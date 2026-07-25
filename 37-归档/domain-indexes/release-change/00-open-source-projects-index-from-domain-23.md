@@ -960,7 +960,7 @@ Pipeline 卡住:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 发布变更 MOC
-- [[发布变更/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
+- [[11-发布变更/README.md|Domain 08: GitOps与CI/CD (GitOps & CI/CD)]]
 - Argo CD企业级GitOps实践指南
 - Jenkins企业级CI/CD流水线深度实践
 - GitLab CI/CD 企业级流水线自动化平台

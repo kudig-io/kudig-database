@@ -94,12 +94,12 @@ tier: peripheral---
 
 | # | 文档 | 关键内容 | 技术深度 |
 |:---:|:---|:---|:---|
-| 01 | [网络协议栈](./01-network-protocols-stack.md) | OSI七层模型、TCP/IP四层模型、协议封装 | 基础理论 |
-| 02 | [TCP/UDP详解](./02-tcp-udp-deep-dive.md) | TCP三次握手/四次挥手、UDP无连接特性、性能对比 | 协议深度 |
-| 03 | [DNS原理配置](./03-dns-principles-configuration.md) | DNS解析流程、递归迭代查询、CoreDNS配置 | 系统服务 |
-| 04 | [负载均衡技术](./04-load-balancing-technologies.md) | L4/L7负载均衡、算法策略、健康检查 | 负载分发 |
-| 05 | [网络安全基础](./05-network-security-fundamentals.md) | 防火墙、TLS/SSL、加密算法、安全协议 | 安全防护 |
-| 06 | [SDN网络虚拟化](./06-sdn-network-virtualization.md) | SDN架构、OpenFlow、网络功能虚拟化(NFV) | 网络创新 |
+| 01 | [网络协议栈](../../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/01-network-protocols-stack.md) | OSI七层模型、TCP/IP四层模型、协议封装 | 基础理论 |
+| 02 | [TCP/UDP详解](../../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/02-tcp-udp-deep-dive.md) | TCP三次握手/四次挥手、UDP无连接特性、性能对比 | 协议深度 |
+| 03 | [DNS原理配置](../../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/03-dns-principles-configuration.md) | DNS解析流程、递归迭代查询、CoreDNS配置 | 系统服务 |
+| 04 | [负载均衡技术](../../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/04-load-balancing-technologies.md) | L4/L7负载均衡、算法策略、健康检查 | 负载分发 |
+| 05 | [网络安全基础](../../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/05-network-security-fundamentals.md) | 防火墙、TLS/SSL、加密算法、安全协议 | 安全防护 |
+| 06 | [SDN网络虚拟化](../../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/06-sdn-network-virtualization.md) | SDN架构、OpenFlow、网络功能虚拟化(NFV) | 网络创新 |
 
 ---
 
@@ -159,7 +159,7 @@ TCP/IP模型
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/networking.md|速查卡: networking]]
+- [[17-系统基础/05-速查卡/networking.md|速查卡: networking]]
 
 
 <!-- risk-assessed -->

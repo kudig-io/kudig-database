@@ -143,14 +143,14 @@ authors:
 ## Obsidian 相关文档
 
 - 云厂商 MOC
-- [[云厂商/README.md|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
+- [[18-云厂商/README.md|Domain-17: 云厂商Kubernetes服务企业级深度指南]]
 
 ## See Also
 
-- [[云厂商/15-alicloud-apsara-ack/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
-- [[云厂商/15-alicloud-apsara-ack/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
-- [[云厂商/02-aws-eks/aws-eks-overview.md|aws-eks-overview]]
-- [[云厂商/03-google-cloud-gke/google-cloud-gke-overview.md|google-cloud-gke-overview]]
+- [[18-云厂商/01-阿里云/专有云-Apsara/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]
+- [[18-云厂商/01-阿里云/专有云-Apsara/alicloud-apsara-ack-overview.md|alicloud-apsara-ack-overview]]
+- [[18-云厂商/02-AWS-EKS/aws-eks-overview.md|aws-eks-overview]]
+- [[18-云厂商/03-Google-GKE/google-cloud-gke-overview.md|google-cloud-gke-overview]]
 
 
 <!-- risk-assessed -->

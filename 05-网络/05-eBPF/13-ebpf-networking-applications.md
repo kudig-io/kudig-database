@@ -565,9 +565,9 @@ cilium connectivity test
 
 ## Related
 
-- [[05-网络/05-eBPF/01-ebpf-programming-fundamentals|eBPF 开发基础]]
-- [[05-网络/05-eBPF/02-ebpf-observability-tools|eBPF 可观测工具]]
-- [[05-网络/05-eBPF/04-ebpf-security-runtime|eBPF 安全运行时]]
+- [[05-网络/05-eBPF/11-ebpf-programming-fundamentals|eBPF 开发基础]]
+- [[05-网络/05-eBPF/12-ebpf-observability-tools|eBPF 可观测工具]]
+- [[05-网络/05-eBPF/14-ebpf-security-runtime|eBPF 安全运行时]]
 
 ## See Also
 

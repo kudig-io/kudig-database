@@ -62,7 +62,7 @@ Please see the [release notes](https://github.com/kubernetes/kops/blob/master/do
 
 * The default instance type for AWS has been changed to t3.medium. This should provide better performance and reduced costs in clusters where the average CPU usage is low.
 
-* Support for [Ubuntu 20.04 (Focal)](../operations/images.md#ubuntu-2004-focal) has been added.
+* Support for [Ubuntu 20.04 (Focal)](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/images.md#ubuntu-2004-focal) has been added.
 
 # Breaking changes
 
@@ -123,7 +123,7 @@ Please see the [release notes](https://github.com/kubernetes/kops/blob/master/do
 
 * Support for Debian 8 (Jessie) has been deprecated and will be removed in future versions of Kops. 
  
-* Support for CoreOS has been deprecated and will be removed in future versions of Kops. Those affected should consider using [Flatcar](../operations/images.md#flatcar) as a replacement.
+* Support for CoreOS has been deprecated and will be removed in future versions of Kops. Those affected should consider using [Flatcar](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/images.md#flatcar) as a replacement.
 
 * Support for the "Legacy" etcd provider has been deprecated. It will not be supported for Kubernetes 1.18 or later. To migrate to the default "Manager" etcd provider see the [etcd migration documentation](../etcd3-migration.md).
 

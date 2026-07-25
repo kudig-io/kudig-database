@@ -63,7 +63,7 @@ prerequisites:
 
 - [[19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断 (Pod Pending Diagnosis)]]
 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
-- [[19-故障诊断/04-高级排障/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
 
 ### FTA 故障树
 
@@ -91,36 +91,36 @@ prerequisites:
 
 ### 工作负载
 
-- [[19-故障诊断/04-高级排障/05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/05-job-cronjob-troubleshooting.md|Job 与 CronJob 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/06-configmap-secret-troubleshooting.md|ConfigMap 与 Secret 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md|Job 与 CronJob 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/06-configmap-secret-troubleshooting.md|ConfigMap 与 Secret 故障排查指南]]
 
 ### 控制平面
 
-- [[19-故障诊断/04-高级排障/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
 
 ### 网络
 
-- [[19-故障诊断/04-高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
 
 ### 存储
 
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### 安全
 
-- [[19-故障诊断/04-高级排障/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
-- [[19-故障诊断/04-高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
 
 ### 调度资源
 
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
 
 ---
 
@@ -130,8 +130,8 @@ prerequisites:
 
 ### 节点相关
 
-- [[19-故障诊断/04-高级排障/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ### 术语词典
 

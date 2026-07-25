@@ -94,7 +94,7 @@ prerequisites:
   - [Known Issues and Important Steps before Upgrading](#known-issues-and-important-steps-before-upgrading)
       - [ThirdPartyResource](#thirdpartyresource)
       - [kubectl](#kubectl)
-      - [[实体/kubernetes.md|kubernetes]] Core Known Issues](#kubernetes-core-known-issues)
+      - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] Core Known Issues](#kubernetes-core-known-issues)
       - Docker runtime Known Issues](#docker-runtime-known-issues)
       - [Rkt runtime Known Issues](#rkt-runtime-known-issues)
   - [Provider-specific Notes](#provider-specific-notes)

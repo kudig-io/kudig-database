@@ -68,7 +68,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[可观测性/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]] |  | k8s, observability, prometheus |  |
+| 1 | [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]] |  | k8s, observability, prometheus |  |
 | 2 | Kubernetes 可观测性架构体系 | 进阶 | k8s, observability, metrics | 5min |
 | 3 | 指标监控体系详解 | 进阶 | k8s, prometheus, metrics | 5min |
 | 4 | 03 - 日志收集架构详解 (Logging Architecture) |  | k8s, observability, prometheus |  |
@@ -152,11 +152,11 @@ graph TD
 
 ## See Also
 
-- [[可观测性/98-merged-indexes/MOC-from-domain-20.md|MOC-from-可观测性]]
-- [[可观测性/98-merged-indexes/MOC-from-domain-21.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-20.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-21.md|MOC-from-可观测性]]
 - [[可观测性/98-merged-indexes/QUALITY-REPORT.md|QUALITY-REPORT]]
-- [[可观测性/98-merged-indexes/README-from-domain-20.md|README-from-可观测性]]
+- [[37-归档/domain-indexes/observability/README-from-domain-20.md|README-from-可观测性]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

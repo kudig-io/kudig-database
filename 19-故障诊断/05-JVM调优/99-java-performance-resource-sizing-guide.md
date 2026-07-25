@@ -607,10 +607,10 @@ spec:
 ## 🔗 相关文档
 
 - [JVM GC 容器调优](./99-jvm-gc-container-tuning-guide.md) — GC 算法选择与监控
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md) — Spring Boot 部署
-- [Java 容器化](../容器运行时/12-java-containerization-guide.md) — 镜像构建优化
-- [Java 可观测性](../可观测性/99-java-observability-kubernetes-guide.md) — 性能监控
-- [GraalVM Native Image](../专项技术/99-graalvm-native-image-guide.md) — 原生编译加速启动
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) — Spring Boot 部署
+- [Java 容器化](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — 镜像构建优化
+- [Java 可观测性](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-java-observability-kubernetes-guide.md) — 性能监控
+- [GraalVM Native Image](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/99-graalvm-native-image-guide.md) — 原生编译加速启动
 
 ---
 

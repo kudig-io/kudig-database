@@ -1919,7 +1919,7 @@ print(f"Llama3-70B INT4: {estimate_memory(70, 4):.0f} GB")
 
 ---
 
-**相关文档**: [144-LLM推理服务](144-llm-inference-serving.md) | [143-LLM微调技术](143-llm-finetuning.md) | [133-GPU调度管理](133-gpu-scheduling-management.md)
+**相关文档**: [144-LLM推理服务](17-llm-inference-serving.md) | [143-LLM微调技术](16-llm-finetuning.md) | [133-GPU调度管理](03-gpu-scheduling-management.md)
 
 **版本**: AutoGPTQ 0.7+ | AWQ 0.2+ | bitsandbytes 0.43+ | llama.cpp b2500+
 

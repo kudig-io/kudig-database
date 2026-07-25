@@ -41,7 +41,7 @@ prerequisites:
 
 ---
 
-## Q1: kudig-database 和 [[实体/kubernetes.md|k8s]] 官方文档有什么区别?
+## Q1: kudig-database 和 [[23-实体/02-K8s核心组件/kubernetes.md|k8s]] 官方文档有什么区别?
 
 **A**: K8s 官方文档是 API 参考和功能说明。kudig-database 是**生产运维实战知识**, 包含:
 - 97 个行业架构方案 (官方文档没有)

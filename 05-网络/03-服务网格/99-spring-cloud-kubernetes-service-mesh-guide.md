@@ -837,10 +837,10 @@ management:
 
 <!-- chunk: 参考链接 -->## 参考链接
 
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md)
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md)
 - [Istio 服务网格指南](./99-istio-service-mesh-guide.md)
-- [Java 可观测性](../可观测性/99-java-observability-kubernetes-guide.md)
-- [Java 安全加固](../安全/99-java-security-kubernetes-guide.md)
+- [Java 可观测性](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-java-observability-kubernetes-guide.md)
+- [Java 安全加固](../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/99-java-security-kubernetes-guide.md)
 
 ---
 

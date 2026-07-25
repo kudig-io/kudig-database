@@ -110,7 +110,7 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - 10-model-deployment-management
 - [[19-故障诊断/02-资源排障/11-deployment-comprehensive-troubleshooting.md|11-deployment-comprehensive-troubleshooting]]
 - [[19-故障诊断/06-FTA故障树/list/deployment-fta.md|Deployment 异常故障树分析]]
-- [[19-故障诊断/04-高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
 - [[23-实体/15-参考与索引/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
 - [[23-实体/15-参考与索引/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference

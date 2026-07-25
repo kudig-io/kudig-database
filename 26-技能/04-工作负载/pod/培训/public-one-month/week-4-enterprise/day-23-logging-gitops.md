@@ -820,8 +820,8 @@ filebeat:
 - [GitOps 原则](https://opengitops.dev/)
 - [Kustomize 官方文档](https://kustomize.io/)
 - [ELK on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- [文件: `../../可观测性/01-elk-stack-enterprise-logging.md`](../../可观测性/01-elk-stack-enterprise-logging.md)
-- [文件: `../../发布变更/01-argo-cd-enterprise-gitops.md`](../../发布变更/01-argo-cd-enterprise-gitops.md)
+- [文件: `../../可观测性/01-elk-stack-enterprise-logging.md`](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/01-elk-stack-enterprise-logging.md)
+- [文件: `../../发布变更/01-argo-cd-enterprise-gitops.md`](../../../../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/01-argo-cd-enterprise-gitops.md)
 
 ```
 

@@ -274,7 +274,7 @@ Flux 同步失败
 
 - 06-flux-gitops-continuous-delivery
 - 99-flux-gitops-guide
-- [[19-故障诊断/04-高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
 - flux
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.26

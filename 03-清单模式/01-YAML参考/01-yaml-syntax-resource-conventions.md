@@ -2342,8 +2342,8 @@ pluto detect-helm -owide --helm-version=3
 ## 内部参考文档
 
 - [02 - Namespace / ResourceQuota / LimitRange YAML 配置参考](./02-namespace-resourcequota-limitrange.md)
-- [Domain 5 - 网络深入](../网络/README.md)
-- [Domain 3 - 工作负载与调度](../domain-3-workload-scheduling/README.md)
+- [Domain 5 - 网络深入](../../05-%E7%BD%91%E7%BB%9C/README.md)
+- [Domain 3 - 工作负载与调度](../README.md)
 
 ## 官方文档
 

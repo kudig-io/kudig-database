@@ -78,57 +78,57 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 
 | # | 文档 | 关键内容 | AI基础 |
 |:---:|:---|:---|:---|
-| 01 | [AI基础设施概览](./01-ai-infrastructure-overview.md) | AI平台架构、K8s AI生态、部署模式 | 架构基础 |
-| 02 | [AI/ML工作负载](./02-ai-ml-workloads.md) | 训练/推理工作负载特征、资源需求 | 负载分析 |
-| 03 | [GPU调度管理](./03-gpu-scheduling-management.md) | GPU资源调度、设备插件、共享机制 | 资源调度 |
-| 04 | [GPU监控DCGM](./04-gpu-monitoring-dcgm.md) | DCGM监控、GPU指标收集、性能分析 | 监控体系 |
-| 05 | [分布式训练](./05-distributed-training-frameworks.md) | Horovod/PyTorch-DDP、弹性训练、故障恢复 | 训练框架 |
-| 06 | [AI数据管道](./06-ai-data-pipeline.md) | 数据预处理、特征工程、Pipeline设计 | 数据处理 |
+| 01 | [AI基础设施概览](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-ai-infrastructure-overview.md) | AI平台架构、K8s AI生态、部署模式 | 架构基础 |
+| 02 | [AI/ML工作负载](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/02-ai-ml-workloads.md) | 训练/推理工作负载特征、资源需求 | 负载分析 |
+| 03 | [GPU调度管理](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/03-gpu-scheduling-management.md) | GPU资源调度、设备插件、共享机制 | 资源调度 |
+| 04 | [GPU监控DCGM](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/04-gpu-monitoring-dcgm.md) | DCGM监控、GPU指标收集、性能分析 | 监控体系 |
+| 05 | [分布式训练](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/05-distributed-training-frameworks.md) | Horovod/PyTorch-DDP、弹性训练、故障恢复 | 训练框架 |
+| 06 | [AI数据管道](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/06-ai-data-pipeline.md) | 数据预处理、特征工程、Pipeline设计 | 数据处理 |
 
 ### 模型全生命周期 (07-14)
 
 | # | 文档 | 关键内容 | 模型管理 |
 |:---:|:---|:---|:---|
-| 07 | [实验管理](./07-ai-experiment-management.md) | MLflow实验跟踪、超参调优、结果分析 | 实验管理 |
-| 08 | [AutoML超参调优](./08-automl-hyperparameter-tuning.md) | Katib、Optuna、超参搜索策略 | 自动化 |
-| 09 | [模型注册中心](./09-model-registry.md) | Model Registry、版本控制、元数据管理 | 注册管理 |
-| 10 | [模型部署管理](./10-model-deployment-management.md) | 模型打包、部署策略、蓝绿发布 | 部署运维 |
-| 11 | [AI安全防护](./11-ai-security-model-protection.md) | 模型安全、对抗攻击防护、隐私保护 | 安全防护 |
-| 12 | [AI成本分析](./12-ai-cost-analysis-finops.md) | GPU成本优化、Spot实例、FinOps实践 | 成本管控 |
-| 13 | [AI平台可观测](./13-ai-platform-observability.md) | AI监控指标、模型性能追踪、异常检测 | 可观测性 |
-| 14 | [性能故障排查](./14-troubleshooting-performance.md) | AI性能瓶颈分析、故障诊断、优化建议 | 故障处理 |
+| 07 | [实验管理](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/07-ai-experiment-management.md) | MLflow实验跟踪、超参调优、结果分析 | 实验管理 |
+| 08 | [AutoML超参调优](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/08-automl-hyperparameter-tuning.md) | Katib、Optuna、超参搜索策略 | 自动化 |
+| 09 | [模型注册中心](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/09-model-registry.md) | Model Registry、版本控制、元数据管理 | 注册管理 |
+| 10 | [模型部署管理](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/10-model-deployment-management.md) | 模型打包、部署策略、蓝绿发布 | 部署运维 |
+| 11 | [AI安全防护](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/11-ai-security-model-protection.md) | 模型安全、对抗攻击防护、隐私保护 | 安全防护 |
+| 12 | [AI成本分析](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/12-ai-cost-analysis-finops.md) | GPU成本优化、Spot实例、FinOps实践 | 成本管控 |
+| 13 | [AI平台可观测](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/13-ai-platform-observability.md) | AI监控指标、模型性能追踪、异常检测 | 可观测性 |
+| 14 | [性能故障排查](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/14-troubleshooting-performance.md) | AI性能瓶颈分析、故障诊断、优化建议 | 故障处理 |
 
 ### LLM大模型专项 (15-25)
 
 | # | 文档 | 关键内容 | 大模型 |
 |:---:|:---|:---|:---|
-| 15 | [LLM数据管道](./15-llm-data-pipeline.md) | 大模型数据处理、清洗、预训练数据准备 | 数据工程 |
-| 16 | [LLM微调训练](./16-llm-finetuning.md) | LoRA/QLoRA微调、指令微调、持续学习 | 模型训练 |
-| 17 | [LLM推理服务](./17-llm-inference-serving.md) | 推理优化、批处理、长序列处理 | 推理部署 |
-| 18 | [LLM服务架构](./18-llm-serving-architecture.md) | 推理服务架构、负载均衡、缓存策略 | 服务设计 |
-| 19 | [LLM量化压缩](./19-llm-quantization.md) | 模型量化、蒸馏、剪枝、压缩部署 | 模型优化 |
-| 20 | [向量数据库RAG](./20-vector-database-rag.md) | 向量检索、RAG架构、知识库构建 | 检索增强 |
-| 21 | [多模态模型](./21-multimodal-models.md) | 多模态融合、视觉语言模型、跨模态检索 | 多模态 |
-| 22 | [LLM隐私安全](./22-llm-privacy-security.md) | 数据隐私、模型安全、合规要求 | 安全合规 |
-| 23 | [LLM成本监控](./23-llm-cost-monitoring.md) | 大模型成本分析、预算控制、计费优化 | 成本管理 |
-| 24 | [LLM版本管理](./24-llm-model-versioning.md) | 模型版本控制、AB测试、灰度发布 | 版本管理 |
-| 25 | [LLM可观测性](./25-llm-observability.md) | 大模型监控、Prompt追踪、生成质量评估 | 大模型监控 |
+| 15 | [LLM数据管道](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/15-llm-data-pipeline.md) | 大模型数据处理、清洗、预训练数据准备 | 数据工程 |
+| 16 | [LLM微调训练](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/16-llm-finetuning.md) | LoRA/QLoRA微调、指令微调、持续学习 | 模型训练 |
+| 17 | [LLM推理服务](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/17-llm-inference-serving.md) | 推理优化、批处理、长序列处理 | 推理部署 |
+| 18 | [LLM服务架构](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/18-llm-serving-architecture.md) | 推理服务架构、负载均衡、缓存策略 | 服务设计 |
+| 19 | [LLM量化压缩](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/19-llm-quantization.md) | 模型量化、蒸馏、剪枝、压缩部署 | 模型优化 |
+| 20 | [向量数据库RAG](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/20-vector-database-rag.md) | 向量检索、RAG架构、知识库构建 | 检索增强 |
+| 21 | [多模态模型](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/21-multimodal-models.md) | 多模态融合、视觉语言模型、跨模态检索 | 多模态 |
+| 22 | [LLM隐私安全](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/22-llm-privacy-security.md) | 数据隐私、模型安全、合规要求 | 安全合规 |
+| 23 | [LLM成本监控](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/23-llm-cost-monitoring.md) | 大模型成本分析、预算控制、计费优化 | 成本管理 |
+| 24 | [LLM版本管理](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/24-llm-model-versioning.md) | 模型版本控制、AB测试、灰度发布 | 版本管理 |
+| 25 | [LLM可观测性](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/25-llm-observability.md) | 大模型监控、Prompt追踪、生成质量评估 | 大模型监控 |
 
 ### 平台治理与运营 (26-35)
 
 | # | 文档 | 关键内容 | 治理运营 |
 |:---:|:---|:---|:---|
-| 26 | [成本优化概览](./26-cost-optimization-overview.md) | AI成本优化策略、资源配置、预算管理 | 成本策略 |
-| 27 | [Kubecost管理](./27-cost-management-kubecost.md) | Kubecost配置、成本分析、优化建议 | 成本工具 |
-| 28 | [绿色计算](./28-green-computing-sustainability.md) | 绿色AI、能耗优化、可持续发展 | 可持续性 |
-| 29 | [阿里云集成](./29-alibaba-cloud-integration.md) | 阿里云AI服务集成、ACK优化配置 | 云厂商 |
-| 30 | [AI安全合规](./30-ai-security-compliance.md) | AI合规要求、数据治理、安全审计 | 合规管理 |
-| 31 | [AI平台治理](./31-ai-platform-governance.md) | 平台治理框架、策略引擎、自动化治理 | 平台治理 |
-| 32 | [MLOps流水线](./32-mlops-pipeline.md) | 端到端MLOps、CI/CD集成、流水线监控 | 运维流水线 |
-| 33 | [模型可解释性](./33-model-explainability.md) | SHAP/LIME解释、公平性检测、透明度保障 | 模型解释 |
-| 34 | [联邦学习](./34-federated-learning.md) | 分布式协同训练、隐私保护、安全聚合 | 协同学习 |
-| 35 | [模型漂移监控](./35-model-drift-monitoring.md) | 实时漂移检测、自动重训练、预警机制 | 模型运维 |
-| 36 | [AI平台增强可观测性](./36-ai-platform-observability-enhanced.md) | 五维可观测性、智能告警、分布式追踪 | 平台监控 |
+| 26 | [成本优化概览](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/26-cost-optimization-overview.md) | AI成本优化策略、资源配置、预算管理 | 成本策略 |
+| 27 | [Kubecost管理](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/27-cost-management-kubecost.md) | Kubecost配置、成本分析、优化建议 | 成本工具 |
+| 28 | [绿色计算](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/28-green-computing-sustainability.md) | 绿色AI、能耗优化、可持续发展 | 可持续性 |
+| 29 | [阿里云集成](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/29-alibaba-cloud-integration.md) | 阿里云AI服务集成、ACK优化配置 | 云厂商 |
+| 30 | [AI安全合规](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/30-ai-security-compliance.md) | AI合规要求、数据治理、安全审计 | 合规管理 |
+| 31 | [AI平台治理](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/31-ai-platform-governance.md) | 平台治理框架、策略引擎、自动化治理 | 平台治理 |
+| 32 | [MLOps流水线](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/32-mlops-pipeline.md) | 端到端MLOps、CI/CD集成、流水线监控 | 运维流水线 |
+| 33 | [模型可解释性](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/33-model-explainability.md) | SHAP/LIME解释、公平性检测、透明度保障 | 模型解释 |
+| 34 | [联邦学习](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/34-federated-learning.md) | 分布式协同训练、隐私保护、安全聚合 | 协同学习 |
+| 35 | [模型漂移监控](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/35-model-drift-monitoring.md) | 实时漂移检测、自动重训练、预警机制 | 模型运维 |
+| 36 | [AI平台增强可观测性](../../../15-AI%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/36-ai-platform-observability-enhanced.md) | 五维可观测性、智能告警、分布式追踪 | 平台监控 |
 
 ---
 
@@ -190,6 +190,6 @@ AI基础设施域全面覆盖 Kubernetes 上的 AI/ML 工作负载管理、GPU�
 
 - 相关知识域: 工作负载
 - 相关知识域: 网络
-- [[系统基础/topic-cheat-sheet/go.md|速查卡: go]]
+- [[17-系统基础/05-速查卡/go.md|速查卡: go]]
 
 <!-- risk-assessed -->

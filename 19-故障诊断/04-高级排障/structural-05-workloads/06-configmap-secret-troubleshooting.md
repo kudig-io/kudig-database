@@ -726,13 +726,13 @@ kubectl rollout restart deployment <name>
 ### 相关文档
 
 - [Pod 故障排查](./01-pod-troubleshooting.md)
-- [RBAC 故障排查](../06-security-auth/01-rbac-troubleshooting.md)
-- [kubelet 故障排查](../02-node-components/01-kubelet-troubleshooting.md)
+- [RBAC 故障排查](../structural-06-security-auth/01-rbac-troubleshooting.md)
+- [kubelet 故障排查](../structural-02-node-components/01-kubelet-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

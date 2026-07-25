@@ -103,7 +103,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 安全 MOC
-- [[安全/README.md|Security Domain]]
+- [[08-安全/README.md|Security Domain]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构
 - 运行时安全防护与威胁检测
@@ -117,11 +117,11 @@ cross_refs:
 
 ## See Also
 
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-25.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-39.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-25.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-39.md|MOC-from-安全]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

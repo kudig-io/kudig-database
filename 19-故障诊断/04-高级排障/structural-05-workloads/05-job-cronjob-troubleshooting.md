@@ -860,12 +860,12 @@ kubectl patch cronjob <name> -p '{"spec":{"suspend":false}}'
 ### 相关文档
 
 - [Pod 故障排查](./01-pod-troubleshooting.md)
-- [资源配额故障排查](../07-resources-scheduling/01-resources-quota-troubleshooting.md)
-- [调度故障排查](../01-control-plane/03-scheduler-troubleshooting.md)
+- [资源配额故障排查](../structural-07-resources-scheduling/01-resources-quota-troubleshooting.md)
+- [调度故障排查](../structural-01-control-plane/03-scheduler-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

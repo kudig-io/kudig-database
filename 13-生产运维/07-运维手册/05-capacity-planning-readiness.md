@@ -334,7 +334,7 @@ kubectl get pods -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name
 - [[12-可靠性/03-容量规划/02-hpa-vpa-cluster-autoscaler-karpenter.md|HPA/VPA/Cluster Autoscaler/Karpenter]]
 - [[13-生产运维/01-成本治理/13-kubernetes-cost-governance.md|Kubernetes 成本治理]]
 - [[13-生产运维/02-集群治理/14-resource-quota-management.md|资源配额管理]]
-- [[09-可观测性/06-SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[09-可观测性/06-SLO-SLI/05-slo-implementation-guide.md|SLO 设定与实施指南]]
 
 ---
 

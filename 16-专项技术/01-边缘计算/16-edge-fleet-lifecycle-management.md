@@ -506,7 +506,7 @@ kubectl exec -n kube-system -it etcd-master-0 -- etcdctl endpoint status --write
 5. **镜像预分发**：边缘节点提前拉取镜像（P2P 分发如 Dragonfly），避免升级时带宽瓶颈
 6. **安全擦除**：退役节点执行安全擦除，防止数据泄露
 7. **与 [[16-专项技术/01-边缘计算/03-kubeedge-architecture-deployment|KubeEdge 架构]] 和 [[16-专项技术/01-边缘计算/05-openyurt-architecture|OpenYurt 架构]] 配合**：了解底层原理
-8. **监控集成**：边缘节点指标通过 [[09-可观测性/prometheus|Prometheus]] 联邦或 Pushgateway 上报
+8. **监控集成**：边缘节点指标通过 [[23-实体/07-可观测性/prometheus|Prometheus]] 联邦或 Pushgateway 上报
 
 ### 网络策略
 

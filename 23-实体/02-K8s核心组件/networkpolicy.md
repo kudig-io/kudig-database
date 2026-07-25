@@ -290,7 +290,7 @@ NetworkPolicy 导致连接失败
 - 16-networkpolicy-deep-practice
 - [[19-故障诊断/02-资源排障/16-networkpolicy-troubleshooting.md|16-networkpolicy-troubleshooting]]
 - [[19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]]
-- [[19-故障诊断/04-高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
 - [[26-技能/05-网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference
 
 

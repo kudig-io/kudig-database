@@ -211,7 +211,7 @@ man ./man/man1/kudig-stats.1
 ## 相关资源
 
 - [KUDIG-DATABASE 主文档](../README.md)
-- [项目脚本](../脚本/README.md)
+- [项目脚本](../README.md)
 - [CNCF 项目库](../生态参考/)
 
 ## Related

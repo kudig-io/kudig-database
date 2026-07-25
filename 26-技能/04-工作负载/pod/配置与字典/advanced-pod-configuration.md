@@ -235,9 +235,9 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,TAINTS:.spec.taints[*].
 ```
 ## 交叉引用
 
-- [RuntimeClass](runtime-class.md) — 运行时类的深入配置
-- [Pod 生命周期](pod-lifecycle.md) — Pod 各阶段与安全上下文的交互
-- [[17-系统基础/06-知识字典/workloads/pods.md|Pods]]](pods.md) — Pod 基础概念和配置
+- [RuntimeClass](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/runtime-class.md) — 运行时类的深入配置
+- [Pod 生命周期](../%E6%A6%82%E5%BF%B5%E5%8E%9F%E7%90%86/pod-lifecycle.md) — Pod 各阶段与安全上下文的交互
+- [[17-系统基础/06-知识字典/workloads/pods.md|Pods]]](../%E6%A6%82%E5%BF%B5%E5%8E%9F%E7%90%86/pods.md) — Pod 基础概念和配置
 - [调度与约束](../scheduling/) — nodeAffinity、tolerations 详解
 
 ## 参考链接

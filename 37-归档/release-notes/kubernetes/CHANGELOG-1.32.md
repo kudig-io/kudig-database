@@ -168,7 +168,7 @@ prerequisites:
     - [Container Images](#container-images-7)
   - [Changelog since v1.32.5](#changelog-since-v1325)
   - [Important Security Information](#important-security-information-1)
-    - [CVE-2025-4563: Nodes can bypass [[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
+    - [CVE-2025-4563: Nodes can bypass [[17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md|dynamic resource allocation]] authorization checks](#cve-2025-4563-nodes-can-bypass-dynamic-resource-allocation-authorization-checks)
   - [Changes by Kind](#changes-by-kind-7)
     - [Feature](#feature-6)
     - [Bug or Regression](#bug-or-regression-6)

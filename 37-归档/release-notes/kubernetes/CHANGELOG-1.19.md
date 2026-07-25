@@ -296,8 +296,8 @@ prerequisites:
     - [Avoiding permanent beta](#avoiding-permanent-beta)
     - [Expanded CLI support for debugging workloads and nodes](#expanded-cli-support-for-debugging-workloads-and-nodes)
     - [Structured logging](#structured-logging)
-    - [[系统基础/topic-dictionary/networking/endpointslices.md|EndpointSlices]] are now enabled by default](#endpointslices-are-now-enabled-by-default)
-    - [[系统基础/topic-dictionary/networking/ingress.md|Ingress]] graduates to General Availability](#ingress-graduates-to-general-availability)
+    - [[17-系统基础/06-知识字典/networking/endpointslices.md|EndpointSlices]] are now enabled by default](#endpointslices-are-now-enabled-by-default)
+    - [[17-系统基础/06-知识字典/networking/ingress.md|Ingress]] graduates to General Availability](#ingress-graduates-to-general-availability)
     - [seccomp graduates to General Availability](#seccomp-graduates-to-general-availability)
     - [Production images moved to community control](#production-images-moved-to-community-control)
     - [KubeSchedulerConfiguration graduates to Beta](#kubeschedulerconfiguration-graduates-to-beta)
@@ -4526,7 +4526,7 @@ filename | sha512 hash
 
 ## Related
 
-- [[生态参考/topic-index/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[21-生态参考/03-领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

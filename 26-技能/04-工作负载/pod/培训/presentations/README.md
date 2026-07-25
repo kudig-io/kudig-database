@@ -129,15 +129,15 @@ tier: peripheral---
 
 | # | 文档 | 主题 | 授课时长 | 难度 |
 |:---:|:---|:---|:---:|:---:|
-| 1 | [架构基础](./kubernetes-architecture-fundamentals-presentation.md) | K8s 架构概览、核心组件、设计哲学 | 3.5h | ⭐⭐ |
-| 2 | [CoreDNS](./kubernetes-coredns-presentation.md) | DNS 服务发现、CoreDNS 配置与调优 | 3h | ⭐⭐⭐ |
-| 3 | [Ingress](./kubernetes-ingress-presentation.md) | Ingress 控制器、路由规则、TLS 终止 | 3h | ⭐⭐⭐ |
-| 4 | [可观测性](./kubernetes-observability-presentation.md) | 监控、日志、链路追踪三大支柱 | 3.5h | ⭐⭐⭐ |
-| 5 | [调度器](./kubernetes-scheduling-presentation.md) | 调度框架、亲和性、拓扑分布约束 | 3h | ⭐⭐⭐⭐ |
-| 6 | [安全与 RBAC](./kubernetes-security-rbac-presentation.md) | RBAC 模型、ServiceAccount、安全策略 | 2.5h | ⭐⭐⭐⭐ |
-| 7 | [Service](./kubernetes-service-presentation.md) | Service 类型、kube-proxy 模式、流量拓扑 | 3h | ⭐⭐⭐ |
-| 8 | [存储](./kubernetes-storage-presentation.md) | PV/PVC、StorageClass、CSI 驱动 | 3.5h | ⭐⭐⭐⭐ |
-| 9 | [Terway 网络](./kubernetes-terway-presentation.md) | 阿里云 Terway CNI、VPC 网络模式 | 3h | ⭐⭐⭐⭐ |
+| 1 | [架构基础](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-architecture-fundamentals-presentation.md) | K8s 架构概览、核心组件、设计哲学 | 3.5h | ⭐⭐ |
+| 2 | [CoreDNS](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-coredns-presentation.md) | DNS 服务发现、CoreDNS 配置与调优 | 3h | ⭐⭐⭐ |
+| 3 | [Ingress](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-ingress-presentation.md) | Ingress 控制器、路由规则、TLS 终止 | 3h | ⭐⭐⭐ |
+| 4 | [可观测性](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-observability-presentation.md) | 监控、日志、链路追踪三大支柱 | 3.5h | ⭐⭐⭐ |
+| 5 | [调度器](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-scheduling-presentation.md) | 调度框架、亲和性、拓扑分布约束 | 3h | ⭐⭐⭐⭐ |
+| 6 | [安全与 RBAC](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-security-rbac-presentation.md) | RBAC 模型、ServiceAccount、安全策略 | 2.5h | ⭐⭐⭐⭐ |
+| 7 | [Service](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-service-presentation.md) | Service 类型、kube-proxy 模式、流量拓扑 | 3h | ⭐⭐⭐ |
+| 8 | [存储](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-storage-presentation.md) | PV/PVC、StorageClass、CSI 驱动 | 3.5h | ⭐⭐⭐⭐ |
+| 9 | [Terway 网络](../../../../../28-%E8%B5%84%E4%BA%A7/presentations/kubernetes-terway-presentation.md) | 阿里云 Terway CNI、VPC 网络模式 | 3h | ⭐⭐⭐⭐ |
 | 10 | [故障排查方法论](./kubernetes-troubleshooting-methodology-presentation.md) | FTA/FEBM、结构化排障流程 | 3h | ⭐⭐⭐⭐ |
 | 11 | [工作负载](./kubernetes-workload-presentation.md) | Deployment/StatefulSet/DaemonSet/Job | 2.5h | ⭐⭐ |
 

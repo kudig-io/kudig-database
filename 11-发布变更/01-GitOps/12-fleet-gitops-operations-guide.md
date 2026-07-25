@@ -528,7 +528,7 @@ rules:
 - [[11-发布变更/01-GitOps/99-argo-cd-gitops-guide.md|Argo CD GitOps 指南]]
 - [[11-发布变更/01-GitOps/99-flux-gitops-guide.md|Flux GitOps 指南]]
 - [[11-发布变更/01-GitOps/07-gitops-security-compliance.md|GitOps 安全合规]]
-- [[09-可观测性/06-SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[09-可观测性/06-SLO-SLI/05-slo-implementation-guide.md|SLO 设定与实施指南]]
 
 
 <!-- risk-assessed -->

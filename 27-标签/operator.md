@@ -86,11 +86,11 @@ last_updated: '2026-07-21'
 
 ## 技能 (Skills)
 
-- [[26-技能/develop-crd-operator|CRD/Operator 开发]]
-- [[26-技能/crd-operator-fta|CRD/Operator FTA]]
-- [[26-技能/controller-manager-fta|Controller Manager FTA]]
-- [[26-技能/daemonset-fta|DaemonSet FTA]]
-- [[26-技能/monitoring-fta|Monitoring FTA]]
+- [[26-技能/02-控制面/crd-operator/运维操作/develop-crd-operator|CRD/Operator 开发]]
+- [[26-技能/02-控制面/crd-operator/crd-operator-fta|CRD/Operator FTA]]
+- [[26-技能/02-控制面/controller-manager/controller-manager-fta|Controller Manager FTA]]
+- [[26-技能/04-工作负载/daemonset/daemonset-fta|DaemonSet FTA]]
+- [[26-技能/08-可观测性/monitoring/monitoring-fta|Monitoring FTA]]
 
 ## 故障诊断 (Troubleshooting)
 

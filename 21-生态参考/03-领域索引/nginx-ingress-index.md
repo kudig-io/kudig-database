@@ -61,8 +61,8 @@ prerequisites:
 - nginx-ingress 网关故障排查
 - [[19-故障诊断/06-FTA故障树/list/nginx-ingress-fta.md|nginx-ingress FTA 故障树]]
 - [[19-故障诊断/08-技能体系/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
 - [[19-故障诊断/02-资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查]]
 
 ### 迁移指南
@@ -73,9 +73,9 @@ prerequisites:
 
 ### 网络与路由
 - CNI 容器网络接口深度解析
-- [[19-故障诊断/04-高级排障/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
-- [[19-故障诊断/04-高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 零信任安全治理]]
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 零信任安全治理]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 故障排查]]
 - Ingress 监控与故障排查
 
 ### 云厂商集成

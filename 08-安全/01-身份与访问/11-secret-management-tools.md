@@ -1672,7 +1672,7 @@ kubectl get secrets -A -o json | jq '.items[] | select(.type=="Opaque") | .metad
 
 ---
 
-**相关文档**: [91-安全扫描工具](91-security-scanning-tools.md) | [92-策略验证工具](92-policy-validation-tools.md) | [89-RBAC权限管理](89-rbac-permissions.md)
+**相关文档**: [91-安全扫描工具](91-security-scanning-tools.md) | [92-策略验证工具](../04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/05-policy-validation-tools.md) | [89-RBAC权限管理](89-rbac-permissions.md)
 
 **版本**: External Secrets 0.9+ | Vault 1.15+ | Sealed Secrets 0.25+ | SOPS 3.8+
 

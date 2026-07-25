@@ -314,6 +314,6 @@ kubectl --context=azure-prod get certificates -A
 - [[18-云厂商/05-腾讯云TKE/06-tke-production-best-practices|腾讯 TKE 生产实践]]
 - [[18-云厂商/06-华为云CCE/06-cce-production-best-practices|华为 CCE 生产实践]]
 - [[10-平台工程/03-治理/09-cost-optimization-finops|成本优化与 FinOps]]
-- [[05-网络/cni-plugins|CNI 插件]]
+- [[23-实体/02-K8s核心组件/cni-plugins|CNI 插件]]
 - [[10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
 - [[24-综合/06-可靠性与成本/multitenancy-resource-isolation-governance|多租户资源隔离治理]]

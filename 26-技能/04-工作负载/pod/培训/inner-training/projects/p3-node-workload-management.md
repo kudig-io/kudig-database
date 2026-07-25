@@ -665,8 +665,8 @@ aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 
 - [ACK 节点池管理](../../云厂商/04-alicloud-ack/230-ack-node-pool.md)
 - [Pod 调度策略](../../domain-09-workload/05-pod-scheduling-strategies.md)
-- [HPA/VPA 自动伸缩](../../工作负载/21-hpa-vpa-autoscaling.md)
-- [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
+- [HPA/VPA 自动伸缩](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/21-hpa-vpa-autoscaling.md)
+- [节点 NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
 
 ```
 

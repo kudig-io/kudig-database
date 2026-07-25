@@ -272,13 +272,13 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 ```
 ## 交叉引用
 
-- [Pod 生命周期事件深度解析](../../工作负载/11-pod-lifecycle-events.md)
-- [高级 Pod 运维模式](../../工作负载/12-advanced-pod-patterns.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [Pod 综合故障排查手册](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
-- [Pod 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/pod-fta.md)
-- [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
-- [OOM 内存诊断](../../故障诊断/07-oom-memory-diagnosis.md)
+- [Pod 生命周期事件深度解析](../%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E4%BA%8B%E4%BB%B6/11-pod-lifecycle-events.md)
+- [高级 Pod 运维模式](../%E6%B8%85%E5%8D%95%E8%A7%84%E8%8C%83/12-advanced-pod-patterns.md)
+- [工作负载概览与架构](../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
+- [Pod 综合故障排查手册](../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
+- [Pod 故障树分析 (FTA)](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/pod-fta.md)
+- [Pod Pending 诊断](../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/05-pod-pending-diagnosis.md)
+- [OOM 内存诊断](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/07-oom-memory-diagnosis.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/

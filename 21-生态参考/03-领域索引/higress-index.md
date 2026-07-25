@@ -65,20 +65,20 @@ prerequisites:
 ## 关联文档 (K8s集成)
 
 ### [[17-系统基础/06-知识字典/networking/ingress.md|Ingress]] 相关
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Ingress 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
 - Service 端点异常
 
 ### 服务网格
 - 服务网格与微服务架构
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Istio 故障排查]]
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 深度排查与性能调优]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|Istio 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh 深度排查与性能调优]]
 
 ### Envoy 与网关
 - Envoy 深度解析
 - Gateway API
-- [[19-故障诊断/04-高级排障/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理]]
 
 ### 迁移指南
 - nginx-ingress 迁移指南

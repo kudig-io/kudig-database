@@ -55,7 +55,7 @@ authors:
 
 ## 概述
 
-向量数据库是 AI 基础设施的核心组件，用于存储和检索高维向量数据（Embedding），支撑语义搜索、推荐系统、RAG（Retrieval-Augmented Generation）等场景。随着大语言模型在企业中的广泛应用，向量数据库已成为 [[15-AI基础设施/]] 中不可或缺的一环。
+向量数据库是 AI 基础设施的核心组件，用于存储和检索高维向量数据（Embedding），支撑语义搜索、推荐系统、RAG（Retrieval-Augmented Generation）等场景。随着大语言模型在企业中的广泛应用，向量数据库已成为 [[15-AI基础设施/index.md|15-AI基础设施]] 中不可或缺的一环。
 
 本文覆盖主流向量数据库在 Kubernetes 上的生产级部署与运维，包括 Milvus、Weaviate、Qdrant、pgvector 和 Chroma，帮助平台工程师和 SRE 完成选型、部署、调优和故障排查。
 
@@ -387,15 +387,15 @@ curl -X POST "http://qdrant-0.qdrant-headless.vector-db.svc:6333/collections/my_
 2. **存储选型**：HNSW 索引使用本地 SSD（Local PV）获得最佳性能；IVF/DiskANN 可使用网络存储
 3. **渐进式扩容**：先增加副本数，再增加分片数，避免一次性大规模 rebalance
 4. **索引策略**：在线查询用 HNSW（ef=128），离线批量用 IVF_FLAT，超大规模用 DiskANN
-5. **备份策略**：每日全量快照 + WAL 增量，参考 [[12-可靠性/01-备份恢复/]] 制定 RPO/RTO
-6. **监控集成**：将向量数据库 metrics 接入 [[09-可观测性/]] 平台，设置 P99 延迟和召回率告警
-7. **数据管线**：Embedding 生成管线参考 [[07-数据库中间件/06-数据流/]] 中的流处理模式
-8. **Operator 管理**：如使用 Milvus Operator，参考 [[07-数据库中间件/05-Operator管理/]] 中的 CRD 管理实践
+5. **备份策略**：每日全量快照 + WAL 增量，参考 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]] 制定 RPO/RTO
+6. **监控集成**：将向量数据库 metrics 接入 [[09-可观测性/index.md|09-可观测性]] 平台，设置 P99 延迟和召回率告警
+7. **数据管线**：Embedding 生成管线参考 [[07-数据库中间件/06-数据流/index.md|06-数据流]] 中的流处理模式
+8. **Operator 管理**：如使用 Milvus Operator，参考 [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]] 中的 CRD 管理实践
 
 ## Related
 
-- [[15-AI基础设施/]]
-- [[07-数据库中间件/01-数据库/]]
-- [[09-可观测性/]]
-- [[12-可靠性/01-备份恢复/]]
-- [[07-数据库中间件/06-数据流/]]
+- [[15-AI基础设施/index.md|15-AI基础设施]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
+- [[07-数据库中间件/06-数据流/index.md|06-数据流]]

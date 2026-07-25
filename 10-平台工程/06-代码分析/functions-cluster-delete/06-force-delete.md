@@ -91,7 +91,7 @@ related_topics:
 - etcd-cleanup
 - ha-delete
 - troubleshooting
-domain_link: '[Installation](../集群基础/README.md)'
+domain_link: '[Installation](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/README.md)'
 topic_link: '[Cluster Delete Overview](./01-overview.md)'
 authors:
 - name: KUDIG Team

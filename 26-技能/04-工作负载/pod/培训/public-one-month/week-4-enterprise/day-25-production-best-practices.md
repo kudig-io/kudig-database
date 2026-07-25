@@ -574,10 +574,10 @@ spec:
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 - [ITIL 变更管理](https://www.axelos.com/best-practice-solutions/itil)
 - [PagerDuty 事故响应指南](https://response.pagerduty.com/)
-- [文件: `../../生产运维/01-production-architecture-design-principles.md`](../../生产运维/01-production-architecture-design-principles.md)
-- [文件: `../../生产运维/22-change-management-process.md`](../../生产运维/22-change-management-process.md)
-- [文件: `../../生产运维/23-incident-response-handling.md`](../../生产运维/23-incident-response-handling.md)
-- [文件: `../../生产运维/24-capacity-planning-forecasting.md`](../../生产运维/24-capacity-planning-forecasting.md)
+- [文件: `../../生产运维/01-production-architecture-design-principles.md`](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/01-production-architecture-design-principles.md)
+- [文件: `../../生产运维/22-change-management-process.md`](../../../../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/04-%E5%8F%98%E6%9B%B4%E7%AE%A1%E7%90%86/22-change-management-process.md)
+- [文件: `../../生产运维/23-incident-response-handling.md`](../../../../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/03-%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94/23-incident-response-handling.md)
+- [文件: `../../生产运维/24-capacity-planning-forecasting.md`](../../../../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/03-%E5%AE%B9%E9%87%8F%E8%A7%84%E5%88%92/24-capacity-planning-forecasting.md)
 
 ```
 

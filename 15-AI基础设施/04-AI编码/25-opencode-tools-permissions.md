@@ -343,9 +343,9 @@ export default tool({
 
 | 文档 | 关系 |
 |------|------|
-| [04 - Agent 系统](./04-opencode-agents-system.md) | Per-Agent 权限配置 |
-| [06 - MCP 集成](./06-opencode-mcp-integration.md) | MCP 工具的权限管理 |
-| [12 - 进阶话题](./12-opencode-advanced-topics.md) | 安全加固策略 |
+| [04 - Agent 系统](24-opencode-agents-system.md) | Per-Agent 权限配置 |
+| [06 - MCP 集成](26-opencode-mcp-integration.md) | MCP 工具的权限管理 |
+| [12 - 进阶话题](32-opencode-advanced-topics.md) | 安全加固策略 |
 
 ---
 

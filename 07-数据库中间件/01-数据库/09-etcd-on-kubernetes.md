@@ -435,9 +435,9 @@ ps aux | grep kube-apiserver | grep -E 'request-timeout|watch-cache|etcd-compact
 
 - [[12-可靠性/00-总览/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
 - [[12-可靠性/01-备份恢复/01-etcd-backup-restore.md|etcd 备份与恢复]]
-- [[12-可靠性/02-灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 损坏恢复 Runbook]]
-- [[12-可靠性/02-灾难恢复/06-control-plane-loss-recovery-playbook.md|控制面丢失恢复 Runbook]]
-- [[12-可靠性/02-灾难恢复/09-certificate-expiry-mass-rotation-playbook.md|证书过期批量轮换 Runbook]]
+- [[12-可靠性/02-灾难恢复/13-etcd-corruption-recovery-playbook.md|etcd 损坏恢复 Runbook]]
+- [[12-可靠性/02-灾难恢复/16-control-plane-loss-recovery-playbook.md|控制面丢失恢复 Runbook]]
+- [[12-可靠性/02-灾难恢复/19-certificate-expiry-mass-rotation-playbook.md|证书过期批量轮换 Runbook]]
 
 ### 工单案例
 

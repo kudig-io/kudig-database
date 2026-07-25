@@ -843,11 +843,11 @@ kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名
 
 ## 延伸阅读
 
-- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
-- [StatefulSet 高级操作](../../工作负载/03-statefulset-advanced-operations.md)
-- [Service 概念与类型](../../网络/06-service-concepts-types.md)
-- [Ingress 基础](../../网络/19-ingress-fundamentals.md)
-- [存储架构总览](../../存储/01-storage-architecture-overview.md)
+- [Deployment 生产模式](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
+- [StatefulSet 高级操作](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/03-statefulset-advanced-operations.md)
+- [Service 概念与类型](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md)
+- [Ingress 基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md)
+- [存储架构总览](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md)
 
 ## Related
 

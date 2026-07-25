@@ -595,9 +595,9 @@ API Server 暴露了 Prometheus 指标（`:443/metrics`），关键指标包括 
 
 ## 延伸阅读
 
-- [K8s 架构与组件深入](../../集群基础/02-core-components-deep-dive.md)
-- [etcd 深入分析](../../集群基础/11-etcd-deep-dive.md)
-- [API Server 深入分析](../../集群基础/12-apiserver-deep-dive.md)
+- [K8s 架构与组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
+- [etcd 深入分析](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/11-etcd-deep-dive.md)
+- [API Server 深入分析](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/12-apiserver-deep-dive.md)
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/210-ack-cluster-management.md)
 - [组件故障排查总览](../../故障诊断/01-troubleshooting-overview.md)
 - [CoreDNS 排障指南](../../故障诊断/11-coredns-troubleshooting.md)

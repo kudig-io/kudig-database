@@ -45,7 +45,7 @@ prerequisites:
 Source: [v2.52.0](https://github.com/prometheus/prometheus/releases/tag/v2.52.0)
 
 * [CHANGE] TSDB: Fix the predicate checking for blocks which are beyond the retention period to include the ones right at the retention boundary. #9633
-* [FEATURE] [[Kubernetes|Kubernetes]] SD: Add a new metric `prometheus_sd_kubernetes_failures_total` to track failed requests to [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|Kubernetes API]]. #13554
+* [FEATURE] [[Kubernetes|Kubernetes]] SD: Add a new metric `prometheus_sd_kubernetes_failures_total` to track failed requests to [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]]. #13554
 * [FEATURE] Kubernetes SD: Add node and zone metadata labels when using the endpointslice role. #13935
 * [FEATURE] Azure SD/Remote Write: Allow usage of Azure authorization SDK. #13099
 * [FEATURE] Alerting: Support native histogram templating. #13731

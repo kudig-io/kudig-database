@@ -1,8 +1,8 @@
 ---
 title: 'Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)'
-description: 'description: ''- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)**
+description: 'description: ''- **[02-containerd Wasm运行时](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/02-containerd-wasm-shim.md)**
   - containerd shim、RuntimeClass、部署配置'''
-summary: 'description: ''- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)**
+summary: 'description: ''- **[02-containerd Wasm运行时](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/02-containerd-wasm-shim.md)**
   - containerd shim、RuntimeClass、部署配置'''
 category: general
 tags:
@@ -49,7 +49,7 @@ prerequisites:
 
 ---
 title: 'Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)'
-description: '- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)** - containerd shim、RuntimeClass、部署配置'
+description: '- **[02-containerd Wasm运行时](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/02-containerd-wasm-shim.md)** - containerd shim、RuntimeClass、部署配置'
 category: webassembly-cloud-native
 tags:
 - k8s
@@ -97,22 +97,22 @@ WebAssembly (Wasm) 正在从浏览器扩展到服务器端和边缘计算领域�
 ## 📚 文档目录
 
 ### 🎯 WebAssembly 基础 (01-02)
-- **[01-WebAssembly云原生基础](./01-wasm-fundamentals-cloud-native.md)** - Wasm 原理、WASI、组件模型
-- **[02-containerd Wasm运行时](./02-containerd-wasm-shim.md)** - containerd shim、RuntimeClass、部署配置
+- **[01-WebAssembly云原生基础](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/01-wasm-fundamentals-cloud-native.md)** - Wasm 原理、WASI、组件模型
+- **[02-containerd Wasm运行时](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/02-containerd-wasm-shim.md)** - containerd shim、RuntimeClass、部署配置
 
 ### 🌐 Wasm 应用框架 (03-05)
-- **[03-SpinKube框架实践](./03-spinkube-framework.md)** - Spin 应用、SpinKube Operator、KEDA 集成
-- **[04-wasmCloud平台](./04-wasmcloud-platform.md)** - wasmCloud 架构、Actor 模型、Lattice 网络
-- **[05-[[wasmedge|WasmEdge]]运行时](./05-wasmedge-runtime.md)** - WasmEdge 特性、Kubernetes 集成、性能优化
+- **[03-SpinKube框架实践](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/03-spinkube-framework.md)** - Spin 应用、SpinKube Operator、KEDA 集成
+- **[04-wasmCloud平台](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/04-wasmcloud-platform.md)** - wasmCloud 架构、Actor 模型、Lattice 网络
+- **[05-[[wasmedge|WasmEdge]]运行时](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/05-wasmedge-runtime.md)** - WasmEdge 特性、Kubernetes 集成、性能优化
 
 ### 🔧 组件与扩展 (06-07)
-- **[06-Wasm组件模型](./06-wasm-component-model.md)** - Component Model、WIT、组件组合
-- **[07-Wasm插件系统](./07-wasm-plugin-system.md)** - Envoy Wasm、Istio 插件、可扩展性
+- **[06-Wasm组件模型](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/06-wasm-component-model.md)** - Component Model、WIT、组件组合
+- **[07-Wasm插件系统](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/07-wasm-plugin-system.md)** - Envoy Wasm、Istio 插件、可扩展性
 
 ### ⚡ 高级应用 (08-10)
-- **[08-Wasm AI推理](./08-wasm-ai-inference.md)** - ONNX 推理、llama.cpp Wasm、边缘 AI
-- **[09-Wasm Serverless](./09-wasm-serverless.md)** - 冷启动优化、Scale-to-Zero、事件驱动
-- **[10-Wasm安全与沙箱](./10-wasm-security-sandbox.md)** - 安全模型、能力系统、隔离边界
+- **[08-Wasm AI推理](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/08-wasm-ai-inference.md)** - ONNX 推理、llama.cpp Wasm、边缘 AI
+- **[09-Wasm Serverless](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/09-wasm-serverless.md)** - 冷启动优化、Scale-to-Zero、事件驱动
+- **[10-Wasm安全与沙箱](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/02-WebAssembly/10-wasm-security-sandbox.md)** - 安全模型、能力系统、隔离边界
 
 ## 🎯 学习路径建议
 

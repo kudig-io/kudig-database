@@ -104,7 +104,7 @@ last_updated: '2026-07-21'
 
 ## 技能 (Skills)
 
-- [[26-技能/gitops-argocd-fta|GitOps ArgoCD FTA]]
+- [[26-技能/01-集群运维/gitops-argocd/gitops-argocd-fta|GitOps ArgoCD FTA]]
 - [[26-技能/01-集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排障]]
 - [[20-最佳实践/07-scenarios/gitops-workflow|GitOps 工作流最佳实践]]
 

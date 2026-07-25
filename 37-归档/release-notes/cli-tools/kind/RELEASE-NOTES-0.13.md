@@ -43,7 +43,7 @@ prerequisites:
 
 Source: [v0.13.0](https://github.com/kubernetes-sigs/kind/releases/tag/v0.13.0)
 
-`v0.13.0` is all about cgroups -- We're making the switch to the systemd cgroup driver to align with current [[实体/kubernetes.md|Kubernetes]] [[概念/container-runtime.md|container runtime]] recommendations](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) and [kubeadm defaults](https://github.com/kubernetes/kubeadm/issues/2376).
+`v0.13.0` is all about cgroups -- We're making the switch to the systemd cgroup driver to align with current [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] [[22-概念/15-运行时与系统/container-runtime.md|container runtime]] recommendations](https://kubernetes.io/docs/setup/production-environment/container-runtimes/) and [kubeadm defaults](https://github.com/kubernetes/kubeadm/issues/2376).
 
 <h1 id="breaking-changes">Breaking Changes</h1>
 

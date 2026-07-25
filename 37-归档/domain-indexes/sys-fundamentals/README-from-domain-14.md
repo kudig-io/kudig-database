@@ -673,37 +673,37 @@ spec:
 
 | # | 文档 | 关键内容 | 适用场景 |
 |:---:|:---|:---|:---|
-| 01 | [Linux 系统架构](./01-linux-system-architecture.md) | 内核架构、启动过程、systemd、内核调优、与K8s关系 | 系统基础、架构理解 |
-| 02 | [进程管理](./02-linux-process-management.md) | 进程生命周期、信号控制、cgroups v1/v2、OOM Killer、与K8s关系 | 进程调试、性能分析 |
-| 03 | [文件系统详解](./03-linux-filesystem-deep-dive.md) | VFS、ext4/xfs/btrfs、OverlayFS、inode、与K8s关系 | 存储管理、权限控制 |
+| 01 | [Linux 系统架构](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/01-linux-system-architecture.md) | 内核架构、启动过程、systemd、内核调优、与K8s关系 | 系统基础、架构理解 |
+| 02 | [进程管理](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/02-linux-process-management.md) | 进程生命周期、信号控制、cgroups v1/v2、OOM Killer、与K8s关系 | 进程调试、性能分析 |
+| 03 | [文件系统详解](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/03-linux-filesystem-deep-dive.md) | VFS、ext4/xfs/btrfs、OverlayFS、inode、与K8s关系 | 存储管理、权限控制 |
 
 ### 网络与存储 (04-05)
 
 | # | 文档 | 关键内容 | 适用场景 |
 |:---:|:---|:---|:---|
-| 04 | [网络配置](./04-linux-networking-configuration.md) | iptables/nftables、IPVS、Network Namespace、veth/bridge、VXLAN、与K8s关系 | 网络运维、K8s网络排查 |
-| 05 | [存储管理](./05-linux-storage-management.md) | LVM、RAID、I/O 调度、NFS/iSCSI、与K8s PV/CSI关系 | 存储架构、容量规划 |
+| 04 | [网络配置](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/04-linux-networking-configuration.md) | iptables/nftables、IPVS、Network Namespace、veth/bridge、VXLAN、与K8s关系 | 网络运维、K8s网络排查 |
+| 05 | [存储管理](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/05-linux-storage-management.md) | LVM、RAID、I/O 调度、NFS/iSCSI、与K8s PV/CSI关系 | 存储架构、容量规划 |
 
 ### 性能与安全 (06-07)
 
 | # | 文档 | 关键内容 | 适用场景 |
 |:---:|:---|:---|:---|
-| 06 | [性能调优](./06-linux-performance-tuning.md) | USE方法论、CPU/内存/I/O/网络分析、eBPF工具、内核参数、与K8s关系 | 性能优化、瓶颈诊断 |
-| 07 | [安全加固](./07-linux-security-hardening.md) | 用户管理、SSH安全、SELinux/AppArmor、审计日志、与K8s安全关系 | 安全配置、合规要求 |
+| 06 | [性能调优](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/06-linux-performance-tuning.md) | USE方法论、CPU/内存/I/O/网络分析、eBPF工具、内核参数、与K8s关系 | 性能优化、瓶颈诊断 |
+| 07 | [安全加固](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/07-linux-security-hardening.md) | 用户管理、SSH安全、SELinux/AppArmor、审计日志、与K8s安全关系 | 安全配置、合规要求 |
 
 ### 容器与运维 (08-09)
 
 | # | 文档 | 关键内容 | 适用场景 |
 |:---:|:---|:---|:---|
-| 08 | [容器技术](./08-linux-container-fundamentals.md) | Namespaces(7种)、Cgroups v2、OverlayFS、Capabilities、Seccomp、与CRI关系 | 容器基础、K8s支撑 |
-| 09 | [运维基础](./09-linux-operations-basics.md) | 系统监控、故障排查、备份恢复、应急响应、K8s节点运维 | 日常运维、应急响应 |
+| 08 | [容器技术](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/08-linux-container-fundamentals.md) | Namespaces(7种)、Cgroups v2、OverlayFS、Capabilities、Seccomp、与CRI关系 | 容器基础、K8s支撑 |
+| 09 | [运维基础](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/09-linux-operations-basics.md) | 系统监控、故障排查、备份恢复、应急响应、K8s节点运维 | 日常运维、应急响应 |
 
 ### 索引与参考 (00, 99)
 
 | # | 文档 | 关键内容 | 适用场景 |
 |:---:|:---|:---|:---|
 | 00 | [开源项目索引](./00-open-source-projects-index.md) | 核心开源项目、版本追踪、K8s依赖关系、容器OS选型 | 技术选型、版本管理 |
-| 99 | [Linux 命令大全参考](./99-linux-commands-reference.md) | 完整 Linux 命令参考，包含命令名称、用途、功能清单 | 命令速查、运维参考 |
+| 99 | [Linux 命令大全参考](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/99-linux-commands-reference.md) | 完整 Linux 命令参考，包含命令名称、用途、功能清单 | 命令速查、运维参考 |
 
 ---
 
@@ -1265,7 +1265,7 @@ K8s节点维护:
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/linux.md|速查卡: linux]]
+- [[17-系统基础/05-速查卡/linux.md|速查卡: linux]]
 
 
 <!-- risk-assessed -->

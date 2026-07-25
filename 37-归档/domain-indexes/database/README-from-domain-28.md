@@ -455,15 +455,15 @@ graph TD
 | 文档 | 主题 | 难度 |
 |:---|:---|:---|
 | [00-开源项目索引](./00-open-source-projects-index.md) | 企业数据库与中间件领域开源项目选型索引 | 入门 |
-| [01-MySQL企业级数据库](./01-mysql-enterprise-database.md) | MySQL 高可用架构、InnoDB 调优、ProxySQL 读写分离、XtraBackup 备份 | 中级→高级 |
-| [02-PostgreSQL企业级数据库](./02-postgresql-enterprise-database.md) | PostgreSQL Patroni 高可用、PgBouncer 连接池、WAL-G 备份恢复 | 中级→高级 |
-| [03-分布式数据库企业级](./03-distributed-database-enterprise.md) | TiDB/CockroachDB/Vitess 架构、数据分片、跨机房容灾 | 高级→专家 |
-| [04-数据库中间件Kubernetes](./04-database-middleware-kubernetes.md) | Vitess/ShardingSphere/ProxySQL on K8s、连接池模式、分片策略 | 高级→专家 |
-| [05-MongoDB企业级数据库](./05-mongodb-enterprise-database.md) | MongoDB 副本集/分片集群、WiredTiger 调优、Oplog 备份 | 中级→高级 |
-| [06-Redis企业级缓存](./06-redis-enterprise-cache.md) | Redis Sentinel/Cluster、持久化策略、大Key治理、缓存一致性 | 中级→高级 |
-| [07-Redis Kubernetes Operator](./07-redis-kubernetes-operator.md) | Redis on K8s、OT-CONTAINER-KIT Operator、Sentinel vs Cluster 模式 | 中级→高级 |
-| [08-Kafka Kubernetes Strimzi](./08-kafka-kubernetes-strimzi.md) | Strimzi Operator、KRaft 模式、Topic 管理、Exactly-Once 语义 | 中级→高级 |
-| [99-CloudNativePG企业指南](./99-cloudnativepg-enterprise-guide.md) | CNPG Operator、PITR、PgBouncer、滚动升级、多租户 | 中级→高级 |
+| [01-MySQL企业级数据库](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/01-mysql-enterprise-database.md) | MySQL 高可用架构、InnoDB 调优、ProxySQL 读写分离、XtraBackup 备份 | 中级→高级 |
+| [02-PostgreSQL企业级数据库](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/02-postgresql-enterprise-database.md) | PostgreSQL Patroni 高可用、PgBouncer 连接池、WAL-G 备份恢复 | 中级→高级 |
+| [03-分布式数据库企业级](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/03-distributed-database-enterprise.md) | TiDB/CockroachDB/Vitess 架构、数据分片、跨机房容灾 | 高级→专家 |
+| [04-数据库中间件Kubernetes](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/04-database-middleware-kubernetes.md) | Vitess/ShardingSphere/ProxySQL on K8s、连接池模式、分片策略 | 高级→专家 |
+| [05-MongoDB企业级数据库](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/05-mongodb-enterprise-database.md) | MongoDB 副本集/分片集群、WiredTiger 调优、Oplog 备份 | 中级→高级 |
+| [06-Redis企业级缓存](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/06-redis-enterprise-cache.md) | Redis Sentinel/Cluster、持久化策略、大Key治理、缓存一致性 | 中级→高级 |
+| [07-Redis Kubernetes Operator](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/07-redis-kubernetes-operator.md) | Redis on K8s、OT-CONTAINER-KIT Operator、Sentinel vs Cluster 模式 | 中级→高级 |
+| [08-Kafka Kubernetes Strimzi](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/08-kafka-kubernetes-strimzi.md) | Strimzi Operator、KRaft 模式、Topic 管理、Exactly-Once 语义 | 中级→高级 |
+| [99-CloudNativePG企业指南](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/99-cloudnativepg-enterprise-guide.md) | CNPG Operator、PITR、PgBouncer、滚动升级、多租户 | 中级→高级 |
 
 ### 学习路径建议
 
@@ -886,7 +886,7 @@ NoSQL数据库:
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/sql.md|速查卡: sql]]
+- [[17-系统基础/05-速查卡/sql.md|速查卡: sql]]
 
 
 <!-- risk-assessed -->

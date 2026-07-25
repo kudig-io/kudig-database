@@ -243,8 +243,8 @@ kubectl get deployments -n prod -o custom-columns='NAME:.metadata.name,DESIRED:.
 - [Jobs](./jobs.md)
 - [CronJob](./cronjob.md)
 - [Managing Workloads（操作指南）](./managing-workloads.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [工作负载故障排查手册](../../工作负载/07-workload-troubleshooting-handbook.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
+- [工作负载故障排查手册](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/07-workload-troubleshooting-handbook.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/

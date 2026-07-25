@@ -395,7 +395,7 @@ SLO 体系要真正落地，需要技术与业务团队共同认可。建议从�
 ## Related
 
 - [[09-可观测性/06-SLO-SLI/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
-- [[09-可观测性/06-SLO-SLI/01-sli-definition-selection.md|SLI 定义与选择]]
+- [[09-可观测性/06-SLO-SLI/04-sli-definition-selection.md|SLI 定义与选择]]
 
 ## See Also
 

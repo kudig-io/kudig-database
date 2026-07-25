@@ -89,62 +89,62 @@ prerequisites:
 
 ## 结构化故障排查 - 控制平面
 
-- [[19-故障诊断/04-高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|Webhook 与准入控制故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/10-control-plane-upgrade-troubleshooting.md|控制平面升级迁移问题处理指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md|Webhook 与准入控制故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/10-control-plane-upgrade-troubleshooting.md|控制平面升级迁移问题处理指南]]
 
 ## 结构化故障排查 - 网络
 
-- [[19-故障诊断/04-高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
-- [[19-故障诊断/04-高级排障/03-networking/07-terway-troubleshooting.md|Terway（阿里云 CNI）网络故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/08-flannel-troubleshooting.md|Flannel 网络故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/07-terway-troubleshooting.md|Terway（阿里云 CNI）网络故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/08-flannel-troubleshooting.md|Flannel 网络故障排查指南]]
 
 ## 结构化故障排查 - 存储
 
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
-- [[19-故障诊断/04-高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
-- [[19-故障诊断/04-高级排障/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
 
 ## 结构化故障排查 - 调度资源
 
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/04-pdb-troubleshooting.md|PodDisruptionBudget (PDB) 故障排查指南]]
 
 ## 结构化故障排查 - AI/ML
 
-- [[19-故障诊断/04-高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
 
 ## 结构化故障排查 - GitOps/DevOps
 
-- [[19-故障诊断/04-高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|GitOps/DevOps 故障排查指南]]
-- [[19-故障诊断/04-高级排障/11-gitops-devops/02-tekton-troubleshooting.md|Tekton CI/CD 流水线故障排查指南]]
-- [[19-故障诊断/04-高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|Flux 镜像自动化故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/01-gitops-devops-troubleshooting.md|GitOps/DevOps 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/02-tekton-troubleshooting.md|Tekton CI/CD 流水线故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/03-flux-image-automation-troubleshooting.md|Flux 镜像自动化故障排查指南]]
 
 ## 结构化故障排查 - 可观测性
 
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
 
 ## 结构化故障排查
 
-- [[19-故障诊断/04-高级排障/02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/05-image-registry-troubleshooting.md|镜像与镜像仓库故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
-- [[19-故障诊断/04-高级排障/05-workloads/06-configmap-secret-troubleshooting.md|ConfigMap 与 Secret 故障排查指南]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|日志与监控故障排查指南]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查指南]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|CRD 与 Operator 故障排查指南]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|Kustomize 部署故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/05-image-registry-troubleshooting.md|镜像与镜像仓库故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|Deployment 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/04-daemonset-troubleshooting.md|DaemonSet 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/06-configmap-secret-troubleshooting.md|ConfigMap 与 Secret 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/02-logging-monitoring-troubleshooting.md|日志与监控故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/05-crd-operator-troubleshooting.md|CRD 与 Operator 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/06-kustomize-troubleshooting.md|Kustomize 部署故障排查指南]]
 
 ## FTA 故障树
 
@@ -230,8 +230,8 @@ prerequisites:
 - [[18-云厂商/01-阿里云/公有云-ACK/241-ack-slb-nlb-alb.md|ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)]]
 - [[18-云厂商/01-阿里云/公有云-ACK/244-ack-ros-iac.md|ACK 关联产品 - ROS 资源编排 (IaC)]]
 - [[18-云厂商/05-腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
-- [[18-云厂商/08-其他云/UCloud-UK8S/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
-- [[18-云厂商/08-其他云/火山引擎-VEK/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
+- [[18-云厂商/08-其他云/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
+- [[18-云厂商/08-其他云/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
 
 ## 生产运维
 

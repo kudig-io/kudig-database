@@ -170,7 +170,7 @@ prerequisites:
 | | 94-smart-prison | | | |
 | | 95-industrial-metaverse | | | |
 | | 96-carbon-capture | | | |
-| | [[应用模式/README.md|Topic 应用层架构设计最佳实践]] | | | |
+| | [[04-应用模式/README.md|Topic 应用层架构设计最佳实践]] | | | |
 
 ---
 
@@ -179,7 +179,7 @@ prerequisites:
 ## Related
 
 - 01-plane-architecture-overview
-- [[实体/kubernetes.md|kubernetes]]
+- [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - daily-ops
 - [[log|log]]
 - [[生态参考/topic-index/README.md|topic-index 深度研究入口使用指南]] — Cross-reference

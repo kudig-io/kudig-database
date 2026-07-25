@@ -54,7 +54,7 @@ authors:
 
 NewSQL 数据库结合了传统关系型数据库的 ACID 事务保证和 NoSQL 的水平扩展能力，提供分布式 SQL 接口。CockroachDB 和 YugabyteDB 是两款代表性的 NewSQL 数据库，均兼容 PostgreSQL 协议，支持在 Kubernetes 上原生部署。
 
-与 [[07-数据库中间件/01-数据库/]] 中的传统关系型数据库相比，NewSQL 解决了单点瓶颈和手动分片的复杂性；与 TiDB 相比，CockroachDB/YugabyteDB 更侧重 PostgreSQL 生态兼容性和多区域部署能力。
+与 [[07-数据库中间件/01-数据库/index.md|01-数据库]] 中的传统关系型数据库相比，NewSQL 解决了单点瓶颈和手动分片的复杂性；与 TiDB 相比，CockroachDB/YugabyteDB 更侧重 PostgreSQL 生态兼容性和多区域部署能力。
 
 ## 架构与核心概念
 
@@ -319,18 +319,18 @@ ORDER BY txn_start ASC;
 ## 最佳实践
 
 1. **节点数量**：CockroachDB 最少 3 节点（容忍 1 节点故障），生产建议 5+ 节点
-2. **时钟同步**：必须部署 chrony/NTP，确保偏差 < 250ms，参考 [[09-可观测性/]] 设置时钟偏移告警
+2. **时钟同步**：必须部署 chrony/NTP，确保偏差 < 250ms，参考 [[09-可观测性/index.md|09-可观测性]] 设置时钟偏移告警
 3. **存储配置**：使用 SSD，`--store` 指定独立磁盘，避免与系统盘共享 I/O
 4. **连接管理**：使用 PgBouncer 或内置连接池，参考 [[07-数据库中间件/08-新型数据库/05-connection-pooling-pgbouncer-proxysql.md]]
-5. **备份策略**：每日全量 + 每小时增量，存储到 S3/GCS，参考 [[12-可靠性/01-备份恢复/]]
+5. **备份策略**：每日全量 + 每小时增量，存储到 S3/GCS，参考 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
 6. **Locality 配置**：多 AZ 部署时指定 `--locality` 确保副本分布合理
 7. **Schema 变更**：使用在线 DDL（`ALTER TABLE ... ADD COLUMN`），大表变更参考 [[07-数据库中间件/08-新型数据库/06-schema-migration-flyway-gh-ost-atlas.md]]
 8. **监控告警**：关注 Range 副本不足、证书过期、磁盘使用率 > 80% 等关键指标
 
 ## Related
 
-- [[07-数据库中间件/01-数据库/]]
-- [[12-可靠性/01-备份恢复/]]
-- [[09-可观测性/]]
-- [[07-数据库中间件/05-Operator管理/]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 - [[07-数据库中间件/08-新型数据库/05-connection-pooling-pgbouncer-proxysql.md]]

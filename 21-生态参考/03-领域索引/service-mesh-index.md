@@ -81,7 +81,7 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
 
 ### CNCF 生态
 
@@ -99,8 +99,8 @@ prerequisites:
 ### 网络与安全
 
 - 网络加密与mTLS
-- [[19-故障诊断/04-高级排障/03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理指南]]
-- [[19-故障诊断/04-高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/06-gateway-api-troubleshooting.md|Gateway API 深度排查与下一代流量治理指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
 
 ### 可观测性
 
@@ -119,9 +119,9 @@ prerequisites:
 
 ### 网络相关
 
-- [[19-故障诊断/04-高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 
 ### 安全相关
 

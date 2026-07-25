@@ -94,7 +94,7 @@ authors:
 ## Obsidian 相关文档
 
 - domain-37-edge-computing MOC
-- [[专项技术/README.md|Domain 15: 边缘计算 (Edge Computing)]]
+- [[16-专项技术/README.md|Domain 15: 边缘计算 (Edge Computing)]]
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)
 - KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)

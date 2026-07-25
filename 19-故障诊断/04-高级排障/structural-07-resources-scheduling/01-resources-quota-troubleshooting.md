@@ -540,7 +540,7 @@ EOF
 
 ## Related
 
-- [[21-生态参考/topic-index/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[21-生态参考/03-领域索引/scheduler-index|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

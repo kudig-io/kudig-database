@@ -173,7 +173,7 @@ groups:
 ---
 
 > 📄 **完整版本**: 本文件为精简版故障树速查。完整的故障树分析（含详细根因推理和决策路径）请查阅：
-> [[37-归档/troubleshooting-diagnostics/FTA故障树/list/pod-fta.md|Pod FTA 完整版]]
+> [[19-故障诊断/06-FTA故障树/list/pod-fta.md|Pod FTA 完整版]]
 
 
 <!-- risk-assessed -->

@@ -60,4 +60,4 @@ last_updated: 2026-05-21
 - [[可靠性/98-merged-indexes/index.md|Domain 09 可靠性工程 索引]]
 
 ## 生产运行手册
-- [[生产运维/05-production-runbook-generator.md|Production Runbook Generator]]
+- [[13-生产运维/07-运维手册/05-production-runbook-generator.md|Production Runbook Generator]]

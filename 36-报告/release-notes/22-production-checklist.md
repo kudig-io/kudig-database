@@ -69,7 +69,7 @@ prerequisites:
 |----|------|------|------|
 | D+8 | 短视频切片 1-3 | 3 个短视频 | 剪映数字人 |
 | D+9 | 短视频切片 4-6 | 3 个短视频 | 剪映数字人 |
-| D+10 | GitHub [[平台工程/代码分析/deployment-create/README.md|README]] 更新 | 新版 README | Git |
+| D+10 | GitHub [[10-平台工程/06-代码分析/deployment-create/README.md|README]] 更新 | 新版 README | Git |
 | D+11 | 快速上手指南验证 | 可用的指南 | 终端 |
 | D+12 | 社交媒体文案定稿 | 各平台文案 | 文档 |
 | D+13 | 内部评审 + 修改 | 终版全部素材 | 会议 |

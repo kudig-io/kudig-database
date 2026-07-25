@@ -86,10 +86,10 @@ cross_refs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[01-API Server故障排查](./01-control-plane-apiserver-troubleshooting.md)** - 控制平面性能优化
-- **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - etcd大规模集群调优
-- **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - 大规模集群性能分析
-- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - 大规模集群升级策略
+- **[01-API Server故障排查](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/01-control-plane-apiserver-troubleshooting.md)** - 控制平面性能优化
+- **[02-etcd故障排查](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/02-control-plane-etcd-troubleshooting.md)** - etcd大规模集群调优
+- **[33-性能瓶颈故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/33-performance-bottleneck-troubleshooting.md)** - 大规模集群性能分析
+- **[34-升级迁移故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/34-upgrade-migration-troubleshooting.md)** - 大规模集群升级策略
 
 ### 📚 扩展学习资料
 - **[Kubernetes大规模集群指南](https://kubernetes.io/docs/setup/best-practices/cluster-large/)** - 官方大规模集群最佳实践

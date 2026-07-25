@@ -111,7 +111,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 网络 MOC
-- [[网络/README.md|Domain 03: Networking 网络]]
+- [[05-网络/README.md|Domain 03: Networking 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - FAQ 文档
 - 网络核心组件

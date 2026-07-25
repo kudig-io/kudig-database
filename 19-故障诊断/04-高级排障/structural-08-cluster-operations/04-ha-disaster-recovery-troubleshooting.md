@@ -643,15 +643,15 @@ kubeadm certs renew all
 ```
 ### 相关文档
 
-- [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
-- [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
-- [证书故障排查](../06-security-auth/02-certificate-troubleshooting.md)
+- [etcd 故障排查](../structural-01-control-plane/02-etcd-troubleshooting.md)
+- [API Server 故障排查](../structural-01-control-plane/01-apiserver-troubleshooting.md)
+- [证书故障排查](../structural-06-security-auth/02-certificate-troubleshooting.md)
 - [集群维护故障排查](./01-cluster-maintenance-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[21-生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
+- [[21-生态参考/03-领域索引/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[21-生态参考/03-领域索引/cluster-index|Cluster 集群知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -469,7 +469,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 ## Obsidian 相关文档
 
 - _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
-- [[生态参考/领域索引/README.md|项目报告 (Reports)]]
+- [[21-生态参考/03-领域索引/README.md|项目报告 (Reports)]]
 - _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
 - _reports/CONTENT-GAP-ANALYSIS.md
 - _reports/DEEP-RESEARCH-ASSESSMENT.md
@@ -484,13 +484,13 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 
 ## Related
 
-- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[文档/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
-- [[文档/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
-- [[文档/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]
+- [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
+- [[29-文档/specs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
+- [[29-文档/specs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
+- [[29-文档/specs/SCENARIO-TAXONOMY.md|KUDIG 场景分类体系]]
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[系统基础/速查卡/k8s.md|k8s]]
+- [[17-系统基础/05-速查卡/k8s.md|k8s]]
 
 <!-- risk-assessed -->

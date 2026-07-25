@@ -98,7 +98,7 @@ authors:
 ## Obsidian 相关文档
 
 - 平台工程 MOC
-- [[平台工程/README.md|Domain 07: 平台工程 (Platform Engineering)]]
+- [[10-平台工程/README.md|Domain 07: 平台工程 (Platform Engineering)]]
 - 平台工程概述与成熟度模型
 - 内部开发者平台设计原则
 - Backstage 部署与配置

@@ -3162,8 +3162,8 @@ patches:
 ---
 
 <!-- chunk: 🔗 相关文档 -->## 🔗 相关文档
-- [35 - Gateway API 和 API Gateway](./35-gateway-api-overview.md)
-- [34 - Ingress 和 IngressClass](./34-ingress-ingressclass.md)
+- [35 - Gateway API 和 API Gateway](../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md)
+- [34 - Ingress 和 IngressClass](10-ingress-ingressclass.md)
 - [33 - PodMonitor 和 ServiceMonitor](./33-podmonitor-servicemonitor.md)
 
 ---

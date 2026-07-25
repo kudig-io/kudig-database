@@ -303,25 +303,25 @@ k8s_versions:
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[22-概念/10-最佳实践/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[15-AI基础设施/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[15-AI基础设施/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[26-技能/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[26-技能/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[10-平台工程/02-运维/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[21-生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[21-生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
-- [[21-生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[21-生态参考/topic-index/higress-index|Higress 知识图谱索引]]
+- [[21-生态参考/03-领域索引/cluster-index|Cluster 集群知识图谱索引]]
+- [[21-生态参考/03-领域索引/pvc-index|PVC 知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[21-生态参考/03-领域索引/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

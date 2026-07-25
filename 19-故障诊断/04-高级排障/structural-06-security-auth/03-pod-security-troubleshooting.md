@@ -714,14 +714,14 @@ capsh --decode=<hex>
 ```
 ### 相关文档
 
-- [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
+- [Pod 故障排查](../structural-05-workloads/01-pod-troubleshooting.md)
 - [RBAC 故障排查](./01-rbac-troubleshooting.md)
-- [Webhook/准入控制故障排查](../01-control-plane/05-webhook-admission-troubleshooting.md)
+- [Webhook/准入控制故障排查](../structural-01-control-plane/05-webhook-admission-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/security-index|Security 安全知识图谱索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

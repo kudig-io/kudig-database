@@ -394,7 +394,7 @@ spec:
 ## Obsidian 相关文档
 
 - 专项技术 MOC
-- [[专项技术/README.md|Domain-10: Kubernetes 扩展生态]]
+- [[16-专项技术/README.md|Domain-10: Kubernetes 扩展生态]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现
 - 03 - 准入控制器(Webhook)配置与实现

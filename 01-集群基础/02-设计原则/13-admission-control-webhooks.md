@@ -119,7 +119,7 @@ k8s_versions:
 
 ---
 
-> **交叉引用**：API Server 准入控制的详细实现请参考 [Domain-3: API Server 深度解析](../集群基础/12-apiserver-deep-dive.md) 和 [Domain-3: 认证授权深度解析](../集群基础/27-authz-authn-deep-dive.md)。
+> **交叉引用**：API Server 准入控制的详细实现请参考 [Domain-3: API Server 深度解析](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/12-apiserver-deep-dive.md) 和 [Domain-3: 认证授权深度解析](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/27-authz-authn-deep-dive.md)。
 
 <!-- chunk: 一、准入控制架构全景 -->
 ## 一、准入控制架构全景

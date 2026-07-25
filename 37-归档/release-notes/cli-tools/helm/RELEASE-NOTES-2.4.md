@@ -58,7 +58,7 @@ The last item is to provide a convenience for installing charts whose versions i
 
 The community keeps growing, and we'd love to see you there.
 
-- Join the discussion in [[实体/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/):
+- Join the discussion in [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Slack](https://slack.k8s.io/):
   - `#helm-users` for questions and just to hang out
   - `#helm-devs` for discussing PRs, code, and bugs 
 - Hang out at the Public Developer Call: Thursday, 9:30 Pacific via [Zoom](https://zoom.us/j/4526666954)

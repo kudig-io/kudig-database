@@ -57,29 +57,29 @@ prerequisites:
 
 ### 集群创建
 
-- [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](工作负载/topic-functions/cluster-create/01-overview.md)
-- [预检阶段 (Preflight Checks)](平台工程/代码分析/cluster-create/02-preflight.md)
-- [证书阶段 (Certificate Generation)](平台工程/代码分析/cluster-create/03-certs.md)
-- [kubeconfig 阶段 (Kubeconfig Generation)](平台工程/代码分析/cluster-create/04-kubeconfig.md)
-- [控制面阶段 (Control Plane & Static [[17-系统基础/06-知识字典/workloads/pods.md|Pods]])](工作负载/topic-functions/cluster-create/05-control-plane.md)
-- 节点加入流程 (kubeadm join)](工作负载/topic-functions/cluster-create/06-join.md)
-- [etcd 集群初始化细节](平台工程/代码分析/cluster-create/07-etcd.md)
-- [高可用控制面搭建](平台工程/代码分析/cluster-create/08-ha.md)
-- [集群升级流程](平台工程/代码分析/cluster-create/09-upgrade.md)
-- [CNI 网络插件与集群网络](平台工程/代码分析/cluster-create/19-cni-networking.md)
-- [Node 注册与 kubeadm token 详解](平台工程/代码分析/cluster-create/20-node-registration.md)
-- Cluster Create — Kubernetes 集群新建源码分析](工作负载/topic-functions/cluster-create/README.md)
+- [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] 集群新建逻辑 — 基于官方代码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/01-overview.md)
+- [预检阶段 (Preflight Checks)](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/02-preflight.md)
+- [证书阶段 (Certificate Generation)](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/03-certs.md)
+- [kubeconfig 阶段 (Kubeconfig Generation)](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/04-kubeconfig.md)
+- [控制面阶段 (Control Plane & Static [[17-系统基础/06-知识字典/workloads/pods.md|Pods]])](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/05-control-plane.md)
+- 节点加入流程 (kubeadm join)](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/06-join.md)
+- [etcd 集群初始化细节](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/07-etcd.md)
+- [高可用控制面搭建](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/08-ha.md)
+- [集群升级流程](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/09-upgrade.md)
+- [CNI 网络插件与集群网络](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/19-cni-networking.md)
+- [Node 注册与 kubeadm token 详解](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/20-node-registration.md)
+- Cluster Create — Kubernetes 集群新建源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-create/README.md)
 
 ### 集群证书
 
-- [Kubernetes 集群 PKI 架构总览](平台工程/代码分析/functions-cluster-cert/01-pki-architecture.md)
-- [CA 证书生成源码分析](平台工程/代码分析/functions-cluster-cert/02-ca-generation.md)
-- [API Server 证书生成源码分析](平台工程/代码分析/functions-cluster-cert/03-apiserver-cert.md)
-- [etcd 证书体系源码分析](平台工程/代码分析/functions-cluster-cert/04-etcd-cert.md)
-- [kubelet 证书与 CSR 机制源码分析](平台工程/代码分析/functions-cluster-cert/05-kubelet-cert.md)
-- [证书轮换机制源码分析](平台工程/代码分析/functions-cluster-cert/06-cert-rotation.md)
-- [证书身份到 RBAC 的映射关系](平台工程/代码分析/functions-cluster-cert/08-rbac-mapping.md)
-- Cluster Cert — Kubernetes 集群证书体系源码分析](工作负载/topic-functions/cluster-cert/README.md)
+- [Kubernetes 集群 PKI 架构总览](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/01-pki-architecture.md)
+- [CA 证书生成源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/02-ca-generation.md)
+- [API Server 证书生成源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/03-apiserver-cert.md)
+- [etcd 证书体系源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/04-etcd-cert.md)
+- [kubelet 证书与 CSR 机制源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/05-kubelet-cert.md)
+- [证书轮换机制源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/06-cert-rotation.md)
+- [证书身份到 RBAC 的映射关系](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/functions-cluster-cert/08-rbac-mapping.md)
+- Cluster Cert — Kubernetes 集群证书体系源码分析](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/06-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/cluster-cert/README.md)
 
 ### 集群删除
 
@@ -92,8 +92,8 @@ prerequisites:
 
 - [[19-故障诊断/03-基础设施排障/34-upgrade-migration-troubleshooting.md|34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)]]
 - [[19-故障诊断/04-高级排障/40-large-scale-cluster-operations.md|40 - 大规模集群运维 (Large Scale Cluster Operations)]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
 
 ### 多集群管理
 

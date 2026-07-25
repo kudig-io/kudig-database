@@ -46,7 +46,7 @@ prerequisites:
 
 **主持人**:
 
-"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 [[实体/kubernetes.md|kubernetes]] 生产运维知识库。
+"今天我们要发布的是 kudig-database, 一个专门为 AI 智能体打造的 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 生产运维知识库。
 
 它不是一份文档, 不是一个 Wiki, 而是 3,346 篇经过结构化处理的专家级知识, 可以直接被智能体检索和使用。
 

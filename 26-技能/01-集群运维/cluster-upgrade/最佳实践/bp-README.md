@@ -170,7 +170,7 @@ etcd:
 - [ ] 网络插件选择和配置
 - [ ] 节点规格和数量规划
 
-**详细指南**: [集群配置最佳实践](infrastructure/kubernetes-cluster.md)
+**详细指南**: [集群配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/kubernetes-cluster.md)
 
 ### 网络配置
 
@@ -201,7 +201,7 @@ spec:
 - [ ] 入口控制器配置
 - [ ] 出口流量控制
 
-**详细指南**: [网络配置最佳实践](infrastructure/networking.md)
+**详细指南**: [网络配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/networking.md)
 
 ### 存储配置
 
@@ -233,7 +233,7 @@ volumeBindingMode: WaitForFirstConsumer
 - [ ] 存储性能监控
 - [ ] 存储成本优化
 
-**详细指南**: [存储配置最佳实践](infrastructure/storage.md)
+**详细指南**: [存储配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/storage.md)
 
 ---
 
@@ -279,7 +279,7 @@ spec:
 - [ ] 镜像安全扫描
 - [ ] 运行时安全监控
 
-**详细指南**: [Pod 安全最佳实践](security/pod-security.md)
+**详细指南**: [Pod 安全最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/pod-security.md)
 
 ### 网络安全
 
@@ -328,7 +328,7 @@ spec:
 - [ ] 入口 WAF 配置
 - [ ] 出口流量白名单
 
-**详细指南**: [网络安全最佳实践](security/network-security.md)
+**详细指南**: [网络安全最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/network-security.md)
 
 ### 密钥管理
 
@@ -371,7 +371,7 @@ spec:
 - [ ] 密钥加密存储
 - [ ] 最小权限访问
 
-**详细指南**: [密钥管理最佳实践](security/secrets-management.md)
+**详细指南**: [密钥管理最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/secrets-management.md)
 
 ---
 
@@ -415,7 +415,7 @@ spec:
 - [ ] 仪表板创建
 - [ ] 容量规划监控
 
-**详细指南**: [监控最佳实践](observability/monitoring.md)
+**详细指南**: [监控最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/monitoring.md)
 
 ### 日志
 
@@ -459,7 +459,7 @@ data:
 - [ ] 日志分析工具
 - [ ] 日志保留策略
 
-**详细指南**: [日志最佳实践](observability/logging.md)
+**详细指南**: [日志最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/logging.md)
 
 ### 追踪
 
@@ -494,7 +494,7 @@ spec:
 - [ ] 依赖关系可视化
 - [ ] 追踪采样策略
 
-**详细指南**: [追踪最佳实践](observability/tracing.md)
+**详细指南**: [追踪最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/tracing.md)
 
 ---
 
@@ -544,7 +544,7 @@ spec:
 - [ ] 部署自动化
 - [ ] 部署监控
 
-**详细指南**: [部署策略最佳实践](operations/deployment.md)
+**详细指南**: [部署策略最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/deployment.md)
 
 ### 扩缩容
 
@@ -590,7 +590,7 @@ spec:
 - [ ] 扩缩容监控
 - [ ] 成本优化
 
-**详细指南**: [扩缩容最佳实践](operations/scaling.md)
+**详细指南**: [扩缩容最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/scaling.md)
 
 ### 灾难恢复
 
@@ -624,7 +624,7 @@ spec:
 - [ ] 灾难恢复演练
 - [ ] 监控和告警
 
-**详细指南**: [灾难恢复最佳实践](operations/disaster-recovery.md)
+**详细指南**: [灾难恢复最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/disaster-recovery.md)
 
 ---
 
@@ -903,24 +903,24 @@ spec:
 - [通用最佳实践参考](common-best-practices.md) - 通用最佳实践原则和规范
 
 ### 基础设施最佳实践
-- [集群配置最佳实践](infrastructure/kubernetes-cluster.md) - Kubernetes集群配置和优化
-- [网络配置最佳实践](infrastructure/networking.md) - 网络架构和CNI插件配置
-- [存储配置最佳实践](infrastructure/storage.md) - 存储类设计和持久卷管理
+- [集群配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/kubernetes-cluster.md) - Kubernetes集群配置和优化
+- [网络配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/networking.md) - 网络架构和CNI插件配置
+- [存储配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/storage.md) - 存储类设计和持久卷管理
 
 ### 安全最佳实践
-- [Pod安全最佳实践](security/pod-security.md) - Pod安全标准和安全上下文
-- [网络安全最佳实践](security/network-security.md) - 网络策略和服务网格安全
-- [密钥管理最佳实践](security/secrets-management.md) - Secrets管理和Vault集成
+- [Pod安全最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/pod-security.md) - Pod安全标准和安全上下文
+- [网络安全最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/network-security.md) - 网络策略和服务网格安全
+- [密钥管理最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/secrets-management.md) - Secrets管理和Vault集成
 
 ### 可观测性最佳实践
-- [监控最佳实践](observability/monitoring.md) - Prometheus监控和告警配置
-- [日志管理最佳实践](observability/logging.md) - EFK日志栈和日志收集
-- [分布式追踪最佳实践](observability/tracing.md) - Jaeger追踪和OpenTelemetry集成
+- [监控最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/monitoring.md) - Prometheus监控和告警配置
+- [日志管理最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/logging.md) - EFK日志栈和日志收集
+- [分布式追踪最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/tracing.md) - Jaeger追踪和OpenTelemetry集成
 
 ### 运维最佳实践
-- [部署策略最佳实践](operations/deployment.md) - 滚动更新、蓝绿部署、金丝雀部署
-- [扩缩容最佳实践](operations/scaling.md) - HPA、VPA、集群自动扩缩容
-- [灾难恢复最佳实践](operations/disaster-recovery.md) - Velero备份和恢复策略
+- [部署策略最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/deployment.md) - 滚动更新、蓝绿部署、金丝雀部署
+- [扩缩容最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/scaling.md) - HPA、VPA、集群自动扩缩容
+- [灾难恢复最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/disaster-recovery.md) - Velero备份和恢复策略
 
 ---
 

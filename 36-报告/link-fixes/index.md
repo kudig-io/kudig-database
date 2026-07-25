@@ -11,6 +11,7 @@ created: '2026-07-25'
 ## 文档
 
 - [[36-报告/link-fixes/WIKI-LINT-REPORT-2026-05-21.md|WIKI-LINT-REPORT-2026-05-21]]
+- [[36-报告/link-fixes/2026-07-25-historical-broken-links-remediation.md|2026-07-25-历史断链治理报告]]
 - [[36-报告/link-fixes/broken-links-final-fix-2026-06-26.md|broken-links-final-fix-2026-06-26]]
 - [[36-报告/link-fixes/broken-links-fix-2026-06-26.md|broken-links-fix-2026-06-26]]
 - [[36-报告/link-fixes/broken-links-full-fix-2026-06-26.md|broken-links-full-fix-2026-06-26]]

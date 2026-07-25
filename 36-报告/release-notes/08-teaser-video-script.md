@@ -69,7 +69,7 @@ prerequisites:
 | 旁白 | "凌晨三点, 线上告警。翻遍文档, 找不到答案。" |
 | 字幕 | 凌晨三点 · 线上告警 |
 | 音效 | 键盘敲击声, 低沉的电子氛围音 |
-| AI 提示词 | Split screen: left side shows a dimly lit desk with laptop showing red alerts at 3AM, right side shows dozens of browser tabs with [[实体/kubernetes.md|kubernetes]] documentation, dark cinematic lighting, photorealistic |
+| AI 提示词 | Split screen: left side shows a dimly lit desk with laptop showing red alerts at 3AM, right side shows dozens of browser tabs with [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] documentation, dark cinematic lighting, photorealistic |
 
 ---
 

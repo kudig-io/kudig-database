@@ -297,7 +297,7 @@ audience:
 - [[17-系统基础/06-知识字典/platform-engineering/gitops-and-continuous-delivery.md|GitOps 与持续交付]]
 - [[17-系统基础/06-知识字典/observability/alerting-and-slo-monitoring.md|告警与 SLO]]
 - [[17-系统基础/06-知识字典/scheduling/cluster-autoscaler.md|Cluster Autoscaler]]
-- [[17-系统基础/06-知识字典/reliability/chaos-engineering.md|混沌工程]]
+- [[17-系统基础/06-知识字典/operations/chaos-engineering.md|混沌工程]]
 
 ## 常用运维命令速查
 

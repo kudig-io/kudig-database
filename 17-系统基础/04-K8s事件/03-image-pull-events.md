@@ -2476,15 +2476,15 @@ echo "=== Audit Complete ==="
 
 ## 10.2 Domain-22: 容器镜像管理
 
-- **[Domain-22: Container Image Management](../容器运行时/README.md)** - 镜像构建、存储、分发和安全管理
+- **[Domain-22: Container Image Management](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/README.md)** - 镜像构建、存储、分发和安全管理
 - **[Domain-22: Dockerfile Best Practices](../容器运行时/01-dockerfile-best-practices.md)** - 镜像构建最佳实践
 - **[Domain-22: Image Registry Setup](../容器运行时/02-image-registry-setup.md)** - 镜像仓库搭建和配置
 
 ## 10.3 Domain-12: 故障排查
 
-- **[Domain-12: Troubleshooting / 27-image-registry-troubleshooting.md](../../19-故障诊断/04-高级排障/02-node-components/05-image-registry-troubleshooting.md)** - 镜像仓库故障排查
-- **[Domain-12: Troubleshooting / 03-container-runtime-troubleshooting.md](../../19-故障诊断/04-高级排障/02-node-components/03-container-runtime-troubleshooting.md)** - 容器运行时(containerd/docker)故障排查
-- **[Domain-12: Troubleshooting / 01-pod-troubleshooting.md](../../19-故障诊断/04-高级排障/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查综合指南
+- **[Domain-12: Troubleshooting / 27-image-registry-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-02-node-components/05-image-registry-troubleshooting.md)** - 镜像仓库故障排查
+- **[Domain-12: Troubleshooting / 03-container-runtime-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-02-node-components/03-container-runtime-troubleshooting.md)** - 容器运行时(containerd/docker)故障排查
+- **[Domain-12: Troubleshooting / 01-pod-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查综合指南
 
 ## 10.4 Domain-2: 节点管理
 

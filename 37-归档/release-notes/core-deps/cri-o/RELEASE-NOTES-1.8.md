@@ -48,7 +48,7 @@ Welcome to the v1.8.5 release of CRI-O!
 
 
 Please try out the release binaries and report any issues at
-https://github.[[实体/kubernetes.md|kubernetes]]-incubator/cri-o/issues.
+https://github.[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]-incubator/cri-o/issues.
 
 
 

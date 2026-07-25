@@ -386,16 +386,16 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 
 ## 延伸阅读
 
-- [etcd 深入](../../集群基础/11-etcd-deep-dive.md)
-- [API Server 深入](../../集群基础/12-apiserver-deep-dive.md)
-- [Scheduler 深入](../../集群基础/20-kube-scheduler-deep-dive.md)
-- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
-- [StatefulSet 高级操作](../../工作负载/03-statefulset-advanced-operations.md)
-- [网络架构总览](../../网络/01-network-architecture-overview.md)
-- [Service 概念与类型](../../网络/06-service-concepts-types.md)
-- [Ingress 基础](../../网络/19-ingress-fundamentals.md)
-- [存储架构总览](../../存储/01-storage-architecture-overview.md)
-- [StorageClass 动态供给](../../存储/04-storageclass-dynamic-provisioning.md)
+- [etcd 深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/11-etcd-deep-dive.md)
+- [API Server 深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/12-apiserver-deep-dive.md)
+- [Scheduler 深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/20-kube-scheduler-deep-dive.md)
+- [Deployment 生产模式](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
+- [StatefulSet 高级操作](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/03-statefulset-advanced-operations.md)
+- [网络架构总览](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/01-network-architecture-overview.md)
+- [Service 概念与类型](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md)
+- [Ingress 基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md)
+- [存储架构总览](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md)
+- [StorageClass 动态供给](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md)
 
 ## Related
 

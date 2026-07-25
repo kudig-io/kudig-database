@@ -442,7 +442,7 @@ spec:
 | etcd问题 | 集群不可用 | etcd集群化 |
 | 网络分区 | 部分节点隔离 | 多网络路径 |
 
-> **交叉引用**：控制平面 HA 的详细配置请参考 [Domain-3: 控制平面高可用](../集群基础/03-plane-high-availability.md)。
+> **交叉引用**：控制平面 HA 的详细配置请参考 [Domain-3: 控制平面高可用](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/03-plane-high-availability.md)。
 
 ---
 

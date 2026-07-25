@@ -30,7 +30,7 @@ estimated_read_time: 5min
 | [[29-文档/agent-specs/index.md\|agent-specs/]] | Agent 规格 | AI Agent 定义、能力规格 |
 | [[29-文档/assessments/index.md\|assessments/]] | 评估 | 技能评估、知识测试 |
 | [[29-文档/ecosystem/index.md\|ecosystem/]] | 生态 | 生态系统文档、组件索引 |
-| [[29-文档/indexes/index.md\|indexes/]] | 索引 | 全域索引、MOC 集合 |
+| [[29-文档/indexes/INDEX.md\|indexes/]] | 索引 | 全域索引、MOC 集合 |
 | [[29-文档/javascripts/index.md\|javascripts/]] | 脚本 | 文档自动化脚本 |
 | [[29-文档/stylesheets/index.md\|stylesheets/]] | 样式 | 文档样式配置 |
 

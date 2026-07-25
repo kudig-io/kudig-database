@@ -796,7 +796,7 @@ class CachedMemorySystem:
 | [04 - RAG 检索](./04-rag-knowledge-retrieval.md) | 语义记忆与 RAG 的结合 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 多 Agent 共享记忆的架构 |
 | [11 - 成本优化](./11-cost-latency-optimization.md) | Token 压缩对成本的影响 |
-| [AI基础设施/20-vector-database-rag.md](../AI基础设施/20-vector-database-rag.md) | 向量数据库选型 |
+| [AI基础设施/20-vector-database-rag.md](../01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/20-vector-database-rag.md) | 向量数据库选型 |
 
 ---
 

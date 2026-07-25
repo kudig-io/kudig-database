@@ -401,11 +401,11 @@ curl -fsSL https://opencode.ai/install | bash
 
 | 文档 | 关系 |
 |------|------|
-| [01 - 概述与架构](./01-opencode-overview-architecture.md) | 架构基础 |
-| [05 - 工具与权限](./05-opencode-tools-permissions.md) | 安全权限详解 |
-| [06 - MCP 集成](./06-opencode-mcp-integration.md) | MCP 故障排查 |
-| [10 - Server API](./10-opencode-server-api.md) | Server 安全配置 |
-| [11 - GitHub CI/CD](./11-opencode-github-automation.md) | CI/CD 自动化 |
+| [01 - 概述与架构](21-opencode-overview-architecture.md) | 架构基础 |
+| [05 - 工具与权限](25-opencode-tools-permissions.md) | 安全权限详解 |
+| [06 - MCP 集成](26-opencode-mcp-integration.md) | MCP 故障排查 |
+| [10 - Server API](30-opencode-server-api.md) | Server 安全配置 |
+| [11 - GitHub CI/CD](31-opencode-github-automation.md) | CI/CD 自动化 |
 
 ---
 

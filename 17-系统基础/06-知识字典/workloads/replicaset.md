@@ -178,7 +178,7 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.metadata.ownerReferences[0].na
 ## 交叉引用
 
 - [[17-系统基础/06-知识字典/workloads/deployments.md|Deployments]]](./deployments.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 - [工作负载管理总览](./workload-management.md)
 - [[17-系统基础/06-知识字典/workloads/replicationcontroller.md|ReplicationController]]（旧版）](./replicationcontroller.md)

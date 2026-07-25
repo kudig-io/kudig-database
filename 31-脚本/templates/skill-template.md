@@ -548,6 +548,6 @@ receivers:
 
 ---
 
-> **关联文档**: [故障诊断/topic-skills/skill-schema.md](../故障诊断/技能体系/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
+> **关联文档**: [故障诊断/topic-skills/skill-schema.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
 
 <!-- risk-assessed -->

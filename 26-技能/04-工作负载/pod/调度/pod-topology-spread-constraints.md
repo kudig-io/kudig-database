@@ -233,9 +233,9 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 ## 交叉引用
 
 - [将 Pod 分配给节点](./assigning-pods-to-nodes.md) — podAntiAffinity 与拓扑分布约束的对比
-- [调度器性能调优](./scheduler-performance-tuning.md) — 拓扑分布约束对调度性能的影响
-- Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
-- [调度框架](./scheduling-framework.md) — PodTopologySpread 插件的扩展点
+- [调度器性能调优](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/scheduler-performance-tuning.md) — 拓扑分布约束对调度性能的影响
+- Karpenter 自动扩缩容](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
+- [调度框架](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/scheduling-framework.md) — PodTopologySpread 插件的扩展点
 
 ## 参考链接
 

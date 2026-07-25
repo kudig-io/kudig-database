@@ -323,9 +323,9 @@ Phase 5: 输出与闭环
 - USER
 - IDENTITY
 - MEMORY
-- [[release-sre/metadata/agent-specs/README.md|Agent Specs 规范目录]]
-- [[release-sre/metadata/taxonomy/taxonomy.md|Release SRE 分类体系]]
-- [[release-sre/metadata/taxonomy/schema.md|Release SRE Schema 定义]]
+- [[29-文档/agent-specs/README.md|Agent Specs 规范目录]]
+- [[35-元数据/metadata/taxonomy.md|Release SRE 分类体系]]
+- [[35-元数据/metadata/schema.md|Release SRE Schema 定义]]
 - [[release-sre/metadata/taxonomy/AGENTS.md|Release SRE Agents 配置]]
 - [[release-sre/qa/raw/README.md|Release SRE QA 语料说明]]
 

@@ -198,7 +198,7 @@ dns-fta.md
 gateway-api-fta.md
 hpa-fta.md
 helm-fta.md
-[[故障诊断/FTA故障树/list/ingress-fta.md|ingress-fta]].md
+[[19-故障诊断/06-FTA故障树/list/ingress-fta.md|ingress-fta]].md
 service-fta.md
 monitoring-fta.md
 networkpolicy-fta.md

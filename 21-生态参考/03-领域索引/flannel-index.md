@@ -73,9 +73,9 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/04-高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查]]
-- [[19-故障诊断/04-高级排障/03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|DNS 故障排查]]
 
 ### FTA 故障树
 

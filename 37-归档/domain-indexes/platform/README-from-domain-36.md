@@ -84,25 +84,25 @@ tier: peripheral---
 ## 📚 文档目录
 
 ### 🎯 平台工程基础 (01-02)
-- **[01-平台工程概述与成熟度模型](./01-platform-engineering-overview.md)** - 平台工程定义、成熟度模型、组织架构
-- **[02-内部开发者平台设计原则](./02-idp-design-principles.md)** - IDP 设计原则、用户体验、架构模式
+- **[01-平台工程概述与成熟度模型](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/01-platform-engineering-overview.md)** - 平台工程定义、成熟度模型、组织架构
+- **[02-内部开发者平台设计原则](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/02-idp-design-principles.md)** - IDP 设计原则、用户体验、架构模式
 
 ### 🌐 Backstage IDP 深度实践 (03-05)
-- **[03-Backstage部署与配置](./03-backstage-deployment.md)** - Backstage 架构、Kubernetes 部署、身份集成
-- **[04-Backstage软件目录与TechDocs](./04-backstage-catalog-techdocs.md)** - Software Catalog、TechDocs、API 文档
-- **[05-Backstage脚手架与模板系统](./05-backstage-scaffolder-templates.md)** - Scaffolder、模板开发、自动化工作流
+- **[03-Backstage部署与配置](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/03-backstage-deployment.md)** - Backstage 架构、Kubernetes 部署、身份集成
+- **[04-Backstage软件目录与TechDocs](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/04-backstage-catalog-techdocs.md)** - Software Catalog、TechDocs、API 文档
+- **[05-Backstage脚手架与模板系统](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/05-backstage-scaffolder-templates.md)** - Scaffolder、模板开发、自动化工作流
 
 ### 🔧 平台即代码 (06-07)
-- **[06-Kratix平台即代码](./06-kratix-platform-as-code.md)** - Kratix Promise、平台 API、自助服务
-- **[07-Crossplane平台组合](./07-crossplane-platform-composition.md)** - Crossplane Composition、XRD、多云基础设施
+- **[06-Kratix平台即代码](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/06-kratix-platform-as-code.md)** - Kratix Promise、平台 API、自助服务
+- **[07-Crossplane平台组合](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/07-crossplane-platform-composition.md)** - Crossplane Composition、XRD、多云基础设施
 
 ### 📊 开发者体验与度量 (08-10)
-- **[08-Golden Paths黄金路径设计](./08-golden-paths-design.md)** - 黄金路径模式、最佳实践、模板设计
-- **[09-开发者体验度量](./09-developer-experience-metrics.md)** - DORA 指标、SPACE 框架、平台 KPI
-- **[10-平台团队拓扑与运营](./10-platform-team-topology.md)** - Team Topologies、平台运营、支持模式
+- **[08-Golden Paths黄金路径设计](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/08-golden-paths-design.md)** - 黄金路径模式、最佳实践、模板设计
+- **[09-开发者体验度量](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/04-%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C/09-developer-experience-metrics.md)** - DORA 指标、SPACE 框架、平台 KPI
+- **[10-平台团队拓扑与运营](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/04-%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C/10-platform-team-topology.md)** - Team Topologies、平台运营、支持模式
 
 ### 🌐 前端部署平台 (11)
-- **[11-Vercel前端部署平台](./[[平台工程/build/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]].md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
+- **[11-Vercel前端部署平台](./[[10-平台工程/01-构建/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]].md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
 
 ## 🎯 学习路径建议
 

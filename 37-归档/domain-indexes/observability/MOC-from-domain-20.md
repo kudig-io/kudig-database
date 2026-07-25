@@ -70,7 +70,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[可观测性/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]] |  | observability, monitoring, alerting |  |
+| 1 | [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]] |  | observability, monitoring, alerting |  |
 | 2 | Prometheus企业级监控系统深度实践 |  | observability, monitoring, alerting |  |
 | 3 | Grafana Enterprise Observability Platform 深度实践 |  | observability, monitoring, alerting |  |
 | 4 | OpenTelemetry分布式追踪与可观测性深度实践 |  | observability, monitoring, alerting |  |
@@ -134,11 +134,11 @@ graph TD
 
 ## See Also
 
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
-- [[可观测性/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
-- [[可观测性/98-merged-indexes/MOC-from-domain-21.md|MOC-from-可观测性]]
-- [[可观测性/98-merged-indexes/MOC-from-domain-8.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-21.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-8.md|MOC-from-可观测性]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

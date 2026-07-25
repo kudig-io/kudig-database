@@ -212,7 +212,7 @@ Step 4: 场景化 Q&A
 | 命令速查表 | [public-training/one-month/resources/commands-cheatsheet.md](public-training/one-month/resources/commands-cheatsheet.md) | 日常运维速查 |
 | 知识图谱 | [public-training/one-month/resources/knowledge-map.md](public-training/one-month/resources/knowledge-map.md) | 全局知识导航 |
 | 考核评估 | [../故障诊断/topic-skills/assessment/]( ../故障诊断/技能体系/assessment/) | 技能自测工具 |
-| 术语表 | [../系统基础/topic-dictionary/k8s-glossary.md](../系统基础/知识字典/k8s-glossary.md) | 术语查询 |
+| 术语表 | [../系统基础/topic-dictionary/k8s-glossary.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/k8s-glossary.md) | 术语查询 |
 | 故障排查手册 | [../故障诊断/]( ../故障诊断/) | 深度故障排查 |
 
 ---
@@ -259,7 +259,7 @@ Step 4: 场景化 Q&A
 - [00-beginner-learning-roadmap.md](00-beginner-learning-roadmap.md) — 多路径学习路线图
 - [beginner-guides/](beginner-guides/) — 🆕 小白补充教程
 - [../故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill（深度技术细节）
-- [../系统基础/topic-dictionary/k8s-glossary.md](../系统基础/知识字典/k8s-glossary.md) — K8s 术语表
+- [../系统基础/topic-dictionary/k8s-glossary.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/k8s-glossary.md) — K8s 术语表
 - [../故障诊断/](../故障诊断/) — 故障排查深度文档
 
 ## Related

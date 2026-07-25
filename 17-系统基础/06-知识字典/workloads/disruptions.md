@@ -219,8 +219,8 @@ kubectl get pdb -n <namespace> -o wide
 
 - [[17-系统基础/06-知识字典/workloads/deployments.md|Deployments]] 中断管理](./deployments.md)
 - [[23-实体/02-K8s核心组件/statefulset.md|StatefulSet]] 有序管理](./statefulsets.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
+- [节点 NotReady 诊断](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
 - [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
 
 ## 参考链接

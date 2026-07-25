@@ -626,9 +626,9 @@ newgrp docker
 |------|------|---------|
 | 1 | 跑第一个 Pod | [../fundamentals/02-pod-basics.md](../fundamentals/02-pod-basics.md) |
 | 2 | 用 Deployment 部署应用 | [../fundamentals/03-deployment-basics.md](../fundamentals/03-deployment-basics.md) |
-| 3 | 用 Service 暴露服务 | [../fundamentals/04-service-basics.md](../fundamentals/04-service-basics.md) |
-| 4 | 配置 Ingress | [../fundamentals/05-ingress-basics.md](../fundamentals/05-ingress-basics.md) |
-| 5 | 挂载存储 | [../fundamentals/08-pv-pvc-basics.md](../fundamentals/08-pv-pvc-basics.md) |
+| 3 | 用 Service 暴露服务 | [../fundamentals/04-service-basics.md](../../../../05-%E7%BD%91%E7%BB%9C/service/%E5%9F%B9%E8%AE%AD/04-service-basics.md) |
+| 4 | 配置 Ingress | [../fundamentals/05-ingress-basics.md](../../../../05-%E7%BD%91%E7%BB%9C/ingress/%E5%9F%B9%E8%AE%AD/05-ingress-basics.md) |
+| 5 | 挂载存储 | [../fundamentals/08-pv-pvc-basics.md](../../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/08-pv-pvc-basics.md) |
 
 ---
 

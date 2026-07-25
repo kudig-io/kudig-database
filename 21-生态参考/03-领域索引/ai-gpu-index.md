@@ -90,21 +90,21 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/04-高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|AI/ML 工作负载故障排查指南]]
-- [[19-故障诊断/04-高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
-- [[19-故障诊断/04-高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|MPI Operator 与分布式训练故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|AI/ML 工作负载故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|MPI Operator 与分布式训练故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ### 调度与资源
 
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 
 ### 成本与可观测性
 
 - 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 - AI平台可观测性体系
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
 
 ## 扩展参考
 

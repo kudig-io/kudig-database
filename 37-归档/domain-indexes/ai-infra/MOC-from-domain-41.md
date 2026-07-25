@@ -133,10 +133,10 @@ AI Agent — AI 智能体架构、工具调用、Agent 工作流
 
 ## Related
 
-- [[系统基础/topic-cheat-sheet/k8s.md|k8s]]
+- [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - cost-optimization
 - daily-ops
-- [[脚本/man/INSTALL.md|INSTALL]]
+- [[31-脚本/man/INSTALL.md|INSTALL]]
 
 
 <!-- risk-assessed -->

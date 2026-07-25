@@ -148,7 +148,7 @@ For file assets, it means adding an explicit path as shown below:
 
 # Required actions
 
-* Amazon Linux 2 users are encouraged to use the AMIs based on the 5.10 Linux kernel. See [the documentation](../operations/images.md#amazon-linux-2) for more information.
+* Amazon Linux 2 users are encouraged to use the AMIs based on the 5.10 Linux kernel. See [the documentation](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/images.md#amazon-linux-2) for more information.
 
 * Terraform support now requires Terraform >=0.15.0.
   Users on older versions must follow Terraform's recommended upgrade path of applying one minor version at a time prior to running `kops update cluster --target terraform`.

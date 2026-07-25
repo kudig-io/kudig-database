@@ -207,7 +207,7 @@ Layer 4: 文化治理（FinOps Practice）
 - Goldilocks: https://github.com/FairwindsOps/goldilocks
 - Karpenter: https://karpenter.sh/
 - FinOps Foundation: https://www.finops.org/
-- [[12-可靠性/03-容量规划/|容量规划目录]]
+- [[12-可靠性/03-容量规划/index.md|容量规划目录]]
 - [[13-生产运维/index.md|生产运维目录]]
 - [[25-研究/01-AI与边缘/gpu-sharing-scheduling.md|GPU 共享调度研究]]
 

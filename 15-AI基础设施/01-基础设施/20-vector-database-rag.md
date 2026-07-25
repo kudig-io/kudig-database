@@ -2829,7 +2829,7 @@ results = vectorstore.similarity_search(query, k=10)
 
 ---
 
-**相关文档**: [144-LLM推理服务](144-llm-inference-serving.md) | [142-LLM数据Pipeline](142-llm-data-pipeline.md) | [132-AI/ML工作负载](132-ai-ml-workloads.md)
+**相关文档**: [144-LLM推理服务](17-llm-inference-serving.md) | [142-LLM数据Pipeline](15-llm-data-pipeline.md) | [132-AI/ML工作负载](02-ai-ml-workloads.md)
 
 **版本**: Milvus 2.3+ | Weaviate 1.24+ | Qdrant 1.8+ | LangChain 0.1+
 

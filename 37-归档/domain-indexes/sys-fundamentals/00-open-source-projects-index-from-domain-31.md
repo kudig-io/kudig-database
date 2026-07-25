@@ -95,7 +95,7 @@ authors:
 ## Obsidian 相关文档
 
 - domain-31-hardware MOC
-- [[系统基础/README.md|Domain 31 - 硬件基础设施]]
+- [[17-系统基础/README.md|Domain 31 - 硬件基础设施]]
 - 云平台硬件基础架构
 - 服务器架构原理
 - CPU技术深度解析

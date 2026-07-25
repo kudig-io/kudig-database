@@ -381,28 +381,28 @@ graph LR
 
 | 文档 | 主题 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
-| [01-Argo CD企业级GitOps](./01-argo-cd-enterprise-gitops.md) | Argo CD 深度实践 | ApplicationSet、多集群、SSO、RBAC、Notifications | 中级→高级 |
-| [02-Jenkins企业级CI/CD](./02-jenkins-enterprise-cicd.md) | Jenkins 流水线实践 | Shared Libraries、Multibranch、Agent K8s | 中级→高级 |
-| [03-GitLab企业级CI/CD](./03-gitlab-enterprise-cicd.md) | GitLab DevOps 平台 | Auto DevOps、Review Apps、安全扫描 | 中级→高级 |
-| [04-GitHub Actions企业级自动化](./04-github-actions-enterprise.md) | GitHub Actions 工作流 | Reusable Workflows、Matrix、OIDC | 中级→高级 |
+| [01-Argo CD企业级GitOps](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/01-argo-cd-enterprise-gitops.md) | Argo CD 深度实践 | ApplicationSet、多集群、SSO、RBAC、Notifications | 中级→高级 |
+| [02-Jenkins企业级CI/CD](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/02-jenkins-enterprise-cicd.md) | Jenkins 流水线实践 | Shared Libraries、Multibranch、Agent K8s | 中级→高级 |
+| [03-GitLab企业级CI/CD](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/03-gitlab-enterprise-cicd.md) | GitLab DevOps 平台 | Auto DevOps、Review Apps、安全扫描 | 中级→高级 |
+| [04-GitHub Actions企业级自动化](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/04-github-actions-enterprise.md) | GitHub Actions 工作流 | Reusable Workflows、Matrix、OIDC | 中级→高级 |
 
 ### 进阶专题 (05-08)
 
 | 文档 | 主题 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
-| [05-Tekton云原生CI/CD](./05-tekton-cloud-native-cicd.md) | Tekton 深度实践 | Pipeline、Task、Trigger、Chains | 高级 |
-| [06-Flux GitOps持续交付](./06-flux-gitops-continuous-delivery.md) | Flux v2 深度实践 | Kustomization、HelmRelease、多集群、ImageAutomation | 高级 |
-| [07-GitOps安全合规](./07-gitops-security-compliance.md) | 安全与合规深度实践 | SLSA、SBOM、Cosign、密钥管理、准入控制 | 高级→专家 |
-| [08-CI/CD流水线模式](./08-cicd-pipeline-patterns.md) | 流水线设计模式 | Trunk-based、环境晋升、金丝雀、多集群发布 | 高级 |
+| [05-Tekton云原生CI/CD](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/05-tekton-cloud-native-cicd.md) | Tekton 深度实践 | Pipeline、Task、Trigger、Chains | 高级 |
+| [06-Flux GitOps持续交付](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/06-flux-gitops-continuous-delivery.md) | Flux v2 深度实践 | Kustomization、HelmRelease、多集群、ImageAutomation | 高级 |
+| [07-GitOps安全合规](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/07-gitops-security-compliance.md) | 安全与合规深度实践 | SLSA、SBOM、Cosign、密钥管理、准入控制 | 高级→专家 |
+| [08-CI/CD流水线模式](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/08-cicd-pipeline-patterns.md) | 流水线设计模式 | Trunk-based、环境晋升、金丝雀、多集群发布 | 高级 |
 
 ### 实践指南 (99-xx)
 
 | 文档 | 主题 | 定位 |
 |:---|:---|:---|
-| [99-Argo CD GitOps指南](./99-argo-cd-gitops-guide.md) | Argo CD 操作手册 | 快速上手指南 |
-| [99-Flux GitOps指南](./99-flux-gitops-guide.md) | Flux 操作手册 | 快速上手指南 |
-| [99-Tekton CI/CD指南](./99-tekton-cicd-guide.md) | Tekton 基础概念 | 入门教程 |
-| [99-Tekton Java CI/CD指南](./99-tekton-java-cicd-guide.md) | Java CI/CD 流水线 | 实战指南 |
+| [99-Argo CD GitOps指南](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/99-argo-cd-gitops-guide.md) | Argo CD 操作手册 | 快速上手指南 |
+| [99-Flux GitOps指南](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/99-flux-gitops-guide.md) | Flux 操作手册 | 快速上手指南 |
+| [99-Tekton CI/CD指南](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/99-tekton-cicd-guide.md) | Tekton 基础概念 | 入门教程 |
+| [99-Tekton Java CI/CD指南](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/99-tekton-java-cicd-guide.md) | Java CI/CD 流水线 | 实战指南 |
 
 ---
 
@@ -936,7 +936,7 @@ CNCF项目状态:
 
 - 相关知识域: 平台工程
 - 相关知识域: domain-24-infrastructure-as-code
-- [[系统基础/topic-cheat-sheet/git.md|速查卡: git]]
+- [[17-系统基础/05-速查卡/git.md|速查卡: git]]
 ```
 
 <!-- risk-assessed -->

@@ -1637,7 +1637,7 @@ spec:
 
 ## 相关配置参考
 - [01 - Pod YAML 配置参考](./01-pod-reference.md) - Pod 模板配置
-- [08 - ConfigMap YAML 配置参考](./08-configmap-reference.md) - 任务脚本管理
+- [08 - ConfigMap YAML 配置参考](13-configmap-reference.md) - 任务脚本管理
 - [09 - Secret YAML 配置参考](./09-secret-reference.md) - 敏感信息管理
 
 ## 工具与生态

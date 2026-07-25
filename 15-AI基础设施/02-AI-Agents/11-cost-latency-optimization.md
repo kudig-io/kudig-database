@@ -886,8 +886,8 @@ class PrefetchAgent:
 | [07 - 记忆管理](./07-memory-context-management.md) | 上下文压缩对成本的影响 |
 | [08 - 评测与可观测性](./observability.md|08-agent-evaluation-observability]].md) | 成本 Prometheus 指标 |
 | [09 - 生产部署](./09-production-deployment-guide.md) | vLLM 部署与 KV Cache |
-| [AI基础设施/26-cost-optimization-overview.md](../AI基础设施/26-cost-optimization-overview.md) | AI 基础设施成本优化 |
-| [AI基础设施/23-llm-cost-monitoring.md](../AI基础设施/23-llm-cost-monitoring.md) | LLM 成本监控体系 |
+| [AI基础设施/26-cost-optimization-overview.md](../01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/26-cost-optimization-overview.md) | AI 基础设施成本优化 |
+| [AI基础设施/23-llm-cost-monitoring.md](../01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/23-llm-cost-monitoring.md) | LLM 成本监控体系 |
 
 ---
 

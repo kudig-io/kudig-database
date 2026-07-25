@@ -2376,9 +2376,9 @@ spec:
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/openkruise-index|OpenKruise 全局索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/openkruise-index|OpenKruise 全局索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

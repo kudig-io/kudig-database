@@ -29,15 +29,15 @@ estimated_read_time: 5min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[03-清单模式/01-YAML参考/README.md\|YAML参考/]] | 资源规范 | Pod/Deployment/Service YAML 字段详解 |
-| [[03-清单模式/02-Kustomize模式/README.md\|Kustomize模式/]] | Kustomize | Base/Overlay、patchesStrategicMerge、Generator |
-| [[03-清单模式/03-Helm值模式/README.md\|Helm值模式/]] | Helm | Chart 结构、values 覆盖、模板函数、依赖管理 |
-| [[03-清单模式/04-Operator模式/README.md\|Operator模式/]] | Operator | CRD 设计、Reconcile 循环、Kubebuilder/Operator SDK |
-| [[03-清单模式/05-GitOps模式/README.md\|04-gitops-patterns/]] | GitOps 清单 | ArgoCD Application、Sync Policy、App-of-Apps |
-| [[03-清单模式/06-安全模式/README.md\|05-security-patterns/]] | 安全清单 | NetworkPolicy、PodSecurity、RBAC 模板 |
-| [[03-清单模式/07-AI-ML模式/README.md\|06-ai-ml-patterns/]] | AI/ML 清单 | GPU 调度、训练 Job、推理服务模板 |
-| [[03-清单模式/08-韧性模式/README.md\|07-resilience-patterns/]] | 弹性清单 | PDB、HPA/VPA、拓扑分布、优先级 |
-| [[03-清单模式/09-平台模式/README.md\|08-platform-patterns/]] | 平台清单 | Namespace 治理、ResourceQuota、LimitRange |
+| [[03-清单模式/README.md\|YAML参考/]] | 资源规范 | Pod/Deployment/Service YAML 字段详解 |
+| [[03-清单模式/README.md\|Kustomize模式/]] | Kustomize | Base/Overlay、patchesStrategicMerge、Generator |
+| [[03-清单模式/README.md\|Helm值模式/]] | Helm | Chart 结构、values 覆盖、模板函数、依赖管理 |
+| [[03-清单模式/README.md\|Operator模式/]] | Operator | CRD 设计、Reconcile 循环、Kubebuilder/Operator SDK |
+| [[03-清单模式/README.md\|04-gitops-patterns/]] | GitOps 清单 | ArgoCD Application、Sync Policy、App-of-Apps |
+| [[03-清单模式/README.md\|05-security-patterns/]] | 安全清单 | NetworkPolicy、PodSecurity、RBAC 模板 |
+| [[03-清单模式/README.md\|06-ai-ml-patterns/]] | AI/ML 清单 | GPU 调度、训练 Job、推理服务模板 |
+| [[03-清单模式/README.md\|07-resilience-patterns/]] | 弹性清单 | PDB、HPA/VPA、拓扑分布、优先级 |
+| [[03-清单模式/README.md\|08-platform-patterns/]] | 平台清单 | Namespace 治理、ResourceQuota、LimitRange |
 
 ## 跨域导航
 

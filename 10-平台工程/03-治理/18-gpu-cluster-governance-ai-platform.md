@@ -489,7 +489,7 @@ kubectl top nodes -l nvidia.com/gpu.present=true
 - 配额管理集成到 [[10-平台工程/01-构建/01-platform-engineering-overview|内部开发者平台]]
 - 成本数据接入 [[10-平台工程/03-治理/09-cost-optimization-finops|FinOps 平台]]
 - 准入策略通过 [[10-平台工程/03-治理/17-multi-tenant-management|多租户管理]] 统一管理
-- GPU 监控接入 [[09-可观测性/prometheus|Prometheus]] + Grafana 治理看板
+- GPU 监控接入 [[23-实体/07-可观测性/prometheus|Prometheus]] + Grafana 治理看板
 - 参考 [[24-综合/06-可靠性与成本/multitenancy-resource-isolation-governance|多租户资源隔离治理]] 了解完整治理体系
 
 ## Related

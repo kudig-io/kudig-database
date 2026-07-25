@@ -29,13 +29,13 @@ estimated_read_time: 5min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[01-集群基础/01-架构总览/README.md\|架构总览/]] | 架构 | Master/Worker、组件交互、高可用拓扑 |
-| [[01-集群基础/03-控制平面/README.md\|控制平面/]] | 控制平面 | API Server/etcd/Scheduler/Controller Manager |
-| [[01-集群基础/02-设计原则/README.md\|设计原则/]] | 原则 | 声明式、不可变基础设施、水平扩展、自愈 |
-| [[01-集群基础/04-API版本/README.md\|API版本/]] | API | Alpha/Beta/GA、版本协商、废弃策略 |
-| [[01-集群基础/05-kubectl/README.md\|kubectl/]] | kubectl | 常用命令、输出格式、插件、调试技巧 |
-| [[01-集群基础/06-升级路径/README.md\|升级路径/]] | 升级 | 滚动升级、版本偏差策略、升级检查清单 |
-| [[01-集群基础/07-性能调优/README.md\|性能调优/]] | 性能 | API Server 调优、etcd 性能、调度器延迟 |
+| [[01-集群基础/README.md\|架构总览/]] | 架构 | Master/Worker、组件交互、高可用拓扑 |
+| [[01-集群基础/README.md\|控制平面/]] | 控制平面 | API Server/etcd/Scheduler/Controller Manager |
+| [[01-集群基础/README.md\|设计原则/]] | 原则 | 声明式、不可变基础设施、水平扩展、自愈 |
+| [[01-集群基础/README.md\|API版本/]] | API | Alpha/Beta/GA、版本协商、废弃策略 |
+| [[01-集群基础/README.md\|kubectl/]] | kubectl | 常用命令、输出格式、插件、调试技巧 |
+| [[01-集群基础/README.md\|升级路径/]] | 升级 | 滚动升级、版本偏差策略、升级检查清单 |
+| [[01-集群基础/README.md\|性能调优/]] | 性能 | API Server 调优、etcd 性能、调度器延迟 |
 
 ## 跨域导航
 

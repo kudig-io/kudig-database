@@ -767,12 +767,12 @@ kubectl patch mutatingwebhookconfiguration <name> --type='json' -p='[{"op": "rep
 ### 相关文档
 
 - [API Server 故障排查](./01-apiserver-troubleshooting.md)
-- [证书故障排查](../06-security-auth/02-certificate-troubleshooting.md)
-- [RBAC 故障排查](../06-security-auth/01-rbac-troubleshooting.md)
+- [证书故障排查](../structural-06-security-auth/02-certificate-troubleshooting.md)
+- [RBAC 故障排查](../structural-06-security-auth/01-rbac-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

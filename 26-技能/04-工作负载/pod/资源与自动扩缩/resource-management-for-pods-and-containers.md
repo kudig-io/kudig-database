@@ -283,9 +283,9 @@ kubectl patch pod <pod-name> --subresource resize --type merge \
 ```
 ## 交叉引用
 
-- [存活、就绪和启动探针](./liveness-readiness-and-startup-probes.md) — 资源不足可导致探针超时和误判
-- [ConfigMaps](./configmaps.md) — 应用配置中的线程池/连接池大小应与资源 limits 匹配
-- [Windows 节点资源管理](./resource-management-for-windows-nodes.md) — Windows 节点上资源管理的特殊行为
+- [存活、就绪和启动探针](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/configuration/liveness-readiness-and-startup-probes.md) — 资源不足可导致探针超时和误判
+- [ConfigMaps](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/configuration/configmaps.md) — 应用配置中的线程池/连接池大小应与资源 limits 匹配
+- [Windows 节点资源管理](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/configuration/resource-management-for-windows-nodes.md) — Windows 节点上资源管理的特殊行为
 
 ## 参考链接
 

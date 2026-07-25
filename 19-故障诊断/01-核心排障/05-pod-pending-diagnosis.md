@@ -93,9 +93,9 @@ cross_refs:
 ### 🔗 关联故障排查文档
 - **[06-Node NotReady诊断](./06-node-notready-diagnosis.md)** - 节点状态异常是Pod Pending的常见原因
 - **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存不足导致的Pod调度失败
-- **[14-PVC存储故障排查](./14-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
-- **[24-Quota/LimitRange故障排查](./24-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
-- **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
+- **[14-PVC存储故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/14-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
+- **[24-Quota/LimitRange故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/24-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
+- **[25-网络连通性故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/25-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
 
 ### 📚 扩展学习资料
 - **[Kubernetes调度器原理](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)** - 深入理解调度机制

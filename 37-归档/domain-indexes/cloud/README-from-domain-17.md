@@ -95,9 +95,9 @@ tier: peripheral---
 
 | # | 文档 | 关键内容 | 技术特色 | 企业级功能 |
 |:---:|:---|:---|:---|:---|
-| 01 | [AWS EKS](./01-aws-eks/aws-eks-overview.md) | Fargate无服务器、Node Groups管理、EKS Anywhere混合云 | 企业级集成、生态丰富 | 多集群联邦、安全合规、成本优化 |
+| 01 | [AWS EKS](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/02-AWS-EKS/aws-eks-overview.md) | Fargate无服务器、Node Groups管理、EKS Anywhere混合云 | 企业级集成、生态丰富 | 多集群联邦、安全合规、成本优化 |
 | 02 | [Google GKE](./02-google-cloud-gke/google-cloud-gke-overview.md) | Autopilot全自动运维、Standard标准模式、Anthos混合多云 | AI/ML优化、性能优异 | 智能调度、自动扩缩容、监控集成 |
-| 03 | [Azure AKS](./03-azure-aks/azure-aks-overview.md) | Virtual Nodes虚拟节点、Azure Arc混合云、企业集成 | 混合云强、企业集成 | Active Directory集成、安全中心、备份恢复 |
+| 03 | [Azure AKS](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/04-Azure-AKS/azure-aks-overview.md) | Virtual Nodes虚拟节点、Azure Arc混合云、企业集成 | 混合云强、企业集成 | Active Directory集成、安全中心、备份恢复 |
 
 ### 国内头部云厂商 (04-06)
 

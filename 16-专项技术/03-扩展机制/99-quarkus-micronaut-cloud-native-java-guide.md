@@ -687,9 +687,9 @@ Phase 4: 测试与优化
 ## 🔗 相关文档
 
 - [GraalVM Native Image 指南](./99-graalvm-native-image-guide.md) — 原生编译原理
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md) — Spring Boot 对比参考
-- [Java 容器化](../容器运行时/12-java-containerization-guide.md) — 容器构建优化
-- [Java 性能 Sizing](../故障诊断/99-java-performance-resource-sizing-guide.md) — 资源配置
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) — Spring Boot 对比参考
+- [Java 容器化](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — 容器构建优化
+- [Java 性能 Sizing](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-java-performance-resource-sizing-guide.md) — 资源配置
 
 ---
 

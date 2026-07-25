@@ -154,7 +154,7 @@ Kubernetes 工具生态是云原生开发运维的效率倍增器，包括：
 ### 本地开发类
 
 - [[17-系统基础/06-知识字典/tooling/minikube.md|Minikube]]
-- [[17-系统基础/06-知识字典/tooling/kind.md|Kind]]
+- [[17-系统基础/06-知识字典/platform-engineering/kind.md|Kind]]
 - [[17-系统基础/06-知识字典/tooling/k3s.md|k3s]]
 - [[17-系统基础/06-知识字典/tooling/k0s.md|k0s]]
 - [[17-系统基础/06-知识字典/tooling/lima.md|Lima]]
@@ -170,7 +170,7 @@ Kubernetes 工具生态是云原生开发运维的效率倍增器，包括：
 - [[17-系统基础/06-知识字典/tooling/opentofu.md|OpenTofu]]
 - [[17-系统基础/06-知识字典/tooling/atlantis.md|Atlantis]]
 - [[17-系统基础/06-知识字典/tooling/kubeadm.md|kubeadm]]
-- [[17-系统基础/06-知识字典/tooling/kubean.md|Kubean]]
+- [[17-系统基础/06-知识字典/operations/kubean.md|Kubean]]
 - [[17-系统基础/06-知识字典/tooling/bootc.md|bootc]]
 
 ### 镜像仓库类
@@ -587,4 +587,4 @@ A: Skaffold 更成熟（Google 维护、与 Cloud Code 集成）；Tilt 更现�
 - [[17-系统基础/06-知识字典/platform-engineering/operator-framework.md|Operator Framework]]
 - [[17-系统基础/06-知识字典/operations/gitops.md|GitOps]]
 - [[17-系统基础/06-知识字典/configuration/helm-values.md|Helm Values]]
-- [[17-系统基础/06-知识字典/container-runtime/containerd.md|containerd]]
+- [[17-系统基础/06-知识字典/fundamentals/containerd.md|containerd]]

@@ -68,16 +68,16 @@ prerequisites:
 | 7 | topic-terway | [06-performance.md](./06-performance.md) | 682 | 专题 | 5 模式性能基准、Pod 容量计算、内核调优、eBPF 加速、生产基线指标 |
 | 8 | topic-terway | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 513 | 专题 | Mermaid FTA 全景图、6 大问题类别、32 条错误信息目录、AND 门组合问题 |
 | 9 | topic-terway | README.md](./README.md) | 85 | 索引 | 专题目录索引与阅读建议 |
-| 10 | 网络 | [05-terway-advanced-guide.md](../网络/05-terway-advanced-guide.md) | 369 | 源文件 | 模式对比、ENIIP 详解、固定 IP、NetworkPolicy、故障排查、最佳实践 |
-| 11 | 网络 | [37-terway-resources-crud-operations.md](../网络/37-terway-resources-crud-operations.md) | 1521 | 源文件 | CRD 资源架构、PodENI/NodeNetworking/PodNetworking CRUD、IPAM Manager |
-| 12 | 网络 | [38-terway-gc-mechanism.md](../网络/38-terway-gc-mechanism.md) | 942 | 源文件 | GC 设计原则、触发链路、参数调优、安全组清理、Finalizer 死锁处理 |
-| 13 | topic-structural-trouble-shooting | [07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 634 | 排障 | 10 分钟快速诊断、问题现象分类、排查步骤决策树、预防与最佳实践 |
-| 14 | topic-fta | [terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | 879 | FTA | ENI/IP 池/CNI/节点网络/安全组/控制面 6 分支 FTA 树、JSON 工作流 |
+| 10 | 网络 | [05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) | 369 | 源文件 | 模式对比、ENIIP 详解、固定 IP、NetworkPolicy、故障排查、最佳实践 |
+| 11 | 网络 | [37-terway-resources-crud-operations.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) | 1521 | 源文件 | CRD 资源架构、PodENI/NodeNetworking/PodNetworking CRUD、IPAM Manager |
+| 12 | 网络 | [38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) | 942 | 源文件 | GC 设计原则、触发链路、参数调优、安全组清理、Finalizer 死锁处理 |
+| 13 | topic-structural-trouble-shooting | [07-terway-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) | 634 | 排障 | 10 分钟快速诊断、问题现象分类、排查步骤决策树、预防与最佳实践 |
+| 14 | topic-fta | [terway-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) | 879 | FTA | ENI/IP 池/CNI/节点网络/安全组/控制面 6 分支 FTA 树、JSON 工作流 |
 | 15 | topic-presentations | [kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | 1075 | 演示 | 4 阶段培训(入门/架构/部署/排障)、Speaker Notes、现场演示命令 |
-| 16 | topic-learn | [day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | 200 | 培训 | 入门学习计划、Terway 三模式理论、实践任务(部署确认/模式识别/排障) |
+| 16 | topic-learn | [day-24-terway-cni.md](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) | 200 | 培训 | 入门学习计划、Terway 三模式理论、实践任务(部署确认/模式识别/排障) |
 | 17 | 云厂商 | [242-ack-vpc-network.md](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) | 110 | VPC | VPC 网络规划、vSwitch 设计策略、Terway 与 VPC 集成、NAT Gateway |
-| 18 | 网络 | [02-cni-architecture-fundamentals.md](../网络/02-cni-architecture-fundamentals.md) | 844 | 源文件 | CNI 规范基础、插件链、IPAM 接口、Terway 作为 CNI 的设计上下文 |
-| 19 | 网络 | [03-cni-plugins-comparison.md](../网络/03-cni-plugins-comparison.md) | 215 | 源文件 | CNI 插件横向对比(Terway/Flannel/Calico/Cilium)、选型决策矩阵 |
+| 18 | 网络 | [02-cni-architecture-fundamentals.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) | 844 | 源文件 | CNI 规范基础、插件链、IPAM 接口、Terway 作为 CNI 的设计上下文 |
+| 19 | 网络 | [03-cni-plugins-comparison.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) | 215 | 源文件 | CNI 插件横向对比(Terway/Flannel/Calico/Cilium)、选型决策矩阵 |
 
 ---
 
@@ -87,19 +87,19 @@ prerequisites:
 
 1. [01-product.md](./01-product.md) -- 理解产品定位与 CNI 选型
 2. [02-architecture.md](./02-architecture.md) -- 深入控制面/数据面架构与 CRD 模型
-3. [05-terway-advanced-guide.md](../网络/05-terway-advanced-guide.md) -- 模式对比与容量规划
+3. [05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) -- 模式对比与容量规划
 4. [03-usage.md](./03-usage.md) -- 容量规划参考与多 vSwitch 设计
 5. [06-performance.md](./06-performance.md) -- 性能基准与 eBPF 迁移策略
 6. [242-ack-vpc-network.md](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) -- VPC 网络顶层规划
-7. [03-cni-plugins-comparison.md](../网络/03-cni-plugins-comparison.md) -- 全局 CNI 选型视角
+7. [03-cni-plugins-comparison.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) -- 全局 CNI 选型视角
 
 ### SRE / 运维
 
 1. [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) -- FTA 故障树速查
 2. [04-operations.md](./04-operations.md) -- GC 调优、告警规则、巡检清单
-3. [38-terway-gc-mechanism.md](../网络/38-terway-gc-mechanism.md) -- GC 机制深度理解
-4. [07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) -- 结构化排障决策树
-5. [terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) -- Agent 可执行的 FTA 工作流
+3. [38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) -- GC 机制深度理解
+4. [07-terway-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) -- 结构化排障决策树
+5. [terway-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) -- Agent 可执行的 FTA 工作流
 6. [05-testing.md](./05-testing.md) -- 生产验证测试套件
 7. [03b-crd-operations.md](./03b-crd-operations.md) -- CRD 诊断脚本与紧急操作
 
@@ -108,23 +108,23 @@ prerequisites:
 1. [01-product.md](./01-product.md) -- 快速了解 Terway 能力边界
 2. [03-usage.md](./03-usage.md) -- Annotation 配置、NetworkPolicy、固定 IP
 3. [03b-crd-operations.md](./03b-crd-operations.md) -- CRD 资源查询与操作
-4. [37-terway-resources-crud-operations.md](../网络/37-terway-resources-crud-operations.md) -- CRD 深度 CRUD 参考
-5. [02-cni-architecture-fundamentals.md](../网络/02-cni-architecture-fundamentals.md) -- CNI 规范与接口理解
+4. [37-terway-resources-crud-operations.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) -- CRD 深度 CRUD 参考
+5. [02-cni-architecture-fundamentals.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) -- CNI 规范与接口理解
 
 ### 培训讲师
 
 1. [kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) -- 完整 3 小时培训讲稿
 2. [01-product.md](./01-product.md) -- 产品概览素材
 3. [02-architecture.md](./02-architecture.md) -- 架构图与模式详解素材
-4. [day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) -- 配套入门实践任务
+4. [day-24-terway-cni.md](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) -- 配套入门实践任务
 5. [05-testing.md](./05-testing.md) -- 现场 Workshop 实验脚本
 
 ### 新人入门
 
-1. [day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) -- 4-5 小时入门学习
+1. [day-24-terway-cni.md](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) -- 4-5 小时入门学习
 2. [01-product.md](./01-product.md) -- 产品定位与模式概览
 3. [03-usage.md](./03-usage.md) -- 安装配置与基本使用
-4. [05-terway-advanced-guide.md](../网络/05-terway-advanced-guide.md) -- 模式对比加深理解
+4. [05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) -- 模式对比加深理解
 5. [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) -- 建立排障意识
 
 ---
@@ -133,19 +133,19 @@ prerequisites:
 
 | 场景 | 推荐文件（优先级排序） |
 |:---|:---|
-| Terway 选型与容量规划 | → [01-product](./01-product.md) → [05-advanced](../网络/05-terway-advanced-guide.md) → [03-usage(容量规划)](./03-usage.md) → [06-performance](./06-performance.md) → [242-vpc](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) |
-| CRD 资源管理 | → [03b-crd-operations](./03b-crd-operations.md) → [37-crud](../网络/37-terway-resources-crud-operations.md) → [02-architecture(CRD模型)](./02-architecture.md) |
+| Terway 选型与容量规划 | → [01-product](./01-product.md) → [05-advanced](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) → [03-usage(容量规划)](./03-usage.md) → [06-performance](./06-performance.md) → [242-vpc](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) |
+| CRD 资源管理 | → [03b-crd-operations](./03b-crd-operations.md) → [37-crud](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) → [02-architecture(CRD模型)](./02-architecture.md) |
 | 生产环境部署 | → [03-usage](./03-usage.md) → [04-operations](./04-operations.md) → [05-testing](./05-testing.md) → [kubernetes-terway-presentation(第三阶段)](../生产运维/topic-presentations/kubernetes-terway-presentation.md) |
-| GC 调优 | → [04-operations(GC章节)](./04-operations.md) → [38-gc](../网络/38-terway-gc-mechanism.md) → [05-testing(GC验证)](./05-testing.md) |
-| 故障排查 | → [07-troubleshooting-fta](./07-troubleshooting-fta.md) → [07-terway-troubleshooting](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) → [04-operations(排障决策树)](./04-operations.md) → [terway-fta](../故障诊断/FTA故障树/list/terway-fta.md) |
-| FTA 故障树分析 | → [terway-fta](../故障诊断/FTA故障树/list/terway-fta.md) → [07-troubleshooting-fta](./07-troubleshooting-fta.md) → [07-terway-troubleshooting](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) |
+| GC 调优 | → [04-operations(GC章节)](./04-operations.md) → [38-gc](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) → [05-testing(GC验证)](./05-testing.md) |
+| 故障排查 | → [07-troubleshooting-fta](./07-troubleshooting-fta.md) → [07-terway-troubleshooting](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) → [04-operations(排障决策树)](./04-operations.md) → [terway-fta](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) |
+| FTA 故障树分析 | → [terway-fta](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) → [07-troubleshooting-fta](./07-troubleshooting-fta.md) → [07-terway-troubleshooting](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) |
 | 多集群网络互通 | → [242-ack-vpc](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) → [03-usage(多集群章节)](./03-usage.md) → [kubernetes-terway-presentation](../生产运维/topic-presentations/kubernetes-terway-presentation.md) |
-| 性能调优与基准测试 | → [06-performance](./06-performance.md) → [05-testing(性能基准)](./05-testing.md) → [05-advanced(性能优化)](../网络/05-terway-advanced-guide.md) |
-| NetworkPolicy 配置 | → [03-usage(NetworkPolicy)](./03-usage.md) → [05-advanced(NetworkPolicy)](../网络/05-terway-advanced-guide.md) → [05-testing(NP测试)](./05-testing.md) |
-| 培训与演讲 | → [kubernetes-terway-presentation](../生产运维/topic-presentations/kubernetes-terway-presentation.md) → [day-24-terway-cni](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) → [01-product](./01-product.md) |
-| 固定 IP 与状态应用 | → [03-usage(固定IP)](./03-usage.md) → [03b-crd-operations(ReservedIP)](./03b-crd-operations.md) → [05-advanced(固定IP)](../网络/05-terway-advanced-guide.md) → [05-testing(固定IP验证)](./05-testing.md) |
-| CNI 基础与选型对比 | → [02-cni-architecture](../网络/02-cni-architecture-fundamentals.md) → [03-cni-plugins-comparison](../网络/03-cni-plugins-comparison.md) → [01-product(CNI对比)](./01-product.md) |
-| 安全组与访问控制 | → [03-usage(安全组)](./03-usage.md) → [03b-crd-operations](./03b-crd-operations.md) → [04-operations](./04-operations.md) → [terway-fta(安全组分支)](../故障诊断/FTA故障树/list/terway-fta.md) |
+| 性能调优与基准测试 | → [06-performance](./06-performance.md) → [05-testing(性能基准)](./05-testing.md) → [05-advanced(性能优化)](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) |
+| NetworkPolicy 配置 | → [03-usage(NetworkPolicy)](./03-usage.md) → [05-advanced(NetworkPolicy)](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) → [05-testing(NP测试)](./05-testing.md) |
+| 培训与演讲 | → [kubernetes-terway-presentation](../生产运维/topic-presentations/kubernetes-terway-presentation.md) → [day-24-terway-cni](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) → [01-product](./01-product.md) |
+| 固定 IP 与状态应用 | → [03-usage(固定IP)](./03-usage.md) → [03b-crd-operations(ReservedIP)](./03b-crd-operations.md) → [05-advanced(固定IP)](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) → [05-testing(固定IP验证)](./05-testing.md) |
+| CNI 基础与选型对比 | → [02-cni-architecture](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) → [03-cni-plugins-comparison](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) → [01-product(CNI对比)](./01-product.md) |
+| 安全组与访问控制 | → [03-usage(安全组)](./03-usage.md) → [03b-crd-operations](./03b-crd-operations.md) → [04-operations](./04-operations.md) → [terway-fta(安全组分支)](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) |
 | 升级与版本迁移 | → [04-operations(升级策略)](./04-operations.md) → [01-product(版本历史)](./01-product.md) → [06-performance(eBPF迁移)](./06-performance.md) |
 | VPC 网络规划 | → [242-ack-vpc](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) → [03-usage(多vSwitch)](./03-usage.md) → [02-architecture](./02-architecture.md) |
 
@@ -243,15 +243,15 @@ graph LR
 
 | 文件 | 行数 | 关联说明 |
 |:---|:---:|:---|
-| [网络/02-cni-architecture-fundamentals.md](../网络/02-cni-architecture-fundamentals.md) | 844 | CNI 规范基础，理解 Terway 插件链设计的前提 |
-| [网络/03-cni-plugins-comparison.md](../网络/03-cni-plugins-comparison.md) | 215 | CNI 插件横向对比，Terway 选型决策参考 |
-| [网络/04-flannel-complete-guide.md](../网络/04-flannel-complete-guide.md) | 430 | Flannel 完整指南，Terway 迁移时对比参考 |
-| [网络/16-networkpolicy-deep-practice.md](../网络/16-networkpolicy-deep-practice.md) | 801 | NetworkPolicy 深度实践，Terway NP 功能的通用知识基础 |
-| [网络/34-network-performance-tuning.md](../网络/34-network-performance-tuning.md) | 205 | 网络性能调优通用方法，Terway 性能调优的补充视角 |
-| [网络/11-dns-service-discovery-coredns.md](../网络/11-dns-service-discovery-coredns.md) | 1140 | CoreDNS 服务发现，Pod 直通 VPC 场景下 DNS 解析联动 |
-| [网络/06-service-concepts-types.md](../网络/06-service-concepts-types.md) | 2516 | Service 类型与实现，Terway ENI 模式下 Service 流量路径 |
-| [网络/19-ingress-fundamentals.md](../网络/19-ingress-fundamentals.md) | 2113 | Ingress 基础，ALB Ingress 与 Terway VPC 网络联动 |
-| [网络/33-network-troubleshooting.md](../网络/33-network-troubleshooting.md) | -- | 通用网络故障排查，Terway 排障的知识补充 |
+| [网络/02-cni-architecture-fundamentals.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) | 844 | CNI 规范基础，理解 Terway 插件链设计的前提 |
+| [网络/03-cni-plugins-comparison.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) | 215 | CNI 插件横向对比，Terway 选型决策参考 |
+| [网络/04-flannel-complete-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/04-flannel-complete-guide.md) | 430 | Flannel 完整指南，Terway 迁移时对比参考 |
+| [网络/16-networkpolicy-deep-practice.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/16-networkpolicy-deep-practice.md) | 801 | NetworkPolicy 深度实践，Terway NP 功能的通用知识基础 |
+| [网络/34-network-performance-tuning.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/34-network-performance-tuning.md) | 205 | 网络性能调优通用方法，Terway 性能调优的补充视角 |
+| [网络/11-dns-service-discovery-coredns.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/11-dns-service-discovery-coredns.md) | 1140 | CoreDNS 服务发现，Pod 直通 VPC 场景下 DNS 解析联动 |
+| [网络/06-service-concepts-types.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md) | 2516 | Service 类型与实现，Terway ENI 模式下 Service 流量路径 |
+| [网络/19-ingress-fundamentals.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md) | 2113 | Ingress 基础，ALB Ingress 与 Terway VPC 网络联动 |
+| [网络/33-network-troubleshooting.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/33-network-troubleshooting.md) | -- | 通用网络故障排查，Terway 排障的知识补充 |
 
 ---
 
@@ -265,20 +265,20 @@ graph LR
 
 | 主题 | 核心文件 | 补充阅读 |
 |------|---------|----------|
-| **产品与架构** | [01-product](./01-product.md), [02-architecture](./02-architecture.md) | [05-advanced](../网络/05-terway-advanced-guide.md) |
+| **产品与架构** | [01-product](./01-product.md), [02-architecture](./02-architecture.md) | [05-advanced](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) |
 | **部署与配置** | [03-usage](./03-usage.md), [03b-crd-operations](./03b-crd-operations.md) | [242-vpc](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) |
-| **运维与监控** | [04-operations](./04-operations.md), [38-gc](../网络/38-terway-gc-mechanism.md) | [06-performance](./06-performance.md) |
+| **运维与监控** | [04-operations](./04-operations.md), [38-gc](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) | [06-performance](./06-performance.md) |
 | **测试与验证** | [05-testing](./05-testing.md) | [06-performance](./06-performance.md) |
-| **故障排查** | [07-troubleshooting-fta](./07-troubleshooting-fta.md), [terway-fta](../故障诊断/FTA故障树/list/terway-fta.md) | [07-terway-troubleshooting](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) |
-| **培训材料** | [kubernetes-terway-presentation](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | [day-24-terway-cni](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) |
+| **故障排查** | [07-troubleshooting-fta](./07-troubleshooting-fta.md), [terway-fta](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) | [07-terway-troubleshooting](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) |
+| **培训材料** | [kubernetes-terway-presentation](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | [day-24-terway-cni](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) |
 
 ### 按难度分级
 
 | 级别 | 适用人群 | 推荐文件 |
 |------|---------|----------|
-| 🟢 入门 | 新人/开发者 | [day-24-terway-cni](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) → [01-product](./01-product.md) → [03-usage](./03-usage.md) |
+| 🟢 入门 | 新人/开发者 | [day-24-terway-cni](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) → [01-product](./01-product.md) → [03-usage](./03-usage.md) |
 | 🟡 进阶 | SRE/运维 | [02-architecture](./02-architecture.md) → [04-operations](./04-operations.md) → [07-troubleshooting-fta](./07-troubleshooting-fta.md) |
-| 🔴 专家 | 架构师/网络工程师 | [02-architecture](./02-architecture.md) → [06-performance](./06-performance.md) → [38-gc](../网络/38-terway-gc-mechanism.md) → [terway-fta](../故障诊断/FTA故障树/list/terway-fta.md) |
+| 🔴 专家 | 架构师/网络工程师 | [02-architecture](./02-architecture.md) → [06-performance](./06-performance.md) → [38-gc](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) → [terway-fta](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) |
 
 ---
 

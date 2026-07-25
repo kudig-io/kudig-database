@@ -79,45 +79,45 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 ### 核心控制器详解 (01-05)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 01 | [工作负载架构概览](./01-workload-overview-architecture.md) | 工作负载分类、生命周期、设计原则 | ⭐⭐⭐⭐⭐ |
-| 02 | [Deployment生产模式](./02-deployment-production-patterns.md) | 无状态应用部署、蓝绿/金丝雀发布 | ⭐⭐⭐⭐⭐ |
-| 03 | [StatefulSet高级运维](./03-statefulset-advanced-operations.md) | 有状态应用管理、数据持久化 | ⭐⭐⭐⭐ |
-| 04 | [DaemonSet管理策略](./04-daemonset-management.md) | 节点级守护进程、监控日志收集 | ⭐⭐⭐⭐⭐ |
-| 05 | [Job/CronJob高级用法](./05-job-cronjob-advanced.md) | 批处理任务、定时作业调度 | ⭐⭐⭐⭐ |
+| 01 | [工作负载架构概览](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md) | 工作负载分类、生命周期、设计原则 | ⭐⭐⭐⭐⭐ |
+| 02 | [Deployment生产模式](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md) | 无状态应用部署、蓝绿/金丝雀发布 | ⭐⭐⭐⭐⭐ |
+| 03 | [StatefulSet高级运维](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/03-statefulset-advanced-operations.md) | 有状态应用管理、数据持久化 | ⭐⭐⭐⭐ |
+| 04 | [DaemonSet管理策略](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/04-daemonset-management.md) | 节点级守护进程、监控日志收集 | ⭐⭐⭐⭐⭐ |
+| 05 | [Job/CronJob高级用法](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/05-job-cronjob-advanced.md) | 批处理任务、定时作业调度 | ⭐⭐⭐⭐ |
 
 ### 监控与运维 (06-09)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 06 | [工作负载监控告警](./06-workload-monitoring-alerting.md) | 监控体系、告警策略、仪表板 | ⭐⭐⭐⭐⭐ |
-| 07 | [故障排查应急手册](./07-workload-troubleshooting-handbook.md) | 故障诊断、应急响应、处理流程 | ⭐⭐⭐⭐⭐ |
-| 08 | [多云混合部署策略](./08-multi-cloud-workload-strategy.md) | 多云架构、联邦管理、成本优化 | ⭐⭐⭐⭐ |
-| 09 | [边缘计算部署模式](./09-edge-computing-deployment.md) | 边缘架构、KubeEdge、资源优化 | ⭐⭐⭐⭐ |
+| 06 | [工作负载监控告警](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/06-workload-monitoring-alerting.md) | 监控体系、告警策略、仪表板 | ⭐⭐⭐⭐⭐ |
+| 07 | [故障排查应急手册](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/07-workload-troubleshooting-handbook.md) | 故障诊断、应急响应、处理流程 | ⭐⭐⭐⭐⭐ |
+| 08 | [多云混合部署策略](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/08-multi-cloud-workload-strategy.md) | 多云架构、联邦管理、成本优化 | ⭐⭐⭐⭐ |
+| 09 | [边缘计算部署模式](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/09-edge-computing-deployment.md) | 边缘架构、KubeEdge、资源优化 | ⭐⭐⭐⭐ |
 
 ### 控制器与调度 (10-16)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 10 | [工作负载控制器概览](./10-workload-controllers-overview.md) | 控制器特性矩阵、基础配置 | ⭐⭐⭐⭐ |
+| 10 | [工作负载控制器概览](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/10-workload-controllers-overview.md) | 控制器特性矩阵、基础配置 | ⭐⭐⭐⭐ |
 | 11 | [Pod生命周期事件](./11-pod-lifecycle-events.md) | Pod状态转换、事件处理 | ⭐⭐⭐⭐ |
 | 12 | [高级Pod模式](./12-advanced-pod-patterns.md) | Pod设计模式、最佳实践 | ⭐⭐⭐ |
-| 13 | [容器生命周期钩子](./13-container-lifecycle-hooks.md) | 启动/停止钩子、健康检查 | ⭐⭐⭐⭐⭐ |
-| 14 | [Sidecar容器模式](./14-sidecar-containers-patterns.md) | 边车模式、服务网格集成 | ⭐⭐⭐⭐⭐ |
-| 15 | [容器运行时接口](./15-container-runtime-interfaces.md) | CRI架构、运行时选型 | ⭐⭐⭐⭐ |
-| 16 | [RuntimeClass配置](./16-runtime-class-configuration.md) | 多运行时管理、资源配置 | ⭐⭐⭐ |
+| 13 | [容器生命周期钩子](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/13-container-lifecycle-hooks.md) | 启动/停止钩子、健康检查 | ⭐⭐⭐⭐⭐ |
+| 14 | [Sidecar容器模式](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/14-sidecar-containers-patterns.md) | 边车模式、服务网格集成 | ⭐⭐⭐⭐⭐ |
+| 15 | [容器运行时接口](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/15-container-runtime-interfaces.md) | CRI架构、运行时选型 | ⭐⭐⭐⭐ |
+| 16 | [RuntimeClass配置](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/16-runtime-class-configuration.md) | 多运行时管理、资源配置 | ⭐⭐⭐ |
 
 ### 镜像与节点管理 (17-20)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 17 | [容器镜像与仓库](./17-container-images-registry.md) | 镜像管理、安全扫描 | ⭐⭐⭐⭐⭐ |
-| 18 | [节点管理操作](./18-node-management-operations.md) | 节点维护、标签管理 | ⭐⭐⭐ |
-| 19 | [调度器配置](./19-scheduler-configuration.md) | 调度策略、优先级配置 | ⭐⭐⭐⭐ |
-| 20 | [Kubelet配置](./20-kubelet-configuration.md) | 节点代理、资源配置 | ⭐⭐⭐⭐⭐ |
+| 17 | [容器镜像与仓库](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/17-container-images-registry.md) | 镜像管理、安全扫描 | ⭐⭐⭐⭐⭐ |
+| 18 | [节点管理操作](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/18-node-management-operations.md) | 节点维护、标签管理 | ⭐⭐⭐ |
+| 19 | [调度器配置](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/19-scheduler-configuration.md) | 调度策略、优先级配置 | ⭐⭐⭐⭐ |
+| 20 | [Kubelet配置](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/20-kubelet-configuration.md) | 节点代理、资源配置 | ⭐⭐⭐⭐⭐ |
 
 ### 扩缩容与资源管理 (21-23)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 21 | [HPA/VPA自动扩缩容](./21-hpa-vpa-autoscaling.md) | 水平/垂直扩缩容策略 | ⭐⭐⭐⭐ |
-| 22 | [集群容量规划](./22-cluster-capacity-planning.md) | 资源规划、容量评估 | ⭐⭐⭐⭐⭐ |
-| 23 | [资源管理](./23-resource-management.md) | 配额管理、资源限制 | ⭐⭐⭐⭐⭐ |
+| 21 | [HPA/VPA自动扩缩容](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/21-hpa-vpa-autoscaling.md) | 水平/垂直扩缩容策略 | ⭐⭐⭐⭐ |
+| 22 | [集群容量规划](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/22-cluster-capacity-planning.md) | 资源规划、容量评估 | ⭐⭐⭐⭐⭐ |
+| 23 | [资源管理](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/23-resource-management.md) | 配额管理、资源限制 | ⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -138,7 +138,7 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 ### K8s v1.29-v1.33 工作负载新特性参考 (99-系列)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 99 | [v1.29-v1.33 工作负载管理新特性指南](./99-kubernetes-v1.33-workloads-guide.md) | Sidecar GA、原地Resize、Job成功策略、AppArmor、用户命名空间 | ⭐⭐⭐⭐⭐ |
+| 99 | [v1.29-v1.33 工作负载管理新特性指南](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-kubernetes-v1.33-workloads-guide.md) | Sidecar GA、原地Resize、Job成功策略、AppArmor、用户命名空间 | ⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -172,6 +172,6 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[系统基础/topic-cheat-sheet/k8s.md|速查卡: k8s]]
+- [[17-系统基础/05-速查卡/k8s.md|速查卡: k8s]]
 
 <!-- risk-assessed -->

@@ -785,9 +785,9 @@ groups:
 
 ## Related
 
-- [[21-生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[21-生态参考/topic-index/storage-index|Storage 存储知识图谱索引]]
-- [[21-生态参考/topic-index/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
+- [[21-生态参考/03-领域索引/pvc-index|PVC 知识图谱索引]]
+- [[21-生态参考/03-领域索引/storage-index|Storage 存储知识图谱索引]]
+- [[21-生态参考/03-领域索引/csi-index|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

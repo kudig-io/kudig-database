@@ -485,7 +485,7 @@ kubectl delete podchaos az-failure-drill -n production
 
 ## 相关
 
-- [[12-可靠性/02-灾难恢复/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
+- [[12-可靠性/02-灾难恢复/10-dr-scenarios-catalog.md|01 dr scenarios catalog]]
 
 
 <!-- risk-assessed -->

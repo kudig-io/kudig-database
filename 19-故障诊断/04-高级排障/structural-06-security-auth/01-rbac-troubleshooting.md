@@ -458,9 +458,9 @@ EOF
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[21-生态参考/topic-index/security-index|Security 安全知识图谱索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[21-生态参考/03-领域索引/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

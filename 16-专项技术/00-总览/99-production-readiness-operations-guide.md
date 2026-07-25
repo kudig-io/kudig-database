@@ -349,11 +349,11 @@ kubectl -n <operator-ns> logs <operator-pod> | grep -i "reconcile\|error"
 
 ### 本域核心文档
 
-- [[边缘计算/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署]]
-- [[WebAssembly/03-spinkube-framework.md|SpinKube 框架实践]]
-- [[扩展机制/03-admission-webhook-configuration.md|准入控制器 Webhook 配置与实现]]
-- [[扩展机制/02-operator-development-patterns.md|Operator 开发模式]]
-- [[扩展机制/06-helm-charts-management.md|Helm Chart 管理]]
+- [[16-专项技术/01-边缘计算/03-kubeedge-architecture-deployment.md|KubeEdge 架构与部署]]
+- [[16-专项技术/02-WebAssembly/03-spinkube-framework.md|SpinKube 框架实践]]
+- [[16-专项技术/03-扩展机制/03-admission-webhook-configuration.md|准入控制器 Webhook 配置与实现]]
+- [[16-专项技术/03-扩展机制/02-operator-development-patterns.md|Operator 开发模式]]
+- [[16-专项技术/03-扩展机制/06-helm-charts-management.md|Helm Chart 管理]]
 - [[03-edge-computing-production-deployment.md|边缘计算生产部署]]
 
 ### 本域待补充重点（Gap 分析推荐）

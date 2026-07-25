@@ -87,11 +87,11 @@ prerequisites:
 - [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
 - [[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
 - [[19-故障诊断/02-资源排障/21-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
-- [[19-故障诊断/04-高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
-- [[19-故障诊断/04-高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
 - [[19-故障诊断/06-FTA故障树/list/csi-fta.md|CSI 存储异常 FTA 树]]
 
 ### 控制平面组件

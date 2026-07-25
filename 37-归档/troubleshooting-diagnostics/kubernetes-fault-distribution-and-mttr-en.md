@@ -36,13 +36,13 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 relationships:
-- target: '[[概念/etcd Operational Reference.md]]'
+- target: '[[22-概念/01-核心架构/etcd Operational Reference.md]]'
   type: uses
-- target: '[[技能/工作负载/pod/方法论/Kubernetes FTA Top Events Index.md]]'
+- target: '[[26-技能/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md]]'
   type: uses
-- target: '[[系统基础/知识字典/workloads/pods.md]]'
+- target: '[[17-系统基础/06-知识字典/workloads/pods.md]]'
   type: uses
-- target: '[[最佳实践/scenarios/capacity-planning.md]]'
+- target: '[[20-最佳实践/07-scenarios/capacity-planning.md]]'
   type: related_to
 ---
 
@@ -77,7 +77,7 @@ Based on production data across the industry:
 
 3. **Network issues are hardest to diagnose**: 60-minute MTTR despite only 18% frequency indicates significant diagnostic challenge. FTA needs extensive diagnostic branching for DNS, CNI, and policy-related failures.
 
-4. **Resource exhaustion is most automatable**: 30-minute MTTR with clear observable signals (memory > 95%, disk > 90%) makes this the best candidate for [[技能/工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]].
+4. **Resource exhaustion is most automatable**: 30-minute MTTR with clear observable signals (memory > 95%, disk > 90%) makes this the best candidate for [[26-技能/04-工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]].
 
 ## etcd FMEA Risk Priority Numbers
 
@@ -112,11 +112,11 @@ Based on production data across the industry:
 | TE-5: Storage failure | P1 | Uncommon | Data access blocked |
 | TE-15: DR failure | P0 | Rare | Business continuity risk |
 
-## [[最佳实践/scenarios/capacity-planning.md|Capacity Planning]] Benchmarks
+## [[20-最佳实践/07-scenarios/capacity-planning.md|Capacity Planning]] Benchmarks
 
 - etcd: 10,000+ writes/second on SSD
 - API Server: Handles 1,000+ req/sec per instance
-- kube-scheduler: Schedules 100+ [[系统基础/知识字典/workloads/pods.md|pods]]/sec
+- kube-scheduler: Schedules 100+ [[17-系统基础/06-知识字典/workloads/pods.md|pods]]/sec
 - Typical cluster: 500-5,000 pods per cluster
 - Typical node: 50-110 pods per node (varies by instance type)
 
@@ -127,13 +127,13 @@ Based on production data across the industry:
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[技能/工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 - Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[概念/etcd Operational Reference.md|etcd Operational Reference]].md|etcd Operational Reference]]
-- [[故障诊断/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]].md|etcd Operational Reference]]
+- [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]
-- [[实体/dex.md|Dex (entities)]]
+- [[23-实体/06-安全/dex.md|Dex (entities)]]
 
 
 <!-- risk-assessed -->

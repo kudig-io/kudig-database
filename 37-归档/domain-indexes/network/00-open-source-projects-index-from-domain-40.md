@@ -108,7 +108,7 @@ authors:
 ## Obsidian 相关文档
 
 - domain-40-cloud-native-api-gateway MOC
-- [[网络/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
+- [[05-网络/README.md|Domain 03: 云原生 API 网关技术体系 (Cloud-Native API Gateway Technolo...]]
 - 01 - 云原生 API 网关架构总览
 - 02 - Kubernetes Gateway API 标准深度解析
 - 03 - API 网关选型指南与对比矩阵

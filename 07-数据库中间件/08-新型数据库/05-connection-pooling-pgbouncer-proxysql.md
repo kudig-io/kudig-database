@@ -55,7 +55,7 @@ authors:
 
 数据库连接是昂贵资源：每个 PostgreSQL 连接消耗约 5-10MB 内存（进程模型），MySQL 每连接约 1-3MB。当微服务架构中数十个服务同时连接数据库时，连接数很容易超过数据库的 `max_connections` 限制，导致 "too many connections" 错误或性能急剧下降。
 
-连接池通过复用少量数据库连接服务大量客户端请求，是 [[07-数据库中间件/01-数据库/]] 生产运维中不可或缺的中间件层。本文覆盖 PgBouncer（PostgreSQL）和 ProxySQL（MySQL）在 Kubernetes 上的部署、调优和故障排查。
+连接池通过复用少量数据库连接服务大量客户端请求，是 [[07-数据库中间件/01-数据库/index.md|01-数据库]] 生产运维中不可或缺的中间件层。本文覆盖 PgBouncer（PostgreSQL）和 ProxySQL（MySQL）在 Kubernetes 上的部署、调优和故障排查。
 
 ## 架构与核心概念
 
@@ -399,15 +399,15 @@ mysql -h proxysql-0.proxysql-headless.database.svc -P 6032 -u admin -padmin \
 2. **连接数规划**：总后端连接数 ≤ 数据库 `max_connections` × 0.8，预留 20% 给管理和紧急连接
 3. **高可用**：PgBouncer 部署 3+ 副本，前置 Service 负载均衡；ProxySQL 使用 Cluster 模式同步配置
 4. **健康检查**：配置 liveness/readiness probe，确保故障 Pod 及时摘除
-5. **监控告警**：关注 `cl_waiting`（排队数）、`sv_active`（活跃后端连接）、等待时间 P99，接入 [[09-可观测性/]] 平台
+5. **监控告警**：关注 `cl_waiting`（排队数）、`sv_active`（活跃后端连接）、等待时间 P99，接入 [[09-可观测性/index.md|09-可观测性]] 平台
 6. **优雅重启**：使用 `SHUTDOWN WAIT_FOR_CLIENTS` 而非直接 kill，避免中断活跃事务
-7. **TLS 配置**：客户端到连接池、连接池到数据库均启用 TLS，参考 [[07-数据库中间件/01-数据库/]] 中的安全配置
-8. **与 Operator 配合**：如使用 CloudNativePG 或 Zalando Operator，连接池通常内置，参考 [[07-数据库中间件/05-Operator管理/]]
+7. **TLS 配置**：客户端到连接池、连接池到数据库均启用 TLS，参考 [[07-数据库中间件/01-数据库/index.md|01-数据库]] 中的安全配置
+8. **与 Operator 配合**：如使用 CloudNativePG 或 Zalando Operator，连接池通常内置，参考 [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 
 ## Related
 
-- [[07-数据库中间件/01-数据库/]]
-- [[09-可观测性/]]
-- [[07-数据库中间件/05-Operator管理/]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 - [[07-数据库中间件/08-新型数据库/03-newsql-cockroachdb-yugabytedb.md]]
-- [[12-可靠性/01-备份恢复/]]
+- [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]

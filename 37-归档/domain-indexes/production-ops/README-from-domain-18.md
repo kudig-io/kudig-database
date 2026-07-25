@@ -74,12 +74,12 @@ prerequisites:
 
 生产环境架构设计原则、多云混合部署、边缘计算部署，以及生产架构蓝图。
 
-- **[01-生产架构设计原则](./topic-production-architecture/01-production-architecture-design-principles.md)** - 高可用、安全、可扩展的架构模式
+- **[01-生产架构设计原则](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/01-production-architecture-design-principles.md)** - 高可用、安全、可扩展的架构模式
 - **[02-多云混合部署策略](./topic-production-architecture/02-multi-cloud-hybrid-deployment-strategy.md)** - 跨云平台部署和容灾方案
-- **[03-边缘计算生产部署](./topic-production-architecture/03-edge-computing-production-deployment.md)** - 边缘场景下的 Kubernetes 运维
-- **[99-生产环境完整架构蓝图](./topic-production-architecture/99-kubernetes-production-architecture-blueprint.md)** - 10 大生产架构 Mermaid 图解
-- **[99-部署模式架构详解](./topic-production-architecture/99-kubernetes-deployment-patterns-architecture.md)** - 6 大部署模式 Mermaid 状态机
-- **[99-多租户与资源隔离架构](./topic-production-architecture/99-kubernetes-multi-tenant-architecture.md)** - 多租户隔离模型 Mermaid 图
+- **[03-边缘计算生产部署](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/03-edge-computing-production-deployment.md)** - 边缘场景下的 Kubernetes 运维
+- **[99-生产环境完整架构蓝图](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/00-%E6%80%BB%E8%A7%88/99-kubernetes-production-architecture-blueprint.md)** - 10 大生产架构 Mermaid 图解
+- **[99-部署模式架构详解](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/00-%E6%80%BB%E8%A7%88/99-kubernetes-deployment-patterns-architecture.md)** - 6 大部署模式 Mermaid 状态机
+- **[99-多租户与资源隔离架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/00-%E6%80%BB%E8%A7%88/99-kubernetes-multi-tenant-architecture.md)** - 多租户隔离模型 Mermaid 图
 
 ---
 
@@ -87,9 +87,9 @@ prerequisites:
 
 企业级监控体系、日志收集分析平台、APM 应用性能监控。
 
-- **[04-企业级监控体系](./topic-observability-performance/04-enterprise-monitoring-system.md)** - Prometheus、Grafana、Alertmanager 完整方案
-- **[05-日志收集分析平台](./topic-observability-performance/05-logging-collection-analysis-platform.md)** - ELK/EFK 栈配置与优化
-- **[06-APM应用性能监控](./topic-observability-performance/06-apm-application-performance-monitoring.md)** - 应用层性能追踪和诊断
+- **[04-企业级监控体系](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/04-enterprise-monitoring-system.md)** - Prometheus、Grafana、Alertmanager 完整方案
+- **[05-日志收集分析平台](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/05-logging-collection-analysis-platform.md)** - ELK/EFK 栈配置与优化
+- **[06-APM应用性能监控](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/06-apm-application-performance-monitoring.md)** - 应用层性能追踪和诊断
 
 > 🔗 **工具实现层**：[可观测性 企业级监控与告警](../domain-20-enterprise-monitoring-alerting)、[可观测性 日志管理与分析](../domain-21-logging-management-analytics)
 
@@ -99,9 +99,9 @@ prerequisites:
 
 零信任安全架构、CIS 基准合规检查、SBOM 软件物料清单。
 
-- **[07-零信任安全架构](./topic-security-compliance/07-zero-trust-security-architecture.md)** - 企业级安全防护体系
-- **[08-CIS基准合规检查](./topic-security-compliance/08-cis-benchmark-compliance-audit.md)** - Kubernetes 安全基线验证
-- **[09-SBOM软件物料清单](./topic-security-compliance/09-software-bill-of-materials.md)** - 供应链安全管理
+- **[07-零信任安全架构](../../../08-%E5%AE%89%E5%85%A8/02-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/07-zero-trust-security-architecture.md)** - 企业级安全防护体系
+- **[08-CIS基准合规检查](../../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/08-cis-benchmark-compliance-audit.md)** - Kubernetes 安全基线验证
+- **[09-SBOM软件物料清单](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/09-software-bill-of-materials.md)** - 供应链安全管理
 
 > 🔗 **工具实现层**：[安全 云原生安全](../安全)
 
@@ -111,9 +111,9 @@ prerequisites:
 
 GitOps 流水线实践、基础设施即代码、自动化运维工具链。
 
-- **[10-GitOps流水线实践](./topic-automation-platform/10-gitops-pipeline-practices.md)** - ArgoCD、FluxCD 配置管理
-- **[11-基础设施即代码](./topic-automation-platform/11-infrastructure-as-code.md)** - Terraform、Crossplane 生产实践
-- **[12-自动化运维工具链](./topic-automation-platform/12-automated-operations-toolchain.md)** - 运维脚本库和自动化框架
+- **[10-GitOps流水线实践](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/10-gitops-pipeline-practices.md)** - ArgoCD、FluxCD 配置管理
+- **[11-基础设施即代码](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/02-IaC/11-infrastructure-as-code.md)** - Terraform、Crossplane 生产实践
+- **[12-自动化运维工具链](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/12-automated-operations-toolchain.md)** - 运维脚本库和自动化框架
 
 > 🔗 **工具实现层**：[发布变更 GitOps CI-CD](../发布变更)、[发布变更 基础设施即代码](../domain-24-infrastructure-as-code)
 
@@ -123,11 +123,11 @@ GitOps 流水线实践、基础设施即代码、自动化运维工具链。
 
 Kubernetes 成本治理、资源配额管理、绿色计算，以及 FinOps/GreenOps 深度指南。
 
-- **[13-Kubernetes成本治理](./topic-cost-governance/13-kubernetes-cost-governance.md)** - FinOps 实践和成本优化策略
-- **[14-资源配额管理](./topic-cost-governance/14-resource-quota-management.md)** - 多租户资源隔离和配额控制
-- **[15-绿色计算可持续发展](./topic-cost-governance/15-green-computing-sustainability.md)** - 碳足迹管理和节能优化
-- **[99-FinOps成本优化指南](./topic-cost-governance/99-finops-cost-optimization-guide.md)** - Kubecost/OpenCost/Infracost 深度实践
-- **[99-GreenOps可持续计算指南](./topic-cost-governance/99-greenops-sustainable-computing-guide.md)** - 碳足迹优化与可持续计算
+- **[13-Kubernetes成本治理](../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/01-%E6%88%90%E6%9C%AC%E6%B2%BB%E7%90%86/13-kubernetes-cost-governance.md)** - FinOps 实践和成本优化策略
+- **[14-资源配额管理](../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/02-%E9%9B%86%E7%BE%A4%E6%B2%BB%E7%90%86/14-resource-quota-management.md)** - 多租户资源隔离和配额控制
+- **[15-绿色计算可持续发展](../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/04-%E7%BB%BF%E8%89%B2%E8%AE%A1%E7%AE%97/15-green-computing-sustainability.md)** - 碳足迹管理和节能优化
+- **[99-FinOps成本优化指南](../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/01-%E6%88%90%E6%9C%AC%E6%B2%BB%E7%90%86/99-finops-cost-optimization-guide.md)** - Kubecost/OpenCost/Infracost 深度实践
+- **[99-GreenOps可持续计算指南](../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/04-%E7%BB%BF%E8%89%B2%E8%AE%A1%E7%AE%97/99-greenops-sustainable-computing-guide.md)** - 碳足迹优化与可持续计算
 
 ---
 
@@ -135,9 +135,9 @@ Kubernetes 成本治理、资源配额管理、绿色计算，以及 FinOps/Gree
 
 企业级备份策略、灾难恢复演练、跨区域容灾部署。
 
-- **[16-企业级备份策略](./topic-reliability-operations/16-enterprise-backup-strategy.md)** - etcd、应用数据完整备份方案
-- **[17-灾难恢复演练](./topic-reliability-operations/17-disaster-recovery-drills.md)** - DR 预案制定和定期演练
-- **[18-跨区域容灾部署](./topic-reliability-operations/18-cross-region-disaster-recovery.md)** - 多活架构和数据同步
+- **[16-企业级备份策略](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/01-%E5%A4%87%E4%BB%BD%E6%81%A2%E5%A4%8D/16-enterprise-backup-strategy.md)** - etcd、应用数据完整备份方案
+- **[17-灾难恢复演练](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/17-disaster-recovery-drills.md)** - DR 预案制定和定期演练
+- **[18-跨区域容灾部署](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/18-cross-region-disaster-recovery.md)** - 多活架构和数据同步
 
 > 🔗 **工具实现层**：[可靠性 灾备与业务连续性](../domain-30-disaster-recovery-business-continuity)
 
@@ -147,11 +147,11 @@ Kubernetes 成本治理、资源配额管理、绿色计算，以及 FinOps/Gree
 
 集群、网络、存储性能调优，以及 Karpenter/KEDA 自动扩展指南。
 
-- **[19-集群性能调优](./topic-observability-performance/19-cluster-performance-tuning.md)** - 内核参数、组件优化指南
-- **[20-网络性能优化](./topic-observability-performance/20-network-performance-optimization.md)** - CNI 插件调优和网络策略
-- **[21-存储性能优化](./topic-observability-performance/21-storage-performance-optimization.md)** - CSI 驱动和存储类优化
-- **[99-Karpenter节点自动扩展指南](./topic-observability-performance/99-karpenter-node-autoscaling-guide.md)** - Karpenter 生产实践
-- **[99-KEDA事件驱动自动缩放指南](./topic-observability-performance/99-keda-event-driven-autoscaling-guide.md)** - KEDA 事件驱动扩缩容
+- **[19-集群性能调优](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/07-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/19-cluster-performance-tuning.md)** - 内核参数、组件优化指南
+- **[20-网络性能优化](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/07-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/20-network-performance-optimization.md)** - CNI 插件调优和网络策略
+- **[21-存储性能优化](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/07-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/21-storage-performance-optimization.md)** - CSI 驱动和存储类优化
+- **[99-Karpenter节点自动扩展指南](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/99-karpenter-node-autoscaling-guide.md)** - Karpenter 生产实践
+- **[99-KEDA事件驱动自动缩放指南](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/99-keda-event-driven-autoscaling-guide.md)** - KEDA 事件驱动扩缩容
 
 ---
 
@@ -159,9 +159,9 @@ Kubernetes 成本治理、资源配额管理、绿色计算，以及 FinOps/Gree
 
 变更管理流程、事件响应处理、容量规划与预测。
 
-- **[22-变更管理流程](./topic-reliability-operations/22-change-management-process.md)** - RFC、灰度发布、回滚机制
-- **[23-事件响应处理](./topic-reliability-operations/23-incident-response-handling.md)** - SRE 实践和故障处理流程
-- **[24-容量规划预测](./topic-reliability-operations/24-capacity-planning-forecasting.md)** - 资源需求预测和扩容策略
+- **[22-变更管理流程](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/04-%E5%8F%98%E6%9B%B4%E7%AE%A1%E7%90%86/22-change-management-process.md)** - RFC、灰度发布、回滚机制
+- **[23-事件响应处理](../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/03-%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94/23-incident-response-handling.md)** - SRE 实践和故障处理流程
+- **[24-容量规划预测](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/03-%E5%AE%B9%E9%87%8F%E8%A7%84%E5%88%92/24-capacity-planning-forecasting.md)** - 资源需求预测和扩容策略
 
 > 🔗 **横向技能切片**：[topic-skills 运维技能卡片](../topic-skills)
 

@@ -116,7 +116,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 可观测性 MOC
-- [[可观测性/README.md|Observability Domain (可观测性领域)]]
+- [[09-可观测性/README.md|Observability Domain (可观测性领域)]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -130,11 +130,11 @@ cross_refs:
 
 ## See Also
 
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-20.md|00-open-source-projects-index-from-可观测性]]
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-可观测性]]
-- [[可观测性/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
-- [[可观测性/98-merged-indexes/MOC-from-domain-20.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-20.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-20.md|MOC-from-可观测性]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

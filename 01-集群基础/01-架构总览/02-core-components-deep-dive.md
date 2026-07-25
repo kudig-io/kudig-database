@@ -1677,12 +1677,12 @@ resources:
 
 | 主题 | 文档编号 | 说明 |
 |------|---------|------|
-| etcd详解 | [Domain-3: etcd运维操作](../集群基础/19-etcd-operations.md) | Raft共识、MVCC、备份恢复 |
-| API Server详解 | [Domain-3: API Server深度解析](../集群基础/12-apiserver-deep-dive.md) | 认证授权、APF限流 |
+| etcd详解 | [Domain-3: etcd运维操作](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/19-etcd-operations.md) | Raft共识、MVCC、备份恢复 |
+| API Server详解 | [Domain-3: API Server深度解析](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/12-apiserver-deep-dive.md) | 认证授权、APF限流 |
 | Controller Manager详解 | [Domain-3: Controller Manager](../集群基础/13-controller-manager-deep-dive.md) | 40+控制器详解 |
 | CCM详解 | [Domain-3: Cloud Controller Manager](../集群基础/14-cloud-controller-manager.md) | 云厂商集成 |
-| Kubelet详解 | [Domain-3: Kubelet深度解析](../集群基础/15-kubelet-deep-dive.md) | Pod生命周期、PLEG |
-| kube-proxy详解 | [Domain-3: kube-proxy](../集群基础/16-kube-proxy-deep-dive.md) | iptables/IPVS/eBPF |
+| Kubelet详解 | [Domain-3: Kubelet深度解析](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/15-kubelet-deep-dive.md) | Pod生命周期、PLEG |
+| kube-proxy详解 | [Domain-3: kube-proxy](../03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/16-kube-proxy-deep-dive.md) | iptables/IPVS/eBPF |
 | Scheduler详解 | [Domain-3: Scheduler深度解析](../集群基础/11-scheduler-deep-dive.md) | 调度框架、插件 |
 
 ---

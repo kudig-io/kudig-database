@@ -21,9 +21,9 @@ Common examples include:
 - Configuring **different Pod Environment Variables and Arguments** for dev, test, canary, production
 
 {% panel style="info", title="Reference" %}
-- [images](../reference/kustomize.md#images)
-- [configMapGenerator](../reference/kustomize.md#configmapgenerator)
-- [secretGenerator](../reference/kustomize.md#secretgenerator)
+- [images](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/tooling/kustomize.md#images)
+- [configMapGenerator](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/tooling/kustomize.md#configmapgenerator)
+- [secretGenerator](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/tooling/kustomize.md#secretgenerator)
 {% endpanel %}
 
 ## Customizing Images

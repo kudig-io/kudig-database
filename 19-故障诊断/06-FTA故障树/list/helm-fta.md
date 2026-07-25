@@ -320,8 +320,8 @@ flowchart TD
 
 ## Related
 
-- [[26-技能/ts-command-output|命令输出根因解析]] — Cross-reference
-- [[21-生态参考/topic-index/helm-index|Helm 全局索引]]
+- [[26-技能/04-工作负载/pod/reference/ts-command-output|命令输出根因解析]] — Cross-reference
+- [[21-生态参考/03-领域索引/helm-index|Helm 全局索引]]
 
 
 <!-- risk-assessed -->

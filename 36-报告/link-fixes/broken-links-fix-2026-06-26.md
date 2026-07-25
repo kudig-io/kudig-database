@@ -32,34 +32,34 @@ last_updated: 2026-06-26
 | Source | Original | Replacement | Confidence |
 |---|---|---|---|
 | `log.md` | `_meta/dashboard.md` | `_meta/dashboard.md` | exact |
-| `concepts/kubernetes-version-evolution.md` | `[[系统基础/知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
-| `concepts/pod-lifecycle.md` | `[[系统基础/知识字典/workloads/init-containers.md|init containers]]` | `系统基础/topic-dictionary/workloads/init-containers.md` | exact |
-| `concepts/pod-lifecycle.md` | `[[系统基础/知识字典/workloads/sidecar-containers.md|sidecar containers]]` | `系统基础/topic-dictionary/workloads/sidecar-containers.md` | exact |
+| `concepts/kubernetes-version-evolution.md` | `[[17-系统基础/06-知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
+| `concepts/pod-lifecycle.md` | `[[17-系统基础/06-知识字典/workloads/init-containers.md|init containers]]` | `系统基础/topic-dictionary/workloads/init-containers.md` | exact |
+| `concepts/pod-lifecycle.md` | `[[17-系统基础/06-知识字典/workloads/sidecar-containers.md|sidecar containers]]` | `系统基础/topic-dictionary/workloads/sidecar-containers.md` | exact |
 | `concepts/pod-lifecycle.md` | `_meta/journal/digest-2026-05-21-full.md` | `_meta/journal/digest-2026-05-21-full.md` | exact |
 | `concepts/pod-lifecycle.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | exact |
-| `concepts/linux-sysctl-tuning.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `concepts/kubernetes-architecture-overview.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `concepts/block-file-object-storage.md` | `[[实体/csi-drivers.md|csi drivers]]` | `entities/csi-drivers.md` | exact |
-| `concepts/overlayfs-storage.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `concepts/container-runtime-comparison.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `concepts/linux-sysctl-tuning.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `concepts/kubernetes-architecture-overview.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `concepts/block-file-object-storage.md` | `[[23-实体/02-K8s核心组件/csi-drivers.md|csi drivers]]` | `entities/csi-drivers.md` | exact |
+| `concepts/overlayfs-storage.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `concepts/container-runtime-comparison.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
 | `concepts/operator-pattern.md` | `_meta/journal/digest-2026-05-21.md` | `_meta/journal/digest-2026-05-21.md` | exact |
-| `concepts/docker-architecture.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `concepts/linux-container-foundation.md` | `[[系统基础/知识字典/workloads/pod-hostname.md|pod hostname]]` | `系统基础/topic-dictionary/workloads/pod-hostname.md` | exact |
-| `concepts/microservice-resilience-patterns.md` | `[[概念/service-mesh-architecture.md|service mesh architecture]]` | `[[概念/service-mesh-architecture.md|service mesh architecture]]` | exact |
-| `concepts/Kubernetes Core Concepts.md` | `[[概念/declarative-api.md|declarative api]]` | `[[概念/declarative-api.md|declarative api]]` | exact |
-| `concepts/storage-model.md` | `[[实体/csi-drivers.md|csi drivers]]` | `entities/csi-drivers.md` | exact |
-| `concepts/watch-mechanism.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | exact |
-| `skills/manage-persistent-storage.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
-| `skills/skill-k8s-node-notready-USAGE-GUIDE.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
-| `skills/troubleshoot-pod-issues.md` | `[[系统基础/知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
-| `skills/troubleshoot-pod-issues.md` | `[[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | `[[技能/可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | exact |
-| `skills/troubleshoot-pod-issues.md` | `[[技能/工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` | `[[技能/工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` | exact |
-| `skills/learn-01-what-is-kubernetes.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | exact |
-| `skills/skill-reference-version-matrix.md` | `[[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` | `[[技能/节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` | exact |
-| `skills/troubleshoot-node-issues.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `skills/configure-health-probes.md` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[技能/工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
-| `skills/skill-reference-diagnostic-workflow.md` | `[[概念/container-runtime.md|container runtime]]` | `container runtime` | exact |
-| `skills/skill-assets-escalation-template.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
+| `concepts/docker-architecture.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `concepts/linux-container-foundation.md` | `[[17-系统基础/06-知识字典/workloads/pod-hostname.md|pod hostname]]` | `系统基础/topic-dictionary/workloads/pod-hostname.md` | exact |
+| `concepts/microservice-resilience-patterns.md` | `[[22-概念/03-网络/service-mesh-architecture.md|service mesh architecture]]` | `[[22-概念/03-网络/service-mesh-architecture.md|service mesh architecture]]` | exact |
+| `concepts/Kubernetes Core Concepts.md` | `[[22-概念/01-核心架构/declarative-api.md|declarative api]]` | `[[22-概念/01-核心架构/declarative-api.md|declarative api]]` | exact |
+| `concepts/storage-model.md` | `[[23-实体/02-K8s核心组件/csi-drivers.md|csi drivers]]` | `entities/csi-drivers.md` | exact |
+| `concepts/watch-mechanism.md` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | exact |
+| `skills/manage-persistent-storage.md` | `[[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
+| `skills/skill-k8s-node-notready-USAGE-GUIDE.md` | `[[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
+| `skills/troubleshoot-pod-issues.md` | `[[17-系统基础/06-知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
+| `skills/troubleshoot-pod-issues.md` | `[[26-技能/08-可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | `[[26-技能/08-可观测性/monitoring/monitor-kubernetes-metrics.md|monitor kubernetes metrics]]` | exact |
+| `skills/troubleshoot-pod-issues.md` | `[[26-技能/04-工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` | `[[26-技能/04-工作负载/pod/运维操作/configure-health-probes.md|configure health probes]]` | exact |
+| `skills/learn-01-what-is-kubernetes.md` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | exact |
+| `skills/skill-reference-version-matrix.md` | `[[26-技能/03-节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` | `[[26-技能/03-节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot node issues]]` | exact |
+| `skills/troubleshoot-node-issues.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `skills/configure-health-probes.md` | `[[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | `[[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot pod issues]]` | exact |
+| `skills/skill-reference-diagnostic-workflow.md` | `[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]` | `container runtime` | exact |
+| `skills/skill-assets-escalation-template.md` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
 | `平台工程/12-automated-operations-toolchain.md` | `_reports/release-notes/22-production-checklist.md` | `_reports/release-notes/22-production-checklist.md` | exact |
 | `可靠性/README.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `entities/kanister.md` | `_meta/journal/digest-2026-05-21-full.md` | `_meta/journal/digest-2026-05-21-full.md` | exact |
@@ -68,7 +68,7 @@ last_updated: 2026-06-26
 | `entities/argo.md` | `_meta/journal/digest-2026-05-21-full.md` | `_meta/journal/digest-2026-05-21-full.md` | exact |
 | `entities/kubernetes.md` | `_meta/journal/digest-2026-05-21-full.md` | `_meta/journal/digest-2026-05-21-full.md` | exact |
 | `entities/kubernetes.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | exact |
-| `entities/kubernetes-changelog.md` | `[[系统基础/知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
+| `entities/kubernetes-changelog.md` | `[[17-系统基础/06-知识字典/workloads/ephemeral-containers.md|ephemeral containers]]` | `系统基础/topic-dictionary/workloads/ephemeral-containers.md` | exact |
 | `entities/interlink.md` | `virtual kubelet` | `系统基础/topic-dictionary/fundamentals/virtual-kubelet.md` | exact |
 | `entities/prometheus.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | `_reports/WIKI-LINT-REPORT-2026-05-21.md` | exact |
 | `entities/cncf-orchestration.md` | `operator framework` | `系统基础/topic-dictionary/platform-engineering/operator-framework.md` | exact |
@@ -78,7 +78,7 @@ last_updated: 2026-06-26
 | `entities/etcd.md` | `_meta/journal/digest-2026-05-21.md` | `_meta/journal/digest-2026-05-21.md` | exact |
 | `entities/cni.md` | `_meta/journal/digest-2026-05-21-full.md` | `_meta/journal/digest-2026-05-21-full.md` | exact |
 | `entities/slimtoolkit.md` | `connect rpc` | `系统基础/topic-dictionary/networking/connect-rpc.md` | exact |
-| `entities/slimtoolkit.md` | `[[实体/oscal-compass.md|oscal compass]]` | `[[实体/oscal-compass.md|oscal compass]]` | exact |
+| `entities/slimtoolkit.md` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | exact |
 | `entities/oscal-compass.md` | `connect rpc` | `系统基础/topic-dictionary/networking/connect-rpc.md` | exact |
 | `entities/linkerd.md` | `connect rpc` | `系统基础/topic-dictionary/networking/connect-rpc.md` | exact |
 

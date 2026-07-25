@@ -480,7 +480,7 @@ groups:
   ```
   若大量 CSR 同时出现 Pending，可能是 kube-controller-manager 的 CSR 审批 controller 异常，需检查 controller-manager 日志。
 - **cert-manager 证书未 Ready**：检查 Challenge、Order、Issuer 状态，确认 DNS-01 / HTTP-01 可达性。Let's Encrypt 的失败次数存在速率限制，连续失败会导致域名被临时封禁。
-- **全集群证书灾难**：参考 [[12-可靠性/02-灾难恢复/09-certificate-expiry-mass-rotation-playbook.md|集群证书批量过期紧急轮转]]。该场景下通常需要 SSH 登录控制平面节点，在时间回退或救援模式下完成证书续期。
+- **全集群证书灾难**：参考 [[12-可靠性/02-灾难恢复/19-certificate-expiry-mass-rotation-playbook.md|集群证书批量过期紧急轮转]]。该场景下通常需要 SSH 登录控制平面节点，在时间回退或救援模式下完成证书续期。
 
 ---
 
@@ -501,7 +501,7 @@ groups:
 - [[01-集群基础/00-总览/99-production-readiness-operations-guide.md|集群基础 生产就绪运维指南]]
 - [[08-安全/00-总览/99-production-readiness-operations-guide.md|安全合规 生产就绪运维指南]]
 - [[12-可靠性/00-总览/99-production-readiness-operations-guide.md|可靠性工程 生产就绪运维指南]]
-- [[12-可靠性/02-灾难恢复/09-certificate-expiry-mass-rotation-playbook.md|集群证书批量过期紧急轮转]]
+- [[12-可靠性/02-灾难恢复/19-certificate-expiry-mass-rotation-playbook.md|集群证书批量过期紧急轮转]]
 - [[01-集群基础/03-控制平面/32-kubeadm-cluster-lifecycle.md|kubeadm 集群生命周期管理]]
 - [[01-集群基础/03-控制平面/19-etcd-operations.md|etcd 运维操作]]
 

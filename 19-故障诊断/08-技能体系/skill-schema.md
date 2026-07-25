@@ -44,7 +44,7 @@ version: 1.0.0
 # [[SKILL|Skill]] Schema (历史参考)
 
 > **⚠️ 已废弃**: 本文件内容已合并至 `templates/skill-template.md`
-> **新模板位置**: [../templates/skill-template.md](../templates/skill-template.md)
+> **新模板位置**: [../templates/skill-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/skill-template.md)
 > **最后更新**: 2026-05
 
 ---
@@ -61,8 +61,8 @@ version: 1.0.0
 
 ## 快速导航
 
-- [[06-存储/README.md|[[KUDIG Database]]].md](../templates/README.md) — 模板体系索引
-- [templates/skill-template.md](../templates/skill-template.md) — Skill 文档标准模板（现行版本）
+- [[06-存储/README.md|[[KUDIG Database]]].md](../../31-%E8%84%9A%E6%9C%AC/templates/README.md) — 模板体系索引
+- [templates/skill-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/skill-template.md) — Skill 文档标准模板（现行版本）
 - [故障诊断/topic-skills/](../) — Skill 文档实际存放目录
 
 ---

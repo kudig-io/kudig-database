@@ -556,7 +556,7 @@ histogram_quantile(0.99, metric_bucket)   # 确保 bucket 粒度合适
 
 ## 相关文档
 
-- [可观测性/02-monitoring-metrics-system.md](../可观测性/02-monitoring-metrics-system.md) - Prometheus 监控体系
+- [可观测性/02-monitoring-metrics-system.md](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/02-monitoring-metrics-system.md) - Prometheus 监控体系
 - [可观测性/](../可观测性/) - 企业监控告警
 
 ## Related

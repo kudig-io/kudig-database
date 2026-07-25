@@ -217,7 +217,7 @@ spec:
 
 ## 相关 Domain
 
-- [[09-可观测性/06-SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]]
+- [[09-可观测性/06-SLO-SLI/04-sli-definition-selection.md|01 sli definition selection]]
 - [[17-系统基础/06-知识字典/observability/observability.md|observability]]/02-metrics/02-[[20-最佳实践/01-best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
 - 发布变更/01-[[17-系统基础/05-速查卡/gitops.md|gitops]]/01-gitops-principles
 

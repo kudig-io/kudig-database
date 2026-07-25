@@ -414,7 +414,7 @@ spec:
 - [[storage-tool-evolution]] — 存储工具的演进
 - [[persistent-volume-claim]] — PVC 原理与配置
 - [[07-数据库中间件/00-总览/01-database-on-kubernetes-guide.md|database-on-kubernetes-guide]] — K8s 上的数据库运行指南
-- [[19-故障诊断/04-高级排障/05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
+- [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
 
 ## Related
 

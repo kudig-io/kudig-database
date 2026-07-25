@@ -281,7 +281,7 @@ ETCDCTL_API=3 etcdctl snapshot restore /backup/etcd/latest.db \
 chown -R etcd:etcd /var/lib/etcd
 systemctl start etcd
 ```
-> 详细步骤与数据校验参见 [[12-可靠性/02-灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 数据损坏检测与恢复全流程]]。
+> 详细步骤与数据校验参见 [[12-可靠性/02-灾难恢复/13-etcd-corruption-recovery-playbook.md|etcd 数据损坏检测与恢复全流程]]。
 
 ### Phase 3：Velero 全集群恢复
 
@@ -612,7 +612,7 @@ kubectl exec -it deploy/prometheus -n monitoring -- \
   ```
 - **etcd 恢复后 split-brain**：比较各成员 revision，选择 revision 最高的唯一 leader；其余成员清理数据目录并以 learner 重新加入。
 - **Region 切换后数据冲突**：切换回主 Region 前，先执行数据库/消息队列的数据核对与冲突解决；禁止双向写入。
-- **无法恢复且备份不可用**：启动“控制面全损重建”流程，按 [[12-可靠性/02-灾难恢复/06-control-plane-loss-recovery-playbook.md|控制面全部丢失的灾难恢复]] 从 snapshot 重建集群。
+- **无法恢复且备份不可用**：启动“控制面全损重建”流程，按 [[12-可靠性/02-灾难恢复/16-control-plane-loss-recovery-playbook.md|控制面全部丢失的灾难恢复]] 从 snapshot 重建集群。
 
 ## 6. 风险与注意事项
 
@@ -630,10 +630,10 @@ kubectl exec -it deploy/prometheus -n monitoring -- \
 ## 7. 相关 Runbook / 推荐阅读
 
 - [[12-可靠性/00-总览/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
-- [[12-可靠性/02-灾难恢复/01-dr-scenarios-catalog.md|灾备场景目录]]
-- [[12-可靠性/02-灾难恢复/02-az-failure-playbook.md|可用区故障恢复手册]]
-- [[12-可靠性/02-灾难恢复/03-etcd-corruption-recovery-playbook.md|etcd 数据损坏检测与恢复全流程]]
-- [[12-可靠性/02-灾难恢复/06-control-plane-loss-recovery-playbook.md|控制面全部丢失的灾难恢复]]
+- [[12-可靠性/02-灾难恢复/10-dr-scenarios-catalog.md|灾备场景目录]]
+- [[12-可靠性/02-灾难恢复/11-az-failure-playbook.md|可用区故障恢复手册]]
+- [[12-可靠性/02-灾难恢复/13-etcd-corruption-recovery-playbook.md|etcd 数据损坏检测与恢复全流程]]
+- [[12-可靠性/02-灾难恢复/16-control-plane-loss-recovery-playbook.md|控制面全部丢失的灾难恢复]]
 - [[12-可靠性/01-备份恢复/01-etcd-backup-restore.md|etcd 备份与恢复]]
 - [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|Velero 企业级备份恢复实践指南]]
 - [[12-可靠性/02-灾难恢复/18-cross-region-disaster-recovery.md|跨区域灾难恢复]]

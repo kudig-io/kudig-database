@@ -520,7 +520,7 @@ kubectl exec -n ai-serving -it deploy/llm-7b-inference -- curl -s localhost:8000
 - GPU 调度参考 [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU 调度与成本优化]]
 - 多租户隔离参考 [[10-平台工程/03-治理/17-multi-tenant-management|多租户管理]]
 - 存储方案参考 [[06-存储/03-分布式存储|分布式存储]]
-- 监控告警参考 [[09-可观测性/prometheus|Prometheus 监控]]
+- 监控告警参考 [[23-实体/07-可观测性/prometheus|Prometheus 监控]]
 
 ## Related
 

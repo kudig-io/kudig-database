@@ -136,7 +136,7 @@ prerequisites:
     - [Client Binaries](#client-binaries-12)
     - [Server Binaries](#server-binaries-12)
     - [Node Binaries](#node-binaries-12)
-- [[实体/kubernetes.md|Kubernetes]] 1.13 Release Notes](#kubernetes-113-release-notes)
+- [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] 1.13 Release Notes](#kubernetes-113-release-notes)
   - [Security Content](#security-content)
   - [Urgent Upgrade Notes](#urgent-upgrade-notes)
     - [(No, really, you MUST do this before you upgrade)](#no-really-you-must-do-this-before-you-upgrade)

@@ -70,7 +70,7 @@ cross_refs:
 
 > **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
 > **相关领域**: [域5-网络](../网络/) | **前置知识**: Gateway API 核心资源  
-> **关联配置**: [11-核心资源](./11-gateway-api-core.md) | [Service参考](./02-service-all-types.md)
+> **关联配置**: [11-核心资源](./11-gateway-api-core.md) | [Service参考](08-service-all-types.md)
 
 ---
 
@@ -1749,8 +1749,8 @@ spec:
 
 ## 本知识库相关文档
 - [11 - Gateway API 核心资源](./11-gateway-api-core.md)
-- [Service 全类型参考](./02-service-all-types.md)
-- [Service Mesh 故障排查](../故障诊断/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md)
+- [Service 全类型参考](08-service-all-types.md)
+- [Service Mesh 故障排查](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/05-service-mesh-istio-troubleshooting.md)
 
 ---
 

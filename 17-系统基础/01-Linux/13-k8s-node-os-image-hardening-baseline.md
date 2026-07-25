@@ -324,7 +324,7 @@ serializeImagePulls: false
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[17-系统基础/01-linux/07-linux-security-hardening.md|Linux 安全加固与合规管理]]
+- [[17-系统基础/01-Linux/07-linux-security-hardening.md|Linux 安全加固与合规管理]]
 - [[17-系统基础/00-总览/99-production-readiness-operations-guide.md|System Foundation 生产就绪运维指南]]
 - [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - [[08-安全/README.md|安全合规域]]

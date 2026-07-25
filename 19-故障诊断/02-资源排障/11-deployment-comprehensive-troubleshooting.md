@@ -90,14 +90,14 @@ cross_refs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[05-Pod Pending诊断](./05-pod-pending-diagnosis.md)** - Pod调度相关问题
-- **[08-Pod综合故障排查](./08-pod-comprehensive-troubleshooting.md)** - Pod生命周期问题
+- **[05-Pod Pending诊断](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/05-pod-pending-diagnosis.md)** - Pod调度相关问题
+- **[08-Pod综合故障排查](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)** - Pod生命周期问题
 - **[17-HPA/VPA故障排查](./17-hpa-vpa-troubleshooting.md)** - 自动扩缩容相关问题
-- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - 版本升级兼容性问题
+- **[34-升级迁移故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/34-upgrade-migration-troubleshooting.md)** - 版本升级兼容性问题
 
 ### 📚 扩展学习资料
-- **[Kubernetes控制器模式](../集群基础/03-controller-pattern.md)** - 理解Deployment控制器原理
-- **[资源版本控制](../集群基础/06-resource-version-control.md)** - 资源状态管理机制
+- **[Kubernetes控制器模式](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/03-controller-pattern.md)** - 理解Deployment控制器原理
+- **[资源版本控制](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/06-resource-version-control.md)** - 资源状态管理机制
 
 ---
 

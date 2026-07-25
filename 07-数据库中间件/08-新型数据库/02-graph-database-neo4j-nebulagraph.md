@@ -54,7 +54,7 @@ authors:
 
 图数据库以节点（Node）和边（Relationship）为基本存储单元，天然适合表达实体间的复杂关联关系。在 AI 驱动的知识图谱、实时推荐引擎、金融欺诈检测、社交网络分析等场景中，图数据库相比关系型数据库在关联查询上有数量级的性能优势。
 
-本文聚焦 Neo4j 和 NebulaGraph 两款主流图数据库在 Kubernetes 上的生产级部署与运维，涵盖集群架构、查询优化、备份恢复和故障排查。图数据库通常作为 [[15-AI基础设施/]] 中知识图谱层的核心组件，与向量数据库配合构建完整的 RAG 系统。
+本文聚焦 Neo4j 和 NebulaGraph 两款主流图数据库在 Kubernetes 上的生产级部署与运维，涵盖集群架构、查询优化、备份恢复和故障排查。图数据库通常作为 [[15-AI基础设施/index.md|15-AI基础设施]] 中知识图谱层的核心组件，与向量数据库配合构建完整的 RAG 系统。
 
 ## 架构与核心概念
 
@@ -338,15 +338,15 @@ kubectl exec -n graph-db nebula-cluster-graphd-0 -- \
 2. **NebulaGraph 分片策略**：根据数据量合理设置 Partition 数（建议每个 Storage 节点 5-10 个 Partition）
 3. **索引策略**：对高频查询的属性建立索引，但避免过多索引影响写入性能
 4. **读写分离**：Neo4j 使用 Read Replica 分担读负载；NebulaGraph 的 Graph Service 天然无状态可扩展
-5. **备份策略**：参考 [[12-可靠性/01-备份恢复/]] 建立定期备份机制，Neo4j 使用 `neo4j-admin backup`，NebulaGraph 使用 Snapshot + BR 工具
-6. **监控集成**：将 Neo4j Metrics / NebulaGraph Stats 接入 [[09-可观测性/]] 平台
+5. **备份策略**：参考 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]] 建立定期备份机制，Neo4j 使用 `neo4j-admin backup`，NebulaGraph 使用 Snapshot + BR 工具
+6. **监控集成**：将 Neo4j Metrics / NebulaGraph Stats 接入 [[09-可观测性/index.md|09-可观测性]] 平台
 7. **数据导入**：大批量数据导入使用 `neo4j-admin import`（离线）或 NebulaGraph Importer，避免逐条 INSERT
-8. **Operator 管理**：使用 Nebula Operator 管理集群生命周期，参考 [[07-数据库中间件/05-Operator管理/]]
+8. **Operator 管理**：使用 Nebula Operator 管理集群生命周期，参考 [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 
 ## Related
 
-- [[07-数据库中间件/01-数据库/]]
-- [[15-AI基础设施/]]
-- [[12-可靠性/01-备份恢复/]]
-- [[09-可观测性/]]
-- [[07-数据库中间件/05-Operator管理/]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[15-AI基础设施/index.md|15-AI基础设施]]
+- [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]

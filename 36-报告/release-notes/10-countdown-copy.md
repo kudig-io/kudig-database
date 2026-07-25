@@ -56,7 +56,7 @@ prerequisites:
 不是文档, 不是 Wiki, 不是博客合集。
 是什么? 7 天后揭晓。
 
-#[[实体/kubernetes.md|kubernetes]] #AI #运维
+#[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] #AI #运维
 ```
 
 ### 社群文案

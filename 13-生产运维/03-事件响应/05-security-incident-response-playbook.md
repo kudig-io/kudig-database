@@ -466,7 +466,7 @@ kubectl run debug --rm -it --image=busybox --restart=Never -- sh
 
 ## Related
 
-- [[13-生产运维/03-事件响应/20-incident-response-process.md|安全事件响应与应急处理流程]]
+- [[13-生产运维/03-事件响应/08-incident-response-process.md|安全事件响应与应急处理流程]]
 - [[08-安全/03-运行时安全/01-falco-cloud-native-security.md|Falco 云原生安全]]
 
 ## See Also

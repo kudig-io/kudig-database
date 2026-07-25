@@ -101,7 +101,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 平台工程 MOC
-- [[平台工程/README.md|Platform Ops Domain (平台运维领域)]]
+- [[10-平台工程/README.md|Platform Ops Domain (平台运维领域)]]
 - 平台运维概述
 - 集群生命周期管理
 - 容量规划与资源评估 (Capacity Planning & Resource Assessment)

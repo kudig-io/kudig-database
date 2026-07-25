@@ -516,8 +516,8 @@ kubectl exec -n falco -it ds/falco -- falco --validate /etc/falco/rules.d/
 ### 与现有安全体系集成
 
 - **镜像安全**：运行时检测是 [[14-容器运行时/03-containerd-CRI-O/06-runtime-security-hardening|运行时安全加固]] 的补充，不能替代镜像扫描
-- **网络策略**：eBPF 网络监控与 [[05-网络/cilium|Cilium NetworkPolicy]] 互补
-- **SIEM 集成**：告警事件导出到 ELK/Splunk，与 [[09-可观测性/prometheus|Prometheus]] 指标关联
+- **网络策略**：eBPF 网络监控与 [[23-实体/04-网络/cilium|Cilium NetworkPolicy]] 互补
+- **SIEM 集成**：告警事件导出到 ELK/Splunk，与 [[23-实体/07-可观测性/prometheus|Prometheus]] 指标关联
 - **RBAC 审计**：K8s Audit Log + Falco 双重审计，覆盖 API 层和运行时层
 
 ## Related
@@ -525,6 +525,6 @@ kubectl exec -n falco -it ds/falco -- falco --validate /etc/falco/rules.d/
 - [[14-容器运行时/03-containerd-CRI-O/06-runtime-security-hardening|运行时安全加固]]
 - [[14-容器运行时/03-containerd-CRI-O/04-kata-containers-secure-container|Kata Containers 安全容器]]
 - [[17-系统基础/01-Linux/07-linux-security-hardening|Linux 安全加固]]
-- [[09-可观测性/ebpf-observability|eBPF 可观测性]]
+- [[24-综合/05-可观测性/ebpf-observability|eBPF 可观测性]]
 - [[10-平台工程/03-治理/10-security-compliance|安全合规]]
 - [[24-综合/05-可观测性/ebpf-observability|eBPF 可观测性综合]]

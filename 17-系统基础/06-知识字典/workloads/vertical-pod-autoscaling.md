@@ -252,9 +252,9 @@ kubectl get pods -n kube-system -l 'app in (vpa-recommender,vpa-updater,vpa-admi
 
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 - [自动扩缩容概览](./autoscaling-workloads.md)
-- [VPA 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/vpa-fta.md)
+- [VPA 故障树分析 (FTA)](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/vpa-fta.md)
 - [Pod QoS 等级](./pod-quality-of-service-classes.md)
-- [工作负载监控与告警](../../工作负载/06-workload-monitoring-alerting.md)
+- [工作负载监控与告警](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/06-workload-monitoring-alerting.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/autoscaling/vertical-pod-autoscale/

@@ -285,8 +285,8 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 可观测性 MOC
-- [[可观测性/README.md|Observability Domain (可观测性领域)]]
-- [[可观测性/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
+- [[09-可观测性/README.md|Observability Domain (可观测性领域)]]
+- [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解
 - 03 - 日志收集架构详解 (Logging Architecture)
@@ -304,6 +304,6 @@ cross_refs:
 - QUALITY-REPORT
 - UPDATED-QUALITY-REPORT
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

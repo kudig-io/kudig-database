@@ -131,7 +131,7 @@ quick-start/
 
 **产出**: 能够连接集群，查看所有命名空间的 Pod
 
-**参考文件**: [01-day-one-checklist.md](./01-day-one-checklist.md)
+**参考文件**: [01-day-one-checklist.md](quick-start/01-day-one-checklist.md)
 
 **详细步骤**:
 
@@ -192,7 +192,7 @@ kubectl get pods -A
 
 **产出**: 能处理常见的 oncall 工单
 
-**参考文件**: [02-first-ticket-guide.md](./02-first-ticket-guide.md)
+**参考文件**: [02-first-ticket-guide.md](quick-start/02-first-ticket-guide.md)
 
 **工单处理标准流程**:
 
@@ -260,7 +260,7 @@ kubectl get pods -n <namespace> --show-labels
 
 **产出**: 能独立完成 oncall 值班交接
 
-**参考文件**: [03-oncall-handoff.md](./03-oncall-handoff.md)
+**参考文件**: [03-oncall-handoff.md](quick-start/03-oncall-handoff.md)
 
 **值班交接检查清单**:
 
@@ -300,7 +300,7 @@ kubectl get pods -n <namespace> --show-labels
 
 **产出**: 能在本地终端高效操作集群
 
-**参考文件**: [04-debug-tools-setup.md](./04-debug-tools-setup.md)
+**参考文件**: [04-debug-tools-setup.md](quick-start/04-debug-tools-setup.md)
 
 **工具安装命令**:
 

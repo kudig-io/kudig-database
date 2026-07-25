@@ -29,18 +29,18 @@ last_updated: 2026-05-21
 - [[README]] — Domain 总览
 
 ## 根目录文档
-- [[云厂商/08-multi-cloud/00-multi-cloud-hybrid-deployment-strategy|Multi cloud hybrid deployment strategy]] — Multi cloud hybrid deployment strategy
+- [[18-云厂商/07-多云混合/00-multi-cloud-hybrid-deployment-strategy|Multi cloud hybrid deployment strategy]] — Multi cloud hybrid deployment strategy
 
 ## 按主题分组
 
 ### 阿里云
 
-- [[云厂商/01-alibaba-cloud/01-专有云架构概述.md|01 专有云架构概述]] — 专有云架构概述
-- [[云厂商/01-alibaba-cloud/02-ACK集群运维.md|02 ACK集群运维]] — ACK集群运维
-- [[云厂商/01-alibaba-cloud/03-Terway-CNI网络.md|03 Terway CNI网络]] — Terway CNI网络
-- [[云厂商/01-alibaba-cloud/04-阿里云存储集成.md|04 阿里云存储集成]] — 阿里云存储集成
-- [[云厂商/01-alibaba-cloud/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]] — 阿里云SLB与Ingress
-- [[云厂商/01-alibaba-cloud/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]] — 阿里云专有云远程顾问指南
+- [[18-云厂商/01-阿里云/01-专有云架构概述.md|01 专有云架构概述]] — 专有云架构概述
+- [[18-云厂商/01-阿里云/02-ACK集群运维.md|02 ACK集群运维]] — ACK集群运维
+- [[18-云厂商/01-阿里云/03-Terway-CNI网络.md|03 Terway CNI网络]] — Terway CNI网络
+- [[18-云厂商/01-阿里云/04-阿里云存储集成.md|04 阿里云存储集成]] — 阿里云存储集成
+- [[18-云厂商/01-阿里云/05-阿里云SLB与Ingress.md|05 阿里云SLB与Ingress]] — 阿里云SLB与Ingress
+- [[18-云厂商/01-阿里云/06-阿里云专有云远程顾问指南.md|06 阿里云专有云远程顾问指南]] — 阿里云专有云远程顾问指南
 - [[README]] — README
 
 ### AWS EKS

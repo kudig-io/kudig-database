@@ -129,53 +129,53 @@ graph TB
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 1 | [Java 容器化最佳实践](./容器运行时/12-java-containerization-guide.md) | Dockerfile 模板、Jib/Buildpacks、分层 JAR、多架构构建、安全加固 | 中级 |
-| 2 | [GraalVM Native Image 指南](./专项技术/99-graalvm-native-image-guide.md) | Spring Boot 3 原生编译、Quarkus/Micronaut 原生、Metadata 配置、K8s 部署 | 高级 |
+| 1 | [Java 容器化最佳实践](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) | Dockerfile 模板、Jib/Buildpacks、分层 JAR、多架构构建、安全加固 | 中级 |
+| 2 | [GraalVM Native Image 指南](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/99-graalvm-native-image-guide.md) | Spring Boot 3 原生编译、Quarkus/Micronaut 原生、Metadata 配置、K8s 部署 | 高级 |
 
 ### 2.2 运行时 (2 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 3 | JVM GC 容器调优深度指南](./故障诊断/99-jvm-gc-container-tuning-guide.md) | G1GC/ZGC/Shenandoah 对比、容器感知参数、GC 监控告警 | 高级 |
-| 4 | [Java 性能调优与资源 Sizing](./故障诊断/99-java-performance-resource-sizing-guide.md) | 资源 Sizing 公式、启动优化、线程池调优、CDS/AppCDS | 高级 |
+| 3 | JVM GC 容器调优深度指南](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-jvm-gc-container-tuning-guide.md) | G1GC/ZGC/Shenandoah 对比、容器感知参数、GC 监控告警 | 高级 |
+| 4 | [Java 性能调优与资源 Sizing](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-java-performance-resource-sizing-guide.md) | 资源 Sizing 公式、启动优化、线程池调优、CDS/AppCDS | 高级 |
 
 ### 2.3 框架 (3 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 5 | [Spring Boot on Kubernetes](./工作负载/99-spring-boot-kubernetes-guide.md) | 探针、配置管理、优雅停机、数据库连接池、生产 Deployment | 中级 |
-| 6 | [Spring Cloud K8s + 服务网格](./网络/99-spring-cloud-kubernetes-service-mesh-guide.md) | Spring Cloud → K8s 原生映射、Istio 集成、Resilience4j、迁移路径 | 高级 |
-| 7 | [Quarkus/Micronaut 云原生 Java](./专项技术/99-quarkus-micronaut-cloud-native-java-guide.md) | Quarkus vs Micronaut vs Spring Boot、Dev Services、反应式编程 | 中级 |
+| 5 | [Spring Boot on Kubernetes](../01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) | 探针、配置管理、优雅停机、数据库连接池、生产 Deployment | 中级 |
+| 6 | [Spring Cloud K8s + 服务网格](../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-spring-cloud-kubernetes-service-mesh-guide.md) | Spring Cloud → K8s 原生映射、Istio 集成、Resilience4j、迁移路径 | 高级 |
+| 7 | [Quarkus/Micronaut 云原生 Java](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/99-quarkus-micronaut-cloud-native-java-guide.md) | Quarkus vs Micronaut vs Spring Boot、Dev Services、反应式编程 | 中级 |
 
 ### 2.4 CI/CD (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 8 | [Tekton Java CI/CD 流水线](./发布变更/99-tekton-java-cicd-guide.md) | Maven/Gradle Task、Jib 构建、安全扫描、GitOps 集成 | 中级 |
+| 8 | [Tekton Java CI/CD 流水线](../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/99-tekton-java-cicd-guide.md) | Maven/Gradle Task、Jib 构建、安全扫描、GitOps 集成 | 中级 |
 
 ### 2.5 可观测性 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 9 | [Java 可观测性整合指南](./可观测性/99-java-observability-kubernetes-guide.md) | Micrometer + JMX Exporter + OTel Agent + 日志 JSON + Grafana Dashboard | 高级 |
+| 9 | [Java 可观测性整合指南](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-java-observability-kubernetes-guide.md) | Micrometer + JMX Exporter + OTel Agent + 日志 JSON + Grafana Dashboard | 高级 |
 
 ### 2.6 安全 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 10 | [Java 安全加固指南](./安全/99-java-security-kubernetes-guide.md) | SecurityContext、KeyStore/TrustStore、OAuth2、SBOM、NetworkPolicy | 高级 |
+| 10 | [Java 安全加固指南](../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/99-java-security-kubernetes-guide.md) | SecurityContext、KeyStore/TrustStore、OAuth2、SBOM、NetworkPolicy | 高级 |
 
 ### 2.7 平台开发 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 11 | [Java K8s Client / Operator SDK](./平台工程/99-java-k8s-client-operator-guide.md) | fabric8/client-java、Java Operator SDK、Informer 模式 | 高级 |
+| 11 | [Java K8s Client / Operator SDK](../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/99-java-k8s-client-operator-guide.md) | fabric8/client-java、Java Operator SDK、Informer 模式 | 高级 |
 
 ### 2.8 运维 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 12 | [Java 性能与资源 Sizing](./故障诊断/99-java-performance-resource-sizing-guide.md) | 容器资源公式、启动优化、线程池、连接池 Sizing | 高级 |
+| 12 | [Java 性能与资源 Sizing](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-java-performance-resource-sizing-guide.md) | 容器资源公式、启动优化、线程池、连接池 Sizing | 高级 |
 
 ---
 

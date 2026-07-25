@@ -284,16 +284,16 @@ openssl s_client -connect <gateway>:443 -servername <sni>
 
 ## 相关文档
 
-- [Higress 企业级网关实践](./网络/04-higress-enterprise-gateway.md)
-- [nginx-ingress 迁移指南](./网络/09-nginx-ingress-migration-guide.md)
-- [Ingress 故障排查](./故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md)
-- [Higress 全局索引](./生态参考/topic-index/higress-index.md)
+- [Higress 企业级网关实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/04-higress-enterprise-gateway.md)
+- [nginx-ingress 迁移指南](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/09-nginx-ingress-migration-guide.md)
+- [Ingress 故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/03-service-ingress-troubleshooting.md)
+- [Higress 全局索引](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/03-%E9%A2%86%E5%9F%9F%E7%B4%A2%E5%BC%95/higress-index.md)
 
 ## Related
 
-- [[26-技能/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
-- [[26-技能/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]] — Cross-reference
-- [[21-生态参考/topic-index/higress-index|Higress 知识图谱索引]]
+- [[26-技能/04-工作负载/pod/方法论/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[26-技能/04-工作负载/pod/方法论/FTA-Driven Runbook Automation|FTA-Driven Runbook Automation]] — Cross-reference
+- [[21-生态参考/03-领域索引/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

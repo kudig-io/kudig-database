@@ -521,14 +521,14 @@ target_roles: [sre, ops-engineer]
 k8s_versions: ["1.28", "1.29", "1.30", "1.31", "1.32", "1.33"]
 related:
   - 集群基础/11-etcd-deep-dive.md
-  - [[01-集群基础/03-control-plane/10-plane-backup-disaster-recovery|10-plane-backup-disaster-recovery]].md
+  - [[01-集群基础/03-控制平面/10-plane-backup-disaster-recovery|10-plane-backup-disaster-recovery]].md
   - 故障诊断/FTA故障树/list/etcd-fta.md
 ---
 ```
 
 ## Related
 
-- [[21-生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[21-生态参考/03-领域索引/etcd-index|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

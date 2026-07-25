@@ -169,21 +169,21 @@ prerequisites:
 
 | 问题类型 | 快速问答 | 决策树 | 深度 [[SKILL|Skill]] |
 |---------|---------|--------|-----------|
-| Pod Pending | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q1-pod-一直-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#1-pod-处于-pending) | [01-pod-crash-loop](../故障诊断/技能体系/01-pod-crash-loop.md) |
-| Pod CrashLoop | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q2-pod-一直-crashloopbackoff-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#2-pod-处于-crashloopbackoff) | [01-pod-crash-loop](../故障诊断/技能体系/01-pod-crash-loop.md) |
-| Pod Evicted | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q4-pod-evicted-怎么办) | - | - |
-| ImagePullBackOff | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q3-pod-imagepullbackoff-怎么办) | - | [03-imagepull-failure](../故障诊断/技能体系/03-imagepull-failure.md) |
-| Service 无法访问 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q5-service-无法访问怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#3-service-无法访问) | [05-service-connectivity](../故障诊断/技能体系/05-service-connectivity.md) |
-| DNS 解析失败 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q6-dns-解析失败怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#4-dns-解析失败) | [04-dns-failure](../故障诊断/技能体系/04-dns-failure.md) |
-| Ingress 404 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q7-ingress-返回-404-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#9-ingress-404) | [13-ingress-gateway-failure](../故障诊断/技能体系/13-ingress-gateway-failure.md) |
-| 节点 NotReady | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q13-节点-notready-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#5-节点-notready) | [故障诊断](../故障诊断/03-node-notready-diagnosis.md) |
-| HPA 不工作 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q11-hpa-不工作怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#6-hpa-不触发扩容) | [07-hpa-scaling-failure](../故障诊断/技能体系/07-hpa-scaling-failure.md) |
-| PVC Pending | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q15-pvc-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#7-pvc-pending) | [06-pvc-storage-failure](../故障诊断/技能体系/06-pvc-storage-failure.md) |
-| RBAC Forbidden | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q17-rbac-forbidden-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#10-rbac-forbidden) | [09-rbac-quota-failure](../故障诊断/技能体系/09-rbac-quota-failure.md) |
-| 滚动更新卡住 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q19-deployment-滚动更新卡住怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#8-deployment-滚动更新卡住) | [08-deployment-rollout-failure](../故障诊断/技能体系/08-deployment-rollout-failure.md) |
-| DaemonSet 问题 | [Q&A](../10-advanced-workloads/10-daemonset-basics.md#6-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../故障诊断/技能体系/17-daemonset-pdb-failure.md) |
-| StatefulSet 问题 | [Q&A](../10-advanced-workloads/11-statefulset-basics.md#7-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../故障诊断/技能体系/17-daemonset-pdb-failure.md) |
-| 调度/亲和性问题 | [Q&A](../11-scheduling/12-scheduling-basics.md#7-数字人-qa-场景) | - | [16-scheduling-pdb-failure](../故障诊断/技能体系/16-scheduling-pdb-failure.md) |
+| Pod Pending | [Q&A](../oncall-qa/oncall-quick-qa.md#q1-pod-一直-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#1-pod-处于-pending) | [01-pod-crash-loop](../故障诊断/技能体系/01-pod-crash-loop.md) |
+| Pod CrashLoop | [Q&A](../oncall-qa/oncall-quick-qa.md#q2-pod-一直-crashloopbackoff-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#2-pod-处于-crashloopbackoff) | [01-pod-crash-loop](../故障诊断/技能体系/01-pod-crash-loop.md) |
+| Pod Evicted | [Q&A](../oncall-qa/oncall-quick-qa.md#q4-pod-evicted-怎么办) | - | - |
+| ImagePullBackOff | [Q&A](../oncall-qa/oncall-quick-qa.md#q3-pod-imagepullbackoff-怎么办) | - | [03-imagepull-failure](../故障诊断/技能体系/03-imagepull-failure.md) |
+| Service 无法访问 | [Q&A](../oncall-qa/oncall-quick-qa.md#q5-service-无法访问怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#3-service-无法访问) | [05-service-connectivity](../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/05-service-connectivity.md) |
+| DNS 解析失败 | [Q&A](../oncall-qa/oncall-quick-qa.md#q6-dns-解析失败怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#4-dns-解析失败) | [04-dns-failure](../故障诊断/技能体系/04-dns-failure.md) |
+| Ingress 404 | [Q&A](../oncall-qa/oncall-quick-qa.md#q7-ingress-返回-404-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#9-ingress-404) | [13-ingress-gateway-failure](../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/13-ingress-gateway-failure.md) |
+| 节点 NotReady | [Q&A](../oncall-qa/oncall-quick-qa.md#q13-节点-notready-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#5-节点-notready) | [故障诊断](../../../../03-%E8%8A%82%E7%82%B9/node/01-node-notready-diagnosis.md) |
+| HPA 不工作 | [Q&A](../oncall-qa/oncall-quick-qa.md#q11-hpa-不工作怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#6-hpa-不触发扩容) | [07-hpa-scaling-failure](../故障诊断/技能体系/07-hpa-scaling-failure.md) |
+| PVC Pending | [Q&A](../oncall-qa/oncall-quick-qa.md#q15-pvc-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#7-pvc-pending) | [06-pvc-storage-failure](../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/07-pvc-storage-failure.md) |
+| RBAC Forbidden | [Q&A](../oncall-qa/oncall-quick-qa.md#q17-rbac-forbidden-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#10-rbac-forbidden) | [09-rbac-quota-failure](../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/09-rbac-quota-failure.md) |
+| 滚动更新卡住 | [Q&A](../oncall-qa/oncall-quick-qa.md#q19-deployment-滚动更新卡住怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#8-deployment-滚动更新卡住) | [08-deployment-rollout-failure](../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/08-deployment-rollout-failure.md) |
+| DaemonSet 问题 | [Q&A](../../../daemonset/%E5%9F%B9%E8%AE%AD/lecturer/10-daemonset-basics.md#6-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../故障诊断/技能体系/17-daemonset-pdb-failure.md) |
+| StatefulSet 问题 | [Q&A](../../../statefulset/%E5%9F%B9%E8%AE%AD/lecturer/11-statefulset-basics.md#7-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../故障诊断/技能体系/17-daemonset-pdb-failure.md) |
+| 调度/亲和性问题 | [Q&A](../../../../02-%E6%8E%A7%E5%88%B6%E9%9D%A2/scheduler/%E5%9F%B9%E8%AE%AD/lecturer/12-scheduling-basics.md#7-数字人-qa-场景) | - | [16-scheduling-pdb-failure](../故障诊断/技能体系/16-scheduling-pdb-failure.md) |
 
 ### 4.2 按使用场景
 
@@ -448,8 +448,8 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 
 **关联文档**:
 - [故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill（深度技术细节）
-- [P0-1: 工单分类体系](../P0-1-ticket-classification-intent-recognition.md) — 工单路由引擎
-- [P0-3: 会话上下文管理](../P0-3-session-context-management.md) — 多轮对话管理
+- [P0-1: 工单分类体系](../../../../../29-%E6%96%87%E6%A1%A3/agent-specs/P0-1-ticket-classification-intent-recognition.md) — 工单路由引擎
+- [P0-3: 会话上下文管理](../../../../../29-%E6%96%87%E6%A1%A3/agent-specs/P0-3-session-context-management.md) — 多轮对话管理
 - [故障诊断/](../../故障诊断/) — 故障排查文档
 
 ## Related

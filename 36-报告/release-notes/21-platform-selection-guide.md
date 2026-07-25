@@ -230,7 +230,7 @@ prerequisites:
 将 19-digital-human-video.md 中的逐字稿逐段粘贴:
 
 段落 1 (开场 Hook):
-  粘贴 "你是一个 [[实体/kubernetes.md|k8s]] 运维工程师..." 全文
+  粘贴 "你是一个 [[23-实体/02-K8s核心组件/kubernetes.md|k8s]] 运维工程师..." 全文
   点击 "Generate Preview"
 
 段落 2 (产品介绍):

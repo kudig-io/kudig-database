@@ -100,11 +100,11 @@ tier: peripheral---
 ## 📖 文档目录
 
 ### 📊 核心监控系统 (01-05)
-- **[01-Prometheus企业级监控](./01-prometheus-enterprise-monitoring.md)** - Prometheus监控系统深度实践，涵盖高可用部署、告警管理、性能优化等完整技术方案
-- **[02-Grafana企业级可观测性](./02-grafana-enterprise-observability.md)** - Grafana平台深度实践，包括仪表板设计、告警规则、数据源集成等
-- **[03-OpenTelemetry分布式追踪](./03-opentelemetry-distributed-tracing.md)** - OpenTelemetry可观测性体系实践，涵盖追踪、指标、日志统一管理
-- **[04-Thanos企业级指标联邦](./04-thanos-enterprise-metrics-federation.md)** - Thanos高可用监控架构，支持全局查询视图和长期存储
-- **[05-Datadog企业级监控](./05-datadog-enterprise-monitoring.md)** - Datadog统一监控平台深度实践，涵盖基础设施监控、APM、日志管理、合成监控等
+- **[01-Prometheus企业级监控](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/01-prometheus-enterprise-monitoring.md)** - Prometheus监控系统深度实践，涵盖高可用部署、告警管理、性能优化等完整技术方案
+- **[02-Grafana企业级可观测性](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/07-%E5%B7%A5%E5%85%B7/02-grafana-enterprise-observability.md)** - Grafana平台深度实践，包括仪表板设计、告警规则、数据源集成等
+- **[03-OpenTelemetry分布式追踪](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/04-%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/03-opentelemetry-distributed-tracing.md)** - OpenTelemetry可观测性体系实践，涵盖追踪、指标、日志统一管理
+- **[04-Thanos企业级指标联邦](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/04-thanos-enterprise-metrics-federation.md)** - Thanos高可用监控架构，支持全局查询视图和长期存储
+- **[05-Datadog企业级监控](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/07-%E5%B7%A5%E5%85%B7/05-datadog-enterprise-monitoring.md)** - Datadog统一监控平台深度实践，涵盖基础设施监控、APM、日志管理、合成监控等
 
 ## 🎯 学习路径建议
 
@@ -198,6 +198,6 @@ tier: peripheral---
 
 - [[系统基础/topic-cheat-sheet/promql.md|速查卡: promql]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

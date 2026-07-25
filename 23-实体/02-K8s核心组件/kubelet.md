@@ -234,7 +234,7 @@ kubelet 异常排查
 - 15-kubelet-deep-dive
 - 33-kubelet-eviction-thresholds
 - 20-kubelet-configuration
-- [[19-故障诊断/04-高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
 - virtual-kubelet
 - [[26-技能/03-节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
 - [[26-技能/04-工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference

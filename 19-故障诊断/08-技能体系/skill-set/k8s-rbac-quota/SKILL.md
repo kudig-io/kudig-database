@@ -137,7 +137,7 @@ RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建�
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../09-rbac-quota-failure.md](../09-rbac-quota-failure.md) |
+| 单文件完整版 | [../09-rbac-quota-failure.md](../../09-rbac-quota-failure.md) |
 
 ## Related
 

@@ -812,7 +812,7 @@ groups:
 
 ## 相关
 
-- [[09-可观测性/06-SLO-SLI/02-slo-implementation-guide.md|02 slo implementation guide]]
+- [[09-可观测性/06-SLO-SLI/05-slo-implementation-guide.md|02 slo implementation guide]]
 - [[12-可靠性/06-SRE实践/02-release-gate-slo-based.md|02 release gate slo based]]
 
 

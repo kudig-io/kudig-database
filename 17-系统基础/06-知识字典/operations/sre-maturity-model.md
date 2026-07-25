@@ -76,7 +76,7 @@ prerequisites:
 - [./operations-best-practices.md](././operations-best-practices.md) - 运维最佳实践
 - [./failure-patterns-analysis.md](././failure-patterns-analysis.md) - 故障模式分析
 - [03-capacity-planning-strategies.md](./03-capacity-planning-strategies.md) - 容量规划策略
-- [../故障诊断/[[06-存储/README.md|[[KUDIG Database]]]].md](../故障诊断/高级排障/structural-README.md) - 结构化故障排查
+- [../故障诊断/[[06-存储/README.md|[[KUDIG Database]]]].md](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-README.md) - 结构化故障排查
 
 **学习路径**:
 1. 先了解当前团队所处的成熟度等级(第1节)
@@ -2801,7 +2801,7 @@ Q5-Q6: 全面推广
 | [./operations-best-practices.md](././operations-best-practices.md) | 前置阅读 | 运维最佳实践是SRE成熟度提升的基础,建议先理解基础运维规范 |
 | [./failure-patterns-analysis.md](././failure-patterns-analysis.md) | 关联实践 | 故障模式分析帮助识别成熟度短板,指导改进方向 |
 | [./performance-tuning-expert.md](././performance-tuning-expert.md) | 深化学习 | 性能调优是Level 4-5阶段的核心能力,提升运维成熟度 |
-| [../网络/30-service-mesh-deep-dive.md](../网络/30-service-mesh-deep-dive.md) | 技术实现 | 服务网格是自动化和可观测性建设的重要工具 |
+| [../网络/30-service-mesh-deep-dive.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/30-service-mesh-deep-dive.md) | 技术实现 | 服务网格是自动化和可观测性建设的重要工具 |
 | [../故障诊断/高级排障/structural-README.md](../故障诊断/高级排障/README.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
 | [../生产运维/topic-presentations/kubernetes-observability-presentation.md](../生产运维/topic-presentations/kubernetes-observability-presentation.md) | 知识扩展 | 可观测性演讲稿深入讲解监控体系建设,是第3节的补充 |
 

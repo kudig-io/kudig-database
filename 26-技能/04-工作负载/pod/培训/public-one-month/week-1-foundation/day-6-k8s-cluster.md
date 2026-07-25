@@ -549,10 +549,10 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 
 ## 延伸阅读
 
-- [集群配置参数](../../集群基础/06-cluster-configuration-parameters.md)
-- [API 版本与特性](../../集群基础/03-api-versions-features.md)
-- [Deployment 生产模式](../../工作负载/02-deployment-production-patterns.md)
-- [K8s 速查手册](../../系统基础/速查卡/k8s.md)
+- [集群配置参数](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/06-%E5%8D%87%E7%BA%A7%E8%B7%AF%E5%BE%84/06-cluster-configuration-parameters.md)
+- [API 版本与特性](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/04-API%E7%89%88%E6%9C%AC/03-api-versions-features.md)
+- [Deployment 生产模式](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
+- [K8s 速查手册](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/05-%E9%80%9F%E6%9F%A5%E5%8D%A1/k8s.md)
 
 ## Related
 

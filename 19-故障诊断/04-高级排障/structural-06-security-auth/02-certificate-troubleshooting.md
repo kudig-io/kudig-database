@@ -842,15 +842,15 @@ kubectl certificate deny <csr>
 ```
 ### 相关文档
 
-- [API Server 故障排查](../01-control-plane/01-apiserver-troubleshooting.md)
-- [etcd 故障排查](../01-control-plane/02-etcd-troubleshooting.md)
-- [kubelet 故障排查](../02-node-components/01-kubelet-troubleshooting.md)
+- [API Server 故障排查](../structural-01-control-plane/01-apiserver-troubleshooting.md)
+- [etcd 故障排查](../structural-01-control-plane/02-etcd-troubleshooting.md)
+- [kubelet 故障排查](../structural-02-node-components/01-kubelet-troubleshooting.md)
 - [RBAC 故障排查](./01-rbac-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[21-生态参考/topic-index/security-index|Security 安全知识图谱索引]]
+- [[21-生态参考/03-领域索引/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[21-生态参考/03-领域索引/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

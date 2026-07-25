@@ -1856,7 +1856,7 @@ falco -r custom_rules.yaml                        # 使用自定义规则
 
 ---
 
-**相关文档**: [90-密钥管理工具](90-secret-management-tools.md) | [92-策略验证工具](92-policy-validation-tools.md) | [93-网络安全策略](93-network-policies.md)
+**相关文档**: [90-密钥管理工具](../01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/11-secret-management-tools.md) | [92-策略验证工具](../04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/05-policy-validation-tools.md) | [93-网络安全策略](93-network-policies.md)
 
 **版本**: Trivy 0.48+ | Grype 0.74+ | Falco 0.37+ | Kubescape 3.0+
 

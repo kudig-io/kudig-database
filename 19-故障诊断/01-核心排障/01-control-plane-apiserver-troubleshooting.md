@@ -105,11 +105,11 @@ related_docs:
 ### 🔗 关联故障排查文档
 - **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - API Server依赖etcd存储，etcd问题会直接影响API Server
 - **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 网络问题可能导致API Server无法正常通信
-- **[35-节点组件故障排查](./35-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
-- **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
-- **[12-RBAC配额故障排查](./12-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
-- **[13-证书故障排查](./13-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
-- **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
+- **[35-节点组件故障排查](../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/35-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
+- **[30-监控告警故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/30-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
+- **[12-RBAC配额故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/12-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
+- **[13-证书故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/13-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
+- **[39-企业级监控告警体系](../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/39-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
 
 ### 📚 扩展学习资料
 - **[Kubernetes官方文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)** - API Server详细配置参考

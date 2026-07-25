@@ -39,7 +39,7 @@ prerequisites:
 
 # kustomize v2.1 Release Notes
 
-Source: [v2.1.0](https://github.[[实体/kubernetes.md|kubernetes]]-sigs/kustomize/releases/tag/v2.1.0)
+Source: [v2.1.0](https://github.[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]-sigs/kustomize/releases/tag/v2.1.0)
 
 [Release notes](https://github.com/kubernetes-sigs/kustomize/blob/master/docs/v2.1.0.md)
 

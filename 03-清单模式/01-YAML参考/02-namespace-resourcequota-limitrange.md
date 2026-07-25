@@ -1904,7 +1904,7 @@ spec:
 ## 内部参考文档
 
 - [01 - YAML 语法基础与 Kubernetes 资源通用规范](./01-yaml-syntax-resource-conventions.md)
-- [Domain 3 - 工作负载与调度](../domain-3-workload-scheduling/README.md)
+- [Domain 3 - 工作负载与调度](../README.md)
 - [Topic - Kubernetes 调度演讲](../生产运维/topic-presentations/kubernetes-scheduling-presentation.md)
 
 ## 官方文档

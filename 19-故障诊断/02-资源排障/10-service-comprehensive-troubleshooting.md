@@ -90,9 +90,9 @@ cross_refs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 底层网络连通性问题
-- **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 网络层面诊断
-- **[26-DNS故障排查](./26-dns-troubleshooting.md)** - 服务发现相关问题
+- **[03-CNI网络故障排查](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/03-networking-cni-troubleshooting.md)** - 底层网络连通性问题
+- **[25-网络连通性故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/25-network-connectivity-troubleshooting.md)** - 网络层面诊断
+- **[26-DNS故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/26-dns-troubleshooting.md)** - 服务发现相关问题
 - **[15-Ingress故障排查](./15-ingress-troubleshooting.md)** - 外部访问相关问题
 
 ### 📚 扩展学习资料

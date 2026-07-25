@@ -106,7 +106,7 @@ Promote `provenance` field to beta by setting the existing feature flag `enable-
 * :sparkles: [TEP-0091] add VerificationResult (#6663)
 * :sparkles: [TEP-0089] Inject SpireControllerAPIClient into the Taskrun controller and reconciler. (#6627)
 * :sparkles: [TEP-0089] [[SPIRE|SPIRE]] for non-falsifiable provenance. Setup the test environment. (#6553)
-* :sparkles: [TEP-0089] Add CSI volumes to the [[Pods|Pods]] which provide the SPIRE [[系统基础/topic-dictionary/workloads/workload-api.md|workload API]] (#6539)
+* :sparkles: [TEP-0089] Add CSI volumes to the [[Pods|Pods]] which provide the SPIRE [[17-系统基础/06-知识字典/workloads/workload-api.md|workload API]] (#6539)
 * :sparkles: Add matrix support for using references to entire PipelineRun array parameters (#6516)
 
 <!-- Fill in deprecation notices when applicable

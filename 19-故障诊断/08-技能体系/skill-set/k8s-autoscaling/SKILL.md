@@ -138,7 +138,7 @@ HPA、VPA 和 Cluster Autoscaler 是 [[Kubernetes|Kubernetes]] 弹性能力的�
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../12-autoscaling-failure.md](../12-autoscaling-failure.md) |
+| 单文件完整版 | [../12-autoscaling-failure.md](../../12-autoscaling-failure.md) |
 
 ## Related
 

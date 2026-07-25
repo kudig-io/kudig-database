@@ -872,11 +872,11 @@ kubectl cp deployment/spring-app:/tmp/recording.jfr ./recording.jfr
 <!-- chunk: 🔗 相关文档 -->
 ## 🔗 相关文档
 
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md) — Spring Boot 部署
-- [JVM GC 容器调优](../故障诊断/99-jvm-gc-container-tuning-guide.md) — GC 监控与调优
-- [分布式追踪指南](../可观测性/99-distributed-tracing-guide.md) — OTel 深度实践
-- [Prometheus 企业监控](../可观测性/99-prometheus-enterprise-guide.md) — Prometheus 配置
-- [性能 Profiling 工具](../可观测性/27-performance-profiling-tools.md) — Profiling 工具链
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) — Spring Boot 部署
+- [JVM GC 容器调优](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-jvm-gc-container-tuning-guide.md) — GC 监控与调优
+- [分布式追踪指南](../04-%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/99-distributed-tracing-guide.md) — OTel 深度实践
+- [Prometheus 企业监控](../02-%E6%8C%87%E6%A0%87/99-prometheus-enterprise-guide.md) — Prometheus 配置
+- [性能 Profiling 工具](../07-%E5%B7%A5%E5%85%B7/27-performance-profiling-tools.md) — Profiling 工具链
 
 ---
 

@@ -102,7 +102,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 工作负载 MOC
-- [[工作负载/README.md|Domain-4: Kubernetes工作负载管理]]
+- [[02-工作负载/README.md|Domain-4: Kubernetes工作负载管理]]
 - 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)
 - 02 - Deployment 生产模式与最佳实践 (Deployment Production Patterns)
 - 03 - StatefulSet 高级运维指南 (StatefulSet Advanced Operations)

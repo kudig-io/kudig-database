@@ -70,7 +70,7 @@ prerequisites:
 
 - CloneSet 故障排查
 - Deployment 故障排查
-- [[19-故障诊断/04-高级排障/05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|StatefulSet 故障排查]]
 
 ## FTA 故障树
 

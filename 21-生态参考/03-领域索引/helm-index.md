@@ -64,9 +64,9 @@ prerequisites:
 
 ## 结构化故障排查 - 集群运维
 
-- [[19-故障诊断/04-高级排障/08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查]]
-- [[19-故障诊断/04-高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|GitOps 故障排查]]
-- [[19-故障诊断/04-高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|ArgoCD 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting.md|Helm 部署故障排查]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/01-gitops-devops-troubleshooting.md|GitOps 故障排查]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/01-gitops-devops-troubleshooting.md|ArgoCD 故障排查]]
 
 ## FTA 故障树
 

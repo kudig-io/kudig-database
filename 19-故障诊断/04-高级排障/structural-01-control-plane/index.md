@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[19-故障诊断/04-高级排障/01-control-plane/01-apiserver-troubleshooting.md|Apiserver Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/02-etcd-troubleshooting.md|Etcd Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|Webhook Admission Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/06-apf-troubleshooting.md|Apf Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|Control Plane Security Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|Control Plane Performance Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/09-control-plane-ha-troubleshooting.md|Control Plane Ha Troubleshooting]]
-- [[19-故障诊断/04-高级排障/01-control-plane/10-control-plane-upgrade-troubleshooting.md|Control Plane Upgrade Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md|Apiserver Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|Etcd Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|Scheduler Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md|Webhook Admission Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/06-apf-troubleshooting.md|Apf Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/07-control-plane-security-troubleshooting.md|Control Plane Security Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/08-control-plane-performance-troubleshooting.md|Control Plane Performance Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/09-control-plane-ha-troubleshooting.md|Control Plane Ha Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/10-control-plane-upgrade-troubleshooting.md|Control Plane Upgrade Troubleshooting]]
 

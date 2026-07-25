@@ -2535,14 +2535,14 @@ chmod +x pod-lifecycle-diagnosis.sh
 
 <!-- chunk: 相关文档交叉引用 -->## 相关文档交叉引用
 
-- **[01-event-system-architecture.md](./01-event-system-architecture.md)** - 事件系统基础架构和 API 参考
-- **[03-image-pull-events.md](./03-image-pull-events.md)** - 镜像拉取相关事件（Pulling, Pulled, ErrImagePull, ImagePullBackOff）
-- **[04-probe-health-check-events.md](./04-probe-health-check-events.md)** - 健康检查探针事件（Unhealthy, ProbeError, OOMKilling）
-- **[05-scheduling-preemption-events.md](./05-scheduling-preemption-events.md)** - 调度和抢占事件（Scheduled, FailedScheduling）
-- **[06-node-lifecycle-condition-events.md](./06-node-lifecycle-condition-events.md)** - 节点生命周期事件（NodeReady, NodeNotReady, NodeHasDiskPressure）
-- **[11-storage-volume-events.md](./11-storage-volume-events.md)** - 存储卷挂载事件（FailedMount, FailedAttachVolume）
+- **[01-event-system-architecture.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/04-K8s%E4%BA%8B%E4%BB%B6/01-event-system-architecture.md)** - 事件系统基础架构和 API 参考
+- **[03-image-pull-events.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/04-K8s%E4%BA%8B%E4%BB%B6/03-image-pull-events.md)** - 镜像拉取相关事件（Pulling, Pulled, ErrImagePull, ImagePullBackOff）
+- **[04-probe-health-check-events.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/04-K8s%E4%BA%8B%E4%BB%B6/04-probe-health-check-events.md)** - 健康检查探针事件（Unhealthy, ProbeError, OOMKilling）
+- **[05-scheduling-preemption-events.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/04-K8s%E4%BA%8B%E4%BB%B6/05-scheduling-preemption-events.md)** - 调度和抢占事件（Scheduled, FailedScheduling）
+- **[06-node-lifecycle-condition-events.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/04-K8s%E4%BA%8B%E4%BB%B6/06-node-lifecycle-condition-events.md)** - 节点生命周期事件（NodeReady, NodeNotReady, NodeHasDiskPressure）
+- **[11-storage-volume-events.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/04-K8s%E4%BA%8B%E4%BB%B6/11-storage-volume-events.md)** - 存储卷挂载事件（FailedMount, FailedAttachVolume）
 - **[Domain-4: 工作负载 - Pod 生命周期](../工作负载/02-pod-lifecycle.md)** - Pod 生命周期详细说明
-- **[Topic: 结构化故障排查 - Pod 故障排查](../故障诊断/高级排障/05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查完整流程
+- **[Topic: 结构化故障排查 - Pod 故障排查](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/01-pod-troubleshooting.md)** - Pod 故障排查完整流程
 
 ---
 

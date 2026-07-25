@@ -948,10 +948,10 @@ kubectl label namespace frontend name=frontend
 ## 延伸阅读
 
 - [Docker 基础概念](../../容器运行时/01-docker-fundamentals-concepts.md)
-- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件](../../集群基础/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
-- [Pod 排障指南](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
+- [K8s 核心组件](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [Pod 排障指南](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
 
 ## Related
 

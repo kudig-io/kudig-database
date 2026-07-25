@@ -273,9 +273,9 @@ kubectl get pvc -n prod -l app=postgres
 ```
 ## 交叉引用
 
-- [StatefulSet 高级运维](../../工作负载/03-statefulset-advanced-operations.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [StatefulSet 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/statefulset-fta.md)
+- [StatefulSet 高级运维](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/03-statefulset-advanced-operations.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
+- [StatefulSet 故障树分析 (FTA)](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/statefulset-fta.md)
 - [存储 CSI 故障排查](../../[[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]].md)
 - [Pod Disruptions 中断管理](./disruptions.md)
 

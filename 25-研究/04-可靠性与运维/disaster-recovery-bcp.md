@@ -167,8 +167,8 @@ spec:
 
 - Velero: https://velero.io/
 - etcd Disaster Recovery: https://etcd.io/docs/v3.5/op-guide/recovery/
-- [[12-可靠性/02-灾难恢复/|灾难恢复目录]]
-- [[12-可靠性/01-备份恢复/|备份恢复目录]]
+- [[12-可靠性/02-灾难恢复/index.md|灾难恢复目录]]
+- [[12-可靠性/01-备份恢复/index.md|备份恢复目录]]
 - [[25-研究/03-平台与交付/multi-cluster-management.md|多集群管理研究]]
 
 ## Related

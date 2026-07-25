@@ -120,7 +120,7 @@ tier: peripheral---
 - **18** - SLO/SLI体系建设与管理
 
 ### 📊 K8s v1.29-v1.33 可观测性新特性 (99-系列)
-- **[99]** - [v1.29-v1.33 可观测性新特性指南](./99-kubernetes-v1.33-observability-guide.md) — Kubelet Tracing GA、Resource Metrics Beta、Node Log Query、Structured Logging
+- **[99]** - [v1.29-v1.33 可观测性新特性指南](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-kubernetes-v1.33-observability-guide.md) — Kubelet Tracing GA、Resource Metrics Beta、Node Log Query、Structured Logging
 - **19** - 监控安全与合规治理
 - **20** - 监控平台高可用与灾备
 - **21** - 监控运维手册与应急响应
@@ -210,6 +210,6 @@ tier: peripheral---
 - 相关知识域: 平台工程
 - [[系统基础/topic-cheat-sheet/promql.md|速查卡: promql]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

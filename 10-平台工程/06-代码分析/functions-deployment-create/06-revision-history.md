@@ -80,8 +80,8 @@ related_topics:
 - rolling-update
 - deployment-status
 - replicaset-controller
-domain_link: '[Control Plane](../集群基础/README.md)'
-topic_link: '[Workloads](../工作负载/README.md)'
+domain_link: '[Control Plane](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/README.md)'
+topic_link: '[Workloads](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/README.md)'
 authors:
 - name: KUDIG Team
   role: contributor

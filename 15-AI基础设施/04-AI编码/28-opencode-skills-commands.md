@@ -382,9 +382,9 @@ Provide specific, actionable feedback.
 
 | 文档 | 关系 |
 |------|------|
-| [04 - Agent 系统](./04-opencode-agents-system.md) | Skill 与 Agent 的交互 |
-| [05 - 工具与权限](./05-opencode-tools-permissions.md) | skill 工具权限配置 |
-| [12 - 进阶话题](./12-opencode-advanced-topics.md) | 团队级 Skill 共享 |
+| [04 - Agent 系统](24-opencode-agents-system.md) | Skill 与 Agent 的交互 |
+| [05 - 工具与权限](25-opencode-tools-permissions.md) | skill 工具权限配置 |
+| [12 - 进阶话题](32-opencode-advanced-topics.md) | 团队级 Skill 共享 |
 
 ---
 

@@ -413,12 +413,12 @@ Kyverno 使用 Admission Webhook 机制，每个 API 请求都会经过策略验
 
 ## 延伸阅读
 
-- [Kyverno 企业策略管理](../../安全/04-kyverno-enterprise-policy-management.md)
-- [Vault 企业 Secret 管理](../../安全/05-vault-enterprise-secrets-management.md)
-- [零信任安全架构](../../生产运维/07-zero-trust-security-architecture.md)
-- [认证授权系统](../../安全/01-authentication-authorization-system.md)
-- [Pod 安全标准](../../安全/06-pod-security-standards.md)
-- [Secret 管理工具](../../安全/11-secret-management-tools.md)
+- [Kyverno 企业策略管理](../../../../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/04-kyverno-enterprise-policy-management.md)
+- [Vault 企业 Secret 管理](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/05-vault-enterprise-secrets-management.md)
+- [零信任安全架构](../../../../../../08-%E5%AE%89%E5%85%A8/02-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/07-zero-trust-security-architecture.md)
+- [认证授权系统](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
+- [Pod 安全标准](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
+- [Secret 管理工具](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/11-secret-management-tools.md)
 
 
 <!-- risk-assessed -->

@@ -62,11 +62,11 @@ prerequisites:
 
 ### 结构化故障排查
 
-- [[19-故障诊断/04-高级排障/02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
-- [[19-故障诊断/04-高级排障/02-node-components/05-image-registry-troubleshooting.md|镜像与镜像仓库故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/02-kube-proxy-troubleshooting.md|kube-proxy 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/04-node-troubleshooting.md|节点问题专项排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/05-image-registry-troubleshooting.md|镜像与镜像仓库故障排查指南]]
 
 ### YAML 配置参考
 
@@ -89,7 +89,7 @@ prerequisites:
 
 ### 自动扩缩容
 
-- [[19-故障诊断/04-高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 - Karpenter 节点自动扩展实践指南
 
 ## 扩展参考
@@ -107,7 +107,7 @@ prerequisites:
 
 ### 硬件与设备管理
 
-- [[19-故障诊断/04-高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 - Metal3-io
 - KubeEdge
 

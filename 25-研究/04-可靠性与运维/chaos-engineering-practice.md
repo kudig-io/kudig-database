@@ -156,11 +156,11 @@ spec:
 - Chaos Mesh: https://chaos-mesh.org/
 - Litmus Chaos: https://litmuschaos.io/
 - Principles of Chaos: https://principlesofchaos.org/
-- [[12-可靠性/04-混沌工程/|混沌工程目录]]
+- [[12-可靠性/04-混沌工程/index.md|混沌工程目录]]
 - [[12-可靠性/index.md|可靠性目录]]
 - [[25-研究/04-可靠性与运维/disaster-recovery-bcp.md|灾难恢复研究]]
 
 ## Related
 
 - [[24-综合/05-可观测性/slo-observability.md|SLO × 可观测性]]
-- [[22-概念/chaos-engineering.md|混沌工程概念]]
+- [[17-系统基础/06-知识字典/operations/chaos-engineering.md|混沌工程概念]]

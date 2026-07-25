@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[归档/topic-publish/video-scripts/README.md|Readme]]
+- [[37-归档/topic-publish/video-scripts/README.md|Readme]]
 
 ## 文档
 
-- [[归档/topic-publish/video-scripts/QUICK-REFERENCE.md|Quick Reference]]
-- [[归档/topic-publish/video-scripts/VIDEO-OUTPUT-GUIDE.md|Video Output Guide]]
-- [[归档/topic-publish/video-scripts/node-notready.md|Node Notready]]
-- [[归档/topic-publish/video-scripts/pod-crashloop.md|Pod Crashloop]]
+- [[37-归档/topic-publish/video-scripts/QUICK-REFERENCE.md|Quick Reference]]
+- [[37-归档/topic-publish/video-scripts/VIDEO-OUTPUT-GUIDE.md|Video Output Guide]]
+- [[37-归档/topic-publish/video-scripts/node-notready.md|Node Notready]]
+- [[37-归档/topic-publish/video-scripts/pod-crashloop.md|Pod Crashloop]]
 

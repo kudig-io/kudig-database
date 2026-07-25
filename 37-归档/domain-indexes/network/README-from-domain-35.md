@@ -65,22 +65,22 @@ eBPF (Extended Berkeley Packet Filter) 是 Linux 内核中的革命性技术，�
 ## 📚 文档目录
 
 ### 🎯 eBPF 基础架构 (01-02)
-- **[01-eBPF架构基础与程序类型](./01-ebpf-architecture-fundamentals.md)** - eBPF 虚拟机、程序类型、验证器、JIT编译
-- **[02-eBPF Map类型与数据结构](./02-ebpf-map-types-data-structures.md)** - Hash/Array/LRU/RingBuffer/Per-CPU Map
+- **[01-eBPF架构基础与程序类型](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/01-ebpf-architecture-fundamentals.md)** - eBPF 虚拟机、程序类型、验证器、JIT编译
+- **[02-eBPF Map类型与数据结构](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/02-ebpf-map-types-data-structures.md)** - Hash/Array/LRU/RingBuffer/Per-CPU Map
 
 ### 🌐 Cilium CNI 深度实践 (03-05)
-- **[03-Cilium CNI架构与部署](./03-cilium-cni-architecture.md)** - Cilium Agent/Operator/CNI Plugin 架构
-- **[04-Cilium网络策略L3/L4/L7](./04-cilium-network-policy.md)** - CiliumNetworkPolicy、L7 HTTP/gRPC/Kafka 策略
-- **[05-Cilium Service Mesh无Sidecar](./05-cilium-service-mesh.md)** - Cilium Service Mesh、eBPF 替代 Sidecar
+- **[03-Cilium CNI架构与部署](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/03-cilium-cni-architecture.md)** - Cilium Agent/Operator/CNI Plugin 架构
+- **[04-Cilium网络策略L3/L4/L7](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/04-cilium-network-policy.md)** - CiliumNetworkPolicy、L7 HTTP/gRPC/Kafka 策略
+- **[05-Cilium Service Mesh无Sidecar](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/05-cilium-service-mesh.md)** - Cilium Service Mesh、eBPF 替代 Sidecar
 
 ### 🔒 安全与可观测性 (06-08)
-- **[06-Tetragon运行时安全](./06-tetragon-runtime-security.md)** - TracingPolicy、进程/文件/网络监控
-- **[07-Hubble网络可观测性](./07-hubble-network-observability.md)** - Hubble UI/CLI/Relay、L3/L4/L7 流可视化
-- **[08-bcc与bpftrace工具链](./08-bcc-bpftrace-tools.md)** - bcc 工具、bpftrace 脚本、性能分析
+- **[06-Tetragon运行时安全](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/06-tetragon-runtime-security.md)** - TracingPolicy、进程/文件/网络监控
+- **[07-Hubble网络可观测性](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/07-hubble-network-observability.md)** - Hubble UI/CLI/Relay、L3/L4/L7 流可视化
+- **[08-bcc与bpftrace工具链](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/08-bcc-bpftrace-tools.md)** - bcc 工具、bpftrace 脚本、性能分析
 
 ### ⚡ 性能与安全应用 (09-10)
-- **[09-eBPF性能优化实践](./09-ebpf-performance-optimization.md)** - XDP 加速、TC 优化、Map 性能调优
-- **[10-eBPF安全应用案例](./10-ebpf-security-applications.md)** - 入侵检测、DDoS 防护、容器逃逸检测
+- **[09-eBPF性能优化实践](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/09-ebpf-performance-optimization.md)** - XDP 加速、TC 优化、Map 性能调优
+- **[10-eBPF安全应用案例](../../../05-%E7%BD%91%E7%BB%9C/05-eBPF/10-ebpf-security-applications.md)** - 入侵检测、DDoS 防护、容器逃逸检测
 
 ## 🎯 学习路径建议
 

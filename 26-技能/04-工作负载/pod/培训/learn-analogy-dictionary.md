@@ -134,7 +134,7 @@ prerequisites:
 
 **关联文档**:
 - [../fundamentals/](../fundamentals/) — 15 课 K8s 基础概念详解
-- [../resources/lecturer-persona.md](../resources/lecturer-persona.md) — 讲师角色设定与场景规范
+- [../resources/lecturer-persona.md](resources/lecturer-persona.md) — 讲师角色设定与场景规范
 
 ## 类比学习法指南
 

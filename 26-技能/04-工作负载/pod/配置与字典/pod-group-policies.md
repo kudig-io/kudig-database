@@ -196,8 +196,8 @@ kubectl get events -n <ns> --field-selector reason=GangScheduling
 ## 交叉引用
 
 - [Workload API](workload-api.md) — 完整 Workload 资源定义
-- [Workload Reference](workload-reference.md) — Pod 端引用 Workload 的方式
-- [Jobs](jobs.md) — 批处理场景下的 gang 调度应用
+- [Workload Reference](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/workload-reference.md) — Pod 端引用 Workload 的方式
+- [Jobs](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/jobs.md) — 批处理场景下的 gang 调度应用
 - [调度与驱逐](../scheduling/) — 调度器核心行为
 
 ## 参考链接

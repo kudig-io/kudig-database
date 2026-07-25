@@ -116,8 +116,8 @@ related_docs:
   │ (集群基础)│               │ (平台工程)│
   └──────────┘               └──────────┘
 
-交叉引用: [架构基础](./集群基础/01-kubernetes-architecture-overview.md) |
-         [设计原理](./集群基础/01-design-principles-foundations.md)
+交叉引用: [架构基础](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md) |
+         [设计原理](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/01-design-principles-foundations.md)
 ```
 
 ---

@@ -405,7 +405,7 @@ kubectl get sa -n production <app-sa> -o json | jq '.metadata.annotations["eks.a
 - [[08-安全/02-网络安全/19-zero-trust-architecture.md|零信任架构]] — 网络分段与身份驱动访问
 - [[08-安全/03-运行时安全/99-falco-runtime-security-guide.md|Falco 运行时安全指南]] — 运行时威胁检测
 - [[08-安全/05-供应链/01-supply-chain-security-overview.md|供应链安全概览]] — 镜像签名与 SBOM
-- [[13-生产运维/03-事件响应/20-incident-response-process.md|安全事件响应流程]] — 事件响应与取证
+- [[13-生产运维/03-事件响应/08-incident-response-process.md|安全事件响应流程]] — 事件响应与取证
 
 ### 相关域参考
 

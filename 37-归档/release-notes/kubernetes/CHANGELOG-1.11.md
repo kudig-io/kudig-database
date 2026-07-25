@@ -130,7 +130,7 @@ prerequisites:
     - [Client Binaries](#client-binaries-10)
     - [Server Binaries](#server-binaries-10)
     - [Node Binaries](#node-binaries-10)
-- [[实体/kubernetes.md|Kubernetes]] 1.11 Release Notes](#kubernetes-111-release-notes)
+- [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] 1.11 Release Notes](#kubernetes-111-release-notes)
   - [Urgent Upgrade Notes](#urgent-upgrade-notes)
     - [(No, really, you MUST do this before you upgrade)](#no-really-you-must-do-this-before-you-upgrade)
   - [Major Themes](#major-themes)

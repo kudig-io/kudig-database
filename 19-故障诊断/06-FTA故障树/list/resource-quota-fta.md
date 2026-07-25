@@ -1219,7 +1219,7 @@ flowchart TD
 
 ## Related
 
-- [[26-技能/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[26-技能/04-工作负载/pod/方法论/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
 
 
 <!-- risk-assessed -->

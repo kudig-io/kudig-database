@@ -390,7 +390,7 @@ kubectl get clusterpolicy -o yaml | grep driverVersion
 
 6. **CDI 迁移规划**：新集群建议直接启用 CDI 模式；存量集群可在 GPU Operator 升级时逐步迁移，CDI 与 Device Plugin 可共存。
 
-7. **容量规划**：GPU 资源规划需结合业务增长预期，参见 [[12-可靠性/03-容量规划/]] 中的容量模型方法论。
+7. **容量规划**：GPU 资源规划需结合业务增长预期，参见 [[12-可靠性/03-容量规划/index.md|03-容量规划]] 中的容量模型方法论。
 
 ## Related
 
@@ -398,4 +398,4 @@ kubectl get clusterpolicy -o yaml | grep driverVersion
 - [[22-概念/07-调度与资源/dynamic-resource-allocation]]
 - [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management]]
 - [[15-AI基础设施/01-基础设施/04-gpu-monitoring-dcgm]]
-- [[19-故障诊断/]]
+- [[19-故障诊断/index.md|19-故障诊断]]

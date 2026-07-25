@@ -497,11 +497,11 @@ CNCF 229 个项目文档不逐个生成聚合页面，而是按功能类别聚�
 
 ## Related
 
-- [[22-概念/bp-observability.md|bp-observability]] — 最佳实践：Observability
-- [[22-概念/bp-infrastructure.md|bp-infrastructure]] — 最佳实践：Infrastructure
-- [[22-概念/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
-- [[22-概念/bp-common-best-practices.md|bp-common-best-practices]] — Kubernetes 通用最佳实践参考
-- [[22-概念/deployment-controller-architecture.md|deployment-controller-architecture]] — Deployment 控制器架构
+- [[22-概念/10-最佳实践/bp-observability.md|bp-observability]] — 最佳实践：Observability
+- [[22-概念/10-最佳实践/bp-infrastructure.md|bp-infrastructure]] — 最佳实践：Infrastructure
+- [[22-概念/05-安全/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[22-概念/10-最佳实践/bp-common-best-practices.md|bp-common-best-practices]] — Kubernetes 通用最佳实践参考
+- [[22-概念/02-工作负载/deployment-controller-architecture.md|deployment-controller-architecture]] — Deployment 控制器架构
 - [2026-05-21] CROSS_LINK pages_scanned=588 links_added=2883 typed_relations_written=0 pages_modified=582 orphans_remaining=38 misc_affinity_updated=0 promotion_candidates=0
 - [2026-05-21] LINT_CONSOLIDATE links_fixed=0 orphans_rescued=496 lifecycle_updates=8 tier_demotions=0 tag_fixes=0 contradiction_callouts=0 report=synthesis/consolidation-2026-05-21.md
 - [2026-05-21] CROSS_LINK_FIX broken_links_fixed=152 nested_fixed=39 md_suffix_fixed=3041 path_normalized=5398 files_modified=83 final_orphans≈0 final_broken_links=0

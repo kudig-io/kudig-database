@@ -511,7 +511,7 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
 - [`buildKubeConfigFromSpec`]([[10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
 - [`kubeadm certs renew`](README.md) — 证书续期
-- [`kubeadm config validate`](17-init-phases.md) — 配置验证
+- [`kubeadm config validate`](../cluster-create/17-init-phases.md) — 配置验证
 
 ## Related
 

@@ -39,7 +39,7 @@ prerequisites:
 
 # kind v0.8 Release Notes
 
-Source: [v0.8.1](https://github.[[实体/kubernetes.md|kubernetes]]-sigs/kind/releases/tag/v0.8.1)
+Source: [v0.8.1](https://github.[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]-sigs/kind/releases/tag/v0.8.1)
 
 **This is a tiny patch release to pick up the fix for [Can't create ipv4 clusters if ipv6 is disabled at kernel level](https://github.com/kubernetes-sigs/kind/issues/1544).**
 

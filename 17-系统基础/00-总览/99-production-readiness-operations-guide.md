@@ -56,7 +56,7 @@ authors:
 
 System Foundation 是 Kubernetes 生产集群的“底座”，涵盖 Linux 操作系统、服务器硬件以及 Kubernetes 事件系统。底座不稳，上层控制面（etcd、API Server、kubelet）和负载都会出现偶发、难以定位的故障。根据当前内容缺口分析，系统基础 亟需补齐 **节点时间同步**、**systemd 与 kubelet 服务管理**、**内核实时补丁**、**OS 镜像与节点加固基线** 以及 **NUMA / CPU 拓扑感知** 等生产就绪动作。本指南聚焦该域的生产就绪检查清单、关键风险缓解、日常运维操作与故障排查速查，帮助 SRE 在上线前与运行期建立可观测、可回滚、可审计的系统基线。
 
-> 本指南与 [[17-系统基础/01-linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]、[[17-系统基础/02-硬件/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]] 互补，避免重复罗列通用命令，重点补充生产就绪视角的落地动作。
+> 本指南与 [[17-系统基础/01-Linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]、[[17-系统基础/02-硬件/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]] 互补，避免重复罗列通用命令，重点补充生产就绪视角的落地动作。
 
 ---
 
@@ -65,7 +65,7 @@ System Foundation 是 Kubernetes 生产集群的“底座”，涵盖 Linux 操�
 在将节点或集群宣布为 production-ready 之前，必须逐项确认以下基线。建议将检查结果以 Infrastructure-as-Code（Ansible/CloudInit/镜像构建脚本）固化，并在每次变更后回归验证。
 
 1. **OS 镜像与加固基线已固化**  
-   生产环境不应依赖人工逐台配置节点。使用 CIS Benchmark、OpenSCAP 或 Lynis 生成合规报告，将加固动作写入镜像构建脚本或 Ansible Playbook；禁用 cups、bluetooth、firewalld 等非必要服务，SSH 仅启用密钥认证并关闭 Root 直接登录。参考 [[17-系统基础/01-linux/07-linux-security-hardening.md|Linux 安全加固]]。
+   生产环境不应依赖人工逐台配置节点。使用 CIS Benchmark、OpenSCAP 或 Lynis 生成合规报告，将加固动作写入镜像构建脚本或 Ansible Playbook；禁用 cups、bluetooth、firewalld 等非必要服务，SSH 仅启用密钥认证并关闭 Root 直接登录。参考 [[17-系统基础/01-Linux/07-linux-security-hardening.md|Linux 安全加固]]。
 
 2. **时间同步服务已配置且漂移可控**  
    etcd 对时间极其敏感，控制平面节点必须运行 chrony 或 systemd-timesyncd，并配置多个上游 NTP 源。生产要求时钟漂移 < 50 ms，建议 < 10 ms。任何时间跳变都应通过审计日志追踪。详见 节点时间同步指南（待补充）。
@@ -252,9 +252,9 @@ System Foundation 的问题往往会“向上透传”为集群、网络、存�
 
 ### 同域参考
 
-- [[17-系统基础/01-linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]
-- [[17-系统基础/01-linux/06-linux-performance-tuning.md|Linux 性能调优]]
-- [[17-系统基础/01-linux/07-linux-security-hardening.md|Linux 安全加固]]
+- [[17-系统基础/01-Linux/09-linux-operations-basics.md|Linux 运维基础与应急响应]]
+- [[17-系统基础/01-Linux/06-linux-performance-tuning.md|Linux 性能调优]]
+- [[17-系统基础/01-Linux/07-linux-security-hardening.md|Linux 安全加固]]
 - [[17-系统基础/02-硬件/16-kubernetes-hardware-troubleshooting.md|K8s 硬件故障排查]]
 - [[17-系统基础/04-K8s事件/06-node-lifecycle-condition-events.md|节点生命周期与状态事件]]
 - [[17-系统基础/05-速查卡/kubectl-scene-cheatsheet.md|kubectl 场景速查卡]]

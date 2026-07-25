@@ -795,9 +795,9 @@ capsh --decode=<hex>
 ```
 ### 相关文档
 
-- [Pod 故障排查](../[[19-故障诊断/04-高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [RBAC 故障排查](./01-rbac-troubleshooting.md)
-- [Webhook/准入控制故障排查](../[[19-故障诊断/04-高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
+- [Pod 故障排查](../[[19-故障诊断/04-高级排障/structural-05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [RBAC 故障排查](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-06-security-auth/01-rbac-troubleshooting.md)
+- [Webhook/准入控制故障排查](../[[19-故障诊断/04-高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
 
 ## Related
 
@@ -808,10 +808,10 @@ capsh --decode=<hex>
 
 ## See Also
 
-- [[19-故障诊断/04-高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
-- [[19-故障诊断/04-高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
-- [[19-故障诊断/04-高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
-- [[19-故障诊断/04-高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
 
 ```
 

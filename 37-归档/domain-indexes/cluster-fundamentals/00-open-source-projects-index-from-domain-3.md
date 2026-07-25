@@ -112,7 +112,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 集群基础 MOC
-- [[集群基础/README.md|Domain-3: Kubernetes控制平面]]
+- [[01-集群基础/README.md|Domain-3: Kubernetes控制平面]]
 - Kubernetes 控制平面架构总览 (Control Plane Architecture Overview)
 - 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 - 控制平面高可用部署模式 (Control Plane High Availability Deployment Patt...

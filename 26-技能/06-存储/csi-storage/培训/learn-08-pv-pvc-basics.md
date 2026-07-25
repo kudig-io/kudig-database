@@ -375,8 +375,8 @@ kubectl delete pvc <pvc-name>
 ---
 
 **关联文档**:
-- [../08-scaling/08-hpa-basics.md](../08-scaling/08-hpa-basics.md) — HPA 自动伸缩
-- [../../故障诊断/topic-skills/06-pvc-storage-failure.md](../../故障诊断/技能体系/06-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
+- [../08-scaling/08-hpa-basics.md](../../../04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/hpa-vpa/%E5%9F%B9%E8%AE%AD/lecturer/08-hpa-basics.md) — HPA 自动伸缩
+- [../../故障诊断/topic-skills/06-pvc-storage-failure.md](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/07-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
 - [../../存储/](../../存储/) — K8s 存储文档
 
 ## 相关概念

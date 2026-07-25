@@ -647,8 +647,8 @@ chmod +x /usr/local/bin/storage-analyzer.sh
 <!-- chunk: 相关文档 -->## 相关文档
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
-- K8s 存储性能调优](../存储/08-storage-performance-tuning.md) - [[Kubernetes|Kubernetes]] 存储性能优化
-- Linux 存储管理](../系统基础/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
+- K8s 存储性能调优](../01-K8s%E5%AD%98%E5%82%A8/08-storage-performance-tuning.md) - [[Kubernetes|Kubernetes]] 存储性能优化
+- Linux 存储管理](../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
 
 ## See Also
 

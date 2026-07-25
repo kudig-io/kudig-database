@@ -81,7 +81,7 @@ description: '## 项目概述'
 
 - 23-kubernetes-opentelemetry-native-observability
 - 03-opentelemetry-distributed-tracing
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
 - opentelemetry
 - RELEASE-NOTES-0.43
 - RELEASE-NOTES-0.12

@@ -494,7 +494,7 @@ A: 三种方案：1) 切换到 Cilium eBPF（推荐）；2) kube-proxy IPVS 模�
 ## Related
 
 - [[17-系统基础/06-知识字典/fundamentals/kube-proxy.md|kube-proxy]]
-- [[17-系统基础/06-知识字典/security/network-policy.md|NetworkPolicy 安全]]
+- [[17-系统基础/06-知识字典/networking/network-policy.md|NetworkPolicy 安全]]
 - [[17-系统基础/06-知识字典/observability/hubble.md|Hubble 可观测性]]
-- [[17-系统基础/06-知识字典/multi-cloud/submariner.md|Submariner 多集群]]
+- [[17-系统基础/06-知识字典/networking/submariner.md|Submariner 多集群]]
 

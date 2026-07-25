@@ -41,7 +41,7 @@ prerequisites:
 
 # kops v1.5 Release Notes
 
-Source: [1.5.3](https://github.[[实体/kubernetes.md|kubernetes]]/kops/releases/tag/1.5.3)
+Source: [1.5.3](https://github.[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]/kops/releases/tag/1.5.3)
 
 * **Important for Terraform Users** Make ELB naming unambiguous by including the full cluster name.  This will cause the ELBs to be recreated if using Terraform with private topologies, causing disruption of external access to the API and of external access to the bastion (if enabled).  Expected disruption is less than 5 minutes.  Use `export KOPS_FEATURE_FLAGS=+UseLegacyELBName` to keep the legacy naming and avoid disruption.  Fix #1899
 

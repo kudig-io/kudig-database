@@ -99,10 +99,10 @@ related_docs:
 
 ### 🔗 关联故障排查文档
 - **[01-API Server故障排查](./01-control-plane-apiserver-troubleshooting.md)** - etcd是API Server的核心存储依赖
-- **[31-备份恢复故障排查](./31-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
-- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
-- **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
-- **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
+- **[31-备份恢复故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/31-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
+- **[34-升级迁移故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/34-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
+- **[33-性能瓶颈故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/33-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
+- **[39-企业级监控告警体系](../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/39-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
 
 ### 📚 扩展学习资料
 - **[etcd官方文档](https://etcd.io/docs/)** - etcd完整技术文档

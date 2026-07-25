@@ -330,7 +330,7 @@ CI/CD 流水线
 ## Obsidian 相关文档
 
 - domain-22-container-image-management MOC
-- [[容器运行时/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
+- [[14-容器运行时/README.md|Domain 13: 容器镜像管理 (Container Image Management)]]
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践
 - JFrog Artifactory Enterprise Container Registry Platform

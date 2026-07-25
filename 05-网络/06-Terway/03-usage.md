@@ -1099,22 +1099,22 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 
 | 文档 | 说明 |
 |:---|:---|
-| [网络/05-terway-advanced-guide.md](../网络/05-terway-advanced-guide.md) | Terway 高级指南（模式对比、ENIIP 详解、容量规划） |
-| [网络/37-terway-resources-crud-operations.md](../网络/37-terway-resources-crud-operations.md) | CRD 完整 CRUD 操作 |
-| [网络/38-terway-gc-mechanism.md](../网络/38-terway-gc-mechanism.md) | GC 垃圾回收机制详解 |
+| [网络/05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) | Terway 高级指南（模式对比、ENIIP 详解、容量规划） |
+| [网络/37-terway-resources-crud-operations.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) | CRD 完整 CRUD 操作 |
+| [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) | GC 垃圾回收机制详解 |
 | [云厂商/04-alicloud-ack/242-ack-vpc-network.md](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) | VPC 网络规划参考 |
-| [网络/16-networkpolicy-deep-practice.md](../网络/16-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
-| [网络/02-cni-architecture-fundamentals.md](../网络/02-cni-architecture-fundamentals.md) | CNI 架构基础 |
-| [网络/03-cni-plugins-comparison.md](../网络/03-cni-plugins-comparison.md) | CNI 插件对比选型 |
+| [网络/16-networkpolicy-deep-practice.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/16-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
+| [网络/02-cni-architecture-fundamentals.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) | CNI 架构基础 |
+| [网络/03-cni-plugins-comparison.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) | CNI 插件对比选型 |
 
 ### 13.3 Topic 专题
 
 | 文档 | 说明 |
 |:---|:---|
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训 |
-| [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md) | Day 24: Terway CNI 入门 |
-| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../故障诊断/高级排障/03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
-| [故障诊断/FTA故障树/list/terway-fta.md](../故障诊断/FTA故障树/list/terway-fta.md) | FTA 故障树 |
+| [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../../26-%E6%8A%80%E8%83%BD/04-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/pod/%E5%9F%B9%E8%AE%AD/inner-training/week-4-network-storage/day-24-terway-cni.md) | Day 24: Terway CNI 入门 |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) | 结构化故障排查 |
+| [故障诊断/FTA故障树/list/terway-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) | FTA 故障树 |
 
 ---
 

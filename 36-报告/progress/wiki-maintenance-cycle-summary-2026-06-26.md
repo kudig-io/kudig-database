@@ -74,7 +74,7 @@ last_updated: 2026-06-26
 
 ### 主要修复类型
 
-1. **概念链接规范化**：`[[Container Runtime]]` → `[[概念/container-runtime.md|Container Runtime]]`
+1. **概念链接规范化**：`[[Container Runtime]]` → `[[22-概念/15-运行时与系统/container-runtime.md|Container Runtime]]`
 2. **_meta/_reports 链接转文本**：报告和日志引用转为纯文本
 3. **YAML/TOML 伪链接清理**：`[[kind: Deployment]]` → `` `kind: Deployment` ``
 4. **relationships 字段修复**：清理 display text、无效 type、不存在目标

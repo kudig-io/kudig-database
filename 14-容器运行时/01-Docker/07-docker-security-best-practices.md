@@ -248,7 +248,7 @@ docker run --rm --net host --pid host \
 
 ## 相关文档
 
-- [200-docker-architecture-overview](./200-docker-architecture-overview.md)
+- [200-docker-architecture-overview](01-docker-architecture-overview.md)
 - [217-linux-container-fundamentals](./217-linux-container-fundamentals.md)
 
 ## 故障排查

@@ -155,10 +155,10 @@ Week 4: 网络与存储 (进阶)
 
 | Day | 主题 | 文件 |
 |:---:|------|------|
-| Day 8 | K8s RBAC 权限配置实操 | [day-08-rbac/01-rbac-hands-on.md](./day-08-rbac/01-rbac-hands-on.md) |
-| Day 9 | K8s 审计日志配置与分析实操 | [day-09-audit-logs/01-audit-logs-hands-on.md](./day-09-audit-logs/01-audit-logs-hands-on.md) |
-| Day 10 | K8s 集群监控体系搭建实操 | [day-10-cluster-monitoring/01-cluster-monitoring-hands-on.md](./day-10-cluster-monitoring/01-cluster-monitoring-hands-on.md) |
-| Day 11 | K8s 安全风险识别与防护实操 | [day-11-risk-assessment/01-risk-assessment-hands-on.md](./day-11-risk-assessment/01-risk-assessment-hands-on.md) |
+| Day 8 | K8s RBAC 权限配置实操 | [day-08-rbac/01-rbac-hands-on.md](../../../07-%E5%AE%89%E5%85%A8/rbac/%E5%9F%B9%E8%AE%AD/day-08-rbac/01-rbac-hands-on.md) |
+| Day 9 | K8s 审计日志配置与分析实操 | [day-09-audit-logs/01-audit-logs-hands-on.md](../../../07-%E5%AE%89%E5%85%A8/rbac/%E5%9F%B9%E8%AE%AD/day-09-audit-logs/01-audit-logs-hands-on.md) |
+| Day 10 | K8s 集群监控体系搭建实操 | [day-10-cluster-monitoring/01-cluster-monitoring-hands-on.md](../../../08-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/monitoring/%E5%9F%B9%E8%AE%AD/day-10-cluster-monitoring/01-cluster-monitoring-hands-on.md) |
+| Day 11 | K8s 安全风险识别与防护实操 | [day-11-risk-assessment/01-risk-assessment-hands-on.md](../../../07-%E5%AE%89%E5%85%A8/rbac/%E5%9F%B9%E8%AE%AD/day-11-risk-assessment/01-risk-assessment-hands-on.md) |
 
 **本周产出**: 能够配置集群 RBAC 权限、识别安全风险、搭建基础监控
 
@@ -170,13 +170,13 @@ Week 4: 网络与存储 (进阶)
 
 | Day | 主题 | 文件 |
 |:---:|------|------|
-| Day 15 | Node 节点基础实操 | [day-15-node-basics/01-node-basics-hands-on.md](./day-15-node-basics/01-node-basics-hands-on.md) |
-| Day 16 | Node 节点进阶实操 | [day-16-node-advanced/01-node-advanced-hands-on.md](./day-16-node-advanced/01-node-advanced-hands-on.md) |
-| Day 17 | 节点池基础实操 | [day-17-nodepool/01-nodepool-basics-hands-on.md](./day-17-nodepool/01-nodepool-basics-hands-on.md) |
-| Day 18 | 节点池进阶实操 | [day-18-nodepool-advanced/01-nodepool-advanced-hands-on.md](./day-18-nodepool-advanced/01-nodepool-advanced-hands-on.md) |
+| Day 15 | Node 节点基础实操 | [day-15-node-basics/01-node-basics-hands-on.md](../../../03-%E8%8A%82%E7%82%B9/node/%E5%9F%B9%E8%AE%AD/day-15-node-basics/01-node-basics-hands-on.md) |
+| Day 16 | Node 节点进阶实操 | [day-16-node-advanced/01-node-advanced-hands-on.md](../../../03-%E8%8A%82%E7%82%B9/node/%E5%9F%B9%E8%AE%AD/day-16-node-advanced/01-node-advanced-hands-on.md) |
+| Day 17 | 节点池基础实操 | [day-17-nodepool/01-nodepool-basics-hands-on.md](../../../03-%E8%8A%82%E7%82%B9/nodepool/%E5%9F%B9%E8%AE%AD/day-17-nodepool/01-nodepool-basics-hands-on.md) |
+| Day 18 | 节点池进阶实操 | [day-18-nodepool-advanced/01-nodepool-advanced-hands-on.md](../../../03-%E8%8A%82%E7%82%B9/nodepool/%E5%9F%B9%E8%AE%AD/day-18-nodepool-advanced/01-nodepool-advanced-hands-on.md) |
 | Day 19 | Pod 容器组基础实操 | [day-19-pod-basics/01-pod-basics-hands-on.md](./day-19-pod-basics/01-pod-basics-hands-on.md) |
 | Day 20 | Pod 容器组进阶实操 | [day-20-pod-advanced/01-pod-advanced-hands-on.md](./day-20-pod-advanced/01-pod-advanced-hands-on.md) |
-| Day 21 | K8s 组件运维实操 | [day-21-component-ops/01-component-ops-hands-on.md](./day-21-component-ops/01-component-ops-hands-on.md) |
+| Day 21 | K8s 组件运维实操 | [day-21-component-ops/01-component-ops-hands-on.md](../../../01-%E9%9B%86%E7%BE%A4%E8%BF%90%E7%BB%B4/cluster-upgrade/%E5%9F%B9%E8%AE%AD/day-21-component-ops/01-component-ops-hands-on.md) |
 
 **本周产出**: 能够管理节点池、排查 Pod 问题、维护 K8s 核心组件
 
@@ -188,12 +188,12 @@ Week 4: 网络与存储 (进阶)
 
 | Day | 主题 | 文件 |
 |:---:|------|------|
-| Day 22 | [[Service|Service]] 基础实操 | [day-22-service-basics/01-service-basics-hands-on.md](./day-22-service-basics/01-service-basics-hands-on.md) |
-| Day 23 | [[Ingress|Ingress]] 实操 | [day-23-ingress/01-ingress-hands-on.md](./day-23-ingress/01-ingress-hands-on.md) |
-| Day 24 | Terway 网络实操 | [day-24-terway/01-terway-hands-on.md](./day-24-terway/01-terway-hands-on.md) |
-| Day 25 | Flannel 网络实操 | [day-25-flannel/01-flannel-hands-on.md](./day-25-flannel/01-flannel-hands-on.md) |
-| Day 26 | 存储卷创建与删除实操 | [day-26-pvc-create/01-pvc-create-hands-on.md](./day-26-pvc-create/01-pvc-create-hands-on.md) |
-| Day 27 | 存储卷挂载实操 | [day-27-pvc-mount/01-pvc-mount-hands-on.md](./day-27-pvc-mount/01-pvc-mount-hands-on.md) |
+| Day 22 | [[Service|Service]] 基础实操 | [day-22-service-basics/01-service-basics-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/service/%E5%9F%B9%E8%AE%AD/day-22-service-basics/01-service-basics-hands-on.md) |
+| Day 23 | [[Ingress|Ingress]] 实操 | [day-23-ingress/01-ingress-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/ingress/%E5%9F%B9%E8%AE%AD/day-23-ingress/01-ingress-hands-on.md) |
+| Day 24 | Terway 网络实操 | [day-24-terway/01-terway-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/cni/%E5%9F%B9%E8%AE%AD/day-24-terway/01-terway-hands-on.md) |
+| Day 25 | Flannel 网络实操 | [day-25-flannel/01-flannel-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/cni/%E5%9F%B9%E8%AE%AD/day-25-flannel/01-flannel-hands-on.md) |
+| Day 26 | 存储卷创建与删除实操 | [day-26-pvc-create/01-pvc-create-hands-on.md](../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/day-26-pvc-create/01-pvc-create-hands-on.md) |
+| Day 27 | 存储卷挂载实操 | [day-27-pvc-mount/01-pvc-mount-hands-on.md](../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/day-27-pvc-mount/01-pvc-mount-hands-on.md) |
 | Day 28 | 综合复习与实践 | [day-28-comprehensive-review/01-comprehensive-review.md](./day-28-comprehensive-review/01-comprehensive-review.md) |
 
 **本周产出**: 能够配置 Service/Ingress、排查网络问题、管理存储卷

@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[报告/quality/ENTERPRISE_BEST_PRACTICES.md|Enterprise Best Practices]]
-- [[报告/quality/QUALITY_REPORT.md|Quality Report]]
-- [[报告/quality/QUALITY_REPORT_v2.0.md|Quality Report V2.0]]
-- [[报告/quality/QUALITY_REPORT_v3.0.md|Quality Report V3.0]]
-- [[报告/quality/QUALITY_REPORT_v4.0.md|Quality Report V4.0]]
+- [[36-报告/quality/ENTERPRISE_BEST_PRACTICES.md|Enterprise Best Practices]]
+- [[36-报告/quality/QUALITY_REPORT.md|Quality Report]]
+- [[36-报告/quality/QUALITY_REPORT_v2.0.md|Quality Report V2.0]]
+- [[36-报告/quality/QUALITY_REPORT_v3.0.md|Quality Report V3.0]]
+- [[36-报告/quality/QUALITY_REPORT_v4.0.md|Quality Report V4.0]]
 - [[36-报告/quality/00-概念目录体检报告-2026-07-23.md|00-概念目录体检报告-2026-07-23]]
 

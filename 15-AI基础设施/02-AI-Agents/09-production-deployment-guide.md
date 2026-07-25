@@ -1027,7 +1027,7 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 多 Worker Pod 的协同 |
 | [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | Prometheus 指标和 Langfuse |
 | [11 - 成本优化](./11-cost-latency-optimization.md) | 资源配额和成本控制 |
-| [AI基础设施/17-llm-inference-serving.md](../AI基础设施/17-llm-inference-serving.md) | vLLM/TGI 推理服务详情 |
+| [AI基础设施/17-llm-inference-serving.md](../01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/17-llm-inference-serving.md) | vLLM/TGI 推理服务详情 |
 | [工作负载](../工作负载/) | K8s Deployment 最佳实践 |
 | [domain-32-yaml-manifests](../清单模式/) | 完整 YAML 模板参考 |
 

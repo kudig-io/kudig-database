@@ -104,7 +104,7 @@ authors:
 ## Obsidian 相关文档
 
 - 安全 MOC
-- [[安全/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
+- [[08-安全/README.md|Domain 05: 供应链安全 (Supply Chain Security)]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)
 - SBOM 生成与管理 (SBOM Generation and Management)
@@ -119,10 +119,10 @@ authors:
 ## See Also
 
 - [[安全/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-25.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-25.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-25.md|MOC-from-安全]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

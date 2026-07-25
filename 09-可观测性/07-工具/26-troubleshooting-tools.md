@@ -1547,7 +1547,7 @@ kubectl logs -l app=<label> --all-containers
 
 ---
 
-**相关文档**: [101-性能分析工具](101-performance-profiling-tools.md) | [98-日志聚合工具](98-log-aggregation-tools.md) | [97-可观测性工具](97-observability-tools.md)
+**相关文档**: [101-性能分析工具](27-performance-profiling-tools.md) | [98-日志聚合工具](98-log-aggregation-tools.md) | [97-可观测性工具](97-observability-tools.md)
 
 **版本**: K9s 0.31+ | Stern 1.28+ | Telepresence 2.17+ | Netshoot latest
 

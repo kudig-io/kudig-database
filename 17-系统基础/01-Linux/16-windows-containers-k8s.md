@@ -439,6 +439,6 @@ Get-EventLog -LogName Application -Newest 20 -EntryType Error
 - [[17-系统基础/01-Linux/08-linux-container-fundamentals|Linux 容器基础]]
 - [[14-容器运行时/03-containerd-CRI-O/01-containerd-production-operations|containerd 生产运维]]
 - [[01-集群基础/节点管理|节点管理]]
-- [[05-网络/cni-plugins|CNI 插件]]
+- [[23-实体/02-K8s核心组件/cni-plugins|CNI 插件]]
 - [[10-平台工程/03-治理/17-multi-tenant-management|多租户管理]]
 - [[17-系统基础/01-Linux/14-arm-architecture-k8s-optimization|ARM 架构优化]]

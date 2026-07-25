@@ -123,13 +123,13 @@ last_updated: 2026-05-21
 
 #### OpenClaw 工作空间
 
-- [[AI基础设施/02-ai-agents/openclaw-workspace/AGENTS.md|AGENTS]] — AGENTS
-- [[AI基础设施/02-ai-agents/openclaw-workspace/IDENTITY.md|IDENTITY]] — IDENTITY
-- [[AI基础设施/02-ai-agents/openclaw-workspace/MEMORY.md|MEMORY]] — MEMORY
-- [[AI基础设施/02-ai-agents/openclaw-workspace/SKILL.md|SKILL]] — SKILL
-- [[AI基础设施/02-ai-agents/openclaw-workspace/SOUL.md|SOUL]] — SOUL
-- [[AI基础设施/02-ai-agents/openclaw-workspace/TOOLS.md|TOOLS]] — TOOLS
-- [[AI基础设施/02-ai-agents/openclaw-workspace/USER.md|USER]] — USER
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/AGENTS.md|AGENTS]] — AGENTS
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/IDENTITY.md|IDENTITY]] — IDENTITY
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/MEMORY.md|MEMORY]] — MEMORY
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md|SKILL]] — SKILL
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/SOUL.md|SOUL]] — SOUL
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/TOOLS.md|TOOLS]] — TOOLS
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/USER.md|USER]] — USER
 
 ### 98 Merged Indexes
 
@@ -197,13 +197,13 @@ last_updated: 2026-05-21
 
 #### OpenClaw 工作空间
 
-- [[AI基础设施/02-ai-agents/openclaw-workspace/AGENTS.md|AGENTS]] — AGENTS
-- [[AI基础设施/02-ai-agents/openclaw-workspace/IDENTITY.md|IDENTITY]] — IDENTITY
-- [[AI基础设施/02-ai-agents/openclaw-workspace/MEMORY.md|MEMORY]] — MEMORY
-- [[AI基础设施/02-ai-agents/openclaw-workspace/SKILL.md|SKILL]] — SKILL
-- [[AI基础设施/02-ai-agents/openclaw-workspace/SOUL.md|SOUL]] — SOUL
-- [[AI基础设施/02-ai-agents/openclaw-workspace/TOOLS.md|TOOLS]] — TOOLS
-- [[AI基础设施/02-ai-agents/openclaw-workspace/USER.md|USER]] — USER
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/AGENTS.md|AGENTS]] — AGENTS
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/IDENTITY.md|IDENTITY]] — IDENTITY
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/MEMORY.md|MEMORY]] — MEMORY
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md|SKILL]] — SKILL
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/SOUL.md|SOUL]] — SOUL
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/TOOLS.md|TOOLS]] — TOOLS
+- [[15-AI基础设施/02-AI-Agents/openclaw-workspace/USER.md|USER]] — USER
 
 ### AI 编程工具
 

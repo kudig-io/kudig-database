@@ -96,7 +96,7 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 | 集群架构、安装与配置 | 25% | kubeadm 安装、升级、高可用、[[etcd|etcd]] 备份恢复 | [domain-01/06-upgrade-paths](../../集群基础/升级路径/) |
 | 工作负载与调度 | 15% | Pod、Deployment、DaemonSet、Job、调度规则 | [fundamentals/02-15](../fundamentals/) |
 | 服务与网络 | 20% | Service、Ingress、NetworkPolicy、CoreDNS、CNI | [domain-03/00-core-k8s-networking](../../网络/K8s网络核心/) |
-| 存储 | 10% | PV、PVC、StorageClass、Volume 模式 | [fundamentals/08-pv-pvc-basics.md](../fundamentals/08-pv-pvc-basics.md) |
+| 存储 | 10% | PV、PVC、StorageClass、Volume 模式 | [fundamentals/08-pv-pvc-basics.md](../../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/08-pv-pvc-basics.md) |
 | 故障排查 | 30% | 节点问题、Pod 排障、网络排障、组件排障 | [故障诊断](../../故障诊断/) |
 
 > 📌 **考试真相**: 故障排查占 30%，是最大头。也是工作中最值钱的技能。

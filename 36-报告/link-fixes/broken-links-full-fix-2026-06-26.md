@@ -31,20 +31,20 @@ last_updated: 2026-06-26
 
 | Source | Original | Replacement | Confidence |
 |---|---|---|---|
-| `_reports/wiki-lint-audit-2026-06-26.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
+| `_reports/wiki-lint-audit-2026-06-26.md` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
 | `_reports/wiki-lint-audit-2026-06-26.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `_reports/wiki-lint-audit-2026-06-26.md` | `artifact hub` | `系统基础/topic-dictionary/tooling/artifact-hub.md` | exact |
 | `_reports/wiki-lint-audit-2026-06-26.md` | `virtual kubelet` | `系统基础/topic-dictionary/fundamentals/virtual-kubelet.md` | exact |
 | `_reports/wiki-lint-audit-2026-06-26.md` | `operator framework` | `系统基础/topic-dictionary/platform-engineering/operator-framework.md` | exact |
 | `_reports/wiki-lint-audit-2026-06-26.md` | `connect rpc` | `系统基础/topic-dictionary/networking/connect-rpc.md` | exact |
-| `_reports/wiki-lint-audit-2026-06-26.md` | `[[实体/oscal-compass.md|oscal compass]]` | `[[实体/oscal-compass.md|oscal compass]]` | exact |
-| `_reports/broken-links-fix-2026-06-26.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
+| `_reports/wiki-lint-audit-2026-06-26.md` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | exact |
+| `_reports/broken-links-fix-2026-06-26.md` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
 | `_reports/broken-links-fix-2026-06-26.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `_reports/broken-links-fix-2026-06-26.md` | `artifact hub` | `系统基础/topic-dictionary/tooling/artifact-hub.md` | exact |
 | `_reports/broken-links-fix-2026-06-26.md` | `virtual kubelet` | `系统基础/topic-dictionary/fundamentals/virtual-kubelet.md` | exact |
 | `_reports/broken-links-fix-2026-06-26.md` | `operator framework` | `系统基础/topic-dictionary/platform-engineering/operator-framework.md` | exact |
 | `_reports/broken-links-fix-2026-06-26.md` | `connect rpc` | `系统基础/topic-dictionary/networking/connect-rpc.md` | exact |
-| `_reports/broken-links-fix-2026-06-26.md` | `[[实体/oscal-compass.md|oscal compass]]` | `[[实体/oscal-compass.md|oscal compass]]` | exact |
+| `_reports/broken-links-fix-2026-06-26.md` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | exact |
 | `_meta/_insights.md` | `kubernetes` | `系统基础/topic-dictionary/fundamentals/kubernetes.md` | fuzzy |
 | `_meta/_insights.md` | `prometheus` | `系统基础/topic-dictionary/observability/prometheus.md` | fuzzy |
 | `_meta/_insights.md` | `etcd` | `系统基础/topic-dictionary/fundamentals/etcd.md` | fuzzy |
@@ -72,7 +72,7 @@ last_updated: 2026-06-26
 | `entities/coredns.md` | `notary project` | `系统基础/topic-dictionary/security/notary-project.md` | exact |
 | `entities/cncf-storage.md` | `piraeus datastore` | `系统基础/topic-dictionary/storage/piraeus-datastore.md` | exact |
 | `entities/cncf-security.md` | `notary project` | `系统基础/topic-dictionary/security/notary-project.md` | exact |
-| `entities/flatcar.md` | `[[实体/serverless-devs.md|serverless devs]]` | `[[实体/serverless-devs.md|serverless devs]]` | exact |
+| `entities/flatcar.md` | `[[23-实体/09-编排调度/serverless-devs.md|serverless devs]]` | `[[23-实体/09-编排调度/serverless-devs.md|serverless devs]]` | exact |
 | `entities/serverless-devs.md` | `oauth2 proxy` | `系统基础/topic-dictionary/security/oauth2-proxy.md` | exact |
 | `entities/opa.md` | `oauth2 proxy` | `系统基础/topic-dictionary/security/oauth2-proxy.md` | exact |
 | `entities/composefs.md` | `oauth2 proxy` | `系统基础/topic-dictionary/security/oauth2-proxy.md` | exact |
@@ -93,7 +93,7 @@ last_updated: 2026-06-26
 | `entities/serverless-workflow.md` | `confidential containers` | `系统基础/topic-dictionary/security/confidential-containers.md` | exact |
 | `entities/bootc.md` | `confidential containers` | `系统基础/topic-dictionary/security/confidential-containers.md` | exact |
 | `entities/confidential-containers.md` | `confidential containers` | `系统基础/topic-dictionary/security/confidential-containers.md` | exact |
-| `entities/cncf-edge-ai.md` | `[[实体/serverless-devs.md|serverless devs]]` | `[[实体/serverless-devs.md|serverless devs]]` | exact |
+| `entities/cncf-edge-ai.md` | `[[23-实体/09-编排调度/serverless-devs.md|serverless devs]]` | `[[23-实体/09-编排调度/serverless-devs.md|serverless devs]]` | exact |
 | `entities/cncf-edge-ai.md` | `serverless workflow` | `系统基础/topic-dictionary/workloads/serverless-workflow.md` | exact |
 | `entities/akri.md` | `podman desktop` | `系统基础/topic-dictionary/tooling/podman-desktop.md` | exact |
 | `entities/spire.md` | `podman desktop` | `系统基础/topic-dictionary/tooling/podman-desktop.md` | exact |
@@ -116,7 +116,7 @@ last_updated: 2026-06-26
 | `网络/00-core-k8s-networking/45-terway-testing-validation.md` | `aeraki mesh` | `系统基础/topic-dictionary/networking/aeraki-mesh.md` | exact |
 | `系统基础/topic-dictionary/operations/chaos-engineering.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `故障诊断/topic-fta/appendix-b-tools-and-resources.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
-| `故障诊断/00-core-troubleshooting/00-open-source-projects-index-from-domain-12.md` | `[[实体/inspektor-gadget.md|inspektor gadget]]` | `[[实体/inspektor-gadget.md|inspektor gadget]]` | exact |
+| `故障诊断/00-core-troubleshooting/00-open-source-projects-index-from-domain-12.md` | `[[23-实体/07-可观测性/inspektor-gadget.md|inspektor gadget]]` | `[[23-实体/07-可观测性/inspektor-gadget.md|inspektor gadget]]` | exact |
 | `生态参考/01-cncf-landscape/03-cncf-selection-guide.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `生态参考/02-papers/15-kubernetes-chaos-engineering-fault-injection-testing.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `生态参考/_archived-release-notes/core-deps/cri-o/RELEASE-NOTES-0.1.md` | `pod lifecycle` | `系统基础/topic-dictionary/workloads/pod-lifecycle.md` | exact |
@@ -129,7 +129,7 @@ last_updated: 2026-06-26
 | `_reports/obsidian-wiki-skills-evaluation-2026-05-24.md` | `'current_density', ...` |
 | `_meta/_insights.md` | `kubernetes` |
 | `_meta/_insights.md` | `k8s` |
-| `_meta/_insights.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` |
+| `_meta/_insights.md` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` |
 | `_meta/_insights.md` | `go` |
 | `_meta/_insights.md` | `etcd index` |
 | `_meta/_insights.md` | `containerd` |

@@ -93,7 +93,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 集群基础 MOC
-- [[集群基础/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
+- [[01-集群基础/README.md|Domain-2: Kubernetes 设计原则与核心机制]]
 - Kubernetes 设计原则与哲学
 - 声明式 API 与面向终态设计
 - 控制器模式与调谐循环

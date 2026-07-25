@@ -49,7 +49,7 @@ The second patch release for containerd 2.2 contains various fixes and improveme
 
 ### Highlights
 
-#### [[概念/container-runtime.md|Container Runtime]] Interface (CRI)
+#### [[22-概念/15-运行时与系统/container-runtime.md|Container Runtime]] Interface (CRI)
 
 * Fix migrated CRI image config when using legacy registry mirrors ([#12987](https://github.com/containerd/containerd/pull/12987))
 * Unpack images with per-layer labels for runtime-specific snapshotters ([#12936](https://github.com/containerd/containerd/pull/12936))

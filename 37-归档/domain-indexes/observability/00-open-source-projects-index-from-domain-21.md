@@ -312,7 +312,7 @@ Fluentd 的轻量级替代品，C 语言编写：
 ## Obsidian 相关文档
 
 - domain-21-logging-management-analytics MOC
-- [[可观测性/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
+- [[09-可观测性/README.md|Domain 06: 日志管理与分析 (Logging Management & Analytics)]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
 - Loki Enterprise Log Aggregation and Analytics Platform
@@ -325,11 +325,11 @@ Fluentd 的轻量级替代品，C 语言编写：
 
 ## See Also
 
-- [[可观测性/07-tools/27-performance-profiling-tools.md|27-performance-profiling-tools]]
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-20.md|00-open-source-projects-index-from-可观测性]]
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
-- [[可观测性/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
+- [[09-可观测性/07-工具/27-performance-profiling-tools.md|27-performance-profiling-tools]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-20.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

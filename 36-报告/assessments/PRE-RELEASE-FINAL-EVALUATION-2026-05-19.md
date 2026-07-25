@@ -234,7 +234,7 @@ prerequisites:
 | domain-22-container-image-management | 10 | 7,384 |
 | 发布变更 | 14 | 15,336 |
 | domain-24-infrastructure-as-code | 8 | 6,020 |
-| domain-25-[[系统基础/知识字典/security/cloud-native-security.md|cloud-native-security]] | 17 | 18,276 |
+| domain-25-[[17-系统基础/06-知识字典/security/cloud-native-security.md|cloud-native-security]] | 17 | 18,276 |
 | 网络 | 15 | 15,976 |
 | domain-27-multi-cloud-hybrid | 12 | 15,164 |
 | domain-28-enterprise-database-middleware | 11 | 10,401 |

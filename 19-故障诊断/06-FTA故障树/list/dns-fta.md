@@ -1749,9 +1749,9 @@ flowchart TD
 
 ## Related
 
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
-- [[21-生态参考/topic-index/network-index|Network 网络知识图谱索引]]
-- [[21-生态参考/topic-index/dns-index|DNS 知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/network-index|Network 网络知识图谱索引]]
+- [[21-生态参考/03-领域索引/dns-index|DNS 知识图谱索引]]
 
 
 <!-- risk-assessed -->

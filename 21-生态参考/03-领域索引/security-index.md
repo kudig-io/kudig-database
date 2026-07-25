@@ -97,10 +97,10 @@ prerequisites:
 - [[19-故障诊断/02-资源排障/12-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
 - [[19-故障诊断/02-资源排障/13-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
 - [[19-故障诊断/03-基础设施排障/32-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
-- [[19-故障诊断/04-高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
-- [[19-故障诊断/04-高级排障/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
-- [[19-故障诊断/04-高级排障/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
-- [[19-故障诊断/04-高级排障/06-security-auth/04-audit-logging-troubleshooting.md|审计日志故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/04-audit-logging-troubleshooting.md|审计日志故障排查指南]]
 
 ### YAML 配置参考
 

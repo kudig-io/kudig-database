@@ -240,10 +240,10 @@ Pod 的 `status.conditions` 中对应 `conditionType` 必须为 `True` 才算 Re
 
 ## 7. 跨域协作
 
-- **Pod 调度与拓扑分布**: 见 [[生产模式/scheduling-topology-patterns|调度与拓扑分布模式]]
-- **资源 QoS 与 right-sizing**: 见 [[生产模式/resource-qos-rightsizing|资源 QoS 与 Right-sizing]]
-- **状态ful 应用备份恢复**: 见 [[生产模式/stateful-app-patterns|状态ful 应用生产模式]]
-- **应用级排障 Runbook**: 见 [[生产模式/application-runbooks|应用排障 Runbook]]
+- **Pod 调度与拓扑分布**: 见 [[04-应用模式/03-生产模式/scheduling-topology-patterns|调度与拓扑分布模式]]
+- **资源 QoS 与 right-sizing**: 见 [[04-应用模式/03-生产模式/resource-qos-rightsizing|资源 QoS 与 Right-sizing]]
+- **状态ful 应用备份恢复**: 见 [[04-应用模式/03-生产模式/stateful-app-patterns|状态ful 应用生产模式]]
+- **应用级排障 Runbook**: 见 [[04-应用模式/03-生产模式/application-runbooks|应用排障 Runbook]]
 
 
 <!-- risk-assessed -->

@@ -318,8 +318,8 @@ mkdir -p ~/.config/opencode/themes
 
 | 文档 | 关系 |
 |------|------|
-| [02 - 安装部署](./02-opencode-installation-quickstart.md) | 终端要求与 Truecolor |
-| [01 - 概述与架构](./01-opencode-overview-architecture.md) | TUI 在架构中的位置 |
+| [02 - 安装部署](22-opencode-installation-quickstart.md) | 终端要求与 Truecolor |
+| [01 - 概述与架构](21-opencode-overview-architecture.md) | TUI 在架构中的位置 |
 
 ---
 

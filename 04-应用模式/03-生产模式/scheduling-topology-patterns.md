@@ -231,8 +231,8 @@ strategies:
 
 ## 7. 跨域协作
 
-- **Pod 可用性与 PDB**: 见 [[生产模式/pod-availability-lifecycle|Pod 可用性生产模式]]
-- **资源 QoS 与 right-sizing**: 见 [[生产模式/resource-qos-rightsizing|资源 QoS 与 Right-sizing]]
+- **Pod 可用性与 PDB**: 见 [[04-应用模式/03-生产模式/pod-availability-lifecycle|Pod 可用性生产模式]]
+- **资源 QoS 与 right-sizing**: 见 [[04-应用模式/03-生产模式/resource-qos-rightsizing|资源 QoS 与 Right-sizing]]
 - **HPA/VPA 弹性伸缩**: 见 `工作负载/00-core-workloads/21-hpa-vpa-autoscaling.md`
 - **Karpenter 节点供应**: 见 `集群基础/99-production-readiness-operations-guide.md`
 

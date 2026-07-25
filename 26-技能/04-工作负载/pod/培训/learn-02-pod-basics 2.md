@@ -401,7 +401,7 @@ kubectl logs <pod-name> --previous
 
 **关联文档**:
 - [../02-getting-started/](../02-getting-started/) — 快速入门
-- [../../故障诊断/topic-skills/01-node-notready.md](../../故障诊断/技能体系/01-node-notready.md) — 节点问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/01-node-notready.md](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/01-node-notready.md) — 节点问题 [[SKILL|Skill]]
 - [../../工作负载/](../../工作负载/) — 工作负载文档
 
 ## 相关概念
@@ -411,8 +411,8 @@ kubectl logs <pod-name> --previous
 
 ## Related
 
-- [[26-技能/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：[[Service|Service]] - 让应用可以被访问
-- [[26-技能/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
+- [[26-技能/05-网络/service/培训/learn-04-service-basics.md|learn-04-service-basics]] — 第四课：[[Service|Service]] - 让应用可以被访问
+- [[26-技能/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[docker]] — Docker
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

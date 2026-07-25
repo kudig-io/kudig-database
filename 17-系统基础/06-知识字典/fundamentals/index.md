@@ -491,8 +491,8 @@ A: 声明式（“我要什么”）而非命令式（“怎么做”）的优�
 
 ## Related
 
-- [[17-系统基础/06-知识字典/scheduling/kube-scheduler.md|kube-scheduler 调度]]
-- [[17-系统基础/06-知识字典/networking/kube-proxy.md|kube-proxy 网络]]
+- [[17-系统基础/06-知识字典/fundamentals/kube-scheduler.md|kube-scheduler 调度]]
+- [[17-系统基础/06-知识字典/fundamentals/kube-proxy.md|kube-proxy 网络]]
 - [[17-系统基础/06-知识字典/security/rbac.md|RBAC 权限]]
 - [[17-系统基础/06-知识字典/platform-engineering/operator-pattern.md|Operator 模式]]
 

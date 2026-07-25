@@ -85,4 +85,4 @@ lifecycle_changed: '2026-06-26'
 - [[14-容器运行时/03-containerd-CRI-O/02-cri-o-production-guide.md|02 cri o production guide]]
 - [[14-容器运行时/04-镜像构建/01-buildkit-production-guide.md|01 buildkit production guide]]
 - [[21-生态参考/03-领域索引/README.md|README]]
-- [[13-生产运维/03-事件响应/02-container-runtime-threat-response.md|02 container runtime threat response]]
+- [[13-生产运维/03-事件响应/06-container-runtime-threat-response.md|02 container runtime threat response]]

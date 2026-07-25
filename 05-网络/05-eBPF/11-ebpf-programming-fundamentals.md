@@ -490,9 +490,9 @@ sudo ./minimal  # 运行
 
 ## Related
 
-- [[05-网络/05-eBPF/02-ebpf-observability-tools|eBPF 可观测工具]]
-- [[05-网络/05-eBPF/03-ebpf-networking-applications|eBPF 网络应用]]
-- [[05-网络/05-eBPF/04-ebpf-security-runtime|eBPF 安全运行时]]
+- [[05-网络/05-eBPF/12-ebpf-observability-tools|eBPF 可观测工具]]
+- [[05-网络/05-eBPF/13-ebpf-networking-applications|eBPF 网络应用]]
+- [[05-网络/05-eBPF/14-ebpf-security-runtime|eBPF 安全运行时]]
 
 ## See Also
 

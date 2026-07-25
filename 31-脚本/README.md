@@ -75,7 +75,7 @@ man kudig-stats
 man kudig-quality
 ```
 
-更多安装选项详见 [`man/INSTALL.md`](../man/INSTALL.md) 和 [`man/README.md`](../man/README.md)。
+更多安装选项详见 [`man/INSTALL.md`](man/INSTALL.md) 和 [`man/README.md`](man/README.md)。
 
 ## 其他工具
 

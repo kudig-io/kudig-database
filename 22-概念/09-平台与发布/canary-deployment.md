@@ -187,7 +187,7 @@ spec:
 - **Session 一致性问题**：用户请求在稳定版和金丝雀版之间随机切换，可能导致 session 不一致——使用基于 Cookie/header 的粘性路由
 - **金丝雀与稳定版数据库 schema 冲突**：如果金丝雀版本修改了数据库 schema，可能与稳定版不兼容——需要遵循兼容性扩展策略
 
-更多部署排错方法请参考 [[19-故障诊断/04-高级排障/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[22-概念/09-平台与发布/blue-green-deployment.md|blue-green-deployment]]。
+更多部署排错方法请参考 [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[22-概念/09-平台与发布/blue-green-deployment.md|blue-green-deployment]]。
 
 
 ## 源码实现分析

@@ -584,9 +584,9 @@ cluster-admin 拥有集群的完全控制权，包括删除 Namespace、修改 R
 
 ## 延伸阅读
 
-- [认证授权体系](../../安全/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
-- [安全架构总览](../../集群基础/14-security-architecture.md)
+- [认证授权体系](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/07-rbac-matrix-configuration.md)
+- [安全架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/14-security-architecture.md)
 - [ACK 安全管理](../../云厂商/04-alicloud-ack/270-ack-security.md)
 
 

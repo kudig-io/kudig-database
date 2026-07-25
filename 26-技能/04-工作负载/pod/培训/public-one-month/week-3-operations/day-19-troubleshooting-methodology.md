@@ -571,11 +571,11 @@ echo "========== 排查完毕 =========="
 ## 延伸阅读
 
 - [结构化故障排查框架](../../故障诊断/高级排障/README.md)
-- [FTA 核心原理](../../故障诊断/FTA故障树/04-fta-core-principles.md)
-- [FEBM 理论基础](../../故障诊断/FEBM方法论/01-febm-theory-foundations.md)
-- [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
-- [Node NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [FTA 核心原理](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/04-fta-core-principles.md)
+- [FEBM 理论基础](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/01-febm-theory-foundations.md)
+- [Pod Pending 诊断](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/05-pod-pending-diagnosis.md)
+- [Node NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
+- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
 
 ```
 

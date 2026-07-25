@@ -74,17 +74,17 @@ authors:
 
 | 指南 | 文件 | 说明 |
 |:-----|:-----|:-----|
-| 集成实践指南 | [01-cncf-integration-guide.md](./01-cncf-integration-guide.md) | 项目组合使用，最佳实践 |
-| 学习路径 | [02-cncf-learning-paths.md](./02-cncf-learning-paths.md) | 角色学习规划，认证备考 |
-| 项目选型指南 | [03-cncf-selection-guide.md](./03-cncf-selection-guide.md) | CNI/存储/监控等选型对比 |
-| FTA 故障树索引 | [04-cncf-fta-index.md](./04-cncf-fta-index.md) | 项目故障树和排障索引 |
+| 集成实践指南 | [01-cncf-integration-guide.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/01-cncf-integration-guide.md) | 项目组合使用，最佳实践 |
+| 学习路径 | [02-cncf-learning-paths.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/02-cncf-learning-paths.md) | 角色学习规划，认证备考 |
+| 项目选型指南 | [03-cncf-selection-guide.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/03-cncf-selection-guide.md) | CNI/存储/监控等选型对比 |
+| FTA 故障树索引 | [04-cncf-fta-index.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/04-cncf-fta-index.md) | 项目故障树和排障索引 |
 
 ---
 
 ## 全景索引
 
 完整项目列表请参见：
-- [根目录全景图谱](../OPEN-SOURCE-ECOSYSTEM.md)
+- [根目录全景图谱](../../../29-%E6%96%87%E6%A1%A3/ecosystem/OPEN-SOURCE-ECOSYSTEM.md)
 - [本域 README.md](README.md)
 
 ---
@@ -115,7 +115,7 @@ authors:
 ## Obsidian 相关文档
 
 - 生态参考 MOC
-- [[生态参考/README.md|Domain-34: CNCF Landscape 开源项目]]
+- [[21-生态参考/README.md|Domain-34: CNCF Landscape 开源项目]]
 - CNCF 集成实践指南
 - CNCF 学习路径
 - CNCF 项目选型指南

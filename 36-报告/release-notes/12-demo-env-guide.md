@@ -65,7 +65,7 @@ prerequisites:
 
 | 组件 | 版本要求 | 说明 |
 |------|---------|------|
-| [[实体/kubernetes.md|kubernetes]] | 1.28+ | 用于部署 Agent 和 RAG 系统 |
+| [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] | 1.28+ | 用于部署 Agent 和 RAG 系统 |
 | kubectl | 与集群版本匹配 | 集群管理 |
 | Helm | 3.12+ | 应用部署 |
 | Python | 3.10+ | RAG 系统运行环境 |

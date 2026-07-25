@@ -132,26 +132,26 @@ prerequisites:
 
 | 规范 | Release 副本 |
 |---|---|
-| CLAUDE Agent Context | [[release-sre/metadata/agent-specs/CLAUDE.md]] |
-| GEMINI Agent Context | [[release-sre/metadata/agent-specs/GEMINI.md]] |
-| P0-1 工单分类与意图识别 | [[release-sre/metadata/agent-specs/P0-1-ticket-classification-intent-recognition.md]] |
-| P0-2 多技能协同协议 | [[release-sre/metadata/agent-specs/P0-2-multi-skill-coordination-protocol.md]] |
-| P0-3 会话上下文管理 | [[release-sre/metadata/agent-specs/P0-3-session-context-management.md]] |
-| P0 知识图谱 RDF 模型 | [[release-sre/metadata/agent-specs/P0-Knowledge-Graph-RDF-Model.md]] |
-| P0 工具 Schema 定义 | [[release-sre/metadata/agent-specs/P0-Tool-Schema-Definition.md]] |
-| P1-4 决策树 Mermaid 规范 | [[release-sre/metadata/agent-specs/P1-4-Decision-Tree-Mermaid-Spec.md]] |
-| P1-4 决策树可视化 | [[release-sre/metadata/agent-specs/P1-4-decision-tree-mermaid-visualization.md]] |
-| P1-5 OnCall 速查卡 | [[release-sre/metadata/agent-specs/P1-5-oncall-quick-reference-card.md]] |
-| P1-6 告警到工单闭环 | [[release-sre/metadata/agent-specs/P1-6-alert-to-ticket-resolution-loop.md]] |
-| P1-7 反思机制 | [[release-sre/metadata/agent-specs/P1-7-Reflection-Mechanism.md]] |
-| P1-8 诊断基准测试 | [[release-sre/metadata/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md]] |
-| P2-7 AI/ML 工作负载排障 | [[release-sre/metadata/agent-specs/P2-7-ai-ml-workloads-troubleshooting.md]] |
-| P2-8 数据库中间件排障 | [[release-sre/metadata/agent-specs/P2-8-database-middleware-troubleshooting.md]] |
-| P2-9 非 K8s 基础设施排障 | [[release-sre/metadata/agent-specs/P2-9-non-k8s-infrastructure-troubleshooting.md]] |
-| P3-10 云厂商专项排障 | [[release-sre/metadata/agent-specs/P3-10-cloud-vendor-specific-troubleshooting.md]] |
-| P3-11 安全事件 SOP | [[release-sre/metadata/agent-specs/P3-11-security-incident-sop-compliance-checklist.md]] |
-| P3-12 多集群联邦排障 | [[release-sre/metadata/agent-specs/P3-12-multi-cluster-federation-troubleshooting.md]] |
-| Obsidian Wiki Agent Context | [[release-sre/metadata/agent-specs/obsidian-wiki-agent-context.md]] |
+| CLAUDE Agent Context | [[29-文档/agent-specs/CLAUDE.md]] |
+| GEMINI Agent Context | [[29-文档/agent-specs/GEMINI.md]] |
+| P0-1 工单分类与意图识别 | [[29-文档/agent-specs/P0-1-ticket-classification-intent-recognition.md]] |
+| P0-2 多技能协同协议 | [[29-文档/agent-specs/P0-2-multi-skill-coordination-protocol.md]] |
+| P0-3 会话上下文管理 | [[29-文档/agent-specs/P0-3-session-context-management.md]] |
+| P0 知识图谱 RDF 模型 | [[29-文档/agent-specs/P0-Knowledge-Graph-RDF-Model.md]] |
+| P0 工具 Schema 定义 | [[29-文档/agent-specs/P0-Tool-Schema-Definition.md]] |
+| P1-4 决策树 Mermaid 规范 | [[29-文档/agent-specs/P1-4-Decision-Tree-Mermaid-Spec.md]] |
+| P1-4 决策树可视化 | [[29-文档/agent-specs/P1-4-decision-tree-mermaid-visualization.md]] |
+| P1-5 OnCall 速查卡 | [[29-文档/agent-specs/P1-5-oncall-quick-reference-card.md]] |
+| P1-6 告警到工单闭环 | [[29-文档/agent-specs/P1-6-alert-to-ticket-resolution-loop.md]] |
+| P1-7 反思机制 | [[29-文档/agent-specs/P1-7-Reflection-Mechanism.md]] |
+| P1-8 诊断基准测试 | [[29-文档/agent-specs/P1-8-Agent-Diagnostic-Benchmark.md]] |
+| P2-7 AI/ML 工作负载排障 | [[29-文档/agent-specs/P2-7-ai-ml-workloads-troubleshooting.md]] |
+| P2-8 数据库中间件排障 | [[29-文档/agent-specs/P2-8-database-middleware-troubleshooting.md]] |
+| P2-9 非 K8s 基础设施排障 | [[29-文档/agent-specs/P2-9-non-k8s-infrastructure-troubleshooting.md]] |
+| P3-10 云厂商专项排障 | [[29-文档/agent-specs/P3-10-cloud-vendor-specific-troubleshooting.md]] |
+| P3-11 安全事件 SOP | [[29-文档/agent-specs/P3-11-security-incident-sop-compliance-checklist.md]] |
+| P3-12 多集群联邦排障 | [[29-文档/agent-specs/P3-12-multi-cluster-federation-troubleshooting.md]] |
+| Obsidian Wiki Agent Context | [[29-文档/agent-specs/obsidian-wiki-agent-context.md]] |
 
 ## Agent 规范使用指南
 

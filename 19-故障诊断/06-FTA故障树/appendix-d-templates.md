@@ -50,7 +50,7 @@ severity: high
 
 
 title: 附录 D：FTA 模板参考 (历史参考)
-description: '- [../fta-methodology-and-agentic-practices.md](../fta-methodology-and-agentic-practices.md)
+description: '- [../fta-methodology-and-agentic-practices.md](fta-methodology-and-agentic-practices.md)
   — FTA 方法论与 AI Agent 实践'
 category: fta
 tags:
@@ -92,7 +92,7 @@ k8s_versions:
 # 附录 D：FTA 模板参考 (历史参考)
 
 > **⚠️ 已废弃**: 本文件内容已合并至 `templates/fta-template.md`
-> **新模板位置**: [../../templates/fta-template.md](../../templates/fta-template.md)
+> **新模板位置**: [../../templates/fta-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/fta-template.md)
 > **最后更新**: 2026-05
 
 ---
@@ -113,9 +113,9 @@ k8s_versions:
 
 ## 快速导航
 
-- [templates/README.md](../../templates/README.md) — 模板体系索引
-- [templates/fta-template.md](../../templates/fta-template.md) — FTA 文档标准模板（现行版本）
-- [../fta-methodology-and-agentic-practices.md](../fta-methodology-and-agentic-practices.md) — FTA 方法论与 AI Agent 实践
+- [templates/README.md](../../31-%E8%84%9A%E6%9C%AC/templates/README.md) — 模板体系索引
+- [templates/fta-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/fta-template.md) — FTA 文档标准模板（现行版本）
+- [../fta-methodology-and-agentic-practices.md](fta-methodology-and-agentic-practices.md) — FTA 方法论与 AI Agent 实践
 - [../README.md](../README.md) — FTA 专题总览
 
 ---

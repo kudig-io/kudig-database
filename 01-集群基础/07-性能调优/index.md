@@ -32,7 +32,7 @@ last_updated: '2026-07-21'
 | [[01-集群基础/07-性能调优/19-cluster-performance-tuning.md\|集群性能调优]] | 整体性能评估、参数调优 | advanced |
 | [[01-集群基础/07-性能调优/20-network-performance-optimization.md\|网络性能优化]] | CNI 性能、MTU、网络策略 | advanced |
 | [[01-集群基础/07-性能调优/21-storage-performance-optimization.md\|存储性能优化]] | IOPS、延迟、存储类型选择 | advanced |
-| [[01-集群基础/03-控制平面/04-apiserver-etcd-performance-tuning.md\|API Server/etcd 调优]] | 控制平面性能深度调优 | advanced |
+| [[01-集群基础/07-性能调优/04-apiserver-etcd-performance-tuning.md\|API Server/etcd 调优]] | 控制平面性能深度调优 | advanced |
 
 ## 性能基准参考
 

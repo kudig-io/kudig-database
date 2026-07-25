@@ -738,24 +738,24 @@ echo "=== 验证完成 ==="
 ### 最佳实践文档
 
 **基础设施**：
-- [集群配置最佳实践](infrastructure/kubernetes-cluster.md)
-- [网络配置最佳实践](infrastructure/networking.md)
-- [存储配置最佳实践](infrastructure/storage.md)
+- [集群配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/kubernetes-cluster.md)
+- [网络配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/networking.md)
+- [存储配置最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/03-infrastructure/storage.md)
 
 **安全**：
-- [Pod安全最佳实践](security/pod-security.md)
-- [网络安全最佳实践](security/network-security.md)
-- [密钥管理最佳实践](security/secrets-management.md)
+- [Pod安全最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/pod-security.md)
+- [网络安全最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/network-security.md)
+- [密钥管理最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/08-security/secrets-management.md)
 
 **可观测性**：
-- [监控最佳实践](observability/monitoring.md)
-- [日志管理最佳实践](observability/logging.md)
-- [分布式追踪最佳实践](observability/tracing.md)
+- [监控最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/monitoring.md)
+- [日志管理最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/logging.md)
+- [分布式追踪最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/05-observability/tracing.md)
 
 **运维**：
-- [部署策略最佳实践](operations/deployment.md)
-- [扩缩容最佳实践](operations/scaling.md)
-- [灾难恢复最佳实践](operations/disaster-recovery.md)
+- [部署策略最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/deployment.md)
+- [扩缩容最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/scaling.md)
+- [灾难恢复最佳实践](../../../../20-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/06-operations/disaster-recovery.md)
 
 ### 官方文档
 

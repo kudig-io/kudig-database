@@ -1391,8 +1391,8 @@ flowchart TD
 
 ## Related
 
-- [[26-技能/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
+- [[26-技能/04-工作负载/pod/方法论/skill-README|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

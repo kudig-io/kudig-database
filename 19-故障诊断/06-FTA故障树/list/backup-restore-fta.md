@@ -825,10 +825,10 @@ flowchart TD
 ## Related
 
 - [[26-技能/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
-- [[26-技能/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[21-生态参考/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[21-生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[26-技能/04-工作负载/pod/方法论/skills-run-README|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[21-生态参考/03-领域索引/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[21-生态参考/03-领域索引/pvc-index|PVC 知识图谱索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

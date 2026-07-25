@@ -296,7 +296,7 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.spec.containers[0].resources}'
 - [Pod 生命周期](./pod-lifecycle.md)
 - [容器环境](./container-environment.md)
 - [高级 Pod 配置](./advanced-pod-configuration.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/downward-api/

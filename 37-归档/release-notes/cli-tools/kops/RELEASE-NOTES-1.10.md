@@ -39,7 +39,7 @@ prerequisites:
 
 # kops v1.10 Release Notes
 
-Source: [1.10.1](https://github.[[实体/kubernetes.md|kubernetes]]/kops/releases/tag/1.10.1)
+Source: [1.10.1](https://github.[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]/kops/releases/tag/1.10.1)
 
 Minor update for the kops 1.10 series.
 

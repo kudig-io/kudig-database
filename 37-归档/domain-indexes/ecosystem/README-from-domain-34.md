@@ -98,25 +98,25 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 ### containerd (8 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| 02-containerd-v2-features.md](./graduated/containerd/02-containerd-v2-features.md) | containerd v2 新特性 |
-| 03-containerd-security-hardening.md](./graduated/containerd/03-containerd-security-hardening.md) | 安全加固 |
-| 04-containerd-upgrade-migration.md](./graduated/containerd/04-containerd-upgrade-migration.md) | 升级迁移 |
-| 05-containerd-windows-support.md](./graduated/containerd/05-containerd-windows-support.md) | Windows 支持 |
-| 06-containerd-observability.md](./graduated/containerd/06-containerd-observability.md) | 可观测性 |
-| [07-containerd-disaster-recovery.md](./graduated/containerd/07-containerd-disaster-recovery.md) | 灾难恢复 |
-| 08-containerd-multi-tenant.md](./graduated/containerd/08-containerd-multi-tenant.md) | 多租户 |
+| 02-containerd-v2-features.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/02-containerd-v2-features.md) | containerd v2 新特性 |
+| 03-containerd-security-hardening.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/03-containerd-security-hardening.md) | 安全加固 |
+| 04-containerd-upgrade-migration.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/04-containerd-upgrade-migration.md) | 升级迁移 |
+| 05-containerd-windows-support.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/05-containerd-windows-support.md) | Windows 支持 |
+| 06-containerd-observability.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/06-containerd-observability.md) | 可观测性 |
+| [07-containerd-disaster-recovery.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/07-containerd-disaster-recovery.md) | 灾难恢复 |
+| 08-containerd-multi-tenant.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/08-containerd-multi-tenant.md) | 多租户 |
 
 ### Istio (3 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| [02-istio-advanced-traffic-management.md](./graduated/istio/02-istio-advanced-traffic-management.md) | 高级流量管理 |
-| [03-istio-security-hardening.md](./graduated/istio/03-istio-security-hardening.md) | 安全加固 |
+| [02-istio-advanced-traffic-management.md](../../../23-%E5%AE%9E%E4%BD%93/04-%E7%BD%91%E7%BB%9C/02-istio-advanced-traffic-management.md) | 高级流量管理 |
+| [03-istio-security-hardening.md](../../../23-%E5%AE%9E%E4%BD%93/04-%E7%BD%91%E7%BB%9C/03-istio-security-hardening.md) | 安全加固 |
 
 ### Prometheus (3 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| [02-prometheus-promql-advanced.md](./graduated/prometheus/02-prometheus-promql-advanced.md) | 高级 PromQL |
-| 03-prometheus-ha-deployment.md](./graduated/prometheus/03-prometheus-ha-deployment.md) | 高可用部署 |
+| [02-prometheus-promql-advanced.md](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-prometheus-promql-advanced.md) | 高级 PromQL |
+| 03-prometheus-ha-deployment.md](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-prometheus-ha-deployment.md) | 高可用部署 |
 
 ---
 
@@ -143,7 +143,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Fluentd](./graduated/fluentd/fluentd.md) | Observability | 统一日志层 |
 | [Flux](./graduated/flux/flux.md) | App Definition | GitOps 持续交付 |
 | [Harbor](./graduated/harbor/harbor.md) | Provisioning | 企业级容器镜像仓库 |
-| [Helm](./[[实体/helm.md|helm]]/helm.md) | App Definition | Kubernetes 包管理器 |
+| [Helm](./[[23-实体/08-交付与制品/helm.md|helm]]/helm.md) | App Definition | Kubernetes 包管理器 |
 | [in-toto](./graduated/in-toto/in-toto.md) | Security | 软件供应链安全框架 |
 | [Istio](./graduated/istio/istio.md) | Service Mesh | 服务网格平台 |
 | [Jaeger](./graduated/jaeger/jaeger.md) | Observability | 分布式追踪系统 |
@@ -176,8 +176,8 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Cloud Custodian](./incubating/cloud-custodian/cloud-custodian.md) | Provisioning | 云资源治理工具 |
 | [CNI](./incubating/cni/cni.md) | Networking | 容器网络接口规范 |
 | [Contour](./incubating/contour/contour.md) | Networking | Kubernetes Ingress 控制器 |
-| [Cortex](./incubating/cortex/cortex.md) | Observability | 多租户 Prometheus 存储 |
-| [Emissary-Ingress](./incubating/emissary-ingress/emissary-ingress.md) | Networking | Kubernetes 原生 API 网关 |
+| [Cortex](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/cortex.md) | Observability | 多租户 Prometheus 存储 |
+| [Emissary-Ingress](../../../23-%E5%AE%9E%E4%BD%93/04-%E7%BD%91%E7%BB%9C/emissary-ingress.md) | Networking | Kubernetes 原生 API 网关 |
 | [Flatcar](./incubating/flatcar/flatcar.md) | Provisioning | 容器优化 Linux 发行版 |
 | [Fluid](./incubating/fluid/fluid.md) | Storage | Kubernetes 数据集编排 |
 | [gRPC](./incubating/grpc/grpc.md) | RPC | 高性能 RPC 框架 |
@@ -192,7 +192,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Lima](./incubating/lima/lima.md) | Provisioning | macOS Linux 虚拟机 |
 | [Litmus](./incubating/litmus/litmus.md) | Observability | 混沌工程工具集 |
 | [Longhorn](./incubating/longhorn/longhorn.md) | Storage | 云原生分布式块存储 |
-| [metal3-io](./incubating/metal3-io/metal3-io.md) | Provisioning | 裸金属 Kubernetes |
+| [metal3-io](../../../23-%E5%AE%9E%E4%BD%93/09-%E7%BC%96%E6%8E%92%E8%B0%83%E5%BA%A6/metal3-io.md) | Provisioning | 裸金属 Kubernetes |
 | [NATS](./incubating/nats/nats.md) | Streaming | 云原生消息系统 |
 | [Notary Project](./incubating/notary-project/notary-project.md) | Security | 容器签名和验证 |
 | [OpenCost](./incubating/opencost/opencost.md) | Observability | Kubernetes 成本监控 |
@@ -237,14 +237,14 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 
 | 项目 | 简介 |
 |:---|:---|
-| [Carina](./sandbox/carina/carina.md) | 本地存储方案 |
+| [Carina](../../../23-%E5%AE%9E%E4%BD%93/05-%E5%AD%98%E5%82%A8/carina.md) | 本地存储方案 |
 | [HwameiStor](./sandbox/hwameistor/hwameistor.md) | 高可用本地存储 |
 | [OpenEBS](./sandbox/openebs/openebs.md) | 容器原生存储 |
 | [Piraeus Datastore](./sandbox/piraeus-datastore/piraeus-datastore.md) | 高可用存储 |
 | [Vineyard](./sandbox/vineyard/vineyard.md) | 内存数据管理 |
 | [Longhorn](./sandbox/longhorn/longhorn.md) | 分布式块存储 |
 | [Stacker](./sandbox/stacker/stacker.md) | OCI 镜像构建 |
-| [ORAS](./sandbox/oras/oras.md) | OCI 制品注册 |
+| [ORAS](../../../23-%E5%AE%9E%E4%BD%93/08-%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%88%B6%E5%93%81/oras.md) | OCI 制品注册 |
 | [Distribution](./sandbox/distribution/distribution.md) | 容器镜像分发 |
 | [zot](./sandbox/zot/zot.md) | OCI 镜像仓库 |
 
@@ -258,8 +258,8 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Copa](./sandbox/copa/copa.md) | 容器镜像修补 |
 | [Dex](./sandbox/dex/dex.md) | OIDC 身份服务 |
 | [Eraser](./sandbox/eraser/eraser.md) | 镜像清理工具 |
-| hexa](./sandbox/hexa/hexa.md) | 策略编排 |
-| [Inclavare Containers](./sandbox/inclavare-containers/inclavare-containers.md) | 机密计算容器 |
+| hexa](../../../23-%E5%AE%9E%E4%BD%93/06-%E5%AE%89%E5%85%A8/hexa.md) | 策略编排 |
+| [Inclavare Containers](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/inclavare-containers.md) | 机密计算容器 |
 | keylime](./sandbox/keylime/keylime.md) | 远程证明 |
 | [KubeArmor](./sandbox/kubearmor/kubearmor.md) | 运行时安全 |
 | [Kubewarden](./sandbox/kubewarden/kubewarden.md) | 策略引擎 |
@@ -281,11 +281,11 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [k3s](./sandbox/k3s/k3s.md) | 轻量级 Kubernetes |
 | kairos](./sandbox/kairos/kairos.md) | 不可变 Kubernetes |
 | [Kubean](./sandbox/kubean/kubean.md) | 集群生命周期管理 |
-| [KubeClipper](./sandbox/kubeclipper/kubeclipper.md) | 集群管理平台 |
+| [KubeClipper](../../../23-%E5%AE%9E%E4%BD%93/09-%E7%BC%96%E6%8E%92%E8%B0%83%E5%BA%A6/kubeclipper.md) | 集群管理平台 |
 | [kcp](./sandbox/kcp/kcp.md) | Kubernetes 控制平面 |
 | [Capsule](./sandbox/capsule/capsule.md) | 多租户管理 |
 | [Clusternet](./sandbox/clusternet/clusternet.md) | 多集群管理 |
-| [Clusterpedia](./sandbox/clusterpedia/clusterpedia.md) | 多集群资源查询 |
+| [Clusterpedia](../../../23-%E5%AE%9E%E4%BD%93/09-%E7%BC%96%E6%8E%92%E8%B0%83%E5%BA%A6/clusterpedia.md) | 多集群资源查询 |
 | [KubeFleet](./sandbox/kubefleet/kubefleet.md) | 多集群编排 |
 | [KubeSlice](./sandbox/kubeslice/kubeslice.md) | 多集群连接 |
 | [KubeStellar](./sandbox/kubestellar/kubestellar.md) | 多集群配置 |
@@ -301,7 +301,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | composefs](./sandbox/composefs/composefs.md) | 组合文件系统 |
 | [container2wasm](./sandbox/container2wasm/container2wasm.md) | 容器转 WASM |
 | [ContainerSSH](./sandbox/containerssh/containerssh.md) | SSH 容器服务 |
-| [Podman Container Tools](./[[实体/podman-container-tools.md|podman-container-tools]]/podman-container-tools.md) | Podman 工具集 |
+| [Podman Container Tools](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/podman-container-tools.md) | Podman 工具集 |
 
 ### 应用定义与交付 (25个)
 
@@ -316,12 +316,12 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [ko](./sandbox/ko/ko.md) | Go 容器构建 |
 | [Konveyor](./sandbox/konveyor/konveyor.md) | 应用现代化 |
 | [kpt](./sandbox/kpt/kpt.md) | 配置包管理 |
-| [KUDO](./sandbox/kudo/kudo.md) | Operator 工具包 |
+| [KUDO](../../../23-%E5%AE%9E%E4%BD%93/08-%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%88%B6%E5%93%81/kudo.md) | Operator 工具包 |
 | [KusionStack](./sandbox/kusionstack/kusionstack.md) | 平台工程套件 |
 | [OpenGitOps](./sandbox/opengitops/opengitops.md) | GitOps 规范 |
 | [OpenTofu](./sandbox/opentofu/opentofu.md) | IaC 工具 |
-| [Porter](./sandbox/porter/porter.md) | CNAB 打包工具 |
-| [Radius](./sandbox/radius/radius.md) | 应用平台 |
+| [Porter](../../../23-%E5%AE%9E%E4%BD%93/08-%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%88%B6%E5%93%81/porter.md) | CNAB 打包工具 |
+| [Radius](../../../23-%E5%AE%9E%E4%BD%93/08-%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%88%B6%E5%93%81/radius.md) | 应用平台 |
 | [SchemaHero](./sandbox/schemahero/schemahero.md) | 数据库 Schema 管理 |
 | [Score](./sandbox/score/score.md) | 工作负载规范 |
 | [Shipwright](./sandbox/shipwright/shipwright.md) | 容器构建框架 |
@@ -330,23 +330,23 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [werf](./sandbox/werf/werf.md) | GitOps 交付工具 |
 | [Atlantis](./sandbox/atlantis/atlantis.md) | Terraform PR 自动化 |
 | [PipeCD](./sandbox/pipecd/pipecd.md) | GitOps CD 平台 |
-| [Dalec](./sandbox/dalec/dalec.md) | 构建规范 |
+| [Dalec](../../../23-%E5%AE%9E%E4%BD%93/08-%E4%BA%A4%E4%BB%98%E4%B8%8E%E5%88%B6%E5%93%81/dalec.md) | 构建规范 |
 | [KitOps](./sandbox/kitops/kitops.md) | ML 模型打包 |
 
 ### 可观测性 (15个)
 
 | 项目 | 简介 |
 |:---|:---|
-| [Inspektor Gadget](./sandbox/inspektor-gadget/inspektor-gadget.md) | eBPF 调试工具 |
+| [Inspektor Gadget](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/inspektor-gadget.md) | eBPF 调试工具 |
 | [Kepler](./sandbox/kepler/kepler.md) | 能耗监控 |
 | [Perses](./sandbox/perses/perses.md) | 仪表盘即代码 |
 | [Pixie](./sandbox/pixie/pixie.md) | Kubernetes 可观测性 |
-| [Trickster](./sandbox/trickster/trickster.md) | 时序数据库代理 |
+| [Trickster](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/trickster.md) | 时序数据库代理 |
 | [Kube-burner](./sandbox/kube-burner/kube-burner.md) | 压力测试工具 |
 | [Kuberhealthy](./sandbox/kuberhealthy/kuberhealthy.md) | 健康检查框架 |
 | [Cartography](./sandbox/cartography/cartography.md) | 基础设施图谱 |
 | drasi](./sandbox/drasi/drasi.md) | 变更检测 |
-| [Tremor](./sandbox/tremor/tremor.md) | 事件处理 |
+| [Tremor](../../../23-%E5%AE%9E%E4%BD%93/12-%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%B6%88%E6%81%AF/tremor.md) | 事件处理 |
 | [openGemini](./sandbox/opengemini/opengemini.md) | 时序数据库 |
 | [Oxia](./sandbox/oxia/oxia.md) | 元数据存储 |
 | [Logging Operator](./sandbox/logging-operator/logging-operator.md) | 日志管理 |
@@ -359,14 +359,14 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 |:---|:---|
 | [KAITO](./sandbox/kaito/kaito.md) | AI 模型推理 |
 | [K8sGPT](./sandbox/k8sgpt/k8sgpt.md) | AI Kubernetes 助手 |
-| [kagent](./sandbox/kagent/kagent.md) | AI 代理 |
+| [kagent](../../../23-%E5%AE%9E%E4%BD%93/11-AI%E4%B8%8E%E8%BE%B9%E7%BC%98/kagent.md) | AI 代理 |
 | [ModelPack](./sandbox/modelpack/modelpack.md) | ML 模型打包 |
 | [hami](./sandbox/hami/hami.md) | GPU 虚拟化 |
 | [Koordinator](./sandbox/koordinator/koordinator.md) | 混合编排 |
-| [KubeElasti](./sandbox/kubeelasti/kubeelasti.md) | AI 弹性扩缩 |
+| [KubeElasti](../../../23-%E5%AE%9E%E4%BD%93/09-%E7%BC%96%E6%8E%92%E8%B0%83%E5%BA%A6/kubeelasti.md) | AI 弹性扩缩 |
 | [Armada](./sandbox/armada/armada.md) | 多集群批处理 |
 | [Cadence](./sandbox/cadence/cadence.md) | 工作流引擎 |
-| [Serverless Workflow](./[[实体/serverless-workflow.md|serverless-workflow]]/serverless-workflow.md) | 工作流规范 |
+| [Serverless Workflow](./[[23-实体/09-编排调度/serverless-workflow.md|serverless-workflow]]/serverless-workflow.md) | 工作流规范 |
 
 ### 边缘计算与 IoT (5个)
 
@@ -376,7 +376,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Kgateway](./sandbox/kgateway/kgateway.md) | Kubernetes API 网关 |
 | [Tinkerbell](./sandbox/tinkerbell/tinkerbell.md) | 裸金属配置 |
 | [WasmEdge](./sandbox/wasmedge/wasmedge.md) | WebAssembly 运行时 |
-| [Serverless Devs](./sandbox/serverless-devs/serverless-devs.md) | 无服务器开发工具 |
+| [Serverless Devs](../../../23-%E5%AE%9E%E4%BD%93/09-%E7%BC%96%E6%8E%92%E8%B0%83%E5%BA%A6/serverless-devs.md) | 无服务器开发工具 |
 
 ### 混沌工程与测试 (5个)
 
@@ -385,7 +385,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | [Chaosblade](./sandbox/chaosblade/chaosblade.md) | 混沌实验工具 |
 | [Krkn](./sandbox/krkn/krkn.md) | 混沌测试 |
 | [Microcks](./sandbox/microcks/microcks.md) | API 模拟测试 |
-| [Runme Notebooks](./sandbox/runme-notebooks/runme-notebooks.md) | 可执行文档 |
+| [Runme Notebooks](../../../23-%E5%AE%9E%E4%BD%93/10-%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/runme-notebooks.md) | 可执行文档 |
 | [Telepresence](./sandbox/telepresence/telepresence.md) | 本地开发调试 |
 
 ### 数据库与中间件 (8个)
@@ -393,7 +393,7 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 | 项目 | 简介 |
 |:---|:---|
 | [CloudNativePG](./sandbox/cloudnativepg/cloudnativepg.md) | PostgreSQL Operator |
-| [Kanister](./sandbox/kanister/kanister.md) | 数据管理 |
+| [Kanister](../../../23-%E5%AE%9E%E4%BD%93/05-%E5%AD%98%E5%82%A8/kanister.md) | 数据管理 |
 | [Sermant](./sandbox/sermant/sermant.md) | 无代理服务网格 |
 | [K8up](./sandbox/k8up/k8up.md) | 备份 Operator |
 | [SlimFaaS](./sandbox/slimfaas/slimfaas.md) | 轻量 FaaS |
@@ -405,15 +405,15 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 
 | 项目 | 简介 |
 |:---|:---|
-| [CoHDI](./sandbox/cohdi/cohdi.md) | 硬件设备接口 |
+| [CoHDI](../../../23-%E5%AE%9E%E4%BD%93/11-AI%E4%B8%8E%E8%BE%B9%E7%BC%98/cohdi.md) | 硬件设备接口 |
 | [Cozystack](./sandbox/cozystack/cozystack.md) | PaaS 平台 |
 | [kube-rs](./sandbox/kube-rs/kube-rs.md) | Rust Kubernetes 客户端 |
 | [Kuadrant](./sandbox/kuadrant/kuadrant.md) | API 管理 |
 | [OpenChoreo](./sandbox/openchoreo/openchoreo.md) | 集成平台 |
 | [OpenFunction](./sandbox/openfunction/openfunction.md) | FaaS 平台 |
-| [OSCAL-COMPASS](./sandbox/oscal-compass/oscal-compass.md) | 合规自动化 |
-| [Podman Desktop](./[[实体/podman-desktop.md|podman-desktop]]/podman-desktop.md) | 容器桌面应用 |
-| [VS Code Kubernetes Tools](./sandbox/vscode-kubernetes-tools/vscode-kubernetes-tools.md) | VS Code 插件 |
+| [OSCAL-COMPASS](../../../23-%E5%AE%9E%E4%BD%93/06-%E5%AE%89%E5%85%A8/oscal-compass.md) | 合规自动化 |
+| [Podman Desktop](./[[23-实体/03-运行时/podman-desktop.md|podman-desktop]]/podman-desktop.md) | 容器桌面应用 |
+| [VS Code Kubernetes Tools](../../../23-%E5%AE%9E%E4%BD%93/10-%E5%B9%B3%E5%8F%B0%E4%B8%8E%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode-kubernetes-tools.md) | VS Code 插件 |
 
 ---
 
@@ -421,10 +421,10 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 
 | 指南 | 说明 | 链接 |
 |:-----|:-----|:-----|
-| **集成实践指南** | CNCF 项目组合使用、最佳实践集成方案 | [01-cncf-integration-guide.md](./01-cncf-integration-guide.md) |
-| **学习路径** | 按角色规划学习顺序（CKA/CKS 认证） | [02-cncf-learning-paths.md](./02-cncf-learning-paths.md) |
-| **项目选型指南** | CNI/Service Mesh/存储等类目选型对比矩阵 | [03-cncf-selection-guide.md](./03-cncf-selection-guide.md) |
-| **FTA 故障树索引** | CNCF 项目故障树分析和排障索引 | [04-cncf-fta-index.md](./04-cncf-fta-index.md) |
+| **集成实践指南** | CNCF 项目组合使用、最佳实践集成方案 | [01-cncf-integration-guide.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/01-cncf-integration-guide.md) |
+| **学习路径** | 按角色规划学习顺序（CKA/CKS 认证） | [02-cncf-learning-paths.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/02-cncf-learning-paths.md) |
+| **项目选型指南** | CNI/Service Mesh/存储等类目选型对比矩阵 | [03-cncf-selection-guide.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/03-cncf-selection-guide.md) |
+| **FTA 故障树索引** | CNCF 项目故障树分析和排障索引 | [04-cncf-fta-index.md](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/04-cncf-fta-index.md) |
 
 ---
 
@@ -463,10 +463,10 @@ Flux → Argo → Helm → Crossplane
 - **[Domain-10: 扩展生态](../专项技术)** - Helm、Operator、GitOps 详解
 - **[Domain-25: 云原生安全](../安全)** - 安全策略与合规实践
 - **[Domain-26: 服务网格](../网络)** - Istio、Linkerd 深度分析
-- **[CNCF 集成实践](./01-cncf-integration-guide.md)** - 项目组合使用
-- **[CNCF 学习路径](./02-cncf-learning-paths.md)** - 系统学习指南
-- **[CNCF 选型指南](./03-cncf-selection-guide.md)** - 决策参考
-- **[CNCF FTA 索引](./04-cncf-fta-index.md)** - 故障树分析
+- **[CNCF 集成实践](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/01-cncf-integration-guide.md)** - 项目组合使用
+- **[CNCF 学习路径](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/02-cncf-learning-paths.md)** - 系统学习指南
+- **[CNCF 选型指南](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/03-cncf-selection-guide.md)** - 决策参考
+- **[CNCF FTA 索引](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/01-CNCF%E5%85%A8%E6%99%AF/04-cncf-fta-index.md)** - 故障树分析
 
 ---
 
@@ -487,7 +487,7 @@ Flux → Argo → Helm → Crossplane
 - [[README]]
 - digest-2026-05-21-full
 
-- [[实体/tinkerbell.md|Tinkerbell]]
-- [[实体/chaosblade.md|ChaosBlade]]
+- [[23-实体/09-编排调度/tinkerbell.md|Tinkerbell]]
+- [[23-实体/14-可靠性与混沌/chaosblade.md|ChaosBlade]]
 
 <!-- risk-assessed -->

@@ -860,14 +860,14 @@ kubectl get pods --field-selector spec.nodeName=<node>
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [Scheduler 故障排查](../01-control-plane/03-scheduler-troubleshooting.md)
-- [资源配额故障排查](../07-resources-scheduling/01-resources-quota-troubleshooting.md)
-- [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
+- [Scheduler 故障排查](../structural-01-control-plane/03-scheduler-troubleshooting.md)
+- [资源配额故障排查](../structural-07-resources-scheduling/01-resources-quota-troubleshooting.md)
+- [Pod 故障排查](../structural-05-workloads/01-pod-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/node-index|Node 知识图谱索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/node-index|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

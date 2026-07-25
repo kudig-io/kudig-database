@@ -177,7 +177,7 @@ last_updated: '2026-07-21'
 ## 实体 (Entities)
 
 - [[23-实体/07-可观测性/prometheus|Prometheus]]
-- [[23-实体/grafana|Grafana]]
+- [[17-系统基础/06-知识字典/observability/grafana|Grafana]]
 - [[23-实体/07-可观测性/jaeger|Jaeger]]
 - [[23-实体/07-可观测性/opentelemetry|OpenTelemetry]]
 - [[23-实体/07-可观测性/thanos|Thanos]]

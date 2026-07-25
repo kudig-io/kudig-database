@@ -261,10 +261,10 @@ kubectl run test --image=nginx --dry-run=server -o yaml --overrides='{"spec":{"n
 ```
 ## 交叉引用
 
-- [污点与容忍度](./taints-and-tolerations.md) — 节点排斥机制，与亲和性互补
+- [污点与容忍度](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/taints-and-tolerations.md) — 节点排斥机制，与亲和性互补
 - [Pod 拓扑分布约束](./pod-topology-spread-constraints.md) — 更精细的跨拓扑域分布控制
-- [Kubernetes 调度器](./kubernetes-scheduler.md) — 过滤和评分阶段如何处理亲和性
-- [Karpenter 自动扩缩容](./karpenter-autoscaling.md) — Karpenter 如何感知 nodeSelector / affinity
+- [Kubernetes 调度器](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/kubernetes-scheduler.md) — 过滤和评分阶段如何处理亲和性
+- [Karpenter 自动扩缩容](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/karpenter-autoscaling.md) — Karpenter 如何感知 nodeSelector / affinity
 
 ## 参考链接
 

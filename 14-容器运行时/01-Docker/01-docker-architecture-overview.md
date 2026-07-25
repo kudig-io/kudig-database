@@ -619,9 +619,9 @@ Image Index (多架构索引)
 
 <!-- chunk: 相关文档 -->## 相关文档
 
-- [201-docker-images-management](./201-docker-images-management.md) - 镜像管理详解
-- [202-docker-container-lifecycle](./202-docker-container-lifecycle.md) - 容器生命周期
-- [203-docker-networking-deep-dive](./203-docker-networking-deep-dive.md) - Docker 网络
+- [201-docker-images-management](02-docker-images-management.md) - 镜像管理详解
+- [202-docker-container-lifecycle](03-docker-container-lifecycle.md) - 容器生命周期
+- [203-docker-networking-deep-dive](04-docker-networking-deep-dive.md) - Docker 网络
 - [217-linux-container-fundamentals](./217-linux-container-fundamentals.md) - 容器技术基础
 - [165-cri-container-runtime-deep-dive](./165-cri-container-runtime-deep-dive.md) - CRI 详解
 

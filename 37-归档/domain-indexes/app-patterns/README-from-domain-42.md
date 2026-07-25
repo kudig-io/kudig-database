@@ -1,7 +1,7 @@
 ---
 title: Topic 应用层架构设计最佳实践
 description: '# Topic: 应用层架构设计最佳实践'
-summary: '本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[系统基础/topic-cheat-sheet/k8s|k8s]] YAML 配置示例**。'
+summary: '本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[17-系统基础/05-速查卡/k8s|k8s]] YAML 配置示例**。'
 category: application-architecture
 tags:
 - k8s
@@ -84,7 +84,7 @@ related_topics:
 
 ## 概述
 
-本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[系统基础/topic-cheat-sheet/k8s.md|k8s]] YAML 配置示例**、**生产最佳实践**与**高可用设计**，可直接作为企业架构设计的参考蓝图。
+本专题聚焦于**基于 Kubernetes 的生产级应用层架构设计**，覆盖电商、社交、金融、教育、游戏、IoT、AI 等核心行业场景。每篇文档均包含完整的 **Mermaid 架构图解**、**[[17-系统基础/05-速查卡/k8s.md|k8s]] YAML 配置示例**、**生产最佳实践**与**高可用设计**，可直接作为企业架构设计的参考蓝图。
 
 ---
 
@@ -92,96 +92,96 @@ related_topics:
 
 | # | 应用场景 | 文档 | 核心 Mermaid 图 | 关键 K8s 特性 |
 |:---:|:---|:---|:---:|:---|
-| 01 | **电商系统** | [01-ecommerce-architecture.md](./01-ecommerce-architecture.md) | 10+ | StatefulSet、HPA、Karpenter、NetworkPolicy |
-| 02 | **小程序平台** | [02-mini-program-architecture.md](./02-mini-program-architecture.md) | 8+ | Knative、Tekton、vCluster、NodeLogQuery |
-| 03 | **内容管理 (CMS)** | [03-cms-architecture.md](./03-cms-architecture.md) | 7+ | Next.js SSR/ISR、CloudNativePG、Kyverno |
-| 04 | **实时通信 (IM/RTC)** | [04-im-rtc-architecture.md](./04-im-rtc-architecture.md) | 9+ | HostNetwork、GPU 节点池、WebSocket LB |
-| 05 | **在线教育** | [05-online-education-architecture.md](./05-online-education-architecture.md) | 8+ | Job、Tekton Pipeline、TDengine、HPA 自定义指标 |
-| 06 | **金融科技** | [06-fintech-architecture.md](./06-fintech-architecture.md) | 9+ | Secrets Store CSI、Pod Security、NetworkPolicy、DRA |
-| 07 | **物联网 (IoT)** | [07-iot-platform-architecture.md](./07-iot-platform-architecture.md) | 7+ | StatefulSet、EMQX、KubeEdge、Karpenter |
-| 08 | **AI/ML 推理** | [08-ai-ml-inference-architecture.md](./08-ai-ml-inference-architecture.md) | 8+ | KServe、DRA GPU、KEDA、vLLM |
-| 09 | **游戏后端** | [09-gaming-backend-architecture.md](./09-gaming-backend-architecture.md) | 8+ | StatefulSet UDP、HPA 自定义指标、TiDB、PodAntiAffinity |
-| 10 | **社交媒体** | [10-social-media-architecture.md](./10-social-media-architecture.md) | 7+ | Feed 流架构、Kafka Worker、GPU 审核、Redis Cluster |
-| 11 | **智慧零售** | [11-smart-retail-architecture.md](./11-smart-retail-architecture.md) | 9+ | KEDA Cron Scaler、Ingress-Nginx、PostgreSQL HA、HPA |
-| 12 | **智慧物流** | [12-smart-logistics-architecture.md](./12-smart-logistics-architecture.md) | 8+ | Knative Serving、MQTT、TiDB、Descheduler |
-| 13 | **数字政务** | [13-digital-government-architecture.md](./13-digital-government-architecture.md) | 10+ | Pod Security、Gatekeeper、NetworkPolicy、Secrets Store CSI |
-| 14 | **智慧医疗** | [14-smart-healthcare-architecture.md](./14-smart-healthcare-architecture.md) | 9+ | StatefulSet、MinIO、PostgreSQL、Helm Chart |
-| 15 | **能源电力** | [15-energy-power-architecture.md](./15-energy-power-architecture.md) | 8+ | KubeEdge、EdgeMesh、Node Affinity、vCluster |
-| 16 | **音视频平台** | [16-video-shortform-architecture.md](./16-video-shortform-architecture.md) | 9+ | FFmpeg GPU、KEDA HTTP Scaler、CDN、Ingress-Nginx |
+| 01 | **电商系统** | [01-ecommerce-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/01-ecommerce-architecture.md) | 10+ | StatefulSet、HPA、Karpenter、NetworkPolicy |
+| 02 | **小程序平台** | [02-mini-program-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/02-mini-program-architecture.md) | 8+ | Knative、Tekton、vCluster、NodeLogQuery |
+| 03 | **内容管理 (CMS)** | [03-cms-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/03-cms-architecture.md) | 7+ | Next.js SSR/ISR、CloudNativePG、Kyverno |
+| 04 | **实时通信 (IM/RTC)** | [04-im-rtc-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/04-im-rtc-architecture.md) | 9+ | HostNetwork、GPU 节点池、WebSocket LB |
+| 05 | **在线教育** | [05-online-education-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/05-online-education-architecture.md) | 8+ | Job、Tekton Pipeline、TDengine、HPA 自定义指标 |
+| 06 | **金融科技** | [06-fintech-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/06-fintech-architecture.md) | 9+ | Secrets Store CSI、Pod Security、NetworkPolicy、DRA |
+| 07 | **物联网 (IoT)** | [07-iot-platform-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/07-iot-platform-architecture.md) | 7+ | StatefulSet、EMQX、KubeEdge、Karpenter |
+| 08 | **AI/ML 推理** | [08-ai-ml-inference-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/08-ai-ml-inference-architecture.md) | 8+ | KServe、DRA GPU、KEDA、vLLM |
+| 09 | **游戏后端** | [09-gaming-backend-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/09-gaming-backend-architecture.md) | 8+ | StatefulSet UDP、HPA 自定义指标、TiDB、PodAntiAffinity |
+| 10 | **社交媒体** | [10-social-media-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/10-social-media-architecture.md) | 7+ | Feed 流架构、Kafka Worker、GPU 审核、Redis Cluster |
+| 11 | **智慧零售** | [11-smart-retail-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/11-smart-retail-architecture.md) | 9+ | KEDA Cron Scaler、Ingress-Nginx、PostgreSQL HA、HPA |
+| 12 | **智慧物流** | [12-smart-logistics-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/12-smart-logistics-architecture.md) | 8+ | Knative Serving、MQTT、TiDB、Descheduler |
+| 13 | **数字政务** | [13-digital-government-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/13-digital-government-architecture.md) | 10+ | Pod Security、Gatekeeper、NetworkPolicy、Secrets Store CSI |
+| 14 | **智慧医疗** | [14-smart-healthcare-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/14-smart-healthcare-architecture.md) | 9+ | StatefulSet、MinIO、PostgreSQL、Helm Chart |
+| 15 | **能源电力** | [15-energy-power-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/15-energy-power-architecture.md) | 8+ | KubeEdge、EdgeMesh、Node Affinity、vCluster |
+| 16 | **音视频平台** | [16-video-shortform-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/16-video-shortform-architecture.md) | 9+ | FFmpeg GPU、KEDA HTTP Scaler、CDN、Ingress-Nginx |
 | 17 | **SaaS 多租户** | [17-saas-multi-tenant-architecture.md](./17-saas-multi-tenant-architecture.md) | 8+ | vCluster、NetworkPolicy、ResourceQuota、RBAC |
-| 18 | **数据中台** | [18-data-midplatform-architecture.md](./18-data-midplatform-architecture.md) | 8+ | Airflow、Spark Operator、Kyverno、Pod Topology Spread |
-| 19 | **云原生 DevOps** | [19-cloudnative-devops-architecture.md](./19-cloudnative-devops-architecture.md) | 7+ | Tekton、[[实体/argocd.md|argocd]]、Ingress-Nginx、Cluster Autoscaler |
-| 20 | **微服务治理** | [20-microservice-governance-architecture.md](./20-microservice-governance-architecture.md) | 9+ | OpenTelemetry、[[实体/jaeger.md|Jaeger]]、[[实体/istio.md|Istio]]、mTLS、Sidecar |
-| 21 | **跨境电商** | [21-cross-border-ecommerce.md](./21-cross-border-ecommerce.md) | 9+ | HPA、KEDA、NetworkPolicy、Pod Topology Spread |
-| 22 | **新能源车联网** | [22-nev-connected-vehicle.md](./22-nev-connected-vehicle.md) | 8+ | DaemonSet、KubeEdge、StatefulSet、CronJob |
-| 23 | **信创替代** | [23-xinchuang-it-innovation.md](./23-xinchuang-it-innovation.md) | 7+ | NodeSelector、arm64、Pod Security、NetworkPolicy |
-| 24 | **保险科技** | [24-insurtech.md](./24-insurtech.md) | 8+ | StatefulSet、GPU、HPA、CronJob |
-| 25 | **证券量化交易** | [25-quantitative-trading.md](./25-quantitative-trading.md) | 7+ | DaemonSet、FPGA、HostNetwork、Privileged |
-| 26 | **航空出行** | [26-aviation-travel.md](./26-aviation-travel.md) | 7+ | HPA、StatefulSet、Pod AntiAffinity |
-| 27 | **酒店旅游** | [27-hospitality-tourism.md](./27-hospitality-tourism.md) | 6+ | HPA、Deployment、NodeSelector |
-| 28 | **房地产科技** | [28-proptech.md](./28-proptech.md) | 6+ | GPU、DaemonSet、IoT |
-| 29 | **农业物联网** | [29-agritech-iot.md](./29-agritech-iot.md) | 6+ | KubeEdge、DaemonSet、CronJob |
-| 30 | **人力资源 SaaS** | [30-hrtech-saas.md](./30-hrtech-saas.md) | 8+ | vCluster、NetworkPolicy、ResourceQuota、CronJob |
-| 31 | **即时零售** | [31-instant-retail.md](./31-instant-retail.md) | 8+ | KEDA、HPA、NetworkPolicy、Pod AntiAffinity |
-| 32 | **智慧餐饮** | [32-smart-restaurant.md](./32-smart-restaurant.md) | 6+ | Deployment、HPA、CronJob |
-| 33 | **跨境电商海外仓** | [33-crossborder-warehouse.md](./33-crossborder-warehouse.md) | 6+ | Deployment、StatefulSet、HPA |
-| 34 | **体育科技** | [34-sportstech.md](./34-sportstech.md) | 7+ | HPA、StatefulSet、Pod AntiAffinity |
-| 35 | **元宇宙数字孪生** | [35-metaverse-digital-twin.md](./35-metaverse-digital-twin.md) | 7+ | GPU、Deployment、HostNetwork |
-| 36 | **碳资产管理 ESG** | [36-carbon-esg-management.md](./36-carbon-esg-management.md) | 6+ | Deployment、CronJob、Blockchain |
-| 37 | **宠物经济** | [37-pet-economy.md](./37-pet-economy.md) | 5+ | Deployment、HPA |
-| 38 | **供应链金融** | [38-supply-chain-finance.md](./38-supply-chain-finance.md) | 6+ | Deployment、Blockchain |
-| 39 | **智慧园区** | [39-smart-campus.md](./39-smart-campus.md) | 7+ | Deployment、DaemonSet、CronJob |
-| 40 | **云游戏** | [40-cloud-gaming.md](./40-cloud-gaming.md) | 8+ | GPU、HPA、WebRTC、StatefulSet |
-| 41 | **美妆电商** | [41-beauty-ecommerce.md](./41-beauty-ecommerce.md) | 8+ | GPU、HPA、Deployment、PersistentVolume |
-| 42 | **二手交易** | [42-secondhand-circular.md](./42-secondhand-circular.md) | 7+ | GPU、Deployment、HPA |
-| 43 | **企业即时通讯** | [43-enterprise-im.md](./43-enterprise-im.md) | 9+ | StatefulSet、HostNetwork、HPA、PersistentVolume |
-| 44 | **数字营销广告科技** | [44-martech-adtech.md](./44-martech-adtech.md) | 7+ | Deployment、HPA、NodeSelector |
-| 45 | **智慧港口航运** | [45-smart-port-shipping.md](./45-smart-port-shipping.md) | 7+ | Deployment、DaemonSet、HPA |
-| 46 | **卫星互联网** | [46-satellite-internet.md](./46-satellite-internet.md) | 6+ | Deployment、NodeSelector |
-| 47 | **智慧矿山** | [47-smart-mining.md](./47-smart-mining.md) | 6+ | DaemonSet、HostNetwork |
-| 48 | **职业教育培训** | [48-vocational-edtech.md](./48-vocational-edtech.md) | 7+ | GPU、StatefulSet、Deployment |
-| 49 | **直播电商** | [49-livestream-ecommerce.md](./49-livestream-ecommerce.md) | 9+ | HostNetwork、HPA、Deployment |
-| 50 | **无人零售** | [50-unmanned-retail.md](./50-unmanned-retail.md) | 8+ | GPU、DaemonSet、Deployment |
-| 51 | **智能制造 MES** | [51-smart-manufacturing-mes.md](./51-smart-manufacturing-mes.md) | 9+ | DaemonSet、GPU、StatefulSet、HPA |
-| 52 | **智慧水务** | [52-smart-water.md](./52-smart-water.md) | 7+ | Deployment、CronJob、DaemonSet |
-| 53 | **新零售 DTC** | [53-new-retail-dtc.md](./53-new-retail-dtc.md) | 6+ | Deployment、HPA、Pod AntiAffinity |
-| 54 | **社交游戏元宇宙** | [54-social-gaming-metaverse.md](./54-social-gaming-metaverse.md) | 7+ | StatefulSet、HostNetwork、GPU、HPA |
-| 55 | **跨境电商独立站** | [55-crossborder-dtc.md](./55-crossborder-dtc.md) | 7+ | Deployment、HPA、Pod AntiAffinity |
-| 56 | **智慧养老** | [56-smart-elderly-care.md](./56-smart-elderly-care.md) | 6+ | Deployment、HPA、DaemonSet |
-| 57 | **数字疗法** | [57-digital-therapeutics.md](./57-digital-therapeutics.md) | 6+ | Deployment、HPA、CronJob |
-| 58 | **Web3 GameFi** | [58-web3-gamefi.md](./58-web3-gamefi.md) | 6+ | Deployment、HPA、StatefulSet |
-| 59 | **工业互联网平台** | [59-industrial-internet-platform.md](./59-industrial-internet-platform.md) | 7+ | Deployment、DaemonSet、HPA、StatefulSet |
-| 60 | **车路协同自动驾驶** | [60-v2x-autonomous-driving.md](./60-v2x-autonomous-driving.md) | 8+ | GPU、DaemonSet、Deployment、HostNetwork |
-| 61 | **智慧电网** | [61-smart-grid.md](./61-smart-grid.md) | 8+ | GPU、DaemonSet、StatefulSet、HPA |
-| 62 | **分布式能源** | [62-distributed-energy.md](./62-distributed-energy.md) | 6+ | Deployment、CronJob、DaemonSet |
-| 63 | **工业视觉检测** | [63-industrial-visual-inspection.md](./63-industrial-visual-inspection.md) | 7+ | GPU、Job、Deployment、PersistentVolume |
-| 64 | **AI 制药** | [64-ai-drug-discovery.md](./64-ai-drug-discovery.md) | 6+ | GPU、Job、Deployment、PersistentVolume |
-| 65 | **自动驾驶仿真** | [65-autonomous-driving-sim.md](./65-autonomous-driving-sim.md) | 7+ | GPU、Deployment、HPA |
-| 66 | **太空互联网** | [66-space-internet.md](./66-space-internet.md) | 6+ | Deployment、NodeSelector |
-| 67 | **脑机接口** | [67-brain-computer-interface.md](./67-brain-computer-interface.md) | 6+ | GPU、Deployment、HPA |
-| 68 | **量子计算云** | [68-quantum-computing-cloud.md](./68-quantum-computing-cloud.md) | 5+ | Deployment、HPA |
-| 69 | **6G 核心网** | [69-6g-core-network.md](./69-6g-core-network.md) | 6+ | Deployment、HPA、StatefulSet |
-| 70 | **数字人民币** | [70-ecny-cbdc.md](./70-ecny-cbdc.md) | 9+ | StatefulSet、Deployment、HPA、Secret |
-| 71 | **智慧税务** | [71-smart-tax.md](./71-smart-tax.md) | 8+ | Deployment、GPU、HPA、StatefulSet |
-| 72 | **数字孪生城市** | [72-digital-twin-city.md](./72-digital-twin-city.md) | 7+ | GPU、Deployment、PersistentVolume |
-| 73 | **智慧消防** | [73-smart-firefighting.md](./73-smart-firefighting.md) | 7+ | GPU、Deployment、DaemonSet |
-| 74 | **沉浸式 XR** | [74-immersive-xr.md](./74-immersive-xr.md) | 7+ | GPU、Deployment、HPA |
-| 75 | **情感计算 AI** | [75-affective-computing.md](./75-affective-computing.md) | 6+ | GPU、Deployment、HPA |
-| 76 | **合成生物学** | [76-synthetic-biology.md](./76-synthetic-biology.md) | 6+ | GPU、Job、Deployment、PersistentVolume |
-| 77 | **可控核聚变监控** | [77-fusion-energy-monitoring.md](./77-fusion-energy-monitoring.md) | 6+ | DaemonSet、Deployment、HostNetwork |
-| 78 | **深海探测** | [78-deep-sea-exploration.md](./78-deep-sea-exploration.md) | 5+ | Deployment、DaemonSet |
-| 79 | **极地科考** | [79-polar-research.md](./79-polar-research.md) | 5+ | DaemonSet、Deployment |
-| 80 | **TSN 时间敏感网络** | [80-tsn-network.md](./80-tsn-network.md) | 7+ | Deployment、DaemonSet、HostNetwork |
-| 81 | **智慧海关** | [81-smart-customs.md](./81-smart-customs.md) | 6+ | GPU、Deployment、HPA |
-| 82 | **司法科技** | [82-legaltech.md](./82-legaltech.md) | 5+ | Deployment、NLP、Blockchain |
-| 83 | **文化数字化** | [83-cultural-digitization.md](./83-cultural-digitization.md) | 5+ | GPU、OSS、CDN |
-| 84 | **国家公园** | [84-national-park.md](./84-national-park.md) | 5+ | ACK Edge、IoT、AI |
-| 85 | **氢能源** | [85-hydrogen-energy.md](./85-hydrogen-energy.md) | 5+ | DaemonSet、IoT、Edge |
-| 86 | **固态电池** | [86-solid-state-battery.md](./86-solid-state-battery.md) | 5+ | GPU、E-HPC、Job |
-| 87 | **柔性制造** | [87-flexible-manufacturing.md](./87-flexible-manufacturing.md) | 5+ | Deployment、AI、HPA |
-| 88 | **纳米材料** | [88-nanomaterials.md](./88-nanomaterials.md) | 5+ | GPU、E-HPC、Job |
-| 89 | **CRISPR 基因编辑** | [89-crispr-gene-editing.md](./89-crispr-gene-editing.md) | 5+ | Deployment、E-HPC |
-| 90 | **类脑计算** | [90-neuromorphic-computing.md](./90-neuromorphic-computing.md) | 5+ | GPU、Deployment、HPA |
+| 18 | **数据中台** | [18-data-midplatform-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/18-data-midplatform-architecture.md) | 8+ | Airflow、Spark Operator、Kyverno、Pod Topology Spread |
+| 19 | **云原生 DevOps** | [19-cloudnative-devops-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/19-cloudnative-devops-architecture.md) | 7+ | Tekton、[[23-实体/08-交付与制品/argocd.md|argocd]]、Ingress-Nginx、Cluster Autoscaler |
+| 20 | **微服务治理** | [20-microservice-governance-architecture.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/20-microservice-governance-architecture.md) | 9+ | OpenTelemetry、[[23-实体/07-可观测性/jaeger.md|Jaeger]]、[[23-实体/04-网络/istio.md|Istio]]、mTLS、Sidecar |
+| 21 | **跨境电商** | [21-cross-border-ecommerce.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/21-cross-border-ecommerce.md) | 9+ | HPA、KEDA、NetworkPolicy、Pod Topology Spread |
+| 22 | **新能源车联网** | [22-nev-connected-vehicle.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/22-nev-connected-vehicle.md) | 8+ | DaemonSet、KubeEdge、StatefulSet、CronJob |
+| 23 | **信创替代** | [23-xinchuang-it-innovation.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/23-xinchuang-it-innovation.md) | 7+ | NodeSelector、arm64、Pod Security、NetworkPolicy |
+| 24 | **保险科技** | [24-insurtech.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/24-insurtech.md) | 8+ | StatefulSet、GPU、HPA、CronJob |
+| 25 | **证券量化交易** | [25-quantitative-trading.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/25-quantitative-trading.md) | 7+ | DaemonSet、FPGA、HostNetwork、Privileged |
+| 26 | **航空出行** | [26-aviation-travel.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/26-aviation-travel.md) | 7+ | HPA、StatefulSet、Pod AntiAffinity |
+| 27 | **酒店旅游** | [27-hospitality-tourism.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/27-hospitality-tourism.md) | 6+ | HPA、Deployment、NodeSelector |
+| 28 | **房地产科技** | [28-proptech.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/28-proptech.md) | 6+ | GPU、DaemonSet、IoT |
+| 29 | **农业物联网** | [29-agritech-iot.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/29-agritech-iot.md) | 6+ | KubeEdge、DaemonSet、CronJob |
+| 30 | **人力资源 SaaS** | [30-hrtech-saas.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/30-hrtech-saas.md) | 8+ | vCluster、NetworkPolicy、ResourceQuota、CronJob |
+| 31 | **即时零售** | [31-instant-retail.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/31-instant-retail.md) | 8+ | KEDA、HPA、NetworkPolicy、Pod AntiAffinity |
+| 32 | **智慧餐饮** | [32-smart-restaurant.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/32-smart-restaurant.md) | 6+ | Deployment、HPA、CronJob |
+| 33 | **跨境电商海外仓** | [33-crossborder-warehouse.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/33-crossborder-warehouse.md) | 6+ | Deployment、StatefulSet、HPA |
+| 34 | **体育科技** | [34-sportstech.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/34-sportstech.md) | 7+ | HPA、StatefulSet、Pod AntiAffinity |
+| 35 | **元宇宙数字孪生** | [35-metaverse-digital-twin.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/35-metaverse-digital-twin.md) | 7+ | GPU、Deployment、HostNetwork |
+| 36 | **碳资产管理 ESG** | [36-carbon-esg-management.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/36-carbon-esg-management.md) | 6+ | Deployment、CronJob、Blockchain |
+| 37 | **宠物经济** | [37-pet-economy.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/37-pet-economy.md) | 5+ | Deployment、HPA |
+| 38 | **供应链金融** | [38-supply-chain-finance.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/38-supply-chain-finance.md) | 6+ | Deployment、Blockchain |
+| 39 | **智慧园区** | [39-smart-campus.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/39-smart-campus.md) | 7+ | Deployment、DaemonSet、CronJob |
+| 40 | **云游戏** | [40-cloud-gaming.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/40-cloud-gaming.md) | 8+ | GPU、HPA、WebRTC、StatefulSet |
+| 41 | **美妆电商** | [41-beauty-ecommerce.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/41-beauty-ecommerce.md) | 8+ | GPU、HPA、Deployment、PersistentVolume |
+| 42 | **二手交易** | [42-secondhand-circular.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/42-secondhand-circular.md) | 7+ | GPU、Deployment、HPA |
+| 43 | **企业即时通讯** | [43-enterprise-im.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/43-enterprise-im.md) | 9+ | StatefulSet、HostNetwork、HPA、PersistentVolume |
+| 44 | **数字营销广告科技** | [44-martech-adtech.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/44-martech-adtech.md) | 7+ | Deployment、HPA、NodeSelector |
+| 45 | **智慧港口航运** | [45-smart-port-shipping.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/45-smart-port-shipping.md) | 7+ | Deployment、DaemonSet、HPA |
+| 46 | **卫星互联网** | [46-satellite-internet.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/46-satellite-internet.md) | 6+ | Deployment、NodeSelector |
+| 47 | **智慧矿山** | [47-smart-mining.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/47-smart-mining.md) | 6+ | DaemonSet、HostNetwork |
+| 48 | **职业教育培训** | [48-vocational-edtech.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/48-vocational-edtech.md) | 7+ | GPU、StatefulSet、Deployment |
+| 49 | **直播电商** | [49-livestream-ecommerce.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/49-livestream-ecommerce.md) | 9+ | HostNetwork、HPA、Deployment |
+| 50 | **无人零售** | [50-unmanned-retail.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/50-unmanned-retail.md) | 8+ | GPU、DaemonSet、Deployment |
+| 51 | **智能制造 MES** | [51-smart-manufacturing-mes.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/51-smart-manufacturing-mes.md) | 9+ | DaemonSet、GPU、StatefulSet、HPA |
+| 52 | **智慧水务** | [52-smart-water.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/52-smart-water.md) | 7+ | Deployment、CronJob、DaemonSet |
+| 53 | **新零售 DTC** | [53-new-retail-dtc.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/53-new-retail-dtc.md) | 6+ | Deployment、HPA、Pod AntiAffinity |
+| 54 | **社交游戏元宇宙** | [54-social-gaming-metaverse.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/54-social-gaming-metaverse.md) | 7+ | StatefulSet、HostNetwork、GPU、HPA |
+| 55 | **跨境电商独立站** | [55-crossborder-dtc.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/55-crossborder-dtc.md) | 7+ | Deployment、HPA、Pod AntiAffinity |
+| 56 | **智慧养老** | [56-smart-elderly-care.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/56-smart-elderly-care.md) | 6+ | Deployment、HPA、DaemonSet |
+| 57 | **数字疗法** | [57-digital-therapeutics.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/57-digital-therapeutics.md) | 6+ | Deployment、HPA、CronJob |
+| 58 | **Web3 GameFi** | [58-web3-gamefi.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/58-web3-gamefi.md) | 6+ | Deployment、HPA、StatefulSet |
+| 59 | **工业互联网平台** | [59-industrial-internet-platform.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/59-industrial-internet-platform.md) | 7+ | Deployment、DaemonSet、HPA、StatefulSet |
+| 60 | **车路协同自动驾驶** | [60-v2x-autonomous-driving.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/60-v2x-autonomous-driving.md) | 8+ | GPU、DaemonSet、Deployment、HostNetwork |
+| 61 | **智慧电网** | [61-smart-grid.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/61-smart-grid.md) | 8+ | GPU、DaemonSet、StatefulSet、HPA |
+| 62 | **分布式能源** | [62-distributed-energy.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/62-distributed-energy.md) | 6+ | Deployment、CronJob、DaemonSet |
+| 63 | **工业视觉检测** | [63-industrial-visual-inspection.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/63-industrial-visual-inspection.md) | 7+ | GPU、Job、Deployment、PersistentVolume |
+| 64 | **AI 制药** | [64-ai-drug-discovery.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/64-ai-drug-discovery.md) | 6+ | GPU、Job、Deployment、PersistentVolume |
+| 65 | **自动驾驶仿真** | [65-autonomous-driving-sim.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/65-autonomous-driving-sim.md) | 7+ | GPU、Deployment、HPA |
+| 66 | **太空互联网** | [66-space-internet.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/66-space-internet.md) | 6+ | Deployment、NodeSelector |
+| 67 | **脑机接口** | [67-brain-computer-interface.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/67-brain-computer-interface.md) | 6+ | GPU、Deployment、HPA |
+| 68 | **量子计算云** | [68-quantum-computing-cloud.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/68-quantum-computing-cloud.md) | 5+ | Deployment、HPA |
+| 69 | **6G 核心网** | [69-6g-core-network.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/69-6g-core-network.md) | 6+ | Deployment、HPA、StatefulSet |
+| 70 | **数字人民币** | [70-ecny-cbdc.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/70-ecny-cbdc.md) | 9+ | StatefulSet、Deployment、HPA、Secret |
+| 71 | **智慧税务** | [71-smart-tax.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/71-smart-tax.md) | 8+ | Deployment、GPU、HPA、StatefulSet |
+| 72 | **数字孪生城市** | [72-digital-twin-city.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/72-digital-twin-city.md) | 7+ | GPU、Deployment、PersistentVolume |
+| 73 | **智慧消防** | [73-smart-firefighting.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/73-smart-firefighting.md) | 7+ | GPU、Deployment、DaemonSet |
+| 74 | **沉浸式 XR** | [74-immersive-xr.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/74-immersive-xr.md) | 7+ | GPU、Deployment、HPA |
+| 75 | **情感计算 AI** | [75-affective-computing.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/75-affective-computing.md) | 6+ | GPU、Deployment、HPA |
+| 76 | **合成生物学** | [76-synthetic-biology.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/76-synthetic-biology.md) | 6+ | GPU、Job、Deployment、PersistentVolume |
+| 77 | **可控核聚变监控** | [77-fusion-energy-monitoring.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/77-fusion-energy-monitoring.md) | 6+ | DaemonSet、Deployment、HostNetwork |
+| 78 | **深海探测** | [78-deep-sea-exploration.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/78-deep-sea-exploration.md) | 5+ | Deployment、DaemonSet |
+| 79 | **极地科考** | [79-polar-research.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/79-polar-research.md) | 5+ | DaemonSet、Deployment |
+| 80 | **TSN 时间敏感网络** | [80-tsn-network.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/80-tsn-network.md) | 7+ | Deployment、DaemonSet、HostNetwork |
+| 81 | **智慧海关** | [81-smart-customs.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/81-smart-customs.md) | 6+ | GPU、Deployment、HPA |
+| 82 | **司法科技** | [82-legaltech.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/82-legaltech.md) | 5+ | Deployment、NLP、Blockchain |
+| 83 | **文化数字化** | [83-cultural-digitization.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/83-cultural-digitization.md) | 5+ | GPU、OSS、CDN |
+| 84 | **国家公园** | [84-national-park.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/84-national-park.md) | 5+ | ACK Edge、IoT、AI |
+| 85 | **氢能源** | [85-hydrogen-energy.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/85-hydrogen-energy.md) | 5+ | DaemonSet、IoT、Edge |
+| 86 | **固态电池** | [86-solid-state-battery.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/86-solid-state-battery.md) | 5+ | GPU、E-HPC、Job |
+| 87 | **柔性制造** | [87-flexible-manufacturing.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/87-flexible-manufacturing.md) | 5+ | Deployment、AI、HPA |
+| 88 | **纳米材料** | [88-nanomaterials.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/88-nanomaterials.md) | 5+ | GPU、E-HPC、Job |
+| 89 | **CRISPR 基因编辑** | [89-crispr-gene-editing.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/89-crispr-gene-editing.md) | 5+ | Deployment、E-HPC |
+| 90 | **类脑计算** | [90-neuromorphic-computing.md](../../../04-%E5%BA%94%E7%94%A8%E6%A8%A1%E5%BC%8F/02-%E8%A1%8C%E4%B8%9A%E6%9E%B6%E6%9E%84/90-neuromorphic-computing.md) | 5+ | GPU、Deployment、HPA |
 
 ---
 
@@ -216,7 +216,7 @@ related_topics:
 |:---|:---|:---|
 | 网络隔离 | 多租户/金融 | NetworkPolicy + Cilium |
 | 密钥管理 | 所有敏感配置 | Vault + Secrets Store CSI |
-| 运行时安全 | 容器安全 | [[实体/falco.md|Falco]] + AppArmor + Seccomp |
+| 运行时安全 | 容器安全 | [[23-实体/06-安全/falco.md|Falco]] + AppArmor + Seccomp |
 | 合规审计 | 金融/政务 | Audit Policy + 不可变日志 |
 
 ---

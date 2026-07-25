@@ -446,7 +446,7 @@ journalctl --vacuum-size=500M
 
 - [[18-云厂商/07-多云混合/11-multicloud-comparison-decision-matrix|多云对比决策矩阵]]
 - [[18-云厂商/06-华为云CCE/06-cce-production-best-practices|华为 CCE 生产实践]]
-- [[05-网络/cni-plugins|CNI 插件]]
-- [[06-存储/csi-drivers|CSI 驱动]]
+- [[23-实体/02-K8s核心组件/cni-plugins|CNI 插件]]
+- [[22-概念/04-存储/csi-drivers|CSI 驱动]]
 - [[10-平台工程/03-治理/10-security-compliance|安全合规]]
-- [[09-可观测性/prometheus|Prometheus 监控]]
+- [[23-实体/07-可观测性/prometheus|Prometheus 监控]]

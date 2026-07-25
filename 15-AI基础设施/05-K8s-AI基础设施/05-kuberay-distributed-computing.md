@@ -574,4 +574,4 @@ curl -s http://ray-head-svc:52365/api/serve/applications/ | jq .
 - [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]
 - [[22-概念/07-调度与资源/gang-scheduling]]
 - [[15-AI基础设施/01-基础设施/04-gpu-monitoring-dcgm]]
-- [[19-故障诊断/]]
+- [[19-故障诊断/index.md|19-故障诊断]]

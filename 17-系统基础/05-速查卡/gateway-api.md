@@ -487,10 +487,10 @@ spec:
 
 ## 交叉引用
 
-- [Ingress](ingress.md) — 被 Gateway API 取代的旧方案
-- [Ingress Controllers](ingress-controllers.md) — 多数控制器同时支持 Ingress 和 Gateway API
-- [Service](service.md) — Gateway API 后端指向的 Service
-- [Service Mesh](service-mesh.md) — Istio 通过 Gateway API 管理服务网格流量
+- [Ingress](../06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/ingress.md) — 被 Gateway API 取代的旧方案
+- [Ingress Controllers](../06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/ingress-controllers.md) — 多数控制器同时支持 Ingress 和 Gateway API
+- [Service](../06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/service.md) — Gateway API 后端指向的 Service
+- [Service Mesh](../06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/service-mesh.md) — Istio 通过 Gateway API 管理服务网格流量
 
 ## 参考链接
 

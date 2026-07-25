@@ -1718,12 +1718,12 @@ subjects:
 - [11 - 扩缩容与 HPA 事件](./11-scaling-hpa-events.md)
 
 ## Domain-5: 网络深度解析
-- [30 - Service Mesh 深度解析](../网络/30-service-mesh-deep-dive.md)
-- [35 - Gateway API 概览](../网络/35-gateway-api-overview.md)
+- [30 - Service Mesh 深度解析](../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/30-service-mesh-deep-dive.md)
+- [35 - Gateway API 概览](../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md)
 
 ## Topic-Structural-Troubleshooting
-- [01 - API Server 故障排查](../故障诊断/高级排障/01-control-plane/01-apiserver-troubleshooting.md)
-- [05 - Webhook Admission 故障排查](../故障诊断/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md)
+- [01 - API Server 故障排查](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-01-control-plane/01-apiserver-troubleshooting.md)
+- [05 - Webhook Admission 故障排查](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-01-control-plane/05-webhook-admission-troubleshooting.md)
 
 ## Topic-Dictionary
 - [05 - 概念速查手册](../系统基础/知识字典/05-concept-reference.md)

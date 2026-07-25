@@ -291,7 +291,7 @@ authors:
           所有主流 API 网关支持 Gateway API 作为标准接口
 ```
 
-> 详细的 Gateway API 技术解析请参考 [02-Kubernetes Gateway API 标准深度解析](./02-kubernetes-gateway-api-deep-dive.md) 以及 [Domain-5: 网络 - Gateway API 概览](../网络/35-gateway-api-overview.md)。
+> 详细的 Gateway API 技术解析请参考 [02-Kubernetes Gateway API 标准深度解析](./02-kubernetes-gateway-api-deep-dive.md) 以及 [Domain-5: 网络 - Gateway API 概览](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md)。
 
 ## 7. 产品选型决策树
 
@@ -325,7 +325,7 @@ authors:
 
 - [Kubernetes Gateway API 官方文档](https://gateway-api.sigs.k8s.io/)
 - [CNCF Landscape - API Gateway](https://landscape.cncf.io/)
-- [Domain-5: 网络 - Ingress 与 API Gateway 对比表](../网络/36-api-gateway-patterns.md)
+- [Domain-5: 网络 - Ingress 与 API Gateway 对比表](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/36-api-gateway-patterns.md)
 - [Domain-26: 服务网格与微服务治理](../网络)
 
 ---

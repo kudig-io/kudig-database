@@ -740,7 +740,7 @@ groups:
 
 ## Related
 
-- [[21-生态参考/topic-index/observability-index|Observability 可观测性知识图谱索引]]
+- [[21-生态参考/03-领域索引/observability-index|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -293,7 +293,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - domain-20-enterprise-monitoring-alerting MOC
-- [[可观测性/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
+- [[09-可观测性/README.md|Domain 06: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]
 - Prometheus企业级监控系统深度实践
 - Grafana Enterprise Observability Platform 深度实践
 - OpenTelemetry分布式追踪与可观测性深度实践
@@ -307,11 +307,11 @@ cross_refs:
 
 ## See Also
 
-- [[可观测性/07-tools/26-troubleshooting-tools.md|26-troubleshooting-tools]]
-- [[可观测性/07-tools/27-performance-profiling-tools.md|27-performance-profiling-tools]]
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-可观测性]]
-- [[可观测性/98-merged-indexes/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
+- [[09-可观测性/07-工具/26-troubleshooting-tools.md|26-troubleshooting-tools]]
+- [[09-可观测性/07-工具/27-performance-profiling-tools.md|27-performance-profiling-tools]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

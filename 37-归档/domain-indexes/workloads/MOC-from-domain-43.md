@@ -67,12 +67,12 @@ Java on Kubernetes — Java 应用部署与调优
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[工作负载/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]] |  | java, k8s, production |  |
-| 2 | [[工作负载/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]] |  | java, k8s, performance |  |
-| 3 | [[工作负载/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]] |  | java, k8s |  |
-| 4 | [[工作负载/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]] |  | java, k8s |  |
-| 5 | [[工作负载/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]] |  | java, k8s |  |
-| 6 | [[工作负载/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]] |  | java, k8s, observability |  |
+| 1 | [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]] |  | java, k8s, production |  |
+| 2 | [[02-工作负载/02-Java-on-K8s/03-jvm-gc-container-tuning.md|JVM GC 容器调优深度指南]] |  | java, k8s, performance |  |
+| 3 | [[02-工作负载/02-Java-on-K8s/04-java-operator-sdk-development.md|Java Operator SDK 开发指南]] |  | java, k8s |  |
+| 4 | [[02-工作负载/02-Java-on-K8s/05-quarkus-native-kubernetes.md|Quarkus Native 编译与 Kubernetes 部署指南]] |  | java, k8s |  |
+| 5 | [[02-工作负载/02-Java-on-K8s/06-java-cicd-tekton-argocd.md|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南]] |  | java, k8s |  |
+| 6 | [[02-工作负载/02-Java-on-K8s/07-java-observability-kubernetes.md|Java 可观测性 on Kubernetes 实践指南]] |  | java, k8s, observability |  |
 
 ---
 
@@ -88,8 +88,8 @@ Java on Kubernetes — Java 应用部署与调优
 
 ## Related
 
-- [[工作负载/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[工作负载/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
+- [[02-工作负载/02-Java-on-K8s/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
 
 
 <!-- risk-assessed -->

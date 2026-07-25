@@ -337,8 +337,8 @@ flowchart TD
 
 ## Related
 
-- [[21-生态参考/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[21-生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
+- [[21-生态参考/03-领域索引/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[21-生态参考/03-领域索引/etcd-index|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

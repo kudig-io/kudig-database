@@ -35,7 +35,7 @@ prerequisites:
 
 # 产品对比表
 
-> kudig-database 与市面上主流 [[实体/kubernetes.md|k8s]] 知识来源的全维度对比
+> kudig-database 与市面上主流 [[23-实体/02-K8s核心组件/kubernetes.md|k8s]] 知识来源的全维度对比
 
 ---
 

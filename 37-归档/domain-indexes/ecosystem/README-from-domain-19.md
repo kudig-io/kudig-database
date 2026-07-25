@@ -74,52 +74,52 @@ prerequisites:
 ## 📚 文档目录
 
 ### 🎯 基础评估与规划 (01-02)
-- **[01-Kubernetes生产就绪性评估框架](./01-kubernetes-production-readiness-assessment.md)** - 系统性评估Kubernetes集群生产就绪程度
-- **[02-Kubernetes大规模集群性能优化](./02-kubernetes-large-scale-performance-optimization.md)** - 5000+节点集群性能调优深度实践
+- **[01-Kubernetes生产就绪性评估框架](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/01-kubernetes-production-readiness-assessment.md)** - 系统性评估Kubernetes集群生产就绪程度
+- **[02-Kubernetes大规模集群性能优化](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/02-kubernetes-large-scale-performance-optimization.md)** - 5000+节点集群性能调优深度实践
 
 ### 🛡️ 安全与合规 (03, 20, 24)
-- **[03-Kubernetes安全零信任架构实施](./03-kubernetes-zero-trust-security-architecture.md)** - 企业级零信任安全架构设计与实施
-- **[20-Kubernetes供应链安全实践](./20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)** - 🆕 SBOM/SLSA/Sigstore供应链安全体系
-- **[24-Kubernetes策略即代码与治理自动化](./24-kubernetes-policy-as-code-governance-automation.md)** - 🆕 Kyverno/OPA/ValidatingAdmissionPolicy策略治理
+- **[03-Kubernetes安全零信任架构实施](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/03-kubernetes-zero-trust-security-architecture.md)** - 企业级零信任安全架构设计与实施
+- **[20-Kubernetes供应链安全实践](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/20-kubernetes-supply-chain-security-sbom-slsa-sigstore.md)** - 🆕 SBOM/SLSA/Sigstore供应链安全体系
+- **[24-Kubernetes策略即代码与治理自动化](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/24-kubernetes-policy-as-code-governance-automation.md)** - 🆕 Kyverno/OPA/ValidatingAdmissionPolicy策略治理
 
 ### ☁️ 架构与部署 (04-05)
-- **[04-Kubernetes多云混合部署架构](./04-kubernetes-multi-cloud-hybrid-deployment.md)** - 企业级多云战略实施指南
-- **[05-Kubernetes GitOps完整实践指南](./05-kubernetes-gitops-complete-practice-guide.md)** - 声明式运维和自动化部署实践
+- **[04-Kubernetes多云混合部署架构](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/04-kubernetes-multi-cloud-hybrid-deployment.md)** - 企业级多云战略实施指南
+- **[05-Kubernetes GitOps完整实践指南](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/05-kubernetes-gitops-complete-practice-guide.md)** - 声明式运维和自动化部署实践
 
 ### 💰 成本与治理 (06)
-- **[06-Kubernetes成本治理与FinOps实践](./06-kubernetes-cost-governance-finops-practice.md)** - 企业级成本管控和优化策略
+- **[06-Kubernetes成本治理与FinOps实践](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/06-kubernetes-cost-governance-finops-practice.md)** - 企业级成本管控和优化策略
 
 ### 💾 存储与网络 (07-08, 18-19)
-- **[07-Kubernetes CSI存储深度实践](./07-kubernetes-csi-storage-deep-practice.md)** - 容器存储接口架构与优化
-- **[08-Kubernetes网络策略与安全微隔离](./08-kubernetes-network-policies-security-micro-segmentation.md)** - 网络安全与微隔离实践
-- **[18-Kubernetes eBPF与Cilium深度实践](./18-kubernetes-ebpf-cilium-deep-practice.md)** - 🆕 Cilium CNI、Tetragon运行时安全、Hubble可观测性
-- **[19-Kubernetes Gateway API与现代流量管理](./19-kubernetes-gateway-api-modern-traffic-management.md)** - 🆕 Gateway API替代Ingress、NGINX迁移指南
+- **[07-Kubernetes CSI存储深度实践](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/07-kubernetes-csi-storage-deep-practice.md)** - 容器存储接口架构与优化
+- **[08-Kubernetes网络策略与安全微隔离](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/08-kubernetes-network-policies-security-micro-segmentation.md)** - 网络安全与微隔离实践
+- **[18-Kubernetes eBPF与Cilium深度实践](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/18-kubernetes-ebpf-cilium-deep-practice.md)** - 🆕 Cilium CNI、Tetragon运行时安全、Hubble可观测性
+- **[19-Kubernetes Gateway API与现代流量管理](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/19-kubernetes-gateway-api-modern-traffic-management.md)** - 🆕 Gateway API替代Ingress、NGINX迁移指南
 
 ### 🌐 服务治理 (09)
-- **[09-Kubernetes服务网格Istio集成](./09-kubernetes-service-mesh-istio-integration.md)** - 服务网格架构与Istio Ambient Mesh实践
+- **[09-Kubernetes服务网格Istio集成](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/09-kubernetes-service-mesh-istio-integration.md)** - 服务网格架构与Istio Ambient Mesh实践
 
 ### ⚙️ 运维自动化 (10, 23)
-- **[10-Kubernetes自动化运维与SRE实践](./10-kubernetes-automation-sre-practices.md)** - SRE理念与自动化运维体系
-- **[23-Kubernetes OpenTelemetry原生可观测性](./23-kubernetes-opentelemetry-native-observability.md)** - 🆕 OTel Collector、自动仪表化、统一可观测性
+- **[10-Kubernetes自动化运维与SRE实践](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/10-kubernetes-automation-sre-practices.md)** - SRE理念与自动化运维体系
+- **[23-Kubernetes OpenTelemetry原生可观测性](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/23-kubernetes-opentelemetry-native-observability.md)** - 🆕 OTel Collector、自动仪表化、统一可观测性
 
 ### 🔧 控制平面优化 (11-12)
-- **[11-Kubernetes API Server深度优化](./11-kubernetes-api-server-deep-optimization-extension.md)** - API Server架构与扩展机制
-- **[12-Kubernetes调度器深度优化](./12-kubernetes-scheduler-deep-optimization-custom-scheduling.md)** - 调度算法与自定义调度
+- **[11-Kubernetes API Server深度优化](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/11-kubernetes-api-server-deep-optimization-extension.md)** - API Server架构与扩展机制
+- **[12-Kubernetes调度器深度优化](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md)** - 调度算法与自定义调度
 
 ### 🏢 多租户与平台工程 (13-14, 21, 26)
-- **[13-Kubernetes多租户安全隔离](./13-kubernetes-multi-tenancy-security-isolation-resource-quota.md)** - 多租户平台架构与安全管理
-- **[14-Kubernetes事件驱动架构](./14-kubernetes-event-driven-architecture-asynchronous-processing.md)** - 事件驱动架构与异步处理
-- **[21-Kubernetes平台工程与内部开发者平台](./21-kubernetes-platform-engineering-internal-developer-platform.md)** - 🆕 Backstage IDP、黄金路径、开发者体验
-- **[26-Kubernetes vCluster与虚拟集群多租户](./26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)** - 🆕 vCluster虚拟集群、轻量级多租户
+- **[13-Kubernetes多租户安全隔离](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/13-kubernetes-multi-tenancy-security-isolation-resource-quota.md)** - 多租户平台架构与安全管理
+- **[14-Kubernetes事件驱动架构](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/14-kubernetes-event-driven-architecture-asynchronous-processing.md)** - 事件驱动架构与异步处理
+- **[21-Kubernetes平台工程与内部开发者平台](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/21-kubernetes-platform-engineering-internal-developer-platform.md)** - 🆕 Backstage IDP、黄金路径、开发者体验
+- **[26-Kubernetes vCluster与虚拟集群多租户](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/26-kubernetes-vcluster-virtual-cluster-multi-tenancy.md)** - 🆕 vCluster虚拟集群、轻量级多租户
 
 ### 🔬 高级测试与边缘计算 (15-16, 22)
-- **[15-Kubernetes混沌工程故障注入](./15-kubernetes-chaos-engineering-fault-injection-testing.md)** - 混沌工程实践与系统韧性测试
-- **[16-Kubernetes边缘计算KubeEdge](./16-kubernetes-edge-computing-kubeedge-practice.md)** - 边缘计算架构与KubeEdge实践
-- **[22-Kubernetes WebAssembly工作负载](./22-kubernetes-webassembly-wasm-workloads.md)** - 🆕 SpinKube、[[实体/wasmcloud.md|wasmcloud]]、Wasm运行时
+- **[15-Kubernetes混沌工程故障注入](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/15-kubernetes-chaos-engineering-fault-injection-testing.md)** - 混沌工程实践与系统韧性测试
+- **[16-Kubernetes边缘计算KubeEdge](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/16-kubernetes-edge-computing-kubeedge-practice.md)** - 边缘计算架构与KubeEdge实践
+- **[22-Kubernetes WebAssembly工作负载](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/22-kubernetes-webassembly-wasm-workloads.md)** - 🆕 SpinKube、[[23-实体/03-运行时/wasmcloud.md|wasmcloud]]、Wasm运行时
 
 ### 🤖 AI/ML与GPU工作负载 (17, 25)
-- **[17-Kubernetes AI/ML GPU调度与LLM推理](./17-kubernetes-aiml-gpu-scheduling-llm-inference.md)** - 🆕 KAI Scheduler、vLLM、Ray on K8s、TPU
-- **[25-GKE Autopilot与Google Cloud AI基础设施](./25-gke-autopilot-google-cloud-ai-infrastructure.md)** - 🆕 GKE Autopilot、TPU Ironwood、Gemini CLI
+- **[17-Kubernetes AI/ML GPU调度与LLM推理](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/17-kubernetes-aiml-gpu-scheduling-llm-inference.md)** - 🆕 KAI Scheduler、vLLM、Ray on K8s、TPU
+- **[25-GKE Autopilot与Google Cloud AI基础设施](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/02-%E8%AE%BA%E6%96%87/25-gke-autopilot-google-cloud-ai-infrastructure.md)** - 🆕 GKE Autopilot、TPU Ironwood、Gemini CLI
 
 ## 🎯 学习路径建议
 

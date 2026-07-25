@@ -57,7 +57,7 @@ authors:
 
 数据库备份是灾难恢复的最后一道防线。在 Kubernetes 环境中，Pod 的短暂性（ephemeral）使得数据持久化和备份策略更加关键。一个完善的备份体系需要覆盖：全量备份、增量备份、WAL 归档（实现 PITR）、备份验证和异地存储。
 
-本文覆盖 PostgreSQL（pgBackRest、WAL-G、barman）和 MySQL（Percona XtraBackup）的备份工具链在 K8s 中的生产实践，是 [[12-可靠性/01-备份恢复/]] 在数据库层的具体实现。
+本文覆盖 PostgreSQL（pgBackRest、WAL-G、barman）和 MySQL（Percona XtraBackup）的备份工具链在 K8s 中的生产实践，是 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]] 在数据库层的具体实现。
 
 ## 架构与核心概念
 
@@ -483,14 +483,14 @@ kubectl exec -n database postgres-primary-0 -- \
 4. **加密存储**：备份文件启用 AES-256 加密（S3 SSE 或 pgBackRest 内置加密）
 5. **保留策略**：全量保留 30 天，WAL 保留 7 天，逻辑备份保留 90 天
 6. **资源隔离**：备份 Job 使用独立 Node Pool 或 ResourceQuota，避免影响在线服务
-7. **监控告警**：备份成功/失败、WAL 归档延迟、备份大小异常均需告警，接入 [[09-可观测性/]]
-8. **恢复演练**：每季度执行一次完整恢复演练，记录 RTO 实际值，参考 [[12-可靠性/01-备份恢复/]]
-9. **Operator 集成**：优先使用 CloudNativePG / Zalando Operator 内置备份能力，参考 [[07-数据库中间件/05-Operator管理/]]
+7. **监控告警**：备份成功/失败、WAL 归档延迟、备份大小异常均需告警，接入 [[09-可观测性/index.md|09-可观测性]]
+8. **恢复演练**：每季度执行一次完整恢复演练，记录 RTO 实际值，参考 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
+9. **Operator 集成**：优先使用 CloudNativePG / Zalando Operator 内置备份能力，参考 [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 
 ## Related
 
-- [[12-可靠性/01-备份恢复/]]
-- [[07-数据库中间件/01-数据库/]]
-- [[09-可观测性/]]
-- [[07-数据库中间件/05-Operator管理/]]
+- [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 - [[07-数据库中间件/08-新型数据库/07-database-observability-pmm.md]]

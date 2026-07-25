@@ -22,8 +22,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[19-故障诊断/04-高级排障/09-command-output/00-command-output-root-cause-parser.md|Command Output Root Cause Parser]]
-- [[19-故障诊断/04-高级排障/09-command-output/01-kubectl-watch-output-parser.md|Kubectl Watch Output Parser]]
+- [[19-故障诊断/04-高级排障/structural-09-command-output/00-command-output-root-cause-parser.md|Command Output Root Cause Parser]]
+- [[19-故障诊断/04-高级排障/structural-09-command-output/01-kubectl-watch-output-parser.md|Kubectl Watch Output Parser]]
 
 
 

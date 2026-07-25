@@ -67,7 +67,7 @@ Minor Improvements:
 * docker/podman drivers: exit with usage when need login to registry [#8225](https://github.com/kubernetes/minikube/pull/8225)
 * multinode: copy apiserver certs only to control plane [#8092](https://github.com/kubernetes/minikube/pull/8092)
 * docker-env: restart dockerd inside minikube on failure [#8239](https://github.com/kubernetes/minikube/pull/8239)
-* wait for [[实体/kubernetes.md|kubernetes components]] on soft start [#8199](https://github.com/kubernetes/minikube/pull/8199)
+* wait for [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes components]] on soft start [#8199](https://github.com/kubernetes/minikube/pull/8199)
 * improve minikube status display for one node [#8238](https://github.com/kubernetes/minikube/pull/8238)
 * improve solution message for wrong kuberentes-version format [#8118](https://github.com/kubernetes/minikube/pull/8118)
 

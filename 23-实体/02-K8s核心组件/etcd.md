@@ -260,7 +260,7 @@ groups:
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
 - [[19-故障诊断/04-高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
 - [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]]
-- [[19-故障诊断/04-高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2
 - [[37-归档/release-notes/core-deps/etcd/RELEASE-NOTES-3.5.md|RELEASE-NOTES-3.5]]
 - [[37-归档/release-notes/core-deps/etcd/RELEASE-NOTES-2.0.md|RELEASE-NOTES-2.0]]

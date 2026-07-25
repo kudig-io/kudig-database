@@ -86,24 +86,24 @@ tier: peripheral---
 ## 📚 文档目录
 
 ### 🎯 供应链安全基础 (01-02)
-- **[01-供应链安全概述](./01-supply-chain-security-overview.md)** - 威胁模型、攻击向量、防护体系
-- **[02-供应链安全成熟度模型](./02-supply-chain-maturity-model.md)** - 成熟度评估、改进路径、合规映射
+- **[01-供应链安全概述](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/01-supply-chain-security-overview.md)** - 威胁模型、攻击向量、防护体系
+- **[02-供应链安全成熟度模型](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/02-supply-chain-maturity-model.md)** - 成熟度评估、改进路径、合规映射
 
 ### 📋 SBOM 软件物料清单 (03-04)
-- **[03-SBOM生成与管理](./03-sbom-generation-management.md)** - Syft、Trivy SBOM、SPDX/CycloneDX 格式
-- **[04-SBOM漏洞分析与治理](./04-sbom-vulnerability-analysis.md)** - Grype、依赖分析、风险评估
+- **[03-SBOM生成与管理](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/03-sbom-generation-management.md)** - Syft、Trivy SBOM、SPDX/CycloneDX 格式
+- **[04-SBOM漏洞分析与治理](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/04-sbom-vulnerability-analysis.md)** - Grype、依赖分析、风险评估
 
 ### 🔐 SLSA 供应链完整性 (05-06)
-- **[05-SLSA级别与实施](./05-slsa-levels-implementation.md)** - SLSA L1-L4、构建证明、来源验证
-- **[06-GitHub Actions SLSA构建](./06-github-actions-slsa-build.md)** - SLSA Generator、Provenance、可复现构建
+- **[05-SLSA级别与实施](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/05-slsa-levels-implementation.md)** - SLSA L1-L4、构建证明、来源验证
+- **[06-GitHub Actions SLSA构建](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/06-github-actions-slsa-build.md)** - SLSA Generator、Provenance、可复现构建
 
 ### ✍️ Sigstore 签名验证 (07-08)
-- **[07-Sigstore与Cosign签名](./07-sigstore-cosign-signing.md)** - Keyless 签名、Cosign 工作流、OIDC 集成
-- **[08-Fulcio与Rekor透明日志](./08-fulcio-rekor-transparency.md)** - 证书颁发、透明日志、审计追踪
+- **[07-Sigstore与Cosign签名](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/07-sigstore-cosign-signing.md)** - Keyless 签名、Cosign 工作流、OIDC 集成
+- **[08-Fulcio与Rekor透明日志](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/08-fulcio-rekor-transparency.md)** - 证书颁发、透明日志、审计追踪
 
 ### 🛡️ 策略与合规 (09-10)
-- **[09-Policy Controller镜像验证](./09-policy-controller-verification.md)** - Kyverno/Gatekeeper 签名验证、准入控制
-- **[10-合规自动化与审计](./10-compliance-automation-audit.md)** - SOC 2、PCI-DSS、FedRAMP 合规自动化
+- **[09-Policy Controller镜像验证](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/09-policy-controller-verification.md)** - Kyverno/Gatekeeper 签名验证、准入控制
+- **[10-合规自动化与审计](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/10-compliance-automation-audit.md)** - SOC 2、PCI-DSS、FedRAMP 合规自动化
 
 ## 🎯 学习路径建议
 
@@ -172,11 +172,11 @@ OPA/Gatekeeper                  # 通用策略引擎
 
 ## See Also
 
-- [[安全/98-merged-indexes/MOC-from-domain-7.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/README-from-domain-25.md|README-from-安全]]
-- [[安全/98-merged-indexes/README-from-domain-7.md|README-from-安全]]
-- [[安全/01-identity-access/01-authentication-authorization-system.md|01-authentication-authorization-system]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-7.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/README-from-domain-25.md|README-from-安全]]
+- [[37-归档/domain-indexes/security/README-from-domain-7.md|README-from-安全]]
+- [[08-安全/01-身份与访问/01-authentication-authorization-system.md|01-authentication-authorization-system]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

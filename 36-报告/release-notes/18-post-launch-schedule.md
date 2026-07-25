@@ -44,7 +44,7 @@ prerequisites:
 
 ### 内容
 
-**主文**: 《kudig-database: 为 AI Agent 打造的 [[实体/kubernetes.md|k8s]] 生产运维知识库正式开源》
+**主文**: 《kudig-database: 为 AI Agent 打造的 [[23-实体/02-K8s核心组件/kubernetes.md|k8s]] 生产运维知识库正式开源》
 - 产品介绍 + 核心数据 (3,346 篇 / 218 CNCF / 982 QA 对)
 - 4 个演示场景截图/GIF
 - Quick Start 代码片段

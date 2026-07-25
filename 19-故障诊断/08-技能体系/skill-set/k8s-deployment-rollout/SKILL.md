@@ -154,7 +154,7 @@ bash scripts/verify-deployment.sh <namespace> <deployment-name>
 | RC-006 | 调度约束无法满足（亲和性/tolerations） | 中 | REM-006 调整调度 | MEDIUM |
 | RC-007 | 初始化容器（Init Container）失败 | 中 | REM-007 修复 init | MEDIUM |
 
-> 完整根因详情见 [reference/root-cause-catalog.md](./reference/root-cause-catalog.md)
+> 完整根因详情见 [reference/root-cause-catalog.md](../k8s-node-notready/reference/root-cause-catalog.md)
 > 完整修复步骤见 [reference/remediation-playbook.md](./reference/remediation-playbook.md)
 
 ## 关联资源
@@ -162,8 +162,8 @@ bash scripts/verify-deployment.sh <namespace> <deployment-name>
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 根因目录 | [reference/root-cause-catalog.md](./reference/root-cause-catalog.md) |
-| 单文件完整版 | [../08-deployment-rollout-failure.md](../08-deployment-rollout-failure.md) |
+| 根因目录 | [reference/root-cause-catalog.md](../k8s-node-notready/reference/root-cause-catalog.md) |
+| 单文件完整版 | [../08-deployment-rollout-failure.md](../../08-deployment-rollout-failure.md) |
 
 ## Related
 

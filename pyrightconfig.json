@@ -1,0 +1,29 @@
+{
+  "include": [
+    "31-脚本",
+    "35-元数据",
+    "19-故障诊断",
+    "30-站点/*.py",
+    "32-发布/*.py",
+    ".claude/scripts"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.git",
+    ".venv",
+    "33-源码",
+    "34-源码分析",
+    "37-归档",
+    "28-资产",
+    ".zread",
+    ".understand-anything",
+    ".ruff_cache",
+    ".qoder",
+    ".obsidian"
+  ],
+  "venvPath": ".",
+  "venv": ".venv",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": "warning"
+}

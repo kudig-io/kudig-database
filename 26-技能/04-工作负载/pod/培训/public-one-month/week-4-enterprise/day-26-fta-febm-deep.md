@@ -571,10 +571,10 @@ spec:
 
 ## 延伸阅读
 
-- [文件: `../../故障诊断/FTA故障树/23-fta-production-quick-start.md`](../../故障诊断/FTA故障树/23-fta-production-quick-start.md)
-- [文件: `../../故障诊断/FTA故障树/kubernetes-fta-full-analysis.md`](../../故障诊断/FTA故障树/kubernetes-fta-full-analysis.md)
-- [文件: `../../故障诊断/FEBM方法论/08-febm-production-quick-start.md`](../../故障诊断/FEBM方法论/08-febm-production-quick-start.md)
-- [文件: `../../故障诊断/FTA故障树/10-agent-orchestration-patterns.md`](../../故障诊断/FTA故障树/10-agent-orchestration-patterns.md)
+- [文件: `../../故障诊断/FTA故障树/23-fta-production-quick-start.md`](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/23-fta-production-quick-start.md)
+- [文件: `../../故障诊断/FTA故障树/kubernetes-fta-full-analysis.md`](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/kubernetes-fta-full-analysis.md)
+- [文件: `../../故障诊断/FEBM方法论/08-febm-production-quick-start.md`](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/08-febm-production-quick-start.md)
+- [文件: `../../故障诊断/FTA故障树/10-agent-orchestration-patterns.md`](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/10-agent-orchestration-patterns.md)
 - [NASA FTA Handbook](https://ntrs.nasa.gov/citations/20020003100)
 - [Google SRE Book - Understanding Outages](https://sre.google/sre-book/understanding-outages/)
 

@@ -521,8 +521,8 @@ Day 7 将学习集群证书管理，理解证书类型、过期处理和轮换�
 
 ## 延伸阅读
 
-- [K8s 版本升级策略](../../集群基础/07-upgrade-paths-strategy.md)
-- [升级与迁移策略](../../集群基础/18-upgrade-migration-strategy.md)
+- [K8s 版本升级策略](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/06-%E5%8D%87%E7%BA%A7%E8%B7%AF%E5%BE%84/07-upgrade-paths-strategy.md)
+- [升级与迁移策略](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/06-%E5%8D%87%E7%BA%A7%E8%B7%AF%E5%BE%84/18-upgrade-migration-strategy.md)
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 
 

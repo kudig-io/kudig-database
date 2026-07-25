@@ -56,7 +56,7 @@ authors:
 
 数据库 Schema 变更是应用发布中最危险的环节之一：一个错误的 DDL 可能导致表锁、数据丢失或服务中断。在 Kubernetes 微服务架构中，多个服务可能共享数据库，Schema 变更需要向后兼容且零停机。
 
-本文覆盖主流 Schema 迁移工具（Flyway、gh-ost、Atlas、Liquibase）在 K8s CI/CD 管线中的集成实践，包括迁移策略设计、在线 DDL 原理和故障排查。Schema 迁移是 [[07-数据库中间件/01-数据库/]] 运维的核心能力，与 [[12-可靠性/01-备份恢复/]] 紧密配合确保安全变更。
+本文覆盖主流 Schema 迁移工具（Flyway、gh-ost、Atlas、Liquibase）在 K8s CI/CD 管线中的集成实践，包括迁移策略设计、在线 DDL 原理和故障排查。Schema 迁移是 [[07-数据库中间件/01-数据库/index.md|01-数据库]] 运维的核心能力，与 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]] 紧密配合确保安全变更。
 
 ## 架构与核心概念
 
@@ -407,16 +407,16 @@ kubectl exec -n database mysql-replica-0 -- \
 2. **CI/CD 集成**：迁移作为 ArgoCD PreSync Hook 或 Helm pre-install Hook 执行，确保先于应用部署
 3. **大表变更**：超过 100 万行的表使用 gh-ost（MySQL）或 `CREATE INDEX CONCURRENTLY`（PostgreSQL）
 4. **Expand-Contract**：所有破坏性变更分两阶段发布，确保新旧版本应用兼容
-5. **备份先行**：重大变更前执行全量备份，参考 [[12-可靠性/01-备份恢复/]] 确认 RPO
+5. **备份先行**：重大变更前执行全量备份，参考 [[12-可靠性/01-备份恢复/index.md|01-备份恢复]] 确认 RPO
 6. **锁超时设置**：DDL 前设置 `lock_timeout = '30s'`（PG）或 `lock_wait_timeout = 30`（MySQL），避免无限等待
 7. **变更窗口**：大表 DDL 安排在低峰期，gh-ost 设置 `--max-load` 限制负载
-8. **审计追踪**：所有迁移通过 Git 版本控制，配合 [[09-可观测性/]] 记录变更时间线
-9. **Operator 集成**：如使用 CloudNativePG 等 Operator，可利用其内置的 Schema 管理能力，参考 [[07-数据库中间件/05-Operator管理/]]
+8. **审计追踪**：所有迁移通过 Git 版本控制，配合 [[09-可观测性/index.md|09-可观测性]] 记录变更时间线
+9. **Operator 集成**：如使用 CloudNativePG 等 Operator，可利用其内置的 Schema 管理能力，参考 [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 
 ## Related
 
-- [[07-数据库中间件/01-数据库/]]
-- [[12-可靠性/01-备份恢复/]]
-- [[09-可观测性/]]
-- [[07-数据库中间件/05-Operator管理/]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[12-可靠性/01-备份恢复/index.md|01-备份恢复]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
 - [[07-数据库中间件/08-新型数据库/05-connection-pooling-pgbouncer-proxysql.md]]

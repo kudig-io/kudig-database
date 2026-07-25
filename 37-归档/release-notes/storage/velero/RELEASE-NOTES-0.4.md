@@ -50,7 +50,7 @@ Breaking changes:
 New features:
 - Add support for S3 SSE with KMS (#29)
 - Validate cloud provider configurations & make persistentVolumeProvider optional (#35)
-- Add [[系统基础/topic-dictionary/fundamentals/garbage-collection.md|garbage collection]] of Restore objects (#63)
+- Add [[17-系统基础/06-知识字典/fundamentals/garbage-collection.md|garbage collection]] of Restore objects (#63)
 - Save logs per backup (#40)
 - Save logs per restore (#79)
 - Add `--include-resources/--exclude-resources` for restores (#78)

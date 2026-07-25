@@ -330,9 +330,9 @@ OpenCode 还支持：302.AI、Baseten、Cerebras、Cloudflare AI Gateway、OpenR
 
 | 文档 | 关系 |
 |------|------|
-| [02 - 安装部署](./02-opencode-installation-quickstart.md) | Provider 快速配置 |
-| [04 - Agent 系统](./04-opencode-agents-system.md) | Per-Agent 模型配置 |
-| [12 - 进阶话题](./12-opencode-advanced-topics.md) | 成本控制策略 |
+| [02 - 安装部署](22-opencode-installation-quickstart.md) | Provider 快速配置 |
+| [04 - Agent 系统](24-opencode-agents-system.md) | Per-Agent 模型配置 |
+| [12 - 进阶话题](32-opencode-advanced-topics.md) | 成本控制策略 |
 
 ---
 

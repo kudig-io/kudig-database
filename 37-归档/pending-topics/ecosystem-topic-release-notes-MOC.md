@@ -93,24 +93,24 @@ prerequisites:
 | 21 | argo-cd v1.8 Release Notes |  | release-notes |  |
 | 22 | argo-cd v2.0 Release Notes |  | release-notes |  |
 | 23 | argo-cd v2.1 Release Notes |  | release-notes |  |
-| 24 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.10.md|argo-cd v2.10 Release Notes]] |  | release-notes |  |
-| 25 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.11.md|argo-cd v2.11 Release Notes]] |  | release-notes |  |
-| 26 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.12.md|argo-cd v2.12 Release Notes]] |  | release-notes |  |
-| 27 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.13.md|argo-cd v2.13 Release Notes]] |  | release-notes |  |
-| 28 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.14.md|argo-cd v2.14 Release Notes]] |  | release-notes |  |
+| 24 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.10.md|argo-cd v2.10 Release Notes]] |  | release-notes |  |
+| 25 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.11.md|argo-cd v2.11 Release Notes]] |  | release-notes |  |
+| 26 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.12.md|argo-cd v2.12 Release Notes]] |  | release-notes |  |
+| 27 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.13.md|argo-cd v2.13 Release Notes]] |  | release-notes |  |
+| 28 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.14.md|argo-cd v2.14 Release Notes]] |  | release-notes |  |
 | 29 | argo-cd v2.2 Release Notes |  | release-notes |  |
 | 30 | argo-cd v2.3 Release Notes |  | release-notes |  |
 | 31 | argo-cd v2.4 Release Notes |  | release-notes |  |
 | 32 | argo-cd v2.5 Release Notes |  | release-notes |  |
-| 33 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.6.md|argo-cd v2.6 Release Notes]] |  | release-notes |  |
-| 34 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.7.md|argo-cd v2.7 Release Notes]] |  | release-notes |  |
-| 35 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.8.md|argo-cd v2.8 Release Notes]] |  | release-notes |  |
-| 36 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.9.md|argo-cd v2.9 Release Notes]] |  | release-notes |  |
-| 37 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.0.md|argo-cd v3.0 Release Notes]] |  | release-notes |  |
-| 38 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1.md|argo-cd v3.1 Release Notes]] |  | release-notes |  |
-| 39 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2.md|argo-cd v3.2 Release Notes]] |  | release-notes |  |
-| 40 | [[生态参考/_archived-release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3.md|argo-cd v3.3 Release Notes]] |  | release-notes |  |
-| 41 | [[生态参考/_archived-release-notes/cicd-gitops/flux/RELEASE-NOTES-0.0.md|flux v0.0 Release Notes]] |  | release-notes |  |
+| 33 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.6.md|argo-cd v2.6 Release Notes]] |  | release-notes |  |
+| 34 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.7.md|argo-cd v2.7 Release Notes]] |  | release-notes |  |
+| 35 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.8.md|argo-cd v2.8 Release Notes]] |  | release-notes |  |
+| 36 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-2.9.md|argo-cd v2.9 Release Notes]] |  | release-notes |  |
+| 37 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.0.md|argo-cd v3.0 Release Notes]] |  | release-notes |  |
+| 38 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.1.md|argo-cd v3.1 Release Notes]] |  | release-notes |  |
+| 39 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.2.md|argo-cd v3.2 Release Notes]] |  | release-notes |  |
+| 40 | [[37-归档/release-notes/cicd-gitops/argo-cd/RELEASE-NOTES-3.3.md|argo-cd v3.3 Release Notes]] |  | release-notes |  |
+| 41 | [[37-归档/release-notes/cicd-gitops/flux/RELEASE-NOTES-0.0.md|flux v0.0 Release Notes]] |  | release-notes |  |
 | 42 | flux v0.1 Release Notes |  | release-notes |  |
 | 43 | flux v0.10 Release Notes |  | release-notes |  |
 | 44 | flux v0.11 Release Notes |  | release-notes |  |
@@ -137,27 +137,27 @@ prerequisites:
 ## Related
 
 - Wiki Lint Report — 2026-05-21 — Cross-reference
-- [[实体/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
-- [[实体/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
-- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- [[实体/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
-- [[实体/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[实体/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
-- [[实体/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[实体/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
-- [[实体/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
-- [[实体/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[23-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[23-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
-- [[网络/00-core-k8s-networking/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[可观测性/01-overview/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[AI基础设施/01-ai-infra/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/01-ai-infra/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[05-网络/01-K8s网络核心/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[09-可观测性/01-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[集群基础/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
-- [[集群基础/01-architecture-overview/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[存储/01-k8s-storage/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[存储/01-k8s-storage/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
-- [[生态参考/topic-index/MOC.md|topic-index MOC]] — Cross-reference
+- [[01-集群基础/05-kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[01-集群基础/01-架构总览/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[06-存储/01-K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[06-存储/01-K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
+- [[21-生态参考/03-领域索引/MOC.md|topic-index MOC]] — Cross-reference
 
 
 <!-- risk-assessed -->

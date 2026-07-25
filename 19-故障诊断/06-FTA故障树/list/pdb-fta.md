@@ -866,8 +866,8 @@ flowchart TD
 
 ## Related
 
-- [[26-技能/skill-reference-remediation-playbook|Remediation Playbook]] — Cross-reference
-- [[26-技能/assessment-daily-check-quiz|Daily Check Quiz]] — Cross-reference
+- [[26-技能/04-工作负载/pod/方法论/skill-reference-remediation-playbook|Remediation Playbook]] — Cross-reference
+- [[26-技能/04-工作负载/pod/培训/测验/assessment-daily-check-quiz|Daily Check Quiz]] — Cross-reference
 
 
 <!-- risk-assessed -->

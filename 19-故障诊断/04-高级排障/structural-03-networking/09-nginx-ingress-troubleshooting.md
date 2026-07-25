@@ -449,15 +449,15 @@ data:
 
 ## 相关文档
 
-- [nginx-ingress 完全指南](./网络/21-nginx-ingress-complete-guide.md)
-- [nginx-ingress 迁移指南](./网络/09-nginx-ingress-migration-guide.md)
+- [nginx-ingress 完全指南](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/21-nginx-ingress-complete-guide.md)
+- [nginx-ingress 迁移指南](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/09-nginx-ingress-migration-guide.md)
 - [nginx-ingress FTA 故障树](./故障诊断/FTA故障树/list/nginx-[[19-故障诊断/06-FTA故障树/list/ingress-fta|ingress-fta]].md)
-- [nginx-ingress 全局索引](./生态参考/topic-index/nginx-ingress-index.md)
+- [nginx-ingress 全局索引](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/03-%E9%A2%86%E5%9F%9F%E7%B4%A2%E5%BC%95/nginx-ingress-index.md)
 - [Ingress 通用故障排查](./03-service-ingress-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[21-生态参考/03-领域索引/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
 
 
 <!-- risk-assessed -->

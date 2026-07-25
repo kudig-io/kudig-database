@@ -235,8 +235,8 @@ spec:
 
 ## Related
 
-- [[21-生态参考/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[21-生态参考/topic-index/higress-index|Higress 知识图谱索引]]
+- [[21-生态参考/03-领域索引/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[21-生态参考/03-领域索引/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

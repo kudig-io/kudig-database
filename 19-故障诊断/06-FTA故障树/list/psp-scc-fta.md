@@ -1364,8 +1364,8 @@ flowchart TD
 
 ## Related
 
-- [[26-技能/skill-reference-remediation-playbook|Remediation Playbook]] — Cross-reference
-- [[21-生态参考/topic-index/security-index|Security 安全知识图谱索引]]
+- [[26-技能/04-工作负载/pod/方法论/skill-reference-remediation-playbook|Remediation Playbook]] — Cross-reference
+- [[21-生态参考/03-领域索引/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

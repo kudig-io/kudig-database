@@ -313,10 +313,10 @@ aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config
 ## 延伸阅读
 
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
-- [K8s 架构总览](../../集群基础/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件深入](../../集群基础/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../集群基础/05-kubectl-commands-reference.md)
-- [集群生命周期管理](../../平台工程/02-cluster-lifecycle-management.md)
+- [K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
+- [K8s 核心组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [集群生命周期管理](../../../../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/02-cluster-lifecycle-management.md)
 - [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
 
 ## Related

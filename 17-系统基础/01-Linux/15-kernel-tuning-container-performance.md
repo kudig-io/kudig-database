@@ -432,5 +432,5 @@ ss -s
 - [[17-系统基础/01-Linux/14-arm-architecture-k8s-optimization|ARM 架构优化]]
 - [[17-系统基础/01-Linux/08-linux-container-fundamentals|Linux 容器基础]]
 - [[14-容器运行时/03-containerd-CRI-O/01-containerd-production-operations|containerd 生产运维]]
-- [[09-可观测性/ebpf-observability|eBPF 可观测性]]
+- [[24-综合/05-可观测性/ebpf-observability|eBPF 可观测性]]
 - [[01-集群基础/节点管理|节点管理]]

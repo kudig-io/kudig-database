@@ -279,7 +279,7 @@ sudo chmod 644 /usr/local/share/man/man8/*.8
 
 - [Manpage 索引](README.md)
 - [项目主文档](../README.md)
-- [项目脚本](../脚本/README.md)
+- [项目脚本](../README.md)
 
 
 <!-- risk-assessed -->

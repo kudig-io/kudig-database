@@ -811,11 +811,11 @@ kubectl exec -it deployment/my-spring-app-native -- /app/my-spring-app -XX:+Prin
 <!-- chunk: 🔗 相关文档 -->
 ## 🔗 相关文档
 
-- [Java 容器化最佳实践](../容器运行时/12-java-containerization-guide.md) — Dockerfile 模式与镜像优化
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md) — Spring Boot K8s 部署
+- [Java 容器化最佳实践](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — Dockerfile 模式与镜像优化
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) — Spring Boot K8s 部署
 - [Quarkus/Micronaut 指南](./99-quarkus-micronaut-cloud-native-java-guide.md) — 云原生 Java 框架对比
-- [JVM GC 容器调优](../故障诊断/99-jvm-gc-container-tuning-guide.md) — GC 调优 (JVM 模式)
-- [Java 可观测性](../可观测性/99-java-observability-kubernetes-guide.md) — Native Image 可观测性
+- [JVM GC 容器调优](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-jvm-gc-container-tuning-guide.md) — GC 调优 (JVM 模式)
+- [Java 可观测性](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-java-observability-kubernetes-guide.md) — Native Image 可观测性
 
 ---
 

@@ -354,15 +354,15 @@ Day 19（故障排查方法论）是本周最关键的一天。FTA 和 FEBM 方�
 
 ## 延伸阅读
 
-- [认证授权系统](../../安全/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
-- [Pod 安全标准](../../安全/06-pod-security-standards.md)
-- [可观测性架构总览](../../可观测性/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../可观测性/10-monitoring-metrics-prometheus.md)
-- [FTA 故障树分析](../../../故障诊断/FTA故障树/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../故障诊断/FEBM方法论/01-febm-theory-foundations.md)
-- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
-- [Node NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
+- [认证授权系统](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/07-rbac-matrix-configuration.md)
+- [Pod 安全标准](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
+- [可观测性架构总览](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/01-observability-architecture-overview.md)
+- [Prometheus 监控](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/10-monitoring-metrics-prometheus.md)
+- [FTA 故障树分析](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/04-fta-core-principles.md)
+- [FEBM 取证循证方法](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/01-febm-theory-foundations.md)
+- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
+- [Node NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
 
 ## Related
 

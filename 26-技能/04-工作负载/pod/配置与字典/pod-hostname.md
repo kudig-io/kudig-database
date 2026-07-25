@@ -245,8 +245,8 @@ echo -n "myhost.mysub.mynamespace.svc.cluster.local" | wc -c
 ```
 ## 交叉引用
 
-- [[17-系统基础/06-知识字典/workloads/statefulsets.md|StatefulSets]]](statefulsets.md) — 自动管理稳定网络标识的首选方案
-- [Pods](pods.md) — Pod 基础概念和 metadata.name
+- [[17-系统基础/06-知识字典/workloads/statefulsets.md|StatefulSets]]](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/statefulsets.md) — 自动管理稳定网络标识的首选方案
+- [Pods](../%E6%A6%82%E5%BF%B5%E5%8E%9F%E7%90%86/pods.md) — Pod 基础概念和 metadata.name
 - [Downward API](downward-api.md) — 在容器内获取 Pod 元数据的其他方式
 
 ## 参考链接

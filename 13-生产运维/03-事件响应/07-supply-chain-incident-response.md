@@ -440,7 +440,7 @@ SLSA（Supply-chain Levels for Software Artifacts）提供从源码到交付的�
 
 ## Related
 
-- [[13-生产运维/03-事件响应/20-incident-response-process.md|安全事件响应与应急处理流程]]
+- [[13-生产运维/03-事件响应/08-incident-response-process.md|安全事件响应与应急处理流程]]
 - [[08-安全/05-供应链/01-supply-chain-security-overview.md|供应链安全概述]]
 
 ## See Also

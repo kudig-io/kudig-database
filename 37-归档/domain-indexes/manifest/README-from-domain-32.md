@@ -73,74 +73,74 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 ### 基础概念 (01-02)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 01 | [YAML 语法与资源规范](./01-yaml-syntax-resource-conventions.md) | YAML 语法、资源四大字段、命名规范、标签注解 | ⭐⭐⭐⭐⭐ |
-| 02 | [Namespace/ResourceQuota/LimitRange](./02-namespace-resourcequota-limitrange.md) | 命名空间隔离、资源配额、限制范围 | ⭐⭐⭐⭐⭐ |
+| 01 | [YAML 语法与资源规范](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/01-yaml-syntax-resource-conventions.md) | YAML 语法、资源四大字段、命名规范、标签注解 | ⭐⭐⭐⭐⭐ |
+| 02 | [Namespace/ResourceQuota/LimitRange](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/02-namespace-resourcequota-limitrange.md) | 命名空间隔离、资源配额、限制范围 | ⭐⭐⭐⭐⭐ |
 
 ### 核心工作负载 (03-07)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
 | 03 | [Pod 完整规格](./03-pod-specification-complete.md) | Pod 所有字段、容器规格、卷挂载、安全上下文、调度 | ⭐⭐⭐⭐⭐ |
-| 04 | [Deployment/ReplicaSet](./04-deployment-replicaset.md) | 无状态部署、滚动更新、版本管理 | ⭐⭐⭐⭐⭐ |
-| 05 | [StatefulSet](./05-statefulset-reference.md) | 有状态应用、稳定标识、有序部署 | ⭐⭐⭐⭐ |
-| 06 | [DaemonSet](./06-daemonset-reference.md) | 节点守护进程、滚动更新 | ⭐⭐⭐⭐ |
-| 07 | [Job/CronJob](./07-job-cronjob-reference.md) | 批处理任务、定时调度、失败策略 | ⭐⭐⭐⭐ |
+| 04 | [Deployment/ReplicaSet](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/04-deployment-replicaset.md) | 无状态部署、滚动更新、版本管理 | ⭐⭐⭐⭐⭐ |
+| 05 | [StatefulSet](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/05-statefulset-reference.md) | 有状态应用、稳定标识、有序部署 | ⭐⭐⭐⭐ |
+| 06 | [DaemonSet](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/06-daemonset-reference.md) | 节点守护进程、滚动更新 | ⭐⭐⭐⭐ |
+| 07 | [Job/CronJob](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/07-job-cronjob-reference.md) | 批处理任务、定时调度、失败策略 | ⭐⭐⭐⭐ |
 
 ### 服务发现与流量管理 (08-12)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 08 | [Service 全类型](./08-service-all-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName/Headless | ⭐⭐⭐⭐⭐ |
-| 09 | [Endpoints/EndpointSlice](./09-endpoints-endpointslice.md) | 端点管理、分片机制、外部服务集成 | ⭐⭐⭐ |
-| 10 | [Ingress/IngressClass](./10-ingress-ingressclass.md) | HTTP 路由、TLS 终结、控制器配置 | ⭐⭐⭐⭐⭐ |
-| 11 | [Gateway API 核心](./11-gateway-api-core.md) | GatewayClass/Gateway/HTTPRoute | ⭐⭐⭐⭐ |
-| 12 | [Gateway API 高级路由](./12-gateway-api-advanced-routes.md) | gRPC/TCP/TLS/UDP Route、ReferenceGrant | ⭐⭐⭐ |
+| 08 | [Service 全类型](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/08-service-all-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName/Headless | ⭐⭐⭐⭐⭐ |
+| 09 | [Endpoints/EndpointSlice](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/09-endpoints-endpointslice.md) | 端点管理、分片机制、外部服务集成 | ⭐⭐⭐ |
+| 10 | [Ingress/IngressClass](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/10-ingress-ingressclass.md) | HTTP 路由、TLS 终结、控制器配置 | ⭐⭐⭐⭐⭐ |
+| 11 | [Gateway API 核心](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/11-gateway-api-core.md) | GatewayClass/Gateway/HTTPRoute | ⭐⭐⭐⭐ |
+| 12 | [Gateway API 高级路由](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/12-gateway-api-advanced-routes.md) | gRPC/TCP/TLS/UDP Route、ReferenceGrant | ⭐⭐⭐ |
 
 ### 配置与存储管理 (13-18)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 13 | [ConfigMap](./13-configmap-reference.md) | 配置管理、挂载方式、热更新 | ⭐⭐⭐⭐⭐ |
-| 14 | [Secret 全类型](./14-secret-all-types.md) | 8 种 Secret 类型、加密存储、安全实践 | ⭐⭐⭐⭐⭐ |
-| 15 | [PersistentVolume](./15-persistentvolume-reference.md) | 持久卷、所有卷源类型、生命周期 | ⭐⭐⭐⭐ |
-| 16 | [PersistentVolumeClaim](./16-persistentvolumeclaim-reference.md) | 卷声明、动态供给、扩容、克隆 | ⭐⭐⭐⭐ |
-| 17 | [StorageClass/VolumeSnapshot](./17-storageclass-volumesnapshot.md) | 存储类、卷快照、快照恢复 | ⭐⭐⭐⭐ |
-| 18 | [CSI 驱动资源](./18-csi-driver-resources.md) | CSIDriver/CSINode/CSIStorageCapacity | ⭐⭐⭐ |
+| 13 | [ConfigMap](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/13-configmap-reference.md) | 配置管理、挂载方式、热更新 | ⭐⭐⭐⭐⭐ |
+| 14 | [Secret 全类型](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/14-secret-all-types.md) | 8 种 Secret 类型、加密存储、安全实践 | ⭐⭐⭐⭐⭐ |
+| 15 | [PersistentVolume](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/15-persistentvolume-reference.md) | 持久卷、所有卷源类型、生命周期 | ⭐⭐⭐⭐ |
+| 16 | [PersistentVolumeClaim](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/16-persistentvolumeclaim-reference.md) | 卷声明、动态供给、扩容、克隆 | ⭐⭐⭐⭐ |
+| 17 | [StorageClass/VolumeSnapshot](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/17-storageclass-volumesnapshot.md) | 存储类、卷快照、快照恢复 | ⭐⭐⭐⭐ |
+| 18 | [CSI 驱动资源](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/18-csi-driver-resources.md) | CSIDriver/CSINode/CSIStorageCapacity | ⭐⭐⭐ |
 
 ### 安全与访问控制 (19-25)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 19 | [ServiceAccount/Token](./19-serviceaccount-token.md) | 服务账户、Token 管理、证书签发 | ⭐⭐⭐⭐ |
-| 20 | [Role/RoleBinding](./20-rbac-role-rolebinding.md) | 命名空间级 RBAC | ⭐⭐⭐⭐⭐ |
-| 21 | [ClusterRole/ClusterRoleBinding](./21-rbac-clusterrole-clusterrolebinding.md) | 集群级 RBAC、访问审查 | ⭐⭐⭐⭐ |
-| 22 | [NetworkPolicy](./22-networkpolicy-reference.md) | 网络策略、微分段、零信任 | ⭐⭐⭐⭐⭐ |
+| 19 | [ServiceAccount/Token](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/19-serviceaccount-token.md) | 服务账户、Token 管理、证书签发 | ⭐⭐⭐⭐ |
+| 20 | [Role/RoleBinding](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/20-rbac-role-rolebinding.md) | 命名空间级 RBAC | ⭐⭐⭐⭐⭐ |
+| 21 | [ClusterRole/ClusterRoleBinding](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/21-rbac-clusterrole-clusterrolebinding.md) | 集群级 RBAC、访问审查 | ⭐⭐⭐⭐ |
+| 22 | [NetworkPolicy](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/22-networkpolicy-reference.md) | 网络策略、微分段、零信任 | ⭐⭐⭐⭐⭐ |
 | 23 | [Pod Security Standards](./23-pod-security-standards.md) | PSS 三级别、PSA 配置 | ⭐⭐⭐⭐ |
-| 24 | [Admission Webhook](./24-admission-webhook-configuration.md) | Validating/Mutating Webhook | ⭐⭐⭐ |
-| 25 | [ValidatingAdmissionPolicy](./25-validatingadmissionpolicy.md) | 原生准入策略、CEL 表达式 (v1.30+) | ⭐⭐⭐ |
+| 24 | [Admission Webhook](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/24-admission-webhook-configuration.md) | Validating/Mutating Webhook | ⭐⭐⭐ |
+| 25 | [ValidatingAdmissionPolicy](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/25-validatingadmissionpolicy.md) | 原生准入策略、CEL 表达式 (v1.30+) | ⭐⭐⭐ |
 
 ### 调度与扩缩容 (26-28)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 26 | [PriorityClass/RuntimeClass](./26-priorityclass-runtimeclass.md) | 优先级抢占、运行时类、DRA | ⭐⭐⭐⭐ |
-| 27 | [HPA v2](./27-hpa-autoscaling-v2.md) | 水平扩缩容、自定义指标、行为策略 | ⭐⭐⭐⭐⭐ |
+| 26 | [PriorityClass/RuntimeClass](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/26-priorityclass-runtimeclass.md) | 优先级抢占、运行时类、DRA | ⭐⭐⭐⭐ |
+| 27 | [HPA v2](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/27-hpa-autoscaling-v2.md) | 水平扩缩容、自定义指标、行为策略 | ⭐⭐⭐⭐⭐ |
 | 28 | [PodDisruptionBudget](./28-poddisruptionbudget-reference.md) | Pod 中断预算、升级保护 | ⭐⭐⭐⭐ |
 
 ### 扩展与 API 管理 (29-31)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 29 | [CustomResourceDefinition](./29-customresourcedefinition.md) | CRD 开发、Schema 验证、CEL 规则 | ⭐⭐⭐⭐ |
-| 30 | [APIService](./30-apiservice-aggregation.md) | API 聚合、Metrics Server | ⭐⭐⭐ |
-| 31 | [FlowSchema/PriorityLevel](./31-api-priority-fairness.md) | API 优先级与公平性 | ⭐⭐⭐ |
+| 29 | [CustomResourceDefinition](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/29-customresourcedefinition.md) | CRD 开发、Schema 验证、CEL 规则 | ⭐⭐⭐⭐ |
+| 30 | [APIService](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/30-apiservice-aggregation.md) | API 聚合、Metrics Server | ⭐⭐⭐ |
+| 31 | [FlowSchema/PriorityLevel](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/31-api-priority-fairness.md) | API 优先级与公平性 | ⭐⭐⭐ |
 
 ### 辅助资源与集群配置 (32-34)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 32 | [Lease/Event/Node](./32-lease-event-node.md) | 协调资源、事件、节点管理 | ⭐⭐⭐ |
-| 33 | [kubeadm 集群引导](./33-kubeadm-cluster-bootstrap.md) | 集群初始化、节点加入、高可用配置 | ⭐⭐⭐⭐ |
-| 34 | [组件配置](./34-component-configuration.md) | [[实体/kubelet.md|kubelet]]/KubeProxy/Scheduler/ControllerManager | ⭐⭐⭐⭐ |
+| 32 | [Lease/Event/Node](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/32-lease-event-node.md) | 协调资源、事件、节点管理 | ⭐⭐⭐ |
+| 33 | [kubeadm 集群引导](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/33-kubeadm-cluster-bootstrap.md) | 集群初始化、节点加入、高可用配置 | ⭐⭐⭐⭐ |
+| 34 | [组件配置](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/34-component-configuration.md) | [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]/KubeProxy/Scheduler/ControllerManager | ⭐⭐⭐⭐ |
 
 ### 高级模式与生态工具 (35-36)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
 | 35 | [高级 Pod 模式](./35-advanced-pod-patterns.md) | Init/Sidecar 容器、亲和性、拓扑分布、探针 | ⭐⭐⭐⭐⭐ |
-| 36 | [[实体/helm.md|helm]]/ArgoCD](./36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置参考 | ⭐⭐⭐⭐ |
+| 36 | [[23-实体/08-交付与制品/helm.md|helm]]/ArgoCD](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置参考 | ⭐⭐⭐⭐ |
 
 ---
 
@@ -219,7 +219,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 
 - [[helm]]
 - [[README]]
-- [[实体/kubelet.md|kubelet]]
+- [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]
 
 
 <!-- risk-assessed -->

@@ -410,7 +410,7 @@ kubectl rollout restart daemonset ebs-csi-node -n kube-system
 1. **渐进式演练**：从 L1（只读延迟）开始，逐步升级到 L3（卷操作），永远不在未验证的环境执行 L4
 2. **标记目标 Pod**：使用 `chaos-target: "true"` 标签精确控制实验范围，避免影响非目标工作负载
 3. **AI Checkpoint 验证**：每次存储混沌实验后验证最新 Checkpoint 可正常加载和恢复训练
-4. **自动化集成**：将存储混沌实验纳入 CI/CD 流水线（预生产环境），参考 [[12-可靠性/04-混沌工程/08-chaos-engineering-platforms.md|混沌工程平台]]
+4. **自动化集成**：将存储混沌实验纳入 CI/CD 流水线（预生产环境），参考 [[12-可靠性/02-灾难恢复/08-chaos-engineering-platforms.md|混沌工程平台]]
 5. **Game Day 制度化**：每季度执行一次存储 Game Day，全团队参与，参考 [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills.md|灾备演练]]
 6. **监控联动**：实验期间自动触发告警，验证告警链路完整性，参考 [[06-存储/01-K8s存储/12-storage-monitoring-alerting.md|存储监控告警]]
 7. **文档化发现**：每次实验产出改进项，更新 Runbook 和架构设计
@@ -419,7 +419,7 @@ kubectl rollout restart daemonset ebs-csi-node -n kube-system
 
 ## Related
 
-- [[12-可靠性/04-混沌工程/08-chaos-engineering-platforms.md|混沌工程平台]]
+- [[12-可靠性/02-灾难恢复/08-chaos-engineering-platforms.md|混沌工程平台]]
 - [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills.md|灾备演练]]
 - [[06-存储/07-AI存储与高级/09-velero-production-deep-dive.md|Velero 生产深度指南]]
 - [[06-存储/01-K8s存储/12-storage-monitoring-alerting.md|存储监控告警]]

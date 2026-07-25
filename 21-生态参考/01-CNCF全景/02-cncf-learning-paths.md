@@ -433,7 +433,7 @@ Month 3: 身份与零信任 (40h)
 **推荐文档**：
 - [Prometheus](./graduated/prometheus/prometheus.md)
 - [Thanos](./incubating/thanos/thanos.md)
-- [Grafana](./graduated/grafana/grafana.md)
+- [Grafana](../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/observability/grafana.md)
 - [Fluentd](./graduated/fluentd/fluentd.md)
 - [Jaeger](./graduated/jaeger/jaeger.md)
 - [OpenTelemetry](./incubating/opentelemetry/opentelemetry.md)

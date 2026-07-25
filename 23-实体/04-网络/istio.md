@@ -405,7 +405,7 @@ spec:
 - 99-istio-service-mesh-guide
 - 01-istio-enterprise-service-mesh
 - [[19-故障诊断/06-FTA故障树/list/service-mesh-istio-fta.md|Service Mesh(Istio) 异常故障树分析]]
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
 - istio
 - [[23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-platform-extensions.md|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]] — Cross-reference

@@ -61,7 +61,7 @@ prerequisites:
 
 - [[19-故障诊断/03-基础设施排障/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
 - [[19-故障诊断/03-基础设施排障/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
-- [[19-故障诊断/04-高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 
 ### 术语词典
 
@@ -73,9 +73,9 @@ prerequisites:
 
 ### 网络相关
 
-- [[19-故障诊断/04-高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
-- [[19-故障诊断/04-高级排障/03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
-- [[19-故障诊断/04-高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md|NetworkPolicy 深度排查与零信任安全治理指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|Service Mesh (Istio) 深度排查与性能调优指南]]
 - [[17-系统基础/06-知识字典/networking/cluster-mesh.md|多集群网络互联（Cluster Mesh）]]
 
 ### 技能卡片

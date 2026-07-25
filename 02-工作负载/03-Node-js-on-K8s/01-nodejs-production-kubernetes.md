@@ -594,5 +594,5 @@ echo "=== 验证完成 ==="
 
 - [[02-工作负载/01-核心工作负载/01-workload-overview-architecture.md|工作负载架构总览]]
 - [[02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling.md|HPA/VPA 自动伸缩]]
-- [[02-工作负载/多语言运行 时/01-go-on-kubernetes-production.md|Go on K8s]]
+- [[02-工作负载/04-多语言运行时/01-go-on-kubernetes-production.md|Go on K8s]]
 - [[27-标签/production|production 标签枢纽]]

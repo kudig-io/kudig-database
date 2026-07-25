@@ -1460,9 +1460,9 @@ kubectl get pods -A
 
 ## Related
 
-- [[21-生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[21-生态参考/topic-index/cert-index|Certificate / TLS 证书知识图谱索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/etcd-index|etcd 知识图谱索引]]
+- [[21-生态参考/03-领域索引/cert-index|Certificate / TLS 证书知识图谱索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

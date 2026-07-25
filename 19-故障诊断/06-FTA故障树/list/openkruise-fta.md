@@ -341,14 +341,14 @@ spec:
 ## 相关文档
 
 - [OpenKruise CNCF Landscape](./生态参考/incubating/openkruise/openkruise.md)
-- [OpenKruise 全局索引](./生态参考/topic-index/openkruise-index.md)
-- [Deployment 故障排查](./故障诊断/topic-structural-trouble-shooting/05-workloads/02-deployment-troubleshooting.md)
-- [StatefulSet 故障排查](./故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md)
+- [OpenKruise 全局索引](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/03-%E9%A2%86%E5%9F%9F%E7%B4%A2%E5%BC%95/openkruise-index.md)
+- [Deployment 故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/02-deployment-troubleshooting.md)
+- [StatefulSet 故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/03-statefulset-troubleshooting.md)
 
 ## Related
 
-- [[26-技能/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[21-生态参考/topic-index/openkruise-index|OpenKruise 全局索引]]
+- [[26-技能/05-网络/ingress/培训/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[21-生态参考/03-领域索引/openkruise-index|OpenKruise 全局索引]]
 
 
 <!-- risk-assessed -->

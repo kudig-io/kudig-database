@@ -787,7 +787,7 @@ knowledge_refs:
 
 ## Related
 
-- [[26-技能/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[26-技能/05-网络/ingress/培训/learn-05-ingress-basics|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
 
 
 <!-- risk-assessed -->

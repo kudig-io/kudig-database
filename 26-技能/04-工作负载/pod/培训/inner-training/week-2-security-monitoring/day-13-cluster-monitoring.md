@@ -529,10 +529,10 @@ Day 14 将学习集群资源配额与 License 管理。
 
 ## 延伸阅读
 
-- [监控指标系统](../../可观测性/02-monitoring-metrics-system.md)
-- [告警管理](../../可观测性/05-alerting-management.md)
-- [Prometheus 监控](../../可观测性/10-monitoring-metrics-prometheus.md)
-- [可观测性架构总览](../../可观测性/01-observability-architecture-overview.md)
+- [监控指标系统](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/02-monitoring-metrics-system.md)
+- [告警管理](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/05-%E5%91%8A%E8%AD%A6/05-alerting-management.md)
+- [Prometheus 监控](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/10-monitoring-metrics-prometheus.md)
+- [可观测性架构总览](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/01-observability-architecture-overview.md)
 
 ```
 

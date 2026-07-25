@@ -1036,7 +1036,7 @@ sequenceDiagram
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 安全 MOC
-- [[安全/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
+- [[08-安全/README.md|Domain 05: 云原生安全 (Cloud Native Security)]]
 - Falco 云原生安全监控深度实践
 - Sysdig企业级容器安全深度实践
 - Aqua Security 企业级容器安全平台深度实践
@@ -1050,11 +1050,11 @@ sequenceDiagram
 
 ## See Also
 
-- [[安全/06-compliance/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
+- [[08-安全/06-合规审计/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
 - [[安全/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

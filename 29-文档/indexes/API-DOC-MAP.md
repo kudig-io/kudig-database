@@ -54,7 +54,7 @@ tags:
 - api
 - mapping
 relationships:
-- target: "[[skills/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]"
+- target: "[[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]"
   type: related_to
 - target: "[[26-技能/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]"
   type: related_to

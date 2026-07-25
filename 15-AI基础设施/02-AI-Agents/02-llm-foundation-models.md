@@ -569,8 +569,8 @@ spec:
 | [01 - Agent 基础](./01-ai-agent-fundamentals.md) | Agent 推理框架对模型能力的依赖 |
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | 不同框架与模型的兼容性 |
 | [11 - 成本与延迟优化](./11-cost-latency-optimization.md) | 模型路由的成本优化实践 |
-| [AI基础设施/17-llm-inference-serving.md](../AI基础设施/17-llm-inference-serving.md) | vLLM/TGI 部署详情 |
-| [AI基础设施/03-gpu-scheduling-management.md](../AI基础设施/03-gpu-scheduling-management.md) | GPU 资源调度 |
+| [AI基础设施/17-llm-inference-serving.md](../01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/17-llm-inference-serving.md) | vLLM/TGI 部署详情 |
+| [AI基础设施/03-gpu-scheduling-management.md](../01-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD/03-gpu-scheduling-management.md) | GPU 资源调度 |
 
 ---
 

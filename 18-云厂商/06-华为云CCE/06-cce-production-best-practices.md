@@ -438,6 +438,6 @@ uname -r
 - [[18-云厂商/07-多云混合/11-multicloud-comparison-decision-matrix|多云对比决策矩阵]]
 - [[18-云厂商/05-腾讯云TKE/06-tke-production-best-practices|腾讯 TKE 生产实践]]
 - [[17-系统基础/01-Linux/14-arm-architecture-k8s-optimization|ARM 架构 K8s 优化]]
-- [[05-网络/cni-plugins|CNI 插件]]
-- [[06-存储/csi-drivers|CSI 驱动]]
+- [[23-实体/02-K8s核心组件/cni-plugins|CNI 插件]]
+- [[22-概念/04-存储/csi-drivers|CSI 驱动]]
 - [[10-平台工程/03-治理/10-security-compliance|安全合规]]

@@ -231,7 +231,7 @@ Agent 直接调用了诊断脚本。
 
 问 Agent:
 
-"帮我设计一套金融支付系统的 [[实体/kubernetes.md|kubernetes]] 生产架构, 要满足 PCI-DSS 合规要求。"
+"帮我设计一套金融支付系统的 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 生产架构, 要满足 PCI-DSS 合规要求。"
 
 [停顿, 展示 Agent 输出]
 

@@ -225,7 +225,7 @@ prerequisites:
 
 filename | sha512 hash
 -------- | -----------
-[[实体/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.12.10/kubernetes.tar.gz) | `fd6b78f7d56bbf5a286dd69a60b9e6987f0a948a527eb180ef4d6f421cf2deb3303a001d4516e461948f4ea38f662046fada9bdb74b33580c9938271f965cf71`
+[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.12.10/kubernetes.tar.gz) | `fd6b78f7d56bbf5a286dd69a60b9e6987f0a948a527eb180ef4d6f421cf2deb3303a001d4516e461948f4ea38f662046fada9bdb74b33580c9938271f965cf71`
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.12.10/kubernetes-src.tar.gz) | `6dbefdf9d6a0dd00cc33a7edb0c78fa172a5ae0ee77fa498776c57a04bbaf79dc2cf44ca704c3304c9107ad7365d7a8a5017b45262f8944532fb4e01657fe80f`
 
 ### Client Binaries

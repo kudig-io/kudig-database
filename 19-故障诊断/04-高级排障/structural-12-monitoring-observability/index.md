@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|Monitoring Observability Troubleshooting]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|Opentelemetry Troubleshooting]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|Ebpf Observability Troubleshooting]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|Finops Cost Optimization Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md|Monitoring Observability Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/02-opentelemetry-troubleshooting.md|Opentelemetry Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/03-ebpf-observability-troubleshooting.md|Ebpf Observability Troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|Finops Cost Optimization Troubleshooting]]
 

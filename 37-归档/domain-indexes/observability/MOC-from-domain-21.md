@@ -64,7 +64,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[可观测性/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]] |  | observability, logging |  |
+| 1 | [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]] |  | observability, logging |  |
 | 2 | ELK Stack企业级日志管理系统深度实践 |  | observability, logging |  |
 | 3 | Fluentd企业级日志收集与处理深度实践 |  | observability, logging |  |
 | 4 | Loki Enterprise Log Aggregation and Analytics Platform |  | observability, logging |  |
@@ -125,11 +125,11 @@ graph TD
 
 ## See Also
 
-- [[可观测性/98-merged-indexes/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
-- [[可观测性/98-merged-indexes/MOC-from-domain-20.md|MOC-from-可观测性]]
-- [[可观测性/98-merged-indexes/MOC-from-domain-8.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-20.md|MOC-from-可观测性]]
+- [[37-归档/domain-indexes/observability/MOC-from-domain-8.md|MOC-from-可观测性]]
 - [[可观测性/98-merged-indexes/QUALITY-REPORT.md|QUALITY-REPORT]]
 
-- [[可观测性/README.md|返回目录]]
+- [[09-可观测性/README.md|返回目录]]
 
 <!-- risk-assessed -->

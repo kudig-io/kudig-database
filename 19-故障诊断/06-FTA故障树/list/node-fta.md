@@ -1498,8 +1498,8 @@ flowchart TD
 
 ## Related
 
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
-- [[21-生态参考/topic-index/node-index|Node 知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/node-index|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

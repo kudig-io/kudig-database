@@ -65,7 +65,7 @@ estimated_read_time: 5min
 intent_queries:
 - 'Domain 24: 基础设施即代码 (Infrastructure as Code) 是什么'
 - '如何 Domain 24: 基础设施即代码 (Infrastructure as Code)'
-- [[实体/kubernetes.md|kubernetes]] 24 infrastructure as code 最佳实践
+- [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 24 infrastructure as code 最佳实践
 trigger_keywords:
 - Domain
 - '24:'
@@ -89,11 +89,11 @@ tier: peripheral---
 ## 📖 文档目录
 
 ### 🏗️ 核心IaC系统 (01-05)
-- **[01-Terraform企业级IaC](./01-terraform-enterprise-iac.md)** - Terraform基础设施即代码深度实践，涵盖模块化设计、策略管理、CI/CD集成等完整技术方案
-- **[02-Ansible企业级自动化](./02-ansible-enterprise-automation.md)** - Ansible配置管理深度实践，包括Playbook设计、角色管理、安全加固等
-- **[03-Pulumi企业级IaC](./03-pulumi-enterprise-iac.md)** - Pulumi现代基础设施即代码实践，支持多语言编程、云原生集成等
-- **[04-Azure Resource Manager企业级](./04-azure-resource-manager-enterprise.md)** - Azure资源管理深度实践，涵盖模板设计、策略治理、成本优化等
-- **[05-Crossplane企业级编排](./05-crossplane-enterprise-orchestration.md)** - Crossplane多云基础设施编排深度实践，包括Provider管理、GitOps集成、安全治理等
+- **[01-Terraform企业级IaC](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/02-IaC/01-terraform-enterprise-iac.md)** - Terraform基础设施即代码深度实践，涵盖模块化设计、策略管理、CI/CD集成等完整技术方案
+- **[02-Ansible企业级自动化](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/02-IaC/02-ansible-enterprise-automation.md)** - Ansible配置管理深度实践，包括Playbook设计、角色管理、安全加固等
+- **[03-Pulumi企业级IaC](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/02-IaC/03-pulumi-enterprise-iac.md)** - Pulumi现代基础设施即代码实践，支持多语言编程、云原生集成等
+- **[04-Azure Resource Manager企业级](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/02-IaC/04-azure-resource-manager-enterprise.md)** - Azure资源管理深度实践，涵盖模板设计、策略治理、成本优化等
+- **[05-Crossplane企业级编排](../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/02-IaC/05-crossplane-enterprise-orchestration.md)** - Crossplane多云基础设施编排深度实践，包括Provider管理、GitOps集成、安全治理等
 
 ## 🎯 学习路径建议
 

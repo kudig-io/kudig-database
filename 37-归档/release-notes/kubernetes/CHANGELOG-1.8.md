@@ -200,7 +200,7 @@ prerequisites:
     - [Node Components](#node-components)
       - [Autoscaling and Metrics](#autoscaling-and-metrics)
         - [Cluster Autoscaler](#cluster-autoscaler)
-      - [[实体/container-runtime.md|Container Runtime]] Interface (CRI)](#container-runtime-interface-cri)
+      - [[23-实体/02-K8s核心组件/container-runtime.md|Container Runtime]] Interface (CRI)](#container-runtime-interface-cri)
       - [kubelet](#kubelet)
     - [Auth](#auth-1)
     - [Cluster Lifecycle](#cluster-lifecycle-1)

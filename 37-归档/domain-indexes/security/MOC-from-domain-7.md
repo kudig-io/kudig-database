@@ -68,7 +68,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[安全/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]] |  | k8s, security, rbac |  |
+| 1 | [[08-安全/00-总览/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]] |  | k8s, security, rbac |  |
 | 2 | Kubernetes 认证授权体系详解 | 进阶 | k8s, rbac, authentication | 5min |
 | 3 | 网络安全策略与零信任架构 | 进阶 | k8s, network, networkpolicy | 5min |
 | 4 | 运行时安全防护与威胁检测 | 高级 | k8s, runtime, security | 5min |
@@ -141,11 +141,11 @@ graph TD
 
 ## See Also
 
-- [[安全/98-merged-indexes/MOC-from-domain-25.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-39.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/README-from-domain-25.md|README-from-安全]]
-- [[安全/98-merged-indexes/README-from-domain-39.md|README-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-25.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-39.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/README-from-domain-25.md|README-from-安全]]
+- [[37-归档/domain-indexes/security/README-from-domain-39.md|README-from-安全]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

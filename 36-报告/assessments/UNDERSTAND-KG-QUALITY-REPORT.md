@@ -239,7 +239,7 @@ authors:
 ## Obsidian 相关文档
 
 - _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
-- [[生态参考/领域索引/README.md|项目报告 (Reports)]]
+- [[21-生态参考/03-领域索引/README.md|项目报告 (Reports)]]
 - _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
 - _reports/CONTENT-GAP-ANALYSIS.md
 - _reports/DEEP-RESEARCH-ASSESSMENT.md
@@ -255,7 +255,7 @@ authors:
 - [[CHANGELOG|CHANGELOG]]
 - [[README|README]]
 - [[log|log]]
-- [[系统基础/速查卡/git.md|git]]
+- [[17-系统基础/05-速查卡/git.md|git]]
 - _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
 
 

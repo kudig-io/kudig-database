@@ -140,10 +140,10 @@ prerequisites:
 - [[19-故障诊断/04-高级排障/39-enterprise-monitoring-alerting-system.md|39 - 企业级监控告警体系]]
 
 ### 结构化故障排查
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|eBPF 可观测性故障排查指南]]
-- [[19-故障诊断/04-高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/03-ebpf-observability-troubleshooting.md|eBPF 可观测性故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
 
 ## 扩展参考
 

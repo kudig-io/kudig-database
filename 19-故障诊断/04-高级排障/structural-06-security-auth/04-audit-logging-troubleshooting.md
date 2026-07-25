@@ -800,7 +800,7 @@ rules:
 
 ## Related
 
-- [[21-生态参考/topic-index/security-index|Security 安全知识图谱索引]]
+- [[21-生态参考/03-领域索引/security-index|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

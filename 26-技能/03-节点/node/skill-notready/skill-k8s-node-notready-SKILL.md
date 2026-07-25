@@ -54,7 +54,7 @@ prerequisites:
 | RC-011 | CNI 插件异常 | 中 | 重启 CNI Pod(手动) | MEDIUM |
 | RC-012 | 节点被手动 cordon | 低 | REM-001 uncordon | LOW |
 
-> 完整根因详情见 [reference/root-cause-catalog.md](./reference/root-cause-catalog.md)
+> 完整根因详情见 [reference/root-cause-catalog.md](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/skill-set/k8s-node-notready/reference/root-cause-catalog.md)
 > 完整修复步骤见 [reference/remediation-playbook.md](./reference/remediation-playbook.md)
 
 ## 相关链接

@@ -140,26 +140,26 @@ reports/
 - [[MOC|MOC]]
 - _reports/OBSIDIAN-WIKI-AGENT-CORPUS-IMPROVEMENT-PLAN.md
 - [[README|README]]
-- [[生态参考/98-merged-indexes/README-from-domain-34.md|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
-- [[实体/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- [[网络/98-merged-indexes/MOC-from-domain-26.md|domain-26-service-mesh-microservices MOC]] — Cross-reference
-- [[应用模式/98-merged-indexes/README-from-domain-42.md|Topic 应用层架构设计最佳实践]] — Cross-reference
-- [[应用模式/98-merged-indexes/MOC-from-domain-42.md|topic-application-architecture MOC]] — Cross-reference
-- [[概念/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
-- [[元数据/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[AI基础设施/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[AI基础设施/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
-- [[发布变更/98-merged-indexes/MOC-from-domain-23.md|domain-23-gitops-ci-cd MOC]] — Cross-reference
-- [[技能/工作负载/pod/培训/learn-decision-tree-mermaid.md|问题排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[技能/工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 问题诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[平台工程/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
-- [[可靠性/98-merged-indexes/README-from-domain-30.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
-- [[实体/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[生态参考/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[生态参考/领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[生态参考/领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[生态参考/领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[生态参考/领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[37-归档/domain-indexes/ecosystem/README-from-domain-34.md|Domain-34: CNCF Landscape 开源项目]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[37-归档/domain-indexes/network/MOC-from-domain-26.md|domain-26-service-mesh-microservices MOC]] — Cross-reference
+- [[37-归档/domain-indexes/app-patterns/README-from-domain-42.md|Topic 应用层架构设计最佳实践]] — Cross-reference
+- [[37-归档/domain-indexes/app-patterns/MOC-from-domain-42.md|topic-application-architecture MOC]] — Cross-reference
+- [[22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[37-归档/domain-indexes/release-change/MOC-from-domain-23.md|domain-23-gitops-ci-cd MOC]] — Cross-reference
+- [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|问题排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 问题诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[37-归档/domain-indexes/reliability/README-from-domain-30.md|Domain 09: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity)]] — Cross-reference
+- [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 - _reports/LESSONS-LEARNED-2026-05-21.md
 
 

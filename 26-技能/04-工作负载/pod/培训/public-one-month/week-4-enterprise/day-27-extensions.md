@@ -451,10 +451,10 @@ Artifact Hub（artifacthub.io）是 CNCF 官方的 Helm Chart 搜索引擎。Bit
 
 ## 延伸阅读
 
-- [CRD 开发指南](../../专项技术/01-crd-development-guide.md)
-- [Helm Charts 管理](../../专项技术/06-helm-charts-management.md)
-- [CRD/Operator 开发](../../平台工程/20-crd-operator-development.md)
-- [控制器模式](../../集群基础/03-controller-pattern.md)
+- [CRD 开发指南](../../../../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/01-crd-development-guide.md)
+- [Helm Charts 管理](../../../../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/06-helm-charts-management.md)
+- [CRD/Operator 开发](../../../../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/20-crd-operator-development.md)
+- [控制器模式](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/03-controller-pattern.md)
 
 
 <!-- risk-assessed -->

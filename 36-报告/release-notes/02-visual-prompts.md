@@ -49,7 +49,7 @@ prerequisites:
 每个节点是一个发光的圆球代表不同技术域 (标注 etcd/networking/security/AI),
 节点间有光线连接形成知识图谱, 网络下方有流动的数据粒子流,
 整体风格: 未来科技、数据可视化、深蓝+青色渐变,
-右下角有 [[实体/kubernetes.md|kubernetes]] 风轮 logo 的抽象化呈现,
+右下角有 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 风轮 logo 的抽象化呈现,
 16:9 宽幅, 4K 高清, 适合发布会主视觉
 ```
 

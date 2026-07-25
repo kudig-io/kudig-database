@@ -430,20 +430,20 @@ Kyverno 的优势在于使用 Kubernetes 原生资源定义策略，学习曲线
 
 ## 延伸阅读
 
-- [Prometheus 企业级监控](../../可观测性/01-prometheus-enterprise-monitoring.md)
-- [ArgoCD 企业级 GitOps](../../发布变更/01-argo-cd-enterprise-gitops.md)
-- [Kyverno 企业策略管理](../../安全/04-kyverno-enterprise-policy-management.md)
-- [Vault 企业 Secret 管理](../../安全/05-vault-enterprise-secrets-management.md)
-- [FTA 故障树分析](../../../故障诊断/FTA故障树/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../故障诊断/FEBM方法论/01-febm-theory-foundations.md)
-- [SLO/SLI 体系](../../可观测性/18-slo-sli-system.md)
-- [CRD 开发指南](../../专项技术/01-crd-development-guide.md)
-- [Helm Charts 管理](../../专项技术/06-helm-charts-management.md)
-- [生产架构设计原则](../../生产运维/01-production-architecture-design-principles.md)
-- [零信任安全架构](../../生产运维/07-zero-trust-security-architecture.md)
-- [变更管理流程](../../生产运维/22-change-management-process.md)
-- [事故响应处理](../../生产运维/23-incident-response-handling.md)
-- [容量规划预测](../../生产运维/24-capacity-planning-forecasting.md)
+- [Prometheus 企业级监控](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/01-prometheus-enterprise-monitoring.md)
+- [ArgoCD 企业级 GitOps](../../../../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/01-GitOps/01-argo-cd-enterprise-gitops.md)
+- [Kyverno 企业策略管理](../../../../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/04-kyverno-enterprise-policy-management.md)
+- [Vault 企业 Secret 管理](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/05-vault-enterprise-secrets-management.md)
+- [FTA 故障树分析](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/04-fta-core-principles.md)
+- [FEBM 取证循证方法](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/01-febm-theory-foundations.md)
+- [SLO/SLI 体系](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/06-SLO-SLI/18-slo-sli-system.md)
+- [CRD 开发指南](../../../../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/01-crd-development-guide.md)
+- [Helm Charts 管理](../../../../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/06-helm-charts-management.md)
+- [生产架构设计原则](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/02-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/01-production-architecture-design-principles.md)
+- [零信任安全架构](../../../../../../08-%E5%AE%89%E5%85%A8/02-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/07-zero-trust-security-architecture.md)
+- [变更管理流程](../../../../../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/04-%E5%8F%98%E6%9B%B4%E7%AE%A1%E7%90%86/22-change-management-process.md)
+- [事故响应处理](../../../../../../13-%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/03-%E4%BA%8B%E4%BB%B6%E5%93%8D%E5%BA%94/23-incident-response-handling.md)
+- [容量规划预测](../../../../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/03-%E5%AE%B9%E9%87%8F%E8%A7%84%E5%88%92/24-capacity-planning-forecasting.md)
 
 ## Related
 

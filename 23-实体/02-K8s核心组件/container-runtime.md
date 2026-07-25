@@ -262,6 +262,6 @@ Pod 异常 → crictl pods 查看 Sandbox 状态
 - [[docker]] — Docker
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[19-故障诊断/04-高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
 
 <!-- risk-assessed -->

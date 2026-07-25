@@ -122,7 +122,7 @@ Red Hat 宣布将以下项目贡献给 CNCF Sandbox:
 ## Obsidian 相关文档
 
 - 容器运行时 MOC
-- [[容器运行时/README.md|Docker 容器技术深度解析]]
+- [[14-容器运行时/README.md|Docker 容器技术深度解析]]
 - Docker 架构概述与核心概念
 - Docker 镜像管理详解
 - Docker 容器生命周期管理

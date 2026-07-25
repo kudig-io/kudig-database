@@ -123,247 +123,247 @@ last_updated: 2026-05-21
 
 #### 配置管理
 
-- [[系统基础/topic-dictionary/configuration/configmaps.md|configmaps]] — Configmaps
-- [[系统基础/topic-dictionary/configuration/liveness-readiness-and-startup-probes.md|liveness-readiness-and-startup-probes]] — Liveness readiness and startup probes
-- [[系统基础/topic-dictionary/configuration/organizing-cluster-access-using-kubeconfig-files.md|organizing-cluster-access-using-kubeconfig-files]] — Organizing cluster access using kubeconfig files
-- [[系统基础/topic-dictionary/configuration/resource-management-for-pods-and-containers.md|resource-management-for-pods-and-containers]] — Resource management for pods and containers
-- [[系统基础/topic-dictionary/configuration/resource-management-for-windows-nodes.md|resource-management-for-windows-nodes]] — Resource management for windows nodes
-- [[系统基础/topic-dictionary/configuration/secrets.md|secrets]] — Secrets
+- [[17-系统基础/06-知识字典/configuration/configmaps.md|configmaps]] — Configmaps
+- [[17-系统基础/06-知识字典/configuration/liveness-readiness-and-startup-probes.md|liveness-readiness-and-startup-probes]] — Liveness readiness and startup probes
+- [[17-系统基础/06-知识字典/configuration/organizing-cluster-access-using-kubeconfig-files.md|organizing-cluster-access-using-kubeconfig-files]] — Organizing cluster access using kubeconfig files
+- [[17-系统基础/06-知识字典/configuration/resource-management-for-pods-and-containers.md|resource-management-for-pods-and-containers]] — Resource management for pods and containers
+- [[17-系统基础/06-知识字典/configuration/resource-management-for-windows-nodes.md|resource-management-for-windows-nodes]] — Resource management for windows nodes
+- [[17-系统基础/06-知识字典/configuration/secrets.md|secrets]] — Secrets
 
 #### 基础概念
 
-- [[系统基础/topic-dictionary/fundamentals/about-cgroup-v2.md|about-cgroup-v2]] — About cgroup v2
-- [[系统基础/topic-dictionary/fundamentals/annotations.md|annotations]] — Annotations
-- [[系统基础/topic-dictionary/fundamentals/cloud-controller-manager.md|cloud-controller-manager]] — Cloud controller manager
-- [[系统基础/topic-dictionary/fundamentals/communication-between-nodes-and-the-control-plane.md|communication-between-nodes-and-the-control-plane]] — Communication between nodes and the control plane
-- [[系统基础/topic-dictionary/fundamentals/controllers.md|controllers]] — Controllers
-- [[系统基础/topic-dictionary/fundamentals/field-selectors.md|field-selectors]] — Field selectors
-- [[系统基础/topic-dictionary/fundamentals/finalizers.md|finalizers]] — Finalizers
-- [[系统基础/topic-dictionary/fundamentals/garbage-collection.md|garbage-collection]] — Garbage collection
-- [[系统基础/topic-dictionary/fundamentals/kubernetes-components.md|kubernetes-components]] — Kubernetes components
-- [[系统基础/topic-dictionary/fundamentals/kubernetes-concepts-reference.md|kubernetes-concepts-reference]] — Kubernetes concepts reference
-- [[系统基础/topic-dictionary/fundamentals/kubernetes-object-management.md|kubernetes-object-management]] — Kubernetes object management
-- [[系统基础/topic-dictionary/fundamentals/kubernetes-self-healing.md|kubernetes-self-healing]] — Kubernetes self healing
-- [[系统基础/topic-dictionary/fundamentals/labels-and-selectors.md|labels-and-selectors]] — Labels and selectors
-- [[系统基础/topic-dictionary/fundamentals/leases.md|leases]] — Leases
-- [[系统基础/topic-dictionary/fundamentals/mixed-version-proxy.md|mixed-version-proxy]] — Mixed version proxy
-- [[系统基础/topic-dictionary/fundamentals/namespaces.md|namespaces]] — Namespaces
-- [[系统基础/topic-dictionary/fundamentals/nodes.md|nodes]] — Nodes
-- [[系统基础/topic-dictionary/fundamentals/object-names-and-ids.md|object-names-and-ids]] — Object names and ids
-- [[系统基础/topic-dictionary/fundamentals/objects-in-kubernetes.md|objects-in-kubernetes]] — Objects in kubernetes
-- [[系统基础/topic-dictionary/fundamentals/owners-and-dependents.md|owners-and-dependents]] — Owners and dependents
-- [[系统基础/topic-dictionary/fundamentals/recommended-labels.md|recommended-labels]] — Recommended labels
-- [[系统基础/topic-dictionary/fundamentals/storage-versions.md|storage-versions]] — Storage versions
-- [[系统基础/topic-dictionary/fundamentals/the-kubectl-command-line-tool.md|the-kubectl-command-line-tool]] — The kubectl command line tool
-- [[系统基础/topic-dictionary/fundamentals/the-kubernetes-api.md|the-kubernetes-api]] — The kubernetes api
+- [[17-系统基础/06-知识字典/fundamentals/about-cgroup-v2.md|about-cgroup-v2]] — About cgroup v2
+- [[17-系统基础/06-知识字典/fundamentals/annotations.md|annotations]] — Annotations
+- [[17-系统基础/06-知识字典/fundamentals/cloud-controller-manager.md|cloud-controller-manager]] — Cloud controller manager
+- [[17-系统基础/06-知识字典/fundamentals/communication-between-nodes-and-the-control-plane.md|communication-between-nodes-and-the-control-plane]] — Communication between nodes and the control plane
+- [[17-系统基础/06-知识字典/fundamentals/controllers.md|controllers]] — Controllers
+- [[17-系统基础/06-知识字典/fundamentals/field-selectors.md|field-selectors]] — Field selectors
+- [[17-系统基础/06-知识字典/fundamentals/finalizers.md|finalizers]] — Finalizers
+- [[17-系统基础/06-知识字典/fundamentals/garbage-collection.md|garbage-collection]] — Garbage collection
+- [[17-系统基础/06-知识字典/fundamentals/kubernetes-components.md|kubernetes-components]] — Kubernetes components
+- [[17-系统基础/06-知识字典/fundamentals/kubernetes-concepts-reference.md|kubernetes-concepts-reference]] — Kubernetes concepts reference
+- [[17-系统基础/06-知识字典/fundamentals/kubernetes-object-management.md|kubernetes-object-management]] — Kubernetes object management
+- [[17-系统基础/06-知识字典/fundamentals/kubernetes-self-healing.md|kubernetes-self-healing]] — Kubernetes self healing
+- [[17-系统基础/06-知识字典/fundamentals/labels-and-selectors.md|labels-and-selectors]] — Labels and selectors
+- [[17-系统基础/06-知识字典/fundamentals/leases.md|leases]] — Leases
+- [[17-系统基础/06-知识字典/fundamentals/mixed-version-proxy.md|mixed-version-proxy]] — Mixed version proxy
+- [[17-系统基础/06-知识字典/fundamentals/namespaces.md|namespaces]] — Namespaces
+- [[17-系统基础/06-知识字典/fundamentals/nodes.md|nodes]] — Nodes
+- [[17-系统基础/06-知识字典/fundamentals/object-names-and-ids.md|object-names-and-ids]] — Object names and ids
+- [[17-系统基础/06-知识字典/fundamentals/objects-in-kubernetes.md|objects-in-kubernetes]] — Objects in kubernetes
+- [[17-系统基础/06-知识字典/fundamentals/owners-and-dependents.md|owners-and-dependents]] — Owners and dependents
+- [[17-系统基础/06-知识字典/fundamentals/recommended-labels.md|recommended-labels]] — Recommended labels
+- [[17-系统基础/06-知识字典/fundamentals/storage-versions.md|storage-versions]] — Storage versions
+- [[17-系统基础/06-知识字典/fundamentals/the-kubectl-command-line-tool.md|the-kubectl-command-line-tool]] — The kubectl command line tool
+- [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|the-kubernetes-api]] — The kubernetes api
 
 #### 多云与边缘
 
-- [[系统基础/topic-dictionary/multi-cloud/edge-computing-and-k3s.md|edge-computing-and-k3s]] — Edge computing and k3s
-- [[系统基础/topic-dictionary/multi-cloud/multi-cloud-operations.md|multi-cloud-operations]] — Multi cloud operations
-- [[系统基础/topic-dictionary/multi-cloud/spaceborne-computing.md|spaceborne-computing]] — Spaceborne computing
+- [[17-系统基础/06-知识字典/multi-cloud/edge-computing-and-k3s.md|edge-computing-and-k3s]] — Edge computing and k3s
+- [[17-系统基础/06-知识字典/multi-cloud/multi-cloud-operations.md|multi-cloud-operations]] — Multi cloud operations
+- [[17-系统基础/06-知识字典/multi-cloud/spaceborne-computing.md|spaceborne-computing]] — Spaceborne computing
 
 #### 网络
 
-- [[系统基础/topic-dictionary/networking/cluster-mesh.md|cluster-mesh]] — Cluster mesh
-- [[系统基础/topic-dictionary/networking/cluster-networking.md|cluster-networking]] — Cluster networking
-- [[系统基础/topic-dictionary/networking/dns-for-services-and-pods.md|dns-for-services-and-pods]] — Dns for services and pods
-- [[系统基础/topic-dictionary/networking/ebpf-and-cilium-networking.md|ebpf-and-cilium-networking]] — Ebpf and cilium networking
-- [[系统基础/topic-dictionary/networking/endpointslices.md|endpointslices]] — Endpointslices
-- [[系统基础/topic-dictionary/networking/gateway-api.md|gateway-api]] — Gateway api
-- [[系统基础/topic-dictionary/networking/ingress.md|ingress]] — Ingress
-- [[系统基础/topic-dictionary/networking/ingress-controllers.md|ingress-controllers]] — Ingress controllers
-- [[系统基础/topic-dictionary/networking/ipv4-ipv6-dual-stack.md|ipv4-ipv6-dual-stack]] — Ipv4 ipv6 dual stack
-- [[系统基础/topic-dictionary/networking/network-policies.md|network-policies]] — Network policies
-- [[系统基础/topic-dictionary/networking/networking-on-windows.md|networking-on-windows]] — Networking on windows
-- [[系统基础/topic-dictionary/networking/service.md|service]] — Service
-- [[系统基础/topic-dictionary/networking/service-clusterip-allocation.md|service-clusterip-allocation]] — Service clusterip allocation
-- [[系统基础/topic-dictionary/networking/service-internal-traffic-policy.md|service-internal-traffic-policy]] — Service internal traffic policy
-- [[系统基础/topic-dictionary/networking/service-mesh.md|service-mesh]] — Service mesh
-- [[系统基础/topic-dictionary/networking/telco-cloud-and-5g-mec.md|telco-cloud-and-5g-mec]] — Telco cloud and 5g mec
-- [[系统基础/topic-dictionary/networking/topology-aware-routing.md|topology-aware-routing]] — Topology aware routing
+- [[17-系统基础/06-知识字典/networking/cluster-mesh.md|cluster-mesh]] — Cluster mesh
+- [[17-系统基础/06-知识字典/networking/cluster-networking.md|cluster-networking]] — Cluster networking
+- [[17-系统基础/06-知识字典/networking/dns-for-services-and-pods.md|dns-for-services-and-pods]] — Dns for services and pods
+- [[17-系统基础/06-知识字典/networking/ebpf-and-cilium-networking.md|ebpf-and-cilium-networking]] — Ebpf and cilium networking
+- [[17-系统基础/06-知识字典/networking/endpointslices.md|endpointslices]] — Endpointslices
+- [[17-系统基础/06-知识字典/networking/gateway-api.md|gateway-api]] — Gateway api
+- [[17-系统基础/06-知识字典/networking/ingress.md|ingress]] — Ingress
+- [[17-系统基础/06-知识字典/networking/ingress-controllers.md|ingress-controllers]] — Ingress controllers
+- [[17-系统基础/06-知识字典/networking/ipv4-ipv6-dual-stack.md|ipv4-ipv6-dual-stack]] — Ipv4 ipv6 dual stack
+- [[17-系统基础/06-知识字典/networking/network-policies.md|network-policies]] — Network policies
+- [[17-系统基础/06-知识字典/networking/networking-on-windows.md|networking-on-windows]] — Networking on windows
+- [[17-系统基础/06-知识字典/networking/service.md|service]] — Service
+- [[17-系统基础/06-知识字典/networking/service-clusterip-allocation.md|service-clusterip-allocation]] — Service clusterip allocation
+- [[17-系统基础/06-知识字典/networking/service-internal-traffic-policy.md|service-internal-traffic-policy]] — Service internal traffic policy
+- [[17-系统基础/06-知识字典/networking/service-mesh.md|service-mesh]] — Service mesh
+- [[17-系统基础/06-知识字典/networking/telco-cloud-and-5g-mec.md|telco-cloud-and-5g-mec]] — Telco cloud and 5g mec
+- [[17-系统基础/06-知识字典/networking/topology-aware-routing.md|topology-aware-routing]] — Topology aware routing
 
 #### 可观测性
 
-- [[系统基础/topic-dictionary/observability/alerting-and-slo-monitoring.md|alerting-and-slo-monitoring]] — Alerting and slo monitoring
-- [[系统基础/topic-dictionary/observability/llm-observability.md|llm-observability]] — Llm observability
-- [[系统基础/topic-dictionary/observability/log-aggregation-with-loki.md|log-aggregation-with-loki]] — Log aggregation with loki
-- [[系统基础/topic-dictionary/observability/logging-architecture.md|logging-architecture]] — Logging architecture
-- [[系统基础/topic-dictionary/observability/metrics-for-kubernetes-object-states.md|metrics-for-kubernetes-object-states]] — Metrics for kubernetes object states
-- [[系统基础/topic-dictionary/observability/metrics-for-kubernetes-system-components.md|metrics-for-kubernetes-system-components]] — Metrics for kubernetes system components
-- [[系统基础/topic-dictionary/observability/observability.md|observability]] — Observability
-- [[系统基础/topic-dictionary/observability/opentelemetry-and-distributed-tracing.md|opentelemetry-and-distributed-tracing]] — Opentelemetry and distributed tracing
-- [[系统基础/topic-dictionary/observability/system-logs.md|system-logs]] — System logs
-- [[系统基础/topic-dictionary/observability/traces-for-kubernetes-system-components.md|traces-for-kubernetes-system-components]] — Traces for kubernetes system components
+- [[17-系统基础/06-知识字典/observability/alerting-and-slo-monitoring.md|alerting-and-slo-monitoring]] — Alerting and slo monitoring
+- [[17-系统基础/06-知识字典/observability/llm-observability.md|llm-observability]] — Llm observability
+- [[17-系统基础/06-知识字典/observability/log-aggregation-with-loki.md|log-aggregation-with-loki]] — Log aggregation with loki
+- [[17-系统基础/06-知识字典/observability/logging-architecture.md|logging-architecture]] — Logging architecture
+- [[17-系统基础/06-知识字典/observability/metrics-for-kubernetes-object-states.md|metrics-for-kubernetes-object-states]] — Metrics for kubernetes object states
+- [[17-系统基础/06-知识字典/observability/metrics-for-kubernetes-system-components.md|metrics-for-kubernetes-system-components]] — Metrics for kubernetes system components
+- [[17-系统基础/06-知识字典/observability/observability.md|observability]] — Observability
+- [[17-系统基础/06-知识字典/observability/opentelemetry-and-distributed-tracing.md|opentelemetry-and-distributed-tracing]] — Opentelemetry and distributed tracing
+- [[17-系统基础/06-知识字典/observability/system-logs.md|system-logs]] — System logs
+- [[17-系统基础/06-知识字典/observability/traces-for-kubernetes-system-components.md|traces-for-kubernetes-system-components]] — Traces for kubernetes system components
 
 #### 运维实践
 
-- [[系统基础/topic-dictionary/operations/backup-disaster-recovery.md|backup-disaster-recovery]] — Backup disaster recovery
-- [[系统基础/topic-dictionary/operations/capacity-planning-forecasting.md|capacity-planning-forecasting]] — Capacity planning forecasting
-- [[系统基础/topic-dictionary/operations/certificates.md|certificates]] — Certificates
-- [[系统基础/topic-dictionary/operations/change-management-release.md|change-management-release]] — Change management release
-- [[系统基础/topic-dictionary/operations/chaos-engineering.md|chaos-engineering]] — Chaos engineering
-- [[系统基础/topic-dictionary/operations/enterprise-ops-practices.md|enterprise-ops-practices]] — Enterprise ops practices
-- [[系统基础/topic-dictionary/operations/failure-patterns-analysis.md|failure-patterns-analysis]] — Failure patterns analysis
-- [[系统基础/topic-dictionary/operations/finops-and-cost-optimization.md|finops-and-cost-optimization]] — Finops and cost optimization
-- [[系统基础/topic-dictionary/operations/greenops-and-carbon-aware-computing.md|greenops-and-carbon-aware-computing]] — Greenops and carbon aware computing
-- [[系统基础/topic-dictionary/operations/incident-management-runbooks.md|incident-management-runbooks]] — Incident management runbooks
-- [[系统基础/topic-dictionary/operations/installing-addons.md|installing-addons]] — Installing addons
-- [[系统基础/topic-dictionary/operations/node-autoscaling.md|node-autoscaling]] — Node autoscaling
-- [[系统基础/topic-dictionary/operations/node-shutdowns.md|node-shutdowns]] — Node shutdowns
-- [[系统基础/topic-dictionary/operations/operations-best-practices.md|operations-best-practices]] — Operations best practices
-- [[系统基础/topic-dictionary/operations/performance-tuning-expert.md|performance-tuning-expert]] — Performance tuning expert
-- [[系统基础/topic-dictionary/operations/production-troubleshooting-playbook.md|production-troubleshooting-playbook]] — Production troubleshooting playbook
-- [[系统基础/topic-dictionary/operations/sli-slo-sla-engineering.md|sli-slo-sla-engineering]] — Sli slo sla engineering
-- [[系统基础/topic-dictionary/operations/sre-maturity-model.md|sre-maturity-model]] — Sre maturity model
-- [[系统基础/topic-dictionary/operations/stateful-services-operations.md|stateful-services-operations]] — Stateful services operations
-- [[系统基础/topic-dictionary/operations/swap-memory-management.md|swap-memory-management]] — Swap memory management
+- [[17-系统基础/06-知识字典/operations/backup-disaster-recovery.md|backup-disaster-recovery]] — Backup disaster recovery
+- [[17-系统基础/06-知识字典/operations/capacity-planning-forecasting.md|capacity-planning-forecasting]] — Capacity planning forecasting
+- [[17-系统基础/06-知识字典/operations/certificates.md|certificates]] — Certificates
+- [[17-系统基础/06-知识字典/operations/change-management-release.md|change-management-release]] — Change management release
+- [[17-系统基础/06-知识字典/operations/chaos-engineering.md|chaos-engineering]] — Chaos engineering
+- [[17-系统基础/06-知识字典/operations/enterprise-ops-practices.md|enterprise-ops-practices]] — Enterprise ops practices
+- [[17-系统基础/06-知识字典/operations/failure-patterns-analysis.md|failure-patterns-analysis]] — Failure patterns analysis
+- [[17-系统基础/06-知识字典/operations/finops-and-cost-optimization.md|finops-and-cost-optimization]] — Finops and cost optimization
+- [[17-系统基础/06-知识字典/operations/greenops-and-carbon-aware-computing.md|greenops-and-carbon-aware-computing]] — Greenops and carbon aware computing
+- [[17-系统基础/06-知识字典/operations/incident-management-runbooks.md|incident-management-runbooks]] — Incident management runbooks
+- [[17-系统基础/06-知识字典/operations/installing-addons.md|installing-addons]] — Installing addons
+- [[17-系统基础/06-知识字典/operations/node-autoscaling.md|node-autoscaling]] — Node autoscaling
+- [[17-系统基础/06-知识字典/operations/node-shutdowns.md|node-shutdowns]] — Node shutdowns
+- [[17-系统基础/06-知识字典/operations/operations-best-practices.md|operations-best-practices]] — Operations best practices
+- [[17-系统基础/06-知识字典/operations/performance-tuning-expert.md|performance-tuning-expert]] — Performance tuning expert
+- [[17-系统基础/06-知识字典/operations/production-troubleshooting-playbook.md|production-troubleshooting-playbook]] — Production troubleshooting playbook
+- [[17-系统基础/06-知识字典/operations/sli-slo-sla-engineering.md|sli-slo-sla-engineering]] — Sli slo sla engineering
+- [[17-系统基础/06-知识字典/operations/sre-maturity-model.md|sre-maturity-model]] — Sre maturity model
+- [[17-系统基础/06-知识字典/operations/stateful-services-operations.md|stateful-services-operations]] — Stateful services operations
+- [[17-系统基础/06-知识字典/operations/swap-memory-management.md|swap-memory-management]] — Swap memory management
 
 #### 平台工程
 
-- [[系统基础/topic-dictionary/platform-engineering/admission-webhook-good-practices.md|admission-webhook-good-practices]] — Admission webhook good practices
-- [[系统基础/topic-dictionary/platform-engineering/api-priority-and-fairness.md|api-priority-and-fairness]] — Api priority and fairness
-- [[系统基础/topic-dictionary/platform-engineering/cluster-api-and-fleet-management.md|cluster-api-and-fleet-management]] — Cluster api and fleet management
-- [[系统基础/topic-dictionary/platform-engineering/compatibility-version-for-control-plane.md|compatibility-version-for-control-plane]] — Compatibility version for control plane
-- [[系统基础/topic-dictionary/platform-engineering/compute-storage-and-networking-extensions.md|compute-storage-and-networking-extensions]] — Compute storage and networking extensions
-- [[系统基础/topic-dictionary/platform-engineering/coordinated-leader-election.md|coordinated-leader-election]] — Coordinated leader election
-- [[系统基础/topic-dictionary/platform-engineering/custom-resources.md|custom-resources]] — Custom resources
-- [[系统基础/topic-dictionary/platform-engineering/developer-portal-and-platform-metrics.md|developer-portal-and-platform-metrics]] — Developer portal and platform metrics
-- [[系统基础/topic-dictionary/platform-engineering/device-plugins.md|device-plugins]] — Device plugins
-- [[系统基础/topic-dictionary/platform-engineering/dynamic-resource-allocation-good-practices.md|dynamic-resource-allocation-good-practices]] — Dynamic resource allocation good practices
-- [[系统基础/topic-dictionary/platform-engineering/extending-the-kubernetes-api.md|extending-the-kubernetes-api]] — Extending the kubernetes api
-- [[系统基础/topic-dictionary/platform-engineering/gitops-and-continuous-delivery.md|gitops-and-continuous-delivery]] — Gitops and continuous delivery
-- [[系统基础/topic-dictionary/platform-engineering/infrastructure-as-code-for-kubernetes.md|infrastructure-as-code-for-kubernetes]] — Infrastructure as code for kubernetes
-- [[系统基础/topic-dictionary/platform-engineering/kubernetes-api-aggregation-layer.md|kubernetes-api-aggregation-layer]] — Kubernetes api aggregation layer
-- [[系统基础/topic-dictionary/platform-engineering/kubevirt-virtual-machines.md|kubevirt-virtual-machines]] — Kubevirt virtual machines
-- [[系统基础/topic-dictionary/platform-engineering/network-plugins.md|network-plugins]] — Network plugins
-- [[系统基础/topic-dictionary/platform-engineering/operator-pattern.md|operator-pattern]] — Operator pattern
-- [[系统基础/topic-dictionary/platform-engineering/proxies-in-kubernetes.md|proxies-in-kubernetes]] — Proxies in kubernetes
-- [[系统基础/topic-dictionary/platform-engineering/webassembly-wasm-workloads.md|webassembly-wasm-workloads]] — Webassembly wasm workloads
+- [[17-系统基础/06-知识字典/platform-engineering/admission-webhook-good-practices.md|admission-webhook-good-practices]] — Admission webhook good practices
+- [[17-系统基础/06-知识字典/platform-engineering/api-priority-and-fairness.md|api-priority-and-fairness]] — Api priority and fairness
+- [[17-系统基础/06-知识字典/platform-engineering/cluster-api-and-fleet-management.md|cluster-api-and-fleet-management]] — Cluster api and fleet management
+- [[17-系统基础/06-知识字典/platform-engineering/compatibility-version-for-control-plane.md|compatibility-version-for-control-plane]] — Compatibility version for control plane
+- [[17-系统基础/06-知识字典/platform-engineering/compute-storage-and-networking-extensions.md|compute-storage-and-networking-extensions]] — Compute storage and networking extensions
+- [[17-系统基础/06-知识字典/platform-engineering/coordinated-leader-election.md|coordinated-leader-election]] — Coordinated leader election
+- [[17-系统基础/06-知识字典/platform-engineering/custom-resources.md|custom-resources]] — Custom resources
+- [[17-系统基础/06-知识字典/platform-engineering/developer-portal-and-platform-metrics.md|developer-portal-and-platform-metrics]] — Developer portal and platform metrics
+- [[17-系统基础/06-知识字典/platform-engineering/device-plugins.md|device-plugins]] — Device plugins
+- [[17-系统基础/06-知识字典/platform-engineering/dynamic-resource-allocation-good-practices.md|dynamic-resource-allocation-good-practices]] — Dynamic resource allocation good practices
+- [[17-系统基础/06-知识字典/platform-engineering/extending-the-kubernetes-api.md|extending-the-kubernetes-api]] — Extending the kubernetes api
+- [[17-系统基础/06-知识字典/platform-engineering/gitops-and-continuous-delivery.md|gitops-and-continuous-delivery]] — Gitops and continuous delivery
+- [[17-系统基础/06-知识字典/platform-engineering/infrastructure-as-code-for-kubernetes.md|infrastructure-as-code-for-kubernetes]] — Infrastructure as code for kubernetes
+- [[17-系统基础/06-知识字典/platform-engineering/kubernetes-api-aggregation-layer.md|kubernetes-api-aggregation-layer]] — Kubernetes api aggregation layer
+- [[17-系统基础/06-知识字典/platform-engineering/kubevirt-virtual-machines.md|kubevirt-virtual-machines]] — Kubevirt virtual machines
+- [[17-系统基础/06-知识字典/platform-engineering/network-plugins.md|network-plugins]] — Network plugins
+- [[17-系统基础/06-知识字典/platform-engineering/operator-pattern.md|operator-pattern]] — Operator pattern
+- [[17-系统基础/06-知识字典/platform-engineering/proxies-in-kubernetes.md|proxies-in-kubernetes]] — Proxies in kubernetes
+- [[17-系统基础/06-知识字典/platform-engineering/webassembly-wasm-workloads.md|webassembly-wasm-workloads]] — Webassembly wasm workloads
 
 #### 调度
 
-- [[系统基础/topic-dictionary/scheduling/api-initiated-eviction.md|api-initiated-eviction]] — Api initiated eviction
-- [[系统基础/topic-dictionary/scheduling/assigning-pods-to-nodes.md|assigning-pods-to-nodes]] — Assigning pods to nodes
-- [[系统基础/topic-dictionary/scheduling/dynamic-resource-allocation.md|dynamic-resource-allocation]] — Dynamic resource allocation
-- [[系统基础/topic-dictionary/scheduling/gang-scheduling.md|gang-scheduling]] — Gang scheduling
-- [[系统基础/topic-dictionary/scheduling/karpenter-autoscaling.md|karpenter-autoscaling]] — Karpenter autoscaling
-- [[系统基础/topic-dictionary/scheduling/kubernetes-scheduler.md|kubernetes-scheduler]] — Kubernetes scheduler
-- [[系统基础/topic-dictionary/scheduling/node-declared-features.md|node-declared-features]] — Node declared features
-- [[系统基础/topic-dictionary/scheduling/node-pressure-eviction.md|node-pressure-eviction]] — Node pressure eviction
-- [[系统基础/topic-dictionary/scheduling/pod-overhead.md|pod-overhead]] — Pod overhead
-- [[系统基础/topic-dictionary/scheduling/pod-priority-and-preemption.md|pod-priority-and-preemption]] — Pod priority and preemption
-- [[系统基础/topic-dictionary/scheduling/pod-scheduling-readiness.md|pod-scheduling-readiness]] — Pod scheduling readiness
-- [[系统基础/topic-dictionary/scheduling/pod-topology-spread-constraints.md|pod-topology-spread-constraints]] — Pod topology spread constraints
-- [[系统基础/topic-dictionary/scheduling/resource-bin-packing.md|resource-bin-packing]] — Resource bin packing
-- [[系统基础/topic-dictionary/scheduling/scheduler-performance-tuning.md|scheduler-performance-tuning]] — Scheduler performance tuning
-- [[系统基础/topic-dictionary/scheduling/scheduling-framework.md|scheduling-framework]] — Scheduling framework
-- [[系统基础/topic-dictionary/scheduling/taints-and-tolerations.md|taints-and-tolerations]] — Taints and tolerations
+- [[17-系统基础/06-知识字典/scheduling/api-initiated-eviction.md|api-initiated-eviction]] — Api initiated eviction
+- [[17-系统基础/06-知识字典/scheduling/assigning-pods-to-nodes.md|assigning-pods-to-nodes]] — Assigning pods to nodes
+- [[17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md|dynamic-resource-allocation]] — Dynamic resource allocation
+- [[17-系统基础/06-知识字典/scheduling/gang-scheduling.md|gang-scheduling]] — Gang scheduling
+- [[17-系统基础/06-知识字典/scheduling/karpenter-autoscaling.md|karpenter-autoscaling]] — Karpenter autoscaling
+- [[17-系统基础/06-知识字典/scheduling/kubernetes-scheduler.md|kubernetes-scheduler]] — Kubernetes scheduler
+- [[17-系统基础/06-知识字典/scheduling/node-declared-features.md|node-declared-features]] — Node declared features
+- [[17-系统基础/06-知识字典/scheduling/node-pressure-eviction.md|node-pressure-eviction]] — Node pressure eviction
+- [[17-系统基础/06-知识字典/scheduling/pod-overhead.md|pod-overhead]] — Pod overhead
+- [[17-系统基础/06-知识字典/scheduling/pod-priority-and-preemption.md|pod-priority-and-preemption]] — Pod priority and preemption
+- [[17-系统基础/06-知识字典/scheduling/pod-scheduling-readiness.md|pod-scheduling-readiness]] — Pod scheduling readiness
+- [[17-系统基础/06-知识字典/scheduling/pod-topology-spread-constraints.md|pod-topology-spread-constraints]] — Pod topology spread constraints
+- [[17-系统基础/06-知识字典/scheduling/resource-bin-packing.md|resource-bin-packing]] — Resource bin packing
+- [[17-系统基础/06-知识字典/scheduling/scheduler-performance-tuning.md|scheduler-performance-tuning]] — Scheduler performance tuning
+- [[17-系统基础/06-知识字典/scheduling/scheduling-framework.md|scheduling-framework]] — Scheduling framework
+- [[17-系统基础/06-知识字典/scheduling/taints-and-tolerations.md|taints-and-tolerations]] — Taints and tolerations
 
 #### 安全
 
-- [[系统基础/topic-dictionary/security/application-security-checklist.md|application-security-checklist]] — Application security checklist
-- [[系统基础/topic-dictionary/security/cloud-native-security.md|cloud-native-security]] — Cloud native security
-- [[系统基础/topic-dictionary/security/cloud-native-security-practices.md|cloud-native-security-practices]] — Cloud native security practices
-- [[系统基础/topic-dictionary/security/controlling-access-to-the-kubernetes-api.md|controlling-access-to-the-kubernetes-api]] — Controlling access to the kubernetes api
-- [[系统基础/topic-dictionary/security/good-practices-for-kubernetes-secrets.md|good-practices-for-kubernetes-secrets]] — Good practices for kubernetes secrets
-- [[系统基础/topic-dictionary/security/hardening-guide---authentication-mechanisms.md|hardening-guide---authentication-mechanisms]] — Hardening guide   authentication mechanisms
-- [[系统基础/topic-dictionary/security/hardening-guide---scheduler-configuration.md|hardening-guide---scheduler-configuration]] — Hardening guide   scheduler configuration
-- [[系统基础/topic-dictionary/security/kubernetes-api-server-bypass-risks.md|kubernetes-api-server-bypass-risks]] — Kubernetes api server bypass risks
-- [[系统基础/topic-dictionary/security/limit-ranges.md|limit-ranges]] — Limit ranges
-- [[系统基础/topic-dictionary/security/linux-kernel-security-constraints-for-pods-and-containers.md|linux-kernel-security-constraints-for-pods-and-containers]] — Linux kernel security constraints for pods and containers
-- [[系统基础/topic-dictionary/security/multi-tenancy.md|multi-tenancy]] — Multi tenancy
-- [[系统基础/topic-dictionary/security/node-resource-managers.md|node-resource-managers]] — Node resource managers
-- [[系统基础/topic-dictionary/security/pod-security-admission.md|pod-security-admission]] — Pod security admission
-- [[系统基础/topic-dictionary/security/pod-security-policies.md|pod-security-policies]] — Pod security policies
-- [[系统基础/topic-dictionary/security/pod-security-standards.md|pod-security-standards]] — Pod security standards
-- [[系统基础/topic-dictionary/security/policy-as-code.md|policy-as-code]] — Policy as code
-- [[系统基础/topic-dictionary/security/process-id-limits-and-reservations.md|process-id-limits-and-reservations]] — Process id limits and reservations
-- [[系统基础/topic-dictionary/security/resource-quotas.md|resource-quotas]] — Resource quotas
-- [[系统基础/topic-dictionary/security/role-based-access-control-good-practices.md|role-based-access-control-good-practices]] — Role based access control good practices
-- [[系统基础/topic-dictionary/security/runtime-security.md|runtime-security]] — Runtime security
-- [[系统基础/topic-dictionary/security/secrets-management-deep-dive.md|secrets-management-deep-dive]] — Secrets management deep dive
-- [[系统基础/topic-dictionary/security/security-checklist.md|security-checklist]] — Security checklist
-- [[系统基础/topic-dictionary/security/security-for-linux-nodes.md|security-for-linux-nodes]] — Security for linux nodes
-- [[系统基础/topic-dictionary/security/security-for-windows-nodes.md|security-for-windows-nodes]] — Security for windows nodes
-- [[系统基础/topic-dictionary/security/service-accounts.md|service-accounts]] — Service accounts
-- [[系统基础/topic-dictionary/security/spiffe-spire-identity.md|spiffe-spire-identity]] — Spiffe spire identity
-- [[系统基础/topic-dictionary/security/supply-chain-security.md|supply-chain-security]] — Supply chain security
+- [[17-系统基础/06-知识字典/security/application-security-checklist.md|application-security-checklist]] — Application security checklist
+- [[17-系统基础/06-知识字典/security/cloud-native-security.md|cloud-native-security]] — Cloud native security
+- [[17-系统基础/06-知识字典/security/cloud-native-security-practices.md|cloud-native-security-practices]] — Cloud native security practices
+- [[17-系统基础/06-知识字典/security/controlling-access-to-the-kubernetes-api.md|controlling-access-to-the-kubernetes-api]] — Controlling access to the kubernetes api
+- [[17-系统基础/06-知识字典/security/good-practices-for-kubernetes-secrets.md|good-practices-for-kubernetes-secrets]] — Good practices for kubernetes secrets
+- [[17-系统基础/06-知识字典/security/hardening-guide---authentication-mechanisms.md|hardening-guide---authentication-mechanisms]] — Hardening guide   authentication mechanisms
+- [[17-系统基础/06-知识字典/security/hardening-guide---scheduler-configuration.md|hardening-guide---scheduler-configuration]] — Hardening guide   scheduler configuration
+- [[17-系统基础/06-知识字典/security/kubernetes-api-server-bypass-risks.md|kubernetes-api-server-bypass-risks]] — Kubernetes api server bypass risks
+- [[17-系统基础/06-知识字典/security/limit-ranges.md|limit-ranges]] — Limit ranges
+- [[17-系统基础/06-知识字典/security/linux-kernel-security-constraints-for-pods-and-containers.md|linux-kernel-security-constraints-for-pods-and-containers]] — Linux kernel security constraints for pods and containers
+- [[17-系统基础/06-知识字典/security/multi-tenancy.md|multi-tenancy]] — Multi tenancy
+- [[17-系统基础/06-知识字典/security/node-resource-managers.md|node-resource-managers]] — Node resource managers
+- [[17-系统基础/06-知识字典/security/pod-security-admission.md|pod-security-admission]] — Pod security admission
+- [[17-系统基础/06-知识字典/security/pod-security-policies.md|pod-security-policies]] — Pod security policies
+- [[17-系统基础/06-知识字典/security/pod-security-standards.md|pod-security-standards]] — Pod security standards
+- [[17-系统基础/06-知识字典/security/policy-as-code.md|policy-as-code]] — Policy as code
+- [[17-系统基础/06-知识字典/security/process-id-limits-and-reservations.md|process-id-limits-and-reservations]] — Process id limits and reservations
+- [[17-系统基础/06-知识字典/security/resource-quotas.md|resource-quotas]] — Resource quotas
+- [[17-系统基础/06-知识字典/security/role-based-access-control-good-practices.md|role-based-access-control-good-practices]] — Role based access control good practices
+- [[17-系统基础/06-知识字典/security/runtime-security.md|runtime-security]] — Runtime security
+- [[17-系统基础/06-知识字典/security/secrets-management-deep-dive.md|secrets-management-deep-dive]] — Secrets management deep dive
+- [[17-系统基础/06-知识字典/security/security-checklist.md|security-checklist]] — Security checklist
+- [[17-系统基础/06-知识字典/security/security-for-linux-nodes.md|security-for-linux-nodes]] — Security for linux nodes
+- [[17-系统基础/06-知识字典/security/security-for-windows-nodes.md|security-for-windows-nodes]] — Security for windows nodes
+- [[17-系统基础/06-知识字典/security/service-accounts.md|service-accounts]] — Service accounts
+- [[17-系统基础/06-知识字典/security/spiffe-spire-identity.md|spiffe-spire-identity]] — Spiffe spire identity
+- [[17-系统基础/06-知识字典/security/supply-chain-security.md|supply-chain-security]] — Supply chain security
 
 #### 专项工作负载
 
-- [[系统基础/topic-dictionary/specialized-workloads/ai-infra-specialist.md|ai-infra-specialist]] — Ai infra specialist
-- [[系统基础/topic-dictionary/specialized-workloads/gpu-resource-management-and-partitioning.md|gpu-resource-management-and-partitioning]] — Gpu resource management and partitioning
-- [[系统基础/topic-dictionary/specialized-workloads/guide-for-running-windows-containers-in-kubernetes.md|guide-for-running-windows-containers-in-kubernetes]] — Guide for running windows containers in kubernetes
-- [[系统基础/topic-dictionary/specialized-workloads/hpc-and-bioinformatics.md|hpc-and-bioinformatics]] — Hpc and bioinformatics
-- [[系统基础/topic-dictionary/specialized-workloads/kserve-model-serving.md|kserve-model-serving]] — Kserve model serving
-- [[系统基础/topic-dictionary/specialized-workloads/kueue-job-queue-management.md|kueue-job-queue-management]] — Kueue job queue management
-- [[系统基础/topic-dictionary/specialized-workloads/llm-inference-optimization.md|llm-inference-optimization]] — Llm inference optimization
-- [[系统基础/topic-dictionary/specialized-workloads/mlops-pipelines-and-model-registry.md|mlops-pipelines-and-model-registry]] — Mlops pipelines and model registry
-- [[系统基础/topic-dictionary/specialized-workloads/vector-databases-and-rag-infrastructure.md|vector-databases-and-rag-infrastructure]] — Vector databases and rag infrastructure
-- [[系统基础/topic-dictionary/specialized-workloads/windows-containers-in-kubernetes.md|windows-containers-in-kubernetes]] — Windows containers in kubernetes
+- [[17-系统基础/06-知识字典/specialized-workloads/ai-infra-specialist.md|ai-infra-specialist]] — Ai infra specialist
+- [[17-系统基础/06-知识字典/specialized-workloads/gpu-resource-management-and-partitioning.md|gpu-resource-management-and-partitioning]] — Gpu resource management and partitioning
+- [[17-系统基础/06-知识字典/specialized-workloads/guide-for-running-windows-containers-in-kubernetes.md|guide-for-running-windows-containers-in-kubernetes]] — Guide for running windows containers in kubernetes
+- [[17-系统基础/06-知识字典/specialized-workloads/hpc-and-bioinformatics.md|hpc-and-bioinformatics]] — Hpc and bioinformatics
+- [[17-系统基础/06-知识字典/specialized-workloads/kserve-model-serving.md|kserve-model-serving]] — Kserve model serving
+- [[17-系统基础/06-知识字典/specialized-workloads/kueue-job-queue-management.md|kueue-job-queue-management]] — Kueue job queue management
+- [[17-系统基础/06-知识字典/specialized-workloads/llm-inference-optimization.md|llm-inference-optimization]] — Llm inference optimization
+- [[17-系统基础/06-知识字典/specialized-workloads/mlops-pipelines-and-model-registry.md|mlops-pipelines-and-model-registry]] — Mlops pipelines and model registry
+- [[17-系统基础/06-知识字典/specialized-workloads/vector-databases-and-rag-infrastructure.md|vector-databases-and-rag-infrastructure]] — Vector databases and rag infrastructure
+- [[17-系统基础/06-知识字典/specialized-workloads/windows-containers-in-kubernetes.md|windows-containers-in-kubernetes]] — Windows containers in kubernetes
 
 #### 存储
 
-- [[系统基础/topic-dictionary/storage/csi-volume-cloning.md|csi-volume-cloning]] — Csi volume cloning
-- [[系统基础/topic-dictionary/storage/dynamic-volume-provisioning.md|dynamic-volume-provisioning]] — Dynamic volume provisioning
-- [[系统基础/topic-dictionary/storage/ephemeral-volumes.md|ephemeral-volumes]] — Ephemeral volumes
-- [[系统基础/topic-dictionary/storage/high-performance-storage-networks.md|high-performance-storage-networks]] — High performance storage networks
-- [[系统基础/topic-dictionary/storage/local-ephemeral-storage.md|local-ephemeral-storage]] — Local ephemeral storage
-- [[系统基础/topic-dictionary/storage/node-specific-volume-limits.md|node-specific-volume-limits]] — Node specific volume limits
-- [[系统基础/topic-dictionary/storage/object-storage-and-data-pipelines.md|object-storage-and-data-pipelines]] — Object storage and data pipelines
-- [[系统基础/topic-dictionary/storage/persistent-volumes.md|persistent-volumes]] — Persistent volumes
-- [[系统基础/topic-dictionary/storage/projected-volumes.md|projected-volumes]] — Projected volumes
-- [[系统基础/topic-dictionary/storage/storage-capacity.md|storage-capacity]] — Storage capacity
-- [[系统基础/topic-dictionary/storage/storage-classes.md|storage-classes]] — Storage classes
-- [[系统基础/topic-dictionary/storage/volume-attributes-classes.md|volume-attributes-classes]] — Volume attributes classes
-- [[系统基础/topic-dictionary/storage/volume-health-monitoring.md|volume-health-monitoring]] — Volume health monitoring
-- [[系统基础/topic-dictionary/storage/volume-snapshot-classes.md|volume-snapshot-classes]] — Volume snapshot classes
-- [[系统基础/topic-dictionary/storage/volume-snapshots.md|volume-snapshots]] — Volume snapshots
-- [[系统基础/topic-dictionary/storage/volumes.md|volumes]] — Volumes
-- [[系统基础/topic-dictionary/storage/windows-storage.md|windows-storage]] — Windows storage
+- [[17-系统基础/06-知识字典/storage/csi-volume-cloning.md|csi-volume-cloning]] — Csi volume cloning
+- [[17-系统基础/06-知识字典/storage/dynamic-volume-provisioning.md|dynamic-volume-provisioning]] — Dynamic volume provisioning
+- [[17-系统基础/06-知识字典/storage/ephemeral-volumes.md|ephemeral-volumes]] — Ephemeral volumes
+- [[17-系统基础/06-知识字典/storage/high-performance-storage-networks.md|high-performance-storage-networks]] — High performance storage networks
+- [[17-系统基础/06-知识字典/storage/local-ephemeral-storage.md|local-ephemeral-storage]] — Local ephemeral storage
+- [[17-系统基础/06-知识字典/storage/node-specific-volume-limits.md|node-specific-volume-limits]] — Node specific volume limits
+- [[17-系统基础/06-知识字典/storage/object-storage-and-data-pipelines.md|object-storage-and-data-pipelines]] — Object storage and data pipelines
+- [[17-系统基础/06-知识字典/storage/persistent-volumes.md|persistent-volumes]] — Persistent volumes
+- [[17-系统基础/06-知识字典/storage/projected-volumes.md|projected-volumes]] — Projected volumes
+- [[17-系统基础/06-知识字典/storage/storage-capacity.md|storage-capacity]] — Storage capacity
+- [[17-系统基础/06-知识字典/storage/storage-classes.md|storage-classes]] — Storage classes
+- [[17-系统基础/06-知识字典/storage/volume-attributes-classes.md|volume-attributes-classes]] — Volume attributes classes
+- [[17-系统基础/06-知识字典/storage/volume-health-monitoring.md|volume-health-monitoring]] — Volume health monitoring
+- [[17-系统基础/06-知识字典/storage/volume-snapshot-classes.md|volume-snapshot-classes]] — Volume snapshot classes
+- [[17-系统基础/06-知识字典/storage/volume-snapshots.md|volume-snapshots]] — Volume snapshots
+- [[17-系统基础/06-知识字典/storage/volumes.md|volumes]] — Volumes
+- [[17-系统基础/06-知识字典/storage/windows-storage.md|windows-storage]] — Windows storage
 
 #### 工具链
 
-- [[系统基础/topic-dictionary/tooling/cli-commands.md|cli-commands]] — Cli commands
-- [[系统基础/topic-dictionary/tooling/container-image-optimization.md|container-image-optimization]] — Container image optimization
-- [[系统基础/topic-dictionary/tooling/tool-ecosystem.md|tool-ecosystem]] — Tool ecosystem
+- [[17-系统基础/06-知识字典/tooling/cli-commands.md|cli-commands]] — Cli commands
+- [[17-系统基础/06-知识字典/tooling/container-image-optimization.md|container-image-optimization]] — Container image optimization
+- [[17-系统基础/06-知识字典/tooling/tool-ecosystem.md|tool-ecosystem]] — Tool ecosystem
 
 #### 工作负载
 
-- [[系统基础/topic-dictionary/workloads/advanced-pod-configuration.md|advanced-pod-configuration]] — Advanced pod configuration
-- [[系统基础/topic-dictionary/workloads/automatic-cleanup-for-finished-jobs.md|automatic-cleanup-for-finished-jobs]] — Automatic cleanup for finished jobs
-- [[系统基础/topic-dictionary/workloads/autoscaling-workloads.md|autoscaling-workloads]] — Autoscaling workloads
-- [[系统基础/topic-dictionary/workloads/container-environment.md|container-environment]] — Container environment
-- [[系统基础/topic-dictionary/workloads/container-lifecycle-hooks.md|container-lifecycle-hooks]] — Container lifecycle hooks
-- [[系统基础/topic-dictionary/workloads/container-runtime-interface-cri.md|container-runtime-interface-cri]] — Container runtime interface cri
-- [[系统基础/topic-dictionary/workloads/cronjob.md|cronjob]] — Cronjob
-- [[系统基础/topic-dictionary/workloads/daemonset.md|daemonset]] — Daemonset
-- [[系统基础/topic-dictionary/workloads/deployments.md|deployments]] — Deployments
-- [[系统基础/topic-dictionary/workloads/disruptions.md|disruptions]] — Disruptions
-- [[系统基础/topic-dictionary/workloads/downward-api.md|downward-api]] — Downward api
-- [[系统基础/topic-dictionary/workloads/ephemeral-containers.md|ephemeral-containers]] — Ephemeral containers
-- [[系统基础/topic-dictionary/workloads/horizontal-pod-autoscaling.md|horizontal-pod-autoscaling]] — Horizontal pod autoscaling
-- [[系统基础/topic-dictionary/workloads/images.md|images]] — Images
-- [[系统基础/topic-dictionary/workloads/init-containers.md|init-containers]] — Init containers
-- [[系统基础/topic-dictionary/workloads/jobs.md|jobs]] — Jobs
-- [[系统基础/topic-dictionary/workloads/managing-workloads.md|managing-workloads]] — Managing workloads
-- [[系统基础/topic-dictionary/workloads/pod-group-policies.md|pod-group-policies]] — Pod group policies
-- [[系统基础/topic-dictionary/workloads/pod-hostname.md|pod-hostname]] — Pod hostname
-- [[系统基础/topic-dictionary/workloads/pod-lifecycle.md|pod-lifecycle]] — Pod lifecycle
-- [[系统基础/topic-dictionary/workloads/pod-quality-of-service-classes.md|pod-quality-of-service-classes]] — Pod quality of service classes
-- [[系统基础/topic-dictionary/workloads/pods.md|pods]] — Pods
-- [[系统基础/topic-dictionary/workloads/replicaset.md|replicaset]] — Replicaset
-- [[系统基础/topic-dictionary/workloads/replicationcontroller.md|replicationcontroller]] — Replicationcontroller
-- [[系统基础/topic-dictionary/workloads/runtime-class.md|runtime-class]] — Runtime class
-- [[系统基础/topic-dictionary/workloads/sidecar-containers.md|sidecar-containers]] — Sidecar containers
-- [[系统基础/topic-dictionary/workloads/spot-and-preemptible-workloads.md|spot-and-preemptible-workloads]] — Spot and preemptible workloads
-- [[系统基础/topic-dictionary/workloads/statefulsets.md|statefulsets]] — Statefulsets
-- [[系统基础/topic-dictionary/workloads/user-namespaces.md|user-namespaces]] — User namespaces
-- [[系统基础/topic-dictionary/workloads/vertical-pod-autoscaling.md|vertical-pod-autoscaling]] — Vertical pod autoscaling
-- [[系统基础/topic-dictionary/workloads/workload-api.md|workload-api]] — Workload api
-- [[系统基础/topic-dictionary/workloads/workload-management.md|workload-management]] — Workload management
-- [[系统基础/topic-dictionary/workloads/workload-reference.md|workload-reference]] — Workload reference
+- [[17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md|advanced-pod-configuration]] — Advanced pod configuration
+- [[17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|automatic-cleanup-for-finished-jobs]] — Automatic cleanup for finished jobs
+- [[17-系统基础/06-知识字典/workloads/autoscaling-workloads.md|autoscaling-workloads]] — Autoscaling workloads
+- [[17-系统基础/06-知识字典/workloads/container-environment.md|container-environment]] — Container environment
+- [[17-系统基础/06-知识字典/workloads/container-lifecycle-hooks.md|container-lifecycle-hooks]] — Container lifecycle hooks
+- [[17-系统基础/06-知识字典/workloads/container-runtime-interface-cri.md|container-runtime-interface-cri]] — Container runtime interface cri
+- [[17-系统基础/06-知识字典/workloads/cronjob.md|cronjob]] — Cronjob
+- [[17-系统基础/06-知识字典/workloads/daemonset.md|daemonset]] — Daemonset
+- [[17-系统基础/06-知识字典/workloads/deployments.md|deployments]] — Deployments
+- [[17-系统基础/06-知识字典/workloads/disruptions.md|disruptions]] — Disruptions
+- [[17-系统基础/06-知识字典/workloads/downward-api.md|downward-api]] — Downward api
+- [[17-系统基础/06-知识字典/workloads/ephemeral-containers.md|ephemeral-containers]] — Ephemeral containers
+- [[17-系统基础/06-知识字典/workloads/horizontal-pod-autoscaling.md|horizontal-pod-autoscaling]] — Horizontal pod autoscaling
+- [[17-系统基础/06-知识字典/workloads/images.md|images]] — Images
+- [[17-系统基础/06-知识字典/workloads/init-containers.md|init-containers]] — Init containers
+- [[17-系统基础/06-知识字典/workloads/jobs.md|jobs]] — Jobs
+- [[17-系统基础/06-知识字典/workloads/managing-workloads.md|managing-workloads]] — Managing workloads
+- [[17-系统基础/06-知识字典/workloads/pod-group-policies.md|pod-group-policies]] — Pod group policies
+- [[17-系统基础/06-知识字典/workloads/pod-hostname.md|pod-hostname]] — Pod hostname
+- [[17-系统基础/06-知识字典/workloads/pod-lifecycle.md|pod-lifecycle]] — Pod lifecycle
+- [[17-系统基础/06-知识字典/workloads/pod-quality-of-service-classes.md|pod-quality-of-service-classes]] — Pod quality of service classes
+- [[17-系统基础/06-知识字典/workloads/pods.md|pods]] — Pods
+- [[17-系统基础/06-知识字典/workloads/replicaset.md|replicaset]] — Replicaset
+- [[17-系统基础/06-知识字典/workloads/replicationcontroller.md|replicationcontroller]] — Replicationcontroller
+- [[17-系统基础/06-知识字典/workloads/runtime-class.md|runtime-class]] — Runtime class
+- [[17-系统基础/06-知识字典/workloads/sidecar-containers.md|sidecar-containers]] — Sidecar containers
+- [[17-系统基础/06-知识字典/workloads/spot-and-preemptible-workloads.md|spot-and-preemptible-workloads]] — Spot and preemptible workloads
+- [[17-系统基础/06-知识字典/workloads/statefulsets.md|statefulsets]] — Statefulsets
+- [[17-系统基础/06-知识字典/workloads/user-namespaces.md|user-namespaces]] — User namespaces
+- [[17-系统基础/06-知识字典/workloads/vertical-pod-autoscaling.md|vertical-pod-autoscaling]] — Vertical pod autoscaling
+- [[17-系统基础/06-知识字典/workloads/workload-api.md|workload-api]] — Workload api
+- [[17-系统基础/06-知识字典/workloads/workload-management.md|workload-management]] — Workload management
+- [[17-系统基础/06-知识字典/workloads/workload-reference.md|workload-reference]] — Workload reference
 
 ## 相关 Domain
 - [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]

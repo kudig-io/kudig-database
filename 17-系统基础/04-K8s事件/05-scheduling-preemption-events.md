@@ -978,7 +978,7 @@ kubectl get nodes -o json | jq -r '.items[] |
 - **[../domain-2-workload/10-pod-scheduling.md](../domain-2-workload/10-pod-scheduling.md)** - Pod 调度机制详解
 - **[../domain-4-storage/20-pv-pvc-dynamic-provisioning.md](../domain-4-storage/20-pv-pvc-dynamic-provisioning.md)** - 存储动态供应与绑定
 - **[../domain-3-cluster/15-node-management.md](../domain-3-cluster/15-node-management.md)** - 节点管理与污点配置
-- **[../故障诊断/高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md](../故障诊断/高级排障/01-control-plane/03-scheduler-troubleshooting.md)** - 调度器故障排查
+- **[../故障诊断/高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-01-control-plane/03-scheduler-troubleshooting.md)** - 调度器故障排查
 
 ## 相关最佳实践
 - **[../系统基础/topic-dictionary/01-operations-best-practices.md](../系统基础/知识字典/01-operations-best-practices.md)** - 调度策略最佳实践

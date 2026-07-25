@@ -64,7 +64,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[安全/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]] |  | security, supply-chain |  |
+| 1 | [[08-安全/00-总览/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]] |  | security, supply-chain |  |
 | 2 | 供应链安全概述 (Supply Chain Security Overview) |  | security, supply-chain, deep-dive |  |
 | 3 | 供应链安全成熟度模型 (Supply Chain Security Maturity Model) |  | security, supply-chain |  |
 | 4 | SBOM 生成与管理 (SBOM Generation and Management) |  | security, supply-chain |  |
@@ -127,11 +127,11 @@ graph TD
 
 ## See Also
 
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-25.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-7.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/README-from-domain-25.md|README-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-25.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-7.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/README-from-domain-25.md|README-from-安全]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

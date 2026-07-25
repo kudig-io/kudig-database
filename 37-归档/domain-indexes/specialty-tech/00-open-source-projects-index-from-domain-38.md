@@ -100,7 +100,7 @@ authors:
 ## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native MOC
-- [[专项技术/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
+- [[16-专项技术/README.md|Domain 15: WebAssembly 云原生 (WebAssembly Cloud Native)]]
 - WebAssembly 云原生基础
 - containerd Wasm 运行时
 - SpinKube 框架实践

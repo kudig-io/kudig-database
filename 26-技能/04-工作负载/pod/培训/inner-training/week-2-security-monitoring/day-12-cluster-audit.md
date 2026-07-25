@@ -471,8 +471,8 @@ rules:
 - [Kubernetes 审计官方文档](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
 - [阿里云 SLS 文档](https://help.aliyun.com/product/28958.html)
 - [ACK 审计日志文档](https://help.aliyun.com/document_detail/155212.html)
-- [文件: `../../../可观测性/01-observability-architecture-overview.md`](../../../可观测性/01-observability-architecture-overview.md)
-- [文件: `../../../可观测性/03-logging-architecture.md`](../../../可观测性/03-logging-architecture.md)
+- [文件: `../../../可观测性/01-observability-architecture-overview.md`](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/01-observability-architecture-overview.md)
+- [文件: `../../../可观测性/03-logging-architecture.md`](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/03-logging-architecture.md)
 
 ---
 

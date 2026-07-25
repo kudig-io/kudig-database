@@ -55,7 +55,7 @@ authors:
 
 数据目录（Data Catalog）是数据治理的核心基础设施，为组织提供数据资产的发现、理解、追踪和治理能力。在 Kubernetes 云原生数据平台中，数据管线（ETL/ELT）日益复杂，数据血缘（Data Lineage）追踪变得不可或缺——它回答"这个指标从哪来"、"修改这张表会影响谁"等关键问题。
 
-本文覆盖 DataHub、Apache Atlas 和 Marquez 三款主流数据目录/血缘系统在 K8s 上的部署与集成实践，帮助数据平台团队构建完整的数据治理体系。数据目录通常与 [[07-数据库中间件/06-数据流/]] 中的管线编排配合使用。
+本文覆盖 DataHub、Apache Atlas 和 Marquez 三款主流数据目录/血缘系统在 K8s 上的部署与集成实践，帮助数据平台团队构建完整的数据治理体系。数据目录通常与 [[07-数据库中间件/06-数据流/index.md|06-数据流]] 中的管线编排配合使用。
 
 ## 架构与核心概念
 
@@ -433,14 +433,14 @@ kubectl exec -n data-catalog deploy/datahub-gms -- \
 4. **权限控制**：DataHub 集成 LDAP/OIDC，按团队划分数据资产 Owner
 5. **变更通知**：配置 DataHub Actions，Schema 变更自动通知 Slack/钉钉
 6. **资源规划**：Elasticsearch 是 DataHub 的性能瓶颈，预留足够内存（heap = 50% 容器内存）
-7. **与数据管线集成**：在 [[07-数据库中间件/06-数据流/]] 的 Flink/Airflow 管线中嵌入 OpenLineage SDK
-8. **监控告警**：监控 GMS 延迟、Kafka 消费 lag、ES 索引大小，接入 [[09-可观测性/]] 平台
-9. **数据库元数据同步**：定期从 [[07-数据库中间件/01-数据库/]] 中的 PostgreSQL/MySQL 同步 Schema 元数据
+7. **与数据管线集成**：在 [[07-数据库中间件/06-数据流/index.md|06-数据流]] 的 Flink/Airflow 管线中嵌入 OpenLineage SDK
+8. **监控告警**：监控 GMS 延迟、Kafka 消费 lag、ES 索引大小，接入 [[09-可观测性/index.md|09-可观测性]] 平台
+9. **数据库元数据同步**：定期从 [[07-数据库中间件/01-数据库/index.md|01-数据库]] 中的 PostgreSQL/MySQL 同步 Schema 元数据
 
 ## Related
 
-- [[07-数据库中间件/06-数据流/]]
-- [[07-数据库中间件/01-数据库/]]
-- [[09-可观测性/]]
-- [[07-数据库中间件/05-Operator管理/]]
-- [[15-AI基础设施/]]
+- [[07-数据库中间件/06-数据流/index.md|06-数据流]]
+- [[07-数据库中间件/01-数据库/index.md|01-数据库]]
+- [[09-可观测性/index.md|09-可观测性]]
+- [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]]
+- [[15-AI基础设施/index.md|15-AI基础设施]]

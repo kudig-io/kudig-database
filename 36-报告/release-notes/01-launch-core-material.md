@@ -45,7 +45,7 @@ prerequisites:
 # kudig-database 发布会 — 核心材料
 
 > **版本**: v1.0 | **发布日期**: 2026-05
-> **定位**: 企业级 [[实体/kubernetes.md|kubernetes]] 生产运维知识库 + AI 智能体语料
+> **定位**: 企业级 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 生产运维知识库 + AI 智能体语料
 
 ---
 

@@ -153,7 +153,7 @@ graph LR
 
 ## 相关文档
 
-- [06-cluster-configuration-parameters.md](../06-cluster-configuration-parameters.md) - 集群配置参数参考
+- [06-cluster-configuration-parameters.md](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/06-%E5%8D%87%E7%BA%A7%E8%B7%AF%E5%BE%84/06-cluster-configuration-parameters.md) - 集群配置参数参考
 - [156-alibaba-cloud-integration.md](../156-alibaba-cloud-integration.md) - 阿里云集成总表
 - [141-hybrid-multi-cloud-design.md](../141-hybrid-multi-cloud-design.md) - 混合云架构设计
 

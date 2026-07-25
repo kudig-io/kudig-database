@@ -26,8 +26,8 @@ last_updated: '2026-07-21'
 
 ## Pages
 
-- [[21-生态参考/98-merged-indexes/README-from-domain-19|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)]]
-- [[21-生态参考/98-merged-indexes/00-open-source-projects-index-from-domain-19|Domain-19 论文与参考 — 开源项目索引]]
+- [[37-归档/domain-indexes/ecosystem/README-from-domain-19|Domain 19: Kubernetes 高级技术论文与最佳实践 (Advanced Technical Papers and Best Practices)]]
+- [[37-归档/domain-indexes/ecosystem/00-open-source-projects-index-from-domain-19|Domain-19 论文与参考 — 开源项目索引]]
 - [[21-生态参考/02-论文/17-kubernetes-aiml-gpu-scheduling-llm-inference|Kubernetes AI/ML GPU调度与LLM推理服务 (AI/ML GPU Scheduling and LLM Inference Serving)]]
 - [[21-生态参考/02-论文/11-kubernetes-api-server-deep-optimization-extension|Kubernetes API Server 深度优化与扩展 (API Server Deep Optimization and Extension)]]
 - [[21-生态参考/02-论文/05-kubernetes-gitops-complete-practice-guide|Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)]]

@@ -586,7 +586,7 @@ Step_5_消息队列选型:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware MOC
-- [[数据库中间件/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
+- [[07-数据库中间件/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise Database & Middleware Op...]]
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构
 - 分布式数据库企业级实践深度指南

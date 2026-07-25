@@ -94,37 +94,37 @@ Platform Ops Domain 提供完整的Kubernetes平台运维知识体系，涵盖�
 ## 📚 文档结构概览
 
 ### 第一部分：运维基础与规划 (01-05)
-01. [平台运维概述与成熟度模型](01-platform-ops-overview.md) - 平台运维核心概念和企业级成熟度评估
-02. [集群生命周期管理](02-cluster-lifecycle-management.md) - 集群从创建到退役的全周期管理
-03. [容量规划与资源评估](03-capacity-planning-resource-assessment.md) - 科学的资源规划方法论和AI预测模型
-04. [性能基准测试与调优](04-performance-benchmarking-tuning.md) - 系统性能优化实践和调优策略
-05. [运维指标体系建设](05-operations-metrics-system.md) - 四级指标体系和监控实践
+01. [平台运维概述与成熟度模型](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/01-platform-ops-overview.md) - 平台运维核心概念和企业级成熟度评估
+02. [集群生命周期管理](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/02-cluster-lifecycle-management.md) - 集群从创建到退役的全周期管理
+03. [容量规划与资源评估](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/03-%E6%B2%BB%E7%90%86/03-capacity-planning-resource-assessment.md) - 科学的资源规划方法论和AI预测模型
+04. [性能基准测试与调优](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/03-%E6%B2%BB%E7%90%86/04-performance-benchmarking-tuning.md) - 系统性能优化实践和调优策略
+05. [运维指标体系建设](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/05-operations-metrics-system.md) - 四级指标体系和监控实践
 
 ### 第二部分：核心运维能力 (06-12)
-06. [监控告警系统](06-monitoring-alerting-system.md) - 企业级监控告警架构和智能告警策略
-07. [GitOps配置管理](07-gitops-configuration-management.md) - 声明式基础设施管理和自动化流水线
-08. [运维自动化工具链](08-automation-toolchain.md) - 端到端自动化流程和工具集成
-09. [成本优化与FinOps](09-cost-optimization-finops.md) - 云成本管理和优化策略
-10. [安全合规管理](10-security-compliance.md) - 零信任安全架构实践和合规治理
-11. [灾难恢复与业务连续性](11-disaster-recovery-business-continuity.md) - DR策略和BCP计划
-12. [备份恢复策略与实践](12-backup-recovery-strategy.md) - 完整的数据保护方案和实战案例
+06. [监控告警系统](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/06-monitoring-alerting-system.md) - 企业级监控告警架构和智能告警策略
+07. [GitOps配置管理](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/07-gitops-configuration-management.md) - 声明式基础设施管理和自动化流水线
+08. [运维自动化工具链](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/08-automation-toolchain.md) - 端到端自动化流程和工具集成
+09. [成本优化与FinOps](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/03-%E6%B2%BB%E7%90%86/09-cost-optimization-finops.md) - 云成本管理和优化策略
+10. [安全合规管理](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/03-%E6%B2%BB%E7%90%86/10-security-compliance.md) - 零信任安全架构实践和合规治理
+11. [灾难恢复与业务连续性](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/11-disaster-recovery-business-continuity.md) - DR策略和BCP计划
+12. [备份恢复策略与实践](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/12-backup-recovery-strategy.md) - 完整的数据保护方案和实战案例
 
 ### 第三部分：高级平台管理 (13-18)
-13. [多集群管理与联邦](13-multi-cluster-management.md) - 多集群统一管理方案和联邦架构
-14. [大规模集群性能优化](14-large-scale-cluster-optimization.md) - 千节点以上集群优化和调优
-15. [生产环境故障诊断](15-production-troubleshooting.md) - 系统性故障排查方法和工具链
-16. [平台升级与迁移策略](16-platform-upgrade-migration.md) - 平稳的版本升级实践和迁移方案 ⭐新增⭐
-17. [多租户管理与资源隔离](17-multi-tenant-management.md) - 企业多租户架构和安全隔离 ⭐新增⭐
-18. [平台可观测性深度实践](18-platform-observability-practice.md) - 全栈可观测性建设和智能分析 ⭐新增⭐
+13. [多集群管理与联邦](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/13-multi-cluster-management.md) - 多集群统一管理方案和联邦架构
+14. [大规模集群性能优化](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/03-%E6%B2%BB%E7%90%86/14-large-scale-cluster-optimization.md) - 千节点以上集群优化和调优
+15. [生产环境故障诊断](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/15-production-troubleshooting.md) - 系统性故障排查方法和工具链
+16. [平台升级与迁移策略](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/16-platform-upgrade-migration.md) - 平稳的版本升级实践和迁移方案 ⭐新增⭐
+17. [多租户管理与资源隔离](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/03-%E6%B2%BB%E7%90%86/17-multi-tenant-management.md) - 企业多租户架构和安全隔离 ⭐新增⭐
+18. [平台可观测性深度实践](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/18-platform-observability-practice.md) - 全栈可观测性建设和智能分析 ⭐新增⭐
 
 ### 第四部分：专项技术主题 (19-25)
-19. [Lease与Leader选举机制](19-lease-leader-election.md) - 分布式协调原语和高可用设计
-20. [CRD与Operator开发](20-crd-operator-development.md) - 自定义资源扩展和控制器开发
-21. [API聚合扩展](21-api-aggregation.md) - Kubernetes API扩展机制和最佳实践
-22. [客户端库深度实践](22-client-libraries.md) - 编程访问Kubernetes和SDK使用
-23. [CLI增强工具](23-cli-enhancement-tools.md) - 命令行工具生态和效率提升
-24. [插件与扩展组件](24-addons-extensions.md) - 生态系统组件集成和管理
-25. [虚拟集群技术](25-virtual-clusters.md) - 多租户虚拟化方案和隔离技术
+19. [Lease与Leader选举机制](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/19-lease-leader-election.md) - 分布式协调原语和高可用设计
+20. [CRD与Operator开发](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/20-crd-operator-development.md) - 自定义资源扩展和控制器开发
+21. [API聚合扩展](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/21-api-aggregation.md) - Kubernetes API扩展机制和最佳实践
+22. [客户端库深度实践](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/22-client-libraries.md) - 编程访问Kubernetes和SDK使用
+23. [CLI增强工具](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/04-%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C/23-cli-enhancement-tools.md) - 命令行工具生态和效率提升
+24. [插件与扩展组件](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/24-addons-extensions.md) - 生态系统组件集成和管理
+25. [虚拟集群技术](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/25-virtual-clusters.md) - 多租户虚拟化方案和隔离技术
 
 ---
 

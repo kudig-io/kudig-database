@@ -103,7 +103,7 @@ prerequisites:
 
 filename | sha256 hash
 -------- | -----------
-[[实体/kubernetes.md|kubernetes]].tar.gz](https://storage.googleapis.com/kubernetes-release/release/v1.2.7/kubernetes.tar.gz) | `53db157923c17fa7a0addb3e4dfe7d1b9194b9266a87d371a251d5bb790a1832`
+[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].tar.gz](https://storage.googleapis.com/kubernetes-release/release/v1.2.7/kubernetes.tar.gz) | `53db157923c17fa7a0addb3e4dfe7d1b9194b9266a87d371a251d5bb790a1832`
 [kubernetes-src.tar.gz](https://storage.googleapis.com/kubernetes-release/release/v1.2.7/kubernetes-src.tar.gz) | `e6e46831706743d8263581d0575507cf5ffc265096d22e5e84cf1c3ae925db5e`
 
 ### Client Binaries

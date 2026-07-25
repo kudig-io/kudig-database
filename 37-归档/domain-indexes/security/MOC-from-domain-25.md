@@ -69,7 +69,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[安全/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]] |  | security, cloud-native |  |
+| 1 | [[08-安全/00-总览/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]] |  | security, cloud-native |  |
 | 2 | Falco 云原生安全监控深度实践 |  | security, cloud-native |  |
 | 3 | Sysdig企业级容器安全深度实践 |  | security, cloud-native |  |
 | 4 | Aqua Security 企业级容器安全平台深度实践 |  | security, cloud-native |  |
@@ -136,11 +136,11 @@ graph TD
 
 ## See Also
 
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-39.md|MOC-from-安全]]
-- [[安全/98-merged-indexes/MOC-from-domain-7.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-39.md|MOC-from-安全]]
+- [[37-归档/domain-indexes/security/MOC-from-domain-7.md|MOC-from-安全]]
 
-- [[安全/README.md|返回目录]]
+- [[08-安全/README.md|返回目录]]
 
 <!-- risk-assessed -->

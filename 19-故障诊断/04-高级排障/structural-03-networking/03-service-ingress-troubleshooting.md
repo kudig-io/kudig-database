@@ -1750,14 +1750,14 @@ EOF
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[21-生态参考/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[21-生态参考/topic-index/network-index|Network 网络知识图谱索引]]
-- [[21-生态参考/topic-index/dns-index|DNS 知识图谱索引]]
-- [[21-生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
-- [[21-生态参考/topic-index/higress-index|Higress 知识图谱索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[21-生态参考/03-领域索引/flannel-index|Flannel 知识图谱索引]]
+- [[21-生态参考/03-领域索引/network-index|Network 网络知识图谱索引]]
+- [[21-生态参考/03-领域索引/dns-index|DNS 知识图谱索引]]
+- [[21-生态参考/03-领域索引/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

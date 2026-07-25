@@ -773,9 +773,9 @@ kubeadm token create --print-join-command
 
 ## Related
 
-- [[21-生态参考/topic-index/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
-- [[21-生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/backup-dr-index|Backup & DR 备份与灾备知识图谱索引]]
+- [[21-生态参考/03-领域索引/cluster-index|Cluster 集群知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

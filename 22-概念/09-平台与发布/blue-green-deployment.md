@@ -244,7 +244,7 @@ spec:
 - **数据库 schema 不兼容**：蓝版本代码不兼容绿版本 schema（或反之），导致回滚后服务不可用——必须使用兼容性扩展策略
 - **Session 粘滞问题**：用户 session 绑定在蓝环境 Pod，切换后 session 丢失——需要使用外部 session 存储（Redis）
 
-更多部署排错方法请参考 [[19-故障诊断/04-高级排障/05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[22-概念/09-平台与发布/canary-deployment.md|canary-deployment]]、[[22-概念/02-工作负载/deployments.md|deployment-strategies]]。
+更多部署排错方法请参考 [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|deployment-troubleshooting]]，其他部署策略参见 [[22-概念/09-平台与发布/canary-deployment.md|canary-deployment]]、[[22-概念/02-工作负载/deployments.md|deployment-strategies]]。
 
 
 ## 参见

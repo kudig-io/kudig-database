@@ -1058,9 +1058,9 @@ kudig-database 作为**人类阅读的知识库**已经非常完善（★★★�
 | 文档 | 说明 |
 |------|------|
 | [Agent 设计思路与落地路径](./14-agent-kudig-design-strategy.md) | Agent 赋能的整体设计思路 |
-| [故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md](../故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md) | FTA 作为 Agent 知识骨架 |
-| [故障诊断/FTA故障树/10-agent-orchestration-patterns.md](../故障诊断/FTA故障树/10-agent-orchestration-patterns.md) | Agent 编排模式 |
-| [故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md](../故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md) | FEBM Agent 工单处理 |
+| [故障诊断/FTA故障树/09-fta-as-agent-knowledge-skeleton.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/09-fta-as-agent-knowledge-skeleton.md) | FTA 作为 Agent 知识骨架 |
+| [故障诊断/FTA故障树/10-agent-orchestration-patterns.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/10-agent-orchestration-patterns.md) | Agent 编排模式 |
+| [故障诊断/FEBM方法论/04-febm-agent-ticket-processing.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/04-febm-agent-ticket-processing.md) | FEBM Agent 工单处理 |
 
 ---
 

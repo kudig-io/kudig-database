@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 概览
 
-- [[归档/README.md|Readme]]
+- [[37-归档/README.md|Readme]]
 
 ## 子目录
 
-- [[归档/topic-publish/index|Topic Publish]]
-- [[归档/troubleshooting-diagnostics/index|Troubleshooting Diagnostics]]
+- [[37-归档/topic-publish/index|Topic Publish]]
+- [[37-归档/troubleshooting-diagnostics/index|Troubleshooting Diagnostics]]
 

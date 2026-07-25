@@ -137,6 +137,6 @@ graph TD
 - [[README]]
 - [[MOC]]
 
-- [[平台工程/topic-code-analysis/MOC.md|topic-functions MOC]]
+- [[10-平台工程/06-代码分析/MOC.md|topic-functions MOC]]
 
 <!-- risk-assessed -->

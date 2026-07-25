@@ -564,10 +564,10 @@ Week 4 将学习网络与存储，包括 Service/Ingress 配置、Terway/Flannel
 
 ## 延伸阅读
 
-- [集群生命周期管理](../../平台工程/02-cluster-lifecycle-management.md)
-- [备份恢复策略](../../平台工程/12-backup-recovery-strategy.md)
-- [监控 Playbooks](../../可观测性/21-monitoring-playbooks.md)
-- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [集群生命周期管理](../../../../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/02-cluster-lifecycle-management.md)
+- [备份恢复策略](../../../../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/12-backup-recovery-strategy.md)
+- [监控 Playbooks](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/05-%E5%91%8A%E8%AD%A6/21-monitoring-playbooks.md)
+- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
 
 ```
 

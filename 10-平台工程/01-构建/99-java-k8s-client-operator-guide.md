@@ -843,10 +843,10 @@ class OperatorIntegrationTest {
 <!-- chunk: 🔗 相关文档 -->
 ## 🔗 相关文档
 
-- [CRD 开发指南](./01-crd-development-guide.md) — CRD 基础概念
+- [CRD 开发指南](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/01-crd-development-guide.md) — CRD 基础概念
 - [Operator 开发模式](./20-crd-operator-development.md) — Operator 设计模式
-- [Java 容器化](../容器运行时/12-java-containerization-guide.md) — Operator 容器化
-- [Java 安全](../安全/99-java-security-kubernetes-guide.md) — RBAC 安全
+- [Java 容器化](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — Operator 容器化
+- [Java 安全](../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/99-java-security-kubernetes-guide.md) — RBAC 安全
 
 ---
 

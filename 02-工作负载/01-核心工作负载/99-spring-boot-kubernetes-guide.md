@@ -972,12 +972,12 @@ spec:
 <!-- chunk: 🔗 相关文档 -->
 ## 🔗 相关文档
 
-- [Java 容器化最佳实践](../容器运行时/12-java-containerization-guide.md) — Dockerfile 与镜像优化
-- [JVM GC 容器调优](../故障诊断/99-jvm-gc-container-tuning-guide.md) — GC 算法选择
-- [Java 可观测性](../可观测性/99-java-observability-kubernetes-guide.md) — Micrometer + OTel
-- [Java 安全加固](../安全/99-java-security-kubernetes-guide.md) — 安全最佳实践
-- [Spring Cloud K8s 集成](../网络/99-spring-cloud-kubernetes-service-mesh-guide.md) — 服务网格
-- [GraalVM Native Image](../专项技术/99-graalvm-native-image-guide.md) — 原生编译
+- [Java 容器化最佳实践](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — Dockerfile 与镜像优化
+- [JVM GC 容器调优](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-jvm-gc-container-tuning-guide.md) — GC 算法选择
+- [Java 可观测性](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-java-observability-kubernetes-guide.md) — Micrometer + OTel
+- [Java 安全加固](../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/99-java-security-kubernetes-guide.md) — 安全最佳实践
+- [Spring Cloud K8s 集成](../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-spring-cloud-kubernetes-service-mesh-guide.md) — 服务网格
+- [GraalVM Native Image](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/99-graalvm-native-image-guide.md) — 原生编译
 
 ---
 

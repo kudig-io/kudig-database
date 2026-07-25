@@ -74,57 +74,57 @@ cross_refs:
 ## 目录结构
 
 ### 1. 网络基础架构 (01-05)
-- [01-network-architecture-overview.md](01-network-architecture-overview.md) - 网络架构概览与核心组件
-- [02-cni-architecture-fundamentals.md](02-cni-architecture-fundamentals.md) - CNI 架构基础与核心原理
-- [03-cni-plugins-comparison.md](03-cni-plugins-comparison.md) - CNI 插件对比与选型指南
-- [04-flannel-complete-guide.md](04-flannel-complete-guide.md) - Flannel 完整指南
-- [05-terway-advanced-guide.md](05-terway-advanced-guide.md) - Terway 高级指南
+- [01-network-architecture-overview.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/01-network-architecture-overview.md) - 网络架构概览与核心组件
+- [02-cni-architecture-fundamentals.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) - CNI 架构基础与核心原理
+- [03-cni-plugins-comparison.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) - CNI 插件对比与选型指南
+- [04-flannel-complete-guide.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/04-flannel-complete-guide.md) - Flannel 完整指南
+- [05-terway-advanced-guide.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) - Terway 高级指南
 
 ### 2. Service 服务 (06-10)
-- [06-service-concepts-types.md](06-service-concepts-types.md) - Service 概念与类型深度解析
-- [07-service-implementation-details.md](07-service-implementation-details.md) - Service 实现细节
-- [08-service-topology-aware.md](08-service-topology-aware.md) - Service 拓扑感知
-- [09-kube-proxy-modes-performance.md](09-kube-proxy-modes-performance.md) - kube-proxy 模式与性能优化
-- [10-service-advanced-features.md](10-service-advanced-features.md) - Service 高级特性
+- [06-service-concepts-types.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md) - Service 概念与类型深度解析
+- [07-service-implementation-details.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/07-service-implementation-details.md) - Service 实现细节
+- [08-service-topology-aware.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/08-service-topology-aware.md) - Service 拓扑感知
+- [09-kube-proxy-modes-performance.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/09-kube-proxy-modes-performance.md) - kube-proxy 模式与性能优化
+- [10-service-advanced-features.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/10-service-advanced-features.md) - Service 高级特性
 
 ### 3. DNS 服务发现 (11-15)
-- [11-dns-service-discovery-coredns.md](11-dns-service-discovery-coredns.md) - DNS 服务发现与 CoreDNS 调优
-- [12-dns-service-discovery.md](12-dns-service-discovery.md) - DNS 服务发现
-- [13-coredns-architecture-principles.md](13-coredns-architecture-principles.md) - CoreDNS 架构原理
-- [14-coredns-configuration-corefile.md](14-coredns-configuration-corefile.md) - CoreDNS 配置 Corefile
-- [15-coredns-plugins-reference.md](15-coredns-plugins-reference.md) - CoreDNS 插件参考
+- [11-dns-service-discovery-coredns.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/11-dns-service-discovery-coredns.md) - DNS 服务发现与 CoreDNS 调优
+- [12-dns-service-discovery.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/12-dns-service-discovery.md) - DNS 服务发现
+- [13-coredns-architecture-principles.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/13-coredns-architecture-principles.md) - CoreDNS 架构原理
+- [14-coredns-configuration-corefile.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/14-coredns-configuration-corefile.md) - CoreDNS 配置 Corefile
+- [15-coredns-plugins-reference.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/15-coredns-plugins-reference.md) - CoreDNS 插件参考
 
 ### 4. 网络策略与安全 (16-18)
-- [16-networkpolicy-deep-practice.md](16-networkpolicy-deep-practice.md) - NetworkPolicy 深度实践指南
-- [17-network-policy-advanced.md](17-network-policy-advanced.md) - NetworkPolicy 高级配置
-- [18-network-encryption-mtls.md](18-network-encryption-mtls.md) - 网络加密与 mTLS
+- [16-networkpolicy-deep-practice.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/16-networkpolicy-deep-practice.md) - NetworkPolicy 深度实践指南
+- [17-network-policy-advanced.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/17-network-policy-advanced.md) - NetworkPolicy 高级配置
+- [18-network-encryption-mtls.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/18-network-encryption-mtls.md) - 网络加密与 mTLS
 
 ### 5. Ingress 入站流量 (19-26)
-- [19-ingress-fundamentals.md](19-ingress-fundamentals.md) - Ingress 基础概念与核心原理
-- [20-ingress-controller-deep-dive.md](20-ingress-controller-deep-dive.md) - Ingress Controller 深入解析
-- [21-nginx-ingress-complete-guide.md](21-nginx-ingress-complete-guide.md) - Nginx Ingress 完整指南
-- [22-ingress-tls-certificate.md](22-ingress-tls-certificate.md) - Ingress TLS 证书管理
-- [23-ingress-advanced-routing.md](23-ingress-advanced-routing.md) - Ingress 高级路由配置
-- [24-ingress-security-hardening.md](24-ingress-security-hardening.md) - Ingress 安全加固
-- [25-ingress-monitoring-troubleshooting.md](25-ingress-monitoring-troubleshooting.md) - Ingress 监控与排错
-- [26-ingress-production-best-practices.md](26-ingress-production-best-practices.md) - Ingress 生产最佳实践
+- [19-ingress-fundamentals.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md) - Ingress 基础概念与核心原理
+- [20-ingress-controller-deep-dive.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/20-ingress-controller-deep-dive.md) - Ingress Controller 深入解析
+- [21-nginx-ingress-complete-guide.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/21-nginx-ingress-complete-guide.md) - Nginx Ingress 完整指南
+- [22-ingress-tls-certificate.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/22-ingress-tls-certificate.md) - Ingress TLS 证书管理
+- [23-ingress-advanced-routing.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/23-ingress-advanced-routing.md) - Ingress 高级路由配置
+- [24-ingress-security-hardening.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/24-ingress-security-hardening.md) - Ingress 安全加固
+- [25-ingress-monitoring-troubleshooting.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/25-ingress-monitoring-troubleshooting.md) - Ingress 监控与排错
+- [26-ingress-production-best-practices.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/26-ingress-production-best-practices.md) - Ingress 生产最佳实践
 
 ### 6. 网络故障排查 (27-29)
-- [27-cni-troubleshooting-optimization.md](27-cni-troubleshooting-optimization.md) - CNI 故障排查与优化
-- [28-coredns-troubleshooting-optimization.md](28-coredns-troubleshooting-optimization.md) - CoreDNS 故障排查与优化
-- [29-egress-traffic-management.md](29-egress-traffic-management.md) - 出站流量管理
+- [27-cni-troubleshooting-optimization.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/27-cni-troubleshooting-optimization.md) - CNI 故障排查与优化
+- [28-coredns-troubleshooting-optimization.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/28-coredns-troubleshooting-optimization.md) - CoreDNS 故障排查与优化
+- [29-egress-traffic-management.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/29-egress-traffic-management.md) - 出站流量管理
 
 ### 7. 高级主题 (30-39)
-- [30-service-mesh-deep-dive.md](30-service-mesh-deep-dive.md) - Service Mesh 深度解析与生产实践 (Istio Ambient Mesh)
-- [31-multi-cluster-federation.md](31-multi-cluster-federation.md) - 多集群网络联邦与跨集群通信 (Karmada & MCS)
-- [32-multi-cluster-networking.md](32-multi-cluster-networking.md) - 多集群网络
-- [33-network-troubleshooting.md](33-network-troubleshooting.md) - 网络故障排查
-- [34-network-performance-tuning.md](34-network-performance-tuning.md) - 网络性能调优
-- [35-gateway-api-overview.md](35-gateway-api-overview.md) - Gateway API 概览 (GAMMA & Mesh)
-- [36-api-gateway-patterns.md](36-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
-- [37-terway-resources-crud-operations.md](37-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
-- [38-terway-gc-mechanism.md](38-terway-gc-mechanism.md) - Terway GC (垃圾回收) 机制详解
-- [39-csi-cni-version-matrix.md](39-csi-cni-version-matrix.md) - CSI/CNI 版本兼容矩阵
+- [30-service-mesh-deep-dive.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/30-service-mesh-deep-dive.md) - Service Mesh 深度解析与生产实践 (Istio Ambient Mesh)
+- [31-multi-cluster-federation.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/31-multi-cluster-federation.md) - 多集群网络联邦与跨集群通信 (Karmada & MCS)
+- [32-multi-cluster-networking.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/32-multi-cluster-networking.md) - 多集群网络
+- [33-network-troubleshooting.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/33-network-troubleshooting.md) - 网络故障排查
+- [34-network-performance-tuning.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/34-network-performance-tuning.md) - 网络性能调优
+- [35-gateway-api-overview.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md) - Gateway API 概览 (GAMMA & Mesh)
+- [36-api-gateway-patterns.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/36-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
+- [37-terway-resources-crud-operations.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
+- [38-terway-gc-mechanism.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) - Terway GC (垃圾回收) 机制详解
+- [39-csi-cni-version-matrix.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/39-csi-cni-version-matrix.md) - CSI/CNI 版本兼容矩阵
 
 ### 8. Terway 阿里云 CNI 专题 (40-47)
 - [40-terway-product-overview.md](40-terway-product-overview.md) - Terway 产品概览：定位、版本历史、5 种网络模式、CNI 对比
@@ -231,6 +231,6 @@ cross_refs:
 - 相关知识域: 集群基础
 - 相关知识域: 网络
 - 相关知识域: 可观测性
-- [[系统基础/topic-cheat-sheet/networking.md|速查卡: networking]]
+- [[17-系统基础/05-速查卡/networking.md|速查卡: networking]]
 
 <!-- risk-assessed -->

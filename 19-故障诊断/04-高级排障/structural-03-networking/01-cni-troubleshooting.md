@@ -1634,13 +1634,13 @@ sysctl -p /etc/sysctl.d/99-kubernetes.conf
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
-- [[21-生态参考/topic-index/etcd-index|etcd 知识图谱索引]]
-- [[21-生态参考/topic-index/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
-- [[21-生态参考/topic-index/flannel-index|Flannel 知识图谱索引]]
-- [[21-生态参考/topic-index/network-index|Network 网络知识图谱索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/etcd-index|etcd 知识图谱索引]]
+- [[21-生态参考/03-领域索引/service-mesh-index|Service Mesh 服务网格知识图谱索引]]
+- [[21-生态参考/03-领域索引/flannel-index|Flannel 知识图谱索引]]
+- [[21-生态参考/03-领域索引/network-index|Network 网络知识图谱索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

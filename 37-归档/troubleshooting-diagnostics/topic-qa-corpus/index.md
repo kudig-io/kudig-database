@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[归档/troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md|Command Output Diagnosis]]
+- [[37-归档/troubleshooting-diagnostics/topic-qa-corpus/command-output-diagnosis.md|Command Output Diagnosis]]
 

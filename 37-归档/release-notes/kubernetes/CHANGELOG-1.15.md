@@ -141,7 +141,7 @@ prerequisites:
     - [Client Binaries](#client-binaries-12)
     - [Server Binaries](#server-binaries-12)
     - [Node Binaries](#node-binaries-12)
-- [[实体/kubernetes.md|Kubernetes]] v1.15 Release Notes](#kubernetes-v115-release-notes)
+- [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] v1.15 Release Notes](#kubernetes-v115-release-notes)
   - [1.15 What’s New](#115-what’s-new)
     - [Continuous Improvement](#continuous-improvement)
     - [Extensibility](#extensibility)

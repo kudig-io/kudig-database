@@ -299,13 +299,13 @@ Prometheus 数据丢失的常见原因：1) Prometheus Pod 重启导致本地存
 
 ## 延伸阅读
 
-- [认证授权系统](../../安全/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../安全/07-rbac-matrix-configuration.md)
-- [Pod 安全标准](../../安全/06-pod-security-standards.md)
-- [证书管理](../../安全/10-certificate-management.md)
-- [Secret 管理工具](../../安全/11-secret-management-tools.md)
-- [可观测性架构总览](../../可观测性/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../可观测性/10-monitoring-metrics-prometheus.md)
+- [认证授权系统](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/07-rbac-matrix-configuration.md)
+- [Pod 安全标准](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
+- [证书管理](../../../../../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/10-certificate-management.md)
+- [Secret 管理工具](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/11-secret-management-tools.md)
+- [可观测性架构总览](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/01-observability-architecture-overview.md)
+- [Prometheus 监控](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/10-monitoring-metrics-prometheus.md)
 
 ## Related
 

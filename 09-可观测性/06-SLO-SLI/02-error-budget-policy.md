@@ -408,7 +408,7 @@ spec:
 
 ## See Also
 
-- [[09-可观测性/06-SLO-SLI/03-error-budget-management.md|错误预算管理]]
+- [[09-可观测性/06-SLO-SLI/06-error-budget-management.md|错误预算管理]]
 - [[09-可观测性/05-告警/05-alerting-management.md|告警管理策略]]
 
 

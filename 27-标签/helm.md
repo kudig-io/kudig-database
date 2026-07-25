@@ -66,7 +66,7 @@ last_updated: '2026-07-21'
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting|Helm 结构化排障]]
 - [[19-故障诊断/06-FTA故障树/list/helm-fta|Helm 故障树分析]]
 - [[19-故障诊断/08-技能体系/26-helm-chart-failure|Helm Chart 故障]]
-- [[26-技能/helm-fta|Helm FTA]]
+- [[26-技能/01-集群运维/helm/helm-fta|Helm FTA]]
 
 ## 集群基础 (Cluster Fundamentals)
 

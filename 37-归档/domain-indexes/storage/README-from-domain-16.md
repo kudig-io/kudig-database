@@ -55,7 +55,7 @@ estimated_read_time: 5min
 intent_queries:
 - 'Domain-16: 存储基础 是什么'
 - '如何 Domain-16: 存储基础'
-- [[实体/kubernetes.md|kubernetes]] 16 storage fundamentals 最佳实践
+- [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 16 storage fundamentals 最佳实践
 trigger_keywords:
 - 'Domain-16:'
 - 存储基础
@@ -86,12 +86,12 @@ tier: peripheral---
 
 | # | 文档 | 关键内容 | 存储类别 |
 |:---:|:---|:---|:---|
-| 01 | [存储技术概览](./01-storage-technologies-overview.md) | 存储发展历程、技术演进、应用场景 | 存储基础 |
-| 02 | [块文件对象存储](./02-block-file-object-storage.md) | 三种存储类型对比、使用场景、选型指南 | 存储分类 |
-| 03 | [RAID存储冗余](./03-raid-storage-redundancy.md) | RAID 0/1/5/6/10级别详解、性能对比 | 数据保护 |
-| 04 | [分布式存储系统](./04-distributed-storage-systems.md) | 分布式架构、一致性协议、系统设计 | 分布式 |
-| 05 | [存储管理运维](./05-storage-management-operations.md) | 存储监控、容量规划、故障处理 | 运维实践 |
-| 06 | [存储性能IOPS](./06-storage-performance-iops.md) | 性能指标详解、测试方法、优化策略 | 性能调优 |
+| 01 | [存储技术概览](../../../06-%E5%AD%98%E5%82%A8/02-%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80/01-storage-technologies-overview.md) | 存储发展历程、技术演进、应用场景 | 存储基础 |
+| 02 | [块文件对象存储](../../../06-%E5%AD%98%E5%82%A8/02-%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80/02-block-file-object-storage.md) | 三种存储类型对比、使用场景、选型指南 | 存储分类 |
+| 03 | [RAID存储冗余](../../../06-%E5%AD%98%E5%82%A8/02-%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80/03-raid-storage-redundancy.md) | RAID 0/1/5/6/10级别详解、性能对比 | 数据保护 |
+| 04 | [分布式存储系统](../../../06-%E5%AD%98%E5%82%A8/02-%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80/04-distributed-storage-systems.md) | 分布式架构、一致性协议、系统设计 | 分布式 |
+| 05 | [存储管理运维](../../../06-%E5%AD%98%E5%82%A8/02-%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80/05-storage-management-operations.md) | 存储监控、容量规划、故障处理 | 运维实践 |
+| 06 | [存储性能IOPS](../../../06-%E5%AD%98%E5%82%A8/02-%E5%AD%98%E5%82%A8%E5%9F%BA%E7%A1%80/06-storage-performance-iops.md) | 性能指标详解、测试方法、优化策略 | 性能调优 |
 
 ---
 

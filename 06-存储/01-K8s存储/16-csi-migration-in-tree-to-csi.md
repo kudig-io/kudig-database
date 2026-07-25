@@ -654,7 +654,7 @@ echo "=========================================="
 - [01 - 存储架构概览](./01-storage-architecture-overview.md) - 存储架构与核心组件
 - [05 - CSI 驱动集成](./05-csi-drivers-integration.md) - CSI 驱动深度配置
 - [09 - PV/PVC 故障排查](./09-pv-pvc-troubleshooting.md) - PVC 诊断与排障
-- [../../集群基础/22-container-storage-deep-dive.md](../集群基础/22-container-storage-deep-dive.md) - CSI 架构原理
+- [../../集群基础/22-container-storage-deep-dive.md](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/22-container-storage-deep-dive.md) - CSI 架构原理
 
 ---
 

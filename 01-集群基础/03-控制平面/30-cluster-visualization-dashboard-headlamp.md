@@ -246,7 +246,7 @@ spec:
 
 ## Related
 
-- [[23-实体/rbac.md|RBAC]]
+- [[17-系统基础/06-知识字典/security/rbac.md|RBAC]]
 - [[23-实体/ingress-controller.md|Ingress Controller]]
 - [[22-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
 - [[19-故障诊断/06-FTA故障树/list/rbac-fta.md|RBAC 异常故障树分析]]

@@ -70,7 +70,7 @@ prerequisites:
 | **K8s 全量故障树** | [Kubernetes 全量故障树分析排查手册](./kubernetes-fta-full-analysis.md) |
 | **FTA + AI Agent** | [第8章：AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) |
 | **通读合集** | [FTA 方法论与 AI Agent 智能运维实践（合集）](./fta-methodology-and-agentic-practices.md) |
-| **FTA vs FEBM 对比** | [topic-febm](../故障诊断/FEBM方法论/README.md) |
+| **FTA vs FEBM 对比** | [topic-febm](../07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/README.md) |
 
 ## 最近更新（2026 Q2）
 - **生产级落地基线**：新增合集章节 [二十三、生产级落地基线（2026Q2 更新）](./fta-methodology-and-agentic-practices.md#二十三生产级落地基线2026q2-更新)
@@ -160,7 +160,7 @@ prerequisites:
 
 | 专题 | 说明 |
 |:---|:---|
-| [topic-febm](../故障诊断/FEBM方法论/README.md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
+| [topic-febm](../07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/README.md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
 | [topic-structural-trouble-shooting](../故障诊断/topic-structural-trouble-shooting/README.md) | 结构化故障排查知识库 |
 | [故障诊断](../故障诊断/) | 传统故障排查文档 |
 | [可观测性](../可观测性/) | 可观测性体系 |
@@ -180,25 +180,25 @@ Agent 工程师:  第8-13章 → 第14章
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[references/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
+- [[23-实体/15-参考与索引/release-notes-networking|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
 - [[22-概念/10-最佳实践/bp-common-best-practices|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[15-AI基础设施/01-ai-infra/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
-- [[15-AI基础设施/01-ai-infra/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[26-技能/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
-- [[26-技能/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/operate/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
+- [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[10-平台工程/02-运维/06-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog|生态组件变更日志索引]] — Cross-reference
-- [[21-生态参考/topic-index/cluster-index|Cluster 集群知识图谱索引]]
-- [[21-生态参考/topic-index/pvc-index|PVC 知识图谱索引]]
-- [[21-生态参考/topic-index/terway-index|Terway 知识图谱索引]]
-- [[21-生态参考/topic-index/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
-- [[21-生态参考/topic-index/higress-index|Higress 知识图谱索引]]
+- [[21-生态参考/03-领域索引/cluster-index|Cluster 集群知识图谱索引]]
+- [[21-生态参考/03-领域索引/pvc-index|PVC 知识图谱索引]]
+- [[21-生态参考/03-领域索引/terway-index|Terway 知识图谱索引]]
+- [[21-生态参考/03-领域索引/nginx-ingress-index|nginx-ingress-controller 知识图谱索引]]
+- [[21-生态参考/03-领域索引/higress-index|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

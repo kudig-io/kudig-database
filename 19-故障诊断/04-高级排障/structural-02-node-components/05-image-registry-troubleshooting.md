@@ -728,14 +728,14 @@ kubectl run debug --rm -it --image=curlimages/curl --restart=Never -- sh
 ### 相关文档
 
 - [kubelet 故障排查](./01-kubelet-troubleshooting.md)
-- [容器运行时故障排查](./[[19-故障诊断/topic-structural-trouble-shooting/02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]].md)
-- [ConfigMap/Secret 故障排查](../05-workloads/06-configmap-secret-troubleshooting.md)
-- [Pod 故障排查](../05-workloads/01-pod-troubleshooting.md)
+- [容器运行时故障排查](./[[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting|03-container-runtime-troubleshooting]].md)
+- [ConfigMap/Secret 故障排查](../structural-05-workloads/06-configmap-secret-troubleshooting.md)
+- [Pod 故障排查](../structural-05-workloads/01-pod-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/node-index|Node 知识图谱索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/node-index|Node 知识图谱索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

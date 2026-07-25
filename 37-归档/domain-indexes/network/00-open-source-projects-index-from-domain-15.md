@@ -142,7 +142,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 网络 MOC
-- [[网络/README.md|Domain-15: 网络基础]]
+- [[05-网络/README.md|Domain-15: 网络基础]]
 - 网络协议栈详解
 - TCP/UDP 协议深度解析
 - DNS 原理与配置

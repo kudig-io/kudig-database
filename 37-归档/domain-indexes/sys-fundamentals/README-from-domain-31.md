@@ -84,34 +84,34 @@ tier: peripheral---
 
 | 编号 | 文档 | 描述 |
 |------|------|------|
-| 01 | [云平台硬件基础架构](01-cloud-hardware-architecture.md) | 数据中心架构、服务器集群、存储系统、网络设备 |
-| 02 | [服务器架构原理](02-server-architecture-principles.md) | 服务器内部架构、NUMA、PCIe总线、BMC管理 |
-| 03 | [CPU技术深度解析](03-cpu-technology-deep-dive.md) | Intel/AMD/ARM处理器、微架构、性能优化 |
-| 04 | [主板与芯片组技术](04-motherboard-chipset-technology.md) | 主板规格、芯片组功能、接口规范 |
+| 01 | [云平台硬件基础架构](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/01-cloud-hardware-architecture.md) | 数据中心架构、服务器集群、存储系统、网络设备 |
+| 02 | [服务器架构原理](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/02-server-architecture-principles.md) | 服务器内部架构、NUMA、PCIe总线、BMC管理 |
+| 03 | [CPU技术深度解析](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/03-cpu-technology-deep-dive.md) | Intel/AMD/ARM处理器、微架构、性能优化 |
+| 04 | [主板与芯片组技术](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/04-motherboard-chipset-technology.md) | 主板规格、芯片组功能、接口规范 |
 
 ### 核心组件技术 (05-09)
 
 | 编号 | 文档 | 描述 |
 |------|------|------|
-| 05 | [内存技术深度解析](05-memory-technology-deep-dive.md) | DDR5架构、ECC、RAS特性、性能优化 |
-| 06 | [机械硬盘技术]([[系统基础/02-hardware/06-storage-hdd-technology.md|06-storage-hdd-technology]].md) | HDD原理、S.M.A.R.T.监控、企业级特性 |
-| 07 | [SSD固态硬盘技术](07-storage-ssd-technology.md) | NAND闪存、NVMe协议、耐久性管理 |
-| 08 | [网络硬件技术](08-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡、交换机 |
-| 09 | [硬件厂商生态](09-hardware-vendors-ecosystem.md) | 服务器厂商、组件供应商、ODM/白牌 |
+| 05 | [内存技术深度解析](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/05-memory-technology-deep-dive.md) | DDR5架构、ECC、RAS特性、性能优化 |
+| 06 | [机械硬盘技术]([[17-系统基础/02-硬件/06-storage-hdd-technology.md|06-storage-hdd-technology]].md) | HDD原理、S.M.A.R.T.监控、企业级特性 |
+| 07 | [SSD固态硬盘技术](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/07-storage-ssd-technology.md) | NAND闪存、NVMe协议、耐久性管理 |
+| 08 | [网络硬件技术](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/08-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡、交换机 |
+| 09 | [硬件厂商生态](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/09-hardware-vendors-ecosystem.md) | 服务器厂商、组件供应商、ODM/白牌 |
 
 ### 硬件故障排查 (10-18) - 重点内容
 
 | 编号 | 文档 | 描述 |
 |------|------|------|
-| 10 | [硬件故障排查方法论](10-hardware-troubleshooting-methodology.md) | 问题分类、诊断流程、工具体系、最佳实践 |
-| 11 | [CPU与内存故障排查](11-cpu-memory-troubleshooting.md) | MCE错误、ECC问题、温度问题、性能诊断 |
-| 12 | [存储设备故障排查](12-storage-troubleshooting.md) | HDD/SSD诊断、RAID问题、数据恢复 |
-| 13 | [网络硬件故障排查](13-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、性能问题 |
-| 14 | [电源与散热故障排查](14-power-thermal-troubleshooting.md) | PSU问题、温度监控、风扇诊断 |
-| 15 | [BIOS与固件故障排查](15-bios-firmware-troubleshooting.md) | POST错误、固件更新、CMOS问题 |
-| 16 | [Kubernetes硬件问题专题](16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件问题、Node NotReady、PLEG、etcd磁盘 |
-| 17 | [硬件错误码速查大全](17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码 |
-| 18 | [硬件问题实战案例库](18-hardware-failure-case-studies.md) | 生产环境真实问题案例、诊断过程、解决方案 |
+| 10 | [硬件故障排查方法论](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/10-hardware-troubleshooting-methodology.md) | 问题分类、诊断流程、工具体系、最佳实践 |
+| 11 | [CPU与内存故障排查](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/11-cpu-memory-troubleshooting.md) | MCE错误、ECC问题、温度问题、性能诊断 |
+| 12 | [存储设备故障排查](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/12-storage-troubleshooting.md) | HDD/SSD诊断、RAID问题、数据恢复 |
+| 13 | [网络硬件故障排查](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/13-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、性能问题 |
+| 14 | [电源与散热故障排查](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/14-power-thermal-troubleshooting.md) | PSU问题、温度监控、风扇诊断 |
+| 15 | [BIOS与固件故障排查](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/15-bios-firmware-troubleshooting.md) | POST错误、固件更新、CMOS问题 |
+| 16 | [Kubernetes硬件问题专题](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/16-kubernetes-hardware-troubleshooting.md) | K8s场景硬件问题、Node NotReady、PLEG、etcd磁盘 |
+| 17 | [硬件错误码速查大全](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/17-hardware-error-codes-reference.md) | MCE/SMART/IPMI/NVMe错误码详解、BIOS蜂鸣码 |
+| 18 | [硬件问题实战案例库](../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/02-%E7%A1%AC%E4%BB%B6/18-hardware-failure-case-studies.md) | 生产环境真实问题案例、诊断过程、解决方案 |
 
 ## 技术栈组件
 

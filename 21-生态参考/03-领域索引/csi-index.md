@@ -62,7 +62,7 @@ prerequisites:
 - CSI 存储驱动故障排查
 - [[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting.md|04 - Storage CSI 故障排查]]
 - [[19-故障诊断/06-FTA故障树/list/csi-fta.md|CSI FTA 故障树]]
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### CSI YAML 配置
 - StorageClass / VolumeSnapshot YAML 配置参考
@@ -79,9 +79,9 @@ prerequisites:
 
 ### 存储高级特性
 - 存储高级特性
-- [[19-故障诊断/04-高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
 
 ### 存储日常运维
 - 存储日常运维操作手册

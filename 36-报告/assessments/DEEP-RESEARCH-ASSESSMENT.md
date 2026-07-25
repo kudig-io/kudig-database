@@ -79,7 +79,7 @@ prerequisites:
 | Category | 当前语料条数 | 建议目标 | 差距 |
 |----------|-------------|---------|------|
 | TC-INFRA-NODE | ~15条 | 500+ | -485 |
-| TC-APP-[[概念/pod-lifecycle.md|pod]] | ~12条 | 500+ | -488 |
+| TC-APP-[[22-概念/02-工作负载/pod-lifecycle.md|pod]] | ~12条 | 500+ | -488 |
 | TC-INFRA-NET | ~10条 | 500+ | -490 |
 | TC-SEC | ~8条 | 500+ | -492 |
 | TC-DATA | 0条 | 500+ | -500 |

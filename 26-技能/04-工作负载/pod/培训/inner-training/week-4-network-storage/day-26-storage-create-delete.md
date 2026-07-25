@@ -530,9 +530,9 @@ volumeClaimTemplates 为 StatefulSet 的每个 Pod 自动创建独立的 PVC。P
 
 ## 延伸阅读
 
-- [存储架构总览](../../存储/01-storage-architecture-overview.md)
-- [PV 架构基础](../../存储/02-pv-architecture-fundamentals.md)
-- [StorageClass 动态供给](../../存储/04-storageclass-dynamic-provisioning.md)
+- [存储架构总览](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md)
+- [PV 架构基础](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/02-pv-architecture-fundamentals.md)
+- [StorageClass 动态供给](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md)
 - [ACK 存储管理](../../云厂商/04-alicloud-ack/245-ack-ebs-storage.md)
 
 ## Related

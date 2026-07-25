@@ -1428,7 +1428,7 @@ kubectl exec es-master-0 -- curl -X PUT "localhost:9200/_cluster/settings" \
 
 ## 相关配置参考
 - [02 - Service YAML 配置参考](./02-service-reference.md) - Headless Service 配置
-- [03 - PersistentVolume YAML 配置参考](./03-persistentvolume-reference.md) - 存储配置
+- [03 - PersistentVolume YAML 配置参考](15-persistentvolume-reference.md) - 存储配置
 - [04 - Deployment YAML 配置参考](./04-deployment-reference.md) - 对比无状态工作负载
 
 ## 工具与生态

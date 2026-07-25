@@ -175,7 +175,7 @@ etcdctl endpoint health --cluster
 
 - [[22-概念/troubleshooting-methodology|故障排查方法论]]
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook|生产故障排查 Playbook]]
-- [[22-概念/fault-tree-analysis|故障树分析]]
+- [[19-故障诊断/06-FTA故障树/glossary/fault-tree-analysis|故障树分析]]
 - [[22-概念/root-cause-analysis|根因分析]]
 
 ## 实体 (Entities)

@@ -78,7 +78,7 @@ Please follow up on [here](https://github.com/longhorn/longhorn/wiki/Outstanding
 ## Highlights
   
   - [IMPROVEMENT] Use PDB to protect Longhorn components from unexpected drains ([3304](https://github.com/longhorn/longhorn/issues/3304)) - @yangchiu @PhanLe1010
-  - [IMPROVEMENT] Periodically clean up [[系统基础/topic-dictionary/storage/volume-snapshots.md|volume snapshots]] ([3836](https://github.com/longhorn/longhorn/issues/3836)) - @c3y1huang @chriscchien
+  - [IMPROVEMENT] Periodically clean up [[17-系统基础/06-知识字典/storage/volume-snapshots.md|volume snapshots]] ([3836](https://github.com/longhorn/longhorn/issues/3836)) - @c3y1huang @chriscchien
   - [IMPROVEMENT] Recurring jobs create new snapshots while being not able to clean up old ones ([4898](https://github.com/longhorn/longhorn/issues/4898)) - @mantissahz @chriscchien
   
 ## Improvement

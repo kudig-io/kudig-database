@@ -87,11 +87,11 @@ cross_refs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 基础监控告警故障诊断
-- **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - 性能监控指标分析
-- **[32-安全相关故障排查](./32-security-troubleshooting.md)** - 安全事件监控告警
-- **[01-API Server故障排查](./01-control-plane-apiserver-troubleshooting.md)** - 控制平面组件监控
-- **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - 存储层监控告警
+- **[30-监控告警故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/30-monitoring-alerting-troubleshooting.md)** - 基础监控告警故障诊断
+- **[33-性能瓶颈故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/33-performance-bottleneck-troubleshooting.md)** - 性能监控指标分析
+- **[32-安全相关故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/32-security-troubleshooting.md)** - 安全事件监控告警
+- **[01-API Server故障排查](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/01-control-plane-apiserver-troubleshooting.md)** - 控制平面组件监控
+- **[02-etcd故障排查](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/02-control-plane-etcd-troubleshooting.md)** - 存储层监控告警
 - **[42-混沌工程和故障注入测试](./42-chaos-engineering-fault-injection-testing.md)** - 系统韧性验证与监控
 
 ### 📚 扩展学习资料

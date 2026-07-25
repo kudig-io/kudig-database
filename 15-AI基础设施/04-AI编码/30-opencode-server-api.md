@@ -313,9 +313,9 @@ for await (const event of events) {
 
 | 文档 | 关系 |
 |------|------|
-| [01 - 概述与架构](./01-opencode-overview-architecture.md) | Client/Server 架构详解 |
-| [11 - GitHub CI/CD](./11-opencode-github-automation.md) | 基于 Server 的自动化 |
-| [12 - 进阶话题](./12-opencode-advanced-topics.md) | 非交互模式与安全 |
+| [01 - 概述与架构](21-opencode-overview-architecture.md) | Client/Server 架构详解 |
+| [11 - GitHub CI/CD](31-opencode-github-automation.md) | 基于 Server 的自动化 |
+| [12 - 进阶话题](32-opencode-advanced-topics.md) | 非交互模式与安全 |
 
 ---
 

@@ -321,7 +321,7 @@ API 网关选型需综合考虑以下维度：
 ## 参考资料
 
 - [01-云原生 API 网关架构总览](./01-api-gateway-architecture-overview.md)
-- [Domain-5: 网络 - Ingress 与 API Gateway 对比表](../网络/36-api-gateway-patterns.md)
+- [Domain-5: 网络 - Ingress 与 API Gateway 对比表](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/36-api-gateway-patterns.md)
 - 各产品官方文档：[Higress](https://higress.io/) | [APISIX](https://apisix.apache.org/) | [Kong](https://docs.konghq.com/) | [Envoy Gateway](https://gateway.envoyproxy.io/) | [Traefik](https://doc.traefik.io/)
 
 ---

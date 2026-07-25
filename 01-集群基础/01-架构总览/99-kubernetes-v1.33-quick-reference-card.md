@@ -513,10 +513,10 @@ kubectl get cs
 |:---|:---|
 | [99-kubernetes-v1.29-v1.33-features-guide.md](./99-kubernetes-v1.29-v1.33-features-guide.md) | 按版本详解 |
 | [99-kubernetes-core-components-v1.29-v1.33-update.md](./99-kubernetes-core-components-v1.29-v1.33-update.md) | 按组件速查 |
-| [99-kubernetes-v1.33-upgrade-guide.md](./99-kubernetes-v1.33-upgrade-guide.md) | 升级实操 |
-| [99-kubectl-v1.29-v1.33-new-commands-guide.md](./99-kubectl-v1.29-v1.33-new-commands-guide.md) | kubectl 新命令 |
+| [99-kubernetes-v1.33-upgrade-guide.md](../06-%E5%8D%87%E7%BA%A7%E8%B7%AF%E5%BE%84/99-kubernetes-v1.33-upgrade-guide.md) | 升级实操 |
+| [99-kubectl-v1.29-v1.33-new-commands-guide.md](../05-kubectl/99-kubectl-v1.29-v1.33-new-commands-guide.md) | kubectl 新命令 |
 | [99-kubernetes-v1.33-production-best-practices.md](./99-kubernetes-v1.33-production-best-practices.md) | 生产最佳实践 |
-| [99-kubernetes-version-lifecycle-support-policy.md](./99-kubernetes-version-lifecycle-support-policy.md) | 版本生命周期 |
+| [99-kubernetes-version-lifecycle-support-policy.md](../04-API%E7%89%88%E6%9C%AC/99-kubernetes-version-lifecycle-support-policy.md) | 版本生命周期 |
 | [99-kubernetes-v1.33-ecosystem-compatibility-matrix.md](./99-kubernetes-v1.33-ecosystem-compatibility-matrix.md) | 兼容性矩阵 |
 
 ---

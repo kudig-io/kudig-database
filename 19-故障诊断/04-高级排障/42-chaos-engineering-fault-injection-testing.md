@@ -79,10 +79,10 @@ cross_refs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[06-Node NotReady诊断](./06-node-notready-diagnosis.md)** - 节点故障注入测试
-- **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存压力问题测试
-- **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - 性能退化测试
-- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - 升级过程中断测试
+- **[06-Node NotReady诊断](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)** - 节点故障注入测试
+- **[07-OOM内存诊断](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/07-oom-memory-diagnosis.md)** - 内存压力问题测试
+- **[33-性能瓶颈故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/33-performance-bottleneck-troubleshooting.md)** - 性能退化测试
+- **[34-升级迁移故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/34-upgrade-migration-troubleshooting.md)** - 升级过程中断测试
 - **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - 混沌实验监控告警配置
 - **[41-事件驱动架构故障排查](./41-event-driven-architecture-troubleshooting.md)** - 事件流系统韧性测试
 

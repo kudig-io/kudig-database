@@ -427,9 +427,9 @@ spec:
 ---
 
 **关联文档**:
-- [topic-skills/18-security-incident-response.md](../../技能体系/18-security-incident-response.md) — 安全事件 Skill
+- [topic-skills/18-security-incident-response.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/18-security-incident-response.md) — 安全事件 Skill
 - [domain-25-cloud-native-security/](../../domain-25-cloud-native-security) — 云原生安全
-- [P0-1: 工单分类体系](../P0-1-ticket-classification-intent-recognition.md)
+- [P0-1: 工单分类体系](../../29-%E6%96%87%E6%A1%A3/agent-specs/P0-1-ticket-classification-intent-recognition.md)
 ```
 
 <!-- risk-assessed -->

@@ -2323,8 +2323,8 @@ spec:
 - [08-service-ingress-events.md](./08-service-ingress-events.md) - Service/Ingress 网络事件
 
 **Troubleshooting 文档:**
-- [故障诊断/高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md](../故障诊断/高级排障/05-workloads/05-job-cronjob-troubleshooting.md) - Job/CronJob 故障排查
-- [故障诊断/高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md](../故障诊断/高级排障/01-control-plane/04-controller-manager-troubleshooting.md) - Controller Manager 故障排查
+- [故障诊断/高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/05-job-cronjob-troubleshooting.md) - Job/CronJob 故障排查
+- [故障诊断/高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-01-control-plane/04-controller-manager-troubleshooting.md) - Controller Manager 故障排查
 
 **Domain 文档:**
 - [domain-8-kubernetes-workloads/](../domain-8-kubernetes-workloads/) - Workload 工作负载详解

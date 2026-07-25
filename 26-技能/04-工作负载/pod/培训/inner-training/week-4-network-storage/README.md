@@ -319,14 +319,14 @@ PVC Pending 通常有几个原因：1) 没有满足条件的 PV（大小不够�
 
 ## 延伸阅读
 
-- [网络架构总览](../../网络/01-network-architecture-overview.md)
-- [CNI 架构基础](../../网络/02-cni-architecture-fundamentals.md)
-- [Service 概念与类型](../../网络/06-service-concepts-types.md)
-- [Ingress 基础](../../网络/19-ingress-fundamentals.md)
-- [Nginx Ingress 完整指南](../../网络/21-nginx-ingress-complete-guide.md)
-- [存储架构总览](../../存储/01-storage-architecture-overview.md)
-- [PV 架构基础](../../存储/02-pv-architecture-fundamentals.md)
-- [StorageClass 动态供给](../../存储/04-storageclass-dynamic-provisioning.md)
+- [网络架构总览](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/01-network-architecture-overview.md)
+- [CNI 架构基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md)
+- [Service 概念与类型](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md)
+- [Ingress 基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md)
+- [Nginx Ingress 完整指南](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/21-nginx-ingress-complete-guide.md)
+- [存储架构总览](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md)
+- [PV 架构基础](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/02-pv-architecture-fundamentals.md)
+- [StorageClass 动态供给](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md)
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 
 ---

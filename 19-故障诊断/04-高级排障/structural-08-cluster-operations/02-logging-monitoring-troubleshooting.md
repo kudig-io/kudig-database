@@ -889,14 +889,14 @@ kubectl top pods -n monitoring
 ```
 ### 相关文档
 
-- [DaemonSet 故障排查](../05-workloads/04-daemonset-troubleshooting.md) (日志采集器)
-- [StatefulSet 故障排查](../05-workloads/03-statefulset-troubleshooting.md) (ES/Prometheus)
-- [Service 故障排查](../03-networking/03-service-ingress-troubleshooting.md)
-- [HPA/VPA 故障排查](../07-resources-scheduling/02-autoscaling-troubleshooting.md) (依赖 metrics)
+- [DaemonSet 故障排查](../structural-05-workloads/04-daemonset-troubleshooting.md) (日志采集器)
+- [StatefulSet 故障排查](../structural-05-workloads/03-statefulset-troubleshooting.md) (ES/Prometheus)
+- [Service 故障排查](../structural-03-networking/03-service-ingress-troubleshooting.md)
+- [HPA/VPA 故障排查](../structural-07-resources-scheduling/02-autoscaling-troubleshooting.md) (依赖 metrics)
 
 ## Related
 
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

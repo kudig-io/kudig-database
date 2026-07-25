@@ -89,7 +89,7 @@ output_pattern: |
   NAME                    READY   STATUS             RESTARTS   AGE
   myapp-xxxx-yyyy         0/1     ImagePullBackOff   0          2m
 diagnosis:
-  - "镜像拉取失败, [[实体/kubernetes|k8s]] 正在退避重试"
+  - "镜像拉取失败, [[23-实体/02-K8s核心组件/kubernetes|k8s]] 正在退避重试"
   - "常见原因: 镜像名/tag 拼写错误、私有仓库认证失败、网络不通、镜像不存在"
 action:
   - "kubectl describe pod myapp-xxxx-yyyy | grep -A5 Events"

@@ -143,7 +143,7 @@ kubectl get pods -n ingress-nginx -o wide --show-labels
 
 # 生产最小配置: 3 副本 + PDB minAvailable=2 + 跨 AZ topologySpreadConstraints
 ```
-同时应配置 `config_last_reload_successful` 和 `nginx_ingress_controller_ssl_expire_time_seconds` 等关键指标的告警。对于七层流量较大的场景，建议将 Ingress 控制器与后端 Service 之间通过 Service Mesh 进行灰度与熔断治理。详情参考 [[K8s网络核心/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]。
+同时应配置 `config_last_reload_successful` 和 `nginx_ingress_controller_ssl_expire_time_seconds` 等关键指标的告警。对于七层流量较大的场景，建议将 Ingress 控制器与后端 Service 之间通过 Service Mesh 进行灰度与熔断治理。详情参考 [[05-网络/01-K8s网络核心/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]。
 
 ### 2.4 CoreDNS 级联故障
 
@@ -288,35 +288,35 @@ iperf3 -c <server-ip> -t 30 -P 4
 | HTTPS 握手后卡死 | MTU 不匹配导致大包丢包 | `kubectl exec <pod> -- ping -M do -s 1472 <target>` | 修正 Pod/隧道/物理网卡 MTU |
 | Service Mesh 服务间调用失败 | Sidecar 注入失败 / DestinationRule 配置错误 | `kubectl get pods -n <ns>`; `istioctl analyze` | 重新注入 Sidecar；修正 DestinationRule |
 
-排查网络故障时，建议遵循先控制面后数据面、先节点后 Pod、先同节点后跨节点的分层思路。对于复杂场景，可结合 [[../19-故障诊断/06-FTA故障树/fta-index.md|故障树]] 进行结构化分析。在排查过程中应做好抓包和日志留存，便于事后复盘。
+排查网络故障时，建议遵循先控制面后数据面、先节点后 Pod、先同节点后跨节点的分层思路。对于复杂场景，可结合 [[19-故障诊断/06-FTA故障树/fta-index.md|故障树]] 进行结构化分析。在排查过程中应做好抓包和日志留存，便于事后复盘。
 
 ## 5. 与其他域的协作边界
 
 | 本域职责 | 协作域 | 边界说明 |
 |---|---|---|
-| CNI / Service / Ingress 高可用架构 | [[../01-集群基础/01-production-architecture-design-principles.md|集群基础]] | 本域提供网络组件 HA 要求，集群域负责控制面、节点与升级基线 |
-| NetworkPolicy / mTLS / 证书生命周期 | [[../08-安全/02-网络安全/02-network-security-policies.md|安全]] | 本域实施 L3/L4 网络隔离，安全域负责零信任架构、密钥与合规审计 |
-| 网络指标、流量拓扑、告警 | [[../09-可观测性/02-指标/99-prometheus-enterprise-guide.md|可观测性]] | 本域定义网络黄金信号，可观测域负责采集、存储与可视化 |
-| 网络 SLO/SLI、容灾演练 | [[../12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|可靠性]] | 本域提供网络组件 RTO/RPO 要求，可靠性域负责整体灾备设计 |
-| 网络故障树与现场诊断 | [[../19-故障诊断/06-FTA故障树/fta-index.md|故障诊断]] | 本域提供网络专业知识，排障域负责结构化诊断流程 |
-| 值班、变更、事件响应 | [[../13-生产运维/03-on-call-playbook.md|生产运维]] | 本域提供网络专项 runbook，生产运维域负责值班体系与变更管理 |
+| CNI / Service / Ingress 高可用架构 | [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|集群基础]] | 本域提供网络组件 HA 要求，集群域负责控制面、节点与升级基线 |
+| NetworkPolicy / mTLS / 证书生命周期 | [[08-安全/02-网络安全/02-network-security-policies.md|安全]] | 本域实施 L3/L4 网络隔离，安全域负责零信任架构、密钥与合规审计 |
+| 网络指标、流量拓扑、告警 | [[09-可观测性/02-指标/99-prometheus-enterprise-guide.md|可观测性]] | 本域定义网络黄金信号，可观测域负责采集、存储与可视化 |
+| 网络 SLO/SLI、容灾演练 | [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|可靠性]] | 本域提供网络组件 RTO/RPO 要求，可靠性域负责整体灾备设计 |
+| 网络故障树与现场诊断 | [[19-故障诊断/06-FTA故障树/fta-index.md|故障诊断]] | 本域提供网络专业知识，排障域负责结构化诊断流程 |
+| 值班、变更、事件响应 | [[13-生产运维/03-事件响应/03-on-call-playbook.md|生产运维]] | 本域提供网络专项 runbook，生产运维域负责值班体系与变更管理 |
 
 明确协作边界可以避免上线前责任不清、运行期间互相推诿。网络域应主动输出网络组件的 SLO 要求、变更窗口建议和应急预案，而其他域则提供平台级支撑。跨域变更评审时，网络域代表应参与涉及 CNI、Ingress、证书和 DNS 的变更，确保网络层面的影响被充分评估。
 
 ## 6. 推荐阅读
 
 ### 本域专项指南
-- [[K8s网络核心/33-network-troubleshooting.md|网络故障诊断与链路排查]]
-- [[K8s网络核心/27-cni-troubleshooting-optimization.md|CNI 故障排查与优化]]
-- [[K8s网络核心/28-coredns-troubleshooting-optimization.md|CoreDNS 故障排查与性能优化]]
-- [[K8s网络核心/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]
-- [[K8s网络核心/34-network-performance-tuning.md|网络性能调优]]
-- [[K8s网络核心/16-networkpolicy-deep-practice.md|NetworkPolicy 深度实践]]
-- [[K8s网络核心/18-network-encryption-mtls.md|网络加密与 mTLS]]
-- [[K8s网络核心/32-multi-cluster-networking.md|多集群网络]]
-- [[K8s网络核心/09-kube-proxy-modes-performance.md|kube-proxy 模式与性能]]
-- [[API网关/11-api-gateway-security-practices.md|API Gateway 安全实践]]
-- [[服务网格/99-linkerd-service-mesh-guide.md|Linkerd Service Mesh 指南]]
+- [[05-网络/01-K8s网络核心/33-network-troubleshooting.md|网络故障诊断与链路排查]]
+- [[05-网络/01-K8s网络核心/27-cni-troubleshooting-optimization.md|CNI 故障排查与优化]]
+- [[05-网络/01-K8s网络核心/28-coredns-troubleshooting-optimization.md|CoreDNS 故障排查与性能优化]]
+- [[05-网络/01-K8s网络核心/26-ingress-production-best-practices.md|Ingress 生产最佳实践]]
+- [[05-网络/01-K8s网络核心/34-network-performance-tuning.md|网络性能调优]]
+- [[05-网络/01-K8s网络核心/16-networkpolicy-deep-practice.md|NetworkPolicy 深度实践]]
+- [[05-网络/01-K8s网络核心/18-network-encryption-mtls.md|网络加密与 mTLS]]
+- [[05-网络/01-K8s网络核心/32-multi-cluster-networking.md|多集群网络]]
+- [[05-网络/01-K8s网络核心/09-kube-proxy-modes-performance.md|kube-proxy 模式与性能]]
+- [[05-网络/04-API网关/11-api-gateway-security-practices.md|API Gateway 安全实践]]
+- [[05-网络/03-服务网格/99-linkerd-service-mesh-guide.md|Linkerd Service Mesh 指南]]
 
 ### 本域规划补齐文件（缺口分析推荐）
 - Calico 生产运维指南（待补充）
@@ -326,13 +326,13 @@ iperf3 -c <server-ip> -t 30 -P 4
 - 网络灾难恢复 Runbook（待补充）
 
 ### 跨域参考
-- [[../01-集群基础/01-production-architecture-design-principles.md|集群生产架构设计原则]]
-- [[../08-安全/02-网络安全/02-network-security-policies.md|网络安全策略]]
-- [[../09-可观测性/02-指标/99-prometheus-enterprise-guide.md|Prometheus 企业级监控指南]]
-- [[../12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[../19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 故障树]]
-- [[../19-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 故障树]]
-- [[../19-故障诊断/06-FTA故障树/list/ingress-fta.md|Ingress 故障树]]
+- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|集群生产架构设计原则]]
+- [[08-安全/02-网络安全/02-network-security-policies.md|网络安全策略]]
+- [[09-可观测性/02-指标/99-prometheus-enterprise-guide.md|Prometheus 企业级监控指南]]
+- [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 故障树]]
+- [[19-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 故障树]]
+- [[19-故障诊断/06-FTA故障树/list/ingress-fta.md|Ingress 故障树]]
 
 ## 7. 快速检查脚本
 

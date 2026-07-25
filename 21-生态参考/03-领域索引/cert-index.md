@@ -68,7 +68,7 @@ prerequisites:
 ### 故障排查
 
 - 证书故障排查 (Certificate Troubleshooting)
-- [[19-故障诊断/04-高级排障/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
 
 ### 技能卡片
 
@@ -94,13 +94,13 @@ prerequisites:
 
 ### 控制平面
 
-- [[19-故障诊断/04-高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
 
 ### 安全
 
-- [[19-故障诊断/04-高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/07-control-plane-security-troubleshooting.md|控制平面安全加固故障排查指南]]
 
 ### 术语词典
 

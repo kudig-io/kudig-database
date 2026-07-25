@@ -237,11 +237,11 @@ kubectl describe ds node-exporter -n monitoring | tail -20
 ```
 ## 交叉引用
 
-- [DaemonSet 管理详解](../../工作负载/04-daemonset-management.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [DaemonSet 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/daemonset-fta.md)
-- [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
-- [工作负载监控与告警](../../工作负载/06-workload-monitoring-alerting.md)
+- [DaemonSet 管理详解](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/04-daemonset-management.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
+- [DaemonSet 故障树分析 (FTA)](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/daemonset-fta.md)
+- [节点 NotReady 诊断](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
+- [工作负载监控与告警](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/06-workload-monitoring-alerting.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/

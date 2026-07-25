@@ -17,12 +17,12 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-0.1.md|Release Notes 0.1]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-0.2.md|Release Notes 0.2]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-0.3.md|Release Notes 0.3]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-0.4.md|Release Notes 0.4]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-0.5.md|Release Notes 0.5]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.7.md|Release Notes 18.7]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.8.md|Release Notes 18.8]]
-- [[生态参考/_archived-release-notes/networking/linkerd/RELEASE-NOTES-18.9.md|Release Notes 18.9]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-0.1.md|Release Notes 0.1]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-0.2.md|Release Notes 0.2]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-0.3.md|Release Notes 0.3]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-0.4.md|Release Notes 0.4]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-0.5.md|Release Notes 0.5]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-18.7.md|Release Notes 18.7]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-18.8.md|Release Notes 18.8]]
+- [[37-归档/release-notes/networking/linkerd/RELEASE-NOTES-18.9.md|Release Notes 18.9]]
 

@@ -513,7 +513,7 @@ systemctl restart kubelet
 - [`NewCertificateAuthority`](02-ca-generation.md) — CA 证书生成
 - [`GetAPIServerAltNames`](13-cert-config.md) — API Server SAN 计算
 - [`kubeadm certs renew`](README.md) — 证书续期命令
-- [`CreateLocalEtcdStaticPodManifest`](07-etcd.md) — etcd 静态 Pod 生成
+- [`CreateLocalEtcdStaticPodManifest`](../cluster-create/07-etcd.md) — etcd 静态 Pod 生成
 
 ## Related
 

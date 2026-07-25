@@ -325,9 +325,9 @@ ripgrep（grep/glob/list 底层引擎）默认遵守 `.gitignore`。若需搜索
 
 | 文档 | 关系 |
 |------|------|
-| [05 - 工具与权限](./05-opencode-tools-permissions.md) | lsp 工具权限配置 |
-| [01 - 概述与架构](./01-opencode-overview-architecture.md) | LSP 在架构中的位置 |
-| [12 - 进阶话题](./12-opencode-advanced-topics.md) | 故障排查 |
+| [05 - 工具与权限](25-opencode-tools-permissions.md) | lsp 工具权限配置 |
+| [01 - 概述与架构](21-opencode-overview-architecture.md) | LSP 在架构中的位置 |
+| [12 - 进阶话题](32-opencode-advanced-topics.md) | 故障排查 |
 
 ---
 

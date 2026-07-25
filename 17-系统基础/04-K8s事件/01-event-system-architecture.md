@@ -585,10 +585,10 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 
 <!-- chunk: 相关文档交叉引用 -->## 相关文档交叉引用
 
-- **[Domain-8: 可观测性 - 事件与审计日志](../可观测性/09-events-audit-logs.md)** - 审计日志体系和合规性
+- **[Domain-8: 可观测性 - 事件与审计日志](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/09-events-audit-logs.md)** - 审计日志体系和合规性
 - **[Domain-4: 工作负载 - Pod生命周期事件表](../工作负载/11-pod-lifecycle-events.md)** - Pod 事件速查表
-- **[Domain-12: 故障排查 - 事件驱动架构](../故障诊断/41-event-driven-architecture-troubleshooting.md)** - 事件驱动系统故障排查
-- **[Domain-1: 架构基础 - kubectl命令参考](../集群基础/05-kubectl-commands-reference.md)** - kubectl 事件相关命令
+- **[Domain-12: 故障排查 - 事件驱动架构](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/41-event-driven-architecture-troubleshooting.md)** - 事件驱动系统故障排查
+- **[Domain-1: 架构基础 - kubectl命令参考](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)** - kubectl 事件相关命令
 
 ---
 

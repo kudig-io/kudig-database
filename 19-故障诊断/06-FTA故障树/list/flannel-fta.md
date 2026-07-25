@@ -237,16 +237,16 @@ ping -M do -s 1400 <target-ip>
 
 ## 相关文档
 
-- [Flannel 完全指南](./网络/04-flannel-complete-guide.md)
-- [Flannel 故障排查](./故障诊断/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md)
-- [CNI 网络故障排查](./故障诊断/topic-structural-trouble-shooting/03-networking/01-cni-troubleshooting.md)
-- [Flannel 全局索引](./生态参考/topic-index/flannel-index.md)
+- [Flannel 完全指南](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/04-flannel-complete-guide.md)
+- [Flannel 故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/08-flannel-troubleshooting.md)
+- [CNI 网络故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/01-cni-troubleshooting.md)
+- [Flannel 全局索引](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/03-%E9%A2%86%E5%9F%9F%E7%B4%A2%E5%BC%95/flannel-index.md)
 
 ## Related
 
-- [[26-技能/ts-command-output|命令输出根因解析]] — Cross-reference
-- [[26-技能/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[21-生态参考/topic-index/flannel-index|Flannel 知识图谱索引]]
+- [[26-技能/04-工作负载/pod/reference/ts-command-output|命令输出根因解析]] — Cross-reference
+- [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[21-生态参考/03-领域索引/flannel-index|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

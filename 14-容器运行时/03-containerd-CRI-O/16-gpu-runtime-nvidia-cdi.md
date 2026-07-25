@@ -482,7 +482,7 @@ dcgmi diag -r 3  # level 3: 全面诊断（耗时较长）
 
 - 训练任务配合 [[22-概念/07-调度与资源/gang-scheduling|Gang Scheduling]] 确保多 GPU Pod 同时调度
 - 推理服务配合 [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU 调度与成本优化]] 实现 MIG 共享
-- GPU 监控集成到 [[09-可观测性/prometheus|Prometheus]] + Grafana 看板
+- GPU 监控集成到 [[23-实体/07-可观测性/prometheus|Prometheus]] + Grafana 看板
 - 参考 [[15-AI基础设施/05-K8s-AI基础设施|K8s AI 基础设施]] 了解完整 AI 平台架构
 
 ## Related

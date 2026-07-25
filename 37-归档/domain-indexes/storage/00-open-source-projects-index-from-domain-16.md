@@ -330,7 +330,7 @@ Volume (PVC)
 ## Obsidian 相关文档
 
 - 存储 MOC
-- [[存储/README.md|Domain-16: 存储基础]]
+- [[06-存储/README.md|Domain-16: 存储基础]]
 - 01 - 存储技术概述
 - 02 - 块存储、文件存储、对象存储
 - 03 - RAID 与存储冗余

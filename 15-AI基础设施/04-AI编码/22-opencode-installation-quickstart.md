@@ -364,10 +364,10 @@ opencode -d
 
 | 文档 | 关系 |
 |------|------|
-| [01 - 概述与架构](./01-opencode-overview-architecture.md) | 理解 OpenCode 全貌 |
-| [03 - Provider 与模型管理](./03-opencode-providers-models.md) | 深入 Provider 配置 |
-| [04 - Agent 系统](./04-opencode-agents-system.md) | 深入 Build/Plan 模式 |
-| [09 - TUI 定制](./09-opencode-tui-customization.md) | 自定义快捷键和主题 |
+| [01 - 概述与架构](21-opencode-overview-architecture.md) | 理解 OpenCode 全貌 |
+| [03 - Provider 与模型管理](23-opencode-providers-models.md) | 深入 Provider 配置 |
+| [04 - Agent 系统](24-opencode-agents-system.md) | 深入 Build/Plan 模式 |
+| [09 - TUI 定制](29-opencode-tui-customization.md) | 自定义快捷键和主题 |
 
 ---
 

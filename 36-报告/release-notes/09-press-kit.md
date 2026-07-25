@@ -51,7 +51,7 @@ prerequisites:
 
 ## 二、产品简介 (300 字)
 
-kudig-database 是一个面向 [[实体/kubernetes.md|kubernetes]] 生产运维场景的企业级知识库, 同时也是专为 AI 智能体 (Agent) 设计的高质量语料库。
+kudig-database 是一个面向 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 生产运维场景的企业级知识库, 同时也是专为 AI 智能体 (Agent) 设计的高质量语料库。
 
 在 Kubernetes 生态中, 运维工程师面临知识分散、文档过时、排查效率低等痛点。当 AI Agent 被引入运维场景时, 缺少结构化的专业知识导致回答质量低下, 无法满足生产环境的需求。
 

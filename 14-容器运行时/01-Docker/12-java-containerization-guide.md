@@ -845,10 +845,10 @@ cosign sign --key cosign.key registry.example.com/my-spring-app:v1.0.0
 
 <!-- chunk: 🔗 相关文档 -->## 🔗 相关文档
 
-- [Jib 详细配置](./10-image-build-tools.md) — Java 应用快速构建工具
-- [JVM GC 容器调优](../故障诊断/99-jvm-gc-container-tuning-guide.md) — GC 算法选择与参数优化
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md) — Spring Boot K8s 部署最佳实践
-- [GraalVM Native Image](../专项技术/99-graalvm-native-image-guide.md) — 原生编译指南
+- [Jib 详细配置](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/10-image-build-tools.md) — Java 应用快速构建工具
+- [JVM GC 容器调优](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/05-JVM%E8%B0%83%E4%BC%98/99-jvm-gc-container-tuning-guide.md) — GC 算法选择与参数优化
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) — Spring Boot K8s 部署最佳实践
+- [GraalVM Native Image](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/03-%E6%89%A9%E5%B1%95%E6%9C%BA%E5%88%B6/99-graalvm-native-image-guide.md) — 原生编译指南
 - [Docker 性能监控](./09-docker-performance-monitoring.md) — 容器性能分析方法
 
 ---

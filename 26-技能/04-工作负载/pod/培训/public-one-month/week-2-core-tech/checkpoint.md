@@ -646,7 +646,7 @@ kubectl get pods -n kube-system -l app=flannel
 - [节点管理最佳实践](https://kubernetes.io/docs/concepts/architecture/nodes/)
 - [Pod 生命周期](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 - [调度器文档](https://kubernetes.io/docs/concepts/scheduling-eviction/)
-- [文件: `../../../工作负载/02-deployment-production-patterns.md`](../../../工作负载/02-deployment-production-patterns.md)
+- [文件: `../../../工作负载/02-deployment-production-patterns.md`](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
 
 ## Related
 

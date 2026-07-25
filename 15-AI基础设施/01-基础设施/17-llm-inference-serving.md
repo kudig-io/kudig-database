@@ -2282,7 +2282,7 @@ response = client.chat.completions.create(
 
 ---
 
-**相关文档**: [145-LLM Serving架构](145-llm-serving-architecture.md) | [146-LLM量化技术](146-llm-quantization.md) | [133-GPU调度管理](133-gpu-scheduling-management.md)
+**相关文档**: [145-LLM Serving架构](18-llm-serving-architecture.md) | [146-LLM量化技术](19-llm-quantization.md) | [133-GPU调度管理](03-gpu-scheduling-management.md)
 
 **版本**: vLLM 0.4.2+ | TGI 2.0+ | TensorRT-LLM 0.9+ | Kubernetes v1.27+
 

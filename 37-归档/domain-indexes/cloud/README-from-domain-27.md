@@ -84,7 +84,7 @@ estimated_read_time: 10min
 intent_queries:
 - 'Domain 27: 多云与混合云架构管理 是什么'
 - '如何 Domain 27: 多云与混合云架构管理'
-- [[实体/kubernetes.md|kubernetes]] 27 multi cloud hybrid 最佳实践
+- [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 27 multi cloud hybrid 最佳实践
 trigger_keywords:
 - Domain
 - '27:'
@@ -168,26 +168,26 @@ tier: peripheral---
 | 编号 | 文档 | 说明 | 复杂度 | 核心技术 |
 |:---|:---|:---|:---|:---|
 | 00 | [开源项目索引](./00-open-source-projects-index.md) | 多云与混合云领域核心开源项目索引与选型指南 | ⭐⭐ | Karmada、Submariner、Crossplane |
-| 01 | [AWS EKS 企业级多云管理](./01-aws-eks-enterprise-multicloud.md) | EKS 集群管理、IRSA、KMS 加密、多云架构集成 | ⭐⭐⭐⭐ | EKS、IRSA、Transit Gateway |
-| 02 | [Azure AKS 企业级多云管理](./02-azure-aks-enterprise-multicloud.md) | AKS 集群配置、Azure AD 集成、Workload Identity、Front Door | ⭐⭐⭐⭐ | AKS、AAD、ExpressRoute |
-| 03 | [企业级多云治理](./03-enterprise-multicloud-governance.md) | 统一治理框架、FinOps、身份认证、成本优化 | ⭐⭐⭐⭐⭐ | Crossplane、Kyverno、OPA |
-| 04 | [Google GKE 企业级多云管理](./04-google-gke-enterprise-multicloud.md) | GKE Autopilot、Anthos 多云、Binary Authorization | ⭐⭐⭐⭐ | GKE、Anthos、Workload Identity |
-| 05 | [IBM Cloud IKS 企业级](./05-ibm-cloud-kubernetes-service-enterprise.md) | Watson AI 集成、Satellite 混合云、Key Protect | ⭐⭐⭐⭐ | IKS、Satellite、Watson AI |
+| 01 | [AWS EKS 企业级多云管理](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/01-aws-eks-enterprise-multicloud.md) | EKS 集群管理、IRSA、KMS 加密、多云架构集成 | ⭐⭐⭐⭐ | EKS、IRSA、Transit Gateway |
+| 02 | [Azure AKS 企业级多云管理](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/02-azure-aks-enterprise-multicloud.md) | AKS 集群配置、Azure AD 集成、Workload Identity、Front Door | ⭐⭐⭐⭐ | AKS、AAD、ExpressRoute |
+| 03 | [企业级多云治理](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/03-enterprise-multicloud-governance.md) | 统一治理框架、FinOps、身份认证、成本优化 | ⭐⭐⭐⭐⭐ | Crossplane、Kyverno、OPA |
+| 04 | [Google GKE 企业级多云管理](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/04-google-gke-enterprise-multicloud.md) | GKE Autopilot、Anthos 多云、Binary Authorization | ⭐⭐⭐⭐ | GKE、Anthos、Workload Identity |
+| 05 | [IBM Cloud IKS 企业级](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/05-ibm-cloud-kubernetes-service-enterprise.md) | Watson AI 集成、Satellite 混合云、Key Protect | ⭐⭐⭐⭐ | IKS、Satellite、Watson AI |
 
 ### 扩展多云平台 (06-07)
 
 | 编号 | 文档 | 说明 | 复杂度 | 核心技术 |
 |:---|:---|:---|:---|:---|
-| 06 | [Alibaba ACK 企业级混合云](./06-alibaba-ack-enterprise-hybrid.md) | ACK Pro、Terway 网络、云原生 AI、混合云架构 | ⭐⭐⭐⭐ | ACK Pro、Terway、Arena AI |
-| 07 | [华为云 CCE 企业级](./07-huawei-cce-enterprise.md) | CCE Turbo、Volcano 调度、裸金属容器、混合云 | ⭐⭐⭐⭐ | CCE Turbo、Volcano、UCS |
+| 06 | [Alibaba ACK 企业级混合云](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/06-alibaba-ack-enterprise-hybrid.md) | ACK Pro、Terway 网络、云原生 AI、混合云架构 | ⭐⭐⭐⭐ | ACK Pro、Terway、Arena AI |
+| 07 | [华为云 CCE 企业级](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/07-huawei-cce-enterprise.md) | CCE Turbo、Volcano 调度、裸金属容器、混合云 | ⭐⭐⭐⭐ | CCE Turbo、Volcano、UCS |
 
 ### 多云技术专题 (08-10)
 
 | 编号 | 文档 | 说明 | 复杂度 | 核心技术 |
 |:---|:---|:---|:---|:---|
-| 08 | [Karmada 多集群联邦](./08-multicloud-federation-karmada.md) | 资源传播、覆盖策略、故障转移、工作负载再平衡 | ⭐⭐⭐⭐⭐ | PropagationPolicy、OverridePolicy |
-| 09 | [多云网络互联](./09-multicloud-network-interconnect.md) | Submariner、Skupper、Transit Gateway、ExpressRoute | ⭐⭐⭐⭐⭐ | Submariner、Skupper、Cilium Mesh |
-| 10 | [多云灾备](./10-multicloud-disaster-recovery.md) | 双活、主备、Pilot Light、数据复制、RPO/RTO 设计 | ⭐⭐⭐⭐⭐ | Velero、Debezium CDC、DNS Failover |
+| 08 | [Karmada 多集群联邦](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/08-multicloud-federation-karmada.md) | 资源传播、覆盖策略、故障转移、工作负载再平衡 | ⭐⭐⭐⭐⭐ | PropagationPolicy、OverridePolicy |
+| 09 | [多云网络互联](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/09-multicloud-network-interconnect.md) | Submariner、Skupper、Transit Gateway、ExpressRoute | ⭐⭐⭐⭐⭐ | Submariner、Skupper、Cilium Mesh |
+| 10 | [多云灾备](../../../18-%E4%BA%91%E5%8E%82%E5%95%86/07-%E5%A4%9A%E4%BA%91%E6%B7%B7%E5%90%88/10-multicloud-disaster-recovery.md) | 双活、主备、Pilot Light、数据复制、RPO/RTO 设计 | ⭐⭐⭐⭐⭐ | Velero、Debezium CDC、DNS Failover |
 
 ## 学习路径建议
 

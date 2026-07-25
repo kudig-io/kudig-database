@@ -1476,7 +1476,7 @@ echo "=== Crossplane 部署完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-27-multi-cloud-hybrid MOC
-- [[云厂商/README.md|Domain 12: 多云与混合云架构管理]]
+- [[18-云厂商/README.md|Domain 12: 多云与混合云架构管理]]
 - AWS EKS 企业级多云管理平台
 - Azure AKS 企业级多云管理平台
 - 企业级多云治理与成本优化深度实践

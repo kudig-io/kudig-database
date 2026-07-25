@@ -157,7 +157,7 @@ best-practices/
 ## 相关最佳实践
 
 - [Pod安全标准](../security/pod-security.md) - 容器安全基础
-- [网络策略](../networking/network-policies.md) - 网络安全实施
+- [网络策略](../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/network-policies.md) - 网络安全实施
 - [密钥管理](../security/secrets-management.md) - 敏感信息保护
 ```
 

@@ -223,7 +223,7 @@ print(f"激进建议: {recommendation['aggressive']:.4%}")
 
 ### Step 2: 识别 SLI
 
-为每个关键步骤选择合适的 SLI（参考 [[09-可观测性/06-SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]]）：
+为每个关键步骤选择合适的 SLI（参考 [[09-可观测性/06-SLO-SLI/04-sli-definition-selection.md|01 sli definition selection]]）：
 
 ```
 步骤 3: 提交订单
@@ -1012,8 +1012,8 @@ escalation:
 
 ## 相关
 
-- [[09-可观测性/06-SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]] — SLI 定义与选择方法论
-- [[09-可观测性/06-SLO-SLI/03-error-budget-management.md|03 error budget management]] — 错误预算管理
+- [[09-可观测性/06-SLO-SLI/04-sli-definition-selection.md|01 sli definition selection]] — SLI 定义与选择方法论
+- [[09-可观测性/06-SLO-SLI/06-error-budget-management.md|03 error budget management]] — 错误预算管理
 - [[09-可观测性/06-SLO-SLI/18-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述
 
 

@@ -84,7 +84,7 @@ related_topics:
 - deployment-controller
 - rolling-update
 - deployment-status
-domain_link: '[Workloads](../工作负载/README.md)'
+domain_link: '[Workloads](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/README.md)'
 topic_link: '[Deployment Create](./README.md)'
 authors:
 - name: KUDIG Team

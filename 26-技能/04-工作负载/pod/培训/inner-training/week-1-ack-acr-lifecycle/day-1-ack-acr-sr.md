@@ -477,7 +477,7 @@ kubectl get pods -n kube-system
 - [Kubernetes 架构概述](https://kubernetes.io/docs/concepts/architecture/)
 - [文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`](../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 - [文件: `../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md`](../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md)
-- [文件: `../../../集群基础/01-kubernetes-architecture-overview.md`](../../../集群基础/01-kubernetes-architecture-overview.md)
+- [文件: `../../../集群基础/01-kubernetes-architecture-overview.md`](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
 
 ---
 

@@ -90,123 +90,123 @@ prerequisites:
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-apiserver-troubleshooting.md](01-control-plane/01-apiserver-troubleshooting.md) | API Server 故障排查 | kubectl 无法连接、API 响应慢、认证授权错误 |
-| [02-etcd-troubleshooting.md](01-control-plane/02-etcd-troubleshooting.md) | etcd 故障排查 | etcd 不可用、数据损坏、性能问题、备份恢复 |
-| [03-scheduler-troubleshooting.md](01-control-plane/03-scheduler-troubleshooting.md) | Scheduler 故障排查 | Pod Pending、调度失败、调度策略问题 |
-| [04-controller-manager-troubleshooting.md](01-control-plane/04-controller-manager-troubleshooting.md) | Controller Manager 故障排查 | 控制器异常、资源不同步、Endpoints 问题 |
-| [05-webhook-admission-troubleshooting.md](01-control-plane/05-webhook-admission-troubleshooting.md) | Webhook/准入控制故障排查 | Webhook 超时、资源被拒绝、准入控制器问题 |
-| [06-apf-troubleshooting.md](01-control-plane/06-apf-troubleshooting.md) | API 优先级与公平性故障排查 | 请求限流 (429)、API 延迟、FlowSchema 配置 |
-| [07-control-plane-security-troubleshooting.md](01-control-plane/07-control-plane-security-troubleshooting.md) | 控制平面安全故障排查 | PSA 策略冲突、安全上下文配置、准入控制绕过 |
-| [08-control-plane-performance-troubleshooting.md](01-control-plane/08-control-plane-performance-troubleshooting.md) | 控制平面性能故障排查 | API Server 延迟、etcd 性能退化、大规模 LIST 请求 |
-| [09-control-plane-ha-troubleshooting.md](01-control-plane/09-control-plane-ha-troubleshooting.md) | 控制平面高可用故障排查 | 多 master 节点问题、etcd 仲裁丢失、VIP 漂移 |
-| [10-control-plane-upgrade-troubleshooting.md](01-control-plane/10-control-plane-upgrade-troubleshooting.md) | 控制平面升级故障排查 | 版本升级失败、API 废弃、 kubeadm 升级卡住 |
+| [01-apiserver-troubleshooting.md](structural-01-control-plane/01-apiserver-troubleshooting.md) | API Server 故障排查 | kubectl 无法连接、API 响应慢、认证授权错误 |
+| [02-etcd-troubleshooting.md](structural-01-control-plane/02-etcd-troubleshooting.md) | etcd 故障排查 | etcd 不可用、数据损坏、性能问题、备份恢复 |
+| [03-scheduler-troubleshooting.md](structural-01-control-plane/03-scheduler-troubleshooting.md) | Scheduler 故障排查 | Pod Pending、调度失败、调度策略问题 |
+| [04-controller-manager-troubleshooting.md](structural-01-control-plane/04-controller-manager-troubleshooting.md) | Controller Manager 故障排查 | 控制器异常、资源不同步、Endpoints 问题 |
+| [05-webhook-admission-troubleshooting.md](structural-01-control-plane/05-webhook-admission-troubleshooting.md) | Webhook/准入控制故障排查 | Webhook 超时、资源被拒绝、准入控制器问题 |
+| [06-apf-troubleshooting.md](structural-01-control-plane/06-apf-troubleshooting.md) | API 优先级与公平性故障排查 | 请求限流 (429)、API 延迟、FlowSchema 配置 |
+| [07-control-plane-security-troubleshooting.md](structural-01-control-plane/07-control-plane-security-troubleshooting.md) | 控制平面安全故障排查 | PSA 策略冲突、安全上下文配置、准入控制绕过 |
+| [08-control-plane-performance-troubleshooting.md](structural-01-control-plane/08-control-plane-performance-troubleshooting.md) | 控制平面性能故障排查 | API Server 延迟、etcd 性能退化、大规模 LIST 请求 |
+| [09-control-plane-ha-troubleshooting.md](structural-01-control-plane/09-control-plane-ha-troubleshooting.md) | 控制平面高可用故障排查 | 多 master 节点问题、etcd 仲裁丢失、VIP 漂移 |
+| [10-control-plane-upgrade-troubleshooting.md](structural-01-control-plane/10-control-plane-upgrade-troubleshooting.md) | 控制平面升级故障排查 | 版本升级失败、API 废弃、 kubeadm 升级卡住 |
 
 ### 02-node-components（节点组件）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-kubelet-troubleshooting.md](02-node-components/01-kubelet-troubleshooting.md) | kubelet 故障排查 | 节点 NotReady、Pod 创建失败、镜像拉取问题 |
-| [02-kube-proxy-troubleshooting.md](02-node-components/02-kube-proxy-troubleshooting.md) | kube-proxy 故障排查 | Service 不可达、iptables/IPVS 规则问题 |
-| [03-container-runtime-troubleshooting.md](02-node-components/03-container-runtime-troubleshooting.md) | 容器运行时故障排查 | containerd/Docker 问题、容器创建失败 |
-| [04-node-troubleshooting.md](02-node-components/04-node-troubleshooting.md) | 节点问题专项排查 | 节点压力、污点容忍、亲和性、资源驱逐 |
-| [05-image-registry-troubleshooting.md](02-node-components/05-image-registry-troubleshooting.md) | 镜像与镜像仓库故障排查 | 镜像拉取失败、认证问题、TLS 错误、限流 |
-| [06-gpu-device-plugin-troubleshooting.md](02-node-components/06-gpu-device-plugin-troubleshooting.md) | GPU/设备插件故障排查 | GPU 不可见、设备分配失败、CUDA 兼容性、MIG 配置 |
+| [01-kubelet-troubleshooting.md](structural-02-node-components/01-kubelet-troubleshooting.md) | kubelet 故障排查 | 节点 NotReady、Pod 创建失败、镜像拉取问题 |
+| [02-kube-proxy-troubleshooting.md](structural-02-node-components/02-kube-proxy-troubleshooting.md) | kube-proxy 故障排查 | Service 不可达、iptables/IPVS 规则问题 |
+| [03-container-runtime-troubleshooting.md](structural-02-node-components/03-container-runtime-troubleshooting.md) | 容器运行时故障排查 | containerd/Docker 问题、容器创建失败 |
+| [04-node-troubleshooting.md](structural-02-node-components/04-node-troubleshooting.md) | 节点问题专项排查 | 节点压力、污点容忍、亲和性、资源驱逐 |
+| [05-image-registry-troubleshooting.md](structural-02-node-components/05-image-registry-troubleshooting.md) | 镜像与镜像仓库故障排查 | 镜像拉取失败、认证问题、TLS 错误、限流 |
+| [06-gpu-device-plugin-troubleshooting.md](structural-02-node-components/06-gpu-device-plugin-troubleshooting.md) | GPU/设备插件故障排查 | GPU 不可见、设备分配失败、CUDA 兼容性、MIG 配置 |
 
 ### 03-networking（网络）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-cni-troubleshooting.md](03-networking/01-cni-troubleshooting.md) | CNI 网络插件故障排查 | Pod 网络不通、跨节点通信失败、IP 分配问题 |
-| [02-dns-troubleshooting.md](03-networking/02-dns-troubleshooting.md) | CoreDNS/DNS 故障排查 | DNS 解析失败、服务发现异常、DNS 性能问题 |
-| [03-service-ingress-troubleshooting.md](03-networking/03-service-ingress-troubleshooting.md) | Service/Ingress 故障排查 | Service 不可达、Ingress 路由问题、TLS 证书错误 |
-| [04-networkpolicy-troubleshooting.md](03-networking/04-networkpolicy-troubleshooting.md) | NetworkPolicy 故障排查 | 网络策略不生效、流量被误拦截、策略配置问题 |
-| [05-service-mesh-istio-troubleshooting.md](03-networking/05-service-mesh-istio-troubleshooting.md) | Service Mesh (Istio) 故障排查 | Sidecar 注入失败、mTLS 问题、流量路由异常、Gateway 不可用 |
-| [06-gateway-api-troubleshooting.md](03-networking/06-gateway-api-troubleshooting.md) | Gateway API 故障排查 | GatewayClass/Gateway/HTTPRoute 配置、跨 namespace 路由、TLS 配置 |
-| [07-terway-troubleshooting.md](03-networking/07-terway-troubleshooting.md) | Terway（阿里云 CNI）故障排查 | ENI/IPVlan 模式、IPAM、安全组、跨节点通信、网络策略 |
-| [08-flannel-troubleshooting.md](03-networking/08-flannel-troubleshooting.md) | Flannel [[26-技能/05-网络/service/诊断排障/ts-networking.md|ts-networking]] | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
+| [01-cni-troubleshooting.md](structural-03-networking/01-cni-troubleshooting.md) | CNI 网络插件故障排查 | Pod 网络不通、跨节点通信失败、IP 分配问题 |
+| [02-dns-troubleshooting.md](structural-03-networking/02-dns-troubleshooting.md) | CoreDNS/DNS 故障排查 | DNS 解析失败、服务发现异常、DNS 性能问题 |
+| [03-service-ingress-troubleshooting.md](structural-03-networking/03-service-ingress-troubleshooting.md) | Service/Ingress 故障排查 | Service 不可达、Ingress 路由问题、TLS 证书错误 |
+| [04-networkpolicy-troubleshooting.md](structural-03-networking/04-networkpolicy-troubleshooting.md) | NetworkPolicy 故障排查 | 网络策略不生效、流量被误拦截、策略配置问题 |
+| [05-service-mesh-istio-troubleshooting.md](structural-03-networking/05-service-mesh-istio-troubleshooting.md) | Service Mesh (Istio) 故障排查 | Sidecar 注入失败、mTLS 问题、流量路由异常、Gateway 不可用 |
+| [06-gateway-api-troubleshooting.md](structural-03-networking/06-gateway-api-troubleshooting.md) | Gateway API 故障排查 | GatewayClass/Gateway/HTTPRoute 配置、跨 namespace 路由、TLS 配置 |
+| [07-terway-troubleshooting.md](structural-03-networking/07-terway-troubleshooting.md) | Terway（阿里云 CNI）故障排查 | ENI/IPVlan 模式、IPAM、安全组、跨节点通信、网络策略 |
+| [08-flannel-troubleshooting.md](structural-03-networking/08-flannel-troubleshooting.md) | Flannel [[26-技能/05-网络/service/诊断排障/ts-networking.md|ts-networking]] | VXLAN/host-gw 模式、子网分配、跨节点通信、MTU、后端切换 |
 
 ### 04-storage（存储）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-pv-pvc-troubleshooting.md](04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC [[26-技能/06-存储/csi-storage/诊断排障/ts-storage.md|ts-storage]] | PVC Pending、卷挂载失败、存储类问题 |
-| [02-csi-troubleshooting.md](04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动问题、卷创建/挂载/扩容问题 |
-| [03-snapshot-backup-troubleshooting.md](04-storage/03-snapshot-backup-troubleshooting.md) | CSI 快照与卷备份故障排查 | VolumeSnapshot、快照恢复、数据一致性 |
-| [04-storage-performance-troubleshooting.md](04-storage/04-storage-performance-troubleshooting.md) | 存储 I/O 性能故障排查 | 高延迟 I/O、吞吐瓶颈、fio 基准测试 |
-| [05-storageclass-troubleshooting.md](04-storage/05-storageclass-troubleshooting.md) | StorageClass 配置与动态供给故障排查 | StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级 |
+| [01-pv-pvc-troubleshooting.md](structural-04-storage/01-pv-pvc-troubleshooting.md) | PV/PVC [[26-技能/06-存储/csi-storage/诊断排障/ts-storage.md|ts-storage]] | PVC Pending、卷挂载失败、存储类问题 |
+| [02-csi-troubleshooting.md](structural-04-storage/02-csi-troubleshooting.md) | CSI 存储驱动故障排查 | CSI 驱动问题、卷创建/挂载/扩容问题 |
+| [03-snapshot-backup-troubleshooting.md](structural-04-storage/03-snapshot-backup-troubleshooting.md) | CSI 快照与卷备份故障排查 | VolumeSnapshot、快照恢复、数据一致性 |
+| [04-storage-performance-troubleshooting.md](structural-04-storage/04-storage-performance-troubleshooting.md) | 存储 I/O 性能故障排查 | 高延迟 I/O、吞吐瓶颈、fio 基准测试 |
+| [05-storageclass-troubleshooting.md](structural-04-storage/05-storageclass-troubleshooting.md) | StorageClass 配置与动态供给故障排查 | StorageClass 参数、volumeBindingMode、拓扑约束、扩容、性能等级 |
 
 ### 05-workloads（工作负载）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-pod-troubleshooting.md](05-workloads/01-pod-troubleshooting.md) | Pod 故障排查 | Pod Pending/CrashLoopBackOff/OOMKilled、镜像拉取失败 |
-| [02-deployment-troubleshooting.md](05-workloads/02-deployment-troubleshooting.md) | Deployment 故障排查 | 滚动更新卡住、副本数不足、回滚问题 |
-| [03-statefulset-troubleshooting.md](05-workloads/03-statefulset-troubleshooting.md) | StatefulSet 故障排查 | 有序部署问题、PVC 绑定失败、网络标识异常 |
-| [04-daemonset-troubleshooting.md](05-workloads/04-daemonset-troubleshooting.md) | DaemonSet 故障排查 | 节点污点、Pod 未调度、系统组件问题 |
-| [05-job-cronjob-troubleshooting.md](05-workloads/05-job-cronjob-troubleshooting.md) | Job/CronJob 故障排查 | 任务失败、定时任务不触发、并行执行问题 |
-| [06-configmap-secret-troubleshooting.md](05-workloads/06-configmap-secret-troubleshooting.md) | ConfigMap/Secret 故障排查 | 配置注入失败、热更新问题、编码问题 |
+| [01-pod-troubleshooting.md](structural-05-workloads/01-pod-troubleshooting.md) | Pod 故障排查 | Pod Pending/CrashLoopBackOff/OOMKilled、镜像拉取失败 |
+| [02-deployment-troubleshooting.md](structural-05-workloads/02-deployment-troubleshooting.md) | Deployment 故障排查 | 滚动更新卡住、副本数不足、回滚问题 |
+| [03-statefulset-troubleshooting.md](structural-05-workloads/03-statefulset-troubleshooting.md) | StatefulSet 故障排查 | 有序部署问题、PVC 绑定失败、网络标识异常 |
+| [04-daemonset-troubleshooting.md](structural-05-workloads/04-daemonset-troubleshooting.md) | DaemonSet 故障排查 | 节点污点、Pod 未调度、系统组件问题 |
+| [05-job-cronjob-troubleshooting.md](structural-05-workloads/05-job-cronjob-troubleshooting.md) | Job/CronJob 故障排查 | 任务失败、定时任务不触发、并行执行问题 |
+| [06-configmap-secret-troubleshooting.md](structural-05-workloads/06-configmap-secret-troubleshooting.md) | ConfigMap/Secret 故障排查 | 配置注入失败、热更新问题、编码问题 |
 
 ### 06-security-auth（安全与认证）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-rbac-troubleshooting.md](06-security-auth/01-rbac-troubleshooting.md) | RBAC 与认证故障排查 | 权限不足、认证失败、ServiceAccount 问题 |
-| [02-certificate-troubleshooting.md](06-security-auth/02-certificate-troubleshooting.md) | 证书故障排查 | 证书过期、CA 不信任、TLS 握手失败、kubeconfig 失效 |
-| [03-pod-security-troubleshooting.md](06-security-auth/03-pod-security-troubleshooting.md) | Pod 安全故障排查 | PSA 策略拒绝、SecurityContext 问题、权限不足 |
-| [04-audit-logging-troubleshooting.md](06-security-auth/04-audit-logging-troubleshooting.md) | 审计日志故障排查 | 审计日志配置、Webhook 发送失败、日志分析、敏感信息保护 |
+| [01-rbac-troubleshooting.md](structural-06-security-auth/01-rbac-troubleshooting.md) | RBAC 与认证故障排查 | 权限不足、认证失败、ServiceAccount 问题 |
+| [02-certificate-troubleshooting.md](structural-06-security-auth/02-certificate-troubleshooting.md) | 证书故障排查 | 证书过期、CA 不信任、TLS 握手失败、kubeconfig 失效 |
+| [03-pod-security-troubleshooting.md](structural-06-security-auth/03-pod-security-troubleshooting.md) | Pod 安全故障排查 | PSA 策略拒绝、SecurityContext 问题、权限不足 |
+| [04-audit-logging-troubleshooting.md](structural-06-security-auth/04-audit-logging-troubleshooting.md) | 审计日志故障排查 | 审计日志配置、Webhook 发送失败、日志分析、敏感信息保护 |
 
 ### 07-resources-scheduling（资源与调度）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-resources-quota-troubleshooting.md](07-resources-scheduling/01-resources-quota-troubleshooting.md) | 资源与配额故障排查 | 资源配额超限、OOM、调度失败 |
-| [02-autoscaling-troubleshooting.md](07-resources-scheduling/02-autoscaling-troubleshooting.md) | HPA/VPA 自动扩缩容故障排查 | 自动扩缩不生效、metrics-server 问题、扩缩容振荡 |
-| [03-cluster-autoscaler-troubleshooting.md](07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md) | Cluster Autoscaler 故障排查 | 节点不扩容/不缩容、云 API 错误、扩容延迟 |
-| [04-pdb-troubleshooting.md](07-resources-scheduling/04-pdb-troubleshooting.md) | PodDisruptionBudget 故障排查 | drain 卡住、缩容阻塞、PDB 配置问题 |
+| [01-resources-quota-troubleshooting.md](structural-07-resources-scheduling/01-resources-quota-troubleshooting.md) | 资源与配额故障排查 | 资源配额超限、OOM、调度失败 |
+| [02-autoscaling-troubleshooting.md](structural-07-resources-scheduling/02-autoscaling-troubleshooting.md) | HPA/VPA 自动扩缩容故障排查 | 自动扩缩不生效、metrics-server 问题、扩缩容振荡 |
+| [03-cluster-autoscaler-troubleshooting.md](structural-07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md) | Cluster Autoscaler 故障排查 | 节点不扩容/不缩容、云 API 错误、扩容延迟 |
+| [04-pdb-troubleshooting.md](structural-07-resources-scheduling/04-pdb-troubleshooting.md) | PodDisruptionBudget 故障排查 | drain 卡住、缩容阻塞、PDB 配置问题 |
 
 ### 08-cluster-operations（集群运维）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-cluster-maintenance-troubleshooting.md](08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | [[26-技能/01-集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] | 集群升级、节点维护、版本兼容 |
-| [02-logging-monitoring-troubleshooting.md](08-cluster-operations/02-logging-monitoring-troubleshooting.md) | 日志与监控故障排查 | 日志丢失、Prometheus 问题、告警问题、Grafana 异常 |
-| [03-helm-troubleshooting.md](08-cluster-operations/03-helm-troubleshooting.md) | Helm 部署故障排查 | Release 失败、模板错误、升级回滚问题 |
-| [04-ha-disaster-recovery-troubleshooting.md](08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面问题、etcd 恢复、备份还原、灾难恢复 |
-| [05-crd-operator-troubleshooting.md](08-cluster-operations/05-crd-operator-troubleshooting.md) | CRD/Operator 故障排查 | CRD 版本冲突、Operator 崩溃、Reconcile 失败、Finalizer 阻塞 |
-| [06-kustomize-troubleshooting.md](08-cluster-operations/06-kustomize-troubleshooting.md) | Kustomize 部署故障排查 | 构建失败、Patch 不生效、多环境配置、镜像替换问题 |
+| [01-cluster-maintenance-troubleshooting.md](structural-08-cluster-operations/01-cluster-maintenance-troubleshooting.md) | [[26-技能/01-集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] | 集群升级、节点维护、版本兼容 |
+| [02-logging-monitoring-troubleshooting.md](structural-08-cluster-operations/02-logging-monitoring-troubleshooting.md) | 日志与监控故障排查 | 日志丢失、Prometheus 问题、告警问题、Grafana 异常 |
+| [03-helm-troubleshooting.md](structural-08-cluster-operations/03-helm-troubleshooting.md) | Helm 部署故障排查 | Release 失败、模板错误、升级回滚问题 |
+| [04-ha-disaster-recovery-troubleshooting.md](structural-08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md) | 高可用与灾备故障排查 | 控制平面问题、etcd 恢复、备份还原、灾难恢复 |
+| [05-crd-operator-troubleshooting.md](structural-08-cluster-operations/05-crd-operator-troubleshooting.md) | CRD/Operator 故障排查 | CRD 版本冲突、Operator 崩溃、Reconcile 失败、Finalizer 阻塞 |
+| [06-kustomize-troubleshooting.md](structural-08-cluster-operations/06-kustomize-troubleshooting.md) | Kustomize 部署故障排查 | 构建失败、Patch 不生效、多环境配置、镜像替换问题 |
 
 ### 09-cloud-provider（云厂商集成）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-cloud-provider-integration-troubleshooting.md](09-cloud-provider/01-cloud-provider-integration-troubleshooting.md) | 云厂商集成故障排查 | CCM 认证失败、LoadBalancer 创建失败、云 API 限流 |
-| [02-multi-cloud-networking-troubleshooting.md](09-cloud-provider/02-multi-cloud-networking-troubleshooting.md) | 多云/混合云网络故障排查 | 跨云 VPC Peering、VPN 隧道、集群网格互联 |
-| [03-cloud-resource-quota-troubleshooting.md](09-cloud-provider/03-cloud-resource-quota-troubleshooting.md) | 云资源配额与 API 限流故障排查 | 配额耗尽、实例扩容失败、API Throttling |
+| [01-cloud-provider-integration-troubleshooting.md](structural-09-cloud-provider/01-cloud-provider-integration-troubleshooting.md) | 云厂商集成故障排查 | CCM 认证失败、LoadBalancer 创建失败、云 API 限流 |
+| [02-multi-cloud-networking-troubleshooting.md](structural-09-cloud-provider/02-multi-cloud-networking-troubleshooting.md) | 多云/混合云网络故障排查 | 跨云 VPC Peering、VPN 隧道、集群网格互联 |
+| [03-cloud-resource-quota-troubleshooting.md](structural-09-cloud-provider/03-cloud-resource-quota-troubleshooting.md) | 云资源配额与 API 限流故障排查 | 配额耗尽、实例扩容失败、API Throttling |
 
 ### 10-ai-ml-workloads（AI/ML 工作负载）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-ai-ml-workloads-troubleshooting.md](10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md) | AI/ML 工作负载通用故障排查 | GPU 调度、分布式训练、模型服务、数据处理 |
-| [02-kubeflow-troubleshooting.md](10-ai-ml-workloads/02-kubeflow-troubleshooting.md) | Kubeflow 平台故障排查 | Pipeline 失败、Katib 实验、KServe 推理、Notebook |
-| [03-mpi-operator-troubleshooting.md](10-ai-ml-workloads/03-mpi-operator-troubleshooting.md) | MPI Operator 与分布式训练故障排查 | MPIJob 启动、NCCL 通信、多节点 GPU 训练 |
+| [01-ai-ml-workloads-troubleshooting.md](structural-10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md) | AI/ML 工作负载通用故障排查 | GPU 调度、分布式训练、模型服务、数据处理 |
+| [02-kubeflow-troubleshooting.md](structural-10-ai-ml-workloads/02-kubeflow-troubleshooting.md) | Kubeflow 平台故障排查 | Pipeline 失败、Katib 实验、KServe 推理、Notebook |
+| [03-mpi-operator-troubleshooting.md](structural-10-ai-ml-workloads/03-mpi-operator-troubleshooting.md) | MPI Operator 与分布式训练故障排查 | MPIJob 启动、NCCL 通信、多节点 GPU 训练 |
 
 ### 11-gitops-devops（GitOps 与 DevOps）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-gitops-devops-troubleshooting.md](11-gitops-devops/01-gitops-devops-troubleshooting.md) | GitOps/DevOps 通用故障排查 | ArgoCD/Flux 同步、CI/CD 流水线、Secret 管理 |
-| [02-tekton-troubleshooting.md](11-gitops-devops/02-tekton-troubleshooting.md) | Tekton CI/CD 流水线故障排查 | PipelineRun 失败、Workspace 问题、触发器异常 |
-| [03-flux-image-automation-troubleshooting.md](11-gitops-devops/03-flux-image-automation-troubleshooting.md) | Flux 镜像自动化故障排查 | 镜像扫描失败、策略不匹配、Git 自动提交异常 |
+| [01-gitops-devops-troubleshooting.md](structural-11-gitops-devops/01-gitops-devops-troubleshooting.md) | GitOps/DevOps 通用故障排查 | ArgoCD/Flux 同步、CI/CD 流水线、Secret 管理 |
+| [02-tekton-troubleshooting.md](structural-11-gitops-devops/02-tekton-troubleshooting.md) | Tekton CI/CD 流水线故障排查 | PipelineRun 失败、Workspace 问题、触发器异常 |
+| [03-flux-image-automation-troubleshooting.md](structural-11-gitops-devops/03-flux-image-automation-troubleshooting.md) | Flux 镜像自动化故障排查 | 镜像扫描失败、策略不匹配、Git 自动提交异常 |
 
 ### 12-monitoring-01-observability-architecture-overview（可观测性）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-monitoring-observability-troubleshooting.md](12-monitoring-observability/01-monitoring-observability-troubleshooting.md) | 可观测性通用故障排查 | Prometheus/Grafana/Loki/Jaeger/AlertManager |
-| [02-opentelemetry-troubleshooting.md](12-monitoring-observability/02-opentelemetry-troubleshooting.md) | OpenTelemetry Collector 故障排查 | OTLP 接收/导出失败、采样、数据丢失 |
-| [03-ebpf-observability-troubleshooting.md](12-monitoring-observability/03-ebpf-observability-troubleshooting.md) | eBPF 可观测性故障排查 | Cilium Hubble、Tetragon、Pixie、eBPF 加载 |
-| [04-finops-cost-optimization-troubleshooting.md](12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md) | FinOps 成本优化故障排查 | 成本飙升、闲置资源、Spot 优化、预算告警 |
+| [01-monitoring-observability-troubleshooting.md](structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md) | 可观测性通用故障排查 | Prometheus/Grafana/Loki/Jaeger/AlertManager |
+| [02-opentelemetry-troubleshooting.md](structural-12-monitoring-observability/02-opentelemetry-troubleshooting.md) | OpenTelemetry Collector 故障排查 | OTLP 接收/导出失败、采样、数据丢失 |
+| [03-ebpf-observability-troubleshooting.md](structural-12-monitoring-observability/03-ebpf-observability-troubleshooting.md) | eBPF 可观测性故障排查 | Cilium Hubble、Tetragon、Pixie、eBPF 加载 |
+| [04-finops-cost-optimization-troubleshooting.md](structural-12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md) | FinOps 成本优化故障排查 | 成本飙升、闲置资源、Spot 优化、预算告警 |
 
 ---
 
@@ -487,105 +487,105 @@ prerequisites:
 
 ### 01 Control Plane
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md|01-apiserver-troubleshooting]]
 - [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|03-scheduler-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md|04-controller-manager-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/06-apf-troubleshooting.md|06-apf-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/07-control-plane-security-troubleshooting.md|07-control-plane-security-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/08-control-plane-performance-troubleshooting.md|08-control-plane-performance-troubleshooting]]
 
 ### 02 Node Components
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|01-kubelet-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/02-kube-proxy-troubleshooting.md|02-kube-proxy-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting.md|03-container-runtime-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/04-node-troubleshooting.md|04-node-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/05-image-registry-troubleshooting.md|05-image-registry-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-02-node-components/06-gpu-device-plugin-troubleshooting.md|06-gpu-device-plugin-troubleshooting]]
 
 ### 03 Networking
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|02-dns-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|03-service-ingress-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md|05-service-mesh-istio-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
 
 ### 04 Storage
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|01-pv-pvc-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting.md|02-csi-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/03-snapshot-backup-troubleshooting.md|03-snapshot-backup-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/04-storage-performance-troubleshooting.md|04-storage-performance-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting.md|05-storageclass-troubleshooting]]
 
 ### 05 Workloads
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/04-daemonset-troubleshooting.md|04-daemonset-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
 
 ### 06 Security Auth
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/03-pod-security-troubleshooting.md|03-pod-security-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
 
 ### 07 Resources Scheduling
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/01-resources-quota-troubleshooting.md|01-resources-quota-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/02-autoscaling-troubleshooting.md|02-autoscaling-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|03-cluster-autoscaler-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/04-pdb-troubleshooting.md|04-pdb-troubleshooting]]
 
 ### 08 Cluster Operations
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/01-cluster-maintenance-troubleshooting.md|01-cluster-maintenance-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/02-logging-monitoring-troubleshooting.md|02-logging-monitoring-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|04-ha-disaster-recovery-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/05-crd-operator-troubleshooting.md|05-crd-operator-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/06-kustomize-troubleshooting.md|06-kustomize-troubleshooting]]
 
 ### 09 Cloud Provider
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-09-cloud-provider/01-cloud-provider-integration-troubleshooting.md|01-cloud-provider-integration-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-09-cloud-provider/02-multi-cloud-networking-troubleshooting.md|02-multi-cloud-networking-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-09-cloud-provider/03-cloud-resource-quota-troubleshooting.md|03-cloud-resource-quota-troubleshooting]]
 
 ### 09 Command Output
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[19-故障诊断/04-高级排障/structural-09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
+- [[19-故障诊断/04-高级排障/structural-09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
 
 ### 10 Ai Ml Workloads
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|01-ai-ml-workloads-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|02-kubeflow-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|03-mpi-operator-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|01-ai-ml-workloads-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/02-kubeflow-troubleshooting.md|02-kubeflow-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|03-mpi-operator-troubleshooting]]
 
 ### 11 Gitops Devops
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
 
 ### 12 Monitoring Observability
 
-- [[37-归档/troubleshooting-diagnostics/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
-- [[37-归档/troubleshooting-diagnostics/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
 
 
 

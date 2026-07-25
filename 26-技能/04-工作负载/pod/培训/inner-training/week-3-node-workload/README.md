@@ -383,14 +383,14 @@ Pod Pending 通常有两个原因：一是没有节点满足调度条件（资�
 
 ## 延伸阅读
 
-- [K8s 架构与组件深入](../../集群基础/02-core-components-deep-dive.md)
+- [K8s 架构与组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 - [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
-- [Pod 生命周期事件](../../工作负载/11-pod-lifecycle-events.md)
-- [HPA/VPA 自动伸缩](../../工作负载/21-hpa-vpa-autoscaling.md)
-- [节点 NotReady 诊断](../../故障诊断/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
-- [集群自动伸缩排障](../../故障诊断/28-cluster-autoscaler-troubleshooting.md)
+- [Pod 生命周期事件](../../../%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E4%BA%8B%E4%BB%B6/11-pod-lifecycle-events.md)
+- [HPA/VPA 自动伸缩](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/21-hpa-vpa-autoscaling.md)
+- [节点 NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
+- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
+- [集群自动伸缩排障](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/28-cluster-autoscaler-troubleshooting.md)
 
 ## Related
 

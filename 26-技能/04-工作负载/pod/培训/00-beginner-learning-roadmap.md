@@ -95,7 +95,7 @@ authors:
 | W1 | [云原生演进故事](beginner-guides/01-cloud-native-evolution-story.md) | [本地环境搭建](beginner-guides/02-local-lab-environment.md) | Docker 基础（镜像/容器/Dockerfile） | 实践：本地跑第一个容器 |
 | W2 | Linux 基础命令（文件/进程/网络） | 实践：在容器里玩 Linux | Git 基础（clone/add/commit/push） | 实践：把代码推到 GitHub |
 | W3 | [K8s 是什么](fundamentals/01-what-is-[[Kubernetes|kubernetes]].md) | [Pod 基础](fundamentals/02-pod-basics.md) | 实践：本地 kind 集群跑第一个 Pod | kubectl 基础命令练习 |
-| W4 | [Deployment 基础](fundamentals/03-deployment-basics.md) | [Service 基础](fundamentals/04-service-basics.md) | 实践：部署一个 Nginx 并暴露服务 | [Ingress 基础](fundamentals/05-ingress-basics.md) |
+| W4 | [Deployment 基础](fundamentals/03-deployment-basics.md) | [Service 基础](../../../05-%E7%BD%91%E7%BB%9C/service/%E5%9F%B9%E8%AE%AD/04-service-basics.md) | 实践：部署一个 Nginx 并暴露服务 | [Ingress 基础](../../../05-%E7%BD%91%E7%BB%9C/ingress/%E5%9F%B9%E8%AE%AD/05-ingress-basics.md) |
 
 **阶段检查点**: 能独立在本地 kind 集群部署一个可访问的 Nginx 网站
 
@@ -103,12 +103,12 @@ authors:
 
 | 周次 | 重点内容 |
 |------|---------|
-| W5 | [ConfigMap & Secret](fundamentals/06-configmap-secret.md) + 实践：配置外置化 |
-| W6 | [Namespace & 资源配额](fundamentals/07-namespace-resource-quota.md) + 多租户模拟 |
-| W7 | [PV & PVC 基础](fundamentals/08-pv-pvc-basics.md) + 实践：给 Nginx 加持久化日志 |
-| W8 | [HPA 基础](fundamentals/09-hpa-basics.md) + [健康检查](fundamentals/10-health-check.md) |
-| W9 | [Job & CronJob](fundamentals/11-job-cronjob.md) + [DaemonSet](fundamentals/13-daemonset-basics.md) |
-| W10 | [StatefulSet](fundamentals/14-statefulset-basics.md) + [调度基础](fundamentals/15-scheduling-basics.md) |
+| W5 | [ConfigMap & Secret](06-configmap-secret.md) + 实践：配置外置化 |
+| W6 | [Namespace & 资源配额](../../../07-%E5%AE%89%E5%85%A8/resource-quota/%E5%9F%B9%E8%AE%AD/07-namespace-resource-quota.md) + 多租户模拟 |
+| W7 | [PV & PVC 基础](../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/08-pv-pvc-basics.md) + 实践：给 Nginx 加持久化日志 |
+| W8 | [HPA 基础](../../hpa-vpa/%E5%9F%B9%E8%AE%AD/09-hpa-basics.md) + [健康检查](10-health-check.md) |
+| W9 | [Job & CronJob](../../job-cronjob/%E5%9F%B9%E8%AE%AD/11-job-cronjob.md) + [DaemonSet](../../daemonset/%E5%9F%B9%E8%AE%AD/13-daemonset-basics.md) |
+| W10 | [StatefulSet](../../statefulset/%E5%9F%B9%E8%AE%AD/14-statefulset-basics.md) + [调度基础](../../../02-%E6%8E%A7%E5%88%B6%E9%9D%A2/scheduler/%E5%9F%B9%E8%AE%AD/15-scheduling-basics.md) |
 
 **阶段检查点**: 能画出 K8s 核心对象的关系图（Pod → Deployment → Service → Ingress → PV）
 
@@ -272,7 +272,7 @@ authors:
 | 概念类比词典 | [resources/analogy-dictionary.md](resources/analogy-dictionary.md) | 用生活化语言理解抽象概念 |
 | 命令速查表 | [public-training/one-month/resources/commands-cheatsheet.md](public-training/one-month/resources/commands-cheatsheet.md) | 日常命令快速查找 |
 | 知识图谱 | [public-training/one-month/resources/knowledge-map.md](public-training/one-month/resources/knowledge-map.md) | 全局知识导航 |
-| 术语表 | [../../系统基础/topic-dictionary/k8s-glossary.md](../../系统基础/知识字典/k8s-glossary.md) | 不懂就查 |
+| 术语表 | [../../系统基础/topic-dictionary/k8s-glossary.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/k8s-glossary.md) | 不懂就查 |
 | YAML 参考 | [../../清单模式/01-yaml-reference/](../../清单模式/YAML参考/) | 写 manifest 时参考 |
 | 故障排查 | [../topic-skills/](../技能体系/) | 遇到问题来这找 |
 

@@ -68,7 +68,7 @@ prerequisites:
 ### 故障排查与维护
 
 - etcd 故障排查 (etcd Troubleshooting)
-- [[19-故障诊断/04-高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
 - [[19-故障诊断/04-高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
 - [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常故障树分析 (etcd FTA)]]
 
@@ -128,16 +128,16 @@ prerequisites:
 
 ### 控制平面故障排查
 
-- [[19-故障诊断/04-高级排障/01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/08-control-plane-performance-troubleshooting.md|控制平面性能瓶颈分析与优化指南]]
-- [[19-故障诊断/04-高级排障/01-control-plane/09-control-plane-ha-troubleshooting.md|控制平面高可用故障处理指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md|API Server 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/08-control-plane-performance-troubleshooting.md|控制平面性能瓶颈分析与优化指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/09-control-plane-ha-troubleshooting.md|控制平面高可用故障处理指南]]
 
 ### 网络与存储故障排查
 
-- [[19-故障诊断/04-高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 
 ### 技能卡片
 
@@ -228,12 +228,12 @@ prerequisites:
 - [[18-云厂商/01-阿里云/公有云-ACK/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
 - [[18-云厂商/05-腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[18-云厂商/06-华为云CCE/huawei-cce-overview.md|华为云 CCE (Cloud Container Engine) 企业级深度实战指南]]
-- [[18-云厂商/08-其他云/UCloud-UK8S/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
-- [[18-云厂商/08-其他云/IBM-IKS/ibm-iks-overview.md|IBM IKS (IBM Cloud Kubernetes Service) 概述]]
-- [[18-云厂商/08-其他云/Oracle-OKE/oracle-oke-overview.md|Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析]]
-- [[18-云厂商/08-其他云/火山引擎-VEK/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
-- [[18-云厂商/08-其他云/天翼云-TKE/ctyun-tke-overview.md|天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述]]
-- [[18-云厂商/08-其他云/移动云-CKE/ecloud-cke-overview.md|移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南]]
+- [[18-云厂商/08-其他云/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
+- [[18-云厂商/08-其他云/ibm-iks-overview.md|IBM IKS (IBM Cloud Kubernetes Service) 概述]]
+- [[18-云厂商/08-其他云/oracle-oke-overview.md|Oracle OKE (Oracle Container Engine for Kubernetes) 企业级深度解析]]
+- [[18-云厂商/08-其他云/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
+- [[18-云厂商/08-其他云/ctyun-tke-overview.md|天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述]]
+- [[18-云厂商/08-其他云/ecloud-cke-overview.md|移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南]]
 - [[18-云厂商/01-阿里云/专有云-Apsara/alicloud-apsara-ack-overview.md|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
 
 ## 生产运维

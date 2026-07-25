@@ -82,8 +82,8 @@ cross_refs:
 ## 相关文档交叉引用
 
 ### 🔗 关联故障排查文档
-- **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 事件传输网络问题
-- **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 事件系统监控告警
+- **[25-网络连通性故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/25-network-connectivity-troubleshooting.md)** - 事件传输网络问题
+- **[30-监控告警故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/30-monitoring-alerting-troubleshooting.md)** - 事件系统监控告警
 - **[36-[[Helm|Helm]] Chart故障排查](./36-helm-chart-troubleshooting.md)** - 事件系统部署问题
 - **[37-多集群管理故障排查](./37-multi-cluster-management-troubleshooting.md)** - 跨集群事件路由
 

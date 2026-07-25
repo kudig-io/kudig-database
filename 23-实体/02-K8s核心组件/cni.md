@@ -98,7 +98,7 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 - CNI 架构与核心原理
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
 - 03-cilium-cni-architecture
-- [[19-故障诊断/04-高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
 - cni
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8

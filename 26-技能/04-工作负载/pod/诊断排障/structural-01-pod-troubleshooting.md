@@ -2121,10 +2121,10 @@ kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
 
 ## See Also
 
-- [[19-故障诊断/04-高级排障/05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
-- [[19-故障诊断/04-高级排障/05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[19-故障诊断/04-高级排障/05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
-- [[19-故障诊断/04-高级排障/05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
 
 ```
 

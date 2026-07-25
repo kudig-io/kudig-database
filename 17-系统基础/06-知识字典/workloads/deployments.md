@@ -263,11 +263,11 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 ```
 ## 交叉引用
 
-- [Deployment 生产模式详解](../../工作负载/02-deployment-production-patterns.md)
-- [工作负载概览与架构](../../工作负载/01-workload-overview-architecture.md)
-- [工作负载监控与告警](../../工作负载/06-workload-monitoring-alerting.md)
-- [工作负载故障排查手册](../../工作负载/07-workload-troubleshooting-handbook.md)
-- [Deployment 故障树分析 (FTA)](../../故障诊断/FTA故障树/list/deployment-fta.md)
+- [Deployment 生产模式详解](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
+- [工作负载概览与架构](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-workload-overview-architecture.md)
+- [工作负载监控与告警](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/06-workload-monitoring-alerting.md)
+- [工作负载故障排查手册](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/07-workload-troubleshooting-handbook.md)
+- [Deployment 故障树分析 (FTA)](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/deployment-fta.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 
 ## 参考链接

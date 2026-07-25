@@ -2633,7 +2633,7 @@ EOF
 
 ## 相关文档
 - [etcd 运维最佳实践](../集群基础/05-etcd-operations.md)
-- [控制平面故障排查](../故障诊断/02-control-plane-etcd-troubleshooting.md)
+- [控制平面故障排查](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/02-control-plane-etcd-troubleshooting.md)
 ```
 
 ### 7.2 Blameless Postmortem 原则

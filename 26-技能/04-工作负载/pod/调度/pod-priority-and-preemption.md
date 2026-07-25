@@ -210,10 +210,10 @@ kubectl describe resourcequota -n <namespace> | grep -i priority
 ```
 ## 交叉引用
 
-- [Kubernetes 调度器](./kubernetes-scheduler.md) — 调度队列排序受优先级影响
-- [节点压力驱逐](./node-pressure-eviction.md) — kubelet 驱逐顺序同样考虑 Pod 优先级
-- [API 发起驱逐](./api-initiated-eviction.md) — API 驱逐与调度器抢占的区别
-- [污点与容忍度](./taints-and-tolerations.md) — 高优先级 Pod 仍需容忍节点污点
+- [Kubernetes 调度器](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/kubernetes-scheduler.md) — 调度队列排序受优先级影响
+- [节点压力驱逐](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/node-pressure-eviction.md) — kubelet 驱逐顺序同样考虑 Pod 优先级
+- [API 发起驱逐](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/api-initiated-eviction.md) — API 驱逐与调度器抢占的区别
+- [污点与容忍度](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/taints-and-tolerations.md) — 高优先级 Pod 仍需容忍节点污点
 
 ## 参考链接
 

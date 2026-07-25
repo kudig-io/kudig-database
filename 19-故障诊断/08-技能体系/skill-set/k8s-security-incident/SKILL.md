@@ -141,7 +141,7 @@ agent_execution_mode: L1-advisory
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../18-security-incident-response.md](../18-security-incident-response.md) |
+| 单文件完整版 | [../18-security-incident-response.md](../../18-security-incident-response.md) |
 
 ## Related
 

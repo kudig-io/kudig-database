@@ -135,7 +135,7 @@ ImagePullBackOff 和 ErrImagePull 是 [[Kubernetes|Kubernetes]] 中最常见的 
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../10-image-pull-failure.md](../10-image-pull-failure.md) |
+| 单文件完整版 | [../10-image-pull-failure.md](../../10-image-pull-failure.md) |
 
 ## Related
 

@@ -71,7 +71,7 @@ prerequisites:
 ### CSI 存储备份
 
 - CSI驱动集成与运维管理
-- [[19-故障诊断/04-高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
 
 ### YAML 配置
 
@@ -88,20 +88,20 @@ prerequisites:
 
 - [[10-平台工程/06-代码分析/cluster-create/07-etcd.md|etcd 集群初始化细节]]
 - [[10-平台工程/06-代码分析/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
-- [[19-故障诊断/04-高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
 - [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常 FTA 树]]
 
 ### 存储相关
 
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
-- [[19-故障诊断/04-高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
-- [[19-故障诊断/04-高级排障/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
 
 ### 故障排查
 
 - [[19-故障诊断/03-基础设施排障/31-backup-restore-troubleshooting.md|备份恢复故障排查 (Backup and Restore Troubleshooting)]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
-- [[19-故障诊断/04-高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
 
 ### FTA 故障树
 

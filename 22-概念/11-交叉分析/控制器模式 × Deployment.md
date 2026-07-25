@@ -121,6 +121,6 @@ Deployment Controller（有状态策略层）
 - [[22-概念/11-交叉分析/控制器模式 × Operator 模式.md|控制器模式 × Operator 模式]]
 - [[22-概念/11-交叉分析/控制器模式 × 可观测性.md|控制器模式 × 可观测性]]
 
-- [[10-平台工程/06-代码分析/deployment-create/README.md|Deployment Create — [[entities/kubernetes.md|Kubernetes]] Deployment 控制器源码分析]]
+- [[10-平台工程/06-代码分析/deployment-create/README.md|Deployment Create — [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Deployment 控制器源码分析]]
 
 <!-- risk-assessed -->

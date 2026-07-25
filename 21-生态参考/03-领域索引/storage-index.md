@@ -87,11 +87,11 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/04-高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
-- [[19-故障诊断/04-高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
-- [[19-故障诊断/04-高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
-- [[19-故障诊断/04-高级排障/04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/04-storage-performance-troubleshooting.md|存储 I/O 性能故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting.md|StorageClass 配置与动态供给故障排查指南]]
 
 ### K8s 事件
 

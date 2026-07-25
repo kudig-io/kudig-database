@@ -767,15 +767,15 @@ kubectl scale sts <name> --replicas=<n>
 ### 相关文档
 
 - [Pod 故障排查](./01-pod-troubleshooting.md)
-- [PV/PVC 故障排查](../04-storage/01-pv-pvc-troubleshooting.md)
-- [DNS 故障排查](../03-networking/02-dns-troubleshooting.md)
-- [调度故障排查](../01-control-plane/03-scheduler-troubleshooting.md)
+- [PV/PVC 故障排查](../structural-04-storage/01-pv-pvc-troubleshooting.md)
+- [DNS 故障排查](../structural-03-networking/02-dns-troubleshooting.md)
+- [调度故障排查](../structural-01-control-plane/03-scheduler-troubleshooting.md)
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/openkruise-index|OpenKruise 全局索引]]
-- [[21-生态参考/topic-index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/openkruise-index|OpenKruise 全局索引]]
+- [[21-生态参考/03-领域索引/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

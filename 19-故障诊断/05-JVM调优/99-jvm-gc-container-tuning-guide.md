@@ -678,11 +678,11 @@ kubectl exec deployment/spring-app -- \
 <!-- chunk: 🔗 相关文档 -->
 ## 🔗 相关文档
 
-- [Java 容器化最佳实践](../容器运行时/12-java-containerization-guide.md) — 容器构建
-- [Spring Boot on K8s](../工作负载/99-spring-boot-kubernetes-guide.md) — Spring Boot 部署
-- [Java 可观测性](../可观测性/99-java-observability-kubernetes-guide.md) — 监控告警
-- [OOM 诊断](../故障诊断/07-oom-memory-diagnosis.md) — 内存问题诊断
-- [性能瓶颈排查](../故障诊断/33-performance-bottleneck-troubleshooting.md) — 性能分析
+- [Java 容器化最佳实践](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — 容器构建
+- [Spring Boot on K8s](../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-spring-boot-kubernetes-guide.md) — Spring Boot 部署
+- [Java 可观测性](../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/99-java-observability-kubernetes-guide.md) — 监控告警
+- [OOM 诊断](../01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/07-oom-memory-diagnosis.md) — 内存问题诊断
+- [性能瓶颈排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/33-performance-bottleneck-troubleshooting.md) — 性能分析
 
 ---
 

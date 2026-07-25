@@ -25,7 +25,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 relationships:
-- target: '[[最佳实践/scenarios/troubleshooting.md]]'
+- target: '[[20-最佳实践/07-scenarios/troubleshooting.md]]'
   type: related_to
 ---
 
@@ -71,7 +71,7 @@ See `log.md` for full list. These are mostly MOC/README/evolution pages and edge
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[最佳实践/scenarios/troubleshooting.md|troubleshooting]]-diagnostics/SUMMARY.md|SUMMARY]]
+- [[20-最佳实践/07-scenarios/troubleshooting.md|troubleshooting]]-diagnostics/SUMMARY.md|SUMMARY]]
 
 
 <!-- risk-assessed -->

@@ -517,18 +517,18 @@ knowledge_refs:
 
 ## Related
 
-- [[26-技能/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.28|calico v3.28 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.29|calico v3.29 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.26|calico v3.26 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.22|calico v3.22 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.23|calico v3.23 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.27|calico v3.27 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.30|calico v3.30 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.24|calico v3.24 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.25|calico v3.25 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.31|calico v3.31 Release Notes]]
-- [[21-生态参考/_archived-release-notes/networking/calico/RELEASE-NOTES-3.21|calico v3.21 Release Notes]]
+- [[26-技能/04-工作负载/pod/方法论/agent/Agent Orchestration Patterns|Agent Orchestration Patterns for FTA]] — Cross-reference
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.28|calico v3.28 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.29|calico v3.29 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.26|calico v3.26 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.22|calico v3.22 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.23|calico v3.23 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.27|calico v3.27 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.30|calico v3.30 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.24|calico v3.24 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.25|calico v3.25 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.31|calico v3.31 Release Notes]]
+- [[37-归档/release-notes/networking/calico/RELEASE-NOTES-3.21|calico v3.21 Release Notes]]
 
 
 <!-- risk-assessed -->

@@ -559,7 +559,7 @@ Prometheus 存储 = 时间序列数 × 每样本字节 × 采样频率 × 保留
 - [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - [[09-可观测性/01-总览/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]]
 - [[09-可观测性/06-SLO-SLI/99-slo-operations-guide.md|SLO 运维指南]]
-- [[09-可观测性/06-SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[09-可观测性/06-SLO-SLI/05-slo-implementation-guide.md|SLO 设定与实施指南]]
 - [[13-生产运维/03-事件响应/03-on-call-playbook.md|值班手册与告警响应规范]]
 - [[13-生产运维/03-事件响应/04-incident-response-template.md|事故响应模板与流程规范]]
 - 告警质量治理与告警疲劳缓解（待补充）

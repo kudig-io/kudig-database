@@ -100,7 +100,7 @@ related_topics:
 - cleanup
 - security-delete
 - force-delete
-domain_link: '[Networking](../网络/README.md)'
+domain_link: '[Networking](../../../05-%E7%BD%91%E7%BB%9C/README.md)'
 topic_link: '[Cluster Delete Overview](./01-overview.md)'
 authors:
 - name: KUDIG Team

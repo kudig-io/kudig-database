@@ -62,7 +62,7 @@ prerequisites:
 | `journal/` | 1 个 | 2 | 日志 |
 | `projects/` | 1 个 | 1 | 项目 |
 | `corpus-config/` | 1 个 | 2 | 语料配置 |
-| 根目录 .md | — | 9 | AGENTS.md, [[平台工程/代码分析/deployment-create/README.md|README]].md 等 |
+| 根目录 .md | — | 9 | AGENTS.md, [[10-平台工程/06-代码分析/deployment-create/README.md|README]].md 等 |
 
 ### 1.2 核心问题
 

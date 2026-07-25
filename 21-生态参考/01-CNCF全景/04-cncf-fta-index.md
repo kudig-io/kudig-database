@@ -91,20 +91,20 @@ authors:
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **Flannel** | [flannel-fta.md](../故障诊断/FTA故障树/list/flannel-fta.md) | [08-flannel-troubleshooting](../故障诊断/高级排障/03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
-| **Calico** | [calico-fta.md](../故障诊断/FTA故障树/list/calico-fta.md) | [05-calico-troubleshooting](../故障诊断/高级排障/03-networking/05-calico-troubleshooting.md) | [[23-实体/02-K8s核心组件/networkpolicy.md|NetworkPolicy]] |
-| **[[Cilium|Cilium]]** | [cilium-fta.md](../故障诊断/FTA故障树/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../网络/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
+| **Flannel** | [flannel-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/flannel-fta.md) | [08-flannel-troubleshooting](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
+| **Calico** | [calico-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/calico-fta.md) | [05-calico-troubleshooting](../故障诊断/高级排障/03-networking/05-calico-troubleshooting.md) | [[23-实体/02-K8s核心组件/networkpolicy.md|NetworkPolicy]] |
+| **[[Cilium|Cilium]]** | [cilium-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
 | **[[Antrea|Antrea]]** | (待补充) | - | - |
 | **Kube-OVN** | (待补充) | - | - |
-| **CNI 通用** | [01-cni-troubleshooting.md](../故障诊断/高级排障/03-networking/01-cni-troubleshooting.md) | - | CNI 配置/插件 |
+| **CNI 通用** | [01-cni-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/01-cni-troubleshooting.md) | - | CNI 配置/插件 |
 
 ### 2.2 网络组件
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **CoreDNS** | [dns-fta.md](../故障诊断/FTA故障树/list/dns-fta.md) | [02-dns-troubleshooting](../故障诊断/高级排障/03-networking/02-dns-troubleshooting.md) | DNS 解析 |
-| **Gateway API** | [gateway-api-fta.md](../故障诊断/FTA故障树/list/gateway-api-fta.md) | - | HTTP 路由 |
-| **Ingress** | [03-service-ingress-troubleshooting.md](../故障诊断/高级排障/03-networking/03-service-ingress-troubleshooting.md) | - | Service/Ingress |
+| **CoreDNS** | [dns-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/dns-fta.md) | [02-dns-troubleshooting](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/02-dns-troubleshooting.md) | DNS 解析 |
+| **Gateway API** | [gateway-api-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/gateway-api-fta.md) | - | HTTP 路由 |
+| **Ingress** | [03-service-ingress-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/03-service-ingress-troubleshooting.md) | - | Service/Ingress |
 
 ### 2.3 多集群网络
 
@@ -119,9 +119,9 @@ authors:
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **Rook/Ceph** | [csi-fta.md](../故障诊断/FTA故障树/list/csi-fta.md) | [存储故障排查](../故障诊断/高级排障/04-storage/01-storage-troubleshooting.md) | OSD/PG |
+| **Rook/Ceph** | [csi-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/csi-fta.md) | [存储故障排查](../故障诊断/高级排障/04-storage/01-storage-troubleshooting.md) | OSD/PG |
 | **Longhorn** | (待补充) | - | 副本/快照 |
-| **CSI** | [csi-fta.md](../故障诊断/FTA故障树/list/csi-fta.md) | [CSI 故障排查](../故障诊断/高级排障/04-storage/02-csi-troubleshooting.md) | 驱动/挂载 |
+| **CSI** | [csi-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/csi-fta.md) | [CSI 故障排查](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-04-storage/02-csi-troubleshooting.md) | 驱动/挂载 |
 | **OpenEBS** | (待补充) | - | - |
 
 ---
@@ -159,7 +159,7 @@ authors:
 
 | 项目 | FTA 文档 | 核心问题 |
 |:-----|:---------|:---------|
-| **cert-manager** | [certificate-fta.md](../故障诊断/FTA故障树/list/certificate-fta.md) | 证书续期 |
+| **cert-manager** | [certificate-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/certificate-fta.md) | 证书续期 |
 | **SPIFFE/SPIRE** | (待补充) | 身份认证 |
 | **OPA/Gatekeeper** | (待补充) | 策略执行 |
 | **Falco** | (待补充) | 运行时检测 |
@@ -172,9 +172,9 @@ authors:
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **API Server** | [apiserver-fta.md](../故障诊断/FTA故障树/list/apiserver-fta.md) | [API Server 排障](../故障诊断/高级排障/01-kubernetes-core/01-apiserver-troubleshooting.md) | 认证/授权 |
-| **etcd** | [etcd-fta.md](../故障诊断/FTA故障树/list/etcd-fta.md) | [etcd 故障排查](../故障诊断/高级排障/01-kubernetes-core/02-etcd-troubleshooting.md) | 共识/存储 |
-| **Controller Manager** | [controller-manager-fta.md](../故障诊断/FTA故障树/list/controller-manager-fta.md) | - | 控制器循环 |
+| **API Server** | [apiserver-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/apiserver-fta.md) | [API Server 排障](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-01-control-plane/01-apiserver-troubleshooting.md) | 认证/授权 |
+| **etcd** | [etcd-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/etcd-fta.md) | [etcd 故障排查](../故障诊断/高级排障/01-kubernetes-core/02-etcd-troubleshooting.md) | 共识/存储 |
+| **Controller Manager** | [controller-manager-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/controller-manager-fta.md) | - | 控制器循环 |
 | **Scheduler** | (待补充) | - | 调度决策 |
 | **Kubelet** | (待补充) | [Kubelet 故障排查](../故障诊断/高级排障/01-kubernetes-core/03-kubelet-troubleshooting.md) | 状态同步 |
 | **[[22-概念/15-运行时与系统/container-runtime.md|Container Runtime]]** | (待补充) | - | 容器启动 |
@@ -183,9 +183,9 @@ authors:
 
 | 项目 | FTA 文档 | 故障排查指南 | 核心问题 |
 |:-----|:---------|:-------------|:---------|
-| **Deployment** | [deployment-fta.md](../故障诊断/FTA故障树/list/deployment-fta.md) | [Workload 排障](../故障诊断/高级排障/02-workloads/01-deployment-rolling-troubleshooting.md) | 滚动更新 |
-| **DaemonSet** | [daemonset-fta.md](../故障诊断/FTA故障树/list/daemonset-fta.md) | - | 节点分布 |
-| **StatefulSet** | (待补充) | [StatefulSet 排障](../故障诊断/高级排障/02-workloads/03-statefulset-troubleshooting.md) | 持久标识 |
+| **Deployment** | [deployment-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/deployment-fta.md) | [Workload 排障](../故障诊断/高级排障/02-workloads/01-deployment-rolling-troubleshooting.md) | 滚动更新 |
+| **DaemonSet** | [daemonset-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/daemonset-fta.md) | - | 节点分布 |
+| **StatefulSet** | (待补充) | [StatefulSet 排障](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/03-statefulset-troubleshooting.md) | 持久标识 |
 | **Pod** | (待补充) | [Pod 故障排查](../故障诊断/高级排障/02-workloads/02-pod-lifecycle-troubleshooting.md) | 调度/启动 |
 | **Job/CronJob** | (待补充) | - | 执行失败 |
 
@@ -193,13 +193,13 @@ authors:
 
 | 项目 | FTA 文档 | 核心问题 |
 |:-----|:---------|:---------|
-| **Cluster Autoscaler** | [cluster-autoscaler-fta.md](../故障诊断/FTA故障树/list/cluster-autoscaler-fta.md) | 扩缩容 |
-| **GPU** | [gpu-fta.md](../故障诊断/FTA故障树/list/gpu-fta.md) | GPU 调度 |
-| **Operator/CRD** | [crd-operator-fta.md](../故障诊断/FTA故障树/list/crd-operator-fta.md) | CRD/Operator |
-| **Cloud Provider** | [cloud-provider-fta.md](../故障诊断/FTA故障树/list/cloud-provider-fta.md) | 云厂商集成 |
-| **Backup/Restore** | [backup-restore-fta.md](../故障诊断/FTA故障树/list/backup-restore-fta.md) | 备份恢复 |
-| **GitOps (Argo CD)** | gitops-argocd-fta.md](../故障诊断/FTA故障树/list/gitops-argocd-fta.md) | 同步失败 |
-| **集群升级** | [cluster-upgrade-fta.md](../故障诊断/FTA故障树/list/cluster-upgrade-fta.md) | 版本升级 |
+| **Cluster Autoscaler** | [cluster-autoscaler-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/cluster-autoscaler-fta.md) | 扩缩容 |
+| **GPU** | [gpu-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/gpu-fta.md) | GPU 调度 |
+| **Operator/CRD** | [crd-operator-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/crd-operator-fta.md) | CRD/Operator |
+| **Cloud Provider** | [cloud-provider-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/cloud-provider-fta.md) | 云厂商集成 |
+| **Backup/Restore** | [backup-restore-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/backup-restore-fta.md) | 备份恢复 |
+| **GitOps (Argo CD)** | gitops-argocd-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/gitops-argocd-fta.md) | 同步失败 |
+| **集群升级** | [cluster-upgrade-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/cluster-upgrade-fta.md) | 版本升级 |
 
 ---
 
@@ -296,9 +296,9 @@ flowchart TD
 
 ### 10.2 FTA 方法论
 
-- [FTA 方法论与 Agentic 实践](./fta-methodology-and-agentic-practices.md)
-- [FTA 故障树构建过程](./05-fta-construction-process.md)
-- [FTA 起源与演进](./01-fta-origin-and-evolution.md)
+- [FTA 方法论与 Agentic 实践](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/fta-methodology-and-agentic-practices.md)
+- [FTA 故障树构建过程](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/05-fta-construction-process.md)
+- [FTA 起源与演进](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/01-fta-origin-and-evolution.md)
 
 ### 10.3 CNCF 资源
 

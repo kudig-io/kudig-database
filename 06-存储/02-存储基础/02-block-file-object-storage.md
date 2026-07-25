@@ -673,7 +673,7 @@ chmod +x s3-benchmark_linux_amd64
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
 - [03-raid-storage-redundancy](./03-raid-storage-redundancy.md) - RAID 配置
-- K8s 存储架构](../存储/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件
+- K8s 存储架构](../01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件
 
 ## See Also
 

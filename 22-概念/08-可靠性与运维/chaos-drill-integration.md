@@ -197,7 +197,7 @@ chaosctl verify --experiment network-partition-az \
 ## 相关 Domain
 
 - [[12-可靠性/04-混沌工程/01-chaos-engineering-overview.md|01 chaos engineering overview]]
-- [[12-可靠性/02-灾难恢复/01-dr-scenarios-catalog.md|01 dr scenarios catalog]]
+- [[12-可靠性/02-灾难恢复/10-dr-scenarios-catalog.md|01 dr scenarios catalog]]
 - [[12-可靠性/07-性能测试/02-chaos-load-integration.md|02 chaos load integration]]
 
 ## 相关页面

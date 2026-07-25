@@ -21,5 +21,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[生态参考/topic-release-notes/MOC.md|Moc]]
+- [[21-生态参考/03-领域索引/MOC.md|Moc]]
 

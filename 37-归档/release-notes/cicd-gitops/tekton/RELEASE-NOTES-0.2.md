@@ -43,7 +43,7 @@ prerequisites:
 
 Source: [v0.2.0](https://github.com/tektoncd/pipeline/releases/tag/v0.2.0)
 
-# 🎉 Tekton Pipelines with Graphs; without [[系统基础/topic-dictionary/workloads/init-containers.md|init containers]]! 🎉
+# 🎉 Tekton Pipelines with Graphs; without [[17-系统基础/06-知识字典/workloads/init-containers.md|init containers]]! 🎉
 
 * [Docs @ v0.2.0](https://github.com/tektoncd/pipeline/tree/v0.2.0/docs#tekton-pipelines)
 * [Examples @ v0.2.0](https://github.com/tektoncd/pipeline/tree/v0.2.0/examples)

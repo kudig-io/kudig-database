@@ -79,7 +79,7 @@ We’ve continued to work on improving Velero’s restic integration. With this 
 
 #### Clone PVs When Cloning a Namespace
 
-Before version 1.2, you could clone a [[Kubernetes|Kubernetes]] namespace by backing it up and then restoring it to a different namespace in the same cluster by using the `--namespace-mappings` flag with the `velero restore create` command. However, in this scenario, Velero was unable to clone [[系统基础/topic-dictionary/storage/persistent-volumes.md|persistent volumes]] used by the namespace, leading to errors for users.
+Before version 1.2, you could clone a [[Kubernetes|Kubernetes]] namespace by backing it up and then restoring it to a different namespace in the same cluster by using the `--namespace-mappings` flag with the `velero restore create` command. However, in this scenario, Velero was unable to clone [[17-系统基础/06-知识字典/storage/persistent-volumes.md|persistent volumes]] used by the namespace, leading to errors for users.
 
 In version 1.2, Velero automatically detects when you are trying to clone an existing namespace, and clones the persistent volumes used by the namespace as well. This doesn’t require the user to specify any additional flags for the `velero restore create` command.  This change lets you fully achieve your goal of cloning namespaces using persistent storage within a cluster.
 

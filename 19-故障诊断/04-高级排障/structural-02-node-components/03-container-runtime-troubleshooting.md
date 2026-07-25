@@ -826,8 +826,8 @@ systemctl restart containerd
 
 ## Related
 
-- [[21-生态参考/topic-index/pod-index|Pod 知识图谱索引]]
-- [[21-生态参考/topic-index/node-index|Node 知识图谱索引]]
+- [[21-生态参考/03-领域索引/pod-index|Pod 知识图谱索引]]
+- [[21-生态参考/03-领域索引/node-index|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

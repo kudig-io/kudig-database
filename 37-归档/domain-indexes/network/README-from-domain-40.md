@@ -73,26 +73,26 @@ prerequisites:
 ## 📚 文档目录
 
 ### 🎯 基础理论与标准 (01-03)
-- **[01-云原生API网关架构总览](./01-api-gateway-architecture-overview.md)** - API 网关 vs Ingress 控制器 vs 服务网格网关；请求生命周期；控制平面/数据平面分离；CNCF 生态定位；产品选型决策树
-- **[02-Kubernetes Gateway API标准深度解析](./02-kubernetes-gateway-api-deep-dive.md)** - GatewayClass/Gateway/HTTPRoute/ReferenceGrant CRD 体系；角色模型；v1.0/v1.1 GA；一致性测试；各产品支持矩阵
-- **[03-API网关选型指南与对比矩阵](./03-api-gateway-selection-guide.md)** - 12+ 维度功能矩阵；场景决策框架；TCO 分析；迁移成本评估；国内企业采用趋势
+- **[01-云原生API网关架构总览](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/01-api-gateway-architecture-overview.md)** - API 网关 vs Ingress 控制器 vs 服务网格网关；请求生命周期；控制平面/数据平面分离；CNCF 生态定位；产品选型决策树
+- **[02-Kubernetes Gateway API标准深度解析](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/02-kubernetes-gateway-api-deep-dive.md)** - GatewayClass/Gateway/HTTPRoute/ReferenceGrant CRD 体系；角色模型；v1.0/v1.1 GA；一致性测试；各产品支持矩阵
+- **[03-API网关选型指南与对比矩阵](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/03-api-gateway-selection-guide.md)** - 12+ 维度功能矩阵；场景决策框架；TCO 分析；迁移成本评估；国内企业采用趋势
 
 ### 🌐 主流产品深度实践 (04-09)
-- **[04-Higress云原生API网关企业级实践](./04-higress-enterprise-gateway.md)** - Istiod 控制平面 + Envoy 数据平面架构；xDS 配置下发原理；Mac 快速 Demo（Docker/Kind）；McpBridge 注册中心对接；Wasm 插件开发实战；AI 网关能力（LLM 代理、Token 限流、多模型 Fallback、语义缓存）；Gateway API 一致性；生产调优与故障排查；竞品横向对比
-- **[05-Apache APISIX企业级API网关实践](./05-apisix-enterprise-gateway.md)** - etcd 控制平面 + OpenResty 数据平面；100+ 插件；Wasm 支持；多语言插件运行时；APISIX Ingress Controller；ADC 声明式配置
-- **[06-Kong API网关企业级实践](./06-kong-enterprise-gateway.md)** - PostgreSQL/DB-less/Konnect 模式；KIC 架构；Kong Gateway Operator；deck 声明式配置；Gateway API 一致性；混合模式部署
-- **[07-Envoy Gateway企业级实践](./07-envoy-gateway-enterprise.md)** - Envoy 官方项目；Gateway API 原生 API 接口；ExtensionPolicy/RateLimitPolicy CRD；EnvoyPatchPolicy 扩展性；Wasm 集成
-- **[08-Traefik API网关企业级实践](./08-traefik-enterprise-gateway.md)** - Traefik v3 架构；Provider（K8s CRD/Ingress/Gateway API）；IngressRoute/Middleware CRD；TLS 自动化（ACME）；Hub API 门户
-- **[09-传统Ingress控制器向云原生API网关迁移](./09-nginx-ingress-migration-guide.md)** - 功能差距分析；迁移模式（并行部署、注解映射、增量切换）；nginx-ingress 迁移到 APISIX/Higress/Kong 实战；零停机迁移清单
+- **[04-Higress云原生API网关企业级实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/04-higress-enterprise-gateway.md)** - Istiod 控制平面 + Envoy 数据平面架构；xDS 配置下发原理；Mac 快速 Demo（Docker/Kind）；McpBridge 注册中心对接；Wasm 插件开发实战；AI 网关能力（LLM 代理、Token 限流、多模型 Fallback、语义缓存）；Gateway API 一致性；生产调优与故障排查；竞品横向对比
+- **[05-Apache APISIX企业级API网关实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/05-apisix-enterprise-gateway.md)** - etcd 控制平面 + OpenResty 数据平面；100+ 插件；Wasm 支持；多语言插件运行时；APISIX Ingress Controller；ADC 声明式配置
+- **[06-Kong API网关企业级实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/06-kong-enterprise-gateway.md)** - PostgreSQL/DB-less/Konnect 模式；KIC 架构；Kong Gateway Operator；deck 声明式配置；Gateway API 一致性；混合模式部署
+- **[07-Envoy Gateway企业级实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/07-envoy-gateway-enterprise.md)** - Envoy 官方项目；Gateway API 原生 API 接口；ExtensionPolicy/RateLimitPolicy CRD；EnvoyPatchPolicy 扩展性；Wasm 集成
+- **[08-Traefik API网关企业级实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/08-traefik-enterprise-gateway.md)** - Traefik v3 架构；Provider（K8s CRD/Ingress/Gateway API）；IngressRoute/Middleware CRD；TLS 自动化（ACME）；Hub API 门户
+- **[09-传统Ingress控制器向云原生API网关迁移](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/09-nginx-ingress-migration-guide.md)** - 功能差距分析；迁移模式（并行部署、注解映射、增量切换）；nginx-ingress 迁移到 APISIX/Higress/Kong 实战；零停机迁移清单
 
 ### 🔧 核心能力专题 (10-12)
-- **[10-Wasm插件生态与开发实践](./10-wasm-plugin-ecosystem.md)** - proxy-wasm ABI 规范；产品支持矩阵；Go/Rust Wasm 插件开发；插件生命周期管理；性能开销分析；Wasm vs Lua vs 原生插件对比
-- **[11-API网关安全体系：认证、鉴权与WAF](./11-api-gateway-security-practices.md)** - JWT/OIDC/mTLS/API Key 认证；OPA 集成；WAF（ModSecurity）；限流策略（令牌桶、滑动窗口、分布式限流）；Bot 检测
-- **[12-API网关可观测性：指标、日志与链路追踪](./12-api-gateway-observability.md)** - 黄金信号；各产品 Prometheus 指标；结构化访问日志；OpenTelemetry/Zipkin/Jaeger 集成；Grafana 仪表盘设计；告警规则
+- **[10-Wasm插件生态与开发实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/10-wasm-plugin-ecosystem.md)** - proxy-wasm ABI 规范；产品支持矩阵；Go/Rust Wasm 插件开发；插件生命周期管理；性能开销分析；Wasm vs Lua vs 原生插件对比
+- **[11-API网关安全体系：认证、鉴权与WAF](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/11-api-gateway-security-practices.md)** - JWT/OIDC/mTLS/API Key 认证；OPA 集成；WAF（ModSecurity）；限流策略（令牌桶、滑动窗口、分布式限流）；Bot 检测
+- **[12-API网关可观测性：指标、日志与链路追踪](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/12-api-gateway-observability.md)** - 黄金信号；各产品 Prometheus 指标；结构化访问日志；OpenTelemetry/Zipkin/Jaeger 集成；Grafana 仪表盘设计；告警规则
 
 ### ⚡ 生产运维与高级主题 (13-14)
-- **[13-API网关性能基准测试与调优](./13-api-gateway-performance-benchmarks.md)** - 基准测试方法论（wrk2/hey/fortio）；Higress/APISIX/Kong/Envoy Gateway/Traefik 对比；调优参数；eBPF 加速路径
-- **[14-API网关生产运维最佳实践](./14-api-gateway-production-operations.md)** - HA 部署模式；滚动升级；GitOps 配置管理；证书生命周期；灾备预案；容量规划；多租户网关；AI 网关生产模式
+- **[13-API网关性能基准测试与调优](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/13-api-gateway-performance-benchmarks.md)** - 基准测试方法论（wrk2/hey/fortio）；Higress/APISIX/Kong/Envoy Gateway/Traefik 对比；调优参数；eBPF 加速路径
+- **[14-API网关生产运维最佳实践](../../../05-%E7%BD%91%E7%BB%9C/04-API%E7%BD%91%E5%85%B3/14-api-gateway-production-operations.md)** - HA 部署模式；滚动升级；GitOps 配置管理；证书生命周期；灾备预案；容量规划；多租户网关；AI 网关生产模式
 
 ## 🎯 学习路径建议
 

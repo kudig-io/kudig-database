@@ -416,8 +416,8 @@ spec:
 ## Obsidian 相关文档
 
 - 生产运维 MOC
-- [[生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
-- [[集群基础/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系

@@ -31,13 +31,13 @@ last_updated: 2026-06-26
 
 | Source | Original | Replacement | Confidence |
 |---|---|---|---|
-| `_reports/broken-links-full-fix-2026-06-26.md` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[实体/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
+| `_reports/broken-links-full-fix-2026-06-26.md` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | `[[23-实体/15-参考与索引/kudig-prompts-catalog.md|kudig prompts catalog]]` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `chaos mesh` | `系统基础/topic-dictionary/operations/chaos-mesh.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `artifact hub` | `系统基础/topic-dictionary/tooling/artifact-hub.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `virtual kubelet` | `系统基础/topic-dictionary/fundamentals/virtual-kubelet.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `operator framework` | `系统基础/topic-dictionary/platform-engineering/operator-framework.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `connect rpc` | `系统基础/topic-dictionary/networking/connect-rpc.md` | exact |
-| `_reports/broken-links-full-fix-2026-06-26.md` | `[[实体/oscal-compass.md|oscal compass]]` | `[[实体/oscal-compass.md|oscal compass]]` | exact |
+| `_reports/broken-links-full-fix-2026-06-26.md` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | `[[23-实体/06-安全/oscal-compass.md|oscal compass]]` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `kubernetes` | `系统基础/topic-dictionary/fundamentals/kubernetes.md` | fuzzy |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `prometheus` | `系统基础/topic-dictionary/observability/prometheus.md` | fuzzy |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `etcd` | `系统基础/topic-dictionary/fundamentals/etcd.md` | fuzzy |
@@ -58,7 +58,7 @@ last_updated: 2026-06-26
 | `_reports/broken-links-full-fix-2026-06-26.md` | `notary project` | `系统基础/topic-dictionary/security/notary-project.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `cloud custodian` | `系统基础/topic-dictionary/operations/cloud-custodian.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `piraeus datastore` | `系统基础/topic-dictionary/storage/piraeus-datastore.md` | exact |
-| `_reports/broken-links-full-fix-2026-06-26.md` | `[[实体/serverless-devs.md|serverless devs]]` | `[[实体/serverless-devs.md|serverless devs]]` | exact |
+| `_reports/broken-links-full-fix-2026-06-26.md` | `[[23-实体/09-编排调度/serverless-devs.md|serverless devs]]` | `[[23-实体/09-编排调度/serverless-devs.md|serverless devs]]` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `oauth2 proxy` | `系统基础/topic-dictionary/security/oauth2-proxy.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `pod lifecycle` | `系统基础/topic-dictionary/workloads/pod-lifecycle.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `podman desktop` | `系统基础/topic-dictionary/tooling/podman-desktop.md` | exact |
@@ -67,10 +67,10 @@ last_updated: 2026-06-26
 | `_reports/broken-links-full-fix-2026-06-26.md` | `confidential containers` | `系统基础/topic-dictionary/security/confidential-containers.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `logging operator` | `系统基础/topic-dictionary/observability/logging-operator.md` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `secrets management` | `skills/best-practices/best-practices/security/secrets-management.md` | exact |
-| `_reports/broken-links-full-fix-2026-06-26.md` | `[[实体/inspektor-gadget.md|inspektor gadget]]` | `[[实体/inspektor-gadget.md|inspektor gadget]]` | exact |
+| `_reports/broken-links-full-fix-2026-06-26.md` | `[[23-实体/07-可观测性/inspektor-gadget.md|inspektor gadget]]` | `[[23-实体/07-可观测性/inspektor-gadget.md|inspektor gadget]]` | exact |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `kubernetes` | `entities/kubernetes.md` | fuzzy |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `k8s` | `系统基础/topic-cheat-sheet/k8s.md` | fuzzy |
-| `_reports/broken-links-full-fix-2026-06-26.md` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[概念/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | fuzzy |
+| `_reports/broken-links-full-fix-2026-06-26.md` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | `[[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes architecture overview]]` | fuzzy |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `go` | `系统基础/topic-cheat-sheet/go.md` | fuzzy |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `etcd index` | `生态参考/topic-index/etcd-index.md` | fuzzy |
 | `_reports/broken-links-full-fix-2026-06-26.md` | `containerd` | `系统基础/topic-dictionary/fundamentals/containerd.md` | fuzzy |
@@ -128,7 +128,7 @@ last_updated: 2026-06-26
 - 故障诊断/topic-febm/ — 修复 ~10 个文件中的 45+ 嵌套链接
 - 生产运维/topic-best-practices/migration/ — 修复 ~10 个文件中的 40+ 嵌套链接
 - 其他 domain 文件 — 修复 ~50 个文件中的 115+ 嵌套链接` |
-| `_reports/broken-links-full-fix-2026-06-26.md` | `[[系统基础/topic-dictionary/workloads/sidecar-containers.md|sidecar containers]]` |
+| `_reports/broken-links-full-fix-2026-06-26.md` | `[[17-系统基础/06-知识字典/workloads/sidecar-containers.md|sidecar containers]]` |
 | `_reports/obsidian-wiki-skills-evaluation-2026-05-24.md` | `[[]]` |
 | `_reports/wiki-lint-2026-05-24.md` | `-t 0` |
 

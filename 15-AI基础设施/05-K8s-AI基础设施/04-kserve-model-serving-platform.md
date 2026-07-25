@@ -468,4 +468,4 @@ kubectl get pods -n ai-serving -w
 - [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]
 - [[22-概念/07-调度与资源/dynamic-resource-allocation]]
 - [[15-AI基础设施/01-基础设施/04-gpu-monitoring-dcgm]]
-- [[05-网络/01-K8s网络核心/]]
+- [[05-网络/01-K8s网络核心/index.md|01-K8s网络核心]]

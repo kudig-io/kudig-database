@@ -117,7 +117,7 @@ prerequisites:
   - [Features](#features)
   - [Known Issues](#known-issues)
   - [Notable Changes to Existing Behavior](#notable-changes-to-existing-behavior)
-    - [[系统基础/topic-dictionary/workloads/deployments.md|Deployments]]](#deployments)
+    - [[17-系统基础/06-知识字典/workloads/deployments.md|Deployments]]](#deployments)
     - [kubectl rolling-update: < v1.4.0 client vs >=v1.4.0 cluster](#kubectl-rolling-update--v140-client-vs-v140-cluster)
     - [kubectl delete: < v1.4.0 client vs >=v1.4.0 cluster](#kubectl-delete--v140-client-vs-v140-cluster)
     - [DELETE operation in REST API](#delete-operation-in-rest-api)
@@ -192,7 +192,7 @@ prerequisites:
 
 filename | sha256 hash
 -------- | -----------
-[[实体/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.4.12/kubernetes.tar.gz) | `f0d7ca7e1c92174c900d49087347d043b817eb589803eacc7727a84df9280ed2`
+[[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].tar.gz](https://dl.k8s.io/v1.4.12/kubernetes.tar.gz) | `f0d7ca7e1c92174c900d49087347d043b817eb589803eacc7727a84df9280ed2`
 [kubernetes-src.tar.gz](https://dl.k8s.io/v1.4.12/kubernetes-src.tar.gz) | `251835f258d79f186d8c715b18f2ccb93312270b35c22434b4ff27bc1de50eda`
 
 ### Client Binaries

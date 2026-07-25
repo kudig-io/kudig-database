@@ -221,9 +221,9 @@ kubectl run dnsutils --rm -it --image=registry.k8s.io/e2e-test-images/jessie-dns
 ## 交叉引用
 
 - [Service](service.md) — Service 的 DNS 名称和服务发现
-- [Pod Hostname](../workloads/pod-hostname.md) — Pod 主机名和 FQDN 配置
-- [EndpointSlices](endpointslices.md) — Headless Service 的 DNS 记录来源
-- [IPv4/IPv6 Dual Stack](ipv4-ipv6-dual-stack.md) — 双栈环境下的 DNS 记录
+- [Pod Hostname](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/pod-hostname.md) — Pod 主机名和 FQDN 配置
+- [EndpointSlices](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/endpointslices.md) — Headless Service 的 DNS 记录来源
+- [IPv4/IPv6 Dual Stack](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/networking/ipv4-ipv6-dual-stack.md) — 双栈环境下的 DNS 记录
 
 ## 参考链接
 

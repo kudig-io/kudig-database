@@ -540,6 +540,6 @@ escalation_package:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-3: 会话上下文管理机制](./P0-3-session-context-management.md)
 - [故障诊断/[[06-存储/README.md|README]].md](../故障诊断/topic-skills/README.md)
-- [templates/skill-template.md](../templates/skill-template.md)
+- [templates/skill-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/skill-template.md)
 
 <!-- risk-assessed -->

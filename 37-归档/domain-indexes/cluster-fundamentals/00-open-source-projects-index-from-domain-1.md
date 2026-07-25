@@ -122,7 +122,7 @@ cross_refs:
 ## Obsidian 相关文档
 
 - 集群基础 MOC
-- [[集群基础/README.md|Domain-1: Kubernetes架构基础]]
+- [[01-集群基础/README.md|Domain-1: Kubernetes架构基础]]
 - Kubernetes 架构全景图
 - Kubernetes 核心组件深度剖析
 - 03 - 功能和API表

@@ -93,36 +93,36 @@ cross_refs:
 | 文档 | 描述 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
 | **[00-开源项目索引](./00-open-source-projects-index.md)** | 服务网格全生态项目索引 | 版本兼容矩阵、选型决策树、社区活跃度排名 | 架构师 |
-| **[07-服务网格对比与选型](./07-service-mesh-comparison-selection.md)** | 五大平台横向对比 | 功能矩阵、性能基准测试、场景化选型建议 | 架构师 |
+| **[07-服务网格对比与选型](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/07-service-mesh-comparison-selection.md)** | 五大平台横向对比 | 功能矩阵、性能基准测试、场景化选型建议 | 架构师 |
 | **[README](./README.md)** | 领域概述与导航 | 学习路径、技术栈概览、适用场景、选型指南 | 全部 |
 
 ### 核心服务网格平台 (01-06)
 
 | 文档 | 描述 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
-| **[01-Istio 企业级服务网格](./01-istio-enterprise-service-mesh.md)** | Istio 深度实践 | IstioOperator HA部署、VirtualService/DestinationRule完整配置、mTLS STRICT + AuthorizationPolicy零信任、Telemetry + Kiali + Prometheus可观测性、istiod调优参数 | 高级 |
-| **[02-Linkerd 企业级服务网格](./02-linkerd-enterprise-service-mesh.md)** | Linkerd Rust 代理实践 | HA模式3副本部署、自动mTLS零配置、ServiceProfile重试超时、SMI TrafficSplit金丝雀、Server + Authorization策略、MeshTLS STRICT模式 | 中高级 |
-| **[03-Consul Connect 企业级](./03-consul-connect-enterprise.md)** | HashiCorp 生态集成 | Helm HA部署3节点Raft、Intention意图访问控制、ServiceRouter/Splitter/Resolver流量管理、多DC Mesh Gateway WAN通信、ACL + Vault证书管理 | 高级 |
-| **[04-Envoy Proxy 企业级](./04-envoy-proxy-enterprise.md)** | Envoy xDS 深度配置 | 完整静态配置(Listener/Route/Cluster)、xDS动态配置、HTTP连接管理器、LEAST_CONN/RING_HASH/MAGLEV负载均衡、mTLS + RBAC + JWT、overload_manager内存防护 | 高级 |
-| **[05-Dapr 企业级运行时](./05-dapr-enterprise-distributed-runtime.md)** | Dapr 构建块实践 | 状态管理(Redis/PostgreSQL/MongoDB)、PubSub(Kafka/RabbitMQ)、Actor虚拟Actor模型、绑定(S3/RabbitMQ)、Resiliency弹性策略、mTLS + ACL访问控制、OpenTelemetry可观测性 | 高级 |
-| **[06-Traefik Mesh 企业级](./06-traefik-mesh-enterprise.md)** | Traefik Mesh 轻量级网格 | 每节点代理DaemonSet架构、IngressRoute高级路由、TraefikService流量分割、Middleware链(限流/认证/CORS/重试/压缩)、TLSOption + ServersTransport安全、ACL模式 | 中高级 |
+| **[01-Istio 企业级服务网格](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/01-istio-enterprise-service-mesh.md)** | Istio 深度实践 | IstioOperator HA部署、VirtualService/DestinationRule完整配置、mTLS STRICT + AuthorizationPolicy零信任、Telemetry + Kiali + Prometheus可观测性、istiod调优参数 | 高级 |
+| **[02-Linkerd 企业级服务网格](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/02-linkerd-enterprise-service-mesh.md)** | Linkerd Rust 代理实践 | HA模式3副本部署、自动mTLS零配置、ServiceProfile重试超时、SMI TrafficSplit金丝雀、Server + Authorization策略、MeshTLS STRICT模式 | 中高级 |
+| **[03-Consul Connect 企业级](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/03-consul-connect-enterprise.md)** | HashiCorp 生态集成 | Helm HA部署3节点Raft、Intention意图访问控制、ServiceRouter/Splitter/Resolver流量管理、多DC Mesh Gateway WAN通信、ACL + Vault证书管理 | 高级 |
+| **[04-Envoy Proxy 企业级](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/04-envoy-proxy-enterprise.md)** | Envoy xDS 深度配置 | 完整静态配置(Listener/Route/Cluster)、xDS动态配置、HTTP连接管理器、LEAST_CONN/RING_HASH/MAGLEV负载均衡、mTLS + RBAC + JWT、overload_manager内存防护 | 高级 |
+| **[05-Dapr 企业级运行时](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/05-dapr-enterprise-distributed-runtime.md)** | Dapr 构建块实践 | 状态管理(Redis/PostgreSQL/MongoDB)、PubSub(Kafka/RabbitMQ)、Actor虚拟Actor模型、绑定(S3/RabbitMQ)、Resiliency弹性策略、mTLS + ACL访问控制、OpenTelemetry可观测性 | 高级 |
+| **[06-Traefik Mesh 企业级](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/06-traefik-mesh-enterprise.md)** | Traefik Mesh 轻量级网格 | 每节点代理DaemonSet架构、IngressRoute高级路由、TraefikService流量分割、Middleware链(限流/认证/CORS/重试/压缩)、TLSOption + ServersTransport安全、ACL模式 | 中高级 |
 
 ### 专题深度 (07-10)
 
 | 文档 | 描述 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
-| **[07-服务网格对比与选型](./07-service-mesh-comparison-selection.md)** | 五大平台全面对比 | Istio vs Linkerd vs Consul vs Dapr vs Traefik功能矩阵、性能基准测试数据、资源消耗对比、选型决策树、场景化推荐 | 架构师 |
-| **[08-Ambient Mesh 与 L7 策略](./08-ambient-mesh-l7-policy.md)** | Istio 无Sidecar模式 | ztunnel DaemonSet L4代理、Waypoint Proxy L7代理、L4/L7策略分离、VirtualService/DestinationRule on Waypoint、Sidecar到Ambient迁移策略 | 高级 |
-| **[09-微服务弹性模式](./09-microservice-resilience-patterns.md)** | 五大弹性模式实践 | 熔断器Circuit Breaker (Resilience4j + Istio OutlierDetection)、重试Retry (退避策略)、超时Timeout (分层配置)、舱壁Bulkhead (线程池/信号量)、限流Rate Limiting (三层限流)、降级Fallback | 高级 |
-| **[10-API 网关与服务网格集成](./10-api-gateway-service-mesh-integration.md)** | 端到端流量治理 | 三种集成模式(Sidecar注入/独立网关/Gateway API)、APISIX + Istio配置、Kong + Istio配置、JWT认证链路、分层限流策略、统一可观测性 | 高级 |
+| **[07-服务网格对比与选型](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/07-service-mesh-comparison-selection.md)** | 五大平台全面对比 | Istio vs Linkerd vs Consul vs Dapr vs Traefik功能矩阵、性能基准测试数据、资源消耗对比、选型决策树、场景化推荐 | 架构师 |
+| **[08-Ambient Mesh 与 L7 策略](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/08-ambient-mesh-l7-policy.md)** | Istio 无Sidecar模式 | ztunnel DaemonSet L4代理、Waypoint Proxy L7代理、L4/L7策略分离、VirtualService/DestinationRule on Waypoint、Sidecar到Ambient迁移策略 | 高级 |
+| **[09-微服务弹性模式](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/09-microservice-resilience-patterns.md)** | 五大弹性模式实践 | 熔断器Circuit Breaker (Resilience4j + Istio OutlierDetection)、重试Retry (退避策略)、超时Timeout (分层配置)、舱壁Bulkhead (线程池/信号量)、限流Rate Limiting (三层限流)、降级Fallback | 高级 |
+| **[10-API 网关与服务网格集成](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/10-api-gateway-service-mesh-integration.md)** | 端到端流量治理 | 三种集成模式(Sidecar注入/独立网关/Gateway API)、APISIX + Istio配置、Kong + Istio配置、JWT认证链路、分层限流策略、统一可观测性 | 高级 |
 
 ### 入门指南 (99-series)
 
 | 文档 | 描述 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
-| **[99-Istio 入门指南](./99-istio-service-mesh-guide.md)** | Istio 快速上手 | Sidecar + Ambient双模式安装、istioctl/Helm两种方式、VirtualService/DestinationRule核心配置、mTLS/JWT安全、Kiali/Jaeger/Prometheus可观测性、多集群部署 | 中级→高级 |
-| **[99-Linkerd 入门指南](./99-linkerd-service-mesh-guide.md)** | Linkerd 极简入门 | CLI/Helm安装、零配置mTLS自动启用、SMI TrafficSplit金丝雀、黄金指标(stat/top/edges/tap)、多集群连接、vs Istio详细选型对比 | 初级→中级 |
-| **[99-Spring Cloud K8s 指南](./99-spring-cloud-kubernetes-service-mesh-guide.md)** | 传统微服务迁移 | Spring Cloud Netflix → Spring Cloud K8s → Istio三阶段演进、Eureka→K8s DNS迁移、Ribbon→Istio负载均衡、Hystrix→Resilience4j+Istio、Spring Cloud Gateway on K8s、Seata分布式事务 | 高级 |
+| **[99-Istio 入门指南](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-istio-service-mesh-guide.md)** | Istio 快速上手 | Sidecar + Ambient双模式安装、istioctl/Helm两种方式、VirtualService/DestinationRule核心配置、mTLS/JWT安全、Kiali/Jaeger/Prometheus可观测性、多集群部署 | 中级→高级 |
+| **[99-Linkerd 入门指南](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-linkerd-service-mesh-guide.md)** | Linkerd 极简入门 | CLI/Helm安装、零配置mTLS自动启用、SMI TrafficSplit金丝雀、黄金指标(stat/top/edges/tap)、多集群连接、vs Istio详细选型对比 | 初级→中级 |
+| **[99-Spring Cloud K8s 指南](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-spring-cloud-kubernetes-service-mesh-guide.md)** | 传统微服务迁移 | Spring Cloud Netflix → Spring Cloud K8s → Istio三阶段演进、Eureka→K8s DNS迁移、Ribbon→Istio负载均衡、Hystrix→Resilience4j+Istio、Spring Cloud Gateway on K8s、Seata分布式事务 | 高级 |
 
 ---
 

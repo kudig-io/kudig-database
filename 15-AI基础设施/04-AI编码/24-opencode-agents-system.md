@@ -384,10 +384,10 @@ Provide constructive feedback without making direct changes.
 
 | 文档 | 关系 |
 |------|------|
-| [05 - 工具与权限](./05-opencode-tools-permissions.md) | Agent 的工具和权限配置 |
-| [08 - [[SKILL|Skill]] 与命令](./08-opencode-skills-commands.md) | Agent 可加载的 Skill 定义 |
-| [03 - Provider 与模型](./03-opencode-providers-models.md) | Per-Agent 模型选择 |
-| [12 - 进阶话题](./12-opencode-advanced-topics.md) | 团队级 Agent 协作模式 |
+| [05 - 工具与权限](25-opencode-tools-permissions.md) | Agent 的工具和权限配置 |
+| [08 - [[SKILL|Skill]] 与命令](28-opencode-skills-commands.md) | Agent 可加载的 Skill 定义 |
+| [03 - Provider 与模型](23-opencode-providers-models.md) | Per-Agent 模型选择 |
+| [12 - 进阶话题](32-opencode-advanced-topics.md) | 团队级 Agent 协作模式 |
 
 ---
 

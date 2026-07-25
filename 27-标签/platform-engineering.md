@@ -116,7 +116,7 @@ last_updated: '2026-07-21'
 
 ## 概念 (Concepts)
 
-- [[22-概念/platform-engineering|平台工程]]
+- [[27-标签/platform-engineering|平台工程]]
 - [[22-概念/internal-developer-platform|内部开发者平台]]
 - [[22-概念/gitops|GitOps]]
 - [[22-概念/09-平台与发布/infrastructure-as-code|基础设施即代码]]
@@ -127,7 +127,7 @@ last_updated: '2026-07-21'
 - [[23-实体/08-交付与制品/argocd|ArgoCD]]
 - [[23-实体/08-交付与制品/flux|Flux]]
 - [[23-实体/08-交付与制品/crossplane|Crossplane]]
-- [[23-实体/cluster-api|Cluster API]]
+- [[17-系统基础/06-知识字典/multi-cloud/cluster-api|Cluster API]]
 
 ## 平台工程全景
 
