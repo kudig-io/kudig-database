@@ -19,8 +19,8 @@ created: '2026-07-01'
 
 KUDIG Database 是一个**双层结构**的云原生运维知识库：
 
-- **提炼知识层**（`concepts/` `entities/` `skills/` `synthesis/`）—— Agent 优先读取，Token 效率高，frontmatter 元数据丰富
-- **源文档层**（`domain-*/` `docs/`）—— 原始深度技术文档，供深度查询兜底
+- **提炼知识层**（`22-概念/` `23-实体/` `26-技能/` `24-综合/`）—— Agent 优先读取，Token 效率高，frontmatter 元数据丰富
+- **源文档层**（`01-集群基础/` … `21-生态参考/` `29-文档/`）—— 原始深度技术文档，供深度查询兜底
 
 覆盖 **20 个核心知识域**：集群基础、工作负载、网络、存储、安全、可观测性、平台工程、发布变更、可靠性工程、故障诊断、生产运维、云厂商（13+ 家）、容器运行时、AI/ML 基础设施、专项技术、数据库中间件、系统基础、清单模式、生态参考、应用模式。
 
@@ -29,16 +29,16 @@ KUDIG Database 是一个**双层结构**的云原生运维知识库：
 每个编号 Domain 均提供入口级生产就绪运维指南，另有关键跨域 Runbook：
 
 - **Per-Domain 生产就绪指南**：各知识域目录下的 `99-production-readiness-operations-guide.md`
-- **证书 / PKI 生命周期 Runbook**：`集群基础/03-control-plane/34-certificate-pki-lifecycle-runbook.md`
-- **集群升级 Runbook**：`集群基础/03-control-plane/35-cluster-upgrade-runbook.md`
-- **灾难恢复与业务连续性 Runbook**：`可靠性/09-disaster-recovery-playbooks/03-disaster-recovery-bc-runbook.md`
-- **Fleet GitOps 操作指南**：`发布变更/01-gitops/08-fleet-gitops-operations-guide.md`
-- **事件响应 Runbook 模板**：`生产运维/03-incident-response/24-incident-response-runbook-template.md`
-- **FinOps 成本治理 Runbook**：`生产运维/01-finops/14-finops-cost-governance-runbook.md`
-- **AI/ML 运维 Runbook**：`AI基础设施/01-ai-infra/45-ai-ml-ops-runbook.md`
-- **边缘生产运维 Runbook**：`专项技术/01-edge-computing/14-edge-production-runbook.md`
+- **证书 / PKI 生命周期 Runbook**：`01-集群基础/03-控制平面/34-certificate-pki-lifecycle-runbook.md`
+- **集群升级 Runbook**：`01-集群基础/03-控制平面/35-cluster-upgrade-runbook.md`
+- **灾难恢复与业务连续性 Runbook**：`12-可靠性/02-灾难恢复/21-disaster-recovery-bc-runbook-v2.md`
+- **Fleet GitOps 操作指南**：`11-发布变更/01-GitOps/08-fleet-gitops-operations-guide.md`
+- **事件响应 Runbook 模板**：`13-生产运维/03-事件响应/24-incident-response-runbook-template.md`
+- **FinOps 成本治理 Runbook**：`13-生产运维/01-成本治理/14-finops-cost-governance-runbook.md`
+- **AI/ML 运维 Runbook**：`15-AI基础设施/01-基础设施/45-ai-ml-ops-runbook.md`
+- **边缘生产运维 Runbook**：`16-专项技术/01-边缘计算/14-edge-production-runbook.md`
 
-详细说明与缺口分析参见 `_reports/domain-production-readiness-content-push-2026-07-01.md` 与 `_reports/domain-content-gap-analysis-2026-07-01.md`。
+详细说明与缺口分析参见 `36-报告/domain-production-readiness-content-push-2026-07-01.md` 与 `36-报告/domain-content-gap-analysis-2026-07-01.md`。
 
 ## 快速开始
 
@@ -51,8 +51,8 @@ KUDIG Database 是一个**双层结构**的云原生运维知识库：
 本项目使用 [Astro](https://astro.build/) 构建静态站点。
 
 ```bash
-# 进入 web 目录
-cd web
+# 进入站点目录
+cd 30-站点
 
 # 安装依赖
 npm install
@@ -67,15 +67,6 @@ npm run build
 npm run preview
 ```
 
-或使用项目封装的脚本：
-
-```bash
-bash scripts/start-web.sh            # Astro dev @ :4321（默认）
-bash scripts/start-web.sh --preview  # 先构建再预览
-bash scripts/start-web.sh --static   # 伺服 visualizations/ 等独立 HTML 工具 @ :8767
-bash scripts/start-web.sh --stop     # 停止服务
-```
-
 ### 仅阅读 Markdown 源文件
 
 知识内容全部是纯 Markdown，可直接在任何编辑器（推荐 [Obsidian](https://obsidian.md/)）中阅读，wikilink `[[...]]` 可被 Obsidian 原生解析。
@@ -84,25 +75,24 @@ bash scripts/start-web.sh --stop     # 停止服务
 
 ```
 .
-├── concepts/        # 提炼知识：核心概念、架构模式、综合分析
-├── entities/        # 提炼知识：组件实体、CNCF 工具、云产品、术语词典
-├── skills/          # 提炼知识：诊断排障、最佳实践、培训体系、FTA 方法
-├── synthesis/       # 提炼知识：跨领域综合分析
-├── 集群基础/ ... 应用模式/   # 源文档：20 个技术域深度文档（中文目录名）
-├── docs/            # 源文档：映射与规范文档
-├── _meta/           # 元数据、语料配置（taxonomy、schema、corpus-config、journal）
-├── _reports/        # 质量报告与评估、发布素材
-├── _archives/       # Wiki 归档快照（重建/恢复用）
-├── release/         # 发布产物（语料导出 corpus、metadata、qa）
-├── research/        # 研究资料
-├── tags/            # 标签索引
-├── assets/          # 图片、图表、附件
-├── web/             # Astro 静态站点项目
-├── scripts/         # 自动化脚本、模板、提示词
-└── STRUCTURE.md     # 完整目录结构规范
+├── 01-集群基础/ … 21-生态参考/   # 源文档：21 个技术域深度文档（NN-中文目录名）
+├── 22-概念/         # 提炼知识：核心概念、架构模式、综合分析
+├── 23-实体/         # 提炼知识：组件实体、CNCF 工具、云产品、术语词典
+├── 24-综合/         # 提炼知识：跨领域综合分析
+├── 25-研究/         # 研究资料
+├── 26-技能/         # 提炼知识：诊断排障、最佳实践、培训体系、FTA 方法
+├── 27-标签/         # 标签索引
+├── 28-资产/         # 图片、图表、附件
+├── 29-文档/         # 源文档：映射与规范文档
+├── 30-站点/         # Astro 静态站点项目
+├── 31-脚本/         # 自动化脚本、模板、提示词
+├── 32-发布/         # 发布产物（语料导出 corpus、metadata、qa）
+├── 35-元数据/       # 元数据、语料配置（taxonomy、schema、corpus-config、journal）
+├── 36-报告/         # 质量报告与评估、发布素材
+└── 37-归档/         # Wiki 归档快照（重建/恢复用）
 ```
 
-详见 [`STRUCTURE.md`](STRUCTURE.md)。
+完整目录映射与命名规范详见 [`35-元数据/domain-mapping.md`](35-元数据/metadata/domain-mapping.md)。
 
 ## 部署
 
@@ -110,7 +100,7 @@ bash scripts/start-web.sh --stop     # 停止服务
 
 ## 贡献
 
-欢迎提交 Issue 和 PR。贡献前请阅读 [`STRUCTURE.md`](STRUCTURE.md) 了解目录约定与 frontmatter 规范。
+欢迎提交 Issue 和 PR。贡献前请阅读 [`35-元数据/domain-mapping.md`](35-元数据/metadata/domain-mapping.md) 与 [`35-元数据/schema.md`](35-元数据/metadata/schema.md) 了解目录约定与 frontmatter 规范。
 
 ## License
 

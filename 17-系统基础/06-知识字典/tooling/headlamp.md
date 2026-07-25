@@ -1,0 +1,82 @@
+---
+title: Headlamp K8s 仪表盘
+description: Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供集群资源可视化、日志查看和终端操作，是 K8s
+  Dashboard ...
+summary: Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供集群资源可视化、日志查看和终端操作，是 K8s Dashboard
+  ...
+category: dictionary
+tags:
+- k8s
+- glossary
+- tooling
+- dashboard
+- ui
+tier: core
+created: 2026-06
+last_updated: 2026-06
+difficulty: beginner
+reading_level: beginner
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Headlamp K8s 仪表盘 是什么
+- Headlamp 详解
+trigger_keywords:
+- Headlamp K8s 仪表盘
+- Headlamp
+- dictionary
+prerequisites:
+- kubernetes
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+# Headlamp K8s 仪表盘（Headlamp）
+
+## 概述
+
+Headlamp 是 Kinvolk（现微软）开源的 Kubernetes 管理仪表盘，提供集群资源可视化、日志查看和终端操作，是 K8s Dashboard 的现代替代方案，支持插件扩展。
+
+## 核心概念/原理
+
+- **现代 UI**：基于 React + TypeScript 的现代 Web 界面
+- **插件架构**：可扩展的插件系统
+- **多集群**：支持同时管理多个集群
+- **Kinvolk 出品**：Flatcar Container Linux 团队开发
+
+## 关键机制或特性
+
+- 集群资源概览（Pods/Services/Deployments 等）
+- 实时日志查看和终端 Shell
+- YAML 编辑器（在线编辑资源）
+- 插件市场（社区和企业插件）
+- 多集群管理和切换
+- 自定义主题和品牌定制
+
+## 使用场景与最佳实践
+
+- Kubernetes 集群的可视化管理
+- 替代 K8s Dashboard 的现代方案
+- 开发者的日常集群操作界面
+- 运维团队的集群监控仪表盘
+- 需要品牌定制的企业管理平台
+
+## 参考链接
+
+- https://headlamp.io/
+- https://github.com/headlamp-k8s/headlamp
+
+## Related
+
+- [[17-系统基础/06-知识字典/tooling/kubectl.md|kubectl]]
+- [[17-系统基础/06-知识字典/tooling/stern.md|Stern]]
+- [[17-系统基础/06-知识字典/observability/prometheus.md|Prometheus]]
+
+
+<!-- risk-assessed -->

@@ -1,0 +1,30 @@
+# NotebookLM 推荐导入配置
+# 用途：NotebookLM 音频播客生成
+# 注意：NotebookLM 有文档数量限制，需精选
+
+name: notebooklm-podcast
+description: "NotebookLM 音频学习推荐导入"
+
+# 方案一：故障排查专题播客
+troubleshooting_podcast:
+  - 19-故障诊断/topic-fta/23-fta-production-quick-start.md      # FTA 快速落地
+  - 19-故障诊断/topic-fta/kubernetes-fta-full-analysis.md        # K8s 全量故障树
+  - 19-故障诊断/topic-febm/08-febm-production-quick-start.md     # FEBM 快速落地
+  - domain-12-troubleshooting/08-pod-comprehensive-troubleshooting.md
+  - domain-12-troubleshooting/09-node-comprehensive-troubleshooting.md
+
+# 方案二：系统学习播客
+learning_podcast:
+  - 13-生产运维/topic-learn/public-training/one-month/README.md
+  - domain-1-architecture-fundamentals/01-kubernetes-architecture-overview.md
+  - domain-2-design-principles/01-design-principles-foundations.md
+  - domain-3-control-plane/11-etcd-deep-dive.md
+  - domain-5-networking/05-network-architecture-overview.md
+
+# 方案三：AI 基础设施播客
+ai_infra_podcast:
+  - domain-11-ai-infra/01-ai-infrastructure-overview.md
+  - domain-11-ai-infra/03-gpu-scheduling-management.md
+  - domain-11-ai-infra/17-llm-inference-serving.md
+  - 15-AI基础设施/topic-ai-agent/01-ai-agent-fundamentals.md
+  - 15-AI基础设施/topic-ai-agent/30-agent-harness-engineering.md

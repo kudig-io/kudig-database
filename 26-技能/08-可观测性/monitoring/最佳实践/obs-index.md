@@ -1,0 +1,23 @@
+---
+title: Observability
+description: Observability 目录索引
+summary: Observability 目录索引
+category: index
+tags:
+- index
+tier: supporting
+created: '2026-07-02'
+last_updated: 2026-07
+---
+
+
+# Observability
+
+> 本页为 `skills/best-practices/observability` 目录的自动索引。
+
+## 文档
+
+- [[26-技能/08-可观测性/monitoring/最佳实践/logging.md|Logging]]
+- [[26-技能/08-可观测性/monitoring/最佳实践/monitoring.md|Monitoring]]
+- [[26-技能/08-可观测性/monitoring/最佳实践/tracing.md|Tracing]]
+

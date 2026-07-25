@@ -3,10 +3,10 @@
 # Command-Output Diagnosis Corpus Targets
 # =============================================================================
 
-CORPUS_DIR := 脚本/corpus-generator
-CORPUS_OUTPUT := 故障诊断/topic-qa-corpus/generated
-SKILLS_DIR := 故障诊断/topic-skills
-FTA_DIR := 故障诊断/topic-fta/list
+CORPUS_DIR := 31-脚本/corpus-generator
+CORPUS_OUTPUT := 19-故障诊断/10-QA语料/generated
+SKILLS_DIR := 19-故障诊断/08-技能体系
+FTA_DIR := 19-故障诊断/06-FTA故障树/list
 
 .PHONY: corpus-generate corpus-generate-all corpus-validate corpus-stats corpus-clean
 

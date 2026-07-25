@@ -1,0 +1,120 @@
+---
+title: Topic Application Architecture
+description: Topic Application Architecture 目录索引
+summary: Topic Application Architecture 目录索引
+category: index
+tags:
+- index
+tier: supporting
+created: '2026-07-02'
+last_updated: 2026-07
+---
+
+
+# Topic Application Architecture
+
+> 本页为 `应用模式/topic-application-architecture` 目录的自动索引。
+
+## 概览
+
+- [[04-应用模式/02-行业架构/README.md|Readme]]
+
+## 文档
+
+- [[04-应用模式/02-行业架构/01-ecommerce-architecture.md|Ecommerce Architecture]]
+- [[04-应用模式/02-行业架构/02-mini-program-architecture.md|Mini Program Architecture]]
+- [[04-应用模式/02-行业架构/03-cms-architecture.md|Cms Architecture]]
+- [[04-应用模式/02-行业架构/04-im-rtc-architecture.md|Im Rtc Architecture]]
+- [[04-应用模式/02-行业架构/05-online-education-architecture.md|Online Education Architecture]]
+- [[04-应用模式/02-行业架构/06-fintech-architecture.md|Fintech Architecture]]
+- [[04-应用模式/02-行业架构/07-iot-platform-architecture.md|Iot Platform Architecture]]
+- [[04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md|Ai Ml Inference Architecture]]
+- [[04-应用模式/02-行业架构/09-gaming-backend-architecture.md|Gaming Backend Architecture]]
+- [[04-应用模式/02-行业架构/10-social-media-architecture.md|Social Media Architecture]]
+- [[04-应用模式/02-行业架构/11-smart-retail-architecture.md|Smart Retail Architecture]]
+- [[04-应用模式/02-行业架构/12-smart-logistics-architecture.md|Smart Logistics Architecture]]
+- [[04-应用模式/02-行业架构/13-digital-government-architecture.md|Digital Government Architecture]]
+- [[04-应用模式/02-行业架构/14-smart-healthcare-architecture.md|Smart Healthcare Architecture]]
+- [[04-应用模式/02-行业架构/15-energy-power-architecture.md|Energy Power Architecture]]
+- [[04-应用模式/02-行业架构/16-video-shortform-architecture.md|Video Shortform Architecture]]
+- [[04-应用模式/02-行业架构/17-saas-multitenant-architecture.md|Saas Multitenant Architecture]]
+- [[04-应用模式/02-行业架构/18-data-midplatform-architecture.md|Data Midplatform Architecture]]
+- [[04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md|Cloudnative Devops Architecture]]
+- [[04-应用模式/02-行业架构/20-microservice-governance-architecture.md|Microservice Governance Architecture]]
+- [[04-应用模式/02-行业架构/21-cross-border-ecommerce.md|Cross Border Ecommerce]]
+- [[04-应用模式/02-行业架构/22-nev-connected-vehicle.md|Nev Connected Vehicle]]
+- [[04-应用模式/02-行业架构/23-xinchuang-it-innovation.md|Xinchuang It Innovation]]
+- [[04-应用模式/02-行业架构/24-insurtech.md|Insurtech]]
+- [[04-应用模式/02-行业架构/25-quantitative-trading.md|Quantitative Trading]]
+- [[04-应用模式/02-行业架构/26-aviation-travel.md|Aviation Travel]]
+- [[04-应用模式/02-行业架构/27-hospitality-tourism.md|Hospitality Tourism]]
+- [[04-应用模式/02-行业架构/28-proptech.md|Proptech]]
+- [[04-应用模式/02-行业架构/29-agritech-iot.md|Agritech Iot]]
+- [[04-应用模式/02-行业架构/30-hrtech-saas.md|Hrtech Saas]]
+- [[04-应用模式/02-行业架构/31-instant-retail.md|Instant Retail]]
+- [[04-应用模式/02-行业架构/32-smart-restaurant.md|Smart Restaurant]]
+- [[04-应用模式/02-行业架构/33-crossborder-warehouse.md|Crossborder Warehouse]]
+- [[04-应用模式/02-行业架构/34-sportstech.md|Sportstech]]
+- [[04-应用模式/02-行业架构/35-metaverse-digital-twin.md|Metaverse Digital Twin]]
+- [[04-应用模式/02-行业架构/36-carbon-esg-management.md|Carbon Esg Management]]
+- [[04-应用模式/02-行业架构/37-pet-economy.md|Pet Economy]]
+- [[04-应用模式/02-行业架构/38-supply-chain-finance.md|Supply Chain Finance]]
+- [[04-应用模式/02-行业架构/39-smart-campus.md|Smart Campus]]
+- [[04-应用模式/02-行业架构/40-cloud-gaming.md|Cloud Gaming]]
+- [[04-应用模式/02-行业架构/41-beauty-ecommerce.md|Beauty Ecommerce]]
+- [[04-应用模式/02-行业架构/42-secondhand-circular.md|Secondhand Circular]]
+- [[04-应用模式/02-行业架构/43-enterprise-im.md|Enterprise Im]]
+- [[04-应用模式/02-行业架构/44-martech-adtech.md|Martech Adtech]]
+- [[04-应用模式/02-行业架构/45-smart-port-shipping.md|Smart Port Shipping]]
+- [[04-应用模式/02-行业架构/46-satellite-internet.md|Satellite Internet]]
+- [[04-应用模式/02-行业架构/47-smart-mining.md|Smart Mining]]
+- [[04-应用模式/02-行业架构/48-vocational-edtech.md|Vocational Edtech]]
+- [[04-应用模式/02-行业架构/49-livestream-ecommerce.md|Livestream Ecommerce]]
+- [[04-应用模式/02-行业架构/50-unmanned-retail.md|Unmanned Retail]]
+- [[04-应用模式/02-行业架构/51-smart-manufacturing-mes.md|Smart Manufacturing Mes]]
+- [[04-应用模式/02-行业架构/52-smart-water.md|Smart Water]]
+- [[04-应用模式/02-行业架构/53-new-retail-dtc.md|New Retail Dtc]]
+- [[04-应用模式/02-行业架构/54-social-gaming-metaverse.md|Social Gaming Metaverse]]
+- [[04-应用模式/02-行业架构/55-crossborder-dtc.md|Crossborder Dtc]]
+- [[04-应用模式/02-行业架构/56-smart-elderly-care.md|Smart Elderly Care]]
+- [[04-应用模式/02-行业架构/57-digital-therapeutics.md|Digital Therapeutics]]
+- [[04-应用模式/02-行业架构/58-web3-gamefi.md|Web3 Gamefi]]
+- [[04-应用模式/02-行业架构/59-industrial-internet-platform.md|Industrial Internet Platform]]
+- [[04-应用模式/02-行业架构/60-v2x-autonomous-driving.md|V2X Autonomous Driving]]
+- [[04-应用模式/02-行业架构/61-smart-grid.md|Smart Grid]]
+- [[04-应用模式/02-行业架构/62-distributed-energy.md|Distributed Energy]]
+- [[04-应用模式/02-行业架构/63-industrial-visual-inspection.md|Industrial Visual Inspection]]
+- [[04-应用模式/02-行业架构/64-ai-drug-discovery.md|Ai Drug Discovery]]
+- [[04-应用模式/02-行业架构/65-autonomous-driving-sim.md|Autonomous Driving Sim]]
+- [[04-应用模式/02-行业架构/66-space-internet.md|Space Internet]]
+- [[04-应用模式/02-行业架构/67-brain-computer-interface.md|Brain Computer Interface]]
+- [[04-应用模式/02-行业架构/68-quantum-computing-cloud.md|Quantum Computing Cloud]]
+- [[04-应用模式/02-行业架构/69-6g-core-network.md|6G Core Network]]
+- [[04-应用模式/02-行业架构/70-ecny-cbdc.md|Ecny Cbdc]]
+- [[04-应用模式/02-行业架构/71-smart-tax.md|Smart Tax]]
+- [[04-应用模式/02-行业架构/72-digital-twin-city.md|Digital Twin City]]
+- [[04-应用模式/02-行业架构/73-smart-firefighting.md|Smart Firefighting]]
+- [[04-应用模式/02-行业架构/74-immersive-xr.md|Immersive Xr]]
+- [[04-应用模式/02-行业架构/75-affective-computing.md|Affective Computing]]
+- [[04-应用模式/02-行业架构/76-synthetic-biology.md|Synthetic Biology]]
+- [[04-应用模式/02-行业架构/77-fusion-energy-monitoring.md|Fusion Energy Monitoring]]
+- [[04-应用模式/02-行业架构/78-deep-sea-exploration.md|Deep Sea Exploration]]
+- [[04-应用模式/02-行业架构/79-polar-research.md|Polar Research]]
+- [[04-应用模式/02-行业架构/80-tsn-network.md|Tsn Network]]
+- [[04-应用模式/02-行业架构/81-smart-customs.md|Smart Customs]]
+- [[04-应用模式/02-行业架构/82-legaltech.md|Legaltech]]
+- [[04-应用模式/02-行业架构/83-cultural-digitization.md|Cultural Digitization]]
+- [[04-应用模式/02-行业架构/84-national-park.md|National Park]]
+- [[04-应用模式/02-行业架构/85-hydrogen-energy.md|Hydrogen Energy]]
+- [[04-应用模式/02-行业架构/86-solid-state-battery.md|Solid State Battery]]
+- [[04-应用模式/02-行业架构/87-flexible-manufacturing.md|Flexible Manufacturing]]
+- [[04-应用模式/02-行业架构/88-nanomaterials.md|Nanomaterials]]
+- [[04-应用模式/02-行业架构/89-crispr-gene-editing.md|Crispr Gene Editing]]
+- [[04-应用模式/02-行业架构/90-neuromorphic-computing.md|Neuromorphic Computing]]
+- [[04-应用模式/02-行业架构/91-urban-air-mobility.md|Urban Air Mobility]]
+- [[04-应用模式/02-行业架构/92-smart-sports-venue.md|Smart Sports Venue]]
+- [[04-应用模式/02-行业架构/93-digital-twin-factory.md|Digital Twin Factory]]
+- [[04-应用模式/02-行业架构/94-smart-prison.md|Smart Prison]]
+- [[04-应用模式/02-行业架构/95-industrial-metaverse.md|Industrial Metaverse]]
+- [[04-应用模式/02-行业架构/96-carbon-capture.md|Carbon Capture]]
+

@@ -26,14 +26,14 @@ jobs:
         with:
           node-version: '20'
           cache: 'npm'
-          cache-dependency-path: 站点/package-lock.json
+          cache-dependency-path: 30-站点/package-lock.json
 
       - name: Install dependencies
-        working-directory: 站点
+        working-directory: 30-站点
         run: npm ci
 
       - name: Build Astro site
-        working-directory: 站点
+        working-directory: 30-站点
         run: npm run build
 
       - name: Setup Pages

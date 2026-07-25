@@ -1,0 +1,3383 @@
+domain: 平台工程
+total_questions: 697
+generated_at: '2026-05-19'
+qa_pairs:
+- type: concept
+  question: 在 12-自动化运维工具链 中, Related 是什么?
+  answer: 参见 10-平台工程/12-automated-operations-toolchain.md 的「Related」章节。
+  source: 10-平台工程/12-automated-operations-toolchain.md
+  section: Related
+- type: concept
+  question: 在 12-自动化运维工具链 中, See Also 是什么?
+  answer: 参见 10-平台工程/12-automated-operations-toolchain.md 的「See Also」章节。
+  source: 10-平台工程/12-automated-operations-toolchain.md
+  section: See Also
+- type: operation
+  question: '如何执行与 12-自动化运维工具链 相关的操作: NODE_NAME=$(hostname)?'
+  answer: 参见 10-平台工程/12-automated-operations-toolchain.md 中的操作步骤。
+  source: 10-平台工程/12-automated-operations-toolchain.md
+  command: NODE_NAME=$(hostname)
+- type: operation
+  question: '如何执行与 12-自动化运维工具链 相关的操作: set -e?'
+  answer: 参见 10-平台工程/12-automated-operations-toolchain.md 中的操作步骤。
+  source: 10-平台工程/12-automated-operations-toolchain.md
+  command: set -e
+- type: concept
+  question: 在 Domain-36 平台工程 — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-36.md 的「核心项目」章节。
+  source: 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-36.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-36 平台工程 — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-36.md 的「参考链接」章节。
+  source: 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-36.md
+  section: 参考链接
+- type: concept
+  question: 在 Domain-36 平台工程 — 开源项目索引 中, Obsidian 相关文档 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-36.md 的「Obsidian 相关文档」章节。
+  source: 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-36.md
+  section: Obsidian 相关文档
+- type: concept
+  question: 在 Domain-9 平台运维 — 开源项目索引 中, 核心项目 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-9.md 的「核心项目」章节。
+  source: 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-9.md
+  section: 核心项目
+- type: concept
+  question: 在 Domain-9 平台运维 — 开源项目索引 中, 参考链接 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-9.md 的「参考链接」章节。
+  source: 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-9.md
+  section: 参考链接
+- type: concept
+  question: 在 Domain-9 平台运维 — 开源项目索引 中, Obsidian 相关文档 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-9.md 的「Obsidian 相关文档」章节。
+  source: 10-平台工程/98-merged-indexes/00-open-source-projects-index-from-domain-9.md
+  section: Obsidian 相关文档
+- type: concept
+  question: 在 domain-36-platform-engineering MOC 中, 领域概述 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-36.md 的「领域概述」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-36.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-36-platform-engineering MOC 中, 文档清单 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-36.md 的「文档清单」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-36.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-36-platform-engineering MOC 中, 知识图谱 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-36.md 的「知识图谱」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-36.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-36-platform-engineering MOC 中, 关联入口 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-36.md 的「关联入口」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-36.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-36-platform-engineering MOC 相关的故障?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-36.md 的故障排查章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-36.md
+- type: concept
+  question: 在 domain-9-platform-ops MOC 中, 领域概述 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-9.md 的「领域概述」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-9.md
+  section: 领域概述
+- type: concept
+  question: 在 domain-9-platform-ops MOC 中, 文档清单 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-9.md 的「文档清单」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-9.md
+  section: 文档清单
+- type: concept
+  question: 在 domain-9-platform-ops MOC 中, 知识图谱 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-9.md 的「知识图谱」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-9.md
+  section: 知识图谱
+- type: concept
+  question: 在 domain-9-platform-ops MOC 中, 关联入口 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-9.md 的「关联入口」章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-9.md
+  section: 关联入口
+- type: troubleshooting
+  question: 如何排查 domain-9-platform-ops MOC 相关的故障?
+  answer: 参见 10-平台工程/98-merged-indexes/MOC-from-domain-9.md 的故障排查章节。
+  source: 10-平台工程/98-merged-indexes/MOC-from-domain-9.md
+- type: concept
+  question: '在 Domain 36: 平台工程 (Platform Engineering) 中, 领域概览 是什么?'
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-36.md 的「领域概览」章节。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-36.md
+  section: 领域概览
+- type: concept
+  question: '在 Domain 36: 平台工程 (Platform Engineering) 中, 文档目录 是什么?'
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-36.md 的「文档目录」章节。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-36.md
+  section: 文档目录
+- type: operation
+  question: '如何执行与 Domain 36: 平台工程 (Platform Engineering) 相关的操作: Backstage (CNCF Incubating)     # 开发者门户?'
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-36.md 中的操作步骤。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-36.md
+  command: 'Backstage (CNCF Incubating)     # 开发者门户'
+- type: comparison
+  question: 'Domain 36: 平台工程 (Platform Engineering) 中有哪些技术对比?'
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-36.md 中的对比分析。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-36.md
+- type: concept
+  question: 在 Platform Ops Domain (平台运维领域) 中, 概述 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-9.md 的「概述」章节。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-9.md
+  section: 概述
+- type: concept
+  question: 在 Platform Ops Domain (平台运维领域) 中, 文档结构概览 是什么?
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-9.md 的「文档结构概览」章节。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-9.md
+  section: 文档结构概览
+- type: best_practice
+  question: 关于 Platform Ops Domain (平台运维领域), 有什么最佳实践?
+  answer: '- 📧 邮箱: allengaller@gmail.com'
+  source: 10-平台工程/98-merged-indexes/README-from-domain-9.md
+- type: troubleshooting
+  question: 如何排查 Platform Ops Domain (平台运维领域) 相关的故障?
+  answer: 参见 10-平台工程/98-merged-indexes/README-from-domain-9.md 的故障排查章节。
+  source: 10-平台工程/98-merged-indexes/README-from-domain-9.md
+- type: concept
+  question: 在 Karpenter 节点自动扩展实践指南 中, See Also 是什么?
+  answer: 参见 10-平台工程/99-karpenter-node-autoscaling-guide.md 的「See Also」章节。
+  source: 10-平台工程/99-karpenter-node-autoscaling-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Karpenter 节点自动扩展实践指南 相关的操作: export CLUSTER_NAME=production?'
+  answer: 参见 10-平台工程/99-karpenter-node-autoscaling-guide.md 中的操作步骤。
+  source: 10-平台工程/99-karpenter-node-autoscaling-guide.md
+  command: export CLUSTER_NAME=production
+- type: operation
+  question: '如何执行与 Karpenter 节点自动扩展实践指南 相关的操作: helm repo add karpenter https://charts.karpenter.sh?'
+  answer: 参见 10-平台工程/99-karpenter-node-autoscaling-guide.md 中的操作步骤。
+  source: 10-平台工程/99-karpenter-node-autoscaling-guide.md
+  command: helm repo add karpenter https://charts.karpenter.sh
+- type: operation
+  question: '如何执行与 Karpenter 节点自动扩展实践指南 相关的操作: kubectl get pods -n karpenter?'
+  answer: 参见 10-平台工程/99-karpenter-node-autoscaling-guide.md 中的操作步骤。
+  source: 10-平台工程/99-karpenter-node-autoscaling-guide.md
+  command: kubectl get pods -n karpenter
+- type: comparison
+  question: Karpenter 节点自动扩展实践指南 中有哪些技术对比?
+  answer: 参见 10-平台工程/99-karpenter-node-autoscaling-guide.md 中的对比分析。
+  source: 10-平台工程/99-karpenter-node-autoscaling-guide.md
+- type: concept
+  question: 在 KEDA 事件驱动自动缩放实践指南 中, See Also 是什么?
+  answer: 参见 10-平台工程/99-keda-event-driven-autoscaling-guide.md 的「See Also」章节。
+  source: 10-平台工程/99-keda-event-driven-autoscaling-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 KEDA 事件驱动自动缩放实践指南 相关的操作: helm repo add kedacore https://kedacore.github.io/charts?'
+  answer: 参见 10-平台工程/99-keda-event-driven-autoscaling-guide.md 中的操作步骤。
+  source: 10-平台工程/99-keda-event-driven-autoscaling-guide.md
+  command: helm repo add kedacore https://kedacore.github.io/charts
+- type: operation
+  question: '如何执行与 KEDA 事件驱动自动缩放实践指南 相关的操作: kubectl get pods -n keda?'
+  answer: 参见 10-平台工程/99-keda-event-driven-autoscaling-guide.md 中的操作步骤。
+  source: 10-平台工程/99-keda-event-driven-autoscaling-guide.md
+  command: kubectl get pods -n keda
+- type: comparison
+  question: KEDA 事件驱动自动缩放实践指南 中有哪些技术对比?
+  answer: 参见 10-平台工程/99-keda-event-driven-autoscaling-guide.md 中的对比分析。
+  source: 10-平台工程/99-keda-event-driven-autoscaling-guide.md
+- type: concept
+  question: 在 平台工程概述与成熟度模型 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/01-platform-engineering-overview.md 的「See Also」章节。
+  source: 10-平台工程/build/01-platform-engineering-overview.md
+  section: See Also
+- type: comparison
+  question: 平台工程概述与成熟度模型 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/01-platform-engineering-overview.md 中的对比分析。
+  source: 10-平台工程/build/01-platform-engineering-overview.md
+- type: concept
+  question: 在 内部开发者平台设计原则 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/02-idp-design-principles.md 的「See Also」章节。
+  source: 10-平台工程/build/02-idp-design-principles.md
+  section: See Also
+- type: comparison
+  question: 内部开发者平台设计原则 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/02-idp-design-principles.md 中的对比分析。
+  source: 10-平台工程/build/02-idp-design-principles.md
+- type: concept
+  question: 在 Backstage 部署与配置 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/03-backstage-deployment.md 的「See Also」章节。
+  source: 10-平台工程/build/03-backstage-deployment.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Backstage 部署与配置 相关的操作: set -euo pipefail?'
+  answer: 参见 10-平台工程/build/03-backstage-deployment.md 中的操作步骤。
+  source: 10-平台工程/build/03-backstage-deployment.md
+  command: set -euo pipefail
+- type: concept
+  question: 在 Backstage 软件目录与 TechDocs 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/04-backstage-catalog-techdocs.md 的「See Also」章节。
+  source: 10-平台工程/build/04-backstage-catalog-techdocs.md
+  section: See Also
+- type: troubleshooting
+  question: 如何排查 Backstage 软件目录与 TechDocs 相关的故障?
+  answer: 参见 10-平台工程/build/04-backstage-catalog-techdocs.md 的故障排查章节。
+  source: 10-平台工程/build/04-backstage-catalog-techdocs.md
+- type: comparison
+  question: Backstage 软件目录与 TechDocs 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/04-backstage-catalog-techdocs.md 中的对比分析。
+  source: 10-平台工程/build/04-backstage-catalog-techdocs.md
+- type: concept
+  question: 在 Backstage 脚手架与模板系统 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/05-backstage-scaffolder-templates.md 的「See Also」章节。
+  source: 10-平台工程/build/05-backstage-scaffolder-templates.md
+  section: See Also
+- type: concept
+  question: 在 Kratix 平台即代码 (Kratix Platform as Code) 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/06-kratix-platform-as-code.md 的「See Also」章节。
+  source: 10-平台工程/build/06-kratix-platform-as-code.md
+  section: See Also
+- type: comparison
+  question: Kratix 平台即代码 (Kratix Platform as Code) 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/06-kratix-platform-as-code.md 中的对比分析。
+  source: 10-平台工程/build/06-kratix-platform-as-code.md
+- type: concept
+  question: 在 Crossplane 平台组合 (Crossplane Platform Composition) 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/07-crossplane-platform-composition.md 的「See Also」章节。
+  source: 10-平台工程/build/07-crossplane-platform-composition.md
+  section: See Also
+- type: comparison
+  question: Crossplane 平台组合 (Crossplane Platform Composition) 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/07-crossplane-platform-composition.md 中的对比分析。
+  source: 10-平台工程/build/07-crossplane-platform-composition.md
+- type: concept
+  question: 在 Golden Paths 黄金路径设计 (Golden Paths Design Patterns) 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/08-golden-paths-design.md 的「See Also」章节。
+  source: 10-平台工程/build/08-golden-paths-design.md
+  section: See Also
+- type: comparison
+  question: Golden Paths 黄金路径设计 (Golden Paths Design Patterns) 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/08-golden-paths-design.md 中的对比分析。
+  source: 10-平台工程/build/08-golden-paths-design.md
+- type: concept
+  question: 在 Vercel 前端部署平台深度指南 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/11-vercel-frontend-deployment-platform.md 的「See Also」章节。
+  source: 10-平台工程/build/11-vercel-frontend-deployment-platform.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Vercel 前端部署平台深度指南 相关的操作: node --version?'
+  answer: 参见 10-平台工程/build/11-vercel-frontend-deployment-platform.md 中的操作步骤。
+  source: 10-平台工程/build/11-vercel-frontend-deployment-platform.md
+  command: node --version
+- type: operation
+  question: '如何执行与 Vercel 前端部署平台深度指南 相关的操作: npx create-next-app@latest my-app?'
+  answer: 参见 10-平台工程/build/11-vercel-frontend-deployment-platform.md 中的操作步骤。
+  source: 10-平台工程/build/11-vercel-frontend-deployment-platform.md
+  command: npx create-next-app@latest my-app
+- type: best_practice
+  question: 关于 Vercel 前端部署平台深度指南, 有什么最佳实践?
+  answer: ✅ 数据库密码、API Key → 使用 Vercel Environment Variables (加密存储)
+  source: 10-平台工程/build/11-vercel-frontend-deployment-platform.md
+- type: comparison
+  question: Vercel 前端部署平台深度指南 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/11-vercel-frontend-deployment-platform.md 中的对比分析。
+  source: 10-平台工程/build/11-vercel-frontend-deployment-platform.md
+- type: concept
+  question: 在 31 - CRD与Operator开发 中, CRD版本规范 是什么?
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 的「CRD版本规范」章节。
+  source: 10-平台工程/build/20-crd-operator-development.md
+  section: CRD版本规范
+- type: concept
+  question: 在 31 - CRD与Operator开发 中, CRD结构定义 是什么?
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 的「CRD结构定义」章节。
+  source: 10-平台工程/build/20-crd-operator-development.md
+  section: CRD结构定义
+- type: concept
+  question: 在 31 - CRD与Operator开发 中, CRD验证规则 是什么?
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 的「CRD验证规则」章节。
+  source: 10-平台工程/build/20-crd-operator-development.md
+  section: CRD验证规则
+- type: concept
+  question: 在 31 - CRD与Operator开发 中, CRD示例 是什么?
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 的「CRD示例」章节。
+  source: 10-平台工程/build/20-crd-operator-development.md
+  section: CRD示例
+- type: concept
+  question: 在 31 - CRD与Operator开发 中, CRD版本转换 是什么?
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 的「CRD版本转换」章节。
+  source: 10-平台工程/build/20-crd-operator-development.md
+  section: CRD版本转换
+- type: operation
+  question: '如何执行与 31 - CRD与Operator开发 相关的操作: kubebuilder init --domain example.com --repo github.com/exam?'
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 中的操作步骤。
+  source: 10-平台工程/build/20-crd-operator-development.md
+  command: kubebuilder init --domain example.com --repo github.com/example/app-operator
+- type: comparison
+  question: 31 - CRD与Operator开发 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/20-crd-operator-development.md 中的对比分析。
+  source: 10-平台工程/build/20-crd-operator-development.md
+- type: concept
+  question: 在 32 - API聚合层配置 中, API聚合架构 是什么?
+  answer: 参见 10-平台工程/build/21-api-aggregation.md 的「API聚合架构」章节。
+  source: 10-平台工程/build/21-api-aggregation.md
+  section: API聚合架构
+- type: concept
+  question: 在 32 - API聚合层配置 中, APIService配置 是什么?
+  answer: 参见 10-平台工程/build/21-api-aggregation.md 的「APIService配置」章节。
+  source: 10-平台工程/build/21-api-aggregation.md
+  section: APIService配置
+- type: concept
+  question: 在 32 - API聚合层配置 中, APIService示例 是什么?
+  answer: 参见 10-平台工程/build/21-api-aggregation.md 的「APIService示例」章节。
+  source: 10-平台工程/build/21-api-aggregation.md
+  section: APIService示例
+- type: concept
+  question: 在 32 - API聚合层配置 中, 内置聚合API 是什么?
+  answer: 参见 10-平台工程/build/21-api-aggregation.md 的「内置聚合API」章节。
+  source: 10-平台工程/build/21-api-aggregation.md
+  section: 内置聚合API
+- type: concept
+  question: 在 32 - API聚合层配置 中, Extension API Server开发 是什么?
+  answer: 参见 10-平台工程/build/21-api-aggregation.md 的「Extension API Server开发」章节。
+  source: 10-平台工程/build/21-api-aggregation.md
+  section: Extension API Server开发
+- type: operation
+  question: '如何执行与 32 - API聚合层配置 相关的操作: kubectl get apiservices?'
+  answer: 参见 10-平台工程/build/21-api-aggregation.md 中的操作步骤。
+  source: 10-平台工程/build/21-api-aggregation.md
+  command: kubectl get apiservices
+- type: concept
+  question: 在 46 - Kubernetes客户端库 中, 客户端库架构 是什么?
+  answer: 参见 10-平台工程/build/22-client-libraries.md 的「客户端库架构」章节。
+  source: 10-平台工程/build/22-client-libraries.md
+  section: 客户端库架构
+- type: concept
+  question: 在 46 - Kubernetes客户端库 中, 官方客户端库对比 是什么?
+  answer: 参见 10-平台工程/build/22-client-libraries.md 的「官方客户端库对比」章节。
+  source: 10-平台工程/build/22-client-libraries.md
+  section: 官方客户端库对比
+- type: concept
+  question: 在 46 - Kubernetes客户端库 中, Go client-go详解 是什么?
+  answer: 参见 10-平台工程/build/22-client-libraries.md 的「Go client-go详解」章节。
+  source: 10-平台工程/build/22-client-libraries.md
+  section: Go client-go详解
+- type: comparison
+  question: 46 - Kubernetes客户端库 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/22-client-libraries.md 中的对比分析。
+  source: 10-平台工程/build/22-client-libraries.md
+- type: concept
+  question: 在 14 - 附加组件和扩展表 中, 必备附加组件 是什么?
+  answer: 参见 10-平台工程/build/24-addons-extensions.md 的「必备附加组件」章节。
+  source: 10-平台工程/build/24-addons-extensions.md
+  section: 必备附加组件
+- type: concept
+  question: 在 14 - 附加组件和扩展表 中, 可观测性组件 是什么?
+  answer: 参见 10-平台工程/build/24-addons-extensions.md 的「可观测性组件」章节。
+  source: 10-平台工程/build/24-addons-extensions.md
+  section: 可观测性组件
+- type: concept
+  question: 在 14 - 附加组件和扩展表 中, Ingress控制器 是什么?
+  answer: 参见 10-平台工程/build/24-addons-extensions.md 的「Ingress控制器」章节。
+  source: 10-平台工程/build/24-addons-extensions.md
+  section: Ingress控制器
+- type: concept
+  question: 在 14 - 附加组件和扩展表 中, Service Mesh 是什么?
+  answer: 参见 10-平台工程/build/24-addons-extensions.md 的「Service Mesh」章节。
+  source: 10-平台工程/build/24-addons-extensions.md
+  section: Service Mesh
+- type: concept
+  question: 在 14 - 附加组件和扩展表 中, 安全组件 是什么?
+  answer: 参见 10-平台工程/build/24-addons-extensions.md 的「安全组件」章节。
+  source: 10-平台工程/build/24-addons-extensions.md
+  section: 安全组件
+- type: operation
+  question: '如何执行与 14 - 附加组件和扩展表 相关的操作: helm repo add jetstack https://charts.jetstack.io?'
+  answer: 参见 10-平台工程/build/24-addons-extensions.md 中的操作步骤。
+  source: 10-平台工程/build/24-addons-extensions.md
+  command: helm repo add jetstack https://charts.jetstack.io
+- type: concept
+  question: 在 Backstage 内部开发者平台 (IDP) 构建指南 中, See Also 是什么?
+  answer: 参见 10-平台工程/build/99-backstage-idp-guide.md 的「See Also」章节。
+  source: 10-平台工程/build/99-backstage-idp-guide.md
+  section: See Also
+- type: operation
+  question: '如何执行与 Backstage 内部开发者平台 (IDP) 构建指南 相关的操作: npx @backstage/create-app@latest?'
+  answer: 参见 10-平台工程/build/99-backstage-idp-guide.md 中的操作步骤。
+  source: 10-平台工程/build/99-backstage-idp-guide.md
+  command: npx @backstage/create-app@latest
+- type: concept
+  question: 在 Java Kubernetes Client 与 Operator SDK 开发指南 中, 目录 是什么?
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 的「目录」章节。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+  section: 目录
+- type: concept
+  question: 在 Java Kubernetes Client 与 Operator SDK 开发指南 中, Java K8s Client 生态全景 是什么?
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 的「Java K8s Client 生态全景」章节。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+  section: Java K8s Client 生态全景
+- type: concept
+  question: 在 Java Kubernetes Client 与 Operator SDK 开发指南 中, fabric8 Kubernetes Client 是什么?
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 的「fabric8 Kubernetes Client」章节。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+  section: fabric8 Kubernetes Client
+- type: operation
+  question: '如何执行与 Java Kubernetes Client 与 Operator SDK 开发指南 相关的操作: ./mvnw package -Dnative \?'
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 中的操作步骤。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+  command: ./mvnw package -Dnative \
+- type: operation
+  question: '如何执行与 Java Kubernetes Client 与 Operator SDK 开发指南 相关的操作: ./mvnw k8s:generate-crd?'
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 中的操作步骤。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+  command: ./mvnw k8s:generate-crd
+- type: troubleshooting
+  question: 如何排查 Java Kubernetes Client 与 Operator SDK 开发指南 相关的故障?
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 的故障排查章节。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+- type: comparison
+  question: Java Kubernetes Client 与 Operator SDK 开发指南 中有哪些技术对比?
+  answer: 参见 10-平台工程/build/99-java-k8s-client-operator-guide.md 中的对比分析。
+  source: 10-平台工程/build/99-java-k8s-client-operator-guide.md
+- type: concept
+  question: 在 开发者体验度量 (Developer Experience Metrics) 中, See Also 是什么?
+  answer: 参见 10-平台工程/developer-experience/09-developer-experience-metrics.md 的「See Also」章节。
+  source: 10-平台工程/developer-experience/09-developer-experience-metrics.md
+  section: See Also
+- type: comparison
+  question: 开发者体验度量 (Developer Experience Metrics) 中有哪些技术对比?
+  answer: 参见 10-平台工程/developer-experience/09-developer-experience-metrics.md 中的对比分析。
+  source: 10-平台工程/developer-experience/09-developer-experience-metrics.md
+- type: concept
+  question: 在 平台团队拓扑与运营 (Platform Team Topology and Operations) 中, See Also 是什么?
+  answer: 参见 10-平台工程/developer-experience/10-platform-team-topology.md 的「See Also」章节。
+  source: 10-平台工程/developer-experience/10-platform-team-topology.md
+  section: See Also
+- type: comparison
+  question: 平台团队拓扑与运营 (Platform Team Topology and Operations) 中有哪些技术对比?
+  answer: 参见 10-平台工程/developer-experience/10-platform-team-topology.md 中的对比分析。
+  source: 10-平台工程/developer-experience/10-platform-team-topology.md
+- type: concept
+  question: 在 110 - CLI 增强与效率工具 (CLI Enhancement) 中, CLI 效率提升工具 是什么?
+  answer: 参见 10-平台工程/developer-experience/23-cli-enhancement-tools.md 的「CLI 效率提升工具」章节。
+  source: 10-平台工程/developer-experience/23-cli-enhancement-tools.md
+  section: CLI 效率提升工具
+- type: concept
+  question: 在 110 - CLI 增强与效率工具 (CLI Enhancement) 中, kubectx / kubens 快速切换 是什么?
+  answer: 参见 10-平台工程/developer-experience/23-cli-enhancement-tools.md 的「kubectx / kubens 快速切换」章节。
+  source: 10-平台工程/developer-experience/23-cli-enhancement-tools.md
+  section: kubectx / kubens 快速切换
+- type: concept
+  question: 在 110 - CLI 增强与效率工具 (CLI Enhancement) 中, kube-capacity 资源余量 是什么?
+  answer: 参见 10-平台工程/developer-experience/23-cli-enhancement-tools.md 的「kube-capacity 资源余量」章节。
+  source: 10-平台工程/developer-experience/23-cli-enhancement-tools.md
+  section: kube-capacity 资源余量
+- type: operation
+  question: '如何执行与 110 - CLI 增强与效率工具 (CLI Enhancement) 相关的操作: kubectx?'
+  answer: 参见 10-平台工程/developer-experience/23-cli-enhancement-tools.md 中的操作步骤。
+  source: 10-平台工程/developer-experience/23-cli-enhancement-tools.md
+  command: kubectx
+- type: operation
+  question: '如何执行与 110 - CLI 增强与效率工具 (CLI Enhancement) 相关的操作: alias kx=''kubectx''?'
+  answer: 参见 10-平台工程/developer-experience/23-cli-enhancement-tools.md 中的操作步骤。
+  source: 10-平台工程/developer-experience/23-cli-enhancement-tools.md
+  command: alias kx='kubectx'
+- type: operation
+  question: '如何执行与 110 - CLI 增强与效率工具 (CLI Enhancement) 相关的操作: kube-capacity?'
+  answer: 参见 10-平台工程/developer-experience/23-cli-enhancement-tools.md 中的操作步骤。
+  source: 10-平台工程/developer-experience/23-cli-enhancement-tools.md
+  command: kube-capacity
+- type: concept
+  question: 在 kubectl 插件生态知识手册 中, 插件概述 是什么?
+  answer: 参见 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md 的「插件概述」章节。
+  source: 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md
+  section: 插件概述
+- type: concept
+  question: 在 kubectl 插件生态知识手册 中, 高频生产插件详解 是什么?
+  answer: 参见 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md 的「高频生产插件详解」章节。
+  source: 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md
+  section: 高频生产插件详解
+- type: operation
+  question: '如何执行与 kubectl 插件生态知识手册 相关的操作: (?'
+  answer: 参见 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md 中的操作步骤。
+  source: 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md
+  command: (
+- type: operation
+  question: '如何执行与 kubectl 插件生态知识手册 相关的操作: kubectl whoami?'
+  answer: 参见 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md 中的操作步骤。
+  source: 10-平台工程/developer-experience/26-kubectl-plugin-ecosystem.md
+  command: kubectl whoami
+- type: concept
+  question: 在 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/03-capacity-planning-resource-assessment.md 的「概述」章节。
+  source: 10-平台工程/governance/03-capacity-planning-resource-assessment.md
+  section: 概述
+- type: concept
+  question: 在 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中, 容量规划框架 是什么?
+  answer: 参见 10-平台工程/governance/03-capacity-planning-resource-assessment.md 的「容量规划框架」章节。
+  source: 10-平台工程/governance/03-capacity-planning-resource-assessment.md
+  section: 容量规划框架
+- type: concept
+  question: 在 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中, 业务需求分析 是什么?
+  answer: 参见 10-平台工程/governance/03-capacity-planning-resource-assessment.md 的「业务需求分析」章节。
+  source: 10-平台工程/governance/03-capacity-planning-resource-assessment.md
+  section: 业务需求分析
+- type: troubleshooting
+  question: 如何排查 容量规划与资源评估 (Capacity Planning & Resource Assessment) 相关的故障?
+  answer: 参见 10-平台工程/governance/03-capacity-planning-resource-assessment.md 的故障排查章节。
+  source: 10-平台工程/governance/03-capacity-planning-resource-assessment.md
+- type: comparison
+  question: 容量规划与资源评估 (Capacity Planning & Resource Assessment) 中有哪些技术对比?
+  answer: 参见 10-平台工程/governance/03-capacity-planning-resource-assessment.md 中的对比分析。
+  source: 10-平台工程/governance/03-capacity-planning-resource-assessment.md
+- type: concept
+  question: 在 性能基准测试与调优 (Performance Benchmarking & Tuning) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/04-performance-benchmarking-tuning.md 的「概述」章节。
+  source: 10-平台工程/governance/04-performance-benchmarking-tuning.md
+  section: 概述
+- type: concept
+  question: 在 性能基准测试与调优 (Performance Benchmarking & Tuning) 中, 性能调优全景视图 是什么?
+  answer: 参见 10-平台工程/governance/04-performance-benchmarking-tuning.md 的「性能调优全景视图」章节。
+  source: 10-平台工程/governance/04-performance-benchmarking-tuning.md
+  section: 性能调优全景视图
+- type: concept
+  question: 在 性能基准测试与调优 (Performance Benchmarking & Tuning) 中, 基准测试框架 是什么?
+  answer: 参见 10-平台工程/governance/04-performance-benchmarking-tuning.md 的「基准测试框架」章节。
+  source: 10-平台工程/governance/04-performance-benchmarking-tuning.md
+  section: 基准测试框架
+- type: operation
+  question: '如何执行与 性能基准测试与调优 (Performance Benchmarking & Tuning) 相关的操作: test_api_server_performance() {?'
+  answer: 参见 10-平台工程/governance/04-performance-benchmarking-tuning.md 中的操作步骤。
+  source: 10-平台工程/governance/04-performance-benchmarking-tuning.md
+  command: test_api_server_performance() {
+- type: troubleshooting
+  question: 如何排查 性能基准测试与调优 (Performance Benchmarking & Tuning) 相关的故障?
+  answer: 参见 10-平台工程/governance/04-performance-benchmarking-tuning.md 的故障排查章节。
+  source: 10-平台工程/governance/04-performance-benchmarking-tuning.md
+- type: comparison
+  question: 性能基准测试与调优 (Performance Benchmarking & Tuning) 中有哪些技术对比?
+  answer: 参见 10-平台工程/governance/04-performance-benchmarking-tuning.md 中的对比分析。
+  source: 10-平台工程/governance/04-performance-benchmarking-tuning.md
+- type: concept
+  question: 在 成本优化与FinOps实践 (Cost Optimization & FinOps) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/09-cost-optimization-finops.md 的「概述」章节。
+  source: 10-平台工程/governance/09-cost-optimization-finops.md
+  section: 概述
+- type: concept
+  question: 在 成本优化与FinOps实践 (Cost Optimization & FinOps) 中, 成本管理框架 是什么?
+  answer: 参见 10-平台工程/governance/09-cost-optimization-finops.md 的「成本管理框架」章节。
+  source: 10-平台工程/governance/09-cost-optimization-finops.md
+  section: 成本管理框架
+- type: concept
+  question: 在 成本优化与FinOps实践 (Cost Optimization & FinOps) 中, Kubecost成本分析 是什么?
+  answer: 参见 10-平台工程/governance/09-cost-optimization-finops.md 的「Kubecost成本分析」章节。
+  source: 10-平台工程/governance/09-cost-optimization-finops.md
+  section: Kubecost成本分析
+- type: concept
+  question: 在 安全合规管理 (Security & Compliance Management) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/10-security-compliance.md 的「概述」章节。
+  source: 10-平台工程/governance/10-security-compliance.md
+  section: 概述
+- type: concept
+  question: 在 安全合规管理 (Security & Compliance Management) 中, 零信任安全架构 是什么?
+  answer: 参见 10-平台工程/governance/10-security-compliance.md 的「零信任安全架构」章节。
+  source: 10-平台工程/governance/10-security-compliance.md
+  section: 零信任安全架构
+- type: concept
+  question: 在 安全合规管理 (Security & Compliance Management) 中, 身份认证与授权 是什么?
+  answer: 参见 10-平台工程/governance/10-security-compliance.md 的「身份认证与授权」章节。
+  source: 10-平台工程/governance/10-security-compliance.md
+  section: 身份认证与授权
+- type: concept
+  question: 在 大规模集群性能优化 (Large Scale Cluster Optimization) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/14-large-scale-cluster-optimization.md 的「概述」章节。
+  source: 10-平台工程/governance/14-large-scale-cluster-optimization.md
+  section: 概述
+- type: concept
+  question: 在 大规模集群性能优化 (Large Scale Cluster Optimization) 中, 大规模集群挑战分析 是什么?
+  answer: 参见 10-平台工程/governance/14-large-scale-cluster-optimization.md 的「大规模集群挑战分析」章节。
+  source: 10-平台工程/governance/14-large-scale-cluster-optimization.md
+  section: 大规模集群挑战分析
+- type: concept
+  question: 在 大规模集群性能优化 (Large Scale Cluster Optimization) 中, 控制平面优化策略 是什么?
+  answer: 参见 10-平台工程/governance/14-large-scale-cluster-optimization.md 的「控制平面优化策略」章节。
+  source: 10-平台工程/governance/14-large-scale-cluster-optimization.md
+  section: 控制平面优化策略
+- type: operation
+  question: '如何执行与 大规模集群性能优化 (Large Scale Cluster Optimization) 相关的操作: optimize_etcd_for_large_cluster() {?'
+  answer: 参见 10-平台工程/governance/14-large-scale-cluster-optimization.md 中的操作步骤。
+  source: 10-平台工程/governance/14-large-scale-cluster-optimization.md
+  command: optimize_etcd_for_large_cluster() {
+- type: troubleshooting
+  question: 如何排查 大规模集群性能优化 (Large Scale Cluster Optimization) 相关的故障?
+  answer: 参见 10-平台工程/governance/14-large-scale-cluster-optimization.md 的故障排查章节。
+  source: 10-平台工程/governance/14-large-scale-cluster-optimization.md
+- type: concept
+  question: 在 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/17-multi-tenant-management.md 的「概述」章节。
+  source: 10-平台工程/governance/17-multi-tenant-management.md
+  section: 概述
+- type: concept
+  question: 在 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 中, 概述 是什么?
+  answer: 参见 10-平台工程/governance/17-multi-tenant-management.md 的「概述」章节。
+  source: 10-平台工程/governance/17-multi-tenant-management.md
+  section: 概述
+- type: concept
+  question: 在 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 中, 多租户架构设计原则 是什么?
+  answer: 参见 10-平台工程/governance/17-multi-tenant-management.md 的「多租户架构设计原则」章节。
+  source: 10-平台工程/governance/17-multi-tenant-management.md
+  section: 多租户架构设计原则
+- type: troubleshooting
+  question: 如何排查 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 相关的故障?
+  answer: 参见 10-平台工程/governance/17-multi-tenant-management.md 的故障排查章节。
+  source: 10-平台工程/governance/17-multi-tenant-management.md
+- type: comparison
+  question: 多租户管理与资源隔离 (Multi-Tenant Management  Resource Isolation) 中有哪些技术对比?
+  answer: 参见 10-平台工程/governance/17-multi-tenant-management.md 中的对比分析。
+  source: 10-平台工程/governance/17-multi-tenant-management.md
+- type: concept
+  question: 在 平台运维概述 (Platform Operations Overview) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/01-platform-ops-overview.md 的「概述」章节。
+  source: 10-平台工程/operate/01-platform-ops-overview.md
+  section: 概述
+- type: concept
+  question: 在 平台运维概述 (Platform Operations Overview) 中, 核心职责 是什么?
+  answer: 参见 10-平台工程/operate/01-platform-ops-overview.md 的「核心职责」章节。
+  source: 10-平台工程/operate/01-platform-ops-overview.md
+  section: 核心职责
+- type: troubleshooting
+  question: 如何排查 平台运维概述 (Platform Operations Overview) 相关的故障?
+  answer: 参见 10-平台工程/operate/01-platform-ops-overview.md 的故障排查章节。
+  source: 10-平台工程/operate/01-platform-ops-overview.md
+- type: concept
+  question: 在 集群生命周期管理 (Cluster Lifecycle Management) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/02-cluster-lifecycle-management.md 的「概述」章节。
+  source: 10-平台工程/operate/02-cluster-lifecycle-management.md
+  section: 概述
+- type: concept
+  question: 在 集群生命周期管理 (Cluster Lifecycle Management) 中, 生命周期阶段 是什么?
+  answer: 参见 10-平台工程/operate/02-cluster-lifecycle-management.md 的「生命周期阶段」章节。
+  source: 10-平台工程/operate/02-cluster-lifecycle-management.md
+  section: 生命周期阶段
+- type: operation
+  question: '如何执行与 集群生命周期管理 (Cluster Lifecycle Management) 相关的操作: CPU: 8核/节点 (控制平面), 4核/节点 (工作节点)?'
+  answer: 参见 10-平台工程/operate/02-cluster-lifecycle-management.md 中的操作步骤。
+  source: 10-平台工程/operate/02-cluster-lifecycle-management.md
+  command: 'CPU: 8核/节点 (控制平面), 4核/节点 (工作节点)'
+- type: troubleshooting
+  question: 如何排查 集群生命周期管理 (Cluster Lifecycle Management) 相关的故障?
+  answer: 参见 10-平台工程/operate/02-cluster-lifecycle-management.md 的故障排查章节。
+  source: 10-平台工程/operate/02-cluster-lifecycle-management.md
+- type: concept
+  question: 在 运维指标体系建设 (Operations Metrics System) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/05-operations-metrics-system.md 的「概述」章节。
+  source: 10-平台工程/operate/05-operations-metrics-system.md
+  section: 概述
+- type: concept
+  question: 在 运维指标体系建设 (Operations Metrics System) 中, 指标体系架构 是什么?
+  answer: 参见 10-平台工程/operate/05-operations-metrics-system.md 的「指标体系架构」章节。
+  source: 10-平台工程/operate/05-operations-metrics-system.md
+  section: 指标体系架构
+- type: concept
+  question: 在 运维指标体系建设 (Operations Metrics System) 中, 四级指标体系详解 是什么?
+  answer: 参见 10-平台工程/operate/05-operations-metrics-system.md 的「四级指标体系详解」章节。
+  source: 10-平台工程/operate/05-operations-metrics-system.md
+  section: 四级指标体系详解
+- type: troubleshooting
+  question: 如何排查 运维指标体系建设 (Operations Metrics System) 相关的故障?
+  answer: 参见 10-平台工程/operate/05-operations-metrics-system.md 的故障排查章节。
+  source: 10-平台工程/operate/05-operations-metrics-system.md
+- type: concept
+  question: 在 监控告警体系 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/06-monitoring-alerting-system.md 的「概述」章节。
+  source: 10-平台工程/operate/06-monitoring-alerting-system.md
+  section: 概述
+- type: concept
+  question: 在 监控告警体系 中, 核心组件架构 是什么?
+  answer: 参见 10-平台工程/operate/06-monitoring-alerting-system.md 的「核心组件架构」章节。
+  source: 10-平台工程/operate/06-monitoring-alerting-system.md
+  section: 核心组件架构
+- type: troubleshooting
+  question: 如何排查 监控告警体系 相关的故障?
+  answer: 参见 10-平台工程/operate/06-monitoring-alerting-system.md 的故障排查章节。
+  source: 10-平台工程/operate/06-monitoring-alerting-system.md
+- type: concept
+  question: 在 GitOps配置管理 (GitOps Configuration Management) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/07-gitops-configuration-management.md 的「概述」章节。
+  source: 10-平台工程/operate/07-gitops-configuration-management.md
+  section: 概述
+- type: concept
+  question: 在 GitOps配置管理 (GitOps Configuration Management) 中, 核心理念 是什么?
+  answer: 参见 10-平台工程/operate/07-gitops-configuration-management.md 的「核心理念」章节。
+  source: 10-平台工程/operate/07-gitops-configuration-management.md
+  section: 核心理念
+- type: concept
+  question: 在 运维自动化工具链 (Operations Automation Toolchain) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/08-automation-toolchain.md 的「概述」章节。
+  source: 10-平台工程/operate/08-automation-toolchain.md
+  section: 概述
+- type: concept
+  question: 在 运维自动化工具链 (Operations Automation Toolchain) 中, 工具链架构 是什么?
+  answer: 参见 10-平台工程/operate/08-automation-toolchain.md 的「工具链架构」章节。
+  source: 10-平台工程/operate/08-automation-toolchain.md
+  section: 工具链架构
+- type: concept
+  question: 在 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/11-disaster-recovery-business-continuity.md 的「概述」章节。
+  source: 10-平台工程/operate/11-disaster-recovery-business-continuity.md
+  section: 概述
+- type: concept
+  question: 在 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity) 中, 灾难恢复策略 是什么?
+  answer: 参见 10-平台工程/operate/11-disaster-recovery-business-continuity.md 的「灾难恢复策略」章节。
+  source: 10-平台工程/operate/11-disaster-recovery-business-continuity.md
+  section: 灾难恢复策略
+- type: concept
+  question: 在 灾难恢复与业务连续性 (Disaster Recovery & Business Continuity) 中, 备份策略体系 是什么?
+  answer: 参见 10-平台工程/operate/11-disaster-recovery-business-continuity.md 的「备份策略体系」章节。
+  source: 10-平台工程/operate/11-disaster-recovery-business-continuity.md
+  section: 备份策略体系
+- type: concept
+  question: 在 Kubernetes 备份与恢复概述 (Backup & Recovery Overview) 中, 备份与恢复整体架构 是什么?
+  answer: 参见 10-平台工程/operate/12-backup-recovery-strategy.md 的「备份与恢复整体架构」章节。
+  source: 10-平台工程/operate/12-backup-recovery-strategy.md
+  section: 备份与恢复整体架构
+- type: concept
+  question: 在 Kubernetes 备份与恢复概述 (Backup & Recovery Overview) 中, 企业级备份恢复实战案例 是什么?
+  answer: 参见 10-平台工程/operate/12-backup-recovery-strategy.md 的「企业级备份恢复实战案例」章节。
+  source: 10-平台工程/operate/12-backup-recovery-strategy.md
+  section: 企业级备份恢复实战案例
+- type: troubleshooting
+  question: 如何排查 Kubernetes 备份与恢复概述 (Backup & Recovery Overview) 相关的故障?
+  answer: 参见 10-平台工程/operate/12-backup-recovery-strategy.md 的故障排查章节。
+  source: 10-平台工程/operate/12-backup-recovery-strategy.md
+- type: comparison
+  question: Kubernetes 备份与恢复概述 (Backup & Recovery Overview) 中有哪些技术对比?
+  answer: 参见 10-平台工程/operate/12-backup-recovery-strategy.md 中的对比分析。
+  source: 10-平台工程/operate/12-backup-recovery-strategy.md
+- type: concept
+  question: 在 多集群管理 中, 多集群架构模式 是什么?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 的「多集群架构模式」章节。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+  section: 多集群架构模式
+- type: concept
+  question: 在 多集群管理 中, 多集群管理工具对比 是什么?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 的「多集群管理工具对比」章节。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+  section: 多集群管理工具对比
+- type: concept
+  question: 在 多集群管理 中, kubeconfig 多集群配置 是什么?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 的「kubeconfig 多集群配置」章节。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+  section: kubeconfig 多集群配置
+- type: concept
+  question: 在 多集群管理 中, Karmada 联邦部署 是什么?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 的「Karmada 联邦部署」章节。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+  section: Karmada 联邦部署
+- type: concept
+  question: 在 多集群管理 中, 跨集群服务发现 (Istio) 是什么?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 的「跨集群服务发现 (Istio)」章节。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+  section: 跨集群服务发现 (Istio)
+- type: troubleshooting
+  question: 如何排查 多集群管理 相关的故障?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 的故障排查章节。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+- type: comparison
+  question: 多集群管理 中有哪些技术对比?
+  answer: 参见 10-平台工程/operate/13-multi-cluster-management.md 中的对比分析。
+  source: 10-平台工程/operate/13-multi-cluster-management.md
+- type: concept
+  question: 在 生产环境故障诊断 (Production Troubleshooting) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/15-production-troubleshooting.md 的「概述」章节。
+  source: 10-平台工程/operate/15-production-troubleshooting.md
+  section: 概述
+- type: concept
+  question: 在 生产环境故障诊断 (Production Troubleshooting) 中, 故障诊断体系架构 是什么?
+  answer: 参见 10-平台工程/operate/15-production-troubleshooting.md 的「故障诊断体系架构」章节。
+  source: 10-平台工程/operate/15-production-troubleshooting.md
+  section: 故障诊断体系架构
+- type: concept
+  question: 在 生产环境故障诊断 (Production Troubleshooting) 中, 系统性故障诊断方法 是什么?
+  answer: 参见 10-平台工程/operate/15-production-troubleshooting.md 的「系统性故障诊断方法」章节。
+  source: 10-平台工程/operate/15-production-troubleshooting.md
+  section: 系统性故障诊断方法
+- type: operation
+  question: '如何执行与 生产环境故障诊断 (Production Troubleshooting) 相关的操作: layered_troubleshooting() {?'
+  answer: 参见 10-平台工程/operate/15-production-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/operate/15-production-troubleshooting.md
+  command: layered_troubleshooting() {
+- type: operation
+  question: '如何执行与 生产环境故障诊断 (Production Troubleshooting) 相关的操作: diagnose_pending_pods() {?'
+  answer: 参见 10-平台工程/operate/15-production-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/operate/15-production-troubleshooting.md
+  command: diagnose_pending_pods() {
+- type: troubleshooting
+  question: 如何排查 生产环境故障诊断 (Production Troubleshooting) 相关的故障?
+  answer: 参见 10-平台工程/operate/15-production-troubleshooting.md 的故障排查章节。
+  source: 10-平台工程/operate/15-production-troubleshooting.md
+- type: concept
+  question: 在 平台升级与迁移策略 (Platform Upgrade & Migration Strategy) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/16-platform-upgrade-migration.md 的「概述」章节。
+  source: 10-平台工程/operate/16-platform-upgrade-migration.md
+  section: 概述
+- type: concept
+  question: 在 平台升级与迁移策略 (Platform Upgrade & Migration Strategy) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/16-platform-upgrade-migration.md 的「概述」章节。
+  source: 10-平台工程/operate/16-platform-upgrade-migration.md
+  section: 概述
+- type: concept
+  question: 在 平台升级与迁移策略 (Platform Upgrade & Migration Strategy) 中, 升级策略与规划 是什么?
+  answer: 参见 10-平台工程/operate/16-platform-upgrade-migration.md 的「升级策略与规划」章节。
+  source: 10-平台工程/operate/16-platform-upgrade-migration.md
+  section: 升级策略与规划
+- type: troubleshooting
+  question: 如何排查 平台升级与迁移策略 (Platform Upgrade & Migration Strategy) 相关的故障?
+  answer: 参见 10-平台工程/operate/16-platform-upgrade-migration.md 的故障排查章节。
+  source: 10-平台工程/operate/16-platform-upgrade-migration.md
+- type: concept
+  question: 在 平台可观测性深度实践 (Platform Observability Deep Practice) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/18-platform-observability-practice.md 的「概述」章节。
+  source: 10-平台工程/operate/18-platform-observability-practice.md
+  section: 概述
+- type: concept
+  question: 在 平台可观测性深度实践 (Platform Observability Deep Practice) 中, 概述 是什么?
+  answer: 参见 10-平台工程/operate/18-platform-observability-practice.md 的「概述」章节。
+  source: 10-平台工程/operate/18-platform-observability-practice.md
+  section: 概述
+- type: concept
+  question: 在 平台可观测性深度实践 (Platform Observability Deep Practice) 中, 平台级可观测性架构 是什么?
+  answer: 参见 10-平台工程/operate/18-platform-observability-practice.md 的「平台级可观测性架构」章节。
+  source: 10-平台工程/operate/18-platform-observability-practice.md
+  section: 平台级可观测性架构
+- type: troubleshooting
+  question: 如何排查 平台可观测性深度实践 (Platform Observability Deep Practice) 相关的故障?
+  answer: 参见 10-平台工程/operate/18-platform-observability-practice.md 的故障排查章节。
+  source: 10-平台工程/operate/18-platform-observability-practice.md
+- type: concept
+  question: 在 69 - Lease 与 Leader 选举机制 (Lease & Leader Election) 中, Lease 机制架构概览 是什么?
+  answer: 参见 10-平台工程/operate/19-lease-leader-election.md 的「Lease 机制架构概览」章节。
+  source: 10-平台工程/operate/19-lease-leader-election.md
+  section: Lease 机制架构概览
+- type: concept
+  question: 在 69 - Lease 与 Leader 选举机制 (Lease & Leader Election) 中, Lease 对象详解 是什么?
+  answer: 参见 10-平台工程/operate/19-lease-leader-election.md 的「Lease 对象详解」章节。
+  source: 10-平台工程/operate/19-lease-leader-election.md
+  section: Lease 对象详解
+- type: operation
+  question: '如何执行与 69 - Lease 与 Leader 选举机制 (Lease & Leader Election) 相关的操作: kubectl get leases -A?'
+  answer: 参见 10-平台工程/operate/19-lease-leader-election.md 中的操作步骤。
+  source: 10-平台工程/operate/19-lease-leader-election.md
+  command: kubectl get leases -A
+- type: best_practice
+  question: 关于 69 - Lease 与 Leader 选举机制 (Lease & Leader Election), 有什么最佳实践?
+  answer: │
+  source: 10-平台工程/operate/19-lease-leader-election.md
+- type: troubleshooting
+  question: 如何排查 69 - Lease 与 Leader 选举机制 (Lease & Leader Election) 相关的故障?
+  answer: 参见 10-平台工程/operate/19-lease-leader-election.md 的故障排查章节。
+  source: 10-平台工程/operate/19-lease-leader-election.md
+- type: concept
+  question: 在 55 - 虚拟集群与多租户 中, 多租户隔离模式 是什么?
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 的「多租户隔离模式」章节。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+  section: 多租户隔离模式
+- type: concept
+  question: 在 55 - 虚拟集群与多租户 中, 虚拟集群工具对比 是什么?
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 的「虚拟集群工具对比」章节。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+  section: 虚拟集群工具对比
+- type: concept
+  question: 在 55 - 虚拟集群与多租户 中, vCluster架构 是什么?
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 的「vCluster架构」章节。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+  section: vCluster架构
+- type: concept
+  question: 在 55 - 虚拟集群与多租户 中, vCluster安装 是什么?
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 的「vCluster安装」章节。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+  section: vCluster安装
+- type: concept
+  question: 在 55 - 虚拟集群与多租户 中, vCluster配置 是什么?
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 的「vCluster配置」章节。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+  section: vCluster配置
+- type: operation
+  question: '如何执行与 55 - 虚拟集群与多租户 相关的操作: curl -L -o vcluster "https://github.com/loft-sh/vcluster/rel?'
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 中的操作步骤。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+  command: curl -L -o vcluster "https://github.com/loft-sh/vcluster/releases/latest/download/vcluster-linux-amd
+- type: comparison
+  question: 55 - 虚拟集群与多租户 中有哪些技术对比?
+  answer: 参见 10-平台工程/operate/25-virtual-clusters.md 中的对比分析。
+  source: 10-平台工程/operate/25-virtual-clusters.md
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 平台运维新特性指南 中, 目录 是什么?
+  answer: 参见 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md 的「目录」章节。
+  source: 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md
+  section: 目录
+- type: concept
+  question: 在 Kubernetes v1.29-v1.33 平台运维新特性指南 中, 版本升级策略与工具 是什么?
+  answer: 参见 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md 的「版本升级策略与工具」章节。
+  source: 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md
+  section: 版本升级策略与工具
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 平台运维新特性指南 相关的操作: VERSION="1.33"?'
+  answer: 参见 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md 中的操作步骤。
+  source: 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md
+  command: VERSION="1.33"
+- type: operation
+  question: '如何执行与 Kubernetes v1.29-v1.33 平台运维新特性指南 相关的操作: apt-mark unhold kubeadm && \?'
+  answer: 参见 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md 中的操作步骤。
+  source: 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md
+  command: apt-mark unhold kubeadm && \
+- type: troubleshooting
+  question: 如何排查 Kubernetes v1.29-v1.33 平台运维新特性指南 相关的故障?
+  answer: 参见 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md 的故障排查章节。
+  source: 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md
+- type: comparison
+  question: Kubernetes v1.29-v1.33 平台运维新特性指南 中有哪些技术对比?
+  answer: 参见 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md 中的对比分析。
+  source: 10-平台工程/operate/99-kubernetes-v1.33-platform-ops-guide.md
+- type: concept
+  question: 在 topic-functions MOC 中, 专题概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/MOC.md 的「专题概述」章节。
+  source: 10-平台工程/topic-code-analysis/MOC.md
+  section: 专题概述
+- type: concept
+  question: 在 topic-functions MOC 中, 文档清单 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/MOC.md 的「文档清单」章节。
+  source: 10-平台工程/topic-code-analysis/MOC.md
+  section: 文档清单
+- type: concept
+  question: 在 topic-functions MOC 中, 统计信息 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/MOC.md 的「统计信息」章节。
+  source: 10-平台工程/topic-code-analysis/MOC.md
+  section: 统计信息
+- type: concept
+  question: 在 topic-functions MOC 中, Related 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/MOC.md 的「Related」章节。
+  source: 10-平台工程/topic-code-analysis/MOC.md
+  section: Related
+- type: comparison
+  question: topic-functions MOC 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/MOC.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/MOC.md
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  section: 函数签名
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  section: 源码位置
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  section: 参数说明
+- type: concept
+  question: 在 Kubernetes 集群 PKI 架构总览 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 Kubernetes 集群 PKI 架构总览 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  command: kubeadm certs check-expiration
+- type: operation
+  question: '如何执行与 Kubernetes 集群 PKI 架构总览 相关的操作: tar czf k8s-pki-backup.tar.gz /etc/kubernetes/pki/?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/01-pki-architecture.md
+  command: tar czf k8s-pki-backup.tar.gz /etc/kubernetes/pki/
+- type: concept
+  question: 在 CA 证书生成源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md
+  section: 函数签名
+- type: concept
+  question: 在 CA 证书生成源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md
+  section: 源码位置
+- type: concept
+  question: 在 CA 证书生成源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 CA 证书生成源码分析 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/02-ca-generation.md
+  command: kubeadm certs check-expiration
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md
+  section: 概述
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md
+  section: 函数签名
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md
+  section: 源码位置
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md
+  section: 参数说明
+- type: concept
+  question: 在 API Server 证书生成源码分析 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 API Server 证书生成源码分析 相关的操作: kubeadm certs renew apiserver --config=kubeadm-config.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/03-apiserver-cert.md
+  command: kubeadm certs renew apiserver --config=kubeadm-config.yaml
+- type: concept
+  question: 在 etcd 证书体系源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md
+  section: 函数签名
+- type: concept
+  question: 在 etcd 证书体系源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md
+  section: 源码位置
+- type: concept
+  question: 在 etcd 证书体系源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md
+  section: 参数说明
+- type: troubleshooting
+  question: 如何排查 etcd 证书体系源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md
+- type: comparison
+  question: etcd 证书体系源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/04-etcd-cert.md
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md
+  section: 概述
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md
+  section: 源码路径
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, kubelet 证书类型 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md 的「kubelet 证书类型」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md
+  section: kubelet 证书类型
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, kubelet 双证书管理器架构 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md 的「kubelet 双证书管理器架构」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md
+  section: kubelet 双证书管理器架构
+- type: concept
+  question: 在 kubelet 证书与 CSR 机制源码分析 中, 引导证书机制（Bootstrap） 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md 的「引导证书机制（Bootstrap）」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md
+  section: 引导证书机制（Bootstrap）
+- type: operation
+  question: '如何执行与 kubelet 证书与 CSR 机制源码分析 相关的操作: kubectl get csr?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/05-kubelet-cert.md
+  command: kubectl get csr
+- type: concept
+  question: 在 证书轮换机制源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md
+  section: 概述
+- type: concept
+  question: 在 证书轮换机制源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md
+  section: 源码路径
+- type: concept
+  question: 在 证书轮换机制源码分析 中, kubeadm 证书轮换 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md 的「kubeadm 证书轮换」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md
+  section: kubeadm 证书轮换
+- type: operation
+  question: '如何执行与 证书轮换机制源码分析 相关的操作: $ kubeadm certs check-expiration?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md
+  command: $ kubeadm certs check-expiration
+- type: operation
+  question: '如何执行与 证书轮换机制源码分析 相关的操作: sudo cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md
+  command: sudo cp -r /etc/kubernetes/pki /etc/kubernetes/pki.backup.$(date +%Y%m%d)
+- type: operation
+  question: '如何执行与 证书轮换机制源码分析 相关的操作: EXPIRY=$(kubeadm certs check-expiration | grep apiserver | a?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/06-cert-rotation.md
+  command: EXPIRY=$(kubeadm certs check-expiration | grep apiserver | awk '{print $3}')
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  section: 概述
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  section: 源码路径
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, SA 密钥对与 TLS 证书的区别 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 的「SA 密钥对与 TLS 证书的区别」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  section: SA 密钥对与 TLS 证书的区别
+- type: concept
+  question: 在 ServiceAccount 密钥对源码分析 中, SA 密钥生成 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 的「SA 密钥生成」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  section: SA 密钥生成
+- type: operation
+  question: '如何执行与 ServiceAccount 密钥对源码分析 相关的操作: -----BEGIN RSA PRIVATE KEY-----?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  command: '-----BEGIN RSA PRIVATE KEY-----'
+- type: operation
+  question: '如何执行与 ServiceAccount 密钥对源码分析 相关的操作: ps aux | grep kube-apiserver | grep service-account-key-file?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  command: ps aux | grep kube-apiserver | grep service-account-key-file
+- type: operation
+  question: '如何执行与 ServiceAccount 密钥对源码分析 相关的操作: sudo openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+  command: sudo openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.pub
+- type: comparison
+  question: ServiceAccount 密钥对源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/07-service-account-keys.md
+- type: concept
+  question: 在 证书身份到 RBAC 的映射关系 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md
+  section: 函数签名
+- type: concept
+  question: 在 证书身份到 RBAC 的映射关系 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md
+  section: 源码位置
+- type: concept
+  question: 在 证书身份到 RBAC 的映射关系 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md
+  section: 参数说明
+- type: best_practice
+  question: 关于 证书身份到 RBAC 的映射关系, 有什么最佳实践?
+  answer: <component-name>.<namespace>.svc            │
+  source: 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md
+- type: best_practice
+  question: 关于 证书身份到 RBAC 的映射关系, 有什么最佳实践?
+  answer: 90 天 - 1 年                                    │
+  source: 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md
+- type: troubleshooting
+  question: 如何排查 证书身份到 RBAC 的映射关系 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/08-rbac-mapping.md
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md
+  section: 概述
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md
+  section: 源码路径
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, join 流程总览 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md 的「join 流程总览」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md
+  section: join 流程总览
+- type: concept
+  question: 在 kubeadm join 证书分发流程 中, 阶段详解 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md 的「阶段详解」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md
+  section: 阶段详解
+- type: operation
+  question: '如何执行与 kubeadm join 证书分发流程 相关的操作: kubeadm token create --print-join-command?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md
+  command: kubeadm token create --print-join-command
+- type: comparison
+  question: kubeadm join 证书分发流程 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/09-join-cert-flow.md
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md
+  section: 概述
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md
+  section: 源码路径
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 架构与信任模型 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md 的「架构与信任模型」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md
+  section: 架构与信任模型
+- type: concept
+  question: 在 Front Proxy 聚合层证书工作流 中, 证书角色详解 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md 的「证书角色详解」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md
+  section: 证书角色详解
+- type: operation
+  question: '如何执行与 Front Proxy 聚合层证书工作流 相关的操作: --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-cli?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md
+  command: --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
+- type: operation
+  question: '如何执行与 Front Proxy 聚合层证书工作流 相关的操作: --requestheader-client-ca-file=/etc/kubernetes/pki/front-pro?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/10-front-proxy-workflow.md
+  command: --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
+- type: concept
+  question: 在 API Server 证书相关启动参数汇总 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md
+  section: 函数签名
+- type: concept
+  question: 在 API Server 证书相关启动参数汇总 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md
+  section: 源码位置
+- type: concept
+  question: 在 API Server 证书相关启动参数汇总 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 API Server 证书相关启动参数汇总 相关的操作: echo "=== API Server Certificate Flags ==="?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md
+  command: echo "=== API Server Certificate Flags ==="
+- type: operation
+  question: '如何执行与 API Server 证书相关启动参数汇总 相关的操作: ./check-apiserver-certs.sh?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/11-apiserver-cert-flags.md
+  command: ./check-apiserver-certs.sh
+- type: concept
+  question: 在 kubeconfig 中的证书嵌入逻辑 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md
+  section: 函数签名
+- type: concept
+  question: 在 kubeconfig 中的证书嵌入逻辑 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeconfig 中的证书嵌入逻辑 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeconfig 中的证书嵌入逻辑 相关的操作: --kubeconfig=/etc/kubernetes/controller-manager.conf?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md
+  command: --kubeconfig=/etc/kubernetes/controller-manager.conf
+- type: comparison
+  question: kubeconfig 中的证书嵌入逻辑 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/12-kubeconfig-certs.md
+- type: concept
+  question: 在 kubeadm 配置对证书生成的影响 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md
+  section: 函数签名
+- type: concept
+  question: 在 kubeadm 配置对证书生成的影响 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm 配置对证书生成的影响 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeadm 配置对证书生成的影响 相关的操作: kubectl get cm kubeadm-config -n kube-system -o yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md
+  command: kubectl get cm kubeadm-config -n kube-system -o yaml
+- type: operation
+  question: '如何执行与 kubeadm 配置对证书生成的影响 相关的操作: kubectl edit cm kubeadm-config -n kube-system?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/13-cert-config.md
+  command: kubectl edit cm kubeadm-config -n kube-system
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md
+  section: 概述
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, 架构对比：集群证书 vs Webhook 证书 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md 的「架构对比：集群证书 vs
+    Webhook 证书」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md
+  section: 架构对比：集群证书 vs Webhook 证书
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, Webhook 配置的证书字段 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md 的「Webhook 配置的证书字段」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md
+  section: Webhook 配置的证书字段
+- type: concept
+  question: 在 Admission Webhook 证书体系 中, API Server 对 Webhook 证书的验证逻辑 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md 的「API Server 对
+    Webhook 证书的验证逻辑」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md
+  section: API Server 对 Webhook 证书的验证逻辑
+- type: operation
+  question: '如何执行与 Admission Webhook 证书体系 相关的操作: openssl genrsa -out webhook-ca.key 2048?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md
+  command: openssl genrsa -out webhook-ca.key 2048
+- type: comparison
+  question: Admission Webhook 证书体系 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/14-admission-webhook-certs.md
+- type: concept
+  question: 在 证书格式与编码详解 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  section: 概述
+- type: concept
+  question: 在 证书格式与编码详解 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  section: 函数签名
+- type: concept
+  question: 在 证书格式与编码详解 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  section: 源码位置
+- type: concept
+  question: 在 证书格式与编码详解 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  section: 参数说明
+- type: concept
+  question: 在 证书格式与编码详解 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 证书格式与编码详解 相关的操作: openssl x509 -in ca.pem -out ca.der -outform DER?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  command: openssl x509 -in ca.pem -out ca.der -outform DER
+- type: operation
+  question: '如何执行与 证书格式与编码详解 相关的操作: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -t?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/15-cert-format-encoding.md
+  command: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -text
+- type: concept
+  question: 在 OpenSSL 证书操作速查手册 中, 查看证书信息 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md 的「查看证书信息」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md
+  section: 查看证书信息
+- type: concept
+  question: 在 OpenSSL 证书操作速查手册 中, 验证证书关系 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md 的「验证证书关系」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md
+  section: 验证证书关系
+- type: operation
+  question: '如何执行与 OpenSSL 证书操作速查手册 相关的操作: openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md
+  command: openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text
+- type: operation
+  question: '如何执行与 OpenSSL 证书操作速查手册 相关的操作: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -e?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md
+  command: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
+- type: operation
+  question: '如何执行与 OpenSSL 证书操作速查手册 相关的操作: for cert in /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/et?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md
+  command: for cert in /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/etcd/*.crt; do
+- type: comparison
+  question: OpenSSL 证书操作速查手册 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/16-openssl-cookbook.md
+- type: concept
+  question: 在 Kubernetes PKI 安全最佳实践 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes PKI 安全最佳实践 中, 私钥保护 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md 的「私钥保护」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md
+  section: 私钥保护
+- type: operation
+  question: '如何执行与 Kubernetes PKI 安全最佳实践 相关的操作: ls -la /etc/kubernetes/pki/?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-cert/17-pki-security-best-practices.md
+  command: ls -la /etc/kubernetes/pki/
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+  section: 参数说明
+- type: concept
+  question: 在 kubeadm init 集群初始化概览 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 kubeadm init 集群初始化概览 相关的操作: kubeadm init \?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+  command: kubeadm init \
+- type: operation
+  question: '如何执行与 kubeadm init 集群初始化概览 相关的操作: kubeadm init --config=kubeadm-config.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+  command: kubeadm init --config=kubeadm-config.yaml
+- type: troubleshooting
+  question: 如何排查 kubeadm init 集群初始化概览 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/01-overview.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/01-overview.md
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  section: 源码位置
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  section: 参数说明
+- type: concept
+  question: 在 预检流程 (kubeadm preflight) 中, 调用链 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 的「调用链」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  section: 调用链
+- type: operation
+  question: '如何执行与 预检流程 (kubeadm preflight) 相关的操作: kubeadm init --ignore-preflight-errors=NumCPU?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  command: kubeadm init --ignore-preflight-errors=NumCPU
+- type: operation
+  question: '如何执行与 预检流程 (kubeadm preflight) 相关的操作: swapoff -a?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  command: swapoff -a
+- type: operation
+  question: '如何执行与 预检流程 (kubeadm preflight) 相关的操作: kubeadm init --dry-run?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+  command: kubeadm init --dry-run
+- type: troubleshooting
+  question: 如何排查 预检流程 (kubeadm preflight) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/02-preflight.md
+- type: concept
+  question: 在 证书管理 (PKI Infrastructure) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/03-certs.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/03-certs.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 证书管理 (PKI Infrastructure) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/03-certs.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/03-certs.md
+  section: 源码位置
+- type: concept
+  question: 在 证书管理 (PKI Infrastructure) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/03-certs.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/03-certs.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 证书管理 (PKI Infrastructure) 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/03-certs.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/03-certs.md
+  command: kubeadm certs check-expiration
+- type: operation
+  question: '如何执行与 证书管理 (PKI Infrastructure) 相关的操作: kubeadm certs renew all?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/03-certs.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/03-certs.md
+  command: kubeadm certs renew all
+- type: operation
+  question: '如何执行与 证书管理 (PKI Infrastructure) 相关的操作: cp /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/api?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/03-certs.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/03-certs.md
+  command: cp /etc/kubernetes/pki/apiserver.crt /etc/kubernetes/pki/apiserver.crt.bak
+- type: concept
+  question: 在 kubeconfig 阶段 — Kubeconfig Generation 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md
+  section: 概述
+- type: concept
+  question: 在 kubeconfig 阶段 — Kubeconfig Generation 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md
+  section: 源码路径
+- type: concept
+  question: 在 kubeconfig 阶段 — Kubeconfig Generation 源码分析 中, 生成 kubeconfig 列表 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md 的「生成 kubeconfig 列表」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md
+  section: 生成 kubeconfig 列表
+- type: operation
+  question: '如何执行与 kubeconfig 阶段 — Kubeconfig Generation 源码分析 相关的操作: cat /etc/kubernetes/admin.conf | grep client-certificate-dat?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/04-kubeconfig.md
+  command: cat /etc/kubernetes/admin.conf | grep client-certificate-data | \
+- type: concept
+  question: 在 控制面组件部署 (Static Pod Manifests) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 控制面组件部署 (Static Pod Manifests) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md
+  section: 源码位置
+- type: concept
+  question: 在 控制面组件部署 (Static Pod Manifests) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 控制面组件部署 (Static Pod Manifests) 相关的操作: cat /etc/kubernetes/manifests/kube-apiserver.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md
+  command: cat /etc/kubernetes/manifests/kube-apiserver.yaml
+- type: troubleshooting
+  question: 如何排查 控制面组件部署 (Static Pod Manifests) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/05-control-plane.md
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+  section: 源码位置
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+  section: 参数说明
+- type: concept
+  question: 在 节点加入流程 (kubeadm join) 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 节点加入流程 (kubeadm join) 相关的操作: kubeadm token create --print-join-command?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+  command: kubeadm token create --print-join-command
+- type: operation
+  question: '如何执行与 节点加入流程 (kubeadm join) 相关的操作: kubeadm token list?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+  command: kubeadm token list
+- type: troubleshooting
+  question: 如何排查 节点加入流程 (kubeadm join) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+- type: comparison
+  question: 节点加入流程 (kubeadm join) 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/06-join.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/06-join.md
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+  section: 源码位置
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+  section: 参数说明
+- type: concept
+  question: 在 etcd 静态 Pod 管理 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 etcd 静态 Pod 管理 相关的操作: ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot-$(?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+  command: ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-snapshot-$(date +%Y%m%d).db \
+- type: operation
+  question: '如何执行与 etcd 静态 Pod 管理 相关的操作: crictl stop $(crictl ps --name etcd -q)?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+  command: crictl stop $(crictl ps --name etcd -q)
+- type: troubleshooting
+  question: 如何排查 etcd 静态 Pod 管理 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/07-etcd.md
+- type: concept
+  question: 在 高可用控制面搭建 — 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/08-ha.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/08-ha.md
+  section: 概述
+- type: concept
+  question: 在 高可用控制面搭建 — 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/08-ha.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/08-ha.md
+  section: 源码路径
+- type: concept
+  question: 在 高可用控制面搭建 — 源码分析 中, 高可用架构 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/08-ha.md 的「高可用架构」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/08-ha.md
+  section: 高可用架构
+- type: operation
+  question: '如何执行与 高可用控制面搭建 — 源码分析 相关的操作: kubeadm init phase upload-certs --upload-certs?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/08-ha.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/08-ha.md
+  command: kubeadm init phase upload-certs --upload-certs
+- type: troubleshooting
+  question: 如何排查 高可用控制面搭建 — 源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/08-ha.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/08-ha.md
+- type: comparison
+  question: 高可用控制面搭建 — 源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/08-ha.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/08-ha.md
+- type: concept
+  question: 在 集群升级流程 (kubeadm upgrade) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 集群升级流程 (kubeadm upgrade) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+  section: 源码位置
+- type: concept
+  question: 在 集群升级流程 (kubeadm upgrade) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 集群升级流程 (kubeadm upgrade) 相关的操作: kubeadm upgrade plan?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+  command: kubeadm upgrade plan
+- type: operation
+  question: '如何执行与 集群升级流程 (kubeadm upgrade) 相关的操作: for node in master-1 master-2 master-3; do?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+  command: for node in master-1 master-2 master-3; do
+- type: operation
+  question: '如何执行与 集群升级流程 (kubeadm upgrade) 相关的操作: ls /etc/kubernetes/tmp/?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+  command: ls /etc/kubernetes/tmp/
+- type: troubleshooting
+  question: 如何排查 集群升级流程 (kubeadm upgrade) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/09-upgrade.md
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, 主要云厂商托管 K8s 方案 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 的「主要云厂商托管 K8s 方案」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+  section: 主要云厂商托管 K8s 方案
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, kubeadm vs 云厂商托管对比 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 的「kubeadm vs 云厂商托管对比」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+  section: kubeadm vs 云厂商托管对比
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, EKS 架构 (AWS) 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 的「EKS 架构 (AWS)」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+  section: EKS 架构 (AWS)
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, EKS Anywhere 架构 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 的「EKS Anywhere 架构」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+  section: EKS Anywhere 架构
+- type: concept
+  question: 在 云厂商方案与 kubeadm 对比 中, GKE 架构 (Google Cloud) 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 的「GKE 架构 (Google Cloud)」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+  section: GKE 架构 (Google Cloud)
+- type: operation
+  question: '如何执行与 云厂商方案与 kubeadm 对比 相关的操作: aws eks update-kubeconfig --name my-cluster?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+  command: aws eks update-kubeconfig --name my-cluster
+- type: troubleshooting
+  question: 如何排查 云厂商方案与 kubeadm 对比 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+- type: comparison
+  question: 云厂商方案与 kubeadm 对比 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/10-cloud-comparison.md
+- type: concept
+  question: '在 集群新建进阶: 关键机制详解 中, 源码路径 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+  section: 源码路径
+- type: concept
+  question: '在 集群新建进阶: 关键机制详解 中, InitConfiguration 完整结构 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 的「InitConfiguration 完整结构」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+  section: InitConfiguration 完整结构
+- type: concept
+  question: '在 集群新建进阶: 关键机制详解 中, kubelet-start 阶段完整流程 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 的「kubelet-start 阶段完整流程」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+  section: kubelet-start 阶段完整流程
+- type: concept
+  question: '在 集群新建进阶: 关键机制详解 中, kubelet.conf vs bootstrap-kubelet.conf 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 的「kubelet.conf vs bootstrap-kubelet.conf」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+  section: kubelet.conf vs bootstrap-kubelet.conf
+- type: concept
+  question: '在 集群新建进阶: 关键机制详解 中, kubelet 配置文件差异 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 的「kubelet 配置文件差异」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+  section: kubelet 配置文件差异
+- type: operation
+  question: '如何执行与 集群新建进阶: 关键机制详解 相关的操作: kubectl -n kube-system get pods -l k8s-app=kube-dns?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+  command: kubectl -n kube-system get pods -l k8s-app=kube-dns
+- type: comparison
+  question: '集群新建进阶: 关键机制详解 中有哪些技术对比?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/11-advanced.md
+- type: concept
+  question: '在 节点加入进阶: Discovery 与 TLS Bootstrap 详解 中, 函数/流程签名 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md
+  section: 函数/流程签名
+- type: concept
+  question: '在 节点加入进阶: Discovery 与 TLS Bootstrap 详解 中, 源码位置 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md
+  section: 源码位置
+- type: concept
+  question: '在 节点加入进阶: Discovery 与 TLS Bootstrap 详解 中, 参数说明 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 节点加入进阶: Discovery 与 TLS Bootstrap 详解 相关的操作: kubeadm token create --print-join-command?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md
+  command: kubeadm token create --print-join-command
+- type: operation
+  question: '如何执行与 节点加入进阶: Discovery 与 TLS Bootstrap 详解 相关的操作: kubeadm join --config=join-config.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/12-join-advanced.md
+  command: kubeadm join --config=join-config.yaml
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 函数/流程签名 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md
+  section: 函数/流程签名
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 源码位置 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md
+  section: 源码位置
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 参数说明 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md
+  section: 参数说明
+- type: concept
+  question: '在 etcd 进阶: HA 集群管理与性能调优 中, 返回值 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 etcd 进阶: HA 集群管理与性能调优 相关的操作: ETCDCTL_API=3 etcdctl endpoint status -w json \?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md
+  command: ETCDCTL_API=3 etcdctl endpoint status -w json \
+- type: troubleshooting
+  question: '如何排查 etcd 进阶: HA 集群管理与性能调优 相关的故障?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/13-etcd-advanced.md
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, 源码路径 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+  section: 源码路径
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, upload-certs 阶段 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 的「upload-certs 阶段」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+  section: upload-certs 阶段
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, --certificate-key 生成与使用 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 的「--certificate-key 生成与使用」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+  section: --certificate-key 生成与使用
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, kube-vip 配置 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 的「kube-vip 配置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+  section: kube-vip 配置
+- type: concept
+  question: '在 高可用进阶: 负载均衡与证书分发 中, kube-vip 工作模式 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 的「kube-vip 工作模式」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+  section: kube-vip 工作模式
+- type: operation
+  question: '如何执行与 高可用进阶: 负载均衡与证书分发 相关的操作: openssl rand -base64 24?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+  command: openssl rand -base64 24
+- type: troubleshooting
+  question: '如何排查 高可用进阶: 负载均衡与证书分发 相关的故障?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+- type: comparison
+  question: '高可用进阶: 负载均衡与证书分发 中有哪些技术对比?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/14-ha-advanced.md
+- type: concept
+  question: '在 集群升级进阶: 滚动升级与回滚策略 中, 函数/流程签名 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+  section: 函数/流程签名
+- type: concept
+  question: '在 集群升级进阶: 滚动升级与回滚策略 中, 源码位置 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+  section: 源码位置
+- type: concept
+  question: '在 集群升级进阶: 滚动升级与回滚策略 中, 参数说明 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 集群升级进阶: 滚动升级与回滚策略 相关的操作: kubeadm upgrade plan?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+  command: kubeadm upgrade plan
+- type: operation
+  question: '如何执行与 集群升级进阶: 滚动升级与回滚策略 相关的操作: kubeadm upgrade apply v1.29.0 --certificate-key=<key>?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+  command: kubeadm upgrade apply v1.29.0 --certificate-key=<key>
+- type: operation
+  question: '如何执行与 集群升级进阶: 滚动升级与回滚策略 相关的操作: ls -la /etc/kubernetes/tmp/?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+  command: ls -la /etc/kubernetes/tmp/
+- type: troubleshooting
+  question: '如何排查 集群升级进阶: 滚动升级与回滚策略 相关的故障?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+- type: comparison
+  question: '集群升级进阶: 滚动升级与回滚策略 中有哪些技术对比?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/15-upgrade-advanced.md
+- type: concept
+  question: '在 安全机制: ServiceAccount Token 与 Audit 中, 源码路径 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/16-security.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/16-security.md
+  section: 源码路径
+- type: concept
+  question: '在 安全机制: ServiceAccount Token 与 Audit 中, ServiceAccount Token 演进 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/16-security.md 的「ServiceAccount Token 演进」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/16-security.md
+  section: ServiceAccount Token 演进
+- type: concept
+  question: '在 安全机制: ServiceAccount Token 与 Audit 中, BoundServiceAccountTokenVolumeProjection 特性门控 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/16-security.md 的「BoundServiceAccountTokenVolumeProjection
+    特性门控」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/16-security.md
+  section: BoundServiceAccountTokenVolumeProjection 特性门控
+- type: operation
+  question: '如何执行与 安全机制: ServiceAccount Token 与 Audit 相关的操作: /etc/kubernetes/pki/sa.key (私钥，API Server 用于签发 Token)?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/16-security.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/16-security.md
+  command: /etc/kubernetes/pki/sa.key (私钥，API Server 用于签发 Token)
+- type: troubleshooting
+  question: '如何排查 安全机制: ServiceAccount Token 与 Audit 相关的故障?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/16-security.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/16-security.md
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, 源码路径 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  section: 源码路径
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, init 完整阶段列表 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 的「init 完整阶段列表」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  section: init 完整阶段列表
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, mark-control-plane 阶段 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 的「mark-control-plane 阶段」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  section: mark-control-plane 阶段
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, kubeadm init --skip-phases 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 的「kubeadm init --skip-phases」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  section: kubeadm init --skip-phases
+- type: concept
+  question: '在 init 阶段详解: mark-control-plane 与 upload-config 中, upload-config 阶段 是什么?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 的「upload-config 阶段」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  section: upload-config 阶段
+- type: operation
+  question: '如何执行与 init 阶段详解: mark-control-plane 与 upload-config 相关的操作: kubectl get nodes --show-labels | grep node-role?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  command: kubectl get nodes --show-labels | grep node-role
+- type: operation
+  question: '如何执行与 init 阶段详解: mark-control-plane 与 upload-config 相关的操作: kubeadm init --skip-phases=mark-control-plane?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  command: kubeadm init --skip-phases=mark-control-plane
+- type: operation
+  question: '如何执行与 init 阶段详解: mark-control-plane 与 upload-config 相关的操作: kubectl get configmap kubeadm-config -n kube-system
+    -o yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+  command: kubectl get configmap kubeadm-config -n kube-system -o yaml
+- type: troubleshooting
+  question: '如何排查 init 阶段详解: mark-control-plane 与 upload-config 相关的故障?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+- type: comparison
+  question: 'init 阶段详解: mark-control-plane 与 upload-config 中有哪些技术对比?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/17-init-phases.md
+- type: concept
+  question: 在 CRI 运行时管理 (Container Runtime Interface) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 CRI 运行时管理 (Container Runtime Interface) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md
+  section: 源码位置
+- type: concept
+  question: 在 CRI 运行时管理 (Container Runtime Interface) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 CRI 运行时管理 (Container Runtime Interface) 相关的操作: docker pull registry.k8s.io/pause:3.9?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md
+  command: docker pull registry.k8s.io/pause:3.9
+- type: troubleshooting
+  question: 如何排查 CRI 运行时管理 (Container Runtime Interface) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md
+- type: comparison
+  question: CRI 运行时管理 (Container Runtime Interface) 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/18-cri-runtime.md
+- type: concept
+  question: 在 CNI 网络插件与集群网络 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md
+  section: 函数签名
+- type: concept
+  question: 在 CNI 网络插件与集群网络 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md
+  section: 源码位置
+- type: concept
+  question: 在 CNI 网络插件与集群网络 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md
+  section: 参数说明
+- type: troubleshooting
+  question: 如何排查 CNI 网络插件与集群网络 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md
+- type: comparison
+  question: CNI 网络插件与集群网络 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/19-cni-networking.md
+- type: concept
+  question: 在 Node 注册与 kubeadm token 详解 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md
+  section: 函数签名
+- type: concept
+  question: 在 Node 注册与 kubeadm token 详解 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md
+  section: 源码位置
+- type: concept
+  question: 在 Node 注册与 kubeadm token 详解 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Node 注册与 kubeadm token 详解 相关的操作: kubeadm token create?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/20-node-registration.md
+  command: kubeadm token create
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  section: 源码路径
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, kube-proxy 部署 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 的「kube-proxy 部署」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  section: kube-proxy 部署
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, kube-proxy ConfigMap 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 的「kube-proxy ConfigMap」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  section: kube-proxy ConfigMap
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, 三种模式对比 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 的「三种模式对比」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  section: 三种模式对比
+- type: concept
+  question: 在 kube-proxy 与 Service 负载均衡 中, iptables 模式 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 的「iptables 模式」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  section: iptables 模式
+- type: operation
+  question: '如何执行与 kube-proxy 与 Service 负载均衡 相关的操作: kubectl get ds -n kube-system -l k8s-app=kube-proxy?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  command: kubectl get ds -n kube-system -l k8s-app=kube-proxy
+- type: operation
+  question: '如何执行与 kube-proxy 与 Service 负载均衡 相关的操作: iptables -t nat -L -n | grep KUBE-SVC?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+  command: iptables -t nat -L -n | grep KUBE-SVC
+- type: troubleshooting
+  question: 如何排查 kube-proxy 与 Service 负载均衡 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+- type: comparison
+  question: kube-proxy 与 Service 负载均衡 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/21-kube-proxy.md
+- type: concept
+  question: 在 存储与卷管理 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md
+  section: 源码路径
+- type: concept
+  question: 在 存储与卷管理 中, 存储类型总览 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md 的「存储类型总览」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md
+  section: 存储类型总览
+- type: concept
+  question: 在 存储与卷管理 中, emptyDir 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md 的「emptyDir」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md
+  section: emptyDir
+- type: concept
+  question: 在 存储与卷管理 中, hostPath 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md 的「hostPath」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md
+  section: hostPath
+- type: concept
+  question: 在 存储与卷管理 中, PersistentVolume (PV) 与 PVC 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md 的「PersistentVolume (PV)
+    与 PVC」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md
+  section: PersistentVolume (PV) 与 PVC
+- type: troubleshooting
+  question: 如何排查 存储与卷管理 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/22-storage-volumes.md
+- type: concept
+  question: 在 kube-scheduler 调度详解 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md
+  section: 函数签名
+- type: concept
+  question: 在 kube-scheduler 调度详解 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md
+  section: 源码位置
+- type: concept
+  question: 在 kube-scheduler 调度详解 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kube-scheduler 调度详解 相关的操作: kubectl describe pod <pod-name> | grep -A 10 "Events"?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md
+  command: kubectl describe pod <pod-name> | grep -A 10 "Events"
+- type: operation
+  question: '如何执行与 kube-scheduler 调度详解 相关的操作: kubectl apply -f - <<EOF?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/23-scheduler.md
+  command: kubectl apply -f - <<EOF
+- type: concept
+  question: 在 kubeadm 不安装的组件 (What kubeadm Does Not Install) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 kubeadm 不安装的组件 (What kubeadm Does Not Install) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm 不安装的组件 (What kubeadm Does Not Install) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeadm 不安装的组件 (What kubeadm Does Not Install) 相关的操作: kubectl apply -f https://raw.githubusercontent.com/projectca?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md
+  command: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.26.0/manifests/calico.yam
+- type: operation
+  question: '如何执行与 kubeadm 不安装的组件 (What kubeadm Does Not Install) 相关的操作: helm repo add cilium https://helm.cilium.io/?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md
+  command: helm repo add cilium https://helm.cilium.io/
+- type: comparison
+  question: kubeadm 不安装的组件 (What kubeadm Does Not Install) 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/24-what-kubeadm-does-not-install.md
+- type: concept
+  question: 在 资源管理与配额控制 (Resource Management) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 资源管理与配额控制 (Resource Management) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md
+  section: 源码位置
+- type: concept
+  question: 在 资源管理与配额控制 (Resource Management) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md
+  section: 参数说明
+- type: troubleshooting
+  question: 如何排查 资源管理与配额控制 (Resource Management) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md
+- type: comparison
+  question: 资源管理与配额控制 (Resource Management) 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-create/25-resource-management.md
+- type: concept
+  question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+  section: 函数签名
+- type: concept
+  question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+  section: 源码位置
+- type: concept
+  question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Kubernetes 集群删除逻辑 — 基于官方代码分析 相关的操作: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+  command: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
+- type: operation
+  question: '如何执行与 Kubernetes 集群删除逻辑 — 基于官方代码分析 相关的操作: ETCDCTL_API=3 etcdctl member list \?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+  command: ETCDCTL_API=3 etcdctl member list \
+- type: troubleshooting
+  question: 如何排查 Kubernetes 集群删除逻辑 — 基于官方代码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+- type: comparison
+  question: Kubernetes 集群删除逻辑 — 基于官方代码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/01-overview.md
+- type: concept
+  question: 在 kubeadm reset 源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md
+  section: 函数签名
+- type: concept
+  question: 在 kubeadm reset 源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md
+  section: 源码位置
+- type: concept
+  question: 在 kubeadm reset 源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 kubeadm reset 源码分析 相关的操作: kubeadm reset?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md
+  command: kubeadm reset
+- type: operation
+  question: '如何执行与 kubeadm reset 源码分析 相关的操作: kubeadm reset --force?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/02-reset.md
+  command: kubeadm reset --force
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  section: 概述
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  section: 函数签名
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  section: 源码位置
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  section: 参数说明
+- type: concept
+  question: 在 节点删除流程 — kubectl delete node 源码分析 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  section: 返回值
+- type: operation
+  question: '如何执行与 节点删除流程 — kubectl delete node 源码分析 相关的操作: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  command: kubectl drain worker-1 --ignore-daemonsets --delete-emptydir-data
+- type: operation
+  question: '如何执行与 节点删除流程 — kubectl delete node 源码分析 相关的操作: kubectl delete node unreachable-node --force --grace-period=?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  command: kubectl delete node unreachable-node --force --grace-period=0
+- type: operation
+  question: '如何执行与 节点删除流程 — kubectl delete node 源码分析 相关的操作: kubectl drain cp-2 --ignore-daemonsets --delete-emptydir-dat?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/03-delete-node.md
+  command: kubectl drain cp-2 --ignore-daemonsets --delete-emptydir-data
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  section: 概述
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  section: 源码路径
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 清理流程总览 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 的「清理流程总览」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  section: 清理流程总览
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 停止 kubelet 服务 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 的「停止 kubelet 服务」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  section: 停止 kubelet 服务
+- type: concept
+  question: 在 节点清理机制 — cleanup-node 源码分析 中, 卸载 kubelet 挂载点 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 的「卸载 kubelet 挂载点」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  section: 卸载 kubelet 挂载点
+- type: operation
+  question: '如何执行与 节点清理机制 — cleanup-node 源码分析 相关的操作: kubeadm reset --config=reset.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  command: kubeadm reset --config=reset.yaml
+- type: operation
+  question: '如何执行与 节点清理机制 — cleanup-node 源码分析 相关的操作: iptables -F && iptables -t nat -F && iptables -t mangle -F &?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/04-cleanup.md
+  command: iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+  section: 概述
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+  section: 源码路径
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, 流程总览 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 的「流程总览」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+  section: 流程总览
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, etcd 类型检测 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 的「etcd 类型检测」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+  section: etcd 类型检测
+- type: concept
+  question: 在 etcd 数据清理与成员移除 — 源码分析 中, etcd 数据目录获取 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 的「etcd 数据目录获取」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+  section: etcd 数据目录获取
+- type: operation
+  question: '如何执行与 etcd 数据清理与成员移除 — 源码分析 相关的操作: etcdctl member list \?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+  command: etcdctl member list \
+- type: troubleshooting
+  question: 如何排查 etcd 数据清理与成员移除 — 源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+- type: comparison
+  question: etcd 数据清理与成员移除 — 源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/05-etcd-cleanup.md
+- type: concept
+  question: 在 强制删除与异常场景处理 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md
+  section: 概述
+- type: concept
+  question: 在 强制删除与异常场景处理 中, --force 标志 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md 的「--force 标志」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md
+  section: --force 标志
+- type: concept
+  question: 在 强制删除与异常场景处理 中, 错误处理策略 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md 的「错误处理策略」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md
+  section: 错误处理策略
+- type: operation
+  question: '如何执行与 强制删除与异常场景处理 相关的操作: kubeadm reset -f?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md
+  command: kubeadm reset -f
+- type: operation
+  question: '如何执行与 强制删除与异常场景处理 相关的操作: kubeadm reset --skip-phases=remove-etcd-member?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md
+  command: kubeadm reset --skip-phases=remove-etcd-member
+- type: troubleshooting
+  question: 如何排查 强制删除与异常场景处理 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/06-force-delete.md
+- type: concept
+  question: 在 HA 集群删除注意事项 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md
+  section: 概述
+- type: concept
+  question: 在 HA 集群删除注意事项 中, HA 架构回顾 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md 的「HA 架构回顾」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md
+  section: HA 架构回顾
+- type: concept
+  question: 在 HA 集群删除注意事项 中, etcd 仲裁维护 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md 的「etcd 仲裁维护」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md
+  section: etcd 仲裁维护
+- type: operation
+  question: '如何执行与 HA 集群删除注意事项 相关的操作: etcdctl endpoint status --write-out=table \?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md
+  command: etcdctl endpoint status --write-out=table \
+- type: operation
+  question: '如何执行与 HA 集群删除注意事项 相关的操作: ip addr show | grep <vip-address>?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md
+  command: ip addr show | grep <vip-address>
+- type: operation
+  question: '如何执行与 HA 集群删除注意事项 相关的操作: ETCDCTL_API=3 etcdctl member list \?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/07-ha-delete.md
+  command: ETCDCTL_API=3 etcdctl member list \
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  section: 概述
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, 删除方式对比 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 的「删除方式对比」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  section: 删除方式对比
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, kubeadm 删除流程（对比基准） 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 的「kubeadm 删除流程（对比基准）」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  section: kubeadm 删除流程（对比基准）
+- type: concept
+  question: 在 云厂商集群删除方案对比 中, EKS 集群删除 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 的「EKS 集群删除」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  section: EKS 集群删除
+- type: operation
+  question: '如何执行与 云厂商集群删除方案对比 相关的操作: eksctl delete cluster --name my-cluster --region us-west-2?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  command: eksctl delete cluster --name my-cluster --region us-west-2
+- type: operation
+  question: '如何执行与 云厂商集群删除方案对比 相关的操作: az aks delete --name my-cluster --resource-group my-rg --yes?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  command: az aks delete --name my-cluster --resource-group my-rg --yes
+- type: operation
+  question: '如何执行与 云厂商集群删除方案对比 相关的操作: gcloud container clusters delete my-cluster --zone=us-centra?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+  command: gcloud container clusters delete my-cluster --zone=us-central1-a --quiet
+- type: comparison
+  question: 云厂商集群删除方案对比 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/08-cloud-delete.md
+- type: concept
+  question: 在 reset 子命令与 Phase 操作速查 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md
+  section: 函数签名
+- type: concept
+  question: 在 reset 子命令与 Phase 操作速查 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md
+  section: 源码位置
+- type: concept
+  question: 在 reset 子命令与 Phase 操作速查 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 reset 子命令与 Phase 操作速查 相关的操作: kubeadm reset --config=reset-config.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md
+  command: kubeadm reset --config=reset-config.yaml
+- type: operation
+  question: '如何执行与 reset 子命令与 Phase 操作速查 相关的操作: kubeadm reset phase preflight?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md
+  command: kubeadm reset phase preflight
+- type: comparison
+  question: reset 子命令与 Phase 操作速查 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/09-reset-phase-commands.md
+- type: concept
+  question: 在 删除时的安全清理 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+  section: 函数签名
+- type: concept
+  question: 在 删除时的安全清理 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+  section: 源码位置
+- type: concept
+  question: 在 删除时的安全清理 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 删除时的安全清理 相关的操作: rm -rf /var/lib/etcd?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+  command: rm -rf /var/lib/etcd
+- type: operation
+  question: '如何执行与 删除时的安全清理 相关的操作: aws ec2 describe-volumes --filters "Name=tag:KubernetesClust?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+  command: aws ec2 describe-volumes --filters "Name=tag:KubernetesCluster,Values=<cluster-name>" --query 'Volum
+- type: operation
+  question: '如何执行与 删除时的安全清理 相关的操作: systemctl stop kubelet 2>/dev/null || true?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+  command: systemctl stop kubelet 2>/dev/null || true
+- type: comparison
+  question: 删除时的安全清理 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/10-security-delete.md
+- type: concept
+  question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md
+  section: 概述
+- type: concept
+  question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 中, 源码中的设计决策 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md 的「源码中的设计决策」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md
+  section: 源码中的设计决策
+- type: concept
+  question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 中, CNI 配置清理 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md 的「CNI 配置清理」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md
+  section: CNI 配置清理
+- type: operation
+  question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 相关的操作: ls /etc/cni/net.d/?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md
+  command: ls /etc/cni/net.d/
+- type: operation
+  question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 相关的操作: rm -rf /etc/cni/net.d/*?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md
+  command: rm -rf /etc/cni/net.d/*
+- type: operation
+  question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 相关的操作: rm -rf /etc/cni/net.d/10-flannel.conflist?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/11-network-cleanup.md
+  command: rm -rf /etc/cni/net.d/10-flannel.conflist
+- type: concept
+  question: 在 集群删除故障排查手册 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md
+  section: 概述
+- type: concept
+  question: 在 集群删除故障排查手册 中, kubeadm reset 常见错误 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md 的「kubeadm reset 常见错误」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md
+  section: kubeadm reset 常见错误
+- type: operation
+  question: '如何执行与 集群删除故障排查手册 相关的操作: ps aux | grep kubeadm?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md
+  command: ps aux | grep kubeadm
+- type: operation
+  question: '如何执行与 集群删除故障排查手册 相关的操作: sudo kubeadm reset -f?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md
+  command: sudo kubeadm reset -f
+- type: operation
+  question: '如何执行与 集群删除故障排查手册 相关的操作: crictl ps | grep etcd?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md
+  command: crictl ps | grep etcd
+- type: troubleshooting
+  question: 如何排查 集群删除故障排查手册 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/12-troubleshooting.md
+- type: concept
+  question: 在 集群删除前的数据备份与迁移检查清单 中, 删除前检查总览 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md 的「删除前检查总览」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md
+  section: 删除前检查总览
+- type: concept
+  question: 在 集群删除前的数据备份与迁移检查清单 中, 阶段一：评估检查清单 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md 的「阶段一：评估检查清单」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md
+  section: 阶段一：评估检查清单
+- type: concept
+  question: 在 集群删除前的数据备份与迁移检查清单 中, 阶段二：备份操作 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md 的「阶段二：备份操作」章节。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md
+  section: 阶段二：备份操作
+- type: operation
+  question: '如何执行与 集群删除前的数据备份与迁移检查清单 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md
+  command: kubectl get nodes -o wide
+- type: operation
+  question: '如何执行与 集群删除前的数据备份与迁移检查清单 相关的操作: kubectl get ingress --all-namespaces?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md
+  command: kubectl get ingress --all-namespaces
+- type: operation
+  question: '如何执行与 集群删除前的数据备份与迁移检查清单 相关的操作: ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd?'
+  answer: 参见 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/cluster-delete/13-pre-delete-backup-checklist.md
+  command: ETCD_POD=$(kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].metadata.name}'
+- type: concept
+  question: 在 Deployment 控制器架构总览 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/01-overview.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/01-overview.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment 控制器架构总览 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/01-overview.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/01-overview.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment 控制器架构总览 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/01-overview.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/01-overview.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Deployment 控制器架构总览 相关的操作: kubectl apply -f deployment.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/01-overview.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/01-overview.md
+  command: kubectl apply -f deployment.yaml
+- type: operation
+  question: '如何执行与 Deployment 控制器架构总览 相关的操作: kubectl set image deployment/web-frontend web=registry.examp?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/01-overview.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/01-overview.md
+  command: kubectl set image deployment/web-frontend web=registry.example.com/web-frontend:v2.2.0
+- type: comparison
+  question: Deployment 控制器架构总览 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/01-overview.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/deployment-create/01-overview.md
+- type: concept
+  question: 在 Deployment 控制器入口源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment 控制器入口源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment 控制器入口源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Deployment 控制器入口源码分析 相关的操作: kubectl rollout pause deployment/nginx?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/02-deployment-controller.md
+  command: kubectl rollout pause deployment/nginx
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md
+  section: 概述
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md
+  section: 源码路径
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, ReplicaSet 控制器架构 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md 的「ReplicaSet
+    控制器架构」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md
+  section: ReplicaSet 控制器架构
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, syncReplicaSet — 核心同步函数 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md 的「syncReplicaSet
+    — 核心同步函数」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md
+  section: syncReplicaSet — 核心同步函数
+- type: concept
+  question: 在 ReplicaSet 控制器源码分析 中, 期望状态对齐 — manageReplicas 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md 的「期望状态对齐 — manageReplicas」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/03-replicaset-controller.md
+  section: 期望状态对齐 — manageReplicas
+- type: concept
+  question: 在 滚动更新源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md
+  section: 概述
+- type: concept
+  question: 在 滚动更新源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md
+  section: 源码路径
+- type: concept
+  question: 在 滚动更新源码分析 中, 滚动更新策略配置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md 的「滚动更新策略配置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md
+  section: 滚动更新策略配置
+- type: concept
+  question: 在 滚动更新源码分析 中, rolloutRolling — 滚动更新入口 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md 的「rolloutRolling —
+    滚动更新入口」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md
+  section: rolloutRolling — 滚动更新入口
+- type: concept
+  question: 在 滚动更新源码分析 中, reconcileNewReplicaSet — 扩容新 RS 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md 的「reconcileNewReplicaSet
+    — 扩容新 RS」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md
+  section: reconcileNewReplicaSet — 扩容新 RS
+- type: operation
+  question: '如何执行与 滚动更新源码分析 相关的操作: kubectl rollout pause deployment/nginx?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/04-rolling-update.md
+  command: kubectl rollout pause deployment/nginx
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md
+  section: 概述
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md
+  section: 参数说明
+- type: concept
+  question: 在 Deployment Status 计算逻辑 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md
+  section: 返回值
+- type: comparison
+  question: Deployment Status 计算逻辑 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/deployment-create/05-deployment-status.md
+- type: concept
+  question: 在 版本历史与回滚机制 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md
+  section: 函数签名
+- type: concept
+  question: 在 版本历史与回滚机制 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md
+  section: 源码位置
+- type: concept
+  question: 在 版本历史与回滚机制 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 版本历史与回滚机制 相关的操作: kubectl set image deployment/nginx nginx=nginx:1.99?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/06-revision-history.md
+  command: kubectl set image deployment/nginx nginx=nginx:1.99
+- type: concept
+  question: 在 Recreate 策略源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+  section: 函数签名
+- type: concept
+  question: 在 Recreate 策略源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+  section: 源码位置
+- type: concept
+  question: 在 Recreate 策略源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+  section: 参数说明
+- type: concept
+  question: 在 Recreate 策略源码分析 中, 返回值 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 的「返回值」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+  section: 返回值
+- type: concept
+  question: 在 Recreate 策略源码分析 中, 调用链 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 的「调用链」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+  section: 调用链
+- type: operation
+  question: '如何执行与 Recreate 策略源码分析 相关的操作: kubectl patch deployment db-migrator \?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+  command: kubectl patch deployment db-migrator \
+- type: comparison
+  question: Recreate 策略源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/deployment-create/07-recreate-strategy.md
+- type: concept
+  question: 在 Deployment 与 HPA 集成源码分析 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment 与 HPA 集成源码分析 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment 与 HPA 集成源码分析 中, 架构概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md 的「架构概述」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md
+  section: 架构概述
+- type: concept
+  question: 在 Deployment 与 HPA 集成源码分析 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 Deployment 与 HPA 集成源码分析 相关的操作: kubectl get hpa -n production?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/08-hpa-integration.md
+  command: kubectl get hpa -n production
+- type: concept
+  question: 在 Deployment 金丝雀与蓝绿发布模式 中, 函数签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md 的「函数签名」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md
+  section: 函数签名
+- type: concept
+  question: 在 Deployment 金丝雀与蓝绿发布模式 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md
+  section: 源码位置
+- type: concept
+  question: 在 Deployment 金丝雀与蓝绿发布模式 中, 架构概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md 的「架构概述」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md
+  section: 架构概述
+- type: concept
+  question: 在 Deployment 金丝雀与蓝绿发布模式 中, pause/resume 机制源码分析 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md 的「pause/resume 机制源码分析」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md
+  section: pause/resume 机制源码分析
+- type: operation
+  question: '如何执行与 Deployment 金丝雀与蓝绿发布模式 相关的操作: kubectl get deployment web-stable?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md
+  command: kubectl get deployment web-stable
+- type: operation
+  question: '如何执行与 Deployment 金丝雀与蓝绿发布模式 相关的操作: kubectl set image deployment/web web=myapp:v2.0.0?'
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/deployment-create/09-canary-bluegreen.md
+  command: kubectl set image deployment/web web=myapp:v2.0.0
+- type: concept
+  question: 在 Deployment vs StatefulSet vs DaemonSet 选型指南 中, 三大控制器核心对比 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md 的「三大控制器核心对比」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md
+  section: 三大控制器核心对比
+- type: concept
+  question: 在 Deployment vs StatefulSet vs DaemonSet 选型指南 中, Deployment 控制器架构要点 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md 的「Deployment 控制器架构要点」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md
+  section: Deployment 控制器架构要点
+- type: concept
+  question: 在 Deployment vs StatefulSet vs DaemonSet 选型指南 中, StatefulSet 控制器架构要点 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md 的「StatefulSet
+    控制器架构要点」章节。
+  source: 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md
+  section: StatefulSet 控制器架构要点
+- type: comparison
+  question: Deployment vs StatefulSet vs DaemonSet 选型指南 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/deployment-create/10-workload-comparison.md
+- type: concept
+  question: 在 节点生命周期总览 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/01-overview.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/01-overview.md
+  section: 概述
+- type: concept
+  question: 在 节点生命周期总览 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/01-overview.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/01-overview.md
+  section: 源码路径
+- type: concept
+  question: 在 节点生命周期总览 中, 节点生命周期 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/01-overview.md 的「节点生命周期」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/01-overview.md
+  section: 节点生命周期
+- type: concept
+  question: 在 节点注册流程 — TLS Bootstrap 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/02-registration.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/02-registration.md
+  section: 概述
+- type: concept
+  question: 在 节点注册流程 — TLS Bootstrap 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/02-registration.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/02-registration.md
+  section: 源码路径
+- type: concept
+  question: 在 节点注册流程 — TLS Bootstrap 源码分析 中, 节点注册完整流程 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/02-registration.md 的「节点注册完整流程」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/02-registration.md
+  section: 节点注册完整流程
+- type: operation
+  question: '如何执行与 节点注册流程 — TLS Bootstrap 源码分析 相关的操作: kubectl get secrets -n kube-system -l kubernetes.io/token-ty?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/02-registration.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/02-registration.md
+  command: kubectl get secrets -n kube-system -l kubernetes.io/token-type=bootstrap.kubernetes.io/token
+- type: operation
+  question: '如何执行与 节点注册流程 — TLS Bootstrap 源码分析 相关的操作: kubeadm token create?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/02-registration.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/02-registration.md
+  command: kubeadm token create
+- type: concept
+  question: 在 节点状态与健康检查 — Node Conditions 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+  section: 概述
+- type: concept
+  question: 在 节点状态与健康检查 — Node Conditions 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+  section: 源码路径
+- type: concept
+  question: 在 节点状态与健康检查 — Node Conditions 源码分析 中, 节点状态（Conditions） 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 的「节点状态（Conditions）」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+  section: 节点状态（Conditions）
+- type: operation
+  question: '如何执行与 节点状态与健康检查 — Node Conditions 源码分析 相关的操作: kubectl get nodes -o jsonpath=''{range .items[*]}{.metadata.n?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+  command: kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{range .status.conditions[*]}{
+- type: operation
+  question: '如何执行与 节点状态与健康检查 — Node Conditions 源码分析 相关的操作: systemctl status kubelet?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+  command: systemctl status kubelet
+- type: troubleshooting
+  question: 如何排查 节点状态与健康检查 — Node Conditions 源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+- type: comparison
+  question: 节点状态与健康检查 — Node Conditions 源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/03-condition.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/03-condition.md
+- type: concept
+  question: 在 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中, 函数/流程签名 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 的「函数/流程签名」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+  section: 函数/流程签名
+- type: concept
+  question: 在 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中, 源码位置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 的「源码位置」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+  section: 源码位置
+- type: concept
+  question: 在 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中, 参数说明 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 的「参数说明」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+  section: 参数说明
+- type: operation
+  question: '如何执行与 节点驱逐与维护 (kubectl drain/cordon/uncordon) 相关的操作: kubectl drain node-1 \?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+  command: kubectl drain node-1 \
+- type: operation
+  question: '如何执行与 节点驱逐与维护 (kubectl drain/cordon/uncordon) 相关的操作: for node in $(kubectl get nodes -l node-role.kubernetes.io/w?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+  command: for node in $(kubectl get nodes -l node-role.kubernetes.io/worker -o name); do
+- type: troubleshooting
+  question: 如何排查 节点驱逐与维护 (kubectl drain/cordon/uncordon) 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+- type: comparison
+  question: 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/04-drain.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/04-drain.md
+- type: concept
+  question: 在 节点升级 — kubeadm upgrade node 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/05-upgrade.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/05-upgrade.md
+  section: 概述
+- type: concept
+  question: 在 节点升级 — kubeadm upgrade node 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/05-upgrade.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/05-upgrade.md
+  section: 源码路径
+- type: concept
+  question: 在 节点升级 — kubeadm upgrade node 源码分析 中, 节点升级概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/05-upgrade.md 的「节点升级概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/05-upgrade.md
+  section: 节点升级概述
+- type: operation
+  question: '如何执行与 节点升级 — kubeadm upgrade node 源码分析 相关的操作: kubectl version --short?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/05-upgrade.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/05-upgrade.md
+  command: kubectl version --short
+- type: operation
+  question: '如何执行与 节点升级 — kubeadm upgrade node 源码分析 相关的操作: apt-get update && apt-get install -y kubeadm=1.29.0-*?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/05-upgrade.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/05-upgrade.md
+  command: apt-get update && apt-get install -y kubeadm=1.29.0-*
+- type: troubleshooting
+  question: 如何排查 节点升级 — kubeadm upgrade node 源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/05-upgrade.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/05-upgrade.md
+- type: concept
+  question: 在 节点证书轮换 — kubelet 证书自动续期源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/06-certificate.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/06-certificate.md
+  section: 概述
+- type: concept
+  question: 在 节点证书轮换 — kubelet 证书自动续期源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/06-certificate.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/06-certificate.md
+  section: 源码路径
+- type: concept
+  question: 在 节点证书轮换 — kubelet 证书自动续期源码分析 中, kubelet 证书管理架构 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/06-certificate.md 的「kubelet 证书管理架构」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/06-certificate.md
+  section: kubelet 证书管理架构
+- type: operation
+  question: '如何执行与 节点证书轮换 — kubelet 证书自动续期源码分析 相关的操作: /var/lib/kubelet/pki/?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/06-certificate.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/06-certificate.md
+  command: /var/lib/kubelet/pki/
+- type: operation
+  question: '如何执行与 节点证书轮换 — kubelet 证书自动续期源码分析 相关的操作: kubectl get csr?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/06-certificate.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/06-certificate.md
+  command: kubectl get csr
+- type: comparison
+  question: 节点证书轮换 — kubelet 证书自动续期源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/06-certificate.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/06-certificate.md
+- type: concept
+  question: 在 节点弹性伸缩 — Cluster Autoscaler 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md
+  section: 概述
+- type: concept
+  question: 在 节点弹性伸缩 — Cluster Autoscaler 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md
+  section: 源码路径
+- type: concept
+  question: 在 节点弹性伸缩 — Cluster Autoscaler 源码分析 中, Cluster Autoscaler 工作原理 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md 的「Cluster Autoscaler 工作原理」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md
+  section: Cluster Autoscaler 工作原理
+- type: operation
+  question: '如何执行与 节点弹性伸缩 — Cluster Autoscaler 源码分析 相关的操作: gcloud container clusters update my-cluster \?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md
+  command: gcloud container clusters update my-cluster \
+- type: operation
+  question: '如何执行与 节点弹性伸缩 — Cluster Autoscaler 源码分析 相关的操作: az aks update \?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md
+  command: az aks update \
+- type: troubleshooting
+  question: 如何排查 节点弹性伸缩 — Cluster Autoscaler 源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/07-autoscaling.md
+- type: concept
+  question: 在 节点故障排查手册 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+  section: 概述
+- type: concept
+  question: 在 节点故障排查手册 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+  section: 源码路径
+- type: concept
+  question: 在 节点故障排查手册 中, 节点 NotReady 排查 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 的「节点 NotReady 排查」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+  section: 节点 NotReady 排查
+- type: operation
+  question: '如何执行与 节点故障排查手册 相关的操作: kubectl get nodes?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+  command: kubectl get nodes
+- type: operation
+  question: '如何执行与 节点故障排查手册 相关的操作: journalctl -u kubelet -p err --no-pager -n 50?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+  command: journalctl -u kubelet -p err --no-pager -n 50
+- type: operation
+  question: '如何执行与 节点故障排查手册 相关的操作: kubelet --validate --config=/var/lib/kubelet/config.yaml?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+  command: kubelet --validate --config=/var/lib/kubelet/config.yaml
+- type: troubleshooting
+  question: 如何排查 节点故障排查手册 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+- type: comparison
+  question: 节点故障排查手册 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/08-troubleshooting.md
+- type: concept
+  question: 在 节点网络：CNI 配置详解 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/09-cni-node.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/09-cni-node.md
+  section: 概述
+- type: concept
+  question: 在 节点网络：CNI 配置详解 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/09-cni-node.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/09-cni-node.md
+  section: 源码路径
+- type: concept
+  question: 在 节点网络：CNI 配置详解 中, CNI 架构 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/09-cni-node.md 的「CNI 架构」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/09-cni-node.md
+  section: CNI 架构
+- type: operation
+  question: '如何执行与 节点网络：CNI 配置详解 相关的操作: kubectl get pod <pod> -o jsonpath=''{.status.containerStatuse?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/09-cni-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/09-cni-node.md
+  command: kubectl get pod <pod> -o jsonpath='{.status.containerStatuses[0].containerID}'
+- type: operation
+  question: '如何执行与 节点网络：CNI 配置详解 相关的操作: ip link show?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/09-cni-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/09-cni-node.md
+  command: ip link show
+- type: troubleshooting
+  question: 如何排查 节点网络：CNI 配置详解 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/09-cni-node.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/09-cni-node.md
+- type: concept
+  question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+  section: 概述
+- type: concept
+  question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+  section: 源码路径
+- type: concept
+  question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, kubelet 配置文件详解 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 的「kubelet 配置文件详解」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+  section: kubelet 配置文件详解
+- type: concept
+  question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, cgroup Driver 配置 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 的「cgroup Driver 配置」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+  section: cgroup Driver 配置
+- type: operation
+  question: '如何执行与 kubelet 进阶配置 — cgroup / 资源管理 / 日志 相关的操作: kubectl get --raw /api/v1/nodes/<node>/proxy/configz | jq ''.?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+  command: kubectl get --raw /api/v1/nodes/<node>/proxy/configz | jq '.kubeletconfig.cgroupDriver'
+- type: operation
+  question: '如何执行与 kubelet 进阶配置 — cgroup / 资源管理 / 日志 相关的操作: cat /proc/cgroups?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+  command: cat /proc/cgroups
+- type: troubleshooting
+  question: 如何排查 kubelet 进阶配置 — cgroup / 资源管理 / 日志 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+- type: comparison
+  question: kubelet 进阶配置 — cgroup / 资源管理 / 日志 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/10-kubelet-config.md
+- type: concept
+  question: 在 节点资源压力与 Eviction — 源码分析 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/11-eviction.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/11-eviction.md
+  section: 概述
+- type: concept
+  question: 在 节点资源压力与 Eviction — 源码分析 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/11-eviction.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/11-eviction.md
+  section: 源码路径
+- type: concept
+  question: 在 节点资源压力与 Eviction — 源码分析 中, kubelet Eviction 机制 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/11-eviction.md 的「kubelet Eviction 机制」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/11-eviction.md
+  section: kubelet Eviction 机制
+- type: operation
+  question: '如何执行与 节点资源压力与 Eviction — 源码分析 相关的操作: dmesg | grep -i "oom"?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/11-eviction.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/11-eviction.md
+  command: dmesg | grep -i "oom"
+- type: troubleshooting
+  question: 如何排查 节点资源压力与 Eviction — 源码分析 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/11-eviction.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/11-eviction.md
+- type: comparison
+  question: 节点资源压力与 Eviction — 源码分析 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/11-eviction.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/11-eviction.md
+- type: concept
+  question: 在 节点监控 — metrics-server / node-exporter / kubelet metrics 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+  section: 概述
+- type: concept
+  question: 在 节点监控 — metrics-server / node-exporter / kubelet metrics 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+  section: 源码路径
+- type: concept
+  question: 在 节点监控 — metrics-server / node-exporter / kubelet metrics 中, kubelet Metrics 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 的「kubelet Metrics」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+  section: kubelet Metrics
+- type: operation
+  question: '如何执行与 节点监控 — metrics-server / node-exporter / kubelet metrics 相关的操作: curl -k --cert /var/lib/kubelet/pki/kubelet-client-current.p?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+  command: curl -k --cert /var/lib/kubelet/pki/kubelet-client-current.pem \
+- type: operation
+  question: '如何执行与 节点监控 — metrics-server / node-exporter / kubelet metrics 相关的操作: kubelet_runtime_operations_total{operation_type="container_s?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+  command: kubelet_runtime_operations_total{operation_type="container_status"} 1234
+- type: operation
+  question: '如何执行与 节点监控 — metrics-server / node-exporter / kubelet metrics 相关的操作: kubelet_pod_worker_duration_seconds_bucket{operation="sync"}?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+  command: kubelet_pod_worker_duration_seconds_bucket{operation="sync"}
+- type: troubleshooting
+  question: 如何排查 节点监控 — metrics-server / node-exporter / kubelet metrics 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/12-monitoring.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/12-monitoring.md
+- type: concept
+  question: 在 节点安全 — Node Authorization / NodeRestriction / Pod Security 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+  section: 概述
+- type: concept
+  question: 在 节点安全 — Node Authorization / NodeRestriction / Pod Security 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+  section: 源码路径
+- type: concept
+  question: 在 节点安全 — Node Authorization / NodeRestriction / Pod Security 中, Node Authorization 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 的「Node Authorization」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+  section: Node Authorization
+- type: operation
+  question: '如何执行与 节点安全 — Node Authorization / NodeRestriction / Pod Security 相关的操作: --authorization-mode=Node,RBAC?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+  command: --authorization-mode=Node,RBAC
+- type: operation
+  question: '如何执行与 节点安全 — Node Authorization / NodeRestriction / Pod Security 相关的操作: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+  command: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -subject
+- type: operation
+  question: '如何执行与 节点安全 — Node Authorization / NodeRestriction / Pod Security 相关的操作: --enable-admission-plugins=NodeRestriction?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+  command: --enable-admission-plugins=NodeRestriction
+- type: comparison
+  question: 节点安全 — Node Authorization / NodeRestriction / Pod Security 中有哪些技术对比?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/13-security.md 中的对比分析。
+  source: 10-平台工程/topic-code-analysis/node-create/13-security.md
+- type: concept
+  question: 在 14 - 节点存储 中, 节点存储类型 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/14-storage-node.md 的「节点存储类型」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/14-storage-node.md
+  section: 节点存储类型
+- type: concept
+  question: 在 14 - 节点存储 中, Local PV 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/14-storage-node.md 的「Local PV」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/14-storage-node.md
+  section: Local PV
+- type: troubleshooting
+  question: 如何排查 14 - 节点存储 相关的故障?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/14-storage-node.md 的故障排查章节。
+  source: 10-平台工程/topic-code-analysis/node-create/14-storage-node.md
+- type: concept
+  question: 在 云厂商节点集成 — AWS / GCP / Azure 中, 概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md 的「概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md
+  section: 概述
+- type: concept
+  question: 在 云厂商节点集成 — AWS / GCP / Azure 中, 源码路径 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md 的「源码路径」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md
+  section: 源码路径
+- type: concept
+  question: 在 云厂商节点集成 — AWS / GCP / Azure 中, 云厂商节点元数据 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md 的「云厂商节点元数据」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md
+  section: 云厂商节点元数据
+- type: operation
+  question: '如何执行与 云厂商节点集成 — AWS / GCP / Azure 相关的操作: curl http://169.254.169.254/latest/meta-data/?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md
+  command: curl http://169.254.169.254/latest/meta-data/
+- type: operation
+  question: '如何执行与 云厂商节点集成 — AWS / GCP / Azure 相关的操作: curl -H "Metadata-Flavor: Google" http://metadata.google.int?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md
+  command: 'curl -H "Metadata-Flavor: Google" http://metadata.google.internal/computeMetadata/v1/'
+- type: operation
+  question: '如何执行与 云厂商节点集成 — AWS / GCP / Azure 相关的操作: curl -H "Metadata: true" "http://169.254.169.254/metadata/in?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/15-cloud-node.md
+  command: 'curl -H "Metadata: true" "http://169.254.169.254/metadata/instance?api-version=2021-02-01"'
+- type: concept
+  question: 在 Windows 节点接入与管理 中, 架构概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/16-windows-node.md 的「架构概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/16-windows-node.md
+  section: 架构概述
+- type: concept
+  question: 在 Windows 节点接入与管理 中, Windows 节点支持矩阵 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/16-windows-node.md 的「Windows 节点支持矩阵」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/16-windows-node.md
+  section: Windows 节点支持矩阵
+- type: concept
+  question: 在 Windows 节点接入与管理 中, 前置条件 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/16-windows-node.md 的「前置条件」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/16-windows-node.md
+  section: 前置条件
+- type: operation
+  question: '如何执行与 Windows 节点接入与管理 相关的操作: kubectl taint nodes windows-worker-1 \?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/16-windows-node.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/16-windows-node.md
+  command: kubectl taint nodes windows-worker-1 \
+- type: concept
+  question: 在 ARM 节点与多架构混合集群 中, 架构概述 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md 的「架构概述」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md
+  section: 架构概述
+- type: concept
+  question: 在 ARM 节点与多架构混合集群 中, ARM 节点前置条件 是什么?
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md 的「ARM 节点前置条件」章节。
+  source: 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md
+  section: ARM 节点前置条件
+- type: operation
+  question: '如何执行与 ARM 节点与多架构混合集群 相关的操作: uname -m?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md
+  command: uname -m
+- type: operation
+  question: '如何执行与 ARM 节点与多架构混合集群 相关的操作: KUBE_VERSION="1.30.0"?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md
+  command: KUBE_VERSION="1.30.0"
+- type: operation
+  question: '如何执行与 ARM 节点与多架构混合集群 相关的操作: CONTAINERD_VERSION="1.7.13"?'
+  answer: 参见 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md 中的操作步骤。
+  source: 10-平台工程/topic-code-analysis/node-create/17-arm-multiarch.md
+  command: CONTAINERD_VERSION="1.7.13"

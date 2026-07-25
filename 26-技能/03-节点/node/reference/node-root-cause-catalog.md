@@ -1,0 +1,457 @@
+---
+title: Node 异常根因目录与修复方案速查表
+description: Kubernetes Node 异常的 15 种根因完整目录，包含每种根因的概率、诊断证据、修复方案、风险等级和验证方法
+summary: 本参考汇总 Node 异常的所有已知根因（RC-001 至 RC-015），为 SRE 和 AI Agent 提供快速根因匹配和修复路由
+category: reference
+tags:
+- k8s
+- node
+- root-cause
+- reference
+- troubleshooting
+- remediation
+- catalog
+sources:
+- 故障诊断/技能体系/01-node-notready.md
+- 故障诊断/技能体系/19-node-resource-pressure.md
+- 故障诊断/技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md
+created: '2026-07-23'
+updated: '2026-07-23'
+lifecycle: active
+tier: supporting
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 运维工程师
+- 技术支持
+- 所有工程师
+estimated_read_time: 10min
+intent_queries:
+- Node NotReady 有哪些根因
+- 节点故障的修复方案有哪些
+- 如何快速定位节点问题根因
+trigger_keywords:
+- 根因
+- root cause
+- 修复方案
+- remediation
+- RC-001
+- RC-002
+- 修复速查
+prerequisites:
+- kubectl-basics
+- node-architecture
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+# Node 异常根因目录与修复方案速查表
+
+---
+
+## 1. 根因总览
+
+### 1.1 NotReady 类根因（SKILL-NODE-001）
+
+| RC ID | 根因 | 概率 | 首选修复 | 风险 |
+|-------|------|------|---------|------|
+| RC-001 | kubelet 进程崩溃/未运行 | 高 | REM-003 重启 kubelet | 🟡 中 |
+| RC-002 | containerd/CRI-O 异常 | 高 | REM-004 重启 containerd | 🟡 中 |
+| RC-003 | 磁盘空间耗尽 (DiskPressure) | 高 | REM-002 清理磁盘 | 🟢 低 |
+| RC-004 | 内存耗尽 (MemoryPressure) | 中 | REM-006 排空重启 | 🔴 高 |
+| RC-005 | PID 耗尽 (PIDPressure) | 中 | REM-003 重启 kubelet | 🟡 中 |
+| RC-006 | 节点-apiserver 网络不通 | 中 | 网络修复(手动) | 🔴 高 |
+| RC-007 | kubelet 证书过期 | 中 | REM-008 证书轮转 | 🟡 中 |
+| RC-008 | PLEG 不健康 | 中 | REM-004 重启 containerd | 🟡 中 |
+| RC-009 | 内核/硬件异常 | 低 | REM-007 替换节点 | 🔴 高 |
+| RC-010 | NTP 时间不同步 | 低 | 修复 NTP(手动) | 🟡 中 |
+| RC-011 | CNI 插件异常 | 中 | 重启 CNI Pod | 🟡 中 |
+| RC-012 | 手动 cordon | 低 | REM-001 uncordon | 🟢 低 |
+| RC-013 | 内核 panic | ~5% | REM-007 替换/恢复 | 🔴 高 |
+| RC-014 | 云厂商节点池异常 | ~8% | 云平台操作 | 🔴 高 |
+| RC-015 | 证书自动轮转失败 | ~4% | REM-008 手动轮转 | 🟡 中 |
+
+### 1.2 资源压力类根因（SKILL-NODE-002）
+
+| RC ID | 根因 | 概率 | 首选修复 | 风险 |
+|-------|------|------|---------|------|
+| RP-001 | 节点内存实际耗尽 | 高 | 释放内存/扩容 | 🟡 中 |
+| RP-002 | kubelet 驱逐阈值过严 | 中 | 调整阈值 | 🟡 中 |
+| RP-003 | 容器/应用内存泄漏 | 中 | 修复应用/重启 Pod | 🟡 中 |
+| RP-004 | 日志文件膨胀 | 高 | 清理日志+配置轮转 | 🟢 低 |
+| RP-005 | emptyDir/Pod 数据膨胀 | 中 | 删除 Pod 重建 | 🟢 低 |
+| RP-006 | 镜像/容器层膨胀 | 高 | `crictl rmi --prune` | 🟢 低 |
+| RP-007 | inode 耗尽 | 低 | 清理小文件 | 🟢 低 |
+| RP-008 | 系统 PID 上限耗尽 | 低 | 增大 pid_max | 🟡 中 |
+| RP-009 | 线程泄漏 | 低 | 修复应用 | 🟡 中 |
+| RP-010 | 临时文件堆积 | 中 | 清理 /tmp | 🟢 低 |
+
+---
+
+## 2. 修复方案详解
+
+### REM-001: Uncordon 节点
+
+- **适用**: RC-012
+- **风险**: 🟢 低
+- **命令**:
+  ```bash
+  kubectl uncordon <node-name>
+  ```
+- **验证**: `kubectl get node <node-name>` → STATUS 为 Ready
+
+---
+
+### REM-002: 清理磁盘空间
+
+- **适用**: RC-003, RP-004, RP-006, RP-007, RP-010
+- **风险**: 🟢 低
+- **命令**:
+  ```bash
+  # 清理未使用镜像
+  ssh <node-ip> "crictl rmi --prune"
+  # 清理已停止容器
+  ssh <node-ip> "crictl ps -a | grep Exited | awk '{print \$1}' | xargs -r crictl rm"
+  # 清理旧日志
+  ssh <node-ip> "find /var/log -name '*.gz' -mtime +7 -delete"
+  ssh <node-ip> "journalctl --vacuum-time=2d"
+  ```
+- **验证**: `df -h /var/lib/containerd` → 使用率 < 85%
+
+---
+
+### REM-003: 重启 kubelet
+
+- **适用**: RC-001, RC-005, RC-008
+- **风险**: 🟡 中（节点短暂不可调度 10-30s）
+- **命令**:
+  ```bash
+  ssh <node-ip> "systemctl restart kubelet"
+  ```
+- **验证**: `systemctl status kubelet` → active (running)
+
+---
+
+### REM-004: 重启 containerd
+
+- **适用**: RC-002, RC-008
+- **风险**: 🟡 中（容器短暂中断 30-60s）
+- **命令**:
+  ```bash
+  ssh <node-ip> "systemctl restart containerd"
+  sleep 10
+  ssh <node-ip> "systemctl restart kubelet"
+  ```
+- **验证**: `crictl ps` → 容器恢复运行
+
+---
+
+### REM-005: 调整驱逐阈值
+
+- **适用**: RC-003/004/005（临时缓解）, RP-002
+- **风险**: 🟡 中（需重启 kubelet）
+- **命令**:
+  ```bash
+  ssh <node-ip> "cp /var/lib/kubelet/config.yaml /var/lib/kubelet/config.yaml.bak"
+  # 修改阈值...
+  ssh <node-ip> "systemctl restart kubelet"
+  ```
+- **回滚**: `cp config.yaml.bak config.yaml && systemctl restart kubelet`
+
+---
+
+### REM-006: 排空节点并重启
+
+- **适用**: RC-001/002/008/009（复杂问题）
+- **风险**: 🔴 高（驱逐所有 Pod）
+- **命令**:
+  ```bash
+  kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --force --grace-period=60
+  ssh <node-ip> "reboot"
+  # 等待 2-5 分钟
+  kubectl uncordon <node-name>
+  ```
+- **前提**: 确认集群有足够资源接纳被驱逐 Pod
+
+---
+
+### REM-007: 替换节点
+
+- **适用**: RC-009, RC-013, RC-014
+- **风险**: 🔴 高（数据可能丢失）
+- **步骤**: drain → delete node → 云平台终止实例 → 新建实例加入集群
+- **前提**: 确认无 local PV 数据
+
+---
+
+### REM-008: 手动证书轮转
+
+- **适用**: RC-007, RC-015
+- **风险**: 🟡 中
+- **命令**:
+  ```bash
+  # 检查 Pending CSR
+  kubectl get csr | grep -i pending
+  kubectl certificate approve <csr-name>
+  # 或重新 bootstrap
+  ssh <node-ip> "rm -f /var/lib/kubelet/pki/kubelet-client-current.pem"
+  ssh <node-ip> "systemctl restart kubelet"
+  kubectl certificate approve <new-csr-name>
+  ```
+
+---
+
+## 3. 根因匹配决策表
+
+| 诊断证据 | 最可能根因 | 修复方案 |
+|---------|-----------|---------|
+| kubelet inactive/failed | RC-001 | REM-003 |
+| containerd inactive + PLEG 日志 | RC-002/RC-008 | REM-004 |
+| DiskPressure=True + df >85% | RC-003 | REM-002 |
+| MemoryPressure=True + free 极低 | RC-004 | REM-006 |
+| PIDPressure=True + PID 接近上限 | RC-005 | REM-003 |
+| TCP 连接 apiserver 失败 | RC-006 | 网络修复 |
+| x509/certificate 错误 | RC-007/RC-015 | REM-008 |
+| dmesg 含 MCE/I/O error | RC-009/RC-013 | REM-007 |
+| timedatectl 未同步 | RC-010 | 修复 NTP |
+| CNI 配置缺失/Pod 异常 | RC-011 | 重启 CNI |
+| unschedulable taint | RC-012 | REM-001 |
+| 云平台实例状态异常 | RC-014 | 云平台操作 |
+
+---
+
+## 4. 详细根因描述（RC-001 ~ RC-012）
+
+> 以下内容整合自 `故障诊断/技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md`
+
+### RC-001: kubelet 进程崩溃或未运行
+
+- **描述**: kubelet 进程因 panic、OOM、配置错误等原因停止运行或反复崩溃重启，无法向 apiserver 发送心跳
+- **概率**: 高
+- **诊断证据**:
+  - **D2.1** 显示 kubelet 未运行（`Active: inactive (dead)` / `Active: failed` / `Active: activating (auto-restart)`）
+  - **D2.2** 日志显示 panic/fatal 错误
+  - **D1.5** Lease 未更新（renewTime 距当前时间 > 40s）
+- **FTA 底层事件映射**: `node-fta.md → evt_kubelet_down`, `evt_heartbeat_fail`
+- **关联修复**: REM-003（重启 kubelet）、REM-006（排空节点并重启）、REM-007（替换节点）
+- **交叉关联**:
+  - RC-003（磁盘压力）可导致 kubelet 无法写入日志或状态文件而崩溃
+  - RC-004（内存压力）可导致 OOM Killer 杀死 kubelet 进程
+  - RC-005（PID 压力）可导致 kubelet 无法 fork 子进程
+
+### RC-002: 容器运行时（containerd）异常
+
+- **描述**: containerd 或 CRI-O 守护进程停止、崩溃或响应超时，kubelet 无法执行容器操作导致 PLEG 不健康
+- **概率**: 高
+- **诊断证据**:
+  - **D2.3** 显示 containerd 未运行（`Active: inactive (dead)` / `Active: failed`）
+  - **D2.4** 日志有错误（`failed to create shim`、`context deadline exceeded` 等）
+  - **D2.6** PLEG 不健康（`GenericPLEG: Unable to retrieve pods`）
+  - **D1.2** Message 包含 `container runtime is down`
+- **FTA 底层事件映射**: `node-fta.md → evt_rt_down`, `evt_cri_sock`, `evt_rt_hang`
+- **关联修复**: REM-004（重启 containerd）、REM-006（排空节点并重启）
+- **交叉关联**:
+  - RC-003（磁盘压力）可导致 containerd 无法创建 shim 或写入层数据
+  - RC-005（PID 压力）可导致 containerd 无法 fork shim 进程
+  - RC-008（PLEG 不健康）通常是 RC-002 的下游症状
+
+### RC-003: 节点磁盘空间耗尽（DiskPressure）
+
+- **描述**: 根分区、/var/lib/kubelet、/var/lib/containerd 或 /var/log 分区磁盘使用率超过驱逐阈值（默认 85%），或 inode 耗尽
+- **概率**: 高
+- **诊断证据**:
+  - **D1.2** DiskPressure=True
+  - **D2.5** 磁盘使用率 >85% 或 inode 使用率 >90%
+  - **D1.3** 事件包含 `NodeHasDiskPressure` 或 `InvalidDiskCapacity`
+- **FTA 底层事件映射**: `node-fta.md → evt_disk_pressure`, `evt_image_gc_fail`
+- **关联修复**: REM-002（清理磁盘空间）、REM-005（调整驱逐阈值）
+- **交叉关联**:
+  - RC-003 可导致 RC-001（kubelet 因无法写入而崩溃）
+  - RC-003 可导致 RC-002（containerd 因无法写入镜像层/shim 数据而异常）
+  - 日志轮转失败是常见的磁盘耗尽隐因，需检查 `/var/log/pods/` 和 `/var/log/containers/` 下的大文件
+
+### RC-004: 节点内存耗尽（MemoryPressure）
+
+- **描述**: 节点可用内存低于 kubelet 驱逐阈值（默认 100Mi），触发内存压力条件
+- **概率**: 中
+- **诊断证据**:
+  - **D1.2** MemoryPressure=True
+  - **D2.5** 可用内存极低（< 100Mi）
+  - **D2.9** OOM Killer 日志（`Out of memory: Killed process`）
+- **FTA 底层事件映射**: `node-fta.md → evt_mem_pressure`, `evt_and_mem_low`, `evt_and_mem_nolimit`
+- **关联修复**: REM-005（调整驱逐阈值）、REM-006（排空节点并重启）
+- **交叉关联**:
+  - RC-004 可导致 RC-001（OOM Killer 杀死 kubelet 进程）
+  - RC-004 可导致 RC-002（OOM Killer 杀死 containerd 进程）
+  - [v1.30+] 若启用 Node swap support，MemoryPressure 计算可能包含 swap 使用量
+
+### RC-005: 节点 PID 耗尽（PIDPressure）
+
+- **描述**: 节点上进程数量接近或达到 pid_max 限制，kubelet 报告 PID 压力
+- **概率**: 中
+- **诊断证据**:
+  - **D1.2** PIDPressure=True
+  - **D2.5** PID 数量接近上限（默认 pid_max 为 32768 或 4194304）
+  - **D2.2** 日志包含 PID 相关错误（`too many open files` 等）
+- **FTA 底层事件映射**: `node-fta.md → evt_pid_exhaust`
+- **关联修复**: REM-005（调整驱逐阈值）、REM-006（排空节点并重启）
+- **交叉关联**:
+  - RC-005 可导致 RC-001（kubelet 无法 fork 子进程）
+  - RC-005 可导致 RC-002（containerd 无法创建 shim 进程）
+
+### RC-006: 节点与 apiserver 网络不通
+
+- **描述**: 防火墙规则变更、安全组配置、路由问题、物理网络问题导致节点无法与 apiserver 通信
+- **概率**: 中
+- **诊断证据**:
+  - **D2.7** TCP 连接失败（`nc -zv` 超时或被拒绝）
+  - **D2.2** 日志包含 `connection refused`、`dial tcp`、`use of closed network connection`
+  - **D1.2** Ready=Unknown（apiserver 长时间未收到心跳）
+- **FTA 底层事件映射**: `node-fta.md → evt_api_unreachable`, `evt_policy_block`, `evt_route_fail`
+- **关联修复**: 需人工排查网络（防火墙、路由、交换机）
+- **交叉关联**:
+  - RC-009（内核 `nf_conntrack: table full`）可导致网络不通的变种表现
+  - 与 RC-007 容易混淆 — TLS 握手失败可能被误判为网络问题，需先检查证书（D2.8）
+
+### RC-007: kubelet 客户端证书过期
+
+- **描述**: kubelet 用于与 apiserver 通信的客户端证书过期或被吊销，TLS 握手失败
+- **概率**: 中
+- **诊断证据**:
+  - **D2.8** 证书已过期（`notAfter` 早于当前时间）或证书文件不存在
+  - **D2.2** 日志包含 `x509: certificate has expired` 或 `certificate signed by unknown authority`
+  - **D2.7** TLS 握手失败（TCP 成功但 HTTPS 请求失败）
+- **FTA 底层事件映射**: `node-fta.md → evt_kubelet_cert`, `evt_node_cert_expire`
+- **关联修复**: REM-008（手动证书轮转）
+- **关联 Skill**: SKILL-SEC-001
+- **交叉关联**:
+  - RC-010（时间不同步）可导致证书验证失败的表现（证书看似有效但因时间偏差仍无法验证）
+  - [v1.28+] kubelet 证书自动轮转（RotateKubeletClientCertificate）默认启用，若自动轮转失败需手动干预
+
+### RC-008: PLEG 不健康导致 NotReady
+
+- **描述**: Pod Lifecycle Event Generator 的 relist 操作超时（>3min），通常由 container runtime 响应慢引起
+- **概率**: 中
+- **诊断证据**:
+  - **D2.6** 日志出现 `PLEG is not healthy`
+  - **D1.2** Message 包含 "PLEG"
+  - **D2.3** containerd 延迟高
+- **FTA 底层事件映射**: `node-fta.md → evt_pleg`, `evt_and_pleg_timeout`, `evt_and_pleg_overload`
+- **关联修复**: REM-003（重启 kubelet）、REM-004（重启 containerd）、REM-006（排空节点并重启）
+- **交叉关联**:
+  - RC-002（容器运行时问题）是 PLEG 不健康最常见的上游原因
+  - 某个容器处于 D 状态（不可中断 I/O 等待）也可阻塞 CRI 调用导致 PLEG 超时
+  - [v1.31+] EventedPLEG 默认启用后，传统 GenericPLEG 误报减少
+
+### RC-009: 内核问题/硬件异常
+
+- **描述**: 服务器硬件问题（磁盘坏块、内存 ECC 错误、CPU MCE）、内核 panic、文件系统损坏
+- **概率**: 低
+- **诊断证据**:
+  - **D2.9** dmesg 包含 `Hardware Error`、`MCE` (Machine Check Exception)、`I/O error`、`device not responding`、`NMI watchdog: BUG: soft lockup`、`EXT4-fs error`、`XFS error`
+  - 节点可能完全无法 SSH（硬件级问题）
+- **FTA 底层事件映射**: `node-fta.md → evt_kernel_panic`, `evt_driver_issue`
+- **关联修复**: REM-006（排空节点并重启）、REM-007（替换节点）、REM-009（内核热补丁/OS 升级）、REM-010（硬件更换）
+- **交叉关联**:
+  - 硬件问题可能导致 RC-001（kubelet 崩溃）、RC-002（containerd 崩溃）、RC-003（磁盘问题导致空间不可用）
+  - `nf_conntrack: table full` 属于 RC-006（网络）和 RC-009（内核）的交叉区域
+
+### RC-010: NTP 时间不同步
+
+- **描述**: 节点时钟偏差过大，导致 TLS 证书验证失败和 Lease 续租异常
+- **概率**: 低
+- **诊断证据**:
+  - **D2.10** 时钟未同步（`System clock synchronized: no`）或偏差 > 5s
+  - **D2.8** 证书看似有效但 TLS 仍失败（因时间偏差导致证书验证时判断为过期/未生效）
+- **FTA 底层事件映射**: `node-fta.md → evt_time_skew_tls`
+- **关联修复**: 修复 NTP 同步（chrony/ntpd 配置）
+- **交叉关联**:
+  - RC-010 可导致 RC-007 的表现（证书有效但因时间偏差验证失败）
+  - 时间偏差是最容易被忽视但影响广泛的根因，在诊断早期（D2.10）就应检查
+
+### RC-011: CNI 插件异常
+
+- **描述**: CNI 配置文件缺失、CNI 二进制文件损坏、CNI DaemonSet Pod 异常，导致节点网络不可用，kubelet 报告 NetworkUnavailable
+- **概率**: 中
+- **诊断证据**:
+  - **D3.2** CNI 配置缺失（`/etc/cni/net.d/` 为空）或 CNI Pod 未运行
+  - **D1.2** NetworkUnavailable=True
+- **FTA 底层事件映射**: `node-fta.md → evt_cni_fail`
+- **关联修复**: 重新部署 CNI DaemonSet、恢复 CNI 配置文件
+- **交叉关联**:
+  - CNI Pod 异常可能是 RC-002（容器运行时问题）的下游症状
+  - CNI 配置被误删通常是运维误操作
+
+### RC-012: 节点被手动 cordon/drain
+
+- **描述**: 运维人员手动执行了 `kubectl cordon` 或 `kubectl drain`，节点被标记为 SchedulingDisabled，不属于问题
+- **概率**: 低
+- **诊断证据**:
+  - **D1.4** 存在 `node.kubernetes.io/unschedulable:NoSchedule` taint
+  - **D1.1** STATUS 包含 "SchedulingDisabled"（注意：STATUS 可能显示为 `Ready,SchedulingDisabled`，此时节点实际是健康的）
+- **FTA 底层事件映射**: `node-fta.md → evt_cordon`（非问题，人工操作）
+- **关联修复**: REM-001（取消 cordon 标记）
+- **交叉关联**:
+  - 这是常见的误诊场景 — 用户报告"节点异常"但实际是 SchedulingDisabled 而非 NotReady
+  - D1.1 中需仔细区分 `NotReady` 和 `Ready,SchedulingDisabled`
+
+---
+
+## 5. 根因交叉关联图
+
+以下展示根因之间的因果和关联关系：
+
+```
+RC-009 (硬件/内核问题)
+  ├─→ RC-001 (kubelet 崩溃)
+  ├─→ RC-002 (containerd 崩溃)
+  └─→ RC-003 (磁盘不可用)
+
+RC-003 (磁盘压力)
+  ├─→ RC-001 (kubelet 无法写入 → 崩溃)
+  └─→ RC-002 (containerd 无法写入 → 异常)
+
+RC-004 (内存压力)
+  ├─→ RC-001 (OOM Killer 杀死 kubelet)
+  └─→ RC-002 (OOM Killer 杀死 containerd)
+
+RC-005 (PID 压力)
+  ├─→ RC-001 (kubelet 无法 fork)
+  └─→ RC-002 (containerd 无法创建 shim)
+
+RC-002 (containerd 异常)
+  └─→ RC-008 (PLEG 不健康 — 最常见的上游原因)
+
+RC-010 (NTP 时间偏差)
+  └─→ RC-007 的表现 (证书验证失败)
+
+RC-006 (网络不通) ←→ RC-007 (证书过期)
+  注意: TLS 握手失败可能被误判为网络问题
+  诊断优先级: 先 D2.8 检查证书，再 D2.7 排查网络
+```
+
+> **提示**: 在诊断时注意根因的级联关系。例如，当发现 PLEG 不健康（RC-008）时，不应仅重启 kubelet，还应检查 containerd 状态（RC-002）和系统资源（RC-003/RC-004/RC-005），排查上游根因。
+
+---
+
+## 6. 版本兼容性说明
+
+| 特性 | 版本 | 影响 |
+|------|------|------|
+| GracefulNodeShutdown GA | v1.28+ | 计划关机不触发 NotReady |
+| PodDisruptionConditions GA | v1.29+ | 驱逐 Pod 记录原因 |
+| NodeSwap beta | v1.30+ | swap 使用可能是预期行为 |
+| EventedPLEG GA | v1.31+ | PLEG 诊断方式变化 |
+| nftables kube-proxy GA | v1.32+ | 网络规则检查方式变化 |
+
+---
+
+## 相关链接
+
+- [[26-技能/03-节点/node/README.md|Node 异常诊断技能集]]
+- [[26-技能/03-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
+- [[26-技能/03-节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
+- [[26-技能/03-节点/node/reference/node-conditions-reference.md|Node Conditions 参考]]
