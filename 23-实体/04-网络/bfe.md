@@ -1,7 +1,7 @@
 ---
 title: BFE
 description: '## 概述'
-summary: 'BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百度内部每天数万亿级别的请求。它提供高级流量路由、安全防护、可观测性等能力，支持 HTTP/HTTPS/HTTP2/QUIC 等协议，适合作为 Kubernetes [[Ingress|Ingress]] Controller 或独立的流量网关。'
+summary: 'BFE 是百度开源的现代化七层负载均衡器和反向代理，处理百度内部每天数万亿级别的请求。它提供高级流量路由、安全防护、可观测性等能力，支持 HTTP/HTTPS/HTTP2/QUIC 等协议，适合作为 Kubernetes [[ingress|Ingress]] Controller 或独立的流量网关。'
 category: entities
 tags:
 - k8s

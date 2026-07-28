@@ -50,11 +50,11 @@ prerequisites:
 
 
 
-# eBPF 与 [[Cilium|Cilium]] 网络
+# eBPF 与 [[cilium|Cilium]] 网络
 
 ## 概述
 
-**eBPF（Extended Berkeley Packet Filter）** 是一项革命性的 Linux 内核技术，允许在不修改内核源码或加载内核模块的情况下，在内核中安全地运行沙箱程序。**Cilium** 是基于 eBPF 的 [[Kubernetes|Kubernetes]] 网络、安全和可观测性解决方案，正在逐步取代传统的 iptables 和 OVS 方案，成为 2026 年云原生网络的事实标准。
+**eBPF（Extended Berkeley Packet Filter）** 是一项革命性的 Linux 内核技术，允许在不修改内核源码或加载内核模块的情况下，在内核中安全地运行沙箱程序。**Cilium** 是基于 eBPF 的 [[kubernetes|Kubernetes]] 网络、安全和可观测性解决方案，正在逐步取代传统的 iptables 和 OVS 方案，成为 2026 年云原生网络的事实标准。
 
 ## 核心概念/原理
 
@@ -72,7 +72,7 @@ Cilium 作为 Kubernetes CNI，完全基于 eBPF 构建：
 - **Cilium Agent**：运行在每个节点上，负责 eBPF 程序加载、策略计算和状态同步
 - **Cilium Operator**：集群级控制器，管理 IPAM（IP 地址管理）、Endpoint 同步
 - **Hubble**：基于 eBPF 的可观测性组件，提供网络流量可视化和安全审计
-- **[[envoy|[[Envoy]]]] 扩展**：用于 Layer 7 应用层协议解析（HTTP、gRPC、Kafka 等）
+- **[[envoy|[[envoy|Envoy]]]] 扩展**：用于 Layer 7 应用层协议解析（HTTP、gRPC、Kafka 等）
 
 ### 3. eBPF 替代传统网络栈
 

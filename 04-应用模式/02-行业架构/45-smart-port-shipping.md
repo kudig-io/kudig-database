@@ -43,7 +43,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -53,7 +53,7 @@ audience:
 - 云原生开发工程师
 estimated_read_time: 5min
 intent_queries:
-- 智慧港口 TOS 系统 [[Kubernetes|Kubernetes]] 部署
+- 智慧港口 TOS 系统 [[kubernetes|Kubernetes]] 部署
 - 集装箱码头自动化管理架构
 - 无人集卡 AGV 调度系统
 - 海关 EDI 电子数据交换

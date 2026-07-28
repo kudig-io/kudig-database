@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-在 AI 训练、高性能计算（HPC）和低延迟数据库场景中，存储 I/O 往往是整体性能的瓶颈。传统的 TCP/IP 网络存储协议（如 NFS、iSCSI）在带宽和延迟上已无法满足万卡 GPU 集群和 NVMe 全闪存阵列的需求。**RDMA（Remote Direct Memory Access）** 和 **NVMe over Fabrics（NVMe-oF）** 通过绕过操作系统内核、直接在网络适配器和内存之间传输数据，将存储访问延迟从毫秒级降低到微秒级。2026 年，这两项技术正在成为 [[Kubernetes|Kubernetes]] 上高性能存储的核心支撑。
+在 AI 训练、高性能计算（HPC）和低延迟数据库场景中，存储 I/O 往往是整体性能的瓶颈。传统的 TCP/IP 网络存储协议（如 NFS、iSCSI）在带宽和延迟上已无法满足万卡 GPU 集群和 NVMe 全闪存阵列的需求。**RDMA（Remote Direct Memory Access）** 和 **NVMe over Fabrics（NVMe-oF）** 通过绕过操作系统内核、直接在网络适配器和内存之间传输数据，将存储访问延迟从毫秒级降低到微秒级。2026 年，这两项技术正在成为 [[kubernetes|Kubernetes]] 上高性能存储的核心支撑。
 
 ## 核心概念/原理
 

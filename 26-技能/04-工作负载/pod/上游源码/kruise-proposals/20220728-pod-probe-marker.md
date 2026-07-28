@@ -8,6 +8,7 @@ reviewers:
 creation-date: 2022-08-09
 last-updated: 2021-09-26
 status: implementable
+tier: supporting
 ---
 
 # Pod Probe Marker

@@ -43,7 +43,7 @@ prerequisites:
 
 ## 概述
 
-动态卷供给允许存储卷在需要时按需创建。没有动态供给时，集群管理员必须手动联系云或存储提供商创建新存储，然后再在 [[Kubernetes|Kubernetes]] 中创建 PersistentVolume 对象来表示它们。动态供给消除了这一繁琐过程，当用户创建 PersistentVolumeClaim（PVC）时，系统会自动为其创建相应的存储卷。
+动态卷供给允许存储卷在需要时按需创建。没有动态供给时，集群管理员必须手动联系云或存储提供商创建新存储，然后再在 [[kubernetes|Kubernetes]] 中创建 PersistentVolume 对象来表示它们。动态供给消除了这一繁琐过程，当用户创建 PersistentVolumeClaim（PVC）时，系统会自动为其创建相应的存储卷。
 
 ## 核心概念/原理
 
@@ -80,7 +80,7 @@ prerequisites:
 ## 使用场景
 
 - **自助式存储申请**：开发团队可以直接创建 PVC 获取存储，无需等待管理员手动配置。
-- **弹性伸缩**：配合 [[StatefulSet|StatefulSet]]、Deployment 等控制器，实现有状态应用的自动存储扩展。
+- **弹性伸缩**：配合 [[statefulset|StatefulSet]]、Deployment 等控制器，实现有状态应用的自动存储扩展。
 - **多存储后端混合使用**：同一集群中可同时配置多个 StorageClass，分别对接 SSD、HDD、NFS、对象存储等不同后端。
 
 ## 最佳实践/注意事项

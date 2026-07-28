@@ -248,7 +248,7 @@ kubectl delete clusterpolicy -l oscal-compass/component=kyverno-policies
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - oscal-compass
-- [[23-实体/openfga.md|[[OpenFGA|OpenFGA]]]]
+- [[23-实体/openfga.md|[[openfga|OpenFGA]]]]
 - [[23-实体/15-参考与索引/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

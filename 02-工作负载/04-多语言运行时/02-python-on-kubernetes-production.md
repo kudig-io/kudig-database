@@ -381,4 +381,4 @@ securityContext:
 - [[02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production.md|Rust 应用 Kubernetes 生产实践]]
 - [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
 - [[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]
-- [[可观测性]]
+- [[09-可观测性/README|可观测性]]

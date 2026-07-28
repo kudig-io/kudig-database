@@ -53,7 +53,7 @@ k8s_versions:
 
 
 
-# [[Helm|Helm]] Chart 部署与回滚故障诊断
+# [[helm|Helm]] Chart 部署与回滚故障诊断
 
 > **[[SKILL|Skill]] ID**: `SKILL-HELM-001`  
 > **严重级别**: P2  
@@ -64,7 +64,7 @@ k8s_versions:
 
 ## 1. 概述
 
-Helm Chart 部署与回滚故障诊断 是 [[Kubernetes|Kubernetes]] 生产环境中 **P2 级问题**。
+Helm Chart 部署与回滚故障诊断 是 [[kubernetes|Kubernetes]] 生产环境中 **P2 级问题**。
 
 **典型触发条件**:
 - `helm upgrade` 返回 template rendering error
@@ -199,7 +199,7 @@ kubectl get pods -n <namespace> -l app.kubernetes.io/instance=<release>
 ## 10. 相关链接
 
 - FTA 故障树: [[19-故障诊断/06-FTA故障树/list/helm-fta.md|Helm FTA]]
-- 相关概念: [[22-概念/gitops-deployment.md|GitOps 部署]]
+- 相关概念: [[22-概念/12-研究/gitops-tool-evolution|GitOps 部署]]
 - Helm 官方文档: https://helm.sh/docs/troubleshooting/
 
 ---

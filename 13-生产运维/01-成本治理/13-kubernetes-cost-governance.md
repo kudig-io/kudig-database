@@ -62,8 +62,8 @@ tags:
 - production
 - operations
 - best-practices
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - calico
 - pdb
 - operator
@@ -79,7 +79,7 @@ estimated_read_time: 5min
 intent_queries:
 - Kubernetes成本治理 是什么
 - 如何 Kubernetes成本治理
-- [[Kubernetes|Kubernetes]] 18 [[23-实体/15-参考与索引/k8s-production-operations.md|production operations]] 最佳实践
+- [[kubernetes|Kubernetes]] 18 [[23-实体/15-参考与索引/k8s-production-operations.md|production operations]] 最佳实践
 trigger_keywords:
 - Kubernetes成本治理
 - production

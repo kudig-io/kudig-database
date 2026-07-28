@@ -35,7 +35,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 控制平面组件的兼容版本
+# [[kubernetes|Kubernetes]] 控制平面组件的兼容版本
 
 ## 概述
 

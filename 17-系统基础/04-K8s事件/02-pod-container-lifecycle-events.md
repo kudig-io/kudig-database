@@ -68,7 +68,7 @@ lifecycle: reviewed
 
 # 02 - Pod 与容器生命周期事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档全面覆盖 [[kubelet|kubelet]] 产生的 Pod 和容器生命周期事件，包括容器创建、启动、终止、重启、沙箱管理等全流程事件，是生产环境排查 Pod 启动失败、CrashLoopBackOff、驱逐等问题的核心参考。**
 

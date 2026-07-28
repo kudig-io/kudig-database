@@ -2021,11 +2021,11 @@ data:
 - **Prometheus + Grafana**: 核心监控平台
 - **Elastic Stack**: 日志分析与搜索
 - **Datadog/New Relic**: 商业APM解决方案
-- **[[Jaeger|Jaeger]]/OpenTelemetry**: 分布式追踪
+- **[[jaeger|Jaeger]]/OpenTelemetry**: 分布式追踪
 
 #### 自动化与编排
 - **Ansible/Terraform**: 基础设施即代码
-- **[[Argo|Argo]] [[23-实体/08-交付与制品/flux.md|Flux]]**: GitOps持续交付
+- **[[argo|Argo]] [[23-实体/08-交付与制品/flux.md|Flux]]**: GitOps持续交付
 - **Jenkins/GitLab CI**: CI/CD流水线
 - **Spinnaker**: 多云交付平台
 

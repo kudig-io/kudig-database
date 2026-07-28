@@ -261,7 +261,7 @@ in-toto-run --step-name build --slsa-provenance \
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - in-toto
-- [[23-实体/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[23-实体/cncf-security.md|[[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]]] — Cross-reference
 - index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 

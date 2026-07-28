@@ -50,7 +50,7 @@ title: Week 3 自测: 节点与工作负载管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|Kubernetes]] week 3 self-test assessment
+  - [[kubernetes|Kubernetes]] week 3 self-test assessment
   - Node and workload knowledge test
   - Node management troubleshooting quiz
   - Pod scheduling self-check

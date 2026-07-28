@@ -50,6 +50,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/04-storage/02-csi-troubleshooting.md
   label: '结构化排障: 02-csi-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

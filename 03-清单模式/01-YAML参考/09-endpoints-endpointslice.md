@@ -61,11 +61,11 @@ authors:
 
 # 09 - Endpoints / EndpointSlice YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 <!-- chunk: 概述 -->## 概述
 
-**Endpoints** 和 **EndpointSlice** 是 Kubernetes 中用于跟踪 [[Service|Service]] 后端 Pod 网络端点的资源对象。它们记录了符合 Service 标签选择器的 Pod IP 地址和端口信息,为服务发现和负载均衡提供基础数据。
+**Endpoints** 和 **EndpointSlice** 是 Kubernetes 中用于跟踪 [[service|Service]] 后端 Pod 网络端点的资源对象。它们记录了符合 Service 标签选择器的 Pod IP 地址和端口信息,为服务发现和负载均衡提供基础数据。
 
 ## 核心概念
 

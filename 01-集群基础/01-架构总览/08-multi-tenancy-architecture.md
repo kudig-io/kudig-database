@@ -94,7 +94,7 @@ cross_refs:
 | **命名空间** | Namespace | 资源分组和隔离 | 稳定 |
 | **资源配额** | ResourceQuota | 限制资源使用 | 稳定 |
 | **限制范围** | LimitRange | 默认和限制 | 稳定 |
-| **网络策略** | [[NetworkPolicy|NetworkPolicy]] | 网络隔离 | 稳定 |
+| **网络策略** | [[networkpolicy\|NetworkPolicy]] | 网络隔离 | 稳定 |
 | **RBAC** | Role/RoleBinding | 权限隔离 | 稳定 |
 | **Pod安全** | NS标签 | 安全策略 | v1.25+ |
 
@@ -321,7 +321,7 @@ spec:
 | 隔离方式 | CNI支持 | 隔离级别 |
 |---------|--------|---------|
 | **NetworkPolicy** | Calico/Cilium | L3/L4 |
-| **服务网格mTLS** | [[Istio|Istio]]/Linkerd | L7+加密 |
+| **服务网格mTLS** | [[istio\|Istio]]/Linkerd | L7+加密 |
 | **VPC隔离** | Terway | 网络级 |
 | **节点网络隔离** | 安全组 | 节点级 |
 

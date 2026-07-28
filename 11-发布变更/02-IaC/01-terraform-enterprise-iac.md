@@ -1627,7 +1627,7 @@ IaC技术发展趋势:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code KUDIG Database — Global MOC
-- [[11-发布变更/README.md|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]e|Infrastructure as Code]])]]
+- [[11-发布变更/README.md|[[37-归档/domain-indexes/release-change/README-from-domain-24|Domain 24: 基础设施即代码 (Infrastructure as Code)]]e|Infrastructure as Code]])]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Ansible企业级自动化运维深度实践
 - [[11-发布变更/02-IaC/11-infrastructure-as-code.md|11 infrastructure as code]]

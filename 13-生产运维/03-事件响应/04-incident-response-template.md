@@ -368,7 +368,7 @@ iptables -L -n | grep DROP | head -20
 - [[13-生产运维/07-运维手册/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[12-可靠性/05-事后复盘/index.md|事后复盘]] — 复盘文化与方法
 - [[19-故障诊断/00-总览/03-systematic-troubleshooting-methodology.md|系统化排障]] — 故障诊断方法论
-- [[node-notready]] — 节点异常排查
+- [[19-故障诊断/08-技能体系/01-node-notready|node-notready]] — 节点异常排查
 
 ## Related
 

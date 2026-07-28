@@ -72,7 +72,7 @@ cross_refs:
 
 # 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [FinOps Foundation](https://www.finops.org/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [FinOps Foundation](https://www.finops.org/)
 
 ---
 
@@ -718,7 +718,7 @@ spec:
 | 工具 | 类型 | 云支持 | K8s原生 | GPU成本 | 开源 | 价格 |
 |-----|------|-------|--------|--------|------|------|
 | **Kubecost** | 成本分析 | AWS/GCP/Azure | 是 | 是 | 是 | 免费/企业版 |
-| **[[OpenCost|OpenCost]]** | 成本分析 | 多云 | 是 | 是 | 是 | 免费 |
+| **[[opencost\|OpenCost]]** | 成本分析 | 多云 | 是 | 是 | 是 | 免费 |
 | **Vantage** | FinOps平台 | 多云 | 是 | 是 | 否 | 付费 |
 | **CloudHealth** | FinOps平台 | 多云 | 部分 | 否 | 否 | 付费 |
 | **Spot.io** | 优化 | AWS/GCP/Azure | 是 | 是 | 否 | 付费 |

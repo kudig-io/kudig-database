@@ -58,9 +58,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
+- [[jaeger|jaeger]]
 - docker
 - opa
 last_updated: 2026-05
@@ -92,7 +92,7 @@ k8s_versions:
 
 # AgentScope 生产部署与可观测性
 
-> **文档类型**: 生产部署专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Runtime, AgentApp, 生产部署, Docker, [[Kubernetes|Kubernetes]], Serverless, Sandbox, AgentScope Studio, OpenTelemetry, Tracing, 可观测性, AaaS, Agent-as-a-Service
+> **文档类型**: 生产部署专题 | **最后更新**: 2026-03 | **关键词**: AgentScope, Runtime, AgentApp, 生产部署, Docker, [[kubernetes|Kubernetes]], Serverless, Sandbox, AgentScope Studio, OpenTelemetry, Tracing, 可观测性, AaaS, Agent-as-a-Service
 
 ---
 

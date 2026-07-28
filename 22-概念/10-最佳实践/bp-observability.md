@@ -83,7 +83,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Namespace、[[DaemonSet|DaemonSet]]）
+- Kubernetes 核心概念（Pod、Namespace、[[daemonset|DaemonSet]]）
 - 日志基础（日志级别、日志格式、日志聚合）
 - EFK/ELK 栈基础（Elasticsearch、Fluentd/Fluent Bit、Kibana）
 
@@ -139,7 +139,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、[[Service|Service]]、Namespace）
+- Kubernetes 核心概念（Pod、[[service|Service]]、Namespace）
 - 监控基础（指标、告警、仪表板）
 - Prometheus 基础（PromQL、告警规则）
 

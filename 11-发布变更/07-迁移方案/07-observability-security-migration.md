@@ -59,10 +59,10 @@ tags:
 - migration
 - modernization
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
-- [[Helm|helm]]
+- [[jaeger|jaeger]]
+- [[helm|helm]]
 - docker
 - elasticsearch
 last_updated: 2026-05

@@ -57,7 +57,7 @@ Prometheus is the de facto standard monitoring system for Kubernetes, providing:
 - **Pull-based architecture**: Scrapes metrics from targets via HTTP
 - **Time-series database**: Local storage with configurable retention
 - **PromQL**: Powerful query language for aggregation, filtering, and mathematical operations
-- **[[Service|Service]] Discovery**: Native K8s service discovery for automatic target detection
+- **[[service|Service]] Discovery**: Native K8s service discovery for automatic target detection
 - **Alertmanager**: Handles alert deduplication, grouping, inhibition, and routing
 
 ### Key Metrics Types

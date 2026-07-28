@@ -1,7 +1,7 @@
 ---
 title: 节点组件故障排查
 description: '# 35 - 节点组件故障排查 (Node Component Troubleshooting)'
-summary: 'kubectl get node <node-name> -o jsonpath='{.status.conditions}''
+summary: "kubectl get node <node-name> -o jsonpath='{.status.conditions}'"
 category: troubleshooting
 tags:
 - kubelet
@@ -97,10 +97,10 @@ cross_refs:
 
 ### 1.1 节点组件概述
 
-[[Kubernetes|Kubernetes]] 节点组件是集群工作节点上的核心守护进程，负责 Pod 的运行、网络管理和资源调度。主要包括：
+[[kubernetes|Kubernetes]] 节点组件是集群工作节点上的核心守护进程，负责 Pod 的运行、网络管理和资源调度。主要包括：
 
 - **kubelet**: 节点代理，负责 Pod 生命周期管理
-- **kube-proxy**: 网络代理，维护 [[Service|Service]] 网络规则
+- **kube-proxy**: 网络代理，维护 [[service|Service]] 网络规则
 - **容器运行时**: Docker/containerd/cri-o，负责容器执行
 - **cAdvisor**: 资源监控代理（集成在 kubelet 中）
 

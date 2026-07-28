@@ -62,7 +62,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s Monitoring & Alerting Failure 诊断与修复
 
-[[Prometheus|Prometheus]]、Grafana 和 Alertmanager 是 [[Kubernetes|Kubernetes]] 可观测性栈的核心。当监控异常时，可能导致问题发现延迟、告警漏报，使 SRE 团队处于"盲飞"状态。
+[[prometheus|Prometheus]]、Grafana 和 Alertmanager 是 [[kubernetes|Kubernetes]] 可观测性栈的核心。当监控异常时，可能导致问题发现延迟、告警漏报，使 SRE 团队处于"盲飞"状态。
 
 本 [[SKILL|Skill]] 覆盖 Prometheus 采集失败、Grafana 数据源异常、Alertmanager 不发送通知、规则配置错误等全部常见根因的诊断和修复。
 

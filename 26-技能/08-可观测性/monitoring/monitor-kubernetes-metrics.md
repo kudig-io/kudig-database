@@ -60,7 +60,7 @@ prerequisites:
 |-----------|------------|-----------------|
 | **API Server** | `apiserver_request_duration_seconds`, `apiserver_request_total` | P99 latency > 4s |
 | **etcd** | `etcd_disk_backend_commit_duration_seconds`, `etcd_server_has_leader` | fsync > 500ms, no leader |
-| **Scheduler** | `scheduler_scheduling_attempt_duration_seconds`, `scheduler_pending_pods` | High pending [[Pods|pods]] |
+| **Scheduler** | `scheduler_scheduling_attempt_duration_seconds`, `scheduler_pending_pods` | High pending [[pods\|pods]] |
 | **Controller Manager** | `workqueue_depth`, `workqueue_queue_duration_seconds` | Growing queue depth |
 
 ### Nodes

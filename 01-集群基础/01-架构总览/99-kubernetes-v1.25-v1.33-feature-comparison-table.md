@@ -1,7 +1,7 @@
 ---
 title: Kubernetes v1.25 - v1.33 特性对比总表
 description: '## 二、网络 (Networking)'
-summary: 'kubectl get --raw /api/v1/nodes/NODE/proxy/configz | jq '.kubeletconfig.featureGates''
+summary: "kubectl get --raw /api/v1/nodes/NODE/proxy/configz | jq '.kubeletconfig.featureGates'"
 category: architecture-fundamentals
 tags:
 - k8s
@@ -72,7 +72,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.25 - v1.33 特性对比总表
+# [[kubernetes|Kubernetes]] v1.25 - v1.33 特性对比总表
 
 > **适用版本**: Kubernetes v1.25 - v1.33  
 > **最后更新**: 2026-04-24  
@@ -89,11 +89,11 @@ cross_refs:
 | **ReadWriteOncePod** | - | - | - | - | **GA** | GA | GA | GA | GA | PVC 单 Pod 独占 |
 | **[[17-系统基础/06-知识字典/scheduling/pod-scheduling-readiness.md|Pod Scheduling Readiness]]** | - | - | - | - | Beta | **GA** | GA | GA | GA | SchedulingGates |
 | **In-Place Pod Resize** | - | - | - | - | Beta | Beta | Beta | Beta | **Alpha** | 原地调整资源 |
-| **PodIndexLabel** | - | - | - | - | - | - | - | - | **GA** | [[StatefulSet|StatefulSet]] 自动标签 |
+| **PodIndexLabel** | - | - | - | - | - | - | - | - | **GA** | [[statefulset\|StatefulSet]] 自动标签 |
 | **Job Mutable Scheduling Directives** | - | - | - | - | - | - | - | - | - | 已稳定 |
 | **PodDisruptionBudget (v1)** | - | - | - | - | - | - | - | - | - | 已稳定 |
-| **[[CronJob|CronJob]] 时区支持** | - | - | - | - | - | - | - | - | - | v1.25+ 已稳定 |
-| **Job Tracking with [[Finalizers|Finalizers]]** | - | - | - | - | - | - | - | - | - | 已稳定 |
+| **[[cronjob\|CronJob]] 时区支持** | - | - | - | - | - | - | - | - | - | v1.25+ 已稳定 |
+| **Job Tracking with [[finalizers\|Finalizers]]** | - | - | - | - | - | - | - | - | - | 已稳定 |
 
 ---
 

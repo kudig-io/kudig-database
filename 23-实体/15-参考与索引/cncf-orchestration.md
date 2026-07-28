@@ -101,7 +101,7 @@ OCM（[[23-实体/09-编排调度/open-cluster-management.md|Open Cluster Manage
 
 ClusterNet 提供多集群网络和管理。
 
-### [[Clusterpedia]] — 沙箱项目
+### [[clusterpedia|Clusterpedia]] — 沙箱项目
 
 clusterpedia 提供跨集群资源查询。
 

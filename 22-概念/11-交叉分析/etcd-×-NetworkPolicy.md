@@ -105,7 +105,7 @@ ETCDCTL_API=3 etcdctl --endpoints=<endpoints> compact $(ETCDCTL_API=3 etcdctl --
 
 ## 相关概念
 - [[etcd]]
-- [[NetworkPolicy]]
+- [[networkpolicy|NetworkPolicy]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

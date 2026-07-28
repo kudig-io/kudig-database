@@ -1,7 +1,7 @@
 ---
 title: 17 - 日志和审计表
 description: '# 17 - 日志和审计表'
-summary: 'kubectl get events -A --sort-by='.lastTimestamp''
+summary: "kubectl get events -A --sort-by='.lastTimestamp'"
 category: observability
 tags:
 - k8s
@@ -90,7 +90,7 @@ cross_refs:
 
 | 组件 | 类型 | 特点 | 版本要求 | ACK替代 |
 |-----|------|------|---------|---------|
-| **[[Fluentd|Fluentd]]** | 收集器 | 插件丰富，功能全面 | v1.16+ | Logtail |
+| **[[fluentd\|Fluentd]]** | 收集器 | 插件丰富，功能全面 | v1.16+ | Logtail |
 | **Fluent Bit** | 收集器 | 轻量级，高性能 | v2.2+ | Logtail |
 | **Filebeat** | 收集器 | Elastic生态 | v8.x | Logtail |
 | **Logtail** | 收集器 | 阿里云原生 | - | 原生 |
@@ -253,7 +253,7 @@ kubectl get events --field-selector=type=Warning
 |-----|------|------|
 | **结构化日志** | JSON格式便于解析 | 应用配置 |
 | **统一时间戳** | UTC或统一时区 | 应用配置 |
-| **关联ID** | 追踪请求链路 | [[OpenTelemetry|OpenTelemetry]] |
+| **关联ID** | 追踪请求链路 | [[opentelemetry\|OpenTelemetry]] |
 | **日志分级** | 按级别过滤 | 应用框架 |
 | **采样** | 高流量日志采样 | Fluent Bit |
 | **保留策略** | 按需设置保留期 | 存储系统 |
@@ -263,7 +263,7 @@ kubectl get events --field-selector=type=Warning
 
 | 功能 | 产品 | 配置方式 |
 |-----|------|---------|
-| **容器日志** | SLS | Logtail [[DaemonSet|DaemonSet]] |
+| **容器日志** | SLS | Logtail [[daemonset\|DaemonSet]] |
 | **K8S事件** | SLS | 控制台开启 |
 | **审计日志** | SLS | 控制台开启 |
 | **Ingress日志** | SLS | 注解配置 |

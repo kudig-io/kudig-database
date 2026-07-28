@@ -89,7 +89,7 @@ related_docs:
 
 # 141 - CNI 架构与核心原理 (CNI Architecture & Fundamentals)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-01
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-01
 
 ---
 
@@ -264,7 +264,7 @@ related_docs:
 | 特性 | Flannel | Calico | Cilium | Terway | Antrea |
 |:---|:---:|:---:|:---:|:---:|:---:|
 | **网络模式** | Overlay | Overlay/BGP | Overlay/Native | VPC | Overlay/NoEncap |
-| **[[NetworkPolicy|NetworkPolicy]]** | ❌ | ✅ | ✅ | ✅ | ✅ |
+| **[[networkpolicy\|NetworkPolicy]]** | ❌ | ✅ | ✅ | ✅ | ✅ |
 | **eBPF 支持** | ❌ | ✅ (部分) | ✅ (原生) | ✅ | ✅ |
 | **加密** | ❌ | ✅ (WireGuard) | ✅ | ❌ | ✅ (IPSec) |
 | **多集群** | ❌ | ✅ | ✅ | ❌ | ✅ |

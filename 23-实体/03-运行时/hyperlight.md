@@ -231,7 +231,7 @@ Hyperlight 异常
 
 ## 参考链接
 
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 
 ## Related
 
@@ -242,7 +242,7 @@ Hyperlight 异常
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - hyperlight
-- [[23-实体/urunc.md|[[urunc (Unikernel Container Runtime)|urunc]]]]
+- [[23-实体/urunc.md|[[23-实体/03-运行时/urunc|urunc]]]]
 - [[23-实体/03-运行时/flatcar.md|Flatcar Container Linux]]
 - [[23-实体/03-运行时/composefs.md|composefs]]
 - [[23-实体/03-运行时/04-containerd-upgrade-migration.md|containerd 升级迁移]]

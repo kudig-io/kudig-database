@@ -59,7 +59,7 @@ authors:
 
 
 
-# [[KubeEdge|KubeEdge]] 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
+# [[kubeedge|KubeEdge]] 设备管理与边缘应用 (KubeEdge Device Management and Edge Applications)
 
 <!-- chunk: 目录 (Table of Contents) -->## 目录 (Table of Contents)
 
@@ -82,7 +82,7 @@ authors:
 
 ## 1.1 KubeEdge 设备管理架构 (Device Management Architecture)
 
-KubeEdge 通过扩展 [[Kubernetes|Kubernetes]] CRD 机制，将 IoT 设备作为 Kubernetes 的一等公民进行管理，实现了云端统一管控物理设备的能力。
+KubeEdge 通过扩展 [[kubernetes|Kubernetes]] CRD 机制，将 IoT 设备作为 Kubernetes 的一等公民进行管理，实现了云端统一管控物理设备的能力。
 
 ```mermaid
 graph TB

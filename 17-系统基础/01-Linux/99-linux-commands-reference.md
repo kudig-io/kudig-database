@@ -67,10 +67,10 @@ tags:
 - linux
 - system
 - kernel
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - docker
-- [[Falco|falco]]
+- [[falco|falco]]
 - job
 - rbac
 last_updated: 2026-05

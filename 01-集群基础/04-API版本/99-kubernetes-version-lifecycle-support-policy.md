@@ -62,7 +62,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 版本生命周期与支持策略
+# [[kubernetes|Kubernetes]] 版本生命周期与支持策略
 
 > **适用版本**: Kubernetes v1.25 - v1.33  
 > **最后更新**: 2026-04-24  

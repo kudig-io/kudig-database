@@ -66,7 +66,7 @@ cross_refs:
 
 # 27 - HorizontalPodAutoscaler v2 YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **主题**: HPA v2 水平自动扩缩容、多指标支持、扩缩容行为控制
 
 <!-- chunk: 目录 -->## 目录
@@ -275,7 +275,7 @@ spec:
 **使用场景**:
 - **Service Mesh**: 避免 Sidecar CPU 影响扩缩容决策
 - **多容器 Pod**: 仅基于主容器指标扩缩容
-- **[[DaemonSet|Daemonset]] + Sidecar**: 精确监控业务容器
+- **[[daemonset|Daemonset]] + Sidecar**: 精确监控业务容器
 
 ## 3. Pods 自定义指标
 
@@ -308,7 +308,7 @@ spec:
 ```
 
 **指标来源**:
-- **[[Prometheus|Prometheus]] Adapter**: 从 Prometheus 查询指标
+- **[[prometheus|Prometheus]] Adapter**: 从 Prometheus 查询指标
 - **Datadog/Custom Metrics API**: 第三方监控系统
 
 **配置示例** (Prometheus Adapter):

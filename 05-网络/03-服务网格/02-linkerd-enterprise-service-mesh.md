@@ -1,7 +1,7 @@
 ---
 title: Linkerd 企业级服务网格深度实践
 description: '# Linkerd 企业级服务网格深度实践'
-summary: 'Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 [[Kubernetes|Kubernetes]] 提供极致轻量、安全默认、开箱即用的服务网格体验。与 [[Istio|Istio]] 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，'
+summary: 'Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 [[kubernetes|Kubernetes]] 提供极致轻量、安全默认、开箱即用的服务网格体验。与 [[istio|Istio]] 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -71,7 +71,7 @@ cross_refs:
 
 
 
-# [[Linkerd|Linkerd]] 企业级服务网格深度实践
+# [[linkerd|Linkerd]] 企业级服务网格深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Linkerd v2.18+ | **难度**: 中高级
 
@@ -79,9 +79,9 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 [[Kubernetes|Kubernetes]] 提供极致轻量、安全默认、开箱即用的服务网格体验。与 [[Istio|Istio]] 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，提供生产级的服务网格核心能力：自动 mTLS、负载均衡、重试超时、流量分割和黄金指标可观测性。
+Linkerd 是云原生计算基金会（CNCF）的第二个毕业项目（2021年），专注于为 [[kubernetes|Kubernetes]] 提供极致轻量、安全默认、开箱即用的服务网格体验。与 [[istio|Istio]] 的"功能全面"设计哲学不同，Linkerd 坚守"极简主义"——用最少的组件、最小的资源开销、最简的配置，提供生产级的服务网格核心能力：自动 mTLS、负载均衡、重试超时、流量分割和黄金指标可观测性。
 
-Linkerd 的核心差异化优势在于其 Rust 编写的 linkerd-proxy 数据平面。相比 Istio 使用的 [[Envoy|Envoy]]（C++，每代理约 100MB+ 内存），Linkerd 的 Rust 代理仅消耗约 20MB 内存，P99 延迟增加低于 1 毫秒。这使得 Linkerd 特别适合资源受限环境（边缘计算、IoT）和快速落地需求的中小型团队。
+Linkerd 的核心差异化优势在于其 Rust 编写的 linkerd-proxy 数据平面。相比 Istio 使用的 [[envoy|Envoy]]（C++，每代理约 100MB+ 内存），Linkerd 的 Rust 代理仅消耗约 20MB 内存，P99 延迟增加低于 1 毫秒。这使得 Linkerd 特别适合资源受限环境（边缘计算、IoT）和快速落地需求的中小型团队。
 
 本文档从企业级生产环境角度，全面覆盖 Linkerd 的架构设计、高可用部署、流量管理、安全策略、可观测性集成、性能调优和故障排查实践。
 

@@ -46,7 +46,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster creation process VPC vSwitch
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] cluster network CIDR planning
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster network CIDR planning
   - aliyun cs POST clusters API
   - ACK console cluster creation wizard
   - Terway Flannel CNI selection
@@ -56,7 +56,7 @@ trigger_keywords:
   - vSwitch
   - CIDR
   - Pod CIDR
-  - [[Service|Service]] CIDR
+  - [[service|Service]] CIDR
   - CNI
   - Terway
   - Flannel

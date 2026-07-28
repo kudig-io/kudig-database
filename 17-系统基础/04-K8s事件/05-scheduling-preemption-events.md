@@ -56,7 +56,7 @@ authors:
 
 # 05 - 调度与抢占事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 kube-scheduler 和 node-controller 产生的所有调度与抢占相关事件,帮助运维人员快速定位和解决调度问题。**
 

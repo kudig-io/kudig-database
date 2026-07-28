@@ -78,7 +78,7 @@ cross_refs:
 
 
 
-# 38 - GitOps和ArgoCD故障排查 (GitOps and [[ArgoCD|ArgoCD]] Troubleshooting)
+# 38 - GitOps和ArgoCD故障排查 (GitOps and [[argocd|ArgoCD]] Troubleshooting)
 
 ---
 

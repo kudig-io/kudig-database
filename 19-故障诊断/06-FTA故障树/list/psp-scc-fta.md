@@ -48,6 +48,7 @@ k8s_versions:
 authors:
 - name: KUDIG Team
   role: contributor
+tier: supporting
 ---
 
 > **生产环境安全提示**

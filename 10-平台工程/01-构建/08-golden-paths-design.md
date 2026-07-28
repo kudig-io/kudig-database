@@ -64,11 +64,11 @@ tags:
 - platform-engineering
 - developer-experience
 - idp
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
-- [[Helm|helm]]
-- [[ArgoCD|argocd]]
+- [[jaeger|jaeger]]
+- [[helm|helm]]
+- [[argocd|argocd]]
 - docker
 last_updated: 2026-05
 difficulty: advanced

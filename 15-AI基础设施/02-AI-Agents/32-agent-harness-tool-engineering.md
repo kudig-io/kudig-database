@@ -53,9 +53,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
-- [[Ingress|ingress]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

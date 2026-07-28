@@ -44,7 +44,7 @@ status: reviewed
 
 ### 值班中响应
 
-1. **接收告警**：通过统一告警平台（[[Prometheus]] Alertmanager / PagerDuty）接收通知
+1. **接收告警**：通过统一告警平台（[[prometheus|Prometheus]] Alertmanager / PagerDuty）接收通知
 2. **确认告警**：在告警平台点击「确认」，停止重复通知
 3. **初步分级**：根据影响范围判定 P0 / P1 / P2
 4. **执行响应**：按分级时间要求启动排查
@@ -85,7 +85,7 @@ status: reviewed
 
 - 节点池扩容失败：检查弹性伸缩配置、实例规格库存、VPC 网段余量
 - 节点池缩容异常：确认 Pod 驱逐策略、DaemonSet 容忍度
-- 节点 NotReady：参考 [[node-notready]] 排查流程
+- 节点 NotReady：参考 [[19-故障诊断/08-技能体系/01-node-notready|node-notready]] 排查流程
 
 ### 费用告警
 
@@ -507,7 +507,7 @@ receivers:
 - [[13-生产运维/07-运维手册/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[13-生产运维/03-事件响应/04-incident-response-template.md|incident-response-template]] — 事故响应模板
 - [[13-生产运维/07-运维手册/02-change-management-guide.md|change-management-guide]] — 变更管理指南
-- [[node-notready]] — 节点异常排查
+- [[19-故障诊断/08-技能体系/01-node-notready|node-notready]] — 节点异常排查
 - [[09-可观测性/05-告警/index.md|告警管理]] — 告警体系设计
 - [[12-可靠性/05-事后复盘/index.md|事后复盘]] — 复盘文化
 

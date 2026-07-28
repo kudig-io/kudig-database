@@ -168,7 +168,7 @@ quadrantChart
 | 进程监控 | kprobe/tracepoint | auditd/strace | <2% | 极低 | 完整系统调用 |
 | 文件监控 | LSM Hook/kprobe | inotify/fanotify | <1% | 低 | VFS 层完整 |
 | 容器安全 | Seccomp+eBPF | AppArmor/SELinux | <1% | 极低 | 内核级别 |
-| 入侵检测 | [[Tetragon|Tetragon]]/Falco-eBPF | OSSEC/Suricata | <3% | 低 | 全栈可见 |
+| 入侵检测 | [[tetragon\|Tetragon]]/Falco-eBPF | OSSEC/Suricata | <3% | 低 | 全栈可见 |
 | DDoS 防护 | XDP | iptables | <5% vs 60%+ | 低 | 线速处理 |
 
 ## 1.4 eBPF 安全工具生态 (eBPF Security Ecosystem)

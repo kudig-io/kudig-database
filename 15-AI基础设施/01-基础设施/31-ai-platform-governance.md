@@ -68,7 +68,7 @@ cross_refs:
 
 # 31 - AI平台治理框架
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[23-实体/11-AI与边缘/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [[23-实体/11-AI与边缘/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | CNCF TAG App Delivery
 
 <!-- chunk: 一、AI平台治理全景架构 -->
 ## 一、AI平台治理全景架构
@@ -112,7 +112,7 @@ cross_refs:
 
 | 维度 | 子维度 | 治理目标 | 技术实现 | 运维要点 |
 |------|--------|----------|----------|----------|
-| **访问控制** | 身份认证 | 统一身份管理 | [[Dex|Dex]] + LDAP | 密钥轮换、多因子认证 |
+| **访问控制** | 身份认证 | 统一身份管理 | [[dex\|Dex]] + LDAP | 密钥轮换、多因子认证 |
 | | 权限管理 | 最小权限原则 | RBAC + OPA | 定期权限审计 |
 | | 审计追踪 | 行为可追溯 | Falco + Audit | 日志保留策略 |
 | **资源配置** | 配额管理 | 资源合理分配 | ResourceQuota | 动态调整机制 |

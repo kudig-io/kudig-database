@@ -309,7 +309,7 @@ kubectl describe quota -n <namespace> | grep -E "^(cpu|memory|pods)"
 |:---|:---|:---|
 | **计算资源** | requests.cpu, limits.cpu | CPU配额 |
 | **计算资源** | requests.memory, limits.memory | 内存配额 |
-| **对象数量** | pods, services, [[Secrets|secrets]], [[ConfigMaps|configmaps]] | 对象数限制 |
+| **对象数量** | pods, services, [[secrets\|secrets]], [[configmaps\|configmaps]] | 对象数限制 |
 | **存储资源** | requests.storage, persistentvolumeclaims | 存储配额 |
 | **扩展资源** | requests.nvidia.com/gpu | GPU等扩展资源 |
 

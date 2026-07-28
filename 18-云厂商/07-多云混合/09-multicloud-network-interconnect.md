@@ -66,9 +66,9 @@ authors:
 
 多云网络互联是构建多云混合云架构的基础。跨云网络的质量直接影响分布式应用的延迟、吞吐量和可靠性。不同云平台的网络模型（VPC、安全组、负载均衡）存在显著差异，需要在 L2/L3 网络层和应用层分别设计互联方案。网络设计的好坏直接决定了应用的响应时间、数据同步延迟和故障恢复速度，是多云架构成功的关键因素。
 
-本文档深入探讨多云网络互联的核心技术：[[Submariner|Submariner]] 提供 L3 层跨集群 Pod/Service IP 直通路由，Skupper 提供应用层安全网络互联，[[Cilium|Cilium]] Cluster Mesh 提供基于 eBPF 的高性能跨集群通信，AWS Transit Gateway / Azure ExpressRoute / Google Cloud Interconnect 提供云间专线连接，混合 DNS 实现跨云服务发现。每个方案都有其适用场景，企业需要根据延迟要求、安全策略和成本预算选择合适的组合。
+本文档深入探讨多云网络互联的核心技术：[[submariner|Submariner]] 提供 L3 层跨集群 Pod/Service IP 直通路由，Skupper 提供应用层安全网络互联，[[cilium|Cilium]] Cluster Mesh 提供基于 eBPF 的高性能跨集群通信，AWS Transit Gateway / Azure ExpressRoute / Google Cloud Interconnect 提供云间专线连接，混合 DNS 实现跨云服务发现。每个方案都有其适用场景，企业需要根据延迟要求、安全策略和成本预算选择合适的组合。
 
-在实际生产环境中，通常需要组合多种网络方案：专线用于云间骨干连接、Submariner 或 Cilium 用于 K8s 集群内 Pod 直通、Skupper 用于跨云微服务应用层互联、VPN 作为专线的备份链路。混合 DNS 是多云网络的关键支撑组件，通过 [[CoreDNS|CoreDNS]] 转发和 External DNS 自动注册，实现跨云服务的自动发现和解析。
+在实际生产环境中，通常需要组合多种网络方案：专线用于云间骨干连接、Submariner 或 Cilium 用于 K8s 集群内 Pod 直通、Skupper 用于跨云微服务应用层互联、VPN 作为专线的备份链路。混合 DNS 是多云网络的关键支撑组件，通过 [[coredns|CoreDNS]] 转发和 External DNS 自动注册，实现跨云服务的自动发现和解析。
 
 ## 多云网络互联方案对比
 

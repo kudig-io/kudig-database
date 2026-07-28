@@ -59,7 +59,7 @@ prerequisites:
 6. **跨节点连通**：在不同节点 Pod 之间 `ping`/`curl`，结合 `ip route get` 确认路径正确。
 7. **快速缓解**：
    - IPAM 耗尽：扩展地址池或回收泄露 IP。
-   - 组件异常：滚动重启 CNI [[DaemonSet|DaemonSet]]，避免单节点规则不同步。
+   - 组件异常：滚动重启 CNI [[daemonset|DaemonSet]]，避免单节点规则不同步。
    - 网络抖动：先降低变更频率，避免大量 Pod 同时创建/删除导致 FDB/ARP 抖动。
 8. **证据留存**：保存 CNI 日志、节点路由/ARP/FDB 快照、失败的连通性测试结果。
 

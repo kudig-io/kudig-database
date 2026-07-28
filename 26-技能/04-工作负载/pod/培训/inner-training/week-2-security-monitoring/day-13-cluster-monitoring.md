@@ -50,8 +50,8 @@ title: Day 13: K8S 集群监控
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK ARMS [[Prometheus|Prometheus]] monitoring configuration
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
+  - ACK ARMS [[prometheus|Prometheus]] monitoring configuration
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
   - Grafana dashboard Kubernetes monitoring
   - PrometheusRule alerting rules configuration
   - kube-state-metrics cluster monitoring

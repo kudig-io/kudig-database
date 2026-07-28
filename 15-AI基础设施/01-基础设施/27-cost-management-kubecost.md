@@ -58,10 +58,10 @@ tags:
 - ml
 - training
 - inference
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - vpa
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -73,7 +73,7 @@ estimated_read_time: 5min
 intent_queries:
 - 成本管理与 FinOps 是什么
 - 如何 成本管理与 FinOps
-- [[Kubernetes|Kubernetes]] 11 ai infra 最佳实践
+- [[kubernetes|Kubernetes]] 11 ai infra 最佳实践
 trigger_keywords:
 - 成本管理与
 - FinOps

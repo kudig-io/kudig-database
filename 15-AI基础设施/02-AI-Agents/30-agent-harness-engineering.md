@@ -62,8 +62,8 @@ tags:
 - multi-agent
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - [[containerd|containerd]]
 last_updated: 2026-05
 difficulty: advanced

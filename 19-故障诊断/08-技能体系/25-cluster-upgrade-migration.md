@@ -85,7 +85,7 @@ agent_execution_mode: L2-semi-auto
 
 # 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
-[[Kubernetes|Kubernetes]] 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、[[etcd|etcd]]、Scheduler、Controller Manager）、节点组件（[[kubelet|kubelet]]、kube-proxy、容器运行时）、插件（CNI、CSI、[[Ingress|Ingress]] Controller）以及工作负载 API 版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过期、容器运行时变更、etcd 数据格式不兼容等问题都可能导致集群功能异常甚至完全不可用。
+[[kubernetes|Kubernetes]] 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、[[etcd|etcd]]、Scheduler、Controller Manager）、节点组件（[[kubelet|kubelet]]、kube-proxy、容器运行时）、插件（CNI、CSI、[[ingress|Ingress]] Controller）以及工作负载 API 版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过期、容器运行时变更、etcd 数据格式不兼容等问题都可能导致集群功能异常甚至完全不可用。
 
 本 Skill 覆盖 kubeadm 升级卡死、版本偏移、API 废弃不兼容、etcd 升级失败、节点升级后异常、CNI/CSI 插件不兼容、跨集群迁移中断、升级回滚失败等 10 种根因的诊断和修复。
 

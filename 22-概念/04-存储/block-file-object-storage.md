@@ -73,7 +73,7 @@ File storage provides POSIX-compatible shared access:
 - **SMB/CIFS**: Windows file sharing, used in mixed environments
 - **CephFS**: Distributed POSIX filesystem on Ceph RADOS layer
 
-K8s uses `ReadWriteMany` access mode for file storage, enabling multiple [[Pods|Pods]] to share data.
+K8s uses `ReadWriteMany` access mode for file storage, enabling multiple [[pods|Pods]] to share data.
 
 ## Object Storage
 

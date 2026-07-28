@@ -48,14 +48,14 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 安全加固深度实践
+title: [[kubernetes|Kubernetes]] 安全加固深度实践
 description: '# Kubernetes 安全加固深度实践'
 category: cloud-native-security
 tags:
 - k8s
 - security
 - cloud-native
-- [[Falco|falco]]
+- [[falco|falco]]
 - opa
 - [[etcd|etcd]]
 - apiserver

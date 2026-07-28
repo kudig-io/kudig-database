@@ -59,7 +59,7 @@ prerequisites:
 
 
 ---
-title: [[Kubernetes|Kubernetes]] [[Service|Service]] 核心概念与类型深度解析
+title: [[kubernetes|Kubernetes]] [[service|Service]] 核心概念与类型深度解析
 description: 深入解析 Service 的核心概念与类型：ClusterIP、NodePort、LoadBalancer、ExternalName、Headless
   Service、无头部署与 Endpoint 切片
 category: 网络

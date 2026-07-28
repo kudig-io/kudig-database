@@ -85,7 +85,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入探讨 [[Kubernetes|Kubernetes]] 扩展性设计的核心模式，涵盖 CRD、Operator、插件机制等关键技术，为企业级扩展开发提供架构指导和最佳实践。
+本文档深入探讨 [[kubernetes|Kubernetes]] 扩展性设计的核心模式，涵盖 CRD、Operator、插件机制等关键技术，为企业级扩展开发提供架构指导和最佳实践。
 
 ---
 

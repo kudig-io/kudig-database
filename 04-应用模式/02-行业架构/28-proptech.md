@@ -59,7 +59,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 房地产科技 [[Kubernetes|Kubernetes]] PropTech
+- 房地产科技 [[kubernetes|Kubernetes]] PropTech
 - 智慧社区 IoT 阿里云架构
 - VR看房 Kubernetes GPU渲染
 - 房产交易平台 K8s 微服务

@@ -59,7 +59,7 @@ tags:
 - docker
 - container
 - image
-- [[Falco|falco]]
+- [[falco|falco]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -71,7 +71,7 @@ estimated_read_time: 15min
 intent_queries:
 - Docker 命令大全参考 是什么
 - 如何 Docker 命令大全参考
-- [[Kubernetes|Kubernetes]] 13 docker 最佳实践
+- [[kubernetes|Kubernetes]] 13 docker 最佳实践
 trigger_keywords:
 - Docker
 - 命令大全参考

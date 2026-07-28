@@ -31,7 +31,7 @@ estimated_read_time: 5min
 | [[14-容器运行时/03-containerd-CRI-O/index.md\|containerd-CRI-O/]] | 轻量运行时 | containerd vs CRI-O、CRI 接口、RuntimeClass |
 | [[14-容器运行时/02-镜像管理/index.md\|镜像管理/]] | 镜像仓库 | Harbor/Registry/镜像策略/供应链安全 |
 | [[14-容器运行时/04-镜像构建/index.md\|镜像构建/]] | 构建优化 | 多阶段构建/BuildKit/Kaniko/distroless |
-| [[14-容器运行时/运行时迁 移/index.md\|运行时迁移/]] | 迁移实践 | Dockershim 移除/Docker→containerd 迁移 |
+| [[14-容器运行时/05-运行时迁移/index.md\|运行时迁移/]] | 迁移实践 | Dockershim 移除/Docker→containerd 迁移 |
 
 ## 跨域导航
 

@@ -71,13 +71,13 @@ cross_refs:
 # OPA Gatekeeper 策略即代码深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Enterprise-grade [[Kubernetes|Kubernetes]] policy enforcement with OPA Gatekeeper | **Complexity**: ⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade [[kubernetes|Kubernetes]] policy enforcement with OPA Gatekeeper | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
 OPA（Open Policy Agent）是一个通用的开源策略引擎，采用 Rego 语言声明式定义策略，能够与 Kubernetes、API 网关、CI/CD 管道等多种系统集成。Gatekeeper 是 OPA 在 Kubernetes 中的准入控制器实现，通过 CRD 将策略定义为 Kubernetes 原生资源，支持验证（Validate）、变异（Mutate）和审计（Audit）三种模式，为企业提供声明式的安全策略管理能力。
 
-与 [[Kyverno|Kyverno]] 的 YAML 原生语法不同，OPA Gatekeeper 使用 Rego 策略语言。Rego 是一种声明式的策略查询语言，具有强大的模式匹配和数据查询能力，适合表达复杂的安全策略逻辑。学习 Rego 需要一定的投入，但一旦掌握，可以实现非常灵活和强大的策略控制，包括跨资源关联查询、复合条件判断、集合运算等高级功能。对于需要在 Kubernetes 之外也统一策略管理的场景（如 API 网关、Kafka 授权、SSH 访问控制等），OPA/Rego 是更好的选择。
+与 [[kyverno|Kyverno]] 的 YAML 原生语法不同，OPA Gatekeeper 使用 Rego 策略语言。Rego 是一种声明式的策略查询语言，具有强大的模式匹配和数据查询能力，适合表达复杂的安全策略逻辑。学习 Rego 需要一定的投入，但一旦掌握，可以实现非常灵活和强大的策略控制，包括跨资源关联查询、复合条件判断、集合运算等高级功能。对于需要在 Kubernetes 之外也统一策略管理的场景（如 API 网关、Kafka 授权、SSH 访问控制等），OPA/Rego 是更好的选择。
 
 ## 威胁模型分析
 

@@ -415,7 +415,7 @@ spec:
 | `subjects.group` | 匹配用户组 | name |
 | `resourceRules.verbs` | 操作动词 | get, list, watch, create, update, delete, patch |
 | `resourceRules.apiGroups` | API 组 | "", apps, batch, networking.k8s.io |
-| `resourceRules.resources` | 资源类型 | [[Pods|pods]], [[Deployments|deployments]], services |
+| `resourceRules.resources` | 资源类型 | [[pods\|pods]], [[deployments\|deployments]], services |
 | `resourceRules.namespaces` | 命名空间 | default, production (不指定表示所有) |
 | `resourceRules.clusterScope` | 集群级资源 | true/false |
 | `nonResourceRules.verbs` | 非资源操作 | get |

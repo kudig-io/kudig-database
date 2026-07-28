@@ -47,7 +47,7 @@ prerequisites:
 
 
 
-title: Java [[Kubernetes|Kubernetes]] Client 与 Operator SDK 开发指南
+title: Java [[kubernetes|Kubernetes]] Client 与 Operator SDK 开发指南
 description: '# Java Kubernetes Client 与 Operator SDK 开发指南'
 category: platform-ops
 tags:
@@ -56,8 +56,8 @@ tags:
 - operations
 - devops
 - docker
-- [[StatefulSet|statefulset]]
-- [[Ingress|ingress]]
+- [[statefulset|statefulset]]
+- [[ingress|ingress]]
 - rbac
 - crd
 - operator

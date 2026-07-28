@@ -58,9 +58,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
+- [[helm|helm]]
 - redis
 - postgresql
 last_updated: 2026-05

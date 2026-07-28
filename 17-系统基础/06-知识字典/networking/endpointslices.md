@@ -37,7 +37,7 @@ prerequisites:
 
 ## 概述
 
-EndpointSlice 是 [[Kubernetes|Kubernetes]] 自 v1.21 起稳定的 API，用于跟踪 [[Service|Service]] 的后端网络端点（通常是 Pod 的 IP 地址）。它是旧版 Endpoints API 的演进，能够支撑大规模 Service（数千个后端 Pod），并高效地更新后端列表，是 kube-proxy 进行内部流量路由的权威数据来源。
+EndpointSlice 是 [[kubernetes|Kubernetes]] 自 v1.21 起稳定的 API，用于跟踪 [[service|Service]] 的后端网络端点（通常是 Pod 的 IP 地址）。它是旧版 Endpoints API 的演进，能够支撑大规模 Service（数千个后端 Pod），并高效地更新后端列表，是 kube-proxy 进行内部流量路由的权威数据来源。
 
 ## 核心概念/原理
 

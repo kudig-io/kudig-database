@@ -372,4 +372,4 @@ spec:
 - [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]
 - [[05-网络/01-K8s网络核心/11-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS]]
 - [[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]
-- [[可观测性]]
+- [[09-可观测性/README|可观测性]]

@@ -43,7 +43,7 @@ prerequisites:
 
 
 title: 音视频与短视频平台架构设计
-description: '# 音视频与短视频平台 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 音视频与短视频平台 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s

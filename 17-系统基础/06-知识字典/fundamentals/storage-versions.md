@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-[[Kubernetes|Kubernetes]]es API|Kubernetes API]] 服务器将对象存储在 [[17-系统基础/06-知识字典/fundamentals/etcd.md|etcd]]（或兼容的键值存储）中。每个对象使用特定版本的 API 类型进行序列化。Kubernetes 使用"存储版本"（storage version）这一术语来描述对象在集群中的实际存储方式。
+[[kubernetes|Kubernetes]]es API|Kubernetes API]] 服务器将对象存储在 [[17-系统基础/06-知识字典/fundamentals/etcd.md|etcd]]（或兼容的键值存储）中。每个对象使用特定版本的 API 类型进行序列化。Kubernetes 使用"存储版本"（storage version）这一术语来描述对象在集群中的实际存储方式。
 
 ## 核心概念/原理
 

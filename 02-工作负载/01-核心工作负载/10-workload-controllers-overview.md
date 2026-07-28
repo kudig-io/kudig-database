@@ -87,7 +87,7 @@ related_docs:
 | 控制器 (Controller) | 核心用途 (Primary Use) | 标识 (Identity) | 扩缩容 (Scaling) | 更新策略 (Update) | 有序性 (Ordered) |
 |-------------------|-------------------|---------------|----------------|-----------------|----------------|
 | **[[deployment]]** | 无状态微服务 | 随机 (Random) | ✅ HPA/VPA | RollingUpdate | ❌ |
-| **[[StatefulSet|StatefulSet]]** | 有状态数据库/中间件 | 固定 (Index) | ✅ HPA | RollingUpdate | ✅ |
+| **[[statefulset\|StatefulSet]]** | 有状态数据库/中间件 | 固定 (Index) | ✅ HPA | RollingUpdate | ✅ |
 | **DaemonSet** | 节点级插件/采集器 | 节点绑定 | ❌ 自动跟随 | RollingUpdate | ❌ |
 | **Job** | 批处理/离线计算 | 随机 | ❌ 并发控制 | - | ❌ |
 | **CronJob** | 定时任务/自动运维 | 随机 | ❌ 并发控制 | - | ❌ |

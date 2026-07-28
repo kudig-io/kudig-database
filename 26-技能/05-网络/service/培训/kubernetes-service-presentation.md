@@ -54,7 +54,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] [[Service|Service]] 全栈进阶培训 (从入门到专家)
+# [[kubernetes|Kubernetes]] [[service|Service]] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 理解服务发现本质、掌握内核转发逻辑、解决大规模网络瓶颈
@@ -88,7 +88,7 @@ authors:
 
 1. 解释 Service 解决的核心问题和四种类型的适用场景
 2. 描述 kube-proxy iptables 和 IPVS 模式的转发流程和性能差异
-3. 配置 Headless Service + [[StatefulSet|StatefulSet]] 实现精确的 Pod 寻址
+3. 配置 Headless Service + [[statefulset|StatefulSet]] 实现精确的 Pod 寻址
 4. 使用 EndpointSlice 解决大规模 Service 的性能问题
 5. 排查 Service 访问不通的常见问题
 6. 选择合适的 ExternalTrafficPolicy 策略
@@ -132,8 +132,8 @@ authors:
 |------|------------------|---------|
 | Pod IP 动态变化 | 提供固定的 ClusterIP（虚拟 IP） | kube-proxy 维护 DNAT 规则 |
 | 多个 Pod 副本如何负载均衡 | 自动分发流量到后端 Pod | iptables 随机/IPVS 调度算法 |
-| 客户端如何找到 Pod | 通过 DNS 名称访问（[[CoreDNS|CoreDNS]]） | CoreDNS 解析 Service 名称 |
-| 外部如何访问集群内服务 | 通过 NodePort / LoadBalancer / [[Ingress|Ingress]] | 节点端口映射/云商 LB |
+| 客户端如何找到 Pod | 通过 DNS 名称访问（[[coredns\|CoreDNS]]） | CoreDNS 解析 Service 名称 |
+| 外部如何访问集群内服务 | 通过 NodePort / LoadBalancer / [[ingress\|Ingress]] | 节点端口映射/云商 LB |
 
 **工作原理：**
 

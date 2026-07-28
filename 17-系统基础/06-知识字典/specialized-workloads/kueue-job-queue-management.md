@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-**Kueue** 是 [[Kubernetes|Kubernetes]] 官方推出的**作业队列与集群级资源配额管理系统**，专门解决 AI/ML、批处理（Batch）和高性能计算（HPC）场景下的资源争抢与调度公平性问题。在 2026 年的 AI 基础设施实践中，Kueue 已成为管理 GPU 集群稀缺资源的标配工具。
+**Kueue** 是 [[kubernetes|Kubernetes]] 官方推出的**作业队列与集群级资源配额管理系统**，专门解决 AI/ML、批处理（Batch）和高性能计算（HPC）场景下的资源争抢与调度公平性问题。在 2026 年的 AI 基础设施实践中，Kueue 已成为管理 GPU 集群稀缺资源的标配工具。
 
 ## 核心概念/原理
 
@@ -90,7 +90,7 @@ Kueue 位于 **API Server 与默认调度器之间**：
 - 拦截 Job/Deployment 的创建请求
 - 管理准入决策
 - 一旦准入，标准的 Kubernetes 调度器负责具体的节点放置
-- 可无缝配合 [[Volcano|Volcano]]、Scheduler Plugins 等高级调度器使用
+- 可无缝配合 [[volcano|Volcano]]、Scheduler Plugins 等高级调度器使用
 
 ## 关键机制或特性
 

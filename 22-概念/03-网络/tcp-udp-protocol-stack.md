@@ -80,14 +80,14 @@ Check: `sysctl net.ipv4.tcp_congestion_control`
 
 ## DNS Resolution Flow
 
-DNS (typically UDP port 53) resolves names to IP addresses through recursive and iterative queries. In K8s, [[CoreDNS|CoreDNS]] handles in-cluster DNS resolution, translating [[Service|Service]] names to ClusterIPs and Pod names to Pod IPs. DNS failures are a common source of Service connectivity issues.
+DNS (typically UDP port 53) resolves names to IP addresses through recursive and iterative queries. In K8s, [[coredns|CoreDNS]] handles in-cluster DNS resolution, translating [[service|Service]] names to ClusterIPs and Pod names to Pod IPs. DNS failures are a common source of Service connectivity issues.
 
 ## Load Balancing Layers
 
 | Layer | Type | Technology | K8s Equivalent |
 |-------|------|-----------|----------------|
 | L4 (Transport) | Port-based routing | IPVS, LVS | kube-proxy IPVS mode |
-| L7 (Application) | Content-based routing | Nginx, HAProxy | [[Ingress|Ingress]] Controller |
+| L7 (Application) | Content-based routing | Nginx, HAProxy | [[ingress\|Ingress]] Controller |
 
 Kube-proxy implements Service load balancing through iptables NAT rules (default) or IPVS (high-performance alternative). The conntrack table tracks connection state; a full conntrack table causes Service connectivity failures.
 

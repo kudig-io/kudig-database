@@ -1,7 +1,7 @@
 ---
 title: 数据库中间件 Kubernetes 企业级实践
 description: '# 数据库中间件 Kubernetes 企业级实践'
-summary: '数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s [[Service|Service]] 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。'
+summary: '数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s [[service|Service]] 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。'
 category: enterprise-database-middleware
 tags:
 - k8s
@@ -65,9 +65,9 @@ cross_refs:
 
 
 
-# 数据库中间件 [[Kubernetes|Kubernetes]] 企业级实践
+# 数据库中间件 [[kubernetes|Kubernetes]] 企业级实践
 
-> **适用版本**: [[Vitess|Vitess]] v21.0 / ShardingSphere v5.5 / ProxySQL v2.7  
+> **适用版本**: [[vitess|Vitess]] v21.0 / ShardingSphere v5.5 / ProxySQL v2.7  
 > **最后更新**: 2026-04-26  
 > **难度**: 高级 → 专家
 
@@ -75,7 +75,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s [[Service|Service]] 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。
+数据库中间件是解决关系型数据库水平扩展、读写分离、数据分片和连接池化等问题的核心组件。在 Kubernetes 环境中，数据库中间件的部署和管理面临新的挑战：如何与 K8s [[service|Service]] 发现机制集成、如何管理有状态的数据库分片拓扑、如何实现中间件本身的弹性伸缩和高可用。
 
 本文档深入探讨三大主流数据库中间件在 K8s 上的实践：Vitess（CNCF Graduated，MySQL 水平扩展）、Apache ShardingSphere（分布式数据库代理）、ProxySQL（高性能 MySQL 代理）。内容覆盖 Operator 部署、分片策略、连接池模式、读写分离、性能调优和监控告警。
 

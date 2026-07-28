@@ -86,7 +86,7 @@ Aqua Security 是企业级容器和云原生安全平台，提供从镜像构建
 
 **容器漂移**：攻击者在运行中的容器内安装新软件或修改二进制文件（容器漂移），用于持久化后门或执行恶意操作。Aqua 的容器漂移检测监控容器文件系统的变化，在发现未授权的二进制执行时触发告警或阻断。
 
-**配置违规**：特权容器、主机命名空间共享、不安全的 capabilities 等配置为攻击者提供了容器逃逸的途径。Aqua KubeEnforcer 通过 [[Kubernetes|Kubernetes]] 准入控制在部署阶段拦截不安全配置。
+**配置违规**：特权容器、主机命名空间共享、不安全的 capabilities 等配置为攻击者提供了容器逃逸的途径。Aqua KubeEnforcer 通过 [[kubernetes|Kubernetes]] 准入控制在部署阶段拦截不安全配置。
 
 <!-- chunk: 架构设计 -->## 架构设计
 
@@ -1084,7 +1084,7 @@ pipeline {
 
 ## 安全部署最佳实践
 
-**网络隔离**：将 Aqua 组件部署在独立的命名空间中，使用 [[NetworkPolicy|NetworkPolicy]] 限制访问。Console 仅允许管理员网络访问，Gateway 仅允许 Enforcer 和 KubeEnforcer 连接，PostgreSQL 仅允许 Console 和 Gateway 访问。
+**网络隔离**：将 Aqua 组件部署在独立的命名空间中，使用 [[networkpolicy|NetworkPolicy]] 限制访问。Console 仅允许管理员网络访问，Gateway 仅允许 Enforcer 和 KubeEnforcer 连接，PostgreSQL 仅允许 Console 和 Gateway 访问。
 
 **资源管理**：为每个 Aqua 组件设置合理的资源请求和限制。Console 和 Scanner 是资源密集型组件，需要充足的 CPU 和内存。Enforcer 以 DaemonSet 运行在每个节点上，需要限制其资源使用以避免影响工作负载。
 

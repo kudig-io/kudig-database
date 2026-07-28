@@ -56,9 +56,9 @@ tags:
 - operations
 - best-practices
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
+- [[helm|helm]]
 - vpa
 - job
 last_updated: 2026-05
@@ -72,7 +72,7 @@ estimated_read_time: 5min
 intent_queries:
 - GreenOps 可持续计算与碳足迹优化指南 是什么
 - 如何 GreenOps 可持续计算与碳足迹优化指南
-- [[Kubernetes|Kubernetes]] 18 [[23-实体/15-参考与索引/k8s-production-operations.md|production operations]] 最佳实践
+- [[kubernetes|Kubernetes]] 18 [[23-实体/15-参考与索引/k8s-production-operations.md|production operations]] 最佳实践
 trigger_keywords:
 - GreenOps
 - 可持续计算与碳足迹优化指南

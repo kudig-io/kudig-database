@@ -91,7 +91,7 @@ cross_refs:
 
 # 32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 运维操作指南
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 运维操作指南
 
 ---
 

@@ -55,7 +55,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 安全与 RBAC 权限管理全栈培训
+# [[kubernetes|Kubernetes]] 安全与 RBAC 权限管理全栈培训
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 安全治理专项
 > **核心原则**: 最小权限原则、零信任架构、多层防御
@@ -88,7 +88,7 @@ authors:
 2. API Server 的三层安全防护：认证 → 授权 → 准入控制
 3. RBAC 四个核心对象：Role、ClusterRole、RoleBinding、ClusterRoleBinding
 4. 准入控制（Admission Webhook）实现自动化安全策略
-5. [[NetworkPolicy|NetworkPolicy]] 实现 Pod 级网络隔离
+5. [[networkpolicy|NetworkPolicy]] 实现 Pod 级网络隔离
 
 ---
 

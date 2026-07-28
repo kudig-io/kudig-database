@@ -37,7 +37,7 @@ prerequisites:
 
 
 
-# [[Service|Service]] Internal Traffic Policy
+# [[service|Service]] Internal Traffic Policy
 
 ## 概述
 
@@ -65,7 +65,7 @@ Service Internal Traffic Policy（Service 内部流量策略）用于控制集�
 
 ## 最佳实践/注意事项
 
-- **确保每个节点都有足够的后端 Pod**：使用 `Local` 策略时，必须保证每个可能发起调用的节点上都有该 Service 的就绪端点，否则会导致流量黑洞和服务不可用。建议通过 [[DaemonSet|DaemonSet]] 或合理的 Pod 反亲和性/拓扑分布约束来保障节点覆盖。
+- **确保每个节点都有足够的后端 Pod**：使用 `Local` 策略时，必须保证每个可能发起调用的节点上都有该 Service 的就绪端点，否则会导致流量黑洞和服务不可用。建议通过 [[daemonset|DaemonSet]] 或合理的 Pod 反亲和性/拓扑分布约束来保障节点覆盖。
 - **监控节点本地端点可用性**：当节点上的后端 Pod 全部终止或漂移后，该节点上对此 Service 的内部调用将失败，需配合健康检查和告警及时发现。
 - **不能与 Topology Aware Routing 同时使用**：若 Service 已启用拓扑感知路由，则不能再设置 `internalTrafficPolicy: Local`。若两者都需要，应拆分到不同的 Service 中。
 - **升级兼容性**：`internalTrafficPolicy` 自 v1.26 起稳定，在旧版本集群中需确认特性门控已启用。

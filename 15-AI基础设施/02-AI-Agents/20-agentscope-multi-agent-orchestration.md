@@ -62,7 +62,7 @@ tags:
 - redis
 - hpa
 - vpa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -839,8 +839,8 @@ asyncio.run(supervisor_worker_system())
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 02-ai-agents KUDIG Database — Global MOC
-- [[15-AI基础设施/02-AI-Agents/README.md|[[AI Agent 工程专题|AI Agent 工程专题]]]]
-- [[15-AI基础设施/02-AI-Agents/01-ai-agent-fundamentals.md|[[AI Agent 基础与核心架构|AI Agent 基础与核心架构]]]]
+- [[15-AI基础设施/02-AI-Agents/README.md|[[15-AI基础设施/02-AI-Agents/README|AI Agent 工程专题]]]]
+- [[15-AI基础设施/02-AI-Agents/01-ai-agent-fundamentals.md|[[15-AI基础设施/02-AI-Agents/01-ai-agent-fundamentals|AI Agent 基础与核心架构]]]]
 - [[15-AI基础设施/02-AI-Agents/02-llm-foundation-models.md|LLM 基座模型选型与评估]]
 - [[15-AI基础设施/02-AI-Agents/03-agent-frameworks-comparison.md|主流 Agent 框架深度对比]]
 - [[15-AI基础设施/02-AI-Agents/04-rag-knowledge-retrieval.md|RAG 检索增强生成深度指南]]

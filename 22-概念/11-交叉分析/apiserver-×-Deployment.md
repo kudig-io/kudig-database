@@ -110,7 +110,7 @@ kubectl get events -n <ns> --field-selector reason=FailedDeployment
 
 ## 相关概念
 - apiserver
-- [[Deployment]]
+- [[deployment|Deployment]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

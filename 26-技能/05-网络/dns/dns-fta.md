@@ -37,7 +37,7 @@ severity: critical
 ---
 title: "DNS 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 CoreDNS 异常 --> ..."
+summary: "<!-- condition: kubectl get [[pods|pods]] -n kube-system -l k8s-app=kube-dns -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 CoreDNS 异常 --> ..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["故障诊断/FTA故障树/list/dns-fta.md"]
 created: 2026-05-21

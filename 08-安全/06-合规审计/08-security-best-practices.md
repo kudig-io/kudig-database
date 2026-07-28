@@ -109,7 +109,7 @@ cross_refs:
 | 实践领域 | 最佳实践 | 实施步骤 | 版本要求 | 安全影响 | ACK集成 |
 |---------|---------|---------|---------|---------|---------|
 | **etcd加密** | 加密存储的Secrets | 配置EncryptionConfiguration | v1.13+ | 防止etcd数据泄露 | 托管版自动加密 |
-| **外部Secret管理** | 使用Vault/KMS | 部署External [[Secrets|Secrets]] Operator | 外部工具 | 集中管理，审计追踪 | 阿里云KMS集成 |
+| **外部Secret管理** | 使用Vault/KMS | 部署External [[secrets\|Secrets]] Operator | 外部工具 | 集中管理，审计追踪 | 阿里云KMS集成 |
 | **限制Secret访问** | RBAC控制 | 仅授权必需的SA访问 | 稳定 | 防止未授权访问 | RAM策略集成 |
 | **Secret轮换** | 定期更新凭证 | 自动化轮换流程 | 外部工具 | 限制泄露影响 | KMS自动轮换 |
 | **避免环境变量** | 使用卷挂载 | `secretKeyRef`改为`volumeMounts` | 稳定 | 环境变量易泄露 | - |
@@ -120,7 +120,7 @@ cross_refs:
 
 | 实践领域 | 最佳实践 | 实施步骤 | 版本要求 | 风险说明 | 工具支持 |
 |---------|---------|---------|---------|---------|---------|
-| **默认拒绝策略** | 默认禁止所有流量 | 创建deny-all [[NetworkPolicy|NetworkPolicy]] | 稳定 | 未授权访问 | Calico/Cilium |
+| **默认拒绝策略** | 默认禁止所有流量 | 创建deny-all [[networkpolicy\|NetworkPolicy]] | 稳定 | 未授权访问 | Calico/Cilium |
 | **命名空间隔离** | 限制跨NS通信 | 配置NS级NetworkPolicy | 稳定 | 横向移动 | CNI支持 |
 | **出站流量控制** | 限制Egress | 白名单外部访问 | 稳定 | 数据外泄 | Egress NetworkPolicy |
 | **mTLS** | 加密服务间通信 | 部署Service Mesh | 外部工具 | 中间人攻击 | Istio/Linkerd |

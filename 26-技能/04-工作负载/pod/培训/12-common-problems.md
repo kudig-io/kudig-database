@@ -52,12 +52,12 @@ tags:
 - k8s
 - training
 - lecturer
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - docker
 - hpa
 - job
-- [[Ingress|ingress]]
-- [[NetworkPolicy|networkpolicy]]
+- [[ingress|ingress]]
+- [[networkpolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner

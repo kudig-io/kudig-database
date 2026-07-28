@@ -52,7 +52,7 @@ prerequisites:
 
 
 title: 控制平面性能基准测试 (Control Plane Performance Benchmarking)
-description: '**适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 性能测试指南'
+description: '**适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 性能测试指南'
 category: control-plane
 tags:
 - k8s
@@ -61,7 +61,7 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - operator
 - rag

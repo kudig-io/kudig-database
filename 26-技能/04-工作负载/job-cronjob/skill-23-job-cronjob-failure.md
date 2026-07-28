@@ -45,7 +45,7 @@ prerequisites:
 
 
 
-# Job/CronJob 故障诊断与修复 / Job & [[CronJob|CronJob]] Failure Diagnosis & Remediation
+# Job/CronJob 故障诊断与修复 / Job & [[cronjob|CronJob]] Failure Diagnosis & Remediation
 
 ### 症状识别
 

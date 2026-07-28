@@ -72,7 +72,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] eBPF与Cilium深度实践 (eBPF and [[Cilium|Cilium]] Deep Practice)
+# [[kubernetes|Kubernetes]] eBPF与Cilium深度实践 (eBPF and [[cilium|Cilium]] Deep Practice)
 
 > **作者**: 云原生网络架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03
 > **适用场景**: 容器网络架构、运行时安全、网络可观测性 | **复杂度**: ⭐⭐⭐⭐⭐

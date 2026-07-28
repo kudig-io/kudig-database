@@ -55,7 +55,7 @@ audience:
 - 广告平台技术负责人
 estimated_read_time: 5min
 intent_queries:
-- martech adtech [[Kubernetes|kubernetes]] architecture
+- martech adtech [[kubernetes|kubernetes]] architecture
 - 程序化广告K8s部署
 - DSP SSP广告平台
 - RTB实时竞价系统
@@ -309,7 +309,7 @@ flowchart LR
 ## Obsidian 相关文档
 
 - topic-application-architecture KUDIG Database — Global MOC
-- [[04-应用模式/02-行业架构/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[04-应用模式/02-行业架构/README.md|[[37-归档/domain-indexes/app-patterns/README-from-domain-42|Topic 应用层架构设计最佳实践]]]]
 - [[04-应用模式/02-行业架构/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[04-应用模式/02-行业架构/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[04-应用模式/02-行业架构/03-cms-architecture.md|内容管理系统 CMS 架构设计]]

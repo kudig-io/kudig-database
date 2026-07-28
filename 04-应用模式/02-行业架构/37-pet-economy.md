@@ -58,7 +58,7 @@ audience:
 - 阿里云新零售解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 宠物经济平台 [[Kubernetes|Kubernetes]] 部署架构
+- 宠物经济平台 [[kubernetes|Kubernetes]] 部署架构
 - 宠物电商服务预约调度系统
 - 宠物智能硬件 IoT 设备管理
 - 宠物保险理赔自动化
@@ -484,7 +484,7 @@ spec:
 ## Obsidian 相关文档
 
 - topic-application-architecture KUDIG Database — Global MOC
-- [[04-应用模式/02-行业架构/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[04-应用模式/02-行业架构/README.md|[[37-归档/domain-indexes/app-patterns/README-from-domain-42|Topic 应用层架构设计最佳实践]]]]
 - [[04-应用模式/02-行业架构/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[04-应用模式/02-行业架构/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[04-应用模式/02-行业架构/03-cms-architecture.md|内容管理系统 CMS 架构设计]]

@@ -69,7 +69,7 @@ cross_refs:
 
 
 
-# 04 - [[Kubernetes|Kubernetes]] 源码结构深度解析
+# 04 - [[kubernetes|Kubernetes]] 源码结构深度解析
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **源码版本**: 以 v1.32.0 为基准 | **参考**: [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes)
 
@@ -121,7 +121,7 @@ cross_refs:
 | **cmd/kube-controller-manager/** | 控制器管理器 | `app/controllermanager.go`<br>`app/options/` | v1.27: 控制器插件化<br>v1.30: 增强选举 | **控制器异常排查**、Leader 选举问题、控制器启用/禁用 |
 | **cmd/kube-scheduler/** | 调度器主程序 | `app/server.go`<br>`app/config/` | v1.25: 调度框架 v1<br>v1.28: DRA Alpha | **调度失败调试**、调度器配置加载、插件注册 |
 | **cmd/kubelet/** | 节点代理 | `app/server.go`<br>`app/options/` | v1.24: Dockershim 移除<br>v1.27: 就地重启 | **节点 NotReady**、CRI 初始化失败、cgroup 配置 |
-| **cmd/kube-proxy/** | 网络代理 | `app/server.go`<br>`app/conntrack.go` | v1.26: nftables Beta<br>v1.31: nftables GA | **[[Service|Service]] 不通排查**、代理模式切换、conntrack 调优 |
+| **cmd/kube-proxy/** | 网络代理 | `app/server.go`<br>`app/conntrack.go` | v1.26: nftables Beta<br>v1.31: nftables GA | **[[service\|Service]] 不通排查**、代理模式切换、conntrack 调优 |
 
 ### 客户端与工具
 

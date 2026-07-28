@@ -54,8 +54,8 @@ tags:
 - operations
 - best-practices
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[cilium|cilium]]
 - docker
 - falco
 - redis

@@ -78,7 +78,7 @@ cross_refs:
 - [五、Micronaut 原生编译](#五micronaut-原生编译)
 - [六、Reachability Metadata 配置](#六reachability-metadata-配置)
 - [七、容器化构建与多架构](#七容器化构建与多架构)
-- [八、[[Kubernetes|Kubernetes]] 部署实践](#八kubernetes-部署实践)
+- [八、[[kubernetes|Kubernetes]] 部署实践](#八kubernetes-部署实践)
 - [九、性能对比与调优](#九性能对比与调优)
 - [十、常见问题与排查](#十常见问题与排查)
 
@@ -663,7 +663,7 @@ resources:
     cpu: "500m"
 ```
 
-### 8.3 [[Knative|Knative]] Serverless 部署
+### 8.3 [[knative|Knative]] Serverless 部署
 
 ```yaml
 apiVersion: serving.knative.dev/v1

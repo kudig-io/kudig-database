@@ -60,7 +60,7 @@ prerequisites:
 | 层 | 指标 | 采集工具 | 说明 |
 |---|------|---------|------|
 | 基础设施层 | CPU/内存/磁盘/网络 | node_exporter | 节点级别资源使用 |
-| [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 层 | Pod/Deployment/Node 状态 | kube-state-metrics | K8s 对象状态 |
+| [[23-实体/kubernetes.md|[[kubernetes\|kubernetes]]]] 层 | Pod/Deployment/Node 状态 | kube-state-metrics | K8s 对象状态 |
 | 应用层 | 业务指标（QPS/Latency/Error） | 应用自暴露 | Pod 内应用 metrics |
 
 ### 1.2 监控组件清单

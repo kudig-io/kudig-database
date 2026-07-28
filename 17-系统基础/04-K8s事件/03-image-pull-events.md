@@ -63,7 +63,7 @@ authors:
 
 # 03 - 镜像拉取事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档系统性覆盖 Kubernetes 容器镜像拉取全流程的所有事件类型,详细解析 imagePullPolicy、镜像拉取失败排查、私有仓库认证和 Docker Hub 限流等生产环境高频问题。**
 
@@ -287,7 +287,7 @@ LAST SEEN   TYPE     REASON    OBJECT                             MESSAGE
 
 - **用户影响**: Pod 启动时间延长,取决于镜像大小和网络速度(通常几秒到几分钟)
 - **服务影响**: 如果是新部署或滚动更新,会影响服务就绪时间和流量切换速度
-- **集群影响**: 大规模拉取(如 [[DaemonSet|DaemonSet]] 部署到所有节点)会产生显著网络流量和镜像仓库负载
+- **集群影响**: 大规模拉取(如 [[daemonset|DaemonSet]] 部署到所有节点)会产生显著网络流量和镜像仓库负载
 - **关联事件链**: `Scheduled` → `Pulling` → `Pulled` → `Created` → `Started`
 
 ## 排查建议
@@ -350,7 +350,7 @@ ps aux | grep kubelet | grep -E "serialize-image-pulls|registry-"
 | 问题原因 | 解决方案 | 优先级 |
 |:---|:---|:---|
 | **镜像体积过大** | 优化 Dockerfile 分层,使用多阶段构建,减小镜像体积 | 高 |
-| **网络带宽不足** | 使用本地镜像仓库或区域性镜像缓存(如 [[Harbor|Harbor]]/Dragonfly) | 高 |
+| **网络带宽不足** | 使用本地镜像仓库或区域性镜像缓存(如 [[harbor\|Harbor]]/Dragonfly) | 高 |
 | **镜像仓库限流** | 配置镜像仓库镜像或使用企业版仓库服务 | 高 |
 | **镜像仓库响应慢** | 更换为地理位置更近的镜像仓库或使用 CDN 加速 | 中 |
 | **多个容器同时拉取** | 调整 kubelet 的 `--serialize-image-pulls=false` 允许并发拉取 | 中 |

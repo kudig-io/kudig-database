@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-**高性能计算（HPC, High-Performance Computing）** 和 **生物信息学（Bioinformatics）** 是计算密集型工作负载的典型代表。随着基因组测序、蛋白质结构预测（AlphaFold）、药物分子模拟等应用的爆炸式增长，传统 HPC 中心（基于 Slurm、PBS）正在与 [[Kubernetes|Kubernetes]] 融合。2026 年的最佳实践表明，通过 **[[Volcano|Volcano]]、Kueue、MPI Operator** 等工具，Kubernetes 已能够有效管理 HPC 作业调度、大规模并行计算和 GPU 集群资源，为科学研究提供云原生的弹性算力平台。
+**高性能计算（HPC, High-Performance Computing）** 和 **生物信息学（Bioinformatics）** 是计算密集型工作负载的典型代表。随着基因组测序、蛋白质结构预测（AlphaFold）、药物分子模拟等应用的爆炸式增长，传统 HPC 中心（基于 Slurm、PBS）正在与 [[kubernetes|Kubernetes]] 融合。2026 年的最佳实践表明，通过 **[[volcano|Volcano]]、Kueue、MPI Operator** 等工具，Kubernetes 已能够有效管理 HPC 作业调度、大规模并行计算和 GPU 集群资源，为科学研究提供云原生的弹性算力平台。
 
 ## 核心概念/原理
 
@@ -63,7 +63,7 @@ prerequisites:
 ### 2. MPI（Message Passing Interface）
 
 MPI 是分布式内存并行计算的标准协议，广泛应用于气候模拟、流体力学、量子化学等领域。在 Kubernetes 上运行 MPI 作业需要：
-- **MPI Operator**：[[Kubeflow|Kubeflow]] 项目的一部分，将 MPI 作业抽象为 Kubernetes CRD
+- **MPI Operator**：[[kubeflow|Kubeflow]] 项目的一部分，将 MPI 作业抽象为 Kubernetes CRD
 - **Horovod**：Uber 开源的分布式深度学习框架，底层基于 MPI/NCCL
 - **AllReduce 通信模式**：多个计算节点之间高效同步梯度或中间结果
 

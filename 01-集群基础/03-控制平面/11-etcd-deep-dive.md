@@ -98,7 +98,7 @@ related_docs:
 
 # [[etcd]] 深度解析 (etcd Deep Dive)
 
-> etcd 是 [[Kubernetes|Kubernetes]] 的核心存储组件，所有集群状态数据的唯一真相来源 (Single Source of Truth)
+> etcd 是 [[kubernetes|Kubernetes]] 的核心存储组件，所有集群状态数据的唯一真相来源 (Single Source of Truth)
 
 ---
 
@@ -114,7 +114,7 @@ related_docs:
 | **快照** | Snapshot | 状态压缩 | 减少WAL大小、加速恢复 |
 | **MVCC存储** | MVCC Store | 多版本存储 | 历史版本、Watch支持、事务隔离 |
 | **BoltDB** | BoltDB Backend | 持久化后端 | B+树索引、页面管理、ACID事务 |
-| **gRPC服务** | [[gRPC|gRPC]] Server | API层 | 客户端通信、流式Watch |
+| **gRPC服务** | [[grpc\|gRPC]] Server | API层 | 客户端通信、流式Watch |
 | **Auth模块** | Auth Module | 认证授权 | 用户管理、角色权限、TLS |
 | **Compaction** | Compaction | 版本压缩 | 历史清理、空间回收 |
 

@@ -49,7 +49,7 @@ prerequisites:
 
 
 
-title: 06 - [[DaemonSet|DaemonSet]] YAML 配置参考
+title: 06 - [[daemonset|DaemonSet]] YAML 配置参考
 description: '# 06 - DaemonSet YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -59,8 +59,8 @@ tags:
 - template
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[cilium|cilium]]
 - flannel
 - calico
 last_updated: 2026-05

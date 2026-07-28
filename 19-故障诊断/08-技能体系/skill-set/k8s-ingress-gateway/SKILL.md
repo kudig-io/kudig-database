@@ -60,9 +60,9 @@ agent_execution_mode: L2-semi-auto
 
 
 
-# K8s [[Ingress|Ingress]] Gateway Failure 诊断与修复
+# K8s [[ingress|Ingress]] Gateway Failure 诊断与修复
 
-Ingress 和 Gateway 是 [[Kubernetes|Kubernetes]] 集群对外暴露服务的核心机制。配置错误、Controller 异常、后端服务不可达都会导致外部流量无法进入集群。
+Ingress 和 Gateway 是 [[kubernetes|Kubernetes]] 集群对外暴露服务的核心机制。配置错误、Controller 异常、后端服务不可达都会导致外部流量无法进入集群。
 
 本 [[SKILL|Skill]] 覆盖 Ingress 规则错误、Gateway API 配置问题、Service 后端不可达、SSL 证书问题等全部常见根因的诊断和修复。
 

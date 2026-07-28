@@ -87,7 +87,7 @@ cross_refs:
 - [五、ShenandoahGC 调优](#五shenandoahgc-调优)
 - [六、容器感知参数详解](#六容器感知参数详解)
 - [七、GC 日志与监控集成](#七gc-日志与监控集成)
-- [八、[[Prometheus|Prometheus]] + JMX Exporter 监控](#八prometheus--jmx-exporter-监控)
+- [八、[[prometheus|Prometheus]] + JMX Exporter 监控](#八prometheus--jmx-exporter-监控)
 - [九、生产级调优案例](#九生产级调优案例)
 - [十、GC 问题排查手册](#十gc-问题排查手册)
 

@@ -65,7 +65,7 @@ estimated_read_time: 5min
 intent_queries:
 - 主板与芯片组技术 是什么
 - 如何 主板与芯片组技术
-- [[Kubernetes|Kubernetes]] 31 hardware 最佳实践
+- [[kubernetes|Kubernetes]] 31 hardware 最佳实践
 trigger_keywords:
 - 主板与芯片组技术
 - hardware

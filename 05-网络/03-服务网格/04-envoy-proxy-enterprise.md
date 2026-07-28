@@ -68,7 +68,7 @@ cross_refs:
 
 
 
-# [[Envoy|Envoy]] Proxy 企业级服务网格数据平面深度实践
+# [[envoy|Envoy]] Proxy 企业级服务网格数据平面深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Envoy v1.33+ | **难度**: 高级
 
@@ -76,7 +76,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Envoy Proxy 是由 Lyft 开发的高性能 L3/L4/L7 网络代理，2017年成为 CNCF 项目，现已发展为云原生服务代理的事实标准。几乎所有主流服务网格（[[Istio|Istio]]、Consul Connect、[[Kuma|Kuma]]）和 API 网关（Emissary、[[Contour|Contour]]、Envoy Gateway）都以 Envoy 作为数据平面。Envoy 的核心优势在于其优秀的 xDS 动态配置 API、丰富的 L7 协议支持、高性能的 C++ 实现，以及可扩展的 WASM 过滤器机制。
+Envoy Proxy 是由 Lyft 开发的高性能 L3/L4/L7 网络代理，2017年成为 CNCF 项目，现已发展为云原生服务代理的事实标准。几乎所有主流服务网格（[[istio|Istio]]、Consul Connect、[[kuma|Kuma]]）和 API 网关（Emissary、[[contour|Contour]]、Envoy Gateway）都以 Envoy 作为数据平面。Envoy 的核心优势在于其优秀的 xDS 动态配置 API、丰富的 L7 协议支持、高性能的 C++ 实现，以及可扩展的 WASM 过滤器机制。
 
 本文档从企业级运维专家角度，深入探讨 Envoy 的核心架构、xDS 配置管理、HTTP 连接管理器、高级负载均衡、安全配置（mTLS/RBAC）、性能调优、监控告警和故障排查。所有配置均可直接应用于生产环境，既适用于独立 Envoy 部署，也为理解服务网格底层数据平面提供参考。
 

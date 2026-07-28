@@ -62,7 +62,7 @@ cross_refs:
 
 
 
-# 47 - [[Helm|Helm]] Chart开发与管理
+# 47 - [[helm|Helm]] Chart开发与管理
 
 <!-- chunk: Helm版本对比 -->
 ## Helm版本对比
@@ -248,7 +248,7 @@ helm install myrelease oci://registry.example.com/charts/mychart
 |-----|------|
 | 内置应用 | 预置常用Helm Chart |
 | 私有仓库 | 支持ACR Helm仓库 |
-| GitOps集成 | [[ArgoCD|ArgoCD]]/FluxCD |
+| GitOps集成 | [[argocd\|ArgoCD]]/FluxCD |
 | 应用管理 | 控制台可视化管理 |
 
 ---

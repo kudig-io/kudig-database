@@ -582,7 +582,7 @@ etcdctl check perf --load="s"
 # 数据一致性检查
 etcdctl check datascale
 ```
-### [[Kubernetes|Kubernetes]] 集成运维
+### [[kubernetes|Kubernetes]] 集成运维
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用

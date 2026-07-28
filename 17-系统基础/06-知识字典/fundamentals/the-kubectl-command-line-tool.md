@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-`kubectl` 是与 [[Kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
+`kubectl` 是与 [[kubernetes|Kubernetes]] 集群的控制平面进行通信的主要命令行工具。它通过 [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 发送请求，是用户管理集群资源、检查集群状态和调试应用的主要接口。
 
 ## 核心概念/原理
 
@@ -65,7 +65,7 @@ prerequisites:
 
 `kubectl` 支持的操作大致分为以下几类：
 
-- **管理资源**：创建、更新和删除 Pod、Deployment、[[Service|Service]] 等对象。推荐使用 `kubectl apply` 进行声明式管理。
+- **管理资源**：创建、更新和删除 Pod、Deployment、[[service|Service]] 等对象。推荐使用 `kubectl apply` 进行声明式管理。
 - **检查集群状态**：列出和描述对象、查看事件、检查资源使用情况。
 - **调试**：查看容器日志、在运行中的容器内执行命令、端口转发到 Pod。
 - **集群操作**：排空节点进行维护、封锁节点以防止新工作负载调度、管理集群配置。

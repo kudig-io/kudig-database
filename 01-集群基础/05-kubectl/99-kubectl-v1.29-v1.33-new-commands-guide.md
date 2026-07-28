@@ -1,7 +1,7 @@
 ---
 title: Kubectl v1.29 - v1.33 新命令与用法速查
 description: '# 查询节点日志 (需 NodeLogQuery Feature Gate)'
-summary: 'kubectl events --sort-by='.lastTimestamp''
+summary: "kubectl events --sort-by='.lastTimestamp'"
 category: architecture-fundamentals
 tags:
 - k8s

@@ -128,7 +128,7 @@ prerequisites:
 - storage
 - 05-network-migration-traffic-cutover
 - Wiki Lint Report — 2026-05-21 — Cross-reference
-- [[21-生态参考/98-merged-indexes/index.md|[[发布说明索引 — 存储|发布说明索引 — 存储]]]] — Cross-reference
+- [[21-生态参考/98-merged-indexes/index.md|[[23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]]] — Cross-reference
 - [[23-实体/15-参考与索引/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
 - [[23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - [[23-实体/15-参考与索引/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference

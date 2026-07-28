@@ -57,7 +57,7 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -73,7 +73,7 @@ audience:
 - 天地一体化网络工程师
 estimated_read_time: 5min
 intent_queries:
-- space internet satellite [[Kubernetes|kubernetes]]
+- space internet satellite [[kubernetes|kubernetes]]
 - 太空互联网K8s架构
 - 卫星运管微服务设计
 - 遥感数据处理平台

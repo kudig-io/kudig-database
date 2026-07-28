@@ -55,7 +55,7 @@ kubectl describe node <node-name>
 kubectl get node <node-name> -o jsonpath='{.status.conditions}'
 ```
 Key conditions:
-- **Ready**: Node is healthy and accepting [[Pods|Pods]]
+- **Ready**: Node is healthy and accepting [[pods|Pods]]
 - **MemoryPressure**: [[kubelet|kubelet]] will evict Pods
 - **DiskPressure**: kubelet will evict Pods
 - **PIDPressure**: Too many processes

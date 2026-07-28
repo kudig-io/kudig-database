@@ -55,9 +55,9 @@ tags:
 - storageclass
 - mysql
 - postgresql
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -69,7 +69,7 @@ estimated_read_time: 5min
 intent_queries:
 - 存储备份与灾难恢复 是什么
 - 如何 存储备份与灾难恢复
-- [[Kubernetes|Kubernetes]] 6 storage 最佳实践
+- [[kubernetes|Kubernetes]] 6 storage 最佳实践
 trigger_keywords:
 - 存储备份与灾难恢复
 - storage

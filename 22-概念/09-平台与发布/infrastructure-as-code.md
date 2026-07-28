@@ -53,7 +53,7 @@ status: reviewed
 | Tool | Language | Paradigm | State Management | Best For |
 |------|----------|----------|-----------------|----------|
 | Terraform | HCL | Declarative | Local, S3, Terraform Cloud | Multi-cloud infrastructure |
-| Pulumi | TypeScript/Python/Go | Imperative/Declarative | [[Service|Service]], local, S3 | Developer-centric IaC |
+| Pulumi | TypeScript/Python/Go | Imperative/Declarative | [[service\|Service]], local, S3 | Developer-centric IaC |
 | Ansible | YAML | Imperative (config mgmt) | None (idempotent) | Configuration management |
 | Crossplane | YAML (K8s CRDs) | Declarative | etcd (K8s native) | K8s-native infra orchestration |
 | AWS CDK | TypeScript/Python | Imperative | CloudFormation | AWS-only infrastructure |

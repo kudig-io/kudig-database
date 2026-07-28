@@ -50,6 +50,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/03-networking/07-terway-troubleshooting.md
   label: '结构化排障: 07-terway-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

@@ -55,7 +55,7 @@ prerequisites:
 
 ---
 title: CI/CD 管道
-description: 深入解析 K8s CI/CD 工具链：[[ArgoCD|ArgoCD]]/Flux GitOps、Tekton JenkinsX、GitHub Actions、CI/CD
+description: 深入解析 K8s CI/CD 工具链：[[argocd|ArgoCD]]/Flux GitOps、Tekton JenkinsX、GitHub Actions、CI/CD
   流水线设计、Blue-Green/Canary 部署与自动化测试
 category: 专项技术
 tags:
@@ -63,7 +63,7 @@ tags:
 - cicd
 - gitops
 - argocd
-- [[Flux|flux]]
+- [[flux|flux]]
 - tekton
 - jenkins
 - github-actions

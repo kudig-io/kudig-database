@@ -57,10 +57,10 @@ tags:
 - rag
 - multi-agent
 - [[kubelet|kubelet]]
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - docker
 - hpa
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

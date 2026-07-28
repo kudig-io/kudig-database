@@ -1,7 +1,7 @@
 ---
 title: NetworkPolicy 故障排查
 description: '# 16 - NetworkPolicy 故障排查 (NetworkPolicy Troubleshooting)'
-summary: 'kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.nodeInfo.containerRuntimeVersion}{"\n"}{end}''
+summary: "kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{\"\\t\"}{.status.nodeInfo.containerRuntimeVersion}{\"\\n\"}{end}'"
 category: troubleshooting
 tags:
 - networkpolicy
@@ -75,7 +75,7 @@ cross_refs:
 
 
 
-# 16 - [[NetworkPolicy|NetworkPolicy]] 故障排查 (NetworkPolicy Troubleshooting)
+# 16 - [[networkpolicy|NetworkPolicy]] 故障排查 (NetworkPolicy Troubleshooting)
 
 ---
 

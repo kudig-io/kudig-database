@@ -54,9 +54,9 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Falco|falco]]
+- [[falco|falco]]
 - minio
 - redis
 - mysql
@@ -105,7 +105,7 @@ k8s_versions:
 
 # 跨境电商架构设计 — 阿里云视角
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#跨境电商` `#全球部署` `#多币种` `#合规` `#阿里云`
 
 ---

@@ -52,7 +52,7 @@ version: 1.0.0
 
 
 
-# topic-skills — 工单智能体 [[Kubernetes|Kubernetes]] 诊断 [[SKILL|Skill]] 库
+# topic-skills — 工单智能体 [[kubernetes|Kubernetes]] 诊断 [[SKILL|Skill]] 库
 
 > **适用版本**: Kubernetes v1.28 - v1.32  
 > **Skill 数量**: 18 个核心场景  

@@ -45,7 +45,7 @@ prerequisites:
 
 ## 概述
 
-Admission Webhook 是扩展 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 的强大机制，但在设计和部署时需要格外谨慎。设计不良的 webhook 可能导致工作负载中断、升级后行为异常，甚至引发集群级问题。本文档为集群运维人员和 webhook 开发者提供了设计和部署 admission webhook 的推荐实践。
+Admission Webhook 是扩展 [[kubernetes|Kubernetes]]es API|Kubernetes API]] 的强大机制，但在设计和部署时需要格外谨慎。设计不良的 webhook 可能导致工作负载中断、升级后行为异常，甚至引发集群级问题。本文档为集群运维人员和 webhook 开发者提供了设计和部署 admission webhook 的推荐实践。
 
 ## 核心概念/原理
 
@@ -72,7 +72,7 @@ Kubernetes 项目建议在可能的情况下优先使用基于 CEL 的内置准�
 - **合并 webhook**：将功能相似的 webhook 合并，减少 API 调用次数。
 - **限制匹配条件**：使用 `matchConditions` 和 `namespaceSelector` 精确过滤请求，减少不必要的 webhook 调用。
 - **设置较小超时**：webhook 应尽快评估（通常毫秒级），设置合理的超时值。
-- **负载均衡与高可用**：在集群内部署多个 webhook 后端，通过 [[Service|Service]] 提供负载均衡。
+- **负载均衡与高可用**：在集群内部署多个 webhook 后端，通过 [[service|Service]] 提供负载均衡。
 - **避免竞争循环**：检查审计日志，防止多个控制器对同一字段反复修改导致循环。
 
 ### 请求过滤与作用域控制

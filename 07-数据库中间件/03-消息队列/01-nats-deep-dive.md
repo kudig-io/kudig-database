@@ -38,7 +38,7 @@ prerequisites:
 
 
 
-# [[NATS|NATS]] 深度解析
+# [[nats|NATS]] 深度解析
 
 ## 架构演进
 
@@ -60,7 +60,7 @@ NATS Server:
 | KV Store | ❌ | ✅ |
 | 性能 | 极高（10M+/sec） | 高（1M+/sec） |
 
-## [[Kubernetes|Kubernetes]] 部署
+## [[kubernetes|Kubernetes]] 部署
 
 ```yaml
 apiVersion: apps/v1

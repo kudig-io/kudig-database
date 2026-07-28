@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-LoxiLB 是一个基于 eBPF 的云原生负载均衡器，由 LoxiLab 团队开发，2023 年加入 CNCF 沙箱。它专注于为 Kubernetes 提供高性能的 L4 负载均衡服务，可作为 Kubernetes 的 [[Service|Service]] LoadBalancer、[[Ingress|Ingress]] 控制器或独立负载均衡网关运行。LoxiLB 利用 eBPF/XDP 技术在内核数据面实现线速转发，支持 BGP、ECMP、DSR（Direct Server Return）等高级网络特性，在 10Gbps+ 吞吐场景下相比 kube-proxy/iptables 有数量级的性能提升。它还原生支持 IPv6、NAT46/64、防火墙和流量镜像等功能。
+LoxiLB 是一个基于 eBPF 的云原生负载均衡器，由 LoxiLab 团队开发，2023 年加入 CNCF 沙箱。它专注于为 Kubernetes 提供高性能的 L4 负载均衡服务，可作为 Kubernetes 的 [[service|Service]] LoadBalancer、[[ingress|Ingress]] 控制器或独立负载均衡网关运行。LoxiLB 利用 eBPF/XDP 技术在内核数据面实现线速转发，支持 BGP、ECMP、DSR（Direct Server Return）等高级网络特性，在 10Gbps+ 吞吐场景下相比 kube-proxy/iptables 有数量级的性能提升。它还原生支持 IPv6、NAT46/64、防火墙和流量镜像等功能。
 
 ## 核心能力
 

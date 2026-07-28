@@ -79,7 +79,7 @@ related_docs:
 
 # 02 - PV/PVC核心概念与企业级实践
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 企业级配置、生产环境最佳实践、问题预防 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 企业级配置、生产环境最佳实践、问题预防 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -439,7 +439,7 @@ spec:
 <!-- chunk: 8. PV 监控与告警 -->
 ## 8. PV 监控与告警
 
-### [[Prometheus|Prometheus]] 监控指标
+### [[prometheus|Prometheus]] 监控指标
 
 | 指标 | 说明 | 告警阈值建议 |
 |:---|:---|:---|
@@ -1186,7 +1186,7 @@ spec:
 ## Obsidian 相关文档
 
 - 存储 KUDIG Database — Global MOC
-- [[06-存储/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[06-存储/README.md|[[37-归档/domain-indexes/storage/README-from-domain-6|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - 03 - PVC使用模式与最佳实践

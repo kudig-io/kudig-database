@@ -216,7 +216,7 @@ ModelKit 操作失败
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kitops
-- [[23-实体/slimtoolkit.md|[[SlimToolkit|SlimToolkit]]]]
+- [[23-实体/slimtoolkit.md|[[slimtoolkit|SlimToolkit]]]]
 - [[23-实体/08-交付与制品/modelpack.md|ModelPack]]
 - [[23-实体/15-参考与索引/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

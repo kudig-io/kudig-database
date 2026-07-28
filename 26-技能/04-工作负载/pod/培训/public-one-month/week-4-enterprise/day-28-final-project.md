@@ -55,7 +55,7 @@ title: Day 28: 综合复习 + 毕业项目
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[Kubernetes|Kubernetes]] 毕业项目
+  - [[kubernetes|Kubernetes]] 毕业项目
   - K8s 综合实践
   - 费曼复述法
   - 知识图谱绘制

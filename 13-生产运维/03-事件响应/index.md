@@ -33,7 +33,7 @@ last_updated: '2026-07-21'
 | [[13-生产运维/03-事件响应/01-escalation-matrix-severity-levels.md\|升级矩阵]] | 严重度分级与升级路径 | intermediate |
 | [[13-生产运维/03-事件响应/02-war-room-coordination-procedures.md\|War Room]] | 作战室协调流程 | advanced |
 | [[13-生产运维/03-事件响应/03-communication-templates-stakeholder.md\|沟通模板]] | 干系人沟通模板 | intermediate |
-| [[13-生产运维/03-事件响应/04-incident-postmortem-template.md\|复盘模板]] | 事件复盘结构化模板 | intermediate |
+| [[12-可靠性/05-事后复盘/03-incident-postmortem-template\|复盘模板]] | 事件复盘结构化模板 | intermediate |
 | [[13-生产运维/03-事件响应/23-incident-response-handling.md\|事件处理]] | 端到端事件处理流程 | advanced |
 | [[13-生产运维/03-事件响应/24-incident-response-runbook-template.md\|Runbook 模板]] | 响应操作手册模板 | advanced |
 

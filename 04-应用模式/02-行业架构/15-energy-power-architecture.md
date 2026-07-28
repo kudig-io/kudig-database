@@ -48,14 +48,14 @@ prerequisites:
 
 
 
-title: 能源电力 [[Kubernetes|Kubernetes]] 生产架构设计
+title: 能源电力 [[kubernetes|Kubernetes]] 生产架构设计
 description: '# 能源电力 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Flux|flux]]
+- [[flux|flux]]
 - redis
 - mysql
 - kafka
@@ -300,7 +300,7 @@ flowchart TB
 | 离线计算 | Spark, Hive | MaxCompute | 历史数据分析 |
 | AI 预测 | Prophet, Transformer | PAI | 功率/负荷预测 |
 | 优化求解 | Pyomo, Gurobi | E-HPC | MILP 调度优化 |
-| 边缘计算 | [[KubeEdge|KubeEdge]], [[OpenYurt|OpenYurt]] | ACK@Edge | 场站/变电站边缘 |
+| 边缘计算 | [[kubeedge\|KubeEdge]], [[openyurt\|OpenYurt]] | ACK@Edge | 场站/变电站边缘 |
 | IoT 接入 | EMQX, Mosquitto | 阿里云 IoT 平台 | 设备协议适配 |
 | 协议转换 | IEC 61850, IEC 104, Modbus | 自研协议网关 | 电力设备通信 |
 | 数字孪生 | Unity, Cesium | DataV + 3D 可视化 | 电网全景展示 |

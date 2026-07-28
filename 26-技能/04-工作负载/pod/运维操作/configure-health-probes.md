@@ -44,7 +44,7 @@ prerequisites:
 |-------|----------|-------------------|
 | **startupProbe** | Application has slow or variable startup time | Disables liveness/readiness until first success |
 | **livenessProbe** | Application can deadlock or become unresponsive | Container is restarted |
-| **readinessProbe** | Application needs warmup time or can become temporarily unavailable | Removed from [[Service|Service]] endpoints |
+| **readinessProbe** | Application needs warmup time or can become temporarily unavailable | Removed from [[service\|Service]] endpoints |
 
 ## Probe Types
 
@@ -120,7 +120,7 @@ For a typical web application with 30s startup time:
 ## Related
 
 - [[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[pod-lifecycle|[[Pod Lifecycle|Pod Lifecycle]]]]
+- [[pod-lifecycle|[[22-概念/02-工作负载/pod-lifecycle|Pod Lifecycle]]]]
 - [[deployment|Deployment]]
 - [[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 

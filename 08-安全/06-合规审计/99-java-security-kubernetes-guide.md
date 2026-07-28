@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# Java 应用 [[Kubernetes|Kubernetes]]es 安全加固深度实践|Kubernetes 安全加固深度实践]]
+# Java 应用 [[kubernetes|Kubernetes]]es 安全加固深度实践|Kubernetes 安全加固深度实践]]
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
 > **Scenario**: Java application security hardening on Kubernetes | **Complexity**: ⭐⭐⭐⭐⭐

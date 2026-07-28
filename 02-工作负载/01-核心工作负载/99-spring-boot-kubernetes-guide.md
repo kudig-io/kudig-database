@@ -68,7 +68,7 @@ cross_refs:
 
 
 
-# Spring Boot on [[Kubernetes|Kubernetes]] 生产实践指南
+# Spring Boot on [[kubernetes|Kubernetes]] 生产实践指南
 
 > **适用版本**: Spring Boot 3.4+ / Kubernetes v1.29-v1.33  
 > **最后更新**: 2026-04-30  
@@ -121,7 +121,7 @@ graph TD
 | JVM 容器感知 | `-XX:+UseContainerSupport` | P0 |
 | 资源 requests/limits | Deployment YAML | P0 |
 | ConfigMap 配置注入 | Deployment `envFrom` | P1 |
-| HPA 指标暴露 | Micrometer + [[Prometheus|Prometheus]] | P1 |
+| HPA 指标暴露 | Micrometer + [[prometheus\|Prometheus]] | P1 |
 | 健康检查端点安全 | `management.endpoints` | P1 |
 | 日志 JSON 格式 | Logback/Log4j2 配置 | P1 |
 | 非 root 运行 | SecurityContext | P2 |

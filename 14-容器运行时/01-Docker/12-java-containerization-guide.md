@@ -69,7 +69,7 @@ cross_refs:
 - [四、Dockerfile 生产级模板](#四dockerfile-生产级模板)
 - [五、Spring Boot 分层 JAR 优化](#五spring-boot-分层-jar-优化)
 - [六、Jib 无 Dockerfile 构建](#六jib-无-dockerfile-构建)
-- [七、[[Buildpacks|Buildpacks]] 自动构建](#七buildpacks-自动构建)
+- [七、[[buildpacks|Buildpacks]] 自动构建](#七buildpacks-自动构建)
 - [八、镜像瘦身策略](#八镜像瘦身策略)
 - [九、多架构构建](#九多架构构建)
 - [十、安全加固](#十安全加固)

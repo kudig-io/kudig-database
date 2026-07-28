@@ -308,7 +308,7 @@ clusters/
     └── limit-range.yaml
 ```
 
-### 5.2 [[NetworkPolicy|NetworkPolicy]] 隔离
+### 5.2 [[networkpolicy|NetworkPolicy]] 隔离
 
 ```
 【场景】
@@ -441,7 +441,7 @@ kubectl describe resourcequota -n <namespace>
 
 ## Related
 
-- [[26-技能/04-工作负载/pod/培训/learn-root.md|learn-root]] — [[Kubernetes|Kubernetes]]es 培训：Root|Kubernetes 培训：Root]]
+- [[26-技能/04-工作负载/pod/培训/learn-root.md|learn-root]] — [[kubernetes|Kubernetes]]es 培训：Root|Kubernetes 培训：Root]]
 - cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
 - [[26-技能/04-工作负载/hpa-vpa/培训/learn-09-hpa-basics.md|learn-09-hpa-basics]] — 第九课：HPA - 自动伸缩
 - [[23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy

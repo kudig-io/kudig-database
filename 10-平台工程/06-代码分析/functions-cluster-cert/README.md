@@ -67,7 +67,7 @@ related_topics:
 
 
 
-# Cluster Cert — [[Kubernetes|Kubernetes]] 集群证书体系源码分析
+# Cluster Cert — [[kubernetes|Kubernetes]] 集群证书体系源码分析
 
 ## 概述
 

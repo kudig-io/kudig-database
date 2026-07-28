@@ -246,7 +246,7 @@ awk '/BEGIN CERTIFICATE/{n++}{print > "cert" n ".pem"}' chain.pem
 
 ---
 
-## [[Kubernetes|Kubernetes]] 证书操作
+## [[kubernetes|Kubernetes]] 证书操作
 
 ### 查看集群证书
 
@@ -492,7 +492,7 @@ kubectl logs -n cert-manager deployment/cert-manager-cainjector
 ## Related
 
 - index/observability-index|Observabilityty 可观测性知识图谱索引|Observability 可观测性知识图谱索引]]]]
-- [[21-生态参考/03-领域索引/cert-index.md|[[Certificate / TLS 证书知识图谱索引|Certificate / TLS 证书知识图谱索引]]]]
+- [[21-生态参考/03-领域索引/cert-index.md|[[21-生态参考/03-领域索引/cert-index|Certificate / TLS 证书知识图谱索引]]]]
 
 ```
 

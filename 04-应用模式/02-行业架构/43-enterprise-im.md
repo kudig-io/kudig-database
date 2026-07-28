@@ -48,7 +48,7 @@ tags:
 - architecture
 - industry
 - redis
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - gateway
 - rag
 last_updated: '2026-05-18'

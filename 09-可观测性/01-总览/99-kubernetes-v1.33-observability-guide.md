@@ -49,7 +49,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] v1.29-v1.33 可观测性新特性指南
+title: [[kubernetes|Kubernetes]] v1.29-v1.33 可观测性新特性指南
 description: '# Kubernetes v1.29-v1.33 可观测性新特性指南'
 category: observability
 tags:

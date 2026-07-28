@@ -75,11 +75,11 @@ cross_refs:
 
 
 
-# 33 - 服务发现与 DNS 配置 ([[Service|Service]] Discovery & DNS)
+# 33 - 服务发现与 DNS 配置 ([[service|Service]] Discovery & DNS)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级
 
-<!-- chunk: [[Kubernetes|Kubernetes]] DNS 架构概览 -->
+<!-- chunk: [[kubernetes|Kubernetes]] DNS 架构概览 -->
 ## Kubernetes DNS 架构概览
 
 ```

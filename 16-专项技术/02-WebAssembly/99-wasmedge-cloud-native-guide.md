@@ -60,7 +60,7 @@ authors:
 
 # WebAssembly (Wasm) 云原生实践指南
 
-> **适用版本**: [[WasmEdge|WasmEdge]] v0.14 / [[containerd|containerd]] wasm shims v0.8 / [[Spin|Spin]] v3.2  
+> **适用版本**: [[wasmedge|WasmEdge]] v0.14 / [[containerd|containerd]] wasm shims v0.8 / [[spin|Spin]] v3.2  
 > **最后更新**: 2026-04-24  
 > **难度**: 高级
 

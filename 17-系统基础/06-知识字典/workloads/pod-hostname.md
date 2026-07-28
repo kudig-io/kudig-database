@@ -66,7 +66,7 @@ prerequisites:
 
 ## 使用场景
 - 应用依赖特定主机名进行许可证验证或集群成员识别。
-- 需要为 [[StatefulSet|StatefulSet]] Pod 提供稳定且可预测的网络标识。
+- 需要为 [[statefulset|StatefulSet]] Pod 提供稳定且可预测的网络标识。
 - 在 Pod 内部模拟特定的域名环境。
 
 ## 最佳实践/注意事项

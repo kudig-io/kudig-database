@@ -55,7 +55,7 @@ prerequisites:
 
 
 title: 金融科技FinTech Kubernetes生产架构设计
-description: '# 金融科技 (FinTech) [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 金融科技 (FinTech) [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -65,7 +65,7 @@ tags:
 - redis
 - kafka
 - job
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - gateway
 - networkpolicy
 last_updated: 2026-05-18

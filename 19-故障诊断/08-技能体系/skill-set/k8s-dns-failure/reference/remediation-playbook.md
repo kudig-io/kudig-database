@@ -26,7 +26,7 @@ last_updated: 2026-05-22
 
 ## 修复步骤
 
-### 修复 1：重启 [[CoreDNS|CoreDNS]]
+### 修复 1：重启 [[coredns|CoreDNS]]
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本

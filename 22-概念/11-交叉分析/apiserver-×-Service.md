@@ -109,7 +109,7 @@ kubectl patch svc <name> -n <ns> -p '{"spec":{"selector":{"version":"v2"}}}'
 
 ## 相关概念
 - apiserver
-- [[Service]]
+- [[service|Service]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

@@ -44,7 +44,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 生产环境部署模式架构详解
+title: [[kubernetes|Kubernetes]] 生产环境部署模式架构详解
 description: '# Kubernetes 生产环境部署模式架构详解'
 category: production-operations
 tags:
@@ -52,11 +52,11 @@ tags:
 - production
 - operations
 - best-practices
-- [[Istio|istio]]
-- [[Harbor|harbor]]
+- [[istio|istio]]
+- [[harbor|harbor]]
 - hpa
 - pdb
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - gateway
 last_updated: 2026-05
 difficulty: advanced

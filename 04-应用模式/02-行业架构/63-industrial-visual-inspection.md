@@ -56,7 +56,7 @@ audience:
 - 后端开发工程师
 estimated_read_time: 5min
 intent_queries:
-- 工业视觉检测 AOI [[Kubernetes|Kubernetes]] 部署方案
+- 工业视觉检测 AOI [[kubernetes|Kubernetes]] 部署方案
 - YOLOv8 缺陷检测模型训练与部署
 - 边缘推理 GPU 集群架构设计
 - PCB/半导体/锂电池视觉检测方案
@@ -322,7 +322,7 @@ flowchart LR
 ## Obsidian 相关文档
 
 - topic-application-architecture KUDIG Database — Global MOC
-- [[04-应用模式/02-行业架构/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[04-应用模式/02-行业架构/README.md|[[37-归档/domain-indexes/app-patterns/README-from-domain-42|Topic 应用层架构设计最佳实践]]]]
 - [[04-应用模式/02-行业架构/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[04-应用模式/02-行业架构/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[04-应用模式/02-行业架构/03-cms-architecture.md|内容管理系统 CMS 架构设计]]

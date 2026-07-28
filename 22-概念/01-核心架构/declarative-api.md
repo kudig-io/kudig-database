@@ -66,7 +66,7 @@ Key metadata fields:
 - **resourceVersion**: etcd revision number, used for optimistic concurrency control
 - **generation**: Incremented each time spec changes
 - **ownerReferences**: Enables cascading deletion ([[17-系统基础/06-知识字典/fundamentals/garbage-collection.md|garbage collection]])
-- **[[Finalizers|finalizers]]**: Pre-delete hooks for resource cleanup
+- **[[finalizers|finalizers]]**: Pre-delete hooks for resource cleanup
 
 ## Server-Side Apply (SSA)
 

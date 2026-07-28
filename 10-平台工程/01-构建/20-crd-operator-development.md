@@ -578,7 +578,7 @@ func (r *ApplicationReconciler) Reconcile(ctx context.Context, req ctrl.Request)
 | **幂等性** | 🔴必须 | Reconcile必须幂等，多次执行结果一致 | CreateOrUpdate / SSA |
 | **状态管理** | 🔴必须 | 使用Status子资源，分离spec/status更新 | `r.Status().Update()` |
 | **所有权管理** | 🔴必须 | 设置OwnerReferences实现级联删除 | `SetControllerReference()` |
-| **[[Finalizers|Finalizers]]** | 🔴必须 | 删除前清理外部资源 | 添加/移除Finalizer |
+| **[[finalizers\|Finalizers]]** | 🔴必须 | 删除前清理外部资源 | 添加/移除Finalizer |
 | **条件状态** | 🔴必须 | 使用Conditions标准化状态报告 | `meta.SetStatusCondition()` |
 | **事件记录** | 🟡推荐 | 发送K8s Events记录关键操作 | `recorder.Eventf()` |
 | **重试策略** | 🟡推荐 | 指数退避重试失败操作 | RateLimiter配置 |

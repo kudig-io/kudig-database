@@ -54,12 +54,12 @@ tags:
 - production
 - operations
 - best-practices
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - pdb
 - job
-- [[CronJob|cronjob]]
-- [[Ingress|ingress]]
+- [[cronjob|cronjob]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

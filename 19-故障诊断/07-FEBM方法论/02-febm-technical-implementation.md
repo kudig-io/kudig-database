@@ -42,6 +42,7 @@ prerequisites:
 - policy-basics
 - logging-basics
 - tracing-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

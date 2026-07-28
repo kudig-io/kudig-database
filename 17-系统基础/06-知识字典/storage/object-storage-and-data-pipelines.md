@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-在 [[Kubernetes|Kubernetes]] 上运行 AI/ML、大数据和云原生应用时，**对象存储（Object Storage）** 已成为海量非结构化数据的事实标准存储层。相比块存储和文件系统，对象存储具有**近乎无限的扩展性、较低的成本和天然的云原生 API 接口**。2026 年的最佳实践要求 Kubernetes 平台具备高效的对象存储集成能力，以及基于 Kubernetes 原生资源（[[Jobs|Jobs]]/CronJobs/Argo Workflows）编排的**数据流水线（Data Pipelines）**。
+在 [[kubernetes|Kubernetes]] 上运行 AI/ML、大数据和云原生应用时，**对象存储（Object Storage）** 已成为海量非结构化数据的事实标准存储层。相比块存储和文件系统，对象存储具有**近乎无限的扩展性、较低的成本和天然的云原生 API 接口**。2026 年的最佳实践要求 Kubernetes 平台具备高效的对象存储集成能力，以及基于 Kubernetes 原生资源（[[jobs|Jobs]]/CronJobs/Argo Workflows）编排的**数据流水线（Data Pipelines）**。
 
 ## 核心概念/原理
 
@@ -109,7 +109,7 @@ AI/ML 应用通常直接使用 S3 SDK（boto3、s3fs、AWS SDK）访问对象存
 ### 4. 数据流水线（Data Pipelines）
 
 Kubernetes 原生数据流水线通常由以下组件构建：
-- **[[Argo|Argo]]go Workflows|Argo Workflows]]**：声明式工作流引擎，广泛用于数据科学和 MLOps
+- **[[argo|Argo]]go Workflows|Argo Workflows]]**：声明式工作流引擎，广泛用于数据科学和 MLOps
 - **Apache Airflow**：任务调度平台，通过 Kubernetes Executor 将任务作为 Pod 运行
 - **Tekton**：云原生 CI/CD 框架，也可用于数据转换流水线
 - **Spark on Kubernetes**：大规模分布式数据处理

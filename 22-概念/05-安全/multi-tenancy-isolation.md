@@ -53,7 +53,7 @@ Multiple tenants share one cluster, isolated by:
 | **RBAC** | Access control (Role + RoleBinding per namespace) |
 | **ResourceQuota** | CPU, memory, storage, PVC count limits |
 | **LimitRange** | Default/limits for containers without explicit settings |
-| **[[NetworkPolicy|NetworkPolicy]]** | Network traffic between namespaces |
+| **[[networkpolicy\|NetworkPolicy]]** | Network traffic between namespaces |
 | **Pod Security Standards** | Container security enforcement level |
 
 ## Hard Isolation

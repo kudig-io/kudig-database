@@ -44,7 +44,7 @@ prerequisites:
 
 
 
-# [[StatefulSet|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+# [[statefulset|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ### 症状识别
 
@@ -57,7 +57,7 @@ prerequisites:
 | S1 | StatefulSet Pod 未按序号启动（如 -1 存在但 -0 不存在） | `kubectl get [[Pods|pods]] -l app=<name>` | 0.95 | 手动删除 → 检查操作记录 |
 | S2 | Pod 序号中断（如 -0, -2 存在但 -1 不存在） | `kubectl get pods -l app=<name>` | 0.95 | 无 |
 | S3 | PVC 一直 Pending | `kubectl get pvc -n <ns>` | 0.95 | 通用 PVC 问题 → SKILL-STORE-001 |
-| S4 | Headless [[Service|Service]] 无 Endpoints | `kubectl get endpoints <svc>` | 0.85 | Service 配置错误 |
+| S4 | Headless [[service\|Service]] 无 Endpoints | `kubectl get endpoints <svc>` | 0.85 | Service 配置错误 |
 | S5 | 滚动更新卡在特定序号 | `kubectl rollout status sts/<name>` | 0.90 | 应用启动慢 → SKILL-POD-001 |
 | S6 | Pod 删除后新 Pod 无法创建 | `kubectl get events` | 0.85 | 节点资源不足 → SKILL-POD-002 |
 | S7 | DNS 解析 `<pod>.<svc>` 失败 | `nslookup` from test Pod | 0.85 | CoreDNS 问题 → SKILL-NET-001 |

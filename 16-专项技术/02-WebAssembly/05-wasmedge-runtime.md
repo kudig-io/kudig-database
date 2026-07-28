@@ -56,7 +56,7 @@ authors:
 
 
 
-# [[WasmEdge|WasmEdge]] 运行时
+# [[wasmedge|WasmEdge]] 运行时
 # WasmEdge Runtime
 
 <!-- chunk: 目录 / Table of Contents -->## 目录 / Table of Contents

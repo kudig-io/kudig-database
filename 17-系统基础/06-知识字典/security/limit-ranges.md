@@ -39,7 +39,7 @@ prerequisites:
 
 ## 概述
 
-LimitRange 是 [[Kubernetes|Kubernetes]] 中的一种策略对象，用于约束在命名空间中可为每种适用对象类型（如 Pod 或 PersistentVolumeClaim）指定的资源分配（limits 和 requests）。默认情况下，容器在集群中以无限制的_compute resources_运行，LimitRange 能够防止单个对象垄断命名空间内的所有可用资源。
+LimitRange 是 [[kubernetes|Kubernetes]] 中的一种策略对象，用于约束在命名空间中可为每种适用对象类型（如 Pod 或 PersistentVolumeClaim）指定的资源分配（limits 和 requests）。默认情况下，容器在集群中以无限制的_compute resources_运行，LimitRange 能够防止单个对象垄断命名空间内的所有可用资源。
 
 ## 核心概念/原理
 

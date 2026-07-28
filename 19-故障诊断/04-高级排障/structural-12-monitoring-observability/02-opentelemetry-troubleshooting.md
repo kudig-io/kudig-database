@@ -41,6 +41,7 @@ prerequisites:
 - tls-basics
 - tracing-basics
 - observability-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

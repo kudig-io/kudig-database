@@ -1,7 +1,7 @@
 ---
 title: Argo CD企业级GitOps实践指南
 description: '# Argo CD企业级GitOps实践指南'
-summary: 'Argo CD 是 CNCF 毕业项目，是业界采用最广泛的 GitOps 持续交付工具。它通过将 Git 仓库作为应用定义的唯一事实来源（Single Source of Truth），自动对比 Git 中声明的期望状态与 [[Kubernetes|Kubernetes]] 集群中的实际状态，并驱动集群状态向期望状态收敛。'
+summary: 'Argo CD 是 CNCF 毕业项目，是业界采用最广泛的 GitOps 持续交付工具。它通过将 Git 仓库作为应用定义的唯一事实来源（Single Source of Truth），自动对比 Git 中声明的期望状态与 [[kubernetes|Kubernetes]] 集群中的实际状态，并驱动集群状态向期望状态收敛。'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -72,11 +72,11 @@ cross_refs:
 
 
 
-# [[Argo|Argo]] CD企业级GitOps实践指南
+# [[argo|Argo]] CD企业级GitOps实践指南
 
 > **作者**: GitOps架构专家 | **版本**: v2.0 | **更新时间**: 2026-04-24
 > **适用场景**: 企业级持续交付平台 | **复杂度**: ⭐⭐⭐⭐⭐
-> **适用版本**: Argo CD v3.3.x / [[Helm|Helm]] Chart v7.8.x
+> **适用版本**: Argo CD v3.3.x / [[helm|Helm]] Chart v7.8.x
 
 ---
 
@@ -96,7 +96,7 @@ cross_refs:
 
 <!-- chunk: 一、概述 -->## 一、概述
 
-Argo CD 是 CNCF 毕业项目，是业界采用最广泛的 GitOps 持续交付工具。它通过将 Git 仓库作为应用定义的唯一事实来源（Single Source of Truth），自动对比 Git 中声明的期望状态与 [[Kubernetes|Kubernetes]] 集群中的实际状态，并驱动集群状态向期望状态收敛。Argo CD 的核心设计理念是声明式、版本化和自动化——所有配置变更通过 Git 提交触发，每一次部署都可审计、可回滚。
+Argo CD 是 CNCF 毕业项目，是业界采用最广泛的 GitOps 持续交付工具。它通过将 Git 仓库作为应用定义的唯一事实来源（Single Source of Truth），自动对比 Git 中声明的期望状态与 [[kubernetes|Kubernetes]] 集群中的实际状态，并驱动集群状态向期望状态收敛。Argo CD 的核心设计理念是声明式、版本化和自动化——所有配置变更通过 Git 提交触发，每一次部署都可审计、可回滚。
 
 在企业级场景中，Argo CD 面临的核心挑战包括：大规模应用管理（单实例管理 1000+ 应用）、多集群多租户隔离、安全合规（RBAC、SSO、审计）、高可用部署（消除单点问题）以及与现有 CI/CD 工具链的集成。本文档基于大规模生产环境的应用经验，系统性地覆盖了从架构设计到运维管理的完整技术方案，帮助企业在 Kubernetes 生态中构建安全、可靠的 GitOps 交付体系。
 

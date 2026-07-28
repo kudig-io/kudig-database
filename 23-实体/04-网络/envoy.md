@@ -232,7 +232,7 @@ istioctl proxy-config routes <pod>
 - RELEASE-NOTES-1.11
 - RELEASE-NOTES-1.35
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
-- [[23-实体/networking-terms.md|[[K8s 网络术语参考|K8s 网络术语参考]]]] — Cross-reference
+- [[23-实体/networking-terms.md|[[23-实体/15-参考与索引/networking-terms|K8s 网络术语参考]]]] — Cross-reference
 - [[23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[23-实体/15-参考与索引/tooling-terms.md|K8s 工具链术语参考]] — Cross-reference

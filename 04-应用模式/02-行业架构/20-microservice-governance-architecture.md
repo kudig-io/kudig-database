@@ -53,7 +53,7 @@ prerequisites:
 
 
 title: 微服务治理与Service Mesh架构设计
-description: '# 微服务治理与 [[Service|Service]]Service Mesh）|Service Mesh]] [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 微服务治理与 [[service|Service]]Service Mesh）|Service Mesh]] [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s

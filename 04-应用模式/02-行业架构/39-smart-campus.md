@@ -45,7 +45,7 @@ tags:
 - architecture
 - industry
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-05-18
 difficulty: intermediate
 reading_level: intermediate
@@ -56,7 +56,7 @@ audience:
 - 智慧城市开发者
 estimated_read_time: 5min
 intent_queries:
-- smart campus [[Kubernetes|kubernetes]] architecture
+- smart campus [[kubernetes|kubernetes]] architecture
 - 智慧园区K8s部署方案
 - 智慧楼宇IoT平台
 - 智慧园区数字孪生

@@ -47,7 +47,7 @@ difficulty: intermediate
 intent_queries:
   - ACK cluster lifecycle management full流程
   - aliyun cs cluster creation deletion upgrade
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
   - ACK cluster certificate renewal
   - Cluster upgrade replacement strategy
 trigger_keywords:
@@ -122,7 +122,7 @@ related_topics:
 |------|---------|------|
 | VPC CIDR | 172.16.0.0/12 | 底层网络基础，需包含所有 vSwitch |
 | Pod CIDR | 10.0.0.0/16 (Flannel) | Flannel 模式专用，决定 Pod IP 范围 |
-| [[Service|Service]] CIDR | 192.168.0.0/16 | ClusterIP 范围，创建后不可修改 |
+| [[service\|Service]] CIDR | 192.168.0.0/16 | ClusterIP 范围，创建后不可修改 |
 | vSwitch CIDR | 172.16.0.0/24 | 每个可用区一个，需预留足够 IP |
 
 ---

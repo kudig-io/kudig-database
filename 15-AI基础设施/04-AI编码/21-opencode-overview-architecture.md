@@ -131,7 +131,7 @@ OpenCode 采用 **Client/Server 分离架构**，这是其区别于其他 Agent 
 | **TUI Client** | Go + Bubble Tea | 终端用户界面，通过 HTTP/SSE 与 Server 通信 |
 | **AI SDK** | Vercel AI SDK | LLM Provider 抽象层，统一 OpenAI/Anthropic/Gemini 等调用接口 |
 | **Tool Runtime** | Bun 原生 | 执行 bash、file I/O、MCP 调用、LSP 查询等 |
-| **[[06-存储/README.md|[[Kubernetes 存储配置最佳实践|storage]]]]** | SQLite | 持久化会话、消息、文件变更历史 |
+| **[[06-存储/README.md|[[20-最佳实践/01-best-practices/infrastructure/storage|storage]]]]** | SQLite | 持久化会话、消息、文件变更历史 |
 | **SDK Generation** | Stainless | 从 OpenAPI Spec 自动生成类型安全的客户端 SDK |
 
 ### 2.2 Agent Loop 原理

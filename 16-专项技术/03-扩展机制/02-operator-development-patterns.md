@@ -97,7 +97,7 @@ cross_refs:
 | **Operator SDK** | Go/Multi | 中 | ⭐⭐⭐⭐⭐ | 全功能开发 |
 | **KUDO** | YAML | 低 | ⭐⭐⭐ | 声明式Operator |
 | **Metacontroller** | 多语言 | 低 | ⭐⭐⭐ | 简单场景 |
-| **[[Crossplane|Crossplane]]** | Go | 高 | ⭐⭐⭐⭐ | 基础设施即代码 |
+| **[[crossplane\|Crossplane]]** | Go | 高 | ⭐⭐⭐⭐ | 基础设施即代码 |
 
 <!-- chunk: Kubebuilder开发实践 -->
 ## Kubebuilder开发实践

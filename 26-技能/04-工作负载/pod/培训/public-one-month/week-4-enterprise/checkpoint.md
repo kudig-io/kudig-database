@@ -61,7 +61,7 @@ title: Week 4 Checkpoint: 终极自测
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[Kubernetes|kubernetes]] 综合自测
+  - [[kubernetes|kubernetes]] 综合自测
   - K8s 终极检验
   - 毕业自测题
   - 企业级运维能力评估
@@ -74,7 +74,7 @@ trigger_keywords:
   - 综合评估
   - SLO
   - GitOps
-  - [[ArgoCD|ArgoCD]]
+  - [[argocd|ArgoCD]]
 reading_level: advanced
 audience:
   - sre-engineer

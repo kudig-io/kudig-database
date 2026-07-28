@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-PodSecurityPolicy（Pod 安全策略，简称 PSP）是一种已移除的 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 安全控制机制。它在 Kubernetes v1.21 中被弃用，并在 **v1.25 中彻底移除**。官方文档不再推荐使用该功能，而是提供了内置和第三方的替代方案来实现相同的 Pod 安全限制。
+PodSecurityPolicy（Pod 安全策略，简称 PSP）是一种已移除的 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 安全控制机制。它在 Kubernetes v1.21 中被弃用，并在 **v1.25 中彻底移除**。官方文档不再推荐使用该功能，而是提供了内置和第三方的替代方案来实现相同的 Pod 安全限制。
 
 ## 核心概念/原理
 
@@ -54,7 +54,7 @@ PodSecurityPolicy 原本是一种集群级资源，用于在 Pod 创建时强制
 PodSecurityPolicy 移除后，可通过以下方式实现类似的 Pod 安全限制：
 
 - **Pod Securityod Security Admission]]（推荐）**：Kubernetes 内置的准入控制器，自 v1.25 起稳定。通过命名空间标签强制执行 Pod 安全标准（Pod Security Standards）的三个级别：`privileged`、`baseline`、`restricted`。
-- **第三方准入插件**：如 [[Kyverno|Kyverno]]、OPA Gatekeeper、Kubewarden 等，可提供更细粒度、更灵活的策略定义和执行能力。
+- **第三方准入插件**：如 [[kyverno|Kyverno]]、OPA Gatekeeper、Kubewarden 等，可提供更细粒度、更灵活的策略定义和执行能力。
 
 ### 迁移支持
 

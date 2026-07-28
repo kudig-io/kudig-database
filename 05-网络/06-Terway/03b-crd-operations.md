@@ -235,7 +235,7 @@ spec:
     ipv4: "172.16.1.100"
 ```
 
-#### [[StatefulSet|StatefulSet]] 固定 IP 完整示例
+#### [[statefulset|StatefulSet]] 固定 IP 完整示例
 
 ```yaml
 apiVersion: apps/v1

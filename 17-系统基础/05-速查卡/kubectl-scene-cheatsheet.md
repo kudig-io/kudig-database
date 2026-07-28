@@ -222,7 +222,7 @@ kubectl run test --image=curlimages/curl --restart=Never -it -- sh  # 调试网�
 
 ## 3. 网络问题场景
 
-### [[Service|Service]] 无 Endpoints / 503
+### [[service|Service]] 无 Endpoints / 503
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
@@ -266,7 +266,7 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy --tail=20  # 查看日志
 # 原因 3: NetworkPolicy 阻塞
 kubectl get networkpolicy -n <namespace>           # 检查是否有拒绝策略
 ```
-### [[Ingress|Ingress]] 404/502/503
+### [[ingress|Ingress]] 404/502/503
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用

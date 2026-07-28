@@ -709,7 +709,7 @@ multipath -ll
 ```
 ---
 
-<!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
+<!-- chunk: 与 [[kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
 ## K8s 持久化存储架构
 

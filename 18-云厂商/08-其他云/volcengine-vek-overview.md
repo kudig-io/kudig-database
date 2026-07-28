@@ -759,11 +759,11 @@ EOF
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[17-系统基础/05-速查卡/go.md|[[17-系统基础/05-速查卡/go|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - 06-monitoring-alerting-system
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
-- [[23-实体/k8s-cloud-provider-comparison.md|[[云厂商托管 Kubernetes 服务全景对比（13 家）|云厂商托管 Kubernetes 服务全景对比（13 家）]]]] — Cross-reference
+- [[23-实体/k8s-cloud-provider-comparison.md|[[23-实体/13-云厂商与发行版/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]]]] — Cross-reference
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

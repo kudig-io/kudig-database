@@ -56,7 +56,7 @@ tags:
 - [[kubelet|kubelet]]
 - flannel
 - calico
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - networkpolicy
 last_updated: 2026-05
 difficulty: advanced

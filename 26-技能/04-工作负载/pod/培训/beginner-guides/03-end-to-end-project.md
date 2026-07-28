@@ -61,7 +61,7 @@ authors:
 # 端到端项目实战——从代码到生产完整流水线
 
 > **项目目标**: 构建一个 **Todo 应用**，并让它跑在 K8s 生产环境中  
-> **你将学到**: 代码 → 镜像 → K8s → [[Helm|Helm]] → GitOps → 监控 → 排障 的完整闭环  
+> **你将学到**: 代码 → 镜像 → K8s → [[helm|Helm]] → GitOps → 监控 → 排障 的完整闭环  
 > **预估时间**: 4-6 小时（可分 2-3 天完成）  
 > **前置要求**: 已完成 [本地环境搭建](02-local-lab-environment.md) 和 [基础概念学习](../fundamentals/)
 
@@ -890,7 +890,7 @@ git remote add origin https://github.com/yourname/todo-app.git
 git push -u origin main
 ```
 
-### 5.2 安装 [[ArgoCD|ArgoCD]]
+### 5.2 安装 [[argocd|ArgoCD]]
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
@@ -1169,7 +1169,7 @@ kind delete cluster --name k8s-lab
 ## 下一步学习建议
 
 1. **加中间件**: 给项目加上 Kafka 消息队列、Elasticsearch 搜索
-2. **加安全**: 配置 [[NetworkPolicy|NetworkPolicy]]、RBAC、Pod Security Standards
+2. **加安全**: 配置 [[networkpolicy|NetworkPolicy]]、RBAC、Pod Security Standards
 3. **加多环境**: 用 Helm values 文件管理 dev/staging/prod 差异
 4. **加测试**: 在 CI 流水线中加入 K8s 集成测试（kuttl、helm test）
 5. **加混沌**: 用 Chaos Mesh 做故障注入演练

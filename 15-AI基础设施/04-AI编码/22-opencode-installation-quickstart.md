@@ -137,7 +137,7 @@ pnpm install -g opencode-ai
 yarn global add opencode-ai
 ```
 
-### 2.4 [[23-实体/docker.md|[[Docker & Containerd 速查卡|docker]]]]
+### 2.4 [[23-实体/docker.md|[[17-系统基础/05-速查卡/docker|docker]]]]
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用

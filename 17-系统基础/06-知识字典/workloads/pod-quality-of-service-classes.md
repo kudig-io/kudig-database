@@ -40,10 +40,10 @@ prerequisites:
 
 
 
-# Pod Quality of [[Service|Service]] Classes
+# Pod Quality of [[service|Service]] Classes
 
 ## 概述
-[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
+[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
 
 ## 核心概念/原理
 可能的 QoS 等级有三种，按驱逐优先级从高到低排列：
@@ -139,7 +139,7 @@ spec:
 | 资源配置 | request == limit（全设） | 至少设置一项 | 不设置任何资源 |
 | 驱逐优先级 | 最低（最后驱逐） | 中等 | 最高（最先驱逐） |
 | CPU 限流 | 严格限制在 limit | 可突发到 limit | 无限制 |
-| OOM Kill 顺序 | 最后被 Kill | 按 OOM [[Score|Score]] | 最先被 Kill |
+| OOM Kill 顺序 | 最后被 Kill | 按 OOM [[score\|Score]] | 最先被 Kill |
 | 独占 CPU | 支持（static CPU Manager） | 不支持 | 不支持 |
 | 适用场景 | 延迟敏感、关键服务 | 一般业务 | 开发测试、非关键任务 |
 

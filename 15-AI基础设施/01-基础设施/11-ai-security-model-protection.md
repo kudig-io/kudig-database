@@ -56,10 +56,10 @@ tags:
 - ml
 - training
 - inference
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - redis
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -71,7 +71,7 @@ estimated_read_time: 5min
 intent_queries:
 - AI安全与模型保护 是什么
 - 如何 AI安全与模型保护
-- [[Kubernetes|Kubernetes]] 11 ai infra 最佳实践
+- [[kubernetes|Kubernetes]] 11 ai infra 最佳实践
 trigger_keywords:
 - AI安全与模型保护
 - ai

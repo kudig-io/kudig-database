@@ -87,7 +87,7 @@ cross_refs:
 
 # 29 - 原地 Pod 资源调整 (In-Place Pod Resize)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.27 Beta, v1.32+ 更完善 | **最后更新**: 2026-04 | **文档类型**: 控制平面特性文档
+> **适用版本**: [[kubernetes|Kubernetes]] v1.27 Beta, v1.32+ 更完善 | **最后更新**: 2026-04 | **文档类型**: 控制平面特性文档
 
 ---
 

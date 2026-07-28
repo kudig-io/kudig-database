@@ -57,13 +57,13 @@ category: cloud-native-api-gateway
 tags:
 - k8s
 - api-gateway
-- [[Envoy|envoy]]
+- [[envoy|envoy]]
 - apisix
 - higress
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
+- [[helm|helm]]
 - argocd
 last_updated: 2026-05
 difficulty: advanced

@@ -1,7 +1,7 @@
 ---
 title: CloudNativePG 企业级 PostgreSQL 运维指南
 description: '# CloudNativePG 企业级 PostgreSQL 运维指南'
-summary: 'CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL [[Kubernetes|Kubernetes]] Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。'
+summary: 'CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL [[kubernetes|Kubernetes]] Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。'
 category: enterprise-database-middleware
 tags:
 - k8s
@@ -67,7 +67,7 @@ cross_refs:
 
 
 
-# [[CloudNativePG|CloudNativePG]] 企业级 PostgreSQL 运维指南
+# [[cloudnativepg|CloudNativePG]] 企业级 PostgreSQL 运维指南
 
 > **适用版本**: CloudNativePG v1.25  
 > **最后更新**: 2026-04-26  
@@ -77,7 +77,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL [[Kubernetes|Kubernetes]] Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。与 Zalando Postgres Operator 和 Crunchy PGO 并列为 K8s 上 PostgreSQL 运维的三大主流方案。
+CloudNativePG（CNPG）是一个由 EDB 主导开发、已进入 CNCF Sandbox 的 PostgreSQL [[kubernetes|Kubernetes]] Operator。它以声明式 CRD 方式管理 PostgreSQL 集群的完整生命周期，包括集群创建、主从复制、自动故障转移、备份恢复、连接池管理、版本升级和监控集成。与 Zalando Postgres Operator 和 Crunchy PGO 并列为 K8s 上 PostgreSQL 运维的三大主流方案。
 
 CloudNativePG 的核心设计理念是"原生 K8s 集成、零外部依赖"。它不依赖 PgPool 或 Patroni 等外部组件，而是通过 Pod 内的 instance manager 进程实现复制管理、故障检测和 WAL 归档。这使得 CNPG 的架构简洁、运维门槛低，适合从中小规模到企业级的各种场景。
 
@@ -89,7 +89,7 @@ CloudNativePG 的架构设计充分考虑了 Kubernetes 的特性，将 PostgreS
 
 **Instance Manager** 是 CNPG 的核心组件，它作为一个 sidecar 容器运行在每个 PostgreSQL Pod 中。Instance Manager 负责管理 PostgreSQL 实例的生命周期：启动和停止 PostgreSQL、执行主从复制配置、管理 WAL 归档、收集监控指标、以及执行故障检测和自动恢复。Instance Manager 通过 PostgreSQL 的 streaming replication 协议管理主从关系，通过查询 `pg_stat_replication` 监控复制状态。
 
-**故障检测和自动故障转移**机制是 CNPG 高可用能力的核心。CNPG 使用 K8s 的 Pod readiness probe 来检测 PostgreSQL 实例的健康状态。当 Primary Pod 的 readiness probe 连续失败（默认 30 秒）时，CNPG 会触发故障转移流程：选择 LSN（Log Sequence Number）最大的 Replica 作为新的 Primary，执行 `pg_ctl promote` 提升它，然后更新 [[Service|Service]] 的 endpoints 将流量指向新的 Primary。整个故障转移过程通常在 30-60 秒内完成。
+**故障检测和自动故障转移**机制是 CNPG 高可用能力的核心。CNPG 使用 K8s 的 Pod readiness probe 来检测 PostgreSQL 实例的健康状态。当 Primary Pod 的 readiness probe 连续失败（默认 30 秒）时，CNPG 会触发故障转移流程：选择 LSN（Log Sequence Number）最大的 Replica 作为新的 Primary，执行 `pg_ctl promote` 提升它，然后更新 [[service|Service]] 的 endpoints 将流量指向新的 Primary。整个故障转移过程通常在 30-60 秒内完成。
 
 **WAL 归档和备份**是 CNPG 数据安全的重要保障。CNPG 使用 Barman Cloud 作为备份引擎，支持 S3、GCS 和 Azure Blob 作为备份存储。WAL 归档是连续的（每产生一个 WAL 文件就上传），确保可以恢复到任意时间点（PITR）。基础备份（Base Backup）可以通过 `ScheduledBackup` CRD 定时执行，也可以通过 `Backup` CRD 按需执行。备份数据使用 gzip 或 zstd 压缩，支持并行上传以加速大型数据库的备份。
 

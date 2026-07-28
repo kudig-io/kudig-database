@@ -51,7 +51,7 @@ prerequisites:
 
 
 
-# Spring Boot on [[Kubernetes|Kubernetes]] 生产实践指南
+# Spring Boot on [[kubernetes|Kubernetes]] 生产实践指南
 
 > **适用版本**: JDK 17+ / Spring Boot 3.x / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
@@ -219,7 +219,7 @@ mvn compile jib:build -Djib.to.auth.username=$REGISTRY_USER -Djib.to.auth.passwo
 # 本地构建调试
 mvn compile jib:dockerBuild
 ```
-#### [[Buildpacks|Buildpacks]]（Spring Boot 官方推荐）
+#### [[buildpacks|Buildpacks]]（Spring Boot 官方推荐）
 
 ```bash
 # Spring Boot 3.x 内置 Buildpacks 支持
@@ -867,7 +867,7 @@ minimum-idle 建议 = maximum-pool-size × 25% ~ 50%
 
 ## 四、最佳实践
 
-### 4.1 分布式追踪集成（Micrometer Tracing + [[OpenTelemetry|OpenTelemetry]]）
+### 4.1 分布式追踪集成（Micrometer Tracing + [[opentelemetry|OpenTelemetry]]）
 
 ```xml
 <dependencyManagement>

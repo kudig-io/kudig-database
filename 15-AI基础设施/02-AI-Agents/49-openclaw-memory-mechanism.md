@@ -54,7 +54,7 @@ tags:
 - multi-agent
 - [[etcd|etcd]]
 - [[kubelet|kubelet]]
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

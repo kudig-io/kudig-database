@@ -47,7 +47,7 @@ prerequisites:
 
 
 
-# Day 22: [[Service|Service]] 基础实操
+# Day 22: [[service|Service]] 基础实操
 
 > **日期**: Week 4 Day 1 | **主题**: Service 类型与配置实践 | **版本**: K8s 1.28-1.33
 
@@ -307,7 +307,7 @@ spec:
 
 ---
 
-## 6. [[Ingress|Ingress]] 与 Service
+## 6. [[ingress|Ingress]] 与 Service
 
 ### 6.1 Ingress 配置
 

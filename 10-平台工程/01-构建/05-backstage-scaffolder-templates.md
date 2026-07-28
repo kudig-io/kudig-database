@@ -51,7 +51,7 @@ prerequisites:
 
 
 
-title: [[Backstage|Backstage]] 脚手架与模板系统
+title: [[backstage|Backstage]] 脚手架与模板系统
 description: 1. [Scaffolder 架构深度解析](#1-scaffolder-架构深度解析)
 category: platform-engineering
 tags:
@@ -59,8 +59,8 @@ tags:
 - platform-engineering
 - developer-experience
 - idp
-- [[Prometheus|prometheus]]
-- [[ArgoCD|argocd]]
+- [[prometheus|prometheus]]
+- [[argocd|argocd]]
 - docker
 - opa
 - redis

@@ -67,7 +67,7 @@ cross_refs:
 
 # 32 - MLOps端到端流水线
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[23-实体/11-AI与边缘/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[23-实体/08-交付与制品/argo.md|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [[23-实体/11-AI与边缘/kubeflow.md|Kubeflow]] Pipelines](https://www.kubeflow.org/docs/components/pipelines/) | [MLflow](https://mlflow.org/) | [[23-实体/08-交付与制品/argo.md|Argo]]go Workflows|Argo Workflows]]](https://argoproj.github.io/argo-workflows/)
 
 <!-- chunk: 一、MLOps流水线架构 -->
 ## 一、MLOps流水线架构
@@ -116,7 +116,7 @@ cross_refs:
 | **特征工程** | 特征提取、转换、存储 | Feast/TF Transform | 特征漂移、版本管理 |
 | **模型训练** | 分布式训练、超参调优 | Kubeflow/Katib | GPU利用率、训练时间 |
 | **模型评估** | 性能评估、公平性检查 | MLflow/Evidently | 评估准确性、偏差检测 |
-| **模型部署** | 打包、部署、流量切换 | [[KServe|KServe]]/Seldon | 部署成功率、延迟指标 |
+| **模型部署** | 打包、部署、流量切换 | [[kserve\|KServe]]/Seldon | 部署成功率、延迟指标 |
 | **在线服务** | 推理服务、自动扩缩容 | Istio/Knative | QPS、错误率、SLA |
 
 ---

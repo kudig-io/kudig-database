@@ -273,7 +273,7 @@ kubectl exec -n spire-system spire-server-0 -- spire-server token generate -spif
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - spiffe
-- [[23-实体/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[23-实体/cncf-security.md|[[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]
 - [[21-生态参考/03-领域索引/cert-index.md|Certificate / TLS 证书知识图谱索引]]
 - [[21-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]

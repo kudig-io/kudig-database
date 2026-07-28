@@ -51,7 +51,7 @@ Pod 网络虚拟化对数据库连接的影响：
 
 ### 状态管理
 
-数据库状态包括：数据文件、事务日志、配置文件、运行时状态。K8s 通过 [[StatefulSet]] + [[persistent-volume-claim]] 提供有状态管理能力，但仍需 Operator 处理复杂生命周期。
+数据库状态包括：数据文件、事务日志、配置文件、运行时状态。K8s 通过 [[statefulset|StatefulSet]] + [[persistent-volume-claim]] 提供有状态管理能力，但仍需 Operator 处理复杂生命周期。
 
 ## MySQL on K8s
 

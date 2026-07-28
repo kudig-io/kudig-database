@@ -291,7 +291,7 @@ data:
     }
 ```
 
-### 3.3 Terway [[DaemonSet|DaemonSet]] 启动参数 — GC 相关 Flag
+### 3.3 Terway [[daemonset|DaemonSet]] 启动参数 — GC 相关 Flag
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用

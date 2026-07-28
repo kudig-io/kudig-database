@@ -47,11 +47,11 @@ prerequisites:
 
 
 
-# 服务网格（[[Service|Service]] Mesh）
+# 服务网格（[[service|Service]] Mesh）
 
 ## 概述
 
-**服务网格（Service Mesh）** 是一种专门处理服务间通信的基础设施层，通过透明代理（Sidecar 或 eBPF）为微服务提供统一的流量管理、安全通信（mTLS）和可观测性能力。2026 年的服务网格技术已形成 **Sidecar 模式（[[Istio|Istio]]、[[Linkerd|Linkerd]]）** 与 **Sidecar-less 模式（[[Cilium|Cilium]] Service Mesh、Istio Ambient Mesh）** 并存的格局。
+**服务网格（Service Mesh）** 是一种专门处理服务间通信的基础设施层，通过透明代理（Sidecar 或 eBPF）为微服务提供统一的流量管理、安全通信（mTLS）和可观测性能力。2026 年的服务网格技术已形成 **Sidecar 模式（[[istio|Istio]]、[[linkerd|Linkerd]]）** 与 **Sidecar-less 模式（[[cilium|Cilium]] Service Mesh、Istio Ambient Mesh）** 并存的格局。
 
 ## 核心概念/原理
 
@@ -64,7 +64,7 @@ prerequisites:
 
 ### 2. Sidecar 模式
 
-每个应用 Pod 中注入一个轻量级代理容器（如 [[envoy|[[Envoy]]]]），拦截所有入站和出站流量：
+每个应用 Pod 中注入一个轻量级代理容器（如 [[envoy|[[envoy|Envoy]]]]），拦截所有入站和出站流量：
 - **Istio**：基于 Envoy，功能最全面，企业采用最广
 - **Linkerd**：自研 Rust 代理，极致轻量，资源开销最低
 

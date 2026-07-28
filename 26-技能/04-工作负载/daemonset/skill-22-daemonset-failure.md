@@ -43,7 +43,7 @@ prerequisites:
 
 
 
-# [[DaemonSet|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+# [[daemonset|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ### 症状识别
 

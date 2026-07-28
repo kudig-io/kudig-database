@@ -1,7 +1,7 @@
 ---
 title: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 description: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
-summary: '监控告警体系是 [[Kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[Prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，'
+summary: '监控告警体系是 [[kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，'
 category: observability
 tags:
 - k8s
@@ -73,7 +73,7 @@ agent_execution_mode: L2-semi-auto
 
 
 
-<!-- condition: kubectl get [[Pods|pods]] -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示监控组件异常 -->
+<!-- condition: kubectl get [[pods|pods]] -n monitoring -o jsonpath='{range .items[?(@.status.phase!="Running")]} {.metadata.name}{"\n"}{end}' 显示监控组件异常 -->
 
 # 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 
@@ -81,7 +81,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-监控告警体系是 [[Kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[Prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，业务问题无法及时发现和响应。这是**元问题**（monitoring the monitoring）场景，其严重性往往被低估。
+监控告警体系是 [[kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，业务问题无法及时发现和响应。这是**元问题**（monitoring the monitoring）场景，其严重性往往被低估。
 
 ### 典型触发场景
 

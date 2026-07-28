@@ -59,7 +59,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
+title: [[kubernetes|Kubernetes]] WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
 description: '# Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)'
 category: papers
 tags:
@@ -68,8 +68,8 @@ tags:
 - research
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[cilium|cilium]]
 - helm
 - containerd
 - docker

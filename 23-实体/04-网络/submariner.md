@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-Submariner 实现 Kubernetes 多集群之间的 Pod 和 [[Service|Service]] 网络直连，由 Red Hat 推动开发，2021 年加入 CNCF 沙箱。它在集群之间建立加密隧道（IPsec/WireGuard），允许跨集群的 Pod 直接通信和 Service 发现，解决了多集群环境下的网络连通性问题。Submariner 的核心组件包括 Gateway Engine（管理网关节点和隧道）、Route Agent（配置节点路由）和 Lighthouse（跨集群 DNS 解析）。Globalnet 组件处理跨集群 CIDR 重叠的场景——通过分配全局 IP 映射解决地址冲突。Submariner 是 OpenShift ACM 多集群解决方案的网络基础组件。
+Submariner 实现 Kubernetes 多集群之间的 Pod 和 [[service|Service]] 网络直连，由 Red Hat 推动开发，2021 年加入 CNCF 沙箱。它在集群之间建立加密隧道（IPsec/WireGuard），允许跨集群的 Pod 直接通信和 Service 发现，解决了多集群环境下的网络连通性问题。Submariner 的核心组件包括 Gateway Engine（管理网关节点和隧道）、Route Agent（配置节点路由）和 Lighthouse（跨集群 DNS 解析）。Globalnet 组件处理跨集群 CIDR 重叠的场景——通过分配全局 IP 映射解决地址冲突。Submariner 是 OpenShift ACM 多集群解决方案的网络基础组件。
 
 ## 核心能力
 

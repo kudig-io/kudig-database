@@ -38,7 +38,7 @@ prerequisites:
 
 
 
-# 在 [[Kubernetes|Kubernetes]] 中运行 Windows 容器指南
+# 在 [[kubernetes|Kubernetes]] 中运行 Windows 容器指南
 
 ## 概述
 

@@ -71,7 +71,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.33 实战案例集
+# [[kubernetes|Kubernetes]] v1.33 实战案例集
 
 > **适用版本**: Kubernetes v1.33  
 > **最后更新**: 2026-04-24  
@@ -440,7 +440,7 @@ kubectl logs -n kube-system -l k8s-app=kube-proxy | grep -i nftables
 | 增量更新 | 慢（全量刷新） | 快（增量更新） |
 | IPv6 支持 | 需要 ip6tables | 原生支持 |
 | 调试难度 | 较复杂 | 相对简单 |
-| 性能（10K [[Service|Service]]） | 慢 | 快 30-50% |
+| 性能（10K [[service\|Service]]） | 慢 | 快 30-50% |
 
 ---
 

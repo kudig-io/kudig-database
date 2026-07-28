@@ -520,5 +520,5 @@ kubectl exec -n kube-system -it etcd-master-0 -- etcdctl endpoint status --write
 - [[16-专项技术/01-边缘计算/05-openyurt-architecture|OpenYurt 架构]]
 - [[16-专项技术/01-边缘计算/14-edge-production-runbook|边缘生产运维手册]]
 - [[16-专项技术/01-边缘计算/15-virtual-kubelet-serverless-node|Virtual Kubelet]]
-- [[01-集群基础/节点管理|节点管理]]
-- [[13-生产运维/升级策略|升级策略]]
+- [[22-概念/08-可靠性与运维/node-lifecycle-management|节点管理]]
+- [[01-集群基础/06-升级路径/index|升级策略]]

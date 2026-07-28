@@ -72,10 +72,10 @@ tags:
 - sbom
 - slsa
 - apiserver
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
-- [[ArgoCD|argocd]]
+- [[helm|helm]]
+- [[argocd|argocd]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -87,7 +87,7 @@ estimated_read_time: 5min
 intent_queries:
 - Policy Controller 镜像验证 (Policy Controller Image Verification) 是什么
 - 如何 Policy Controller 镜像验证 (Policy Controller Image Verification)
-- [[Kubernetes|Kubernetes]] 39 supply chain security 最佳实践
+- [[kubernetes|Kubernetes]] 39 supply chain security 最佳实践
 trigger_keywords:
 - Policy
 - Controller

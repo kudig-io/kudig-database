@@ -47,7 +47,7 @@ prerequisites:
 
 ## 功能对比
 
-| 功能 | MySQL Operator | PostgreSQL ([[CloudNativePG|CloudNativePG]]) | Redis Operator |
+| 功能 | MySQL Operator | PostgreSQL ([[cloudnativepg\|CloudNativePG]]) | Redis Operator |
 |------|---------------|---------------------------|----------------|
 | **高可用** | Group Replication | Streaming Replication | Sentinel / Cluster |
 | **故障转移** | 自动 | 自动 | 自动 |

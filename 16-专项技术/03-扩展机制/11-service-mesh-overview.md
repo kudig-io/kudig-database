@@ -74,9 +74,9 @@ cross_refs:
 <!-- chunk: 服务网格对比 -->
 ## 服务网格对比
 
-| 特性 | Istio | Linkerd | [[Cilium|Cilium]] SM | Consul Connect |
+| 特性 | Istio | Linkerd | [[cilium\|Cilium]] SM | Consul Connect |
 |-----|-------|---------|-----------|---------------|
-| **架构** | [[Envoy|Envoy]] Sidecar | Rust Sidecar | eBPF无Sidecar | Envoy Sidecar |
+| **架构** | [[envoy\|Envoy]] Sidecar | Rust Sidecar | eBPF无Sidecar | Envoy Sidecar |
 | **资源开销** | 高 | 低 | 很低 | 中 |
 | **学习曲线** | 陡峭 | 平缓 | 中等 | 中等 |
 | **功能丰富度** | 最全面 | 核心功能 | 核心功能 | 全面 |

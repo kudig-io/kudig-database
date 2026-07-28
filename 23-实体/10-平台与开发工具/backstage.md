@@ -216,7 +216,7 @@ kubectl rollout restart deployment/backstage -n backstage
 ## 参考链接
 
 - [[23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[22-概念/08-可靠性与运维/microservice-resilience-patterns.md|microservice-resilience-patterns]]
 - [[22-概念/09-平台与发布/ci-cd-pipeline-patterns.md|ci-cd-pipeline-patterns]]
 

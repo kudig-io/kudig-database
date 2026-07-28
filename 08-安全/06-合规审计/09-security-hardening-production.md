@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 安全加固
 description: '# Kubernetes 安全加固'
-summary: 'kubectl get pods -A -o json | jq -r '.items[] | select(.spec.containers[].securityContext.privileged==true) | .metadata.namespace + "/" + .metadata.name''
+summary: "kubectl get pods -A -o json | jq -r '.items[] | select(.spec.containers[].securityContext.privileged==true) | .metadata.namespace + \"/\" + .metadata.name'"
 category: security
 tags:
 - k8s
@@ -65,7 +65,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 安全加固
+# [[kubernetes|Kubernetes]] 安全加固
 
 > Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
@@ -75,7 +75,7 @@ cross_refs:
 | 层级 | 加固内容 | 优先级 |
 |------|----------|--------|
 | 集群 | API Server、[[etcd|etcd]]、[[kubelet|kubelet]] | 高 |
-| 网络 | [[NetworkPolicy|NetworkPolicy]]、mTLS、出口控制 | 高 |
+| 网络 | [[networkpolicy\|NetworkPolicy]]、mTLS、出口控制 | 高 |
 | 工作负载 | Pod 安全、镜像安全 | 高 |
 | 数据 | Secret 加密、RBAC | 高 |
 | 运行时 | 沙箱、安全上下文 | 中 |

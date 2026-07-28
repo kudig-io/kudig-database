@@ -269,7 +269,7 @@ kind load docker-image my-app:v1 --name k8s-lab
 # 进入节点容器排查
 docker exec -it k8s-lab-control-plane bash
 ```
-### kind 的 [[Ingress|Ingress]]（本地访问服务）
+### kind 的 [[ingress|Ingress]]（本地访问服务）
 
 kind 集群默认无法从宿主机直接访问 NodePort。需要额外配置：
 

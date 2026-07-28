@@ -39,6 +39,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - tls-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

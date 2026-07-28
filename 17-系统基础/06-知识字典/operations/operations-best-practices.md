@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-# 01 - [[Kubernetes|Kubernetes]] 生产环境运维最佳实践字典
+# 01 - [[kubernetes|Kubernetes]] 生产环境运维最佳实践字典
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -72,7 +72,7 @@ prerequisites:
 - **资深专家**: 深入架构设计、问题预防和大规模集群管理
 
 **前置知识要求**:
-- 基础: 了解 Kubernetes 核心概念（Pod、Deployment、[[Service|Service]]）
+- 基础: 了解 Kubernetes 核心概念（Pod、Deployment、[[service|Service]]）
 - 进阶: 熟悉 YAML 配置语法和 kubectl 基本操作
 - 专家: 了解分布式系统原理和 Linux 系统管理
 

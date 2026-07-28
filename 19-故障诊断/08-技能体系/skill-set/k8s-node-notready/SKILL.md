@@ -59,7 +59,7 @@ k8s_versions:
 
 # K8s Node NotReady 诊断与修复
 
-Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态，控制平面将在 `pod-eviction-timeout`（默认 5 分钟）后驱逐该节点上所有非 [[DaemonSet|DaemonSet]] Pod。控制平面节点 NotReady 可能直接威胁集群可用性。
+Node NotReady 是 [[kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态，控制平面将在 `pod-eviction-timeout`（默认 5 分钟）后驱逐该节点上所有非 [[daemonset|DaemonSet]] Pod。控制平面节点 NotReady 可能直接威胁集群可用性。
 
 本 [[SKILL|Skill]] 覆盖 kubelet 异常、容器运行时问题、网络分区、资源压力（磁盘/内存/PID）、证书过期等全部 12 种根因的诊断和修复。
 

@@ -304,7 +304,7 @@ Pod 事件含 FailedCreatePodSandBox / cni plugin / terway
 | 子事件 | 处置 |
 |--------|------|
 | CNI 配置错误 | 1) 检查 `/etc/cni/net.d/` 配置文件 2) 验证 Terway ConfigMap 3) 确认 CNI 版本与 K8s 版本兼容 |
-| CNI 守护进程异常 | 1) 检查 Terway [[DaemonSet|DaemonSet]] 状态 2) 查看 Pod 日志 3) `ls /opt/cni/bin/terway` 确认二进制 4) 重启 Terway DaemonSet |
+| CNI 守护进程异常 | 1) 检查 Terway [[daemonset\|DaemonSet]] 状态 2) 查看 Pod 日志 3) `ls /opt/cni/bin/terway` 确认二进制 4) 重启 Terway DaemonSet |
 | 路由/iptables 失败 | 1) `ip route show` 检查路由表 2) `iptables -L -n -t nat` 检查规则 3) 确认 Terway 运行模式 4) 重启 Terway Daemon |
 
 ---

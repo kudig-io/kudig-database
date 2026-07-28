@@ -88,7 +88,7 @@ cross_refs:
 
 # cloud-controller-manager 深度解析 (CCM Deep Dive)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.28 - v1.32 | **最后更新**: 2026-01 | **文档类型**: 生产级深度解析
+> **适用版本**: [[kubernetes|Kubernetes]] v1.28 - v1.32 | **最后更新**: 2026-01 | **文档类型**: 生产级深度解析
 
 cloud-controller-manager (CCM) 是 Kubernetes 与云提供商集成的核心组件，负责管理云特定的控制逻辑，实现节点管理、负载均衡、路由配置等云平台集成功能。
 

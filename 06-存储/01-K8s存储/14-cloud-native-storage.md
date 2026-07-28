@@ -56,9 +56,9 @@ tags:
 - pvc
 - storageclass
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
+- [[helm|helm]]
 - job
 last_updated: 2026-05
 difficulty: advanced

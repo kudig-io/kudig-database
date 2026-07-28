@@ -39,7 +39,7 @@ prerequisites:
 
 
 
-# Emissary-[[Ingress|Ingress]]
+# Emissary-[[ingress|Ingress]]
 
 > **CNCF 状态**: Incubating | **类别**: Networking | **主要语言**: Python, Go
 

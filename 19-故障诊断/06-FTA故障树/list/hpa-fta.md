@@ -51,6 +51,7 @@ cross_refs:
 - type: domain
   path: ../工作负载/21-hpa-vpa-autoscaling.md
   label: '深度文档: 21-hpa-vpa-autoscaling'
+tier: supporting
 ---
 
 > **生产环境安全提示**

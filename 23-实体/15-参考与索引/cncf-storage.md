@@ -164,7 +164,7 @@ Vineyard 是内存中数据共享中间件。
 
 Harbor 是企业级容器镜像仓库。
 
-- 镜像漏洞扫描（[[Trivy|Trivy]] 集成）
+- 镜像漏洞扫描（[[trivy|Trivy]] 集成）
 - 镜像签名和内容信任
 - RBAC 权限管理
 - 跨仓库复制
@@ -178,7 +178,7 @@ Zot 是 OCI 原生的容器镜像仓库（纯 OCI，无 Docker 特定依赖）�
 
 Distribution 是 OCI 分发规范参考实现（原 Docker Registry）。
 
-### [[ORAS]] — 沙箱项目
+### [[oras|ORAS]] — 沙箱项目
 
 oras（OCI Registry As Storage）推送任意 OCI 制品到镜像仓库。
 

@@ -21,7 +21,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[19-故障诊断/06-FTA故障树/list|List]]
+- [[19-故障诊断/06-FTA故障树/fta-index|List]]
 
 ## 文档
 

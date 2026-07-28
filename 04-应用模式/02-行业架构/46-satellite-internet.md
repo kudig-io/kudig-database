@@ -54,7 +54,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - opa
 - postgresql
@@ -71,7 +71,7 @@ audience:
 - 阿里云大数据解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 低轨卫星 LEO 星座 [[Kubernetes|Kubernetes]] 部署
+- 低轨卫星 LEO 星座 [[kubernetes|Kubernetes]] 部署
 - 卫星遥感数据处理 GPU 集群架构
 - 卫星物联网 IoT 数据采集架构
 - TLE 轨道预测数据处理

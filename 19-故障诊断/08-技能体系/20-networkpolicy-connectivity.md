@@ -59,7 +59,7 @@ version: 1.0.0
 
 ---
 skill_id: "SKILL-NET-004"
-skill_name: "[[NetworkPolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting"
+skill_name: "[[networkpolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting"
 version: "1.0"
 category: "network"
 severity_range: "P0-P2"
@@ -82,7 +82,7 @@ trigger_keywords:
   - "timeout"
   - "CNI policy"
   - "calico policy"
-  - "[[Cilium|cilium]] policy"
+  - "[[cilium|cilium]] policy"
 trigger_events:
   - "NetworkPolicyViolation"
   - "CalicoPolicyViolation"

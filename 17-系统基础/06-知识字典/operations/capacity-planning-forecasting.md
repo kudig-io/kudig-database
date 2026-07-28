@@ -46,7 +46,7 @@ prerequisites:
 
 # 13 - 容量规划与资源预测
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 > **生产环境实战经验总结**: 基于万级节点集群容量管理经验，涵盖从资源预测到成本优化的全方位最佳实践
 
@@ -118,11 +118,11 @@ graph LR
 
 | 维度 | 关键指标 | 目标值 | 评估周期 | 数据来源 |
 |------|----------|--------|----------|----------|
-| **计算资源** | CPU 利用率、可调度容量 | 60-75% | 每周 | [[Prometheus|Prometheus]]、Metrics Server |
+| **计算资源** | CPU 利用率、可调度容量 | 60-75% | 每周 | [[prometheus\|Prometheus]]、Metrics Server |
 | **内存资源** | 内存利用率、OOM 频率 | 65-80% | 每周 | cAdvisor、Node Exporter |
 | **存储资源** | 磁盘使用率、IOPS、带宽 | <80% | 每天 | CSI Metrics、Node Exporter |
 | **网络资源** | 带宽使用率、PPS、连接数 | <70% | 每天 | CNI Metrics、Node Exporter |
-| **Pod 密度** | 每节点 Pod 数、调度失败率 | <80% max-[[Pods|pods]] | 每周 | Kube-Scheduler Metrics |
+| **Pod 密度** | 每节点 Pod 数、调度失败率 | <80% max-[[pods\|pods]] | 每周 | Kube-Scheduler Metrics |
 | **[[17-系统基础/06-知识字典/fundamentals/etcd.md|etcd]] 容量** | DB 大小、请求延迟、吞吐量 | <8GB, <100ms | 每天 | etcd Metrics |
 
 ### 1.3 容量规划方法论

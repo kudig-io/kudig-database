@@ -78,7 +78,7 @@ cross_refs:
 | Windows Server | 2019 LTSC | 长期支持版本 |
 | Windows Server | 2022 LTSC | 推荐版本 |
 | Docker/containerd | [[containerd|containerd]] 1.6+ | 容器运行时 |
-| [[Kubernetes|Kubernetes]] | v1.22+ | 稳定支持 |
+| [[kubernetes\|Kubernetes]] | v1.22+ | 稳定支持 |
 
 <!-- chunk: Windows容器类型 -->
 ## Windows容器类型
@@ -94,7 +94,7 @@ cross_refs:
 | 功能 | Linux | Windows | 说明 |
 |-----|-------|---------|------|
 | Pod | ✅ | ✅ | 完全支持 |
-| [[Service|Service]] | ✅ | ✅ | ClusterIP/NodePort/LB |
+| [[service\|Service]] | ✅ | ✅ | ClusterIP/NodePort/LB |
 | Deployment | ✅ | ✅ | 完全支持 |
 | StatefulSet | ✅ | ✅ | 完全支持 |
 | DaemonSet | ✅ | ✅ | 完全支持 |

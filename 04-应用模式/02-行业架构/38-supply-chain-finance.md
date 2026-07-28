@@ -50,7 +50,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -100,7 +100,7 @@ k8s_versions:
 
 # 供应链金融架构设计 — 阿里云视角
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#供应链金融` `#区块链` `#保理` `#阿里云`
 
 ---

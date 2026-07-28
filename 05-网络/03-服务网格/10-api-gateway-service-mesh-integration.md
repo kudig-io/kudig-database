@@ -76,7 +76,7 @@ cross_refs:
 # API 网关与服务网格集成深度实践
 
 > **最后更新**: 2026-04-24
-> **适用版本**: APISIX 3.x / Kong 3.x / [[Istio|Istio]] v1.29 / Gateway API v1.2
+> **适用版本**: APISIX 3.x / Kong 3.x / [[istio|Istio]] v1.29 / Gateway API v1.2
 > **难度**: 高级
 
 ---
@@ -1139,7 +1139,7 @@ spec:
 
 ## 10.1 追踪链路完整性测试
 
-确保从客户端到 API 网关、经过 Istio Sidecar、再到后端微服务的完整追踪链路不中断是端到端可观测性的关键。以下脚本通过发送测试请求并检查 [[Jaeger|Jaeger]]/Tempo 中的追踪数据，验证各层的 trace context 传播是否正确。
+确保从客户端到 API 网关、经过 Istio Sidecar、再到后端微服务的完整追踪链路不中断是端到端可观测性的关键。以下脚本通过发送测试请求并检查 [[jaeger|Jaeger]]/Tempo 中的追踪数据，验证各层的 trace context 传播是否正确。
 
 ```bash
 #!/bin/bash

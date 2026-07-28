@@ -54,7 +54,7 @@ Trivy (by Aqua Security) is a comprehensive, open-source security scanner for cl
 |-----------|-------------|--------|
 | Vulnerability | OS packages and language dependencies | CVE list with severity |
 | Misconfiguration | K8s manifests, Dockerfile, Terraform | Policy violations |
-| Secret Detection | Hardcoded credentials in code/repos | Exposed [[Secrets|secrets]] |
+| Secret Detection | Hardcoded credentials in code/repos | Exposed [[secrets\|secrets]] |
 | SBOM Generation | Software Bill of Materials | CycloneDX/SPDX format |
 
 ## 安装与配置

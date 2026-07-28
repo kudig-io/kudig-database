@@ -61,8 +61,8 @@ tags:
 - apiserver
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[cilium|cilium]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate

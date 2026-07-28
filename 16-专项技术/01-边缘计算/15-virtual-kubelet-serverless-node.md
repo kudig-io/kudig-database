@@ -510,5 +510,5 @@ kubectl get pod <pod-name> -o yaml | grep -E "hostPath|hostNetwork|privileged|da
 - [[16-专项技术/01-边缘计算/16-edge-fleet-lifecycle-management|边缘舰队管理]]
 - [[10-平台工程/02-运维/99-karpenter-node-autoscaling-guide|Karpenter 节点自动伸缩]]
 - [[10-平台工程/02-运维/99-keda-event-driven-autoscaling-guide|KEDA 事件驱动伸缩]]
-- [[01-集群基础/节点管理|节点管理]]
-- [[02-工作负载/pod-scheduling|Pod 调度]]
+- [[22-概念/08-可靠性与运维/node-lifecycle-management|节点管理]]
+- [[22-概念/07-调度与资源/scheduling-algorithm|Pod 调度]]

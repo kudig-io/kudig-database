@@ -152,7 +152,7 @@ flowchart TD
 
 ---
 
-## 3. [[Service|Service]] 无法访问
+## 3. [[service|Service]] 无法访问
 
 ```mermaid
 flowchart TD

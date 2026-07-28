@@ -1,7 +1,7 @@
 ---
 title: HPA/VPA 故障排查
 description: '# 17 - HPA/VPA 故障排查 (HPA/VPA Troubleshooting)'
-summary: 'kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.status.conditions}''
+summary: "kubectl get hpa <hpa-name> -n <namespace> -o jsonpath='{.status.conditions}'"
 category: troubleshooting
 tags:
 - hpa
@@ -720,7 +720,7 @@ EOF
 - 故障诊断 KUDIG Database — Global MOC
 - [[19-故障诊断/README.md|Domain-12 故障排查 (Troubleshooting)]]
 - index.md|Domain-12 故障排查 — 开源项目索引]]
-- [[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting.md|[[API Server 故障排查|API Server 故障排查]]]]
+- [[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting.md|[[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting|API Server 故障排查]]]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]

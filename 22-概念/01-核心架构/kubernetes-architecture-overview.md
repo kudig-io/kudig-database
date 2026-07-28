@@ -42,7 +42,7 @@ status: reviewed
 
 
 
-# [[Kubernetes|Kubernetes]] Architecture Overview
+# [[kubernetes|Kubernetes]] Architecture Overview
 
 ## Layered Architecture
 

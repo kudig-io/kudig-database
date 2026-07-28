@@ -59,7 +59,7 @@ authors:
 
 KServe 是 Kubernetes 原生的模型服务平台，提供标准化的模型推理、转换和解释能力。它通过 InferenceService CRD 抽象了模型部署的复杂性，支持多种推理运行时（vLLM、Triton、TorchServe、SKLearn、XGBoost 等），并集成了 Knative 实现 Serverless 自动伸缩（含 Scale-to-Zero）和 Istio/Kourier 实现流量管理。
 
-KServe 的核心价值在于：统一的模型部署接口、生产级自动伸缩、金丝雀发布、模型版本管理和可观测性。对于需要管理数十到数百个模型的平台团队，KServe 提供了比裸 Deployment 更高层次的抽象和运维能力。关于模型部署的基础概念，参见 [[15-AI基础设施/01-基础设施/10-model-deployment-serving]]；GPU 调度参见 [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]。
+KServe 的核心价值在于：统一的模型部署接口、生产级自动伸缩、金丝雀发布、模型版本管理和可观测性。对于需要管理数十到数百个模型的平台团队，KServe 提供了比裸 Deployment 更高层次的抽象和运维能力。关于模型部署的基础概念，参见 [[15-AI基础设施/05-K8s-AI基础设施/04-kserve-model-serving-platform|10-model-deployment-serving]]；GPU 调度参见 [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]。
 
 ## 架构与核心概念
 
@@ -464,7 +464,7 @@ kubectl get pods -n ai-serving -w
 
 ## Related
 
-- [[15-AI基础设施/01-基础设施/10-model-deployment-serving]]
+- [[15-AI基础设施/05-K8s-AI基础设施/04-kserve-model-serving-platform|10-model-deployment-serving]]
 - [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]
 - [[22-概念/07-调度与资源/dynamic-resource-allocation]]
 - [[15-AI基础设施/01-基础设施/04-gpu-monitoring-dcgm]]

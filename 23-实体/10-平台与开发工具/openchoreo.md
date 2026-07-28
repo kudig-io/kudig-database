@@ -226,7 +226,7 @@ kubectl delete component payment-service
 
 - [[23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
 - [[flux]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 - [[22-概念/01-核心架构/controller-pattern.md|controller-pattern]]
 

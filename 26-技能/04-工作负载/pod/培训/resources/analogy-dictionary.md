@@ -46,7 +46,7 @@ prerequisites:
 
 ---
 title: K8S 概念类比词典
-description: 用生活化类比解释 [[Kubernetes|Kubernetes]] 核心概念，帮助学员快速建立直觉理解
+description: 用生活化类比解释 [[kubernetes|Kubernetes]] 核心概念，帮助学员快速建立直觉理解
 category: learning
 tags:
 - k8s
@@ -88,8 +88,8 @@ tier: peripheral---
 |---------|---------|------|
 | Pod | 快递盒 | 装东西的盒子，可以单个或组合 |
 | Deployment | 人力资源部 | 负责招聘、解雇、保证人员数量 |
-| [[Service|Service]] | 前台电话 | 统一接入，自动转接 |
-| [[Ingress|Ingress]] | 酒店大堂 | 入口登记处，指引到具体服务 |
+| [[service\|Service]] | 前台电话 | 统一接入，自动转接 |
+| [[ingress\|Ingress]] | 酒店大堂 | 入口登记处，指引到具体服务 |
 | Namespace | 办公室隔间 | 隔离但共享公共设施 |
 | ConfigMap | 公告板 | 公开的配置信息 |
 | Secret | 保险柜 | 保密的配置信息 |

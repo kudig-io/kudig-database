@@ -69,7 +69,7 @@ status: reviewed
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、[[Service|Service]]、Namespace）
+- Kubernetes 核心概念（Pod、[[service|Service]]、Namespace）
 - 网络安全基础（防火墙、ACL、加密）
 - 服务网格基础（Istio、Linkerd）
 

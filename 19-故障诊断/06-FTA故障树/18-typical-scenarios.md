@@ -57,7 +57,7 @@ tags:
 - fault-tree
 - root-cause
 - troubleshooting
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - mysql
 - agent
 last_updated: 2026-05

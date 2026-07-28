@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-随着 [[Kubernetes|Kubernetes]] 和云原生技术栈的复杂度不断上升，**平台工程（[[22-概念/09-平台与发布/platform-engineering-sre.md|Platform Engineering]]）** 正在取代传统的 DevOps 模式，成为企业提升开发者效率和交付速度的核心方法论。**开发者门户（Developer Portal）** 是平台工程的关键载体，它通过自助服务（Self-[[Service|service]]）界面将底层基础设施的复杂性抽象化，让应用开发者能够专注于业务代码。2026 年的主流实现包括 **[[Backstage|Backstage]]（由 Spotify 开源，现由 CNCF 托管）** 和 **Port** 等商业方案。
+随着 [[kubernetes|Kubernetes]] 和云原生技术栈的复杂度不断上升，**平台工程（[[22-概念/09-平台与发布/platform-engineering-sre.md|Platform Engineering]]）** 正在取代传统的 DevOps 模式，成为企业提升开发者效率和交付速度的核心方法论。**开发者门户（Developer Portal）** 是平台工程的关键载体，它通过自助服务（Self-[[service|service]]）界面将底层基础设施的复杂性抽象化，让应用开发者能够专注于业务代码。2026 年的主流实现包括 **[[backstage|Backstage]]（由 Spotify 开源，现由 CNCF 托管）** 和 **Port** 等商业方案。
 
 ## 核心概念/原理
 

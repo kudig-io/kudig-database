@@ -1,7 +1,7 @@
 ---
 title: AWS EKS 企业级多云管理平台
 description: '# AWS EKS 企业级多云管理平台'
-summary: 'Amazon Elastic Kubernetes Service (EKS)] [[Service|Service]] (EKS) 是 AWS 提供的托管 Kubernetes 服务，为企业提供高度可扩展、安全可靠的容器编排平台。EKS 自动管理 Kubernetes 控制平面的可用性和可扩展性，'
+summary: 'Amazon Elastic Kubernetes Service (EKS)] [[service|Service]] (EKS) 是 AWS 提供的托管 Kubernetes 服务，为企业提供高度可扩展、安全可靠的容器编排平台。EKS 自动管理 Kubernetes 控制平面的可用性和可扩展性，'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -67,9 +67,9 @@ authors:
 
 <!-- chunk: 概述 -->## 概述
 
-Amazon Elastic Kubernetes Service (EKS)] [[Service|Service]] (EKS) 是 AWS 提供的托管 Kubernetes 服务，为企业提供高度可扩展、安全可靠的容器编排平台。EKS 自动管理 Kubernetes 控制平面的可用性和可扩展性，消除了企业自行维护 [[etcd|etcd]] 集群和 API Server 的复杂度，使团队能够专注于应用交付和业务创新。
+Amazon Elastic Kubernetes Service (EKS)] [[service|Service]] (EKS) 是 AWS 提供的托管 Kubernetes 服务，为企业提供高度可扩展、安全可靠的容器编排平台。EKS 自动管理 Kubernetes 控制平面的可用性和可扩展性，消除了企业自行维护 [[etcd|etcd]] 集群和 API Server 的复杂度，使团队能够专注于应用交付和业务创新。
 
-在多云架构场景下，EKS 通常作为核心工作负载承载平台，与 Azure AKS、Google GKE 等云平台形成多云协同架构。企业通过统一的管理平面（如 [[Karmada|Karmada]]、Rancher）实现跨云资源调度、服务发现和故障转移，构建真正意义上的多云混合云平台。本文档从生产环境运维专家角度，深入探讨 EKS 的企业级部署架构、多云管理策略和运维最佳实践，涵盖集群规划、网络设计、安全加固、可观测性建设等关键技术领域。
+在多云架构场景下，EKS 通常作为核心工作负载承载平台，与 Azure AKS、Google GKE 等云平台形成多云协同架构。企业通过统一的管理平面（如 [[karmada|Karmada]]、Rancher）实现跨云资源调度、服务发现和故障转移，构建真正意义上的多云混合云平台。本文档从生产环境运维专家角度，深入探讨 EKS 的企业级部署架构、多云管理策略和运维最佳实践，涵盖集群规划、网络设计、安全加固、可观测性建设等关键技术领域。
 
 ## EKS 核心特性
 

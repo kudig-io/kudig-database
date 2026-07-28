@@ -54,13 +54,13 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Flux|flux]]
+- [[flux|flux]]
 - redis
 - mysql
 - postgresql
 - kafka
 - hpa
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert

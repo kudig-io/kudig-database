@@ -1098,7 +1098,7 @@ sudo systemctl daemon-reload
 - `mysql` / `mariadb` - MySQL/MariaDB 数据库
 - `postgresql` - PostgreSQL 数据库
 - `docker` - Docker 守护进程
-- `[[kubelet|kubelet]]` - [[Kubernetes|Kubernetes]] 节点代理
+- `[[kubelet|kubelet]]` - [[kubernetes|Kubernetes]] 节点代理
 
 ### SysVinit (service)
 

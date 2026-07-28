@@ -379,7 +379,7 @@ Service 异常
 - [ ] **Week 2: 安全监控**
   - [ ] 能配置 RBAC 权限
   - [ ] 能配置审计日志
-  - [ ] 能部署 [[Prometheus|Prometheus]] + Grafana
+  - [ ] 能部署 [[prometheus|Prometheus]] + Grafana
   - [ ] 能识别常见安全风险
 
 - [ ] **Week 3: 节点与工作负载**

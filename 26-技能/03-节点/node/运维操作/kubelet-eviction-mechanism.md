@@ -226,7 +226,7 @@ kubectl describe pod <pod> | grep -A 5 "Last State"
 
 ## 相关技能
 
-- [[26-技能/03-节点/node/运维操作/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[26-技能/03-节点/node/运维操作/node-drain-and-maintenance.md|[[26-技能/03-节点/node/运维操作/node-drain-and-maintenance|节点驱逐与维护]]]]
 - [[22-概念/07-调度与资源/resource-management.md|资源管理]]
 - [[pod-lifecycle|Pod 生命周期]]
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]

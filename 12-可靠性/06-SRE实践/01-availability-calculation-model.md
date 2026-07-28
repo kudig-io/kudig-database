@@ -189,7 +189,7 @@ A_system = Σ(k=0 to M) C(N+M, k) × A^(N+M-k) × (1-A)^k
 | 3+1 | 99.9994% | 99.999994% |
 | 4+1 | 99.9990% | 99.999990% |
 
-## [[Kubernetes|Kubernetes]] 组件依赖图的可用性分解示例
+## [[kubernetes|Kubernetes]] 组件依赖图的可用性分解示例
 
 ### K8s 控制平面依赖图
 
@@ -296,7 +296,7 @@ A_e2e = 0.9999 × 0.999 × 0.9999 × 0.9999 × 0.999988
 | Controller Manager | 99.9% | 99.99% | Leader Election 主备 |
 | kubelet | 99.95% | - | 节点级守护进程 |
 | Ingress Controller | 99.9% | 99.9999% | 多副本 + LB |
-| [[CoreDNS|CoreDNS]] | 99.9% | 99.99% | 2+ 副本 |
+| [[coredns\|CoreDNS]] | 99.9% | 99.99% | 2+ 副本 |
 
 ## 从 99.9% 到 99.999% 的架构成本对比
 
@@ -660,7 +660,7 @@ RPO (Recovery Point Objective): 数据丢失时间目标
 
 ## 可用性监控与告警
 
-### [[Prometheus|Prometheus]] 可用性查询
+### [[prometheus|Prometheus]] 可用性查询
 
 ```promql
 # 基于请求的成功率 (过去 28 天)

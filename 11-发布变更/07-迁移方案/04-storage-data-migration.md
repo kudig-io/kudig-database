@@ -55,7 +55,7 @@ tags:
 - ceph
 - mysql
 - job
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - rag
 - agent
 last_updated: 2026-05
@@ -114,8 +114,8 @@ k8s_versions:
 | **GlusterFS** | ReadWriteMany | 阿里云 NAS (CSI) | rsync 数据同步 |
 | **Local PV** | ReadWriteOnce | 阿里云 ESSD 云盘 (CSI) | tar + 传输 + 解压 |
 | **hostPath** | ReadWriteOnce | 阿里云 ESSD / NAS | 手动数据复制 |
-| **[[OpenEBS|OpenEBS]] Jiva** | ReadWriteOnce | 阿里云 ESSD 云盘 | 快照 + 数据复制 |
-| **[[Longhorn|Longhorn]]** | ReadWriteOnce | 阿里云 ESSD 云盘 | Longhorn 备份 + 恢复 |
+| **[[openebs\|OpenEBS]] Jiva** | ReadWriteOnce | 阿里云 ESSD 云盘 | 快照 + 数据复制 |
+| **[[longhorn\|Longhorn]]** | ReadWriteOnce | 阿里云 ESSD 云盘 | Longhorn 备份 + 恢复 |
 
 ## 1.2 存储容量规划
 

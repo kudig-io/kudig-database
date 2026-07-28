@@ -136,7 +136,7 @@ flowchart TD
 
 | 类别 | 关键信号 |
 |------|---------|
-| **事件** | [[Service|Service]] type=LoadBalancer 的 `SyncLoadBalancerFailed` 事件、PVC `ProvisioningFailed` 事件、Node `RegisteredNode` 失败事件 |
+| **事件** | [[service\|Service]] type=LoadBalancer 的 `SyncLoadBalancerFailed` 事件、PVC `ProvisioningFailed` 事件、Node `RegisteredNode` 失败事件 |
 | **关键指标** | `cloudprovider_<provider>_api_request_duration_seconds`、`cloudprovider_<provider>_api_request_errors_total`、`kube_service_status_load_balancer_ingress`、`kube_persistentvolumeclaim_status_phase`、`kube_node_status_condition` |
 | **关键日志** | cloud-controller-manager 日志（API call errors / throttling）、CSI driver 日志（disk attach/detach）、kube-controller-manager 日志（node lifecycle）、云平台操作审计日志 |
 | **配置核对** | CCM 部署配置（--cloud-provider / cloud-config）、云凭证 Secret、Service annotations（LB 配置）、StorageClass paramete
@@ -185,7 +185,7 @@ flowchart TD
 ## 相关链接
 
 - [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 
 ## Related
 

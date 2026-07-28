@@ -34,7 +34,7 @@ tags:
 - [[kubelet|kubelet]]
 - [[containerd|containerd]]
 - pdb
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - daemonset
 - rag
 last_updated: 2026-05

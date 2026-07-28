@@ -52,7 +52,7 @@ prerequisites:
 
 
 
-# [[Helm|Helm]] 生产环境速查卡
+# [[helm|Helm]] 生产环境速查卡
 
 > **适用版本**: Helm 3.12 - 3.15 | **最后更新**: 2026-05
 
@@ -242,7 +242,7 @@ dependencies:
 | 安全审计 | `helm lint` + `kubeval` + `conftest` |
 | OCI 仓库 | Helm 3.8+ 推荐 OCI 仓库替代传统 HTTP 仓库 |
 | RBAC | 限制 Helm serviceaccount 的 namespace 权限 |
-| [[Secrets|Secrets]] | 使用 `helm-secrets` 插件加密敏感 values |
+| [[secrets\|Secrets]] | 使用 `helm-secrets` 插件加密敏感 values |
 
 ---
 
@@ -471,7 +471,7 @@ helm upgrade myapp ./chart -f values-prod.yaml --set image.tag=v2.0
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[23-实体/k8s-advanced-ecosystem.md|[[硬件知识体系、CNCF 全景生态与 eBPF 平台工程|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]]] — Cross-reference
+- [[23-实体/k8s-advanced-ecosystem.md|[[23-实体/15-参考与索引/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]]] — Cross-reference
 - gitops|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
 - [[23-实体/15-参考与索引/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference

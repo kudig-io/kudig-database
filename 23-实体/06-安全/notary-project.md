@@ -260,7 +260,7 @@ notation sign --signature-manifest myregistry.io/myapp:v1.0.0 --delete
 
 ## 参考链接
 
-- [[23-实体/vault.md|[[HashiCorp Vault|vault]]]]
+- [[23-实体/vault.md|[[23-实体/06-安全/vault|vault]]]]
 - [[kyverno]]
 - [[22-概念/05-安全/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]

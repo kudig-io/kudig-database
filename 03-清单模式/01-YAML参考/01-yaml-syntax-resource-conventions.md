@@ -51,7 +51,7 @@ prerequisites:
 
 
 
-title: 01 - YAML 语法基础与 [[Kubernetes|Kubernetes]] 资源通用规范
+title: 01 - YAML 语法基础与 [[kubernetes|Kubernetes]] 资源通用规范
 description: 1. [概述](#1-概述)
 category: yaml-manifests
 tags:
@@ -62,7 +62,7 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - istio
 - envoy
 last_updated: 2026-05

@@ -397,7 +397,7 @@ spec:
 <!-- chunk: 9. 监控与告警配置 -->
 ## 9. 监控与告警配置
 
-### 9.1 推荐的 [[Prometheus|Prometheus]] 告警规则
+### 9.1 推荐的 [[prometheus|Prometheus]] 告警规则
 
 ```yaml
 groups:

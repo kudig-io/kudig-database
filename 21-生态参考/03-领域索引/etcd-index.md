@@ -69,7 +69,7 @@ prerequisites:
 
 - etcd 故障排查 (etcd Troubleshooting)
 - [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
-- [[19-故障诊断/04-高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[19-故障诊断/04-高级排障/structural-10-etcd-maintenance|etcd 维护专项文档]]
 - [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常故障树分析 (etcd FTA)]]
 
 ### CNCF 生态

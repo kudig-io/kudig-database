@@ -828,7 +828,7 @@ spec:
   canaryTrafficPercent: 10
 ```
 
-### 2. [[Argo|Argo]] Rollouts集成
+### 2. [[argo|Argo]] Rollouts集成
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1

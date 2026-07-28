@@ -77,7 +77,7 @@ related_docs:
 
 
 
-# 101 - 包管理与应用分发工具 (Package Management & [[Distribution|Distribution]])
+# 101 - 包管理与应用分发工具 (Package Management & [[distribution|Distribution]])
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **难度**: 中级-高级
 

@@ -66,7 +66,7 @@ cross_refs:
 # HashiCorp Vault 企业级密钥管理深度实践
 
 > **Author**: Enterprise Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Enterprise-grade [[Secrets|secrets]]ts Management|secrets management]] and cryptographic operations | **Complexity**: ⭐⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade [[secrets|secrets]]ts Management|secrets management]] and cryptographic operations | **Complexity**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 

@@ -50,7 +50,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster upgrade strategy in-place replacement
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] version upgrade path compatibility
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] version upgrade path compatibility
   - kubent API deprecation check upgrade
   - Cluster upgrade verification rollback
   - ACK managed cluster upgrade process

@@ -64,7 +64,7 @@ audience:
 - HPC工程师
 estimated_read_time: 5min
 intent_queries:
-- nanomaterials [[Kubernetes|kubernetes]] architecture
+- nanomaterials [[kubernetes|kubernetes]] architecture
 - 纳米材料高通量计算K8s
 - 材料基因组平台设计
 - 分子动力学模拟HPC

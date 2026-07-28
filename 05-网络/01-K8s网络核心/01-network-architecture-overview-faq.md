@@ -76,9 +76,9 @@ cross_refs:
 # FAQ 文档
 本文档适用于：产品手册、官网页面、课程测验、现场 Q&A。
 
-<!-- chunk: 问题1：[[Kubernetes|Kubernetes]] 网络从外部到 Pod 的完整链路是什么？ -->
+<!-- chunk: 问题1：[[kubernetes|Kubernetes]] 网络从外部到 Pod 的完整链路是什么？ -->
 ## 问题1：Kubernetes 网络从外部到 Pod 的完整链路是什么？
-- **答案**：典型南北向链路为：Internet → DNS → CDN/WAF → 云负载均衡（SLB/ALB/NLB）→ Kubernetes [[Ingress|Ingress]]（Nginx Ingress / Gateway API / ALB Ingress Controller）→ Kubernetes [[Service|Service]]（ClusterIP / NodePort / LoadBalancer / Headless）→ CNI 网络（Flannel/Calico/Cilium/Terway，veth/bridge/ENI）→ Pod 网络（如 10.244.0.0/16）→ 物理网络/VPC（Node Network）。  
+- **答案**：典型南北向链路为：Internet → DNS → CDN/WAF → 云负载均衡（SLB/ALB/NLB）→ Kubernetes [[ingress|Ingress]]（Nginx Ingress / Gateway API / ALB Ingress Controller）→ Kubernetes [[service|Service]]（ClusterIP / NodePort / LoadBalancer / Headless）→ CNI 网络（Flannel/Calico/Cilium/Terway，veth/bridge/ENI）→ Pod 网络（如 10.244.0.0/16）→ 物理网络/VPC（Node Network）。  
   该分层的核心价值是：入口治理（Ingress/Gateway）与服务发现/负载均衡（Service）解耦，底层由 CNI 负责跨节点转发与策略能力。
 
 <!-- chunk: 问题2：ClusterIP 适合什么场景？为什么说它是微服务“唯一标准入口”？ -->

@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-有效的告警系统不仅仅是"出问题时通知人"，而是要在**用户受到影响之前**准确捕捉异常信号，同时避免告警疲劳。2026 年的最佳实践将 **SLO（[[Service|Service]] Level Objective）** 作为告警设计的核心锚点，通过 **Multi-window Multi-burn-rate** 策略实现高信噪比的告警体系。[[Prometheus|Prometheus]] + Alertmanager 仍是 [[Kubernetes|Kubernetes]] 环境的主流组合，但越来越多的组织开始引入 **[[Cortex|Cortex]]、[[Thanos|Thanos]]、VictoriaMetrics** 来解决大规模集群的指标存储和全局查询问题。
+有效的告警系统不仅仅是"出问题时通知人"，而是要在**用户受到影响之前**准确捕捉异常信号，同时避免告警疲劳。2026 年的最佳实践将 **SLO（[[service|Service]] Level Objective）** 作为告警设计的核心锚点，通过 **Multi-window Multi-burn-rate** 策略实现高信噪比的告警体系。[[prometheus|Prometheus]] + Alertmanager 仍是 [[kubernetes|Kubernetes]] 环境的主流组合，但越来越多的组织开始引入 **[[cortex|Cortex]]、[[thanos|Thanos]]、VictoriaMetrics** 来解决大规模集群的指标存储和全局查询问题。
 
 ## 核心概念/原理
 

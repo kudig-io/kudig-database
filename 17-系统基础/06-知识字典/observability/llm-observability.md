@@ -67,7 +67,7 @@ prerequisites:
 - **请求来源**（用户 ID、会话 ID、应用端点）
 - **延迟分解**（排队时间、Prefill 时间、Decode 时间）
 
-这些数据通常通过 **[[OpenTelemetry|OpenTelemetry]]** 的自定义 Span 和 Event 进行采集，并存储在专门的 LLM 可观测性平台中。
+这些数据通常通过 **[[opentelemetry|OpenTelemetry]]** 的自定义 Span 和 Event 进行采集，并存储在专门的 LLM 可观测性平台中。
 
 ### 3. 自动化质量评估
 

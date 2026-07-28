@@ -192,7 +192,7 @@ flowchart TD
 ## 相关链接
 
 - [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 - [[26-技能/03-节点/node/诊断排障/ts-node-components.md|节点组件排查]]
 
 ## Related

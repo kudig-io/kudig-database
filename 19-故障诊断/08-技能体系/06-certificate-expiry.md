@@ -1,7 +1,7 @@
 ---
 title: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 description: '## 1. 概述'
-summary: '证书（Certificate）是 [[Kubernetes|Kubernetes]] 安全模型的基石。'
+summary: '证书（Certificate）是 [[kubernetes|Kubernetes]] 安全模型的基石。'
 category: security
 tags:
 - k8s
@@ -73,7 +73,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-证书（Certificate）是 [[Kubernetes|Kubernetes]] 安全模型的基石。集群内几乎所有组件间通信都依赖 TLS 双向认证（mTLS）：apiserver ↔ [[kubelet|kubelet]]、apiserver ↔ [[etcd|etcd]]、apiserver ↔ controller-manager / scheduler、以及面向用户的 [[Ingress|Ingress]] TLS 终止。**证书过期是 P0 级别事件** —— 它可以在瞬间让整个集群完全不可用，且恢复过程复杂、风险极高。
+证书（Certificate）是 [[kubernetes|Kubernetes]] 安全模型的基石。集群内几乎所有组件间通信都依赖 TLS 双向认证（mTLS）：apiserver ↔ [[kubelet|kubelet]]、apiserver ↔ [[etcd|etcd]]、apiserver ↔ controller-manager / scheduler、以及面向用户的 [[ingress|Ingress]] TLS 终止。**证书过期是 P0 级别事件** —— 它可以在瞬间让整个集群完全不可用，且恢复过程复杂、风险极高。
 
 ### Kubernetes 中的证书体系
 

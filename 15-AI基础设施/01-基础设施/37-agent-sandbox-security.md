@@ -67,7 +67,7 @@ cross_refs:
 
 # AI Agent 沙箱安全架构
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.28 - v1.33 | **最后更新**: 2026-05
+> **适用版本**: [[kubernetes|Kubernetes]] v1.28 - v1.33 | **最后更新**: 2026-05
 
 ---
 

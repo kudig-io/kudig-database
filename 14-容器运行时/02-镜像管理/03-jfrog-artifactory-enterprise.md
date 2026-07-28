@@ -68,9 +68,9 @@ tags:
 - container
 - image
 - registry
-- [[Harbor|harbor]]
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[harbor|harbor]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - argocd
 - docker
 - postgresql

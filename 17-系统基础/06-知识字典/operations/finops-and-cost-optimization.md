@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-随着 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
+随着 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 集群规模和复杂度的增长，云资源浪费已成为企业 IT 支出的主要痛点。研究表明，生产集群普遍存在 **40%–60% 的超配（Overprovisioning）**，开发测试环境全天候运行进一步加剧了成本问题。**FinOps** 是将财务管理与云原生运营相结合的实践，通过成本可视化、资源右调优（Right-sizing）、自动伸缩和 spot 实例策略，帮助企业在 2026 年将 Kubernetes 成本降低 30%–40%。
 
 ## 核心概念/原理
 
@@ -70,7 +70,7 @@ prerequisites:
 
 | 工具 | 类型 | 核心能力 |
 |------|------|----------|
-| **[[OpenCost|OpenCost]]** | 开源（CNCF 沙箱） | 基础的 Kubernetes 成本计算，支持 [[Prometheus|Prometheus]] 导出 |
+| **[[opencost\|OpenCost]]** | 开源（CNCF 沙箱） | 基础的 Kubernetes 成本计算，支持 [[prometheus\|Prometheus]] 导出 |
 | **Kubecost** | 商业（基于 OpenCost） | 高级治理、告警、预算控制、多集群支持 |
 | **CloudHealth / Cloudability** | 商业 SaaS | 多云成本管理和优化建议 |
 

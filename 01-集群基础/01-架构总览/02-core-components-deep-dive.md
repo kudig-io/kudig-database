@@ -85,7 +85,7 @@ related_docs:
 
 
 
-# [[Kubernetes|Kubernetes]] 核心组件深度剖析 (Core Components Deep Dive)
+# [[kubernetes|Kubernetes]] 核心组件深度剖析 (Core Components Deep Dive)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-05 | **参考**: [kubernetes.io/docs/concepts/overview/components](https://kubernetes.io/docs/concepts/overview/components/)
 
@@ -172,7 +172,7 @@ related_docs:
 | 4 | **kube-scheduler** | apiserver可用 | 30s | `/healthz` 端点 | 新Pod无法调度 |
 | 5 | **kubelet** | apiserver可用 | 30s | `curl http://localhost:10248/healthz` | 节点NotReady |
 | 6 | **kube-proxy** | apiserver, kubelet | 30s | `/healthz` 端点 | Service网络问题 |
-| 7 | **[[CoreDNS|CoreDNS]]** | kube-proxy, CNI | 60s | DNS查询测试 | 服务发现失败 |
+| 7 | **[[coredns\|CoreDNS]]** | kube-proxy, CNI | 60s | DNS查询测试 | 服务发现失败 |
 | 8 | **CNI** | kubelet | 60s | Pod网络测试 | Pod网络不通 |
 
 ### 1.4 组件版本兼容性矩阵

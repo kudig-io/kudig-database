@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-PersistentVolume（PV）和 PersistentVolumeClaim（PVC）是 [[Kubernetes|Kubernetes]] 中用于抽象存储供给与消费的 API 资源。PV 代表集群中的一块存储，由管理员预先创建或通过 StorageClass 动态供给；PVC 是用户对存储的请求，类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。
+PersistentVolume（PV）和 PersistentVolumeClaim（PVC）是 [[kubernetes|Kubernetes]] 中用于抽象存储供给与消费的 API 资源。PV 代表集群中的一块存储，由管理员预先创建或通过 StorageClass 动态供给；PVC 是用户对存储的请求，类似于 Pod 消耗节点资源，PVC 消耗 PV 资源。
 
 ## 核心概念/原理
 

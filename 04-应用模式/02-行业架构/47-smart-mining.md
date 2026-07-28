@@ -51,10 +51,10 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - mysql
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - operator
 - nvidia
 - rag

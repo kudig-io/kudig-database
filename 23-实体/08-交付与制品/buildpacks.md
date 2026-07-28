@@ -36,7 +36,7 @@ prerequisites:
 
 
 
-# Cloud Native [[Buildpacks|Buildpacks]]
+# Cloud Native [[buildpacks|Buildpacks]]
 
 > **CNCF 状态**: Incubating | **类别**: CI/CD | **主要语言**: Go
 
@@ -244,7 +244,7 @@ pack builder create my-builder:latest -b builder.toml
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - buildpacks
-- [[23-实体/cncf-runtime.md|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
+- [[23-实体/cncf-runtime.md|[[23-实体/15-参考与索引/cncf-runtime|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

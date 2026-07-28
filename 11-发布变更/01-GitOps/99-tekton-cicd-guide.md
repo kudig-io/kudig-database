@@ -1,7 +1,7 @@
 ---
 title: Tekton 云原生 CI/CD 实践指南
 description: '# Tekton 云原生 CI/CD 实践指南'
-summary: 'Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，完全基于 [[Kubernetes|Kubernetes]] 原生资源定义。它的设计理念是将 CI/CD 流水线分解为可复用的 Task 和 Pipeline 资源，每个 Step 对应一个容器执行。'
+summary: 'Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，完全基于 [[kubernetes|Kubernetes]] 原生资源定义。它的设计理念是将 CI/CD 流水线分解为可复用的 Task 和 Pipeline 资源，每个 Step 对应一个容器执行。'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -92,11 +92,11 @@ cross_refs:
 
 <!-- chunk: 一、概述 -->## 一、概述
 
-Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，完全基于 [[Kubernetes|Kubernetes]] 原生资源定义。它的设计理念是将 CI/CD 流水线分解为可复用的 Task 和 Pipeline 资源，每个 Step 对应一个容器执行。这种设计使得 CI/CD 流水线完全声明式、可版本化、GitOps 友好。
+Tekton 是由 Continuous Delivery Foundation (CDF) 托管的云原生 CI/CD 框架，完全基于 [[kubernetes|Kubernetes]] 原生资源定义。它的设计理念是将 CI/CD 流水线分解为可复用的 Task 和 Pipeline 资源，每个 Step 对应一个容器执行。这种设计使得 CI/CD 流水线完全声明式、可版本化、GitOps 友好。
 
 Tekton 的核心优势包括：完全 Kubernetes 原生（所有资源都是 K8s CRD）；不可变执行（每个 TaskRun 创建独立的 Pod）；声明式配置（YAML 定义，GitOps 友好）；可组合可复用（Task Catalog / Tekton Hub）；供应链安全（Tekton Chains 支持 SLSA Level 3）；事件驱动（Tekton Triggers 支持 Webhook 触发）。
 
-Tekton 在企业中的典型定位是 CI 层——负责代码构建、测试、镜像推送和签名。CD 层通常由 [[Argo|Argo]] CD 或 [[Flux|Flux]] 等 GitOps 工具处理。Tekton + Argo CD 的组合已成为云原生 CI/CD 的标准模式：Tekton 负责将代码转化为可部署制品，Argo CD 负责将制品部署到集群。
+Tekton 在企业中的典型定位是 CI 层——负责代码构建、测试、镜像推送和签名。CD 层通常由 [[argo|Argo]] CD 或 [[flux|Flux]] 等 GitOps 工具处理。Tekton + Argo CD 的组合已成为云原生 CI/CD 的标准模式：Tekton 负责将代码转化为可部署制品，Argo CD 负责将制品部署到集群。
 
 本指南覆盖 Tekton 的核心概念、安装部署、Task/Pipeline 定义、Triggers 事件触发、与 Argo CD 的 GitOps 集成，以及与 Jenkins/GitHub Actions 的选型对比。
 

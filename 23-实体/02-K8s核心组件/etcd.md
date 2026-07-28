@@ -1,8 +1,8 @@
 ---
 title: etcd (entities)
 description: '- etcd 深度解析'
-summary: etcd is the backing datastore for Kubernetes. All cluster state ([[Pods|Pods]],
-  Services, [[ConfigMaps|ConfigMaps]], [[Secrets|Secrets]], etc.) is persisted to
+summary: etcd is the backing datastore for Kubernetes. All cluster state ([[pods|Pods]],
+  Services, [[configmaps|ConfigMaps]], [[secrets|Secrets]], etc.) is persisted to
   etcd. It uses Raft consensus for faul...
 category: entities
 tags:
@@ -45,7 +45,7 @@ prerequisites:
 
 ## Overview
 
-etcd is the backing datastore for Kubernetes. All cluster state ([[Pods|Pods]], Services, [[ConfigMaps|ConfigMaps]], [[Secrets|Secrets]], etc.) is persisted to etcd. It uses Raft consensus for fault-tolerant replication and MVCC (Multi-Version Concurrency Control) for watchable history.
+etcd is the backing datastore for Kubernetes. All cluster state ([[pods|Pods]], Services, [[configmaps|ConfigMaps]], [[secrets|Secrets]], etc.) is persisted to etcd. It uses Raft consensus for fault-tolerant replication and MVCC (Multi-Version Concurrency Control) for watchable history.
 
 ## Key Properties
 
@@ -258,7 +258,7 @@ groups:
 - 19-etcd-operations
 - 07-distributed-consensus-etcd
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
-- [[19-故障诊断/04-高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[19-故障诊断/04-高级排障/structural-10-etcd-maintenance|10-etcd-maintenance]]
 - [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]]
 - [[19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2

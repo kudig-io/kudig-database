@@ -427,7 +427,7 @@ docker events --filter 'event=health_status'
 | **journald** | 集成 systemd | journald | ✓ |
 | **syslog** | syslog 协议 | syslog 服务器 | ✗ |
 | **gelf** | Graylog 格式 | GELF 服务器 | ✗ |
-| **[[Fluentd|fluentd]]** | Fluentd 转发 | Fluentd | ✗ |
+| **[[fluentd\|fluentd]]** | Fluentd 转发 | Fluentd | ✗ |
 | **awslogs** | AWS CloudWatch | AWS | ✗ |
 | **splunk** | Splunk HEC | Splunk | ✗ |
 | **gcplogs** | GCP Logging | GCP | ✗ |

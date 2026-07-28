@@ -70,7 +70,7 @@ cross_refs:
 
 # 147 - 向量数据库与RAG架构
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [Milvus](https://milvus.io/docs) | [Weaviate](https://weaviate.io/developers/weaviate) | [LangChain](https://python.langchain.com/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [Milvus](https://milvus.io/docs) | [Weaviate](https://weaviate.io/developers/weaviate) | [LangChain](https://python.langchain.com/)
 
 <!-- chunk: 一、RAG系统架构全景 -->
 ## 一、RAG系统架构全景

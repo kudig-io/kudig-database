@@ -47,10 +47,10 @@ title: Day 11: 风险点识别与防范
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] security risk assessment checklist
+  - ACK [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] security risk assessment checklist
   - Pod Securityod Security Standards]] PSS configuration
   - Kubernetes security baseline hardening
-  - [[NetworkPolicy|NetworkPolicy]] zero trust security
+  - [[networkpolicy|NetworkPolicy]] zero trust security
   - SecurityContext container hardening
 trigger_keywords:
   - security risk

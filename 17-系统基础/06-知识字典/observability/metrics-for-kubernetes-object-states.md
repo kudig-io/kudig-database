@@ -41,7 +41,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 对象状态指标（kube-state-metrics）
+# [[kubernetes|Kubernetes]] 对象状态指标（kube-state-metrics）
 
 ## 概述
 
@@ -49,7 +49,7 @@ kube-state-metrics 是一个 Kubernetes 插件代理，用于从 [[17-系统基�
 
 ## 核心概念/原理
 
-- **对象状态即指标**：Kubernetes 对象在 API 中的状态（如标签、注解、启动/终止时间、当前阶段等）可以被转换为 [[Prometheus|Prometheus]] 指标。
+- **对象状态即指标**：Kubernetes 对象在 API 中的状态（如标签、注解、启动/终止时间、当前阶段等）可以被转换为 [[prometheus|Prometheus]] 指标。
 - **只读代理**：kube-state-metrics 仅读取 Kubernetes API 对象，不修改任何资源。
 - **补充控制平面指标**：与控制平面组件自身暴露的运行时指标不同，kube-state-metrics 提供的是“对象语义”层面的指标。
 

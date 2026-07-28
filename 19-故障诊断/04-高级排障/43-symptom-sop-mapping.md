@@ -329,7 +329,7 @@ cross_refs:
 
 **诊断路径**：
 
-**路径 1: [[Finalizers|Finalizers]] 阻塞删除**
+**路径 1: [[finalizers|Finalizers]] 阻塞删除**
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl edit/patch`：修改运行中的资源
@@ -614,7 +614,7 @@ cross_refs:
   2. 检查 iptables/ipvs 规则: SSH 到节点执行 iptables-save | grep <svc-name>
   3. 重启 kube-proxy: kubectl delete pod -n kube-system -l k8s-app=kube-proxy
 ```
-**路径 3: 网络策略（[[NetworkPolicy|NetworkPolicy]]）阻止**
+**路径 3: 网络策略（[[networkpolicy|NetworkPolicy]]）阻止**
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用
 检查命令: kubectl get networkpolicy -n <namespace>

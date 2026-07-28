@@ -52,7 +52,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 架构与基础概念全栈培训
+# [[kubernetes|Kubernetes]] 架构与基础概念全栈培训
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 基础架构通识
 > **核心原则**: 理解分布式系统设计哲学、掌握集群核心组件、构建云原生思维

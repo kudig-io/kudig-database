@@ -46,7 +46,7 @@ Flux is a set of Kubernetes controllers that implement GitOpsps Principles and P
 - **Status**: CNCF graduated (2022)
 - **Architecture**: Set of specialized controllers (lightweight: 200-500MB RAM)
 - **Secret Management**: Native SOPS support with age/GPG
-- **Learning Curve**: Lower than [[ArgoCD|ArgoCD]]
+- **Learning Curve**: Lower than [[argocd|ArgoCD]]
 
 ## Core Controllers
 

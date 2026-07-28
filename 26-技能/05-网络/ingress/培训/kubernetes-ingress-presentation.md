@@ -58,7 +58,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] 全栈进阶培训 (从入门到专家)
+# [[kubernetes|Kubernetes]] [[ingress|Ingress]] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 掌握七层网关基础、实现精细化流量管控、构建高性能接入体系
@@ -91,7 +91,7 @@ authors:
 
 完成本次培训后，学员能够：
 
-1. 区分 [[Service|Service]]（L4）和 Ingress（L7）的功能差异
+1. 区分 [[service|Service]]（L4）和 Ingress（L7）的功能差异
 2. 部署 Nginx Ingress Controller 并配置路由规则
 3. 实现金丝雀发布、A/B 测试等高级流量治理
 4. 配置 Cert-Manager 实现 TLS 证书自动化管理

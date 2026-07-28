@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 网络配置最佳实践
+# [[kubernetes|Kubernetes]] 网络配置最佳实践
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -86,7 +86,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、[[Service|Service]]、[[Ingress|Ingress]]）
+- Kubernetes 核心概念（Pod、[[service|Service]]、[[ingress|Ingress]]）
 - Linux 网络基础（iptables、ipvs、vxlan）
 - 网络安全基础（防火墙、ACL）
 

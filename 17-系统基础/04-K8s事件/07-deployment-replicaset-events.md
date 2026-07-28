@@ -64,7 +64,7 @@ intent_queries:
 - 07-deployment-replicaset-events生产环境部署
 
 tier: peripheral---
-title: 07 - Deployment 与 [[ReplicaSet|ReplicaSet]] 控制器事件
+title: 07 - Deployment 与 [[replicaset|ReplicaSet]] 控制器事件
 description: '<!-- chunk: 📋 文档概述' -->## 📋 文档概述'
 category: kubernetes-events
 tags:

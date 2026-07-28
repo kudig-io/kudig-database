@@ -61,10 +61,10 @@ tags:
 - yaml
 - manifest
 - template
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Istio|istio]]
-- [[Envoy|envoy]]
+- [[istio|istio]]
+- [[envoy|envoy]]
 - redis
 - postgresql
 last_updated: 2026-05
@@ -78,7 +78,7 @@ estimated_read_time: 5min
 intent_queries:
 - 高级 Pod 模式与调度策略 YAML 配置参考 是什么
 - 如何 高级 Pod 模式与调度策略 YAML 配置参考
-- [[Kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
+- [[kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
 trigger_keywords:
 - 高级
 - Pod

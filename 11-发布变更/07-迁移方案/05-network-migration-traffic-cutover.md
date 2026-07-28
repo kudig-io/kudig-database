@@ -57,11 +57,11 @@ tags:
 - migration
 - modernization
 - grafana
-- [[Cilium|cilium]]
+- [[cilium|cilium]]
 - flannel
 - calico
-- [[Helm|helm]]
-- [[Ingress|ingress]]
+- [[helm|helm]]
+- [[ingress|ingress]]
 - gateway
 last_updated: 2026-05
 difficulty: advanced

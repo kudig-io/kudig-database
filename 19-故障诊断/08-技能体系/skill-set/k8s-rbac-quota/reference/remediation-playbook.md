@@ -36,7 +36,7 @@ last_updated: 2026-05-22
     - [REM-003 创建 ServiceAccount](#rem-003)
     - [REM-004 创建 RoleBinding/ClusterRoleBinding](#rem-004)
   - [🟡 中风险](#-中风险)
-    - [REM-005 调整 [[NetworkPolicy|NetworkPolicy]]](#rem-005)
+    - [REM-005 调整 [[networkpolicy|NetworkPolicy]]](#rem-005)
   - [🔴 高风险](#-高风险)
     - [REM-006 调整 PodSecurity/Admission](#rem-006)
 - [验证确认](#验证确认)

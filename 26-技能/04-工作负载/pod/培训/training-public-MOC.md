@@ -78,7 +78,7 @@ prerequisites:
 | 2 | 小白学习路线图（多路径版） | 入门 | roadmap, beginner, CKA | 15min |
 | 3 | 云原生演进故事 | 入门 | tutorial, history, cloud-native | 20min |
 | 4 | 本地零成本实验环境搭建 | 入门 | tutorial, lab, kind, minikube | 30min |
-| 5 | 端到端项目实战 | 中级 | tutorial, project, [[Helm|helm]], gitops | 45min |
+| 5 | 端到端项目实战 | 中级 | tutorial, project, [[helm\|helm]], gitops | 45min |
 | 6 | CKA 认证备考完全指南 | 中级 | CKA, certification, exam | 25min |
 | 7 | kubernetes.md|第一课：Kubernetes 入门]] | 入门 | tutorial, k8s, training | 5min |
 | 2 | 第二课：Pod - K8s 的最小调度单元 | 入门 | tutorial, Pod, 容器组 | 5min |

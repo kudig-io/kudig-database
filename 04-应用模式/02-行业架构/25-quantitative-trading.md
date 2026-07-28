@@ -55,13 +55,13 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - redis
 - mysql
 - kafka
-- [[StatefulSet|statefulset]]
-- [[DaemonSet|daemonset]]
+- [[statefulset|statefulset]]
+- [[daemonset|daemonset]]
 last_updated: '2026-05-18'
 difficulty: expert
 reading_level: expert

@@ -90,7 +90,7 @@ graph TD
 
 - [[05-网络/README.md|README]]
 - [[05-网络/README.md|README]]
-- [[05-网络/README.md|Domain 03: [[网络诊断速查卡|Networking]] — Terway 专题]]
+- [[05-网络/README.md|Domain 03: [[17-系统基础/05-速查卡/networking|Networking]] — Terway 专题]]
 
 
 ---

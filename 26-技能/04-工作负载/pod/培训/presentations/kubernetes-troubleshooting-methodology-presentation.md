@@ -55,7 +55,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 故障排查方法论全栈培训
+# [[kubernetes|Kubernetes]] 故障排查方法论全栈培训
 
 > **适用版本**: 所有 Kubernetes 版本 | **文档类型**: 实战排障专项
 > **核心原则**: 分层排查、证据驱动、快速止损

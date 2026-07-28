@@ -69,9 +69,9 @@ cross_refs:
 
 
 
-# 129 - NGINX [[Ingress|Ingress]] 完整配置指南
+# 129 - NGINX [[ingress|Ingress]] 完整配置指南
 
-> **适用版本**: NGINX Ingress Controller v1.8 - v1.10 | [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: NGINX Ingress Controller v1.8 - v1.10 | [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 

@@ -75,9 +75,9 @@ cross_refs:
 
 
 
-# 133 - [[Ingress|Ingress]] 监控与故障排查
+# 133 - [[ingress|Ingress]] 监控与故障排查
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -99,7 +99,7 @@ cross_refs:
 | **健康** | 上游健康状态 | 后端服务健康 | 有不健康后端 |
 | **配置** | 配置重载次数 | 配置变更频率 | 异常频繁 |
 
-### 1.2 NGINX Ingress [[Prometheus|Prometheus]] 指标
+### 1.2 NGINX Ingress [[prometheus|Prometheus]] 指标
 
 | 指标名称 | 类型 | 标签 | 说明 |
 |---------|------|------|------|

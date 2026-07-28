@@ -48,7 +48,7 @@ title: Day 15: 安全体系 - RBAC + 认证授权
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|kubernetes]] RBAC 配置
+  - [[kubernetes|kubernetes]] RBAC 配置
   - K8s 认证授权体系
   - ServiceAccount 管理
   - RBAC 权限设计
@@ -133,7 +133,7 @@ rules:
 
 关键字段说明：
 
-- `apiGroups`: 资源所属的 API 组。核心资源（如 Pod、[[Service|Service]]）的 apiGroup 为空字符串 `""`
+- `apiGroups`: 资源所属的 API 组。核心资源（如 Pod、[[service|Service]]）的 apiGroup 为空字符串 `""`
 - `resources`: 资源类型。注意 `pods/log` 表示 Pod 的子资源日志
 - `verbs`: 允许的操作。get（获取单个）、list（列出多个）、watch（监听变化）、create（创建）、update（更新）、patch（部分更新）、delete（删除）
 

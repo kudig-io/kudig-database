@@ -50,7 +50,7 @@ API 发起驱逐（API-initiated Eviction）是通过 Eviction API 创建 `Evict
 
 ### 调用方式
 
-可以通过 [[Kubernetes|Kubernetes]] 语言客户端访问 API 并创建 `Eviction` 对象，POST 操作示例如下：
+可以通过 [[kubernetes|Kubernetes]] 语言客户端访问 API 并创建 `Eviction` 对象，POST 操作示例如下：
 
 ```json
 {
@@ -98,7 +98,7 @@ API 服务器执行准入检查后可能返回以下响应：
 
 ## 最佳实践/注意事项
 
-- 如果应用进入问题状态（如 [[ReplicaSet|ReplicaSet]] 创建的新 Pod 无法进入 Ready 状态），Eviction API 可能持续返回 429 或 500，直到人工干预。
+- 如果应用进入问题状态（如 [[replicaset|ReplicaSet]] 创建的新 Pod 无法进入 Ready 状态），Eviction API 可能持续返回 429 或 500，直到人工干预。
 - 遇到卡住的驱逐时，可以尝试：
   - 中止或暂停导致问题的自动化操作，调查卡住的应用后再恢复。
   - 等待一段时间后，直接从集群控制平面删除 Pod（不使用 Eviction API）。
@@ -191,7 +191,7 @@ curl -v -H 'Content-type: application/json' \
 | API 返回 429 Too Many Requests | PDB 限制当前不允许驱逐 | 等待副本恢复健康后重试；检查 Pod 是否能正常 Ready |
 | API 返回 500 Internal Server Error | 多个 PDB 引用同一 Pod | `kubectl get pdb --all-namespaces -o wide` 检查 selector 重叠 |
 | Pod 驱逐后新 Pod 无法启动 | 新 Pod 未通过 readiness probe | 检查新 Pod 日志和健康检查配置 |
-| drain 时 [[DaemonSet|DaemonSet]] Pod 阻塞 | 未使用 `--ignore-daemonsets` | 添加 `--ignore-daemonsets` 参数 |
+| drain 时 [[daemonset\|DaemonSet]] Pod 阻塞 | 未使用 `--ignore-daemonsets` | 添加 `--ignore-daemonsets` 参数 |
 
 ## 生产检查清单
 

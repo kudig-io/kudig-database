@@ -63,7 +63,7 @@ authors:
 
 # 14 - Secret 全类型 YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **相关领域**: [域3-存储与配置](../domain-3-storage/) | **前置知识**: Pod, ConfigMap  
 > **关联配置**: [13-ConfigMap参考](./13-configmap-reference.md) | [RBAC配置](./07-rbac-complete.md)
 

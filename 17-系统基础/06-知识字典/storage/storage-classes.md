@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-StorageClass 是 [[Kubernetes|Kubernetes]] 中用于描述管理员所提供的存储“类别”的 API 资源。不同的 StorageClass 可以映射到不同的服务质量（QoS）级别、备份策略或任意由集群管理员定义的策略。它使得用户无需了解底层存储的实现细节，即可按需请求不同特性的持久存储。
+StorageClass 是 [[kubernetes|Kubernetes]] 中用于描述管理员所提供的存储“类别”的 API 资源。不同的 StorageClass 可以映射到不同的服务质量（QoS）级别、备份策略或任意由集群管理员定义的策略。它使得用户无需了解底层存储的实现细节，即可按需请求不同特性的持久存储。
 
 ## 核心概念/原理
 

@@ -46,7 +46,7 @@ kubelet runs on every worker node and is responsible for:
 - Mounting volumes via CSI
 - Running health probes (liveness, readiness, startup)
 - Reporting node and Pod status
-- Evicting [[Pods|Pods]] under resource pressure
+- Evicting [[pods|Pods]] under resource pressure
 
 ## Key Subsystems
 

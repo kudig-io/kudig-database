@@ -1,7 +1,7 @@
 ---
 title: SuperEdge 架构实践 (SuperEdge Architecture Practice)
 description: '# SuperEdge 架构实践 (SuperEdge Architecture Practice)'
-summary: 'SuperEdge 是腾讯开源的 [[Kubernetes|Kubernetes]] 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。'
+summary: 'SuperEdge 是腾讯开源的 [[kubernetes|Kubernetes]] 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。'
 category: edge-computing
 tags:
 - k8s
@@ -61,9 +61,9 @@ authors:
 
 <!-- chunk: 概述 (Overview) -->## 概述 (Overview)
 
-SuperEdge 是腾讯开源的 [[Kubernetes|Kubernetes]] 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。
+SuperEdge 是腾讯开源的 [[kubernetes|Kubernetes]] 原生边缘计算管理框架，专为大规模边缘节点管理而设计。它将 Kubernetes 强大的容器编排能力延伸到边缘端，同时解决了边缘计算场景中的网络不稳定、节点自治、服务发现等核心挑战。
 
-SuperEdge is Tencent's open-source Kubernetes-native edge computing management framework designed for large-scale edge node management. It extends Kubernetes' powerful container orchestration capabilities to the edge while addressing core challenges in edge computing scenarios such as network instability, node autonomy, and [[Service|service]] discovery.
+SuperEdge is Tencent's open-source Kubernetes-native edge computing management framework designed for large-scale edge node management. It extends Kubernetes' powerful container orchestration capabilities to the edge while addressing core challenges in edge computing scenarios such as network instability, node autonomy, and [[service|service]] discovery.
 
 ---
 
@@ -190,7 +190,7 @@ SuperEdge 包含以下核心组件：
 
 | 组件名 | 功能 | 部署位置 |
 |--------|------|----------|
-| `tunnel-edge` | 维护到云端的隧道连接 | Edge Node ([[DaemonSet|DaemonSet]]) |
+| `tunnel-edge` | 维护到云端的隧道连接 | Edge Node ([[daemonset\|DaemonSet]]) |
 | `lite-apiserver` | 本地 API 代理与缓存 | Edge Node (Static Pod) |
 | `edge-health` | 分布式节点健康检查 | Edge Node (DaemonSet) |
 | `application-grid-wrapper` | 服务流量本地化代理 | Edge Node (DaemonSet) |
@@ -1844,7 +1844,7 @@ SuperEdge 已在腾讯内部数万台边缘节点的生产环境中验证，是�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-37-edge-computing KUDIG Database — Global MOC
-- [[16-专项技术/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- [[16-专项技术/README.md|[[37-归档/domain-indexes/specialty-tech/README-from-domain-37|Domain 37: 边缘计算 (Edge Computing)]]]]
 - Domain-37 边缘计算 — 开源项目索引
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

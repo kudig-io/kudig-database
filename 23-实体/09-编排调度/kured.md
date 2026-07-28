@@ -42,7 +42,7 @@ prerequisites:
 
 
 
-# [[Kured|Kured]] (KUbernetes REboot Daemon)
+# [[kured|Kured]] (KUbernetes REboot Daemon)
 
 > **CNCF 状态**: Sandbox | **类别**: Orchestration | **主要语言**: Go
 

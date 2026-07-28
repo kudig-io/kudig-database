@@ -55,12 +55,12 @@ last_updated: 2026-05-23
 
 ## 概述
 
-[[CoreDNS|CoreDNS]] 是 [[Kubernetes|Kubernetes]] 集群 DNS 的核心组件。DNS 问题会导致服务发现失败、外部依赖不可访问等连锁问题。
+[[coredns|CoreDNS]] 是 [[kubernetes|Kubernetes]] 集群 DNS 的核心组件。DNS 问题会导致服务发现失败、外部依赖不可访问等连锁问题。
 
 **典型触发场景**：
 1. CoreDNS Pod 崩溃或资源不足
 2. CoreDNS ConfigMap 配置错误
-3. [[NetworkPolicy|NetworkPolicy]] 阻断 UDP/53
+3. [[networkpolicy|NetworkPolicy]] 阻断 UDP/53
 4. 节点 DNS 配置冲突（systemd-resolved 等）
 
 ## 症状识别

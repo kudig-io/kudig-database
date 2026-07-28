@@ -48,7 +48,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] v1.29-v1.33 平台运维新特性指南
+title: [[kubernetes|Kubernetes]] v1.29-v1.33 平台运维新特性指南
 description: '# Kubernetes v1.29-v1.33 平台运维新特性指南'
 category: platform-ops
 tags:
@@ -61,7 +61,7 @@ tags:
 - [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate

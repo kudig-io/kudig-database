@@ -56,7 +56,7 @@ tags:
 - rag
 - multi-agent
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -200,7 +200,7 @@ class TestCommandSafetyVerifier:
         output = """
         执行以下命令检查 Pod 状态:
         ```bash
-        kubectl get [[Pods|pods]] -n default
+        kubectl get [[pods|pods]] -n default
         kubectl describe pod nginx-xxx -n default
         kubectl logs nginx-xxx -n default --tail=100
         ```

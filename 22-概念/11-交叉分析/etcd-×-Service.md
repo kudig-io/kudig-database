@@ -105,7 +105,7 @@ kubectl -n kube-system exec <kube-proxy-pod> -- iptables-save | wc -l
 
 ## 相关概念
 - [[etcd]]
-- [[Service]]
+- [[service|Service]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

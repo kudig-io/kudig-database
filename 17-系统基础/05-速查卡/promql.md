@@ -53,7 +53,7 @@ related_docs:
 
 # PromQL 速查表
 
-> [[Prometheus|Prometheus]] Query Language 快速参考 | Prometheus v2.40+ | **最后更新**: 2026-05
+> [[prometheus|Prometheus]] Query Language 快速参考 | Prometheus v2.40+ | **最后更新**: 2026-05
 
 ---
 

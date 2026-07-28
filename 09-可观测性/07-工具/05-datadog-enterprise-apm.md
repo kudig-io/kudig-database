@@ -52,8 +52,8 @@ tags:
 - k8s
 - monitoring
 - alerting
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - docker
 - opa
 - elasticsearch

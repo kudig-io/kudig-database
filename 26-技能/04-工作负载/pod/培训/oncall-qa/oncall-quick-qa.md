@@ -62,7 +62,7 @@ tags:
 - apiserver
 - [[kubelet|kubelet]]
 - scheduler
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - docker
 - opa
 last_updated: 2026-05

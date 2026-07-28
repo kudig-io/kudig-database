@@ -49,7 +49,7 @@ prerequisites:
 
 # 速查卡 (Cheat Sheet)
 
-> 覆盖 [[Kubernetes|Kubernetes]] 生产运维全场景的快速参考卡片集
+> 覆盖 [[kubernetes|Kubernetes]] 生产运维全场景的快速参考卡片集
 
 ## 概述
 

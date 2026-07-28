@@ -48,7 +48,7 @@ tags:
 - architecture
 - industry
 - redis
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - operator
 - wasm
 last_updated: 2026-05-18
@@ -60,7 +60,7 @@ audience:
 - 支付系统专家
 estimated_read_time: 5min
 intent_queries:
-- 数字人民币 e-CNY [[Kubernetes|Kubernetes]] 架构
+- 数字人民币 e-CNY [[kubernetes|Kubernetes]] 架构
 - 央行数字货币 CBDC 区块链 K8s
 - 双离线支付 可信硬件 K8s
 - 数字人民币智能合约 Kubernetes

@@ -58,9 +58,9 @@ agent_execution_mode: L2-semi-auto
 
 # K8s Deployment Rollout Failure 诊断与修复
 
-Deployment Rollout Failure 是 [[Kubernetes|Kubernetes]] 中最常见的发布问题类型。滚动更新可能因为资源不足、镜像拉取失败、健康检查失败、调度限制等原因卡住，导致新版本无法上线或新旧版本同时运行。
+Deployment Rollout Failure 是 [[kubernetes|Kubernetes]] 中最常见的发布问题类型。滚动更新可能因为资源不足、镜像拉取失败、健康检查失败、调度限制等原因卡住，导致新版本无法上线或新旧版本同时运行。
 
-本 [[SKILL|Skill]] 覆盖 Deployment 发布失败、滚动更新卡住、[[ReplicaSet|ReplicaSet]] 残留等全部常见根因的诊断和修复。
+本 [[SKILL|Skill]] 覆盖 Deployment 发布失败、滚动更新卡住、[[replicaset|ReplicaSet]] 残留等全部常见根因的诊断和修复。
 
 ## 何时使用此 Skill
 

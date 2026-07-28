@@ -45,7 +45,7 @@ prerequisites:
 
 ## Overview
 
-ArgoCD is a CNCF graduated project implementing the [[22-概念/gitops-principles.md|[[GitOps 速查卡|GitOps]]]] pattern for Kubernetes. It continuously monitors Git repositories and automatically synchronizes cluster state to match the desired state declared in manifests.
+ArgoCD is a CNCF graduated project implementing the [[22-概念/gitops-principles.md|[[17-系统基础/05-速查卡/gitops|GitOps]]]] pattern for Kubernetes. It continuously monitors Git repositories and automatically synchronizes cluster state to match the desired state declared in manifests.
 
 ## Architecture
 

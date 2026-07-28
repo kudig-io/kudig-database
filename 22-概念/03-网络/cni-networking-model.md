@@ -75,7 +75,7 @@ CoreDNS Pod 变为 Running
 
 ## 主流 CNI 插件对比
 
-| 插件 | 模式 | 数据面 | 性能 | 网络模型 | BGP 支持 | [[NetworkPolicy|NetworkPolicy]] |
+| 插件 | 模式 | 数据面 | 性能 | 网络模型 | BGP 支持 | [[networkpolicy\|NetworkPolicy]] |
 |------|------|--------|------|---------|---------|--------------|
 | Calico | Overlay + BGP | eBPF/Linux Routing | 高 | IP-in-IP/VXLAN | 是 | 是 |
 | Cilium | Overlay + BGP | eBPF | 最高 | VXLAN/Geneve | 是 | 是（eBPF 级别） |
@@ -212,7 +212,7 @@ Pod 内应用发起 DNS 查询:
 
 - networking.md|Service 网络]]
 - [[23-实体/02-K8s核心组件/cni-plugins.md|CNI 插件]]
-- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]]]
 - [[23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
 
 ## Related

@@ -57,9 +57,9 @@ tags:
 - authentication
 - authorization
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
-- [[Envoy|envoy]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
+- [[envoy|envoy]]
 - cilium
 last_updated: 2026-05
 difficulty: advanced

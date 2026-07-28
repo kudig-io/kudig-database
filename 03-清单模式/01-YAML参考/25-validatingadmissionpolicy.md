@@ -56,8 +56,8 @@ tags:
 - manifest
 - template
 - apiserver
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - docker
 - opa
 - redis

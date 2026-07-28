@@ -70,7 +70,7 @@ cross_refs:
 
 
 
-# 18 - [[Kubernetes|Kubernetes]] 升级和迁移策略指南
+# 18 - [[kubernetes|Kubernetes]] 升级和迁移策略指南
 
 <!-- chunk: 概述 -->
 ## 概述

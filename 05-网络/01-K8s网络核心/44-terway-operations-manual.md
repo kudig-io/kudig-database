@@ -327,7 +327,7 @@ Terway 作为 CNI 插件实现了 Kubernetes 网络模型，通过 ENI 将 Pod �
 
 - 建议在生产环境中使用 ENI 多 IP 模式以提高 IP 利用率 ^[inferred]
 - 密切监控 ENI 资源使用情况，避免 IP 耗尽 ^[inferred]
-- 配合 [[NetworkPolicy|NetworkPolicy]] 实现 Pod 间访问控制 ^[inferred]
+- 配合 [[networkpolicy|NetworkPolicy]] 实现 Pod 间访问控制 ^[inferred]
 
 ## 参考链接
 

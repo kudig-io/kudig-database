@@ -7,6 +7,7 @@ reviewers:
 creation-date: 2022-08-24
 last-updated: 2022-08-25
 status:
+tier: supporting
 ---
 
 # PersistentPodState custom workload support

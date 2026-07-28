@@ -901,9 +901,9 @@ spec:
 | **实验跟踪** | MLflow | 参数/指标/模型版本 | ⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **实验跟踪** | Weights & Biases | 可视化/协作 | ⭐ | ⭐⭐⭐⭐ |
 | **特征存储** | Feast | 特征管理 | ⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **模型服务** | [[KServe|KServe]] | 推理服务 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **模型服务** | [[kserve\|KServe]] | 推理服务 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **工作流** | Kubeflow Pipelines | DAG编排 | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
-| **工作流** | [[Argo|Argo]]go Workflows|Argo Workflows]] | 通用工作流 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
+| **工作流** | [[argo\|Argo]]go Workflows|Argo Workflows]] | 通用工作流 | ⭐⭐⭐ | ⭐⭐⭐⭐⭐ |
 | **AutoML** | Katib | 超参数调优 | ⭐⭐⭐ | ⭐⭐⭐ |
 
 ---

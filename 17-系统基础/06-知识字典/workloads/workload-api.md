@@ -45,7 +45,7 @@ prerequisites:
 # Workload API
 
 ## 概述
-Workload API 是 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组）。它提供了一种结构化的、机器可读的多 Pod 应用调度需求定义，补充了现有工作负载控制器的运行时行为。
+Workload API 是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] v1.35 引入的 Alpha 特性（默认禁用，需启用 `GenericWorkload` 特性门控和 `scheduling.k8s.io/v1alpha1` API 组）。它提供了一种结构化的、机器可读的多 Pod 应用调度需求定义，补充了现有工作负载控制器的运行时行为。
 
 ## 核心概念/原理
 - **Workload 资源**：属于 `scheduling.k8s.io/v1alpha1` API 组，用于定义一组 Pod 的调度策略和放置约束。

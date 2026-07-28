@@ -46,13 +46,13 @@ prerequisites:
 
 ## 概述
 
-容器运行时接口（CRI）是一个插件接口，它使 [[kubelet|kubelet]] 能够使用多种不同的容器运行时，而无需重新编译集群组件。CRI 是 kubelet 与容器运行时之间的主要通信协议，采用 [[gRPC|gRPC]] 定义。
+容器运行时接口（CRI）是一个插件接口，它使 [[kubelet|kubelet]] 能够使用多种不同的容器运行时，而无需重新编译集群组件。CRI 是 kubelet 与容器运行时之间的主要通信协议，采用 [[grpc|gRPC]] 定义。
 
 ## 核心概念/原理
 
 ### 为什么需要 CRI
 
-在 [[Kubernetes|Kubernetes]] 早期，kubelet 与容器运行时（如 Docker）紧密耦合。为了支持更多运行时（如 containerd、CRI-O），Kubernetes 引入了 CRI，将 kubelet 与具体的容器运行时解耦，使得：
+在 [[kubernetes|Kubernetes]] 早期，kubelet 与容器运行时（如 Docker）紧密耦合。为了支持更多运行时（如 containerd、CRI-O），Kubernetes 引入了 CRI，将 kubelet 与具体的容器运行时解耦，使得：
 
 - 社区和厂商可以独立开发新的容器运行时
 - kubelet 无需为每种运行时做定制化开发

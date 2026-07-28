@@ -44,8 +44,8 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK RBAC RAM two-layer permission model
-  - [[Prometheus|Prometheus]] monitoring|monitoring alerting]] configuration
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] audit log SLS integration
+  - [[prometheus|Prometheus]] monitoring|monitoring alerting]] configuration
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] audit log SLS integration
   - ResourceQuota LimitRange configuration
   - Security hardening best practices
 trigger_keywords:

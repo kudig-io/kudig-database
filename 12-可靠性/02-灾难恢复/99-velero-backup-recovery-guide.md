@@ -65,14 +65,14 @@ authors:
 
 # Velero 企业级备份恢复实践指南
 
-> **作者**: [[Kubernetes|Kubernetes]] 灾备架构师 | **版本**: v2.0 | **更新时间**: 2026-05-18
+> **作者**: [[kubernetes|Kubernetes]] 灾备架构师 | **版本**: v2.0 | **更新时间**: 2026-05-18
 > **适用版本**: Velero v1.15.0 | **难度**: ⭐⭐⭐⭐
 
 ---
 
 <!-- chunk: 概述 -->## 概述
 
-Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。Velero 能够备份 Kubernetes 集群的所有资源对象（[[Deployments|Deployments]]、Services、[[ConfigMaps|ConfigMaps]]、[[Secrets|Secrets]]、CRDs 等）以及持久卷（PV）数据，支持跨集群迁移和灾难恢复。本文档深入探讨 Velero 在企业级生产环境中的部署、配置、备份策略、恢复流程和最佳实践。
+Velero（前身为 Heptio Ark）是 Kubernetes 生态中最成熟的开源备份与灾难恢复工具，由 VMware Tanzu 团队维护。Velero 能够备份 Kubernetes 集群的所有资源对象（[[deployments|Deployments]]、Services、[[configmaps|ConfigMaps]]、[[secrets|Secrets]]、CRDs 等）以及持久卷（PV）数据，支持跨集群迁移和灾难恢复。本文档深入探讨 Velero 在企业级生产环境中的部署、配置、备份策略、恢复流程和最佳实践。
 
 ## RPO 与 RTO 定义
 

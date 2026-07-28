@@ -53,6 +53,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/08-cluster-operations/05-crd-operator-troubleshooting.md
   label: '结构化排障: 05-crd-operator-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

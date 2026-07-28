@@ -42,7 +42,7 @@ status: reviewed
 
 
 
-# [[Service|Service]] Networking
+# [[service|Service]] Networking
 
 ## Service Types
 
@@ -58,7 +58,7 @@ status: reviewed
 Clients discover services via DNS:
 - **FQDN**: `my-svc.my-ns.svc.cluster.local`
 - **CoreDNS** resolves to ClusterIP
-- **kube-proxy** routes ClusterIP to backend [[Pods|Pods]]
+- **kube-proxy** routes ClusterIP to backend [[pods|Pods]]
 
 ## Load Balancing Modes
 
@@ -75,7 +75,7 @@ Since Kubernetes v1.21, EndpointSlice replaces Endpoints as the scalable way to 
 - Multiple address types (IPv4, IPv6, FQDN)
 - Topology-aware routing
 
-## [[Ingress|Ingress]] and Gateway API
+## [[ingress|Ingress]] and Gateway API
 
 - **Ingress**: L7 HTTP/HTTPS routing with TLS termination (nginx, ALB, etc.)
 - **Gateway API**: Next-generation successor to Ingress with richer routing, multi-tenant support, and standardized resource types (HTTPRoute, TCPRoute, etc.)

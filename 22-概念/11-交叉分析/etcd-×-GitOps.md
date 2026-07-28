@@ -105,7 +105,7 @@ kubectl patch application <app-name> -n argocd -p '{"spec":{"syncPolicy":{"autom
 
 ## 相关概念
 - [[etcd]]
-- [[GitOps]]
+- [[gitops|GitOps]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

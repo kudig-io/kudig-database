@@ -73,7 +73,7 @@ cross_refs:
 
 # Java 应用性能调优与资源 Sizing 指南
 
-> **适用版本**: JDK 21 (LTS) / Spring Boot 3.4+ / [[Kubernetes|Kubernetes]] v1.29-v1.33  
+> **适用版本**: JDK 21 (LTS) / Spring Boot 3.4+ / [[kubernetes|Kubernetes]] v1.29-v1.33  
 > **最后更新**: 2026-04-30  
 > **难度**: 高级
 
@@ -522,7 +522,7 @@ spec:
           periodSeconds: 60
 ```
 
-### 9.2 [[KEDA|KEDA]] 自定义伸缩
+### 9.2 [[keda|KEDA]] 自定义伸缩
 
 ```yaml
 apiVersion: keda.sh/v1alpha1
@@ -618,7 +618,7 @@ spec:
 ## Obsidian 相关文档
 
 - 故障诊断 KUDIG Database — Global MOC
-- [[19-故障诊断/README.md|Domain-12 故障排查 ([[KUDIG 故障排查 Prompt 模板|Troubleshooting]])]]
+- [[19-故障诊断/README.md|Domain-12 故障排查 ([[23-实体/15-参考与索引/kudig-prompts-catalog|Troubleshooting]])]]
 - Domain-12 故障排查 — 开源项目索引
 - [[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]

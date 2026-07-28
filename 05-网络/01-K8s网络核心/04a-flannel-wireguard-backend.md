@@ -73,7 +73,7 @@ cross_refs:
 
 # Flannel WireGuard 加密后端配置
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
 
 ---
 
@@ -444,7 +444,7 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

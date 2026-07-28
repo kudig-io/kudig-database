@@ -54,7 +54,7 @@ kubectl get clusterrolebindings,rolebindings --all-namespaces -o wide
 Look for:
 - **Wildcard verbs** (`verbs: ["*"]`): Grants all operations on resources
 - **Wildcard resources** (`resources: ["*"]`): Grants access to all resource types
-- **ClusterRoleBinding to default ServiceAccount**: Gives cluster-wide access to all [[Pods|Pods]] in namespace
+- **ClusterRoleBinding to default ServiceAccount**: Gives cluster-wide access to all [[pods|Pods]] in namespace
 - **`[[Secrets|secrets]]` access**: Ability to read secrets is equivalent to full cluster access (via kubeconfig in secrets)
 
 ### Step 3: Verify ServiceAccount Permissions

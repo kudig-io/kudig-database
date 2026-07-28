@@ -69,7 +69,7 @@ cross_refs:
 
 # gVisor 容器沙箱深度解析
 
-> **适用版本**: gVisor 2024+ / [[Kubernetes|Kubernetes]] v1.28 - v1.33 | **最后更新**: 2026-05
+> **适用版本**: gVisor 2024+ / [[kubernetes|Kubernetes]] v1.28 - v1.33 | **最后更新**: 2026-05
 
 ---
 

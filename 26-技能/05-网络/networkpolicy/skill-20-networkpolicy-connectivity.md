@@ -47,7 +47,7 @@ prerequisites:
 
 
 
-# [[NetworkPolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+# [[networkpolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 
 ### 症状识别
 
@@ -61,7 +61,7 @@ prerequisites:
 | S2 | NetworkPolicy 变更后通信中断 | 检查事件时间线 | 0.90 | 同时有其他变更 |
 | S3 | 跨 namespace Pod 间通信失败 | 跨 namespace `kubectl exec` 测试 | 0.85 | DNS 问题 → SKILL-NET-001 |
 | S4 | Cilium/Calico policy denied 指标升高 | Prometheus/Hubble 观测 | 0.95 | 攻击流量 → SKILL-SECURITY-001 |
-| S5 | 入站正常但出站失败（或相反） | 定向连通性测试 | 0.80 | [[Service|Service]] 问题 → SKILL-NET-002 |
+| S5 | 入站正常但出站失败（或相反） | 定向连通性测试 | 0.80 | [[service\|Service]] 问题 → SKILL-NET-002 |
 | S6 | 所有 NetworkPolicy 似乎不生效 | 策略存在但流量未被过滤 | 0.85 | CNI 不支持 → RC-001 |
 | S7 | 特定标签 Pod 通信被阻断 | 按标签分组测试连通性 | 0.85 | Pod 本身问题 → SKILL-POD-001 |
 | S8 | 默认 namespace 通信正常，新 namespace 失败 | 多 namespace 对比测试 | 0.80 | namespace 配置问题 |

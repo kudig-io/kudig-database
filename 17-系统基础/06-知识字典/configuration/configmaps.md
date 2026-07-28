@@ -42,7 +42,7 @@ prerequisites:
 
 ## 概述
 
-ConfigMap 是 [[Kubernetes|Kubernetes]] 中用于存储非机密数据的 API 对象，以键值对（key-value）形式保存。Pod 可以将 ConfigMap 用作环境变量、命令行参数，或者作为卷中的配置文件。通过 ConfigMap，你可以将环境相关的配置与容器镜像解耦，使应用更易于移植。
+ConfigMap 是 [[kubernetes|Kubernetes]] 中用于存储非机密数据的 API 对象，以键值对（key-value）形式保存。Pod 可以将 ConfigMap 用作环境变量、命令行参数，或者作为卷中的配置文件。通过 ConfigMap，你可以将环境相关的配置与容器镜像解耦，使应用更易于移植。
 
 ## 核心概念/原理
 
@@ -67,7 +67,7 @@ Pod 中使用 ConfigMap 的四种方式：
 
 ## 使用场景
 
-- 将开发环境（`localhost`）和生产环境（Kubernetes [[Service|Service]]）的配置分离，例如数据库主机地址。
+- 将开发环境（`localhost`）和生产环境（Kubernetes [[service|Service]]）的配置分离，例如数据库主机地址。
 - 为同一应用在不同命名空间或集群中提供不同的配置，而无需重新构建镜像。
 - 存储小型配置文件（如 `.properties`、`.conf`），供应用启动时读取。
 

@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-Pod Overhead（Pod 开销）是 [[Kubernetes|Kubernetes]] 中一种用于核算 Pod 基础设施所消耗系统资源的方式。这些资源是容器内部运行所需资源之外的额外开销。Pod 的开销在准入时根据 Pod 的 RuntimeClass 相关联的开销进行设置。
+Pod Overhead（Pod 开销）是 [[kubernetes|Kubernetes]] 中一种用于核算 Pod 基础设施所消耗系统资源的方式。这些资源是容器内部运行所需资源之外的额外开销。Pod 的开销在准入时根据 Pod 的 RuntimeClass 相关联的开销进行设置。
 
 ## 核心概念/原理
 

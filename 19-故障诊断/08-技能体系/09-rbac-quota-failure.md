@@ -1,7 +1,7 @@
 ---
 title: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 description: '## 1. 概述'
-summary: 'RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。'
+summary: 'RBAC（Role-Based Access Control）和 ResourceQuota 是 [[kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。'
 category: security
 tags:
 - k8s
@@ -77,7 +77,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。ResourceQuota 和 LimitRange 问题则会导致工作负载无法创建或调度，影响业务扩容和新服务上线。此外，现代 Kubernetes 集群普遍部署 OPA/Gatekeeper 或 [[Kyverno|Kyverno]] 等策略引擎，其 Admission Controller 拦截也会产生类似 RBAC 403 的错误表象。
+RBAC（Role-Based Access Control）和 ResourceQuota 是 [[kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。ResourceQuota 和 LimitRange 问题则会导致工作负载无法创建或调度，影响业务扩容和新服务上线。此外，现代 Kubernetes 集群普遍部署 OPA/Gatekeeper 或 [[kyverno|Kyverno]] 等策略引擎，其 Admission Controller 拦截也会产生类似 RBAC 403 的错误表象。
 
 ### 典型触发场景
 
@@ -85,7 +85,7 @@ RBAC（Role-Based Access Control）和 ResourceQuota 是 [[Kubernetes|Kubernetes
 2. **ResourceQuota 配额耗尽**: Namespace 内 CPU/Memory/对象数量达到配额上限，新 Pod/PVC/Service 创建被拒绝。常见于资源紧张的生产环境、批量任务执行、资源泄漏场景
 3. **LimitRange 约束冲突**: Pod 资源请求不满足 LimitRange 定义的最小/最大限制，或未设置 requests/limits 导致被 LimitRange 默认值覆盖后超限
 4. **Admission Controller 策略拦截**: OPA/Gatekeeper、Kyverno 或其他 ValidatingWebhook 基于安全/合规策略拒绝资源创建
-5. **多租户隔离问题**: 跨 Namespace 访问被 [[NetworkPolicy|NetworkPolicy]] 或 RBAC 隔离策略阻止
+5. **多租户隔离问题**: 跨 Namespace 访问被 [[networkpolicy|NetworkPolicy]] 或 RBAC 隔离策略阻止
 
 ### 前置条件
 

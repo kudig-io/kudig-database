@@ -233,7 +233,7 @@ fga store delete --store-id $STORE_ID
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - openfga
-- [[23-实体/kubearmor.md|[[KubeArmor|KubeArmor]]]]
+- [[23-实体/kubearmor.md|[[kubearmor|KubeArmor]]]]
 - [[23-实体/06-安全/tokenetes.md|Tokenetes]]
 - [[23-实体/06-安全/containerssh.md|ContainerSSH]]
 - [[23-实体/06-安全/parsec.md|Parsec]]

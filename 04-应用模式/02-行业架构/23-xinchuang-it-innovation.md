@@ -57,7 +57,7 @@ tags:
 - industry
 - [[etcd|etcd]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - calico
 - docker

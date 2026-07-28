@@ -82,8 +82,8 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[19-故障诊断/04-高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]] |  | troubleshooting, guide, configuration |  |
-| 2 | [[19-故障诊断/04-高级排障/01-control-plane/01-apiserver-troubleshooting.md|[[API Server 故障排查指南|API Server 故障排查指南]]]] |  | troubleshooting, guide |  |
+| 1 | [[19-故障诊断/04-高级排障/structural-00-configuration-first-methodology\|疑难问题系统性排查方法论：配置优先（Configuration-First）]] |  | troubleshooting, guide, configuration |  |
+| 2 | [[19-故障诊断/04-高级排障/01-control-plane/01-apiserver-troubleshooting.md|[[19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting\|API Server 故障排查指南]]]] |  | troubleshooting, guide |  |
 | 3 | [[19-故障诊断/04-高级排障/01-control-plane/02-etcd-troubleshooting.md|[[etcd|etcd]]cd 故障排查指南|etcd 故障排查指南]]]] |  | troubleshooting, guide |  |
 | 4 | [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]] |  | troubleshooting, guide |  |
 | 5 | [[19-故障诊断/04-高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md|Controller Manager 故障排查指南]] |  | troubleshooting, guide |  |

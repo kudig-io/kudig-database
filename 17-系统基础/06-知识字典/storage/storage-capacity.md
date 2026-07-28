@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-存储容量跟踪是 [[Kubernetes|Kubernetes]] 在 v1.24 达到稳定（stable）的一项功能。它使 Kubernetes 能够跟踪集群中各节点的可用存储容量，并在调度 Pod 时将其作为考量因素，从而减少因节点存储不足导致的调度失败和重试。
+存储容量跟踪是 [[kubernetes|Kubernetes]] 在 v1.24 达到稳定（stable）的一项功能。它使 Kubernetes 能够跟踪集群中各节点的可用存储容量，并在调度 Pod 时将其作为考量因素，从而减少因节点存储不足导致的调度失败和重试。
 
 ## 核心概念/原理
 

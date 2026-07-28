@@ -24,7 +24,7 @@ last_updated: 2026-05-22
 
 # 修复操作手册 / Remediation Playbook
 
-> **来源**: SKILL-ING-001 v1.0 — [[Ingress|Ingress]] Gateway Failure 诊断与修复
+> **来源**: SKILL-ING-001 v1.0 — [[ingress|Ingress]] Gateway Failure 诊断与修复
 
 ## 目录
 

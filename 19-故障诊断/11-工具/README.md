@@ -122,9 +122,9 @@ grep
 **功能**: 检查集群网络组件和服务连通性
 **输出文件**: `network_check.txt`
 **检查项目**:
-- [[23-实体/coredns.md|[[CoreDNS|coredns]]]]运行状态
+- [[23-实体/coredns.md|[[coredns|coredns]]]]运行状态
 - Service和Endpoint状态
-- [[23-实体/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]配置
+- [[23-实体/networkpolicy.md|[[networkpolicy|networkpolicy]]]]配置
 - Ingress控制器状态
 
 ### 5. 存储系统检查
@@ -292,7 +292,7 @@ fi
 4. 相关的诊断输出文件
 
 ---
-**工具版本**: v1.0.0 | **最后更新**: 2026-02-05 | **适用环境**: [[Kubernetes|Kubernetes]] v1.25+
+**工具版本**: v1.0.0 | **最后更新**: 2026-02-05 | **适用环境**: [[kubernetes|Kubernetes]] v1.25+
 
 ## Related
 

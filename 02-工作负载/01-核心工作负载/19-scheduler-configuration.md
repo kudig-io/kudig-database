@@ -402,7 +402,7 @@ kubectl patch pod gated-pod --type=json \
 | **GPU调度** | ack-ai-scheduler | GPU拓扑感知调度 | AI/ML训练 |
 | **Gang调度** | ack-scheduler-plugins | 原子批量调度 | 分布式训练 |
 | **容量调度** | ack-scheduler-plugins | 弹性配额 | 多租户 |
-| **协同调度** | [[Koordinator|Koordinator]] | 混部调度 | 在线+离线混部 |
+| **协同调度** | [[koordinator\|Koordinator]] | 混部调度 | 在线+离线混部 |
 | **负载感知** | Koordinator | 基于真实负载调度 | 提高资源利用率 |
 
 ```yaml

@@ -46,7 +46,7 @@ prerequisites:
 
 
 title: K8S 运维诊断技能库
-description: [[Kubernetes|Kubernetes]] 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化
+description: [[kubernetes|Kubernetes]] 运维诊断全栈技能库，涵盖 Pod/Node/Network/Storage/Performance 五大故障域的结构化
   SOP
 category: ai-agent
 tags:
@@ -58,7 +58,7 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - coredns
 last_updated: 2026-04
 difficulty: advanced

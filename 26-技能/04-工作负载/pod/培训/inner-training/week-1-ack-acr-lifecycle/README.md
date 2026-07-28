@@ -55,7 +55,7 @@ last_updated: 2026-05-18
 difficulty: beginner
 intent_queries:
   - ACK ACR cluster lifecycle week 1 curriculum
-  - [[Kubernetes|Kubernetes]]es 集群配置最佳实践|Kubernetes cluster]] lifecycle management
+  - [[kubernetes|Kubernetes]]es 集群配置最佳实践|Kubernetes cluster]] lifecycle management
   - ACK week 1 learning path guide
   - ACK cluster type selection
   - Kubernetes cluster certificate management

@@ -39,7 +39,7 @@ prerequisites:
 
 # Istio 高级流量管理
 
-> **CNCF 状态**: Graduated | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Go
+> **CNCF 状态**: Graduated | **类别**: [[service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Go
 
 ## 概述
 

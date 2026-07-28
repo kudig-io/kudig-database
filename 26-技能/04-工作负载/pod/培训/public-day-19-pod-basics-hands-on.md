@@ -1,7 +1,7 @@
 ---
 title: 'Day 19: Pod 容器组基础实操'
 description: '- Pod 探针配置'
-summary: 'kubectl get pod <pod-name> -o jsonpath='{.status.conditions[*].type}''
+summary: "kubectl get pod <pod-name> -o jsonpath='{.status.conditions[*].type}'"
 category: learning
 tags:
 - k8s
@@ -44,7 +44,7 @@ title: Day 19: Pod 容器组基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] Pod 生命周期
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod 生命周期
   - Pod 探针配置
   - CrashLoopBackOff 排查
   - Pod QoS 等级

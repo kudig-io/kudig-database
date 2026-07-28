@@ -402,7 +402,7 @@ kubectl edit hpa <name>
 
 ## Related
 
-- [[26-技能/04-工作负载/statefulset/培训/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
+- [[26-技能/04-工作负载/statefulset/培训/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[statefulset|StatefulSet]] - 有状态应用管理
 - [[26-技能/04-工作负载/pod/培训/learn-root.md|learn-root]] — Kubernetes 培训：Root
 - [[26-技能/04-工作负载/job-cronjob/培训/learn-11-job-cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
 - [[26-技能/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill

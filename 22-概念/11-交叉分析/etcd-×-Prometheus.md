@@ -108,7 +108,7 @@ ETCDCTL_API=3 etcdctl --endpoints=<endpoints> endpoint status --write-out=table
 
 ## 相关概念
 - [[etcd]]
-- [[Prometheus]]
+- [[prometheus|Prometheus]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

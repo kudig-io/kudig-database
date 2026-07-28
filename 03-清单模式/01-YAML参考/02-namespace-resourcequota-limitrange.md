@@ -63,7 +63,7 @@ authors:
 
 # 02 - Namespace / ResourceQuota / LimitRange YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
 
 ---
 

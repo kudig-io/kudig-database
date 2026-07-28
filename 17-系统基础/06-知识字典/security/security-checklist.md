@@ -47,7 +47,7 @@ prerequisites:
 
 ## 核心概念/原理
 
-安全清单覆盖了 [[Kubernetes|Kubernetes]] 集群安全的多个关键领域：认证与授权、网络安全、Pod 安全、日志与审计、Pod 放置、[[Secrets|Secrets]]、镜像和准入控制器。它为集群管理员提供了一套可操作的基线检查项。
+安全清单覆盖了 [[kubernetes|Kubernetes]] 集群安全的多个关键领域：认证与授权、网络安全、Pod 安全、日志与审计、Pod 放置、[[secrets|Secrets]]、镜像和准入控制器。它为集群管理员提供了一套可操作的基线检查项。
 
 ## 关键机制或特性
 

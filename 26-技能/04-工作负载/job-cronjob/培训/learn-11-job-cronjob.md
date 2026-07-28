@@ -39,7 +39,7 @@ prerequisites:
 
 
 
-# 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
+# 第九课：Job 和 [[cronjob|CronJob]] - 任务调度
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 
@@ -567,7 +567,7 @@ kubectl delete cronjob <name>
 ## Related
 
 - [[26-技能/04-工作负载/pod/培训/learn-02-pod-basics.md|learn-02-pod-basics]] — 第二课：Pod - K8s 的最小调度单元
-- [[26-技能/04-工作负载/statefulset/培训/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
+- [[26-技能/04-工作负载/statefulset/培训/learn-14-statefulset-basics.md|learn-14-statefulset-basics]] — 第14课：[[statefulset|StatefulSet]] - 有状态应用管理
 - [[26-技能/04-工作负载/pod/培训/learn-root.md|learn-root]] — Kubernetes 培训：Root
 - [[26-技能/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[deployment]] — Deployment

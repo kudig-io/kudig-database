@@ -68,7 +68,7 @@ cross_refs:
 
 # 运维指标体系建设 (Operations Metrics System)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **文档版本**: v1.0 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **文档版本**: v1.0 | **最后更新**: 2026-02
 > **目标读者**: 运维经理、SRE团队、平台工程师
 
 <!-- chunk: 概述 -->
@@ -769,7 +769,7 @@ metrics_system_checklist
 ## Obsidian 相关文档
 
 - 平台工程 KUDIG Database — Global MOC
-- [[10-平台工程/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[10-平台工程/README.md|[[37-归档/domain-indexes/platform/README-from-domain-9|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理

@@ -98,7 +98,7 @@ authors:
 **平台工程 (Platform Engineering)** 是一门工程学科，专注于设计、构建和维护自助式内部开发者平台 (Internal Developer Platform, IDP)，以加速软件交付、降低认知负载，并在整个组织中标准化最佳实践。
 
 > **官方定义** (Gartner, 2023):  
-> "Platform engineering is the discipline of designing and building toolchains and workflows that enable self-[[Service|service]] capabilities for software engineering organizations in the cloud-native era."
+> "Platform engineering is the discipline of designing and building toolchains and workflows that enable self-[[service|service]] capabilities for software engineering organizations in the cloud-native era."
 
 ```
 传统模式 (Traditional Mode)
@@ -128,7 +128,7 @@ authors:
 - CI/CD 工具链爆发（Jenkins、GitLab CI、GitHub Actions）
 - 容器化技术兴起（Docker, 2013）
 
-**阶段三：云原生与 [[Kubernetes|Kubernetes]] (2015-2020)**
+**阶段三：云原生与 [[kubernetes|Kubernetes]] (2015-2020)**
 - Kubernetes 成为容器编排标准
 - 微服务架构大规模落地
 - 基础设施即代码 (IaC) 普及
@@ -394,7 +394,7 @@ graph TB
 |--------|----------|----------|-----------|
 | **应用脚手架** | 新服务/项目模板生成 | Backstage Scaffolder | 100% 自助 |
 | **CI/CD 流水线** | 构建、测试、部署自动化 | GitHub Actions, Tekton | 80% 自助 |
-| **环境管理** | Dev/Staging/Prod 环境配置 | [[Crossplane|Crossplane]], Terraform | 70% 自助 |
+| **环境管理** | Dev/Staging/Prod 环境配置 | [[crossplane\|Crossplane]], Terraform | 70% 自助 |
 | **服务目录** | 服务注册、发现、文档 | Backstage Catalog | 100% 自助 |
 | **监控告警** | 指标、日志、追踪 | Prometheus, Grafana | 90% 自助 |
 | **密钥管理** | 证书、密码、API Key | Vault, External Secrets | 85% 自助 |

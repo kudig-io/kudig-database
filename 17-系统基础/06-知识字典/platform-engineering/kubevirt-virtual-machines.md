@@ -46,7 +46,7 @@ prerequisites:
 
 
 
-# [[KubeVirt|KubeVirt]]：在 [[Kubernetes|Kubernetes]] 上运行虚拟机
+# [[kubevirt|KubeVirt]]：在 [[kubernetes|Kubernetes]] 上运行虚拟机
 
 ## 概述
 
@@ -59,7 +59,7 @@ prerequisites:
 KubeVirt 通过 Kubernetes Operator 在集群中部署以下核心组件：
 - **virt-api**：提供 KubeVirt 自定义资源的 API 服务
 - **virt-controller**：负责 VM 生命周期管理（创建、调度、扩缩容）
-- **virt-handler**：运行在每个节点上的 [[DaemonSet|DaemonSet]]，管理本节点 VM 的启动、停止和监控
+- **virt-handler**：运行在每个节点上的 [[daemonset|DaemonSet]]，管理本节点 VM 的启动、停止和监控
 - **virt-launcher**：每个 VM 对应一个 Pod，Pod 中运行 libvirt/QEMU 进程
 
 ### 2. 核心 CRD
@@ -68,7 +68,7 @@ KubeVirt 通过 Kubernetes Operator 在集群中部署以下核心组件：
 |-----|------|------|
 | **VirtualMachine（VM）** | 定义虚拟机的配置模板 | Deployment |
 | **VirtualMachineInstance（VMI）** | VM 的运行时实例 | Pod |
-| **VirtualMachinePool** | 管理一组相同的 VM | [[ReplicaSet|ReplicaSet]] |
+| **VirtualMachinePool** | 管理一组相同的 VM | [[replicaset\|ReplicaSet]] |
 | **DataVolume** | 管理 VM 磁盘镜像的创建和导入 | PVC + Job |
 
 ### 3. VM 与容器的统一编排

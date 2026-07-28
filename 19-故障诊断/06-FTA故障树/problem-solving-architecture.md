@@ -34,6 +34,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

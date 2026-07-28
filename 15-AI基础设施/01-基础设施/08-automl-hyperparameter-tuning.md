@@ -838,7 +838,7 @@ torch.save(subnet.state_dict(), "optimized_subnet.pth")
 **推荐选择：**
 - 深度学习：Ray Tune（大规模并行） + Optuna（精细优化）
 - 传统ML：Auto-sklearn（快速baseline）
-- 生产环境：Ray Tune + [[Kubernetes|Kubernetes]]（弹性扩缩容）
+- 生产环境：Ray Tune + [[kubernetes|Kubernetes]]（弹性扩缩容）
 - 学术研究：Optuna（灵活、可扩展）
 
 ---

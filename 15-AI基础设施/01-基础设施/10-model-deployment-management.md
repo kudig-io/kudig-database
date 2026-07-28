@@ -70,7 +70,7 @@ cross_refs:
 
 # AI模型部署与生命周期管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[23-实体/11-AI与边缘/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[23-实体/11-AI与边缘/kserve.md|KServe]]](https://kserve.github.io/website/) | [Seldon Core](https://docs.seldon.io/projects/seldon-core/) | [BentoML](https://docs.bentoml.org/)
 
 <!-- chunk: 一、模型部署架构概览 -->
 ## 一、模型部署架构概览
@@ -149,8 +149,8 @@ cross_refs:
 |----------|----------|------|------|--------|
 | **Serverless** | 突发流量、开发测试 | 自动扩缩、成本优化 | 冷启动延迟 | ⭐⭐ |
 | **Deployment** | 稳定在线服务 | 简单可靠、易于调试 | 资源浪费 | ⭐ |
-| **[[StatefulSet|StatefulSet]]** | 有状态模型服务 | 数据持久化、有序部署 | 复杂度高 | ⭐⭐⭐ |
-| **[[DaemonSet|DaemonSet]]** | 节点本地服务 | 本地缓存、低延迟 | 资源利用率低 | ⭐⭐ |
+| **[[statefulset\|StatefulSet]]** | 有状态模型服务 | 数据持久化、有序部署 | 复杂度高 | ⭐⭐⭐ |
+| **[[daemonset\|DaemonSet]]** | 节点本地服务 | 本地缓存、低延迟 | 资源利用率低 | ⭐⭐ |
 | **Job/CronJob** | 批处理推理 | 一次性任务、定时执行 | 不适合在线服务 | ⭐⭐ |
 
 ---

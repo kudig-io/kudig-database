@@ -43,7 +43,7 @@ title: Day 9: RAM 账号管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK RAM authorization [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] RBAC integration
+  - ACK RAM authorization [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] RBAC integration
   - aliyun cs grant_permissions RAM user cluster access
   - RAM role assume role Kubernetes
   - Multi-team RBAC namespace isolation

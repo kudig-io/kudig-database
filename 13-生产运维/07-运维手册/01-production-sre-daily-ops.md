@@ -345,7 +345,7 @@ Level 5: 自愈 (Self-Healing)
 
 ## 相关链接
 
-- [[node-notready]] — 节点异常的排查方法
+- [[19-故障诊断/08-技能体系/01-node-notready|node-notready]] — 节点异常的排查方法
 - [[22-概念/08-可靠性与运维/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
 - [[13-生产运维/07-运维手册/02-change-management-guide.md|change-management-guide]] — 变更管理的详细流程
 - [[13-生产运维/03-事件响应/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册

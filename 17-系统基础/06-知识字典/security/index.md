@@ -495,6 +495,6 @@ A: Falco 是检测工具（发现异常并告警，不阻断）；KubeArmor 是�
 
 - [[17-系统基础/06-知识字典/networking/network-policy.md|NetworkPolicy 网络安全]]
 - [[17-系统基础/06-知识字典/operations/backup-restore.md|备份恢复]]
-- [[17-系统基础/06-知识字典/platform-engineering/admission-webhook.md|Admission Webhook]]
-- [[17-系统基础/06-知识字典/observability/audit-logging.md|审计日志]]
+- [[17-系统基础/06-知识字典/security/admission-controller|Admission Webhook]]
+- [[09-可观测性/03-日志/12-logging-auditing|审计日志]]
 

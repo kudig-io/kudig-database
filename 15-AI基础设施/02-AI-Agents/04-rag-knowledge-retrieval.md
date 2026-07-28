@@ -54,11 +54,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Helm|helm]]
+- [[helm|helm]]
 - redis
 - postgresql
 - hpa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

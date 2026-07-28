@@ -60,10 +60,10 @@ tags:
 - lecturer
 - apiserver
 - [[kubelet|kubelet]]
-- [[Cilium|cilium]]
+- [[cilium|cilium]]
 - flannel
 - calico
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - docker
 last_updated: 2026-05
 difficulty: intermediate

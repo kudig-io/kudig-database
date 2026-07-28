@@ -50,7 +50,7 @@ prerequisites:
 
 
 
-title: [[wasmCloud|wasmCloud]] 平台
+title: [[wasmcloud|wasmCloud]] 平台
 description: 1. [wasmCloud 概述](#1-wasmcloud-概述)
 category: webassembly-cloud-native
 tags:
@@ -58,10 +58,10 @@ tags:
 - wasm
 - webassembly
 - cloud-native
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
-- [[Helm|helm]]
+- [[jaeger|jaeger]]
+- [[helm|helm]]
 - docker
 - opa
 last_updated: 2026-05

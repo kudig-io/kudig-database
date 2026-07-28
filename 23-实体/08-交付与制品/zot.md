@@ -225,7 +225,7 @@ zot 服务异常
 - [[distribution]] — Distribution
 
 - zot
-- [[23-实体/modelpack.md|[[ModelPack|ModelPack]]]]
+- [[23-实体/modelpack.md|[[modelpack|ModelPack]]]]
 - [[23-实体/08-交付与制品/kitops.md|KitOps]]
 - [[23-实体/06-安全/copa.md|Copa (Copacetic)]]
 - [[23-实体/03-运行时/stacker.md|Stacker]]

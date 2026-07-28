@@ -81,7 +81,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 认证授权深度解析 (Authentication & Authorization Deep Dive)
+# [[kubernetes|Kubernetes]] 认证授权深度解析 (Authentication & Authorization Deep Dive)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 安全认证文档
 

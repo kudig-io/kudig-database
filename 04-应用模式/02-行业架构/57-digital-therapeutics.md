@@ -50,7 +50,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - redis
 - mysql

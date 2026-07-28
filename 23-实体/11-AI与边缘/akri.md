@@ -229,7 +229,7 @@ kubectl rollout restart daemonset/akri-agent -n akri-system
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - akri
-- [[23-实体/cncf-edge-ai.md|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- [[23-实体/cncf-edge-ai.md|[[23-实体/15-参考与索引/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
 - index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 

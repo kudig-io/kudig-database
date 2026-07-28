@@ -74,7 +74,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 核心组件 v1.29 - v1.33 新特性速查
+# [[kubernetes|Kubernetes]] 核心组件 v1.29 - v1.33 新特性速查
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  

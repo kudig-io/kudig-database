@@ -100,7 +100,7 @@ kubectl get --raw /metrics | grep apiserver_storage_objects
 
 ## 相关概念
 - apiserver
-- [[Prometheus]]
+- [[prometheus|Prometheus]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

@@ -2346,7 +2346,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 35: eBPF 技术体系 (eBPF Technology Stack)|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-35|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - [[05-网络/05-eBPF/02-ebpf-map-types-data-structures.md|02 ebpf map types data structures]]
 - Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)

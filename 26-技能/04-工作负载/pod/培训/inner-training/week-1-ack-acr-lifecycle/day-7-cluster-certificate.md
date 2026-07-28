@@ -52,7 +52,7 @@ title: Day 7: K8S 集群证书
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|Kubernetes]] certificate system CA API Server [[etcd|etcd]]
+  - [[kubernetes|Kubernetes]] certificate system CA API Server [[etcd|etcd]]
   - ACK kubeconfig certificate renewal
   - Kubernetes certificate expiration troubleshooting
   - [[kubelet|kubelet]] TLS Bootstrap

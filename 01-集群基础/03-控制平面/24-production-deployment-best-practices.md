@@ -69,7 +69,7 @@ tags:
 - scheduler
 - controller-manager
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - istio
 last_updated: 2026-05

@@ -35,7 +35,7 @@ estimated_read_time: 5min
 | [[07-数据库中间件/07-搜索引擎/index.md\|搜索引擎/]] | 搜索与分析 | Elasticsearch/OpenSearch/向量搜索 |
 | [[07-数据库中间件/05-Operator管理/index.md\|Operator管理/]] | Operator 模式 | 数据库 Operator 设计与对比 |
 | [[07-数据库中间件/06-数据流/index.md\|数据流/]] | 流处理 | Flink/Spark Streaming/CDC |
-| [[07-数据库中间件/新型数 据库/index.md\|新型数据库/]] | 新型数据库 | NewSQL/图数据库/向量数据库 |
+| [[07-数据库中间件/08-新型数据库/index.md\|新型数据库/]] | 新型数据库 | NewSQL/图数据库/向量数据库 |
 
 ## 跨域导航
 

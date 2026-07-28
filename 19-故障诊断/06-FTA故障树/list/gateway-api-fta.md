@@ -55,6 +55,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/03-networking/06-gateway-api-troubleshooting.md
   label: '结构化排障: 06-gateway-api-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

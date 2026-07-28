@@ -1395,7 +1395,7 @@ for key, value in risk_assessment.items():
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-21-logging-management-analytics MOC]]
-- [[09-可观测性/README.md|[[Domain 21: 日志管理与分析 (Logging Management & Analytics)|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-21|Domain 21: 日志管理与分析 (Logging Management & Analytics)]] Management & Analytics)]]
 - [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-21 日志管理与分析 — 开源项目索引]]
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践

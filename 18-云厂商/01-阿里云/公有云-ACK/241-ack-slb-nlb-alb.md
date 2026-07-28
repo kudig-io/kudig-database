@@ -1,7 +1,7 @@
 ---
 title: ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)
-description: 'description: ''- [负载均衡选型指南](#负载均衡选型指南)'''
-summary: 'description: ''- [负载均衡选型指南](#负载均衡选型指南)'''
+description: ACK 负载均衡接入实践：NLB/ALB/CLB 选型、LoadBalancer Service 与 ALB Ingress 配置、生产级注解速查与故障排查
+summary: ACK 负载均衡（SLB/NLB/ALB）接入实践指南，覆盖产品选型对比、生产级 LoadBalancer Service 与 ALB Ingress 配置、核心注解速查表、部署验证步骤与常见故障诊断。
 category: general
 tags:
 - cloud
@@ -48,8 +48,9 @@ prerequisites:
 ## 目录
 
 - [负载均衡选型指南](#负载均衡选型指南)
-- [[17-系统基础/06-知识字典/networking/service.md|Service]] (NLB/CLB) 详解](#service-nlbclb-详解)
+- [Service (NLB/CLB) 详解](#service-nlbclb-详解)
 - [ALB Ingress 高级配置](#alb-ingress-高级配置)
+- [部署验证步骤](#部署验证步骤)
 - [生产级注解 (Annotations) 速查表](#生产级注解-annotations-速查表)
 - [故障排查与性能调优](#故障排查与性能调优)
 
@@ -117,6 +118,36 @@ spec:
 
 ---
 
+## 部署验证步骤
+
+### 验证 LoadBalancer Service 交付
+
+```bash
+# 🟢 低风险：EXTERNAL-IP 从 <pending> 变为实际地址即交付成功
+kubectl get svc nlb-service -w
+
+# 🟢 低风险：查看 CCM（cloud-controller-manager）事件，定位创建失败原因
+kubectl describe svc nlb-service | grep -A10 Events
+
+# 🟢 低风险：验证后端端口连通性
+curl -sv http://<EXTERNAL-IP>:80/healthz --max-time 5
+```
+
+### 验证 ALB Ingress 生效
+
+```bash
+# 🟢 低风险：确认 ALB Ingress Controller 运行正常
+kubectl -n kube-system get pods -l app=alb-ingress-controller
+
+# 🟢 低风险：Ingress 地址列非空即 ALB 实例已关联
+kubectl get ingress -o wide
+
+# 🟢 低风险：验证域名路由与证书
+curl -sv https://<your-domain>/api/ping --resolve <your-domain>:443:<ALB-IP>
+```
+
+---
+
 ## 生产级注解 (Annotations) 速查表
 
 ### 核心管理类
@@ -146,6 +177,7 @@ spec:
 | **SLB 无法创建** | 权限不足 / 规格售罄 | 检查 RAM 权限；尝试更换规格或可用区 |
 | **健康检查失败** | 安全组未放通 / 后端路径错误 | 检查 `service-ns` 安全组及应用健康检查端口路径 |
 | **流量不均** | 调度算法不匹配 / 会话保持过长 | 检查 `wrr` 权重设置；调整会话保持时间 |
+| **注解不生效** | CCM 版本过旧 / 注解拼写错误 | `kubectl -n kube-system logs deploy/cloud-controller-manager \| grep <svc-name>` |
 
 ### 性能调优建议
 
@@ -157,18 +189,16 @@ spec:
 
 ## 相关文档
 
-- [223-load-balancing-technologies.md](./223-load-balancing-technologies.md) - 负载均衡通用技术
-- [63-ingress-fundamentals.md](./63-ingress-fundamentals.md) - Ingress 基础与选型
-- [156-alibaba-cloud-integration.md](./156-alibaba-cloud-integration.md) - 阿里云集成总表
+- [[05-网络/01-K8s网络核心/index|K8s 网络核心]]
+- [[05-网络/04-API网关/index|API 网关与 Ingress 选型]]
+- [[18-云厂商/01-阿里云/index|阿里云域索引]]
 
 ## Related
 
-- [[log|log]]
-- [[17-系统基础/05-速查卡/go.md|go]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - [[23-实体/04-网络/grpc.md|grpc]]
-- [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[13-生产运维/05-工单案例/ticket-case-003-slb-backend-group-misconfig|工单案例：SLB 后端组配置错误]]
 
 ## See Also
 

@@ -194,7 +194,7 @@ tags: [training, bootcamp, 28-days, k8s, sre, devops, k8s-1.28-1.33]
 | 天数 | 主题 | 你将学会 |
 |:---:|------|---------|
 | Day 8-9 | 控制平面深潜 | etcd Raft 协议、API 请求链、调度算法 |
-| Day 10-11 | 工作负载实战 | Deployment / [[StatefulSet|StatefulSet]] / [[DaemonSet|DaemonSet]] / HPA |
+| Day 10-11 | 工作负载实战 | Deployment / [[statefulset\|StatefulSet]] / [[daemonset\|DaemonSet]] / HPA |
 | Day 12-13 | 网络栈精通 | CNI 原理、Service 四种类型、Ingress 路由 |
 | Day 14 | 存储 + 综合实践 | PV/PVC/CSI 全链路 + 生产级应用编排 |
 

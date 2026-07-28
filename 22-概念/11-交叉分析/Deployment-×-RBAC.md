@@ -111,7 +111,7 @@ kubectl create rolebinding ci-deployment-manager --role=deployment-manager --ser
 - [[23-实体/08-交付与制品/argocd.md|ArgoCD]]：GitOps同步
 
 ## 相关概念
-- [[Deployment]]
+- [[deployment|Deployment]]
 - RBAC
 ## Related
 

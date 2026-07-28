@@ -64,7 +64,7 @@ cross_refs:
 
 # K8s Serverless / FaaS 实践指南
 
-> **适用版本**: [[Knative|Knative]] Serving v1.17 / [[OpenFunction|OpenFunction]] v1.2 / [[KEDA|KEDA]] HTTP Addon  
+> **适用版本**: [[knative|Knative]] Serving v1.17 / [[openfunction|OpenFunction]] v1.2 / [[keda|KEDA]] HTTP Addon  
 > **最后更新**: 2026-04-24  
 > **难度**: 中级
 
@@ -75,7 +75,7 @@ cross_refs:
 
 - [一、Serverless on K8s 架构模式](#一serverless-on-k8s-架构模式)
 - [二、Knative Serving 部署](#二knative-serving-部署)
-- [三、Knative [[Service|Service]] 与自动缩放](#三knative-service-与自动缩放)
+- [三、Knative [[service|Service]] 与自动缩放](#三knative-service-与自动缩放)
 - [四、OpenFunction 云原生函数](#四openfunction-云原生函数)
 - [五、KEDA + HTTP 无服务器工作负载](#五keda--http-无服务器工作负载)
 - [六、事件驱动架构 (Knative Eventing)](#六事件驱动架构-knative-eventing)

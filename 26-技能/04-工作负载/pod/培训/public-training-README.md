@@ -188,8 +188,8 @@ Week 4: 网络与存储 (进阶)
 
 | Day | 主题 | 文件 |
 |:---:|------|------|
-| Day 22 | [[Service|Service]] 基础实操 | [day-22-service-basics/01-service-basics-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/service/%E5%9F%B9%E8%AE%AD/day-22-service-basics/01-service-basics-hands-on.md) |
-| Day 23 | [[Ingress|Ingress]] 实操 | [day-23-ingress/01-ingress-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/ingress/%E5%9F%B9%E8%AE%AD/day-23-ingress/01-ingress-hands-on.md) |
+| Day 22 | [[service\|Service]] 基础实操 | [day-22-service-basics/01-service-basics-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/service/%E5%9F%B9%E8%AE%AD/day-22-service-basics/01-service-basics-hands-on.md) |
+| Day 23 | [[ingress\|Ingress]] 实操 | [day-23-ingress/01-ingress-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/ingress/%E5%9F%B9%E8%AE%AD/day-23-ingress/01-ingress-hands-on.md) |
 | Day 24 | Terway 网络实操 | [day-24-terway/01-terway-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/cni/%E5%9F%B9%E8%AE%AD/day-24-terway/01-terway-hands-on.md) |
 | Day 25 | Flannel 网络实操 | [day-25-flannel/01-flannel-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/cni/%E5%9F%B9%E8%AE%AD/day-25-flannel/01-flannel-hands-on.md) |
 | Day 26 | 存储卷创建与删除实操 | [day-26-pvc-create/01-pvc-create-hands-on.md](../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/day-26-pvc-create/01-pvc-create-hands-on.md) |

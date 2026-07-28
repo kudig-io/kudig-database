@@ -3,7 +3,6 @@ title: Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage
 description: '# Kubernetes 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice
   Guide)'
 summary: '本文档深入探讨了Kubernetes容器存储接口(CSI)的架构设计、实现原理和最佳实践，基于多种存储后端的生产实践经验，提供从基础概念到高级特性的完整技术指南，帮助企业构建高效、可靠的存储解决方案。'
-  Guide)'
 category: papers
 tags:
 - k8s
@@ -67,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
+# [[kubernetes|Kubernetes]] 容器存储接口 (CSI) 深度实践指南 (Container Storage Interface Deep Practice Guide)
 
 > **作者**: 存储架构专家 | **版本**: v1.5 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级存储架构设计 | **复杂度**: ⭐⭐⭐⭐⭐

@@ -74,7 +74,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.29 - v1.33 完整 Feature Gate 与特性参考手册
+# [[kubernetes|Kubernetes]] v1.29 - v1.33 完整 Feature Gate 与特性参考手册
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  
@@ -136,8 +136,8 @@ Feature Gate 生命周期
 | **GracefulNodeShutdown** | v1.26 | 优雅节点关机 |
 | **CSIInlineVolume** | v1.25 | CSI 内联卷 |
 | **CSIMigration** | v1.25 | CSI 迁移 |
-| **CronJobTimeZone** | v1.25 | [[CronJob|CronJob]] 时区支持 |
-| **JobTrackingWithFinalizers** | v1.25 | Job 跟踪 [[Finalizers|Finalizers]] |
+| **CronJobTimeZone** | v1.25 | [[cronjob\|CronJob]] 时区支持 |
+| **JobTrackingWithFinalizers** | v1.25 | Job 跟踪 [[finalizers\|Finalizers]] |
 | **SeccompDefault** | v1.25 | 默认 Seccomp 策略 |
 | **LocalStorageCapacityIsolation** | v1.25 | 本地存储容量隔离 |
 | **StatefulSetMinReadySeconds** | v1.25 | StatefulSet 最小就绪时间 |

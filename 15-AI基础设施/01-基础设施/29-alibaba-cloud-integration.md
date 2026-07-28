@@ -108,7 +108,7 @@ cross_refs:
 | **漏洞扫描** | ACR企业版 | - | 自动扫描CVE |
 | **镜像签名** | ACR企业版 | v1.28+ | 内容信任验证 |
 | **制品同步** | ACR配置 | - | 跨地域镜像同步 |
-| **[[Helm|Helm]] Chart** | ACR企业版 | - | Helm Chart仓库 |
+| **[[helm\|Helm]] Chart** | ACR企业版 | - | Helm Chart仓库 |
 
 ```yaml
 # ACK免密拉取配置

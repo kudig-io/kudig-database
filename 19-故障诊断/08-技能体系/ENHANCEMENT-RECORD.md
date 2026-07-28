@@ -93,7 +93,7 @@ version: 1.0.0
 | 02-pod-crashloop-oomkilled.md | 新增 Phase 4 应用级内存分析（pprof/JFR/tracemalloc）、RC-013/014（cgroup v2/preStop Hook）、REM-010 内存泄漏修复 |
 | 03-pod-pending.md | 新增 SchedulingGates/Topology Spread/GPU 诊断、RC-014/015（PriorityClass抢占/GPU调度）、DRA 调度演进 |
 | 04-dns-resolution-failure.md | 新增 Phase 4/5（NodeLocal DNSCache/自定义DNS策略）、RC-013/014（插件链异常/QPS压力）、REM-011/012 |
-| 05-service-connectivity.md | 新增 Phase 4/5（[[Service|Service]]Service Mesh）|Service Mesh]]/Gateway API）、RC-013/014/015（EndpointSlice/Mesh sidecar/MCS API） |
+| 05-service-connectivity.md | 新增 Phase 4/5（[[service\|Service]]Service Mesh）|Service Mesh]]/Gateway API）、RC-013/014/015（EndpointSlice/Mesh sidecar/MCS API） |
 | 06-certificate-expiry.md | 新增 Phase 4/5（[[cert-manager|cert-manager]]轮转/mTLS诊断）、RC-013/014/015（cert-manager/mTLS/OCSP）、REM-012/013 |
 
 ### 3.2 新增 Skill（12 个文件）

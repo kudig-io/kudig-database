@@ -76,7 +76,7 @@ cross_refs:
 
 ### 前置知识
 
-- Kubernetes 核心概念（Pod、Deployment、[[Service|Service]]）
+- Kubernetes 核心概念（Pod、Deployment、[[service|Service]]）
 - Linux 系统管理基础
 - 网络基础知识
 

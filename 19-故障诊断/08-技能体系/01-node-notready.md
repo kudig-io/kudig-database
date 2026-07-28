@@ -1,7 +1,7 @@
 ---
 title: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 description: '## 1. 概述'
-summary: 'Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，'
+summary: 'Node NotReady 是 [[kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，'
 category: node
 tags:
 - k8s
@@ -71,7 +71,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-Node NotReady 是 [[Kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 [[DaemonSet|DaemonSet]] Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
+Node NotReady 是 [[kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，Kubernetes 控制平面（kube-controller-manager 的 node-lifecycle-controller）将在 `pod-eviction-timeout`（默认 5 分钟）后开始驱逐该节点上的所有非 [[daemonset|DaemonSet]] Pod，导致大规模服务中断。对于 control plane 节点，NotReady 可能直接威胁集群可用性。
 
 > **版本差异说明 / Version Notes**:
 > - `pod-eviction-timeout` 默认 5 分钟，自 v1.28+ 可通过 kube-controller-manager 的 `--node-monitor-grace-period` 调整

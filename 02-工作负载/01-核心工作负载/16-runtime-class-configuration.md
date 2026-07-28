@@ -105,7 +105,7 @@ scheduling:
 | gvisor | runsc | 安全沙箱 | 内核隔离 |
 | kata | kata-runtime | 轻量级VM | 虚拟化隔离 |
 | nvidia | nvidia | GPU容器 | 进程隔离 |
-| [[WasmEdge|wasmedge]] | wasmedge | WebAssembly | Wasm沙箱 |
+| [[wasmedge\|wasmedge]] | wasmedge | WebAssembly | Wasm沙箱 |
 
 <!-- chunk: containerd配置 -->
 ## containerd配置

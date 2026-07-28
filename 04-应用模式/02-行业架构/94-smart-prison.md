@@ -53,7 +53,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - mysql
 - operator
@@ -104,7 +104,7 @@ k8s_versions:
 
 # 智慧监狱架构设计 — 阿里云视角
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#智慧监狱` `#司法矫正` `#AI监控` `#智慧监管` `#阿里云`
 
 ---

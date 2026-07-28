@@ -150,7 +150,7 @@ spec:
 
 ### Falco + Talon
 
-[[Falco]] 是 CNCF 毕业的运行时威胁检测工具：
+[[falco|Falco]] 是 CNCF 毕业的运行时威胁检测工具：
 
 **Falco** — 检测异常行为：
 - 系统调用监控 (基于内核模块/eBPF)
@@ -179,7 +179,7 @@ spec:
 
 ### Tetragon — eBPF 强制执行
 
-[[Tetragon]] (Cilium 生态) 提供 eBPF 级别的安全强制：
+[[tetragon|Tetragon]] (Cilium 生态) 提供 eBPF 级别的安全强制：
 
 | 能力 | 说明 |
 |------|------|
@@ -208,7 +208,7 @@ spec:
 
 ### KubeArmor
 
-[[KubeArmor]] 提供基于 LSM (Linux Security Modules) 的强制执行：
+[[kubearmor|KubeArmor]] 提供基于 LSM (Linux Security Modules) 的强制执行：
 - AppArmor / SELinux / BPF-LSM 支持
 - 声明式安全策略
 - 与 K8S 原生集成
@@ -254,7 +254,7 @@ spec:
 
 ### Cilium — L7 网络策略 + Hubble
 
-[[Cilium]] 是 CNCF 毕业的 eBPF 网络方案：
+[[cilium|Cilium]] 是 CNCF 毕业的 eBPF 网络方案：
 
 ```yaml
 # Cilium L7 网络策略 — 只允许 GET /api/*
@@ -374,9 +374,9 @@ CIS Benchmark 主要检查项：
 
 ## 相关概念
 
-- [[Cilium]] — eBPF 网络与安全
-- [[Kyverno]] — YAML 原生策略引擎
-- [[Falco]] — 运行时威胁检测
+- [[cilium|Cilium]] — eBPF 网络与安全
+- [[kyverno|Kyverno]] — YAML 原生策略引擎
+- [[falco|Falco]] — 运行时威胁检测
 - Sigstore — 无钥签名体系
 - Pod Security Standards — Pod 安全标准
 - RBAC — 基于角色的访问控制

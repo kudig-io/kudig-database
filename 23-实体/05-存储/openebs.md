@@ -277,7 +277,7 @@ OpenEBS 存储异常
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - openebs
-- [[23-实体/cncf-storage.md|[[CNCF 存储与数据库项目全景|CNCF 存储与数据库项目全景]]]] — Cross-reference
+- [[23-实体/cncf-storage.md|[[23-实体/15-参考与索引/cncf-storage|CNCF 存储与数据库项目全景]]]] — Cross-reference
 - [[21-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]

@@ -55,7 +55,7 @@ last_updated: 2026-05-23
 
 ## 概述
 
-Pod CrashLoopBackOff 和 OOMKilled 是 [[Kubernetes|Kubernetes]] 工作负载中最常见的问题类型。本 Skill 覆盖从症状识别到修复验证的完整闭环。
+Pod CrashLoopBackOff 和 OOMKilled 是 [[kubernetes|Kubernetes]] 工作负载中最常见的问题类型。本 Skill 覆盖从症状识别到修复验证的完整闭环。
 
 **典型触发场景**：
 1. 应用代码异常导致容器反复退出（退出码 1）
@@ -112,7 +112,7 @@ Pod CrashLoopBackOff 和 OOMKilled 是 [[Kubernetes|Kubernetes]] 工作负载中
 ## 危险操作
 
 - **动作**: `kubectl delete pod <pod> --force --grace-period=0`
-  - **风险**: 强制删除可能导致数据不一致或 [[StatefulSet|StatefulSet]] 状态异常
+  - **风险**: 强制删除可能导致数据不一致或 [[statefulset|StatefulSet]] 状态异常
   - **确认要求**: 是
 - **动作**: 修改 StatefulSet 的 volumeClaimTemplates
   - **风险**: 可能导致 PVC 丢失或数据不可访问

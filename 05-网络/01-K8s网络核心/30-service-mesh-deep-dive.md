@@ -73,9 +73,9 @@ cross_refs:
 
 
 
-# 02 - [[Service|Service]]Service Mesh）|Service Mesh]] 深度解析与生产实践
+# 02 - [[service|Service]]Service Mesh）|Service Mesh]] 深度解析与生产实践
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 专家级
 
 ---
 

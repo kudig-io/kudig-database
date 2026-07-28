@@ -58,7 +58,7 @@ authors:
 
 # 31 - FlowSchema / PriorityLevelConfiguration YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 GA (Beta 从 v1.20, Alpha 从 v1.18) | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 GA (Beta 从 v1.20, Alpha 从 v1.18) | **最后更新**: 2026-02
 
 **本文档全面覆盖 API Priority and Fairness (APF) 的 YAML 配置**,包括 FlowSchema 请求分类、PriorityLevelConfiguration 优先级配置、内置流量控制策略、Shuffle Sharding 机制、生产实践案例等。
 
@@ -795,7 +795,7 @@ spec:
 
 ## 6.5 案例 5: 监控指标收集优先级
 
-**场景**: [[Prometheus|Prometheus]] 等监控系统定期抓取 `/metrics` 端点
+**场景**: [[prometheus|Prometheus]] 等监控系统定期抓取 `/metrics` 端点
 
 ```yaml
 # 为监控系统创建专用 FlowSchema

@@ -728,7 +728,7 @@ factory := informers.NewSharedInformerFactory(clientset, 0)
 
 ## Related
 
-- [[21-生态参考/03-领域索引/etcd-index.md|[[etcd 知识图谱索引|etcd 知识图谱索引]]]]
+- [[21-生态参考/03-领域索引/etcd-index.md|[[21-生态参考/03-领域索引/etcd-index|etcd 知识图谱索引]]]]
 
 
 - [[10-平台工程/06-代码分析/kubernetes-core/06-declarative-api-informer-mechanism.md|声明式 API 与 Informer 机制源码剖析（DeltaFIFO/WorkQueue 行号级实现）]]

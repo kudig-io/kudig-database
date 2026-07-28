@@ -570,7 +570,7 @@ mysql -h $REPLICA_HOST -u $DB_USER -p$DB_PASSWORD -e "SHOW SLAVE STATUS\G" | \
 
 2. **迁移脚本版本化管理**：使用 Flyway/Liquibase 管理迁移脚本，与代码仓库同步版本。
 
-3. **迁移前必须备份**：通过 [[12-可靠性/01-备份恢复]] 流程确保有可用备份。
+3. **迁移前必须备份**：通过 [[12-可靠性/01-备份恢复/index|01-备份恢复]] 流程确保有可用备份。
 
 4. **大表操作使用在线 DDL 工具**：超过 100 万行的表禁止直接 ALTER TABLE。
 
@@ -599,6 +599,6 @@ mysql -h $REPLICA_HOST -u $DB_USER -p$DB_PASSWORD -e "SHOW SLAVE STATUS\G" | \
 - [[11-发布变更/04-变更管理/01-change-window-and-approval.md|变更窗口与审批]]
 - [[11-发布变更/01-GitOps/08-cicd-pipeline-patterns.md|CI/CD 流水线模式]]
 - [[11-发布变更/04-变更管理/07-rollback-automation-patterns.md|回滚自动化模式]]
-- [[12-可靠性/01-备份恢复]]
+- [[12-可靠性/01-备份恢复/index|01-备份恢复]]
 - [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
 - [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略]]

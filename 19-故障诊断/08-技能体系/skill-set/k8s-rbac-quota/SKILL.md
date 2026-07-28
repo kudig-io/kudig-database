@@ -60,7 +60,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s RBAC & Quota Failure 诊断与修复
 
-RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建失败、应用功能异常的常见根因。权限配置错误可能在 CI/CD 发布、新服务部署、集群升级后暴露。
+RBAC 和 ResourceQuota 问题是 [[kubernetes|Kubernetes]] 中导致 Pod 创建失败、应用功能异常的常见根因。权限配置错误可能在 CI/CD 发布、新服务部署、集群升级后暴露。
 
 本 [[SKILL|Skill]] 覆盖 RBAC 权限不足、ResourceQuota 超限、ServiceAccount 缺失等全部常见根因的诊断和修复。
 
@@ -129,7 +129,7 @@ RBAC 和 ResourceQuota 问题是 [[Kubernetes|Kubernetes]] 中导致 Pod 创建�
 | RC-002 | ResourceQuota 超限 | 高 | REM-002 调整配额 | LOW |
 | RC-003 | ServiceAccount 不存在 | 中 | REM-003 创建 SA | LOW |
 | RC-004 | RoleBinding/ClusterRoleBinding 缺失 | 中 | REM-004 创建 Binding | LOW |
-| RC-005 | [[NetworkPolicy|NetworkPolicy]] 阻止 API 访问 | 低 | REM-005 调整策略 | MEDIUM |
+| RC-005 | [[networkpolicy\|NetworkPolicy]] 阻止 API 访问 | 低 | REM-005 调整策略 | MEDIUM |
 | RC-006 | PodSecurityPolicy/Admission 拒绝 | 中 | REM-006 调整策略 | HIGH |
 
 ## 关联资源

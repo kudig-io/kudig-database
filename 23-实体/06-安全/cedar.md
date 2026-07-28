@@ -262,7 +262,7 @@ cedar format --policies policy.cedar
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - cedar
-- [[23-实体/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[23-实体/cncf-security.md|[[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]]] — Cross-reference
 
 
 <!-- risk-assessed -->

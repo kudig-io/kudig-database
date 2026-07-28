@@ -51,7 +51,7 @@ prerequisites:
 
 ## 场景概述
 
-AI 基础设施是 [[Kubernetes|Kubernetes]] 的新兴场景。
+AI 基础设施是 [[kubernetes|Kubernetes]] 的新兴场景。
 
 ---
 

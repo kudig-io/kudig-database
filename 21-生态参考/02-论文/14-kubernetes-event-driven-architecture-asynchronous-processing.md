@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
+title: [[kubernetes|Kubernetes]] 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
 description: '# Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous
   Processing)'
 category: papers
@@ -63,10 +63,10 @@ tags:
 - papers
 - research
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Jaeger|jaeger]]
+- [[prometheus|prometheus]]
+- [[jaeger|jaeger]]
 - kafka
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
 - operator
 last_updated: 2026-05

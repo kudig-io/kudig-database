@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-title: 04 - Deployment / [[ReplicaSet|ReplicaSet]] YAML 配置参考
+title: 04 - Deployment / [[replicaset|ReplicaSet]] YAML 配置参考
 description: '# 04 - Deployment / ReplicaSet YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -64,7 +64,7 @@ tags:
 - template
 - [[etcd|etcd]]
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - jaeger
 - istio
 - helm

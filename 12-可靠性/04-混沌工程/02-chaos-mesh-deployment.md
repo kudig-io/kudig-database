@@ -57,7 +57,7 @@ Chaos Mesh 架构:
 └── chaos-mesh-controller-manager: 核心控制器
 ```
 
-## [[Helm|Helm]] 安装
+## [[helm|Helm]] 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release

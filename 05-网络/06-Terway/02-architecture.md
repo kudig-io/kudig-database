@@ -1,7 +1,7 @@
 ---
 title: 02 - Terway 架构原理 (Architecture Deep Dive)
 description: '# 02 - Terway 架构原理 (Architecture Deep Dive)'
-summary: 'Terway 是阿里云 ACK 的容器网络接口 (CNI) 插件, 核心设计目标是将 [[Kubernetes|Kubernetes]] Pod 直接接入阿里云 VPC 网络, 使 Pod 获得 VPC 级别的网络连通性, 同时保持与原生 VPC 网络策略和安全组的一致性.'
+summary: 'Terway 是阿里云 ACK 的容器网络接口 (CNI) 插件, 核心设计目标是将 [[kubernetes|Kubernetes]] Pod 直接接入阿里云 VPC 网络, 使 Pod 获得 VPC 级别的网络连通性, 同时保持与原生 VPC 网络策略和安全组的一致性.'
 category: terway
 tags:
 - k8s
@@ -69,7 +69,7 @@ prerequisites:
 
 ## 1. 整体架构
 
-Terway 是阿里云 ACK 的容器网络接口 (CNI) 插件, 核心设计目标是将 [[Kubernetes|Kubernetes]] Pod 直接接入阿里云 VPC 网络, 使 Pod 获得 VPC 级别的网络连通性, 同时保持与原生 VPC 网络策略和安全组的一致性.
+Terway 是阿里云 ACK 的容器网络接口 (CNI) 插件, 核心设计目标是将 [[kubernetes|Kubernetes]] Pod 直接接入阿里云 VPC 网络, 使 Pod 获得 VPC 级别的网络连通性, 同时保持与原生 VPC 网络策略和安全组的一致性.
 
 ### 1.1 网络拓扑全景图
 
@@ -134,7 +134,7 @@ Terway 是阿里云 ACK 的容器网络接口 (CNI) 插件, 核心设计目标�
 
 | 组件 | 形态 | 命名空间 | 职责 | 关键配置 |
 |------|------|----------|------|----------|
-| **Terway [[DaemonSet|DaemonSet]]** | DaemonSet (每个 Node 一个 Pod) | `kube-system` | 运行 CNI 插件二进制, 执行 IPAM, 管理 ENI/IP 资源池, 处理 CNI ADD/DEL/CHECK 请求 | `terway-eniip` (ENIIP 模式) / `terway-eni` (ENI 独占模式) |
+| **Terway [[daemonset\|DaemonSet]]** | DaemonSet (每个 Node 一个 Pod) | `kube-system` | 运行 CNI 插件二进制, 执行 IPAM, 管理 ENI/IP 资源池, 处理 CNI ADD/DEL/CHECK 请求 | `terway-eniip` (ENIIP 模式) / `terway-eni` (ENI 独占模式) |
 | **Terway Controller** | Deployment (默认 1 副本, 可选 HA) | `kube-system` | Watch CRD 变更, 管理 ENI 生命周期, 节点网络资源协调, 垃圾回收, 状态同步 | 由 `terway-controller` Deployment 管理 |
 | **eni-config ConfigMap** | ConfigMap | `kube-system` | 全局网络配置, 包括: VPC ID, vSwitch ID 列表, 安全组, 网络模式, IP 池大小, 是否启用 Trunk 等 | 所有 Terway 组件启动时读取 |
 

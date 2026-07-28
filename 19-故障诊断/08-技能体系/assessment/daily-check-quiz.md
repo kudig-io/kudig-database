@@ -97,7 +97,7 @@ E. 升级集群版本
 
 ### Day 3（周三）
 
-**题目**：一个 Deployment 有 3 个副本，所有 Pod 都处于 Running 状态，但 [[Service|Service]] 的 Endpoints 为空。以下哪个不是可能的原因？
+**题目**：一个 Deployment 有 3 个副本，所有 Pod 都处于 Running 状态，但 [[service|Service]] 的 Endpoints 为空。以下哪个不是可能的原因？
 
 A. Service 的 selector 与 Pod 的标签不匹配
 B. 所有 Pod 的 readinessProbe 都失败

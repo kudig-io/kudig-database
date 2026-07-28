@@ -59,7 +59,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
+title: [[kubernetes|Kubernetes]] 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
 description: '**作者:** 云原生治理架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:**
   集群治理、合规审计、策略自动化 | **复杂度:** ⭐⭐⭐⭐⭐'
 category: papers
@@ -69,10 +69,10 @@ tags:
 - research
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Envoy|envoy]]
-- [[Cilium|cilium]]
+- [[envoy|envoy]]
+- [[cilium|cilium]]
 - helm
 last_updated: 2026-05
 difficulty: expert

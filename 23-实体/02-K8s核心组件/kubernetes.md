@@ -50,7 +50,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] (CNCF Graduated)
+# [[kubernetes|Kubernetes]] (CNCF Graduated)
 
 > **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
 

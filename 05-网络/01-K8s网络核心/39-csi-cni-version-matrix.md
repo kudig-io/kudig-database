@@ -102,10 +102,10 @@ cross_refs:
 | **GCE PD CSI** v1.10+ | 1.20 | 1.26-1.33 | 1.33 | GKE 原生支持 |
 | **Azure Disk CSI** v1.20+ | 1.20 | 1.26-1.33 | 1.33 | AKS 原生支持 |
 | **阿里云 Cloud Disk CSI** v1.0+ | 1.21 | 1.28-1.33 | 1.33 | ACK 原生支持 |
-| **Ceph CSI (RBD)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | [[Rook|Rook]] 部署 |
+| **Ceph CSI (RBD)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | [[rook\|Rook]] 部署 |
 | **Ceph CSI (CephFS)** v3.6+ | 1.22 | 1.26-1.33 | 1.33 | Rook 部署 |
 | **NFS CSI** v4.0+ | 1.20 | 1.26-1.33 | 1.33 | 需要外部Provisioner |
-| **[[Longhorn|Longhorn]] CSI** v1.5+ | 1.21 | 1.26-1.33 | 1.33 | CNCF 项目 |
+| **[[longhorn\|Longhorn]] CSI** v1.5+ | 1.21 | 1.26-1.33 | 1.33 | CNCF 项目 |
 | **TopoLVM CSI** v0.10+ | 1.21 | 1.28-1.33 | 1.33 | 本地 LVM 支持 |
 | **OpenEBS CSI** v3.0+ | 1.22 | 1.26-1.33 | 1.33 | CNCF 项目 |
 

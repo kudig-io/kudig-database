@@ -73,7 +73,7 @@ tags:
 - [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -85,7 +85,7 @@ estimated_read_time: 5min
 intent_queries:
 - 集群性能调优 是什么
 - 如何 集群性能调优
-- [[Kubernetes|Kubernetes]] 18 production operations 最佳实践
+- [[kubernetes|Kubernetes]] 18 production operations 最佳实践
 trigger_keywords:
 - 集群性能调优
 - production

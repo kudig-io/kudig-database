@@ -1,3 +1,12 @@
+---
+title: Node NotReady 完整诊断技能
+category: reference
+tags:
+- reference
+tier: supporting
+created: '2026-07-27'
+---
+
 # Node NotReady 完整诊断技能
 
 ## 概述

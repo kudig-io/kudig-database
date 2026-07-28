@@ -52,7 +52,7 @@ title: Day 15: Node 节点基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
   - Node status conditions Ready NotReady
   - Node capacity allocatable resource management
   - Kubernetes node monitoring troubleshooting

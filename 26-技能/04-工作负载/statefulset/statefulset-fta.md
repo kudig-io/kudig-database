@@ -43,7 +43,7 @@ severity: critical
 ---
 title: "StatefulSet 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 StatefulSet Pod 非 Running --..."
+summary: "<!-- condition: kubectl get [[pods|pods]] -n <ns> -l app=<name> -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 StatefulSet Pod 非 Running --..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["故障诊断/FTA故障树/list/statefulset-fta.md"]
 created: 2026-05-21

@@ -140,7 +140,7 @@ related_topics:
 | ESSD PL2 | 高性能 | 100,000 | 700 MB/s | 数据库、高 IO |
 | ESSD PL3 | 极致 | 1,000,000 | 4,000 MB/s | 核心数据库 |
 
-**[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 配置** 包括节点名称模式、标签（Labels）、污点（Taints）和用户数据（User Data）。标签用于调度——Pod 可以通过 nodeSelector 或 nodeAffinity 指定调度到带有特定标签的节点池。污点用于排斥——没有设置对应 Toleration 的 Pod 不会被调度到该节点池。
+**[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 配置** 包括节点名称模式、标签（Labels）、污点（Taints）和用户数据（User Data）。标签用于调度——Pod 可以通过 nodeSelector 或 nodeAffinity 指定调度到带有特定标签的节点池。污点用于排斥——没有设置对应 Toleration 的 Pod 不会被调度到该节点池。
 
 ### 托管节点池 vs 自管理节点池
 
@@ -174,7 +174,7 @@ related_topics:
 
 生产环境的节点池架构通常采用"分层隔离"设计：
 
-**系统节点池**: 专门运行 K8s 系统组件和基础服务（如 [[CoreDNS|CoreDNS]]、Ingress Controller、Prometheus、日志采集 Agent）。建议配置：
+**系统节点池**: 专门运行 K8s 系统组件和基础服务（如 [[coredns|CoreDNS]]、Ingress Controller、Prometheus、日志采集 Agent）。建议配置：
 
 - 实例规格: ecs.g6.xlarge（4C16G）或更高
 - 节点数量: 至少 2 个（高可用）

@@ -47,7 +47,7 @@ status: reviewed
 
 ## Security Layers
 
-[[Kubernetes|Kubernetes]] security follows a defense-in-depth model across four layers:
+[[kubernetes|Kubernetes]] security follows a defense-in-depth model across four layers:
 
 ### Layer 1: Cluster Access Control
 
@@ -61,7 +61,7 @@ status: reviewed
 - **RBAC** (Role-Based Access Control): ClusterRole/Role + ClusterRoleBinding/RoleBinding
 - **ABAC** (Attribute-Based): Legacy, rarely used
 - **Node Authorization**: Restricted [[kubelet|kubelet]] permissions
-- **Webhook Authorization**: External authorization [[Service|service]]
+- **Webhook Authorization**: External authorization [[service|service]]
 
 **Admission Control** intercepts requests before persistence:
 - **Mutating**: Modify requests (e.g., inject sidecar, set defaults)

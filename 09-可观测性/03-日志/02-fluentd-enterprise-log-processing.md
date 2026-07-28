@@ -1,7 +1,7 @@
 ---
 title: Fluentd企业级日志收集与处理深度实践
 description: '# Fluentd企业级日志收集与处理深度实践'
-summary: 'This document provides in-depth exploration of [[Fluentd|Fluentd]] enterprise log collection and processing architecture design, deployment practices, and operational management.'
+summary: 'This document provides in-depth exploration of [[fluentd|Fluentd]] enterprise log collection and processing architecture design, deployment practices, and operational management.'
 category: logging-management-analytics
 tags:
 - k8s
@@ -64,7 +64,7 @@ authors:
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 
-This document provides in-depth exploration of [[Fluentd|Fluentd]] enterprise log collection and processing architecture design, deployment practices, and operational management. Based on large-scale production environment experience, it offers comprehensive technical guidance from log collection to real-time processing, helping enterprises build reliable, scalable log management systems.
+This document provides in-depth exploration of [[fluentd|Fluentd]] enterprise log collection and processing architecture design, deployment practices, and operational management. Based on large-scale production environment experience, it offers comprehensive technical guidance from log collection to real-time processing, helping enterprises build reliable, scalable log management systems.
 
 <!-- chunk: 1. Fluentd Architecture Deep Dive -->## 1. Fluentd Architecture Deep Dive
 

@@ -11,9 +11,9 @@
 用法: python3 31-脚本/maintenance/rewrite-prefix-links-20260723.py [--dry-run]
 """
 import os
+import posixpath
 import re
 import sys
-import posixpath
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))

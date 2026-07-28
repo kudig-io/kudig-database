@@ -52,15 +52,15 @@ title: Day 24: 云原生安全 + 合规
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|Kubernetes]]es 安全加固|Kubernetes 安全加固]]
-  - [[Kyverno|Kyverno]] 策略引擎
+  - [[kubernetes|Kubernetes]]es 安全加固|Kubernetes 安全加固]]
+  - [[kyverno|Kyverno]] 策略引擎
   - 零信任安全架构
   - Secret 管理工具
 trigger_keywords:
   - 云原生安全
   - Kyverno
   - 零信任
-  - Sealed [[Secrets|Secrets]]
+  - Sealed [[secrets|Secrets]]
   - Vault
   - 安全审计
   - 合规

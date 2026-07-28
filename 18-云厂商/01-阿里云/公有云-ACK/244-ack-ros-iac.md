@@ -1,7 +1,7 @@
 ---
 title: ACK 关联产品 - ROS 资源编排 (IaC)
-description: 'description: ''- [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)'''
-summary: 'description: ''- [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)'''
+description: ACK 基础设施即代码实践：ROS 与 Terraform 选型、ACK 集群 ROS 模板、堆栈部署与变更预览操作步骤、CI/CD 集成
+summary: ACK 资源编排（ROS/IaC）实践指南，覆盖 ROS 与 Terraform 选型对比、ACK Pro 集群模板示例、堆栈创建/变更预览/回滚完整操作步骤与验证方法、GitOps 集成建议。
 category: general
 tags:
 - cloud
@@ -50,6 +50,7 @@ prerequisites:
 - [IaC 方案对比 (ROS vs Terraform)](#iac-方案对比-ros-vs-terraform)
 - [ROS 基本概念与架构](#ros-基本概念与架构)
 - [ACK 集群 ROS 模板示例](#ack-集群-ros-模板示例)
+- [堆栈操作步骤与验证](#堆栈操作步骤与验证)
 - [资源依赖管理 (DependsOn)](#资源依赖管理-dependson)
 - [CI/CD 与 GitOps 集成](#cicd-与-gitops-集成)
 
@@ -115,6 +116,51 @@ Outputs:
 
 ---
 
+## 堆栈操作步骤与验证
+
+### 创建堆栈
+
+```bash
+# 🟢 低风险：先验证模板语法
+aliyun ros ValidateTemplate --TemplateBody "$(cat ack-cluster.yaml)"
+
+# 🟡 中风险：创建堆栈（会实际创建 ACK 集群与 ECS 资源）
+aliyun ros CreateStack --StackName prod-ack-stack \
+  --TemplateBody "$(cat ack-cluster.yaml)" \
+  --Parameters.1.ParameterKey=VpcId --Parameters.1.ParameterValue=vpc-xxx \
+  --Parameters.2.ParameterKey=VSwitchIds --Parameters.2.ParameterValue=vsw-xxx,vsw-yyy \
+  --TimeoutInMinutes 60
+```
+
+### 验证堆栈状态
+
+```bash
+# 🟢 低风险：轮询堆栈状态，期望 CREATE_COMPLETE
+aliyun ros GetStack --StackId <stack-id> | jq '{Status, StatusReason}'
+
+# 🟢 低风险：查看输出值（集群 ID 等）
+aliyun ros GetStack --StackId <stack-id> | jq '.Outputs'
+
+# 🟢 低风险：创建失败时定位具体资源的失败原因
+aliyun ros ListStackEvents --StackId <stack-id> | jq '.Events[] | select(.Status | endswith("FAILED")) | {LogicalResourceId, StatusReason}'
+```
+
+### 变更预览与更新（生产推荐流程）
+
+```bash
+# 🟢 低风险：生成变更集，预览受影响资源，不实际执行
+aliyun ros CreateChangeSet --StackId <stack-id> --ChangeSetName pre-check-$(date +%m%d) \
+  --TemplateBody "$(cat ack-cluster.yaml)"
+aliyun ros GetChangeSet --ChangeSetId <changeset-id> | jq '.Changes'
+
+# 🔴 高风险：确认变更集无意外删除（Action 为 Remove 的资源）后才执行
+aliyun ros ExecuteChangeSet --ChangeSetId <changeset-id>
+```
+
+> 关键检查点：变更集中任何 `"Action": "Remove"` 或 `"Replacement": "True"` 的条目都意味着资源重建，对集群/节点池类资源将造成业务中断，必须走变更窗口。
+
+---
+
 ## 资源依赖管理 (DependsOn)
 
 在 IaC 编排中，资源创建的顺序至关重要。
@@ -153,17 +199,15 @@ graph LR
 
 ## 相关文档
 
-- [06-cluster-configuration-parameters.md](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/06-%E5%8D%87%E7%BA%A7%E8%B7%AF%E5%BE%84/06-cluster-configuration-parameters.md) - 集群配置参数参考
-- [156-alibaba-cloud-integration.md](./156-alibaba-cloud-integration.md) - 阿里云集成总表
-- [141-hybrid-multi-cloud-design.md](./141-hybrid-multi-cloud-design.md) - 混合云架构设计
+- [[11-发布变更/02-IaC/index|IaC 专题索引]]
+- [[11-发布变更/02-IaC/01-terraform-enterprise-iac|Terraform 企业级 IaC]]
+- [[18-云厂商/01-阿里云/index|阿里云域索引]]
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[17-系统基础/05-速查卡/gitops.md|gitops]]
 - [[17-系统基础/05-速查卡/git.md|git]]
-- 06-cluster-configuration-parameters
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ## See Also

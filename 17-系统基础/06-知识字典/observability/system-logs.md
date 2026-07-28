@@ -47,7 +47,7 @@ prerequisites:
 
 ## 核心概念/原理
 
-- **klog**：[[Kubernetes|Kubernetes]] 的日志库，为 Kubernetes 系统组件生成日志消息。
+- **klog**：[[kubernetes|Kubernetes]] 的日志库，为 Kubernetes 系统组件生成日志消息。
 - **日志输出稳定性**：与命令行标志不同，日志输出的格式和内容**不属于 [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 稳定性保证范围**，不同版本之间日志条目和格式可能发生变化。
 - **日志输出目标**：输出始终写入 `stderr`，重定向由调用 Kubernetes 组件的外部程序（如 POSIX shell、systemd）处理。
 - **kube-log-runner**：在无法使用 shell 重定向的环境（如 distroless 容器、Windows 系统服务）中，可使用 `kube-log-runner` 包装器来重定向日志输出。

@@ -52,7 +52,7 @@ prerequisites:
 
 
 
-title: [[Crossplane|Crossplane]] 平台组合 (Crossplane Platform Composition)
+title: [[crossplane|Crossplane]] 平台组合 (Crossplane Platform Composition)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: platform-engineering
 tags:
@@ -61,8 +61,8 @@ tags:
 - developer-experience
 - idp
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - argocd
 - flux
 - postgresql

@@ -62,9 +62,9 @@ tags:
 - modernization
 - [[etcd|etcd]]
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Cilium|cilium]]
+- [[cilium|cilium]]
 - flannel
 - calico
 last_updated: 2026-05

@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-kube-scheduler 是 [[Kubernetes|Kubernetes]] 的默认调度器，负责将 Pod 放置到集群的节点上。在大型集群中，可以通过调整调度器的行为来平衡调度延迟（新 Pod 快速放置）和准确性（调度器很少做出差的放置决策）。
+kube-scheduler 是 [[kubernetes|Kubernetes]] 的默认调度器，负责将 Pod 放置到集群的节点上。在大型集群中，可以通过调整调度器的行为来平衡调度延迟（新 Pod 快速放置）和准确性（调度器很少做出差的放置决策）。
 
 ## 核心概念/原理
 

@@ -139,7 +139,7 @@ Headlamp 是 K8s 的 Web 管理界面。
 
 ### tools]] — 沙箱项目
 
-VS Code [[Kubernetes|Kubernetes]] 扩展。
+VS Code [[kubernetes|Kubernetes]] 扩展。
 
 ### [[cloud-custodian]] — 孵化项目
 

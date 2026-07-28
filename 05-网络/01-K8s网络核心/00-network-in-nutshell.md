@@ -75,7 +75,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 网络基础 Network in a Nutshell
+# [[kubernetes|Kubernetes]] 网络基础 Network in a Nutshell
 
 > 目标：**用一套 Mermaid 图看懂 K8s 网络**，再配合 **kind 本地集群**全部动手验证一遍。
 >
@@ -84,7 +84,7 @@ cross_refs:
 Kubernetes 网络看似复杂，但只要抓住两条主线就不会迷路：
 
 - **主线一：K8s 只定义「网络应该长什么样」（网络模型），不关心「怎么实现」。**
-- **主线二：具体实现由 CNI 插件、kube-proxy、[[CoreDNS|CoreDNS]]、Ingress 这几个角色分工协作完成。**
+- **主线二：具体实现由 CNI 插件、kube-proxy、[[coredns|CoreDNS]]、Ingress 这几个角色分工协作完成。**
 
 ---
 

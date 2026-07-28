@@ -64,7 +64,7 @@ cross_refs:
 
 # 33 - kubeadm 集群引导配置 YAML 参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
 
 <!-- chunk: 目录 -->## 目录
 
@@ -1955,7 +1955,7 @@ kubeadm init --config kubeadm-init-config.yaml
    - 配置合理的资源预留
 
 4. **监控运维**:
-   - 配置 [[Prometheus|Prometheus]] 监控
+   - 配置 [[prometheus|Prometheus]] 监控
    - 收集审计日志
    - 定期备份 etcd
    - 制定证书续期流程

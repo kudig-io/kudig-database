@@ -90,7 +90,7 @@ prerequisites:
 | Domain | I-O 对数 | 对应问题场景 | 文件 |
 |--------|----------|-------------|------|
 | POD | 81 | Pod CrashLoop、Pending、OOM | `generated/command-output-diagnosis-all.md` |
-| NET | 72 | [[Service|Service]]、Ingress、网络连通性 | 同上 |
+| NET | 72 | [[service\|Service]]、Ingress、网络连通性 | 同上 |
 | INGRESS | 54 | Ingress Controller、Gateway API | 同上 |
 | SEC | 38 | RBAC、Quota、NetworkPolicy | 同上 |
 | WORK | 33 | Deployment、StatefulSet、DaemonSet | 同上 |

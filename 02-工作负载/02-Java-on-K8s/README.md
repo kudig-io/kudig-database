@@ -50,7 +50,7 @@ prerequisites:
 
 
 
-# Java on [[Kubernetes|Kubernetes]] 综合实践指南
+# Java on [[kubernetes|Kubernetes]] 综合实践指南
 
 > **一站式 Java + Kubernetes 知识入口** | 12 篇专题指南 | 覆盖从容器化到生产的完整生命周期
 > **适用版本**: JDK 17+ / Spring Boot 3.x / Quarkus 3.x / GraalVM for JDK 17+ / Kubernetes v1.28+
@@ -71,7 +71,7 @@ Java 是企业级后端开发的第一大语言，Kubernetes 是容器编排的�
 | 维度 | 传统部署 | Kubernetes 部署 |
 |------|---------|----------------|
 | 资源模型 | 物理内存/CPU 为边界 | cgroups 限制，需容器感知 |
-| 网络模型 | 固定 IP | [[Service|Service]]/DNS 动态发现 |
+| 网络模型 | 固定 IP | [[service\|Service]]/DNS 动态发现 |
 | 配置管理 | 本地配置文件 | ConfigMap/Secret 动态注入 |
 | 生命周期 | 手动启停 | 探针驱动的自动化生命周期管理 |
 | 日志 | 本地文件轮转 | stdout → 日志收集器 |

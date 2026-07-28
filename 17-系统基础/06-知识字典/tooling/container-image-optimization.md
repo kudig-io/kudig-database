@@ -42,7 +42,7 @@ prerequisites:
 
 ## 概述
 
-容器镜像是 [[Kubernetes|Kubernetes]] 应用部署的基础单元。优化镜像不仅可以**缩短启动时间、降低存储和带宽成本**，还能**显著减少安全攻击面**。2026 年的行业最佳实践强调：镜像应尽可能小、只包含应用运行所需的最小依赖、使用不可变基础镜像，并通过 SBOM 和签名确保供应链透明。主流优化手段包括**多阶段构建（Multi-stage Build）、Distroless 镜像、BuildKit 缓存、镜像分层优化和 OCI 标准化**。
+容器镜像是 [[kubernetes|Kubernetes]] 应用部署的基础单元。优化镜像不仅可以**缩短启动时间、降低存储和带宽成本**，还能**显著减少安全攻击面**。2026 年的行业最佳实践强调：镜像应尽可能小、只包含应用运行所需的最小依赖、使用不可变基础镜像，并通过 SBOM 和签名确保供应链透明。主流优化手段包括**多阶段构建（Multi-stage Build）、Distroless 镜像、BuildKit 缓存、镜像分层优化和 OCI 标准化**。
 
 ## 核心概念/原理
 
@@ -112,8 +112,8 @@ docker buildx build --push \
 
 2026 年，所有主流镜像仓库和运行时都遵循 OCI 标准：
 - **OCI Image Spec**：标准化的镜像格式和索引
-- **OCI [[Distribution|Distribution]] Spec**：镜像推送/拉取协议
-- **OCI Artifact**：支持存储除容器镜像外的其他产物（如 [[Helm|Helm]] Chart、SBOM、签名）
+- **OCI [[distribution|Distribution]] Spec**：镜像推送/拉取协议
+- **OCI Artifact**：支持存储除容器镜像外的其他产物（如 [[helm|Helm]] Chart、SBOM、签名）
 
 ### 镜像安全扫描
 

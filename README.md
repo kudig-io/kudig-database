@@ -38,7 +38,7 @@ KUDIG Database 是一个**双层结构**的云原生运维知识库：
 - **AI/ML 运维 Runbook**：`15-AI基础设施/01-基础设施/45-ai-ml-ops-runbook.md`
 - **边缘生产运维 Runbook**：`16-专项技术/01-边缘计算/14-edge-production-runbook.md`
 
-详细说明与缺口分析参见 `36-报告/domain-production-readiness-content-push-2026-07-01.md` 与 `36-报告/domain-content-gap-analysis-2026-07-01.md`。
+详细说明与缺口分析参见 `36-报告/assessments/domain-production-readiness-content-push-2026-07-01.md` 与 `36-报告/assessments/domain-content-gap-analysis-2026-07-01.md`。
 
 ## 快速开始
 
@@ -84,15 +84,17 @@ npm run preview
 ├── 27-标签/         # 标签索引
 ├── 28-资产/         # 图片、图表、附件
 ├── 29-文档/         # 源文档：映射与规范文档
-├── 30-站点/         # Astro 静态站点项目
+├── 30-站点/         # Astro 静态站点项目（.gitignore 忽略）
 ├── 31-脚本/         # 自动化脚本、模板、提示词
-├── 32-发布/         # 发布产物（语料导出 corpus、metadata、qa）
+├── 32-发布/         # 发布产物（语料导出 corpus、metadata、qa，冻结）
+├── 33-源码/         # vendor 源码树（Kubernetes、terway 等，.gitignore 忽略）
+├── 34-源码分析/     # 源码分析笔记
 ├── 35-元数据/       # 元数据、语料配置（taxonomy、schema、corpus-config、journal）
-├── 36-报告/         # 质量报告与评估、发布素材
-└── 37-归档/         # Wiki 归档快照（重建/恢复用）
+├── 36-报告/         # 质量报告与评估、发布素材（冻结）
+└── 37-归档/         # Wiki 归档快照（重建/恢复用，冻结）
 ```
 
-完整目录映射与命名规范详见 [`35-元数据/domain-mapping.md`](35-元数据/metadata/domain-mapping.md)。
+完整目录映射与命名规范详见 [`35-元数据/metadata/domain-mapping.md`](35-元数据/metadata/domain-mapping.md)。
 
 ## 部署
 
@@ -100,7 +102,7 @@ npm run preview
 
 ## 贡献
 
-欢迎提交 Issue 和 PR。贡献前请阅读 [`35-元数据/domain-mapping.md`](35-元数据/metadata/domain-mapping.md) 与 [`35-元数据/schema.md`](35-元数据/metadata/schema.md) 了解目录约定与 frontmatter 规范。
+欢迎提交 Issue 和 PR。贡献前请阅读 [`35-元数据/metadata/domain-mapping.md`](35-元数据/metadata/domain-mapping.md) 与 [`35-元数据/metadata/schema.md`](35-元数据/metadata/schema.md) 了解目录约定与 frontmatter 规范。
 
 ## License
 

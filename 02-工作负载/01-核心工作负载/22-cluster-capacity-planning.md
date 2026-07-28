@@ -1,7 +1,7 @@
 ---
 title: 集群容量规划
 description: '## 概述'
-summary: '容量规划是确保 [[Kubernetes|Kubernetes]] 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。'
+summary: '容量规划是确保 [[kubernetes|Kubernetes]] 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。'
 category: workloads
 tags:
 - k8s
@@ -74,7 +74,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-容量规划是确保 [[Kubernetes|Kubernetes]] 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。
+容量规划是确保 [[kubernetes|Kubernetes]] 集群能够满足当前和未来工作负载需求的关键实践。本文档详细介绍集群规模限制、节点容量规划、资源预留策略和容量监控方法。
 
 <!-- chunk: 容量规划架构 -->
 ## 容量规划架构
@@ -219,7 +219,7 @@ cross_refs:
 | **Pod 总数** | 150,000 Pod | 单集群最大 Pod 数 | 调度器吞吐量、etcd 存储 |
 | **每节点 Pod 数** | 110 Pod | 单节点默认最大 Pod 数 | kubelet 性能、IP 地址空间 |
 | **每节点容器数** | 300 容器 | 单节点推荐最大容器数 | 运行时性能 |
-| **[[Service|Service]] 数量** | 10,000 Service | 单集群最大 Service 数 | kube-proxy 规则数量 |
+| **[[service\|Service]] 数量** | 10,000 Service | 单集群最大 Service 数 | kube-proxy 规则数量 |
 | **Endpoints 每 Service** | 5000 | 单 Service 最大端点数 | iptables/IPVS 性能 |
 | **ConfigMap 大小** | 1 MiB | 单个 ConfigMap 最大大小 | etcd 限制 |
 | **Secret 大小** | 1 MiB | 单个 Secret 最大大小 | etcd 限制 |

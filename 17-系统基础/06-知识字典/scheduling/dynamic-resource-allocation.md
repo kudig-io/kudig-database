@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-动态资源分配（Dynamic Resource Allocation，DRA）是 [[Kubernetes|Kubernetes]] v1.35 中达到 stable 的特性。它允许用户在 Pod 之间请求和共享资源，这些资源通常是附加设备，如硬件加速器。DRA 提供了比 Device Plugin 更灵活的设备分类、请求和使用方式。
+动态资源分配（Dynamic Resource Allocation，DRA）是 [[kubernetes|Kubernetes]] v1.35 中达到 stable 的特性。它允许用户在 Pod 之间请求和共享资源，这些资源通常是附加设备，如硬件加速器。DRA 提供了比 Device Plugin 更灵活的设备分类、请求和使用方式。
 
 ## 核心概念/原理
 

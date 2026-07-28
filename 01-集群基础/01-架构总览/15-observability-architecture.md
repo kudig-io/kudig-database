@@ -72,7 +72,7 @@ cross_refs:
 
 
 
-# 15 - [[Kubernetes|Kubernetes]]es 可观测性架构体系|Kubernetes 可观测性架构体系]]
+# 15 - [[kubernetes|Kubernetes]]es 可观测性架构体系|Kubernetes 可观测性架构体系]]
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -167,7 +167,7 @@ unified_observability_plane:
 <!-- chunk: 二、指标监控体系架构 -->
 ## 二、指标监控体系架构
 
-### 2.1 [[Prometheus|Prometheus]] 生态系统
+### 2.1 [[prometheus|Prometheus]] 生态系统
 
 #### 监控架构拓扑
 ```yaml
@@ -608,7 +608,7 @@ output {
 <!-- chunk: 四、分布式链路追踪 -->
 ## 四、分布式链路追踪
 
-### 4.1 [[OpenTelemetry|OpenTelemetry]] 架构
+### 4.1 [[opentelemetry|OpenTelemetry]] 架构
 
 #### 追踪数据流架构
 ```mermaid

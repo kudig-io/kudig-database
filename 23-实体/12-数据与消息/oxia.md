@@ -277,7 +277,7 @@ Oxia 异常
 - [[etcd]] — etcd
 
 - oxia
-- [[23-实体/schemahero.md|[[SchemaHero|SchemaHero]]]]
+- [[23-实体/schemahero.md|[[schemahero|SchemaHero]]]]
 - index/etcd-index|etcd 知识图谱索引]]
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

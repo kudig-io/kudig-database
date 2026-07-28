@@ -50,7 +50,7 @@ prerequisites:
 
 ## 概述
 
-随着企业 [[Kubernetes|Kubernetes]] 集群数量从个位数增长到数十甚至上百个，**集群舰队管理（Fleet Management）** 成为平台工程的核心挑战。**Cluster API（CAPI）** 是 Kubernetes 官方的声明式集群生命周期管理项目，它使用 Kubernetes 的 CRD 机制来创建、配置和管理其他 Kubernetes 集群，实现了"用 Kubernetes 管理 Kubernetes"的 Meta-Cluster 模式。
+随着企业 [[kubernetes|Kubernetes]] 集群数量从个位数增长到数十甚至上百个，**集群舰队管理（Fleet Management）** 成为平台工程的核心挑战。**Cluster API（CAPI）** 是 Kubernetes 官方的声明式集群生命周期管理项目，它使用 Kubernetes 的 CRD 机制来创建、配置和管理其他 Kubernetes 集群，实现了"用 Kubernetes 管理 Kubernetes"的 Meta-Cluster 模式。
 
 ## 核心概念/原理
 
@@ -76,7 +76,7 @@ Cluster API 通过以下 CRD 抽象集群生命周期：
 - **Red Hat Advanced Cluster Management（ACM）**：基于 OpenShift 的企业级舰队管理
 - **Google Anthos**：多云/混合云统一控制平面
 - **Azure Fleet Manager**：Azure 原生的集群舰队管理
-- **Cluster Mesh（[[Cilium|Cilium]]/Istio）**：跨集群的服务发现和流量管理
+- **Cluster Mesh（[[cilium|Cilium]]/Istio）**：跨集群的服务发现和流量管理
 
 ### 4. 声明式集群生命周期
 

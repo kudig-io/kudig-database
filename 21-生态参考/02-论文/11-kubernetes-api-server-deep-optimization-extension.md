@@ -62,7 +62,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 深度优化与扩展 (API Server Deep Optimization and Extension)
+# [[kubernetes|Kubernetes]]es API|Kubernetes API]] Server 深度优化与扩展 (API Server Deep Optimization and Extension)
 
 > **作者**: Kubernetes核心组件专家 | **版本**: v1.7 | **更新时间**: 2026-03-03
 > **适用场景**: 大规模集群控制平面优化 | **复杂度**: ⭐⭐⭐⭐⭐

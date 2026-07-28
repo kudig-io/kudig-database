@@ -73,7 +73,7 @@ cross_refs:
 
 # Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32  
 > **文档版本**: v2.0 | 生产级 kube-proxy 配置参考  
 > **最后更新**: 2026-01
 
@@ -867,7 +867,7 @@ main "$@"
 <!-- chunk: 监控与告警 -->
 ## 监控与告警
 
-### [[Prometheus|Prometheus]] 监控规则
+### [[prometheus|Prometheus]] 监控规则
 
 ```yaml
 # kube-proxy-monitoring-rules.yaml
@@ -1096,7 +1096,7 @@ kubectl run test-curl --rm -it --image=curlimages/curl --restart=Never -- curl -
 
 | 问题 | 原因 | 解决方案 |
 |------|------|---------|
-| Service 无法访问 | kube-proxy 未运行 | 检查 [[DaemonSet|DaemonSet]] 状态 |
+| Service 无法访问 | kube-proxy 未运行 | 检查 [[daemonset\|DaemonSet]] 状态 |
 | 规则同步慢 | Service 数量过多 | 切换到 IPVS 模式 |
 | IPVS 模式启动失败 | 内核模块未加载 | `modprobe ip_vs ip_vs_rr ip_vs_sh` |
 | conntrack 表满 | 连接数过多 | 增加 `nf_conntrack_max` |

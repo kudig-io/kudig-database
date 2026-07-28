@@ -54,6 +54,7 @@ cross_refs:
 - type: index
   path: ../../生态参考/topic-index/openkruise-index.md
   label: '索引文档: openkruise-index'
+tier: supporting
 ---
 
 > **生产环境安全提示**

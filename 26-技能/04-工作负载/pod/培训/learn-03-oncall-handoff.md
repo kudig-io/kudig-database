@@ -458,7 +458,7 @@ tags: [onboarding, oncall, handoff, shift, sre, ops-engineer, k8s-1.28-1.33]
 
 - [[26-技能/07-安全/resource-quota/培训/learn-07-namespace-resource-quota.md|learn-07-namespace-resource-quota]] — 第七课：Namespace 与资源隔离
 - [[26-技能/02-控制面/scheduler/培训/learn-15-scheduling-basics.md|learn-15-scheduling-basics]] — 第15课：调度与亲和性
-- [[26-技能/04-工作负载/pod/培训/learn-inner-training.md|learn-inner-training]] — [[Kubernetes|Kubernetes]]es 培训：Inner Training|Kubernetes 培训：Inner Training]]
+- [[26-技能/04-工作负载/pod/培训/learn-inner-training.md|learn-inner-training]] — [[kubernetes|Kubernetes]]es 培训：Inner Training|Kubernetes 培训：Inner Training]]
 - [[26-技能/04-工作负载/pod/培训/learn-lecturer-persona.md|learn-lecturer-persona]] — K8S 讲师角色设定与场景规范
 - [[prometheus]] — Prometheus
 

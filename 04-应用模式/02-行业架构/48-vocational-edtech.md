@@ -46,7 +46,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - gpu
 - nvidia
 last_updated: 2026-05-18
@@ -59,7 +59,7 @@ audience:
 - 虚拟实训工程师
 estimated_read_time: 5min
 intent_queries:
-- vocational education [[Kubernetes|kubernetes]] architecture
+- vocational education [[kubernetes|kubernetes]] architecture
 - 职业教育K8s部署方案
 - 在线考试防作弊系统
 - 虚拟实训云桌面

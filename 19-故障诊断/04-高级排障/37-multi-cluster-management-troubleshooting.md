@@ -493,7 +493,7 @@ chmod +x failover-test.sh
 ```
 ---
 
-<!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-[[17-系统基础/06-知识字典/networking/cluster-networking.md|Cluster Networking]]Networking]] and [[Service|Service]] Discovery Issues) -->
+<!-- chunk: 4. 跨集群网络和服务发现问题排查 (Cross-[[17-系统基础/06-知识字典/networking/cluster-networking.md|Cluster Networking]]Networking]] and [[service|Service]] Discovery Issues) -->
 ## 4. 跨集群网络和服务发现问题排查 (Cross-Cluster Networking and Service Discovery Issues)
 
 ### 4.1 服务发现配置检查

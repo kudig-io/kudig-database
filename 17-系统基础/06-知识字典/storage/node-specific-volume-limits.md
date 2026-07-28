@@ -45,7 +45,7 @@ prerequisites:
 
 ## 概述
 
-[[Kubernetes|Kubernetes]] 需要尊重每个节点可以附加（attach）的卷数量上限。云厂商（如 AWS、GCP、Azure）通常对每块虚拟机可挂载的磁盘数量有限制。如果不遵守这些限制，调度到该节点的 Pod 可能会因卷无法附加而卡在等待状态。
+[[kubernetes|Kubernetes]] 需要尊重每个节点可以附加（attach）的卷数量上限。云厂商（如 AWS、GCP、Azure）通常对每块虚拟机可挂载的磁盘数量有限制。如果不遵守这些限制，调度到该节点的 Pod 可能会因卷无法附加而卡在等待状态。
 
 ## 核心概念/原理
 
@@ -89,7 +89,7 @@ Kubernetes v1.35 [beta]（默认启用）
 - CSI 驱动可以在运行时动态调整节点可附加的最大卷数。
 - 通过在 `CSIDriver` 规格中设置 `nodeAllocatableUpdatePeriodSeconds`，[[kubelet|kubelet]] 会定期调用 `NodeGetInfo` 刷新限制。
 - 最小允许间隔为 10 秒。
-- 如果卷附加操作因资源耗尽（`ResourceExhausted`，[[gRPC|gRPC]] code 8）而失败，Kubernetes 会立即更新该节点的可分配卷数，并将受影响的 Pod 标记为 Failed，防止无限卡在 `ContainerCreating` 状态。
+- 如果卷附加操作因资源耗尽（`ResourceExhausted`，[[grpc|gRPC]] code 8）而失败，Kubernetes 会立即更新该节点的可分配卷数，并将受影响的 Pod 标记为 Failed，防止无限卡在 `ContainerCreating` 状态。
 
 ### 防止在未安装 CSI 驱动的节点上放置 Pod
 
@@ -133,7 +133,7 @@ kubectl describe node <node-name> | grep attachable-volumes
 ## 生产检查清单
 
 - [ ] 规划节点卷密度：每节点最大 Pod 数 × 每 Pod 卷数 <= 节点卷限制
-- [ ] 大规模 [[StatefulSet|StatefulSet]] 注意分散到足够多节点
+- [ ] 大规模 [[statefulset|StatefulSet]] 注意分散到足够多节点
 - [ ] CSI 驱动正确实现 NodeGetInfo 报告最大卷数
 
 ## 命令快速参考

@@ -1,7 +1,7 @@
 ---
 title: 大规模集群运维
 description: '# 40 - 大规模集群运维 (Large Scale Cluster Operations)'
-summary: ''pods': math.ceil((total_resources['pods'] * self.safety_margin) / 110)  # 假设每个节点110个Pod'
+summary: "'pods': math.ceil((total_resources['pods'] * self.safety_margin) / 110)  # 假设每个节点110个Pod"
 category: troubleshooting
 tags:
 - large-scale

@@ -1,7 +1,7 @@
 ---
 title: 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考
 description: '# 36 - 生态工具 (Kustomize / Helm / ArgoCD) YAML 配置参考'
-summary: '本文档提供 [[Kubernetes|Kubernetes]] 生态工具的完整 YAML 配置参考，涵盖：'
+summary: '本文档提供 [[kubernetes|Kubernetes]] 生态工具的完整 YAML 配置参考，涵盖：'
 category: yaml-manifests
 tags:
 - k8s
@@ -68,13 +68,13 @@ cross_refs:
 
 
 
-# 36 - 生态工具 (Kustomize / [[Helm|Helm]] / [[ArgoCD|ArgoCD]]) YAML 配置参考
+# 36 - 生态工具 (Kustomize / [[helm|Helm]] / [[argocd|ArgoCD]]) YAML 配置参考
 
 > **适用版本**: Kustomize v5.x / Helm v3.x / ArgoCD v2.x | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
 
 <!-- chunk: 📋 概述 -->## 📋 概述
 
-本文档提供 [[Kubernetes|Kubernetes]] 生态工具的完整 YAML 配置参考，涵盖：
+本文档提供 [[kubernetes|Kubernetes]] 生态工具的完整 YAML 配置参考，涵盖：
 - **Kustomize**: 声明式配置管理
 - **Helm**: 包管理和模板引擎
 - **ArgoCD**: GitOps 持续部署

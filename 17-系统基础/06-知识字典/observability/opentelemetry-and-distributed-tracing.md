@@ -49,11 +49,11 @@ prerequisites:
 
 
 
-# [[OpenTelemetry|OpenTelemetry]] 与分布式链路追踪
+# [[opentelemetry|OpenTelemetry]] 与分布式链路追踪
 
 ## 概述
 
-**OpenTelemetry（OTel）** 是 CNCF 毕业项目，已成为云原生可观测性领域的事实标准。它提供了统一的 API、SDK 和数据收集规范，用于采集**指标（Metrics）、日志（Logs）和链路追踪（Traces）**三类可观测性信号。2026 年，[[Kubernetes|Kubernetes]] 上的现代应用已普遍采用 OpenTelemetry 替代分散的 [[Prometheus|Prometheus]]、[[Jaeger|Jaeger]]、[[fluentd|[[Fluentd]]]] 等工具链，实现"一个 SDK、一个 Collector、多后端输出"的统一可观测架构。
+**OpenTelemetry（OTel）** 是 CNCF 毕业项目，已成为云原生可观测性领域的事实标准。它提供了统一的 API、SDK 和数据收集规范，用于采集**指标（Metrics）、日志（Logs）和链路追踪（Traces）**三类可观测性信号。2026 年，[[kubernetes|Kubernetes]] 上的现代应用已普遍采用 OpenTelemetry 替代分散的 [[prometheus|Prometheus]]、[[jaeger|Jaeger]]、[[fluentd|[[fluentd|Fluentd]]]] 等工具链，实现"一个 SDK、一个 Collector、多后端输出"的统一可观测架构。
 
 ## 核心概念/原理
 

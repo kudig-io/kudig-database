@@ -74,7 +74,7 @@ cross_refs:
 
 # 132 - AI/ML工作负载运维 (AI/ML Workloads Operations)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [[23-实体/11-AI与边缘/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/), [Ray](https://ray.io/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [[23-实体/11-AI与边缘/kubeflow.md|Kubeflow]]](https://www.kubeflow.org/), [Ray](https://ray.io/)
 
 ---
 

@@ -67,11 +67,11 @@ tags:
 - platform-engineering
 - developer-experience
 - idp
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
-- [[Istio|istio]]
-- [[Cilium|cilium]]
+- [[jaeger|jaeger]]
+- [[istio|istio]]
+- [[cilium|cilium]]
 - helm
 last_updated: 2026-05
 difficulty: advanced

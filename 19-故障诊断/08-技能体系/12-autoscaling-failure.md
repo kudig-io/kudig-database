@@ -1,7 +1,7 @@
 ---
 title: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 description: '## 1. 概述'
-summary: '弹性伸缩是 [[Kubernetes|Kubernetes]] 实现资源效率和应用高可用的核心能力。当弹性伸缩失效时，可能导致**资源浪费**（无法缩容）、**服务降级**（无法扩容）或**成本失控**。Kubernetes 提供三个层次的弹性伸缩机制，本 [[SKILL|Skill]] 覆盖它们的完整故障诊断：'
+summary: '弹性伸缩是 [[kubernetes|Kubernetes]] 实现资源效率和应用高可用的核心能力。当弹性伸缩失效时，可能导致**资源浪费**（无法缩容）、**服务降级**（无法扩容）或**成本失控**。Kubernetes 提供三个层次的弹性伸缩机制，本 [[SKILL|Skill]] 覆盖它们的完整故障诊断：'
 category: scaling
 tags:
 - k8s
@@ -80,12 +80,12 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-弹性伸缩是 [[Kubernetes|Kubernetes]] 实现资源效率和应用高可用的核心能力。当弹性伸缩失效时，可能导致**资源浪费**（无法缩容）、**服务降级**（无法扩容）或**成本失控**。Kubernetes 提供三个层次的弹性伸缩机制，本 [[SKILL|Skill]] 覆盖它们的完整故障诊断：
+弹性伸缩是 [[kubernetes|Kubernetes]] 实现资源效率和应用高可用的核心能力。当弹性伸缩失效时，可能导致**资源浪费**（无法缩容）、**服务降级**（无法扩容）或**成本失控**。Kubernetes 提供三个层次的弹性伸缩机制，本 [[SKILL|Skill]] 覆盖它们的完整故障诊断：
 
 - **HPA (Horizontal Pod Autoscaler)**: 基于指标（CPU/Memory/自定义指标/外部指标）自动调整 Pod 副本数
 - **VPA (Vertical Pod Autoscaler)**: 自动调整 Pod 的 CPU/Memory requests 和 limits
 - **Cluster Autoscaler (CA)**: 基于 Pending Pod 自动调整集群节点数量
-- **[[KEDA|KEDA]] (Kubernetes Event-Driven Autoscaling)**: 基于事件源（Kafka/RabbitMQ/Prometheus 等）的扩缩容
+- **[[keda|KEDA]] (Kubernetes Event-Driven Autoscaling)**: 基于事件源（Kafka/RabbitMQ/Prometheus 等）的扩缩容
 
 ### 典型触发场景
 
@@ -116,7 +116,7 @@ agent_execution_mode: L2-semi-auto
 | S4 | VPA recommendation 为空或所有值为 0 / VPA recommendation empty | `kubectl describe vpa <name>` 查看 Recommendation 字段为空或 CPU/Memory 为 0 | 0.85 | VPA 刚创建尚未完成首次推荐（需等待 5-10 分钟） |
 | S5 | VPA UpdateMode=Auto 但 Pod 不重启，资源未更新 / VPA not applying recommendations | `kubectl get vpa <name> -o yaml` 显示 UpdateMode=Auto，但 Pod resources 与推荐值不一致 | 0.80 | VPA admission controller 正常但推荐变化幅度小于阈值 |
 | S6 | Cluster Autoscaler 日志 "could not scale up" / CA scale up failed | `kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep -i "could not"` | 0.90 | 节点池已达最大容量（预期行为） |
-| S7 | 节点池扩容成功但 Pod 仍 Pending / Node added but [[Pods|pods]] still pending | `kubectl get nodes` 显示新节点 Ready，但 `kubectl get pods` 仍有 Pending | 0.85 | 新节点未满足 Pod 的 nodeSelector/affinity/tolerations |
+| S7 | 节点池扩容成功但 Pod 仍 Pending / Node added but [[pods\|pods]] still pending | `kubectl get nodes` 显示新节点 Ready，但 `kubectl get pods` 仍有 Pending | 0.85 | 新节点未满足 Pod 的 nodeSelector/affinity/tolerations |
 | S8 | 节点缩容被阻止，CA 日志显示 "cannot be removed" / Scale down blocked | `kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 | grep "cannot be removed"` | 0.90 | 节点上有 PDB 保护的 Pod 且剩余节点无法承载（预期行为） |
 | S9 | KEDA ScaledObject 状态为 Unknown 或 Error / KEDA ScaledObject unhealthy | `kubectl get scaledobject -A` 查看 READY 列显示 False 或 Unknown | 0.85 | KEDA operator 刚部署或重启中 |
 | S10 | Metrics Server Pod CrashLoopBackOff 或 Pending / Metrics Server unhealthy | `kubectl get pods -n kube-system -l k8s-app=metrics-server` 状态异常 | 0.95 | 集群未安装 Metrics Server（需要确认是否需要 HPA） |

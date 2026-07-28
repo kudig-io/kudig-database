@@ -96,7 +96,7 @@ bash teardown.sh
 | 01 | 节点被 cordon | SKILL-NODE-001 | RC-012 | LOW |
 | 02 | Pod CrashLoopBackOff | SKILL-POD-001 | 启动命令错误 | LOW |
 | 03 | Pod Pending | SKILL-POD-002 | 资源超限 | LOW |
-| 04 | DNS 解析问题 | SKILL-NET-001 | [[CoreDNS|CoreDNS]] 缩容 | LOW |
+| 04 | DNS 解析问题 | SKILL-NET-001 | [[coredns\|CoreDNS]] 缩容 | LOW |
 | 05 | Service 无 Endpoints | SKILL-NET-002 | Selector 不匹配 | LOW |
 
 ### 扩展场景 (6-10)

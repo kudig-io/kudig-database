@@ -49,7 +49,7 @@ prerequisites:
 
 
 
-title: [[Backstage|Backstage]] 软件目录与 TechDocs
+title: [[backstage|Backstage]] 软件目录与 TechDocs
 description: 2. [catalog-info.yaml 完整指南](#2-catalog-infoyaml-完整指南)
 category: platform-engineering
 tags:
@@ -58,9 +58,9 @@ tags:
 - developer-experience
 - idp
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[ArgoCD|argocd]]
+- [[argocd|argocd]]
 - docker
 - harbor
 last_updated: 2026-05

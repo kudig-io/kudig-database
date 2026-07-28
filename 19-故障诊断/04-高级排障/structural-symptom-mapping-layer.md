@@ -71,7 +71,7 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - istio
 - envoy
@@ -2066,9 +2066,9 @@ compliance:
 
 - [[19-故障诊断/04-高级排障/MOC.md|topic-structural-trouble-shooting MOC]]
 - [[19-故障诊断/04-高级排障/README.md|Kubernetes 结构化故障排查知识库]]
-- [[19-故障诊断/04-高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[19-故障诊断/04-高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[19-故障诊断/04-高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[19-故障诊断/04-高级排障/structural-00-configuration-first-methodology|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
+- [[19-故障诊断/04-高级排障/structural-09-dra-troubleshooting|DRA（动态资源分配）故障排查指南]]
+- [[19-故障诊断/04-高级排障/structural-10-etcd-maintenance|etcd 维护专项文档]]
 
 ## Related
 
@@ -2077,10 +2077,10 @@ compliance:
 
 ## See Also
 
-- [[19-故障诊断/04-高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[19-故障诊断/04-高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
-- [[19-故障诊断/04-高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[19-故障诊断/04-高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-09-dra-troubleshooting|09-dra-troubleshooting]]
+- [[19-故障诊断/04-高级排障/structural-10-etcd-maintenance|10-etcd-maintenance]]
+- [[19-故障诊断/04-高级排障/structural-00-configuration-first-methodology|00-configuration-first-methodology]]
+- [[19-故障诊断/04-高级排障/structural-09-dra-troubleshooting|09-dra-troubleshooting]]
 
 
 <!-- risk-assessed -->

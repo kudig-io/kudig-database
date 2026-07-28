@@ -50,7 +50,7 @@ tags:
 - industry
 - redis
 - mysql
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - operator
 last_updated: 2026-05-18
 difficulty: intermediate
@@ -61,11 +61,11 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 即时零售 [[Kubernetes|Kubernetes]] 30分钟达
+- 即时零售 [[kubernetes|Kubernetes]] 30分钟达
 - 同城配送 骑手调度 K8s
 - LBS搜索 Redis Geo Kubernetes
 - 前置仓 履约 Kubernetes
-- 即时零售 [[KEDA|KEDA]] 弹性伸缩
+- 即时零售 [[keda|KEDA]] 弹性伸缩
 trigger_keywords:
 - 即时零售
 - O2O

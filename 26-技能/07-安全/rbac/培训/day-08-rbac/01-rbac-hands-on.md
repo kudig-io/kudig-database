@@ -153,7 +153,7 @@ kubectl describe rolebinding app-team-readonly-binding -n app-team
 
 ## 3. 场景二：跨 namespace 读取权限（ClusterRole + RoleBinding）
 
-**场景**: `monitoring` 服务账号需要读取所有 namespace 的 Pod 和 [[Service|Service]]。
+**场景**: `monitoring` 服务账号需要读取所有 namespace 的 Pod 和 [[service|Service]]。
 
 ### 3.1 创建 ClusterRole（集群范围只读）
 

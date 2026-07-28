@@ -66,7 +66,7 @@ cross_refs:
 
 # 33 - 模型可解释性与透明度
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [SHAP](https://shap.readthedocs.io/) | [LIME](https://github.com/marcotcr/lime) | [InterpretML](https://interpret.ml/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [SHAP](https://shap.readthedocs.io/) | [LIME](https://github.com/marcotcr/lime) | [InterpretML](https://interpret.ml/)
 
 <!-- chunk: 一、模型可解释性框架 -->
 ## 一、模型可解释性框架

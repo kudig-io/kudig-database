@@ -51,7 +51,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -67,7 +67,7 @@ audience:
 - 餐饮信息化负责人
 estimated_read_time: 5min
 intent_queries:
-- smart restaurant [[Kubernetes|kubernetes]] architecture
+- smart restaurant [[kubernetes|kubernetes]] architecture
 - 智慧餐饮K8s部署方案
 - 餐饮点餐KDS系统
 - 餐饮供应链预测

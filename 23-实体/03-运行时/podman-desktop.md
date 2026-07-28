@@ -210,7 +210,7 @@ podman machine rm <name>
 - [[lima]] — Lima
 
 - podman-desktop
-- [[23-实体/cncf-runtime.md|[[CNCF 容器运行时与工具链项目全景|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
+- [[23-实体/cncf-runtime.md|[[23-实体/15-参考与索引/cncf-runtime|CNCF 容器运行时与工具链项目全景]]]] — Cross-reference
 
 
 <!-- risk-assessed -->

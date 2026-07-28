@@ -50,8 +50,8 @@ last_updated: '2026-07-21'
 
 - [[10-平台工程/01-构建/01-platform-engineering-overview|平台工程概览]]
 - [[10-平台工程/01-构建/03-backstage-deployment|Backstage 部署]]
-- [[10-平台工程/01-构建/02-idp-architecture-design|IDP 架构设计]]
-- [[10-平台工程/01-构建/04-developer-portal-patterns|开发者门户模式]]
+- [[10-平台工程/01-构建/02-idp-design-principles|IDP 架构设计]]
+- [[10-平台工程/01-构建/04-backstage-catalog-techdocs|开发者门户模式]]
 
 ## 运维管理 (Operations)
 
@@ -62,15 +62,15 @@ last_updated: '2026-07-21'
 
 ## 治理 (Governance)
 
-- [[10-平台工程/03-治理/01-platform-governance-model|平台治理模型]]
-- [[10-平台工程/03-治理/02-policy-as-code-governance|策略即代码治理]]
-- [[10-平台工程/03-治理/03-cost-governance-optimization|成本治理优化]]
+- [[10-平台工程/03-治理/index|平台治理模型]]
+- [[25-研究/02-网络与安全/policy-as-code-security|策略即代码治理]]
+- [[10-平台工程/03-治理/09-cost-optimization-finops|成本治理优化]]
 
 ## 开发体验 (Developer Experience)
 
-- [[10-平台工程/04-开发体验/01-developer-experience-overview|开发者体验概览]]
-- [[10-平台工程/04-开发体验/02-self-service-infrastructure|自助式基础设施]]
-- [[10-平台工程/04-开发体验/03-golden-path-templates|黄金路径模板]]
+- [[10-平台工程/04-开发体验/27-developer-experience-engineering|开发者体验概览]]
+- [[10-平台工程/04-开发体验/index|自助式基础设施]]
+- [[10-平台工程/01-构建/08-golden-paths-design|黄金路径模板]]
 
 ## 代码分析 (Code Analysis)
 
@@ -78,11 +78,11 @@ last_updated: '2026-07-21'
 
 ## GitOps 与交付
 
-- [[11-发布变更/01-GitOps/01-argocd-enterprise-gitops|ArgoCD 企业级 GitOps]]
-- [[11-发布变更/01-GitOps/02-flux-enterprise-gitops|Flux 企业级 GitOps]]
+- [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
+- [[11-发布变更/01-GitOps/06-flux-gitops-continuous-delivery|Flux 企业级 GitOps]]
 - [[11-发布变更/01-GitOps/08-fleet-gitops-operations-guide|Fleet GitOps 运营]]
-- [[11-发布变更/02-IaC/01-terraform-kubernetes-infrastructure|Terraform K8s 基础设施]]
-- [[11-发布变更/02-IaC/02-crossplane-cloud-native-iac|Crossplane 云原生 IaC]]
+- [[11-发布变更/02-IaC/01-terraform-enterprise-iac|Terraform K8s 基础设施]]
+- [[11-发布变更/02-IaC/05-crossplane-enterprise-orchestration|Crossplane 云原生 IaC]]
 
 ## 生产就绪评估
 
@@ -117,7 +117,7 @@ last_updated: '2026-07-21'
 ## 概念 (Concepts)
 
 - [[27-标签/platform-engineering|平台工程]]
-- [[22-概念/internal-developer-platform|内部开发者平台]]
+- [[22-概念/09-平台与发布/platform-engineering-idp|内部开发者平台]]
 - [[22-概念/gitops|GitOps]]
 - [[22-概念/09-平台与发布/infrastructure-as-code|基础设施即代码]]
 

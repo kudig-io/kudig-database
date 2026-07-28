@@ -64,7 +64,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
+# [[kubernetes|Kubernetes]] 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 
 > **作者**: Kubernetes性能优化专家 | **版本**: v2.2 | **更新时间**: 2026-03-03
 > **适用场景**: 1000+节点大规模集群 | **复杂度**: ⭐⭐⭐⭐⭐

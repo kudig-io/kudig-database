@@ -54,7 +54,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 调度与编排策略全栈培训
+# [[kubernetes|Kubernetes]] 调度与编排策略全栈培训
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 性能与稳定性专项
 > **核心原则**: 资源利用率最大化、业务高可用分布、调度公平性
@@ -1192,7 +1192,7 @@ kubectl delete pod pvc-pod --force --grace-period=0  # ⚠️ 跳过优雅终止
 
 ## Q4: 如何实现跨可用区高可用部署？
 
-**回答**: 使用 Pod 反亲和性或 TopologySpreadConstraints 配合 topology key：(1) `requiredDuringSchedulingIgnoredDuringExecution` + `topology.kubernetes.io/zone`：强制跨 AZ 分散；(2) TopologySpreadConstraints + `maxSkew: 1`：更均匀的分布；(3) 结合 Pod Disruption Budget（PDB）限制同时不可用的 Pod 数量；(4) 确保每个 AZ 有足够的节点资源；(5) 使用拓扑感知的 [[Service|Service]] 流量路由（[[17-系统基础/06-知识字典/networking/topology-aware-routing.md|Topology Aware Routing]]）。
+**回答**: 使用 Pod 反亲和性或 TopologySpreadConstraints 配合 topology key：(1) `requiredDuringSchedulingIgnoredDuringExecution` + `topology.kubernetes.io/zone`：强制跨 AZ 分散；(2) TopologySpreadConstraints + `maxSkew: 1`：更均匀的分布；(3) 结合 Pod Disruption Budget（PDB）限制同时不可用的 Pod 数量；(4) 确保每个 AZ 有足够的节点资源；(5) 使用拓扑感知的 [[service|Service]] 流量路由（[[17-系统基础/06-知识字典/networking/topology-aware-routing.md|Topology Aware Routing]]）。
 
 ## Q5: Descheduler 是什么？什么时候需要？
 

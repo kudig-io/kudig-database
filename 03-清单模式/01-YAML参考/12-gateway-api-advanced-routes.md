@@ -68,7 +68,7 @@ cross_refs:
 
 # 12 - Gateway API 高级路由 YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
 > **相关领域**: [域5-网络](../网络/) | **前置知识**: Gateway API 核心资源  
 > **关联配置**: [11-核心资源](./11-gateway-api-core.md) | [Service参考](08-service-all-types.md)
 
@@ -95,7 +95,7 @@ cross_refs:
 | 路由类型 | API 版本 | 成熟度 | 协议支持 | 用途 |
 |----------|----------|--------|----------|------|
 | **HTTPRoute** | v1 | Standard (GA) | HTTP, HTTPS | Web应用、REST API |
-| **GRPCRoute** | v1alpha2 | Experimental | [[gRPC|gRPC]] (HTTP/2) | 微服务RPC通信 |
+| **GRPCRoute** | v1alpha2 | Experimental | [[grpc\|gRPC]] (HTTP/2) | 微服务RPC通信 |
 | **TCPRoute** | v1alpha2 | Experimental | TCP | 数据库、消息队列 |
 | **TLSRoute** | v1alpha2 | Experimental | TLS (SNI) | TLS 透传 |
 | **UDPRoute** | v1alpha2 | Experimental | UDP | DNS、视频流 |
@@ -122,8 +122,8 @@ kubectl get crd | grep gateway
 
 | 控制器实现 | HTTPRoute | GRPCRoute | TCPRoute | TLSRoute | UDPRoute |
 |------------|-----------|-----------|----------|----------|----------|
-| **[[Istio|Istio]]** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ❌ |
-| **[[Envoy|Envoy]] Gateway** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ✅ Experimental |
+| **[[istio\|Istio]]** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ❌ |
+| **[[envoy\|Envoy]] Gateway** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ✅ Experimental |
 | **Nginx Gateway Fabric** | ✅ GA | 🚧 Planned | ❌ | ❌ | ❌ |
 | **Traefik** | ✅ GA | ✅ Experimental | ✅ Experimental | ✅ Experimental | ✅ Experimental |
 

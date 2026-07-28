@@ -228,7 +228,7 @@ vela delete first-vela-app
 
 - [[23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
 - [[flux]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[deployment]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 

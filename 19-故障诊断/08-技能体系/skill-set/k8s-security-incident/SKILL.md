@@ -63,7 +63,7 @@ agent_execution_mode: L1-advisory
 
 # K8s Security Incident Response 诊断与响应
 
-[[Kubernetes|Kubernetes]] 安全事件可能涉及容器逃逸、权限提升、恶意镜像、未授权访问等。正确的响应流程对于控制影响范围、保留证据、满足合规要求至关重要。
+[[kubernetes|Kubernetes]] 安全事件可能涉及容器逃逸、权限提升、恶意镜像、未授权访问等。正确的响应流程对于控制影响范围、保留证据、满足合规要求至关重要。
 
 本 Skill 提供安全事件的识别、遏制、根除、恢复和总结的全流程指导。
 
@@ -71,7 +71,7 @@ agent_execution_mode: L1-advisory
 
 | 症状 | 检测方法 | 置信度 |
 |------|---------|--------|
-| 异常容器进程 | [[Falco|Falco]]/运行时检测 | 0.90 |
+| 异常容器进程 | [[falco\|Falco]]/运行时检测 | 0.90 |
 | 未授权 API 访问 | Audit Logs | 0.95 |
 | 特权容器创建 | Admission Logs | 0.95 |
 | 可疑网络连接 | Network Flow Logs | 0.85 |

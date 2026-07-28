@@ -104,7 +104,7 @@ LLM 推理需要高吞吐、低延迟、大显存管理。主流引擎各有侧�
 
 ### KServe — 推理服务标准
 
-[[KServe]] 提供基于 CRD 的推理服务编排：
+[[kserve|KServe]] 提供基于 CRD 的推理服务编排：
 
 ```yaml
 apiVersion: serving.kserve.io/v1beta1
@@ -190,7 +190,7 @@ spec:
 
 ### Kubeflow v1.10
 
-[[Kubeflow]] 是 K8S 上最完整的 ML 平台：
+[[kubeflow|Kubeflow]] 是 K8S 上最完整的 ML 平台：
 
 | 组件 | 功能 | 状态 |
 |------|------|------|
@@ -267,7 +267,7 @@ K8S 社区成立 AI Gateway 工作组，推动：
 - 基于 gVisor/Kata Containers 的沙箱
 - 临时文件系统与网络隔离
 - 工具调用的权限控制
-- 与 [[Istio]] Service Mesh 集成
+- 与 [[istio|Istio]] Service Mesh 集成
 
 ### PSI Metrics GA (Pressure Stall Information)
 
@@ -296,8 +296,8 @@ spec:
 
 ## 相关概念
 
-- [[KServe]] — 推理服务平台
-- [[Kubeflow]] — ML 平台
+- [[kserve|KServe]] — 推理服务平台
+- [[kubeflow|Kubeflow]] — ML 平台
 - [[17-系统基础/06-知识字典/specialized-workloads/ray|KubeRay]] — Ray on K8S
 - vLLM — LLM 推理引擎
 - MLflow — ML 实验管理

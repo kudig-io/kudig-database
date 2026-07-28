@@ -52,17 +52,17 @@ prerequisites:
 
 
 
-title: 电商系统 [[Kubernetes|Kubernetes]] 生产架构设计
+title: 电商系统 [[kubernetes|Kubernetes]] 生产架构设计
 description: '# 电商系统 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
-- [[Istio|istio]]
+- [[jaeger|jaeger]]
+- [[istio|istio]]
 - envoy
 - minio
 - redis

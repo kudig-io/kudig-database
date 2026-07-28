@@ -1,7 +1,7 @@
 ---
 title: 生产场景导航
 description: '## 概述'
-summary: '本主题将 [[Kubernetes|Kubernetes]] 运维知识按实际生产场景组织，覆盖 20 个常见运维场景。每个场景包含决策树、关联文档、FTA 故障树和快速操作手册。'
+summary: '本主题将 [[kubernetes|Kubernetes]] 运维知识按实际生产场景组织，覆盖 20 个常见运维场景。每个场景包含决策树、关联文档、FTA 故障树和快速操作手册。'
 category: general
 tags:
 - k8s
@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-本主题将 [[Kubernetes|Kubernetes]] 运维知识按实际生产场景组织，覆盖 20 个常见运维场景。每个场景包含决策树、关联文档、FTA 故障树和快速操作手册。
+本主题将 [[kubernetes|Kubernetes]] 运维知识按实际生产场景组织，覆盖 20 个常见运维场景。每个场景包含决策树、关联文档、FTA 故障树和快速操作手册。
 
 ## 场景分类
 

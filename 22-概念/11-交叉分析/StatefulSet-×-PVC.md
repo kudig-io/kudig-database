@@ -113,7 +113,7 @@ kubectl exec <sts-name>-0 -n <ns> -- df -h <mount-path>
 - [[23-实体/08-交付与制品/argocd.md|ArgoCD]]：GitOps同步
 
 ## 相关概念
-- [[StatefulSet]]
+- [[statefulset|StatefulSet]]
 - PVC
 ## Related
 

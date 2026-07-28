@@ -51,7 +51,7 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK comprehensive cluster operation project
-  - [[Kubernetes|Kubernetes]] multi-tier architecture deployment
+  - [[kubernetes|Kubernetes]] multi-tier architecture deployment
   - ACK end-to-end cluster lifecycle management
   - Production-grade cluster security hardening
   - Microservices deployment ACK best practices

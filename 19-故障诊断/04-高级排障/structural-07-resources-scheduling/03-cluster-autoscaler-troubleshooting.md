@@ -34,6 +34,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - gpu-scheduling-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

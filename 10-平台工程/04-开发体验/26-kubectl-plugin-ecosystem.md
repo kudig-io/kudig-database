@@ -164,7 +164,7 @@ kubectl get deployment -o yaml | kubectl neat > clean-deployment.yaml
 ```
 ### 2.3 kubectl-tree（资源层级视图）
 
-**用途**: 显示资源之间的层级关系（如 [[ReplicaSet|ReplicaSet]] 包含哪些 Pod，Service 引用哪些 Endpoints）
+**用途**: 显示资源之间的层级关系（如 [[replicaset|ReplicaSet]] 包含哪些 Pod，Service 引用哪些 Endpoints）
 
 **安装**: `kubectl krew install tree`
 

@@ -271,7 +271,7 @@ nats stream view ORDERS --count=10
 
 - [[vineyard]] — Vineyard
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — [[Istio|Istio]]io 安全加固|Istio 安全加固]]
+- [[03-istio-security-hardening]] — [[istio|Istio]]io 安全加固|Istio 安全加固]]
 - [[copa]] — Copa (Copacetic)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

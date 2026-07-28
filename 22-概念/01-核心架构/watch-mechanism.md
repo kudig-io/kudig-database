@@ -74,7 +74,7 @@ When a Watch connection breaks, the client reconnects using its last known `reso
 ## Why It Matters
 
 Watch enables:
-- Real-time reconciliation in [[22-概念/controller-pattern.md|[[Controller Pattern (Reconciliation Loop)|Controller Pattern]]]]
+- Real-time reconciliation in [[22-概念/controller-pattern.md|[[22-概念/01-核心架构/controller-pattern|Controller Pattern]]]]
 - Efficient state synchronization without polling
 - Event-driven architecture where components react to state changes
 - Horizontal scalability (each controller independently watches what it needs)

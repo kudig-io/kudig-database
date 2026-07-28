@@ -90,7 +90,7 @@ labels:
 ## 镜像安全
 
 - 使用可信镜像仓库白名单 ^[inferred]
-- 镜像安全扫描（[[Trivy|Trivy]] 等）^[inferred]
+- 镜像安全扫描（[[trivy|Trivy]] 等）^[inferred]
 - 避免使用 `latest` 标签，使用固定版本 ^[ambiguous]
 
 ## 常见陷阱
@@ -115,9 +115,9 @@ labels:
 
 ## 相关资源
 
-- [[22-概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[22-概念/k8s-production-best-practices.md|[[22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
 - [[22-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
-- [[22-概念/secrets-management.md|[[Secrets Management|Secrets Management]]]]
+- [[22-概念/secrets-management.md|[[08-安全/07-零信任架构/02-secrets-management-deep-dive|Secrets Management]]]]
 - [[26-技能/07-安全/rbac/audit-rbac-configurations.md|Audit RBAC Configurations]]
 
 ## 生产案例

@@ -91,7 +91,7 @@ related_docs:
 
 # 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-03 | **参考**: [CNI Specification](https://github.com/containernetworking/cni)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-03 | **参考**: [CNI Specification](https://github.com/containernetworking/cni)
 
 ---
 

@@ -54,8 +54,8 @@ tags:
 - authentication
 - authorization
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - [[containerd|containerd]]
 - docker
 last_updated: 2026-05

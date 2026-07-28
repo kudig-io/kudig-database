@@ -144,7 +144,7 @@ SlimFaas 是轻量级 FaaS 框架。
 
 Serverless Workflow 定义无服务器工作流规范。
 
-### [[Radius]] — 沙箱项目
+### [[radius|Radius]] — 沙箱项目
 
 Radius 是云原生应用平台。
 

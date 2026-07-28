@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-ServiceAccount（服务账号）是 [[Kubernetes|Kubernetes]] 中的一种非人类账户，用于在集群内提供独立的安全身份。应用 Pod、系统组件以及集群内外的实体都可以使用特定 ServiceAccount 的凭据来标识自己。该身份在多种场景下非常有用，例如向 API server 认证或实施基于身份的安全策略。
+ServiceAccount（服务账号）是 [[kubernetes|Kubernetes]] 中的一种非人类账户，用于在集群内提供独立的安全身份。应用 Pod、系统组件以及集群内外的实体都可以使用特定 ServiceAccount 的凭据来标识自己。该身份在多种场景下非常有用，例如向 API server 认证或实施基于身份的安全策略。
 
 ## 核心概念/原理
 

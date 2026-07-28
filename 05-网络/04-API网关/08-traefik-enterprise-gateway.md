@@ -62,7 +62,7 @@ authors:
 
 # 08 - Traefik API 网关企业级实践
 
-> **文档版本**: v1.0 | **适用版本**: Traefik v3.x, [[Kubernetes|Kubernetes]] 1.24+ | **更新日期**: 2026-03-04 | **关键词**: Traefik, IngressRoute, Middleware, ACME, Let's Encrypt, Hub
+> **文档版本**: v1.0 | **适用版本**: Traefik v3.x, [[kubernetes|Kubernetes]] 1.24+ | **更新日期**: 2026-03-04 | **关键词**: Traefik, IngressRoute, Middleware, ACME, Let's Encrypt, Hub
 
 <!-- chunk: 目录 -->## 目录
 

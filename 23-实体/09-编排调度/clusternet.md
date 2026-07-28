@@ -1,7 +1,7 @@
 ---
 title: Clusternet (entities)
 description: '## 概述'
-summary: 'Clusternet 是一个多集群管理和应用分发平台，专为管理跨云、跨区域的 Kubernetes 集群而设计。它采用 Hub-Agent 架构，支持 Pull 和 Push 两种模式进行集群注册，能够将应用资源（Deployment、[[Service|Service]]、Helm Release 等）智能分发到多个子集群。'
+summary: 'Clusternet 是一个多集群管理和应用分发平台，专为管理跨云、跨区域的 Kubernetes 集群而设计。它采用 Hub-Agent 架构，支持 Pull 和 Push 两种模式进行集群注册，能够将应用资源（Deployment、[[service|Service]]、Helm Release 等）智能分发到多个子集群。'
 category: entities
 tags:
 - k8s
@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-Clusternet 是由华为开源的多集群管理和应用分发平台，专为管理跨云、跨区域的 Kubernetes 集群而设计，2021 年加入 CNCF Sandbox。它采用 Hub-Agent 架构，支持 Pull 和 Push 两种模式进行集群注册，能够将应用资源（Deployment、[[Service|Service]]、Helm Release 等）智能分发到多个子集群。Clusternet 特别适合边缘计算和混合云场景，即使子集群位于 NAT 或防火墙后面也能通过 Pull 模式注册连接。
+Clusternet 是由华为开源的多集群管理和应用分发平台，专为管理跨云、跨区域的 Kubernetes 集群而设计，2021 年加入 CNCF Sandbox。它采用 Hub-Agent 架构，支持 Pull 和 Push 两种模式进行集群注册，能够将应用资源（Deployment、[[service|Service]]、Helm Release 等）智能分发到多个子集群。Clusternet 特别适合边缘计算和混合云场景，即使子集群位于 NAT 或防火墙后面也能通过 Pull 模式注册连接。
 
 ## 核心特性
 

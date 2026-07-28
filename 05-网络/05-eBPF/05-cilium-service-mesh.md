@@ -71,10 +71,10 @@ cross_refs:
 
 
 
-# [[Cilium|Cilium]] [[Service|Service]]Service Mesh）|Service Mesh]] 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
+# [[cilium|Cilium]] [[service|Service]]Service Mesh）|Service Mesh]] 无 Sidecar 架构 (Cilium Service Mesh Sidecar-less Architecture)
 
 > **文档版本**: v1.0 | **适用版本**: Cilium 1.14+ | **更新日期**: 2026-03-03  
-> **关键词**: Cilium, eBPF, Service Mesh, Sidecar-less, mTLS, [[SPIFFE|SPIFFE]], Gateway API, L7 流量管理
+> **关键词**: Cilium, eBPF, Service Mesh, Sidecar-less, mTLS, [[spiffe|SPIFFE]], Gateway API, L7 流量管理
 
 ---
 

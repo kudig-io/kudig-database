@@ -59,7 +59,7 @@ prerequisites:
 |----------------|----------|
 | Pod 启动失败、CrashLoopBackOff、Pending | 工作负载 → 故障诊断/FTA故障树/pod-fta |
 | etcd、控制平面、apiserver | 集群基础 → 故障诊断/FTA故障树/apiserver-fta |
-| 网络不通、[[Service|Service]]、DNS | 网络 → 故障诊断/FTA故障树/dns-fta |
+| 网络不通、[[service\|Service]]、DNS | 网络 → 故障诊断/FTA故障树/dns-fta |
 | 存储、PV、PVC | 存储 → 故障诊断/FTA故障树/csi-fta |
 | 权限、RBAC、认证 | 安全 → 故障诊断/FTA故障树/rbac-fta |
 

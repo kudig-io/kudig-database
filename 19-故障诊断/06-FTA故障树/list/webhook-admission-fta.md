@@ -44,6 +44,7 @@ prerequisites:
 fta_id: FTA-WEBHOOK_ADMISSION-001
 component: Webhook Admission
 severity: critical
+tier: supporting
 ---
 
 > **生产环境安全提示**

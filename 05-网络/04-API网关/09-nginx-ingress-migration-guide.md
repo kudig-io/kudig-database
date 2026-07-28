@@ -69,7 +69,7 @@ cross_refs:
 
 
 
-# 09 - 传统 [[Ingress|Ingress]] 控制器向云原生 API 网关迁移
+# 09 - 传统 [[ingress|Ingress]] 控制器向云原生 API 网关迁移
 
 > **文档版本**: v1.0 | **适用版本**: nginx-ingress 1.x → Higress/APISIX/Kong/Envoy Gateway | **更新日期**: 2026-03-04 | **关键词**: 迁移, nginx-ingress, 注解映射, 零停机, 并行部署
 
@@ -90,11 +90,11 @@ cross_refs:
 
 ## nginx-ingress 的能力边界
 
-nginx-ingress（ingress-nginx）是 [[Kubernetes|Kubernetes]] 社区使用最广泛的 Ingress 控制器，但随着业务复杂度提升，其局限性日益明显。
+nginx-ingress（ingress-nginx）是 [[kubernetes|Kubernetes]] 社区使用最广泛的 Ingress 控制器，但随着业务复杂度提升，其局限性日益明显。
 
 ## 功能对比：nginx-ingress vs 现代 API 网关
 
-| 能力维度 | nginx-ingress | Higress | APISIX | Kong | [[Envoy|Envoy]] Gateway |
+| 能力维度 | nginx-ingress | Higress | APISIX | Kong | [[envoy\|Envoy]] Gateway |
 |---------|--------------|---------|--------|------|--------------|
 | **配置方式** | Ingress + 注解 | CRD + Gateway API | CRD + Admin API | CRD + Admin API | Gateway API |
 | **动态配置** | ❌ 需重载 Nginx | ✅ 无重载热更新 | ✅ 无重载热更新 | ✅ 无重载 | ✅ xDS 动态 |

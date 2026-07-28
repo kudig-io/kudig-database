@@ -65,11 +65,11 @@ tags:
 - operations
 - best-practices
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Istio|istio]]
+- [[istio|istio]]
 - calico
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -81,7 +81,7 @@ estimated_read_time: 5min
 intent_queries:
 - 绿色计算可持续发展 是什么
 - 如何 绿色计算可持续发展
-- [[Kubernetes|Kubernetes]] 18 production operations 最佳实践
+- [[kubernetes|Kubernetes]] 18 production operations 最佳实践
 trigger_keywords:
 - 绿色计算可持续发展
 - production

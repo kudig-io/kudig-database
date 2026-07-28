@@ -84,7 +84,7 @@ cross_refs:
 
 # 30 - 动态资源分配 ([[17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]])
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档
+> **适用版本**: [[kubernetes|Kubernetes]] v1.30+ (Alpha/Beta 演进中) | **最后更新**: 2026-04 | **文档类型**: 特性设计文档
 
 ---
 
@@ -156,7 +156,7 @@ cross_refs:
 | 对比维度 | 传统 Device Plugin | 动态资源分配 (DRA) | 说明 |
 |:---------|:-------------------|:-------------------|:-----|
 | **资源粒度** | 整设备 (如 `nvidia.com/gpu: 1`) | 子设备/组合设备 (MIG slice, 显存块) | DRA 支持将物理设备切分为逻辑单元 |
-| **调度集成** | kubelet 阶段通过 `Allocate` [[gRPC|gRPC]] 调用 | 通过调度框架插件 (DRA Plugin) | DRA 在调度阶段即确定资源分配 |
+| **调度集成** | kubelet 阶段通过 `Allocate` [[grpc\|gRPC]] 调用 | 通过调度框架插件 (DRA Plugin) | DRA 在调度阶段即确定资源分配 |
 | **分配灵活性** | 静态，无参数 | 支持参数化配置 (`parametersRef`) | 用户可指定计算模式、显存大小等 |
 | **拓扑感知** | 有限 (通过 `TopologyHint`) | 原生支持 NUMA/PCIe 拓扑约束 | DRA 在 Filter/Score 阶段考虑拓扑 |
 | **多设备组合** | 不支持 | 支持跨 ResourceClass 组合 | 如 `GPU + NIC + RDMA` 联合分配 |

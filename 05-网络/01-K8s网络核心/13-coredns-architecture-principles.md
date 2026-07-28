@@ -75,9 +75,9 @@ cross_refs:
 
 
 
-# 53 - [[CoreDNS|CoreDNS]] 架构与核心原理 (Architecture & Principles)
+# 53 - [[coredns|CoreDNS]] 架构与核心原理 (Architecture & Principles)
 
-> **适用版本**: CoreDNS 1.8.0+ / [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: CoreDNS 1.8.0+ / [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -182,7 +182,7 @@ CoreDNS 采用**模块化插件架构**，每个功能以独立插件实现，�
 | 模式 | 说明 | 示例插件 | 行为 |
 |:---|:---|:---|:---|
 | **Authoritative** | 权威响应 | kubernetes, file, hosts | 直接生成响应,终止链 |
-| **Passthrough** | 传递模式 | log, [[Prometheus|prometheus]], errors | 处理后传递给下一个插件 |
+| **Passthrough** | 传递模式 | log, [[prometheus\|prometheus]], errors | 处理后传递给下一个插件 |
 | **Fallthrough** | 回退模式 | kubernetes (配置fallthrough) | 无法处理时传递 |
 | **Terminal** | 终止模式 | forward | 作为最后一环处理 |
 
@@ -254,7 +254,7 @@ CoreDNS 采用**模块化插件架构**，每个功能以独立插件实现，�
 | **Service A记录** | `<svc>.<ns>.svc.<zone>` | nginx.default.svc.cluster.local | ClusterIP |
 | **Service SRV记录** | `_<port>._<proto>.<svc>.<ns>.svc.<zone>` | _http._tcp.nginx.default.svc.cluster.local | 端口+主机名 |
 | **Headless Service** | `<svc>.<ns>.svc.<zone>` | mysql-headless.db.svc.cluster.local | 所有Pod IP列表 |
-| **[[StatefulSet|StatefulSet]] Pod** | `<pod>.<svc>.<ns>.svc.<zone>` | mysql-0.mysql-headless.db.svc.cluster.local | 特定Pod IP |
+| **[[statefulset\|StatefulSet]] Pod** | `<pod>.<svc>.<ns>.svc.<zone>` | mysql-0.mysql-headless.db.svc.cluster.local | 特定Pod IP |
 | **Pod A记录** | `<pod-ip-dashed>.<ns>.pod.<zone>` | 10-244-1-5.default.pod.cluster.local | Pod IP |
 | **ExternalName** | `<svc>.<ns>.svc.<zone>` | ext-db.default.svc.cluster.local | CNAME到外部域名 |
 

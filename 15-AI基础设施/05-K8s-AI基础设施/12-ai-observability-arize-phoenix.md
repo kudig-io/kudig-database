@@ -59,7 +59,7 @@ AI 应用的可观测性与传统微服务有本质区别。传统可观测性�
 
 本文覆盖 AI 可观测性的核心概念、Arize Phoenix 和 Langfuse 的 K8s 生产部署、OpenTelemetry for LLM 追踪集成、模型质量监控（drift detection / hallucination rate）、GPU 利用率与推理性能关联分析、告警规则设计以及故障排查。
 
-相关页面：[[Agent可观测性]]、[[Prometheus监控体系]]、[[LLM Gateway与推理路由]]、[[vLLM推理引擎部署]]、[[GPU调度与资源管理]]
+相关页面：[[15-AI基础设施/05-K8s-AI基础设施/12-ai-observability-arize-phoenix|Agent可观测性]]、[[23-实体/07-可观测性/prometheus|Prometheus监控体系]]、[[15-AI基础设施/05-K8s-AI基础设施/11-llm-gateway-routing-cost|LLM Gateway与推理路由]]、[[15-AI基础设施/05-K8s-AI基础设施/02-vllm-inference-serving-production|vLLM推理引擎部署]]、[[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]
 
 ## 架构与核心概念
 
@@ -704,8 +704,8 @@ Tail-based Sampling:
 
 ## Related
 
-- [[Agent可观测性]]
-- [[Prometheus监控体系]]
-- [[LLM Gateway与推理路由]]
-- [[vLLM推理引擎部署]]
-- [[GPU调度与资源管理]]
+- [[15-AI基础设施/05-K8s-AI基础设施/12-ai-observability-arize-phoenix|Agent可观测性]]
+- [[23-实体/07-可观测性/prometheus|Prometheus监控体系]]
+- [[15-AI基础设施/05-K8s-AI基础设施/11-llm-gateway-routing-cost|LLM Gateway与推理路由]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-vllm-inference-serving-production|vLLM推理引擎部署]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]

@@ -66,7 +66,7 @@ This generates:
 
 ### Step 3: Implement Reconciliation
 
-The Reconcile() function follows the [[22-概念/controller-pattern.md|[[Controller Pattern (Reconciliation Loop)|Controller Pattern]]]]:
+The Reconcile() function follows the [[22-概念/controller-pattern.md|[[22-概念/01-核心架构/controller-pattern|Controller Pattern]]]]:
 
 1. Fetch the CR instance
 2. Determine desired state from spec
@@ -75,7 +75,7 @@ The Reconcile() function follows the [[22-概念/controller-pattern.md|[[Control
 5. Update CR status
 6. Return (requeue on error, no-requeue on success)
 
-### Step 4: Add [[Finalizers|Finalizers]]
+### Step 4: Add [[finalizers|Finalizers]]
 
 Finalizers prevent CR deletion before cleanup:
 ```go

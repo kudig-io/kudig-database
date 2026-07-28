@@ -51,7 +51,7 @@ tags:
 - training
 - lecturer
 - rbac
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner

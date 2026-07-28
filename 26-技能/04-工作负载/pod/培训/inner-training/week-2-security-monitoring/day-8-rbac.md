@@ -116,7 +116,7 @@ RBAC 权限模型的核心概念：
 
 - **主体（Subject）**: 谁在发起操作。可以是 User（用户）、Group（用户组）或 ServiceAccount（服务账号）
 - **动作（Verb）**: 对资源执行的操作。包括 get、list、watch、create、update、patch、delete、deletecollection 等
-- **资源（Resource）**: 操作的对象。如 [[Pods|pods]]、services、[[Deployments|deployments]]、secrets 等
+- **资源（Resource）**: 操作的对象。如 [[pods|pods]]、services、[[deployments|deployments]]、secrets 等
 - **API Group**: 资源所属的 API 组。核心资源（pods、services）属于 ""（核心组），Deployment 属于 "apps" 组
 
 权限的定义遵循"谁能对什么资源做什么操作"的模式。

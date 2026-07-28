@@ -769,7 +769,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[14-容器运行时/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[14-容器运行时/README.md|[[37-归档/domain-indexes/container-runtime/README-from-domain-22|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - index.md|Domain-22 容器镜像管理 — 开源项目索引]]
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

@@ -49,7 +49,7 @@ prerequisites:
 
 
 title: 数据中台架构设计
-description: '# 数据中台 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 数据中台 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -160,7 +160,7 @@ k8s_versions:
 
 ## 2.1 数据采集与接入
 
-数据采集是数据中台的起点，需要覆盖多种数据源和多种接入模式。批量采集（DataX/Sqoop）用于历史数据迁移和定期全量同步；实时采集（Flink CDC/Canal）用于数据库变更数据的实时捕获；日志采集（[[Fluentd|Fluentd]]/Logstash/Beats）用于应用日志和服务器日志的实时采集；消息接入（Kafka/RocketMQ）用于业务事件的流式接入。数据接入层需要提供统一的 schema 管理和数据格式标准化。
+数据采集是数据中台的起点，需要覆盖多种数据源和多种接入模式。批量采集（DataX/Sqoop）用于历史数据迁移和定期全量同步；实时采集（Flink CDC/Canal）用于数据库变更数据的实时捕获；日志采集（[[fluentd|Fluentd]]/Logstash/Beats）用于应用日志和服务器日志的实时采集；消息接入（Kafka/RocketMQ）用于业务事件的流式接入。数据接入层需要提供统一的 schema 管理和数据格式标准化。
 
 ## 2.2 数据存储与计算
 

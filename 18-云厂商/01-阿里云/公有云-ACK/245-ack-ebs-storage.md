@@ -1,7 +1,7 @@
 ---
 title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)
-description: 'title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)'
-summary: 'title: ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)'
+description: ACK 云盘存储实践：ESSD 性能等级选型、CSI StorageClass 配置、加密快照、在线扩容操作步骤与成本模型
+summary: ACK 云盘（ESSD/EBS）存储实践指南，覆盖 ESSD PL0-PL3 性能等级选型、生产级 CSI StorageClass 配置、KMS 加密与快照策略、PVC 在线扩容完整操作步骤与验证方法、成本模型。
 category: general
 tags:
 - cloud
@@ -55,7 +55,7 @@ prerequisites:
 - [ESSD 性能等级详解](#essd-性能等级详解)
 - [CSI 驱动优化配置](#csi-驱动优化配置)
 - [存储安全: 加密与快照](#存储安全-加密与快照)
-- [动态扩容与迁移路径](#动态扩容与迁移路径)
+- [动态扩容操作步骤](#动态扩容操作步骤)
 - [成本模型与选型建议](#成本模型与选型建议)
 
 ---
@@ -89,11 +89,36 @@ parameters:
   type: cloud_essd
   # 性能等级: PL1
   performanceLevel: PL1
-  # 延迟绑定，优化跨 AZ 调度
-  volumeBindingMode: WaitForFirstConsumer
-  # 扩容开关
-  allowVolumeExpansion: "true"
+# 延迟绑定，确保云盘与 Pod 调度到同一可用区
+volumeBindingMode: WaitForFirstConsumer
+# 允许 PVC 在线扩容
+allowVolumeExpansion: true
 reclaimPolicy: Retain
+```
+
+### 验证 CSI 驱动与动态供给
+
+```bash
+# 🟢 低风险：确认 CSI 插件组件运行正常
+kubectl -n kube-system get pods -l app=csi-plugin
+kubectl -n kube-system get pods -l app=csi-provisioner
+
+# 🟢 低风险：创建测试 PVC，验证自动建盘
+cat <<EOF | kubectl apply -f -
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: essd-test
+spec:
+  accessModes: ["ReadWriteOnce"]
+  storageClassName: alibabacloud-disk-essd
+  resources:
+    requests:
+      storage: 20Gi
+EOF
+
+# WaitForFirstConsumer 模式下 PVC 保持 Pending 属正常，挂载 Pod 后应变 Bound
+kubectl get pvc essd-test -w
 ```
 
 ### 挂载参数优化
@@ -129,12 +154,28 @@ parameters:
 
 ---
 
-## 动态扩容与迁移路径
+## 动态扩容操作步骤
 
 ### 扩容限制
 
 - **只能增不能减**: 云盘支持在线/离线扩容，但不支持缩容。
 - **文件系统刷新**: XFS 需要在线扩容后执行 `xfs_growfs`；ext4 执行 `resize2fs`。ACK CSI 驱动会自动处理这些原子操作。
+
+### 在线扩容操作与验证
+
+```bash
+# 前提：StorageClass 已设置 allowVolumeExpansion: true
+
+# 🟡 中风险：直接修改 PVC 容量（仅能调大）
+kubectl patch pvc essd-test -p '{"spec":{"resources":{"requests":{"storage":"40Gi"}}}}'
+
+# 🟢 低风险：观察扩容进度，Conditions 中 FileSystemResizePending 消失即完成
+kubectl describe pvc essd-test | grep -A5 Conditions
+kubectl get pvc essd-test -o jsonpath='{.status.capacity.storage}'
+
+# 🟢 低风险：在 Pod 内确认文件系统容量已更新
+kubectl exec <pod-name> -- df -h /data
+```
 
 ### 迁移建议
 
@@ -160,18 +201,15 @@ parameters:
 
 ## 相关文档
 
-- [76-storageclass-dynamic-provisioning.md](./76-storageclass-dynamic-provisioning.md) - 存储类动态供给
-- [166-csi-container-storage-deep-dive.md](./166-csi-container-storage-deep-dive.md) - CSI 规范深度解析
-- [156-alibaba-cloud-integration.md](./156-alibaba-cloud-integration.md) - 阿里云集成总表
+- [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning|StorageClass 动态供给]]
+- [[06-存储/01-K8s存储/05-csi-drivers-integration|CSI 驱动集成]]
+- [[18-云厂商/01-阿里云/index|阿里云域索引]]
 
 ## Related
 
-- [[hot|hot]]
-- [[17-系统基础/05-速查卡/go.md|go]]
-- [[17-系统基础/05-速查卡/sql.md|sql]]
 - [[17-系统基础/05-速查卡/linux.md|linux]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
-- [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[13-生产运维/05-工单案例/ticket-case-043-statefulset-pvc-unbound|工单案例：StatefulSet PVC 未绑定]]
 
 ## See Also
 

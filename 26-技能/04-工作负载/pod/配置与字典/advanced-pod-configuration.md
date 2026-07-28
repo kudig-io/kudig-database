@@ -178,7 +178,7 @@ spec:
 | PriorityClass | 优先级值 | 用途 |
 |--------------|---------|------|
 | `system-node-critical` | 2000001000 | 节点关键组件（如 kube-proxy） |
-| `system-cluster-critical` | 2000000000 | 集群关键组件（如 [[CoreDNS|CoreDNS]]） |
+| `system-cluster-critical` | 2000000000 | 集群关键组件（如 [[coredns\|CoreDNS]]） |
 | 自定义高优先级 | 1000000 | 业务关键应用 |
 | 默认（无设置） | 0 | 普通工作负载 |
 | 自定义低优先级 | -100 | 可牺牲的批处理任务 |

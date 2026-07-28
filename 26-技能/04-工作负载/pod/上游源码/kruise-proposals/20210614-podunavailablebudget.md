@@ -9,6 +9,7 @@ reviewers:
 creation-date: 2021-06-14
 last-updated: 2021-06-16
 status: implementable
+tier: supporting
 ---
 
 # Pod Unavailable Budget Feature

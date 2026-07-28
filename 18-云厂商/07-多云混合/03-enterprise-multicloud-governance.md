@@ -986,7 +986,7 @@ echo -e "\n=== 标签合规检查完成 ==="
 1. **标签标准化**: 建立企业级标签策略，所有资源必须包含 Environment、Team、CostCenter、Application、Owner 标签
 2. **最小权限原则**: 所有云平台采用最小权限 IAM 策略，启用 JIT 即时访问
 3. **基础设施即代码**: 所有资源通过 Terraform 管理，禁止手动创建资源
-4. **GitOps 工作流**: 通过 Argo CD / [[Flux|Flux]] 实现声明式资源管理，审计所有变更
+4. **GitOps 工作流**: 通过 Argo CD / [[flux|Flux]] 实现声明式资源管理，审计所有变更
 5. **合规自动化**: 使用 OPA/Kyverno 策略引擎自动执行合规检查
 
 ## 成本优化最佳实践
@@ -1028,7 +1028,7 @@ echo -e "\n=== 标签合规检查完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-27-multi-cloud-hybrid KUDIG Database — Global MOC
-- [[18-云厂商/README.md|[[Domain 27: 多云与混合云架构管理|Domain 27: 多云与混合云架构管理]]]]
+- [[18-云厂商/README.md|[[37-归档/domain-indexes/cloud/README-from-domain-27|Domain 27: 多云与混合云架构管理]]]]
 - Domain-27 多云与混合云 — 开源项目索引
 - AWS EKS 企业级多云管理平台
 - Azure AKS 企业级多云管理平台

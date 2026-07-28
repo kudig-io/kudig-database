@@ -374,7 +374,7 @@ allowedTopologies:
 | **CephFS CSI** | 文件存储 | RWX | ✓ | ✓ | ✓ | 高 |
 | **NFS CSI** | 文件存储 | RWX | ✗ | ✗ | ✗ | 中 |
 | **Local Path** | 本地存储 | RWO | ✗ | ✗ | ✗ | 中 |
-| **[[Longhorn|Longhorn]]** | 分布式块存储 | RWO/RWX | ✓ | ✓ | ✓ | 高 |
+| **[[longhorn\|Longhorn]]** | 分布式块存储 | RWO/RWX | ✓ | ✓ | ✓ | 高 |
 
 ### 阿里云存储CSI配置
 
@@ -1026,7 +1026,7 @@ groups:
 <!-- chunk: 生产级存储配置示例 -->
 ## 生产级存储配置示例
 
-### MySQL [[StatefulSet|StatefulSet]] + ESSD
+### MySQL [[statefulset|StatefulSet]] + ESSD
 
 ```yaml
 apiVersion: apps/v1

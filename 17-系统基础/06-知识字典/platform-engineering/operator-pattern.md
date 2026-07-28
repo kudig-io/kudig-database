@@ -82,10 +82,10 @@ An Operator is a custom controller that manages CRD instances:
 
 1. **Watch** CRD changes via Informer
 2. **Reconcile**: Compare desired spec vs actual cluster state
-3. **Create/Update** dependent Kubernetes resources ([[Deployments|Deployments]], Services, PVCs, etc.)
+3. **Create/Update** dependent Kubernetes resources ([[deployments|Deployments]], Services, PVCs, etc.)
 4. **Update Status** on the CRD instance
 
-Popular operators: [[Prometheus|Prometheus]] Operator, Elasticsearch Operator, MySQL Operator, [[ArgoCD|ArgoCD]].
+Popular operators: [[prometheus|Prometheus]] Operator, Elasticsearch Operator, MySQL Operator, [[argocd|ArgoCD]].
 
 ## Admission Webhooks
 

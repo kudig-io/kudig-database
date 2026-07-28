@@ -51,7 +51,7 @@ audience:
 - 工业软件开发者
 estimated_read_time: 5min
 intent_queries:
-- 工业互联网 [[Kubernetes|Kubernetes]] IIoT平台
+- 工业互联网 [[kubernetes|Kubernetes]] IIoT平台
 - 设备接入 MQTT OPC-UA K8s
 - 工业数据中台 Kubernetes Flink
 - 工业APP 低代码 Kubernetes

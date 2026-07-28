@@ -45,7 +45,7 @@ severity: high
 
 # Scheduler 异常故障树分析
 
-<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling 显示调度失败 -->
+<!-- condition: kubectl get [[pods|pods]] -A --field-selector=status.phase=Pending 显示大量 Pending Pod 或 kubectl get events -A --field-selector reason=FailedScheduling 显示调度失败 -->
 
 # Scheduler 异常 FTA 树
 

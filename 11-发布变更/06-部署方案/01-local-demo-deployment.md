@@ -59,7 +59,7 @@ tags:
 - [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - containerd
 last_updated: 2026-05
 difficulty: intermediate

@@ -69,7 +69,7 @@ cross_refs:
 
 # 04 - Higress 云原生 API 网关企业级实践
 
-> **文档版本**: v2.0 | **适用版本**: Higress v1.x - v2.x, [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Higress, [[Envoy|Envoy]], Istiod, Wasm, AI Gateway, Gateway API, xDS, 阿里云, McpBridge
+> **文档版本**: v2.0 | **适用版本**: Higress v1.x - v2.x, [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Higress, [[envoy|Envoy]], Istiod, Wasm, AI Gateway, Gateway API, xDS, 阿里云, McpBridge
 
 <!-- chunk: 目录 -->## 目录
 
@@ -85,7 +85,7 @@ cross_refs:
 10. [Gateway API 集成](#10-gateway-api-集成)
 11. [可观测性](#11-可观测性)
 12. [生产环境调优](#12-生产环境调优)
-13. [与 [[Istio|Istio]] 协同](#13-与-istio-协同)
+13. [与 [[istio|Istio]] 协同](#13-与-istio-协同)
 14. [常见故障排查](#14-常见故障排查)
 15. [与竞品横向对比](#15-与竞品横向对比)
 
@@ -93,7 +93,7 @@ cross_refs:
 
 <!-- chunk: 1. Higress 项目概述 -->## 1. Higress 项目概述
 
-Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy 构建，2022 年开源，2023 年进入 CNCF Sandbox。其命名源自 "High" + "[[Ingress|Ingress]]"，寓意高性能的入口网关。
+Higress 是阿里巴巴开源的云原生 API 网关，基于 Istio 和 Envoy 构建，2022 年开源，2023 年进入 CNCF Sandbox。其命名源自 "High" + "[[ingress|Ingress]]"，寓意高性能的入口网关。
 
 ## 核心定位
 

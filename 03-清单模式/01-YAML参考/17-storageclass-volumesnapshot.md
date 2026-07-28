@@ -61,7 +61,7 @@ authors:
 # 17 - StorageClass / VolumeSnapshot YAML 配置参考
 
 > **文档版本**: 2026-02  
-> **适用范围**: [[Kubernetes|Kubernetes]] v1.25 - v1.33
+> **适用范围**: [[kubernetes|Kubernetes]] v1.25 - v1.33
 > **资源类型**: StorageClass, VolumeSnapshot, VolumeSnapshotClass, VolumeSnapshotContent  
 > **API 版本**: storage.k8s.io/v1, snapshot.storage.k8s.io/v1  
 > **用途**: 动态存储供给与卷快照管理
@@ -1332,7 +1332,7 @@ kubectl get volumesnapshot -n database
 # NAME              READYTOUSE   SOURCEPVC     AGE
 # mysql-snapshot    true         mysql-pvc     10d  (状态 Terminating)
 ```
-**原因**: 快照有 [[Finalizers|finalizers]] 保护
+**原因**: 快照有 [[finalizers|finalizers]] 保护
 
 **排查步骤**:
 

@@ -1,7 +1,7 @@
 ---
 title: 网络连通性故障排查
 description: '# 25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)'
-summary: 'kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.status.conditions[?(@.type=="Ready")].status}{"\n"}{end}' | grep False'
+summary: "kubectl get pods -n <namespace> -o jsonpath='{range .items[*]}{.metadata.name}{\"\\t\"}{.status.conditions[?(@.type==\"Ready\")].status}{\"\\n\"}{end}' | grep False"
 category: troubleshooting
 tags:
 - network
@@ -149,7 +149,7 @@ cross_refs:
 <!-- chunk: 2. 数据路径基础与场景化排查 (Data Path Fundamentals & Scenario-Based Diagnosis) -->
 ## 2. 数据路径基础与场景化排查 (Data Path Fundamentals & Scenario-Based Diagnosis)
 
-### 2.1 [[Kubernetes|Kubernetes]] 数据路径全景
+### 2.1 [[kubernetes|Kubernetes]] 数据路径全景
 
 理解数据包经过的完整路径，是精准定位网络问题的基础。
 

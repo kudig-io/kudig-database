@@ -45,7 +45,7 @@ prerequisites:
 
 ## 概述
 
-Pod 优先级和抢占（Pod Priority and Preemption）是 [[Kubernetes|Kubernetes]] v1.14 中达到 stable 的特性。Pod 可以具有优先级，表示该 Pod 相对于其他 Pod 的重要性。如果某个 Pod 无法被调度，调度器会尝试抢占（驱逐）优先级较低的 Pod，以使该 pending Pod 能够被调度。
+Pod 优先级和抢占（Pod Priority and Preemption）是 [[kubernetes|Kubernetes]] v1.14 中达到 stable 的特性。Pod 可以具有优先级，表示该 Pod 相对于其他 Pod 的重要性。如果某个 Pod 无法被调度，调度器会尝试抢占（驱逐）优先级较低的 Pod，以使该 pending Pod 能够被调度。
 
 ## 核心概念/原理
 

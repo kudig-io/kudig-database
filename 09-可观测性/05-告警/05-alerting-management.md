@@ -1,7 +1,7 @@
 ---
 title: 05 - 告警管理策略 (Alerting Management)
 description: '# 05 - 告警管理策略 (Alerting Management)'
-summary: '本文档从生产环境运维专家视角，深入解析 [[Kubernetes|Kubernetes]] 告警管理体系，涵盖告警策略设计、规则编写、通知路由、抑制去重、SLO驱动告警、智能降噪、多租户管理等核心内容，结合大规模集群实践经验，为企业构建智能化、可扩展的告警系统提供完整指导。'
+summary: '本文档从生产环境运维专家视角，深入解析 [[kubernetes|Kubernetes]] 告警管理体系，涵盖告警策略设计、规则编写、通知路由、抑制去重、SLO驱动告警、智能降噪、多租户管理等核心内容，结合大规模集群实践经验，为企业构建智能化、可扩展的告警系统提供完整指导。'
 category: observability
 tags:
 - k8s
@@ -79,7 +79,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档从生产环境运维专家视角，深入解析 [[Kubernetes|Kubernetes]] 告警管理体系，涵盖告警策略设计、规则编写、通知路由、抑制去重、SLO驱动告警、智能降噪、多租户管理等核心内容，结合大规模集群实践经验，为企业构建智能化、可扩展的告警系统提供完整指导。
+本文档从生产环境运维专家视角，深入解析 [[kubernetes|Kubernetes]] 告警管理体系，涵盖告警策略设计、规则编写、通知路由、抑制去重、SLO驱动告警、智能降噪、多租户管理等核心内容，结合大规模集群实践经验，为企业构建智能化、可扩展的告警系统提供完整指导。
 
 ---
 
@@ -905,7 +905,7 @@ global_alert_management:
 ## Obsidian 相关文档
 
 - observability/MOC.md|可观测性 MOC]]
-- [[09-可观测性/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-8|Observability Domain (可观测性领域)]]]]
 - [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解

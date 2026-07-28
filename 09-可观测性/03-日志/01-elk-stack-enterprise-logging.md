@@ -57,7 +57,7 @@ tags:
 - docker
 - kafka
 - elasticsearch
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - webhook
 last_updated: 2026-05
 difficulty: intermediate
@@ -70,7 +70,7 @@ estimated_read_time: 5min
 intent_queries:
 - ELK Stack企业级日志管理系统深度实践 是什么
 - 如何 ELK Stack企业级日志管理系统深度实践
-- [[Kubernetes|Kubernetes]] 21 logging management analytics 最佳实践
+- [[kubernetes|Kubernetes]] 21 logging management analytics 最佳实践
 trigger_keywords:
 - ELK
 - Stack企业级日志管理系统深度实践

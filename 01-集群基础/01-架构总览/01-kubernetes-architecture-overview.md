@@ -62,7 +62,7 @@ prerequisites:
 
 
 ---
-title: [[Kubernetes|Kubernetes]] 架构全景图
+title: [[kubernetes|Kubernetes]] 架构全景图
 description: 全面介绍 Kubernetes 架构总览、控制平面、节点组件、核心对象模型、高可用架构、扩展机制、安全架构和可观测性
 category: 集群基础
 tags:
@@ -259,7 +259,7 @@ graph TB
 | **控制器模式** | 持续调谐当前状态到期望状态 | Controller Manager 包含40+控制器 |
 | **松耦合设计** | 组件通过 API Server 交互 | 组件可独立升级和扩展 |
 | **可扩展性** | 插件化架构 | CRI/CNI/CSI/Device Plugin/Admission |
-| **自愈能力** | 自动故障检测与恢复 | [[ReplicaSet|ReplicaSet]]/DaemonSet 自动重启 |
+| **自愈能力** | 自动故障检测与恢复 | [[replicaset\|ReplicaSet]]/DaemonSet 自动重启 |
 | **水平扩展** | 通过副本实现扩展 | HPA/VPA/Cluster Autoscaler |
 | **不可变基础设施** | 容器镜像不可变 | 配置变更通过滚动更新 |
 | **最终一致性** | 分布式系统一致性模型 | 基于 etcd 的最终一致性 |

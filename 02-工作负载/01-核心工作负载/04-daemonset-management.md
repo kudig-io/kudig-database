@@ -74,7 +74,7 @@ cross_refs:
 
 
 
-# 04 - [[DaemonSet|DaemonSet]] 管理策略与最佳实践 (DaemonSet Management Strategies)
+# 04 - [[daemonset|DaemonSet]] 管理策略与最佳实践 (DaemonSet Management Strategies)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] DaemonSet](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/)
 
@@ -102,7 +102,7 @@ graph TD
 
 | 场景类别 | 具体用途 | 推荐方案 | 关键配置 |
 |----------|----------|----------|----------|
-| **日志收集** | [[Fluentd|Fluentd]]/Filebeat | DaemonSet | hostPath挂载 |
+| **日志收集** | [[fluentd\|Fluentd]]/Filebeat | DaemonSet | hostPath挂载 |
 | **监控代理** | Node Exporter | DaemonSet | 主机网络 |
 | **网络插件** | CNI插件 | DaemonSet | 特权模式 |
 | **存储插件** | CSI驱动 | DaemonSet | 节点选择器 |

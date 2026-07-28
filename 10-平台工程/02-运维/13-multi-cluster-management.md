@@ -69,7 +69,7 @@ cross_refs:
 
 # 多集群管理
 
-> [[Kubernetes|Kubernetes]] 版本: v1.25 - v1.32 | 适用环境: 生产集群
+> [[kubernetes|Kubernetes]] 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 <!-- chunk: 多集群架构模式 -->
 ## 多集群架构模式
@@ -89,8 +89,8 @@ cross_refs:
 | Rancher | 管理平台 | 全功能、易用 | 中大规模 |
 | KubeSphere | 管理平台 | 国产、功能全 | 中大规模 |
 | Loft | 虚拟集群 | 轻量、多租户 | 开发测试 |
-| [[Karmada|Karmada]] | 联邦 | CNCF、原生 | 大规模 |
-| [[Clusternet|Clusternet]] | 联邦 | 腾讯开源 | 中大规模 |
+| [[karmada\|Karmada]] | 联邦 | CNCF、原生 | 大规模 |
+| [[clusternet\|Clusternet]] | 联邦 | 腾讯开源 | 中大规模 |
 | Admiralty | 调度 | 跨集群调度 | 特定场景 |
 
 <!-- chunk: kubeconfig 多集群配置 -->
@@ -215,7 +215,7 @@ spec:
         value: 3
 ```
 
-<!-- chunk: 跨集群服务发现 ([[Istio|Istio]]) -->
+<!-- chunk: 跨集群服务发现 ([[istio|Istio]]) -->
 ## 跨集群服务发现 (Istio)
 
 ```yaml

@@ -74,9 +74,9 @@ cross_refs:
 
 
 
-# 128 - [[Ingress|Ingress]] Controller 深入剖析
+# 128 - [[ingress|Ingress]] Controller 深入剖析
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 

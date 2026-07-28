@@ -70,7 +70,7 @@ cross_refs:
 
 # 23 - Pod Securityod Security Standards]] (PSS/PSA) YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->## 目录
 

@@ -49,7 +49,7 @@ prerequisites:
 
 
 
-title: Java 应用 [[Kubernetes|Kubernetes]] 可观测性整合指南
+title: Java 应用 [[kubernetes|Kubernetes]] 可观测性整合指南
 description: '# Java 应用 Kubernetes 可观测性整合指南'
 category: observability
 tags:

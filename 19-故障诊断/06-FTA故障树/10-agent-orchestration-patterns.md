@@ -36,6 +36,7 @@ prerequisites:
 - helm-basics
 - iac-basics
 - tls-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

@@ -41,7 +41,7 @@ prerequisites:
 
 
 
-# 第13课：[[DaemonSet|DaemonSet]] 与节点守护
+# 第13课：[[daemonset|DaemonSet]] 与节点守护
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 

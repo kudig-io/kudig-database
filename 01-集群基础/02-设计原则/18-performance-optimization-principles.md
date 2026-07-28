@@ -1,7 +1,7 @@
 ---
 title: 18 - 性能优化原理
 description: '# 18 - 性能优化原理'
-summary: '本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。'
+summary: '本文档深入探讨 [[kubernetes|Kubernetes]] 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。'
 category: design-principles
 tags:
 - k8s
@@ -75,13 +75,13 @@ cross_refs:
 > **架构师洞察**：
 > 性能优化不应是盲目的“跑分”，而应针对瓶颈进行精确打击。
 > 1. **原地垂直伸缩 (In-place Pod Resizing)**：K8s 1.30 趋于稳定的原地资源调整功能彻底改变了 VPA 的运维模式。现在你可以动态修改 Pod 的 CPU/Memory `Requests` 而无需重启 Pod。这对于长连接服务或大型数据库来说，是解决资源碎片和性能抖动的核心利器。
-> 2. **eBPF 与加速数据面**：在大规模集群中，iptables 的线性查表开销是性能杀手。采用 [[Cilium|Cilium]] 等基于 eBPF 的 CNI 可以实现 O(1) 复杂度的服务路由。对于极高性能场景，应考虑 DPDK 或 SR-IOV 绕过内核协议栈。
+> 2. **eBPF 与加速数据面**：在大规模集群中，iptables 的线性查表开销是性能杀手。采用 [[cilium|Cilium]] 等基于 eBPF 的 CNI 可以实现 O(1) 复杂度的服务路由。对于极高性能场景，应考虑 DPDK 或 SR-IOV 绕过内核协议栈。
 > 3. **冷启动优化**：Serverless 场景下，容器镜像的拉取通常占启动时间的 80%。采用“镜像流 (Image Streaming)”技术（如 Stargz 或 Nydus），让容器在镜像完整下载前就启动并按需加载数据，是提升极致扩展性的关键。
 
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入探讨 [[Kubernetes|Kubernetes]] 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。
+本文档深入探讨 [[kubernetes|Kubernetes]] 系统的性能优化设计原理，涵盖调度优化、资源管理、网络性能、存储性能等核心领域，为企业构建高性能 Kubernetes 平台提供理论指导和最佳实践方案。
 
 ---
 
@@ -474,7 +474,7 @@ data:
 
 ### 4.2 服务网格性能优化
 
-#### [[Istio|Istio]] 性能调优配置
+#### [[istio|Istio]] 性能调优配置
 ```yaml
 # Istio 高性能部署配置
 apiVersion: install.istio.io/v1alpha1

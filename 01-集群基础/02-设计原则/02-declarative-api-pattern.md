@@ -50,7 +50,7 @@ prerequisites:
 
 ---
 title: 声明式 API 与面向终态设计
-description: 深入解析 [[Kubernetes|Kubernetes]] 声明式 API 的核心概念、Server-Side Apply (SSA)、字段管理与冲突处理的底层机制
+description: 深入解析 [[kubernetes|Kubernetes]] 声明式 API 的核心概念、Server-Side Apply (SSA)、字段管理与冲突处理的底层机制
 category: 集群基础
 tags:
 - k8s
@@ -62,7 +62,7 @@ tags:
 - [[etcd|etcd]]
 - opa
 - hpa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - design-principles
 last_updated: 2026-05
 difficulty: advanced

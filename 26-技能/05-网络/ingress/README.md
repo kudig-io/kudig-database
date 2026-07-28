@@ -1,3 +1,12 @@
+---
+title: Ingress 网关故障诊断
+category: reference
+tags:
+- reference
+tier: supporting
+created: '2026-07-27'
+---
+
 # Ingress 网关故障诊断
 
 ## 概述

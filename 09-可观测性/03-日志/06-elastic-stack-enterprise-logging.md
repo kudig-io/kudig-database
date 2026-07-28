@@ -1635,7 +1635,7 @@ maintenance.run_daily_maintenance()
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[09-可观测性/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-20|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
 - [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - [[23-实体/07-可观测性/prometheus.md|prometheus]]
 - Grafana Enterprise Observability Platform 深度实践

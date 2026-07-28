@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 备份与恢复概述 (Backup & Recovery Overview)
+title: [[kubernetes|Kubernetes]] 备份与恢复概述 (Backup & Recovery Overview)
 description: '# Kubernetes 备份与恢复概述 (Backup & Recovery Overview)'
 category: platform-ops
 tags:
@@ -64,7 +64,7 @@ tags:
 - devops
 - [[etcd|etcd]]
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - helm
 - argocd

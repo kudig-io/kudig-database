@@ -38,7 +38,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] Self-Healing（Kubernetes 自愈能力）
+# [[kubernetes|Kubernetes]] Self-Healing（Kubernetes 自愈能力）
 
 ## 概述
 
@@ -54,8 +54,8 @@ Kubernetes 从设计之初就具备自愈能力，以帮助维护工作负载的
 - 若 [[22-概念/02-工作负载/pod-lifecycle.md|pod]] 中的容器失败，[[kubelet|kubelet]] 会根据 Pod 的 `restartPolicy`（如 `Always`、`OnFailure`）自动重启该容器。
 
 ### 副本替换
-- **Deployment / [[ReplicaSet|ReplicaSet]]**：若某个 Pod 失败，控制器会创建新的 Pod 以维持指定的副本数。
-- **[[StatefulSet|StatefulSet]]**：类似地，会重新创建失败的 Pod，并保持稳定的网络标识和存储绑定。
+- **Deployment / [[replicaset|ReplicaSet]]**：若某个 Pod 失败，控制器会创建新的 Pod 以维持指定的副本数。
+- **[[statefulset|StatefulSet]]**：类似地，会重新创建失败的 Pod，并保持稳定的网络标识和存储绑定。
 - **DaemonSet**：若 DaemonSet 的 Pod 失败，控制平面会在同一节点上创建替换 Pod，确保节点级服务持续运行。
 
 ### 持久存储恢复

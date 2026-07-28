@@ -65,8 +65,8 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[DaemonSet|daemonset]]
+- [[prometheus|prometheus]]
+- [[daemonset|daemonset]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate

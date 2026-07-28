@@ -844,7 +844,7 @@ Level 5 - 自主化运维 (Autonomous Operations) ......................... 95-1
 ## Obsidian 相关文档
 
 - 可观测性 KUDIG Database — Global MOC
-- [[09-可观测性/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-8|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - 指标监控体系详解

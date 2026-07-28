@@ -56,8 +56,8 @@ tags:
 - production
 - operations
 - best-practices
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - opa
 - hpa
 - vpa
@@ -73,7 +73,7 @@ estimated_read_time: 5min
 intent_queries:
 - K8s FinOps 成本优化实践指南 是什么
 - 如何 K8s FinOps 成本优化实践指南
-- [[Kubernetes|Kubernetes]] 18 production operations 最佳实践
+- [[kubernetes|Kubernetes]] 18 production operations 最佳实践
 trigger_keywords:
 - K8s
 - FinOps

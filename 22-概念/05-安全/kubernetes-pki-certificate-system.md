@@ -203,15 +203,15 @@ sudo ntpdate -u pool.ntp.org
 
 ## 相关概念
 
-- [[26-技能/07-安全/certificate/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
+- [[26-技能/07-安全/certificate/kubelet-certificate-rotation.md|[[26-技能/07-安全/certificate/kubelet-certificate-rotation|kubelet 证书轮换机制]]]]
 - [[22-概念/05-安全/security-defense-depth.md|安全纵深防御]]
 - [[22-概念/05-安全/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]]
 - [[26-技能/02-控制面/etcd/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
+- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]]]
 
 ## Related
 
-- [[22-概念/05-安全/secrets-management.md|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
+- [[22-概念/05-安全/secrets-management.md|secrets-management]] — [[secrets|Secrets]]ts Management|Secrets Management]]
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus

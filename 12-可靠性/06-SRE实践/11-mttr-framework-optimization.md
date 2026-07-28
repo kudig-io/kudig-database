@@ -713,4 +713,4 @@ curl -s -H "Authorization: Bearer $INCIDENT_API_TOKEN" \
 - [[11-发布变更/04-变更管理/07-rollback-automation-patterns.md|回滚自动化模式]]
 - [[09-可观测性/01-总览/01-observability-architecture-overview.md|可观测性架构总览]]
 - [[12-可靠性/06-SRE实践/04-toil-reduction-automation.md|Toil 消减自动化]]
-- [[12-可靠性/05-事后复盘]]
+- [[12-可靠性/05-事后复盘/index|05-事后复盘]]

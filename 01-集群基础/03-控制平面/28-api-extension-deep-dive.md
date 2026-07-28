@@ -84,7 +84,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] API扩展深度解析 (API Extensions Deep Dive)
+# [[kubernetes|Kubernetes]] API扩展深度解析 (API Extensions Deep Dive)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: API扩展文档
 

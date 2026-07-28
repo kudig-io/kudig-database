@@ -60,7 +60,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 生产环境完整架构蓝图
+title: [[kubernetes|Kubernetes]] 生产环境完整架构蓝图
 description: '# Kubernetes 生产环境完整架构蓝图'
 category: production-operations
 tags:
@@ -73,7 +73,7 @@ tags:
 - [[kubelet|kubelet]]
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

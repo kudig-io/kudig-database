@@ -42,7 +42,7 @@ prerequisites:
 
 
 
-# Day 13: 网络栈 - [[Ingress|Ingress]] + [[NetworkPolicy|NetworkPolicy]]
+# Day 13: 网络栈 - [[ingress|Ingress]] + [[networkpolicy|NetworkPolicy]]
 
 ```yaml
 ---

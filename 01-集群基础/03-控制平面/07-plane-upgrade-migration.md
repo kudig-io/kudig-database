@@ -83,7 +83,7 @@ cross_refs:
 
 # 控制平面升级与迁移策略 (Control Plane Upgrade & Migration Strategy)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 升级迁移指南
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 升级迁移指南
 
 ---
 

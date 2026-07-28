@@ -1,7 +1,7 @@
 ---
 title: Karmada 多集群联邦深度实践
 description: '# Karmada 多集群联邦深度实践'
-summary: 'Karmada（[[Kubernetes|Kubernetes]] [[Armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，'
+summary: 'Karmada（[[kubernetes|Kubernetes]] [[armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -60,11 +60,11 @@ authors:
 
 
 
-# [[Karmada|Karmada]] 多集群联邦深度实践
+# [[karmada|Karmada]] 多集群联邦深度实践
 
 <!-- chunk: 概述 -->## 概述
 
-Karmada（[[Kubernetes|Kubernetes]] [[Armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，通过 PropagationPolicy 和 OverridePolicy 实现精细化的跨集群工作负载分发和配置覆盖。Karmada 的生产用户包括华为、vivo、美团、字节跳动、中国工商银行等大型企业，在金融、互联网、制造等行业积累了丰富的生产实践经验。
+Karmada（[[kubernetes|Kubernetes]] [[armada|Armada]]）是华为云开源的多云多集群 Kubernetes 编排引擎，已捐赠至 CNCF 成为 Incubating 项目。Karmada 提供了 Kubernetes 原生的多云管理 API，通过 PropagationPolicy 和 OverridePolicy 实现精细化的跨集群工作负载分发和配置覆盖。Karmada 的生产用户包括华为、vivo、美团、字节跳动、中国工商银行等大型企业，在金融、互联网、制造等行业积累了丰富的生产实践经验。
 
 Karmada 的核心设计理念是"Kubernetes Native"——通过 CRD 和 Aggregated API Server [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|扩展 Kubernetes API]]PI|Kubernetes API]]，用户无需学习新的 API 概念即可管理多云环境。Karmada 支持多种调度策略：静态权重、动态资源感知、亲和性/反亲和性、以及基于故障域的智能调度。问题自动转移机制能够在成员集群不可用时，自动将工作负载迁移到健康的集群，确保业务连续性。多集群服务发现（MultiClusterService）允许跨集群的服务发现和负载均衡，使得应用可以透明地访问跨集群的服务。
 

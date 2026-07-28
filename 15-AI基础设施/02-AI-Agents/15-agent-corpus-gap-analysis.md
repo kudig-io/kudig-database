@@ -68,7 +68,7 @@ tags:
 - apiserver
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -108,7 +108,7 @@ k8s_versions:
 
 ## 概述
 
-kudig-database 已覆盖 39 个知识域、1477 个文件、4300 万字，是目前极其全面的 [[Kubernetes|Kubernetes]] 生产运维知识库。但"人读的知识库"与"Agent 可用的语料库"之间存在**结构性差距**。
+kudig-database 已覆盖 39 个知识域、1477 个文件、4300 万字，是目前极其全面的 [[kubernetes|Kubernetes]] 生产运维知识库。但"人读的知识库"与"Agent 可用的语料库"之间存在**结构性差距**。
 
 本文从 **Agent 视角** 系统审视现有内容，识别出 **10 大类缺失**，对每一类给出：
 - 现有资产的逐文件审计

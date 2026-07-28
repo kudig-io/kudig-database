@@ -50,7 +50,7 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - gateway
 - operator
 - gpu
@@ -64,7 +64,7 @@ audience:
 - 智能制造负责人
 estimated_read_time: 5min
 intent_queries:
-- 柔性制造 [[Kubernetes|Kubernetes]] C2M定制
+- 柔性制造 [[kubernetes|Kubernetes]] C2M定制
 - 智能排产 APS Kubernetes 部署
 - 数字主线 Digital Thread 工厂
 - AI质检 工业视觉 Kubernetes

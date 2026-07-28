@@ -43,7 +43,7 @@ prerequisites:
 
 
 
-# 场景: [[Service|Service]]Service Mesh）|Service Mesh]] 运维
+# 场景: [[service|Service]]Service Mesh）|Service Mesh]] 运维
 
 > **场景 ID**: SC-16
 > **英文**: Service Mesh Operations

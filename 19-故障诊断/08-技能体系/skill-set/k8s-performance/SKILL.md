@@ -67,7 +67,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s Performance Bottleneck 诊断与修复
 
-性能问题是 [[Kubernetes|Kubernetes]] 生产环境中最具挑战性的问题类型之一。CPU 节流、内存 OOM、磁盘 IO 饱和、网络延迟都可能导致应用响应变慢甚至不可用。
+性能问题是 [[kubernetes|Kubernetes]] 生产环境中最具挑战性的问题类型之一。CPU 节流、内存 OOM、磁盘 IO 饱和、网络延迟都可能导致应用响应变慢甚至不可用。
 
 本 [[SKILL|Skill]] 覆盖 Pod/节点/集群级别的性能瓶颈诊断和修复，包括资源优化、调度调整、应用级优化等。
 
@@ -78,7 +78,7 @@ agent_execution_mode: L2-semi-auto
 | Pod CPU 使用率接近 limit | `kubectl top pod` | 0.95 |
 | Pod 被 OOMKilled | `kubectl get pod` + Events | 0.95 |
 | 节点负载高 | `kubectl top node` | 0.90 |
-| 应用 P99 延迟突增 | [[Prometheus|Prometheus]]/Grafana | 0.90 |
+| 应用 P99 延迟突增 | [[prometheus\|Prometheus]]/Grafana | 0.90 |
 | 磁盘 IO 等待高 | node_exporter iowait | 0.85 |
 | CPU Throttling | `container_cpu_cfs_throttled_seconds_total` | 0.95 |
 

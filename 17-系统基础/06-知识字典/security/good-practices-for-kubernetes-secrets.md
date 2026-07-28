@@ -38,7 +38,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] [[Secrets|Secrets]] 最佳实践
+# [[kubernetes|Kubernetes]] [[secrets|Secrets]] 最佳实践
 
 ## 概述
 

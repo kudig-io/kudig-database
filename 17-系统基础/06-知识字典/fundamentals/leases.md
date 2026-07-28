@@ -43,7 +43,7 @@ prerequisites:
 
 ## 概述
 
-Lease（租约）是分布式系统中用于锁定共享资源和协调集合成员活动的机制。在 [[Kubernetes|Kubernetes]] 中，Lease 对象属于 `coordination.k8s.io` API 组，被用于系统级关键能力，如节点心跳（node heartbeats）和组件级领导者选举（leader election）。
+Lease（租约）是分布式系统中用于锁定共享资源和协调集合成员活动的机制。在 [[kubernetes|Kubernetes]] 中，Lease 对象属于 `coordination.k8s.io` API 组，被用于系统级关键能力，如节点心跳（node heartbeats）和组件级领导者选举（leader election）。
 
 ## 核心概念/原理
 

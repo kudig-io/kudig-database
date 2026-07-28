@@ -54,12 +54,12 @@ tags:
 - production
 - operations
 - best-practices
-- [[Istio|istio]]
+- [[istio|istio]]
 - opa
 - redis
 - mysql
-- [[StatefulSet|statefulset]]
-- [[Ingress|ingress]]
+- [[statefulset|statefulset]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

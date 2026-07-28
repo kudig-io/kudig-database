@@ -67,7 +67,7 @@ Cilium replaces iptables-based networking with eBPF programs:
 
 | Component | Role |
 |-----------|------|
-| Cilium Agent | [[DaemonSet|DaemonSet]] per node, programs eBPF into kernel |
+| Cilium Agent | [[daemonset\|DaemonSet]] per node, programs eBPF into kernel |
 | Cilium Operator | Cluster-wide operations (IPAM, node management) |
 | CNI Plugin | Integrates with kubelet for Pod networking |
 | eBPF dataplane | In-kernel packet processing, policy enforcement |

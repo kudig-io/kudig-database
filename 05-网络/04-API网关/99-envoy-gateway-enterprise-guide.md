@@ -62,7 +62,7 @@ authors:
 
 
 
-# [[Envoy|Envoy]] Gateway 企业级 API Gateway 实践指南
+# [[envoy|Envoy]] Gateway 企业级 API Gateway 实践指南
 
 > **适用版本**: Envoy Gateway v1.3 / Gateway API v1.2  
 > **最后更新**: 2026-04-24  
@@ -80,7 +80,7 @@ authors:
 - [六、速率限制与熔断](#六速率限制与熔断)
 - [七、认证与授权](#七认证与授权)
 - [八、可观测性集成](#八可观测性集成)
-- [九、Envoy Gateway vs 传统 [[Ingress|Ingress]]](#九envoy-gateway-vs-传统-ingress)
+- [九、Envoy Gateway vs 传统 [[ingress|Ingress]]](#九envoy-gateway-vs-传统-ingress)
 
 ---
 
@@ -110,7 +110,7 @@ Envoy Gateway 定位
 |:---|:---|:---|
 | 基础设施管理员 | GatewayClass, Gateway | 端口、协议、TLS、IP |
 | 集群运维 | Gateway (共享) | 多租户、策略、监控 |
-| 应用开发者 | HTTPRoute, [[Service|Service]] | 路由规则、流量分配 |
+| 应用开发者 | HTTPRoute, [[service\|Service]] | 路由规则、流量分配 |
 
 ---
 

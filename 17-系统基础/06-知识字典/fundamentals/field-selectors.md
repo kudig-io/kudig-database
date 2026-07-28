@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-字段选择器（Field Selectors）允许根据一个或多个资源字段的值来选择 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 对象。与标签选择器不同，字段选择器基于资源的实际字段值进行过滤，是一种更底层的资源筛选机制。
+字段选择器（Field Selectors）允许根据一个或多个资源字段的值来选择 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 对象。与标签选择器不同，字段选择器基于资源的实际字段值进行过滤，是一种更底层的资源筛选机制。
 
 ## 核心概念/原理
 
@@ -56,7 +56,7 @@ kubectl get pods --field-selector ""
 
 字段选择器支持 `=`、`==`（两者含义相同）和 `!=` 运算符。
 
-**示例**：选择所有不在 `default` 命名空间中的 [[Service|Service]]：
+**示例**：选择所有不在 `default` 命名空间中的 [[service|Service]]：
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
@@ -82,8 +82,8 @@ kubectl get pods --field-selector=status.phase!=Running,spec.restartPolicy=Alway
 | Event | `involvedObject.kind`、`involvedObject.namespace`、`involvedObject.name`、`involvedObject.uid`、`involvedObject.apiVersion`、`involvedObject.resourceVersion`、`involvedObject.fieldPath`、`reason`、`reportingComponent`、`source`、`type` |
 | Secret | `type` |
 | Namespace | `status.phase` |
-| [[ReplicaSet|ReplicaSet]] | `status.replicas` |
-| [[ReplicationController|ReplicationController]] | `status.replicas` |
+| [[replicaset\|ReplicaSet]] | `status.replicas` |
+| [[replicationcontroller\|ReplicationController]] | `status.replicas` |
 | Job | `status.successful` |
 | Node | `spec.unschedulable` |
 | CertificateSigningRequest | `spec.signerName` |

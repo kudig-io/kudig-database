@@ -226,8 +226,8 @@ parsec-tool destroy-key --key-name mykey
 
 ## 参考链接
 
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
-- [[23-实体/vault.md|[[HashiCorp Vault|vault]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
+- [[23-实体/vault.md|[[23-实体/06-安全/vault|vault]]]]
 - [[22-概念/05-安全/secrets-management.md|secrets-management]]
 - [[22-概念/05-安全/security-defense-depth.md|security-defense-depth]]
 

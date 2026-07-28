@@ -93,7 +93,7 @@ status: reviewed
 
 ### 自动化原则
 
-尽可能自动化重复性工作。实施 CI/CD、[[22-概念/gitops-principles.md|[[GitOps 速查卡|GitOps]]]]、[[26-技能/04-工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|自动扩缩容]]，验证自动化覆盖率和效率提升。
+尽可能自动化重复性工作。实施 CI/CD、[[22-概念/gitops-principles.md|[[17-系统基础/05-速查卡/gitops|GitOps]]]]、[[26-技能/04-工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|自动扩缩容]]，验证自动化覆盖率和效率提升。
 
 ### 标准化原则
 
@@ -257,10 +257,10 @@ kubectl get deploy -A -o json | jq -r '
 
 ## 相关资源
 
-- [[26-技能/01-集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|[[Kubernetes 集群配置最佳实践|Kubernetes 集群配置最佳实践]]]]
-- [[26-技能/05-网络/cni/最佳实践/k8s-network-configuration-guide.md|[[Kubernetes 网络配置最佳实践|Kubernetes 网络配置最佳实践]]]]
-- [[26-技能/06-存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|[[Kubernetes 存储配置最佳实践|Kubernetes 存储配置最佳实践]]]]
-- [[26-技能/08-可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|[[Kubernetes 日志管理最佳实践|Kubernetes 日志管理最佳实践]]]]
+- [[26-技能/01-集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|[[20-最佳实践/01-best-practices/infrastructure/kubernetes-cluster|Kubernetes 集群配置最佳实践]]]]
+- [[26-技能/05-网络/cni/最佳实践/k8s-network-configuration-guide.md|[[20-最佳实践/01-best-practices/infrastructure/networking|Kubernetes 网络配置最佳实践]]]]
+- [[26-技能/06-存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|[[20-最佳实践/01-best-practices/infrastructure/storage|Kubernetes 存储配置最佳实践]]]]
+- [[26-技能/08-可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|[[20-最佳实践/01-best-practices/observability/logging|Kubernetes 日志管理最佳实践]]]]
 - [[26-技能/08-可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
 - [[26-技能/08-可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]]
 - [[26-技能/04-工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]]

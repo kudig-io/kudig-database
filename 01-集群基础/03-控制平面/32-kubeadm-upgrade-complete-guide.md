@@ -59,8 +59,8 @@ tags:
 - scheduler
 - controller-manager
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[CoreDNS|coredns]]
+- [[prometheus|prometheus]]
+- [[coredns|coredns]]
 - helm
 last_updated: 2026-05
 difficulty: advanced

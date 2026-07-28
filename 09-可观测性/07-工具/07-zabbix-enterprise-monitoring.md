@@ -76,7 +76,7 @@ cross_refs:
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 
-This document provides comprehensive exploration of Zabbix enterprise monitoring platform architecture design, deployment practices, and operational management. Based on large-scale production environment experience, it offers complete technical guidance from infrastructure monitoring to business [[Service|service]] level monitoring, helping enterprises build unified, intelligent monitoring platforms.
+This document provides comprehensive exploration of Zabbix enterprise monitoring platform architecture design, deployment practices, and operational management. Based on large-scale production environment experience, it offers complete technical guidance from infrastructure monitoring to business [[service|service]] level monitoring, helping enterprises build unified, intelligent monitoring platforms.
 
 <!-- chunk: 1. Zabbix Enterprise Architecture Deep Dive -->## 1. Zabbix Enterprise Architecture Deep Dive
 

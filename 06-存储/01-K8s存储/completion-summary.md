@@ -203,7 +203,7 @@ Domain-6存储知识库已经成功完成了高质量的查漏补缺工作，达
 ## Obsidian 相关文档
 
 - 存储 KUDIG Database — Global MOC
-- [[06-存储/README.md|[[Kubernetes 存储配置最佳实践|Storage]]ge Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[06-存储/README.md|[[20-最佳实践/01-best-practices/infrastructure/storage|Storage]]ge Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践

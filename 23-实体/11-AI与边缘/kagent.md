@@ -240,7 +240,7 @@ kubectl delete agent ops-assistant -n kagent
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kagent
-- [[23-实体/cncf-edge-ai.md|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- [[23-实体/cncf-edge-ai.md|[[23-实体/15-参考与索引/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

@@ -40,13 +40,13 @@ prerequisites:
 
 ## 概述
 
-在 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，一些对象是所有者（owners），而另一些对象是它们的依赖者（dependents）。例如，[[ReplicaSet|ReplicaSet]] 是一组 Pod 的所有者。所有权与标签和选择器机制不同，它帮助 Kubernetes 的不同部分避免干扰它们不控制的对象。
+在 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 中，一些对象是所有者（owners），而另一些对象是它们的依赖者（dependents）。例如，[[replicaset|ReplicaSet]] 是一组 Pod 的所有者。所有权与标签和选择器机制不同，它帮助 Kubernetes 的不同部分避免干扰它们不控制的对象。
 
 ## 核心概念/原理
 
 ### Owner References
 
-依赖对象具有 `metadata.ownerReferences` 字段，用于引用其所有者对象。一个有效的所有者引用包含对象名称和 UID，且必须与依赖对象位于同一命名空间。Kubernetes 会自动为 ReplicaSet、[[DaemonSet|DaemonSet]]、Deployment、Job、[[CronJob|CronJob]] 和 ReplicationController 等对象的依赖资源设置此字段。
+依赖对象具有 `metadata.ownerReferences` 字段，用于引用其所有者对象。一个有效的所有者引用包含对象名称和 UID，且必须与依赖对象位于同一命名空间。Kubernetes 会自动为 ReplicaSet、[[daemonset|DaemonSet]]、Deployment、Job、[[cronjob|CronJob]] 和 ReplicationController 等对象的依赖资源设置此字段。
 
 虽然可以手动更改此字段，但通常不需要，可以让 Kubernetes 自动管理这些关系。
 

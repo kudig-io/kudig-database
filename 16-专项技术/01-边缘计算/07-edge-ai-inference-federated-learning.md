@@ -53,7 +53,7 @@ prerequisites:
 ---
 tags:
 - edge
-- [[KubeEdge|kubeedge]]
+- [[kubeedge|kubeedge]]
 - tutorial
 intent_queries:
 - edge-ai-inference-federated-learning是什么？
@@ -70,7 +70,7 @@ tags:
 - iot
 - kubeedge
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - redis
 - operator
@@ -86,7 +86,7 @@ estimated_read_time: 5min
 intent_queries:
 - 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning) 是什么
 - 如何 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
-- [[Kubernetes|Kubernetes]] 37 edge computing 最佳实践
+- [[kubernetes|Kubernetes]] 37 edge computing 最佳实践
 trigger_keywords:
 - 边缘
 - AI

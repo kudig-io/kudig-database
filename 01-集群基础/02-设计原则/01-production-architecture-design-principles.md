@@ -54,11 +54,11 @@ tags:
 - operations
 - best-practices
 - [[etcd|etcd]]
-- [[Helm|helm]]
+- [[helm|helm]]
 - hpa
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - rbac
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

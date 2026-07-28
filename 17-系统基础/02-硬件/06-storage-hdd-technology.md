@@ -70,7 +70,7 @@ estimated_read_time: 5min
 intent_queries:
 - 机械硬盘技术 是什么
 - 如何 机械硬盘技术
-- [[Kubernetes|Kubernetes]] 31 hardware 最佳实践
+- [[kubernetes|Kubernetes]] 31 hardware 最佳实践
 trigger_keywords:
 - 机械硬盘技术
 - hardware

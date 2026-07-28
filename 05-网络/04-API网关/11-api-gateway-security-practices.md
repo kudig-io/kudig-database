@@ -65,7 +65,7 @@ authors:
 
 # 11 - API 网关安全体系：认证、鉴权与 WAF
 
-> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: JWT, OIDC, mTLS, API Key, OPA, WAF, 限流, 零信任, HMAC, Bot 防护
+> **文档版本**: v1.0 | **适用版本**: [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: JWT, OIDC, mTLS, API Key, OPA, WAF, 限流, 零信任, HMAC, Bot 防护
 
 <!-- chunk: 目录 -->## 目录
 
@@ -613,7 +613,7 @@ spec:
 | **APISIX** | 内置 WAF 插件 + 自定义规则 | 部分 OWASP | 拦截 | ~1ms/请求 |
 | **Kong** | Kong WAF（Enterprise）| OWASP CRS | 检测/拦截 | ~2ms/请求 |
 | **Traefik** | 无原生 WAF，依赖 ModSecurity 中间件 | 手动配置 | 拦截 | ~5ms/请求 |
-| **[[Envoy|Envoy]] Gateway** | ext_proc 调用外部 WAF | 取决于外部服务 | 可配置 | 取决于网络 |
+| **[[envoy\|Envoy]] Gateway** | ext_proc 调用外部 WAF | 取决于外部服务 | 可配置 | 取决于网络 |
 
 ---
 

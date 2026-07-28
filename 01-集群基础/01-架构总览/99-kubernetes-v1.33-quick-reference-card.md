@@ -74,7 +74,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.33 速查卡
+# [[kubernetes|Kubernetes]] v1.33 速查卡
 
 > **一页纸速查**: v1.29 → v1.33 所有关键变更  
 > **最后更新**: 2026-04-24
@@ -93,7 +93,7 @@ cross_refs:
 | **[[kubelet|Kubelet]] Resource Metrics** | **Beta** | `/metrics/resource` 端点，替代 Summary API | ✅ 默认启用 |
 | **In-Place Pod Resize** | **Alpha** | 原地调整 Pod 资源，无需重启 | ❌ 需启用 FG |
 | **Cross-Namespace PVC** | **Alpha** | PVC 跨命名空间引用数据源 | ❌ 需启用 FG |
-| **PodIndexLabel** | **GA** | [[StatefulSet|StatefulSet]] 自动生成 `apps.kubernetes.io/pod-index` | ✅ 默认启用 |
+| **PodIndexLabel** | **GA** | [[statefulset\|StatefulSet]] 自动生成 `apps.kubernetes.io/pod-index` | ✅ 默认启用 |
 | **Windows HostProcess** | **GA** | Windows 容器 HostProcess 模式稳定 | ✅ 默认启用 |
 
 ---

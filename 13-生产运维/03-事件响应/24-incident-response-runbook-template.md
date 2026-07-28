@@ -439,7 +439,7 @@ kubectl patch pvc <pvc> -n <ns> --type='json' \
 - [[13-生产运维/03-事件响应/01-escalation-matrix-severity-levels.md|升级矩阵与严重等级]]
 - [[13-生产运维/03-事件响应/02-war-room-coordination-procedures.md|War Room 协调流程]]
 - [[13-生产运维/03-事件响应/03-communication-templates-stakeholder.md|事故沟通模板]]
-- [[13-生产运维/03-事件响应/04-incident-postmortem-template.md|无责复盘模板]]
+- [[12-可靠性/05-事后复盘/03-incident-postmortem-template|无责复盘模板]]
 - [[13-生产运维/03-事件响应/23-incident-response-handling.md|事故响应处理]]
 
 

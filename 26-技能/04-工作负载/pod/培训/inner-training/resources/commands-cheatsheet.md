@@ -262,7 +262,7 @@ kubectl delete pod <pod> --force --grace-period=0  # ⚠️ 跳过优雅终止�
 ```
 ---
 
-## 六、kubectl — Deployment / [[StatefulSet|StatefulSet]]
+## 六、kubectl — Deployment / [[statefulset|StatefulSet]]
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl rollout undo/restart`：触发滚动变更，影响副本
@@ -284,7 +284,7 @@ kubectl scale sts <name> --replicas=3
 ```
 ---
 
-## 七、kubectl — [[Service|Service]] / [[Ingress|Ingress]]
+## 七、kubectl — [[service|Service]] / [[ingress|Ingress]]
 
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用

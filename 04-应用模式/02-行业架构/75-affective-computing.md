@@ -60,7 +60,7 @@ audience:
 - 人机交互设计师
 estimated_read_time: 5min
 intent_queries:
-- 情感计算 AI [[Kubernetes|Kubernetes]] GPU部署
+- 情感计算 AI [[kubernetes|Kubernetes]] GPU部署
 - 多模态情绪识别 Kubernetes
 - 智能客服 情绪分析 K8s
 - 隐私保护 边缘计算 AI
@@ -544,7 +544,7 @@ spec:
 
 ## 8.2 生产检查清单
 
-- [ ] 多模态识别准确率 > 85%（F1-[[Score|Score]]）
+- [ ] 多模态识别准确率 > 85%（F1-[[score|Score]]）
 - [ ] 端到端推理延迟 P99 < 200ms
 - [ ] 情绪数据端到端加密
 - [ ] 伦理审查委员会审批通过

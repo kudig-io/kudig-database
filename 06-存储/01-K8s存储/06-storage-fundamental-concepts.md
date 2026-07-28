@@ -925,7 +925,7 @@ kubectl delete pod quick-start-pod
 kubectl delete pvc quick-start-pvc
 kubectl delete sc quick-start-sc
 ```
-> **CSI parameters 传递机制**: StorageClass 的 `parameters` 字段通过 CSI Sidecar（`external-provisioner`）传递给 CSI 驱动的 `CreateVolume` [[gRPC|gRPC]] 调用。每个 CSI 驱动定义自己支持的参数（如阿里云的 `type`/`performanceLevel`、AWS 的 `type`/`iopsPerGB`）。参数不匹配时，CSI 驱动会返回错误，PVC 会保持 Pending。
+> **CSI parameters 传递机制**: StorageClass 的 `parameters` 字段通过 CSI Sidecar（`external-provisioner`）传递给 CSI 驱动的 `CreateVolume` [[grpc|gRPC]] 调用。每个 CSI 驱动定义自己支持的参数（如阿里云的 `type`/`performanceLevel`、AWS 的 `type`/`iopsPerGB`）。参数不匹配时，CSI 驱动会返回错误，PVC 会保持 Pending。
 
 ---
 
@@ -1126,7 +1126,7 @@ kubectl delete sc lab-retain lab-delete
 ## Related
 
 - index/storage-index|Storage 存储知识图谱索引]]
-- [[21-生态参考/03-领域索引/csi-index.md|[[CSI (Container Storage Interface) 知识图谱索引|CSI (Container Storage Interface) 知识图谱索引]]]]
+- [[21-生态参考/03-领域索引/csi-index.md|[[21-生态参考/03-领域索引/csi-index|CSI (Container Storage Interface) 知识图谱索引]]]]
 
 
 <!-- risk-assessed -->

@@ -48,7 +48,7 @@ prerequisites:
 
 
 ---
-title: 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
+title: 第14课：[[statefulset|StatefulSet]] - 有状态应用管理
 description: '# 第14课：StatefulSet - 有状态应用管理'
 category: learning
 tags:
@@ -64,7 +64,7 @@ tags:
 - kafka
 - pdb
 - statefulset
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 aliases:
 - StatefulSet
 - 有状态集

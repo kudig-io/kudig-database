@@ -56,7 +56,7 @@ audience:
 - 算法工程师
 estimated_read_time: 5min
 intent_queries:
-- 量子计算云平台 [[Kubernetes|Kubernetes]] 架构
+- 量子计算云平台 [[kubernetes|Kubernetes]] 架构
 - 量子线路 QASM 编译执行
 - VQE 变分量子本征求解器
 - 量子经典混合计算调度
@@ -828,7 +828,7 @@ spec:
 | 数据库 | **PolarDB** |
 | 对象存储 | **OSS（加密存储）** |
 | 可观测性 | **ARMS + SLS** |
-| 工作流 | **[[Argo|Argo]]go Workflows|Argo Workflows]]** |
+| 工作流 | **[[argo\|Argo]]go Workflows|Argo Workflows]]** |
 
 ## 8.2 生产检查清单
 

@@ -46,10 +46,10 @@ prerequisites:
 # StatefulSets
 
 ## 概述
-[[StatefulSet|StatefulSet]] 是用于管理有状态应用的工作负载 API 对象。它管理一组基于相同容器规范运行的 Pod，并保证这些 Pod 的排序和唯一性。与 Deployment 不同，StatefulSet 为每个 Pod 维护一个粘性标识（sticky identity），即使 Pod 被重新调度，该标识也不会改变。
+[[statefulset|StatefulSet]] 是用于管理有状态应用的工作负载 API 对象。它管理一组基于相同容器规范运行的 Pod，并保证这些 Pod 的排序和唯一性。与 Deployment 不同，StatefulSet 为每个 Pod 维护一个粘性标识（sticky identity），即使 Pod 被重新调度，该标识也不会改变。
 
 ## 核心概念/原理
-- **稳定网络标识**：每个 Pod 都有一个基于序号的唯一主机名，格式为 `$(statefulset-name)-$(ordinal)`。配合 Headless [[Service|Service]] 可提供稳定的 DNS 名称。
+- **稳定网络标识**：每个 Pod 都有一个基于序号的唯一主机名，格式为 `$(statefulset-name)-$(ordinal)`。配合 Headless [[service|Service]] 可提供稳定的 DNS 名称。
 - **稳定存储**：通过 `volumeClaimTemplates` 为每个 Pod 自动创建 PersistentVolumeClaim。Pod 重新调度后，原有的 PVC 会重新挂载到新 Pod。
 - **有序部署与扩缩容**：默认 `OrderedReady` 策略下，Pod 按序号 0 到 N-1 依次创建；缩容时按 N-1 到 0 依次删除。每个前置 Pod 必须 Running 且 Ready 后，才会继续下一步。
 - **Pod 序号**：

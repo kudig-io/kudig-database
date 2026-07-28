@@ -356,7 +356,7 @@ Project (./opencode.json)           ← 最高优先级
 | **Formatter 不工作** | 确认工具命令可用（如 `prettier`、`gofmt`）、配置文件存在 |
 | **Custom Tool 错误** | 检查 `.opencode/tools/` 中 TypeScript 语法；确保 `@opencode-ai/plugin` 可用 |
 | **Server 无法访问** | 检查端口占用、防火墙规则；Server 认证是否正确 |
-| **GitHub Action 失败** | 检查 [[Secrets|Secrets]] 配置、权限设置、GitHub App 安装状态 |
+| **GitHub Action 失败** | 检查 [[secrets\|Secrets]] 配置、权限设置、GitHub App 安装状态 |
 
 ### 调试模式
 

@@ -212,7 +212,7 @@ route -n | grep flannel
 ```
 ---
 
-## 5. Flannel 与 [[NetworkPolicy|NetworkPolicy]]
+## 5. Flannel 与 [[networkpolicy|NetworkPolicy]]
 
 ### 5.1 Calico 安装（替代 Flannel）
 
@@ -356,7 +356,7 @@ kube-proxy 通过 iptables/IPVS 将 ClusterIP DNAT 到后端 PodIP:TargetPort。
 
 </details>
 
-**2. [[Ingress|Ingress]] vs Gateway API?**
+**2. [[ingress|Ingress]] vs Gateway API?**
 
 <details><summary>答案</summary>
 

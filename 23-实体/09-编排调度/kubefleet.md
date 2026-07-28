@@ -1,7 +1,7 @@
 ---
 title: KubeFleet [entities]
 description: '## 概述'
-summary: 'KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的工作负载分发、配置管理和策略驱动的资源放置能力。它通过 Hub-Member 架构和声明式 Placement 策略，实现将 Kubernetes 资源（Deployment、[[Service|Service]]、ConfigMap 等）自动分发到多个成员集群，'
+summary: 'KubeFleet 是一个多集群资源编排平台，提供跨 Kubernetes 集群的工作负载分发、配置管理和策略驱动的资源放置能力。它通过 Hub-Member 架构和声明式 Placement 策略，实现将 Kubernetes 资源（Deployment、[[service|Service]]、ConfigMap 等）自动分发到多个成员集群，'
 category: entities
 tags:
 - k8s
@@ -242,7 +242,7 @@ kubectl logs -n fleet-system -l app=fleet-agent --tail=100
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - kubefleet
-- [[23-实体/cncf-orchestration.md|[[CNCF 编排与应用管理项目全景|CNCF 编排与应用管理项目全景]]]] — Cross-reference
+- [[23-实体/cncf-orchestration.md|[[23-实体/15-参考与索引/cncf-orchestration|CNCF 编排与应用管理项目全景]]]] — Cross-reference
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 

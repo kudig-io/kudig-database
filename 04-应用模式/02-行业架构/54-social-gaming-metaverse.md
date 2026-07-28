@@ -53,11 +53,11 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - redis
 - mysql
 - hpa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - operator
 - gpu
 last_updated: 2026-05-18
@@ -69,7 +69,7 @@ audience:
 - 云游戏工程师
 estimated_read_time: 5min
 intent_queries:
-- 社交游戏 [[Kubernetes|Kubernetes]] 元宇宙社交
+- 社交游戏 [[kubernetes|Kubernetes]] 元宇宙社交
 - 虚拟空间 WebSocket K8s 状态同步
 - 万人同屏 Kubernetes 状态同步
 - UGC创作 区块链确权 K8s

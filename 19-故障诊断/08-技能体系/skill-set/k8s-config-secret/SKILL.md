@@ -60,7 +60,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s ConfigMap & Secret Failure 诊断与修复
 
-ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心机制。挂载失败、键名错误、大小超限、不可变配置修改等问题都会导致应用无法正确读取配置。
+ConfigMap 和 Secret 是 [[kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心机制。挂载失败、键名错误、大小超限、不可变配置修改等问题都会导致应用无法正确读取配置。
 
 本 [[SKILL|Skill]] 覆盖 ConfigMap/Secret 挂载失败、配置热更新不生效、敏感数据编码错误等全部常见根因的诊断和修复。
 

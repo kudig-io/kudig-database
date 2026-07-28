@@ -56,7 +56,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] [[CoreDNS|CoreDNS]] 全栈进阶培训 (从入门到专家)
+# [[kubernetes|Kubernetes]] [[coredns|CoreDNS]] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 掌握服务发现入口、极致性能调优、深度故障排查
@@ -103,7 +103,7 @@ authors:
 3. ndots 陷阱是大规模集群中 DNS 性能的头号杀手
 4. NodeLocal DNSCache 是解决 conntrack 竞态问题的标准方案
 5. 掌握 CoreDNS 的插件化架构和性能指标
-6. CoreDNS 的缓存 TTL 配置直接影响 [[Service|Service]] 变更的生效时间
+6. CoreDNS 的缓存 TTL 配置直接影响 [[service|Service]] 变更的生效时间
 
 ---
 

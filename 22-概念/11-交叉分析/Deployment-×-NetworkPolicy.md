@@ -121,8 +121,8 @@ EOF
 - [[23-实体/08-交付与制品/argocd.md|ArgoCD]]：GitOps同步
 
 ## 相关概念
-- [[Deployment]]
-- [[NetworkPolicy]]
+- [[deployment|Deployment]]
+- [[networkpolicy|NetworkPolicy]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

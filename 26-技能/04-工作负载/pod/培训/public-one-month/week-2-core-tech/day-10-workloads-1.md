@@ -45,7 +45,7 @@ prerequisites:
 
 
 
-# Day 10: 工作负载 - Deployment + [[StatefulSet|StatefulSet]] + [[DaemonSet|DaemonSet]]
+# Day 10: 工作负载 - Deployment + [[statefulset|StatefulSet]] + [[daemonset|DaemonSet]]
 
 ```yaml
 ---

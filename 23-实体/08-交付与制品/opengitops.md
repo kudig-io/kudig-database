@@ -229,7 +229,7 @@ spec:
 ## 参考链接
 
 - [[flux]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[22-概念/09-平台与发布/gitops-principles.md|gitops-principles]]
 - [[22-概念/01-核心架构/declarative-api.md|declarative-api]]
 

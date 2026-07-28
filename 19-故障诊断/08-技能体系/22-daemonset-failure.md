@@ -59,7 +59,7 @@ version: 1.0.0
 
 ---
 skill_id: "SKILL-WORK-003"
-skill_name: "[[DaemonSet|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation"
+skill_name: "[[daemonset|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation"
 version: "1.0"
 category: "workload"
 severity_range: "P0-P2"
@@ -80,8 +80,8 @@ trigger_keywords:
   - "node missing pod"
   - "kube-proxy"
   - "calico-node"
-  - "[[Cilium|cilium]]"
-  - "[[fluentd|[[Fluentd]]]]"
+  - "[[cilium|cilium]]"
+  - "[[fluentd|[[fluentd|Fluentd]]]]"
   - "node-exporter"
   - "系统组件"
   - "污点"

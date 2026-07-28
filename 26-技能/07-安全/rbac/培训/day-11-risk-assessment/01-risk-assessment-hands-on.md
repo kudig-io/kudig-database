@@ -78,7 +78,7 @@ prerequisites:
 | [[etcd|etcd]] | 数据泄露 | TLS + 网络隔离 + 加密 |
 | [[kubelet|Kubelet]] | 容器逃逸 | RBAC + 静态 Pod + PSP |
 | [[22-概念/15-运行时与系统/container-runtime.md|Container Runtime]] | 权限过大 | 最小化 capabilities |
-| 网络 | 横向移动 | [[NetworkPolicy|NetworkPolicy]] + CNI 隔离 |
+| 网络 | 横向移动 | [[networkpolicy\|NetworkPolicy]] + CNI 隔离 |
 
 ---
 

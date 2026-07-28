@@ -42,7 +42,7 @@ prerequisites:
 
 
 ---
-title: 第一课：[[Kubernetes|Kubernetes]] 入门
+title: 第一课：[[kubernetes|Kubernetes]] 入门
 description: • 如果你有 100 台服务器，容器该部署到哪台？
 category: learning
 tags:
@@ -52,7 +52,7 @@ tags:
 - lecturer
 - docker
 - mysql
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner

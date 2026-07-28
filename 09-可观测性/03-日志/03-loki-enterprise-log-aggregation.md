@@ -69,7 +69,7 @@ tags:
 - efk
 - loki
 - grafana
-- [[Istio|istio]]
+- [[istio|istio]]
 - docker
 - statefulset
 - job

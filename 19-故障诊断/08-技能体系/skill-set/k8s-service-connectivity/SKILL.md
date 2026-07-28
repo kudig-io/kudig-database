@@ -1,6 +1,6 @@
 ---
-title: '[[Service|Service]] 连通性问题诊断与修复'
-summary: '[[Service|Service]] 连通性问题诊断与修复：Service 连通性问题通常由 Endpoints 缺失、Selector 不匹配、NetworkPolicy
+title: '[[service|Service]] 连通性问题诊断与修复'
+summary: '[[service|Service]] 连通性问题诊断与修复：Service 连通性问题通常由 Endpoints 缺失、Selector 不匹配、NetworkPolicy
   阻断或 kube-proxy 异常引起。'
 category: network
 tags:
@@ -51,11 +51,11 @@ last_updated: 2026-05-23
 
 
 
-# [[Service|Service]] 连通性问题诊断与修复
+# [[service|Service]] 连通性问题诊断与修复
 
 ## 概述
 
-Service 连通性问题通常由 Endpoints 缺失、Selector 不匹配、[[NetworkPolicy|NetworkPolicy]] 阻断或 kube-proxy 异常引起。
+Service 连通性问题通常由 Endpoints 缺失、Selector 不匹配、[[networkpolicy|NetworkPolicy]] 阻断或 kube-proxy 异常引起。
 
 ## 症状识别
 

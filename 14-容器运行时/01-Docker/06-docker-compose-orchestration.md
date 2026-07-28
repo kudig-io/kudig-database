@@ -999,7 +999,7 @@ docker compose build --pull
 - [202-docker-container-lifecycle](03-docker-container-lifecycle.md) - 容器生命周期
 - [203-docker-networking-deep-dive](04-docker-networking-deep-dive.md) - Docker 网络
 - [204-docker-storage-volumes](05-docker-storage-volumes.md) - Docker 存储
-- [125-gitops-workflow-[[ArgoCD|argocd]]](./125-gitops-workflow-argocd.md) - GitOps 工作流
+- [125-gitops-workflow-[[argocd|argocd]]](./125-gitops-workflow-argocd.md) - GitOps 工作流
 
 ## See Also
 

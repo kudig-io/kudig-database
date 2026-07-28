@@ -64,7 +64,7 @@ Falco is the de facto runtime security threat detection engine for cloud native 
 
 ## Deployment
 
-Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all container syscalls. Recommended configuration uses eBPF driver (safer than kernel module).
+Falco deploys as a [[daemonset|DaemonSet]] with one pod per node, monitoring all container syscalls. Recommended configuration uses eBPF driver (safer than kernel module).
 
 ```bash
 # Helm 安装 Falco（eBPF 驱动）

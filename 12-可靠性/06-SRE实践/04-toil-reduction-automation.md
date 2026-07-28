@@ -431,7 +431,7 @@ avg(node_cpu_utilization) before CA vs after CA
 
 ### 场景 2: 证书自动轮换
 
-**问题描述**: [[Kubernetes|Kubernetes]] 集群涉及大量证书 (API Server、[[etcd|etcd]]、Ingress TLS、Service Account)，手动跟踪和续期容易遗漏，导致服务中断。
+**问题描述**: [[kubernetes|Kubernetes]] 集群涉及大量证书 (API Server、[[etcd|etcd]]、Ingress TLS、Service Account)，手动跟踪和续期容易遗漏，导致服务中断。
 
 **Toil 特征**:
 - 频率: 每 3-12 个月 (不同证书不同)

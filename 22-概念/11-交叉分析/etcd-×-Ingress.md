@@ -105,7 +105,7 @@ kubectl get --raw /metrics | grep etcd_server_slow_apply_total
 
 ## 相关概念
 - [[etcd]]
-- [[Ingress]]
+- [[ingress|Ingress]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

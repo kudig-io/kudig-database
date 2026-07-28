@@ -96,7 +96,7 @@ related_docs:
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档深入解析 [[Kubernetes|Kubernetes]] 指标监控体系，涵盖 Prometheus 生态、核心组件指标、自定义指标扩展、告警规则设计等关键内容，为构建生产级监控系统提供完整指导。
+本文档深入解析 [[kubernetes|Kubernetes]] 指标监控体系，涵盖 Prometheus 生态、核心组件指标、自定义指标扩展、告警规则设计等关键内容，为构建生产级监控系统提供完整指导。
 
 ---
 

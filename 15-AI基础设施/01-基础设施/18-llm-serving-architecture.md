@@ -1273,7 +1273,7 @@ groups:
 - [ ] **可观测性**：
   - Prometheus指标采集
   - Grafana Dashboard
-  - 分布式追踪（[[Jaeger|Jaeger]]）
+  - 分布式追踪（[[jaeger|Jaeger]]）
   - 日志聚合（ELK/Loki）
 
 ### 10.2 性能基准

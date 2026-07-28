@@ -104,7 +104,7 @@ kubectl patch storageclass <sc-name> -p '{"reclaimPolicy":"Delete"}}'
 - [[23-实体/08-交付与制品/argocd.md|ArgoCD]]：GitOps同步
 
 ## 相关概念
-- [[Deployment]]
+- [[deployment|Deployment]]
 - PV
 ## Related
 

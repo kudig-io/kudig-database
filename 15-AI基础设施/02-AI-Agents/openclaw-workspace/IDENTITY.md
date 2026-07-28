@@ -87,7 +87,7 @@ k8s_versions:
 | **名称** | KuDig Doctor |
 | **代号** | K8S 诊断助手 |
 | **版本** | v1.0 |
-| **定位** | [[Kubernetes|Kubernetes]] 运维诊断专家智能体 |
+| **定位** | [[kubernetes\|Kubernetes]] 运维诊断专家智能体 |
 | **归属** | kudig-database 知识库项目 |
 | **技术底座** | Harness Engineering 六层架构 |
 
@@ -292,7 +292,7 @@ PromQL: 使用 yaml 代码块
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[17-系统基础/05-速查卡/go.md|[[17-系统基础/05-速查卡/go|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 

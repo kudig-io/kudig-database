@@ -72,7 +72,7 @@ authors:
 - [四、Tekton Chains 构建证明](#四tekton-chains-构建证明)
 - [五、cosign 镜像签名与验证](#五cosign-镜像签名与验证)
 - [六、SBOM 生成与管理](#六sbom-生成与管理)
-- [七、策略引擎验证 ([[Kyverno|Kyverno]]/OPA)](#七策略引擎验证-kyvernoopa)
+- [七、策略引擎验证 ([[kyverno|Kyverno]]/OPA)](#七策略引擎验证-kyvernoopa)
 - [八、SLSA 等级提升路径](#八slsa-等级提升路径)
 - [九、参考架构](#九参考架构)
 

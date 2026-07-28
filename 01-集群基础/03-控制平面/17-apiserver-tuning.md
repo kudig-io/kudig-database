@@ -58,9 +58,9 @@ tags:
 - scheduler
 - controller-manager
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

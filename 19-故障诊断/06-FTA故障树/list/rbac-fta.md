@@ -57,6 +57,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md
   label: '结构化排障: 01-rbac-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

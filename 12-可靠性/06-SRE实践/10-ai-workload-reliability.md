@@ -54,7 +54,7 @@ authors:
 
 AI/ML 工作负载与传统微服务在可靠性保障上存在本质差异：GPU 硬件故障率远高于 CPU（年化故障率 5-15% vs <1%）、单次训练任务可能持续数天到数周、推理服务对延迟极度敏感（P99 < 100ms）、模型文件体积巨大（数 GB 到数百 GB）。这些特性要求专门的可靠性工程实践。
 
-本文覆盖 AI 工作负载可靠性的完整技术栈：GPU 故障检测与自动恢复、推理服务 SLA 保障体系、模型降级与 Fallback 策略、分布式训练 Checkpoint 机制以及 Kubernetes 上的容错设计模式。与 [[AI基础设施]] 中的基础部署指南不同，本文聚焦于生产环境的可靠性工程。
+本文覆盖 AI 工作负载可靠性的完整技术栈：GPU 故障检测与自动恢复、推理服务 SLA 保障体系、模型降级与 Fallback 策略、分布式训练 Checkpoint 机制以及 Kubernetes 上的容错设计模式。与 [[15-AI基础设施/README|AI基础设施]] 中的基础部署指南不同，本文聚焦于生产环境的可靠性工程。
 
 ## 核心概念
 
@@ -824,7 +824,7 @@ print(f'Best metric: {state.get(\"best_metric\", \"N/A\")}')
 
 ## Related
 
-- [[AI基础设施]]
+- [[15-AI基础设施/README|AI基础设施]]
 - [[12-可靠性/06-SRE实践/08-resilience-patterns-circuit-breaker.md|弹性模式]]
 - [[12-可靠性/06-SRE实践/01-availability-calculation-model.md|可用性计算模型]]
 - [[09-可观测性/02-指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业级监控]]

@@ -49,7 +49,7 @@ prerequisites:
 
 ## 概述
 
-**电信云（Telco Cloud）** 和 **5G 多接入边缘计算（MEC, Multi-access Edge Computing）** 是通信行业数字化转型的核心技术。[[Kubernetes|Kubernetes]] 正在成为电信网络功能（CNF, Cloud-Native Network Functions）的主流承载平台，替代传统的专用硬件（如 EPC、IMS、RAN）。2026 年，全球主要运营商（如 Verizon、中国移动、德国电信）已将 5G 核心网和边缘节点全面云原生化，Kubernetes 在其中扮演着编排容器化网络功能、管理边缘计算资源的关键角色。
+**电信云（Telco Cloud）** 和 **5G 多接入边缘计算（MEC, Multi-access Edge Computing）** 是通信行业数字化转型的核心技术。[[kubernetes|Kubernetes]] 正在成为电信网络功能（CNF, Cloud-Native Network Functions）的主流承载平台，替代传统的专用硬件（如 EPC、IMS、RAN）。2026 年，全球主要运营商（如 Verizon、中国移动、德国电信）已将 5G 核心网和边缘节点全面云原生化，Kubernetes 在其中扮演着编排容器化网络功能、管理边缘计算资源的关键角色。
 
 ## 核心概念/原理
 
@@ -118,7 +118,7 @@ spec:
 - **mMTC（海量机器类通信）**：面向 IoT 传感器，支持每平方公里百万级设备连接
 
 Kubernetes 上的网络切片通常通过：
-- **Namespace + [[NetworkPolicy|NetworkPolicy]]** 实现逻辑隔离
+- **Namespace + [[networkpolicy|NetworkPolicy]]** 实现逻辑隔离
 - **SR-IOV + VLAN/VXLAN** 实现物理网络隔离
 - **QoS 策略** 确保不同切片的带宽和延迟 SLA
 

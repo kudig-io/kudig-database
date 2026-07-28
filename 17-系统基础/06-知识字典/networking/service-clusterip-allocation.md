@@ -35,11 +35,11 @@ prerequisites:
 
 
 
-# [[Service|Service]] ClusterIP allocation
+# [[service|Service]] ClusterIP allocation
 
 ## 概述
 
-在 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中，`ClusterIP` 类型的 Service 会被分配一个集群范围内的虚拟 IP 地址，客户端通过该 IP 访问 Service，再由 Kubernetes 将流量负载均衡到后端 Pod。整个集群中，每个 Service 的 ClusterIP 必须唯一。Kubernetes 采用了一种分带（banding）分配策略，以降低用户手动指定静态 IP 与系统自动动态分配发生冲突的风险。
+在 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 中，`ClusterIP` 类型的 Service 会被分配一个集群范围内的虚拟 IP 地址，客户端通过该 IP 访问 Service，再由 Kubernetes 将流量负载均衡到后端 Pod。整个集群中，每个 Service 的 ClusterIP 必须唯一。Kubernetes 采用了一种分带（banding）分配策略，以降低用户手动指定静态 IP 与系统自动动态分配发生冲突的风险。
 
 ## 核心概念/原理
 
@@ -178,7 +178,7 @@ kubectl get svc <name> -o jsonpath='{.spec.clusterIP}'
 ## 交叉引用
 
 - [Service](service.md) — Service 类型和 ClusterIP 的使用
-- [DNS for Services](dns-for-services-and-[[Pods|pods]].md) — ClusterIP 与 DNS 记录的关系
+- [DNS for Services](dns-for-services-and-[[pods|pods]].md) — ClusterIP 与 DNS 记录的关系
 - [[17-系统基础/06-知识字典/networking/ipv4-ipv6-dual-stack.md|IPv4/IPv6 Dual Stack]]](ipv4-ipv6-dual-stack.md) — 双栈 Service 的 IP 分配
 
 ## 参考链接

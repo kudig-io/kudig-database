@@ -54,7 +54,7 @@ tags:
 - operations
 - best-practices
 - [[etcd|etcd]]
-- [[Istio|istio]]
+- [[istio|istio]]
 - docker
 - opa
 - falco

@@ -1039,7 +1039,7 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
-- [[09-可观测性/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-20|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
 - index.md|Domain-20 企业监控与告警 — 开源项目索引]]
 - [[09-可观测性/07-工具/02-grafana-enterprise-observability.md|02 grafana enterprise observability]]
 - OpenTelemetry分布式追踪与可观测性深度实践

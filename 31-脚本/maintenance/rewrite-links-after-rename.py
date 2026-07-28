@@ -377,7 +377,7 @@ def rewrite_mdlink(m):
 
 def rewrite_file(path):
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, encoding="utf-8") as f:
             content = f.read()
     except UnicodeDecodeError:
         return 0

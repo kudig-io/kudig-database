@@ -74,7 +74,7 @@ cross_refs:
 
 
 
-# 13 - [[Kubernetes|Kubernetes]] 性能调优专项指南
+# 13 - [[kubernetes|Kubernetes]] 性能调优专项指南
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -553,7 +553,7 @@ spec:
 
 ### 4.1 CNI 插件性能调优
 
-#### [[Cilium|Cilium]] eBPF 优化
+#### [[cilium|Cilium]] eBPF 优化
 ```yaml
 # Cilium 性能优化配置
 cilium:
@@ -601,7 +601,7 @@ spec:
   xdpRefreshInterval: 90s
 ```
 
-### 4.2 [[Service|Service]] 性能优化
+### 4.2 [[service|Service]] 性能优化
 
 #### kube-proxy 优化配置
 ```yaml

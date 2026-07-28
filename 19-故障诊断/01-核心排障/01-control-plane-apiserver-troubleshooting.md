@@ -95,7 +95,7 @@ related_docs:
 
 # 01 - API Server 故障排查 (API Server Troubleshooting)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/), [API Server Performance Tuning](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [kubernetes.io/docs/tasks/debug](https://kubernetes.io/docs/tasks/debug/), [API Server Performance Tuning](https://kubernetes.io/docs/setup/best-practices/cluster-large/)
 
 ---
 

@@ -68,10 +68,10 @@ This architecture ensures controllers are resilient to API Server outages and ne
 
 | Controller | Observes | Manages | Purpose |
 |-----------|----------|---------|---------|
-| Deployment Controller | Deployment | [[ReplicaSet|ReplicaSet]] | Rolling updates, rollback |
+| Deployment Controller | Deployment | [[replicaset\|ReplicaSet]] | Rolling updates, rollback |
 | ReplicaSet Controller | ReplicaSet | Pod | Maintain replica count |
-| [[StatefulSet|StatefulSet]] Controller | StatefulSet | Pod, PVC | Ordered stateful management |
-| [[DaemonSet|DaemonSet]] Controller | DaemonSet, Node | Pod | One Pod per node |
+| [[statefulset\|StatefulSet]] Controller | StatefulSet | Pod, PVC | Ordered stateful management |
+| [[daemonset\|DaemonSet]] Controller | DaemonSet, Node | Pod | One Pod per node |
 | Job Controller | Job | Pod | Run-to-completion tasks |
 | Node Controller | Node | Pod (eviction) | Node health monitoring |
 | PV Controller | PV, PVC | PV, PVC | Volume binding |

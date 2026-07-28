@@ -21,7 +21,7 @@ last_updated: 2026-05-22
 
 
 
-# [[Service|Service]] 连通性问题修复手册
+# [[service|Service]] 连通性问题修复手册
 
 ## 修复步骤
 

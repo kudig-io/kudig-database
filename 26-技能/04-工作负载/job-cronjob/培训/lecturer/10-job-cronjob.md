@@ -43,7 +43,7 @@ prerequisites:
 
 
 
-# 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
+# 第九课：Job 和 [[cronjob|CronJob]] - 任务调度
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 

@@ -63,7 +63,7 @@ tags:
 - events
 - troubleshooting
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - [[containerd|containerd]]
 - cri-o
 - redis

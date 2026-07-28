@@ -81,7 +81,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.33 生态系统兼容性矩阵
+# [[kubernetes|Kubernetes]] v1.33 生态系统兼容性矩阵
 
 > **适用版本**: Kubernetes v1.33  
 > **最后更新**: 2026-04-24  
@@ -96,7 +96,7 @@ cross_refs:
 - [二、容器运行时](#二容器运行时)
 - [三、CNI 网络插件](#三cni-网络插件)
 - [四、CSI 存储驱动](#四csi-存储驱动)
-- [五、[[Ingress|Ingress]] Controller / Gateway](#五ingress-controller--gateway)
+- [五、[[ingress|Ingress]] Controller / Gateway](#五ingress-controller--gateway)
 - [六、服务网格](#六服务网格)
 - [七、可观测性栈](#七可观测性栈)
 - [八、安全工具](#八安全工具)

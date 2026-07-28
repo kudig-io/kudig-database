@@ -185,15 +185,15 @@ spec:
 
 ## 相关技能
 
-- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-deletion.md|[[kubeadm 集群删除操作|kubeadm 集群删除操作]]]]
-- [[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-deletion.md|[[26-技能/01-集群运维/kubeadm/kubeadm-cluster-deletion|kubeadm 集群删除操作]]]]
+- [[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism.md|[[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism|kubelet 资源驱逐机制]]]]
 - [[26-技能/02-控制面/etcd/backup-restore-etcd.md|备份和恢复 etcd]]
 - [[22-概念/07-调度与资源/resource-management.md|资源管理]]
 
 ## Related
 
 - [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm-cluster-deletion]] — kubeadm 集群删除操作
-- [[23-实体/statefulset.md|[[StatefulSet|statefulset]]]] — StatefulSet
+- [[23-实体/statefulset.md|[[statefulset|statefulset]]]] — StatefulSet
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -56,7 +56,7 @@ tags:
 - storageclass
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - mysql
 last_updated: 2026-05
@@ -70,7 +70,7 @@ estimated_read_time: 5min
 intent_queries:
 - 存储性能调优与优化策略 是什么
 - 如何 存储性能调优与优化策略
-- [[Kubernetes|Kubernetes]] 6 storage 最佳实践
+- [[kubernetes|Kubernetes]] 6 storage 最佳实践
 trigger_keywords:
 - 存储性能调优与优化策略
 - storage

@@ -2771,7 +2771,7 @@ data:
 - **bpftool**: `man bpftool-map`
 - **BCC Map 文档**: [github.com/iovisor/bcc/blob/master/docs/reference_guide.md](https://github.com/iovisor/bcc/blob/master/docs/reference_guide.md)
 - **eBPF 示例程序**: [github.com/torvalds/linux/tree/master/samples/bpf](https://github.com/torvalds/linux/tree/master/samples/bpf)
-- **[[Cilium|Cilium]] eBPF Go 库**: [github.com/cilium/ebpf](https://github.com/cilium/ebpf)
+- **[[cilium|Cilium]] eBPF Go 库**: [github.com/cilium/ebpf](https://github.com/cilium/ebpf)
 
 ---
 

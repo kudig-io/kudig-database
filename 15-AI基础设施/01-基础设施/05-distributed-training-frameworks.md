@@ -485,7 +485,7 @@ for step, batch in enumerate(train_dataloader):
 
 ---
 
-### DeepSpeed on [[Kubernetes|Kubernetes]]
+### DeepSpeed on [[kubernetes|Kubernetes]]
 
 ```yaml
 apiVersion: batch/v1

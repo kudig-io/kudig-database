@@ -86,7 +86,7 @@ cross_refs:
 
 # kube-proxy 深度解析 (kube-proxy Deep Dive)
 
-> kube-proxy 是 [[Kubernetes|Kubernetes]] 的网络代理组件，运行在每个节点上，负责实现 [[Service|Service]] 的负载均衡和网络转发
+> kube-proxy 是 [[kubernetes|Kubernetes]] 的网络代理组件，运行在每个节点上，负责实现 [[service|Service]] 的负载均衡和网络转发
 
 ---
 
@@ -651,7 +651,7 @@ spec:
 | `rest_client_request_duration_seconds` | Histogram | API请求延迟 | p99 > 1s |
 | `process_resident_memory_bytes` | Gauge | 内存使用 | > 256MB |
 
-### 7.2 [[Prometheus|Prometheus]] 告警规则
+### 7.2 [[prometheus|Prometheus]] 告警规则
 
 ```yaml
 groups:

@@ -50,7 +50,7 @@ prerequisites:
 | ID | Top Event | Severity | Impact | Typical Symptoms | ACK-Specific |
 |----|-----------|----------|--------|-----------------|-------------|
 | TE-1 | Cluster completely unavailable | P0 | Entire cluster | kubectl cannot connect, all services down | ECS/ESSD/SLB |
-| TE-2 | Application [[Service|service]] unavailable | P0 | Specific app | HTTP 5xx errors, users cannot access | ASM/ARMS/Terway |
+| TE-2 | Application [[service\|service]] unavailable | P0 | Specific app | HTTP 5xx errors, users cannot access | ASM/ARMS/Terway |
 | TE-3 | Pod startup failure | P1 | Specific Pod | Pod in Pending/Error state | ACK scheduler |
 | TE-4 | Network communication anomaly | P1 | Network layer | DNS failure, Pod communication broken | Terway ENI/IPVLAN |
 | TE-5 | Storage access failure | P1 | Storage layer | PVC bind failure, volume mount failure | OSS/CSI/NAS |

@@ -70,7 +70,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.33 弃用功能与迁移指南
+# [[kubernetes|Kubernetes]] v1.33 弃用功能与迁移指南
 
 > **适用版本**: Kubernetes v1.25 - v1.33  
 > **最后更新**: 2026-04-24  

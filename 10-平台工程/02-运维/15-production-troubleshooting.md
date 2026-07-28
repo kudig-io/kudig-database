@@ -53,7 +53,7 @@ tags:
 - operations
 - devops
 - scheduler
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate
@@ -65,7 +65,7 @@ estimated_read_time: 5min
 intent_queries:
 - 生产环境故障诊断 (Production Troubleshooting) 是什么
 - 如何 生产环境故障诊断 (Production Troubleshooting)
-- [[Kubernetes|Kubernetes]] 9 platform ops 最佳实践
+- [[kubernetes|Kubernetes]] 9 platform ops 最佳实践
 - 生产环境故障诊断 (Production Troubleshooting) 故障排查
 - 生产环境故障诊断 (Production Troubleshooting) 排障步骤
 trigger_keywords:

@@ -1040,7 +1040,7 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-24-infrastructure-as-code KUDIG Database — Global MOC
-- [[11-发布变更/README.md|[[Domain 24: 基础设施即代码 (Infrastructure as Code)|Domain 24: 基础设施即代码 (Infrastructure as Code)]]]]
+- [[11-发布变更/README.md|[[37-归档/domain-indexes/release-change/README-from-domain-24|Domain 24: 基础设施即代码 (Infrastructure as Code)]]]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Terraform企业级基础设施即代码实践
 - Pulumi Enterprise Infrastructure as Code Platform

@@ -53,9 +53,9 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
-- [[Flux|flux]]
-- [[Falco|falco]]
+- [[prometheus|prometheus]]
+- [[flux|flux]]
+- [[falco|falco]]
 - ceph
 - redis
 - mysql

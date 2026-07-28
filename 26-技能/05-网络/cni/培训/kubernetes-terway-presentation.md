@@ -57,7 +57,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] Terway (Aliyun) 全栈进阶培训 (从入门到专家)
+# [[kubernetes|Kubernetes]] Terway (Aliyun) 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: 阿里云 ACK v1.26 - v1.32 | **Terway 版本**: v1.5+
 > **核心原则**: 理解云原生网络架构、掌握高性能 ENI 策略
@@ -88,7 +88,7 @@ authors:
 1. Terway 是阿里云 ACK 自研的 CNI 插件，Pod IP 直通 VPC
 2. 三种核心模式：VPC 路由、ENI 独占、ENIIP（推荐默认）
 3. IPAM 预热池机制减少 OpenAPI 调用延迟
-4. 四层安全模型：节点安全组 → Pod 安全组 → [[NetworkPolicy|NetworkPolicy]] → RAM
+4. 四层安全模型：节点安全组 → Pod 安全组 → [[networkpolicy|NetworkPolicy]] → RAM
 5. 容量规划是 Terway 生产部署的第一步
 
 ---
@@ -155,7 +155,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 - Pod 级安全组：每个 Pod 可绑定独立安全组，实现精细化访问控制
 
 **SLB/ALB 集成：**
-- LoadBalancer 类型 [[Service|Service]] 自动关联阿里云 SLB/ALB
+- LoadBalancer 类型 [[service|Service]] 自动关联阿里云 SLB/ALB
 - SLB 后端直接挂载 Pod IP (ENIIP 模式)，无需经过 NodePort 转发
 - 流量路径：Client → SLB → Pod IP (直通)，减少一跳
 
@@ -165,7 +165,7 @@ Flannel 是 ACK 早期默认 CNI，采用 Overlay (VXLAN) 方案。Terway 在 Po
 
 | 组件 | 形态 | 职责 |
 |:---|:---|:---|
-| **Terway [[DaemonSet|DaemonSet]]** | DaemonSet (每 Node 一个 Pod) | 运行 CNI 插件二进制, 执行 IPAM, 管理 ENI/IP 资源池 |
+| **Terway [[daemonset\|DaemonSet]]** | DaemonSet (每 Node 一个 Pod) | 运行 CNI 插件二进制, 执行 IPAM, 管理 ENI/IP 资源池 |
 | **Terway Controller** | Deployment (1 副本, 可选 HA) | Watch CRD 变更, 管理 ENI 生命周期, GC |
 | **eni-config ConfigMap** | ConfigMap | 全局网络配置: VPC ID, vSwitch ID, 安全组, 网络模式 |
 

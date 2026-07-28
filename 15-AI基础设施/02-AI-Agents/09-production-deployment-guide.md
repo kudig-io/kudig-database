@@ -58,8 +58,8 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - redis
 - postgresql
 - hpa
@@ -100,7 +100,7 @@ k8s_versions:
 
 <!-- chunk: 概述 -->## 概述
 
-将 Agent 服务部署到 [[Kubernetes|Kubernetes]] 生产环境，需要解决 LLM 推理服务的 GPU 资源管理、长连接和流式输出的网络处理、基于队列长度的弹性扩缩容，以及 Agent 服务特有的限流和成本控制需求。本文提供完整的生产级部署架构、YAML 清单和运维手册。
+将 Agent 服务部署到 [[kubernetes|Kubernetes]] 生产环境，需要解决 LLM 推理服务的 GPU 资源管理、长连接和流式输出的网络处理、基于队列长度的弹性扩缩容，以及 Agent 服务特有的限流和成本控制需求。本文提供完整的生产级部署架构、YAML 清单和运维手册。
 
 ---
 

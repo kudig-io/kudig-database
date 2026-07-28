@@ -56,7 +56,7 @@ prerequisites:
 
 
 ---
-title: [[Kubernetes|Kubernetes]] 最佳实践指南
+title: [[kubernetes|Kubernetes]] 最佳实践指南
 description: 系统化的 Kubernetes 生产环境最佳实践集合
 category: topic-best-practices
 tags:
@@ -142,7 +142,7 @@ tier: peripheral---
 **核心原则**:
 - 高可用控制平面：至少3个主节点
 - 合理的节点规格：根据工作负载选择节点类型
-- 网络规划：Pod CIDR、[[Service|Service]] CIDR、节点网络分离
+- 网络规划：Pod CIDR、[[service|Service]] CIDR、节点网络分离
 
 **关键配置**:
 

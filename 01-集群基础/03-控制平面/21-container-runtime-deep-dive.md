@@ -107,7 +107,7 @@ cross_refs:
 <!-- chunk: 1. 容器运行时演进历史 -->
 ## 1. 容器运行时演进历史
 
-### 1.1 Docker 到 [[Kubernetes|Kubernetes]] 的演进
+### 1.1 Docker 到 [[kubernetes|Kubernetes]] 的演进
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用

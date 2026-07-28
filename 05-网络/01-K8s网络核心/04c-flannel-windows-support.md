@@ -74,7 +74,7 @@ cross_refs:
 
 # Flannel Windows 节点支持
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | Windows Server 2019+ | **最后更新**: 2026-05
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | Windows Server 2019+ | **最后更新**: 2026-05
 
 ---
 
@@ -93,7 +93,7 @@ Flannel 对 Windows 节点的支持通过 HDC (Host Device Communication) 后端
 | UDP 后端 | ✓ | ✗ |
 | WireGuard 后端 | ✓ | ✗ |
 | IPv6 Dual Stack | ✓ | ✗ |
-| [[NetworkPolicy|NetworkPolicy]] | ✓ (需 Canal) | ✗ |
+| [[networkpolicy\|NetworkPolicy]] | ✓ (需 Canal) | ✗ |
 
 ---
 

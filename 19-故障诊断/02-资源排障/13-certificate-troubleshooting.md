@@ -80,7 +80,7 @@ cross_refs:
 
 ---
 
-<!-- chunk: 1. [[Kubernetes|Kubernetes]] 证书体系 (Certificate Architecture) -->
+<!-- chunk: 1. [[kubernetes|Kubernetes]] 证书体系 (Certificate Architecture) -->
 ## 1. Kubernetes 证书体系 (Certificate Architecture)
 
 ### 1.1 证书组件总览

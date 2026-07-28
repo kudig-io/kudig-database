@@ -563,7 +563,7 @@ APIService 不可用
 ## Obsidian 相关文档
 
 - 平台工程 KUDIG Database — Global MOC
-- [[10-平台工程/README.md|[[Platform Ops Domain (平台运维领域)|Platform Ops Domain (平台运维领域)]]]]
+- [[10-平台工程/README.md|[[37-归档/domain-indexes/platform/README-from-domain-9|Platform Ops Domain (平台运维领域)]]]]
 - index.md|Domain-9 平台运维 — 开源项目索引]]
 - 平台运维概述
 - 集群生命周期管理

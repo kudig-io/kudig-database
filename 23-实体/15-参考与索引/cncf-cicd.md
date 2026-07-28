@@ -140,7 +140,7 @@ Kubean 是 K8s 集群生命周期管理工具。
 
 Backstage 是开源开发者门户。
 
-- 软件目录（[[Service|Service]] Catalog）
+- 软件目录（[[service|Service]] Catalog）
 - 技术文档（TechDocs）
 - 插件生态丰富
 - Spotify 开源并广泛采用

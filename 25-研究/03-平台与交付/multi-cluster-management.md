@@ -189,4 +189,4 @@ spec:
 ## Related
 
 - [[24-综合/02-交付与GitOps/argocd-gitops.md|ArgoCD × GitOps]]
-- [[25-研究/multi-cluster-security-governance.md|多集群安全治理]]
+- [[25-研究/02-网络与安全/zero-trust-k8s-security|多集群安全治理]]

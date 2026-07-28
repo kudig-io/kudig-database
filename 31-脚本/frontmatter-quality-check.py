@@ -10,83 +10,55 @@ Phase 2 (Fix):  自动补全缺失的基础字段 (title, description, category,
 
 import re
 import sys
-import yaml
-from pathlib import Path
-from datetime import date
 from collections import defaultdict
+from datetime import date
+from pathlib import Path
+
+import yaml
 
 BASE_DIR = Path(__file__).parent.parent
 TODAY = date.today().isoformat()[:7]  # YYYY-MM
 
 EXCLUDE_DIRS = {'.git', '.venv', '.ruff_cache', 'site', 'node_modules',
                 '.obsidian', '.zread', '.claude', '.codebuddy', '.comate',
-                '.github', '.understand-anything'}
+                '.github', '.understand-anything', '.qoder', '.mimocode', '.zcode',
+                '28-资产', '30-站点', '31-脚本', '32-发布', '33-源码',
+                '34-源码分析', '35-元数据', '36-报告', '37-归档'}
 
-# 目录 → 默认标签映射
+# 顶层目录 → 默认标签映射（2026-07 目录结构：NN-中文名）
 DIR_TAGS = {
-    "domain-1-architecture-fundamentals": ["k8s", "architecture", "deep-dive"],
-    "domain-2-design-principles": ["k8s", "design-principles"],
-    "domain-3-control-plane": ["k8s", "control-plane", "deep-dive"],
-    "domain-4-workloads": ["k8s", "workload", "pod", "deployment"],
-    "domain-5-networking": ["k8s", "networking", "service", "ingress"],
-    "domain-6-storage": ["k8s", "storage", "pv", "pvc"],
-    "domain-7-security": ["k8s", "security", "rbac", "best-practice"],
-    "domain-8-observability": ["k8s", "observability", "prometheus", "monitoring"],
-    "domain-9-platform-ops": ["k8s", "devops", "daily-ops"],
-    "domain-10-extensions": ["k8s", "crd", "operator"],
-    "domain-11-ai-infra": ["k8s", "ai", "gpu", "deep-dive"],
-    "domain-12-troubleshooting": ["k8s", "troubleshooting", "guide"],
-    "domain-13-docker": ["docker", "container", "best-practice"],
-    "domain-14-linux": ["linux", "system-admin", "guide"],
-    "domain-15-network-fundamentals": ["networking", "fundamentals"],
-    "domain-16-storage-fundamentals": ["storage", "fundamentals"],
-    "domain-17-cloud-provider": ["cloud", "multi-cloud"],
-    "domain-18-production-operations": ["k8s", "production", "best-practice"],
-    "domain-19-papers": ["paper", "research"],
-    "domain-20-enterprise-monitoring-alerting": ["observability", "monitoring", "alerting"],
-    "domain-21-logging-management-analytics": ["observability", "logging"],
-    "domain-22-container-image-management": ["docker", "image", "security"],
-    "domain-23-gitops-ci-cd": ["gitops", "cicd", "devops"],
-    "domain-24-infrastructure-as-code": ["iac", "terraform"],
-    "domain-25-cloud-native-security": ["security", "cloud-native"],
-    "domain-26-service-mesh-microservices": ["mesh", "microservices", "istio"],
-    "domain-27-multi-cloud-hybrid": ["cloud", "hybrid"],
-    "domain-28-enterprise-database-middleware": ["database", "middleware"],
-    "domain-29-automated-testing-quality": ["quality", "testing"],
-    "domain-30-disaster-recovery-business-continuity": ["disaster-recovery", "backup-restore"],
-    "domain-31-hardware": ["hardware"],
-    "domain-32-yaml-manifests": ["yaml", "reference"],
-    "domain-33-kubernetes-events": ["k8s", "events"],
-    "domain-34-cncf-landscape": ["cncf", "ecosystem"],
-    "domain-35-ebpf-technology": ["ebpf", "cilium"],
-    "domain-36-platform-engineering": ["platform", "idp"],
-    "domain-37-edge-computing": ["edge", "kubeedge"],
-    "domain-38-webassembly-cloud-native": ["wasm", "cloud-native"],
-    "domain-39-supply-chain-security": ["security", "supply-chain"],
-    "domain-40-cloud-native-api-gateway": ["gateway", "api"],
+    "01-集群基础": ["k8s", "architecture", "control-plane"],
+    "02-工作负载": ["k8s", "workload", "deployment"],
+    "03-清单模式": ["yaml", "reference", "manifests"],
+    "04-应用模式": ["architecture", "application-patterns"],
+    "05-网络": ["k8s", "networking", "service"],
+    "06-存储": ["k8s", "storage", "pv"],
+    "07-数据库中间件": ["database", "middleware"],
+    "08-安全": ["k8s", "security", "rbac"],
+    "09-可观测性": ["observability", "monitoring", "prometheus"],
+    "10-平台工程": ["platform", "idp"],
+    "11-发布变更": ["gitops", "cicd", "release"],
+    "12-可靠性": ["reliability", "sre", "disaster-recovery"],
+    "13-生产运维": ["k8s", "production", "daily-ops"],
+    "14-容器运行时": ["docker", "container", "containerd"],
+    "15-AI基础设施": ["ai", "gpu", "k8s"],
+    "16-专项技术": ["ebpf", "edge", "wasm"],
+    "17-系统基础": ["linux", "fundamentals"],
+    "18-云厂商": ["cloud", "multi-cloud"],
+    "19-故障诊断": ["k8s", "troubleshooting", "guide"],
+    "20-最佳实践": ["best-practice", "k8s"],
+    "21-生态参考": ["cncf", "ecosystem", "reference"],
 }
 
+# 提炼层目录 → 默认标签映射
 TOPIC_TAGS = {
-    "topic-ai-agent": ["ai", "ai-agent"],
-    "topic-ai-coding": ["ai", "ai-coding"],
-    "topic-application-architecture": ["architecture", "best-practice"],
-    "topic-cheat-sheet": ["cheatsheet", "quick-reference"],
-    "topic-deployment": ["deployment"],
-    "topic-dictionary": ["dictionary", "reference"],
-    "topic-febm": ["febm", "troubleshooting"],
-    "topic-fta": ["fta", "troubleshooting"],
-    "topic-functions": ["reference"],
-    "topic-index": ["index", "reference"],
-    "domain-java-kubernetes": ["java", "k8s"],
-    "topic-learn": ["learning", "tutorial"],
-    "topic-migration": ["migration", "upgrade"],
-    "topic-presentations": ["presentation"],
-    "topic-publish": ["publish"],
-    "topic-qa-corpus": ["qa"],
-    "topic-release-notes": ["release-notes"],
-    "topic-skills": ["skill", "daily-ops"],
-    "topic-structural-trouble-shooting": ["troubleshooting", "guide"],
-    "topic-terway": ["terway", "networking", "cni"],
+    "22-概念": ["concept", "reference"],
+    "23-实体": ["entity", "reference"],
+    "24-综合": ["synthesis", "cross-domain"],
+    "25-研究": ["research", "paper"],
+    "26-技能": ["skill", "daily-ops"],
+    "27-标签": ["tag", "index"],
+    "29-文档": ["docs", "reference"],
 }
 
 
@@ -301,7 +273,7 @@ def main():
             field_missing_count[f] += 1
 
     if field_missing_count:
-        print(f"\n缺失字段统计:")
+        print("\n缺失字段统计:")
         for field, count in sorted(field_missing_count.items(), key=lambda x: -x[1]):
             print(f"  {field:25s} {count:5d} 文件缺失")
 
@@ -320,7 +292,7 @@ def main():
 
     # Print files with most missing fields (top 20)
     if mode == "scan":
-        print(f"\n缺失字段最多的文件 (Top 20):")
+        print("\n缺失字段最多的文件 (Top 20):")
         sorted_results = sorted(results, key=lambda x: -len(x.get("missing", [])))
         for r in sorted_results[:20]:
             if r.get("missing"):

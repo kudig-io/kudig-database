@@ -73,9 +73,9 @@ cross_refs:
 
 
 
-# 04 - DNS 服务发现与 [[CoreDNS|CoreDNS]] 调优
+# 04 - DNS 服务发现与 [[coredns|CoreDNS]] 调优
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 高级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 高级
 
 ---
 
@@ -1240,7 +1240,7 @@ spec:
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]]]
 - [[05-网络/01-K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

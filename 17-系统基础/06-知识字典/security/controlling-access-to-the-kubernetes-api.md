@@ -40,7 +40,7 @@ prerequisites:
 
 
 
-# 控制对 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 的访问
+# 控制对 [[kubernetes|Kubernetes]]es API|Kubernetes API]] 的访问
 
 ## 概述
 

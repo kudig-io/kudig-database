@@ -60,7 +60,7 @@ authors:
 
 # 10 - Wasm 插件生态与开发实践
 
-> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Wasm, proxy-wasm, TinyGo, Rust, 插件, 沙箱, 热加载, OCI
+> **文档版本**: v1.0 | **适用版本**: [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Wasm, proxy-wasm, TinyGo, Rust, 插件, 沙箱, 热加载, OCI
 
 <!-- chunk: 目录 -->## 目录
 
@@ -159,7 +159,7 @@ proxy-wasm 是由 Envoy 社区主导、多家厂商共同制定的 WebAssembly �
 | ABI 版本 | 发布时间 | 主要 SDK | 关键变化 |
 |---------|---------|---------|---------|
 | **0.1.0** | 2020-Q1 | envoy-wasm-sdk (C++) | 初始版本，仅 HTTP 过滤器 |
-| **0.2.0** | 2021-Q1 | proxy-wasm-go-sdk, proxy-wasm-rust-sdk | 增加 TCP、[[gRPC|gRPC]] 支持 |
+| **0.2.0** | 2021-Q1 | proxy-wasm-go-sdk, proxy-wasm-rust-sdk | 增加 TCP、[[grpc\|gRPC]] 支持 |
 | **0.2.1** | 2022-Q2 | 同上 | 修复内存模型 Bug，增加 shared_data |
 | **0.3.0（草案）** | 2024-Q1 | 实验性支持 | 支持异步 HTTP 调用、计时器精度提升 |
 
@@ -194,7 +194,7 @@ proxy-wasm 插件运行在独立的线性内存空间中。宿主与插件之间
 | **共享队列** | `proxy_enqueue/dequeue_shared_queue` | 跨 Worker 消息传递 |
 | **计时器** | `proxy_set_tick_period_milliseconds` | 周期性触发（心跳、定时上报） |
 | **日志** | `proxy_log` | 输出结构化日志至宿主日志系统 |
-| **指标** | `proxy_define/increment_metric` | 向宿主注册并更新 [[Prometheus|Prometheus]] 指标 |
+| **指标** | `proxy_define/increment_metric` | 向宿主注册并更新 [[prometheus\|Prometheus]] 指标 |
 
 ---
 

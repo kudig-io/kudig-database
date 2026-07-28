@@ -74,8 +74,8 @@ topic-best-practices 专题
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[common-best-practices|[[Kubernetes 通用最佳实践参考|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
-| 2 | [[kubernetes-cluster|[[Kubernetes 集群配置最佳实践|Kubernetes 集群配置最佳实践]]]] |  |  |  |
+| 1 | [[common-best-practices|[[20-最佳实践/01-best-practices/common-best-practices|Kubernetes 通用最佳实践参考]]]] |  | best-practice |  |
+| 2 | [[kubernetes-cluster|[[20-最佳实践/01-best-practices/infrastructure/kubernetes-cluster|Kubernetes 集群配置最佳实践]]]] |  |  |  |
 | 3 | [[networking|Kubernetes 网络配置最佳实践]] |  | networking |  |
 | 4 | [[storage|Kubernetes 存储配置最佳实践]] |  | storage |  |
 | 5 | [[logging|Kubernetes 日志管理最佳实践]] |  |  |  |

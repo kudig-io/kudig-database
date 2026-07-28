@@ -71,7 +71,7 @@ cross_refs:
 
 
 
-# 14 - [[Kubernetes|Kubernetes]] 安全架构深度分析
+# 14 - [[kubernetes|Kubernetes]] 安全架构深度分析
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -434,9 +434,9 @@ spec:
       port: 8080
 ```
 
-### 3.2 [[Service|Service]]Service Mesh）|Service Mesh]] 安全增强
+### 3.2 [[service|Service]]Service Mesh）|Service Mesh]] 安全增强
 
-#### [[Istio|Istio]] 安全配置
+#### [[istio|Istio]] 安全配置
 ```yaml
 # Istio 安全策略
 apiVersion: security.istio.io/v1beta1

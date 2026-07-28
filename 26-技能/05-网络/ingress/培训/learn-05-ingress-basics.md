@@ -44,7 +44,7 @@ prerequisites:
 
 
 
-# 第五课：[[Ingress|Ingress]] - 外部 HTTP/HTTPS 访问
+# 第五课：[[ingress|Ingress]] - 外部 HTTP/HTTPS 访问
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 

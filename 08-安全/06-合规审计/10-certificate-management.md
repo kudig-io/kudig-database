@@ -1,7 +1,7 @@
 ---
 title: 证书管理与 TLS 配置
 description: '# 证书管理与 TLS 配置'
-summary: '证书管理是 [[Kubernetes|Kubernetes]] 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、[[Ingress|Ingress]] HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。'
+summary: '证书管理是 [[kubernetes|Kubernetes]] 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、[[ingress|Ingress]] HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。'
 category: security
 tags:
 - k8s
@@ -79,7 +79,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-证书管理是 [[Kubernetes|Kubernetes]] 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、[[Ingress|Ingress]] HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。
+证书管理是 [[kubernetes|Kubernetes]] 安全体系的核心组成部分,涉及集群组件通信加密、服务间 mTLS、[[ingress|Ingress]] HTTPS 等多个层面。本文档详细介绍 Kubernetes 证书体系、cert-manager 部署配置和证书生命周期管理。
 
 <!-- chunk: 证书架构 -->
 ## 证书架构
@@ -431,7 +431,7 @@ echo "=== 证书更新完成 ==="
 <!-- chunk: cert-manager 部署 -->
 ## cert-manager 部署
 
-### [[Helm|Helm]] 安装
+### [[helm|Helm]] 安装
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `helm upgrade/install`：部署/升级 release
@@ -921,7 +921,7 @@ spec:
 <!-- chunk: mTLS 配置 -->
 ## mTLS 配置
 
-### [[Istio|Istio]] mTLS
+### [[istio|Istio]] mTLS
 
 ```yaml
 # istio-mtls.yaml

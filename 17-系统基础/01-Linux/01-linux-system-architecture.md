@@ -1,7 +1,7 @@
 ---
 title: 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南
 description: '# 01 - Linux 系统架构与内核深度解析：生产环境运维专家指南'
-summary: '本文档从生产环境运维专家视角，深入解析 Linux 系统架构、内核工作机制和企业级最佳实践。涵盖系统启动优化、内核参数调优、性能监控、故障排查等关键运维技能，为 [[Kubernetes|Kubernetes]] 和容器化环境提供坚实的基础支撑。'
+summary: '本文档从生产环境运维专家视角，深入解析 Linux 系统架构、内核工作机制和企业级最佳实践。涵盖系统启动优化、内核参数调优、性能监控、故障排查等关键运维技能，为 [[kubernetes|Kubernetes]] 和容器化环境提供坚实的基础支撑。'
 category: linux
 tags:
 - linux
@@ -69,7 +69,7 @@ cross_refs:
 
 <!-- chunk: 摘要 -->## 摘要
 
-本文档从生产环境运维专家视角，深入解析 Linux 系统架构、内核工作机制和企业级最佳实践。涵盖系统启动优化、内核参数调优、性能监控、故障排查等关键运维技能，为 [[Kubernetes|Kubernetes]] 和容器化环境提供坚实的基础支撑。
+本文档从生产环境运维专家视角，深入解析 Linux 系统架构、内核工作机制和企业级最佳实践。涵盖系统启动优化、内核参数调优、性能监控、故障排查等关键运维技能，为 [[kubernetes|Kubernetes]] 和容器化环境提供坚实的基础支撑。
 
 **核心价值**：
 - 🏗️ **架构深度理解**：掌握 Linux 内核各子系统的交互机制
@@ -506,7 +506,7 @@ systemctl enable --now chronyd rsyslog
 
 | 指标类别 | 关键指标 | 告警阈值 | 监控工具 |
 |:---|:---|:---|:---|
-| **CPU** | 使用率、负载、上下文切换 | >80%, >CPU核数*2 | top, sar, [[Prometheus|Prometheus]] |
+| **CPU** | 使用率、负载、上下文切换 | >80%, >CPU核数*2 | top, sar, [[prometheus\|Prometheus]] |
 | **内存** | 使用率、swap使用、cache/buffer | >85%, >10% | free, vmstat |
 | **磁盘** | 使用率、IOPS、延迟 | >85%, >50ms | iostat, df |
 | **网络** | 带宽使用、连接数、错误包 | >80%, >1% | ss, ifstat |

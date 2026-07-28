@@ -1,7 +1,7 @@
 ---
 title: 华为云 CCE 企业级容器平台深度实践
 description: '# 华为云 CCE 企业级容器平台深度实践'
-summary: '华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 [[Kubernetes|Kubernetes]] 服务，以 CCE Turbo 云原生网络、[[Volcano|Volcano]] 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，'
+summary: '华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 [[kubernetes|Kubernetes]] 服务，以 CCE Turbo 云原生网络、[[volcano|Volcano]] 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -66,9 +66,9 @@ authors:
 
 <!-- chunk: 概述 -->## 概述
 
-华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 [[Kubernetes|Kubernetes]] 服务，以 CCE Turbo 云原生网络、[[Volcano|Volcano]] 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，单个 Pod 可获得独立 ENI 网卡，网络性能接近物理机级别。Volcano 调度器在 AI/大数据场景下提供批量调度、队列管理、公平调度和优先级抢占能力，已捐赠给 CNCF 成为孵化项目。
+华为云容器引擎（Cloud Container Engine，CCE）是华为云提供的托管 [[kubernetes|Kubernetes]] 服务，以 CCE Turbo 云原生网络、[[volcano|Volcano]] 高性能调度器和裸金属容器实例为核心差异化能力。CCE Turbo 基于华为自研的 ENI 网络直通技术，实现容器网络零损耗，单个 Pod 可获得独立 ENI 网卡，网络性能接近物理机级别。Volcano 调度器在 AI/大数据场景下提供批量调度、队列管理、公平调度和优先级抢占能力，已捐赠给 CNCF 成为孵化项目。
 
-在混合云架构中，CCE 通过华为云混合集群、IEF 边缘容器和 UCS（Unified Cloud [[Service|Service]]）多集群管理实现云边协同和多云统一管理。UCS 是华为推出的多云统一管理平台，可以管理华为云 CCE、阿里云 ACK、AWS EKS 等多种 Kubernetes 集群，提供统一的策略管理和服务治理能力。华为云是 [[Karmada|Karmada]]、Volcano、[[KubeEdge|KubeEdge]]、Kurator 等多云开源项目的核心贡献者，在多云编排和边缘计算领域具有深厚的技术积累。
+在混合云架构中，CCE 通过华为云混合集群、IEF 边缘容器和 UCS（Unified Cloud [[service|Service]]）多集群管理实现云边协同和多云统一管理。UCS 是华为推出的多云统一管理平台，可以管理华为云 CCE、阿里云 ACK、AWS EKS 等多种 Kubernetes 集群，提供统一的策略管理和服务治理能力。华为云是 [[karmada|Karmada]]、Volcano、[[kubeedge|KubeEdge]]、Kurator 等多云开源项目的核心贡献者，在多云编排和边缘计算领域具有深厚的技术积累。
 
 本文档深入探讨 CCE Turbo 网络架构、Volcano 调度优化、裸金属容器部署和混合云集成方案。内容涵盖完整的集群创建配置、存储类定义、安全策略、监控告警规则和运维自动化脚本，为企业构建基于华为云的生产级容器平台提供全面参考。
 

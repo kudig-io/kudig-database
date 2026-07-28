@@ -55,8 +55,8 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ELK 企业日志架构
-  - [[ArgoCD|ArgoCD]] GitOps 实践
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] Kustomize
+  - [[argocd|ArgoCD]] GitOps 实践
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Kustomize
   - 多环境配置管理
 trigger_keywords:
   - ELK
@@ -101,7 +101,7 @@ related_topics:
 
 **前置条件**：
 - 已完成 Week 3 的监控告警学习
-- 有 [[Helm|Helm]] 和 YAML 基础
+- 有 [[helm|Helm]] 和 YAML 基础
 - 了解 Deployment/Service/Ingress 等资源
 
 ---

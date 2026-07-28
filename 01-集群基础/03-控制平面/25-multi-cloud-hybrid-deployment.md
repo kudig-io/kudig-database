@@ -63,8 +63,8 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - argocd
 - opa
 last_updated: 2026-05

@@ -52,7 +52,7 @@ prerequisites:
 
 
 
-# Java CI/CD on [[Kubernetes|Kubernetes]]: Tekton + [[ArgoCD|ArgoCD]] 实践指南
+# Java CI/CD on [[kubernetes|Kubernetes]]: Tekton + [[argocd|ArgoCD]] 实践指南
 
 > **适用版本**: Tekton Pipelines v0.60+ / ArgoCD v2.12+ / JDK 17+ / Kubernetes v1.28+
 > **最后更新**: 2026-04-30
@@ -63,7 +63,7 @@ prerequisites:
 
 在 Kubernetes 上为 Java 应用构建 CI/CD 流水线，需要解决一系列特定挑战：Maven/Gradle 依赖缓存管理、容器镜像构建优化、安全扫描集成、质量门禁、多架构构建以及 GitOps 部署策略。Tekton 提供声明式的流水线能力，ArgoCD 实现 GitOps 持续交付，两者结合为 Java 应用提供完整的云原生 CI/CD 方案。
 
-本指南覆盖从代码提交到生产部署的完整流水线，包括 Tekton Task/Pipeline 定义、Jib 容器构建、[[Trivy|Trivy]] 安全扫描、SonarQube 质量门禁、ArgoCD GitOps 部署以及 Canary/Blue-Green 发布策略。
+本指南覆盖从代码提交到生产部署的完整流水线，包括 Tekton Task/Pipeline 定义、Jib 容器构建、[[trivy|Trivy]] 安全扫描、SonarQube 质量门禁、ArgoCD GitOps 部署以及 Canary/Blue-Green 发布策略。
 
 ```mermaid
 graph LR
@@ -822,7 +822,7 @@ spec:
             periodSeconds: 5
 ```
 
-AnalysisTemplate（基于 [[Prometheus|Prometheus]] 指标自动判断是否继续发布）:
+AnalysisTemplate（基于 [[prometheus|Prometheus]] 指标自动判断是否继续发布）:
 
 ```yaml
 apiVersion: argoproj.io/v1alpha1

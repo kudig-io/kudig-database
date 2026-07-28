@@ -66,7 +66,7 @@ cross_refs:
 
 # 20 - 安全事件响应与应急处理流程
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [NIST Computer Security Incident Handling Guide](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) | [SANS Incident Handling Process](https://www.sans.org/reading-room/whitepapers/incident/incident-handlers-handbook-33901)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [NIST Computer Security Incident Handling Guide](https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final) | [SANS Incident Handling Process](https://www.sans.org/reading-room/whitepapers/incident/incident-handlers-handbook-33901)
 
 <!-- chunk: 一、安全事件响应体系架构 -->
 ## 一、安全事件响应体系架构
@@ -773,7 +773,7 @@ echo "Health check completed. Report saved to /reports/incident_${INCIDENT_ID}_r
 ## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Security Domain|Security Domain]]]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-7|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构

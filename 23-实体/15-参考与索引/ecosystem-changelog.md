@@ -51,7 +51,7 @@ prerequisites:
 
 # 生态组件变更日志索引
 
-> 本文档是 [[Kubernetes|Kubernetes]] 生态组件变更日志的全局索引，覆盖 6 大分类目录共 1010 个版本文件 ^[inferred]
+> 本文档是 [[kubernetes|Kubernetes]] 生态组件变更日志的全局索引，覆盖 6 大分类目录共 1010 个版本文件 ^[inferred]
 
 ## 分类统计
 

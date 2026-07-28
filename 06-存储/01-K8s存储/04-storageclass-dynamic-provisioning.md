@@ -77,7 +77,7 @@ related_docs:
 
 # 04 - StorageClass动态供给与多租户管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 多租户配置、动态供给优化、成本控制 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 多租户配置、动态供给优化、成本控制 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -1722,7 +1722,7 @@ kubectl get pods -n kube-system -l app=ibm-vpc-block-csi-driver
 ## Obsidian 相关文档
 
 - 存储 KUDIG Database — Global MOC
-- [[06-存储/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[06-存储/README.md|[[37-归档/domain-indexes/storage/README-from-domain-6|Storage Domain 存储领域知识库]]]]
 - Domain-6 存储 — 开源项目索引
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践

@@ -47,7 +47,7 @@ prerequisites:
 
 
 ---
-title: 第五课：[[Ingress|Ingress]] - 外部 HTTP/HTTPS 访问
+title: 第五课：[[ingress|Ingress]] - 外部 HTTP/HTTPS 访问
 description: 2. 掌握 Ingress 的配置方法
 category: learning
 tags:
@@ -57,8 +57,8 @@ tags:
 - k8s
 - training
 - lecturer
-- [[Istio|istio]]
-- [[Helm|helm]]
+- [[istio|istio]]
+- [[helm|helm]]
 - ingress
 - gateway
 aliases:

@@ -49,7 +49,7 @@ prerequisites:
 
 
 
-title: [[Ingress|Ingress]] 故障排查
+title: [[ingress|Ingress]] 故障排查
 description: '# 15 - Ingress 故障排查 (Ingress Troubleshooting)'
 category: troubleshooting
 tags:
@@ -60,8 +60,8 @@ tags:
 - certificate
 - hostname
 - ssl
-- [[Prometheus|prometheus]]
-- [[StatefulSet|statefulset]]
+- [[prometheus|prometheus]]
+- [[statefulset|statefulset]]
 - job
 last_updated: 2026-02
 difficulty: intermediate

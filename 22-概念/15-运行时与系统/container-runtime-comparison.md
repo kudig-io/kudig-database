@@ -45,7 +45,7 @@ status: reviewed
 | Layer | Name | Examples | Responsibility |
 |-------|------|---------|----------------|
 | High-level | Container Engine | Docker, Podman | Image management, CLI, networking |
-| Mid-level | CRI Manager | containerd, CRI-O | Container lifecycle, image [[Distribution|distribution]] |
+| Mid-level | CRI Manager | containerd, CRI-O | Container lifecycle, image [[distribution\|distribution]] |
 | Low-level | OCI Runtime | runc, crun, youki | Actual container process creation |
 
 ## Production Runtime Comparison

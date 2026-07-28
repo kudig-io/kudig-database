@@ -51,7 +51,7 @@ prerequisites:
 
 ## 场景概述
 
-应用部署是 [[Kubernetes|Kubernetes]] 最常见的操作场景。本场景汇总了 Deployment、[[StatefulSet|StatefulSet]]、[[DaemonSet|DaemonSet]] 等所有工作负载的部署模式和最佳实践。
+应用部署是 [[kubernetes|Kubernetes]] 最常见的操作场景。本场景汇总了 Deployment、[[statefulset|StatefulSet]]、[[daemonset|DaemonSet]] 等所有工作负载的部署模式和最佳实践。
 
 ---
 

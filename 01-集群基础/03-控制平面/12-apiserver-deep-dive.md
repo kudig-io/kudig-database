@@ -100,7 +100,7 @@ related_docs:
 
 # kube-apiserver 深度解析 (kube-apiserver Deep Dive)
 
-> kube-apiserver 是 [[Kubernetes|Kubernetes]] 控制平面的核心组件，提供 RESTful API 接口，是所有组件通信的唯一入口
+> kube-apiserver 是 [[kubernetes|Kubernetes]] 控制平面的核心组件，提供 RESTful API 接口，是所有组件通信的唯一入口
 
 ---
 
@@ -158,7 +158,7 @@ related_docs:
 
 | API组 | 路径前缀 | 包含资源 | 说明 |
 |:---|:---|:---|:---|
-| **Core (Legacy)** | /api/v1 | [[Pods|pods]], services, configmaps, secrets, nodes | 核心资源 |
+| **Core (Legacy)** | /api/v1 | [[pods\|pods]], services, configmaps, secrets, nodes | 核心资源 |
 | **apps** | /apis/apps/v1 | deployments, statefulsets, daemonsets, replicasets | 应用工作负载 |
 | **batch** | /apis/batch/v1 | jobs, cronjobs | 批处理任务 |
 | **networking.k8s.io** | /apis/networking.k8s.io/v1 | ingresses, networkpolicies | 网络资源 |

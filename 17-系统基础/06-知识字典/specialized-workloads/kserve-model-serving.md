@@ -44,11 +44,11 @@ prerequisites:
 
 
 
-# [[KServe|KServe]] 模型服务平台
+# [[kserve|KServe]] 模型服务平台
 
 ## 概述
 
-**KServe** 是 [[Kubernetes|Kubernetes]] 上领先的**云原生模型推理服务平台**，提供标准化的模型部署、自动扩缩容（包括缩至零）、金丝雀发布、A/B 测试以及多框架支持。作为 CNCF 孵化的项目，KServe 在 2025–2026 年已成为企业级 AI 推理基础设施的事实标准。
+**KServe** 是 [[kubernetes|Kubernetes]] 上领先的**云原生模型推理服务平台**，提供标准化的模型部署、自动扩缩容（包括缩至零）、金丝雀发布、A/B 测试以及多框架支持。作为 CNCF 孵化的项目，KServe 在 2025–2026 年已成为企业级 AI 推理基础设施的事实标准。
 
 ## 核心概念/原理
 
@@ -58,7 +58,7 @@ KServe 将模型服务抽象为 `InferenceService` 自定义资源（CRD），�
 
 ### 2. 自动扩缩容与 Scale-to-Zero
 
-KServe 深度集成 **[[knative|[[Knative]]]]** 和 **[[Istio|Istio]]**，支持：
+KServe 深度集成 **[[knative|[[knative|Knative]]]]** 和 **[[istio|Istio]]**，支持：
 - **HPA 基于自定义指标扩缩容**：如 GPU 利用率、请求队列长度、推理延迟
 - **Scale-to-Zero**：当请求量为零时自动缩容至 0 Pod，显著降低空闲 GPU/CPU 成本
 - **冷启动优化**：通过模型预加载、镜像缓存、容器启动加速减少从 0 到 1 的延迟

@@ -91,7 +91,7 @@ cross_refs:
 | **2. [[etcd|etcd]]** | 10+ | 加密通信，权限控制 | 稳定 |
 | **3. Control Plane配置** | 20+ | 控制器参数 | 稳定 |
 | **4. Worker Node** | 30+ | kubelet配置，文件权限 | v1.24+ CRI相关 |
-| **5. Policies** | 30+ | RBAC，PSA，[[NetworkPolicy|NetworkPolicy]] | v1.25+ PSA相关 |
+| **5. Policies** | 30+ | RBAC，PSA，[[networkpolicy\|NetworkPolicy]] | v1.25+ PSA相关 |
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源
@@ -134,7 +134,7 @@ docker run --rm -v /etc:/etc:ro -v /var:/var:ro \
 | **身份鉴别** | RBAC+认证 | OIDC/LDAP集成 | 用户列表，权限矩阵 |
 | **访问控制** | RBAC | Role/ClusterRole | 角色定义文档 |
 | **安全审计** | 审计日志 | API审计配置 | 审计日志样本 |
-| **入侵防范** | NetworkPolicy+WAF | 网络策略+[[Ingress|Ingress]] | 策略配置 |
+| **入侵防范** | NetworkPolicy+WAF | 网络策略+[[ingress\|Ingress]] | 策略配置 |
 | **数据完整性** | etcd备份+加密 | 备份策略 | 备份记录 |
 | **数据保密性** | TLS+Secret加密 | 证书管理 | 加密配置 |
 | **数据备份恢复** | etcd快照+Velero | 备份策略 | 恢复测试记录 |

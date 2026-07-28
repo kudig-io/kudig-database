@@ -46,7 +46,7 @@ title: Day 17: 节点池基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 节点池创建
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 节点池创建
   - 新节点加入集群
   - 节点池扩缩容
   - 工作负载调度到节点池

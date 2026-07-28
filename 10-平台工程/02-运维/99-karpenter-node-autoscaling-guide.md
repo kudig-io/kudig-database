@@ -605,7 +605,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 生产运维 KUDIG Database — Global MOC
-- [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
+- [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 ([[13-生产运维/README|Production Operations]]ns Best Practices|Production Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
 - [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略

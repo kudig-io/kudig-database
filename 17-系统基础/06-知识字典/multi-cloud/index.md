@@ -466,7 +466,7 @@ A: 三种主流方案：
 - [[17-系统基础/06-知识字典/scheduling/kubefleet.md|KubeFleet]]
 - [[17-系统基础/06-知识字典/networking/cilium.md|Cilium ClusterMesh]]
 - [[17-系统基础/06-知识字典/operations/argo.md|ArgoCD 多集群 GitOps]]
-- [[17-系统基础/06-知识字典/security/zero-trust.md|零信任安全架构]]
+- [[08-安全/07-零信任架构/index|零信任安全架构]]
 
 ## 常用运维命令速查
 

@@ -75,9 +75,9 @@ cross_refs:
 
 
 
-# Spring Cloud [[Kubernetes|Kubernetes]] 与服务网格集成指南
+# Spring Cloud [[kubernetes|Kubernetes]] 与服务网格集成指南
 
-> **适用版本**: Spring Cloud 2024.0+ / Spring Cloud Kubernetes 3.x / [[Istio|Istio]] v1.29+
+> **适用版本**: Spring Cloud 2024.0+ / Spring Cloud Kubernetes 3.x / [[istio|Istio]] v1.29+
 > **最后更新**: 2026-04-24
 > **难度**: 高级
 
@@ -130,9 +130,9 @@ graph LR
 | Eureka (服务发现) | K8s Service + DNS | **使用 K8s 原生** |
 | Spring Cloud Config | K8s ConfigMap + Secret | **使用 K8s 原生** |
 | Ribbon/LoadBalancer | K8s Service (kube-proxy) | **使用 K8s 原生** |
-| Zuul/Spring Cloud Gateway | K8s [[Ingress|Ingress]] / Gateway API | 按需选择 |
+| Zuul/Spring Cloud Gateway | K8s [[ingress\|Ingress]] / Gateway API | 按需选择 |
 | Hystrix (熔断) | Resilience4j / Istio | Resilience4j (应用级) |
-| Spring Cloud Sleuth | [[OpenTelemetry|OpenTelemetry]] | **使用 OTel** |
+| Spring Cloud Sleuth | [[opentelemetry\|OpenTelemetry]] | **使用 OTel** |
 | Spring Cloud Bus | K8s Event / ConfigMap Watch | 按需选择 |
 | Spring Cloud Stream | Kafka / RabbitMQ on K8s | 保留 |
 | Spring Cloud Security | K8s RBAC + Istio mTLS | 按需组合 |

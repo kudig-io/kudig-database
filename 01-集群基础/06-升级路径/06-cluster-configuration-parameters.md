@@ -73,7 +73,7 @@ cross_refs:
 
 # 06 - 集群配置参数完全参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/command-line-tools-reference](https://kubernetes.io/docs/reference/command-line-tools-reference/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/reference/command-line-tools-reference](https://kubernetes.io/docs/reference/command-line-tools-reference/)
 
 ---
 
@@ -112,7 +112,7 @@ cross_refs:
 
 | 参数 | 默认值 | 推荐生产值 | 版本变更 | 说明 | 安全/性能影响 |
 |:---|:---|:---|:---|:---|:---|
-| `--service-cluster-ip-range` | 10.0.0.0/24 | `10.96.0.0/12` (1M IP) | 稳定 | [[Service|Service]] ClusterIP CIDR | **不可变更**；规划足够空间 |
+| `--service-cluster-ip-range` | 10.0.0.0/24 | `10.96.0.0/12` (1M IP) | 稳定 | [[service\|Service]] ClusterIP CIDR | **不可变更**；规划足够空间 |
 | `--service-node-port-range` | 30000-32767 | 30000-32767 或扩展 | 稳定 | NodePort范围 | 避免与主机端口冲突 |
 | `--kubernetes-service-node-port` | 0 | 0 | 稳定 | kubernetes服务NodePort | 0表示不暴露 |
 | `--bind-address` | 0.0.0.0 | 0.0.0.0 或特定IP | 稳定 | API监听地址 | 多网卡时指定管理网 |

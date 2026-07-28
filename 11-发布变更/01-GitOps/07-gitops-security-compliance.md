@@ -72,10 +72,10 @@ cross_refs:
 
 # GitOps 安全与合规深度实践
 
-> **适用版本**: SLSA v1.0 / Cosign v2.4 / External Secretsts|Secrets]] v0.14 / Sealed Secrets v0.27 / [[SOPS|SOPS]] v3.9
+> **适用版本**: SLSA v1.0 / Cosign v2.4 / External Secretsts|Secrets]] v0.14 / Sealed Secrets v0.27 / [[sops|SOPS]] v3.9
 > **最后更新**: 2026-04-24
 > **难度**: 高级
-> **前置知识**: GitOps 基础概念、[[Kubernetes|Kubernetes]] 安全模型、容器安全基础
+> **前置知识**: GitOps 基础概念、[[kubernetes|Kubernetes]] 安全模型、容器安全基础
 
 软件供应链安全是现代软件工程的核心挑战。随着攻击面不断扩大，企业需要建立纵深防御体系来保护从代码提交到生产部署的完整链路。GitOps 的声明式特性和 Git 审计追踪为安全合规提供了天然优势，但仍需要主动的安全策略和工具链来防范供应链攻击、密钥泄露和未授权访问等风险。
 

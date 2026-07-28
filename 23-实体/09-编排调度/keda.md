@@ -277,7 +277,7 @@ kubectl get --raw "/apis/external.metrics.k8s.io/v1beta1" | jq .
 
 - observability/99-keda-event-driven-autoscaling-guide.md|99-keda-event-driven-autoscaling-guide]]
 - keda
-- [[23-实体/cncf-orchestration.md|[[CNCF 编排与应用管理项目全景|CNCF 编排与应用管理项目全景]]]] — Cross-reference
+- [[23-实体/cncf-orchestration.md|[[23-实体/15-参考与索引/cncf-orchestration|CNCF 编排与应用管理项目全景]]]] — Cross-reference
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 

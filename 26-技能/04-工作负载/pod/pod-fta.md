@@ -38,7 +38,7 @@ severity: high
 ---
 title: "Pod 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase!=Running -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.namespace}/{.metadata.name}{\'\..."
+summary: "<!-- condition: kubectl get [[pods|pods]] -A --field-selector=status.phase!=Running -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.namespace}/{.metadata.name}{\'\..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["故障诊断/FTA故障树/list/pod-fta.md"]
 created: 2026-05-21

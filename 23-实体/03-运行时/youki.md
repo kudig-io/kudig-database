@@ -242,8 +242,8 @@ sudo youki delete --force <container-id>
 - [[containerd]] — containerd
 
 - youki
-- [[22-概念/container-runtime-comparison.md|[[Container Runtime|Container Runtime]]me Comparison|Container Runtime Comparison]]]] — Cross-reference
-- [[22-概念/docker-architecture.md|[[Docker Architecture and Container Runtime|Docker Architecture and Container Runtime]]]] — Cross-reference
+- [[22-概念/container-runtime-comparison.md|[[22-概念/15-运行时与系统/container-runtime|Container Runtime]]me Comparison|Container Runtime Comparison]]]] — Cross-reference
+- [[22-概念/docker-architecture.md|[[22-概念/15-运行时与系统/docker-architecture|Docker Architecture and Container Runtime]]]] — Cross-reference
 - [[23-实体/15-参考与索引/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
 

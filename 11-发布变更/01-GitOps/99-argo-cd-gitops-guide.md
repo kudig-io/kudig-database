@@ -1,7 +1,7 @@
 ---
 title: Argo CD 企业级 GitOps 实践指南
 description: '# Argo CD 企业级 GitOps 实践指南'
-summary: '本指南是 Argo CD GitOps 实践的操作手册，提供从安装部署到生产运维的完整技术方案。Argo CD 是 CNCF 毕业的 GitOps 持续交付工具，它将 Git 仓库作为 [[Kubernetes|Kubernetes]] 应用定义的唯一事实来源，自动检测并收敛集群状态到 Git 中声明的期望状态。'
+summary: '本指南是 Argo CD GitOps 实践的操作手册，提供从安装部署到生产运维的完整技术方案。Argo CD 是 CNCF 毕业的 GitOps 持续交付工具，它将 Git 仓库作为 [[kubernetes|Kubernetes]] 应用定义的唯一事实来源，自动检测并收敛集群状态到 Git 中声明的期望状态。'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -75,9 +75,9 @@ cross_refs:
 
 
 
-# [[Argo|Argo]] CD 企业级 GitOps 实践指南
+# [[argo|Argo]] CD 企业级 GitOps 实践指南
 
-> **适用版本**: Argo CD v3.3.8 / [[Helm|Helm]] Chart v7.8.0
+> **适用版本**: Argo CD v3.3.8 / [[helm|Helm]] Chart v7.8.0
 > **最后更新**: 2026-04-24
 > **难度**: 中级 → 高级
 
@@ -99,7 +99,7 @@ cross_refs:
 
 <!-- chunk: 一、概述 -->## 一、概述
 
-本指南是 Argo CD GitOps 实践的操作手册，提供从安装部署到生产运维的完整技术方案。Argo CD 是 CNCF 毕业的 GitOps 持续交付工具，它将 Git 仓库作为 [[Kubernetes|Kubernetes]] 应用定义的唯一事实来源，自动检测并收敛集群状态到 Git 中声明的期望状态。
+本指南是 Argo CD GitOps 实践的操作手册，提供从安装部署到生产运维的完整技术方案。Argo CD 是 CNCF 毕业的 GitOps 持续交付工具，它将 Git 仓库作为 [[kubernetes|Kubernetes]] 应用定义的唯一事实来源，自动检测并收敛集群状态到 Git 中声明的期望状态。
 
 Argo CD 的核心优势包括：丰富的 Web UI 提供应用拓扑可视化；ApplicationSet 支持声明式的多环境/多集群应用生成；AppProject 实现项目级权限隔离；支持 Helm、Kustomize、Jsonnet 等多种清单生成工具；与 Argo Rollouts 深度集成实现渐进式交付；内置通知系统支持 Slack、Email、Webhook 等多种通知渠道。
 

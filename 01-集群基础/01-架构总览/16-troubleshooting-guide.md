@@ -77,7 +77,7 @@ cross_refs:
 
 
 
-# 16 - [[Kubernetes|Kubernetes]] 故障排查专家级指南
+# 16 - [[kubernetes|Kubernetes]] 故障排查专家级指南
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐
 
@@ -204,7 +204,7 @@ cross_refs:
 <!-- chunk: 三、网络与存储排查 -->
 ## 三、网络与存储排查
 
-### 3.1 CNI 网络问题 (以 [[Cilium|Cilium]] 为例)
+### 3.1 CNI 网络问题 (以 [[cilium|Cilium]] 为例)
 - **工具**：`cilium-health`
 - **检查项**：
   - BPF Map 是否满额

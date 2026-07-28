@@ -76,10 +76,10 @@ cross_refs:
 <!-- chunk: CNI插件功能对比 -->
 ## CNI插件功能对比
 
-| 功能 | Calico | [[Cilium|Cilium]] | Flannel | Terway(ACK) | [[Antrea|Antrea]] |
+| 功能 | Calico | [[cilium\|Cilium]] | Flannel | Terway(ACK) | [[antrea\|Antrea]] |
 |-----|--------|--------|---------|-------------|--------|
 | **网络模式** | VXLAN/IPIP/BGP | VXLAN/Native | VXLAN/host-gw | VPC/ENIIP | VXLAN/Geneve |
-| **[[NetworkPolicy|NetworkPolicy]]** | ✅ 完整 | ✅ 完整+L7 | ❌ | ✅ 完整 | ✅ 完整 |
+| **[[networkpolicy\|NetworkPolicy]]** | ✅ 完整 | ✅ 完整+L7 | ❌ | ✅ 完整 | ✅ 完整 |
 | **eBPF数据面** | ✅ (可选) | ✅ (原生) | ❌ | ✅ | ❌ |
 | **服务网格** | ❌ | ✅ (Cilium Mesh) | ❌ | ASM集成 | ❌ |
 | **带宽限制** | ✅ | ✅ | ❌ | ✅ | ✅ |

@@ -222,7 +222,7 @@ ip link set br-vxlan100 up
 | 插件 | 类型 | 特点 | 适用场景 |
 |:---|:---|:---|:---|
 | **Calico** | L3 路由 | BGP、网络策略 | 大规模集群 |
-| **[[Cilium|Cilium]]** | eBPF | 高性能、可观测 | 云原生 |
+| **[[cilium\|Cilium]]** | eBPF | 高性能、可观测 | 云原生 |
 | **Flannel** | Overlay | 简单易用 | 小规模 |
 | **Weave** | Overlay | 加密、多播 | 安全需求 |
 

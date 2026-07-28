@@ -72,8 +72,8 @@ healing_action:
 | Risk Level | Execution Mode | Approval | Examples |
 |-----------|---------------|----------|----------|
 | **Low** | Auto-executable | None | Restart Pod, increase resource limits, uncordon node |
-| **Medium** | Auto + notify | Post-execution review | Scale deployment, modify ConfigMap, restart [[DaemonSet|DaemonSet]] |
-| **High** | Human approval required | Pre-execution sign-off | Drain node, modify [[NetworkPolicy|NetworkPolicy]], change RBAC |
+| **Medium** | Auto + notify | Post-execution review | Scale deployment, modify ConfigMap, restart [[daemonset\|DaemonSet]] |
+| **High** | Human approval required | Pre-execution sign-off | Drain node, modify [[networkpolicy\|NetworkPolicy]], change RBAC |
 | **Critical** | Human approval + backup | Pre-execution + data backup | etcd restore, cluster upgrade, certificate rotation |
 
 ## Automation Pipeline

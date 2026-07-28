@@ -59,7 +59,7 @@ intent_queries:
 - thanos-enterprise-metrics-federation的最佳实践
 
 tier: peripheral---
-title: [[Thanos|Thanos]] Enterprise Metrics Federation and Long-term Storage
+title: [[thanos|Thanos]] Enterprise Metrics Federation and Long-term Storage
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: enterprise-monitoring-alerting
 tags:

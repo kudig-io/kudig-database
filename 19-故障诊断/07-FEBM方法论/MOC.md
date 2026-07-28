@@ -73,9 +73,9 @@ FEBM 取证 — 问题事件取证方法文档
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[19-故障诊断/07-FEBM方法论/01-febm-theory-foundations.md|[[第一章：FEBM 方法论原理与理论基础|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
-| 2 | [[19-故障诊断/07-FEBM方法论/02-febm-technical-implementation.md|[[第二章:FEBM 技术实现体系|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
-| 3 | [[19-故障诊断/07-FEBM方法论/03-febm-best-practices.md|[[第三章：FEBM 最佳实践|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
+| 1 | [[19-故障诊断/07-FEBM方法论/01-febm-theory-foundations.md|[[19-故障诊断/07-FEBM方法论/01-febm-theory-foundations\|第一章：FEBM 方法论原理与理论基础]]]] |  | febm, troubleshooting |  |
+| 2 | [[19-故障诊断/07-FEBM方法论/02-febm-technical-implementation.md|[[19-故障诊断/07-FEBM方法论/02-febm-technical-implementation\|第二章:FEBM 技术实现体系]]]] |  | febm, troubleshooting |  |
+| 3 | [[19-故障诊断/07-FEBM方法论/03-febm-best-practices.md|[[19-故障诊断/07-FEBM方法论/03-febm-best-practices\|第三章：FEBM 最佳实践]]]] |  | febm, troubleshooting, best-practice |  |
 | 4 | [[19-故障诊断/07-FEBM方法论/04-febm-agent-ticket-processing.md|第四章：FEBM 对云平台工单智能体托管的意义]] |  | febm, troubleshooting |  |
 | 5 | [[19-故障诊断/07-FEBM方法论/05-febm-construction-methodology.md|第五章：FEBM 体系建设方法论]] |  | febm, troubleshooting |  |
 | 6 | [[19-故障诊断/07-FEBM方法论/06-febm-future-evolution.md|第六章：未来演进方向]] |  | febm, troubleshooting |  |

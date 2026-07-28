@@ -57,7 +57,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] Workload 全栈进阶培训 (从入门到专家)
+# [[kubernetes|Kubernetes]] Workload 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 掌握声明式编排、实现应用高可用稳定性防护
@@ -78,7 +78,7 @@ authors:
 |------|------|------|
 | 第一阶段 | 工作负载基础概念 | 30 分钟 |
 | 第二阶段 | Deployment 深度解析 | 35 分钟 |
-| 第三阶段 | [[StatefulSet|StatefulSet]] 与有状态应用 | 30 分钟 |
+| 第三阶段 | [[statefulset\|StatefulSet]] 与有状态应用 | 30 分钟 |
 | 第四阶段 | 实战演示 | 30 分钟 |
 | 第五阶段 | 监控告警与弹性伸缩 | 25 分钟 |
 | Q&A | 互动问答 | 15 分钟 |
@@ -86,8 +86,8 @@ authors:
 
 ## 核心要点
 
-1. 四种工作负载类型：Deployment、StatefulSet、[[DaemonSet|DaemonSet]]、Job/CronJob
-2. Deployment 通过 [[ReplicaSet|ReplicaSet]] 实现滚动更新和回滚
+1. 四种工作负载类型：Deployment、StatefulSet、[[daemonset|DaemonSet]]、Job/CronJob
+2. Deployment 通过 [[replicaset|ReplicaSet]] 实现滚动更新和回滚
 3. 资源 QoS（Guaranteed/Burstable/BestEffort）决定 Pod 稳定性
 4. 探针（Liveness/Readiness/Startup）保障应用可用性
 5. HPA（水平自动扩缩）应对流量波动

@@ -249,7 +249,7 @@ ko version
 - [[holmesgpt]] — HolmesGPT
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[22-概念/cli-tools-evolution.md|[[CLI 工具演进|CLI 工具演进]]]] — Cross-reference
+- [[22-概念/cli-tools-evolution.md|[[22-概念/12-研究/cli-tools-evolution|CLI 工具演进]]]] — Cross-reference
 - [[23-实体/15-参考与索引/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

@@ -56,7 +56,7 @@ tags:
 - mysql
 - job
 - rbac
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 - gpu
 last_updated: 2026-05-18
 difficulty: expert
@@ -68,7 +68,7 @@ audience:
 - HPC架构师
 estimated_read_time: 5min
 intent_queries:
-- CRISPR gene editing [[Kubernetes|kubernetes]] architecture
+- CRISPR gene editing [[kubernetes|kubernetes]] architecture
 - 基因编辑K8s高性能计算
 - gRNA设计AI平台
 - 脱靶检测HPC架构

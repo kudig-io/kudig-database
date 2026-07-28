@@ -50,7 +50,7 @@ title: Day 15: Node 节点基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 节点管理
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 节点管理
   - kubectl cordon drain uncordon
   - 节点状态 NotReady 排查
   - Pod 调度到特定节点

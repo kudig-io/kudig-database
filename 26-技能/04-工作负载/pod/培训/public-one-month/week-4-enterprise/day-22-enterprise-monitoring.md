@@ -47,12 +47,12 @@ prerequisites:
 
 
 ---
-title: Day 22: 企业监控 - [[Prometheus|Prometheus]] 企业级 + Grafana
+title: Day 22: 企业监控 - [[prometheus|Prometheus]] 企业级 + Grafana
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - Prometheus 企业级监控架构
-  - [[Thanos|Thanos]] 跨集群监控
+  - [[thanos|Thanos]] 跨集群监控
   - Grafana 企业级配置
   - SLO/SLI 体系设计
 trigger_keywords:

@@ -52,7 +52,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK week 3 node [[17-系统基础/06-知识字典/workloads/workload-management.md|workload management]] curriculum
-  - [[Kubernetes|Kubernetes]] node pool management learning path
+  - [[kubernetes|Kubernetes]] node pool management learning path
   - Pod lifecycle scheduling management
   - Kubernetes core components operations
   - Week 3 project based learning

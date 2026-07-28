@@ -50,7 +50,7 @@ title: Day 21: K8s 组件运维实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 控制平面组件运维
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 控制平面组件运维
   - API Server 故障排查
   - [[etcd|etcd]] 备份恢复
   - 证书管理与续期

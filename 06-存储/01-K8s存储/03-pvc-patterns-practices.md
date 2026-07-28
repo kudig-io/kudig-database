@@ -57,7 +57,7 @@ tags:
 - redis
 - mysql
 - elasticsearch
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -69,7 +69,7 @@ estimated_read_time: 5min
 intent_queries:
 - PVC使用模式与最佳实践 是什么
 - 如何 PVC使用模式与最佳实践
-- [[Kubernetes|Kubernetes]] 6 storage 最佳实践
+- [[kubernetes|Kubernetes]] 6 storage 最佳实践
 trigger_keywords:
 - PVC使用模式与最佳实践
 - storage

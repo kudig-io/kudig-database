@@ -96,7 +96,7 @@ GitHub Actions 是 GitHub 原生的 CI/CD 自动化平台，于 2019 年正式�
 
 GitHub Actions 的核心设计理念是"事件驱动"——每个工作流由 GitHub 事件（push、pull_request、schedule、workflow_dispatch 等）触发，通过 Job 和 Step 组成执行图。Runner 是工作流的执行环境，GitHub 提供了托管的 Runner（GitHub-hosted），也支持自托管 Runner（Self-hosted）用于需要特殊硬件或网络要求的场景。
 
-在企业级场景中，GitHub Actions 提供了丰富的安全和治理能力：Environment Protection Rules（环境保护规则）支持必需的审查人、等待计时器和部署分支策略；[[Secrets|Secrets]]ts Management|Secrets Management]]（密钥管理）支持仓库、环境和组织级别的密钥；OpenID Connect (OIDC) 支持与云提供商的无密钥认证；GitHub Advanced Security (GHAS) 提供代码扫描、密钥扫描和依赖审查。
+在企业级场景中，GitHub Actions 提供了丰富的安全和治理能力：Environment Protection Rules（环境保护规则）支持必需的审查人、等待计时器和部署分支策略；[[secrets|Secrets]]ts Management|Secrets Management]]（密钥管理）支持仓库、环境和组织级别的密钥；OpenID Connect (OIDC) 支持与云提供商的无密钥认证；GitHub Advanced Security (GHAS) 提供代码扫描、密钥扫描和依赖审查。
 
 本文档系统性地覆盖了 GitHub Actions 的企业级架构设计、工作流开发模式、安全加固、性能优化和运维管理，帮助企业构建安全、高效的 CI/CD 自动化平台。
 

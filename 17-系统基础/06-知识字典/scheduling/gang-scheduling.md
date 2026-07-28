@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-Gang Scheduling（组调度）确保一组 Pod 以"全有或全无"的方式进行调度。如果集群无法容纳整个组（或定义的最低数量），则组中没有任何 Pod 会被绑定到节点上。该特性在 [[Kubernetes|Kubernetes]] v1.35 中为 alpha 状态。
+Gang Scheduling（组调度）确保一组 Pod 以"全有或全无"的方式进行调度。如果集群无法容纳整个组（或定义的最低数量），则组中没有任何 Pod 会被绑定到节点上。该特性在 [[kubernetes|Kubernetes]] v1.35 中为 alpha 状态。
 
 ## 核心概念/原理
 

@@ -59,7 +59,7 @@ authors:
 
 LLM 推理引擎的选型直接影响服务的吞吐量、延迟、成本和运维复杂度。当前主流的三大引擎各有侧重：HuggingFace TGI 以开箱即用和生态兼容见长，NVIDIA Triton Inference Server 以多框架统一和模型编排能力著称，TensorRT-LLM 则追求 NVIDIA 硬件上的极致推理性能。本文从架构设计、部署方法、性能基准和选型决策四个维度进行系统性对比，帮助团队做出适合自身场景的技术选择。
 
-关于 GPU 资源管理和调度，参见 [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management]]；模型部署生命周期管理参见 [[15-AI基础设施/01-基础设施/10-model-deployment-serving]]。
+关于 GPU 资源管理和调度，参见 [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management]]；模型部署生命周期管理参见 [[15-AI基础设施/05-K8s-AI基础设施/04-kserve-model-serving-platform|10-model-deployment-serving]]。
 
 ## 架构与核心概念
 
@@ -468,7 +468,7 @@ curl -s http://triton-llm-svc:8000/v2/models/llama3-70b/config | jq .
 
 ## Related
 
-- [[15-AI基础设施/01-基础设施/10-model-deployment-serving]]
+- [[15-AI基础设施/05-K8s-AI基础设施/04-kserve-model-serving-platform|10-model-deployment-serving]]
 - [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management]]
 - [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks]]
 - [[05-网络/01-K8s网络核心/index.md|01-K8s网络核心]]

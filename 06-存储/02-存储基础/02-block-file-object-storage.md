@@ -618,7 +618,7 @@ chmod +x s3-benchmark_linux_amd64
 
 | 组件 | 功能 |
 |:---|:---|
-| **RBD** | 块设备 ([[Kubernetes|Kubernetes]] PV) |
+| **RBD** | 块设备 ([[kubernetes\|Kubernetes]] PV) |
 | **CephFS** | POSIX 文件系统 |
 | **RGW** | S3 兼容对象存储 |
 

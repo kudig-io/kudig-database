@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-title: [[Cilium|Cilium]] 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
+title: [[cilium|Cilium]] 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)
 description: '# Cilium 网络策略 L3/L4/L7 (Cilium Network Policy L3/L4/L7)'
 category: ebpf-technology
 tags:

@@ -71,7 +71,7 @@ cross_refs:
 
 # 35 - 模型漂移监控与预警
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [Evidently AI](https://www.evidentlyai.com/) | [WhyLabs](https://whylabs.ai/) | [Arize AI](https://arize.com/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [Evidently AI](https://www.evidentlyai.com/) | [WhyLabs](https://whylabs.ai/) | [Arize AI](https://arize.com/)
 
 <!-- chunk: 一、模型漂移监控架构 -->
 ## 一、模型漂移监控架构

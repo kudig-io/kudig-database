@@ -1,7 +1,7 @@
 ---
 title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)
-description: 'title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)'
-summary: 'title: ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)'
+description: ACK 权限体系实践：RAM 角色与策略、RRSA Pod 级精细化授权配置步骤、最小权限原则与安全审计
+summary: ACK 权限与授权（RAM & RRSA）实践指南，覆盖 RAM 基础权限架构、节点池 Worker 角色风险、RRSA Pod 级精细化授权完整配置步骤与验证方法、最小权限实施与审计监控。
 category: general
 tags:
 - cloud
@@ -101,22 +101,70 @@ sequenceDiagram
     Pod->>阿里云资源: 使用 STS Token 访问 (如 OSS/SLS)
 ```
 
-### 配置步骤简述
+### 配置步骤
 
-1. **启用 OIDC**: 集群设置中开启 "启用 RRSA"。
-2. **创建 RAM 角色**: 配置信任策略为 OIDC 身份提供商。
-3. **绑定 ServiceAccount**: 使用注解标记。
+#### 步骤 1：启用集群 RRSA 功能
+
+```bash
+# 🟡 中风险：为存量集群开启 RRSA（控制面会滚动更新 OIDC 配置）
+aliyun cs PUT /clusters/${CLUSTER_ID} \
+  --header "Content-Type=application/json" \
+  --body '{"enable_rrsa": true}'
+
+# 🟢 低风险：确认 OIDC Provider 已注册（输出非空即成功）
+aliyun ram ListOIDCProviders | jq '.OIDCProviders.OIDCProvider[] | select(.Description | contains("'${CLUSTER_ID}'"))'
+```
+
+#### 步骤 2：创建可被 OIDC 扮演的 RAM 角色
+
+```bash
+# 🟡 中风险：创建信任 OIDC 身份提供商的角色（信任策略限定 namespace + serviceaccount）
+aliyun ram CreateRole --RoleName ack-oss-reader \
+  --AssumeRolePolicyDocument '{
+    "Version": "1",
+    "Statement": [{
+      "Action": "sts:AssumeRoleWithOIDC",
+      "Effect": "Allow",
+      "Principal": {"Federated": ["acs:ram::<ACCOUNT_ID>:oidc-provider/ack-rrsa-<CLUSTER_ID>"]},
+      "Condition": {"StringEquals": {
+        "oidc:sub": "system:serviceaccount:prod:my-oss-accessor"
+      }}
+    }]
+  }'
+
+# 🟡 中风险：挂载最小权限策略（示例：OSS 只读）
+aliyun ram AttachPolicyToRole --PolicyType System \
+  --PolicyName AliyunOSSReadOnlyAccess --RoleName ack-oss-reader
+```
+
+#### 步骤 3：绑定 ServiceAccount
 
 ```yaml
-# 示例 ServiceAccount 绑定
+# 使用注解声明角色 ARN，RRSA Webhook 会自动注入 Token
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: my-oss-accessor
+  namespace: prod
   annotations:
-    # 替换为您的 RAM 角色 ARN
-    oss.alibabacloud.com/role-arn: "acs:ram::123456789:role/ack-oss-role"
+    pod-identity.alibabacloud.com/role-name: "ack-oss-reader"
 ```
+
+#### 步骤 4：验证 RRSA 生效
+
+```bash
+# 🟢 低风险：确认 rrsa webhook 组件运行
+kubectl -n ack-pod-identity-system get pods 2>/dev/null || kubectl -n kube-system get pods | grep -i rrsa
+
+# 🟢 低风险：Pod 内应存在 OIDC Token 环境变量与投射文件
+kubectl -n prod exec <pod-name> -- env | grep -E 'ALIBABA_CLOUD_ROLE_ARN|ALIBABA_CLOUD_OIDC'
+kubectl -n prod exec <pod-name> -- cat /var/run/secrets/tokens/oidc-token | head -c 40
+
+# 🟢 低风险：在 Pod 内用 STS Token 实际访问云资源（以 ossutil 为例）
+kubectl -n prod exec <pod-name> -- ossutil ls oss://<bucket-name> --limited-num 1
+```
+
+> 验证失败时优先排查：① 信任策略中 `oidc:sub` 与实际 `namespace:serviceaccount` 是否一致；② Pod 是否在创建时就已挂好 ServiceAccount（先建 SA 再建 Pod）。
 
 ---
 
@@ -141,21 +189,28 @@ metadata:
 - **权限过大监控**: 定期配合 "配置审计" 产品检查 `AliyunCSFullAccess` 等高危权限的使用。
 - **API 审计**: 通过 "操作审计" (ActionTrail) 监控 `cs.aliyuncs.com` 相关的 API 调用记录。
 
+### 审计命令示例
+
+```bash
+# 🟢 低风险：检查集群内是否有 Secret 明文存储 AccessKey
+kubectl get secrets -A -o json | jq -r '.items[] | select(.data != null) | select([.data | keys[]] | map(test("(?i)access.?key|ak.?secret")) | any) | "\(.metadata.namespace)/\(.metadata.name)"'
+
+# 🟢 低风险：盘点所有绑定了 RAM 角色的 ServiceAccount
+kubectl get sa -A -o json | jq -r '.items[] | select(.metadata.annotations["pod-identity.alibabacloud.com/role-name"] != null) | "\(.metadata.namespace)/\(.metadata.name) -> \(.metadata.annotations["pod-identity.alibabacloud.com/role-name"])"'
+```
+
 ---
 
 ## 相关文档
 
-- [84-rbac-matrix-configuration.md](./84-rbac-matrix-configuration.md) - Kubernetes RBAC 矩阵
-- [206-docker-security-best-practices.md](./206-docker-security-best-practices.md) - 容器安全实践
-- [156-alibaba-cloud-integration.md](./156-alibaba-cloud-integration.md) - 阿里云集成总表
+- [[08-安全/01-身份与访问/07-rbac-matrix-configuration|Kubernetes RBAC 矩阵配置]]
+- [[08-安全/01-身份与访问/04-oidc-identity-provider-integration|OIDC 身份提供商集成]]
+- [[18-云厂商/01-阿里云/index|阿里云域索引]]
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|go]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
-- [[17-系统基础/05-速查卡/docker.md|docker]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
-- USER
 - [[23-实体/15-参考与索引/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 
 ## See Also

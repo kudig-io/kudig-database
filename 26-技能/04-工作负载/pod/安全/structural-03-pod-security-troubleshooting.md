@@ -62,7 +62,7 @@ tags:
 - apiserver
 - [[kubelet|kubelet]]
 - opa
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - rbac
 - webhook
 last_updated: 2026-05

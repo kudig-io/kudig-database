@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.29-v1.33 设计原理演进与影响分析
+# [[kubernetes|Kubernetes]] v1.29-v1.33 设计原理演进与影响分析
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  

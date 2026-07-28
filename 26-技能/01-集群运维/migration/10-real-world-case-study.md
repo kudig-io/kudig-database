@@ -60,12 +60,12 @@ tags:
 - k8s
 - migration
 - modernization
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - calico
-- [[ArgoCD|argocd]]
+- [[argocd|argocd]]
 - docker
-- [[Harbor|harbor]]
+- [[harbor|harbor]]
 - ceph
 last_updated: 2026-05
 difficulty: advanced

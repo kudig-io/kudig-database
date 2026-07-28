@@ -74,7 +74,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.29 - v1.33 版本特性深度指南
+# [[kubernetes|Kubernetes]] v1.29 - v1.33 版本特性深度指南
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  
@@ -182,7 +182,7 @@ resources:
 
 | 弃用项 | 替代方案 | 操作 |
 |:---|:---|:---|
-| Node v1beta1 metrics | Node v1 metrics | 更新 [[Prometheus|Prometheus]] 查询 |
+| Node v1beta1 metrics | Node v1 metrics | 更新 [[prometheus\|Prometheus]] 查询 |
 | in-tree [[26-技能/01-集群运维/cloud-provider/诊断排障/ts-cloud-provider.md|cloud providers]] | 外部云控制器管理器 (CCM) | 迁移至 CCM |
 | flowcontrol.apiserver.k8s.io/v1beta2 | v1 | 更新 FlowSchema |
 

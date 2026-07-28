@@ -1,7 +1,7 @@
 ---
 title: Pod Pending 状态深度诊断
 description: '# 05 - Pod Pending 状态深度诊断 (Pod Pending Diagnosis)'
-summary: 'Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 接受，但尚未被调度到节点或容器镜像尚未拉取。'
+summary: 'Pod 处于 Pending 状态表示 Pod 已被 [[kubernetes|Kubernetes]]es API|Kubernetes API]] Server 接受，但尚未被调度到节点或容器镜像尚未拉取。'
 category: troubleshooting
 tags:
 - pod
@@ -130,7 +130,7 @@ cross_refs:
 
 ### 1.1 Pod Pending 状态定义
 
-Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] Server 接受，但尚未被调度到节点或容器镜像尚未拉取。
+Pod 处于 Pending 状态表示 Pod 已被 [[kubernetes|Kubernetes]]es API|Kubernetes API]] Server 接受，但尚未被调度到节点或容器镜像尚未拉取。
 
 | 阶段 | 状态 | 说明 | 诊断入口 |
 |------|------|------|---------|
@@ -228,7 +228,7 @@ Pod 处于 Pending 状态表示 Pod 已被 [[Kubernetes|Kubernetes]]es API|Kuber
 
 ### 2.1 快速诊断流程图
 
-<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending 显示有 Pending Pod -->
+<!-- condition: kubectl get [[pods|pods]] -A --field-selector=status.phase=Pending 显示有 Pending Pod -->
 
 ```
 # 🟢 低风险：只读/信息收集，通常无副作用

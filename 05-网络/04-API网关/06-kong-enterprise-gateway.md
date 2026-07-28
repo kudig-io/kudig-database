@@ -65,7 +65,7 @@ authors:
 
 # 06 - Kong API 网关企业级实践
 
-> **文档版本**: v1.0 | **适用版本**: Kong Gateway 3.x, [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Kong, KIC, Kong [[Ingress|Ingress]] Controller, deck, Konnect, DB-less
+> **文档版本**: v1.0 | **适用版本**: Kong Gateway 3.x, [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Kong, KIC, Kong [[ingress|Ingress]] Controller, deck, Konnect, DB-less
 
 <!-- chunk: 目录 -->## 目录
 
@@ -101,7 +101,7 @@ Kong 是全球使用最广泛的开源 API 网关之一，由 Kong Inc. 于 2015
 | **Kong Gateway (EE)** | 企业版，含 Manager GUI、RBAC、审计等 | 商业许可 |
 | **Kong Konnect** | 全球化 SaaS 管理平面 | SaaS 订阅 |
 | **Kong Ingress Controller** | Kubernetes 原生控制器 | Apache 2.0 |
-| **Kong Mesh** | 服务网格（基于 [[Kuma|Kuma]]） | 商业许可 |
+| **Kong Mesh** | 服务网格（基于 [[kuma\|Kuma]]） | 商业许可 |
 
 <!-- chunk: 2. 核心架构 -->## 2. 核心架构
 

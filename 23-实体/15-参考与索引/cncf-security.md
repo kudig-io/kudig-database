@@ -81,7 +81,7 @@ Ratify 是可插拔的制品验证引擎，用于 K8s 准入控制。
 
 ### [[eraser]] — 沙箱项目
 
-Eraser 自动清理 [[Kubernetes|Kubernetes]] 节点上的未使用容器镜像。
+Eraser 自动清理 [[kubernetes|Kubernetes]] 节点上的未使用容器镜像。
 
 ### [[copa]] — 沙箱项目
 

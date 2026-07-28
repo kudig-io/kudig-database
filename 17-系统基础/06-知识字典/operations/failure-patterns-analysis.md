@@ -46,7 +46,7 @@ prerequisites:
 
 
 
-# 02 - [[Kubernetes|Kubernetes]] 故障模式与根因分析字典
+# 02 - [[kubernetes|Kubernetes]] 故障模式与根因分析字典
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -64,9 +64,9 @@ prerequisites:
 - **资深专家**: 建立问题预防体系、混沌工程实践、智能化故障预测
 
 **前置知识要求**:
-- 基础: 了解 Pod、Node、[[Service|Service]] 等核心概念（参见 [../fundamentals/kubernetes-concepts-reference.md](../fundamentals/kubernetes-concepts-reference.md)）
+- 基础: 了解 Pod、Node、[[service|Service]] 等核心概念（参见 [../fundamentals/kubernetes-concepts-reference.md](../fundamentals/kubernetes-concepts-reference.md)）
 - 进阶: 熟悉 kubectl 命令和日志查看（参见 [../tooling/cli-commands.md](../tooling/cli-commands.md)）
-- 专家: 了解分布式系统理论和 [[Prometheus|Prometheus]] 监控
+- 专家: 了解分布式系统理论和 [[prometheus|Prometheus]] 监控
 
 **关联文件**:
 - [./operations-best-practices.md](./operations-best-practices.md) - 运维最佳实践（预防问题的配置标准）

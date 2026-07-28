@@ -70,7 +70,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 服务网格深度实践与Istio集成 ([[Service|Service]]Service Mesh）|Service Mesh]] Deep Practice and [[Istio|Istio]] Integration)
+# [[kubernetes|Kubernetes]] 服务网格深度实践与Istio集成 ([[service|Service]]Service Mesh）|Service Mesh]] Deep Practice and [[istio|Istio]] Integration)
 
 > **作者**: 服务网格架构专家 | **版本**: v3.0 | **更新时间**: 2026-03-03
 > **适用场景**: 微服务架构治理 | **复杂度**: ⭐⭐⭐⭐⭐

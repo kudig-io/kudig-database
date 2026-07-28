@@ -56,8 +56,8 @@ title: Day 27: 扩展生态 + 高级主题
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|Kubernetes]] CRD 开发
-  - [[Helm|Helm]] Charts 管理
+  - [[kubernetes|Kubernetes]] CRD 开发
+  - [[helm|Helm]] Charts 管理
   - Operator 模式
   - K8s 扩展生态
 trigger_keywords:

@@ -51,7 +51,7 @@ status: reviewed
 Supply chain attacks can occur at any stage:
 1. **Development**: Developer machine compromised, dependency confusion attack
 2. **Build**: CI/CD pipeline hijacked, build tools tampered with, backdoor inserted during compilation
-3. **[[Distribution|Distribution]]**: Registry attacked, image replaced, tag mutated (same tag points to different content)
+3. **[[distribution|Distribution]]**: Registry attacked, image replaced, tag mutated (same tag points to different content)
 4. **Deployment**: Unsigned image deployed to production without verification
 
 ## SBOM (Software Bill of Materials)
@@ -61,7 +61,7 @@ SBOM is a formal inventory of all components in a software artifact:
 | Tool | Format | Use Case |
 |------|--------|----------|
 | Syft | CycloneDX, SPDX | Container image SBOM generation |
-| [[Trivy|Trivy]] | SPDX-JSON | Image scan + SBOM combined |
+| [[trivy\|Trivy]] | SPDX-JSON | Image scan + SBOM combined |
 | cyclonedx-maven-plugin | CycloneDX | Java application SBOM |
 
 SBOM enables offline vulnerability scanning and dependency tracking without needing the original image.

@@ -64,9 +64,9 @@ authors:
 
 
 
-# 07 - [[Envoy|Envoy]] Gateway 企业级实践
+# 07 - [[envoy|Envoy]] Gateway 企业级实践
 
-> **文档版本**: v1.0 | **适用版本**: Envoy Gateway 1.x, [[Kubernetes|Kubernetes]] 1.26+ | **更新日期**: 2026-03-04 | **关键词**: Envoy Gateway, Gateway API, xDS, EnvoyPatchPolicy, ExtensionPolicy
+> **文档版本**: v1.0 | **适用版本**: Envoy Gateway 1.x, [[kubernetes|Kubernetes]] 1.26+ | **更新日期**: 2026-03-04 | **关键词**: Envoy Gateway, Gateway API, xDS, EnvoyPatchPolicy, ExtensionPolicy
 
 <!-- chunk: 目录 -->## 目录
 
@@ -92,7 +92,7 @@ Envoy Gateway（简称 EG）是 Envoy 社区于 2022 年正式发起的官方 [[
 - **CNCF 官方项目**：与 Envoy Proxy 同属 CNCF 生态，2023 年加入沙箱，2024 年晋升孵化级
 - **Gateway API First**：100% 以 Kubernetes Gateway API 为主接口，不引入自有私有 CRD 作为核心路由对象
 - **官方背书**：由 Envoy 核心维护者主导，矩阵涵盖 Tetrate、Microsoft、VMware 等主要贡献者
-- **轻量控制面**：相比 [[Istio|Istio]]/Contour 等，控制面极为精简，仅运行单个 `envoy-gateway` 控制器 Pod
+- **轻量控制面**：相比 [[istio|Istio]]/Contour 等，控制面极为精简，仅运行单个 `envoy-gateway` 控制器 Pod
 
 ## 适用场景
 

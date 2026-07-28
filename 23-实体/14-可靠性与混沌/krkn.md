@@ -264,7 +264,7 @@ kubectl get endpoints -n production
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - krkn
-- [[23-实体/cncf-infrastructure.md|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
+- [[23-实体/cncf-infrastructure.md|[[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
 - index/etcd-index|etcd 知识图谱索引]]
 
 

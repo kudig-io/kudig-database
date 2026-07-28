@@ -1,7 +1,7 @@
 ---
 title: Domain-12 故障排查 — 开源项目索引
 description: '# Domain-12 故障排查 — 开源项目索引'
-summary: 'kubectl get events --sort-by='.lastTimestamp' -A                    # 全局事件'
+summary: "kubectl get events --sort-by='.lastTimestamp' -A                    # 全局事件"
 category: troubleshooting
 tags:
 - k8s
@@ -106,12 +106,12 @@ cross_refs:
 | **Lens (OpenLens)** | K8s IDE / GUI | Mirantis | v6.5.0 | 25k+ | MIT |
 | **Stern** | 多 Pod 日志聚合 | 社区 | v1.32.0 | 12k+ | Apache-2.0 |
 | **kube-state-metrics** | K8s 资源状态指标 | K8s SIG | v2.15.0 | 5.5k+ | Apache-2.0 |
-| **node_exporter** | 主机指标导出 | [[Prometheus|Prometheus]] | v1.9.0 | 11k+ | Apache-2.0 |
+| **node_exporter** | 主机指标导出 | [[prometheus\|Prometheus]] | v1.9.0 | 11k+ | Apache-2.0 |
 | **cAdvisor** | 容器资源分析 | K8s SIG | v0.51.0 | 16k+ | Apache-2.0 |
 | **Kubeshark** | K8s 流量抓包分析 | Kubeshark | v52.0.0 | 13k+ | Apache-2.0 |
 | **[[23-实体/07-可观测性/inspektor-gadget.md|Inspektor Gadget]]** | eBPF 排查工具集 | Inspektor | v0.38.0 | 7k+ | Apache-2.0 |
 | **kubectl-debug** | 调试容器 | 社区 | v0.2.0 | 3k+ | Apache-2.0 |
-| **kruise-debug** | [[OpenKruise|OpenKruise]] 调试 | 阿里云 | - | - | Apache-2.0 |
+| **kruise-debug** | [[openkruise\|OpenKruise]] 调试 | 阿里云 | - | - | Apache-2.0 |
 | **ktop** | top 风格 K8s 监控 | 社区 | v0.3.0 | 1.5k+ | Apache-2.0 |
 | **kube-capacity** | 资源容量概览 | 社区 | v0.8.0 | 2k+ | Apache-2.0 |
 | **kubectl-ai** | AI 辅助 kubectl | 社区 | v1.3.0 | 2k+ | Apache-2.0 |
@@ -194,7 +194,7 @@ ctrl-l   # 查看容器日志 (多容器)
 
 - 功能最丰富的 K8s GUI
 - 内置终端、日志、Shell
-- [[Helm|Helm]] Chart 管理
+- [[helm|Helm]] Chart 管理
 - 资源编辑器与差异对比
 - 网络、存储可视化
 - **注意**: 2024 年后 Lens 主要功能转向 Mirantis 商业版，OpenLens 社区版维护缓慢

@@ -220,7 +220,7 @@ spec:
 | livenessProbe | 应用健康 | 重启容器 |
 | readinessProbe | 应用就绪 | 移除Endpoints |
 | Node Controller | 节点心跳 | 驱逐Pod |
-| [[ReplicaSet|ReplicaSet]] | Pod数量 | 创建新Pod |
+| [[replicaset\|ReplicaSet]] | Pod数量 | 创建新Pod |
 
 <!-- chunk: 节点故障处理 -->
 ## 节点故障处理
@@ -406,7 +406,7 @@ scheduler_ha:
 | 数据库 (MySQL) | 主从复制 + 自动故障转移 | Operator (Orchestrator/Vitess) | MySQL Operator |
 | 数据库 (PostgreSQL) | 流复制 + Patroni | Patroni + etcd | PGO Operator |
 | 缓存 (Redis) | Sentinel / Cluster 模式 | Redis Operator | Redis Sentinel |
-| 消息队列 (Kafka) | 多副本 + ISR | Kafka Operator ([[Strimzi|Strimzi]]) | Strimzi |
+| 消息队列 (Kafka) | 多副本 + ISR | Kafka Operator ([[strimzi\|Strimzi]]) | Strimzi |
 | 对象存储 (MinIO) | 纠删码 + 多节点 | MinIO Operator | MinIO Tenant |
 
 #### PodDisruptionBudget 最佳实践矩阵

@@ -162,8 +162,8 @@ GPU 型号约束:
 - NVIDIA GPU Operator: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/
 - NVIDIA MIG User Guide: https://docs.nvidia.com/datacenter/tesla/mig-user-guide/
 - NVIDIA MPS Documentation: https://docs.nvidia.com/deploy/mps/
-- [[15-AI基础设施/02-gpu-scheduling/|GPU 调度目录]]
-- [[15-AI基础设施/03-inference-serving/|推理服务目录]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU 调度目录]]
+- [[15-AI基础设施/01-基础设施/17-llm-inference-serving|推理服务目录]]
 - [[22-概念/07-调度与资源/autoscaling-strategies.md|自动伸缩策略]]
 
 ## Related

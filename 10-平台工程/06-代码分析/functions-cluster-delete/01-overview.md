@@ -70,7 +70,7 @@ related_topics:
 
 
 
-# [[Kubernetes|Kubernetes]] 集群删除逻辑 — 基于官方代码分析
+# [[kubernetes|Kubernetes]] 集群删除逻辑 — 基于官方代码分析
 
 ## 函数签名
 

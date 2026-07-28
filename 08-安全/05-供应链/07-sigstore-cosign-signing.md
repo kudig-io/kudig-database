@@ -70,8 +70,8 @@ tags:
 - security
 - sbom
 - slsa
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - docker
 - redis
 - mysql
@@ -86,7 +86,7 @@ estimated_read_time: 5min
 intent_queries:
 - Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 是什么
 - 如何 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
-- [[Kubernetes|Kubernetes]] 39 supply chain security 最佳实践
+- [[kubernetes|Kubernetes]] 39 supply chain security 最佳实践
 trigger_keywords:
 - Sigstore
 - Cosign

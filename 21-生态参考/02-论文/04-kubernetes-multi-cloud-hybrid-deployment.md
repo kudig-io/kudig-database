@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
+# [[kubernetes|Kubernetes]] 多云混合部署架构与实践 (Multi-Cloud Hybrid Deployment Architecture)
 
 > **作者**: 云原生架构专家 | **版本**: v1.4 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级多云战略实施 | **复杂度**: ⭐⭐⭐⭐⭐

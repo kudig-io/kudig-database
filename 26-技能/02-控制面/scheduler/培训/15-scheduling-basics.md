@@ -55,8 +55,8 @@ tags:
 - lecturer
 - redis
 - pdb
-- [[StatefulSet|statefulset]]
-- [[DaemonSet|daemonset]]
+- [[statefulset|statefulset]]
+- [[daemonset|daemonset]]
 - operator
 - gpu
 last_updated: 2026-05

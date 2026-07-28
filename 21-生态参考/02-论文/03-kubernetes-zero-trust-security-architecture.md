@@ -53,7 +53,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
+title: [[kubernetes|Kubernetes]] 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 description: '# Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)'
 category: papers
 tags:
@@ -62,8 +62,8 @@ tags:
 - research
 - [[etcd|etcd]]
 - apiserver
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - cilium
 - containerd
 - docker

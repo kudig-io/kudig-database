@@ -75,9 +75,9 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[17-系统基础/06-知识字典/GAP-ANALYSIS.md|[[Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）|Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）]]]] |  | dictionary, reference |  |
-| 2 | [[17-系统基础/06-知识字典/configuration/configmaps.md|[[ConfigMaps|ConfigMaps]]]] |  | dictionary, reference, configuration |  |
-| 3 | [[17-系统基础/06-知识字典/configuration/liveness-readiness-and-startup-probes.md|[[Liveness, Readiness, and Startup Probes|Liveness, Readiness, and Startup Probes]]]] |  | dictionary, reference |  |
+| 1 | [[17-系统基础/06-知识字典/GAP-ANALYSIS.md|[[17-系统基础/06-知识字典/GAP-ANALYSIS\|Topic Dictionary 内容缺口分析（2026 行业最佳实践视角）]]]] |  | dictionary, reference |  |
+| 2 | [[17-系统基础/06-知识字典/configuration/configmaps.md|[[configmaps\|ConfigMaps]]]] |  | dictionary, reference, configuration |  |
+| 3 | [[17-系统基础/06-知识字典/configuration/liveness-readiness-and-startup-probes.md|[[17-系统基础/06-知识字典/configuration/liveness-readiness-and-startup-probes\|Liveness, Readiness, and Startup Probes]]]] |  | dictionary, reference |  |
 | 4 | [[17-系统基础/06-知识字典/configuration/organizing-cluster-access-using-kubeconfig-files.md|Organizing Cluster Access Using kubeconfig Files]] |  | dictionary, reference, configuration |  |
 | 5 | [[17-系统基础/06-知识字典/configuration/resource-management-for-pods-and-containers.md|Resource Management for Pods and Containers]] |  | dictionary, reference |  |
 | 6 | [[17-系统基础/06-知识字典/configuration/resource-management-for-windows-nodes.md|Resource Management for Windows nodes]] |  | dictionary, reference |  |

@@ -68,7 +68,7 @@ cross_refs:
 
 # 21 - 多集群安全管理与联邦认证
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [Kubernetes Federation v2](https://github.com/kubernetes-sigs/kubefed) | [Red Hat Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) | [Rancher Fleet](https://fleet.rancher.io/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [Kubernetes Federation v2](https://github.com/kubernetes-sigs/kubefed) | [Red Hat Advanced Cluster Management](https://www.redhat.com/en/technologies/management/advanced-cluster-management) | [Rancher Fleet](https://fleet.rancher.io/)
 
 <!-- chunk: 一、多集群安全架构设计 -->
 ## 一、多集群安全架构设计
@@ -995,7 +995,7 @@ echo "Report saved to: /reports/security_report_$(date +%Y%m%d).txt"
 ## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Security Domain|Security Domain]]]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-7|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构

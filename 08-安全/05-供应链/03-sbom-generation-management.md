@@ -2411,7 +2411,7 @@ if __name__ == "__main__":
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Domain 39: 供应链安全 (Supply Chain Security)|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-39|Domain 39: 供应链安全 (Supply Chain Security)]] Security]])]]
 - [[08-安全/00-总览/00-open-source-projects-index.md|Domain-39 供应链安全 — 开源项目索引]]
 - 供应链安全概述 (Supply Chain Security Overview)
 - 供应链安全成熟度模型 (Supply Chain Security Maturity Model)

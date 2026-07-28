@@ -52,7 +52,7 @@ prerequisites:
 ---
 tags:
 - edge
-- [[KubeEdge|kubeedge]]
+- [[kubeedge|kubeedge]]
 - case-study
 intent_queries:
 - edge-use-cases是什么？
@@ -68,8 +68,8 @@ tags:
 - edge
 - iot
 - kubeedge
-- [[Flux|flux]]
-- [[Harbor|harbor]]
+- [[flux|flux]]
+- [[harbor|harbor]]
 - opa
 - redis
 - postgresql

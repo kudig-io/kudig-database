@@ -56,7 +56,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - postgresql
 last_updated: 2026-05
 difficulty: advanced

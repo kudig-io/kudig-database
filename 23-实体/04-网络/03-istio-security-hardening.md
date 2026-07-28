@@ -43,7 +43,7 @@ prerequisites:
 
 # Istio 安全加固
 
-> **CNCF 状态**: Graduated | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Go
+> **CNCF 状态**: Graduated | **类别**: [[service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Go
 
 ## 概述
 
@@ -122,7 +122,7 @@ EOF
 
 - [[23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
 - [[istio]]
-- [[23-实体/vault.md|[[HashiCorp Vault|vault]]]]
+- [[23-实体/vault.md|[[23-实体/06-安全/vault|vault]]]]
 - [[22-概念/05-安全/secrets-management.md|secrets-management]]
 - [[pod-lifecycle]]
 

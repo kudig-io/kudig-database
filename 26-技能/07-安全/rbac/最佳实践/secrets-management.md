@@ -47,13 +47,13 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 密钥管理最佳实践
+title: [[kubernetes|Kubernetes]] 密钥管理最佳实践
 description: 生产环境 Kubernetes 密钥管理配置的最佳实践指南
 category: 生产运维/topic-best-practices/security
 tags:
 - kubernetes
 - security
-- [[Secrets|secrets]]
+- [[secrets|secrets]]
 - vault
 - encryption
 last_updated: 2026-05

@@ -1360,7 +1360,7 @@ class CostReportGenerator:
 | 版本 | 变更内容 | 影响 |
 |-----|---------|------|
 | **Kubecost 2.0** | 新增 GPU 成本追踪 | 更精确的 LLM 成本分析 |
-| **[[OpenCost|OpenCost]] 1.0** | CNCF 毕业项目 | 开源替代方案 |
+| **[[opencost\|OpenCost]] 1.0** | CNCF 毕业项目 | 开源替代方案 |
 | **v1.28** | 原生 GPU 监控增强 | 更好的 Device Plugin 支持 |
 
 <!-- chunk: 最佳实践总结 -->

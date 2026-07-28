@@ -58,7 +58,7 @@ Projected Volume 是一种将多个现有的卷源（如 Secret、ConfigMap、do
 | `secret` | 将 Secret 的键值对作为文件投射到目录中。 |
 | `configMap` | 将 ConfigMap 的键值对作为文件投射到目录中。 |
 | `downwardAPI` | 将 Pod 的元数据或资源信息以文件形式投射。 |
-| `serviceAccountToken` | 将当前 ServiceAccount 的 Token 注入到指定路径，用于访问 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] API。 |
+| `serviceAccountToken` | 将当前 ServiceAccount 的 Token 注入到指定路径，用于访问 [[23-实体/kubernetes.md|[[kubernetes\|kubernetes]]]] API。 |
 | `clusterTrustBundle` | 将 ClusterTrustBundle 对象的内容作为自动更新的 PEM 文件注入（v1.33 beta）。 |
 | `podCertificate` | 为 Pod 安全地提供私钥和 X.509 证书链，并自动轮换（v1.35 beta）。 |
 

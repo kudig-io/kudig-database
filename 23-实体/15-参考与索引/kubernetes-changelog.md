@@ -50,8 +50,8 @@ prerequisites:
 | v1.2 | 42 KB | 早期版本，多容器 Pod 支持 |
 | v1.3 | 85 KB | 企业级功能引入 |
 | v1.4 | 137 KB | 自动扩缩增强 |
-| v1.5 | 140 KB | [[StatefulSet|StatefulSet]]、RBAC alpha |
-| v1.6 | 312 KB | 动态供给、[[CronJob|CronJob]] |
+| v1.5 | 140 KB | [[statefulset\|StatefulSet]]、RBAC alpha |
+| v1.6 | 312 KB | 动态供给、[[cronjob\|CronJob]] |
 | v1.7 | 317 KB | 核心功能扩展 |
 | v1.8 | 320 KB | RBAC/NetworkPolicy GA |
 | v1.9 | 322 KB | Apps API GA |

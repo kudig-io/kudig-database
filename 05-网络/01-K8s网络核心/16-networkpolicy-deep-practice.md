@@ -46,14 +46,14 @@ prerequisites:
 
 
 
-title: 01 - [[NetworkPolicy|NetworkPolicy]] 深度实践指南
+title: 01 - [[networkpolicy|NetworkPolicy]] 深度实践指南
 description: '# 01 - NetworkPolicy 深度实践指南'
 category: networking
 tags:
 - k8s
 - networking
-- [[Service|service]]
-- [[Ingress|ingress]]
+- [[service|service]]
+- [[ingress|ingress]]
 - cni
 - prometheus
 - cilium

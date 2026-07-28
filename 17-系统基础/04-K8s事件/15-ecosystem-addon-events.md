@@ -60,9 +60,9 @@ authors:
 
 # 15 - 生态系统与插件事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
-> **本文档记录 Kubernetes 生态系统中常见生产插件和扩展组件产生的事件,包括 Node Problem Detector、[[Ingress|Ingress]] 控制器、cert-manager、[[Istio|Istio]]、[[ArgoCD|ArgoCD]]、[[Knative|Knative]]、Prometheus Operator、Velero、External DNS 和 MetalLB。**
+> **本文档记录 Kubernetes 生态系统中常见生产插件和扩展组件产生的事件,包括 Node Problem Detector、[[ingress|Ingress]] 控制器、cert-manager、[[istio|Istio]]、[[argocd|ArgoCD]]、[[knative|Knative]]、Prometheus Operator、Velero、External DNS 和 MetalLB。**
 
 ---
 

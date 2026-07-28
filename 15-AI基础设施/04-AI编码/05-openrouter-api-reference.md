@@ -320,7 +320,7 @@ type ToolChoice =
 | **408** | Request Timeout | 请求超时 |
 | **429** | Too Many Requests | Rate Limit 超限 |
 | **502** | Bad Gateway | Provider 返回错误 |
-| **503** | [[Service]] Unavailable | 无可用 Provider |
+| **503** | [[service\|Service]] Unavailable | 无可用 Provider |
 
 ### 7.2 Error 响应格式
 

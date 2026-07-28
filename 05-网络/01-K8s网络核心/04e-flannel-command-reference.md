@@ -463,7 +463,7 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

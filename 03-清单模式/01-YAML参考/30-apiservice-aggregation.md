@@ -61,7 +61,7 @@ cross_refs:
 
 # 30 - APIService YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 **本文档全面覆盖 APIService(API 聚合层)的 YAML 配置**,包括完整字段说明、本地 vs 远程 APIService、内部原理、与 Metrics Server 集成、自定义 API Server 开发等。
 

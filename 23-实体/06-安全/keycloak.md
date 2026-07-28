@@ -240,7 +240,7 @@ kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kcadm.sh get \
 
 ## Related
 
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]] — ArgoCD
+- [[23-实体/argocd.md|[[argocd|argocd]]]] — ArgoCD
 - [[ovn-kubernetes]] — OVN-Kubernetes
 - [[vitess]] — Vitess
 - [[argo]] — Argo Workflows

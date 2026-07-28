@@ -142,7 +142,7 @@ Ingress 是 K8s 中 HTTP/HTTPS 层的路由规则。相比 Service（四层 TCP/
 
 Ingress 的工作原理：Ingress Controller（如 Nginx Ingress Controller、ALB Ingress Controller）持续监听集群中的 Ingress 资源变化，并根据规则配置实际的负载均衡器。当外部请求到达时，Ingress Controller 根据域名和路径将请求路由到对应的后端 Service。
 
-**Nginx Ingress Controller** 是社区最流行的 Ingress Controller。它在集群内部以 [[DaemonSet|DaemonSet]] 或 Deployment 方式运行 Nginx 反向代理，通过 Watch Ingress 资源动态生成 Nginx 配置。优势是功能丰富、社区支持好；缺点是流量需要经过 Nginx 中转，增加了一跳延迟。
+**Nginx Ingress Controller** 是社区最流行的 Ingress Controller。它在集群内部以 [[daemonset|DaemonSet]] 或 Deployment 方式运行 Nginx 反向代理，通过 Watch Ingress 资源动态生成 Nginx 配置。优势是功能丰富、社区支持好；缺点是流量需要经过 Nginx 中转，增加了一跳延迟。
 
 **ALB Ingress Controller** 是阿里云提供的 Ingress Controller。它直接将 Ingress 规则映射到阿里云 ALB（Application Load Balancer）实例，无需在集群内部运行代理。优势是性能好、与阿里云生态集成；缺点是依赖阿里云 ALB 服务。
 
@@ -166,7 +166,7 @@ Ingress Controller 对比：
 - **ENI 模式**: 每个 Pod 使用独立的辅助 ENI，Pod 拥有与节点相同网络平面的 IP 地址。优势是网络性能接近原生、支持网络策略；缺点是每个节点的 Pod 数量受 ENI 配额限制
 - **ENIIP 模式**: 在辅助 ENI 上分配辅助私有 IP，一个 ENI 可以为多个 Pod 提供 IP。这是 Terway 的推荐模式，在性能和密度之间取得平衡
 
-**Flannel** 是社区最简单的 CNI 插件之一。它使用 VxLAN 覆盖网络（Overlay）在节点间建立隧道。Flannel 的优势是配置简单、不依赖特定的网络基础设施；缺点是 VxLAN 封装带来一定的性能开销、不支持 [[Kubernetes|Kubernetes]] [[NetworkPolicy|NetworkPolicy]]。
+**Flannel** 是社区最简单的 CNI 插件之一。它使用 VxLAN 覆盖网络（Overlay）在节点间建立隧道。Flannel 的优势是配置简单、不依赖特定的网络基础设施；缺点是 VxLAN 封装带来一定的性能开销、不支持 [[kubernetes|Kubernetes]] [[networkpolicy|NetworkPolicy]]。
 
 选择建议：如果使用阿里云 ACK 且需要 NetworkPolicy，选择 Terway。如果需要简单的网络方案且对网络策略没有要求，可以选择 Flannel。
 

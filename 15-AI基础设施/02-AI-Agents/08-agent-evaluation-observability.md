@@ -51,7 +51,7 @@ prerequisites:
 
 title: Agent 评测体系与可观测性
 description: '**文档类型**: 工程质量专题 | **最后更新**: 2026-03 | **关键词**: Agent 评测, LLM-as-Judge,
-  RAGAS, Langfuse, LangSmith, Phoenix, 轨迹评估, [[OpenTelemetry|OpenTelemetry]], 可观测性, Agent 指标'
+  RAGAS, Langfuse, LangSmith, Phoenix, 轨迹评估, [[opentelemetry|OpenTelemetry]], 可观测性, Agent 指标'
 category: ai-agent
 tags:
 - ai
@@ -59,9 +59,9 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
+- [[helm|helm]]
 - postgresql
 - job
 last_updated: 2026-05

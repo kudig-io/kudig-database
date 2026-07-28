@@ -106,7 +106,7 @@ tolerations:
 
 ### 多污点/多容忍度处理
 
-[[Kubernetes|Kubernetes]] 处理多个污点和容忍度的方式类似于过滤器：从节点的所有污点开始，忽略 Pod 有匹配容忍度的污点；剩余的未忽略污点会对 Pod 产生相应效果。
+[[kubernetes|Kubernetes]] 处理多个污点和容忍度的方式类似于过滤器：从节点的所有污点开始，忽略 Pod 有匹配容忍度的污点；剩余的未忽略污点会对 Pod 产生相应效果。
 
 ## 关键机制或特性
 
@@ -120,7 +120,7 @@ tolerations:
   - `node.kubernetes.io/unschedulable`
   - `node.cloudprovider.kubernetes.io/uninitialized`
 - **自动容忍度**：Kubernetes 自动为 Pod 添加 `node.kubernetes.io/not-ready` 和 `node.kubernetes.io/unreachable` 的容忍度，`tolerationSeconds=300`（5分钟）。
-- **[[DaemonSet|DaemonSet]] 容忍度**：DaemonSet Pod 对上述两个污点的 NoExecute 容忍度没有 `tolerationSeconds`，确保它们永远不会因此被驱逐。
+- **[[daemonset|DaemonSet]] 容忍度**：DaemonSet Pod 对上述两个污点的 NoExecute 容忍度没有 `tolerationSeconds`，确保它们永远不会因此被驱逐。
 - **数值比较操作符**（v1.35+ alpha）：除了 `Equal` 和 `Exists`，还支持 `Gt` 和 `Lt` 用于匹配整数值的污点，适用于基于阈值的调度。
 - **设备污点和容忍度**：在使用动态资源分配（DRA）管理特殊硬件时，管理员可以针对单个设备（而非整个节点）设置污点和容忍度。
 

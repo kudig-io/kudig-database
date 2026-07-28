@@ -59,7 +59,7 @@ related_topics:
 
 
 
-# Node Create — [[Kubernetes|Kubernetes]] 节点生命周期管理
+# Node Create — [[kubernetes|Kubernetes]] 节点生命周期管理
 
 ## 函数签名
 

@@ -42,7 +42,7 @@ prerequisites:
 
 ## 概述
 
-节点声明特性（Node Declared Features）是 [[Kubernetes|Kubernetes]] v1.35 中引入的 alpha 特性。Kubernetes 节点使用声明特性来报告特定新特性或特性门控功能的可用性。控制平面组件利用这些信息做出更好的决策。
+节点声明特性（Node Declared Features）是 [[kubernetes|Kubernetes]] v1.35 中引入的 alpha 特性。Kubernetes 节点使用声明特性来报告特定新特性或特性门控功能的可用性。控制平面组件利用这些信息做出更好的决策。
 
 ## 核心概念/原理
 

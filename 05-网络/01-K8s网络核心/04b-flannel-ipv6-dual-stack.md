@@ -74,7 +74,7 @@ cross_refs:
 
 # Flannel IPv6 Dual Stack 支持
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
 
 ---
 
@@ -348,7 +348,7 @@ ip -6 neigh show dev flannel.1
 
 ---
 
-<!-- chunk: 9. 与 [[Cilium|Cilium]]/Calico 对比 -->
+<!-- chunk: 9. 与 [[cilium|Cilium]]/Calico 对比 -->
 ## 9. 与 Cilium/Calico 对比
 
 | 特性 | Flannel | Cilium | Calico |
@@ -356,7 +356,7 @@ ip -6 neigh show dev flannel.1
 | IPv6 单栈 | ✓ | ✓ | ✓ |
 | IPv6 Dual Stack | ✓ | ✓ | ✓ |
 | eBPF-based | ✗ | ✓ | ✗ |
-| [[NetworkPolicy|NetworkPolicy]] | 需 Canal | 原生 | 原生 |
+| [[networkpolicy\|NetworkPolicy]] | 需 Canal | 原生 | 原生 |
 | 生产推荐度 | 中 | 高 | 高 |
 
 ---

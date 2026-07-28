@@ -1,3 +1,12 @@
+---
+title: Customizing Pods
+category: reference
+tags:
+- reference
+tier: supporting
+created: '2026-07-27'
+---
+
 {% panel style="success", title="Providing Feedback" %}
 **Provide feedback at the [survey](https://www.surveymonkey.com/r/C855WZW)**
 {% endpanel %}

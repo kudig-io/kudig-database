@@ -71,7 +71,7 @@ Hierarchical timeout design: outer timeout > inner timeout at each layer.
 
 ### 4. Bulkhead Isolation
 
-Limits resource consumption so one [[Service|service]] failure does not exhaust all resources.
+Limits resource consumption so one [[service|service]] failure does not exhaust all resources.
 
 - **Mesh layer**: Istio DestinationRule connectionPool (max connections, max pending requests)
 - **App layer**: Resilience4j Bulkhead (semaphore or thread pool isolation)

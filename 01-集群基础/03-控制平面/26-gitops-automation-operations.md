@@ -86,7 +86,7 @@ cross_refs:
 
 # GitOps自动化运维实践 (GitOps Automation Operations Practice)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: GitOps自动化运维指南
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: GitOps自动化运维指南
 
 ---
 

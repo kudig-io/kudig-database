@@ -64,7 +64,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 边缘计算与KubeEdge实践 (Edge Computing and [[KubeEdge|KubeEdge]] Practice)
+# [[kubernetes|Kubernetes]] 边缘计算与KubeEdge实践 (Edge Computing and [[kubeedge|KubeEdge]] Practice)
 
 > **作者**: 边缘计算架构专家 | **版本**: v1.6 | **更新时间**: 2026-03-03
 > **适用场景**: 边缘计算平台架构 | **复杂度**: ⭐⭐⭐⭐⭐

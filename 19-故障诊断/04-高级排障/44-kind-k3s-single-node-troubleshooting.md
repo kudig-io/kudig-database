@@ -1,7 +1,7 @@
 ---
 title: Kind / K3s 单机集群故障排查
 description: '# Kind / K3s 单机集群故障排查'
-summary: 'Kind（[[Kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。'
+summary: 'Kind（[[kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。'
 category: troubleshooting
 tags:
 - k8s
@@ -84,7 +84,7 @@ cross_refs:
 
 ### 1.1 Kind 简介与核心概念
 
-Kind（[[Kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。
+Kind（[[kubernetes|Kubernetes]] in Docker）用于本地开发/测试/CI，每个"节点"是一个 Docker 容器。
 
 **架构**：
 ```
@@ -402,7 +402,7 @@ sudo k3s agent --server https://<server-ip>:6443 \
 
 ### 2.4 K3s 单机多容器网络问题
 
-**问题现象**: Pod 之间无法通信，[[Service|Service]] ClusterIP 无法访问
+**问题现象**: Pod 之间无法通信，[[service|Service]] ClusterIP 无法访问
 
 **排查步骤**：
 

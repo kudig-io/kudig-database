@@ -51,7 +51,7 @@ title: Day 19: 故障排查方法论 (关键日)
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|kubernetes]] 故障排查方法论 FTA
+  - [[kubernetes|kubernetes]] 故障排查方法论 FTA
   - FEBM 取证循证方法
   - k8s 故障树分析
   - 结构化排障流程
@@ -129,10 +129,10 @@ FEBM: 解决"怎么判断"的问题 (方法)
 | 问题层级 | 典型问题 | 排查入口 |
 |----------|---------|---------|
 | Pod 级 | Pending/CrashLoop/ImagePull | kubectl describe pod |
-| [[Service|Service]] 级 | 无 Endpoints/DNS 失败 | kubectl get endpoints |
+| [[service\|Service]] 级 | 无 Endpoints/DNS 失败 | kubectl get endpoints |
 | 节点级 | NotReady/DiskPressure | kubectl describe node |
 | 控制面级 | API 不可用/调度失败 | kubectl get componentstatuses |
-| 网络级 | Pod 间不通/外网不可达 | [[NetworkPolicy|NetworkPolicy]]/iptables |
+| 网络级 | Pod 间不通/外网不可达 | [[networkpolicy\|NetworkPolicy]]/iptables |
 
 ---
 

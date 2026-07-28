@@ -70,7 +70,7 @@ cross_refs:
 
 # CI/CD 流水线模式与渐进式交付深度实践
 
-> **适用版本**: [[Argo|Argo]] Rollouts v1.8 / Argo CD v3.3 / Flagger v1.40
+> **适用版本**: [[argo|Argo]] Rollouts v1.8 / Argo CD v3.3 / Flagger v1.40
 > **最后更新**: 2026-04-24
 > **难度**: 高级
 
@@ -93,7 +93,7 @@ cross_refs:
 
 CI/CD 流水线模式和部署策略是软件交付过程中的核心决策。不同的分支策略（Trunk-Based、GitFlow、GitHub Flow）直接影响团队协作效率和发布节奏；不同的部署策略（滚动更新、蓝绿部署、金丝雀发布）直接影响用户感知和风险控制。选择合适的模式组合，是构建高效、安全交付流程的基础。
 
-渐进式交付（Progressive Delivery）是 CI/CD 的高级形态，它将部署过程分解为多个渐进阶段，每个阶段都通过自动化指标分析验证服务质量，只有验证通过才推进到下一阶段。Argo Rollouts 和 Flagger 是 [[Kubernetes|Kubernetes]] 生态中两个主流的渐进式交付工具，它们替代 Kubernetes 原生的 Deployment 资源，提供更精细的发布控制能力。
+渐进式交付（Progressive Delivery）是 CI/CD 的高级形态，它将部署过程分解为多个渐进阶段，每个阶段都通过自动化指标分析验证服务质量，只有验证通过才推进到下一阶段。Argo Rollouts 和 Flagger 是 [[kubernetes|Kubernetes]] 生态中两个主流的渐进式交付工具，它们替代 Kubernetes 原生的 Deployment 资源，提供更精细的发布控制能力。
 
 本文档深入探讨四种分支策略的优缺点和适用场景、三种部署策略的技术实现、环境晋升（Promotion）的自动化流程，以及 Argo Rollouts 金丝雀/蓝绿发布的完整配置。这些实践帮助企业根据团队规模和应用特点选择最合适的 CI/CD 模式。
 
@@ -874,7 +874,7 @@ spec:
 
 ## 10.2 Flagger 自动化分析
 
-Flagger 是 [[Flux|Flux]] 生态中的渐进式交付工具，支持 Istio、[[Linkerd|Linkerd]]、App Mesh、Contour、NGINX 和 Gloo 等多种服务网格和 Ingress 控制器。Flagger 的 AnalysisTemplate 支持 Prometheus、Datadog、CloudWatch 和 Webhook 等多种指标来源，可以根据业务指标自动决定是否继续发布或回滚。
+Flagger 是 [[flux|Flux]] 生态中的渐进式交付工具，支持 Istio、[[linkerd|Linkerd]]、App Mesh、Contour、NGINX 和 Gloo 等多种服务网格和 Ingress 控制器。Flagger 的 AnalysisTemplate 支持 Prometheus、Datadog、CloudWatch 和 Webhook 等多种指标来源，可以根据业务指标自动决定是否继续发布或回滚。
 
 ```yaml
 # Flagger Canary 配置

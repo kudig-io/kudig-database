@@ -48,10 +48,10 @@ tags:
 - logging
 - efk
 - loki
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
-- [[Ingress|ingress]]
-- [[NetworkPolicy|networkpolicy]]
+- [[ingress|ingress]]
+- [[networkpolicy|networkpolicy]]
 - operator
 - rag
 last_updated: 2026-05

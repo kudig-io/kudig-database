@@ -47,7 +47,7 @@ Kube-OVN 是由灵雀云（Alauda）开源的高级 Kubernetes CNI 网络插件�
 ## 核心特性
 
 - **子网管理**: Namespace 与子网关联，支持自定义 CIDR 和网关
-- **固定 IP**: 为 [[StatefulSet|StatefulSet]] Pod 和普通 Pod 提供固定 IP 分配
+- **固定 IP**: 为 [[statefulset|StatefulSet]] Pod 和普通 Pod 提供固定 IP 分配
 - **VPC 多租户**: 自定义 VPC 实现网络级隔离，支持跨子网路由
 - **QoS 带宽管理**: 为 Pod 配置入站/出站带宽限制
 - **网络策略**: 增强 NetworkPolicy，支持 ICMP、网段级别控制
@@ -276,7 +276,7 @@ Kube-OVN 网络异常
 ## 参考链接
 
 - [[23-实体/02-K8s核心组件/cni-plugins.md|cni-plugins]]
-- [[23-实体/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
+- [[23-实体/networkpolicy.md|[[networkpolicy|networkpolicy]]]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 - [[22-概念/01-核心架构/controller-pattern.md|controller-pattern]]
 - [[pod-lifecycle]]

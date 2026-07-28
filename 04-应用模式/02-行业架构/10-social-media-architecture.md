@@ -48,7 +48,7 @@ prerequisites:
 
 
 title: 社交媒体平台Kubernetes生产架构设计
-description: '# 社交媒体平台 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 社交媒体平台 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -615,7 +615,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - topic-application-architecture KUDIG Database — Global MOC
-- [[04-应用模式/02-行业架构/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[04-应用模式/02-行业架构/README.md|[[37-归档/domain-indexes/app-patterns/README-from-domain-42|Topic 应用层架构设计最佳实践]]]]
 - [[04-应用模式/02-行业架构/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[04-应用模式/02-行业架构/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[04-应用模式/02-行业架构/03-cms-architecture.md|内容管理系统 CMS 架构设计]]

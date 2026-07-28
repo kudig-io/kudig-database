@@ -1535,7 +1535,7 @@ future_trends:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Domain 25: 云原生安全 (Cloud Native Security)|Domain 25: 云原生安全 (Cloud Native Security)]]]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-25|Domain 25: 云原生安全 (Cloud Native Security)]]]]
 - [[08-安全/00-总览/00-open-source-projects-index.md|Domain-25 云原生安全 — 开源项目索引]]
 - Falco 云原生安全监控深度实践
 - Aqua Security 企业级容器安全平台深度实践

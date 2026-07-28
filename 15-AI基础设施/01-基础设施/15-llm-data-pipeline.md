@@ -72,7 +72,7 @@ cross_refs:
 
 # 142 - LLM训练数据Pipeline与管理 (LLM Data Pipeline & Management)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [Ray Data](https://docs.ray.io/en/latest/data/data.html)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [Ray Data](https://docs.ray.io/en/latest/data/data.html)
 
 ---
 

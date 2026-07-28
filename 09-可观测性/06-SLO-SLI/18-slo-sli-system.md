@@ -1,7 +1,7 @@
 ---
 title: 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)
 description: '# 19 - SLO/SLI体系建设与管理 (SLO/SLI System Construction & Management)'
-summary: '本文档从Google级SRE总监视角，系统阐述SLO([[Service|Service]] Level Objective)和SLI(Service Level Indicator)体系建设的企业级方法论，涵盖Google SRE最佳实践、金融级可靠性标准、智能告警策略和业务价值量化等核心技术，结合万亿级请求处理经验，'
+summary: '本文档从Google级SRE总监视角，系统阐述SLO([[service|Service]] Level Objective)和SLI(Service Level Indicator)体系建设的企业级方法论，涵盖Google SRE最佳实践、金融级可靠性标准、智能告警策略和业务价值量化等核心技术，结合万亿级请求处理经验，'
 category: observability
 tags:
 - k8s
@@ -81,7 +81,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档从Google级SRE总监视角，系统阐述SLO([[Service|Service]] Level Objective)和SLI(Service Level Indicator)体系建设的企业级方法论，涵盖Google SRE最佳实践、金融级可靠性标准、智能告警策略和业务价值量化等核心技术，结合万亿级请求处理经验，为企业构建世界级服务质量管理体系提供战略指导。
+本文档从Google级SRE总监视角，系统阐述SLO([[service|Service]] Level Objective)和SLI(Service Level Indicator)体系建设的企业级方法论，涵盖Google SRE最佳实践、金融级可靠性标准、智能告警策略和业务价值量化等核心技术，结合万亿级请求处理经验，为企业构建世界级服务质量管理体系提供战略指导。
 
 ---
 
@@ -806,7 +806,7 @@ continuous_improvement_methodology:
 ## Obsidian 相关文档
 
 - observability/MOC.md|可观测性 MOC]]
-- [[09-可观测性/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-8|Observability Domain (可观测性领域)]]]]
 - index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解

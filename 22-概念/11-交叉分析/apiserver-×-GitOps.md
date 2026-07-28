@@ -106,7 +106,7 @@ kubectl get prioritylevelconfiguration -A
 
 ## 相关概念
 - apiserver
-- [[GitOps]]
+- [[gitops|GitOps]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

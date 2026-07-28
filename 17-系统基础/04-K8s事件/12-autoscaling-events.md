@@ -61,7 +61,7 @@ authors:
 
 # 12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 HPA、VPA 和 Cluster Autoscaler 产生的所有自动扩缩容相关事件。**
 
@@ -582,7 +582,7 @@ Message: failed to get pods metric: unable to get metric http_requests for selec
 
 **排查重点**
 - 检查 Custom Metrics API / External Metrics API 是否部署
-- 验证 [[Prometheus|Prometheus]] Adapter / Datadog Cluster Agent 等适配器配置
+- 验证 [[prometheus|Prometheus]] Adapter / Datadog Cluster Agent 等适配器配置
 - 确认指标名称和选择器正确
 
 ---
@@ -1651,7 +1651,7 @@ NAME         STATUS    RESTARTS   AGE
 web-app-new  Running   0          1m   # 使用新配置
 ```
 **适用场景**
-- 有状态应用（[[StatefulSet|StatefulSet]]）
+- 有状态应用（[[statefulset|StatefulSet]]）
 - 需要控制重启时间窗口
 - 生产环境需要审批流程
 - 关键服务不能随意重启

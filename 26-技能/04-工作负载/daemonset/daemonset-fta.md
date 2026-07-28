@@ -39,7 +39,7 @@ severity: critical
 
 
 ---
-title: "[[DaemonSet|DaemonSet]] 异常故障树分析"
+title: "[[daemonset|DaemonSet]] 异常故障树分析"
 category: skills
 summary: "<!-- condition: kubectl get daemonset -A -o jsonpath='{range .items[?(@.status.desiredNumberScheduled != @.status.numberAvailable)]} {.metadata.namespace}/{.metadata.name}{\'\n\..."
 tags: ["k8s", "fta", "troubleshooting"]

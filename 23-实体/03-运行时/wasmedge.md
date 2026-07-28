@@ -210,7 +210,7 @@ Wasm Pod 启动失败
 ## 参考链接
 
 - [[containerd]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[pod-lifecycle]]
 
 ## Related

@@ -1442,7 +1442,7 @@ groups:
 - Spark: 3.5.0+
 - Feast: 0.35.0+
 - Great Expectations: 0.18.0+
-- [[Kubernetes|Kubernetes]]: v1.27+
+- [[kubernetes|Kubernetes]]: v1.27+
 
 **相关表格：**
 - [111-AI基础设施架构](./01-ai-infrastructure.md)

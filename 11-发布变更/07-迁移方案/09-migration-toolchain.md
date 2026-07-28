@@ -55,12 +55,12 @@ tags:
 - k8s
 - migration
 - modernization
-- [[Helm|helm]]
+- [[helm|helm]]
 - docker
-- [[Harbor|harbor]]
+- [[harbor|harbor]]
 - redis
 - mysql
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - daemonset
 last_updated: 2026-05
 difficulty: advanced

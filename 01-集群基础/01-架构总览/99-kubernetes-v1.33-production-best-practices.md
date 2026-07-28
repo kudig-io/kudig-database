@@ -73,7 +73,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] v1.33 生产环境最佳实践
+# [[kubernetes|Kubernetes]] v1.33 生产环境最佳实践
 
 > **适用版本**: Kubernetes v1.29 - v1.33  
 > **最后更新**: 2026-04-24  
@@ -439,7 +439,7 @@ profiles:
 <!-- chunk: 六、可观测性增强 -->
 ## 六、可观测性增强
 
-### 6.1 [[OpenTelemetry|OpenTelemetry]] Tracing (v1.31 GA)
+### 6.1 [[opentelemetry|OpenTelemetry]] Tracing (v1.31 GA)
 
 ```yaml
 # kubelet 配置

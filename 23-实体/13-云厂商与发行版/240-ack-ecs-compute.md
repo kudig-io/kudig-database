@@ -188,7 +188,7 @@ fs.file-max = 2000000
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[17-系统基础/05-速查卡/go.md|[[17-系统基础/05-速查卡/go|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[23-实体/13-云厂商与发行版/245-ack-ebs-storage.md|245-ack-ebs-storage]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]

@@ -64,7 +64,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] GitOps 完整实践指南 (GitOps Complete Practice Guide)
+# [[kubernetes|Kubernetes]] GitOps 完整实践指南 (GitOps Complete Practice Guide)
 
 > **作者**: GitOps实践专家 | **版本**: v2.1 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级CI/CD流水线 | **复杂度**: ⭐⭐⭐⭐
@@ -110,7 +110,7 @@ GitOps四大原则:
 ```bash
 # 手动执行部署命令
 kubectl apply -f deployment.yaml
-[[Helm|helm]] install myapp ./charts/myapp
+[[helm|helm]] install myapp ./charts/myapp
 terraform apply -auto-approve
 ```
 *痛点: 无版本控制、难追溯、易出错*

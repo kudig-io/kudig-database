@@ -55,7 +55,7 @@ last_updated: 2026-05-23
 
 ## 概述
 
-[[Kubernetes|Kubernetes]] 证书体系包含 API Server、[[etcd|etcd]]、[[kubelet|kubelet]]、frontend-proxy 等多组证书。证书过期会导致组件间通信失败、节点 NotReady 等严重后果。
+[[kubernetes|Kubernetes]] 证书体系包含 API Server、[[etcd|etcd]]、[[kubelet|kubelet]]、frontend-proxy 等多组证书。证书过期会导致组件间通信失败、节点 NotReady 等严重后果。
 
 **注意**: 本 Skill 涉及高风险的证书操作，默认执行模式为 L1-advisory（仅建议）。
 

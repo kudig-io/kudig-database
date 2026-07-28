@@ -61,12 +61,12 @@ tags:
 - production
 - operations
 - best-practices
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
-- [[CronJob|cronjob]]
-- [[Ingress|ingress]]
+- [[cronjob|cronjob]]
+- [[ingress|ingress]]
 - rbac
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

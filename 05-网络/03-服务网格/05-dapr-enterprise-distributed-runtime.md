@@ -73,7 +73,7 @@ cross_refs:
 
 
 
-# [[Dapr|Dapr]] (Distributed Application Runtime) Enterprise 深度实践
+# [[dapr|Dapr]] (Distributed Application Runtime) Enterprise 深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Dapr v1.15+ | **难度**: 高级
 
@@ -83,7 +83,7 @@ cross_refs:
 
 Dapr (Distributed Application Runtime) 是微软于2019年发起、2023年从 CNCF 毕业的分布式应用运行时项目。与传统的服务网格在网络层提供透明代理不同，Dapr 在应用层通过标准化的 HTTP/gRPC API 提供分布式系统的核心构建块（Building Blocks）——服务调用、状态管理、发布订阅、Actor 模型、绑定、密钥管理等。Dapr 通过 Sidecar 模式与业务应用同 Pod 部署，应用通过 HTTP/gRPC 调用 Dapr Sidecar 的标准 API 获得这些能力，无需引入特定的 SDK 或框架依赖。
 
-Dapr 的核心价值在于"可移植的分布式系统能力抽象"——相同的业务代码可以运行在 [[Kubernetes|Kubernetes]]、虚拟机、边缘设备上，只需更换底层的组件配置（State Store、Pub/Sub Broker 等），即可适配不同的基础设施。这使得 Dapr 特别适合多云混合部署和供应商锁定规避的场景。2026年 Dapr 已经发展到 v1.15 版本，支持 Actor 状态 TTL、Pub/Sub 消息过滤、直接流式传输等高级特性，社区贡献的组件后端超过 100 种。
+Dapr 的核心价值在于"可移植的分布式系统能力抽象"——相同的业务代码可以运行在 [[kubernetes|Kubernetes]]、虚拟机、边缘设备上，只需更换底层的组件配置（State Store、Pub/Sub Broker 等），即可适配不同的基础设施。这使得 Dapr 特别适合多云混合部署和供应商锁定规避的场景。2026年 Dapr 已经发展到 v1.15 版本，支持 Actor 状态 TTL、Pub/Sub 消息过滤、直接流式传输等高级特性，社区贡献的组件后端超过 100 种。
 
 本文档从企业级生产环境角度，全面覆盖 Dapr 的架构设计、核心构建块配置、弹性模式、可观测性、安全策略、性能调优和故障排查。每个章节包含完整的 YAML 配置和可直接运行的代码示例。
 
@@ -827,7 +827,7 @@ spec:
 
 ---
 
-<!-- chunk: 可观测性 — OpenTelemetry, Prometheus, [[Jaeger|Jaeger]] 集成 -->## 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成
+<!-- chunk: 可观测性 — OpenTelemetry, Prometheus, [[jaeger|Jaeger]] 集成 -->## 可观测性 — OpenTelemetry, Prometheus, Jaeger 集成
 
 ## 分布式追踪
 

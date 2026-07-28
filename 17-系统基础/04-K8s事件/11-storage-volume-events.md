@@ -58,7 +58,7 @@ authors:
 
 # 11 - 存储与卷事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.33 | **最后更新**: 2026-05 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.33 | **最后更新**: 2026-05 | **作者**: Allen Galler
 
 > **本文档详细记录所有存储相关事件,包括卷挂载、卷附加、PV/PVC 管理和 CSI 驱动事件。**
 
@@ -735,7 +735,7 @@ file -s /dev/xvdba
 - 事件: `MountVolume.SetUp failed for volume "config": configmap "app-config" not found`
 
 **根因**:
-[[Helm|Helm]] Chart 定义了 ConfigMap 挂载,但未实际创建 ConfigMap
+[[helm|Helm]] Chart 定义了 ConfigMap 挂载,但未实际创建 ConfigMap
 
 **解决方案**:
 

@@ -59,7 +59,7 @@ authors:
 
 # 29 - CustomResourceDefinition (CRD) YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 **本文档全面覆盖 CustomResourceDefinition (CRD) 的 YAML 配置**,包括完整字段说明、OpenAPI v3 Schema 验证、CEL 表达式验证、多版本转换、生产实践案例等。
 
@@ -85,7 +85,7 @@ authors:
 CustomResourceDefinition (CRD) 是 Kubernetes 的扩展机制,允许用户定义自己的资源类型:
 
 - **声明式 API 扩展**: 无需修改 API Server 源码即可添加新资源类型
-- **原生 Kubernetes 体验**: 自定义资源与内置资源(Pod、[[Service|Service]] 等)使用方式完全一致
+- **原生 Kubernetes 体验**: 自定义资源与内置资源(Pod、[[service|Service]] 等)使用方式完全一致
 - **Schema 验证**: 通过 OpenAPI v3 Schema 定义资源结构和验证规则
 - **版本管理**: 支持多版本共存、自动转换、存储版本迁移
 

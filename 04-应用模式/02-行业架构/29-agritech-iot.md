@@ -49,7 +49,7 @@ tags:
 - architecture
 - industry
 - mysql
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - gateway
 - operator
 - agent
@@ -76,7 +76,7 @@ trigger_keywords:
 - 边缘网关
 - 精准灌溉
 - 溯源
-- [[KubeEdge|KubeEdge]]
+- [[kubeedge|KubeEdge]]
 - 无人机植保
 - 农业大数据
 related_domains:

@@ -45,7 +45,7 @@ CSI 卷克隆功能允许用户在创建新的 PersistentVolumeClaim（PVC）时
 
 ## 核心概念/原理
 
-- **克隆定义**：克隆是现有 [[Kubernetes|Kubernetes]] 卷的一个精确副本，可以像标准卷一样被消费。
+- **克隆定义**：克隆是现有 [[kubernetes|Kubernetes]] 卷的一个精确副本，可以像标准卷一样被消费。
 - **数据源引用**：在新建 PVC 的 `dataSource` 字段中指定源 PVC 的名称和类型（`PersistentVolumeClaim`）。
 - **后端实现**：实际的克隆操作由底层 CSI 驱动在存储后端执行，而非 Kubernetes 本身复制数据。
 

@@ -61,7 +61,7 @@ prerequisites:
 | Control Plane | 控制平面 | 负责整个集群的管理和控制 |
 | kube-apiserver | API Server | K8s 集群的入口，REST API 提供者 |
 | kube-scheduler | 调度器 | 将 Pod 分配到合适的节点 |
-| kube-controller-manager | 控制器管理器 | 运行各种控制器（Deployment、[[ReplicaSet|ReplicaSet]] 等） |
+| kube-controller-manager | 控制器管理器 | 运行各种控制器（Deployment、[[replicaset\|ReplicaSet]] 等） |
 | cloud-controller-manager | 云控制器管理器 | 与云厂商 API 交互，管理节点/负载均衡/路由 |
 | [[etcd|etcd]] | etcd | 分布式键值存储，保存集群所有数据 |
 

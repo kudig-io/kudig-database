@@ -56,7 +56,7 @@ authors:
 
 
 
-# [[Crossplane|Crossplane]] 平台工程实践指南
+# [[crossplane|Crossplane]] 平台工程实践指南
 
 > **适用版本**: Crossplane v1.19.0  
 > **最后更新**: 2026-04-24  
@@ -228,7 +228,7 @@ spec:
     version: "16"
 ```
 
-**与 [[Argo|Argo]] CD 集成**
+**与 [[argo|Argo]] CD 集成**
 - Crossplane 资源为原生 K8s YAML
 - 直接通过 Argo CD 管理
 - 利用 Argo CD 的 drift detection 检测云资源漂移

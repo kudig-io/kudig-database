@@ -59,7 +59,7 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - calico
 - docker
 - rbac

@@ -44,7 +44,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Flux|flux]]
+- [[flux|flux]]
 last_updated: 2026-05-18
 difficulty: expert
 reading_level: expert
@@ -54,7 +54,7 @@ audience:
 - 实时系统专家
 estimated_read_time: 5min
 intent_queries:
-- 可控核聚变 [[Kubernetes|Kubernetes]] 实时控制
+- 可控核聚变 [[kubernetes|Kubernetes]] 实时控制
 - 托卡马克 等离子体控制 K8s
 - 核聚变数据采集 时序数据库
 - 核聚变监控 高性能计算 K8s

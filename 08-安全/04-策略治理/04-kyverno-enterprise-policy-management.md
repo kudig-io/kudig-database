@@ -65,10 +65,10 @@ cross_refs:
 
 
 
-# [[Kyverno|Kyverno]] 企业级策略管理深度实践
+# [[kyverno|Kyverno]] 企业级策略管理深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Enterprise-grade [[Kubernetes|Kubernetes]] policy management and security enforcement | **Complexity**: ⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade [[kubernetes|Kubernetes]] policy management and security enforcement | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 

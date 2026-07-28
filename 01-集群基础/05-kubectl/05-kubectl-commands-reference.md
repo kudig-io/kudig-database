@@ -87,7 +87,7 @@ related_docs:
 
 # kubectl 命令完整参考 (kubectl Commands Complete Reference)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-05 | **文档类型**: 生产运维参考
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-05 | **文档类型**: 生产运维参考
 
 ---
 

@@ -68,7 +68,7 @@ cross_refs:
 
 
 
-# K8s 分布式追踪实践指南 ([[Jaeger|Jaeger]] / Tempo / [[OpenTelemetry|OpenTelemetry]])
+# K8s 分布式追踪实践指南 ([[jaeger|Jaeger]] / Tempo / [[opentelemetry|OpenTelemetry]])
 
 > **适用版本**: Jaeger v1.65 / Grafana Tempo v2.7 / OpenTelemetry Collector v0.120  
 > **最后更新**: 2026-04-24  

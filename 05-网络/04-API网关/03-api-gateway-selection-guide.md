@@ -63,7 +63,7 @@ authors:
 
 # 03 - API 网关选型指南与对比矩阵
 
-> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: 选型, 对比, Higress, APISIX, Kong, [[Envoy|Envoy]] Gateway, Traefik
+> **文档版本**: v1.0 | **适用版本**: [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: 选型, 对比, Higress, APISIX, Kong, [[envoy|Envoy]] Gateway, Traefik
 
 ## 目录
 
@@ -111,7 +111,7 @@ API 网关选型需综合考虑以下维度：
 | Header/Query 匹配 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 域名路由 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 通配符域名 | ✅ | ✅ | ✅ | ✅ | ✅ |
-| [[gRPC|gRPC]] 路由 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| [[grpc\|gRPC]] 路由 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | WebSocket | ✅ | ✅ | ✅ | ✅ | ✅ |
 | TCP/UDP 代理 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | 流量分割/金丝雀 | ✅ | ✅ | ✅ | ✅ | ✅ |

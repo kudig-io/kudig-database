@@ -51,7 +51,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - redis
 - mysql
@@ -67,7 +67,7 @@ audience:
 - 适老化产品经理
 estimated_read_time: 5min
 intent_queries:
-- smart elderly care [[Kubernetes|kubernetes]] architecture
+- smart elderly care [[kubernetes|kubernetes]] architecture
 - 智慧养老K8s部署方案
 - 养老平台AI跌倒检测
 - 居家养老IoT监测

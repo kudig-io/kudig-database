@@ -56,7 +56,7 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - opa
 - daemonset
 last_updated: 2026-05

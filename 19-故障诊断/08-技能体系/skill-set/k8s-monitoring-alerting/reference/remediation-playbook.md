@@ -36,7 +36,7 @@ last_updated: 2026-05-22
     - [REM-004 修正 Alertmanager 配置](#rem-004)
     - [REM-005 修正告警规则](#rem-005)
   - [🟡 中风险](#-中风险)
-    - [REM-001 扩容/清理 [[Prometheus|Prometheus]] 存储](#rem-001)
+    - [REM-001 扩容/清理 [[prometheus|Prometheus]] 存储](#rem-001)
     - [REM-006 调整网络策略](#rem-006)
 - [验证确认](#验证确认)
 - [升级协议](#升级协议)

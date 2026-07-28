@@ -56,7 +56,7 @@ Cilium is an eBPF-based networking, security, and observability platform for Kub
 
 | Capability | Description |
 |------------|-------------|
-| CNI | Pod networking, IPAM, Kubernetes [[Service|Service]] routing |
+| CNI | Pod networking, IPAM, Kubernetes [[service\|Service]] routing |
 | NetworkPolicy | L3/L4 policies + L7 HTTP/gRPC/Kafka policies |
 | Service Mesh | Sidecar-less mesh via eBPF + optional Envoy for L7 |
 | Load Balancing | eBPF-based kube-proxy replacement (Maglev, ECMP) |

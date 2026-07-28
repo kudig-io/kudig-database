@@ -576,7 +576,7 @@ Multi-window Multi-burn-rate 告警是 Google SRE 推荐的最佳实践，结合
 
 ### 与现有体系集成
 
-AIOps 智能告警应与 [[09-可观测性/06-SLO-SLI]] 体系深度集成，以 SLO 为锚点定义告警优先级；与 [[12-可靠性/06-SRE实践/03-incident-command-system.md|事件指挥系统]] 对接，实现告警到事件的自动升级；与 [[09-可观测性/05-告警/02-pagerduty-opsgenie-integration.md|PagerDuty/OpsGenie]] 集成，实现智能排班和升级策略。
+AIOps 智能告警应与 [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice|06-SLO-SLI]] 体系深度集成，以 SLO 为锚点定义告警优先级；与 [[12-可靠性/06-SRE实践/03-incident-command-system.md|事件指挥系统]] 对接，实现告警到事件的自动升级；与 [[09-可观测性/05-告警/02-pagerduty-opsgenie-integration.md|PagerDuty/OpsGenie]] 集成，实现智能排班和升级策略。
 
 ## Related
 
@@ -584,6 +584,6 @@ AIOps 智能告警应与 [[09-可观测性/06-SLO-SLI]] 体系深度集成，以
 - [[09-可观测性/05-告警/03-alert-fatigue-reduction-strategies.md|告警疲劳消减策略]]
 - [[09-可观测性/05-告警/02-pagerduty-opsgenie-integration.md|PagerDuty/OpsGenie 集成]]
 - [[09-可观测性/02-指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业级监控]]
-- [[09-可观测性/06-SLO-SLI]]
+- [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice|06-SLO-SLI]]
 - [[12-可靠性/06-SRE实践/03-incident-command-system.md|事件指挥系统]]
 - [[09-可观测性/01-总览/01-observability-architecture-overview.md|可观测性架构总览]]

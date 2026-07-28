@@ -52,7 +52,7 @@ prerequisites:
 
 ## 场景概述
 
-集群部署是从零开始构建 [[Kubernetes|Kubernetes]] 生产环境的第一步。本文档汇总了 KUDIG 知识库中所有与集群部署相关的文档、技能和故障树。
+集群部署是从零开始构建 [[kubernetes|Kubernetes]] 生产环境的第一步。本文档汇总了 KUDIG 知识库中所有与集群部署相关的文档、技能和故障树。
 
 ---
 

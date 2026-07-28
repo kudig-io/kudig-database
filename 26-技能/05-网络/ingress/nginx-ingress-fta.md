@@ -133,13 +133,13 @@ kubectl exec -it ingress-nginx/<pod> -n ingress-nginx -- \
 ## 相关链接
 
 - [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA 诊断执行引擎|FTA 诊断执行引擎]]]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 - networking.md|网络故障排查]]
 
 ## Related
 
 - [[26-技能/03-节点/node/诊断排障/ts-node-components.md|ts-node-components]] — 节点组件故障排查
-- [[apiserver-fta]] — [[apiserver-fta|[[API Server 异常故障树分析|API Server 异常故障树分析]]]]
+- [[apiserver-fta]] — [[apiserver-fta|[[19-故障诊断/06-FTA故障树/list/apiserver-fta|API Server 异常故障树分析]]]]
 - [[scheduler-fta]] — Scheduler 异常故障树分析
 - [[26-技能/04-工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz-answers.md|assessment-k8s-fundamentals-quiz-answers]] — K8S Fundamentals Quiz Answers
 - [[prometheus]] — Prometheus

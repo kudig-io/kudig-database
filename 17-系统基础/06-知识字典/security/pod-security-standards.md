@@ -79,7 +79,7 @@ Pod 安全标准定义了以下三个策略级别：
 
 ### OS 特定策略
 
-自 [[Kubernetes|Kubernetes]] v1.25 起，Restricted 策略会根据 `pod.spec.os.name` 字段进行 OS 特定的策略控制。对于 Windows Pod，以下 Linux 专属控制项会被放宽：
+自 [[kubernetes|Kubernetes]] v1.25 起，Restricted 策略会根据 `pod.spec.os.name` 字段进行 OS 特定的策略控制。对于 Windows Pod，以下 Linux 专属控制项会被放宽：
 
 - Privilege Escalation
 - Seccomp

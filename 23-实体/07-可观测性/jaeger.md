@@ -307,7 +307,7 @@ kubectl delete jaeger production -n observability
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - jaeger
-- [[23-实体/k8s-observability-ecosystem.md|[[可观测性体系：指标、日志、链路追踪与混沌工程|可观测性体系：指标、日志、链路追踪与混沌工程]]]] — Cross-reference
+- [[23-实体/k8s-observability-ecosystem.md|[[23-实体/15-参考与索引/k8s-observability-ecosystem|可观测性体系：指标、日志、链路追踪与混沌工程]]]] — Cross-reference
 - [[23-实体/15-参考与索引/observability-terms.md|K8s 可观测性术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/tooling-terms.md|K8s 工具链术语参考]] — Cross-reference
 - [[22-概念/10-最佳实践/bp-observability.md|最佳实践：Observability]] — Cross-reference

@@ -54,15 +54,15 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] Gateway API 与现代流量管理实践
+title: [[kubernetes|Kubernetes]] Gateway API 与现代流量管理实践
 description: '# Kubernetes Gateway API 与现代流量管理实践'
 category: papers
 tags:
 - k8s
 - papers
 - research
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 - envoy
 - cilium
 - argocd

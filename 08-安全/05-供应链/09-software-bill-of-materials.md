@@ -61,9 +61,9 @@ tags:
 - production
 - operations
 - best-practices
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Harbor|harbor]]
+- [[harbor|harbor]]
 - opa
 - job
 - rag
@@ -78,7 +78,7 @@ estimated_read_time: 5min
 intent_queries:
 - 软件物料清单 是什么
 - 如何 软件物料清单
-- [[Kubernetes|Kubernetes]] 18 production operations 最佳实践
+- [[kubernetes|Kubernetes]] 18 production operations 最佳实践
 trigger_keywords:
 - 软件物料清单
 - production

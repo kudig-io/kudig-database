@@ -232,7 +232,7 @@ journalctl -k | grep SECCOMP
 
 ## Related
 
-- [[22-概念/05-安全/secrets-management.md|secrets-management]] — [[Secrets|Secrets]]ts Management|Secrets Management]]
+- [[22-概念/05-安全/secrets-management.md|secrets-management]] — [[secrets|Secrets]]ts Management|Secrets Management]]
 - [[23-实体/kubelet.md|[[kubelet|kubelet]]]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[22-概念/15-运行时与系统/linux-container-foundation.md|linux-container-foundation]] — Linux Container Foundation

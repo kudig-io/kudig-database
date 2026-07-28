@@ -70,7 +70,7 @@ cross_refs:
 
 
 
-# [[Linkerd|Linkerd]] 轻量级服务网格实践指南
+# [[linkerd|Linkerd]] 轻量级服务网格实践指南
 
 > **适用版本**: Linkerd v2.18 (stable) / Linkerd v2.19 (edge)
 > **最后更新**: 2026-04-24
@@ -135,11 +135,11 @@ graph TB
 
 ## 核心设计原则
 
-| 原则 | 说明 | 与 [[Istio|Istio]] 对比 |
+| 原则 | 说明 | 与 [[istio\|Istio]] 对比 |
 |:---|:---|:---|
 | 极简主义 | 最小配置集，核心功能开箱即用 | Istio ~50 CRD vs Linkerd ~15 |
 | 零配置安全 | mTLS 默认启用，无需任何配置 | Istio 需要显式配置 PeerAuthentication |
-| 性能优先 | Rust 代理，亚毫秒延迟 | Istio [[Envoy|Envoy]] C++ 1-3ms P99 |
+| 性能优先 | Rust 代理，亚毫秒延迟 | Istio [[envoy\|Envoy]] C++ 1-3ms P99 |
 | 渐进式采用 | 按命名空间逐步接入，无侵入 | 与 Istio 相同 |
 | 可组合性 | 独立组件（Viz, Multicluster）可按需安装 | Istio 扩展较重 |
 | 安全默认 | 最小权限、自动证书轮换、默认加密 | Istio 需要额外配置 |

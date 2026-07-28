@@ -1,7 +1,7 @@
 ---
 title: KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)
 description: '# KubeEdge 架构与部署 (KubeEdge Architecture and Deployment)'
-summary: 'KubeEdge 是一个开源的边缘计算框架，构建在 [[Kubernetes|Kubernetes]] 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。'
+summary: 'KubeEdge 是一个开源的边缘计算框架，构建在 [[kubernetes|Kubernetes]] 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。'
 category: edge-computing
 tags:
 - k8s
@@ -65,7 +65,7 @@ cross_refs:
 
 
 
-# [[KubeEdge|KubeEdge]] 架构与部署 (KubeEdge Architecture and Deployment)
+# [[kubeedge|KubeEdge]] 架构与部署 (KubeEdge Architecture and Deployment)
 
 <!-- chunk: 目录 (Table of Contents) -->## 目录 (Table of Contents)
 
@@ -88,7 +88,7 @@ cross_refs:
 
 ## 1.1 项目简介 (Project Overview)
 
-KubeEdge 是一个开源的边缘计算框架，构建在 [[Kubernetes|Kubernetes]] 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。
+KubeEdge 是一个开源的边缘计算框架，构建在 [[kubernetes|Kubernetes]] 之上，将容器化应用的编排能力扩展到边缘节点。由华为发起，2019 年进入 CNCF Sandbox，2022 年晋升为 CNCF Incubating 项目。
 
 ```
 KubeEdge 核心能力:

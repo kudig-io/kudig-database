@@ -50,7 +50,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster lifecycle self-test quiz
-  - [[Kubernetes|Kubernetes]] week 1 knowledge assessment
+  - [[kubernetes|Kubernetes]] week 1 knowledge assessment
   - ACK ACR fundamental concepts test
   - Self-checkpoint quiz questions
   - Knowledge evaluation
@@ -117,7 +117,7 @@ related_topics:
 
 ---
 
-### 2. ACK 集群创建时，VPC CIDR、Pod CIDR、[[Service|Service]] CIDR 三者有什么关系和约束？
+### 2. ACK 集群创建时，VPC CIDR、Pod CIDR、[[service|Service]] CIDR 三者有什么关系和约束？
 
 **你的回答:**
 
@@ -161,7 +161,7 @@ vSwitch B:     172.16.1.0/24  → 可容纳 256 个节点
 
 | 组件 | 作用 | 必装 |
 |------|------|------|
-| [[CoreDNS|coredns]] | 韧群 DNS 服务 (域名解析) | 是 |
+| [[coredns\|coredns]] | 韧群 DNS 服务 (域名解析) | 是 |
 | cloud-controller-manager | 管理云资源 (SLB/路由/ENI) | 是 |
 | terway / flannel | CNI 网络插件 (Pod 网络) | 二选一 |
 | csi-plugin / csi-provisioner | CSI 存储插件 (云盘/NAS/OSS) | 是 |

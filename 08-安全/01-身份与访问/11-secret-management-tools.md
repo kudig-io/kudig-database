@@ -71,7 +71,7 @@ cross_refs:
 
 # 11 - 密钥与敏感信息管理工具
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: External Secretsts|Secrets]]](https://external-secrets.io/) | HashiCorp Vault](https://developer.hashicorp.com/vault) | [Sealed Secrets](https://sealed-secrets.netlify.app/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: External Secretsts|Secrets]]](https://external-secrets.io/) | HashiCorp Vault](https://developer.hashicorp.com/vault) | [Sealed Secrets](https://sealed-secrets.netlify.app/)
 
 <!-- chunk: 一、密钥管理架构全景 -->
 ## 一、密钥管理架构全景
@@ -143,7 +143,7 @@ cross_refs:
 | **External Secrets Operator** | 同步控制器 | ★★★★★ | ✓ | ★★★★☆ | ★★★☆☆ | 中 | 多云/混合云 |
 | **HashiCorp Vault** | 外部密钥库 | ★★★★☆ | ★★★★★ | ★★★☆☆ | ★★★★★ | 高 | 企业安全 |
 | **Sealed Secrets** | 加密控制器 | ★☆☆☆☆ | ✗ | ★★★★★ | ★★☆☆☆ | 低 | GitOps工作流 |
-| **[[SOPS|SOPS]]** | 文件加密 | ★★★★☆ | ✗ | ★★★★★ | ★★☆☆☆ | 低 | 小团队 |
+| **[[sops\|SOPS]]** | 文件加密 | ★★★★☆ | ✗ | ★★★★★ | ★★☆☆☆ | 低 | 小团队 |
 | **AWS Secrets Manager** | 托管服务 | AWS only | ★★★★★ | ★★★☆☆ | ★★★★★ | 低 | AWS原生 |
 | **Azure Key Vault** | 托管服务 | Azure only | ★★★★☆ | ★★★☆☆ | ★★★★★ | 低 | Azure原生 |
 | **GCP Secret Manager** | 托管服务 | GCP only | ★★★★☆ | ★★★☆☆ | ★★★★★ | 低 | GCP原生 |

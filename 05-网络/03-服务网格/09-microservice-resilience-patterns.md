@@ -1,7 +1,7 @@
 ---
 title: 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting
 description: '# 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting'
-summary: '在分布式微服务系统中，问题是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联问题等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的问题不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 [[Kubernetes|Kubernetes]] 环境下微服务弹性模式的实现，'
+summary: '在分布式微服务系统中，问题是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联问题等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的问题不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 [[kubernetes|Kubernetes]] 环境下微服务弹性模式的实现，'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -73,14 +73,14 @@ cross_refs:
 # 微服务弹性模式深度实践 — Circuit Breaker, Retry, Timeout, Bulkhead, Rate Limiting
 
 > **最后更新**: 2026-04-24
-> **适用版本**: Resilience4j 2.x / [[Istio|Istio]] v1.29 / Spring Boot 3.4+
+> **适用版本**: Resilience4j 2.x / [[istio|Istio]] v1.29 / Spring Boot 3.4+
 > **难度**: 高级
 
 ---
 
 <!-- chunk: 概述 -->## 概述
 
-在分布式微服务系统中，问题是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联问题等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的问题不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 [[Kubernetes|Kubernetes]] 环境下微服务弹性模式的实现，包括应用层的 Resilience4j 配置和服务网格层的 Istio 弹性策略，以及两者的协同与冲突避免策略。
+在分布式微服务系统中，问题是不可避免的常态而非例外。网络分区、服务过载、依赖不可用、级联问题等问题随时可能发生。弹性模式（Resilience Patterns）通过在系统层面引入防御性编程机制，使得单个组件的问题不会蔓延为系统级的灾难。本文档从理论与实践两个维度，全面覆盖 [[kubernetes|Kubernetes]] 环境下微服务弹性模式的实现，包括应用层的 Resilience4j 配置和服务网格层的 Istio 弹性策略，以及两者的协同与冲突避免策略。
 
 弹性模式的核心目标不是消除问题，而是控制问题的影响范围和恢复时间。一个设计良好的弹性系统应当能够优雅降级而非完全失效，并在问题条件消除后快速恢复到正常状态。本文档覆盖五种核心弹性模式：熔断器（Circuit Breaker）、重试（Retry）、超时（Timeout）、舱壁隔离（Bulkhead）和限流（Rate Limiting），以及它们在 Kubernetes + Istio 环境下的生产级配置实践。
 

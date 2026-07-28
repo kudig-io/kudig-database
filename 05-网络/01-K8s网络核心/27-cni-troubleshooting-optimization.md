@@ -77,7 +77,7 @@ cross_refs:
 
 # 144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-03
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **最后更新**: 2026-03
 
 ---
 
@@ -88,7 +88,7 @@ cross_refs:
 |:---|:---|:---|:---|
 | **P0** | Pod 网络初始化失败 | Pod 无法启动 | 紧急 |
 | **P1** | Pod 间通信问题 | 服务不可用 | 高 |
-| **P2** | [[Service|Service]] 访问异常 | 部分功能异常 | 中 |
+| **P2** | [[service\|Service]] 访问异常 | 部分功能异常 | 中 |
 | **P3** | 网络性能问题 | 延迟/丢包 | 低 |
 
 ---

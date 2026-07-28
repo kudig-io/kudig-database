@@ -48,14 +48,14 @@ prerequisites:
 
 
 
-title: [[OpenYurt|OpenYurt]] 边缘方案 (OpenYurt Edge Solution)
+title: [[openyurt|OpenYurt]] 边缘方案 (OpenYurt Edge Solution)
 description: '# OpenYurt 边缘方案 (OpenYurt Edge Solution)'
 category: edge-computing
 tags:
 - k8s
 - edge
 - iot
-- [[KubeEdge|kubeedge]]
+- [[kubeedge|kubeedge]]
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]

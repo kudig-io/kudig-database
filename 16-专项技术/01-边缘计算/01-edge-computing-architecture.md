@@ -57,12 +57,12 @@ tags:
 - k8s
 - edge
 - iot
-- [[KubeEdge|kubeedge]]
+- [[kubeedge|kubeedge]]
 - [[etcd|etcd]]
 - apiserver
 - [[kubelet|kubelet]]
 - scheduler
-- [[ArgoCD|argocd]]
+- [[argocd|argocd]]
 - flux
 last_updated: 2026-05
 difficulty: advanced

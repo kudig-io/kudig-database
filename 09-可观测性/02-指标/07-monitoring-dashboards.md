@@ -1,7 +1,7 @@
 ---
 title: 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)
 description: '# 04 - 监控仪表板设计与最佳实践 (Monitoring Dashboards)'
-summary: '本文档详细阐述 [[Kubernetes|Kubernetes]] 环境下监控仪表板的设计原则、Grafana 最佳实践、面板配置技巧和可视化策略，为运维团队提供专业的监控可视化解决方案。'
+summary: '本文档详细阐述 [[kubernetes|Kubernetes]] 环境下监控仪表板的设计原则、Grafana 最佳实践、面板配置技巧和可视化策略，为运维团队提供专业的监控可视化解决方案。'
 category: observability
 tags:
 - k8s
@@ -83,7 +83,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档详细阐述 [[Kubernetes|Kubernetes]] 环境下监控仪表板的设计原则、Grafana 最佳实践、面板配置技巧和可视化策略，为运维团队提供专业的监控可视化解决方案。
+本文档详细阐述 [[kubernetes|Kubernetes]] 环境下监控仪表板的设计原则、Grafana 最佳实践、面板配置技巧和可视化策略，为运维团队提供专业的监控可视化解决方案。
 
 ---
 
@@ -563,7 +563,7 @@ collaboration_guidelines:
 ## Obsidian 相关文档
 
 - observability/MOC.md|可观测性 MOC]]
-- [[09-可观测性/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-8|Observability Domain (可观测性领域)]]]]
 - [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解

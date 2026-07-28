@@ -1,7 +1,7 @@
 ---
 title: Kyverno K8s 原生策略管理实践指南
 description: '# Kyverno K8s 原生策略管理实践指南'
-summary: 'Kyverno 是专为 [[Kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，'
+summary: 'Kyverno 是专为 [[kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，'
 category: cloud-native-security
 tags:
 - k8s
@@ -65,7 +65,7 @@ cross_refs:
 
 
 
-# [[Kyverno|Kyverno]] K8s 原生策略管理实践指南
+# [[kyverno|Kyverno]] K8s 原生策略管理实践指南
 
 > **适用版本**: Kyverno v1.14.0
 > **最后更新**: 2026-04-24
@@ -75,7 +75,7 @@ cross_refs:
 
 <!-- chunk: 一、概述与威胁模型 -->## 一、概述与威胁模型
 
-Kyverno 是专为 [[Kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，这使得 K8s 管理员和安全团队能够以最低的学习成本快速落地策略管理。
+Kyverno 是专为 [[kubernetes|Kubernetes]] 设计的策略引擎，以 CNCF 毕业项目的身份成为云原生策略管理的事实标准。与 OPA Gatekeeper 需要学习 Rego 语言不同，Kyverno 使用标准 K8s YAML 定义策略，直接使用 kubectl 管理策略资源，这使得 K8s 管理员和安全团队能够以最低的学习成本快速落地策略管理。
 
 在缺乏策略引擎的 K8s 集群中，安全风险无处不在。开发人员可以随意创建特权容器用于调试但事后忘记删除；CI/CD 管道可以部署使用 latest 标签的镜像导致生产环境不可预测；团队成员可以绕过安全基线直接创建不安全的 K8s 资源；命名空间的资源配额可能被过度消耗影响其他团队的服务质量。这种无约束的状态在小型团队中也许可以通过人工审查来控制，但在多团队、多集群、多环境的企业环境中，人工审查完全无法跟上资源创建的速度和规模。
 

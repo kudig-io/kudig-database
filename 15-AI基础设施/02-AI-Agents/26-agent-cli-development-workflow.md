@@ -54,7 +54,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[ArgoCD|argocd]]
+- [[argocd|argocd]]
 - hpa
 - gateway
 - rbac

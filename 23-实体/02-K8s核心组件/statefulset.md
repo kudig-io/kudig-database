@@ -50,10 +50,10 @@ StatefulSet manages stateful workloads that require stable identity and persiste
 
 | Property | Description |
 |----------|-------------|
-| **Stable Pod identity** | [[Pods|Pods]] named `{name}-{0}`, `{name}-{1}`, ... in order |
+| **Stable Pod identity** | [[pods\|Pods]] named `{name}-{0}`, `{name}-{1}`, ... in order |
 | **Ordered operations** | Pods created 0→N, terminated N→0 |
 | **Persistent storage** | Each Pod gets its own PVC from `volumeClaimTemplates` |
-| **Stable network** | DNS via Headless [[Service|Service]]: `pod-0.service.ns.svc.cluster.local` |
+| **Stable network** | DNS via Headless [[service\|Service]]: `pod-0.service.ns.svc.cluster.local` |
 | **PVC retention** | PVCs survive Pod deletion (data persists) |
 
 ## Update Strategy

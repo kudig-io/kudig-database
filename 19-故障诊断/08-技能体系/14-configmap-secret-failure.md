@@ -1,7 +1,7 @@
 ---
 title: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 description: '# ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting'
-summary: 'ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理问题会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。'
+summary: 'ConfigMap 和 Secret 是 [[kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理问题会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。'
 category: configuration
 tags:
 - k8s
@@ -78,7 +78,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理问题会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。随着 External Secrets Operators]] Operator、Vault Agent Injector 等外部 Secret 管理方案的普及，配置管理的复杂度和故障模式也在增加。
+ConfigMap 和 Secret 是 [[kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理问题会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。随着 External Secrets Operators]] Operator、Vault Agent Injector 等外部 Secret 管理方案的普及，配置管理的复杂度和故障模式也在增加。
 
 ### 典型触发场景
 

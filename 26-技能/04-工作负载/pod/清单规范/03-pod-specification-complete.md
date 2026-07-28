@@ -59,8 +59,8 @@ tags:
 - [[etcd|etcd]]
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Envoy|envoy]]
+- [[prometheus|prometheus]]
+- [[envoy|envoy]]
 - coredns
 last_updated: 2026-05
 difficulty: intermediate

@@ -1,7 +1,7 @@
 ---
 title: Antrea [entities]
 description: '## 概述'
-summary: 'Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，为 Pod 网络提供高性能数据平面。它实现了 Kubernetes [[NetworkPolicy|NetworkPolicy]] API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。'
+summary: 'Antrea 是基于 Open vSwitch (OVS) 构建的 Kubernetes 网络解决方案，为 Pod 网络提供高性能数据平面。它实现了 Kubernetes [[networkpolicy|NetworkPolicy]] API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。'
 category: entities
 tags:
 - k8s
@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-Antrea 是由 VMware 开源的 Kubernetes CNI 网络插件，基于 Open vSwitch（OVS）构建，2021 年加入 CNCF Sandbox。它为 Pod 网络提供高性能数据平面，完整实现 Kubernetes [[NetworkPolicy|NetworkPolicy]] API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。Antrea 是 VMware Tanzu 的默认 CNI，适合需要高级网络功能的企业场景。
+Antrea 是由 VMware 开源的 Kubernetes CNI 网络插件，基于 Open vSwitch（OVS）构建，2021 年加入 CNCF Sandbox。它为 Pod 网络提供高性能数据平面，完整实现 Kubernetes [[networkpolicy|NetworkPolicy]] API，并扩展支持更细粒度的流量控制，包括 ClusterNetworkPolicy、Egress 和流量可观测性功能。Antrea 是 VMware Tanzu 的默认 CNI，适合需要高级网络功能的企业场景。
 
 ## 核心特性
 

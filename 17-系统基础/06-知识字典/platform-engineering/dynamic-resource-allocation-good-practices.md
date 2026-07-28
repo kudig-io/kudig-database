@@ -47,7 +47,7 @@ prerequisites:
 
 ## 概述
 
-动态资源分配（[[17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]], DRA）是 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中用于管理专用硬件资源（如 GPU、FPGA 等）的一套机制。本文档面向集群管理员，介绍在配置和使用 DRA 时的最佳实践，包括驱动部署、升级、监控和性能调优等方面的建议。
+动态资源分配（[[17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md|Dynamic Resource Allocation]], DRA）是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 中用于管理专用硬件资源（如 GPU、FPGA 等）的一套机制。本文档面向集群管理员，介绍在配置和使用 DRA 时的最佳实践，包括驱动部署、升级、监控和性能调优等方面的建议。
 
 ## 核心概念/原理
 
@@ -60,10 +60,10 @@ prerequisites:
 
 ### DRA 驱动部署与维护
 
-- **部署方式**：通常以 [[DaemonSet|DaemonSet]] 部署到全部或部分节点（通过 node selector 等机制）。
+- **部署方式**：通常以 [[daemonset|DaemonSet]] 部署到全部或部分节点（通过 node selector 等机制）。
 - **无缝升级（Seamless upgrades）**：部分 DRA 驱动支持通过 `kubeletplugin` 接口实现无缝升级，允许两个版本的驱动在短时间内共存。该功能需要 [[kubelet|kubelet]] 1.33+，并且驱动需支持该特性。
   - 若无法使用无缝升级，升级期间可能出现：依赖 ResourceClaim 的新 Pod 无法启动、已停止 Pod 的资源清理被延迟、运行中的 Pod 不受影响。
-- **健康检查**：DRA 驱动应暴露 [[gRPC|gRPC]] 健康检查端点，建议配置为 DaemonSet 的 liveness probe，以便在驱动异常时自动重启，减少调度延迟和排障时间。
+- **健康检查**：DRA 驱动应暴露 [[grpc|gRPC]] 健康检查端点，建议配置为 DaemonSet 的 liveness probe，以便在驱动异常时自动重启，减少调度延迟和排障时间。
 - **节点排空顺序**：在自定义节点排空逻辑时，应尽可能**最后**排空 DRA 驱动，确保驱动有机会为已分配资源的 Pod 执行清理（unprepare）。
 
 ### 高负载环境监控与调优

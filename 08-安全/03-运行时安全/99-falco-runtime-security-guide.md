@@ -1,7 +1,7 @@
 ---
 title: Falco 运行时安全监控深度实践
 description: '# Falco 运行时安全监控深度实践'
-summary: 'Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 [[Kubernetes|Kubernetes]] 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。'
+summary: 'Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 [[kubernetes|Kubernetes]] 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。'
 category: cloud-native-security
 tags:
 - k8s
@@ -68,14 +68,14 @@ cross_refs:
 
 
 
-# [[Falco|Falco]] 运行时安全监控深度实践
+# [[falco|Falco]] 运行时安全监控深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
 > **Scenario**: Runtime security monitoring with Falco and Falco Sidekick | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
-Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 [[Kubernetes|Kubernetes]] 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。
+Falco 是 CNCF 毕业项目，是云原生运行时安全的行业标准工具。它通过内核模块或 eBPF 探针捕获系统调用，结合容器感知和 [[kubernetes|Kubernetes]] 元数据，使用灵活的规则引擎实时检测异常行为。Falco 能够检测容器逃逸、权限提升、文件完整性违规、网络异常、加密货币挖矿等多种安全威胁，是企业构建运行时安全防线的核心组件。
 
 ## 威胁模型分析
 

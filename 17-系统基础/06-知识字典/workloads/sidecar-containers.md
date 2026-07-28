@@ -47,7 +47,7 @@ prerequisites:
 Sidecar 容器是与主应用容器运行在同一 Pod 内的辅助容器，用于增强或扩展主应用功能，如日志收集、监控、安全代理或数据同步。
 
 ## 核心概念/原理
-- **[[Kubernetes|Kubernetes]] 实现方式**：自 v1.29（默认启用 `SidecarContainers` 特性门控）起，Sidecar 被实现为一种特殊的 init 容器——即在 `initContainers` 列表中声明，并设置 `restartPolicy: Always`。
+- **[[kubernetes|Kubernetes]] 实现方式**：自 v1.29（默认启用 `SidecarContainers` 特性门控）起，Sidecar 被实现为一种特殊的 init 容器——即在 `initContainers` 列表中声明，并设置 `restartPolicy: Always`。
 - **生命周期**：Sidecar 容器在 Pod 启动时先于主容器启动，并在整个 Pod 生命周期内持续运行；Pod 终止时，Sidecar 在主容器完全停止后才接收终止信号。
 - **独立性**：Sidecar 容器拥有独立的重启策略，可独立于主容器启动、停止或重启。
 
@@ -59,8 +59,8 @@ Sidecar 容器是与主应用容器运行在同一 Pod 内的辅助容器，用�
 - **资源共享**：Sidecar 与主容器共享网络和存储命名空间；Pod 的有效资源请求/限制为：[[17-系统基础/06-知识字典/scheduling/pod-overhead.md|Pod Overhead]] + max(非 init 容器之和, 有效 init 容器值)。
 
 ## 使用场景
-- 日志/指标收集代理（如 Fluent Bit、[[Prometheus|Prometheus]] exporter）。
-- 服务网格代理（如 [[Istio|Istio]] [[envoy|[[Envoy]]]]）。
+- 日志/指标收集代理（如 Fluent Bit、[[prometheus|Prometheus]] exporter）。
+- 服务网格代理（如 [[istio|Istio]] [[envoy|[[envoy|Envoy]]]]）。
 - 配置重载或文件同步工具。
 - 安全审计或身份验证代理。
 

@@ -61,7 +61,7 @@ tags:
 - apiserver
 - [[kubelet|kubelet]]
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - istio
 - calico
 last_updated: 2026-05

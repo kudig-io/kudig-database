@@ -1,7 +1,7 @@
 ---
 title: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 description: '## 1. 概述'
-summary: '控制平面（Control Plane）是 [[Kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，'
+summary: '控制平面（Control Plane）是 [[kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，'
 category: control-plane
 tags:
 - k8s
@@ -67,7 +67,7 @@ agent_execution_mode: L2-semi-auto
 
 
 
-<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[Pods|pods]] -n kube-system -l component=[[etcd|etcd]] 显示非 Running -->
+<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[pods|pods]] -n kube-system -l component=[[etcd|etcd]] 显示非 Running -->
 
 # etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 
@@ -75,7 +75,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-控制平面（Control Plane）是 [[Kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，其健康状态更是生死攸关——etcd 集群丢失 quorum 意味着集群将无法进行任何状态变更。
+控制平面（Control Plane）是 [[kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，其健康状态更是生死攸关——etcd 集群丢失 quorum 意味着集群将无法进行任何状态变更。
 
 ### 典型触发场景
 

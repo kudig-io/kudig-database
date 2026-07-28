@@ -41,7 +41,7 @@ prerequisites:
 
 ## State Machine
 
-[[Pods|Pods]] transition through these phases:
+[[pods|Pods]] transition through these phases:
 
 | Phase | Meaning |
 |-------|---------|
@@ -71,7 +71,7 @@ Each Pod has four condition types that describe its internal state:
 |-------|---------|---------|--------|
 | **startupProbe** | Allow slow startup | Runs until first success | Disables other probes during startup |
 | **livenessProbe** | Detect deadlocked/stuck processes | Periodic check | Container restart |
-| **readinessProbe** | Determine if container can accept traffic | Periodic check | Remove from [[Service|Service]] endpoints |
+| **readinessProbe** | Determine if container can accept traffic | Periodic check | Remove from [[service\|Service]] endpoints |
 
 Each probe can use HTTP GET, TCP Socket, or Exec commands.
 

@@ -55,7 +55,7 @@ title: Week 4: 企业级进阶期 (Days 22-28)
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[Kubernetes|Kubernetes]] 企业级运维
+  - [[kubernetes|Kubernetes]] 企业级运维
   - GitOps 持续部署
   - 生产事故响应
   - SRE 能力建设
@@ -63,7 +63,7 @@ trigger_keywords:
   - Week 4
   - 企业级
   - GitOps
-  - [[ArgoCD|ArgoCD]]
+  - [[argocd|ArgoCD]]
   - 变更管理
   - 事故响应
   - 容量规划
@@ -96,7 +96,7 @@ related_topics:
 
 ### 学习目标
 
-- 掌握企业级监控告警平台（[[Prometheus|Prometheus]] + Thanos + Grafana）的架构设计与部署实践
+- 掌握企业级监控告警平台（[[prometheus|Prometheus]] + Thanos + Grafana）的架构设计与部署实践
 - 理解 GitOps 理念并能够使用 ArgoCD 实现声明式持续部署
 - 深入云原生安全体系，掌握策略引擎（Kyverno）、Secret 管理（Vault）与零信任架构
 - 学会运用 FTA（故障树分析）和 FEBM（取证循证方法）解决复杂生产问题

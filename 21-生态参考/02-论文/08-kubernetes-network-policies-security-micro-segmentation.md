@@ -3,7 +3,6 @@ title: Kubernetes 网络策略与安全微隔离实践 (Network Policies and Sec
 description: '# Kubernetes 网络策略与安全微隔离实践 (Network Policies and Security Micro-Segmentation
   Practice)'
 summary: '本文档深入探讨了Kubernetes网络策略与安全微隔离的实现原理、配置方法和最佳实践，基于大规模生产环境的网络安全实践经验，提供从基础网络策略到高级微隔离的完整技术指南，帮助企业构建零信任网络架构。'
-  Practice)'
 category: papers
 tags:
 - k8s
@@ -66,7 +65,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[17-系统基础/06-知识字典/networking/network-policies.md|Network Policies]] and Security Micro-Segmentation Practice)
+# [[kubernetes|Kubernetes]] 网络策略与安全微隔离实践 ([[17-系统基础/06-知识字典/networking/network-policies.md|Network Policies]] and Security Micro-Segmentation Practice)
 
 > **作者**: 网络安全架构专家 | **版本**: v2.0 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级网络安全防护 | **复杂度**: ⭐⭐⭐⭐⭐

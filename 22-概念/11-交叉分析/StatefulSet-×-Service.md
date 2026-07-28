@@ -122,8 +122,8 @@ EOF
 - [[23-实体/08-交付与制品/argocd.md|ArgoCD]]：GitOps同步
 
 ## 相关概念
-- [[StatefulSet]]
-- [[Service]]
+- [[statefulset|StatefulSet]]
+- [[service|Service]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

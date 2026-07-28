@@ -87,9 +87,9 @@ cross_refs:
 
 | 组件 | 用途 | 部署方式 | 版本兼容 | 生产必需 | ACK集成 |
 |-----|------|---------|---------|---------|---------|
-| **[[CoreDNS|CoreDNS]]** | 集群DNS服务 | Deployment | 与K8S同步 | 是 | 自动安装 |
+| **[[coredns\|CoreDNS]]** | 集群DNS服务 | Deployment | 与K8S同步 | 是 | 自动安装 |
 | **Metrics Server** | 资源指标API | Deployment | v0.7+ for v1.28+ | 是(HPA/VPA需要) | 可选安装 |
-| **CNI Plugin** | 容器网络 | [[DaemonSet|DaemonSet]] | 取决于插件 | 是 | Terway/Flannel |
+| **CNI Plugin** | 容器网络 | [[daemonset\|DaemonSet]] | 取决于插件 | 是 | Terway/Flannel |
 | **kube-proxy** | Service网络代理 | DaemonSet | 与K8S同步 | 是 | 自动安装 |
 | **CSI Driver** | 存储接口 | DaemonSet+Deployment | 取决于驱动 | 是(使用存储) | 云盘/NAS CSI |
 

@@ -49,6 +49,7 @@ authors:
 created: "2026-06-26"
 updated: "2026-06-26"
 summary: '4. [配置 BackupStorageLocation 与 VolumeSnapshotLocation](#配置-backupstoragelocation-与-volumesnapshotlocation)'
+tier: supporting
 ---
 
 > **生产环境安全提示**

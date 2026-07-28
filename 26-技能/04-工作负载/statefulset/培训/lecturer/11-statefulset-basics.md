@@ -47,7 +47,7 @@ prerequisites:
 
 
 
-# 第14课：[[StatefulSet|StatefulSet]] - 有状态应用管理
+# 第14课：[[statefulset|StatefulSet]] - 有状态应用管理
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 25 分钟
 
@@ -611,7 +611,7 @@ kubectl delete statefulset <name>
 ---
 
 **关联文档**:
-- [../10-advanced-workloads/10-daemonset-basics.md](../../../daemonset/%E5%9F%B9%E8%AE%AD/lecturer/10-daemonset-basics.md) — [[DaemonSet|DaemonSet]]
+- [../10-advanced-workloads/10-daemonset-basics.md](../../../daemonset/%E5%9F%B9%E8%AE%AD/lecturer/10-daemonset-basics.md) — [[daemonset|DaemonSet]]
 - [../../故障诊断/topic-skills/17-daemonset-pdb-failure.md](../../故障诊断/技能体系/17-daemonset-pdb-failure.md) — StatefulSet 问题 [[SKILL|Skill]]
 - [../../工作负载/](../../工作负载/) — 工作负载文档
 

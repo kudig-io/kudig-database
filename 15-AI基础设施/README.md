@@ -29,10 +29,10 @@ estimated_read_time: 10min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[15-AI基础设施/01-基础设施/README.md\|基础设施/]] | GPU/硬件 | GPU 调度、NCCL、存储、网络拓扑 |
-| [[15-AI基础设施/05-K8s-AI基础设施/README.md\|K8s-AI基础设施/]] | K8s AI | Volcano/Kueue、Training Operator、MIG |
+| [[15-AI基础设施/01-基础设施/index.md\|基础设施/]] | GPU/硬件 | GPU 调度、NCCL、存储、网络拓扑 |
+| [[15-AI基础设施/05-K8s-AI基础设施/index.md\|K8s-AI基础设施/]] | K8s AI | Volcano/Kueue、Training Operator、MIG |
 | [[15-AI基础设施/02-AI-Agents/README.md\|AI-Agents/]] | Agent | LLM Agent、多智能体、Tool Use、Memory |
-| [[15-AI基础设施/03-Agent运行时/README.md\|Agent运行时/]] | 运行时 | Agent 容器化、沙箱、资源隔离、调度 |
+| [[15-AI基础设施/03-Agent运行时/index.md\|Agent运行时/]] | 运行时 | Agent 容器化、沙箱、资源隔离、调度 |
 | [[15-AI基础设施/04-AI编码/README.md\|AI编码/]] | AI 编码 | Copilot/Cursor、代码生成、AI 辅助开发 |
 
 ## 跨域导航

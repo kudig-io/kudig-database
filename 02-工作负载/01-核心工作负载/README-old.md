@@ -1,7 +1,7 @@
 ---
 title: 'Domain-4: Kubernetes工作负载'
 description: '## 概述'
-summary: 'Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSet]]、DaemonSet等核心工作负载资源的配置管理和最佳实践。'
+summary: 'Kubernetes工作负载域深入解析Pod、Deployment、[[statefulset|StatefulSet]]、DaemonSet等核心工作负载资源的配置管理和最佳实践。'
 category: workloads
 tags:
 - k8s
@@ -65,14 +65,14 @@ cross_refs:
 
 # Domain-4: Kubernetes工作负载
 
-> **文档数量**: 24 篇 | **最后更新**: 2026-02 | **适用版本**: [[Kubernetes|Kubernetes]] 1.20+
+> **文档数量**: 24 篇 | **最后更新**: 2026-02 | **适用版本**: [[kubernetes|Kubernetes]] 1.20+
 
 ---
 
 <!-- chunk: 概述 -->
 ## 概述
 
-Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSet]]、DaemonSet等核心工作负载资源的配置管理和最佳实践。
+Kubernetes工作负载域深入解析Pod、Deployment、[[statefulset|StatefulSet]]、DaemonSet等核心工作负载资源的配置管理和最佳实践。
 
 **核心价值**：
 - 📦 **资源管理**：各类工作负载资源配置和管理
@@ -107,7 +107,7 @@ Kubernetes工作负载域深入解析Pod、Deployment、[[StatefulSet|StatefulSe
 | 13 | [污点与容忍](./13-taints-tolerations.md) | 节点污点、Pod容忍、调度控制 | ⭐⭐⭐⭐⭐ |
 | 14 | [拓扑分布约束](./14-topology-spread-constraints.md) | 跨区域部署、负载均衡 | ⭐⭐⭐⭐ |
 | 15 | [优先级与抢占](./15-priority-preemption.md) | 优先级类、抢占机制、资源竞争 | ⭐⭐⭐⭐ |
-| 16 | [服务质量等级](./16-quality-of-[[Service|service]].md) | QoS分类、驱逐策略、资源保障 | ⭐⭐⭐⭐⭐ |
+| 16 | [服务质量等级](./16-quality-of-[[service\|service]].md) | QoS分类、驱逐策略、资源保障 | ⭐⭐⭐⭐⭐ |
 
 ### 工作负载模式 (17-20)
 | # | 文档 | 关键内容 | 重要程度 |

@@ -68,7 +68,7 @@ cross_refs:
 
 
 
-# [[Istio|Istio]] Ambient Mesh 与 L7 策略深度实践
+# [[istio|Istio]] Ambient Mesh 与 L7 策略深度实践
 
 > **最后更新**: 2026-04-24
 > **适用版本**: Istio v1.29+ (Ambient GA)
@@ -183,12 +183,12 @@ ztunnel 核心能力：
 
 | 能力 | 说明 |
 |:---|:---|
-| L4 代理 | TCP 连接代理，支持 HTTP/2 和 [[gRPC|gRPC]] 的透传 |
-| mTLS | 基于 [[SPIFFE|SPIFFE]] 身份的自动证书管理，每Pod粒度的身份标识 |
+| L4 代理 | TCP 连接代理，支持 HTTP/2 和 [[grpc\|gRPC]] 的透传 |
+| mTLS | 基于 [[spiffe\|SPIFFE]] 身份的自动证书管理，每Pod粒度的身份标识 |
 | HBONE 隧道 | HTTP-Based Overlay Network Encapsulation，用于跨节点通信 |
 | 健康检查 | 代为执行服务健康检查，减少应用负担 |
 | 指标导出 | L4 层连接指标、字节计数、错误率 |
-| DNS 代理 | 节点级 DNS 解析，支持 K8s [[Service|Service]] 发现 |
+| DNS 代理 | 节点级 DNS 解析，支持 K8s [[service\|Service]] 发现 |
 
 ## 1.2 Waypoint Proxy L7 代理
 

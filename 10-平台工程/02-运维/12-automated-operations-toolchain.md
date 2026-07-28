@@ -53,8 +53,8 @@ tags:
 - operations
 - best-practices
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 - [[containerd|containerd]]
 - docker
 - ingress

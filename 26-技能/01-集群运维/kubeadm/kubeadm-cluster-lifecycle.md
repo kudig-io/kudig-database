@@ -63,7 +63,7 @@ prerequisites:
 | 9 | `mark-control-plane` | 添加 control-plane 标签和 NoSchedule 污点 | 节点标签和污点 |
 | 10 | `bootstrap-token` | 创建 Bootstrap Token Secret | `bootstrap-token-xxx` Secret |
 | 11 | `kubelet-finalize` | 终止 kubelet 证书引导，切换到正式证书 | 证书轮换就绪 |
-| 12 | `addon` | 部署 [[CoreDNS|CoreDNS]] + kube-proxy [[DaemonSet|DaemonSet]] | 核心附加组件 |
+| 12 | `addon` | 部署 [[coredns\|CoreDNS]] + kube-proxy [[daemonset\|DaemonSet]] | 核心附加组件 |
 
 ## 核心参数说明
 

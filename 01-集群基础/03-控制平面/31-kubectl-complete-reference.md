@@ -86,7 +86,7 @@ cross_refs:
 
 # 31 - kubectl 完全命令参考 (kubectl Complete Reference)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 命令参考手册
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32+ | **最后更新**: 2026-04 | **文档类型**: 命令参考手册
 
 ---
 

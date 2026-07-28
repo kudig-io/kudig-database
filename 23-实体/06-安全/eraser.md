@@ -1,7 +1,7 @@
 ---
 title: Eraser [entities]
 description: '## 概述'
-summary: 'Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群节点中删除存在漏洞的和未使用的容器镜像。它通过与漏洞扫描器（如 [[Trivy|Trivy]]）集成，定期扫描节点上的镜像，自动移除包含高危漏洞的镜像，减小节点的攻击面并释放磁盘空间。'
+summary: 'Eraser 是一个 Kubernetes 原生的镜像清理工具，用于自动从集群节点中删除存在漏洞的和未使用的容器镜像。它通过与漏洞扫描器（如 [[trivy|Trivy]]）集成，定期扫描节点上的镜像，自动移除包含高危漏洞的镜像，减小节点的攻击面并释放磁盘空间。'
 category: entities
 tags:
 - k8s

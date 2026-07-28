@@ -68,7 +68,7 @@ CDC 三种实现方式:
 └──────────┘     └─────────────┘     └──────────┘
 ```
 
-## [[Kubernetes|Kubernetes]] 部署
+## [[kubernetes|Kubernetes]] 部署
 
 ```yaml
 apiVersion: kafka.strimzi.io/v1beta2

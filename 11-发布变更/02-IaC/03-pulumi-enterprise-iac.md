@@ -62,7 +62,7 @@ tags:
 - iac
 - terraform
 - pulumi
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - gateway
 - operator
 - rag
@@ -78,7 +78,7 @@ estimated_read_time: 5min
 intent_queries:
 - Pulumi Enterprise Infrastructure as Code Platform 是什么
 - 如何 Pulumi Enterprise Infrastructure as Code Platform
-- [[Kubernetes|Kubernetes]] 24 infrastructure as code 最佳实践
+- [[kubernetes|Kubernetes]] 24 infrastructure as code 最佳实践
 trigger_keywords:
 - Pulumi
 - Enterprise

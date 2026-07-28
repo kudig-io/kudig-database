@@ -242,7 +242,7 @@ kubectl describe runtimeclass kuasar-vmm
 - [[containerd]] — containerd
 
 - kuasar
-- [[23-实体/urunc.md|[[urunc (Unikernel Container Runtime)|urunc]]]]
+- [[23-实体/urunc.md|[[23-实体/03-运行时/urunc|urunc]]]]
 - [[23-实体/03-运行时/hyperlight.md|Hyperlight]]
 - [[23-实体/15-参考与索引/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 

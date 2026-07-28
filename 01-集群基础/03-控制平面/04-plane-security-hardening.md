@@ -89,7 +89,7 @@ cross_refs:
 
 # 控制平面安全加固指南 (Control Plane Security Hardening Guide)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 安全配置手册
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 安全配置手册
 
 ---
 

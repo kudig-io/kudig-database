@@ -68,7 +68,7 @@ cross_refs:
 
 # 21 - 多模态模型融合与部署
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [CLIP](https://github.com/openai/CLIP) | [LLaVA](https://github.com/haotian-liu/LLaVA) | [Whisper](https://github.com/openai/whisper) | [ImageBind](https://github.com/facebookresearch/ImageBind)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [CLIP](https://github.com/openai/CLIP) | [LLaVA](https://github.com/haotian-liu/LLaVA) | [Whisper](https://github.com/openai/whisper) | [ImageBind](https://github.com/facebookresearch/ImageBind)
 
 <!-- chunk: 一、多模态AI架构全景 -->
 ## 一、多模态AI架构全景

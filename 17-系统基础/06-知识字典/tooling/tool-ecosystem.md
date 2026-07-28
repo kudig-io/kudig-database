@@ -81,16 +81,16 @@ prerequisites:
 
 ### 新手必装工具清单(TOP 10)
 
-> 以下是 [[Kubernetes|Kubernetes]] 初学者最应该优先安装和学习的工具:
+> 以下是 [[kubernetes|Kubernetes]] 初学者最应该优先安装和学习的工具:
 
 | 优先级 | 工具 | 分类 | 一句话说明 |
 |--------|------|------|------------|
 | ⭐1 | kubectl | 核心CLI | 与集群交互的基本工具,必装 |
-| ⭐2 | [[Helm|Helm]] | 包管理 | 一键安装复杂应用,像apt/yum一样 |
+| ⭐2 | [[helm\|Helm]] | 包管理 | 一键安装复杂应用,像apt/yum一样 |
 | ⭐3 | k9s | CLI增强 | 终端上的Kubernetes仪表盘,比kubectl更直观 |
 | ⭐4 | Lens/K9s | 可视化 | 图形化集群管理,适合初学者 |
-| ⭐5 | [[Prometheus|Prometheus]]+Grafana | 监控 | 监控集群和应用的标准方案 |
-| ⭐6 | [[ArgoCD|ArgoCD]] | GitOps | 声明式持续部署,现代DevOps必备 |
+| ⭐5 | [[prometheus\|Prometheus]]+Grafana | 监控 | 监控集群和应用的标准方案 |
+| ⭐6 | [[argocd\|ArgoCD]] | GitOps | 声明式持续部署,现代DevOps必备 |
 | ⭐7 | Ingress-NGINX | 流量入口 | 最成熟的Ingress Controller |
 | ⭐8 | [[cert-manager|cert-manager]] | 证书管理 | 自动化管理TLS证书 |
 | ⭐9 | kustomize | 配置管理 | kubectl内置的配置叠加工具 |

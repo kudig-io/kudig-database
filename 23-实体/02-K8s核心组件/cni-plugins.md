@@ -52,7 +52,7 @@ CNI (Container Network Interface) is the standard plugin interface Kubernetes us
 
 | Plugin | Type | Features | Best For |
 |--------|------|----------|----------|
-| **Calico** | BGP routing | [[NetworkPolicy|NetworkPolicy]] enforcement, BGP peering, IPIP/VXLAN overlay | Enterprise, NetworkPolicy-heavy |
+| **Calico** | BGP routing | [[networkpolicy\|NetworkPolicy]] enforcement, BGP peering, IPIP/VXLAN overlay | Enterprise, NetworkPolicy-heavy |
 | **Cilium** | eBPF-based | L7 policy, identity-aware security, observability, service mesh replacement | High-performance, security-focused |
 | **Flannel** | Overlay (VXLAN/UDP/WireGuard) | Simple, minimal overhead, dual-stack, WireGuard encryption | Small clusters, simplicity |
 | **Terway** | Alibaba Cloud ENI | Direct ENI IP allocation, high throughput, VPC-native | Alibaba Cloud environments |

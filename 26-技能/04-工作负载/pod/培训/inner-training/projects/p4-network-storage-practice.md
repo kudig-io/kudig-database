@@ -49,7 +49,7 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK microservice deployment network storage
-  - [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] DNS [[Service|service]] discovery
+  - [[kubernetes|Kubernetes]] [[ingress|Ingress]] DNS [[service|service]] discovery
   - StatefulSet PVC persistent storage
   - CNI network policy verification
   - ACK storage CSI integration

@@ -61,7 +61,7 @@ authors:
 
 # 23. 事件响应处理 (Incident Response Handling)
 
-> **适用范围**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 45分钟
+> **适用范围**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 45分钟
 
 <!-- chunk: 📋 章节概览 -->## 📋 章节概览
 
@@ -671,7 +671,7 @@ chatbot:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 生产运维 KUDIG Database — Global MOC
-- [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 ([[Production Operations|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
+- [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 ([[13-生产运维/README|Production Operations]]ns Best Practices|Production Operations Best Practices]]佳实践字典|Operations Best Practices]])]]
 - Domain-18 生产运维 — 开源项目索引
 - [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略

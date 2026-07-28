@@ -305,7 +305,7 @@ kubectl get pods --all-namespaces -o jsonpath='{range .items[*].spec.containers[
 
 1. **容器镜像快照**: `crictl inspect <container-id>`
 2. **节点日志**: `/var/log` 和 journalctl
-3. **审计日志**: [[Kubernetes|Kubernetes]] Audit Logs
+3. **审计日志**: [[kubernetes|Kubernetes]] Audit Logs
 4. **网络流量**: 如有抓包，保存 pcap 文件
 5. **内存转储**: 如进行，保存到安全存储
 6. **时间线**: 详细的事件时间线记录

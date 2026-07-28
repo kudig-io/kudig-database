@@ -41,12 +41,12 @@ prerequisites:
 
 ## 概述
 
-垃圾回收（Garbage Collection）是 [[Kubernetes|Kubernetes]] 用于清理集群资源的各种机制的统称。它允许自动清理以下类型的资源：已终止的 Pod、已完成的 Job、没有 owner reference 的对象、未使用的容器和镜像、回收策略为 Delete 的动态供给 PersistentVolume、过期或陈旧的 CertificateSigningRequest（CSR）、以及已被删除的节点和节点 Lease 对象等。
+垃圾回收（Garbage Collection）是 [[kubernetes|Kubernetes]] 用于清理集群资源的各种机制的统称。它允许自动清理以下类型的资源：已终止的 Pod、已完成的 Job、没有 owner reference 的对象、未使用的容器和镜像、回收策略为 Delete 的动态供给 PersistentVolume、过期或陈旧的 CertificateSigningRequest（CSR）、以及已被删除的节点和节点 Lease 对象等。
 
 ## 核心概念/原理
 
 - **Owner References（所有者引用）**：Kubernetes 中的许多对象通过 owner references 相互关联。它告诉控制平面哪些对象依赖于其他对象。Kubernetes 利用 owner references 在删除对象前清理相关资源，大多数情况下 owner references 是自动管理的。
-- **所有权 vs 标签选择器**：所有权不同于标签和选择器机制。例如，[[Service|Service]] 通过标签确定哪些 EndpointSlice 属于它，同时这些 EndpointSlice 也会带有指向该 Service 的 owner reference，帮助 Kubernetes 各组件避免误操作不属于自己的对象。
+- **所有权 vs 标签选择器**：所有权不同于标签和选择器机制。例如，[[service|Service]] 通过标签确定哪些 EndpointSlice 属于它，同时这些 EndpointSlice 也会带有指向该 Service 的 owner reference，帮助 Kubernetes 各组件避免误操作不属于自己的对象。
 - **跨命名空间限制**：跨命名空间的 owner reference 被设计为禁止。命名空间内的依赖对象可以指向集群范围或同命名空间的所有者；集群范围的依赖对象只能指向集群范围的所有者。v1.20+ 若检测到无效的跨命名空间 owner reference，会生成 `OwnerRefInvalidNamespace` 警告事件。
 
 ## 关键机制或特性
@@ -75,7 +75,7 @@ prerequisites:
   - `MaxPerPodContainer`：每个 Pod 可保留的死亡容器最大数量
   - `MaxContainers`：集群范围内可保留的死亡容器最大数量
 
-### [[Finalizers|Finalizers]]
+### [[finalizers|Finalizers]]
 可通过 finalizers 控制垃圾回收在删除具有 owner references 的资源时的行为，确保所有必要的清理任务完成后才删除对象。
 
 ## 使用场景

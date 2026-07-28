@@ -1046,7 +1046,7 @@ print(analyzer.detect_anomalies())
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 容器运行时 KUDIG Database — Global MOC
-- [[14-容器运行时/README.md|[[Docker 容器技术深度解析|Docker 容器技术深度解析]]]]
+- [[14-容器运行时/README.md|[[37-归档/domain-indexes/container-runtime/README-from-domain-13|Docker 容器技术深度解析]]]]
 - Domain-13 Docker — 开源项目索引
 - Docker 架构概述与核心概念
 - [[23-实体/03-运行时/docker.md|docker]]

@@ -42,7 +42,7 @@ prerequisites:
 
 
 ---
-title: 第四课：[[Service|Service]] - 让应用可以被访问
+title: 第四课：[[service|Service]] - 让应用可以被访问
 description: 【解决方案】
 category: learning
 tags:
@@ -53,8 +53,8 @@ tags:
 - training
 - lecturer
 - [[kubelet|kubelet]]
-- [[CoreDNS|coredns]]
-- [[Ingress|ingress]]
+- [[coredns|coredns]]
+- [[ingress|ingress]]
 - networkpolicy
 aliases:
 - Service

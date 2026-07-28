@@ -41,11 +41,11 @@ prerequisites:
 
 
 
-# Assigning [[Pods|Pods]] to Nodes
+# Assigning [[pods|Pods]] to Nodes
 
 ## 概述
 
-[[Kubernetes|Kubernetes]] 提供了多种方式将 Pod 约束到特定节点运行，或让 Pod 优先在某些节点上运行。推荐的方法都使用标签选择器（label selectors）来促进选择。虽然通常不需要设置此类约束（调度器会自动进行合理放置），但在某些情况下，用户可能需要控制 Pod 部署到哪个节点。
+[[kubernetes|Kubernetes]] 提供了多种方式将 Pod 约束到特定节点运行，或让 Pod 优先在某些节点上运行。推荐的方法都使用标签选择器（label selectors）来促进选择。虽然通常不需要设置此类约束（调度器会自动进行合理放置），但在某些情况下，用户可能需要控制 Pod 部署到哪个节点。
 
 ## 核心概念/原理
 

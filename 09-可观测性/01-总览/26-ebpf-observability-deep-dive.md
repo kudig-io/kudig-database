@@ -491,11 +491,11 @@ kubectl exec -n kube-system daemonset/cilium -- \
 
 ### 部署决策矩阵
 
-1. **已使用 Cilium CNI**：直接启用 Hubble，零额外部署成本。Hubble 提供 L3-L7 网络可观测性，与 [[网络]] 策略深度集成。
+1. **已使用 Cilium CNI**：直接启用 Hubble，零额外部署成本。Hubble 提供 L3-L7 网络可观测性，与 [[05-网络/README|网络]] 策略深度集成。
 
 2. **需要无 SDK 的 APM**：部署 Pixie，特别适合多语言微服务环境（Java、Go、Python、Node.js 混合部署），无需逐个服务接入 SDK。
 
-3. **安全合规要求**：部署 Tetragon，满足运行时安全审计需求。与 [[安全]] 体系集成，将事件导出至 SIEM。
+3. **安全合规要求**：部署 Tetragon，满足运行时安全审计需求。与 [[08-安全/README|安全]] 体系集成，将事件导出至 SIEM。
 
 ### 内核版本与兼容性
 

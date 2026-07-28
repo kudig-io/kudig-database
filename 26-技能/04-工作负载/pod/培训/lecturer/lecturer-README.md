@@ -46,7 +46,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 金牌讲师 - 工单数字人场景
+# [[kubernetes|Kubernetes]] 金牌讲师 - 工单数字人场景
 
 > **版本**: v1.4
 > **创建日期**: 2026-05-18
@@ -192,7 +192,7 @@ prerequisites:
 | Pod 卡住 | "Pod 一直 Pending" | describe 看 Events |
 | 应用崩了 | "容器一直重启" | logs 看日志 |
 | 服务不通 | "访问不了我的服务" | 检查 Endpoints |
-| 网络慢 | "DNS 解析失败" | 检查 [[CoreDNS|CoreDNS]] 状态 |
+| 网络慢 | "DNS 解析失败" | 检查 [[coredns\|CoreDNS]] 状态 |
 | 资源不足 | "配额超限了" | describe quota 看使用量 |
 | 版本回滚 | "想回滚到上一个版本" | kubectl rollout undo |
 | 扩缩容 | "想增加 Pod 数量" | kubectl scale |
@@ -455,7 +455,7 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[21-生态参考/98-merged-indexes/index.md|[[发布说明索引 — 网络|发布说明索引 — 网络]]]] — Cross-reference
+- [[21-生态参考/98-merged-indexes/index.md|[[23-实体/15-参考与索引/release-notes-networking|发布说明索引 — 网络]]]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference

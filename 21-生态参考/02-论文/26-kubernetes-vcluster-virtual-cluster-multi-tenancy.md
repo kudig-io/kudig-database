@@ -66,7 +66,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
+# [[kubernetes|Kubernetes]] vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
 > 作者: 多租户架构专家 | 版本: v1.0 | 更新时间: 2026-03-03
 > 适用场景: SaaS 平台多租户、开发测试隔离、CI/CD 环境、平台工程 | 复杂度: ⭐⭐⭐⭐
@@ -229,7 +229,7 @@ graph TB
 
 vCluster 支持三种虚拟控制平面实现：
 
-| 特性 | [[k3s|K3s]]（默认） | [[K0s|K0s]] | Vanilla K8s |
+| 特性 | [[k3s|K3s]]（默认） | [[k0s\|K0s]] | Vanilla K8s |
 |-----|------------|-----|------------|
 | **二进制大小** | ~70MB | ~70MB | ~150MB |
 | **内存占用** | ~150MB | ~120MB | ~250MB |

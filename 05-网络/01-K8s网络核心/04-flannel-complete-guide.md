@@ -88,7 +88,7 @@ cross_refs:
 
 # 142 - Flannel 完整指南 (Flannel Complete Guide)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **Flannel 版本**: v0.24+ | **最后更新**: 2026-01
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **Flannel 版本**: v0.24+ | **最后更新**: 2026-01
 
 ---
 
@@ -511,7 +511,7 @@ tcpdump -i eth0 -n port 8472  # VXLAN UDP 端口
 
 ---
 
-<!-- chunk: 8. 与 [[NetworkPolicy|NetworkPolicy]] 集成 -->
+<!-- chunk: 8. 与 [[networkpolicy|NetworkPolicy]] 集成 -->
 ## 8. 与 NetworkPolicy 集成
 
 Flannel 本身不支持 NetworkPolicy，需配合 Calico:
@@ -545,7 +545,7 @@ kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.0/
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

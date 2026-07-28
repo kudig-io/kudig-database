@@ -63,7 +63,7 @@ agent_execution_mode: L2-semi-auto
 
 
 
-<!-- condition: kubectl get [[Pods|pods]] -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
+<!-- condition: kubectl get [[pods|pods]] -A -o jsonpath='{range .items[?(@.status.containerStatuses[?(@.restartCount>3)])]} {.metadata.namespace}/{.metadata.name}{\"\n\"}{end}' 显示频繁重启的 Pod -->
 
 # Pod CrashLoopBackOff & OOMKilled 诊断与修复
 
@@ -76,7 +76,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-**CrashLoopBackOff** 和 **OOMKilled** 是生产环境中最常见的 Pod 级别问题，占 [[Kubernetes|Kubernetes]] 工单总量的 30-40%。
+**CrashLoopBackOff** 和 **OOMKilled** 是生产环境中最常见的 Pod 级别问题，占 [[kubernetes|Kubernetes]] 工单总量的 30-40%。
 
 - **CrashLoopBackOff**: 容器反复退出（exit），[[kubelet|kubelet]] 以指数退避（exponential backoff, 10s → 20s → 40s → ... → 5min cap）策略不断尝试重启容器。这是一个**状态描述**，不是根因本身——真正的问题隐藏在容器的 exit code 和日志中。
 - **OOMKilled**: Linux 内核的 OOM Killer 终止了容器进程（发送 SIGKILL, exit code 137），通常由容器实际内存用量超过 cgroup memory limit 触发。在 Kubernetes 中，这意味着 `resources.limits.memory` 设置不足或应用存在内存泄漏。

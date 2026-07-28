@@ -792,7 +792,7 @@ crontab -e
 */5 * * * * /usr/local/bin/monitor.sh
 ```
 
-<!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
+<!-- chunk: 与 [[kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
 ## 节点运维与 K8s 集群稳定性
 

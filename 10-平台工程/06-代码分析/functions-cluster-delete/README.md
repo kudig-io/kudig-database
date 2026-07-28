@@ -71,7 +71,7 @@ related_topics:
 
 
 
-# Cluster Delete — [[Kubernetes|Kubernetes]] 集群删除源码分析
+# Cluster Delete — [[kubernetes|Kubernetes]] 集群删除源码分析
 
 ## 函数签名
 
@@ -121,9 +121,9 @@ func RunDrain(drainer *Drainer, f cmdutil.Factory, out io.Writer, errOut io.Writ
 
 | 标志 | 说明 |
 |------|------|
-| `--ignore-daemonsets` | 忽略 [[DaemonSet|DaemonSet]] Pod |
+| `--ignore-daemonsets` | 忽略 [[daemonset\|DaemonSet]] Pod |
 | `--delete-emptydir-data` | 删除使用 emptyDir 的 Pod |
-| `--force` | 强制删除非 [[ReplicaSet|ReplicaSet]] 管理的 Pod |
+| `--force` | 强制删除非 [[replicaset\|ReplicaSet]] 管理的 Pod |
 | `--grace-period` | 优雅终止宽限期（秒） |
 | `--timeout` | drain 超时时间 |
 | `--disable-eviction` | 使用 delete 替代 evict |

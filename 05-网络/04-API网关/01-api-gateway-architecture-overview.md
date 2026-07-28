@@ -63,7 +63,7 @@ authors:
 
 # 01 - 云原生 API 网关架构总览
 
-> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: API Gateway, [[Ingress|Ingress]] Controller, Gateway API, 控制平面, 数据平面
+> **文档版本**: v1.0 | **适用版本**: [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: API Gateway, [[ingress|Ingress]] Controller, Gateway API, 控制平面, 数据平面
 
 ## 目录
 
@@ -84,7 +84,7 @@ authors:
 - **声明式配置**: 通过 Kubernetes CRD 或 Gateway API 资源声明式管理路由规则
 - **动态热更新**: 路由、插件配置实时生效，无需重启或 reload
 - **可编程扩展**: 支持 Wasm、Lua 或多语言插件运行时，灵活扩展网关能力
-- **Kubernetes 原生**: 深度集成 [[Service|Service]] Discovery、RBAC、ConfigMap/Secret 等 K8s 原语
+- **Kubernetes 原生**: 深度集成 [[service|Service]] Discovery、RBAC、ConfigMap/Secret 等 K8s 原语
 - **可观测性内建**: 原生暴露 Prometheus 指标、结构化访问日志和分布式链路追踪
 
 ### 核心职责

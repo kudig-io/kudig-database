@@ -63,7 +63,7 @@ tags:
 - platform-engineering
 - developer-experience
 - idp
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - docker
 - postgresql
@@ -80,7 +80,7 @@ estimated_read_time: 5min
 intent_queries:
 - 开发者体验度量 (Developer Experience Metrics) 是什么
 - 如何 开发者体验度量 (Developer Experience Metrics)
-- [[Kubernetes|Kubernetes]] 36 [[22-概念/09-平台与发布/platform-engineering-sre.md|platform engineering]] 最佳实践
+- [[kubernetes|Kubernetes]] 36 [[22-概念/09-平台与发布/platform-engineering-sre.md|platform engineering]] 最佳实践
 trigger_keywords:
 - 开发者体验度量
 - Developer

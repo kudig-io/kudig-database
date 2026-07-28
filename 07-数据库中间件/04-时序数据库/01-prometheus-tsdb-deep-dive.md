@@ -40,7 +40,7 @@ prerequisites:
 
 
 
-# [[Prometheus|Prometheus]] TSDB 深度解析
+# [[prometheus|Prometheus]] TSDB 深度解析
 
 ## 存储架构
 

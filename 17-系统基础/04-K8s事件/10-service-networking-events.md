@@ -61,9 +61,9 @@ cross_refs:
 
 
 
-# 10 - [[Service|Service]] 与网络事件
+# 10 - [[service|Service]] 与网络事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 Service、LoadBalancer、Endpoint/EndpointSlice 和网络相关的所有事件。**
 

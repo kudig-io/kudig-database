@@ -46,7 +46,7 @@ prerequisites:
 
 
 ---
-title: 第九课：Job 和 [[CronJob|CronJob]] - 任务调度
+title: 第九课：Job 和 [[cronjob|CronJob]] - 任务调度
 description: '# 第九课：Job 和 CronJob - 任务调度'
 category: learning
 tags:

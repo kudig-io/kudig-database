@@ -60,9 +60,9 @@ cross_refs:
 
 
 
-# 09 - Job 与 [[CronJob|CronJob]] 批处理事件
+# 09 - Job 与 [[cronjob|CronJob]] 批处理事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 Job 和 CronJob 控制器产生的所有批处理相关事件。**
 
@@ -139,7 +139,7 @@ Count: 1
 
 **版本信息:**
 - **起始版本**: v1.0
-- **最后变更**: v1.24（Indexed [[Jobs|Jobs]] 增强）
+- **最后变更**: v1.24（Indexed [[jobs|Jobs]] 增强）
 
 **生产影响:**
 - ✅ 正常执行流程
@@ -2315,7 +2315,7 @@ spec:
 **Domain-33 Kubernetes Events:**
 - [01-pod-lifecycle-events.md](./01-pod-lifecycle-events.md) - Pod 生命周期事件（FailedScheduling 等）
 - [02-deployment-events.md](./02-deployment-events.md) - Deployment 事件
-- [03-statefulset-events.md](./03-statefulset-events.md) - [[StatefulSet|StatefulSet]] 事件
+- [03-statefulset-events.md](./03-statefulset-events.md) - [[statefulset|StatefulSet]] 事件
 - [04-daemonset-events.md](./04-daemonset-events.md) - DaemonSet 事件
 - [05-replicaset-events.md](./05-replicaset-events.md) - ReplicaSet 事件
 - [06-hpa-events.md](./06-hpa-events.md) - HPA 自动扩缩容事件

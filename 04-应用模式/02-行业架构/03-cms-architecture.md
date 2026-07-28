@@ -47,7 +47,7 @@ prerequisites:
 
 
 title: 内容管理系统 CMS 架构设计
-description: '# 内容管理系统 (CMS) [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 内容管理系统 (CMS) [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
@@ -58,7 +58,7 @@ tags:
 - postgresql
 - elasticsearch
 - hpa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
 last_updated: 2026-05-18
 difficulty: intermediate

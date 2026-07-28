@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 合规与审计
+# [[kubernetes|Kubernetes]] 合规与审计
 
 > Kubernetes 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
@@ -248,7 +248,7 @@ spec:
 | 访问控制 | 特权账户管理 | ServiceAccount |
 | 安全审计 | 操作日志 | Audit Log |
 | 安全审计 | 日志保护 | 外部存储 |
-| 入侵防范 | 网络隔离 | [[NetworkPolicy|NetworkPolicy]] |
+| 入侵防范 | 网络隔离 | [[networkpolicy\|NetworkPolicy]] |
 | 数据保密 | 传输加密 | TLS |
 | 数据保密 | 存储加密 | Secret 加密 |
 | 数据备份 | 备份策略 | [[etcd|etcd]]/Velero |

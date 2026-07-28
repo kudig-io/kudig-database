@@ -75,9 +75,9 @@ cross_refs:
 
 
 
-# [[Service|Service]] 高级特性与应用案例 (Service Advanced Features)
+# [[service|Service]] 高级特性与应用案例 (Service Advanced Features)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32  
 > **文档版本**: v2.0 | 生产级 Service 高级特性参考  
 > **最后更新**: 2026-01
 
@@ -868,7 +868,7 @@ main
 | **健康检查** | Local 策略需要 | 配置 healthCheckNodePort |
 | **Pod 分布** | 配合 Local 策略 | 使用 topologySpreadConstraints |
 | **超时配置** | 会话超时时间 | 根据业务需求调整 |
-| **监控告警** | Service 健康监控 | 配置 [[Prometheus|Prometheus]] 规则 |
+| **监控告警** | Service 健康监控 | 配置 [[prometheus\|Prometheus]] 规则 |
 
 ### 监控指标
 

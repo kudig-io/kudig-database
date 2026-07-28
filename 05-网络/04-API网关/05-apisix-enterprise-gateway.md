@@ -66,7 +66,7 @@ authors:
 
 # 05 - Apache APISIX 企业级 API 网关实践
 
-> **文档版本**: v1.0 | **适用版本**: APISIX 3.x, [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: APISIX, OpenResty, [[etcd|etcd]], Lua, 插件, APISIX [[Ingress|Ingress]] Controller
+> **文档版本**: v1.0 | **适用版本**: APISIX 3.x, [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: APISIX, OpenResty, [[etcd|etcd]], Lua, 插件, APISIX [[ingress|Ingress]] Controller
 
 <!-- chunk: 目录 -->## 目录
 
@@ -93,7 +93,7 @@ Apache APISIX 是 Apache 软件基金会顶级项目，由 API7.ai 主导开发�
 - **丰富插件**: 100+ 内置插件，覆盖认证、限流、安全、可观测等场景
 - **多语言扩展**: 支持 Lua、Go、Java、Python、Wasm 插件运行时
 - **动态配置**: 基于 etcd 实时配置下发，毫秒级生效
-- **全协议支持**: HTTP/HTTPS、[[gRPC|gRPC]]、WebSocket、TCP/UDP、MQTT
+- **全协议支持**: HTTP/HTTPS、[[grpc|gRPC]]、WebSocket、TCP/UDP、MQTT
 
 ## 发展历程
 

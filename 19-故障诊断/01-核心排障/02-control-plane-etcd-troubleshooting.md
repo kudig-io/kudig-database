@@ -90,7 +90,7 @@ related_docs:
 
 # 02 - etcd 故障排查 (etcd Troubleshooting)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [etcd.io/docs](https://etcd.io/docs/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **专家级别**: ⭐⭐⭐⭐⭐ | **参考**: [etcd.io/docs](https://etcd.io/docs/)
 
 ---
 

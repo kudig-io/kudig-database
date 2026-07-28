@@ -56,6 +56,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md
   label: '结构化排障: 04-controller-manager-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

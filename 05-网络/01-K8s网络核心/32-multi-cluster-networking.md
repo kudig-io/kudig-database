@@ -76,8 +76,8 @@ cross_refs:
 
 | 方案 | 架构 | 延迟 | 复杂度 | 适用场景 |
 |-----|------|------|-------|---------|
-| [[Submariner|Submariner]] | 隧道 | 中 | 中 | 混合云 |
-| [[Cilium|Cilium]] Cluster Mesh | eBPF隧道 | 低 | 中 | 同质集群 |
+| [[submariner\|Submariner]] | 隧道 | 中 | 中 | 混合云 |
+| [[cilium\|Cilium]] Cluster Mesh | eBPF隧道 | 低 | 中 | 同质集群 |
 | Istio多集群 | 服务网格 | 中 | 高 | 服务治理 |
 | Skupper | 应用层 | 中 | 低 | 简单互联 |
 | VPN/专线 | 网络层 | 低 | 高 | 企业网络 |
@@ -316,7 +316,7 @@ spec:
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

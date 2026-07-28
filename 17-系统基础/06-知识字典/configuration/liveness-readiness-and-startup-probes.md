@@ -42,7 +42,7 @@ prerequisites:
 
 ## 概述
 
-[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 提供三种探针（Probe）来持续监控 Pod 中容器的健康状态。根据探针返回的结果，Kubernetes 可以决定是否需要重启不健康的容器，或者是否将流量路由到尚未就绪的容器。这三种探针分别是：Startup Probe（启动探针）、Liveness Probe（存活探针）和 Readiness Probe（就绪探针）。
+[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 提供三种探针（Probe）来持续监控 Pod 中容器的健康状态。根据探针返回的结果，Kubernetes 可以决定是否需要重启不健康的容器，或者是否将流量路由到尚未就绪的容器。这三种探针分别是：Startup Probe（启动探针）、Liveness Probe（存活探针）和 Readiness Probe（就绪探针）。
 
 ## 核心概念/原理
 
@@ -63,7 +63,7 @@ prerequisites:
 
 - **作用**：判断容器是否已准备好接收流量。
 - **执行时机**：在容器整个生命周期中周期性执行。
-- **适用场景**：用于等待应用完成耗时初始化任务（如建立网络连接、加载配置文件、预热缓存），或在应用暂时过载、故障恢复时暂时将 Pod 从 [[Service|Service]] 端点中移除。若探针失败，Kubernetes 会将该 Pod 从所有匹配的 Service 端点中摘除。
+- **适用场景**：用于等待应用完成耗时初始化任务（如建立网络连接、加载配置文件、预热缓存），或在应用暂时过载、故障恢复时暂时将 Pod 从 [[service|Service]] 端点中移除。若探针失败，Kubernetes 会将该 Pod 从所有匹配的 Service 端点中摘除。
 
 ## 关键机制或特性
 

@@ -48,7 +48,7 @@ prerequisites:
 
 
 
-title: 05 - [[StatefulSet|StatefulSet]] YAML 配置参考
+title: 05 - [[statefulset|StatefulSet]] YAML 配置参考
 description: '# 05 - StatefulSet YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -56,7 +56,7 @@ tags:
 - yaml
 - manifest
 - template
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - docker
 - ceph
 - redis
@@ -73,7 +73,7 @@ estimated_read_time: 10min
 intent_queries:
 - StatefulSet YAML 配置参考 是什么
 - 如何 StatefulSet YAML 配置参考
-- [[Kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
+- [[kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
 trigger_keywords:
 - StatefulSet
 - YAML

@@ -45,7 +45,7 @@ severity: critical
 
 # Job/CronJob 异常故障树分析
 
-<!-- condition: kubectl get [[Jobs|jobs]] -A -o jsonpath='{range .items[?(@.status.failed>0)]}{.metadata.name}{"\t"}{.status.failed}{"\n"}{end}' 显示有 Failed Job -->
+<!-- condition: kubectl get [[jobs|jobs]] -A -o jsonpath='{range .items[?(@.status.failed>0)]}{.metadata.name}{"\t"}{.status.failed}{"\n"}{end}' 显示有 Failed Job -->
 
 # Job/CronJob 异常 FTA 树
 

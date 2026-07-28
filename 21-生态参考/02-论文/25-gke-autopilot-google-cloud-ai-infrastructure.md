@@ -62,7 +62,7 @@ tags:
 - research
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - [[containerd|containerd]]
 - docker
 - redis

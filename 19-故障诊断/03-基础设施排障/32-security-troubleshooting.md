@@ -1,7 +1,7 @@
 ---
 title: 安全相关故障排查
 description: '# 32 - 安全相关故障排查 (Security Troubleshooting)'
-summary: 'kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].spec.containers[0].command}' | jq'
+summary: "kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[0].spec.containers[0].command}' | jq"
 category: troubleshooting
 tags:
 - security

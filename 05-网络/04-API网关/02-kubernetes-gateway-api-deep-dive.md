@@ -62,7 +62,7 @@ cross_refs:
 
 
 
-# 02 - [[Kubernetes|Kubernetes]] Gateway API 标准深度解析
+# 02 - [[kubernetes|Kubernetes]] Gateway API 标准深度解析
 
 > **文档版本**: v1.0 | **适用版本**: Gateway API v1.0 - v1.2, Kubernetes 1.25+ | **更新日期**: 2026-03-04 | **关键词**: Gateway API, GatewayClass, HTTPRoute, ReferenceGrant, 一致性测试
 
@@ -76,7 +76,7 @@ cross_refs:
 6. [跨命名空间路由与 ReferenceGrant](#6-跨命名空间路由与-referencegrant)
 7. [一致性测试与合规等级](#7-一致性测试与合规等级)
 8. [各产品 Gateway API 支持矩阵](#8-各产品-gateway-api-支持矩阵)
-9. [从 [[Ingress|Ingress]] 迁移到 Gateway API](#9-从-ingress-迁移到-gateway-api)
+9. [从 [[ingress|Ingress]] 迁移到 Gateway API](#9-从-ingress-迁移到-gateway-api)
 
 ---
 
@@ -432,7 +432,7 @@ go test ./conformance/... -run TestConformance \
 
 <!-- chunk: 8. 各产品 Gateway API 支持矩阵 -->## 8. 各产品 Gateway API 支持矩阵
 
-| 能力 | Higress | APISIX | Kong | [[Envoy|Envoy]] GW | Traefik |
+| 能力 | Higress | APISIX | Kong | [[envoy\|Envoy]] GW | Traefik |
 |------|---------|--------|------|----------|---------|
 | **GatewayClass** | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **Gateway** | ✅ | ✅ | ✅ | ✅ | ✅ |

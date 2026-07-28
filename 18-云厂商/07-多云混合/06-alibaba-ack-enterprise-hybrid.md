@@ -1,7 +1,7 @@
 ---
 title: Alibaba Cloud ACK 企业级混合云深度实践
 description: '# Alibaba Cloud ACK 企业级混合云深度实践'
-summary: '阿里云容器服务 [[Kubernetes|Kubernetes]] 版（Alibaba Container [[Service|Service]] for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。'
+summary: '阿里云容器服务 [[kubernetes|Kubernetes]] 版（Alibaba Container [[service|Service]] for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。'
 category: multi-cloud-hybrid
 tags:
 - k8s
@@ -67,7 +67,7 @@ authors:
 
 <!-- chunk: 概述 -->## 概述
 
-阿里云容器服务 [[Kubernetes|Kubernetes]] 版（Alibaba Container [[Service|Service]] for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。ACK Pro 版提供企业级 SLA 保障、Terway 高性能网络、云原生 AI 基础设施、以及与本地数据中心的深度混合云集成能力。阿里云是中国最大的云服务商，在金融、政务、电商、制造等行业拥有大量企业客户。
+阿里云容器服务 [[kubernetes|Kubernetes]] 版（Alibaba Container [[service|Service]] for Kubernetes，ACK）是阿里云提供的托管 Kubernetes 服务，在中国市场占有领先地位。ACK Pro 版提供企业级 SLA 保障、Terway 高性能网络、云原生 AI 基础设施、以及与本地数据中心的深度混合云集成能力。阿里云是中国最大的云服务商，在金融、政务、电商、制造等行业拥有大量企业客户。
 
 在多云混合云架构中，ACK 通常作为中国区域工作负载的核心承载平台，通过云企业网（CEN）、SAG 智能接入网关和 VPN 网关与本地数据中心及其他云平台互联。ACK 的 Terway 网络插件基于 eBPF 技术，提供接近原生性能的网络吞吐，支持 IPVlan 和 ENI 弹性网卡两种模式。云原生 AI 套件（Arena、Arena Deployment）为 GPU 密集型工作负载提供极致调度能力，支持 GPU 共享、显存隔离和拓扑感知调度。ECI 弹性容器实例提供 Serverless Pod 能力，按秒计费，无需管理节点。
 
@@ -78,7 +78,7 @@ authors:
 | 特性 | 说明 | 适用场景 |
 |:---|:---|:---|
 | ACK Pro | 企业级托管集群，99.95% SLA，托管节点池 | 生产环境 |
-| Terway 网络 | 基于 eBPF 的高性能 CNI，支持 [[NetworkPolicy|NetworkPolicy]] 和 IPVlan | 高性能网络 |
+| Terway 网络 | 基于 eBPF 的高性能 CNI，支持 [[networkpolicy\|NetworkPolicy]] 和 IPVlan | 高性能网络 |
 | 托管节点池 | 阿里云管理节点生命周期（修复、升级、替换） | 减少运维负担 |
 | ECI 弹性容器实例 | Serverless Pod，按秒计费，无需管理节点 | 突发流量、CI/CD |
 | 云原生 AI 套件 | Arena 训练/推理框架、GPU 共享与隔离 | AI 训练、推理 |

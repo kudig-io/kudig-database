@@ -58,10 +58,10 @@ tags:
 - workload
 - pod
 - deployment
-- [[StatefulSet|statefulset]]
-- [[Prometheus|prometheus]]
+- [[statefulset|statefulset]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Istio|istio]]
+- [[istio|istio]]
 - redis
 - postgresql
 last_updated: 2026-05

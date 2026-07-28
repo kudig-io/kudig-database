@@ -79,7 +79,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] [[Ingress|Ingress]] 基础概念与核心原理 (Ingress Fundamentals)
+# [[kubernetes|Kubernetes]] [[ingress|Ingress]] 基础概念与核心原理 (Ingress Fundamentals)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  
 > **文档版本**: v3.0 | 生产级 Ingress 配置参考  

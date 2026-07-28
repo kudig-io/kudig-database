@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 容器环境为容器提供了若干重要资源，包括文件系统、容器自身信息，以及集群中其他对象的信息。了解这些资源有助于开发人员在容器内正确获取运行时的上下文信息。
+[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 容器环境为容器提供了若干重要资源，包括文件系统、容器自身信息，以及集群中其他对象的信息。了解这些资源有助于开发人员在容器内正确获取运行时的上下文信息。
 
 ## 核心概念/原理
 
@@ -59,7 +59,7 @@ prerequisites:
 
 ### 集群信息
 
-当容器创建时，Kubernetes 会将同一命名空间内所有正在运行的 [[Service|Service]] 信息以环境变量的形式注入到该容器中。对于名为 `foo` 的 Service，会设置如下环境变量：
+当容器创建时，Kubernetes 会将同一命名空间内所有正在运行的 [[service|Service]] 信息以环境变量的形式注入到该容器中。对于名为 `foo` 的 Service，会设置如下环境变量：
 
 ```
 FOO_SERVICE_HOST=<服务所在的主机地址>

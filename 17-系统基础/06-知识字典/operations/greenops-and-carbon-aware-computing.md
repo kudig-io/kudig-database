@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
+随着全球对气候变化的重视和企业 ESG（环境、社会与治理）合规要求的提升，**GreenOps** 正在成为云原生运维的重要分支。GreenOps 将环境可持续性纳入 IT 运营决策，通过**碳感知调度（Carbon-aware Scheduling）、资源效率优化和可再生能源优先**等手段，降低 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 工作负载的碳足迹。2026 年，欧盟 CSRD 等法规已要求大型企业披露数字基础设施的碳排放数据。
 
 ## 核心概念/原理
 
@@ -63,13 +63,13 @@ prerequisites:
 **碳感知调度**是指根据电网的实时碳强度数据，将工作负载调度到碳排放更低的时间段或地理区域：
 - **时间偏移（Temporal Shifting）**：将非紧急的批处理任务推迟到夜间（风电充足时）执行
 - **地理偏移（Spatial Shifting）**：将工作负载从煤电为主的区域迁移到水电/光伏为主的区域
-- **Kubernetes 集成**：通过自定义调度器或扩展（如 [[Kepler|Kepler]] + Carbon-aware plugins）实现自动碳感知决策
+- **Kubernetes 集成**：通过自定义调度器或扩展（如 [[kepler|Kepler]] + Carbon-aware plugins）实现自动碳感知决策
 
 ### 3. Kepler：Kubernetes 能耗监控
 
 **Kepler（Kubernetes Efficient Power Level Exporter）** 是 CNCF 沙箱项目，利用 eBPF 和 RAPL（Running Average Power Limit）接口：
 - 按 Pod 级别采集能耗数据（瓦特）
-- 将能耗数据导出为 [[Prometheus|Prometheus]] 指标
+- 将能耗数据导出为 [[prometheus|Prometheus]] 指标
 - 支持计算每个 Pod 的碳排放量估算
 
 ```
@@ -138,7 +138,7 @@ Kubernetes 资源优化直接带来能耗降低：
 | Kepler 指标为零 | RAPL 接口不可用或 eBPF 未加载 | `kubectl logs -n kepler kepler-*` | 确认节点支持 RAPL，内核启用 eBPF |
 | 碳感知调度器未生效 | 碳强度 API 不可达 | 检查 Electricity Maps / WattTime API 连通性 | 配置 API key 和网络出口策略 |
 | 能耗数据不准确 | 虚拟机环境无法直接读取 RAPL | `cat /sys/class/powercap/intel-rapl:0/energy_uj` | 使用 Kepler 的估算模型替代直接读取 |
-| 批处理任务未在低碳时段运行 | 调度器插件优先级配置错误 | 查看自定义调度器配置 | 确认碳感知插件的 [[Score|Score]] 权重设置 |
+| 批处理任务未在低碳时段运行 | 调度器插件优先级配置错误 | 查看自定义调度器配置 | 确认碳感知插件的 [[score\|Score]] 权重设置 |
 | kube-green 环境未按时关闭 | SleepInfo CR 时区不匹配 | `kubectl get sleepinfo -A -o yaml` | 设置正确的 timezone 字段 |
 
 ## 生产检查清单

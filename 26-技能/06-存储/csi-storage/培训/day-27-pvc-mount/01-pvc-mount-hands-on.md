@@ -1,7 +1,7 @@
 ---
 title: 'Day 27: 存储卷挂载实操'
 description: '# Day 27: 存储卷挂载实操'
-summary: 'kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[*].mountPropagation}''
+summary: "kubectl get pod <pod-name> -o jsonpath='{.spec.volumes[*].mountPropagation}'"
 category: learning
 tags:
 - k8s
@@ -49,7 +49,7 @@ prerequisites:
 
 # Day 27: 存储卷挂载实操
 
-> **日期**: Week 4 Day 6 | **主题**: 存储挂载方式与最佳实践 | **版本**: [[23-实体/kubernetes.md|[[Kubernetes 生产环境速查卡|k8s]]]] 1.28-1.33
+> **日期**: Week 4 Day 6 | **主题**: 存储挂载方式与最佳实践 | **版本**: [[23-实体/kubernetes.md|[[17-系统基础/05-速查卡/k8s|k8s]]]] 1.28-1.33
 
 ---
 
@@ -233,7 +233,7 @@ spec:
 
 ---
 
-## 5. [[StatefulSet|StatefulSet]] 存储管理
+## 5. [[statefulset|StatefulSet]] 存储管理
 
 ### 5.1 有状态应用存储
 
@@ -434,7 +434,7 @@ kube-proxy 通过 iptables/IPVS 将 ClusterIP DNAT 到后端 PodIP:TargetPort。
 
 </details>
 
-**2. [[Ingress|Ingress]] vs Gateway API?**
+**2. [[ingress|Ingress]] vs Gateway API?**
 
 <details><summary>答案</summary>
 

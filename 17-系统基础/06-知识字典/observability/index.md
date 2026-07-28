@@ -238,10 +238,10 @@ audience:
 
 ## Related
 
-- [[17-系统基础/06-知识字典/operations/alerting.md|告警运维]]
-- [[17-系统基础/06-知识字典/platform-engineering/slo.md|SLO 工程]]
+- [[09-可观测性/05-告警/index|告警运维]]
+- [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice|SLO 工程]]
 - [[17-系统基础/06-知识字典/networking/cilium.md|Cilium Hubble 网络可观测]]
-- [[17-系统基础/06-知识字典/security/audit-logging.md|安全审计日志]]
+- [[09-可观测性/03-日志/12-logging-auditing|安全审计日志]]
 
 ## 深度技术解析
 

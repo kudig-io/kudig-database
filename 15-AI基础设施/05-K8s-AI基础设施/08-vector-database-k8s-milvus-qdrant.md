@@ -59,7 +59,7 @@ authors:
 
 本文覆盖三大主流向量数据库（Milvus、Qdrant、Weaviate）以及 pgvector 扩展的架构对比、K8s 生产部署、HNSW 索引内存估算、性能调优、备份恢复和故障排查。帮助 AI 平台团队选择并运维适合自身场景的向量存储方案。
 
-相关页面：[[RAG知识库架构]]、[[GPU调度与资源管理]]、[[K8s有状态服务运维]]、[[Prometheus监控体系]]、[[K8s存储与PV管理]]
+相关页面：[[15-AI基础设施/05-K8s-AI基础设施/08-vector-database-k8s-milvus-qdrant|RAG知识库架构]]、[[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]、[[22-概念/02-工作负载/statefulset|K8s有状态服务运维]]、[[23-实体/07-可观测性/prometheus|Prometheus监控体系]]、[[17-系统基础/06-知识字典/storage/persistent-volume|K8s存储与PV管理]]
 
 ## 架构与核心概念
 
@@ -623,8 +623,8 @@ spec:
 
 ## Related
 
-- [[RAG知识库架构]]
-- [[K8s有状态服务运维]]
-- [[Prometheus监控体系]]
-- [[K8s存储与PV管理]]
-- [[GPU调度与资源管理]]
+- [[15-AI基础设施/05-K8s-AI基础设施/08-vector-database-k8s-milvus-qdrant|RAG知识库架构]]
+- [[22-概念/02-工作负载/statefulset|K8s有状态服务运维]]
+- [[23-实体/07-可观测性/prometheus|Prometheus监控体系]]
+- [[17-系统基础/06-知识字典/storage/persistent-volume|K8s存储与PV管理]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]

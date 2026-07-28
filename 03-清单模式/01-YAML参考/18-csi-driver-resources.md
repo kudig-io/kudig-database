@@ -67,7 +67,7 @@ cross_refs:
 # 18 - CSI 驱动资源 YAML 配置参考
 
 > **文档版本**: 2026-02  
-> **适用范围**: [[Kubernetes|Kubernetes]] v1.25 - v1.32  
+> **适用范围**: [[kubernetes|Kubernetes]] v1.25 - v1.32  
 > **资源类型**: CSIDriver, CSINode, CSIStorageCapacity  
 > **API 版本**: storage.k8s.io/v1  
 > **用途**: CSI 驱动注册、节点拓扑、存储容量管理
@@ -1182,7 +1182,7 @@ kubectl exec test-pod -- df -h /data
 ```
 ## 5.2 案例 2: 监控 CSI Driver
 
-**[[Prometheus|Prometheus]] 监控配置**:
+**[[prometheus|Prometheus]] 监控配置**:
 
 ```yaml
 # ServiceMonitor (Prometheus Operator)

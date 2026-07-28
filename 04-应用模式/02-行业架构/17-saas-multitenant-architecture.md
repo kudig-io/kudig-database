@@ -49,17 +49,17 @@ prerequisites:
 
 
 title: SaaS多租户平台Kubernetes生产架构设计
-description: '# SaaS 多租户平台 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# SaaS 多租户平台 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Helm|helm]]
+- [[helm|helm]]
 - redis
 - mysql
 - elasticsearch
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - gateway
 - rbac
 last_updated: '2026-05-18'

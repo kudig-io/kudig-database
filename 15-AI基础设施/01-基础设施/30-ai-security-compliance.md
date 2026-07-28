@@ -68,7 +68,7 @@ cross_refs:
 
 # AI平台安全加固与合规
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [NIST AI RMF](https://csrc.nist.gov/publications/detail/white-paper/2023/03/01/artificial-intelligence-risk-management-framework-ai-rmf-10/final) | [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [NIST AI RMF](https://csrc.nist.gov/publications/detail/white-paper/2023/03/01/artificial-intelligence-risk-management-framework-ai-rmf-10/final) | [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
 
 <!-- chunk: 一、AI平台安全架构 -->
 ## 一、AI平台安全架构
@@ -144,11 +144,11 @@ cross_refs:
 
 | 安全领域 | 控制措施 | 实施组件 | 合规要求 | 重要程度 |
 |----------|----------|----------|----------|----------|
-| **身份认证** | 多因子认证、SSO集成 | [[Keycloak|Keycloak]]、LDAP | GDPR、SOC2 | ⭐⭐⭐⭐⭐ |
+| **身份认证** | 多因子认证、SSO集成 | [[keycloak\|Keycloak]]、LDAP | GDPR、SOC2 | ⭐⭐⭐⭐⭐ |
 | **访问控制** | RBAC、ABAC、网络策略 | Kubernetes RBAC、OPA | HIPAA、ISO27001 | ⭐⭐⭐⭐⭐ |
 | **数据加密** | 静态加密、传输加密 | Vault、cert-manager | PCI-DSS、GDPR | ⭐⭐⭐⭐⭐ |
 | **模型安全** | 模型签名、差分隐私 | Sigstore、OpenDP | AI Act、NIST AI RMF | ⭐⭐⭐⭐ |
-| **威胁检测** | 运行时防护、异常检测 | [[Falco|Falco]]、Sysdig | NIST CSF | ⭐⭐⭐⭐ |
+| **威胁检测** | 运行时防护、异常检测 | [[falco\|Falco]]、Sysdig | NIST CSF | ⭐⭐⭐⭐ |
 | **合规审计** | 操作审计、合规报告 | Auditbeat、ELK | SOX、FINRA | ⭐⭐⭐ |
 
 ---

@@ -44,7 +44,7 @@ severity: high
 
 # API Server 异常故障树分析
 
-<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[Pods|pods]] -n kube-system -l component=kube-apiserver 显示非 Running -->
+<!-- condition: kubectl get --raw /healthz 返回非 200 或 kubectl get [[pods|pods]] -n kube-system -l component=kube-apiserver 显示非 Running -->
 
 # API Server 异常 FTA 树
 

@@ -46,7 +46,7 @@ prerequisites:
 
 # Sermant
 
-> **CNCF 状态**: Sandbox | **类别**: [[Service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Java
+> **CNCF 状态**: Sandbox | **类别**: [[service|Service]]Service Mesh）|Service Mesh]] | **主要语言**: Java
 
 ## 概述
 

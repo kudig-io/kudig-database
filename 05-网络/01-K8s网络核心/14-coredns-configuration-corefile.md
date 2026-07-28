@@ -72,9 +72,9 @@ cross_refs:
 
 
 
-# 54 - [[CoreDNS|CoreDNS]] Corefile 配置详解 (Corefile Configuration)
+# 54 - [[coredns|CoreDNS]] Corefile 配置详解 (Corefile Configuration)
 
-> **适用版本**: CoreDNS 1.8.0+ / [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: CoreDNS 1.8.0+ / [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 

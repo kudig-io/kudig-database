@@ -56,15 +56,15 @@ prerequisites:
 
 
 title: 云原生 DevOps 平台架构设计
-description: '# 云原生 DevOps 平台 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 云原生 DevOps 平台 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
+- [[helm|helm]]
 - argocd
 - flux
 - docker

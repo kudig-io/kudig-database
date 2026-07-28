@@ -125,7 +125,7 @@ Step 2: kubectl describe pod <name>
 Step 3: kubectl logs <name> --previous (if crashed)
   -> Application-level error identification
 ```
-### Example: [[Service|Service]] Not Reachable
+### Example: [[service|Service]] Not Reachable
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl exec`：进入容器执行命令，可能改变容器状态

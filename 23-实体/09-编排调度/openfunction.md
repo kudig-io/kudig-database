@@ -1,7 +1,7 @@
 ---
 title: OpenFunction (entities)
 description: '## 概述'
-summary: 'OpenFunction 是一个云原生 FaaS (Function as a [[Service|Service]]) 平台，使开发者能够专注于业务逻辑。它集成了 Knative、KEDA、Dapr、Shipwright 等云原生项目，提供从源码构建到函数运行的完整生命周期管理，支持同步和异步函数运行时。'
+summary: 'OpenFunction 是一个云原生 FaaS (Function as a [[service|Service]]) 平台，使开发者能够专注于业务逻辑。它集成了 Knative、KEDA、Dapr、Shipwright 等云原生项目，提供从源码构建到函数运行的完整生命周期管理，支持同步和异步函数运行时。'
 category: entities
 tags:
 - k8s

@@ -54,7 +54,7 @@ tags:
 - disaster-recovery
 - backup
 - ha
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - job
 - gateway
 - rbac
@@ -71,7 +71,7 @@ estimated_read_time: 5min
 intent_queries:
 - Veeam Backup & Replication 企业级备份恢复解决方案 是什么
 - 如何 Veeam Backup & Replication 企业级备份恢复解决方案
-- [[Kubernetes|Kubernetes]] 30 disaster recovery business continuity 最佳实践
+- [[kubernetes|Kubernetes]] 30 disaster recovery business continuity 最佳实践
 trigger_keywords:
 - Veeam
 - Backup

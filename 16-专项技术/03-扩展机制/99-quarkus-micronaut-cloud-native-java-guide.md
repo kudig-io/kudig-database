@@ -78,7 +78,7 @@ cross_refs:
 - [二、框架对比](#二框架对比)
 - [三、Quarkus 核心实践](#三quarkus-核心实践)
 - [四、Micronaut 核心实践](#四micronaut-核心实践)
-- [五、[[Kubernetes|Kubernetes]] 原生集成](#五kubernetes-原生集成)
+- [五、[[kubernetes|Kubernetes]] 原生集成](#五kubernetes-原生集成)
 - [六、Dev Services 开发体验](#六dev-services-开发体验)
 - [七、反应式编程](#七反应式编程)
 - [八、Native Image 编译](#八native-image-编译)

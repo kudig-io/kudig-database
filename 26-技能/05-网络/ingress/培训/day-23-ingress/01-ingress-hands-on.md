@@ -70,7 +70,7 @@ prerequisites:
 |--------|------|---------|
 | NGINX Ingress Controller | 功能丰富，性能高 | 生产环境 |
 | Traefik | 支持 Let's Encrypt 自动证书 | 内部服务 |
-| Ambassador | 基于 [[Envoy|Envoy]]，支持 canary | API Gateway |
+| Ambassador | 基于 [[envoy\|Envoy]]，支持 canary | API Gateway |
 | GKE Ingress | GCP 原生集成 | GCP 环境 |
 
 ---

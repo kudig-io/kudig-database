@@ -610,7 +610,7 @@ kubectl rollout status deployment/$DEPLOY -n $NS --timeout=5s 2>&1 || true
    kubectl get secret -n <namespace> | grep image-pull
    ```
 
-### 4.2 [[ReplicaSet|ReplicaSet]] 不创建解决方案
+### 4.2 [[replicaset|ReplicaSet]] 不创建解决方案
 
 如果 Deployment 已创建但没有 ReplicaSet：
 

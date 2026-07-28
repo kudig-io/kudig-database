@@ -2898,7 +2898,7 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 2. 充分利用共享内存实现跨请求状态（限流计数器、缓存等）
 3. 异步 HTTP 调用避免阻塞请求流程
 4. 通过 OCI 镜像分发插件，利用 SHA256 验证完整性
-5. 使用 [[Prometheus|Prometheus]] 指标监控插件运行状态
+5. 使用 [[prometheus|Prometheus]] 指标监控插件运行状态
 6. 渐进式发布新版插件，降低风险
 
 ---
@@ -2915,7 +2915,7 @@ Wasm 插件系统通过 **proxy-wasm 规范** 提供了标准化的代理扩展�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[16-专项技术/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[16-专项技术/README.md|[[37-归档/domain-indexes/specialty-tech/README-from-domain-38|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - Domain-38 WebAssembly 云原生 — 开源项目索引
 - WebAssembly 云原生基础
 - containerd Wasm 运行时

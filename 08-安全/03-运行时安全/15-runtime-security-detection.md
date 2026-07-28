@@ -69,7 +69,7 @@ cross_refs:
 
 # 15 - 安全扫描与检测工具
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[23-实体/06-安全/falco.md|Falco]] Documentation](https://falco.org/docs/) | [[23-实体/06-安全/kubearmor.md|KubeArmor]] Documentation](https://kubearmor.io/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[23-实体/06-安全/falco.md|Falco]] Documentation](https://falco.org/docs/) | [[23-实体/06-安全/kubearmor.md|KubeArmor]] Documentation](https://kubearmor.io/)
 
 <!-- chunk: 一、运行时安全检测架构 -->
 ## 一、运行时安全检测架构
@@ -142,7 +142,7 @@ cross_refs:
 | **Falco** | eBPF/Syscall | 低-中 | 系统调用、文件操作 | 高 | 通用威胁检测 |
 | **KubeArmor** | LSM/eBPF | 低 | 文件、进程、网络 | 中 | Kubernetes专用 |
 | **Sysdig** | eBPF | 中 | 全栈监控 | 高 | 商业平台 |
-| **[[Tetragon|Tetragon]]** | eBPF | 低 | 网络、进程跟踪 | 中 | Cilium生态 |
+| **[[tetragon\|Tetragon]]** | eBPF | 低 | 网络、进程跟踪 | 中 | Cilium生态 |
 | **Tracee** | eBPF | 中 | 运行时追踪 | 中 | 安全研究 |
 
 <!-- chunk: 二、Falco深度配置与实践 -->

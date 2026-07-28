@@ -62,7 +62,7 @@ authors:
 
 
 
-# [[Backstage|Backstage]] 内部开发者平台 (IDP) 构建指南
+# [[backstage|Backstage]] 内部开发者平台 (IDP) 构建指南
 
 > **适用版本**: Backstage v1.36.0  
 > **最后更新**: 2026-04-24  
@@ -409,7 +409,7 @@ docs/
 | 插件 | 作用 | 安装 |
 |:---|:---|:---|
 | `@backstage/plugin-[[Kubernetes|kubernetes]]` | K8s 资源可视化 | `yarn add` + 后端配置 |
-| `@backstage/plugin-argo-cd` | [[Argo|Argo]] CD 应用状态 | `yarn add` |
+| `@backstage/plugin-argo-cd` | [[argo\|Argo]] CD 应用状态 | `yarn add` |
 | `@backstage/plugin-[[Prometheus|prometheus]]` | Prometheus 指标 | `yarn add` |
 | `@backstage/plugin-grafana` | Grafana 仪表盘 | `yarn add` |
 | `@backstage/plugin-sonarqube` | 代码质量看板 | `yarn add` |

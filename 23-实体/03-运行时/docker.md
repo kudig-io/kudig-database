@@ -56,7 +56,7 @@ Docker is the platform that popularized containerization. Since K8s v1.24 remove
 | Component | Role |
 |-----------|------|
 | Docker CLI | User interface (docker command) |
-| dockerd | API [[Service|service]], manages images/networks/volumes |
+| dockerd | API [[service\|service]], manages images/networks/volumes |
 | containerd | Container lifecycle management |
 | containerd-shim | Keeps container running when dockerd restarts |
 | runc | OCI runtime, creates actual container process |

@@ -51,7 +51,7 @@ prerequisites:
 
 
 
-title: 22 - [[NetworkPolicy|NetworkPolicy]] YAML 配置参考
+title: 22 - [[networkpolicy|NetworkPolicy]] YAML 配置参考
 description: '# 22 - NetworkPolicy YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -59,9 +59,9 @@ tags:
 - yaml
 - manifest
 - template
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
+- [[cilium|cilium]]
 - flannel
 - calico
 - coredns

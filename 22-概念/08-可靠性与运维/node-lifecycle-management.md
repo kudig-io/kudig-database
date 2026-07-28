@@ -220,9 +220,9 @@ Node Ready
 
 ## 相关概念
 
-- [[26-技能/03-节点/node/运维操作/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
-- [[26-技能/07-安全/certificate/kubelet-certificate-rotation.md|[[kubelet 证书轮换机制|kubelet 证书轮换机制]]]]
-- [[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism.md|[[kubelet 资源驱逐机制|kubelet 资源驱逐机制]]]]
+- [[26-技能/03-节点/node/运维操作/node-drain-and-maintenance.md|[[26-技能/03-节点/node/运维操作/node-drain-and-maintenance|节点驱逐与维护]]]]
+- [[26-技能/07-安全/certificate/kubelet-certificate-rotation.md|[[26-技能/07-安全/certificate/kubelet-certificate-rotation|kubelet 证书轮换机制]]]]
+- [[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism.md|[[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism|kubelet 资源驱逐机制]]]]
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]
 - [[pod-lifecycle|Pod 生命周期]]
 

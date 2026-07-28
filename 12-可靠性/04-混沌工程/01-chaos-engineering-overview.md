@@ -97,7 +97,7 @@ prerequisites:
   CI/CD → 部署 → 自动混沌实验 → 验证 SLO → 通过/回滚
 ```
 
-### 5. 最小化爆炸半径 (Minimize Blast [[Radius|Radius]])
+### 5. 最小化爆炸半径 (Minimize Blast [[radius|Radius]])
 
 ```
 爆炸半径控制手段:
@@ -113,7 +113,7 @@ prerequisites:
 |------|------|------|
 | **1. 萌芽** | 随机故障注入 | 手动 kubectl delete pod |
 | **2. 基础** | 有计划的人工实验 | Chaos Mesh Dashboard |
-| **3. 中级** | 自动化实验，事后分析 | [[Litmus|Litmus]] + CI/CD 集成 |
+| **3. 中级** | 自动化实验，事后分析 | [[litmus\|Litmus]] + CI/CD 集成 |
 | **4. 高级** | 生产环境持续运行，自动回滚 | Gremlin / 自研平台 |
 | **5. 专家** | 智能故障预测，AI 驱动 | 智能混沌平台 |
 

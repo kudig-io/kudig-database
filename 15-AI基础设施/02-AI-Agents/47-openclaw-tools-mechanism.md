@@ -56,8 +56,8 @@ tags:
 - rag
 - multi-agent
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

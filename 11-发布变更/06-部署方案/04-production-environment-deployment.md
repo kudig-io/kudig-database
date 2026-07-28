@@ -66,7 +66,7 @@ tags:
 - apiserver
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - calico
 last_updated: 2026-05

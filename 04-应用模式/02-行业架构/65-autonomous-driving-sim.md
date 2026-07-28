@@ -55,9 +55,9 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[ArgoCD|argocd]]
+- [[argocd|argocd]]
 - opa
 - mysql
 - job

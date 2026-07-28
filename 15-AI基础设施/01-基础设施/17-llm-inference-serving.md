@@ -60,9 +60,9 @@ tags:
 - training
 - inference
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
+- [[jaeger|jaeger]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -74,7 +74,7 @@ estimated_read_time: 5min
 intent_queries:
 - LLM推理服务部署 是什么
 - 如何 LLM推理服务部署
-- [[Kubernetes|Kubernetes]] 11 ai infra 最佳实践
+- [[kubernetes|Kubernetes]] 11 ai infra 最佳实践
 trigger_keywords:
 - LLM推理服务部署
 - ai

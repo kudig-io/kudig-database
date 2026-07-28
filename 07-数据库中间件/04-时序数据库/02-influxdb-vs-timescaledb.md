@@ -49,7 +49,7 @@ prerequisites:
 | 维度 | InfluxDB v2 | TimescaleDB |
 |------|-------------|-------------|
 | 基础 | 专用存储引擎 | PostgreSQL 扩展 |
-| 查询语言 | [[Flux|Flux]] / InfluxQL | SQL + 时序扩展 |
+| 查询语言 | [[flux\|Flux]] / InfluxQL | SQL + 时序扩展 |
 | 生态 | Influx 生态 | PostgreSQL 生态 |
 | 高可用 | Enterprise / Cloud | Patroni / 流复制 |
 | 压缩率 | 高 | 中 |

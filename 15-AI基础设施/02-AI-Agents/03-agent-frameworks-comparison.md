@@ -58,7 +58,7 @@ tags:
 - redis
 - postgresql
 - hpa
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

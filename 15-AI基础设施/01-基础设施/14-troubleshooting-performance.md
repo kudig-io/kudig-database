@@ -73,7 +73,7 @@ cross_refs:
 
 # AI平台故障排查与性能优化
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Troubleshooting](https://kubernetes.io/docs/tasks/debug/) | [NVIDIA DCGM](https://developer.nvidia.com/dcgm)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [Kubernetes Troubleshooting](https://kubernetes.io/docs/tasks/debug/) | [NVIDIA DCGM](https://developer.nvidia.com/dcgm)
 
 <!-- chunk: 一、AI平台故障诊断体系 -->
 ## 一、AI平台故障诊断体系
@@ -152,7 +152,7 @@ cross_refs:
 |----------|----------|----------|------|----------|
 | **GPU问题** | CUDA错误、驱动崩溃、温度过高 | 基础设施 | 30min | nvidia-smi, dcgmi |
 | **模型加载失败** | 无法启动、OOM、权重损坏 | 应用层 | 15min | model logs, kubectl describe |
-| **推理延迟高** | P99>500ms、吞吐量下降 | 服务层 | 45min | [[Prometheus|Prometheus]], [[Jaeger|Jaeger]] |
+| **推理延迟高** | P99>500ms、吞吐量下降 | 服务层 | 45min | [[prometheus\|Prometheus]], [[jaeger\|Jaeger]] |
 | **训练卡住** | Loss不收敛、梯度消失 | 计算层 | 60min | TensorBoard, profiling |
 | **数据访问异常** | 数据读取慢、文件损坏 | 存储层 | 20min | iostat, storage logs |
 | **网络通信问题** | 连接超时、丢包严重 | 网络层 | 25min | ping, tcpdump, traceroute |

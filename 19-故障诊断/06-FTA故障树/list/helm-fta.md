@@ -55,6 +55,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md
   label: '结构化排障: 03-helm-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

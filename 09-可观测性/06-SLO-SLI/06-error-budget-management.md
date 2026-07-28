@@ -382,7 +382,7 @@ panels:
 预算超支      → 触发事后复盘，SLO 评审
 ```
 
-### [[Kubernetes|Kubernetes]] 自动熔断实现
+### [[kubernetes|Kubernetes]] 自动熔断实现
 
 ```yaml
 # error-budget-policy.yaml

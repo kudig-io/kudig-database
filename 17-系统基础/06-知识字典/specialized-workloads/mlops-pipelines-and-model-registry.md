@@ -49,7 +49,7 @@ prerequisites:
 
 ## 概述
 
-**MLOps（Machine Learning Operations）** 是将 DevOps 工程实践应用于机器学习生命周期的方法论。2026 年的行业最佳实践要求 AI 基础设施具备完整的**数据准备、模型训练、实验追踪、模型注册、自动部署与监控反馈**能力。在 [[Kubernetes|Kubernetes]] 上，MLOps 通常通过 **[[Kubeflow|Kubeflow]]、MLflow、Airflow** 等工具链以及原生的 [[Jobs|Jobs]]/CronJobs/Pipelines 来实现。
+**MLOps（Machine Learning Operations）** 是将 DevOps 工程实践应用于机器学习生命周期的方法论。2026 年的行业最佳实践要求 AI 基础设施具备完整的**数据准备、模型训练、实验追踪、模型注册、自动部署与监控反馈**能力。在 [[kubernetes|Kubernetes]] 上，MLOps 通常通过 **[[kubeflow|Kubeflow]]、MLflow、Airflow** 等工具链以及原生的 [[jobs|Jobs]]/CronJobs/Pipelines 来实现。
 
 ## 核心概念/原理
 
@@ -68,10 +68,10 @@ prerequisites:
 ### 2. Kubeflow：Kubernetes 原生 MLOps 平台
 
 **Kubeflow** 是专为 Kubernetes 设计的开源 MLOps 平台，核心组件包括：
-- **Kubeflow Pipelines**：基于 [[Argo|Argo]] 的工作流编排引擎，定义可复用的 ML Pipeline
+- **Kubeflow Pipelines**：基于 [[argo|Argo]] 的工作流编排引擎，定义可复用的 ML Pipeline
 - **Kubeflow Notebooks**：为数据科学家提供 Jupyter/VSCode 开发环境
 - **Katib**：自动超参数调优（Hyperparameter Tuning）
-- **[[KServe|KServe]]**：集成在 Kubeflow 中的模型推理服务（现已独立为 CNCF 项目）
+- **[[kserve|KServe]]**：集成在 Kubeflow 中的模型推理服务（现已独立为 CNCF 项目）
 - **Training Operator**：支持 TensorFlow/PyTorch/MPIJob/XGBoost 的分布式训练
 
 ### 3. MLflow：模型生命周期管理

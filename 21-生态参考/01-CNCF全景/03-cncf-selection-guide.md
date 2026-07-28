@@ -108,7 +108,7 @@ authors:
 
 ### 1.2 CNI 功能对比
 
-| 特性 | Cilium | Calico | Flannel | [[Antrea|Antrea]] | OVN-[[Kubernetes|Kubernetes]] |
+| 特性 | Cilium | Calico | Flannel | [[antrea\|Antrea]] | OVN-[[kubernetes\|Kubernetes]] |
 |:-----|:------:|:------:|:-------:|:------:|:---------------:|
 | **成熟度** | Graduated | Graduated | Graduated | Sandbox | Sandbox |
 | **eBPF 加速** | ✓ | ✗ | ✗ | ✗ | ✗ |
@@ -135,7 +135,7 @@ authors:
 
 ---
 
-## 2. [[Service|Service]]Service Mesh）|Service Mesh]] 选型
+## 2. [[service|Service]]Service Mesh）|Service Mesh]] 选型
 
 ### 2.1 选型决策树
 
@@ -247,7 +247,7 @@ authors:
 
 ### 4.1 监控方案对比
 
-| 特性 | [[Prometheus|Prometheus]] | Thanos | Cortex | Mimir |
+| 特性 | [[prometheus\|Prometheus]] | Thanos | Cortex | Mimir |
 |:-----|:----------:|:------:|:------:|:-----:|
 | **成熟度** | Graduated | Incubating | Incubating | Sandbox |
 | **多租户** | ✗ | ✗ | ✓ | ✓ |

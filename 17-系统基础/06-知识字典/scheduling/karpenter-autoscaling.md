@@ -44,7 +44,7 @@ prerequisites:
 
 ## 概述
 
-**Karpenter** 是 AWS 开源的 [[Kubernetes|Kubernetes]] 节点自动扩缩容项目，已成为 2026 年替代传统 **Cluster Autoscaler** 的主流方案。与 Cluster Autoscaler 相比，Karpenter 不再依赖预配置的节点组（Node Group/Auto Scaling Group），而是直接观察 Pending Pod 的资源需求，实时选择最优的实例类型和购买选项（On-Demand / Spot），并在秒级内启动新节点。这种"**直接调度到云**"的架构显著提升了资源利用率、降低了成本和启动延迟。
+**Karpenter** 是 AWS 开源的 [[kubernetes|Kubernetes]] 节点自动扩缩容项目，已成为 2026 年替代传统 **Cluster Autoscaler** 的主流方案。与 Cluster Autoscaler 相比，Karpenter 不再依赖预配置的节点组（Node Group/Auto Scaling Group），而是直接观察 Pending Pod 的资源需求，实时选择最优的实例类型和购买选项（On-Demand / Spot），并在秒级内启动新节点。这种"**直接调度到云**"的架构显著提升了资源利用率、降低了成本和启动延迟。
 
 ## 核心概念/原理
 

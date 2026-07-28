@@ -59,7 +59,7 @@ authors:
 
 LLM Gateway 解决的核心问题包括：多供应商 API 格式不统一（OpenAI/Anthropic/Azure/自部署模型）、Token 成本不可控、缺乏统一的限流和配额管理、无法实现模型级别的故障转移和负载均衡。本文覆盖开源方案对比、K8s 生产部署、路由策略设计、成本归因和故障排查。
 
-相关页面：[[vLLM推理引擎部署]]、[[K8s Ingress与流量管理]]、[[Prometheus监控体系]]、[[AI可观测性平台]]、[[K8s资源配额与LimitRange]]
+相关页面：[[15-AI基础设施/05-K8s-AI基础设施/02-vllm-inference-serving-production|vLLM推理引擎部署]]、[[22-概念/03-网络/ingress|K8s Ingress与流量管理]]、[[23-实体/07-可观测性/prometheus|Prometheus监控体系]]、[[15-AI基础设施/05-K8s-AI基础设施/12-ai-observability-arize-phoenix|AI可观测性平台]]、[[17-系统基础/06-知识字典/configuration/resource-quota|K8s资源配额与LimitRange]]
 
 ## 架构与核心概念
 
@@ -636,8 +636,8 @@ spec:
 
 ## Related
 
-- [[vLLM推理引擎部署]]
-- [[K8s Ingress与流量管理]]
-- [[Prometheus监控体系]]
-- [[AI可观测性平台]]
-- [[K8s资源配额与LimitRange]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-vllm-inference-serving-production|vLLM推理引擎部署]]
+- [[22-概念/03-网络/ingress|K8s Ingress与流量管理]]
+- [[23-实体/07-可观测性/prometheus|Prometheus监控体系]]
+- [[15-AI基础设施/05-K8s-AI基础设施/12-ai-observability-arize-phoenix|AI可观测性平台]]
+- [[17-系统基础/06-知识字典/configuration/resource-quota|K8s资源配额与LimitRange]]

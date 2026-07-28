@@ -40,6 +40,7 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - logging-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

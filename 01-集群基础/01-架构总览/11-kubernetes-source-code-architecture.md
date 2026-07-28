@@ -68,7 +68,7 @@ cross_refs:
 
 
 
-# 11 - [[Kubernetes|Kubernetes]] 源码架构深度分析
+# 11 - [[kubernetes|Kubernetes]] 源码架构深度分析
 
 <!-- chunk: 概述 -->
 ## 概述

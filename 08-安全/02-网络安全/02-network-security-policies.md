@@ -604,7 +604,7 @@ kubectl logs -n kube-system -l k8s-app=cilium
 ## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Security Domain|Security Domain]]]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-7|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 运行时安全防护与威胁检测

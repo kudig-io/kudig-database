@@ -72,7 +72,7 @@ estimated_read_time: 5min
 intent_queries:
 - 硬件错误码速查大全 是什么
 - 如何 硬件错误码速查大全
-- [[Kubernetes|Kubernetes]] 31 hardware 最佳实践
+- [[kubernetes|Kubernetes]] 31 hardware 最佳实践
 trigger_keywords:
 - 硬件错误码速查大全
 - hardware

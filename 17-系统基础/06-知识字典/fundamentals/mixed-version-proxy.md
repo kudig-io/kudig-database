@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-Mixed Version Proxy 是 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 1.28 引入的 Alpha 特性（默认关闭），它允许 API 服务器将资源请求代理给其他对等（peer）API 服务器，同时使客户端能够通过发现机制获得整个集群资源的完整视图。这在集群中运行多个不同版本的 [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器时非常有用（例如在进行长时间的滚动升级期间）。
+Mixed Version Proxy 是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 1.28 引入的 Alpha 特性（默认关闭），它允许 API 服务器将资源请求代理给其他对等（peer）API 服务器，同时使客户端能够通过发现机制获得整个集群资源的完整视图。这在集群中运行多个不同版本的 [[17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 服务器时非常有用（例如在进行长时间的滚动升级期间）。
 
 ## 核心概念/原理
 
@@ -79,7 +79,7 @@ application/json;g=apidiscovery.k8s.io;v=v2;as=APIGroupDiscoveryList;profile=nop
 2. 如果请求的资源在本地发现文档中存在（如 `GET /api/v1/pods/some-pod`），则由本地处理。
 3. 如果资源不存在于本地发现文档中（如某个在新版本 Kubernetes 中才引入的 API），处理请求的 API 服务器会查询所有对等 API 服务器的非聚合发现文档，找到能够提供该资源的对等 API 服务器，然后将请求代理过去。
 4. 如果没有已知的对等 API 服务器能处理该请求，则由本地处理链返回 404 Not Found。
-5. 如果找到了对等 API 服务器但无法建立连接（如网络问题或数据竞争），则返回 503 [[Service|Service]] Unavailable。
+5. 如果找到了对等 API 服务器但无法建立连接（如网络问题或数据竞争），则返回 503 [[service|Service]] Unavailable。
 
 ## 使用场景
 

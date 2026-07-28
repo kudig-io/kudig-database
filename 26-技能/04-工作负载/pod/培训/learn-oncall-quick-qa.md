@@ -260,7 +260,7 @@ kubectl delete pods -n <namespace> --field-selector=status.phase=Evicted
 
 ## 二、网络问题（高频）
 
-### Q5: [[Service|Service]] 无法访问怎么办？
+### Q5: [[service|Service]] 无法访问怎么办？
 
 ```
 【回复】
@@ -356,7 +356,7 @@ nameserver 应该是集群 DNS 的 IP（通常是 10.96.0.10）。
 "
 ```
 
-### Q7: [[Ingress|Ingress]] 返回 404 怎么办？
+### Q7: [[ingress|Ingress]] 返回 404 怎么办？
 
 ```
 【回复】

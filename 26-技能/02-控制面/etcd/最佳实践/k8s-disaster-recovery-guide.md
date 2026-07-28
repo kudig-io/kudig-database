@@ -60,7 +60,7 @@ prerequisites:
 
 - 时间：每天凌晨 2 点（`0 2 * * *`）^[inferred]
 - 范围：production 和 staging 命名空间
-- 包含资源：[[Deployments|deployments]]、services、configmaps、secrets、PVCs、PVs ^[inferred]
+- 包含资源：[[deployments|deployments]]、services、configmaps、secrets、PVCs、PVs ^[inferred]
 - 包含卷快照：`snapshotVolumes: true` ^[inferred]
 - 保留期：720 小时（30 天）^[inferred]
 

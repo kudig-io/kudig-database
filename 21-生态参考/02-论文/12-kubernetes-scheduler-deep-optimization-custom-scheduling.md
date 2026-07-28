@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
+# [[kubernetes|Kubernetes]] 调度器深度优化与自定义调度 (Scheduler Deep Optimization and Custom Scheduling)
 
 > **作者**: Kubernetes调度专家 | **版本**: v1.6 | **更新时间**: 2026-03-03
 > **适用场景**: 高性能调度与资源优化 | **复杂度**: ⭐⭐⭐⭐⭐

@@ -51,7 +51,7 @@ status: reviewed
 | Parameter | Recommended | K8s Impact |
 |-----------|-------------|-----------|
 | net.ipv4.ip_forward | 1 | Required for Pod cross-node communication |
-| net.bridge.bridge-nf-call-iptables | 1 | Required for kube-proxy [[Service|Service]] routing |
+| net.bridge.bridge-nf-call-iptables | 1 | Required for kube-proxy [[service\|Service]] routing |
 | net.bridge.bridge-nf-call-ip6tables | 1 | Required for IPv6 dual-stack |
 | net.netfilter.nf_conntrack_max | 1048576 | Conntrack table size for large clusters |
 | net.core.somaxconn | 32768 | Socket listen queue for high-concurrency Services |

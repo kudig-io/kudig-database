@@ -75,7 +75,7 @@ cross_refs:
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [gateway-api.sigs.k8s.io](https://gateway-api.sigs.k8s.io/)
 
-<!-- chunk: 1. Gateway API vs [[Ingress|Ingress]] -->
+<!-- chunk: 1. Gateway API vs [[ingress|Ingress]] -->
 ## 1. Gateway API vs Ingress
 
 | 特性 | Ingress | Gateway API | 说明 |
@@ -84,7 +84,7 @@ cross_refs:
 | **多协议** | HTTP(S) | HTTP/HTTPS/TCP/UDP/gRPC/TLS | 统一多协议支持 |
 | **流量分割** | ❌ | ✅ 原生支持 | 基于权重的流量分配 |
 | **请求修改** | 注解依赖 | ✅ 标准化 | 统一的Filter机制 |
-| **后端引用** | [[Service|Service]] | Service/任意后端 | 更灵活的后端选择 |
+| **后端引用** | [[service\|Service]] | Service/任意后端 | 更灵活的后端选择 |
 | **跨命名空间** | ❌ | ✅ ReferenceGrant | 安全的跨NS引用 |
 | **网格治理 (GAMMA)** | ❌ | ✅ (v1.1+) | **East-West** 流量治理标准化 |
 
@@ -95,7 +95,7 @@ cross_refs:
 
 | CRD | 作用域 | 角色 | 说明 |
 |-----|-------|------|------|
-| **GatewayClass** | Cluster | 基础设施管理员 | 定义底层网关实现 (如 [[Istio|Istio]], Nginx) |
+| **GatewayClass** | Cluster | 基础设施管理员 | 定义底层网关实现 (如 [[istio\|Istio]], Nginx) |
 | **Gateway** | Namespace | 平台/集群管理员 | 定义流量入口 (IP, Port, TLS) |
 | **HTTPRoute** | Namespace | 应用开发者 | 定义 L7 路由、过滤、权重 |
 | **ReferenceGrant** | Namespace | 资源所有者 | 允许跨 NS 的安全引用 |

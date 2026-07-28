@@ -70,7 +70,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] [[OpenTelemetry|OpenTelemetry]] 原生可观测性 (OpenTelemetry Native Observability)
+# [[kubernetes|Kubernetes]] [[opentelemetry|OpenTelemetry]] 原生可观测性 (OpenTelemetry Native Observability)
 
 > 作者: 可观测性架构专家 | 版本: v1.0 | 更新时间: 2026-03-03
 > 适用场景: 分布式追踪、指标采集、日志关联、全栈可观测性 | 复杂度: ⭐⭐⭐⭐
@@ -103,7 +103,7 @@ OpenTelemetry（OTel）在 2026 年已成为云原生可观测性领域无可争
 
 ## 1.1 可观测性三大支柱统一
 
-在 OpenTelemetry 出现之前，可观测性领域呈现碎片化态势：[[Prometheus|Prometheus]] 负责指标、[[Jaeger|Jaeger]]/Zipkin 负责追踪、ELK/EFK 负责日志，三套系统各自为政，数据无法关联。
+在 OpenTelemetry 出现之前，可观测性领域呈现碎片化态势：[[prometheus|Prometheus]] 负责指标、[[jaeger|Jaeger]]/Zipkin 负责追踪、ELK/EFK 负责日志，三套系统各自为政，数据无法关联。
 
 OpenTelemetry 通过统一的数据模型、SDK 和协议（OTLP）彻底改变了这一格局：
 

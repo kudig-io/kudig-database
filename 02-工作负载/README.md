@@ -32,7 +32,7 @@ estimated_read_time: 5min
 | [[02-工作负载/01-核心工作负载/index.md\|核心工作负载/]] | K8s 原生控制器 | Pod/Deployment/StatefulSet/DaemonSet/Job/HPA |
 | [[02-工作负载/02-Java-on-K8s/README.md\|Java-on-K8s/]] | Java 垂直栈 | Spring Boot/JVM GC/Operator SDK/Quarkus |
 | [[02-工作负载/03-Node-js-on-K8s/index.md\|Node-js-on-K8s/]] | Node.js 垂直栈 | 内存管理/优雅关闭/Event Loop/可观测性 |
-| [[02-工作负载/多语言运行 时/index.md\|多语言运行时/]] | 多语言实践 | Go/Python/Rust/GPU/多集群 |
+| [[02-工作负载/04-多语言运行时/index.md\|多语言运行时/]] | 多语言实践 | Go/Python/Rust/GPU/多集群 |
 
 ## 跨域导航
 

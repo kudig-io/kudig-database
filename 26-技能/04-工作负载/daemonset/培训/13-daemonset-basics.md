@@ -47,7 +47,7 @@ prerequisites:
 
 
 ---
-title: 第13课：[[DaemonSet|DaemonSet]] 与节点守护
+title: 第13课：[[daemonset|DaemonSet]] 与节点守护
 description: 2. 掌握 DaemonSet 的创建和配置方法
 category: learning
 tags:
@@ -60,7 +60,7 @@ tags:
 - ceph
 - hpa
 - pdb
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - daemonset
 last_updated: 2026-05
 difficulty: beginner

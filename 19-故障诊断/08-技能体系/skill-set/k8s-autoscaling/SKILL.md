@@ -62,7 +62,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s Autoscaling Failure 诊断与修复
 
-HPA、VPA 和 Cluster Autoscaler 是 [[Kubernetes|Kubernetes]] 弹性能力的核心组件。当自动扩缩容不工作时，应用可能因负载突增而响应缓慢，或因资源浪费而成本过高。
+HPA、VPA 和 Cluster Autoscaler 是 [[kubernetes|Kubernetes]] 弹性能力的核心组件。当自动扩缩容不工作时，应用可能因负载突增而响应缓慢，或因资源浪费而成本过高。
 
 本 [[SKILL|Skill]] 覆盖 HPA 无法获取指标、VPA 推荐不生效、Cluster Autoscaler 无法扩展节点等全部常见根因的诊断和修复。
 

@@ -71,9 +71,9 @@ cross_refs:
 | 工具 (Tool) | 策略语言 (Language) | 核心能力 (Capabilities) | 学习曲线 |
 |------------|-------------------|----------------------|---------|
 | **OPA/Gatekeeper** | Rego | 通用策略引擎、强大灵活 | 陡峭 |
-| **[[Kyverno|Kyverno]]** | YAML | K8s 原生、易上手 | 平缓 |
+| **[[kyverno\|Kyverno]]** | YAML | K8s 原生、易上手 | 平缓 |
 | **Polaris** | YAML | 配置审计、仪表盘 | 极简 |
-| **[[Kubewarden|Kubewarden]]** | WebAssembly | 多语言策略、高性能 | 中等 |
+| **[[kubewarden\|Kubewarden]]** | WebAssembly | 多语言策略、高性能 | 中等 |
 
 <!-- chunk: Kyverno 生产实践 -->
 ## Kyverno 生产实践

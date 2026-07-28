@@ -227,7 +227,7 @@ Enclave Pod 启动失败
 ## Related
 
 - [[atlantis]] — Atlantis
-- [[23-实体/tetragon.md|[[Tetragon|tetragon]]]] — Tetragon
+- [[23-实体/tetragon.md|[[tetragon|tetragon]]]] — Tetragon
 - [[submariner]] — Submariner
 - deployment]] — Prometheus 高可用部署
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

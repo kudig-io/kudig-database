@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 备份与恢复深度实践
+# [[kubernetes|Kubernetes]] 备份与恢复深度实践
 
 > **作者**: Kubernetes 灾备架构师 | **版本**: v1.0 | **更新时间**: 2026-05-18
 > **适用场景**: Kubernetes 集群级灾难恢复与数据保护 | **复杂度**: ⭐⭐⭐⭐⭐
@@ -696,7 +696,7 @@ kubectl get pvc -A | grep -v Bound
 | 问题现象 | 可能原因 | 排查步骤 | 解决方案 |
 |:---|:---|:---|:---|
 | etcd 恢复后 API Server 不启动 | 快照与集群配置不匹配 | 检查 etcd 恢复参数 | 确保initial-cluster参数正确 |
-| Velero 备份卡在 InProgress | Node Agent 未运行 | 检查 [[DaemonSet|DaemonSet]] 状态 | 重启 Node Agent |
+| Velero 备份卡在 InProgress | Node Agent 未运行 | 检查 [[daemonset\|DaemonSet]] 状态 | 重启 Node Agent |
 | CSI 快照创建失败 | StorageClass 不支持快照 | 检查 CSI Driver 能力 | 安装支持快照的 CSI Driver |
 | 恢复后 Pod CrashLoopBackOff | ConfigMap/Secret 未恢复 | 检查资源恢复顺序 | 确保依赖资源先恢复 |
 | PV 数据丢失 | 未启用卷备份 | 检查备份配置 | 启用 snapshotVolumes 或 FS Backup |
@@ -936,7 +936,7 @@ echo "请执行应用层验证测试"
 ## Velero 安全加固
 
 1. **对象存储加密**：所有备份存储桶启用 SSE-S3 或 SSE-KMS 加密
-2. **网络隔离**：Velero 运行在独立命名空间，使用 [[NetworkPolicy|NetworkPolicy]] 限制流量
+2. **网络隔离**：Velero 运行在独立命名空间，使用 [[networkpolicy|NetworkPolicy]] 限制流量
 3. **RBAC 最小权限**：Velero ServiceAccount 仅授予必要的 ClusterRole 权限
 4. **凭证管理**：使用 External Secrets 或 Sealed Secrets 管理备份凭证
 5. **审计日志**：记录所有备份和恢复操作

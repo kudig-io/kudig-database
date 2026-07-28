@@ -385,4 +385,4 @@ securityContext:
 - [[02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production.md|Rust 应用 Kubernetes 生产实践]]
 - [[02-工作负载/04-多语言运行时/02-python-on-kubernetes-production.md|Python 应用 Kubernetes 生产实践]]
 - [[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]
-- [[可观测性]]
+- [[09-可观测性/README|可观测性]]

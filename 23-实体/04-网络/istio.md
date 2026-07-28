@@ -44,7 +44,7 @@ prerequisites:
 
 # Istio
 
-Istio is the most widely adopted [[Service|service]]Service Mesh）|service mesh]], graduated from CNCF in 2023. It provides transparent traffic management, security, and observability for microservices.
+Istio is the most widely adopted [[service|service]]Service Mesh）|service mesh]], graduated from CNCF in 2023. It provides transparent traffic management, security, and observability for microservices.
 
 ## Key Facts
 
@@ -60,7 +60,7 @@ Istio is the most widely adopted [[Service|service]]Service Mesh）|service mesh
 |----------|---------|
 | VirtualService | Traffic routing, weight splitting, retries, timeouts |
 | DestinationRule | Connection pools, outlier detection, traffic policies |
-| Gateway | [[Ingress|Ingress]]/egress traffic entry point |
+| Gateway | [[ingress\|Ingress]]/egress traffic entry point |
 | PeerAuthentication | mTLS mode (STRICT/PERMISSIVE/DISABLE) |
 | AuthorizationPolicy | L7 access control (allow/deny rules) |
 | RequestAuthentication | JWT validation for external services |

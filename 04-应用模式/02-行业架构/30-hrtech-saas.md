@@ -58,9 +58,9 @@ tags:
 - mysql
 - hpa
 - job
-- [[CronJob|cronjob]]
-- [[Ingress|ingress]]
-- [[NetworkPolicy|networkpolicy]]
+- [[cronjob|cronjob]]
+- [[ingress|ingress]]
+- [[networkpolicy|networkpolicy]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced

@@ -53,12 +53,12 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - redis
 - mysql
 - hpa
-- [[StatefulSet|statefulset]]
-- [[Ingress|ingress]]
+- [[statefulset|statefulset]]
+- [[ingress|ingress]]
 - networkpolicy
 last_updated: 2026-05-18
 difficulty: advanced

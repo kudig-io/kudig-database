@@ -74,10 +74,10 @@ tags:
 - sbom
 - slsa
 - apiserver
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
-- [[ArgoCD|argocd]]
+- [[helm|helm]]
+- [[argocd|argocd]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -89,7 +89,7 @@ estimated_read_time: 5min
 intent_queries:
 - 合规自动化与审计 (Compliance Automation and Audit) 是什么
 - 如何 合规自动化与审计 (Compliance Automation and Audit)
-- [[Kubernetes|Kubernetes]] 39 supply chain security 最佳实践
+- [[kubernetes|Kubernetes]] 39 supply chain security 最佳实践
 trigger_keywords:
 - 合规自动化与审计
 - Compliance

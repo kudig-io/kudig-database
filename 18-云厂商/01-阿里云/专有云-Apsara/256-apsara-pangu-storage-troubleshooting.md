@@ -325,6 +325,6 @@ PVC/存储异常
 ## Related
 
 - [[17-系统基础/06-知识字典/storage/csi.md|CSI]]
-- [[17-系统基础/06-知识字典/storage/storageclasses.md|StorageClass]]
+- [[17-系统基础/06-知识字典/storage/persistent-volume|StorageClass]]
 
 <!-- risk-assessed -->

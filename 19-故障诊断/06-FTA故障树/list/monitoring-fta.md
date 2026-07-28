@@ -57,6 +57,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md
   label: '结构化排障: 01-monitoring-observability-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

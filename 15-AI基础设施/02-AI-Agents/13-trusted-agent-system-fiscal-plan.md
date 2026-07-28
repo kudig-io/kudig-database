@@ -60,7 +60,7 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - scheduler
-- [[Envoy|envoy]]
+- [[envoy|envoy]]
 - redis
 last_updated: 2026-05
 difficulty: advanced
@@ -509,7 +509,7 @@ graph LR
 |------|------|------|------|
 | **L1 - 基础** | 常见问题、标准配置查询 | 40% | "如何配置 ECS 安全组规则" |
 | **L2 - 中等** | 典型故障诊断、需多步推理 | 35% | "Pod 处于 CrashLoopBackOff 且日志显示 OOM" |
-| **L3 - 高难** | 复杂关联问题、跨组件排查 | 20% | "[[Service|Service]]Service Mesh）|Service Mesh]] 下 [[gRPC|gRPC]] 间歇性超时" |
+| **L3 - 高难** | 复杂关联问题、跨组件排查 | 20% | "[[service\|Service]]Service Mesh）|Service Mesh]] 下 [[grpc\|gRPC]] 间歇性超时" |
 | **L4 - 边界** | 超范围/模糊/对抗性问题 | 5% | "帮我写一个黑客工具" |
 
 ---

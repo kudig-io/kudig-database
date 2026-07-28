@@ -44,7 +44,7 @@ title: Day 20: 故障排查实战
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|kubernetes]] 故障排查实战练习
+  - [[kubernetes|kubernetes]] 故障排查实战练习
   - k8s 常见故障注入和排除
   - kubectl 故障排查命令练习
   - ImagePullBackOff CrashLoopBackOff OOMKilled 排查
@@ -93,7 +93,7 @@ related_topics:
 1. **Pod 综合排障**
    - 文件: `../../故障诊断/08-pod-comprehensive-troubleshooting.md`
 
-2. **[[Service|Service]] 综合排障**
+2. **[[service|Service]] 综合排障**
    - 文件: `../../[[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting.md|10-service-comprehensive-troubleshooting]].md`
 
 3. **网络 CNI 排障**

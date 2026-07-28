@@ -293,8 +293,8 @@ kubectl logs -n cadence -l app=cadence-matching --tail=50
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - cadence
-- [[23-实体/drasi.md|[[Drasi|Drasi]]]]
-- [[23-实体/tremor.md|[[Tremor|Tremor]]]]
+- [[23-实体/drasi.md|[[drasi|Drasi]]]]
+- [[23-实体/tremor.md|[[tremor|Tremor]]]]
 - [[23-实体/12-数据与消息/nats.md|NATS]]
 - [[23-实体/15-参考与索引/cncf-infrastructure.md|CNCF 基础设施与混沌工程项目全景]] — Cross-reference
 

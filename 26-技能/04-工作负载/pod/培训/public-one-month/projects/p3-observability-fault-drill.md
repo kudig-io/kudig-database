@@ -52,7 +52,7 @@ title: 项目 P3: 可观测性体系搭建 + 故障演练
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Prometheus|prometheus]]us and Grafana|prometheus grafana]] loki alertmanager 完整部署
+  - [[prometheus|prometheus]]us and Grafana|prometheus grafana]] loki alertmanager 完整部署
   - k8s 可观测性体系搭建步骤
   - 故障注入演练 fta febm 方法论
   - kube-prometheus-stack 部署配置

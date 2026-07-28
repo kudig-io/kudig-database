@@ -1,7 +1,7 @@
 ---
 title: 06 - Terway 性能调优 (Performance Tuning)
 description: '## 1. 网络模式性能对比'
-summary: 'kubectl get node <node-name> -o jsonpath='{.status.allocatable.pods}''
+summary: "kubectl get node <node-name> -o jsonpath='{.status.allocatable.pods}'"
 category: terway
 tags:
 - k8s
@@ -74,7 +74,7 @@ prerequisites:
 | Pod 密度 | 最高 | 最低 | 高 | 高 |
 | 配置复杂度 | 低 | 低 | 低 | 中 |
 | 内核要求 | 任意 | 任意 | 任意 | 4.19+ |
-| [[NetworkPolicy|NetworkPolicy]] | iptables | eBPF/iptables | eBPF/iptables | eBPF |
+| [[networkpolicy\|NetworkPolicy]] | iptables | eBPF/iptables | eBPF/iptables | eBPF |
 | 网络开销 | veth + 路由 | 无 | veth | 无 |
 | 推荐度 | 兼容场景 | 极致性能 | **首选** | 高性能 |
 
@@ -141,7 +141,7 @@ ethtool -L eth0 combined 8
 
 ### 3.2 内核网络参数
 
-通过 init container 或 [[DaemonSet|DaemonSet]] 在节点上持久化以下参数:
+通过 init container 或 [[daemonset|DaemonSet]] 在节点上持久化以下参数:
 
 > ⚠️ **🟠 高危操作** — 影响业务流量或节点状态，需变更工单+影响评估+计划回滚
 > - `sysctl -w`：实时修改内核参数，全局生效
@@ -250,7 +250,7 @@ done
 systemctl enable irqbalance
 systemctl start irqbalance
 ```
-[[Kubernetes|Kubernetes]] NUMA 感知调度 (需要开启 Topology Manager):
+[[kubernetes|Kubernetes]] NUMA 感知调度 (需要开启 Topology Manager):
 
 ```yaml
 apiVersion: kubelet.config.k8s.io/v1beta1

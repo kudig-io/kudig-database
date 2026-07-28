@@ -46,7 +46,7 @@ prerequisites:
 
 ---
 title: 运行时安全防护与威胁检测
-description: 深入解析 K8s 运行时安全：Seccomp、AppArmor、SELinux、[[Falco|Falco]] 规则、容器逃逸检测、供应链安全与安全上下文配置
+description: 深入解析 K8s 运行时安全：Seccomp、AppArmor、SELinux、[[falco|Falco]] 规则、容器逃逸检测、供应链安全与安全上下文配置
 category: 安全
 tags:
 - k8s
@@ -58,7 +58,7 @@ tags:
 - container
 - security-context
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - rbac
 - best-practice
 last_updated: 2026-05
@@ -72,7 +72,7 @@ estimated_read_time: 5min
 intent_queries:
 - 运行时安全防护与威胁检测 是什么
 - 如何 运行时安全防护与威胁检测
-- [[Kubernetes|Kubernetes]] 7 security 最佳实践
+- [[kubernetes|Kubernetes]] 7 security 最佳实践
 trigger_keywords:
 - 运行时安全防护与威胁检测
 - security

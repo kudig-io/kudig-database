@@ -83,7 +83,7 @@ cross_refs:
 
 # 控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 深度技术解析
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 深度技术解析
 
 ---
 

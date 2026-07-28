@@ -86,15 +86,15 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 ## 容量规划 (Capacity Planning)
 
 - [[13-生产运维/07-运维手册/05-capacity-planning-readiness|容量规划就绪]]
-- [[12-可靠性/03-容量规划/01-capacity-planning-methodology|容量规划方法论]]
-- [[12-可靠性/03-容量规划/02-resource-forecasting-models|资源预测模型]]
+- [[12-可靠性/03-容量规划/01-capacity-planning-framework|容量规划方法论]]
+- [[12-可靠性/03-容量规划/24-capacity-planning-forecasting|资源预测模型]]
 - [[02-工作负载/01-核心工作负载/22-cluster-capacity-planning|集群容量规划]]
 
 ## 混沌工程 (Chaos Engineering)
 
-- [[12-可靠性/04-混沌工程/01-chaos-engineering-principles|混沌工程原则]]
-- [[12-可靠性/04-混沌工程/02-chaos-mesh-practice|Chaos Mesh 实践]]
-- [[12-可靠性/04-混沌工程/03-litmus-chaos-experiments|LitmusChaos 实验]]
+- [[12-可靠性/04-混沌工程/01-chaos-engineering-overview|混沌工程原则]]
+- [[12-可靠性/04-混沌工程/02-chaos-mesh-deployment|Chaos Mesh 实践]]
+- [[12-可靠性/04-混沌工程/04-litmus-practices|LitmusChaos 实验]]
 - [[25-研究/04-可靠性与运维/chaos-engineering-practice|混沌工程实践研究]]
 - [[24-综合/06-可靠性与成本/chaos-engineering-sre-resilience|混沌工程与 SRE 韧性]]
 
@@ -107,9 +107,9 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 
 ## 事后复盘 (Postmortem)
 
-- [[12-可靠性/05-事后复盘/01-blameless-postmortem-guide|无责事后复盘指南]]
-- [[12-可靠性/05-事后复盘/02-postmortem-template|事后复盘模板]]
-- [[12-可靠性/05-事后复盘/03-incident-review-process|事件回顾流程]]
+- [[12-可靠性/05-事后复盘/01-blameless-postmortem-template|无责事后复盘指南]]
+- [[12-可靠性/05-事后复盘/03-incident-postmortem-template|事后复盘模板]]
+- [[12-可靠性/05-事后复盘/02-postmortem-culture-guide|事件回顾流程]]
 
 ## On-Call 运营
 
@@ -140,9 +140,9 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 ## 概念 (Concepts)
 
 - [[22-概念/sre-principles|SRE 原则]]
-- [[22-概念/error-budget|错误预算]]
+- [[22-概念/08-可靠性与运维/slo-error-budget-framework|错误预算]]
 - [[22-概念/toil-elimination|Toil 消除]]
-- [[22-概念/incident-management|事件管理]]
+- [[22-概念/08-可靠性与运维/incident-management-patterns|事件管理]]
 - [[22-概念/capacity-planning|容量规划]]
 
 ## 实体 (Entities)

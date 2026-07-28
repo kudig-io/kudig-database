@@ -110,7 +110,7 @@ ACK 提供了完整的 OpenAPI 接口，支持通过 aliyun CLI、Python SDK、J
 | AK/SK (AccessKey) | 中 | 服务端程序、脚本自动化 | 永久 (需手动轮换) |
 | STS Token | 高 | 临时授权、跨账号访问 | 15min - 12h |
 | RAM 角色 (ECS) | 高 | ECS 上运行的应用 | 自动轮换 |
-| OIDC | 最高 | [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] ServiceAccount | 短期自动 |
+| OIDC | 最高 | [[23-实体/kubernetes.md|[[kubernetes\|kubernetes]]]] ServiceAccount | 短期自动 |
 
 ### 2. ACK API 核心接口分类
 

@@ -160,7 +160,7 @@ Terway 网络异常
 
 - 建议在生产环境中使用 ENIIP 模式以提高 IP 利用率
 - 密切监控 ENI 资源使用情况，避免 IP 耗尽
-- 配合 [[NetworkPolicy|NetworkPolicy]] 实现 Pod 间访问控制
+- 配合 [[networkpolicy|NetworkPolicy]] 实现 Pod 间访问控制
 - 配置多 vSwitch 提高 IP 分配容错性
 - 启用 eBPF 模式提升 NetworkPolicy 性能
 - 监控 Terway DaemonSet Pod 状态和 IP 池使用率

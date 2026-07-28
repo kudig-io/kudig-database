@@ -80,7 +80,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-本文档提供完整的 Operator 开发指南，涵盖从基础概念到高级模式的全方位技术指导，帮助企业构建生产级的 [[Kubernetes|Kubernetes]] 自定义控制器和 Operator。
+本文档提供完整的 Operator 开发指南，涵盖从基础概念到高级模式的全方位技术指导，帮助企业构建生产级的 [[kubernetes|Kubernetes]] 自定义控制器和 Operator。
 
 ---
 

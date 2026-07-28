@@ -63,14 +63,14 @@ Kubernetes 集群依赖于一组**核心组件**（Core Dependencies）作为基
 - **v3.0**：v3 API 引入，lease 机制，snapshot restore
 - **v3.4**：gRPC proxy，gRPC gateway，性能提升
 - **v3.5**：安全性增强，默认 TLS，维护 K8s 1.20+
-- 参见 [[22-概念/core-dependency-version-matrix.md|[[核心依赖版本矩阵|核心依赖版本矩阵]]]] 了解完整版本矩阵
+- 参见 [[22-概念/core-dependency-version-matrix.md|[[22-概念/01-核心架构/core-dependency-version-matrix|核心依赖版本矩阵]]]] 了解完整版本矩阵
 
 ### containerd
 
 - **v1.0**：CRI 支持初版，FIFO 死锁修复
 - **v1.6**（LTS）：长期支持版本，K8s 1.23-1.26 默认
 - **v2.0**：CRI v1（移除 alpha2），配置格式 v2，NRI 内置
-- 参见 [[23-实体/container-runtime.md|[[Container Runtime|Container Runtime]]]] 了解容器运行时架构
+- 参见 [[23-实体/container-runtime.md|[[22-概念/15-运行时与系统/container-runtime|Container Runtime]]]] 了解容器运行时架构
 
 ### CRI-O
 

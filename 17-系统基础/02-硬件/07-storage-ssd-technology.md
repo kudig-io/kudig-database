@@ -72,7 +72,7 @@ estimated_read_time: 5min
 intent_queries:
 - SSD固态硬盘技术 是什么
 - 如何 SSD固态硬盘技术
-- [[Kubernetes|Kubernetes]] 31 hardware 最佳实践
+- [[kubernetes|Kubernetes]] 31 hardware 最佳实践
 trigger_keywords:
 - SSD固态硬盘技术
 - hardware

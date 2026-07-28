@@ -46,6 +46,17 @@ jobs:
       - name: Ruff check
         run: ruff check 31-脚本/maintenance/
 
+  readme-sync:
+    name: README Sync Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: README 与实际目录一致性校验
+        run: python3 31-脚本/readme-sync-check.py
+
   frontmatter:
     name: Frontmatter Integrity
     runs-on: ubuntu-latest
@@ -94,9 +105,8 @@ jobs:
           PY
 
   wikilinks:
-    name: Broken Wikilink Report
+    name: Broken Wikilink Gate
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -107,34 +117,49 @@ jobs:
           python3 - <<'PY'
           import pathlib, re
           ROOT = pathlib.Path('.')
-          EXCL = {'node_modules','.venv','.git','__pycache__','30-站点','32-发布','33-源码','37-归档','36-报告','35-元数据','28-资产'}
-          CONTENT = {'22-概念', '23-实体', '26-技能', '24-综合', '29-文档', '20-最佳实践', '25-研究'}
+          EXCL = {'node_modules','.venv','.git','__pycache__','30-站点','32-发布','33-源码'}
+          SCAN_EXCL = EXCL | {'37-归档','36-报告','35-元数据','28-资产','31-脚本'}
+          CONTENT = {'22-概念', '23-实体', '26-技能', '24-综合', '29-文档', '20-最佳实践', '25-研究', '27-标签'}
           DOMAINS = {'01-集群基础','02-工作负载','05-网络','06-存储','08-安全','09-可观测性','10-平台工程','11-发布变更','12-可靠性','19-故障诊断','13-生产运维','18-云厂商','14-容器运行时','15-AI基础设施','16-专项技术','07-数据库中间件','17-系统基础','03-清单模式','21-生态参考','04-应用模式'}
           WL = re.compile(r'\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]')
           def is_content(p):
               return p.parts[0] in DOMAINS or p.parts[0] in CONTENT
+          # 链接目标索引收录全库（含 35-元数据/31-脚本/36-报告/37-归档，链接可指向冻结目录）
           names = set()
           for p in ROOT.rglob('*.md'):
-              if any(x in p.parts for x in EXCL) or not is_content(p):
+              if any(x in p.parts for x in EXCL) or p.parts[0].startswith('.'):
                   continue
               names.add(p.stem); names.add(p.name)
           broken = []
           for p in sorted(ROOT.rglob('*.md')):
-              if any(x in p.parts for x in EXCL) or not is_content(p):
+              if any(x in p.parts for x in SCAN_EXCL) or p.parts[0].startswith('.') or not is_content(p):
                   continue
-              for m in WL.finditer(p.read_text(encoding='utf-8')):
-                  target = m.group(1).strip()
-                  if not target:
+              fence = False
+              for line in p.read_text(encoding='utf-8').split('\n'):
+                  if line.lstrip().startswith('```'):
+                      fence = not fence
                       continue
-                  stem = target.split('/')[-1].replace('.md','')
-                  if stem not in names and target not in names:
-                      broken.append(f"{p}:{target}")
+                  if fence:
+                      continue
+                  # 行内代码中的 shell [[ ]] 测试语法不是 wikilink
+                  masked = re.sub(r'`[^`]*`', '', line)
+                  for m in WL.finditer(masked):
+                      target = m.group(1).strip().rstrip('\\')
+                      if not target:
+                          continue
+                      stem = target.split('/')[-1]
+                      if stem.endswith('.md'):
+                          stem = stem[:-3]
+                      if stem and stem not in names and target not in names:
+                          broken.append(f"{p}:{target}")
           print(f"broken wikilinks: {len(broken)}")
           for b in broken[:40]:
               print("  " + b)
           if len(broken) > 40:
               print(f"  ... and {len(broken)-40} more")
-          # 当前为报告模式；broken link 清零后将下面的阈值改为 fail-on-regression。
+          # 2026-07-27 断链清零后启用强制门禁：任何新增断链都会使 CI 失败。
           if broken:
-              print("::warning::存在 broken wikilinks，详见上方报告（当前不阻断，待清零后启用 gate）")
+              print("::error::存在 broken wikilinks，请修复后重新提交（参考 31-脚本/maintenance/ 下的修复脚本）")
+              import sys; sys.exit(1)
+          print("wikilinks OK")
           PY

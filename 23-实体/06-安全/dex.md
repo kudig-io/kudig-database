@@ -222,7 +222,7 @@ kubectl delete refreshtokens.dex.coreos.com --all -n dex
 ## 参考链接
 
 - [[23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 - [[22-概念/04-存储/storage-model.md|storage-model]]
 - [[22-概念/05-安全/secrets-management.md|secrets-management]]

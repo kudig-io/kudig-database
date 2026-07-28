@@ -55,9 +55,9 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[Prometheus|prometheus]]
-- [[ArgoCD|argocd]]
-- [[Flux|flux]]
+- [[prometheus|prometheus]]
+- [[argocd|argocd]]
+- [[flux|flux]]
 - opa
 - mysql
 - job

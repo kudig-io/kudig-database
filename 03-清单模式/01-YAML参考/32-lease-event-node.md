@@ -66,7 +66,7 @@ cross_refs:
 
 # 32 - Lease / Event / Node YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 **本文档全面覆盖 Lease(租约)、Event(事件)、Node(节点)的 YAML 配置**,包括完整字段说明、Lease 在 Leader Election 中的应用、Event 事件类型、Node 节点管理、生产实践案例等。
 

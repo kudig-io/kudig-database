@@ -64,7 +64,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s Logging Pipeline Failure 诊断与修复
 
-日志收集管道（[[Fluentd|Fluentd]]、Fluent Bit、Filebeat 等）是 [[Kubernetes|Kubernetes]] 可观测性的重要组成部分。当日志收集中断时，问题排查将失去关键线索，安全审计也会受到影响。
+日志收集管道（[[fluentd|Fluentd]]、Fluent Bit、Filebeat 等）是 [[kubernetes|Kubernetes]] 可观测性的重要组成部分。当日志收集中断时，问题排查将失去关键线索，安全审计也会受到影响。
 
 本 [[SKILL|Skill]] 覆盖日志代理异常、后端存储（ES/Loki）不可用、日志丢弃、解析错误等全部常见根因的诊断和修复。
 

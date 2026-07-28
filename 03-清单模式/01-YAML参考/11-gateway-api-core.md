@@ -66,8 +66,8 @@ cross_refs:
 
 # 11 - Gateway API 核心资源 YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
-> **相关领域**: [域5-网络](../网络/) | **前置知识**: [[Service|Service]], [[Ingress|Ingress]]  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 + Gateway API v1.0+ | **最后更新**: 2026-02  
+> **相关领域**: [域5-网络](../网络/) | **前置知识**: [[service|Service]], [[ingress|Ingress]]  
 > **关联配置**: [12-高级路由](./12-gateway-api-advanced-routes.md) | [Ingress参考](./08-ingress-all-classes.md)
 
 ---

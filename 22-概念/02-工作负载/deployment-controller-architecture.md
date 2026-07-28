@@ -1,7 +1,7 @@
 ---
 title: Deployment 控制器架构
 description: '# Deployment 控制器架构'
-summary: 'Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 [[ReplicaSet|ReplicaSet]] 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。'
+summary: 'Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 [[replicaset|ReplicaSet]] 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。'
 category: concepts
 tags:
 - k8s
@@ -45,7 +45,7 @@ status: reviewed
 
 ## 概述
 
-Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 [[ReplicaSet|ReplicaSet]] 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。
+Deployment 控制器是 Kubernetes 中管理无状态工作负载的核心组件。它通过 [[replicaset|ReplicaSet]] 间接管理 Pod，实现声明式更新、滚动发布、版本回滚等能力。控制器采用典型的 Kubernetes 控制器模式：Informer + WorkQueue + Reconcile Loop。
 
 ## 控制器分层架构
 
@@ -251,8 +251,8 @@ kubectl get pods -n <ns> -l app=<app> | grep -v Running
 
 ## 相关概念
 
-- [[26-技能/04-工作负载/deployment/deployment-rolling-update.md|[[Deployment 滚动更新策略|Deployment 滚动更新策略]]]]
-- [[26-技能/04-工作负载/deployment/deployment-canary-and-bluegreen.md|[[金丝雀与蓝绿发布|金丝雀与蓝绿发布]]]]
+- [[26-技能/04-工作负载/deployment/deployment-rolling-update.md|[[26-技能/04-工作负载/deployment/deployment-rolling-update|Deployment 滚动更新策略]]]]
+- [[26-技能/04-工作负载/deployment/deployment-canary-and-bluegreen.md|[[26-技能/04-工作负载/deployment/deployment-canary-and-bluegreen|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
 - [[22-概念/01-核心架构/controller-pattern.md|控制器模式]]
 - [[22-概念/01-核心架构/watch-mechanism.md|Watch 机制]]

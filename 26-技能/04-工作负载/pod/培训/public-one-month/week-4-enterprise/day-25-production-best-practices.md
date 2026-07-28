@@ -48,7 +48,7 @@ title: Day 25: 生产运维最佳实践
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 变更管理
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 变更管理
   - 生产事故响应流程
   - 容量规划预测
   - SRE 最佳实践

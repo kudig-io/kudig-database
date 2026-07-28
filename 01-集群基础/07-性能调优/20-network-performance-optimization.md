@@ -56,10 +56,10 @@ tags:
 - production
 - operations
 - best-practices
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
-- [[Envoy|envoy]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
+- [[envoy|envoy]]
+- [[cilium|cilium]]
 - calico
 - docker
 last_updated: 2026-05

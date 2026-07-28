@@ -52,9 +52,9 @@ title: Day 16: 安全体系 - Pod 安全 + 密钥管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
   - K8s Secret 管理最佳实践
-  - [[Kyverno|Kyverno]] 策略引擎
+  - [[kyverno|Kyverno]] 策略引擎
   - Pod 安全上下文配置
 trigger_keywords:
   - Pod Security

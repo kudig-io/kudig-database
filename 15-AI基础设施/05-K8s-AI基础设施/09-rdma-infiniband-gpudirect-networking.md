@@ -59,7 +59,7 @@ authors:
 
 本文覆盖 RDMA 技术基础（RoCE v2 vs InfiniBand）、NVIDIA Network Operator 部署、GPUDirect RDMA/Storage 配置、NCCL 通信优化、SR-IOV + Multus 设备暴露、网络拓扑感知调度以及性能基准测试。帮助 AI 基础设施团队构建和运维高性能训练网络。
 
-相关页面：[[GPU调度与资源管理]]、[[Kubeflow训练平台]]、[[K8s网络策略与CNI]]、[[AI集群多租户隔离]]、[[K8s节点管理与运维]]
+相关页面：[[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]、[[23-实体/11-AI与边缘/kubeflow|Kubeflow训练平台]]、[[23-实体/02-K8s核心组件/networkpolicy|K8s网络策略与CNI]]、[[15-AI基础设施/05-K8s-AI基础设施/14-gpu-cost-attribution-multitenant|AI集群多租户隔离]]、[[22-概念/08-可靠性与运维/node-lifecycle-management|K8s节点管理与运维]]
 
 ## 架构与核心概念
 
@@ -493,8 +493,8 @@ reservedMemory:
 
 ## Related
 
-- [[GPU调度与资源管理]]
-- [[Kubeflow训练平台]]
-- [[K8s网络策略与CNI]]
-- [[AI集群多租户隔离]]
-- [[K8s节点管理与运维]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]
+- [[23-实体/11-AI与边缘/kubeflow|Kubeflow训练平台]]
+- [[23-实体/02-K8s核心组件/networkpolicy|K8s网络策略与CNI]]
+- [[15-AI基础设施/05-K8s-AI基础设施/14-gpu-cost-attribution-multitenant|AI集群多租户隔离]]
+- [[22-概念/08-可靠性与运维/node-lifecycle-management|K8s节点管理与运维]]

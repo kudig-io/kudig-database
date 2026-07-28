@@ -120,7 +120,7 @@ kubelet 在驱逐用户 Pod 之前会先尝试回收节点级资源：
 - 节点压力驱逐与 API-initiated 驱逐不同，kubelet **不尊重** PodDisruptionBudget 和 `terminationGracePeriodSeconds`。
 - 软驱逐阈值可配置最大 Pod 优雅终止期；硬驱逐阈值使用 0 秒宽限期（立即关闭）。
 - 配置驱逐策略时，应确保调度器不会调度会立即触发驱逐的 Pod。
-- 如果不想 [[DaemonSet|DaemonSet]] 的 Pod 被驱逐，应为它们设置足够高的优先级。
+- 如果不想 [[daemonset|DaemonSet]] 的 Pod 被驱逐，应为它们设置足够高的优先级。
 - 对于 Linux 节点，`memory.available` 的计算排除了 `inactive_file`，因为 kubelet 假设这部分内存可以在压力下回收。
 - 大量使用本地存储的工作负载可能会因内核缓存被计为 `active_file` 而触发内存压力驱逐，可以通过将内存限制和请求设为相同值来缓解。
 

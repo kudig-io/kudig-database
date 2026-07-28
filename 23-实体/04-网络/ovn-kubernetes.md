@@ -237,7 +237,7 @@ kubectl apply -f ovn-setup.yaml
 - [[cilium]]
 - [[22-概念/03-网络/cilium-ebpf-networking.md|cilium-ebpf-networking]]
 - [[23-实体/02-K8s核心组件/cni-plugins.md|cni-plugins]]
-- [[23-实体/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
+- [[23-实体/networkpolicy.md|[[networkpolicy|networkpolicy]]]]
 - [[22-概念/04-存储/storage-model.md|storage-model]]
 
 ## Related

@@ -244,13 +244,13 @@ authors:
 | **GCP** | PD | Filestore | GCS |
 | **阿里云** | 云盘 | NAS | OSS |
 
-### [[Kubernetes|Kubernetes]] 存储
+### [[kubernetes|Kubernetes]] 存储
 
 | 类型 | CSI 驱动 |
 |:---|:---|
 | **云盘** | AWS EBS CSI, AliDisk CSI |
 | **网络文件** | EFS CSI, NFS CSI |
-| **分布式** | Ceph CSI, [[Longhorn|Longhorn]] |
+| **分布式** | Ceph CSI, [[longhorn\|Longhorn]] |
 | **本地** | Local PV |
 
 ---

@@ -62,7 +62,7 @@ authors:
 
 # 24. 容量规划与预测 (Capacity Planning & Forecasting)
 
-> **适用范围**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 50分钟
+> **适用范围**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **更新时间**: 2024年 | **预计阅读时间**: 50分钟
 
 <!-- chunk: 📋 章节概览 -->## 📋 章节概览
 
@@ -1215,8 +1215,8 @@ groups:
 - [Cluster Autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler)
 
 ## 工具推荐
-- **监控工具**: [[Prometheus|Prometheus]], Grafana, Datadog
-- **预测工具**: Kubecost, [[OpenCost|OpenCost]]
+- **监控工具**: [[prometheus|Prometheus]], Grafana, Datadog
+- **预测工具**: Kubecost, [[opencost|OpenCost]]
 - **分析工具**: Python (pandas, scikit-learn), R
 
 ## 学习资源

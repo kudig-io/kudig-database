@@ -64,7 +64,7 @@ authors:
 
 # 12 - API 网关可观测性：指标、日志与链路追踪
 
-> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: [[Prometheus|Prometheus]], [[OpenTelemetry|OpenTelemetry]], Grafana, 访问日志, 链路追踪, 黄金信号, Loki, [[Jaeger|Jaeger]], Zipkin
+> **文档版本**: v1.0 | **适用版本**: [[kubernetes|Kubernetes]] 1.25+ | **更新日期**: 2026-03-04 | **关键词**: [[prometheus|Prometheus]], [[opentelemetry|OpenTelemetry]], Grafana, 访问日志, 链路追踪, 黄金信号, Loki, [[jaeger|Jaeger]], Zipkin
 
 <!-- chunk: 目录 -->## 目录
 

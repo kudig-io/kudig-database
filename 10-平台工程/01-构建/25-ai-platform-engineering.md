@@ -519,7 +519,7 @@ kubectl exec -n ai-serving -it deploy/llm-7b-inference -- curl -s localhost:8000
 
 - GPU 调度参考 [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU 调度与成本优化]]
 - 多租户隔离参考 [[10-平台工程/03-治理/17-multi-tenant-management|多租户管理]]
-- 存储方案参考 [[06-存储/03-分布式存储|分布式存储]]
+- 存储方案参考 [[06-存储/03-分布式存储/index|分布式存储]]
 - 监控告警参考 [[23-实体/07-可观测性/prometheus|Prometheus 监控]]
 
 ## Related
@@ -528,5 +528,5 @@ kubectl exec -n ai-serving -it deploy/llm-7b-inference -- curl -s localhost:8000
 - [[10-平台工程/03-治理/18-gpu-cluster-governance-ai-platform|GPU 集群治理]]
 - [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU 调度与成本优化]]
 - [[24-综合/01-AI与机器学习/training-inference-data-lifecycle|训练推理数据生命周期]]
-- [[15-AI基础设施/05-K8s-AI基础设施|K8s AI 基础设施]]
+- [[15-AI基础设施/05-K8s-AI基础设施/index|K8s AI 基础设施]]
 - [[10-平台工程/01-构建/03-backstage-deployment|Backstage 部署]]

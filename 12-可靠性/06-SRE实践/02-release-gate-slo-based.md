@@ -122,12 +122,12 @@ flowchart TD
 - [ ] **1. 集群资源充足**: 目标命名空间 CPU/内存 Request 使用率 < 70%
 - [ ] **2. 节点健康**: 所有节点 Ready，无 DiskPressure、MemoryPressure
 - [ ] **3. 存储容量**: PVC 使用率 < 80%，有扩展空间
-- [ ] **4. 网络策略**: 新服务的 [[NetworkPolicy|NetworkPolicy]] 已配置并验证
+- [ ] **4. 网络策略**: 新服务的 [[networkpolicy|NetworkPolicy]] 已配置并验证
 - [ ] **5. DNS 解析**: 新域名/服务名已正确解析
 
 ### 应用检查 (6-10)
 
-- [ ] **6. 镜像安全扫描**: [[Trivy|Trivy]]/Snyk 扫描无 HIGH/CRITICAL 漏洞
+- [ ] **6. 镜像安全扫描**: [[trivy|Trivy]]/Snyk 扫描无 HIGH/CRITICAL 漏洞
 - [ ] **7. 配置验证**: ConfigMap/Secret 变更已 diff 确认
 - [ ] **8. 资源限制**: CPU/Memory Request 和 Limit 已设置合理值
 - [ ] **9. 健康检查**: LivenessProbe 和 ReadinessProbe 已配置且通过
@@ -135,11 +135,11 @@ flowchart TD
 
 ### 可观测性检查 (11-15)
 
-- [ ] **11. 指标埋点**: 关键业务指标已接入 [[Prometheus|Prometheus]]
+- [ ] **11. 指标埋点**: 关键业务指标已接入 [[prometheus|Prometheus]]
 - [ ] **12. 日志规范**: 日志格式统一，关键路径有结构化日志
 - [ ] **13. 告警规则**: 新服务的告警规则已配置并测试
 - [ ] **14. Dashboard**: Grafana 大盘已创建或更新
-- [ ] **15. 追踪集成**: 分布式追踪已接入（[[Jaeger|Jaeger]]/Tempo/SkyWalking）
+- [ ] **15. 追踪集成**: 分布式追踪已接入（[[jaeger|Jaeger]]/Tempo/SkyWalking）
 
 ### SLO/发布检查 (16-20)
 

@@ -80,7 +80,7 @@ cross_refs:
 |-----|------|---------|-----------|---------|
 | WireGuard | L3 | 低(3-5%) | 低 | CNI加密 |
 | IPsec | L3 | 中(5-10%) | 中 | 传统方案 |
-| mTLS([[Istio|Istio]]) | L7 | 中(5-15%) | 中 | 服务网格 |
+| mTLS([[istio\|Istio]]) | L7 | 中(5-15%) | 中 | 服务网格 |
 | Cilium加密 | L3/L4 | 低 | 低 | eBPF加密 |
 
 <!-- chunk: Calico WireGuard加密 -->
@@ -321,7 +321,7 @@ spec:
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]working]] 网络]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
 - [[05-网络/01-K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

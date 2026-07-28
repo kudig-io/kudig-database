@@ -52,8 +52,8 @@ tags:
 - workload
 - pod
 - deployment
-- [[StatefulSet|statefulset]]
-- [[Prometheus|prometheus]]
+- [[statefulset|statefulset]]
+- [[prometheus|prometheus]]
 - hpa
 - vpa
 - pdb
@@ -69,7 +69,7 @@ estimated_read_time: 5min
 intent_queries:
 - 资源管理表 是什么
 - 如何 资源管理表
-- [[Kubernetes|Kubernetes]] 4 workloads 最佳实践
+- [[kubernetes|Kubernetes]] 4 workloads 最佳实践
 trigger_keywords:
 - 资源管理表
 - workloads

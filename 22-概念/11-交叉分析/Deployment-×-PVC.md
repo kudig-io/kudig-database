@@ -108,7 +108,7 @@ kubectl get sc <sc-name> -o jsonpath='{.allowVolumeExpansion}'
 - ArgoCD：GitOps同步
 
 ## 相关概念
-- [[Deployment]]
+- [[deployment|Deployment]]
 - PVC
 ## Related
 

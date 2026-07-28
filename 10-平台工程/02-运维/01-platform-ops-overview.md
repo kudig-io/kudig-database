@@ -59,7 +59,7 @@ prerequisites:
 
 ---
 title: 平台运维概述
-description: 全面介绍 [[Kubernetes|Kubernetes]] 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径
+description: 全面介绍 [[kubernetes|Kubernetes]] 平台运维的职责范围、能力模型、成熟度评估框架，以及企业级平台工程团队的建设路径
 category: 平台工程
 tags:
 - k8s

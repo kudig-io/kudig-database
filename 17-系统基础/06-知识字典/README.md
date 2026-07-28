@@ -53,7 +53,7 @@ prerequisites:
 
 # Topic Dictionary 知识字典
 
-> 基于 [[Kubernetes|Kubernetes]] 官方文档概念与生产环境最佳实践构建的系统性知识库。
+> 基于 [[kubernetes|Kubernetes]] 官方文档概念与生产环境最佳实践构建的系统性知识库。
 > 
 > **整理原则**：按照 CNCF 云原生技术栈、SRE 运维成熟度模型、平台工程（[[22-概念/09-平台与发布/platform-engineering-sre.md|Platform Engineering]]）的行业最佳实践进行领域划分，便于检索、学习与持续演进。
 

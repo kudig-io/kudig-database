@@ -1354,7 +1354,7 @@ dr_maturity_model:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-30-disaster-recovery-business-continuity KUDIG Database — Global MOC
-- [[12-可靠性/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise [[Kubernetes 灾难恢复最佳实践|Disaster Recovery]] & Busin...]]
+- [[12-可靠性/README.md|Domain 09: 企业级灾备与业务连续性 (Enterprise [[20-最佳实践/01-best-practices/operations/disaster-recovery|Disaster Recovery]] & Busin...]]
 - index.md|Domain-30 灾备与业务连续性 — 开源项目索引]]
 - VMware vSphere 企业级灾备与业务连续性
 - Veeam Backup & Replication 企业级备份恢复解决方案

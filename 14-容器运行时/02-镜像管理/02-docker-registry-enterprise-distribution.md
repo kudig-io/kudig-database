@@ -59,7 +59,7 @@ authors:
 # Docker Registry企业级镜像分发深度实践
 
 > **Author**: Container Registry Architect | **Version**: v1.0 | **Update Time**: 2026-02-07
-> **Scenario**: Enterprise-grade container image [[Distribution|distribution]] architecture | **Complexity**: ⭐⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade container image [[distribution|distribution]] architecture | **Complexity**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 🎯 Abstract -->## 🎯 Abstract
 

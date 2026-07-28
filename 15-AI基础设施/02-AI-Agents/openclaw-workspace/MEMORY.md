@@ -57,9 +57,9 @@ tags:
 - rag
 - multi-agent
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - hpa
 last_updated: 2026-04
 difficulty: advanced
@@ -342,8 +342,8 @@ memory_metadata:
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
-- [[17-系统基础/05-速查卡/k8s.md|[[Kubernetes 生产环境速查卡|k8s]]]]
+- [[17-系统基础/05-速查卡/go.md|[[17-系统基础/05-速查卡/go|go]]]]
+- [[17-系统基础/05-速查卡/k8s.md|[[17-系统基础/05-速查卡/k8s|k8s]]]]
 - [[23-实体/02-K8s核心组件/coredns.md|coredns]]
 
 ## See Also

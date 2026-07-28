@@ -58,7 +58,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 运维硬件故障排查专题
+# [[kubernetes|Kubernetes]] 运维硬件故障排查专题
 
 <!-- chunk: 概述 -->## 概述
 

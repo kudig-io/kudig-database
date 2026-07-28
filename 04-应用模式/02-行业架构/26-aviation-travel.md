@@ -51,7 +51,7 @@ tags:
 - industry
 - redis
 - mysql
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - operator
 last_updated: '2026-05-18'
 difficulty: advanced

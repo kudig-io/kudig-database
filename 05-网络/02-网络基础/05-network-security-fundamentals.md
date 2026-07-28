@@ -351,9 +351,9 @@ iptables -A INPUT -j LOG --log-prefix "DROPPED: "
 
 | 组件 | 功能 | 技术实现 |
 |:---|:---|:---|
-| **身份提供者** | 用户/设备身份管理 | [[Keycloak|Keycloak]], Okta, Azure AD |
-| **策略引擎** | 访问控制策略 | OPA, [[Kyverno|Kyverno]] |
-| **策略执行点** | 策略实施 | [[Istio|Istio]], Cilium, Firewalls |
+| **身份提供者** | 用户/设备身份管理 | [[keycloak\|Keycloak]], Okta, Azure AD |
+| **策略引擎** | 访问控制策略 | OPA, [[kyverno\|Kyverno]] |
+| **策略执行点** | 策略实施 | [[istio\|Istio]], Cilium, Firewalls |
 | **信任评估** | 持续信任评估 | SIEM, UEBA |
 | **日志审计** | 安全事件记录 | ELK, Splunk |
 

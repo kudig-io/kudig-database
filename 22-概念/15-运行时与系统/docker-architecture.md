@@ -51,7 +51,7 @@ Docker operates through five distinct layers, each communicating via standardize
 | Layer | Name | Process | Interface |
 |-------|------|---------|-----------|
 | User Interface | Docker CLI | docker | REST API (Unix Socket) |
-| API [[Service|Service]] | Docker Daemon | dockerd | [[gRPC|gRPC]] API |
+| API [[service\|Service]] | Docker Daemon | dockerd | [[grpc\|gRPC]] API |
 | Container Manager | containerd | containerd | OCI Runtime Spec |
 | Container Shim | containerd-shim | containerd-shim-runc-v2 | OCI Runtime |
 | Low-level Runtime | runc | runc | Linux Kernel |

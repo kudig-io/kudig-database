@@ -68,7 +68,7 @@ related_docs:
 
 
 
-# [[Kubernetes|Kubernetes]] 生产环境速查卡
+# [[kubernetes|Kubernetes]] 生产环境速查卡
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-05
 > **目标**: 涵盖生产环境 90% 以上常用命令，支持快速查阅和故障排查

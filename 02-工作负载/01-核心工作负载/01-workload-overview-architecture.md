@@ -47,7 +47,7 @@ prerequisites:
 
 
 
-title: 01 - [[Kubernetes|Kubernetes]] 工作负载架构概览 (Workload Architecture Overview)
+title: 01 - [[kubernetes|Kubernetes]] 工作负载架构概览 (Workload Architecture Overview)
 description: '# 01 - Kubernetes 工作负载架构概览 (Workload Architecture Overview)'
 category: workloads
 tags:
@@ -55,8 +55,8 @@ tags:
 - workload
 - pod
 - deployment
-- [[StatefulSet|statefulset]]
-- [[Prometheus|prometheus]]
+- [[statefulset|statefulset]]
+- [[prometheus|prometheus]]
 - hpa
 - vpa
 - daemonset

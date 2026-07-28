@@ -32,6 +32,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
+tier: supporting
 ---
 
 > **生产环境安全提示**

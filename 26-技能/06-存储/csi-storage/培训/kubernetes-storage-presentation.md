@@ -58,7 +58,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 存储体系全栈进阶培训 (从入门到专家)
+# [[kubernetes|Kubernetes]] 存储体系全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南
 > **核心原则**: 理解持久化本质、掌握 CSI 挂载机制、确保数据容灾闭环
@@ -263,8 +263,8 @@ CSI (Container Storage Interface) 是 Kubernetes 与存储系统之间的标准�
 
 | 组件 | 职责 | 运行方式 |
 |------|------|---------|
-| CSI Controller | CreateVolume、DeleteVolume、ControllerPublish/Unpublish | [[StatefulSet|StatefulSet]]/Deployment (1-3 副本) |
-| CSI Node Plugin | NodeStage/Unstage、NodePublish/Unpublish | [[DaemonSet|DaemonSet]] (每个节点一个) |
+| CSI Controller | CreateVolume、DeleteVolume、ControllerPublish/Unpublish | [[statefulset\|StatefulSet]]/Deployment (1-3 副本) |
+| CSI Node Plugin | NodeStage/Unstage、NodePublish/Unpublish | [[daemonset\|DaemonSet]] (每个节点一个) |
 | External Provisioner | 监听 PVC，调用 CSI Controller 创建卷 | Sidecar 容器 |
 | External Attacher | 监听 VolumeAttachment，调用 CSI Controller 挂载/卸载 | Sidecar 容器 |
 | External Snapshotter | 监听 VolumeSnapshot，调用 CSI Controller 创建快照 | Sidecar 容器 |

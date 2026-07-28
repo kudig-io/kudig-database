@@ -64,7 +64,7 @@ cross_refs:
 
 # 分布式数据库企业级实践深度指南
 
-> **适用版本**: TiDB v9.0 / CockroachDB v25.1 / [[Vitess|Vitess]] v21.0  
+> **适用版本**: TiDB v9.0 / CockroachDB v25.1 / [[vitess|Vitess]] v21.0  
 > **最后更新**: 2026-04-26  
 > **难度**: 高级 → 专家
 
@@ -82,7 +82,7 @@ cross_refs:
 
 分布式数据库的发展经历了三个主要阶段。第一代以 Google Spanner 和 Megastore 为代表，提出了分布式事务、TrueTime API 等基础概念。第二代以 TiDB、CockroachDB 为代表，将分布式数据库技术普及到开源社区，降低了使用门槛。第三代正在向 HTAP（混合事务/分析处理）方向演进，TiDB 通过 TiFlash 列存引擎实现了行存和列存的透明融合，使得同一套数据库系统既能处理高并发的 OLTP 请求，又能执行复杂的 OLAP 分析查询。
 
-在云原生时代，分布式数据库正在与 [[Kubernetes|Kubernetes]] 深度集成。TiDB Operator 和 CockroachDB Operator 使得在 K8s 上管理分布式数据库集群成为可能。然而，分布式数据库对网络延迟和存储性能的敏感性意味着在 K8s 上部署时需要特别注意网络配置（HostNetwork、[[NetworkPolicy|NetworkPolicy]]）和存储选型（Local PV、高性能 StorageClass）。
+在云原生时代，分布式数据库正在与 [[kubernetes|Kubernetes]] 深度集成。TiDB Operator 和 CockroachDB Operator 使得在 K8s 上管理分布式数据库集群成为可能。然而，分布式数据库对网络延迟和存储性能的敏感性意味着在 K8s 上部署时需要特别注意网络配置（HostNetwork、[[networkpolicy|NetworkPolicy]]）和存储选型（Local PV、高性能 StorageClass）。
 
 Vitess 作为一个独特的存在，它并不是一个完整的分布式数据库，而是 MySQL 的水平扩展中间件。Vitess 通过 VTGate 提供统一的查询入口，通过 VTTablet 管理每个 MySQL 实例，通过 VReplication 实现数据迁移和重新分片。Vitess 已经被 YouTube、Slack、Square 等大规模互联网公司采用，是 MySQL 水平扩展领域最成熟的开源方案。
 

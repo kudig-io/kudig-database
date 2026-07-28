@@ -76,7 +76,7 @@ related_topics:
 
 > **文档数量**: 90 篇  
 > **最后更新**: 2026-04-24  
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33  
 > **目标读者**: 架构师、SRE、DevOps、技术负责人  
 > **视角**: 阿里云解决方案架构师实战经验
 
@@ -92,8 +92,8 @@ related_topics:
 
 | # | 应用场景 | 文档 | 核心 Mermaid 图 | 关键 K8s 特性 |
 |:---:|:---|:---|:---:|:---|
-| 01 | **电商系统** | [01-ecommerce-architecture.md](./01-ecommerce-architecture.md) | 10+ | [[StatefulSet|StatefulSet]]、HPA、Karpenter、[[NetworkPolicy|NetworkPolicy]] |
-| 02 | **小程序平台** | [02-mini-program-architecture.md](./02-mini-program-architecture.md) | 8+ | [[Knative|Knative]]、Tekton、vCluster、NodeLogQuery |
+| 01 | **电商系统** | [01-ecommerce-architecture.md](./01-ecommerce-architecture.md) | 10+ | [[statefulset\|StatefulSet]]、HPA、Karpenter、[[networkpolicy\|NetworkPolicy]] |
+| 02 | **小程序平台** | [02-mini-program-architecture.md](./02-mini-program-architecture.md) | 8+ | [[knative\|Knative]]、Tekton、vCluster、NodeLogQuery |
 | 03 | **内容管理 (CMS)** | [03-cms-architecture.md](./03-cms-architecture.md) | 7+ | Next.js SSR/ISR、CloudNativePG、Kyverno |
 | 04 | **实时通信 (IM/RTC)** | [04-im-rtc-architecture.md](./04-im-rtc-architecture.md) | 9+ | HostNetwork、GPU 节点池、WebSocket LB |
 | 05 | **在线教育** | [05-online-education-architecture.md](./05-online-education-architecture.md) | 8+ | Job、Tekton Pipeline、TDengine、HPA 自定义指标 |

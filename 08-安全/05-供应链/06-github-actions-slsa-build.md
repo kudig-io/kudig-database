@@ -64,7 +64,7 @@ tags:
 - security
 - sbom
 - slsa
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - docker
 - job
@@ -80,7 +80,7 @@ estimated_read_time: 5min
 intent_queries:
 - GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 是什么
 - 如何 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
-- [[Kubernetes|Kubernetes]] 39 supply chain security 最佳实践
+- [[kubernetes|Kubernetes]] 39 supply chain security 最佳实践
 trigger_keywords:
 - GitHub
 - Actions

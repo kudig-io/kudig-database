@@ -86,7 +86,7 @@ related_docs:
 
 # 133 - GPU调度与管理 (GPU Scheduling & Management)
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01 | **参考**: [NVIDIA Device Plugin](https://github.com/NVIDIA/k8s-device-plugin)
 
 ---
 

@@ -44,7 +44,7 @@ status: reviewed
 
 
 
-# [[Kubernetes|Kubernetes]] Core Concepts
+# [[kubernetes|Kubernetes]] Core Concepts
 
 ## Design Principles
 
@@ -53,7 +53,7 @@ Kubernetes is built on several foundational design principles:
 - **[[22-概念/01-核心架构/declarative-api.md|Declarative API]]**: Desired state is declared, controllers reconcile actual state to match
 - **Controller Pattern**: Continuous reconciliation loops maintain system state
 - **etcd Consensus**: Raft algorithm ensures consistent distributed state
-- **Immutability**: [[Pods|Pods]] are immutable once created; changes create new Pods
+- **Immutability**: [[pods|Pods]] are immutable once created; changes create new Pods
 - **Loose Coupling**: Components communicate only through the API Server
 
 ## Control Plane

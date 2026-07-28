@@ -224,7 +224,7 @@ kcl main.k | kubectl delete -f -
 
 ## 参考链接
 
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[deployment]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 - [[22-概念/09-平台与发布/gitops-principles.md|gitops-principles]]

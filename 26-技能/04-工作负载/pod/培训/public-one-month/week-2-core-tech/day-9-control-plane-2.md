@@ -394,7 +394,7 @@ kubectl delete deployment controller-test
 
 ## 明日预告
 
-Day 10 将学习工作负载资源: Deployment、[[StatefulSet|StatefulSet]]、[[DaemonSet|DaemonSet]]，理解不同应用类型的管理方式。
+Day 10 将学习工作负载资源: Deployment、[[statefulset|StatefulSet]]、[[daemonset|DaemonSet]]，理解不同应用类型的管理方式。
 
 
 <!-- risk-assessed -->

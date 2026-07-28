@@ -52,7 +52,7 @@ prerequisites:
 
 # 04 - SRE运维成熟度模型
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 > **SRE实践进阶指南**: 基于Google SRE理念和企业级实践经验，构建完整的运维成熟度评估和提升体系
 
@@ -76,7 +76,7 @@ prerequisites:
 - [./operations-best-practices.md](././operations-best-practices.md) - 运维最佳实践
 - [./failure-patterns-analysis.md](././failure-patterns-analysis.md) - 故障模式分析
 - [03-capacity-planning-strategies.md](./03-capacity-planning-strategies.md) - 容量规划策略
-- [../故障诊断/[[06-存储/README.md|[[KUDIG Database]]]].md](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-README.md) - 结构化故障排查
+- [../故障诊断/[[06-存储/README.md|[[README|KUDIG Database]]]].md](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-README.md) - 结构化故障排查
 
 **学习路径**:
 1. 先了解当前团队所处的成熟度等级(第1节)
@@ -426,7 +426,7 @@ spec:
 
 3. **Level 3→4 (流水线→GitOps)**:
    - **动力**: 配置漂移严重,实际状态与期望状态不一致
-   - **方法**: 采用声明式配置+Git版本控制+自动同步([[ArgoCD|ArgoCD]]/FluxCD)
+   - **方法**: 采用声明式配置+Git版本控制+自动同步([[argocd|ArgoCD]]/FluxCD)
    - **收益**: 配置即代码,审计能力强,自愈能力初步形成
 
 4. **Level 4→5 (GitOps→智能化)**:

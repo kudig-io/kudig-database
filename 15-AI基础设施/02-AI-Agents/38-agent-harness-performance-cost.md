@@ -55,7 +55,7 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - redis
 last_updated: 2026-05
 difficulty: advanced

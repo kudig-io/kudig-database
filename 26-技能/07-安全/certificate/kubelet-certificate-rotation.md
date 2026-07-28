@@ -181,9 +181,9 @@ journalctl -u kubelet | grep -i "certificate|csr|rotation"
 
 ## 相关技能
 
-- [[22-概念/kubernetes-pki-certificate-system.md|[[Kubernetes PKI 证书体系|Kubernetes PKI 证书体系]]]]
-- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[kubeadm 集群创建生命周期|kubeadm 集群创建生命周期]]]]
-- [[26-技能/03-节点/node/运维操作/node-drain-and-maintenance.md|[[节点驱逐与维护|节点驱逐与维护]]]]
+- [[22-概念/kubernetes-pki-certificate-system.md|[[22-概念/05-安全/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]]]
+- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]]]
+- [[26-技能/03-节点/node/运维操作/node-drain-and-maintenance.md|[[26-技能/03-节点/node/运维操作/node-drain-and-maintenance|节点驱逐与维护]]]]
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]
 
 ## Related

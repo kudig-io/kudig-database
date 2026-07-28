@@ -72,7 +72,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]] 版本 API 兼容矩阵 (1.28 → 1.33)
+# [[kubernetes|Kubernetes]] 版本 API 兼容矩阵 (1.28 → 1.33)
 
 > **文档类型**: 版本参考手册 | **适用版本**: K8s 1.28-1.33 | **最后更新**: 2026-05
 > **使用场景**: Agent 判断"某 YAML 能否在指定集群版本运行"、"某 API 字段是否可用"
@@ -88,7 +88,7 @@ cross_refs:
 - **Alpha**: 可能随时被移除，不应在生产环境使用
 
 **本矩阵覆盖范围**：
-- Deployment, [[StatefulSet|StatefulSet]], DaemonSet, Job, CronJob
+- Deployment, [[statefulset|StatefulSet]], DaemonSet, Job, CronJob
 - Service, Ingress, NetworkPolicy
 - PersistentVolume, PersistentVolumeClaim, StorageClass
 - HorizontalPodAutoscaler, VerticalPodAutoscaler

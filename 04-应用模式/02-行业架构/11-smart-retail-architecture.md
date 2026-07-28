@@ -48,18 +48,18 @@ prerequisites:
 
 
 title: 智慧零售与新零售Kubernetes生产架构设计
-description: '# 智慧零售与新零售 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 智慧零售与新零售 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - minio
 - redis
 - mysql
 - kafka
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - gateway
 last_updated: '2026-05-18'
 difficulty: advanced

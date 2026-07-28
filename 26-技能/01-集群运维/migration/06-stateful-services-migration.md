@@ -63,7 +63,7 @@ tags:
 - mysql
 - kafka
 - elasticsearch
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

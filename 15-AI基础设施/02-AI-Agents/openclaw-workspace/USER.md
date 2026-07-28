@@ -60,7 +60,7 @@ tags:
 - rag
 - multi-agent
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - flannel
 - calico
@@ -98,7 +98,7 @@ k8s_versions:
 | 属性 | 值 |
 |------|-----|
 | **角色** | ACK（阿里云容器服务）工单负责人 |
-| **技术栈** | [[Kubernetes|Kubernetes]]、Docker、Prometheus、Grafana、Terraform |
+| **技术栈** | [[kubernetes\|Kubernetes]]、Docker、Prometheus、Grafana、Terraform |
 | **时区** | Asia/Shanghai (UTC+8) |
 | **工作时间** | 工作日 09:00-18:00，但工单可能在任何时段提交 |
 | **K8S 经验** | 高级：熟悉核心组件、能读源码、能做集群级调优 |

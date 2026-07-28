@@ -58,7 +58,7 @@ authors:
 
 # 14 - Namespace、资源管理与垃圾回收事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 Namespace 管理、垃圾回收、ResourceQuota、LimitRange 和 PDB 相关的所有事件。**
 
@@ -88,7 +88,7 @@ authors:
 | **Namespace Controller** |
 | `NamespaceDeletionContentFailure` | Warning | namespace-controller | 低频 | v1.0+ | Namespace 内容删除失败 |
 | `NamespaceContentRemaining` | Normal | namespace-controller | 中频 | v1.0+ | Namespace 仍有资源未删除 |
-| `NamespaceFinalizersRemaining` | Normal | namespace-controller | 中频 | v1.0+ | Namespace 仍有 [[Finalizers|finalizers]] 未处理 |
+| `NamespaceFinalizersRemaining` | Normal | namespace-controller | 中频 | v1.0+ | Namespace 仍有 [[finalizers\|finalizers]] 未处理 |
 | **Garbage Collector** |
 | `DeletingDependents` | Normal | garbage-collector | 中频 | v1.5+ | 正在删除依赖对象 |
 | `GracefulDeletion` | Normal | garbage-collector | 中频 | v1.5+ | 开始优雅删除 |
@@ -638,7 +638,7 @@ kubectl get pods -n my-namespace -o json | \
 |:---|:---|:---|
 | Pod 卡在 Terminating | `terminationGracePeriodSeconds` 过长 | 强制删除: `kubectl delete pod --grace-period=0 --force` |
 | PVC 无法删除 | PV 仍处于 Bound 状态 | 删除 PV: `kubectl delete pv <pv-name>` |
-| [[Service|Service]] 无法删除 | LoadBalancer 云资源未释放 | 检查云平台负载均衡器状态 |
+| [[service\|Service]] 无法删除 | LoadBalancer 云资源未释放 | 检查云平台负载均衡器状态 |
 | 自定义资源卡住 | CR 的 finalizer 未处理 | 移除 finalizer 或重启相关 controller |
 
 **加速 Namespace 删除的方法**:
@@ -1000,7 +1000,7 @@ Events:
 
 **使用场景**:
 - 删除 Deployment 但保留 Pod (用于调试或手动接管)
-- 删除 [[StatefulSet|StatefulSet]] 但保留 PVC (避免数据丢失)
+- 删除 [[statefulset|StatefulSet]] 但保留 PVC (避免数据丢失)
 - 删除自定义 CR 但保留关联资源
 
 ## 典型事件消息

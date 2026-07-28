@@ -67,8 +67,8 @@ tags:
 - decision-tree
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Jaeger|jaeger]]
+- [[prometheus|prometheus]]
+- [[jaeger|jaeger]]
 - istio
 - coredns
 - containerd

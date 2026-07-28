@@ -74,8 +74,8 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[17-系统基础/05-速查卡/docker.md|[[Docker & Containerd 速查卡|Docker]] & [[containerd|Containerd]] 速查表]] |  | cheatsheet, quick-reference |  |
-| 2 | [[17-系统基础/05-速查卡/gateway-api.md|[[Kubernetes|Kubernetes]]es Gateway API 速查卡|Kubernetes Gateway API 速查卡]]]] |  | cheatsheet, quick-reference |  |
+| 1 | [[17-系统基础/05-速查卡/docker.md|[[17-系统基础/05-速查卡/docker|Docker]] & [[containerd|Containerd]] 速查表]] |  | cheatsheet, quick-reference |  |
+| 2 | [[17-系统基础/05-速查卡/gateway-api.md|[[kubernetes\|Kubernetes]]es Gateway API 速查卡|Kubernetes Gateway API 速查卡]]]] |  | cheatsheet, quick-reference |  |
 | 3 | [[17-系统基础/05-速查卡/git.md|Git 速查表]] |  | cheatsheet, quick-reference |  |
 | 4 | [[17-系统基础/05-速查卡/gitops.md|GitOps 生产环境速查卡]] |  | cheatsheet, quick-reference, daily-ops |  |
 | 5 | [[17-系统基础/05-速查卡/go.md|Go 生产环境速查卡]] |  | cheatsheet, quick-reference |  |

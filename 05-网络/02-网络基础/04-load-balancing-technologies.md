@@ -319,7 +319,7 @@ upstream backend {
 | 需求场景 | 推荐方案 | 理由 | 典型配置 |
 |:---|:---|:---|:---|
 | **高并发Web** | Nginx + LVS | 成熟稳定、性能优异 | 4核8GB + 10Gbps |
-| **微服务架构** | [[Envoy|Envoy]]/Istio | 服务网格、可观测性强 | 2核4GB + 1Gbps |
+| **微服务架构** | [[envoy\|Envoy]]/Istio | 服务网格、可观测性强 | 2核4GB + 1Gbps |
 | **UDP流媒体** | HAProxy + DPDK | 低延迟、高吞吐 | 8核16GB + 25Gbps |
 | **全球部署** | Cloud Load Balancer | 地理分布、自动扩缩 | 按需付费 |
 | **金融交易** | F5 BIG-IP | 企业级、安全合规 | 专用硬件 |

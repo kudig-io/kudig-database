@@ -70,7 +70,7 @@ authors:
 
 # Hubble 网络可观测性 (Hubble Network Observability)
 
-> Hubble 是构建在 [[Cilium|Cilium]] 和 eBPF 之上的完全分布式网络与安全可观测性平台，能够以完全透明的方式深度观测服务通信行为、网络基础设施以及应用层协议。
+> Hubble 是构建在 [[cilium|Cilium]] 和 eBPF 之上的完全分布式网络与安全可观测性平台，能够以完全透明的方式深度观测服务通信行为、网络基础设施以及应用层协议。
 
 ---
 
@@ -82,7 +82,7 @@ authors:
 4. [[17-系统基础/06-知识字典/networking/service.md|Service]] Map 与依赖关系图](#4-service-map-与依赖关系图)
 5. [网络策略可视化](#5-网络策略可视化)
 6. [[23-实体/07-可观测性/prometheus.md|Prometheus]] Metrics 导出](#6-prometheus-metrics-导出)
-7. [Hubble 部署与配置 ([[Helm|Helm]])](#7-hubble-部署与配置-helm)
+7. [Hubble 部署与配置 ([[helm|Helm]])](#7-hubble-部署与配置-helm)
 8. [与 Grafana 集成仪表板](#8-与-grafana-集成仪表板)
 9. [故障排查与网络诊断](#9-故障排查与网络诊断)
 10. [企业级可观测性实践](#10-企业级可观测性实践)

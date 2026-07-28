@@ -951,7 +951,7 @@ kubectl get pvc --all-namespaces -o jsonpath='{range .items[*]}{.metadata.namesp
 ## Obsidian 相关文档
 
 - 存储 KUDIG Database — Global MOC
-- [[06-存储/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[06-存储/README.md|[[37-归档/domain-indexes/storage/README-from-domain-6|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践

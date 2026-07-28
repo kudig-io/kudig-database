@@ -71,7 +71,7 @@ cross_refs:
 
 # Flannel 多集群场景与子网冲突处理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25+ | Flannel v0.20+ | **最后更新**: 2026-05
 
 ---
 

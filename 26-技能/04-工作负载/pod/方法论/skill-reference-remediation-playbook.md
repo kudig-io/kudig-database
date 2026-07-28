@@ -90,7 +90,7 @@ kubectl drain <node> --ignore-daemonsets
 ## Related
 
 - [[26-技能/04-工作负载/pod/诊断排障/ts-workloads.md|ts-workloads]] — 工作负载故障排查
-- [[pdb-fta]] — [[26-技能/04-工作负载/hpa-vpa/pdb-fta.md|[[PDB 异常故障树分析|PDB 异常故障树分析]]]]
+- [[pdb-fta]] — [[26-技能/04-工作负载/hpa-vpa/pdb-fta.md|[[19-故障诊断/06-FTA故障树/list/pdb-fta|PDB 异常故障树分析]]]]
 - [[26-技能/04-工作负载/pod/培训/测验/assessment-daily-check-quiz.md|assessment-daily-check-quiz]] — Daily Check Quiz
 - [[psp-scc-fta]] — PSP/SCC 异常故障树分析
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

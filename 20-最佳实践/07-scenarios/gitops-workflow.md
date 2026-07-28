@@ -159,7 +159,7 @@ argocd app history <app-name>
 - [[23-实体/15-参考与索引/kudig-metadata-index.md|README]].md|README]]
 - [[22-概念/09-平台与发布/infrastructure-as-code.md|infrastructure-as-code]]
 - [[26-技能/01-集群运维/helm/helm-fta.md|helm-fta]]
-- [[17-系统基础/05-速查卡/helm.md|[[Helm|helm]]]]
+- [[17-系统基础/05-速查卡/helm.md|[[helm|helm]]]]
 - [[17-系统基础/05-速查卡/gitops.md|gitops]]
 
 

@@ -73,9 +73,9 @@ cross_refs:
 
 
 
-# 134 - [[Ingress|Ingress]] 生产最佳实践
+# 134 - [[ingress|Ingress]] 生产最佳实践
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -96,8 +96,8 @@ cross_refs:
 | **限流配置** | 安全 | ☐ | 配置请求限流 |
 | **安全响应头** | 安全 | ☐ | 配置所有安全响应头 |
 | **日志配置** | 运维 | ☐ | JSON 格式，请求 ID |
-| **监控告警** | 运维 | ☐ | [[Prometheus|Prometheus]] 指标 + Grafana |
-| **网络策略** | 安全 | ☐ | [[NetworkPolicy|NetworkPolicy]] 隔离 |
+| **监控告警** | 运维 | ☐ | [[prometheus\|Prometheus]] 指标 + Grafana |
+| **网络策略** | 安全 | ☐ | [[networkpolicy\|NetworkPolicy]] 隔离 |
 
 ### 1.2 运行时检查清单
 

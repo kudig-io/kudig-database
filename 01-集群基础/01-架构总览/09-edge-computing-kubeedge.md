@@ -69,7 +69,7 @@ cross_refs:
 
 
 
-# 09 - 边缘计算集成架构 ([[KubeEdge|KubeEdge]]/OpenYurt)
+# 09 - 边缘计算集成架构 ([[kubeedge|KubeEdge]]/OpenYurt)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubeedge.io](https://kubeedge.io/) | [[23-实体/11-AI与边缘/openyurt.md|openyurt]].io](https://openyurt.io/)
 
@@ -83,7 +83,7 @@ cross_refs:
 | **[[k3s|K3s]]** | Rancher | 轻量级K8S | 独立发行版 | 强 | - |
 | **MicroK8s** | Canonical | 单节点K8S | 独立发行版 | 中 | - |
 | **SuperEdge** | 腾讯 | 边缘自治 | v1.25+ | 强 | - |
-| **[[Akri|Akri]]** | Microsoft | 设备发现 | v1.25+ | 中 | - |
+| **[[akri\|Akri]]** | Microsoft | 设备发现 | v1.25+ | 中 | - |
 
 <!-- chunk: KubeEdge架构 -->
 ## KubeEdge架构

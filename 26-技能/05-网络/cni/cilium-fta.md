@@ -45,7 +45,7 @@ severity: critical
 
 
 
-# [[Cilium|Cilium]] Fta
+# [[cilium|Cilium]] Fta
 
 title: cilium FTA 树：eBPF/Cilium CNI 故障诊断
 description: 'TE["顶事件: Cilium/EBPF 网络异常<br/>Pod 无法通信 / 访问延迟高"]'

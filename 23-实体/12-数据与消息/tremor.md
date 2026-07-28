@@ -277,7 +277,7 @@ curl -s http://tremor:9898/metrics | grep backpressure
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - tremor
-- [[23-实体/drasi.md|[[Drasi|Drasi]]]]
+- [[23-实体/drasi.md|[[drasi|Drasi]]]]
 - observability|CNCF 可观测性项目全景]] — Cross-reference
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 

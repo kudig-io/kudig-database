@@ -1152,7 +1152,7 @@ journalctl -u kubelet --no-pager -n 100 | grep -i "cpu.*manager" || echo "未找
 <!-- chunk: 监控告警 -->
 ## 监控告警
 
-### [[Prometheus|Prometheus]] 监控规则
+### [[prometheus|Prometheus]] 监控规则
 
 ```yaml
 # kubelet-monitoring-rules.yaml

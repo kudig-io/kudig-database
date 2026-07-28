@@ -72,7 +72,7 @@ cross_refs:
 # OPA Gatekeeper 策略即代码深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Enterprise-grade [[Kubernetes|Kubernetes]] policy enforcement with OPA Gatekeeper | **Complexity**: ⭐⭐⭐⭐
+> **Scenario**: Enterprise-grade [[kubernetes|Kubernetes]] policy enforcement with OPA Gatekeeper | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 

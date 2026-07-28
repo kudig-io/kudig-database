@@ -70,7 +70,7 @@ audience:
 - GPU计算工程师
 estimated_read_time: 5min
 intent_queries:
-- 云游戏 [[Kubernetes|Kubernetes]] GPU渲染集群
+- 云游戏 [[kubernetes|Kubernetes]] GPU渲染集群
 - WebRTC云游戏 低延迟串流 K8s
 - NVIDIA MIG GPU虚拟化 云游戏
 - 游戏存档同步 OSS 加密 K8s

@@ -149,9 +149,9 @@ flowchart TD
 | **支付网关** | 99.99% | P99 < 200ms | 直接关联资金，零容忍 |
 | **数据流水线** | 99.5% | 批次完成率 > 99% | 批处理允许一定失败 |
 | **管理后台 API** | 99% | P99 < 2s | 非用户-facing，可容忍 |
-| **[[Kubernetes|Kubernetes]] 控制平面** | 99.9% | P99 < 1s (apiserver) | 影响整个集群 |
+| **[[kubernetes\|Kubernetes]] 控制平面** | 99.9% | P99 < 1s (apiserver) | 影响整个集群 |
 | **集群 DNS** | 99.99% | P99 < 5ms | 影响所有服务发现 |
-| **[[Ingress|Ingress]] 控制器** | 99.9% | P99 < 500ms | 外部流量入口 |
+| **[[ingress\|Ingress]] 控制器** | 99.9% | P99 < 500ms | 外部流量入口 |
 
 ### 基于历史数据的 SLO 设定方法
 
@@ -424,7 +424,7 @@ slos:
   解决: 要么降低平台级 SLO 到 99.7%，要么提升服务级 SLO
 ```
 
-## [[Prometheus|Prometheus]] Recording Rules 配置模板
+## [[prometheus|Prometheus]] Recording Rules 配置模板
 
 ### 为什么需要 Recording Rules
 

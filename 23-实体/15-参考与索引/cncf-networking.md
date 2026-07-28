@@ -1,7 +1,7 @@
 ---
 title: CNCF 网络与服务网格项目全景
 description: '# CNCF 网络与服务网格项目全景'
-summary: 'CNCF 网络生态围绕 **CNI（容器网络）**、**服务网格（Service Mesh）vice]] Mesh）**、**DNS/服务发现**、**负载均衡与入口（[[Ingress|Ingress]]）** 四大层次构建。'
+summary: 'CNCF 网络生态围绕 **CNI（容器网络）**、**服务网格（Service Mesh）vice]] Mesh）**、**DNS/服务发现**、**负载均衡与入口（[[ingress|Ingress]]）** 四大层次构建。'
 category: entities
 tags:
 - k8s
@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-CNCF 网络生态围绕 **CNI（容器网络）**、**服务网格（Service Mesh）vice]] Mesh）**、**DNS/服务发现**、**负载均衡与入口（[[Ingress|Ingress]]）** 四大层次构建。
+CNCF 网络生态围绕 **CNI（容器网络）**、**服务网格（Service Mesh）vice]] Mesh）**、**DNS/服务发现**、**负载均衡与入口（[[ingress|Ingress]]）** 四大层次构建。
 
 ---
 

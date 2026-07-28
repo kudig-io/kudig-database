@@ -47,7 +47,7 @@ prerequisites:
 
 ## 概述
 
-[[Kubernetes|Kubernetes]] 集群的所有组件之间都通过 **TLS（传输层安全协议）** 进行通信，因此需要一套完整的 **PKI（公钥基础设施）证书体系** 来完成双向身份验证与加密传输。如果你使用 `kubeadm` 安装集群，这些证书会自动生成；但在手动部署或需要更高安全性的场景下，运维人员需要自行创建并管理证书。
+[[kubernetes|Kubernetes]] 集群的所有组件之间都通过 **TLS（传输层安全协议）** 进行通信，因此需要一套完整的 **PKI（公钥基础设施）证书体系** 来完成双向身份验证与加密传输。如果你使用 `kubeadm` 安装集群，这些证书会自动生成；但在手动部署或需要更高安全性的场景下，运维人员需要自行创建并管理证书。
 
 > **注意**：原概念页面 `/docs/concepts/cluster-administration/certificates/` 已迁移，当前内容主要基于官方最佳实践文档 `/docs/setup/best-practices/certificates/` 进行总结。
 

@@ -1,7 +1,7 @@
 ---
 title: cert-manager 自动证书管理深度实践
 description: '# cert-manager 自动证书管理深度实践'
-summary: 'TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，[[Ingress|Ingress]] 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，'
+summary: 'TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，[[ingress|Ingress]] 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，'
 category: cloud-native-security
 tags:
 - k8s
@@ -70,11 +70,11 @@ cross_refs:
 # cert-manager 自动证书管理深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: Automated TLS certificate management for [[Kubernetes|Kubernetes]] | **Complexity**: ⭐⭐⭐
+> **Scenario**: Automated TLS certificate management for [[kubernetes|Kubernetes]] | **Complexity**: ⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 
-TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，[[Ingress|Ingress]] 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，它将证书生命周期完全自动化，支持 ACME（Let's Encrypt）、私有 CA、Vault PKI、自签名等多种颁发者，通过声明式 API 管理证书的签发和自动轮换。
+TLS 证书是云原生环境中服务间安全通信的基础。在 Kubernetes 集群中，[[ingress|Ingress]] 端点、服务间 mTLS、Webhook 服务器等场景都需要大量证书。手动管理证书的签发、分发和轮换既繁琐又容易出错，证书过期导致的服务中断是常见的生产事故。cert-manager 是 Kubernetes 生态中最流行的证书管理工具，它将证书生命周期完全自动化，支持 ACME（Let's Encrypt）、私有 CA、Vault PKI、自签名等多种颁发者，通过声明式 API 管理证书的签发和自动轮换。
 
 cert-manager 的核心价值在于将证书管理从手动操作转变为声明式自动化。管理员只需创建一个 Certificate 资源，指定域名、颁发者和有效期，cert-manager 就会自动完成证书签发、Secret 创建和到期前自动轮换。当证书即将到期时，cert-manager 会自动申请新证书并更新 Secret，使用该 Secret 的 Ingress 和工作负载会自动获取新证书。对于 ACME（Let's Encrypt）证书，cert-manager 自动处理 HTTP-01 和 DNS-01 挑战，无需手动操作 DNS 记录或配置 Web 服务器。
 

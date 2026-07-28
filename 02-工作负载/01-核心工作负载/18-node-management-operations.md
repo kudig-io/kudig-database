@@ -89,7 +89,7 @@ cross_refs:
 
 | 阶段 | 关键操作 | 建议命令 | 注意事项 |
 |------|----------|----------|----------|
-| **准备 (Provision)** | 通过 NodePool 创建/扩容节点 | ACK 控制台或 `cluster-autoscaler` | 统一镜像与 [[kubelet|kubelet]] 配置, 预置监控/日志 [[DaemonSet|DaemonSet]] |
+| **准备 (Provision)** | 通过 NodePool 创建/扩容节点 | ACK 控制台或 `cluster-autoscaler` | 统一镜像与 [[kubelet|kubelet]] 配置, 预置监控/日志 [[daemonset\|DaemonSet]] |
 | **接入 (Join)** | 节点加入集群并打标签 | `kubectl label nodes` / `kubectl taint nodes` | 加入后立刻补齐 `env=prod`、`zone=xxx` 等业务标签 |
 | **维护 (Maintain)** | 打补丁/升级内核/重启宿主机 | `kubectl drain <node> --ignore-daemonsets --delete-emptydir-data` | 搭配 PDB, 控制同时维护的节点数量 |
 | **下线 (Decommission)** | 永久移除节点 | `kubectl drain` → `kubectl delete node` | 先确认无绑定本地盘/本地日志, 相关 Pod 已在其他节点稳定运行 |

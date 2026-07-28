@@ -340,7 +340,7 @@ npm install -g kubetail
 kubetail <deployment-name> -n production
 ```
 
-### 7.3 [[Cilium|cilium]] (CNI 调试)
+### 7.3 [[cilium|cilium]] (CNI 调试)
 
 ```bash
 # Cilium CLI

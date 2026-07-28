@@ -56,9 +56,9 @@ Code Push -> Build Image -> Run Tests -> Security Scan -> Push to Registry -> Up
 |-------|--------|-------|
 | Build | Compile code, build container image | Docker BuildKit, Kaniko |
 | Test | Unit, integration, E2E tests | pytest, Jest, Cypress |
-| Scan | Vulnerability scan, SBOM generation | [[Trivy|Trivy]], Syft |
+| Scan | Vulnerability scan, SBOM generation | [[trivy\|Trivy]], Syft |
 | Sign | Image signature verification | Cosign/Sigstore |
-| Push | Push to container registry | [[Harbor|Harbor]], ECR, GCR |
+| Push | Push to container registry | [[harbor\|Harbor]], ECR, GCR |
 | Update Manifest | Update K8s manifests with new image tag | kustomize edit set image |
 | Deploy | GitOps controller syncs to cluster | ArgoCD, Flux |
 

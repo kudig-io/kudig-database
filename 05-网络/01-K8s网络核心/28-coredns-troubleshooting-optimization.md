@@ -76,9 +76,9 @@ cross_refs:
 
 
 
-# 56 - [[CoreDNS|CoreDNS]] 故障排查与性能优化 (Troubleshooting & Optimization)
+# 56 - [[coredns|CoreDNS]] 故障排查与性能优化 (Troubleshooting & Optimization)
 
-> **适用版本**: CoreDNS 1.8.0+ / [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: CoreDNS 1.8.0+ / [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -287,7 +287,7 @@ kubectl logs -n kube-system deploy/coredns | grep -i error
 
 | 检查项 | 正常值 | 检查命令 |
 |:---|:---|:---|
-| CoreDNS延迟 | <10ms | [[Prometheus|Prometheus]]: `coredns_dns_request_duration_seconds` |
+| CoreDNS延迟 | <10ms | [[prometheus\|Prometheus]]: `coredns_dns_request_duration_seconds` |
 | 缓存命中率 | >60% | Prometheus: `coredns_cache_hits_total / (hits+misses)` |
 | 上游延迟 | <50ms | `dig @8.8.8.8 example.com +stats` |
 | ndots配置 | 合理 | 外部域名查询次数过多 |

@@ -96,7 +96,7 @@ status: stable
 **核心原则**:
 - 高可用控制平面：至少3个主节点
 - 合理的节点规格：根据工作负载选择节点类型
-- 网络规划：Pod CIDR、[[Service|Service]] CIDR、节点网络分离
+- 网络规划：Pod CIDR、[[service|Service]] CIDR、节点网络分离
 
 **关键配置**:
 

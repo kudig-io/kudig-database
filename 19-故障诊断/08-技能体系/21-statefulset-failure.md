@@ -60,7 +60,7 @@ version: 1.0.0
 
 ---
 skill_id: "SKILL-WORK-002"
-skill_name: "[[StatefulSet|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation"
+skill_name: "[[statefulset|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation"
 version: "1.0"
 category: "workload"
 severity_range: "P0-P2"
@@ -80,7 +80,7 @@ trigger_keywords:
   - "PVC pending"
   - "pod not starting"
   - "ordinal"
-  - "headless [[Service|service]]"
+  - "headless [[service|service]]"
   - "有状态集"
   - "数据库集群"
   - "kafka"

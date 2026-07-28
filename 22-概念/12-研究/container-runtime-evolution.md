@@ -58,7 +58,7 @@ crun 由 Red Hat 维护，适合低延迟与资源受限场景。
 WebAssembly 作为新型容器运行时正在崛起：
 
 - **runwasi**：containerd 的 WASM shim，使 containerd 可调度 WASM 工作负载
-- **[[SpinKube]]** v0.24：CNCF Sandbox，将 Fermyon Spin 应用编排为 K8S 原生工作负载
+- **[[spinkube|SpinKube]]** v0.24：CNCF Sandbox，将 Fermyon Spin 应用编排为 K8S 原生工作负载
 - **sub-ms 冷启动**：WASM 模块启动延迟在亚毫秒级，远快于传统容器
 - 适用于边缘计算、函数即服务、插件系统等场景
 

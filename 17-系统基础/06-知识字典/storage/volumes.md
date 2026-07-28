@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-[[Kubernetes|Kubernetes]] Volumes 为 Pod 中的容器提供了一种通过文件系统访问和共享数据的机制。容器内的磁盘文件默认是临时的，容器崩溃或停止后数据会丢失。Volume 解决了数据持久化和容器间共享存储的问题。
+[[kubernetes|Kubernetes]] Volumes 为 Pod 中的容器提供了一种通过文件系统访问和共享数据的机制。容器内的磁盘文件默认是临时的，容器崩溃或停止后数据会丢失。Volume 解决了数据持久化和容器间共享存储的问题。
 
 ## 核心概念/原理
 

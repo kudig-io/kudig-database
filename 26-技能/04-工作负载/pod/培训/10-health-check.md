@@ -57,7 +57,7 @@ tags:
 - redis
 - mysql
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-05
 difficulty: beginner
 reading_level: beginner

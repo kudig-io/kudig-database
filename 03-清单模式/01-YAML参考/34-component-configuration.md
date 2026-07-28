@@ -68,7 +68,7 @@ authors:
 
 
 
-# 34. [[Kubernetes|Kubernetes]] 组件配置（Component Configuration）
+# 34. [[kubernetes|Kubernetes]] 组件配置（Component Configuration）
 
 > **适用版本**：Kubernetes v1.25 – v1.32 | **文档日期**：2026-02
 

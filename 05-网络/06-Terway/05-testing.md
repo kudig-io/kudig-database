@@ -125,7 +125,7 @@ kubectl exec terway-test-1 -- ip link show
 |:---|:---|
 | eth0 IP | VPC 子网 IP，非 10.244.x.x 等 CIDR |
 | 默认路由 | 指向节点网关或 ENI 接口 |
-| nameserver | 集群 [[CoreDNS|CoreDNS]] [[Service|Service]] ClusterIP（通常为 10.96.0.10 或 172.16.0.10） |
+| nameserver | 集群 [[coredns\|CoreDNS]] [[service\|Service]] ClusterIP（通常为 10.96.0.10 或 172.16.0.10） |
 | search | `default.svc.cluster.local svc.cluster.local cluster.local` |
 
 异常排查：
@@ -272,7 +272,7 @@ echo "结果: PASS=$PASS  FAIL=$FAIL"
 ```
 ---
 
-## 3. [[NetworkPolicy|NetworkPolicy]] 测试
+## 3. [[networkpolicy|NetworkPolicy]] 测试
 
 ### 3.1 默认拒绝所有入站流量
 

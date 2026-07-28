@@ -57,9 +57,9 @@ authors:
 
 
 
-# [[Harbor|Harbor]] 企业级镜像仓库部署指南
+# [[harbor|Harbor]] 企业级镜像仓库部署指南
 
-> **适用版本**: Harbor v2.13.0 / [[Helm|Helm]] Chart v1.16.0  
+> **适用版本**: Harbor v2.13.0 / [[helm|Helm]] Chart v1.16.0  
 > **最后更新**: 2026-04-24  
 > **难度**: 中级
 
@@ -299,7 +299,7 @@ spec:
 ## Obsidian 相关文档
 
 - domain-22-container-image-management KUDIG Database — Global MOC
-- [[14-容器运行时/README.md|[[Domain 22: 容器镜像管理 (Container Image Management)|Domain 22: 容器镜像管理 (Container Image Management)]]]]
+- [[14-容器运行时/README.md|[[37-归档/domain-indexes/container-runtime/README-from-domain-22|Domain 22: 容器镜像管理 (Container Image Management)]]]]
 - Domain-22 容器镜像管理 — 开源项目索引
 - Harbor企业级容器镜像仓库深度实践
 - Docker Registry企业级镜像分发深度实践

@@ -747,7 +747,7 @@ kubectl get leases -n kube-node-lease -o json | \
     (now - (.spec.renewTime | fromdateiso8601)) > 60
   ) | .metadata.name'
 ```
-### [[Prometheus|Prometheus]] 监控规则
+### [[prometheus|Prometheus]] 监控规则
 
 ```yaml
 # prometheus-lease-rules.yaml

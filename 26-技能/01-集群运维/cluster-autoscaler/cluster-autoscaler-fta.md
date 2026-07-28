@@ -44,7 +44,7 @@ severity: medium
 ---
 title: "Cluster Autoscaler 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -A --field-selector=status.phase=Pending -o jsonpath='{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\'\n\'}{en..."
+summary: "<!-- condition: kubectl get [[pods|pods]] -A --field-selector=status.phase=Pending -o jsonpath='{range .items[?(@.spec.nodeName==null)]} {.metadata.namespace}/{.metadata.name}{\'\n\'}{en..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["故障诊断/FTA故障树/list/cluster-autoscaler-fta.md"]
 created: 2026-05-21

@@ -56,7 +56,7 @@ title: Week 3: 运维作战能力期 (Days 15-21)
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|kubernetes]] Week 3 学习路径
+  - [[kubernetes|kubernetes]] Week 3 学习路径
   - K8s 运维能力建设
   - 安全可观测性排障学习
   - 故障排查方法论入门

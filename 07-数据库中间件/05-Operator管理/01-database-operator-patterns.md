@@ -95,11 +95,11 @@ status:
 | 数据库 | Operator | 成熟度 |
 |--------|---------|--------|
 | MySQL | Oracle MySQL Operator | GA |
-| PostgreSQL | [[CloudNativePG|CloudNativePG]] / Zalando | GA |
+| PostgreSQL | [[cloudnativepg\|CloudNativePG]] / Zalando | GA |
 | Redis | Redis Operator / Spotahome | GA |
 | MongoDB | MongoDB Community Operator | GA |
 | Cassandra | Cass Operator | GA |
-| Kafka | [[Strimzi|Strimzi]] | GA |
+| Kafka | [[strimzi\|Strimzi]] | GA |
 
 ## 反模式
 

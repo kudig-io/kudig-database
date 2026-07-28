@@ -47,11 +47,11 @@ status: reviewed
 
 # GitOps Principles and Practice
 
-## [[OpenGitOps|OpenGitOps]] Four Principles
+## [[opengitops|OpenGitOps]] Four Principles
 
 | Principle | Description | Implementation | Benefit |
 |-----------|-------------|----------------|---------|
-| Declarative | Desired state described declaratively | K8s YAML, [[Helm|Helm]] values, Kustomize | Reviewable, comparable, rollbackable |
+| Declarative | Desired state described declaratively | K8s YAML, [[helm\|Helm]] values, Kustomize | Reviewable, comparable, rollbackable |
 | Versioned + Immutable | State stored in version-controlled system | Git repository | Full audit trail, traceable changes |
 | Automated Pull | Changes pulled automatically from VCS | ArgoCD Sync, Flux Reconciliation | Reduced human error, consistency |
 | Continuous Reconciliation | Agent compares actual vs desired state | ArgoCD Controller, Flux Kustomization Controller | Drift detection, self-healing |

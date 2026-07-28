@@ -203,8 +203,8 @@ histogram_quantile(0.50, vllm_batch_size_bucket)
 - vLLM 文档: https://docs.vllm.ai/
 - NVIDIA Triton: https://docs.nvidia.com/deeplearning/triton-inference-server/
 - KServe: https://kserve.github.io/website/
-- [[15-AI基础设施/03-inference-serving/|推理服务目录]]
-- [[15-AI基础设施/02-gpu-scheduling/|GPU 调度目录]]
+- [[15-AI基础设施/01-基础设施/17-llm-inference-serving|推理服务目录]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU 调度目录]]
 - [[25-研究/01-AI与边缘/gpu-sharing-scheduling.md|GPU 共享调度研究]]
 
 ## Related

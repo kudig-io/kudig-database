@@ -67,7 +67,7 @@ cross_refs:
 # Vault K8s 密钥管理集成深度实践
 
 > **Author**: Cloud Native Security Architect | **Version**: v1.0 | **Update Time**: 2026-05-18
-> **Scenario**: HashiCorp Vault integration with [[Kubernetes|Kubernetes]] secrets management | **Complexity**: ⭐⭐⭐⭐
+> **Scenario**: HashiCorp Vault integration with [[kubernetes|Kubernetes]] secrets management | **Complexity**: ⭐⭐⭐⭐
 
 <!-- chunk: 概述 -->## 概述
 

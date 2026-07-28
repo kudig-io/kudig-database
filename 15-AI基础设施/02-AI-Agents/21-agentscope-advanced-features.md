@@ -55,7 +55,7 @@ tags:
 - rag
 - multi-agent
 - [[kubelet|kubelet]]
-- [[Jaeger|jaeger]]
+- [[jaeger|jaeger]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

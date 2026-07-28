@@ -106,8 +106,8 @@ kubectl expose pod <sts-name>-0 --name=<svc-name>-0 --port=<port> -n <ns>
 - [[23-实体/08-交付与制品/argocd.md|ArgoCD]]：GitOps同步
 
 ## 相关概念
-- [[StatefulSet]]
-- [[Ingress]]
+- [[statefulset|StatefulSet]]
+- [[ingress|Ingress]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

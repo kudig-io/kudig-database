@@ -53,7 +53,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - opa
 - postgresql
@@ -70,7 +70,7 @@ audience:
 - CIM平台开发者
 estimated_read_time: 5min
 intent_queries:
-- digital twin city [[Kubernetes|kubernetes]] architecture
+- digital twin city [[kubernetes|kubernetes]] architecture
 - 数字孪生城市K8s部署
 - CIM平台架构设计
 - 城市三维渲染GPU

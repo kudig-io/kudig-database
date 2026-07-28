@@ -60,7 +60,7 @@ authors:
 
 
 
-# 01 - [[Kubernetes|Kubernetes]] 事件系统架构与 API 参考
+# 01 - [[kubernetes|Kubernetes]] 事件系统架构与 API 参考
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
@@ -306,7 +306,7 @@ type: Normal
 |:---|:---|:---|:---|
 | **kubelet** | `kubelet` | 容器生命周期、镜像拉取、探针、卷挂载、节点状态 | Pod, Node |
 | **kube-scheduler** | `default-scheduler` | 调度成功/失败、抢占 | Pod |
-| **deployment-controller** | `deployment-controller` | 副本集伸缩、滚动更新、回滚 | Deployment, [[ReplicaSet|ReplicaSet]] |
+| **deployment-controller** | `deployment-controller` | 副本集伸缩、滚动更新、回滚 | Deployment, [[replicaset\|ReplicaSet]] |
 | **replicaset-controller** | `replicaset-controller` | Pod 创建/删除 | ReplicaSet, Pod |
 | **statefulset-controller** | `statefulset-controller` | Pod 有序创建/删除 | StatefulSet, Pod |
 | **daemonset-controller** | `daemon-set-controller` | DaemonSet Pod 管理 | DaemonSet, Pod |

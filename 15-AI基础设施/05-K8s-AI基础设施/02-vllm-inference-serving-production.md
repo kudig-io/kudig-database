@@ -59,7 +59,7 @@ authors:
 
 vLLM 是当前 LLM 推理领域性能最优的开源引擎之一，其核心创新 PagedAttention 将 KV Cache 管理类比操作系统虚拟内存分页，消除了传统连续内存分配导致的显存碎片化问题，使 GPU 显存利用率从 50-60% 提升至 90% 以上。结合 Continuous Batching（持续批处理）和 Tensor Parallel（张量并行）技术，vLLM 能够在单节点多 GPU 环境下实现极高的推理吞吐量。
 
-本文聚焦 vLLM 在 Kubernetes 上的生产级部署，覆盖从基础 Deployment 到多 GPU Tensor Parallel、量化推理、性能调优、监控告警和故障排查的完整链路。关于模型部署的整体架构，参见 [[15-AI基础设施/01-基础设施/10-model-deployment-serving]]；GPU 调度基础参见 [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]。
+本文聚焦 vLLM 在 Kubernetes 上的生产级部署，覆盖从基础 Deployment 到多 GPU Tensor Parallel、量化推理、性能调优、监控告警和故障排查的完整链路。关于模型部署的整体架构，参见 [[15-AI基础设施/05-K8s-AI基础设施/04-kserve-model-serving-platform|10-model-deployment-serving]]；GPU 调度基础参见 [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]。
 
 ## 架构与核心概念
 
@@ -464,7 +464,7 @@ kubectl exec -it <vllm-pod> -n ai-serving -- nvidia-smi dmon -s u -d 5
 
 ## Related
 
-- [[15-AI基础设施/01-基础设施/10-model-deployment-serving]]
+- [[15-AI基础设施/05-K8s-AI基础设施/04-kserve-model-serving-platform|10-model-deployment-serving]]
 - [[22-概念/07-调度与资源/gpu-scheduling-ai-workloads]]
 - [[22-概念/07-调度与资源/gang-scheduling]]
 - [[15-AI基础设施/01-基础设施/04-gpu-monitoring-dcgm]]

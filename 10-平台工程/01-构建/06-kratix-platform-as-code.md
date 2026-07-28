@@ -65,11 +65,11 @@ tags:
 - developer-experience
 - idp
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Helm|helm]]
-- [[ArgoCD|argocd]]
-- [[Flux|flux]]
+- [[helm|helm]]
+- [[argocd|argocd]]
+- [[flux|flux]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

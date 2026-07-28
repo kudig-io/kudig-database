@@ -40,7 +40,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] Scheduler
+# [[kubernetes|Kubernetes]] Scheduler
 
 ## 概述
 

@@ -259,7 +259,7 @@ kubectl logs -n kubeflow -l app=kubeflow-pipelines-api-server --tail=50
 - 99-kubeflow-ai-platform-guide
 - troubleshooting.md|02-kubeflow-troubleshooting]]
 - kubeflow
-- [[23-实体/kaito.md|[[KAITO (Kubernetes AI Toolchain Operator)|KAITO]]]]
+- [[23-实体/kaito.md|[[23-实体/11-AI与边缘/kaito|KAITO]]]]
 - [[23-实体/15-参考与索引/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
 - [[21-生态参考/03-领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]

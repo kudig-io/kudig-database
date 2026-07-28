@@ -64,7 +64,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
+# [[kubernetes|Kubernetes]] 成本治理与 FinOps 实践 (Kubernetes Cost Governance and FinOps Practice)
 
 > **作者**: Kubernetes成本优化专家 | **版本**: v1.6 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级成本管控 | **复杂度**: ⭐⭐⭐⭐

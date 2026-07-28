@@ -57,11 +57,11 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[Helm|helm]]
-- [[ArgoCD|argocd]]
+- [[helm|helm]]
+- [[argocd|argocd]]
 - redis
 - hpa
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced
@@ -96,7 +96,7 @@ k8s_versions:
 
 ## 概述
 
-本文探讨 **Agent 作为技术赋能新范式**的设计思路，结合 kudig-database 这一覆盖 39+ 知识域、1400+ 文件、4300 万字的 [[Kubernetes|Kubernetes]] 生产运维全域知识库，分析如何从传统的"文档→人工阅读→手动执行"链路，转变为"知识→自主推理→自动行动"的赋能闭环。
+本文探讨 **Agent 作为技术赋能新范式**的设计思路，结合 kudig-database 这一覆盖 39+ 知识域、1400+ 文件、4300 万字的 [[kubernetes|Kubernetes]] 生产运维全域知识库，分析如何从传统的"文档→人工阅读→手动执行"链路，转变为"知识→自主推理→自动行动"的赋能闭环。
 
 ---
 

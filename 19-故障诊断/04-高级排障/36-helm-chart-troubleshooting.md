@@ -77,7 +77,7 @@ cross_refs:
 
 
 
-# 36 - [[Helm|Helm]] Chart 故障排查 (Helm Chart Troubleshooting)
+# 36 - [[helm|Helm]] Chart 故障排查 (Helm Chart Troubleshooting)
 
 ---
 

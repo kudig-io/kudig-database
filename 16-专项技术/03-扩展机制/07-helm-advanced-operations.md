@@ -66,7 +66,7 @@ cross_refs:
 
 
 
-# 129 - [[Helm|Helm]] 高级运维：复杂部署、CI/CD 集成与安全最佳实践
+# 129 - [[helm|Helm]] 高级运维：复杂部署、CI/CD 集成与安全最佳实践
 
 <!-- chunk: Helm 高级配置管理 -->
 ## Helm 高级配置管理

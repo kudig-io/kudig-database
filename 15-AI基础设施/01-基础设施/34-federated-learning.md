@@ -68,7 +68,7 @@ cross_refs:
 
 # 34 - 联邦学习与分布式协同训练
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [FATE](https://fate.readthedocs.io/) | [FedML](https://fedml.ai/) | [TensorFlow Federated](https://www.tensorflow.org/federated)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [FATE](https://fate.readthedocs.io/) | [FedML](https://fedml.ai/) | [TensorFlow Federated](https://www.tensorflow.org/federated)
 
 <!-- chunk: 一、联邦学习架构 -->
 ## 一、联邦学习架构

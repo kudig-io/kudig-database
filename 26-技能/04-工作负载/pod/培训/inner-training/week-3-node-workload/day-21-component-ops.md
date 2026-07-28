@@ -52,8 +52,8 @@ title: Day 21: K8S 组件运维
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] control plane components运维
-  - [[CoreDNS|CoreDNS]] troubleshooting DNS resolution
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] control plane components运维
+  - [[coredns|CoreDNS]] troubleshooting DNS resolution
   - kube-proxy iptables IPVS mode
   - CNI Terway Flannel network troubleshooting
   - API Server etcd health check

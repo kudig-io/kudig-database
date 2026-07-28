@@ -39,7 +39,7 @@ prerequisites:
 
 ## 概述
 
-Node（节点）是 [[Kubernetes|Kubernetes]] 集群中的工作机器，可以是物理机或虚拟机。Kubernetes 通过将容器放入 Pod 中，并在 Node 上运行这些 Pod 来执行工作负载。一个集群通常包含多个节点，但在学习或资源受限的环境中也可能只有一个节点。每个节点由控制平面管理，包含运行 Pod 所必需的服务组件：[[kubelet|kubelet]]、容器运行时（[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]）和 kube-proxy。
+Node（节点）是 [[kubernetes|Kubernetes]] 集群中的工作机器，可以是物理机或虚拟机。Kubernetes 通过将容器放入 Pod 中，并在 Node 上运行这些 Pod 来执行工作负载。一个集群通常包含多个节点，但在学习或资源受限的环境中也可能只有一个节点。每个节点由控制平面管理，包含运行 Pod 所必需的服务组件：[[kubelet|kubelet]]、容器运行时（[[22-概念/15-运行时与系统/container-runtime.md|container runtime]]）和 kube-proxy。
 
 ## 核心概念/原理
 

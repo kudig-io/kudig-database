@@ -71,7 +71,7 @@ estimated_read_time: 5min
 intent_queries:
 - PersistentVolume YAML 配置参考 是什么
 - 如何 PersistentVolume YAML 配置参考
-- [[Kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
+- [[kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
 trigger_keywords:
 - PersistentVolume
 - YAML

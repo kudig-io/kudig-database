@@ -71,7 +71,7 @@ estimated_read_time: 5min
 intent_queries:
 - Commvault 企业级灾备与业务连续性深度实践 是什么
 - 如何 Commvault 企业级灾备与业务连续性深度实践
-- [[Kubernetes|Kubernetes]] 30 disaster recovery business continuity 最佳实践
+- [[kubernetes|Kubernetes]] 30 disaster recovery business continuity 最佳实践
 trigger_keywords:
 - Commvault
 - 企业级灾备与业务连续性深度实践

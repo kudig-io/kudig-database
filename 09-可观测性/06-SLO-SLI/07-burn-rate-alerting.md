@@ -244,7 +244,7 @@ PromQL:
 
 ## 告警规则完整 YAML 配置
 
-### [[Prometheus|Prometheus]] Alertmanager 完整配置
+### [[prometheus|Prometheus]] Alertmanager 完整配置
 
 ```yaml
 # slo-burn-rate-alerts.yaml

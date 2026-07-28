@@ -1,7 +1,7 @@
 ---
 title: ACK 关联产品 - VPC 网络
-description: 'title: ACK 关联产品 - VPC 网络'
-summary: 'title: ACK 关联产品 - VPC 网络'
+description: ACK 集群 VPC 网络规划实践：地址段设计、vSwitch 多可用区策略、Terway CNI 集成、NAT 出口与混合云互联
+summary: ACK 集群 VPC 网络规划实践指南，覆盖 VPC/Pod/Service 三大网段设计、多可用区 vSwitch 策略、Terway CNI 模式选择、NAT 网关出口管理与 CEN/专线混合云互联，附网络验证命令。
 category: general
 tags:
 - cloud
@@ -49,6 +49,7 @@ prerequisites:
 - [VPC 网络规划](#vpc-网络规划)
 - [子网 (vSwitch) 设计策略](#子网-vswitch-设计策略)
 - [Terway CNI 与 VPC 集成](#terway-cni-与-vpc-集成)
+- [网络配置验证方法](#网络配置验证方法)
 - [出口流量管理 (NAT Gateway)](#出口流量管理-nat-gateway)
 - [多集群与混合云互联](#多集群与混合云互联)
 
@@ -62,7 +63,7 @@ prerequisites:
 |:---|:---|:---|:---|
 | **VPC 网段** | `192.168.0.0/12` | 整个专有网络 | 后续不可修改，需预留充足空间 |
 | **Pod 网段** | `172.20.0.0/16` | 集群 Pod 使用 | 不能与 VPC/Service 网段冲突 |
-| **[[Service|Service]] 网段** | `172.21.0.0/20` | 集群内部 Service | 必须是私网地址段 |
+| **[[service\|Service]] 网段** | `172.21.0.0/20` | 集群内部 Service | 必须是私网地址段 |
 
 ### IP 地址分配估算公式
 
@@ -110,6 +111,37 @@ prerequisites:
 
 ---
 
+## 网络配置验证方法
+
+### 验证 Terway 与 Pod IP 分配
+
+```bash
+# 🟢 低风险：确认 Terway DaemonSet 全部 Ready
+kubectl -n kube-system get ds terway-eniip
+
+# 🟢 低风险：Pod IP 应落在规划的 Pod 网段内
+kubectl get pods -A -o wide | head -20
+
+# 🟢 低风险：查看节点 ENI 配额使用情况（ENI 耗尽会导致 Pod 卡 ContainerCreating）
+kubectl get nodes -o custom-columns='NAME:.metadata.name,MAX-POD:.status.allocatable.pods'
+kubectl -n kube-system logs ds/terway-eniip -c terway --tail=30 | grep -i 'eni\|ip pool'
+```
+
+### 验证跨可用区与出口连通性
+
+```bash
+# 🟢 低风险：确认节点分布在多个可用区
+kubectl get nodes -L topology.kubernetes.io/zone
+
+# 🟢 低风险：在集群内验证 SNAT 出口公网 IP（应为 NAT 网关绑定的 EIP）
+kubectl run nettest --rm -it --image=registry.cn-hangzhou.aliyuncs.com/acs/busybox:latest --restart=Never -- wget -qO- http://ifconfig.me
+
+# 🟢 低风险：Pod 间跨节点连通性抽样
+kubectl exec <pod-a> -- ping -c 3 <pod-b-ip>
+```
+
+---
+
 ## 出口流量管理 (NAT Gateway)
 
 ### 典型架构
@@ -141,22 +173,27 @@ graph TD
 | **VPN 网关** | 加密隧道，成本低 | 办公网与 ACK 集群互联 |
 | **高速通道 (Express Connect)** | 物理专线，低延迟 | IDC 机房与 ACK 混合云 |
 
+### 选型决策要点
+
+1. **跨地域多集群**：优先 CEN，自动路由传播避免手工维护路由表；注意各集群 Pod/Service 网段不可重叠。
+2. **办公网访问集群 API**：VPN 网关成本最低；需长期稳定大带宽则上专线。
+3. **混合云节点接入（ACK One/注册集群）**：专线 + CEN 组合，保证 kubelet 到控制面的延迟 < 100ms。
+
 ---
 
 ## 相关文档
 
-- [220-network-protocols-stack.md](./220-network-protocols-stack.md) - 网络协议基础
-- [203-docker-networking-deep-dive.md](./203-docker-networking-deep-dive.md) - Docker 网络详解
-- [156-alibaba-cloud-integration.md](./156-alibaba-cloud-integration.md) - 阿里云集成总表
+- [[05-网络/06-Terway/index|Terway 专题]]
+- [[05-网络/02-网络基础/index|网络协议基础]]
+- [[18-云厂商/01-阿里云/index|阿里云域索引]]
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|go]]
 - [[17-系统基础/05-速查卡/networking.md|networking]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
-- [[17-系统基础/05-速查卡/docker.md|docker]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - [[21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[13-生产运维/05-工单案例/ticket-case-001-terway-eni-exhaustion|工单案例：Terway ENI 耗尽]]
 
 ## See Also
 

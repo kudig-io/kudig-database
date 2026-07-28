@@ -68,7 +68,7 @@ cross_refs:
 
 # 05 - CSI驱动集成与运维管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 故障处理、性能调优、监控告警 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **运维重点**: 故障处理、性能调优、监控告警 | **最后更新**: 2026-02
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -157,7 +157,7 @@ cross_refs:
 <!-- chunk: 3. CSI 服务接口规范 -->
 ## 3. CSI 服务接口规范
 
-### 3.1 Identity [[Service|Service]]
+### 3.1 Identity [[service|Service]]
 
 | RPC | 说明 |
 |:---|:---|
@@ -444,7 +444,7 @@ spec:
     persistentVolumeClaimName: mysql-data
 ```
 
-### 6.3 定时快照 ([[CronJob|CronJob]])
+### 6.3 定时快照 ([[cronjob|CronJob]])
 
 ```yaml
 apiVersion: batch/v1

@@ -15,6 +15,7 @@ audience:
 - SRE
 - 平台工程师
 - 开发工程师
+tier: supporting
 ---
 
 # DNS 解析与服务发现

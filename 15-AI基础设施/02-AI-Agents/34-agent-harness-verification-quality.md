@@ -56,7 +56,7 @@ tags:
 - rag
 - multi-agent
 - [[etcd|etcd]]
-- [[Helm|helm]]
+- [[helm|helm]]
 - docker
 last_updated: 2026-05
 difficulty: advanced

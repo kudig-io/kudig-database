@@ -72,7 +72,7 @@ cross_refs:
 
 | CRD | 用途 | 版本 |
 |----|------|------|
-| VirtualService | 流量路由规则 | networking.[[Istio|istio]].io/v1 |
+| VirtualService | 流量路由规则 | networking.[[istio\|istio]].io/v1 |
 | DestinationRule | 目标策略 | networking.istio.io/v1 |
 | Gateway | 入口网关 | networking.istio.io/v1 |
 | ServiceEntry | 外部服务注册 | networking.istio.io/v1 |
@@ -356,7 +356,7 @@ spec:
 ## Obsidian 相关文档
 
 - 专项技术 KUDIG Database — Global MOC
-- [[16-专项技术/README.md|Domain-10: [[Kubernetes|Kubernetes]] 扩展生态]]
+- [[16-专项技术/README.md|Domain-10: [[kubernetes|Kubernetes]] 扩展生态]]
 - index.md|Domain-10 扩展与自定义 — 开源项目索引]]
 - CRD 自定义资源定义开发指南
 - 02 - Operator开发模式与控制器实现

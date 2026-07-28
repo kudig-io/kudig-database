@@ -56,7 +56,7 @@ authors:
 
 # K8s 开发者体验工具链指南
 
-> **适用版本**: k9s v0.40 / [[Headlamp|Headlamp]] v0.30 / stern v1.31  
+> **适用版本**: k9s v0.40 / [[headlamp|Headlamp]] v0.30 / stern v1.31  
 > **最后更新**: 2026-04-24  
 > **难度**: 初级 → 中级
 
@@ -477,7 +477,7 @@ source <(kubectl completion zsh)
 ## Obsidian 相关文档
 
 - domain-37-edge-computing KUDIG Database — Global MOC
-- [[16-专项技术/README.md|[[Domain 37: 边缘计算 (Edge Computing)|Domain 37: 边缘计算 (Edge Computing)]]]]
+- [[16-专项技术/README.md|[[37-归档/domain-indexes/specialty-tech/README-from-domain-37|Domain 37: 边缘计算 (Edge Computing)]]]]
 - index.md|Domain-37 边缘计算 — 开源项目索引]]
 - 边缘计算架构概述 (Edge Computing Architecture Overview)
 - 云边协同设计模式 (Cloud-Edge Collaboration Design Patterns)

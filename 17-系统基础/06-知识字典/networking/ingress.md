@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-Ingress 是 [[Kubernetes|Kubernetes]] 中用于管理集群外部 HTTP/HTTPS 访问到内部 [[Service|Service]] 的 API 对象。它支持基于主机名（Host）和路径（Path）的路由规则，可提供负载均衡、SSL/TLS 终止以及基于名称的虚拟主机等能力。需要注意的是，**Ingress API 已被冻结**，Kubernetes 官方不再对其新增功能，推荐使用 **Gateway API** 作为继任方案。
+Ingress 是 [[kubernetes|Kubernetes]] 中用于管理集群外部 HTTP/HTTPS 访问到内部 [[service|Service]] 的 API 对象。它支持基于主机名（Host）和路径（Path）的路由规则，可提供负载均衡、SSL/TLS 终止以及基于名称的虚拟主机等能力。需要注意的是，**Ingress API 已被冻结**，Kubernetes 官方不再对其新增功能，推荐使用 **Gateway API** 作为继任方案。
 
 ## 核心概念/原理
 

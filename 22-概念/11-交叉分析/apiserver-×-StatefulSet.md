@@ -108,7 +108,7 @@ kubectl patch sts <name> -n <ns> -p '{"spec":{"updateStrategy":{"rollingUpdate":
 
 ## 相关概念
 - apiserver
-- [[StatefulSet]]
+- [[statefulset|StatefulSet]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

@@ -40,7 +40,7 @@ prerequisites:
 
 
 title: 智慧物流与供应链Kubernetes生产架构设计
-description: '# 智慧物流与供应链 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 智慧物流与供应链 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s

@@ -130,7 +130,7 @@ prerequisites:
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[17-系统基础/05-速查卡/go.md|[[17-系统基础/05-速查卡/go|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[23-实体/13-云厂商与发行版/240-ack-ecs-compute.md|240-ack-ecs-compute]]
 - [[23-实体/13-云厂商与发行版/252-apsara-stack-pop-operations.md|252-apsara-stack-pop-operations]]

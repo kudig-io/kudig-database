@@ -64,9 +64,9 @@ cross_refs:
 
 
 
-# 07 - Job / [[CronJob|CronJob]] YAML 配置参考
+# 07 - Job / [[cronjob|CronJob]] YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **难度**: 入门 → 专家全覆盖
 
 ---
 
@@ -1249,7 +1249,7 @@ kubectl describe job my-job
 # 查看 Pod 日志
 kubectl logs job/my-job
 ```
-✅ **配置 [[Prometheus|Prometheus]] 告警**:
+✅ **配置 [[prometheus|Prometheus]] 告警**:
 ```yaml
 # Prometheus Alert 规则
 groups:

@@ -278,7 +278,7 @@ curl http://localhost:3500/v1.0/metadata
 
 ## Related
 
-- [[02-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
+- [[02-istio-advanced-traffic-management]] — [[istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
 - [[vscode-kubernetes-tools]] — VS Code Kubernetes Tools
 - [[litmus]] — LitmusChaos
 - [[pixie]] — Pixie

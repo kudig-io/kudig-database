@@ -169,7 +169,7 @@ seed/*.md ────────────────────┘  (人�
 | 缺口 | 状态 | 计划 |
 |------|------|------|
 | GPU 场景 I-O 对 | 待补充 | 从 gpu-fta.md + 相关 Skill 提取 |
-| [[Helm|Helm]] 场景 I-O 对 | 待补充 | 从 helm-fta.md + 相关 Skill 提取 |
+| [[helm\|Helm]] 场景 I-O 对 | 待补充 | 从 helm-fta.md + 相关 Skill 提取 |
 | Webhook 场景 I-O 对 | 待补充 | 从 webhook-admission-fta.md 提取 |
 | 命令去重率提升 | 进行中 | 优化归一化去重策略 |
 | Critical severity 比例 | 进行中 | 增加根因级别诊断对 |

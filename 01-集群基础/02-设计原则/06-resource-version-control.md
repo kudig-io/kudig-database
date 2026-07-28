@@ -699,7 +699,7 @@ spec:
 
 ## Related
 
-- [[21-生态参考/03-领域索引/etcd-index.md|[[etcd 知识图谱索引|etcd 知识图谱索引]]]]
+- [[21-生态参考/03-领域索引/etcd-index.md|[[21-生态参考/03-领域索引/etcd-index|etcd 知识图谱索引]]]]
 
 
 - [[10-平台工程/06-代码分析/kubernetes-core/05-etcd-storage-deep-dive.md|etcd 与存储链路源码剖析（resourceVersion ↔ etcd revision 的源码本体）]]

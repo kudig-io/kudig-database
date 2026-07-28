@@ -43,11 +43,11 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 系统组件指标
+# [[kubernetes|Kubernetes]] 系统组件指标
 
 ## 概述
 
-Kubernetes 系统组件指标能够帮助我们深入了解集群内部的运行状况，对于构建监控仪表板和告警系统尤为重要。Kubernetes 组件以 [[Prometheus|Prometheus]] 文本格式暴露指标，便于人和机器共同阅读和处理。
+Kubernetes 系统组件指标能够帮助我们深入了解集群内部的运行状况，对于构建监控仪表板和告警系统尤为重要。Kubernetes 组件以 [[prometheus|Prometheus]] 文本格式暴露指标，便于人和机器共同阅读和处理。
 
 ## 核心概念/原理
 

@@ -54,11 +54,11 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - opa
 - mysql
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - gpu
 - nvidia
 last_updated: 2026-05-18

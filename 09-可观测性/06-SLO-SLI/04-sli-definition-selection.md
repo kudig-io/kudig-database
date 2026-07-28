@@ -50,7 +50,7 @@ prerequisites:
 
 ## 什么是 SLI
 
-**SLI ([[Service|Service]] Level Indicator)** — 服务级别指标，是经过审慎选择的量化指标，用于衡量服务某个方面的可靠性水平。
+**SLI ([[service|Service]] Level Indicator)** — 服务级别指标，是经过审慎选择的量化指标，用于衡量服务某个方面的可靠性水平。
 
 ### SLI 的核心特征
 
@@ -81,12 +81,12 @@ Google SRE 提出的四个核心维度，适用于绝大多数服务：
   - 失败请求 P99 延迟: 5ms
 ```
 
-**[[Kubernetes|Kubernetes]] 场景下的延迟 SLI**:
+**[[kubernetes|Kubernetes]] 场景下的延迟 SLI**:
 
 | 服务类型 | 延迟测量点 | 建议 SLI |
 |---------|-----------|---------|
-| HTTP API | [[Ingress|Ingress]] → Pod | P99 响应时间 < 500ms |
-| [[gRPC|gRPC]] 服务 | Service → Pod | P99 响应时间 < 200ms |
+| HTTP API | [[ingress\|Ingress]] → Pod | P99 响应时间 < 500ms |
+| [[grpc\|gRPC]] 服务 | Service → Pod | P99 响应时间 < 200ms |
 | 数据库查询 | App → DB | P99 查询时间 < 100ms |
 | 消息消费 | Queue → Consumer | P99 消费延迟 < 5s |
 
@@ -208,7 +208,7 @@ Kubernetes 控制平面和数据平面的每个核心组件都有明确的 SLI �
 
 API Server 是整个集群的入口，其可靠性直接影响所有操作。
 
-| SLI | 描述 | 推荐阈值 | [[Prometheus|Prometheus]] 指标 |
+| SLI | 描述 | 推荐阈值 | [[prometheus\|Prometheus]] 指标 |
 |-----|------|---------|----------------|
 | **读请求延迟** | 非流式读请求 P99 延迟 | < 1s | `apiserver_request_duration_seconds_bucket{verb!="WATCH"}` |
 | **写请求延迟** | 写请求（PUT/POST/PATCH/DELETE）P99 延迟 | < 5s | `apiserver_request_duration_seconds_bucket{verb=~"POST|PUT|PATCH|DELETE"}` |

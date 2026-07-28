@@ -55,6 +55,7 @@ cross_refs:
 - type: index
   path: ../../生态参考/topic-index/higress-index.md
   label: '索引文档: higress-index'
+tier: supporting
 ---
 
 > **生产环境安全提示**

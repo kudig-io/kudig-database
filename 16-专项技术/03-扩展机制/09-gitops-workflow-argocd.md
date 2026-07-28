@@ -78,7 +78,7 @@ cross_refs:
 
 | 工具 | 架构 | 同步方式 | 多集群 | Helm支持 | 社区活跃度 |
 |-----|------|---------|-------|---------|-----------|
-| **[[ArgoCD|ArgoCD]]** | Pull | 应用级 | ✅ | ✅ | ⭐⭐⭐⭐⭐ |
+| **[[argocd\|ArgoCD]]** | Pull | 应用级 | ✅ | ✅ | ⭐⭐⭐⭐⭐ |
 | **FluxCD v2** | Pull | Kustomize/Helm | ✅ | ✅ | ⭐⭐⭐⭐⭐ |
 | **Jenkins X** | Push | Pipeline | ✅ | ✅ | ⭐⭐⭐ |
 | **Rancher Fleet** | Pull | Bundle | ✅ | ✅ | ⭐⭐⭐⭐ |
@@ -319,9 +319,9 @@ spec:
 | **版本控制** | 所有变更可追溯 | Git commit history |
 | **PR审核** | 变更需要审批 | Branch Protection Rules |
 | **自动同步** | 检测漂移自动修复 | selfHeal: true |
-| **渐进式交付** | 金丝雀/蓝绿部署 | [[Argo|Argo]] Rollouts/Flagger |
+| **渐进式交付** | 金丝雀/蓝绿部署 | [[argo\|Argo]] Rollouts/Flagger |
 | **多环境管理** | 分支/目录策略 | Kustomize overlays |
-| **密钥管理** | 安全存储敏感信息 | Sealed [[Secrets|Secrets]]/SOPS/ESO |
+| **密钥管理** | 安全存储敏感信息 | Sealed [[secrets\|Secrets]]/SOPS/ESO |
 
 <!-- chunk: 多环境管理策略 -->
 ## 多环境管理策略

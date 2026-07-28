@@ -49,7 +49,7 @@ title: Day 20: Pod 容器组进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[Kubernetes|Kubernetes]] Pod 调度深度配置
+  - [[kubernetes|Kubernetes]] Pod 调度深度配置
   - Pod 亲和性反亲和性
   - 拓扑分布约束配置
   - 探针与资源配置

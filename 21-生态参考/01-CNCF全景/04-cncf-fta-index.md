@@ -93,8 +93,8 @@ authors:
 |:-----|:---------|:-------------|:---------|
 | **Flannel** | [flannel-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/flannel-fta.md) | [08-flannel-troubleshooting](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
 | **Calico** | [calico-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/calico-fta.md) | [05-calico-troubleshooting](../故障诊断/高级排障/03-networking/05-calico-troubleshooting.md) | [[23-实体/02-K8s核心组件/networkpolicy.md|NetworkPolicy]] |
-| **[[Cilium|Cilium]]** | [cilium-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
-| **[[Antrea|Antrea]]** | (待补充) | - | - |
+| **[[cilium\|Cilium]]** | [cilium-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../../05-%E7%BD%91%E7%BB%9C/02-%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
+| **[[antrea\|Antrea]]** | (待补充) | - | - |
 | **Kube-OVN** | (待补充) | - | - |
 | **CNI 通用** | [01-cni-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/01-cni-troubleshooting.md) | - | CNI 配置/插件 |
 

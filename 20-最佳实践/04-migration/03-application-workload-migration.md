@@ -54,9 +54,9 @@ tags:
 - migration
 - modernization
 - docker
-- [[Harbor|harbor]]
+- [[harbor|harbor]]
 - opa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - daemonset
 - job
 - cronjob

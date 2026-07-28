@@ -224,7 +224,7 @@ kubectl get pdb -n <namespace> -o wide
 - [Pod Pending 诊断](../../故障诊断/05-pod-pending-diagnosis.md)
 
 ## 参考链接
-- https://[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/
+- https://[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/disruptions/
 
 ## Related
 

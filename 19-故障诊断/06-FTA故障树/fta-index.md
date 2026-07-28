@@ -37,6 +37,7 @@ prerequisites:
 - service-mesh-basics
 - etcd-basics
 - observability-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

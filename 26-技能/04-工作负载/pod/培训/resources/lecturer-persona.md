@@ -75,7 +75,7 @@ tier: peripheral---
 > **创建日期**: 2026-05-18
 > **更新日期**: 2026-05-21
 > **用途**: 工单数字人 (Ticket Digital Human) 的台词设计与知识库
-> **定位**: [[Kubernetes|Kubernetes]] 入门讲解 + 常见问题答疑的数字人教练
+> **定位**: [[kubernetes|Kubernetes]] 入门讲解 + 常见问题答疑的数字人教练
 > **场景**: 新人培训、工单托管客服、On-Call 速查、智能客服机器人
 
 ---

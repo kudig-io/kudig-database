@@ -46,15 +46,15 @@ prerequisites:
 
 
 title: 物联网 IoT 平台架构设计
-description: '# 物联网 (IoT) 平台 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 物联网 (IoT) 平台 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Flux|flux]]
+- [[flux|flux]]
 - kafka
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - gateway
 - operator
 - rag

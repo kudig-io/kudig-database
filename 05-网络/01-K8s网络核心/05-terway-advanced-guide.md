@@ -1,7 +1,7 @@
 ---
 title: 143 - Terway 高级指南 (Terway Advanced Guide)
 description: '# 143 - Terway 高级指南 (Terway Advanced Guide)'
-summary: 'kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.metadata.annotations.k8s\.aliyun\.com/allocated-eniips}{"\n"}{end}''
+summary: "kubectl get nodes -o jsonpath='{range .items[*]}{.metadata.name}{\"\\t\"}{.metadata.annotations.k8s\\.aliyun\\.com/allocated-eniips}{\"\\n\"}{end}'"
 category: networking
 tags:
 - k8s
@@ -249,7 +249,7 @@ spec:
 
 ---
 
-<!-- chunk: 5. 固定 IP 配置 ([[StatefulSet|StatefulSet]]) -->
+<!-- chunk: 5. 固定 IP 配置 ([[statefulset|StatefulSet]]) -->
 ## 5. 固定 IP 配置 (StatefulSet)
 
 ```yaml
@@ -291,7 +291,7 @@ spec:
 <!-- chunk: 6. NetworkPolicy 支持 -->
 ## 6. NetworkPolicy 支持
 
-### 6.1 Terway + [[Cilium|Cilium]]
+### 6.1 Terway + [[cilium|Cilium]]
 
 Terway 支持两种 NetworkPolicy 实现:
 
@@ -463,7 +463,7 @@ data:
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[05-网络/README.md|[[Domain 5: Networking 网络|Domain 5: Networking 网络]]]]
+- [[05-网络/README.md|[[37-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]]]
 - [[05-网络/01-K8s网络核心/00-network-in-nutshell.md|00 network in nutshell]]
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档

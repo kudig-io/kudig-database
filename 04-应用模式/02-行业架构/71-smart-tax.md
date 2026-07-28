@@ -61,7 +61,7 @@ audience:
 - 合规专家
 estimated_read_time: 5min
 intent_queries:
-- 电子税务局 [[Kubernetes|Kubernetes]] 高可用架构
+- 电子税务局 [[kubernetes|Kubernetes]] 高可用架构
 - 全电发票区块链存证系统
 - 税务风控 AI 模型预测
 - 国密算法 SM2 SM3 SM4
@@ -357,7 +357,7 @@ flowchart LR
 ## Obsidian 相关文档
 
 - topic-application-architecture KUDIG Database — Global MOC
-- [[04-应用模式/02-行业架构/README.md|[[Topic 应用层架构设计最佳实践|Topic 应用层架构设计最佳实践]]]]
+- [[04-应用模式/02-行业架构/README.md|[[37-归档/domain-indexes/app-patterns/README-from-domain-42|Topic 应用层架构设计最佳实践]]]]
 - [[04-应用模式/02-行业架构/01-ecommerce-architecture.md|电商系统 Kubernetes 生产架构设计]]
 - [[04-应用模式/02-行业架构/02-mini-program-architecture.md|小程序平台架构设计]]
 - [[04-应用模式/02-行业架构/03-cms-architecture.md|内容管理系统 CMS 架构设计]]

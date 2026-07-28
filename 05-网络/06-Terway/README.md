@@ -72,8 +72,8 @@ prerequisites:
 |:---:|:---|:---:|:---|:---|
 | 1 | [01-product.md](./01-product.md) | 330+ | 产品概览 | 定位与价值、版本历史(v1.0-v1.5)、5 种模式总览、CNI 对比(12 项)、依赖与限制、ECS 规格速查、适用场景 |
 | 2 | [02-architecture.md](./02-architecture.md) | 950+ | 架构原理 | 整体架构图、控制面/数据面、5 种模式详解(含 ASCII 架构图)、IPAM 流程、5 个 CRD 模型、四层安全体系、CNI 规范集成、BoltDB 持久化 |
-| 3 | [03-usage.md](./03-usage.md) | 730+ | 使用指南 | 安装初始化、5 种模式配置(YAML)、[[NetworkPolicy|NetworkPolicy]](iptables/Cilium)、固定 IP(PodNetworking/ReservedIP)、Pod 安全组、IPv6 双栈、Annotation 速查(20+)、容量规划 |
-| 4 | [04-operations.md](./04-operations.md) | 860+ | 运维手册 | 健康检查脚本、GC 机制(设计原则/触发链路/参数调优)、[[Prometheus|Prometheus]] 告警(3 规则)、升级/回滚、故障排查决策树、IP 泄漏紧急处理、巡检清单、SRE 红线(7 条) |
+| 3 | [03-usage.md](./03-usage.md) | 730+ | 使用指南 | 安装初始化、5 种模式配置(YAML)、[[networkpolicy\|NetworkPolicy]](iptables/Cilium)、固定 IP(PodNetworking/ReservedIP)、Pod 安全组、IPv6 双栈、Annotation 速查(20+)、容量规划 |
+| 4 | [04-operations.md](./04-operations.md) | 860+ | 运维手册 | 健康检查脚本、GC 机制(设计原则/触发链路/参数调优)、[[prometheus\|Prometheus]] 告警(3 规则)、升级/回滚、故障排查决策树、IP 泄漏紧急处理、巡检清单、SRE 红线(7 条) |
 | 5 | [05-testing.md](./05-testing.md) | 1040+ | 测试验证 | Pod 网络验证、6 类跨节点测试、NetworkPolicy 3 场景测试、ENI 密度压测(50 Pod)、固定 IP/GC/安全组验证、iperf3 基准、MTU 测试、端到端测试套件(可执行脚本) |
 | 6 | [06-performance.md](./06-performance.md) | 600+ | 性能调优 | 5 模式性能基准、Pod 容量计算(5 规格)、内核调优(网卡多队列/sysctl/NUMA)、IP 池预热、eBPF 加速与迁移、生产基线(5 项指标+告警阈值)、性能故障排查 |
 | 7 | [03b-crd-operations.md](./03b-crd-operations.md) | 740+ | CRD 操作 | 5 个 CRD 全量清单、PodENI/NodeNetworking/PodNetworking/ReservedIP/IPInstance 完整 CRUD、ConfigMap 管理(jq)、综合诊断脚本、命令速查表 |

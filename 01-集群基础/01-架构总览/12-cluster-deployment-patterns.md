@@ -80,7 +80,7 @@ cross_refs:
 
 
 
-# 12 - [[Kubernetes|Kubernetes]] 集群部署架构模式指南
+# 12 - [[kubernetes|Kubernetes]] 集群部署架构模式指南
 
 <!-- chunk: 概述 -->
 ## 概述
@@ -306,7 +306,7 @@ spec:
 
 ### 2.4 边缘计算部署模式
 
-#### [[KubeEdge|KubeEdge]] 架构
+#### [[kubeedge|KubeEdge]] 架构
 ```yaml
 # 边缘节点配置
 cloud:
@@ -440,7 +440,7 @@ cluster_federation:
 
 ### 3.3 裸金属部署方案
 
-#### [[MetalLB|MetalLB]] 负载均衡器
+#### [[metallb|MetalLB]] 负载均衡器
 ```yaml
 # MetalLB 配置
 apiVersion: metallb.io/v1beta1
@@ -492,7 +492,7 @@ spec:
 
 ### 4.1 零信任网络架构
 
-#### [[Istio|Istio]] Service Mesh 集成
+#### [[istio|Istio]] Service Mesh 集成
 ```yaml
 # Istio 安装配置
 apiVersion: install.istio.io/v1alpha1

@@ -88,7 +88,7 @@ cross_refs:
 
 
 
-# [[Kubernetes|Kubernetes]]es Scheduler|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)
+# [[kubernetes|Kubernetes]]es Scheduler|Kubernetes Scheduler]] 深度解析 (Kube-Scheduler Deep Dive)
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -114,7 +114,7 @@ cross_refs:
 
 | 职责 | 描述 | 关键机制 |
 |------|------|----------|
-| Pod 分配 (Pod Assignment) | 为 Pending 状态的 Pod 选择最优节点 | 过滤 (Filter) + 评分 ([[Score|Score]]) |
+| Pod 分配 (Pod Assignment) | 为 Pending 状态的 Pod 选择最优节点 | 过滤 (Filter) + 评分 ([[score\|Score]]) |
 | 资源匹配 (Resource Matching) | 确保节点资源满足 Pod 需求 | Requests/Limits 计算 |
 | 约束满足 (Constraint Satisfaction) | 满足亲和性、容忍度等约束 | Affinity/Anti-Affinity/Toleration |
 | 负载均衡 (Load Balancing) | 在集群节点间均衡分配工作负载 | Scoring 策略 |
@@ -756,7 +756,7 @@ description: "用于可中断的批处理任务"
 | PriorityClass 名称 | 优先级值 | 用途 |
 |--------------------|----------|------|
 | system-node-critical | 2000001000 | 节点关键组件 (如 kube-proxy) |
-| system-cluster-critical | 2000000000 | 集群关键组件 (如 [[CoreDNS|CoreDNS]]) |
+| system-cluster-critical | 2000000000 | 集群关键组件 (如 [[coredns\|CoreDNS]]) |
 | (用户自定义) | -2147483648 ~ 1000000000 | 用户工作负载 |
 
 ### 6.3 抢占流程详解

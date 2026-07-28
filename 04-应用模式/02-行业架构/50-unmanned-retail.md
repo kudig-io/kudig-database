@@ -46,7 +46,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - gpu
 - nvidia
 last_updated: 2026-05-18
@@ -58,7 +58,7 @@ audience:
 - 边缘计算专家
 estimated_read_time: 5min
 intent_queries:
-- 无人零售 [[Kubernetes|Kubernetes]] 边缘计算
+- 无人零售 [[kubernetes|Kubernetes]] 边缘计算
 - 智能货柜 AI视觉 Kubernetes
 - IoT零售 阿里云 Kubernetes
 - 商品识别 GPU Kubernetes

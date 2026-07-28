@@ -62,7 +62,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 可观测性全栈培训 (监控、日志、追踪)
+# [[kubernetes|Kubernetes]] 可观测性全栈培训 (监控、日志、追踪)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 运维可观测性专项
 > **核心原则**: 黄金指标驱动、白盒监控、全链路追踪
@@ -76,7 +76,7 @@ authors:
 - SRE 工程师：构建完整的可观测性体系
 - 全栈开发：理解应用的监控与日志最佳实践
 - 监控架构师：设计大规模集群的监控架构
-- 运维工程师：掌握 [[Prometheus|Prometheus]] 查询和告警配置
+- 运维工程师：掌握 [[prometheus|Prometheus]] 查询和告警配置
 
 ## 预计时长
 

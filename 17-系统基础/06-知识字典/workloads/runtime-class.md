@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-RuntimeClass 是 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 中用于选择容器运行时配置的特性（自 v1.20 起进入 Stable）。它允许用户为不同的 Pod 指定不同的容器运行时配置，从而在性能与安全性之间取得平衡。
+RuntimeClass 是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 中用于选择容器运行时配置的特性（自 v1.20 起进入 Stable）。它允许用户为不同的 Pod 指定不同的容器运行时配置，从而在性能与安全性之间取得平衡。
 
 ## 核心概念/原理
 

@@ -1849,7 +1849,7 @@ log "诊断报告已保存: $OUTPUT_FILE"
 <!-- chunk: 11. 监控告警配置 -->
 ## 11. 监控告警配置
 
-### 11.1 [[Prometheus|Prometheus]] 告警规则
+### 11.1 [[prometheus|Prometheus]] 告警规则
 
 ```yaml
 # node-notready-alerts.yaml
@@ -2170,7 +2170,7 @@ shutdownGracePeriodByPodPriority:
 | **恢复测试** | 验证自动恢复 | 模拟后恢复节点 |
 | **驱逐测试** | 验证 Pod 迁移 | 触发节点 NotReady |
 | **资源压力测试** | 验证驱逐策略 | 消耗内存/磁盘 |
-| **混沌测试** | 验证整体稳定性 | [[ChaosBlade|ChaosBlade]] 节点问题 |
+| **混沌测试** | 验证整体稳定性 | [[chaosblade\|ChaosBlade]] 节点问题 |
 
 ### 14.3 产品经理视角
 

@@ -46,7 +46,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - gpu
 - nvidia
 last_updated: '2026-05-18'
@@ -98,7 +98,7 @@ k8s_versions:
 
 # 车路协同自动驾驶架构设计 — 阿里云视角
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#车路协同` `#自动驾驶` `#V2X` `#阿里云`
 
 ---

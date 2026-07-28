@@ -41,7 +41,7 @@ prerequisites:
 
 ## 概述
 
-除了 `kubectl` 和 Dashboard 之外，还有许多工具可以可视化和管理 [[Kubernetes|Kubernetes]] 对象。一组通用的推荐标签（Recommended Labels）允许这些工具以可互操作的方式工作，用所有工具都能理解的通用方式描述对象。
+除了 `kubectl` 和 Dashboard 之外，还有许多工具可以可视化和管理 [[kubernetes|Kubernetes]] 对象。一组通用的推荐标签（Recommended Labels）允许这些工具以可互操作的方式工作，用所有工具都能理解的通用方式描述对象。
 
 ## 核心概念/原理
 

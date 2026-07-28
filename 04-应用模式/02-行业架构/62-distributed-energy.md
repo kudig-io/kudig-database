@@ -48,9 +48,9 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - mysql
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 last_updated: 2026-05-18
 difficulty: advanced
 reading_level: advanced
@@ -60,7 +60,7 @@ audience:
 - 电力系统专家
 estimated_read_time: 5min
 intent_queries:
-- 分布式能源 [[Kubernetes|Kubernetes]] 边缘计算
+- 分布式能源 [[kubernetes|Kubernetes]] 边缘计算
 - 光伏储能 EMS Kubernetes 部署
 - 虚拟电厂 VPP Kubernetes
 - 能源调度优化 AI Kubernetes

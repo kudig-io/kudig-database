@@ -205,7 +205,7 @@ spec:
   kubectl get jobs -n prod --no-headers | wc -l
   kubectl get jobs -n prod --field-selector=status.successful=1 --no-headers | wc -l
   ```
-- **解决方案**: 为 Job 设置 `ttlSecondsAfterFinished`，使用 [[CronJob|CronJob]] 的 `successfulJobsHistoryLimit`/`failedJobsHistoryLimit`。
+- **解决方案**: 为 Job 设置 `ttlSecondsAfterFinished`，使用 [[cronjob|CronJob]] 的 `successfulJobsHistoryLimit`/`failedJobsHistoryLimit`。
 
 ## 生产就绪检查清单
 

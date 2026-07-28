@@ -44,7 +44,7 @@ prerequisites:
 
 
 
-# [[Argo|Argo]] Workflows
+# [[argo|Argo]] Workflows
 
 > **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
 

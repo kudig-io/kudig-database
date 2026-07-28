@@ -50,11 +50,11 @@ prerequisites:
 
 
 ---
-title: Day 17: 可观测性 - 监控 + [[Prometheus|Prometheus]]
+title: Day 17: 可观测性 - 监控 + [[prometheus|Prometheus]]
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|kubernetes]] Prometheus 监控
+  - [[kubernetes|kubernetes]] Prometheus 监控
   - K8s 可观测性架构
   - Prometheus 查询语言 PromQL
   - Grafana Dashboard 配置

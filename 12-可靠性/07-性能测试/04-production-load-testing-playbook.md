@@ -9,7 +9,7 @@ tags:
 - load-testing
 - goreplay
 - traffic-replay
-tier: critical
+tier: core
 created: '2026-07-02'
 last_updated: 2026-07
 difficulty: advanced

@@ -43,7 +43,7 @@ prerequisites:
 
 ## Role
 
-Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage [[Pods|Pods]].
+Deployment is the primary workload controller for stateless applications. It manages ReplicaSets, which in turn manage [[pods|Pods]].
 
 ## Key Features
 
@@ -51,7 +51,7 @@ Deployment is the primary workload controller for stateless applications. It man
 |---------|-------------|
 | **Declarative management** | Define desired replica count, update strategy, Pod template |
 | **Rolling updates** | Replace old Pods with new Pods gradually (maxSurge, maxUnavailable) |
-| **Rollback** | Revert to any previous [[ReplicaSet|ReplicaSet]] via `kubectl rollout undo` |
+| **Rollback** | Revert to any previous [[replicaset\|ReplicaSet]] via `kubectl rollout undo` |
 | **Scaling** | Change replica count with `kubectl scale` or HPA |
 | **Revision history** | Track changes via `revisionHistoryLimit` (default 10) |
 
@@ -70,7 +70,7 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 
 ## Conditions
 
-[[Deployments|Deployments]] report these conditions:
+[[deployments|Deployments]] report these conditions:
 - **Available**: Minimum replicas are ready
 - **Progressing**: Deployment is making progress (new Pods created or old Pods terminated)
 

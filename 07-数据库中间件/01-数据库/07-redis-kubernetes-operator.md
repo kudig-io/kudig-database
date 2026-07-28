@@ -65,7 +65,7 @@ cross_refs:
 
 
 
-# Redis [[Kubernetes|Kubernetes]] Operator 企业级实践
+# Redis [[kubernetes|Kubernetes]] Operator 企业级实践
 
 > **适用版本**: Redis 7.2 ~ 8.0 / Redis Operator v0.19  
 > **最后更新**: 2026-04-26  

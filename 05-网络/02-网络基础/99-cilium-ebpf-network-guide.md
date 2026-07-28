@@ -67,7 +67,7 @@ cross_refs:
 
 
 
-# [[Cilium|Cilium]] eBPF 网络与安全实践指南
+# [[cilium|Cilium]] eBPF 网络与安全实践指南
 
 > **适用版本**: Cilium v1.17.0  
 > **最后更新**: 2026-04-24  

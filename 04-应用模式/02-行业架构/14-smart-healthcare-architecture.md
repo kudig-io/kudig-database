@@ -49,7 +49,7 @@ prerequisites:
 
 
 title: 智慧医疗Kubernetes生产架构设计
-description: '# 智慧医疗 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 智慧医疗 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s

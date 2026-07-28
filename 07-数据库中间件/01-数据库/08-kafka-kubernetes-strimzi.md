@@ -69,7 +69,7 @@ cross_refs:
 
 
 
-# Kafka [[Kubernetes|Kubernetes]] 企业级实践 — [[Strimzi|Strimzi]] Operator 深度指南
+# Kafka [[kubernetes|Kubernetes]] 企业级实践 — [[strimzi|Strimzi]] Operator 深度指南
 
 > **适用版本**: Apache Kafka 3.9 / Strimzi 0.45  
 > **最后更新**: 2026-04-26  

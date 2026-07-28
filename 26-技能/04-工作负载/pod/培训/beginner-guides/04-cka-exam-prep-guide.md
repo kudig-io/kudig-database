@@ -53,7 +53,7 @@ authors:
 
 # CKA 认证备考完全指南
 
-> **考试全称**: Certified [[Kubernetes|Kubernetes]] Administrator (CKA)  
+> **考试全称**: Certified [[kubernetes|Kubernetes]] Administrator (CKA)  
 > **主办方**: Linux Foundation + CNCF  
 > **考试费用**: $395（约 ¥2800，偶有促销）  
 > **考试形式**: 线上远程监考，2 小时，17 道实操题  

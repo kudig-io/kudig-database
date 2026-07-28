@@ -321,7 +321,7 @@ kubectl exec -n monitoring prometheus-k8s-ha-0 -- du -sh /prometheus/
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - 03-prometheus-ha-deployment
-- [[23-实体/cncf-observability.md|[[CNCF 可观测性项目全景|CNCF 可观测性项目全景]]]] — Cross-reference
+- [[23-实体/cncf-observability.md|[[23-实体/15-参考与索引/cncf-observability|CNCF 可观测性项目全景]]]] — Cross-reference
 
 
 <!-- risk-assessed -->

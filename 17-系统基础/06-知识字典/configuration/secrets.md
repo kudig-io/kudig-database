@@ -45,7 +45,7 @@ prerequisites:
 
 ## 概述
 
-Secret 是 [[Kubernetes|Kubernetes]] 中用于存储敏感数据（如密码、令牌、密钥等）的 API 对象。使用 Secret 可以避免将机密信息硬编码到 Pod 规约或容器镜像中，从而降低在创建、查看和编辑 Pod 过程中泄露敏感数据的风险。
+Secret 是 [[kubernetes|Kubernetes]] 中用于存储敏感数据（如密码、令牌、密钥等）的 API 对象。使用 Secret 可以避免将机密信息硬编码到 Pod 规约或容器镜像中，从而降低在创建、查看和编辑 Pod 过程中泄露敏感数据的风险。
 
 ## 核心概念/原理
 

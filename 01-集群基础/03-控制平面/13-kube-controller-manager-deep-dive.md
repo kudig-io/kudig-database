@@ -97,7 +97,7 @@ related_docs:
 
 # kube-controller-manager 深度解析 (KCM Deep Dive)
 
-> kube-controller-manager (KCM) 是 [[Kubernetes|Kubernetes]] 控制平面的核心组件，运行所有内置控制器，确保集群状态与期望状态一致
+> kube-controller-manager (KCM) 是 [[kubernetes|Kubernetes]] 控制平面的核心组件，运行所有内置控制器，确保集群状态与期望状态一致
 
 ---
 
@@ -199,9 +199,9 @@ related_docs:
 | **DaemonSetController** | DaemonSet | Pod | 每节点运行一个Pod |
 | **JobController** | Job | Pod | 批处理任务、完成追踪 |
 | **CronJobController** | CronJob | Job | 定时任务调度 |
-| **[[ReplicationController|ReplicationController]]** | RC | Pod | 旧版副本控制(已弃用) |
+| **[[replicationcontroller\|ReplicationController]]** | RC | Pod | 旧版副本控制(已弃用) |
 
-### 2.2 服务与网络控制器 ([[Service|Service]] & Network Controllers)
+### 2.2 服务与网络控制器 ([[service|Service]] & Network Controllers)
 
 | 控制器 | 监控资源 | 管理资源 | 核心职责 |
 |:---|:---|:---|:---|

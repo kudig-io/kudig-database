@@ -45,7 +45,7 @@ prerequisites:
 # Autoscaling Workloads
 
 ## 概述
-自动扩缩容（Autoscaling）允许工作负载根据资源需求自动调整规模，使集群能够更弹性和高效地响应变化。[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 支持水平扩缩容（增加/减少副本数）和垂直扩缩容（调整单个 Pod 的资源）。
+自动扩缩容（Autoscaling）允许工作负载根据资源需求自动调整规模，使集群能够更弹性和高效地响应变化。[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 支持水平扩缩容（增加/减少副本数）和垂直扩缩容（调整单个 Pod 的资源）。
 
 ## 核心概念/原理
 - **水平扩缩容（Horizontal Scaling）**：通过增加或减少 Pod 副本数来应对负载变化。
@@ -58,7 +58,7 @@ prerequisites:
   - **VPA（VerticalPodAutoscaler）**：根据历史资源使用情况自动调整 Pod 的资源请求和限制。
   - **Cluster Proportional Autoscaler**：根据集群节点数/核心数自动水平扩缩容。
   - **Cluster Proportional Vertical Autoscaler**：根据集群规模自动垂直调整资源请求（Beta）。
-  - **[[KEDA|KEDA]]（Kubernetes Event Driven Autoscaler）**：基于事件（如队列消息数）驱动扩缩容。
+  - **[[keda|KEDA]]（Kubernetes Event Driven Autoscaler）**：基于事件（如队列消息数）驱动扩缩容。
   - **定时扩缩容**：可通过 KEDA 的 `Cron` scaler 按时间表扩缩容。
 
 ## 关键机制或特性
@@ -197,7 +197,7 @@ spec:
 | 是否核心 API | 是 | CRD（需安装） | CRD（需安装） | 独立组件 |
 | 是否需要 Metrics Server | 是 | 是 | 取决于 trigger | 否 |
 | 零副本缩容 | 否（minReplicas≥1） | N/A | 是（从 0 扩容） | 否 |
-| 典型场景 | Web/API 服务 | 资源 rightsizing | 消息队列/事件驱动 | [[CoreDNS|CoreDNS]]/监控 |
+| 典型场景 | Web/API 服务 | 资源 rightsizing | 消息队列/事件驱动 | [[coredns\|CoreDNS]]/监控 |
 | 与 HPA 共存 | — | 建议分指标 | 替代 HPA | 互不冲突 |
 
 ## 故障排查

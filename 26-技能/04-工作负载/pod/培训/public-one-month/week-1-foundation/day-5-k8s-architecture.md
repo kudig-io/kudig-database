@@ -44,7 +44,7 @@ prerequisites:
 
 
 
-# Day 5: [[Kubernetes|Kubernetes]] 架构全貌
+# Day 5: [[kubernetes|Kubernetes]] 架构全貌
 
 ```yaml
 ---
@@ -119,20 +119,20 @@ Kubernetes 采用 Master-Node（也叫控制平面-数据平面）架构。Maste
 
 **控制平面（Master）组件**运行在 Master 节点上（或由云服务托管）：
 
-- **etcd**: 分布式键值存储，保存集群的所有状态数据（Pod、[[Service|Service]]、ConfigMap、Secret 等定义）。etcd 是集群的"唯一真实来源"（Single Source of Truth）。只有 API Server 能直接访问 etcd，其他组件都通过 API Server 间接读写数据。etcd 使用 Raft 共识协议保证数据一致性，对磁盘 IO 延迟非常敏感（建议使用 SSD）
+- **etcd**: 分布式键值存储，保存集群的所有状态数据（Pod、[[service|Service]]、ConfigMap、Secret 等定义）。etcd 是集群的"唯一真实来源"（Single Source of Truth）。只有 API Server 能直接访问 etcd，其他组件都通过 API Server 间接读写数据。etcd 使用 Raft 共识协议保证数据一致性，对磁盘 IO 延迟非常敏感（建议使用 SSD）
 
 - **kube-apiserver**: 所有操作的入口。它提供 RESTful API，处理认证（Authentication）、授权（Authorization）和准入控制（Admission Control），然后将数据持久化到 etcd。所有组件（kubectl、kubelet、scheduler、controller-manager）都通过 API Server 交互。API Server 支持 Watch 机制，允许客户端订阅资源变化事件
 
 - **kube-controller-manager**: 运行多种控制器的进程。每个控制器遵循 Reconcile（调和）模式：Watch 资源变化 → 对比期望状态与实际状态 → 执行操作。核心控制器包括：
   - Deployment Controller: 管理滚动更新
-  - [[ReplicaSet|ReplicaSet]] Controller: 维护 Pod 副本数
+  - [[replicaset|ReplicaSet]] Controller: 维护 Pod 副本数
   - Node Controller: 监控节点健康
   - Service Account Controller: 管理服务账号
   - Namespace Controller: 清理已删除命名空间的资源
 
 - **kube-scheduler**: 负责将未调度的 Pod 分配到合适的节点。调度过程分两阶段：
   - Filter（过滤）: 排除不满足条件的节点（资源不足、污点不匹配、亲和性不符等）
-  - [[Score|Score]]（打分）: 对候选节点打分排序（资源均衡、镜像本地性、亲和性偏好等）
+  - [[score|Score]]（打分）: 对候选节点打分排序（资源均衡、镜像本地性、亲和性偏好等）
 
 **数据平面（Node）组件**运行在每个工作节点上：
 

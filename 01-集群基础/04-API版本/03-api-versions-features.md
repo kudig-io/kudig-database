@@ -84,9 +84,9 @@ cross_refs:
 | 功能名称 | API组/版本 | Kind | 稳定性 | 引入版本 | 稳定版本 | 弃用版本 | 移除版本 | 生产使用提示 |
 |---------|-----------|------|-------|---------|---------|---------|---------|-------------|
 | **Pod** | core/v1 | Pod | Stable | v1.0 | v1.0 | - | - | 不直接创建，使用控制器管理；设置资源requests/limits |
-| **[[ReplicaSet|ReplicaSet]]** | apps/v1 | ReplicaSet | Stable | v1.2 | v1.9 | - | - | 不直接使用，由Deployment管理 |
+| **[[replicaset\|ReplicaSet]]** | apps/v1 | ReplicaSet | Stable | v1.2 | v1.9 | - | - | 不直接使用，由Deployment管理 |
 | **Deployment** | apps/v1 | Deployment | Stable | v1.2 | v1.9 | - | - | 无状态应用首选；配置滚动更新策略 |
-| **[[StatefulSet|StatefulSet]]** | apps/v1 | StatefulSet | Stable | v1.5 | v1.9 | - | - | 有状态应用；需配合Headless [[Service|Service]] |
+| **[[statefulset\|StatefulSet]]** | apps/v1 | StatefulSet | Stable | v1.5 | v1.9 | - | - | 有状态应用；需配合Headless [[service\|Service]] |
 | **DaemonSet** | apps/v1 | DaemonSet | Stable | v1.2 | v1.9 | - | - | 节点级守护进程；使用nodeSelector精确控制 |
 | **Job** | batch/v1 | Job | Stable | v1.2 | v1.9 | - | - | 批处理任务；配置backoffLimit和activeDeadlineSeconds |
 | **CronJob** | batch/v1 | CronJob | Stable | v1.4 | v1.21 | - | - | 定时任务；注意时区设置(v1.25+支持) |

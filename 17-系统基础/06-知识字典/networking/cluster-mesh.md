@@ -52,7 +52,7 @@ prerequisites:
 
 ## 概述
 
-随着企业 [[Kubernetes|Kubernetes]] 集群数量从单个增长到数十甚至上百个，**多集群网络互联（Cluster Mesh）** 成为构建统一服务网格和跨集群负载均衡的关键技术。Cluster Mesh 允许不同地域、不同云厂商的 Kubernetes 集群中的 Pod 像在同一个网络中一样相互通信，实现真正的**全局服务发现**和**跨集群流量管理**。2026 年的主流实现包括 **[[Cilium|Cilium]] Cluster Mesh** 和 **[[Istio|Istio]] Multi-Cluster**。
+随着企业 [[kubernetes|Kubernetes]] 集群数量从单个增长到数十甚至上百个，**多集群网络互联（Cluster Mesh）** 成为构建统一服务网格和跨集群负载均衡的关键技术。Cluster Mesh 允许不同地域、不同云厂商的 Kubernetes 集群中的 Pod 像在同一个网络中一样相互通信，实现真正的**全局服务发现**和**跨集群流量管理**。2026 年的主流实现包括 **[[cilium|Cilium]] Cluster Mesh** 和 **[[istio|Istio]] Multi-Cluster**。
 
 ## 核心概念/原理
 
@@ -133,7 +133,7 @@ Cluster Mesh 通过 **Cluster ID** 区分不同集群中的同名服务：
 ### 安全通信
 
 - **Cilium**：支持通过 IPSec 或 WireGuard 对跨集群的 Pod-to-Pod 流量进行自动加密
-- **Istio**：所有跨集群服务间通信默认启用 mTLS，通过 [[SPIFFE|SPIFFE]] 身份进行双向认证
+- **Istio**：所有跨集群服务间通信默认启用 mTLS，通过 [[spiffe|SPIFFE]] 身份进行双向认证
 - **NetworkPolicy 全局生效**：在 Cilium Cluster Mesh 中，CiliumNetworkPolicy 可以跨集群生效
 
 ## 使用场景

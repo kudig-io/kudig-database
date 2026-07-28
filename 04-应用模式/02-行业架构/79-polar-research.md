@@ -48,7 +48,7 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - operator
 - webhook
 last_updated: 2026-05-18
@@ -60,7 +60,7 @@ audience:
 - 极端环境系统专家
 estimated_read_time: 5min
 intent_queries:
-- 极地科考 [[Kubernetes|Kubernetes]] 边缘计算
+- 极地科考 [[kubernetes|Kubernetes]] 边缘计算
 - 冰川监测 卫星通信 K8s
 - 极地环境 低带宽 Kubernetes
 - 南极北极 科考站 K8s部署

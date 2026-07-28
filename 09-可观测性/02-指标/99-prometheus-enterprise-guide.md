@@ -63,7 +63,7 @@ cross_refs:
 
 
 
-# [[Prometheus|Prometheus]] 企业级监控部署指南
+# [[prometheus|Prometheus]] 企业级监控部署指南
 
 > **适用版本**: Prometheus v3.3.0 / kube-state-metrics v2.15 / Alertmanager v0.28  
 > **最后更新**: 2026-04-24  
@@ -74,7 +74,7 @@ cross_refs:
 ## 📋 目录
 
 - [一、架构设计](#一架构设计)
-- [二、[[Helm|Helm]] 部署](#二helm-部署)
+- [二、[[helm|Helm]] 部署](#二helm-部署)
 - [三、高可用配置](#三高可用配置)
 - [四、告警规则最佳实践](#四告警规则最佳实践)
 - [五、服务发现配置](#五服务发现配置)
@@ -460,7 +460,7 @@ prometheus:
 | Prometheus OOMKilled | 抓取目标过多 / 高基数标签 | 增加内存限制、添加 relabel 过滤、减少 target |
 | 磁盘快速增长 | retention 过长 / 高 cardinality | 缩短 retention、启用压缩、过滤无用指标 |
 | 查询超时 | 复杂查询 / 数据量大 | 增加 query.timeout、使用 recording rules |
-| Target 显示 down | 网络不通 / 指标路径错误 | 检查 [[Service|Service]]/Pod 注解、网络策略 |
+| Target 显示 down | 网络不通 / 指标路径错误 | 检查 [[service\|Service]]/Pod 注解、网络策略 |
 | Alertmanager 未触发 | 路由规则不匹配 / inhibit | 检查 alertmanager 配置、路由树 |
 
 ---

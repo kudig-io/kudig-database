@@ -50,6 +50,7 @@ authors:
 created: "2026-06-26"
 updated: "2026-06-26"
 summary: '2. [StatefulSet + Headless Service 模式](#statefulset--headless-service-模式)'
+tier: supporting
 ---
 
 > **生产环境安全提示**

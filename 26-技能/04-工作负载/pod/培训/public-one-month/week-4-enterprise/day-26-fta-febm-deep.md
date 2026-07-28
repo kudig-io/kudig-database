@@ -52,7 +52,7 @@ title: Day 26: FTA/FEBM 专题深化
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 故障树分析进阶
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 故障树分析进阶
   - FEBM 取证循证方法深化
   - AI Agent 运维模式
   - K8s 问题全景树
@@ -121,7 +121,7 @@ FTA（故障树分析）是一种自顶向下的故障分析方法，从一个�
 
 | 逻辑门 | 符号 | 含义 | 示例 |
 |--------|------|------|------|
-| OR 门 | ⊕ | 任一子事件发生即触发 | Pod 问题 OR [[Service|Service]] 问题 → 应用不可用 |
+| OR 门 | ⊕ | 任一子事件发生即触发 | Pod 问题 OR [[service\|Service]] 问题 → 应用不可用 |
 | AND 门 | ⊗ | 所有子事件同时发生才触发 | CPU 满载 AND 内存不足 → 节点问题 |
 | XOR 门 | ⊖ | 有且仅有一个子事件发生 | 人为误操作 XOR 程序 Bug → 数据丢失 |
 | NOT 门 | ¬ | 子事件不发生 | NOT 告警触发 → 问题未被发现 |

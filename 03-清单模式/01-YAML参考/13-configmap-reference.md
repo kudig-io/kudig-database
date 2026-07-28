@@ -61,7 +61,7 @@ authors:
 
 # 13 - ConfigMap YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **相关领域**: [域3-存储与配置](../domain-3-storage/) | **前置知识**: Pod, Volume  
 > **关联配置**: [14-Secret参考](./14-secret-all-types.md) | [Pod配置](./01-pod-all-fields.md)
 

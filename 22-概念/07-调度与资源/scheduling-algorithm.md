@@ -48,7 +48,7 @@ The scheduler processes each unscheduled Pod through these phases:
 1. **SchedulingQueue**: Pod enters priority-based queue
 2. **PreFilter**: Fast pre-checks (resource totals, feature validation)
 3. **Filter**: Eliminates nodes that cannot run the Pod (resources, affinity, taints, topology, volumes)
-4. **PostFilter**: Preemption -- if no nodes pass, try evicting lower-priority [[Pods|Pods]]
+4. **PostFilter**: Preemption -- if no nodes pass, try evicting lower-priority [[pods|Pods]]
 5. **Score**: Rank remaining nodes (resource balance, image locality, topology spread, inter-pod affinity)
 6. **NormalizeScore**: Normalize scores to 0-100 range
 7. **Select**: Choose highest-scored node

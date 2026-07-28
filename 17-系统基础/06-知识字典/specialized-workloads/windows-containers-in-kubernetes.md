@@ -43,7 +43,7 @@ prerequisites:
 
 
 
-# Windows 容器在 [[Kubernetes|Kubernetes]] 中的支持
+# Windows 容器在 [[kubernetes|Kubernetes]] 中的支持
 
 ## 概述
 

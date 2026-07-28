@@ -73,7 +73,7 @@ cross_refs:
 
 
 
-# 21 - [[StatefulSet|StatefulSet]] 故障排查 (StatefulSet Troubleshooting)
+# 21 - [[statefulset|StatefulSet]] 故障排查 (StatefulSet Troubleshooting)
 
 ---
 

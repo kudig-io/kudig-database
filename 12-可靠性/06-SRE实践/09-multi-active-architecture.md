@@ -579,7 +579,7 @@ kubectl logs -n traffic-management deployment/gslb-controller --tail=50 | grep -
 
 4. **渐进式流量切换**：故障恢复后不要一次性回切所有流量，按 10% → 30% → 50% → 100% 渐进恢复。
 
-5. **定期演练**：每季度执行一次多活切换演练，验证 RTO/RPO 达标。参考 [[12-可靠性/02-灾难恢复]] 演练流程。
+5. **定期演练**：每季度执行一次多活切换演练，验证 RTO/RPO 达标。参考 [[12-可靠性/02-灾难恢复/index|02-灾难恢复]] 演练流程。
 
 ### 冲突解决策略
 
@@ -601,8 +601,8 @@ kubectl logs -n traffic-management deployment/gslb-controller --tail=50 | grep -
 ## Related
 
 - [[12-可靠性/06-SRE实践/01-availability-calculation-model.md|可用性计算模型]]
-- [[12-可靠性/02-灾难恢复]]
-- [[12-可靠性/01-备份恢复]]
+- [[12-可靠性/02-灾难恢复/index|02-灾难恢复]]
+- [[12-可靠性/01-备份恢复/index|01-备份恢复]]
 - [[09-可观测性/02-指标/16-multi-cluster-monitoring-governance.md|多集群监控治理]]
 - [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
 - [[12-可靠性/06-SRE实践/08-resilience-patterns-circuit-breaker.md|弹性模式]]

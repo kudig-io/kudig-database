@@ -599,7 +599,7 @@ spec:
 <!-- chunk: 监控与告警配置 -->
 ## 监控与告警配置
 
-### [[Prometheus|Prometheus]] 告警规则
+### [[prometheus|Prometheus]] 告警规则
 
 ```yaml
 # 07-audit-alerts.yaml
@@ -842,7 +842,7 @@ security_analysis
 ## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Security Domain|Security Domain]]]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-7|Security Domain]]]]
 - [[08-安全/00-总览/00-open-source-projects-index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构

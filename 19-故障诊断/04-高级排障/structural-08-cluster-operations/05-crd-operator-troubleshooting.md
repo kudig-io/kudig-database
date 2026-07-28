@@ -38,6 +38,7 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - tls-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

@@ -55,13 +55,13 @@ tags:
 - k8s
 - monitoring
 - alerting
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - docker
 - redis
 - mysql
 - kafka
 - elasticsearch
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 last_updated: 2026-05
 difficulty: intermediate
 reading_level: intermediate

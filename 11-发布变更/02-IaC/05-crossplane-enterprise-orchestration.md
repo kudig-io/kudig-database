@@ -64,7 +64,7 @@ authors:
 
 
 
-# [[Crossplane|Crossplane]] Enterprise Infrastructure Orchestration 深度实践
+# [[crossplane|Crossplane]] Enterprise Infrastructure Orchestration 深度实践
 
 > **Author**: Multi-Cloud Platform Architect | **Version**: v1.0 | **Update Time**: 2026-02-07
 > **Scenario**: Enterprise-grade multi-cloud infrastructure orchestration | **Complexity**: ⭐⭐⭐⭐⭐

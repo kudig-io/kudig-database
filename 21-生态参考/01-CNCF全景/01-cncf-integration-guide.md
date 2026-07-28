@@ -69,7 +69,7 @@ authors:
 
 # CNCF 集成实践指南
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.28+ | **最后更新**: 2026-05
+> **适用版本**: [[kubernetes|Kubernetes]] v1.28+ | **最后更新**: 2026-05
 
 ---
 

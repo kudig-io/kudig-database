@@ -54,10 +54,10 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - mysql
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - operator
 - webhook
 last_updated: 2026-05-18
@@ -104,7 +104,7 @@ k8s_versions:
 
 # 氢能源架构设计 — 阿里云视角
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#氢能源` `#制氢` `#储氢` `#燃料电池` `#阿里云`
 
 ---

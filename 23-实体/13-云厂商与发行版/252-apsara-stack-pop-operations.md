@@ -145,7 +145,7 @@ aliyun pop-cli GetQuota --OwnerId 12345
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
+- [[17-系统基础/05-速查卡/go.md|[[17-系统基础/05-速查卡/go|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[23-实体/13-云厂商与发行版/243-ack-ram-authorization.md|243-ack-ram-authorization]]
 - [[23-实体/13-云厂商与发行版/250-apsara-stack-ess-scaling.md|250-apsara-stack-ess-scaling]]

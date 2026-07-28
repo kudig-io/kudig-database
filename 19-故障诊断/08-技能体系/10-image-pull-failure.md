@@ -1,7 +1,7 @@
 ---
 title: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 description: '## 1. 概述'
-summary: '镜像拉取问题是 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，'
+summary: '镜像拉取问题是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，'
 category: pod
 tags:
 - k8s
@@ -78,7 +78,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-镜像拉取问题是 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
+镜像拉取问题是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
 
 ### 典型触发场景
 
@@ -88,12 +88,12 @@ agent_execution_mode: L2-semi-auto
 4. **网络/代理问题**: 节点无法访问仓库（防火墙、代理配置、DNS 解析失败），连接超时
 5. **TLS/证书问题**: 私有仓库使用自签名证书但节点未配置信任，TLS 握手失败
 6. **多架构镜像问题**: 镜像不支持当前节点的 CPU 架构（如 ARM64 节点拉取 AMD64-only 镜像）
-7. **镜像策略阻断**: Admission Webhook (如 Gatekeeper、[[Kyverno|Kyverno]]) 拒绝镜像因不符合安全策略
+7. **镜像策略阻断**: Admission Webhook (如 Gatekeeper、[[kyverno|Kyverno]]) 拒绝镜像因不符合安全策略
 8. **离线环境同步**: Air-Gap 环境中镜像未同步到内部仓库
 
 ### 前置条件
 
-- **RBAC 权限**: 至少需要对 [[Pods|pods]]、events、secrets、serviceaccounts 的 get/list 权限；配置 imagePullSecrets 需要 secrets 的 create/update 权限
+- **RBAC 权限**: 至少需要对 [[pods|pods]]、events、secrets、serviceaccounts 的 get/list 权限；配置 imagePullSecrets 需要 secrets 的 create/update 权限
 - **节点访问**: 深度诊断（Phase 2+）可能需要 SSH 访问节点或使用 `kubectl debug node/`
 - **工具要求**: kubectl (v1.28+), crictl (节点诊断), curl/openssl (网络/TLS 诊断)
 - **可选工具**: crane/skopeo (镜像 manifest 检查), cosign/notation (签名验证)

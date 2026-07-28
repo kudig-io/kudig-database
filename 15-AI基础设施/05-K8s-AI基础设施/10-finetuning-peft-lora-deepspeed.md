@@ -59,7 +59,7 @@ authors:
 
 本文覆盖微调方法对比（Full fine-tuning / PEFT / LoRA / QLoRA）、DeepSpeed ZeRO 各阶段的 K8s 部署、PyTorch FSDP 配置、Kubeflow PyTorchJob 任务编排、GPU 内存精确估算、数据管线设计以及 Checkpoint 生命周期管理。
 
-相关页面：[[GPU调度与资源管理]]、[[Kubeflow训练平台]]、[[Kueue与YuniKorn批量调度]]、[[AI高性能网络]]、[[K8s存储与PV管理]]
+相关页面：[[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]、[[23-实体/11-AI与边缘/kubeflow|Kubeflow训练平台]]、[[15-AI基础设施/05-K8s-AI基础设施/07-batch-scheduling-kueue-yunikorn|Kueue与YuniKorn批量调度]]、[[15-AI基础设施/05-K8s-AI基础设施/09-rdma-infiniband-gpudirect-networking|AI高性能网络]]、[[17-系统基础/06-知识字典/storage/persistent-volume|K8s存储与PV管理]]
 
 ## 架构与核心概念
 
@@ -600,8 +600,8 @@ greater_is_better: false
 
 ## Related
 
-- [[GPU调度与资源管理]]
-- [[Kubeflow训练平台]]
-- [[Kueue与YuniKorn批量调度]]
-- [[AI高性能网络]]
-- [[K8s存储与PV管理]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]
+- [[23-实体/11-AI与边缘/kubeflow|Kubeflow训练平台]]
+- [[15-AI基础设施/05-K8s-AI基础设施/07-batch-scheduling-kueue-yunikorn|Kueue与YuniKorn批量调度]]
+- [[15-AI基础设施/05-K8s-AI基础设施/09-rdma-infiniband-gpudirect-networking|AI高性能网络]]
+- [[17-系统基础/06-知识字典/storage/persistent-volume|K8s存储与PV管理]]

@@ -42,7 +42,7 @@ prerequisites:
 
 
 ---
-title: "[[ORAS|ORAS]] (OCI Registry As Storage)"
+title: "[[oras|ORAS]] (OCI Registry As Storage)"
 category: entities
 summary: "ORAS (OCI Registry As Storage) 是一个用于将 OCI 工件推送到和拉取自 OCI 兼容仓库的工具和库。它允许使用容器镜像仓库存储任意类型的工件，如 Helm Chart、WASM 模块、策略文件、签名等，实现 "anything as OCI artifacts" 的理念。"
 tags: k8s, cncf, image, oras]

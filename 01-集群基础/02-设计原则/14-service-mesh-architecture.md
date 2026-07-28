@@ -57,9 +57,9 @@ tags:
 - design
 - principles
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
-- [[Jaeger|jaeger]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[jaeger|jaeger]]
+- [[istio|istio]]
 - envoy
 - cilium
 - docker

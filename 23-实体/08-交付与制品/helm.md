@@ -208,8 +208,8 @@ helm uninstall my-release -n web --keep-history
 ## 参考链接
 
 - [[flux]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
-- [[23-实体/vault.md|[[HashiCorp Vault|vault]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
+- [[23-实体/vault.md|[[23-实体/06-安全/vault|vault]]]]
 - [[deployment]]
 - [[22-概念/09-平台与发布/gitops-principles.md|gitops-principles]]
 

@@ -54,7 +54,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -71,7 +71,7 @@ audience:
 - 数字孪生工程师
 estimated_read_time: 5min
 intent_queries:
-- industrial metaverse [[Kubernetes|kubernetes]] architecture
+- industrial metaverse [[kubernetes|kubernetes]] architecture
 - 工业元宇宙K8s部署
 - VR协同设计平台
 - 数字孪生工厂K8s

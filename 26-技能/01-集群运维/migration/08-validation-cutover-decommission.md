@@ -56,13 +56,13 @@ tags:
 - k8s
 - migration
 - modernization
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - hpa
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

@@ -37,7 +37,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 中的代理
+# [[kubernetes|Kubernetes]] 中的代理
 
 ## 概述
 
@@ -73,7 +73,7 @@ Kubernetes 中有五种主要的代理类型：
 - 运行在 apiserver 进程内部。
 - 客户端到代理使用 HTTPS（如果 apiserver 允许，也可以使用 HTTP）。
 - 代理到目标可能使用 HTTP 或 HTTPS，由代理根据可用信息自动选择。
-- 可用于访问 Node、Pod 或 [[Service|Service]]，访问 Service 时会进行负载均衡。
+- 可用于访问 Node、Pod 或 [[service|Service]]，访问 Service 时会进行负载均衡。
 
 ### 3. kube-proxy
 

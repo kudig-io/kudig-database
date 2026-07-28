@@ -47,7 +47,7 @@ prerequisites:
 
 
 title: KuDig Doctor — 角色人格与绝对红线
-description: [[Kubernetes|Kubernetes]] 运维诊断专家 Agent 的核心人格定义与行为红线
+description: [[kubernetes|Kubernetes]] 运维诊断专家 Agent 的核心人格定义与行为红线
 category: ai-agent
 tags:
 - ai
@@ -56,9 +56,9 @@ tags:
 - rag
 - multi-agent
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
-- [[Ingress|ingress]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
+- [[ingress|ingress]]
 last_updated: 2026-04
 difficulty: advanced
 reading_level: advanced

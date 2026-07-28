@@ -61,12 +61,12 @@ tags:
 - migration
 - modernization
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Cilium|cilium]]
+- [[cilium|cilium]]
 - flannel
 - calico
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

@@ -762,7 +762,7 @@ esac
 
 ---
 
-<!-- chunk: 与 [[Kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
+<!-- chunk: 与 [[kubernetes|Kubernetes]] 的关系 -->## 与 Kubernetes 的关系
 
 ## 容器存储 (Container Storage)
 

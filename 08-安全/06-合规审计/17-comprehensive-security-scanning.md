@@ -69,7 +69,7 @@ cross_refs:
 
 # 17 - 安全扫描与漏洞检测工具
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[23-实体/06-安全/trivy.md|Trivy]]](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [[23-实体/06-安全/falco.md|Falco]]](https://falco.org/)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[23-实体/06-安全/trivy.md|Trivy]]](https://aquasecurity.github.io/trivy/) | [Grype](https://github.com/anchore/grype) | [[23-实体/06-安全/falco.md|Falco]]](https://falco.org/)
 
 <!-- chunk: 一、安全扫描体系架构 -->
 ## 一、安全扫描体系架构
@@ -154,7 +154,7 @@ cross_refs:
 | **Snyk** | 全栈 | 商业DB | ✓ | ★★★★★ | ✓ | ★★★★☆ | 部分 | 开发者体验 |
 | **Anchore** | 镜像/SBOM | 多源 | ★★★★★ | ★★★★☆ | ✗ | ★★★★☆ | 企业版 | 企业合规 |
 | **Falco** | 运行时 | 规则 | ✗ | ✗ | ★★★★★ | ★★★★★ | ✓ | 运行时检测 |
-| **[[Kubescape|Kubescape]]** | K8s配置 | NSA/MITRE | ✗ | ★★★★☆ | ✓ | ★★★★★ | ✓ | K8s安全 |
+| **[[kubescape\|Kubescape]]** | K8s配置 | NSA/MITRE | ✗ | ★★★★☆ | ✓ | ★★★★★ | ✓ | K8s安全 |
 | **Checkov** | IaC | 策略 | ✗ | ★★★★★ | ✗ | ★★★☆☆ | ✓ | IaC扫描 |
 
 ### 1.3 漏洞严重性与SLA

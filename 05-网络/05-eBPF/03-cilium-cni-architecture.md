@@ -1,7 +1,7 @@
 ---
 title: Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 description: '# Cilium CNI 架构与部署 (Cilium CNI Architecture and Deployment)'
-summary: '8. [Cilium 与 [[Kubernetes|Kubernetes]] 网络模型](#8-cilium-与-kubernetes-网络模型)'
+summary: '8. [Cilium 与 [[kubernetes|Kubernetes]] 网络模型](#8-cilium-与-kubernetes-网络模型)'
 category: ebpf-technology
 tags:
 - k8s
@@ -71,7 +71,7 @@ cross_refs:
 
 
 
-# [[Cilium|Cilium]] CNI 架构与部署 (Cilium CNI Architecture and Deployment)
+# [[cilium|Cilium]] CNI 架构与部署 (Cilium CNI Architecture and Deployment)
 
 > **文档版本**: v1.0 | **适用版本**: Cilium 1.15/1.16 | **更新时间**: 2026-03  
 > **CNCF 状态**: Graduated (2023年10月) | **许可证**: Apache 2.0
@@ -87,7 +87,7 @@ cross_refs:
 5. [Cilium 部署方式](#5-cilium-部署方式)
 6. [从传统 CNI 迁移到 Cilium](#6-从传统-cni-迁移到-cilium)
 7. [多集群 Cluster Mesh 配置](#7-多集群-cluster-mesh-配置)
-8. [Cilium 与 [[Kubernetes|Kubernetes]] 网络模型](#8-cilium-与-kubernetes-网络模型)
+8. [Cilium 与 [[kubernetes|Kubernetes]] 网络模型](#8-cilium-与-kubernetes-网络模型)
 9. [故障排查与诊断](#9-故障排查与诊断)
 10. [2026 最新特性](#10-2026-最新特性)
 

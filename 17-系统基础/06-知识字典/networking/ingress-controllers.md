@@ -47,17 +47,17 @@ prerequisites:
 
 
 
-# [[Ingress|Ingress]] Controllers
+# [[ingress|Ingress]] Controllers
 
 ## 概述
 
-Ingress 资源本身只是声明式的路由配置，**必须有 Ingress Controller 在集群中运行**才能将其转化为实际的流量转发规则。Ingress Controller 通常以负载均衡器或反向代理的形式实现，负责监听 Ingress 和 EndpointSlice 的变化，并动态配置底层数据面（如 NGINX、[[Envoy|Envoy]]、云厂商 LB 等）。
+Ingress 资源本身只是声明式的路由配置，**必须有 Ingress Controller 在集群中运行**才能将其转化为实际的流量转发规则。Ingress Controller 通常以负载均衡器或反向代理的形式实现，负责监听 Ingress 和 EndpointSlice 的变化，并动态配置底层数据面（如 NGINX、[[envoy|Envoy]]、云厂商 LB 等）。
 
 ## 核心概念/原理
 
 - **控制器与 IngressClass**：每个 Ingress 通过 `ingressClassName` 字段关联一个 IngressClass，IngressClass 则声明了负责实现该类的控制器名称（`spec.controller`）。控制器仅处理匹配其 IngressClass 的 Ingress 资源。
 - **多控制器共存**：一个集群中可以同时部署多个 Ingress Controller，只要它们使用不同的 IngressClass 即可。例如，一个用于内部流量（内部 NGINX），一个用于公网流量（云厂商 LB）。
-- **默认控制器**：若创建 Ingress 时未指定 `ingressClassName`，且集群中恰好只有一个 IngressClass 被标记为默认，则 [[Kubernetes|Kubernetes]] 会自动将其分配给该 Ingress。
+- **默认控制器**：若创建 Ingress 时未指定 `ingressClassName`，且集群中恰好只有一个 IngressClass 被标记为默认，则 [[kubernetes|Kubernetes]] 会自动将其分配给该 Ingress。
 
 ## 关键机制或特性
 

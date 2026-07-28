@@ -87,7 +87,7 @@ graph TD
 ## 相关文档
 
 - [[16-专项技术/README.md|README]]
-- [[KubeEdge]].md]]
+- [[kubeedge|KubeEdge]].md]]
 
 
 ---

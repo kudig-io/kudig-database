@@ -49,7 +49,7 @@ status: reviewed
 
 
 
-# [[Service|Service]]Service Mesh）|Service Mesh]] Architecture
+# [[service|Service]]Service Mesh）|Service Mesh]] Architecture
 
 ## What is a Service Mesh
 

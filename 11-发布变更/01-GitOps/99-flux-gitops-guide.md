@@ -1,7 +1,7 @@
 ---
 title: Flux GitOps 实践指南
 description: '# Flux GitOps 实践指南'
-summary: 'Flux v2 是 CNCF 毕业的 GitOps 持续交付工具，基于 GitOps Toolkit 构建。与 [[Argo|Argo]] CD 的集中式管理架构不同，Flux 采用分布式设计——每个 [[Kubernetes|Kubernetes]] 集群运行自己的 Flux 实例，Git 仓库就是唯一的控制平面。'
+summary: 'Flux v2 是 CNCF 毕业的 GitOps 持续交付工具，基于 GitOps Toolkit 构建。与 [[argo|Argo]] CD 的集中式管理架构不同，Flux 采用分布式设计——每个 [[kubernetes|Kubernetes]] 集群运行自己的 Flux 实例，Git 仓库就是唯一的控制平面。'
 category: gitops-ci-cd
 tags:
 - k8s
@@ -72,7 +72,7 @@ cross_refs:
 
 
 
-# [[Flux|Flux]] GitOps 实践指南
+# [[flux|Flux]] GitOps 实践指南
 
 > **适用版本**: Flux v2.5 (Flux CD)
 > **最后更新**: 2026-04-24
@@ -96,7 +96,7 @@ cross_refs:
 
 <!-- chunk: 一、概述 -->## 一、概述
 
-Flux v2 是 CNCF 毕业的 GitOps 持续交付工具，基于 GitOps Toolkit 构建。与 [[Argo|Argo]] CD 的集中式管理架构不同，Flux 采用分布式设计——每个 [[Kubernetes|Kubernetes]] 集群运行自己的 Flux 实例，Git 仓库就是唯一的控制平面。这种设计理念使得 Flux 更轻量、更适合"每集群自治"的多集群策略，也是 Kubernetes 原生 GitOps 的典范实现。
+Flux v2 是 CNCF 毕业的 GitOps 持续交付工具，基于 GitOps Toolkit 构建。与 [[argo|Argo]] CD 的集中式管理架构不同，Flux 采用分布式设计——每个 [[kubernetes|Kubernetes]] 集群运行自己的 Flux 实例，Git 仓库就是唯一的控制平面。这种设计理念使得 Flux 更轻量、更适合"每集群自治"的多集群策略，也是 Kubernetes 原生 GitOps 的典范实现。
 
 Flux 的核心优势包括：内置镜像自动更新（Image Automation）无需额外工具；原生支持 SOPS 加密文件解密；Notification Controller 提供灵活的事件通知；与 Terraform 的深度集成（tf-controller）；支持 OCI Registry 作为源；Helm Controller 原生管理 Helm Release 生命周期。
 

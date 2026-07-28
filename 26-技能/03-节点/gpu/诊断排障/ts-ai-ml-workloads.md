@@ -1,7 +1,7 @@
 ---
 title: AI/ML 工作负载排查
 description: '# AI/ML 工作负载排查'
-summary: '1. **GPU 可见性**：`kubectl get nodes -o jsonpath='{.items[*].status.allocatable.nvidia\.com/gpu}'`，确认资源暴露。'
+summary: "1. **GPU 可见性**：`kubectl get nodes -o jsonpath='{.items[*].status.allocatable.nvidia\\.com/gpu}'`，确认资源暴露。"
 category: skills
 tags:
 - k8s

@@ -48,7 +48,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster deletion resource cleanup
-  - [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] cluster removal retain resources
+  - [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster removal retain resources
   - SLB ENI security group cleanup
   - aliyun cs DELETE cluster API
   - Cluster deletion failure troubleshooting

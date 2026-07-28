@@ -136,7 +136,7 @@ kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli garbage-collect
 # 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
 kubectl exec -n kube-system <terway-pod> -c terway -- terway-cli sync
 ```
-触发本地 IPAM 与 [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 全量同步，适用于状态不一致场景。
+触发本地 IPAM 与 [[kubernetes|Kubernetes]]es API|Kubernetes API]] 全量同步，适用于状态不一致场景。
 
 **查看帮助:**
 

@@ -60,7 +60,7 @@ tags:
 - grafana
 - redis
 - mysql
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 - operator
 - gpu
 last_updated: 2026-05-18
@@ -107,7 +107,7 @@ k8s_versions:
 
 # 6G 核心网架构设计 — 阿里云视角
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
+> **适用版本**: [[kubernetes|Kubernetes]] v1.29 - v1.33 | **最后更新**: 2026-04-24
 > **作者**: 阿里云解决方案架构师 | **标签**: `#6G` `#核心网` `#通感一体` `#空天地` `#阿里云`
 
 ---

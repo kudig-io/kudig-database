@@ -41,7 +41,7 @@ prerequisites:
 
 
 
-# [[SOPS|SOPS]] ([[Secrets|Secrets]] OPerationS)
+# [[sops|SOPS]] ([[secrets|Secrets]] OPerationS)
 
 > **CNCF 状态**: Sandbox | **类别**: Supply Chain | **主要语言**: Go
 

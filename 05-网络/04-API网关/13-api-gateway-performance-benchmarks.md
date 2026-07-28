@@ -63,7 +63,7 @@ authors:
 
 # 13 - API 网关性能基准测试与调优
 
-> **文档版本**: v1.0 | **适用版本**: [[Kubernetes|Kubernetes]] 1.27+ | **更新日期**: 2026-03-04 | **关键词**: 性能, 基准测试, wrk2, fortio, QPS, 延迟, 调优
+> **文档版本**: v1.0 | **适用版本**: [[kubernetes|Kubernetes]] 1.27+ | **更新日期**: 2026-03-04 | **关键词**: 性能, 基准测试, wrk2, fortio, QPS, 延迟, 调优
 
 <!-- chunk: 目录 -->## 目录
 
@@ -88,7 +88,7 @@ authors:
 | **wrk2** | HTTP | 开放环回 | 高 | ✅ HdrHistogram | 稳定吞吐量测试 |
 | **hey** | HTTP | 闭合环回 | 中 | ✅ 百分位 | 快速冒烟测试 |
 | **fortio** | HTTP/gRPC | 开放+闭合 | 高 | ✅ HDR | 精确 QPS 控制 |
-| **ghz** | [[gRPC|gRPC]] | 闭合环回 | 中 | ✅ 百分位 | gRPC 专项测试 |
+| **ghz** | [[grpc\|gRPC]] | 闭合环回 | 中 | ✅ 百分位 | gRPC 专项测试 |
 | **k6** | HTTP/WS | 开放+闭合 | 高 | ✅ P95/P99 | 复杂场景脚本 |
 | **vegeta** | HTTP | 开放环回 | 高 | ✅ HdrHistogram | 持续速率攻击 |
 
@@ -280,7 +280,7 @@ kubectl exec -n $GATEWAY_NS $GATEWAY_POD -- \
 | **Envoy Gateway** | 1.1 | 2 | **138,000** | 0.9ms | 4.8ms | 14ms | 75% (4C) | 420MB | 52,000 |
 | **Kong** | 3.6 | 2 | **95,000** | 1.8ms | 8.9ms | 35ms | 88% (4C) | 480MB | 35,000 |
 | **Traefik** | 3.1 | 2 | **110,000** | 1.4ms | 7.2ms | 28ms | 71% (4C) | 210MB | 40,000 |
-| **Nginx [[Ingress|Ingress]]** | 1.10 | 2 | **155,000** | 0.7ms | 3.8ms | 9ms | 65% (4C) | 180MB | 60,000 |
+| **Nginx [[ingress\|Ingress]]** | 1.10 | 2 | **155,000** | 0.7ms | 3.8ms | 9ms | 65% (4C) | 180MB | 60,000 |
 
 > 注：Nginx Ingress 作为参照基线，仅支持基础代理能力，不具备动态 API 管理特性。
 

@@ -61,7 +61,7 @@ version: 1.0.0
 
 ## 快速导航
 
-- [[06-存储/README.md|[[KUDIG Database]]].md](../../31-%E8%84%9A%E6%9C%AC/templates/README.md) — 模板体系索引
+- [[06-存储/README.md|[[README|KUDIG Database]]].md](../../31-%E8%84%9A%E6%9C%AC/templates/README.md) — 模板体系索引
 - [templates/skill-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/skill-template.md) — Skill 文档标准模板（现行版本）
 - [故障诊断/topic-skills/](../) — Skill 文档实际存放目录
 

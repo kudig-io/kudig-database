@@ -55,6 +55,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/03-scheduler-troubleshooting.md
   label: '结构化排障: 03-scheduler-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

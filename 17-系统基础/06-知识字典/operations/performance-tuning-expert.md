@@ -52,7 +52,7 @@ prerequisites:
 
 
 
-# 03 - [[Kubernetes|Kubernetes]] 性能调优专家指南
+# 03 - [[kubernetes|Kubernetes]] 性能调优专家指南
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -70,7 +70,7 @@ prerequisites:
 
 **前置知识要求**:
 - **基础**: Kubernetes架构(API Server、[[17-系统基础/06-知识字典/fundamentals/etcd.md|etcd]]、调度器)、Pod生命周期、资源请求与限制
-- **中级**: 存储类(StorageClass)、网络插件(CNI)、监控体系([[Prometheus|Prometheus]]/Grafana)
+- **中级**: 存储类(StorageClass)、网络插件(CNI)、监控体系([[prometheus|Prometheus]]/Grafana)
 - **专家**: Linux内核调优、容器运行时原理、网络栈优化、应用性能分析
 
 **关联文件**:

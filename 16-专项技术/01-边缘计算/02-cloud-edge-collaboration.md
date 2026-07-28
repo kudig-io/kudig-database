@@ -713,7 +713,7 @@ func (r *LWWRegister) Merge(other *LWWRegister) *LWWRegister {
 
 ## 4.1 期望状态 vs 实际状态 (Desired State vs Actual State)
 
-[[Kubernetes|Kubernetes]]/KubeEdge 使用声明式 API 和控制器模式来管理边缘状态，这是云边协同的核心设计理念。
+[[kubernetes|Kubernetes]]/KubeEdge 使用声明式 API 和控制器模式来管理边缘状态，这是云边协同的核心设计理念。
 
 ```mermaid
 graph LR
@@ -900,7 +900,7 @@ func (s *LocalStateStore) GetConfigMap(namespace, name string) (*v1.ConfigMap, e
 
 ## 5.2 YurtHub 离线缓存机制 (YurtHub Offline Cache)
 
-[[OpenYurt|OpenYurt]] 的 YurtHub 实现了边缘节点离线时的本地 API 代理：
+[[openyurt|OpenYurt]] 的 YurtHub 实现了边缘节点离线时的本地 API 代理：
 
 ```mermaid
 graph LR

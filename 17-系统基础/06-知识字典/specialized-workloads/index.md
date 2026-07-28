@@ -256,7 +256,7 @@ spec:
 
 - [[17-系统基础/06-知识字典/scheduling/volcano.md|Volcano 批量调度]]
 - [[17-系统基础/06-知识字典/multi-cloud/edge-computing-and-k3s.md|边缘计算与 K3s]]
-- [[17-系统基础/06-知识字典/workloads/job-cronjob.md|Job/CronJob 工作负载]]
+- [[02-工作负载/01-核心工作负载/05-job-cronjob-advanced|Job/CronJob 工作负载]]
 - [[17-系统基础/06-知识字典/configuration/resource-management-for-pods-and-containers.md|资源管理]]
 
 ## 深度技术解析

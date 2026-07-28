@@ -64,7 +64,7 @@ tags:
 - testing
 - quality
 - automation
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - docker
 - job
@@ -81,7 +81,7 @@ estimated_read_time: 5min
 intent_queries:
 - Selenium 企业级自动化测试平台 是什么
 - 如何 Selenium 企业级自动化测试平台
-- [[Kubernetes|Kubernetes]] 29 automated testing quality 最佳实践
+- [[kubernetes|Kubernetes]] 29 automated testing quality 最佳实践
 trigger_keywords:
 - Selenium
 - 企业级自动化测试平台

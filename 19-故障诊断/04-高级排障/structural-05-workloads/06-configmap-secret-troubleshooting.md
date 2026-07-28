@@ -41,6 +41,7 @@ prerequisites:
 - etcd-basics
 - mysql-basics
 - policy-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

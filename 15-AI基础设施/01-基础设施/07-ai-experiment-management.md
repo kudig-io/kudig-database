@@ -707,7 +707,7 @@ spec:
 
 ---
 
-<!-- chunk: 四、[[Kubeflow|Kubeflow]] Pipelines -->
+<!-- chunk: 四、[[kubeflow|Kubeflow]] Pipelines -->
 ## 四、Kubeflow Pipelines
 
 ### 4.1 完整ML Pipeline定义

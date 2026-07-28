@@ -1,3 +1,12 @@
+---
+title: kubeadm 集群生命周期管理
+category: reference
+tags:
+- reference
+tier: supporting
+created: '2026-07-27'
+---
+
 # kubeadm 集群生命周期管理
 
 ## 概述

@@ -61,7 +61,7 @@ prerequisites:
 
 
 
-﻿# [[Kubernetes|Kubernetes]] 与 AI/ML 概念参考手册（完整恢复版）
+﻿# [[kubernetes|Kubernetes]] 与 AI/ML 概念参考手册（完整恢复版）
 
 > 本文档包含kusheet项目涉及的300+核心技术概念，涵盖Kubernetes、分布式系统、AI/ML、DevOps等领域的完整知识体系。
 
@@ -91,7 +91,7 @@ prerequisites:
 | 3 | Node | §1 | 集群中的机器，像工厂里的一台"工作台" |
 | 4 | Namespace | §1 | 逻辑隔离分区，像办公楼里的"不同楼层" |
 | 5 | Deployment | §5 | 管理 Pod 副本的控制器，像"车队调度中心" |
-| 6 | [[Service|Service]] | §6 | 稳定的网络入口，像"公司前台电话总机" |
+| 6 | [[service\|Service]] | §6 | 稳定的网络入口，像"公司前台电话总机" |
 | 7 | ConfigMap | §5 | 配置数据存储，像"应用的配置文件柜" |
 | 8 | Secret | §5 | 敏感数据存储，像"保险箱" |
 | 9 | Label | §1 | 对象标签，像"行李标签"用于分类和筛选 |

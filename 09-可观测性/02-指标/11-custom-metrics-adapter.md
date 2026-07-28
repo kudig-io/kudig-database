@@ -79,7 +79,7 @@ cross_refs:
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/tasks/run-application/horizontal-pod-autoscale](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
 
-本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 [[Prometheus|Prometheus]] Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
+本文档从生产环境运维专家视角，深入解析 Kubernetes 自定义指标适配器体系，涵盖 [[prometheus|Prometheus]] Adapter、外部指标集成、HPA高级配置、指标管道优化等核心内容，结合大规模集群实践经验，为企业构建灵活、高效的自动扩缩容系统提供完整指导。
 
 | API | 路径 | 提供者 | 用途 | 版本支持 |
 |-----|------|-------|------|---------|
@@ -217,7 +217,7 @@ spec:
         averageValue: "30"
 ```
 
-<!-- chunk: [[KEDA|KEDA]](Kubernetes Event-driven Autoscaling) -->
+<!-- chunk: [[keda|KEDA]](Kubernetes Event-driven Autoscaling) -->
 ## KEDA(Kubernetes Event-driven Autoscaling)
 
 ```yaml

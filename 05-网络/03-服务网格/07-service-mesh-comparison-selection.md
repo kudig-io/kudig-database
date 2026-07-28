@@ -78,7 +78,7 @@ cross_refs:
 # 服务网格对比与选型决策指南
 
 > **最后更新**: 2026-04-24
-> **适用版本**: [[Istio|Istio]] v1.29 / [[Linkerd|Linkerd]] v2.18 / Consul v1.20 / [[Dapr|Dapr]] v1.15 / Traefik Mesh v1.4
+> **适用版本**: [[istio|Istio]] v1.29 / [[linkerd|Linkerd]] v2.18 / Consul v1.20 / [[dapr|Dapr]] v1.15 / Traefik Mesh v1.4
 > **难度**: 架构师级
 
 ---
@@ -126,7 +126,7 @@ graph TB
 
 | 项目 | 设计哲学 | 架构模式 | 数据平面技术 | 核心取舍 |
 |:---|:---|:---|:---|:---|
-| **Istio** | 功能全面、企业级 | Sidecar + Ambient 双模式 | C++ ([[Envoy|Envoy]]) | 功能丰富 vs 运维复杂 |
+| **Istio** | 功能全面、企业级 | Sidecar + Ambient 双模式 | C++ ([[envoy\|Envoy]]) | 功能丰富 vs 运维复杂 |
 | **Linkerd** | 极简主义、安全默认 | Sidecar only | Rust (自研) | 简洁 vs 功能限制 |
 | **Consul Connect** | 生态集成、多平台 | Sidecar (Envoy) | C++ (Envoy) | HashiCorp 绑定 vs 统一管理 |
 | **Dapr** | 应用级抽象、多运行时 | SDK + Sidecar | Go (自研) | 应用侵入 vs 丰富能力 |

@@ -91,7 +91,7 @@ Redis 提供了丰富的数据结构，每种结构都有其特定的应用场�
 
 **Set** 是无序的字符串集合，底层使用 intset（整数集合，当所有元素都是整数时）或 hashtable 实现。Set 适合实现标签系统（SADD/SINTER）、共同好友（SINTER）、抽奖系统（SRANDMEMBER/SPOP）和去重（SADD 返回是否已存在）。
 
-**Sorted Set**（ZSET）是 Redis 最强大的数据结构之一，它在 Set 的基础上为每个元素关联一个分数（[[Score|score]]），并按照分数排序。底层使用 listpack（元素较少时）或 skiplist + hashtable（元素较多时）实现。Sorted Set 的典型应用场景包括排行榜（ZINCRBY + ZREVRANGE）、延迟队列（score 存储执行时间戳，ZRANGEBYSCORE 取出到期的任务）、带权重的标签系统和滑动窗口限流。
+**Sorted Set**（ZSET）是 Redis 最强大的数据结构之一，它在 Set 的基础上为每个元素关联一个分数（[[score|score]]），并按照分数排序。底层使用 listpack（元素较少时）或 skiplist + hashtable（元素较多时）实现。Sorted Set 的典型应用场景包括排行榜（ZINCRBY + ZREVRANGE）、延迟队列（score 存储执行时间戳，ZRANGEBYSCORE 取出到期的任务）、带权重的标签系统和滑动窗口限流。
 
 **Bitmap**、**HyperLogLog** 和 **Geo** 是 Redis 的扩展数据结构。Bitmap 适合实现用户签到（每天一个 bit）、在线状态和布隆过滤器；HyperLogLog 适合基数统计（UV 计数），标准误差为 0.81%，每个键仅占用 12KB 内存；Geo 适合存储地理位置信息并计算距离和范围查询。
 
@@ -969,7 +969,7 @@ Cache-Aside (推荐):
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-28-enterprise-database-middleware KUDIG Database — Global MOC
-- [[07-数据库中间件/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise [[Database & Middleware|Database & Middleware]] Op...]]
+- [[07-数据库中间件/README.md|Domain 16: 企业级数据库与中间件运维 (Enterprise [[07-数据库中间件/README|Database & Middleware]] Op...]]
 - Domain-28 企业数据库与中间件 — 开源项目索引
 - MySQL 企业级数据库运维管理
 - PostgreSQL 企业级数据库高可用架构

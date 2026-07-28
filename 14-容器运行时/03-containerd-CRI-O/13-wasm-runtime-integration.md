@@ -410,7 +410,7 @@ kubectl get pods --field-selector spec.runtimeClassName=wasmedge --all-namespace
 3. **RuntimeClass 命名规范**：按运行时类型命名（`wasmedge`、`wasmtime`、`spin`），配合 nodeSelector 确保调度到正确节点
 4. **监控集成**：WASM Pod 的监控指标与普通 Pod 一致（通过 kubelet cAdvisor），但缺少容器内部指标，需在 WASM 模块内实现 Prometheus exporter
 5. **安全加固**：WASM 沙箱本身提供内存安全，但仍需限制 WASI preopens 目录范围，避免模块访问敏感文件
-6. **版本管理**：WASM 运行时迭代快，建议使用 DaemonSet 管理节点上的 shim 二进制版本，配合 [[13-生产运维/升级策略|滚动升级策略]] 逐节点更新
+6. **版本管理**：WASM 运行时迭代快，建议使用 DaemonSet 管理节点上的 shim 二进制版本，配合 [[01-集群基础/06-升级路径/index|滚动升级策略]] 逐节点更新
 
 ### Krustlet 的替代与演进
 

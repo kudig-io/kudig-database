@@ -91,7 +91,7 @@ cross_refs:
 
 | API Group | 常见资源 | 说明 |
 |-----------|---------|------|
-| `""` (core) | [[Pods|pods]], services, [[Secrets|secrets]], [[ConfigMaps|configmaps]], pvc, nodes, namespaces | 核心API资源 |
+| `""` (core) | [[pods\|pods]], services, [[secrets\|secrets]], [[configmaps\|configmaps]], pvc, nodes, namespaces | 核心API资源 |
 | `apps` | deployments, statefulsets, daemonsets, replicasets | 工作负载控制器 |
 | `batch` | jobs, cronjobs | 批处理任务 |
 | `networking.k8s.io` | networkpolicies, ingresses, ingressclasses | 网络资源 |

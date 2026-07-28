@@ -85,9 +85,9 @@ FTA 故障树 — 故障树分析文档集合
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution.md|[[第一章：FTA 起源与发展史|第一章：FTA 起源与发展史]]]] |  | fta, troubleshooting |  |
-| 2 | [[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations.md|[[第二章：FTA 数学基础与理论模型|第二章：FTA 数学基础与理论模型]]]] |  | fta, troubleshooting |  |
-| 3 | [[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards.md|[[第三章：FTA 符号体系与标准规范|第三章：FTA 符号体系与标准规范]]]] |  | fta, troubleshooting |  |
+| 1 | [[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution.md|[[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution\|第一章：FTA 起源与发展史]]]] |  | fta, troubleshooting |  |
+| 2 | [[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations.md|[[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations\|第二章：FTA 数学基础与理论模型]]]] |  | fta, troubleshooting |  |
+| 3 | [[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards.md|[[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards\|第三章：FTA 符号体系与标准规范]]]] |  | fta, troubleshooting |  |
 | 4 | [[19-故障诊断/06-FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]] |  | fta, troubleshooting |  |
 | 5 | [[19-故障诊断/06-FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]] |  | fta, troubleshooting |  |
 | 6 | [[19-故障诊断/06-FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]] |  | fta, troubleshooting |  |

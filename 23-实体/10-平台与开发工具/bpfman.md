@@ -214,7 +214,7 @@ eBPF 程序未生效
 ## 参考链接
 
 - [[cilium]]
-- [[23-实体/argocd.md|[[ArgoCD|argocd]]]]
+- [[23-实体/argocd.md|[[argocd|argocd]]]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]
 - [[22-概念/03-网络/cilium-ebpf-networking.md|cilium-ebpf-networking]]

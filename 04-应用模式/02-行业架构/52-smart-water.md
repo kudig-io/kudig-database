@@ -45,7 +45,7 @@ tags:
 - architecture
 - industry
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-05-18
 difficulty: intermediate
 reading_level: intermediate
@@ -56,7 +56,7 @@ audience:
 - 阿里云 IoT 解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 智慧水务 [[Kubernetes|Kubernetes]] 部署架构
+- 智慧水务 [[kubernetes|Kubernetes]] 部署架构
 - 水务管网监测 IoT 数据处理
 - 爆管预警水力模型计算
 - DMA 分区漏损监测

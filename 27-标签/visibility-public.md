@@ -108,7 +108,7 @@ last_updated: '2026-07-21'
 - Wiki Dedup 审计报告 — 2026-05-24
 - Wiki Lint 健康审计 — 2026-05-24
 - [[22-概念/02-工作负载/workload-api|Workload API]]
-- [[19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/SKILL|[[Service|Service]] 连通性问题诊断与修复]]
+- [[19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/SKILL|[[service|Service]] 连通性问题诊断与修复]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook|certificate expiry Remediation Playbook]]
 - [[14-容器运行时/03-containerd-CRI-O/01-containerd-deep-guide|containerd 深度指南]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-dns-failure/reference/remediation-playbook|dns failure Remediation Playbook]]

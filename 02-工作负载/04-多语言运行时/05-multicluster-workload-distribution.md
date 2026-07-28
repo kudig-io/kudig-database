@@ -393,4 +393,4 @@ spec:
 - [[05-网络/01-K8s网络核心/32-multi-cluster-networking.md|多集群网络]]
 - [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]
 - [[02-工作负载/00-总览/99-kubernetes-deployment-patterns-architecture.md|Kubernetes 部署模式架构]]
-- [[12-可靠性/02-灾难恢复]]
+- [[12-可靠性/02-灾难恢复/index|02-灾难恢复]]

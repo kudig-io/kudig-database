@@ -57,7 +57,7 @@ tags:
 - [[kubelet|kubelet]]
 - controller-manager
 - docker
-- [[Harbor|harbor]]
+- [[harbor|harbor]]
 - job
 last_updated: 2026-05
 difficulty: intermediate
@@ -70,7 +70,7 @@ estimated_read_time: 5min
 intent_queries:
 - ServiceAccount / Token 管理 YAML 配置参考 是什么
 - 如何 ServiceAccount / Token 管理 YAML 配置参考
-- [[Kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
+- [[kubernetes|Kubernetes]] 32 yaml manifests 最佳实践
 trigger_keywords:
 - ServiceAccount
 - Token

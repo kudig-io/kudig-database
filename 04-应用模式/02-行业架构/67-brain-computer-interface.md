@@ -53,9 +53,9 @@ tags:
 - industry
 - opa
 - job
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - rbac
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 - gpu
 - nvidia
 last_updated: 2026-05-18

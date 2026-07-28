@@ -59,7 +59,7 @@ tags:
 - workload
 - pod
 - deployment
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - [[etcd|etcd]]
 - prometheus
 - grafana

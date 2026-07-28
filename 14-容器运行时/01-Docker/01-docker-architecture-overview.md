@@ -67,7 +67,7 @@ estimated_read_time: 10min
 intent_queries:
 - Docker 架构概述与核心概念 是什么
 - 如何 Docker 架构概述与核心概念
-- [[Kubernetes|Kubernetes]] 13 docker 最佳实践
+- [[kubernetes|Kubernetes]] 13 docker 最佳实践
 trigger_keywords:
 - Docker
 - 架构概述与核心概念

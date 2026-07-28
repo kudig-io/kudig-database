@@ -57,10 +57,10 @@ tags:
 - k8s
 - gitops
 - ci-cd
-- [[ArgoCD|argocd]]
-- [[Flux|flux]]
+- [[argocd|argocd]]
+- [[flux|flux]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - helm
 - docker

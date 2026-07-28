@@ -101,7 +101,7 @@ related:
 
 ## 概述
 
-本文是 [[Kubernetes|Kubernetes]] 学习路径中 Linux 基础模块的第一部分，聚焦于 Linux 系统架构、进程管理和容器隔离原理（namespace + cgroup）。理解这些概念是掌握 K8s 的前提——K8s 节点运行在 Linux 上，容器的本质就是 Linux 内核提供的隔离能力，而 K8s 的 resources.limits 最终通过 cgroup 实现。本文将帮助你建立从 Linux 内核到容器到 K8s 的完整认知链条。
+本文是 [[kubernetes|Kubernetes]] 学习路径中 Linux 基础模块的第一部分，聚焦于 Linux 系统架构、进程管理和容器隔离原理（namespace + cgroup）。理解这些概念是掌握 K8s 的前提——K8s 节点运行在 Linux 上，容器的本质就是 Linux 内核提供的隔离能力，而 K8s 的 resources.limits 最终通过 cgroup 实现。本文将帮助你建立从 Linux 内核到容器到 K8s 的完整认知链条。
 
 ### 学习目标
 

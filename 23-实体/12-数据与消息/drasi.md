@@ -238,8 +238,8 @@ kubectl logs -n drasi-system -l app=drasi-reaction --tail=50 -f
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - drasi
-- [[23-实体/nats.md|[[NATS|NATS]]]]
-- [[23-实体/cncf-infrastructure.md|[[CNCF 基础设施与混沌工程项目全景|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
+- [[23-实体/nats.md|[[nats|NATS]]]]
+- [[23-实体/cncf-infrastructure.md|[[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]]] — Cross-reference
 
 
 <!-- risk-assessed -->

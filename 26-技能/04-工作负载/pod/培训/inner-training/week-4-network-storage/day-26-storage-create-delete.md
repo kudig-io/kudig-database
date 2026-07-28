@@ -144,7 +144,7 @@ K8s 的存储体系采用"供给-消费"模式：
 | NAS | nasplugin.csi.alibabacloud.com | alicloud-nas | RWX | 共享文件访问 | 多 Pod 共享文件 |
 | OSS | ossplugin.csi.alibabacloud.com | alicloud-oss | ROX | 低成本、高可靠 | 静态资源、日志归档 |
 
-云盘的关键限制：只支持 RWO（同一时间只能被一个节点挂载）。这意味着使用云盘的 Pod 不能在多个节点上运行（适合 [[StatefulSet|StatefulSet]]），且节点问题时需要等待 Volume Detach 后才能在另一个节点上 Attach。
+云盘的关键限制：只支持 RWO（同一时间只能被一个节点挂载）。这意味着使用云盘的 Pod 不能在多个节点上运行（适合 [[statefulset|StatefulSet]]），且节点问题时需要等待 Volume Detach 后才能在另一个节点上 Attach。
 
 ---
 

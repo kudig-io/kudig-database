@@ -1,7 +1,7 @@
 ---
 title: Traefik Mesh Enterprise Service Mesh 深度实践
 description: '# Traefik Mesh Enterprise Service Mesh 深度实践'
-summary: 'Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 [[Kubernetes|Kubernetes]] 原生服务网格。与 [[Istio|Istio]] 和 [[Linkerd|Linkerd]] 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，'
+summary: 'Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 [[kubernetes|Kubernetes]] 原生服务网格。与 [[istio|Istio]] 和 [[linkerd|Linkerd]] 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，'
 category: service-mesh-microservices
 tags:
 - k8s
@@ -73,7 +73,7 @@ cross_refs:
 
 
 
-# Traefik Mesh Enterprise [[Service|Service]]Service Mesh）|Service Mesh]] 深度实践
+# Traefik Mesh Enterprise [[service|Service]]Service Mesh）|Service Mesh]] 深度实践
 
 > **最后更新**: 2026-04-24 | **适用版本**: Traefik Mesh v1.4+ / Traefik v3.x | **难度**: 中高级
 
@@ -81,7 +81,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 [[Kubernetes|Kubernetes]] 原生服务网格。与 [[Istio|Istio]] 和 [[Linkerd|Linkerd]] 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，通过修改 Kubernetes Service 的 Endpoint 来引导流量经过 Traefik 代理，而非在每个 Pod 中注入 Sidecar 容器。这种设计简化了部署和运维，但功能覆盖度相对有限。
+Traefik Mesh（原名 Maesh）是基于 Traefik Proxy 的轻量级 [[kubernetes|Kubernetes]] 原生服务网格。与 [[istio|Istio]] 和 [[linkerd|Linkerd]] 的 Sidecar 模式不同，Traefik Mesh 采用"每节点代理"（per-node proxy）架构，通过修改 Kubernetes Service 的 Endpoint 来引导流量经过 Traefik 代理，而非在每个 Pod 中注入 Sidecar 容器。这种设计简化了部署和运维，但功能覆盖度相对有限。
 
 Traefik Mesh 的核心优势在于与 Traefik 生态的无缝集成——如果您已经在使用 Traefik 作为 Ingress Controller，Traefik Mesh 提供了最自然的服务网格扩展路径。Go 语言编写的代理保证了良好的性能和低内存占用，Traefik 丰富的 Middleware 生态（限流、认证、重试、压缩等）可以直接应用于服务间通信。2026年 Traefik Mesh 的最新版本为 v1.4，与 Traefik v3.3 完全兼容，支持 ACL 模式、透明代理模式和丰富的 Middleware 链。
 

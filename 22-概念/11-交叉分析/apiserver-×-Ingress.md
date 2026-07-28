@@ -105,7 +105,7 @@ kubectl annotate ingress <name> cert-manager.io/cluster-issuer=letsencrypt-prod 
 
 ## 相关概念
 - apiserver
-- [[Ingress]]
+- [[ingress|Ingress]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes (CNCF Graduated)]]

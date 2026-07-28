@@ -51,7 +51,7 @@ prerequisites:
 
 
 
-title: 08 - [[Service|Service]] 全类型 YAML 配置参考
+title: 08 - [[service|Service]] 全类型 YAML 配置参考
 description: '# 08 - Service 全类型 YAML 配置参考'
 category: yaml-manifests
 tags:
@@ -61,9 +61,9 @@ tags:
 - template
 - apiserver
 - controller-manager
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
+- [[cilium|cilium]]
 - coredns
 last_updated: 2026-05
 difficulty: intermediate

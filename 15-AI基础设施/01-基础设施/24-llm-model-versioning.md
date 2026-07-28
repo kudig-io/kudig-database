@@ -67,7 +67,7 @@ cross_refs:
 
 # 24 - LLM模型版本管理与治理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [MLflow](https://mlflow.org/) | [DVC](https://dvc.org/) | [HuggingFace Hub](https://huggingface.co/) | CNCF Model Registry
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 专家级 | **参考**: [MLflow](https://mlflow.org/) | [DVC](https://dvc.org/) | [HuggingFace Hub](https://huggingface.co/) | CNCF Model Registry
 
 <!-- chunk: 一、企业级模型版本治理体系 -->
 ## 一、企业级模型版本治理体系

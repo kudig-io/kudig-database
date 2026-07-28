@@ -63,7 +63,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[22-概念/09-平台与发布/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
+title: [[kubernetes|Kubernetes]] 平台工程与内部开发者平台 ([[22-概念/09-平台与发布/platform-engineering-sre.md|Platform Engineering]] and Internal Developer Platform)
 description: '**作者:** 平台工程架构专家 | **版本:** v1.0 | **更新时间:** 2026-03-03 | **适用场景:** 开发者平台建设、DevEx优化、自助服务
   | **复杂度:** ⭐⭐⭐⭐⭐'
 category: papers
@@ -71,9 +71,9 @@ tags:
 - k8s
 - papers
 - research
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Jaeger|jaeger]]
+- [[jaeger|jaeger]]
 - cilium
 - helm
 - argocd

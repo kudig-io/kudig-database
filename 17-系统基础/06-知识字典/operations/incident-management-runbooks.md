@@ -46,7 +46,7 @@ prerequisites:
 
 # 12 - 生产事故管理与应急手册
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 > **生产环境实战经验总结**: 基于万级节点集群运维经验，涵盖从事故分级到应急响应的全方位最佳实践
 
@@ -909,7 +909,7 @@ AFFECTED_USERS=150
 REVENUE_LOSS_PER_HOUR=5000
 
 # 评估技术严重程度
-API_ERROR_RATE=$(kubectl top [[Pods|pods]] -n kube-system | grep apiserver | awk '{print $3}')
+API_ERROR_RATE=$(kubectl top [[pods|pods]] -n kube-system | grep apiserver | awk '{print $3}')
 
 echo "业务影响评估:"
 echo "  - 影响用户数: $AFFECTED_USERS"
@@ -1186,7 +1186,7 @@ class ImpactAssessor:
         loss_per_hour = total_loss / max(duration_hours, 1)
         
         if loss_per_hour >= self.revenue_thresholds["critical"]:
-            return {"[[Score|score]]": 10, "estimated_loss": total_loss}
+            return {"[[score|score]]": 10, "estimated_loss": total_loss}
         elif loss_per_hour >= self.revenue_thresholds["high"]:
             return {"score": 7, "estimated_loss": total_loss}
         elif loss_per_hour >= self.revenue_thresholds["medium"]:

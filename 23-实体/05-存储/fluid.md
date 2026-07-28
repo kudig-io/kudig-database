@@ -232,7 +232,7 @@ kubectl delete alluxioruntime training-data
 ## 参考链接
 
 - [[23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
-- [[23-实体/networkpolicy.md|[[NetworkPolicy|networkpolicy]]]]
+- [[23-实体/networkpolicy.md|[[networkpolicy|networkpolicy]]]]
 - [[deployment]]
 - [[23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]]
 - [[operator-pattern]]

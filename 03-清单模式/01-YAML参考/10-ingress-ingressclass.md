@@ -65,9 +65,9 @@ cross_refs:
 
 
 
-# 10 - [[Ingress|Ingress]] / IngressClass YAML 配置参考
+# 10 - [[ingress|Ingress]] / IngressClass YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02
 
 <!-- chunk: 概述 -->## 概述
 
@@ -85,7 +85,7 @@ cross_refs:
 - **负载均衡**: 在多个 Pod 之间分发流量
 - **高级功能**: URL 重写、速率限制、身份验证等(通过注解)
 
-**Ingress 与 [[Service|Service]] 的关系**:
+**Ingress 与 [[service|Service]] 的关系**:
 ```
 外部流量 → LoadBalancer/NodePort → Ingress Controller → Ingress 规则 → Service → Pod
 ```
@@ -95,7 +95,7 @@ cross_refs:
 - **Ingress-NGINX** (NGINX Inc. 维护)
 - **Traefik**
 - **HAProxy Ingress**
-- **[[Contour|Contour]]** ([[Envoy|Envoy]] 代理)
+- **[[contour|Contour]]** ([[envoy|Envoy]] 代理)
 - **Istio Gateway** (服务网格)
 - **Kong Ingress**
 - **云厂商**: AWS ALB、GCP GCLB、Azure Application Gateway

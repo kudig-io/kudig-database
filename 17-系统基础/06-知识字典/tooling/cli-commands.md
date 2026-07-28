@@ -53,7 +53,7 @@ prerequisites:
 
 
 
-﻿# [[Kubernetes|Kubernetes]] & AI/ML 命令行清单 (Complete CLI Commands Reference)
+﻿# [[kubernetes|Kubernetes]] & AI/ML 命令行清单 (Complete CLI Commands Reference)
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
@@ -1128,7 +1128,7 @@ kubectl label node gpu-node-01 nvidia.com/mig.config="all-1g.10gb"
 
 ## 7. AI/ML 工作负载命令
 
-### 7.1 [[Kubeflow|Kubeflow]] 训练任务
+### 7.1 [[kubeflow|Kubeflow]] 训练任务
 
 > ⚠️ **🟡 中危变更** — 变更集群资源状态，建议先 --dry-run 或 diff 确认
 > - `kubectl apply/create/replace`：创建/变更集群资源

@@ -66,7 +66,7 @@ cross_refs:
 
 # 146 - LLM模型量化技术
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [GPTQ](https://github.com/IST-DASLab/gptq) | [AWQ](https://github.com/mit-han-lab/llm-awq) | [bitsandbytes](https://github.com/TimDettmers/bitsandbytes)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 高级 | **参考**: [GPTQ](https://github.com/IST-DASLab/gptq) | [AWQ](https://github.com/mit-han-lab/llm-awq) | [bitsandbytes](https://github.com/TimDettmers/bitsandbytes)
 
 <!-- chunk: 一、量化技术全景 -->
 ## 一、量化技术全景

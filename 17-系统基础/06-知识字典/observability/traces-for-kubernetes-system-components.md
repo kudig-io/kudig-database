@@ -42,13 +42,13 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 系统组件链路追踪
+# [[kubernetes|Kubernetes]] 系统组件链路追踪
 
 ## 概述
 
 FEATURE STATE: `Kubernetes v1.27 [beta]`
 
-系统组件链路追踪记录了集群中各操作之间的延迟和关系。Kubernetes 组件通过 **[[OpenTelemetry|OpenTelemetry]] Protocol (OTLP)** 使用 [[gRPC|gRPC]] exporter 发出追踪数据（trace spans），这些数据可以通过 OpenTelemetry Collector 收集并路由到追踪后端，用于可视化端到端请求流、诊断性能问题和识别瓶颈。
+系统组件链路追踪记录了集群中各操作之间的延迟和关系。Kubernetes 组件通过 **[[opentelemetry|OpenTelemetry]] Protocol (OTLP)** 使用 [[grpc|gRPC]] exporter 发出追踪数据（trace spans），这些数据可以通过 OpenTelemetry Collector 收集并路由到追踪后端，用于可视化端到端请求流、诊断性能问题和识别瓶颈。
 
 ## 核心概念/原理
 

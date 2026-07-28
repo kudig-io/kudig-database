@@ -60,7 +60,7 @@ tags:
 - apiserver
 - scheduler
 - controller-manager
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - docker
 - daemonset

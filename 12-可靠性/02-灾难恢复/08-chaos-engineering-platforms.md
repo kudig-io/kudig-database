@@ -68,7 +68,7 @@ authors:
 # 混沌工程平台实践：LitmusChaos 与 Chaos Mesh
 
 > **作者**: SRE 架构师 | **版本**: v1.0 | **更新时间**: 2026-05-18
-> **适用场景**: [[Kubernetes|Kubernetes]] 混沌工程平台部署与演练 | **复杂度**: ⭐⭐⭐⭐⭐
+> **适用场景**: [[kubernetes|Kubernetes]] 混沌工程平台部署与演练 | **复杂度**: ⭐⭐⭐⭐⭐
 
 ---
 
@@ -762,7 +762,7 @@ kubectl logs -n chaos-mesh daemonset/chaos-daemon --tail=50
 | 实验未生效 | namespace 未打标签 | 检查 `chaos-mesh.org/inject` 标签 | 给目标 namespace 打标签 |
 | 网络问题不生效 | containerd 配置问题 | 检查 Chaos Daemon 日志 | 确认 runtime 和 socket 路径 |
 | Pod Kill 不执行 | RBAC 权限不足 | 检查 ServiceAccount 权限 | 添加必要的 ClusterRole |
-| Dashboard 不可访问 | Service 未暴露 | 检查 Service 和 [[Ingress|Ingress]] | 配置 port-forward 或 Ingress |
+| Dashboard 不可访问 | Service 未暴露 | 检查 Service 和 [[ingress\|Ingress]] | 配置 port-forward 或 Ingress |
 | 实验卡住不结束 | duration 配置错误 | 检查实验 spec | 手动删除 CR 资源 |
 | 稳态检查失败 | 指标采集延迟 | 检查 Prometheus 采集间隔 | 调整查询时间窗口 |
 

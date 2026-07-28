@@ -74,8 +74,8 @@ cross_refs:
 | 引擎 | 语言 | 架构 | 适用场景 | 学习曲线 | 社区活跃度 |
 |-----|-----|------|---------|---------|-----------|
 | **OPA/Gatekeeper** | Rego | Webhook | 通用策略,跨平台 | 高 | ⭐⭐⭐⭐⭐ |
-| **[[Kyverno|Kyverno]]** | YAML/CEL | Webhook | K8s原生策略 | 低 | ⭐⭐⭐⭐⭐ |
-| **[[Kubewarden|Kubewarden]]** | Wasm | Webhook | 多语言策略 | 中 | ⭐⭐⭐ |
+| **[[kyverno\|Kyverno]]** | YAML/CEL | Webhook | K8s原生策略 | 低 | ⭐⭐⭐⭐⭐ |
+| **[[kubewarden\|Kubewarden]]** | Wasm | Webhook | 多语言策略 | 中 | ⭐⭐⭐ |
 | **ValidatingAdmissionPolicy** | CEL | 内置 | 简单验证,无外部依赖 | 低 | K8s原生 |
 | **Polaris** | YAML | CLI/Webhook | 最佳实践检查 | 低 | ⭐⭐⭐⭐ |
 

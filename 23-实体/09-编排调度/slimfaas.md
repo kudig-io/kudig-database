@@ -1,7 +1,7 @@
 ---
 title: SlimFaas (entities)
 description: '## 概述'
-summary: 'SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-[[Service|Service]] (FaaS) 平台，专注于简单性和低资源占用。它可以将普通的 Kubernetes Deployment 作为函数运行，支持 Scale-to-Zero（缩容到零）和按需自动扩容，无需复杂的 FaaS 框架。'
+summary: 'SlimFaas 是一个轻量级的 Kubernetes 原生 Function-as-a-[[service|Service]] (FaaS) 平台，专注于简单性和低资源占用。它可以将普通的 Kubernetes Deployment 作为函数运行，支持 Scale-to-Zero（缩容到零）和按需自动扩容，无需复杂的 FaaS 框架。'
 category: entities
 tags:
 - k8s
@@ -238,7 +238,7 @@ helm uninstall slimfaas -n slimfaas
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - slimfaas
-- [[23-实体/cncf-edge-ai.md|[[CNCF 边缘计算与 AI/ML 项目全景|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
+- [[23-实体/cncf-edge-ai.md|[[23-实体/15-参考与索引/cncf-edge-ai|CNCF 边缘计算与 AI/ML 项目全景]]]] — Cross-reference
 - index/gitops-cicd-index|GitOps / CI-CD 全局索引]]
 
 

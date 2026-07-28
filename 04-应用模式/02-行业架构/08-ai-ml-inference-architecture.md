@@ -49,7 +49,7 @@ prerequisites:
 
 
 
-title: AI/ML 推理服务 [[Kubernetes|Kubernetes]] 生产架构设计
+title: AI/ML 推理服务 [[kubernetes|Kubernetes]] 生产架构设计
 description: '# AI/ML 推理服务 Kubernetes 生产架构设计'
 category: application-architecture
 tags:
@@ -57,8 +57,8 @@ tags:
 - architecture
 - industry
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Harbor|harbor]]
+- [[prometheus|prometheus]]
+- [[harbor|harbor]]
 - job
 - gateway
 - operator

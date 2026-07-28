@@ -74,13 +74,13 @@ cross_refs:
 
 
 
-# [[Flux|Flux]] v2 GitOps 持续交付深度实践
+# [[flux|Flux]] v2 GitOps 持续交付深度实践
 
-> **适用版本**: Flux v2.5 / [[Helm|Helm]] Controller v2.x / Kustomize Controller v1.x
+> **适用版本**: Flux v2.5 / [[helm|Helm]] Controller v2.x / Kustomize Controller v1.x
 > **最后更新**: 2026-04-24
 > **难度**: 中级 → 高级
 > **阅读时间**: 约 45 分钟
-> **前置知识**: [[Kubernetes|Kubernetes]] 基础、Git 基本操作、Helm/Kustomize 概念
+> **前置知识**: [[kubernetes|Kubernetes]] 基础、Git 基本操作、Helm/Kustomize 概念
 
 Flux 是云原生计算基金会（CNCF）毕业项目，是 Kubernetes 原生的持续交付工具。与 Argo CD 不同，Flux 不提供 Web 界面，而是完全通过声明式 API 和 Git 工作流驱动。Flux 的设计哲学是"Git 是唯一的真实来源"，所有配置变更都通过 Git 提交触发，确保完整的审计追踪和可重复性。
 

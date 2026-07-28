@@ -118,8 +118,8 @@ related:
 ### 学习目标
 
 - 深入理解控制平面各组件（etcd、API Server、Scheduler、Controller Manager）的工作机制
-- 掌握所有主要工作负载类型（Deployment、StatefulSet、DaemonSet、Job、[[CronJob|CronJob]]）及生产级配置模式
-- 掌握 K8s 网络栈的完整体系（CNI、Service、DNS、Ingress、[[NetworkPolicy|NetworkPolicy]]）
+- 掌握所有主要工作负载类型（Deployment、StatefulSet、DaemonSet、Job、[[cronjob|CronJob]]）及生产级配置模式
+- 掌握 K8s 网络栈的完整体系（CNI、Service、DNS、Ingress、[[networkpolicy|NetworkPolicy]]）
 - 掌握存储体系的核心机制（PV/PVC、StorageClass、CSI）
 - **产出**: 生产级应用编排方案
 
@@ -159,9 +159,9 @@ API Server 性能调优参数：
 **Scheduler** 的工作分为两个阶段：
 
 - **Filter（过滤）**: 排除不满足 Pod 调度条件的节点。过滤条件包括：节点资源是否充足、节点是否有对应的标签（nodeSelector/nodeAffinity）、Pod 是否能容忍节点的污点（Taint/Toleration）、持久卷是否在节点所在可用区等
-- **[[Score|Score]]（打分）**: 对通过过滤的节点进行打分排序。打分策略包括：资源均衡（优先选择资源充裕的节点）、镜像本地性（优先选择已有所需镜像的节点）、亲和性/反亲和性等
+- **[[score|Score]]（打分）**: 对通过过滤的节点进行打分排序。打分策略包括：资源均衡（优先选择资源充裕的节点）、镜像本地性（优先选择已有所需镜像的节点）、亲和性/反亲和性等
 
-**Controller Manager** 运行着多种控制器。每个控制器遵循 Reconcile（调和）模式：通过 Watch/List 监听资源变化 → 对比期望状态与实际状态 → 执行操作使实际状态趋向期望状态。例如，Deployment Controller 监听 Deployment 的变化，当 Replicas 从 2 变为 4 时，创建两个新的 [[ReplicaSet|ReplicaSet]]。
+**Controller Manager** 运行着多种控制器。每个控制器遵循 Reconcile（调和）模式：通过 Watch/List 监听资源变化 → 对比期望状态与实际状态 → 执行操作使实际状态趋向期望状态。例如，Deployment Controller 监听 Deployment 的变化，当 Replicas 从 2 变为 4 时，创建两个新的 [[replicaset|ReplicaSet]]。
 
 ### 工作负载类型与生产模式
 

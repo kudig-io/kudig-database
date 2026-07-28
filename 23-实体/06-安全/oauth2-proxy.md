@@ -226,7 +226,7 @@ helm uninstall oauth2-proxy -n oauth2-proxy
 - [[keycloak]] — Keycloak
 
 - oauth2-proxy
-- [[23-实体/cncf-security.md|[[CNCF 安全与合规项目全景|CNCF 安全与合规项目全景]]]] — Cross-reference
+- [[23-实体/cncf-security.md|[[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]]] — Cross-reference
 
 
 <!-- risk-assessed -->

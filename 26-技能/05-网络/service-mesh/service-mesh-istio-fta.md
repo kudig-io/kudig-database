@@ -41,9 +41,9 @@ severity: medium
 
 
 ---
-title: "[[Service|Service]]Service Mesh）|Service Mesh]](Istio) 异常故障树分析"
+title: "[[service|Service]]Service Mesh）|Service Mesh]](Istio) 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -n istio-system -o jsonpath='{range .items[?(@.status.phase!='Running')]}{.metadata.name}{\'\n\'}{end}' 显示 Istio 控制面异常 --> - **目标**：覆盖 Istio 控制面..."
+summary: "<!-- condition: kubectl get [[pods|pods]] -n istio-system -o jsonpath='{range .items[?(@.status.phase!='Running')]}{.metadata.name}{\'\n\'}{end}' 显示 Istio 控制面异常 --> - **目标**：覆盖 Istio 控制面..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["故障诊断/FTA故障树/list/service-mesh-istio-fta.md"]
 created: 2026-05-21

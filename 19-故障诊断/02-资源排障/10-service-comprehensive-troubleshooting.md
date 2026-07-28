@@ -73,7 +73,7 @@ cross_refs:
 
 
 
-# 10 - [[Service|Service]] 全面故障排查 (Service Comprehensive Troubleshooting)
+# 10 - [[service|Service]] 全面故障排查 (Service Comprehensive Troubleshooting)
 
 <!-- chunk: 🎯 本文档价值 -->
 ## 🎯 本文档价值
@@ -168,7 +168,7 @@ cross_refs:
 | ClusterIP不通 | kube-proxy问题/iptables | `iptables -t nat -L` | 检查kube-proxy |
 | NodePort不通 | 防火墙/端口冲突 | `ss -tlnp` | 检查防火墙 |
 | LoadBalancer Pending | 云provider未配置 | `kubectl describe svc` | 配置LB provider |
-| 跨命名空间不通 | [[NetworkPolicy|NetworkPolicy]] | `kubectl get netpol` | 调整策略 |
+| 跨命名空间不通 | [[networkpolicy\|NetworkPolicy]] | `kubectl get netpol` | 调整策略 |
 
 ### 1.3 生产环境典型场景
 

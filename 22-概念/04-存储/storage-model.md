@@ -67,7 +67,7 @@ Kubernetes decouples storage from workloads through three objects:
 ## CSI (Container Storage Interface)
 
 CSI is the standard plugin interface for storage vendors. It provides:
-- **Controller [[Service|Service]]**: Create/Delete/Attach/Detach volumes
+- **Controller [[service|Service]]**: Create/Delete/Attach/Detach volumes
 - **Node Service**: Stage/Unstage/Publish/Unpublish volumes on nodes
 
 Popular CSI drivers include AWS EBS CSI, Azure Disk CSI, Ceph CSI, and cloud provider-specific drivers.

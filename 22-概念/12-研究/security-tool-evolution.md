@@ -54,7 +54,7 @@ status: stable
 | [[falco|Falco]] | 43 个版本 | 运行时安全与异常检测 |
 | [[opa|opa]] | 86 个版本 | 通用策略引擎 |
 | Gatekeeper | 24 个版本 | OPA 的 Kubernetes 准入集成 |
-| [[23-实体/trivy.md|[[Trivy|trivy]]]] | 28 个版本 | 容器和 IaC 安全扫描 |
+| [[23-实体/trivy.md|[[trivy\|trivy]]]] | 28 个版本 | 容器和 IaC 安全扫描 |
 | [[cert-manager|cert-manager]] | 37 个版本 | Kubernetes 证书管理 |
 
 ## Falco 版本演进
@@ -75,7 +75,7 @@ Falco 是云原生运行时安全项目，通过系统调用和行为检测异�
 - eBPF 探针支持（替代内核模块）
 - 改进的规则引擎
 - 更好的 Kubernetes 集成
-- 输出到多种后端（[[gRPC|gRPC]]、Webhook 等）^ [inferred]
+- 输出到多种后端（[[grpc|gRPC]]、Webhook 等）^ [inferred]
 
 ### Falco 规则体系
 

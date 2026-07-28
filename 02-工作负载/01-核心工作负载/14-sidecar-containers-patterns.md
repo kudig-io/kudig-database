@@ -1,7 +1,7 @@
 ---
 title: Sidecar 容器模式
 description: '## 概述'
-summary: 'Sidecar 容器是 [[Kubernetes|Kubernetes]] 中的核心设计模式，用于扩展和增强主应用容器的功能。Kubernetes v1.28 引入了原生 Sidecar 容器支持，提供更好的生命周期管理。本文档详细介绍 Sidecar 模式的设计原理、实现方式和最佳实践。'
+summary: 'Sidecar 容器是 [[kubernetes|Kubernetes]] 中的核心设计模式，用于扩展和增强主应用容器的功能。Kubernetes v1.28 引入了原生 Sidecar 容器支持，提供更好的生命周期管理。本文档详细介绍 Sidecar 模式的设计原理、实现方式和最佳实践。'
 category: workloads
 tags:
 - k8s
@@ -71,7 +71,7 @@ cross_refs:
 <!-- chunk: 概述 -->
 ## 概述
 
-Sidecar 容器是 [[Kubernetes|Kubernetes]] 中的核心设计模式，用于扩展和增强主应用容器的功能。Kubernetes v1.28 引入了原生 Sidecar 容器支持，提供更好的生命周期管理。本文档详细介绍 Sidecar 模式的设计原理、实现方式和最佳实践。
+Sidecar 容器是 [[kubernetes|Kubernetes]] 中的核心设计模式，用于扩展和增强主应用容器的功能。Kubernetes v1.28 引入了原生 Sidecar 容器支持，提供更好的生命周期管理。本文档详细介绍 Sidecar 模式的设计原理、实现方式和最佳实践。
 
 <!-- chunk: Sidecar 架构 -->
 ## Sidecar 架构

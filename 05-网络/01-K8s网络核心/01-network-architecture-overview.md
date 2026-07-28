@@ -58,8 +58,8 @@ category: networking
 tags:
 - k8s
 - networking
-- [[Service|service]]
-- [[Ingress|ingress]]
+- [[service|service]]
+- [[ingress|ingress]]
 - cni
 - scheduler
 - prometheus

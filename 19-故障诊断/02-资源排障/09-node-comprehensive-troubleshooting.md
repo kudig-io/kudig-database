@@ -343,7 +343,7 @@ ss -tlnp | grep -E "6443|10250|10251|10252"
 
 | 端口 | 组件 | 用途 |
 |:---:|:---|:---|
-| 6443 | API Server | [[Kubernetes|Kubernetes]]es API|Kubernetes API]] |
+| 6443 | API Server | [[kubernetes\|Kubernetes]]es API|Kubernetes API]] |
 | 2379-2380 | [[etcd|etcd]] | etcd客户端/对等通信 |
 | 10250 | kubelet | kubelet API |
 | 10251 | kube-scheduler | 调度器 |

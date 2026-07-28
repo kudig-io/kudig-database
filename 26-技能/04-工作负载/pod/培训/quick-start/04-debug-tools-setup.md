@@ -203,7 +203,7 @@ stern backend -n production --color=always
 
 ---
 
-## 4. [[Kubescape|kubescape]] 安全工具
+## 4. [[kubescape|kubescape]] 安全工具
 
 ### 4.1 安装 kubescape
 
@@ -336,7 +336,7 @@ npm install -g kubetail
 kubetail <deployment-name> -n production
 ```
 
-### 7.3 [[Cilium|cilium]] (CNI 调试)
+### 7.3 [[cilium|cilium]] (CNI 调试)
 
 ```bash
 # Cilium CLI

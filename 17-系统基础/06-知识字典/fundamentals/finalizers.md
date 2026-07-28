@@ -37,7 +37,7 @@ prerequisites:
 
 ## 概述
 
-Finalizers 是带有命名空间限制的键，用于告诉 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 在完全删除标记为删除的资源之前等待特定条件满足。Finalizers 会通知控制器清理被删除对象所拥有的资源。
+Finalizers 是带有命名空间限制的键，用于告诉 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 在完全删除标记为删除的资源之前等待特定条件满足。Finalizers 会通知控制器清理被删除对象所拥有的资源。
 
 ## 核心概念/原理
 

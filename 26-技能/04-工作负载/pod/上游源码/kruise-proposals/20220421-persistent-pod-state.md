@@ -8,6 +8,7 @@ reviewers:
 creation-date: 2021-04-21
 last-updated: 2021-04-21
 status: implementable
+tier: supporting
 ---
 
 # Persistent Pod State

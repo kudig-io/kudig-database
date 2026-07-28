@@ -43,16 +43,16 @@ prerequisites:
 
 
 title: 数字政务Kubernetes生产架构设计
-description: '# 数字政务 [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 数字政务 [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
 - apiserver
-- [[Ingress|ingress]]
+- [[ingress|ingress]]
 - rbac
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 - operator
 - rag
 last_updated: 2026-05-18

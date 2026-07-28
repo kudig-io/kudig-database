@@ -252,7 +252,7 @@ kubectl rollout undo deployment/payment-service
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - score
-- [[22-概念/scheduling-algorithm.md|[[Scheduling Algorithm|Scheduling Algorithm]]]] — Cross-reference
+- [[22-概念/scheduling-algorithm.md|[[22-概念/07-调度与资源/scheduling-algorithm|Scheduling Algorithm]]]] — Cross-reference
 - [[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
 - [[26-技能/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[23-实体/15-参考与索引/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference

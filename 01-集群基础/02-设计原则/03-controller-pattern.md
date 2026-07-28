@@ -48,7 +48,7 @@ prerequisites:
 
 ---
 title: 控制器模式与调谐循环
-description: 深入解析 [[Kubernetes|Kubernetes]] 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践
+description: 深入解析 [[kubernetes|Kubernetes]] 控制器模式的核心机制：Reconcile 循环、最终一致性、水平触发与边缘触发的对比、以及控制器开发最佳实践
 category: 集群基础
 tags:
 - k8s
@@ -57,9 +57,9 @@ tags:
 - control-loop
 - level-triggered
 - operator
-- [[Prometheus|prometheus]]
-- [[Helm|helm]]
-- [[StatefulSet|statefulset]]
+- [[prometheus|prometheus]]
+- [[helm|helm]]
+- [[statefulset|statefulset]]
 - daemonset
 - design-principles
 last_updated: 2026-05

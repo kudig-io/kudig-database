@@ -41,7 +41,7 @@ prerequisites:
 
 
 
-# Day 12: 网络栈 - CNI + [[Service|Service]] + DNS
+# Day 12: 网络栈 - CNI + [[service|Service]] + DNS
 
 ```yaml
 ---
@@ -345,7 +345,7 @@ kubectl delete namespace dns-test  # ⚠️ 不可逆：永久删除命名空间
 
 ## 明日预告
 
-Day 13 将学习 [[Ingress|Ingress]] 和 [[NetworkPolicy|NetworkPolicy]]，实现 HTTP 路由和网络隔离。
+Day 13 将学习 [[ingress|Ingress]] 和 [[networkpolicy|NetworkPolicy]]，实现 HTTP 路由和网络隔离。
 
 ## Related
 

@@ -59,7 +59,7 @@ tags:
 - scheduler
 - controller-manager
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - hpa
 - rbac
 last_updated: 2026-05
@@ -73,7 +73,7 @@ estimated_read_time: 5min
 intent_queries:
 - 控制平面扩缩容指南 (Control Plane Scalability Guide) 是什么
 - 如何 控制平面扩缩容指南 (Control Plane Scalability Guide)
-- [[Kubernetes|Kubernetes]] 3 control plane 最佳实践
+- [[kubernetes|Kubernetes]] 3 control plane 最佳实践
 trigger_keywords:
 - 控制平面扩缩容指南
 - Control

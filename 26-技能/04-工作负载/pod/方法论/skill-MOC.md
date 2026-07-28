@@ -54,8 +54,8 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[19-故障诊断/08-技能体系/01-node-notready.md|[[节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
-| 2 | [[19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md|[[Pod CrashLoopBackOff & OOMKilled 诊断与修复|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
+| 1 | [[19-故障诊断/08-技能体系/01-node-notready.md|[[19-故障诊断/08-技能体系/01-node-notready\|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
+| 2 | [[19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md|[[19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
 | 3 | [[19-故障诊断/08-技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
 | 4 | [[19-故障诊断/08-技能体系/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
 | 5 | [[19-故障诊断/08-技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |

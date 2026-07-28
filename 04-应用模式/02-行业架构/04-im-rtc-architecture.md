@@ -51,18 +51,18 @@ prerequisites:
 
 
 title: 实时通信 IM/RTC 架构设计
-description: '# 实时通信 (IM / RTC) [[Kubernetes|Kubernetes]] 生产架构设计'
+description: '# 实时通信 (IM / RTC) [[kubernetes|Kubernetes]] 生产架构设计'
 category: application-architecture
 tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - redis
 - mysql
 - kafka
 - elasticsearch
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - gateway
 last_updated: 2026-05-18
 difficulty: expert

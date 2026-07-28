@@ -1,7 +1,7 @@
 ---
 title: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 description: '## 1. 概述'
-summary: 'Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，'
+summary: 'Service 是 [[kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，'
 category: network
 tags:
 - k8s
@@ -70,20 +70,20 @@ agent_execution_mode: L2-semi-auto
 
 <!-- condition: kubectl get endpoints <service-name> -n <ns> -o jsonpath='{.subsets}' | jq 'length == 0 or . == null' 显示 Endpoint 为空 -->
 
-# [[Service|Service]] 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+# [[service|Service]] 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ---
 
 ## 1. 概述
 
-Service 是 [[Kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，直接导致微服务间通信断裂、业务功能不可用。
+Service 是 [[kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，直接导致微服务间通信断裂、业务功能不可用。
 
 ### 典型触发场景
 
 1. **Endpoints 为空**: Service 的 label selector 与后端 Pod 的 labels 不匹配，或者所有后端 Pod 的 readiness probe 均失败，导致 EndpointSlice 中无任何就绪地址
 2. **端口映射错误**: Service 的 `targetPort` 与容器实际监听的 `containerPort` 不一致，流量被转发到未监听的端口，返回 connection refused
 3. **kube-proxy 规则缺失/过期**: kube-proxy Pod 异常或 iptables/IPVS/nftables 规则未正确同步，导致 ClusterIP 上的流量无法被正确 DNAT 到后端 Pod
-4. **[[NetworkPolicy|NetworkPolicy]] 阻断**: 集群中配置了 NetworkPolicy，显式或隐式地阻断了客户端 Pod 到 Service 后端 Pod 的流量
+4. **[[networkpolicy|NetworkPolicy]] 阻断**: 集群中配置了 NetworkPolicy，显式或隐式地阻断了客户端 Pod 到 Service 后端 Pod 的流量
 5. **LoadBalancer External IP 未分配**: 云环境中 LoadBalancer 类型 Service 的 External IP 长时间处于 `<pending>`，云控制器（cloud-controller-manager）无法正常工作
 
 ### Service 类型覆盖

@@ -54,6 +54,7 @@ cross_refs:
 - type: structural
   path: ../故障诊断/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md
   label: '结构化排障: 04-daemonset-troubleshooting'
+tier: supporting
 ---
 
 > **生产环境安全提示**

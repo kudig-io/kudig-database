@@ -80,7 +80,7 @@ estimated_read_time: 5min
 intent_queries:
 - 集群生命周期管理 是什么
 - 如何 集群生命周期管理
-- [[Kubernetes|Kubernetes]] 9 platform ops 最佳实践
+- [[kubernetes|Kubernetes]] 9 platform ops 最佳实践
 trigger_keywords:
 - 集群生命周期管理
 - platform

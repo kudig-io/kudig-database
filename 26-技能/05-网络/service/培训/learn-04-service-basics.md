@@ -36,7 +36,7 @@ prerequisites:
 
 
 
-# 第四课：[[Service|Service]] - 让应用可以被访问
+# 第四课：[[service|Service]] - 让应用可以被访问
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
 

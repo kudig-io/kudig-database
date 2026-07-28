@@ -54,7 +54,7 @@ prerequisites:
 
 
 ---
-title: [[Kubernetes|Kubernetes]] 设计原则与哲学
+title: [[kubernetes|Kubernetes]] 设计原则与哲学
 description: 深入理解 Kubernetes 的核心设计哲学：声明式面向终态的闭环控制系统，以及控制器模式、水平触发、最终一致性等核心概念
 category: 集群基础
 tags:
@@ -66,8 +66,8 @@ tags:
 - level-triggered
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
-- [[Istio|istio]]
+- [[prometheus|prometheus]]
+- [[istio|istio]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

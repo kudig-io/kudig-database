@@ -61,7 +61,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 结构化故障排查知识库
+# [[kubernetes|Kubernetes]] 结构化故障排查知识库
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-04 | **文档数量**: 63篇
 
@@ -78,7 +78,7 @@ prerequisites:
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [00-configuration-first-methodology.md](00-configuration-first-methodology.md) | **配置优先（Configuration-First）排查方法论** | 疑难问题的系统性排查，强调先检查配置文件再深入网络/系统排查，以 [[CoreDNS|CoreDNS]] 为完整示例 |
+| [00-configuration-first-methodology.md](00-configuration-first-methodology.md) | **配置优先（Configuration-First）排查方法论** | 疑难问题的系统性排查，强调先检查配置文件再深入网络/系统排查，以 [[coredns\|CoreDNS]] 为完整示例 |
 
 > **推荐**：遇到复杂疑难问题时，先阅读方法论文档确定排查策略，再进入具体组件的排查指南。
 

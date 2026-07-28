@@ -66,7 +66,7 @@ related_topics:
 
 
 
-# Deployment Create — [[Kubernetes|Kubernetes]] Deployment 控制器源码分析
+# Deployment Create — [[kubernetes|Kubernetes]] Deployment 控制器源码分析
 
 ## 函数签名
 
@@ -93,7 +93,7 @@ func (dc *DeploymentController) syncDeployment(ctx context.Context, key string) 
 | Recreate 策略 | `pkg/controller/deployment/recreate.go` | rolloutRecreate |
 | 进度追踪 | `pkg/controller/deployment/progress.go` | calculateStatus、syncRolloutStatus |
 | 回滚逻辑 | `pkg/controller/deployment/rollback.go` | rollbackToRevision |
-| [[ReplicaSet|ReplicaSet]] 工具 | `pkg/controller/deployment/util/deployment_util.go` | FindNewReplicaSet、GetNewReplicaSet |
+| [[replicaset\|ReplicaSet]] 工具 | `pkg/controller/deployment/util/deployment_util.go` | FindNewReplicaSet、GetNewReplicaSet |
 | ReplicaSet 控制器 | `pkg/controller/replicaset/replica_set.go` | ReplicaSet 核心逻辑 |
 | API 类型 | `staging/src/k8s.io/api/apps/v1/types.go` | Deployment/ReplicaSet 数据结构 |
 

@@ -145,7 +145,7 @@ spec:
 
 ### 可观测性指标
 
-APF 暴露了大量 [[Prometheus|Prometheus]] 指标，包括：
+APF 暴露了大量 [[prometheus|Prometheus]] 指标，包括：
 
 - `apiserver_flowcontrol_rejected_requests_total`：被拒绝的请求总数。
 - `apiserver_flowcontrol_dispatched_requests_total`：开始执行的请求总数。

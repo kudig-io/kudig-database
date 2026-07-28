@@ -89,7 +89,7 @@ cross_refs:
 
 <!-- condition: kubectl get nodes -o jsonpath='{range .items[?(@.status.conditions[?(@.type=="Ready" && @.status!="True")].nodeName)]}' 显示有 NotReady 节点 -->
 
-# [[Kubernetes|Kubernetes]] 控制平面架构总览
+# [[kubernetes|Kubernetes]] 控制平面架构总览
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **最后更新**: 2026-02 | **文档类型**: 架构设计文档
 
@@ -159,7 +159,7 @@ cross_refs:
 | **声明式API** | 用户声明期望状态，系统自动达成 | YAML配置文件 |
 | **控制循环** | 持续监控并调整实际状态 | Watch + Reconcile |
 | **最终一致性** | 系统最终收敛到期望状态 | 异步协调机制 |
-| **松耦合设计** | 组件间通过API交互 | [[gRPC|gRPC]]/HTTP通信 |
+| **松耦合设计** | 组件间通过API交互 | [[grpc\|gRPC]]/HTTP通信 |
 | **可扩展性** | 支持自定义控制器和CRD | Operator模式 |
 
 ---
@@ -693,7 +693,7 @@ spec:
 
 | 指标类别 | 指标名称 | 目标值 | 测量方法 |
 |----------|----------|--------|----------|
-| **API延迟** | P99 API响应时间 | <100ms | [[Prometheus|prometheus]] histogram |
+| **API延迟** | P99 API响应时间 | <100ms | [[prometheus\|prometheus]] histogram |
 | **API吞吐** | QPS | >1000 req/s | load test工具 |
 | **etcd延迟** | WAL fsync延迟 | <10ms | etcd metrics |
 | **调度性能** | Pod调度延迟 | <5s | kube-scheduler metrics |

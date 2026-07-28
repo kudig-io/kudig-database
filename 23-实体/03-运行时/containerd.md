@@ -48,7 +48,7 @@ containerd is an industry-standard [[22-概念/15-运行时与系统/container-r
 - **Architecture**: Monolithic daemon with plugin system
 - **Memory Footprint**: ~100MB RAM
 - **Default OCI Runtime**: runc (also supports crun, kata)
-- **CRI Plugin**: io.containerd.[[gRPC|grpc]].v1.cri
+- **CRI Plugin**: io.containerd.[[grpc|grpc]].v1.cri
 - **Configuration**: /etc/containerd/config.toml
 
 ## Core Components

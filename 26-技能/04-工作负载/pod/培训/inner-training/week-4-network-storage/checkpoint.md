@@ -1,7 +1,7 @@
 ---
 title: 'Week 4 自测: 网络与存储'
 description: '# Week 4 自测: 网络与存储'
-summary: 'Week 4 是整个培训的收官阶段，涵盖了 [[Kubernetes|Kubernetes]] 网络和存储两大核心基础设施主题。网络和存储是支撑业务应用运行的关键基础能力，理解 Service/Ingress 的路由机制、CNI 插件的工作原理、以及 PV/PVC 的生命周期管理，是运维工程师独立排障和架构设计的基础。'
+summary: 'Week 4 是整个培训的收官阶段，涵盖了 [[kubernetes|Kubernetes]] 网络和存储两大核心基础设施主题。网络和存储是支撑业务应用运行的关键基础能力，理解 Service/Ingress 的路由机制、CNI 插件的工作原理、以及 PV/PVC 的生命周期管理，是运维工程师独立排障和架构设计的基础。'
 category: learning
 tags:
 - k8s
@@ -96,7 +96,7 @@ tags: [week-4, checkpoint, self-test, networking, storage, k8s, k8s-1.28-1.33]
 
 ## 概述
 
-Week 4 是整个培训的收官阶段，涵盖了 [[Kubernetes|Kubernetes]] 网络和存储两大核心基础设施主题。网络和存储是支撑业务应用运行的关键基础能力，理解 Service/Ingress 的路由机制、CNI 插件的工作原理、以及 PV/PVC 的生命周期管理，是运维工程师独立排障和架构设计的基础。
+Week 4 是整个培训的收官阶段，涵盖了 [[kubernetes|Kubernetes]] 网络和存储两大核心基础设施主题。网络和存储是支撑业务应用运行的关键基础能力，理解 Service/Ingress 的路由机制、CNI 插件的工作原理、以及 PV/PVC 的生命周期管理，是运维工程师独立排障和架构设计的基础。
 
 本自测检验你对网络和存储两个领域的掌握程度，包含概念理解、命令实操和场景分析三个部分。请独立完成，不查阅参考资料。
 
@@ -200,7 +200,7 @@ spec:
 
 ---
 
-### 5. [[StatefulSet|StatefulSet]] 的 volumeClaimTemplates 和 Deployment 使用 PVC 有什么区别？
+### 5. [[statefulset|StatefulSet]] 的 volumeClaimTemplates 和 Deployment 使用 PVC 有什么区别？
 
 > 你的回答:
 

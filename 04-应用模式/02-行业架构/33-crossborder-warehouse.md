@@ -53,7 +53,7 @@ tags:
 - k8s
 - architecture
 - industry
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - opa
 - redis
@@ -69,7 +69,7 @@ audience:
 - SRE
 estimated_read_time: 5min
 intent_queries:
-- 跨境电商海外仓 [[Kubernetes|Kubernetes]] WMS
+- 跨境电商海外仓 [[kubernetes|Kubernetes]] WMS
 - 多区域仓库 Kubernetes 分布式部署
 - 跨境物流 订单履约 K8s
 - 库存同步 RocketMQ Kubernetes

@@ -89,7 +89,7 @@ related_docs:
 
 
 
-# 01 - [[Kubernetes|Kubernetes]] 可观测性架构体系 (Observability Architecture)
+# 01 - [[kubernetes|Kubernetes]] 可观测性架构体系 (Observability Architecture)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [kubernetes.io/docs/concepts/cluster-administration/monitoring](https://kubernetes.io/docs/concepts/cluster-administration/monitoring/)
 
@@ -191,7 +191,7 @@ unified_observability_plane:
 <!-- chunk: 二、指标监控体系架构 -->
 ## 二、指标监控体系架构
 
-### 2.1 [[Prometheus|Prometheus]] 生态系统
+### 2.1 [[prometheus|Prometheus]] 生态系统
 
 #### 监控架构拓扑
 ```yaml

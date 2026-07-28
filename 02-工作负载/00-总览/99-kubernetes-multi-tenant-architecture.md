@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 多租户与资源隔离生产架构
+title: [[kubernetes|Kubernetes]] 多租户与资源隔离生产架构
 description: '# Kubernetes 多租户与资源隔离生产架构'
 category: production-operations
 tags:
@@ -65,9 +65,9 @@ tags:
 - [[etcd|etcd]]
 - apiserver
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
-- [[Cilium|cilium]]
+- [[cilium|cilium]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

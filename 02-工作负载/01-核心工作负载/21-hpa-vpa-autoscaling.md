@@ -71,7 +71,7 @@ cross_refs:
 
 # HPA/VPA 自动伸缩配置
 
-> [[Kubernetes|Kubernetes]] 版本: v1.25 - v1.32 | 适用环境: 生产集群
+> [[kubernetes|Kubernetes]] 版本: v1.25 - v1.32 | 适用环境: 生产集群
 
 <!-- chunk: HPA 版本演进 -->
 ## HPA 版本演进
@@ -88,8 +88,8 @@ cross_refs:
 | 指标类型 | 说明 | 使用场景 |
 |----------|------|----------|
 | Resource | CPU/Memory 使用率 | 基础伸缩 |
-| [[Pods|Pods]] | Pod 自定义指标 | 应用级指标 |
-| Object | K8s 对象指标 | [[Ingress|Ingress]] QPS 等 |
+| [[pods\|Pods]] | Pod 自定义指标 | 应用级指标 |
+| Object | K8s 对象指标 | [[ingress\|Ingress]] QPS 等 |
 | External | 外部系统指标 | 消息队列长度 |
 | ContainerResource | 容器级资源 | 多容器 Pod |
 
@@ -220,7 +220,7 @@ spec:
       mode: "Off"  # 不调整 sidecar
 ```
 
-<!-- chunk: [[KEDA|KEDA]] 事件驱动伸缩 -->
+<!-- chunk: [[keda|KEDA]] 事件驱动伸缩 -->
 ## KEDA 事件驱动伸缩
 
 ```yaml

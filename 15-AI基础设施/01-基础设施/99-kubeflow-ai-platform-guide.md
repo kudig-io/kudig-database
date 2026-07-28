@@ -69,7 +69,7 @@ cross_refs:
 
 
 
-# [[Kubeflow|Kubeflow]] AI 平台部署与实践指南
+# [[kubeflow|Kubeflow]] AI 平台部署与实践指南
 
 > **适用版本**: Kubeflow v1.10.0  
 > **最后更新**: 2026-04-24  
@@ -86,7 +86,7 @@ cross_refs:
 - [四、Pipelines 工作流编排](#四pipelines-工作流编排)
 - [五、Katib 超参数调优](#五katib-超参数调优)
 - [六、Training Operator 分布式训练](#六training-operator-分布式训练)
-- [七、[[KServe|KServe]] 模型服务集成](#七kserve-模型服务集成)
+- [七、[[kserve|KServe]] 模型服务集成](#七kserve-模型服务集成)
 - [八、多租户与隔离](#八多租户与隔离)
 - [九、生产环境 checklist](#九生产环境-checklist)
 
@@ -154,7 +154,7 @@ kustomize build apps/training-operator/upstream | kubectl apply -f -
 |:---|:---|
 | K8s 版本 | v1.29+ |
 | Storage | 默认 StorageClass (PVC) |
-| [[Ingress|Ingress]] | Istio / NGINX / 云厂商 LB |
+| [[ingress\|Ingress]] | Istio / NGINX / 云厂商 LB |
 | GPU (可选) | NVIDIA GPU Operator 预装 |
 | 资源 | 至少 8C16G 控制平面节点 |
 

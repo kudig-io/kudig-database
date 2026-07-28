@@ -1,7 +1,7 @@
 ---
 title: 21 - ClusterRole / ClusterRoleBinding YAML 配置参考
 description: '# 21 - ClusterRole / ClusterRoleBinding YAML 配置参考'
-summary: 'ClusterRole 和 ClusterRoleBinding 是 [[Kubernetes|Kubernetes]] RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。'
+summary: 'ClusterRole 和 ClusterRoleBinding 是 [[kubernetes|Kubernetes]] RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。'
 category: yaml-manifests
 tags:
 - k8s
@@ -64,7 +64,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-ClusterRole 和 ClusterRoleBinding 是 [[Kubernetes|Kubernetes]] RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。与 Role/RoleBinding 不同,ClusterRole 可以授权访问集群范围的资源(如 Node、PersistentVolume)和非资源 URL(如 /healthz)。本文档覆盖 ClusterRole、ClusterRoleBinding、内建角色、权限审查 API 的完整配置。
+ClusterRole 和 ClusterRoleBinding 是 [[kubernetes|Kubernetes]] RBAC 的**集群级别**资源,用于授予跨 namespace 或集群资源的权限。与 Role/RoleBinding 不同,ClusterRole 可以授权访问集群范围的资源(如 Node、PersistentVolume)和非资源 URL(如 /healthz)。本文档覆盖 ClusterRole、ClusterRoleBinding、内建角色、权限审查 API 的完整配置。
 
 **适用版本**: Kubernetes v1.25 - v1.32  
 **更新时间**: 2026-02

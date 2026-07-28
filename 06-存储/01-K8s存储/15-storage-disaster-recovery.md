@@ -66,7 +66,7 @@ cross_refs:
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **运维重点**: 灾难恢复、数据迁移、业务连续性
 >
-> **文档定位**: 本文档聚焦 **灾备架构分层设计**、**自动/手动故障转移**、**存储迁移**、**跨集群数据同步** 及 **灾备演练与 SLA 管理**。如需了解 Velero 企业备份方案、应用级（MySQL/PostgreSQL）备份操作及 VolumeSnapshot [[CronJob|CronJob]] 自动化，请参阅 [10 - 存储备份与灾难恢复](./10-storage-backup-disaster-recovery.md)。
+> **文档定位**: 本文档聚焦 **灾备架构分层设计**、**自动/手动故障转移**、**存储迁移**、**跨集群数据同步** 及 **灾备演练与 SLA 管理**。如需了解 Velero 企业备份方案、应用级（MySQL/PostgreSQL）备份操作及 VolumeSnapshot [[cronjob|CronJob]] 自动化，请参阅 [10 - 存储备份与灾难恢复](./10-storage-backup-disaster-recovery.md)。
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -710,7 +710,7 @@ generate_sla_report
 ## Obsidian 相关文档
 
 - 存储 KUDIG Database — Global MOC
-- [[06-存储/README.md|[[Storage Domain 存储领域知识库|Storage Domain 存储领域知识库]]]]
+- [[06-存储/README.md|[[37-归档/domain-indexes/storage/README-from-domain-6|Storage Domain 存储领域知识库]]]]
 - index.md|Domain-6 存储 — 开源项目索引]]
 - 存储架构概览与核心组件
 - PV/PVC 核心概念与企业级实践

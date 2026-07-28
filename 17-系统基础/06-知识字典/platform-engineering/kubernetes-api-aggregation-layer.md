@@ -37,7 +37,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]]es API|Kubernetes API]] 聚合层
+# [[kubernetes|Kubernetes]]es API|Kubernetes API]] 聚合层
 
 ## 概述
 
@@ -74,7 +74,7 @@ API 聚合层（Aggregation Layer）允许 Kubernetes 通过额外的 API 进行
 
 | 症状 | 可能原因 | 排查步骤 |
 |------|----------|----------|
-| APIService Available=False | 扩展 API server Pod 不健康 | `kubectl get apiservice <name>` 查看 conditions；检查后端 [[Service|Service]] |
+| APIService Available=False | 扩展 API server Pod 不健康 | `kubectl get apiservice <name>` 查看 conditions；检查后端 [[service\|Service]] |
 | 聚合 API 请求 503 | 后端 Service 端点不存在 | `kubectl get endpoints -n <ns> <svc>` |
 | TLS 握手失败 | CA bundle 不匹配 | 检查 APIService 的 `caBundle` 与实际证书 |
 

@@ -1,7 +1,7 @@
 ---
 title: 'Day 24: Terway 网络实操'
 description: '# Day 24: Terway 网络实操'
-summary: 'kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.tencentvpc~2Fpod-ip}''
+summary: "kubectl get pod <pod-name> -o jsonpath='{.metadata.annotations.tencentvpc~2Fpod-ip}'"
 category: learning
 tags:
 - k8s
@@ -174,7 +174,7 @@ ip route show
 
 ## 4. Terway 网络策略
 
-### 4.1 [[NetworkPolicy|NetworkPolicy]] 配置
+### 4.1 [[networkpolicy|NetworkPolicy]] 配置
 
 ```yaml
 # 限制 Pod 入站流量

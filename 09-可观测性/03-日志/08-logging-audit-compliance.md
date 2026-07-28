@@ -619,7 +619,7 @@ compliance_maturity_model:
 ## Obsidian 相关文档
 
 - observability/MOC.md|可观测性 MOC]]
-- [[09-可观测性/README.md|[[Observability Domain (可观测性领域)|Observability Domain (可观测性领域)]]]]
+- [[09-可观测性/README.md|[[37-归档/domain-indexes/observability/README-from-domain-8|Observability Domain (可观测性领域)]]]]
 - [[09-可观测性/01-总览/00-open-source-projects-index.md|Domain-8 可观测性 — 开源项目索引]]
 - Kubernetes 可观测性架构体系
 - 指标监控体系详解

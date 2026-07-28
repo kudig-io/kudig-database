@@ -54,7 +54,7 @@ prerequisites:
 
 
 
-title: [[Kubernetes|Kubernetes]] 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota
+title: [[kubernetes|Kubernetes]] 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota
   Management)
 description: '# Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource
   Quota Management)'
@@ -65,8 +65,8 @@ tags:
 - research
 - apiserver
 - [[kubelet|kubelet]]
-- [[Prometheus|prometheus]]
-- [[Cilium|cilium]]
+- [[prometheus|prometheus]]
+- [[cilium|cilium]]
 - opa
 - elasticsearch
 - statefulset

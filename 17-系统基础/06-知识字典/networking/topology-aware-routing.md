@@ -43,7 +43,7 @@ prerequisites:
 
 ## 核心概念/原理
 
-- **拓扑提示（Hints）**：EndpointSlice 控制器在计算 [[Service|Service]] 的后端端点时，会考虑每个端点所在节点的拓扑信息（region 和 zone），并在 EndpointSlice 的 `hints.forZones` 字段中为端点分配提示。
+- **拓扑提示（Hints）**：EndpointSlice 控制器在计算 [[service|Service]] 的后端端点时，会考虑每个端点所在节点的拓扑信息（region 和 zone），并在 EndpointSlice 的 `hints.forZones` 字段中为端点分配提示。
 - **kube-proxy 消费提示**：kube-proxy 在转发流量时，会根据自身所在 zone 过滤带有对应 zone 提示的端点，优先选择同 zone 端点。如果某个端点被分配到其他 zone，也会有少量跨区流量用于均衡负载。
 - **按比例分配**：控制器默认根据各 zone 内节点的**可分配 CPU 核心数**比例来分配端点数量。例如，zone A 的可分配 CPU 是 zone B 的两倍，则 zone A 会分配到约两倍的端点提示。
 

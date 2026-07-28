@@ -43,7 +43,7 @@ prerequisites:
 
 ## Role
 
-NetworkPolicy is a Kubernetes resource that defines how [[Pods|Pods]] communicate with each other and external network endpoints. It acts as a Pod-level firewall.
+NetworkPolicy is a Kubernetes resource that defines how [[pods|Pods]] communicate with each other and external network endpoints. It acts as a Pod-level firewall.
 
 **Important**: NetworkPolicy requires CNI plugin support (Calico, Cilium, or other compatible CNIs). Flannel does NOT support NetworkPolicy.
 
@@ -53,7 +53,7 @@ NetworkPolicy selects target Pods via `podSelector` and defines:
 
 | Policy Type | Controls |
 |-------------|----------|
-| **[[Ingress|Ingress]]** | Incoming traffic to selected Pods |
+| **[[ingress\|Ingress]]** | Incoming traffic to selected Pods |
 | **Egress** | Outgoing traffic from selected Pods |
 
 Traffic sources/destinations can be specified via:

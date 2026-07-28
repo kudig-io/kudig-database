@@ -71,9 +71,9 @@ cross_refs:
 
 
 
-# 132 - [[Ingress|Ingress]] 安全加固与防护
+# 132 - [[ingress|Ingress]] 安全加固与防护
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -84,7 +84,7 @@ cross_refs:
 
 | 攻击类型 | 英文 | 描述 | 风险等级 |
 |---------|------|------|---------|
-| **DDoS 攻击** | Distributed Denial of [[Service|Service]] | 大量请求导致服务不可用 | 高 |
+| **DDoS 攻击** | Distributed Denial of [[service\|Service]] | 大量请求导致服务不可用 | 高 |
 | **SQL 注入** | SQL Injection | 通过输入执行恶意 SQL | 高 |
 | **XSS 攻击** | Cross-Site Scripting | 注入恶意脚本 | 高 |
 | **CSRF 攻击** | Cross-Site Request Forgery | 伪造用户请求 | 中 |

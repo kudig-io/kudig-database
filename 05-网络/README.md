@@ -29,13 +29,13 @@ estimated_read_time: 10min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[05-网络/01-K8s网络核心/README.md\|K8s网络核心/]] | Pod 网络 | CNI 规范、Service/DNS、NetworkPolicy |
-| [[05-网络/02-网络基础/README.md\|网络基础/]] | 协议 | TCP/IP、负载均衡、DNS 原理 |
-| [[05-网络/03-服务网格/README.md\|服务网格/]] | Mesh | Istio/Envoy/Linkerd、流量管理、mTLS |
-| [[05-网络/04-API网关/README.md\|API网关/]] | 网关 | Ingress Controller、Gateway API、Kong/APISIX |
-| [[05-网络/05-eBPF/README.md\|eBPF/]] | eBPF | Cilium、XDP、网络可观测、性能优化 |
+| [[05-网络/01-K8s网络核心/index.md\|K8s网络核心/]] | Pod 网络 | CNI 规范、Service/DNS、NetworkPolicy |
+| [[05-网络/02-网络基础/index.md\|网络基础/]] | 协议 | TCP/IP、负载均衡、DNS 原理 |
+| [[05-网络/03-服务网格/index.md\|服务网格/]] | Mesh | Istio/Envoy/Linkerd、流量管理、mTLS |
+| [[05-网络/04-API网关/index.md\|API网关/]] | 网关 | Ingress Controller、Gateway API、Kong/APISIX |
+| [[05-网络/05-eBPF/index.md\|eBPF/]] | eBPF | Cilium、XDP、网络可观测、性能优化 |
 | [[05-网络/06-Terway/README.md\|Terway/]] | Terway | 阿里云 ENI、Trunk、固定 IP |
-| [[05-网络/07-附件/README.md\|附件/]] | 附件 | 网络拓扑图、配置模板、参考数据 |
+| [[05-网络/07-附件/index.md\|附件/]] | 附件 | 网络拓扑图、配置模板、参考数据 |
 
 ## 跨域导航
 

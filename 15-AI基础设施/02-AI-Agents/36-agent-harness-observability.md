@@ -48,7 +48,7 @@ prerequisites:
 
 title: Agent Harness 可观测性体系
 description: '**文档类型**: Harness 工程深入专题 | **最后更新**: 2026-04 | **关键词**: Observability,
-  [[OpenTelemetry|OpenTelemetry]], Langfuse, Traces, Metrics, Logging, [[Prometheus|Prometheus]], Grafana, 告警, Agent
+  [[opentelemetry|OpenTelemetry]], Langfuse, Traces, Metrics, Logging, [[prometheus|Prometheus]], Grafana, 告警, Agent
   调试, Span, 执行追踪'
 category: ai-agent
 tags:

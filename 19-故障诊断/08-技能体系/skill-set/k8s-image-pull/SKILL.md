@@ -58,7 +58,7 @@ agent_execution_mode: L2-semi-auto
 
 # K8s Image Pull Failure 诊断与修复
 
-ImagePullBackOff 和 ErrImagePull 是 [[Kubernetes|Kubernetes]] 中最常见的 Pod 启动失败原因之一。根因可能涉及镜像不存在、标签错误、仓库认证、网络问题或节点磁盘空间不足等。
+ImagePullBackOff 和 ErrImagePull 是 [[kubernetes|Kubernetes]] 中最常见的 Pod 启动失败原因之一。根因可能涉及镜像不存在、标签错误、仓库认证、网络问题或节点磁盘空间不足等。
 
 本 [[SKILL|Skill]] 覆盖全部常见镜像拉取失败根因的诊断和修复。
 
@@ -124,7 +124,7 @@ ImagePullBackOff 和 ErrImagePull 是 [[Kubernetes|Kubernetes]] 中最常见的 
 | RC ID | 根因 | 概率 | 首选修复 | 风险 |
 |-------|------|------|---------|------|
 | RC-001 | 镜像标签不存在或拼写错误 | 高 | REM-001 修正镜像 | LOW |
-| RC-002 | 私有仓库认证失败 | 高 | REM-002 更新 [[Secrets|secrets]] | LOW |
+| RC-002 | 私有仓库认证失败 | 高 | REM-002 更新 [[secrets\|secrets]] | LOW |
 | RC-003 | 镜像仓库网络不可达 | 中 | REM-003 检查网络 | MEDIUM |
 | RC-004 | 节点磁盘空间不足 | 中 | REM-004 清理磁盘 | LOW |
 | RC-005 | 镜像平台不兼容（ARM/x86） | 低 | REM-005 修正镜像 | LOW |

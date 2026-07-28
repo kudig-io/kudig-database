@@ -59,7 +59,7 @@ Kueue 是 Kubernetes SIG-Scheduling 官方项目，以 Job 队列管理和配额
 
 本文覆盖两者的架构设计、生产部署、AI 训练任务调度实践、资源配额管理以及故障排查，帮助平台工程师为多租户 AI 集群选择合适的调度方案。
 
-相关页面：[[GPU调度与资源管理]]、[[Kubeflow训练平台]]、[[Volcano批量调度]]、[[K8s资源配额与LimitRange]]、[[AI集群多租户隔离]]
+相关页面：[[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]、[[23-实体/11-AI与边缘/kubeflow|Kubeflow训练平台]]、[[23-实体/09-编排调度/volcano|Volcano批量调度]]、[[17-系统基础/06-知识字典/configuration/resource-quota|K8s资源配额与LimitRange]]、[[15-AI基础设施/05-K8s-AI基础设施/14-gpu-cost-attribution-multitenant|AI集群多租户隔离]]
 
 ## 架构与核心概念
 
@@ -543,8 +543,8 @@ yunikorn_scheduling_latency_seconds_bucket
 
 ## Related
 
-- [[GPU调度与资源管理]]
-- [[Kubeflow训练平台]]
-- [[Volcano批量调度]]
-- [[K8s资源配额与LimitRange]]
-- [[AI集群多租户隔离]]
+- [[15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving|GPU调度与资源管理]]
+- [[23-实体/11-AI与边缘/kubeflow|Kubeflow训练平台]]
+- [[23-实体/09-编排调度/volcano|Volcano批量调度]]
+- [[17-系统基础/06-知识字典/configuration/resource-quota|K8s资源配额与LimitRange]]
+- [[15-AI基础设施/05-K8s-AI基础设施/14-gpu-cost-attribution-multitenant|AI集群多租户隔离]]

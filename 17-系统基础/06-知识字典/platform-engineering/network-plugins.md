@@ -46,7 +46,7 @@ prerequisites:
 
 ## 概述
 
-[[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
+[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 允许使用 Container Network Interface（CNI）插件来实现集群网络。CNI 插件是实现 Kubernetes 网络模型的必要组件，负责为 Pod 分配 IP、建立网络连通性，并支持网络策略、端口映射等高级功能。
 
 ## 核心概念/原理
 
@@ -62,7 +62,7 @@ prerequisites:
 
 ## 使用场景
 
-- 集群需要实现 Overlay 网络、Underlay 网络或混合网络拓扑时，部署对应的 CNI 插件（如 Calico、[[Cilium|Cilium]]、Flannel）。
+- 集群需要实现 Overlay 网络、Underlay 网络或混合网络拓扑时，部署对应的 CNI 插件（如 Calico、[[cilium|Cilium]]、Flannel）。
 - 需要将容器端口暴露到宿主机端口时，启用 `hostPort` 支持。
 - 需要对特定 Pod 的网络流量进行限速时，启用 bandwidth 流量整形插件。
 

@@ -60,7 +60,7 @@ prerequisites:
 | `OutOfMemoryError` | `kubectl logs` | `OutOfMemoryError` | JVM 内存溢出 |
 | `NotReady` | `kubectl describe node` | `Ready: False` | 节点不可用 |
 | `MemoryPressure` | `kubectl describe node` | `MemoryPressure: True` | 节点内存压力大 |
-| `<none>` (endpoints) | `kubectl get endpoints` | `ENDPOINTS <none>` | [[Service|Service]] 无后端 |
+| `<none>` (endpoints) | `kubectl get endpoints` | `ENDPOINTS <none>` | [[service\|Service]] 无后端 |
 | `metrics not available` | `kubectl top node` | `metrics not available yet` | metrics-server 异常 |
 | `not authorized` | `kubectl exec` | `not authorized` | RBAC 权限不足 |
 | `unable to upgrade` | `kubectl exec` | `unable to upgrade connection` | API Server 与 Pod 隧道中断 |

@@ -70,7 +70,7 @@ estimated_read_time: 5min
 intent_queries:
 - 存储高级特性与优化策略 是什么
 - 如何 存储高级特性与优化策略
-- [[Kubernetes|Kubernetes]] 6 storage 最佳实践
+- [[kubernetes|Kubernetes]] 6 storage 最佳实践
 trigger_keywords:
 - 存储高级特性与优化策略
 - storage

@@ -44,12 +44,12 @@ prerequisites:
 
 ## 概述
 
-在 [[23-实体/kubernetes.md|[[Kubernetes|kubernetes]]]] 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
+在 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 集群中，节点可能会因为计划内维护或意外原因（如断电）而关闭。如果节点在关闭前未被清空（drain），可能导致工作负载失败。节点关闭分为**优雅关闭（graceful）**和**非优雅关闭（non-graceful）**两种类型。Kubernetes 提供了相应的机制来尽量降低节点关闭对工作负载的影响。
 
 ## 核心概念/原理
 
 - **优雅节点关闭**：[[kubelet|kubelet]] 尝试检测系统关闭信号，按照正常的 Pod 终止流程停止节点上的 Pod，并在关闭期间拒绝接收新 Pod。
-- **非优雅节点关闭**：kubelet 的关闭管理器未检测到关闭事件，Pod 可能长时间停留在 Terminating 状态，[[StatefulSet|StatefulSet]] 无法在新节点重建同名 Pod，卷也无法重新挂载。
+- **非优雅节点关闭**：kubelet 的关闭管理器未检测到关闭事件，Pod 可能长时间停留在 Terminating 状态，[[statefulset|StatefulSet]] 无法在新节点重建同名 Pod，卷也无法重新挂载。
 - **systemd 抑制锁（inhibitor locks）**：Linux 上的优雅关闭依赖 systemd 的抑制锁来延迟关机，为 Pod 终止争取时间。
 - **Windows 服务控制处理程序**：Windows 上的优雅关闭依赖 kubelet 以 Windows 服务运行，通过注册服务控制处理程序来延迟预关闭事件。
 

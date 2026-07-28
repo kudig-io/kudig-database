@@ -226,7 +226,7 @@ aliyun cs DescribeClusterDetail --ClusterId <cluster-id>
 | **版本确认** | `kubectl version` | 目标版本 |
 | **节点状态** | `kubectl get nodes -o wide` | 全部Ready，版本正确 |
 | **系统Pod** | `kubectl get [[Pods|pods]] -n kube-system` | 全部Running |
-| **[[CoreDNS|CoreDNS]]** | `kubectl run test --rm -it --image=busybox -- nslookup kubernetes` | 解析成功 |
+| **[[coredns\|CoreDNS]]** | `kubectl run test --rm -it --image=busybox -- nslookup kubernetes` | 解析成功 |
 | **应用健康** | `kubectl get pods -A` | 全部正常 |
 | **Service访问** | 测试关键Service | 正常响应 |
 | **存储** | `kubectl get pv,pvc -A` | 状态正常 |

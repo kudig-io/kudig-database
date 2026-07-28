@@ -648,7 +648,7 @@ git count-objects -vH
 
 ## 相关文档
 
-- [发布变更/](../发布变更/) - [[22-概念/gitops-principles.md|[[GitOps 速查卡|gitops]]]] 与 CI/CD
+- [发布变更/](../发布变更/) - [[22-概念/gitops-principles.md|[[17-系统基础/05-速查卡/gitops|gitops]]]] 与 CI/CD
 - [Git 官方文档](https://git-scm.com/doc)
 
 

@@ -40,7 +40,7 @@ prerequisites:
 
 ## 概述
 
-在 [[Kubernetes|Kubernetes]] 中，命名空间（Namespaces）提供了一种在单个集群内隔离资源组的机制。资源名称需要在命名空间内唯一，但不必跨命名空间唯一。命名空间作用域仅适用于命名空间资源（如 Deployment、[[Service|Service]]），不适用于集群范围资源（如 StorageClass、Node、PersistentVolume）。
+在 [[kubernetes|Kubernetes]] 中，命名空间（Namespaces）提供了一种在单个集群内隔离资源组的机制。资源名称需要在命名空间内唯一，但不必跨命名空间唯一。命名空间作用域仅适用于命名空间资源（如 Deployment、[[service|Service]]），不适用于集群范围资源（如 StorageClass、Node、PersistentVolume）。
 
 ## 核心概念/原理
 

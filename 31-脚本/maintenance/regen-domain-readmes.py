@@ -7,7 +7,6 @@ Without --apply, only prints what would change.
 """
 from __future__ import annotations
 
-import os
 import sys
 from pathlib import Path
 

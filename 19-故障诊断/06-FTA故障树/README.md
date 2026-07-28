@@ -40,6 +40,7 @@ prerequisites:
 - monitoring-basics
 - gpu-scheduling-basics
 - observability-basics
+tier: supporting
 ---
 
 > **生产环境安全提示**

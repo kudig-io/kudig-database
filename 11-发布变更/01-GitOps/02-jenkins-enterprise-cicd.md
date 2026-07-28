@@ -73,7 +73,7 @@ cross_refs:
 
 > **作者**: CI/CD架构专家 | **版本**: v2.0 | **更新时间**: 2026-04-24
 > **适用场景**: 企业级CI/CD流水线架构 | **复杂度**: ⭐⭐⭐⭐⭐
-> **适用版本**: Jenkins LTS 2.492.x / JCasC / [[Kubernetes|Kubernetes]] Plugin
+> **适用版本**: Jenkins LTS 2.492.x / JCasC / [[kubernetes|Kubernetes]] Plugin
 
 ---
 
@@ -1399,7 +1399,7 @@ spec:
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 发布变更 KUDIG Database — Global MOC
-- [[11-发布变更/README.md|[[Domain 23: GitOps与CI/CD (GitOps & CI/CD)|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]tOps]] & CI/CD)]]
+- [[11-发布变更/README.md|[[37-归档/domain-indexes/release-change/README-from-domain-23|Domain 23: GitOps与CI/CD (GitOps & CI/CD)]]tOps]] & CI/CD)]]
 - index.md|Domain-23 GitOps & CI/CD — 开源项目索引]]
 - Argo CD企业级GitOps实践指南
 - GitLab CI/CD 企业级流水线自动化平台

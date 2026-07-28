@@ -63,7 +63,7 @@ cross_refs:
 
 
 
-# [[Backstage|Backstage]] 部署与配置
+# [[backstage|Backstage]] 部署与配置
 # Backstage Deployment and Configuration
 
 > **领域**: 平台工程 | [[22-概念/09-平台与发布/platform-engineering-sre.md|Platform Engineering]]  

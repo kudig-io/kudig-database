@@ -58,7 +58,7 @@ authors:
 
 # 26 - PriorityClass / RuntimeClass YAML 配置参考
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02  
 > **主题**: PriorityClass 优先级、RuntimeClass 运行时、ResourceClaim 动态资源分配
 
 <!-- chunk: 目录 -->## 目录

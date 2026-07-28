@@ -8,6 +8,7 @@ reviewers:
 creation-date: 2021-06-15
 last-updated: 2021-08-10
 status: implementable
+tier: supporting
 ---
 
 # SidecarSet Patch Pod Metadata

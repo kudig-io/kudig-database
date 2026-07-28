@@ -53,10 +53,10 @@ tags:
 - llm
 - rag
 - multi-agent
-- [[CoreDNS|coredns]]
+- [[coredns|coredns]]
 - hpa
-- [[StatefulSet|statefulset]]
-- [[DaemonSet|daemonset]]
+- [[statefulset|statefulset]]
+- [[daemonset|daemonset]]
 - rbac
 last_updated: 2026-05
 difficulty: advanced

@@ -86,26 +86,26 @@ etcdctl endpoint health --cluster
 ## 故障树分析 (FTA)
 
 - [[19-故障诊断/06-FTA故障树/README|FTA 故障树方法论索引]]
-- [[19-故障诊断/06-FTA故障树/01-fta-methodology-overview|FTA 方法论概览]]
-- [[19-故障诊断/06-FTA故障树/02-pod-failure-fta|Pod 故障树分析]]
-- [[19-故障诊断/06-FTA故障树/03-node-failure-fta|节点故障树分析]]
-- [[19-故障诊断/06-FTA故障树/04-network-failure-fta|网络故障树分析]]
-- [[19-故障诊断/06-FTA故障树/05-storage-failure-fta|存储故障树分析]]
+- [[19-故障诊断/06-FTA故障树/fta-methodology-and-agentic-practices|FTA 方法论概览]]
+- [[19-故障诊断/06-FTA故障树/list/pod-fta|Pod 故障树分析]]
+- [[19-故障诊断/06-FTA故障树/list/node-fta|节点故障树分析]]
+- [[19-故障诊断/06-FTA故障树/list/networkpolicy-fta|网络故障树分析]]
+- [[19-故障诊断/06-FTA故障树/list/csi-fta|存储故障树分析]]
 
 ## FEBM 基于证据的排障
 
 - [[19-故障诊断/07-FEBM方法论/README|FEBM 方法论索引]]
-- [[19-故障诊断/07-FEBM方法论/01-febm-methodology-overview|FEBM 方法论概览]]
-- [[19-故障诊断/07-FEBM方法论/02-evidence-collection-guide|证据收集指南]]
-- [[19-故障诊断/07-FEBM方法论/03-hypothesis-verification|假设验证流程]]
+- [[19-故障诊断/07-FEBM方法论/01-febm-theory-foundations|FEBM 方法论概览]]
+- [[19-故障诊断/07-FEBM方法论/02-febm-technical-implementation|证据收集指南]]
+- [[19-故障诊断/07-FEBM方法论/01-febm-theory-foundations|假设验证流程]]
 
 ## 核心排障 (Core Troubleshooting)
 
-- [[19-故障诊断/01-核心排障/01-pod-lifecycle-troubleshooting|Pod 生命周期排障]]
-- [[19-故障诊断/01-核心排障/02-scheduling-resource-troubleshooting|调度与资源排障]]
+- [[19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting|Pod 生命周期排障]]
+- [[19-故障诊断/01-核心排障/05-pod-pending-diagnosis|调度与资源排障]]
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting|CNI 网络排障]]
 - [[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting|存储 CSI 排障]]
-- [[19-故障诊断/01-核心排障/05-control-plane-troubleshooting|控制平面排障]]
+- [[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting|控制平面排障]]
 
 ## 资源排障 (Resource Troubleshooting)
 
@@ -173,10 +173,10 @@ etcdctl endpoint health --cluster
 
 ## 概念 (Concepts)
 
-- [[22-概念/troubleshooting-methodology|故障排查方法论]]
+- [[19-故障诊断/00-总览/03-systematic-troubleshooting-methodology|故障排查方法论]]
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook|生产故障排查 Playbook]]
 - [[19-故障诊断/06-FTA故障树/glossary/fault-tree-analysis|故障树分析]]
-- [[22-概念/root-cause-analysis|根因分析]]
+- [[23-实体/15-参考与索引/fta-febm-methodology|根因分析]]
 
 ## 实体 (Entities)
 

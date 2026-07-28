@@ -51,7 +51,7 @@ title: Day 19: Pod 容器组基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[Kubernetes|Kubernetes]] Pod lifecycle Pending Running Succeeded Failed
+  - [[kubernetes|Kubernetes]] Pod lifecycle Pending Running Succeeded Failed
   - Pod container debugging logs exec
   - Kubernetes Sidecar multi-container pattern
   - Init Container initialization

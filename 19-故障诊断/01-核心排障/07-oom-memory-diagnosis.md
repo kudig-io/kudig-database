@@ -1,7 +1,7 @@
 ---
 title: OOM 和内存问题诊断
 description: '## Kubernetes内存管理架构'
-summary: 'kubectl get events -A --field-selector reason=OOMKilled --sort-by='.lastTimestamp' | tail -20'
+summary: "kubectl get events -A --field-selector reason=OOMKilled --sort-by='.lastTimestamp' | tail -20"
 category: troubleshooting
 tags:
 - oom
@@ -1493,7 +1493,7 @@ watch -n 1 'kubectl get pods -o wide | grep oom-test'
 ## Obsidian 相关文档
 
 - 故障诊断 KUDIG Database — Global MOC
-- [[19-故障诊断/README.md|Domain-12 故障排查 ([[KUDIG 故障排查 Prompt 模板|Troubleshooting]])]]
+- [[19-故障诊断/README.md|Domain-12 故障排查 ([[23-实体/15-参考与索引/kudig-prompts-catalog|Troubleshooting]])]]
 - index.md|Domain-12 故障排查 — 开源项目索引]]
 - [[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]

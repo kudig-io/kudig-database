@@ -61,7 +61,7 @@ cross_refs:
 
 # 06 - 节点生命周期与状态事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 ---
 
@@ -353,7 +353,7 @@ Source:  node-controller
 - **现有 Pod**：
   - 立即影响：Pod 状态变为 Unknown
   - 5 分钟后（默认 pod-eviction-timeout）：Pod 被驱逐，在其他节点重建
-- **服务影响**：如果节点上有 [[Service|Service]] 的 endpoints，会被标记为 NotReady
+- **服务影响**：如果节点上有 [[service|Service]] 的 endpoints，会被标记为 NotReady
 
 ## 排查建议
 

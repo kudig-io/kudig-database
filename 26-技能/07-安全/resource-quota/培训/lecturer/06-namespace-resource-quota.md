@@ -309,7 +309,7 @@ clusters/
     └── limit-range.yaml
 ```
 
-### 5.2 [[NetworkPolicy|NetworkPolicy]] 隔离
+### 5.2 [[networkpolicy|NetworkPolicy]] 隔离
 
 ```
 【场景】

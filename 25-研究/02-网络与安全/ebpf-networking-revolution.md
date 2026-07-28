@@ -150,7 +150,7 @@ Phase 4: 清理收尾（1 周）
 - Linux Kernel BPF Documentation: https://www.kernel.org/doc/html/latest/bpf/
 - [[23-实体/04-网络/cilium.md|Cilium]]
 - [[05-网络/05-eBPF/03-cilium-cni-architecture.md|Cilium CNI 架构]]
-- [[09-可观测性/03-tracing/|分布式追踪]]
+- [[09-可观测性/04-链路追踪/index|分布式追踪]]
 
 ## Related
 

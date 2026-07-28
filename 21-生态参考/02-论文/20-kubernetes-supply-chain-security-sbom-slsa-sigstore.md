@@ -65,14 +65,14 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
+# [[kubernetes|Kubernetes]] 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
 
 > **作者**: 云原生安全架构专家 | **版本**: v1.0 | **更新时间**: 2026-03-03
 > **适用场景**: 容器供应链安全、合规审计、镜像安全 | **复杂度**: ⭐⭐⭐⭐⭐
 
 <!-- chunk: 🎯 摘要 -->## 🎯 摘要
 
-本文档系统梳理Kubernetes容器供应链安全的完整技术体系，覆盖从代码提交到生产部署的全链条安全实践。重点阐述SBOM软件物料清单（SPDX/CycloneDX）、SLSA构建来源证明（Level 1-4）与Sigstore无密钥签名体系（Cosign/Fulcio/Rekor）的企业级落地方案。结合SolarWinds、Log4Shell等真实攻击案例，分析Kubernetes供应链威胁面，并提供in-toto Attestation链路验证、Admission Controller强制检查、[[Kyverno|Kyverno]]/OPA策略执行等纵深防御实践，帮助团队构建符合NIST SSDF与SLSA框架要求的云原生供应链安全基线。
+本文档系统梳理Kubernetes容器供应链安全的完整技术体系，覆盖从代码提交到生产部署的全链条安全实践。重点阐述SBOM软件物料清单（SPDX/CycloneDX）、SLSA构建来源证明（Level 1-4）与Sigstore无密钥签名体系（Cosign/Fulcio/Rekor）的企业级落地方案。结合SolarWinds、Log4Shell等真实攻击案例，分析Kubernetes供应链威胁面，并提供in-toto Attestation链路验证、Admission Controller强制检查、[[kyverno|Kyverno]]/OPA策略执行等纵深防御实践，帮助团队构建符合NIST SSDF与SLSA框架要求的云原生供应链安全基线。
 
 <!-- chunk: 1. 供应链安全威胁全景 -->## 1. 供应链安全威胁全景
 

@@ -54,7 +54,7 @@ prerequisites:
 6. **快速缓解**：
    - 降低 API 调用频率或增加配额。
    - 临时切换到备用节点组或区域。
-7. **证据留存**：保存 CCM 日志、云 API 错误、[[Service|Service]] 事件。
+7. **证据留存**：保存 CCM 日志、云 API 错误、[[service|Service]] 事件。
 
 #### 排查方法与步骤
 

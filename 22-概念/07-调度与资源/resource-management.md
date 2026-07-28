@@ -64,7 +64,7 @@ The [[kubelet|kubelet]] assigns QoS class based on request/limit configuration:
 
 ## Eviction Thresholds
 
-kubelet monitors node resources and evicts [[Pods|Pods]] when thresholds are crossed:
+kubelet monitors node resources and evicts [[pods|Pods]] when thresholds are crossed:
 
 | Threshold Type | Default | Behavior |
 |----------------|---------|----------|

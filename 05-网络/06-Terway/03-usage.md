@@ -1,7 +1,7 @@
 ---
 title: 03 - Terway 使用指南 (Usage Guide)
 description: '# 03 - Terway 使用指南 (Usage Guide)'
-summary: '在 ACK 控制台创建集群时，网络插件选择 **Terway** 即自动完成安装。Terway 以 [[DaemonSet|DaemonSet]] 形态运行在每个节点上，并在 kube-system 命名空间中创建对应的 ConfigMap 和 RBAC 资源。'
+summary: '在 ACK 控制台创建集群时，网络插件选择 **Terway** 即自动完成安装。Terway 以 [[daemonset|DaemonSet]] 形态运行在每个节点上，并在 kube-system 命名空间中创建对应的 ConfigMap 和 RBAC 资源。'
 category: terway
 tags:
 - k8s
@@ -61,7 +61,7 @@ prerequisites:
 
 ### 1.1 ACK 托管集群自动安装
 
-在 ACK 控制台创建集群时，网络插件选择 **Terway** 即自动完成安装。Terway 以 [[DaemonSet|DaemonSet]] 形态运行在每个节点上，并在 kube-system 命名空间中创建对应的 ConfigMap 和 RBAC 资源。
+在 ACK 控制台创建集群时，网络插件选择 **Terway** 即自动完成安装。Terway 以 [[daemonset|DaemonSet]] 形态运行在每个节点上，并在 kube-system 命名空间中创建对应的 ConfigMap 和 RBAC 资源。
 
 验证安装状态：
 
@@ -94,7 +94,7 @@ kubectl get configmap -n kube-system eni-config -o jsonpath='{.data.eni_conf}' |
 | `vswitches` | Pod 使用的 vSwitch，支持多可用区 | `{"cn-hangzhou-b": ["vsw-xxx"]}` |
 | `security_group` | Pod 默认安全组 | `sg-2ze...` |
 | `eni_cap` | 每 ENI 分配的辅助 IP 数 | `2` - `10` |
-| `service_cidr` | ClusterIP [[Service|Service]] CIDR | `10.96.0.0/12` |
+| `service_cidr` | ClusterIP [[service\|Service]] CIDR | `10.96.0.0/12` |
 | `max_pool_size` | 本地 IP 池最大容量 | `25` |
 | `min_pool_size` | 本地 IP 池最小保留数 | `5` |
 

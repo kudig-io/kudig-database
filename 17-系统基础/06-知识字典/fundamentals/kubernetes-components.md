@@ -42,7 +42,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 组件
+# [[kubernetes|Kubernetes]] 组件
 
 ## 概述
 
@@ -65,7 +65,7 @@ Kubernetes 集群由控制平面（Control Plane）和一组工作节点（Worke
 节点组件运行在每个工作节点上，负责维护运行中的 Pod 并提供 Kubernetes 运行时环境：
 
 - **[[kubelet|kubelet]]**：确保 Pod 及其容器按照规范运行，并报告节点和 Pod 的状态。
-- **kube-proxy**（可选）：维护节点上的网络规则，实现 [[Service|Service]] 的网络代理和负载均衡。
+- **kube-proxy**（可选）：维护节点上的网络规则，实现 [[service|Service]] 的网络代理和负载均衡。
 - **容器运行时（Container Runtime）**：负责运行容器，例如 containerd、CRI-O 等。
 
 ## 关键机制或特性

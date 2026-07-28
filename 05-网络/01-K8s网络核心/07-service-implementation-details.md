@@ -82,7 +82,7 @@ cross_refs:
 | NodePort | 节点端口 | kube-proxy | ✅ | 开发测试 |
 | LoadBalancer | 云LB | 云厂商 | ✅ | 生产入口 |
 | ExternalName | DNS别名 | ❌ | ✅ | 外部服务 |
-| Headless | 无ClusterIP | ❌ | ❌ | [[StatefulSet|StatefulSet]] |
+| Headless | 无ClusterIP | ❌ | ❌ | [[statefulset\|StatefulSet]] |
 
 <!-- chunk: kube-proxy模式对比 -->
 ## kube-proxy模式对比

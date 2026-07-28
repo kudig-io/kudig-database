@@ -53,7 +53,7 @@ prerequisites:
 
 - **低风险**：滚动更新（`maxUnavailable: 1`, `maxSurge: 1`）^[inferred]
 - **中风险**：金丝雀部署（通过 Flagger 逐步放量，stepWeight: 10）^[inferred]
-- **高风险**：蓝绿部署（双版本并行，通过 [[Service|Service]] selector 切换流量）^[inferred]
+- **高风险**：蓝绿部署（双版本并行，通过 [[service|Service]] selector 切换流量）^[inferred]
 
 ## 关键配置
 
@@ -115,10 +115,10 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 ## 相关资源
 
-- [[22-概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
+- [[22-概念/k8s-production-best-practices.md|[[22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
 - [[deployment|Deployment]]
-- [[26-技能/04-工作负载/pod/运维操作/configure-health-probes.md|[[Configure Health Probes|Configure Health Probes]]]]
-- [[22-概念/gitops-principles.md|[[GitOps 速查卡|GitOps]]ps Principles and Practice|GitOps Principles]]]]
+- [[26-技能/04-工作负载/pod/运维操作/configure-health-probes.md|[[26-技能/04-工作负载/pod/运维操作/configure-health-probes|Configure Health Probes]]]]
+- [[22-概念/gitops-principles.md|[[17-系统基础/05-速查卡/gitops|GitOps]]ps Principles and Practice|GitOps Principles]]]]
 
 ## 生产案例
 

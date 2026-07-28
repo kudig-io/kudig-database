@@ -70,7 +70,7 @@ cross_refs:
 
 # 26 - AI基础设施成本优化概览
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **AI栈版本**: vLLM 0.4+ | **最后更新**: 2026-02 | **质量等级**: 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **AI栈版本**: vLLM 0.4+ | **最后更新**: 2026-02 | **质量等级**: 专家级
 
 <!-- chunk: 一、AI基础设施成本全景分析 -->
 ## 一、AI基础设施成本全景分析
@@ -167,10 +167,10 @@ cross_refs:
 |---------|---------|---------|---------|---------|
 | **资源调度** | Kubernetes CA/HPA | 自动扩缩容 | 原生集成 | 20-40% |
 | **GPU优化** | vLLM/TGI | 推理优化 | 模型服务 | 30-60% |
-| **成本监控** | Kubecost/OpenCost | 成本分析 | [[Prometheus|Prometheus]] | 可见性 |
+| **成本监控** | Kubecost/OpenCost | 成本分析 | [[prometheus\|Prometheus]] | 可见性 |
 | **存储优化** | JuiceFS/Alluxio | 分布式缓存 | CSI插件 | 20-50% |
-| **网络优化** | [[Cilium|Cilium]]/eBPF | 网络加速 | CNI插件 | 10-30% |
-| **自动化** | [[Argo|Argo]]go Workflows|Argo Workflows]] | 流水线优化 | CRD | 效率提升 |
+| **网络优化** | [[cilium\|Cilium]]/eBPF | 网络加速 | CNI插件 | 10-30% |
+| **自动化** | [[argo\|Argo]]go Workflows|Argo Workflows]] | 流水线优化 | CRD | 效率提升 |
 
 <!-- chunk: 三、GPU成本深度优化 -->
 ## 三、GPU成本深度优化

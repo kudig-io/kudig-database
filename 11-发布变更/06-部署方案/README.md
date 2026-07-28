@@ -50,7 +50,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] 部署方案指南 (Deployment Guide)
+# [[kubernetes|Kubernetes]] 部署方案指南 (Deployment Guide)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档类型**: 部署方案汇总 | **最后更新**: 2025-01
 
@@ -142,7 +142,7 @@ Q1: 你的目标是什么？
 | minikube | 1.30+ | 1.32+ | 本地 Demo 集群 (可选) |
 | k3s | 1.25+ | 1.28+ | 单节点/轻量级集群 |
 | kubeadm | 与目标版本一致 | 1.28+ | 标准集群初始化 |
-| [[Helm|Helm]] | 3.10+ | 3.13+ | 包管理器 |
+| [[helm\|Helm]] | 3.10+ | 3.13+ | 包管理器 |
 
 ---
 
@@ -169,7 +169,7 @@ Q1: 你的目标是什么？
 | Deployment 模式 | `工作负载/02-deployment-production-patterns.md` | 蓝绿/金丝雀/滚动更新详解 |
 | 生产架构原则 | `生产运维/01-production-architecture-design-principles.md` | 高可用/安全/可扩展设计 |
 | 故障排查大全 | `故障诊断/` | 各类故障排查手册 |
-| 网络深入 | `网络/` | CNI、[[Service|Service]]、Ingress 详解 |
+| 网络深入 | `网络/` | CNI、[[service\|Service]]、Ingress 详解 |
 | 存储深入 | `存储/` | CSI、PV/PVC、存储类详解 |
 | 安全深入 | `安全/` | RBAC、NetworkPolicy、安全加固 |
 | 监控深入 | `可观测性/` | Prometheus、Grafana、日志 |

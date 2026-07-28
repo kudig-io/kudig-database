@@ -70,7 +70,7 @@ cross_refs:
 <!-- chunk: 架构师解析：[[etcd|etcd]] 的 CP 属性如何影响 K8s？ -->
 ## 架构师解析：etcd 的 CP 属性如何影响 K8s？
 
-[[Kubernetes|Kubernetes]] 将状态存储在 etcd 中，而 etcd 是一个典型的 **CP 系统**（满足一致性与分区容错，牺牲可用性）。
+[[kubernetes|Kubernetes]] 将状态存储在 etcd 中，而 etcd 是一个典型的 **CP 系统**（满足一致性与分区容错，牺牲可用性）。
 
 ### 生产环境下的表现
 * **脑裂保护**: 当 etcd 集群发生网络分区且无法达成多数派 (Quorum) 时，整个控制面将变为**只读**。

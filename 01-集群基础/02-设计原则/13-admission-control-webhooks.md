@@ -57,7 +57,7 @@ tags:
 - principles
 - [[etcd|etcd]]
 - apiserver
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - docker
 - opa
 - statefulset

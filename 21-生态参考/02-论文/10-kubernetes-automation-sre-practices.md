@@ -60,7 +60,7 @@ authors:
 
 
 
-# [[Kubernetes|Kubernetes]] 自动化运维与SRE实践 (Automation and SRE Practices)
+# [[kubernetes|Kubernetes]] 自动化运维与SRE实践 (Automation and SRE Practices)
 
 > **作者**: SRE专家 | **版本**: v2.3 | **更新时间**: 2026-03-03
 > **适用场景**: 企业级运维自动化 | **复杂度**: ⭐⭐⭐⭐⭐

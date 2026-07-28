@@ -37,7 +37,7 @@ prerequisites:
 
 
 
-# [[Kubernetes|Kubernetes]] API
+# [[kubernetes|Kubernetes]] API
 
 ## 概述
 

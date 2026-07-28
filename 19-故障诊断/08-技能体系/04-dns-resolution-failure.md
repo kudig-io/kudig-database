@@ -1,7 +1,7 @@
 ---
 title: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 description: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
-summary: 'DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[Service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，'
+summary: 'DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，'
 category: network
 tags:
 - k8s
@@ -64,7 +64,7 @@ agent_execution_mode: L2-semi-auto
 
 
 
-<!-- condition: kubectl exec -it <pod> -n <ns> -- nslookup [[Kubernetes|kubernetes]].default 2>&1 | grep -E 'server can\'t find|NXDOMAIN' 显示 DNS 解析失败 -->
+<!-- condition: kubectl exec -it <pod> -n <ns> -- nslookup [[kubernetes|kubernetes]].default 2>&1 | grep -E 'server can\'t find|NXDOMAIN' 显示 DNS 解析失败 -->
 
 # DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 
@@ -72,14 +72,14 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[Service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，影响呈**级联放大**——几乎所有依赖网络通信的应用组件都将失败，表现为大面积的连接超时、服务不可达和应用报错。DNS 问题的隐蔽性在于：应用层面的错误信息千变万化（HTTP 502/503、connection refused、timeout），但根因往往指向同一个问题——DNS 解析失败。
+DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，影响呈**级联放大**——几乎所有依赖网络通信的应用组件都将失败，表现为大面积的连接超时、服务不可达和应用报错。DNS 问题的隐蔽性在于：应用层面的错误信息千变万化（HTTP 502/503、connection refused、timeout），但根因往往指向同一个问题——DNS 解析失败。
 
-自 Kubernetes 1.12 起，**[[CoreDNS|CoreDNS]]** 取代 kube-dns 成为默认的集群 DNS 提供者。CoreDNS 以 Deployment 方式部署在 `kube-system` namespace 中，通过 `kube-dns` Service（ClusterIP）对外提供 DNS 服务。每个 Pod 的 `/etc/resolv.conf` 中的 `nameserver` 指向该 ClusterIP，所有 DNS 查询通过该地址路由到 CoreDNS Pod。
+自 Kubernetes 1.12 起，**[[coredns|CoreDNS]]** 取代 kube-dns 成为默认的集群 DNS 提供者。CoreDNS 以 Deployment 方式部署在 `kube-system` namespace 中，通过 `kube-dns` Service（ClusterIP）对外提供 DNS 服务。每个 Pod 的 `/etc/resolv.conf` 中的 `nameserver` 指向该 ClusterIP，所有 DNS 查询通过该地址路由到 CoreDNS Pod。
 
 ### 典型触发场景
 
 1. **CoreDNS 异常**: CoreDNS Pod 崩溃（CrashLoopBackOff）、资源不足（OOMKilled / CPU throttling）、配置错误（Corefile 语法错误），导致 DNS 服务完全不可用或响应超慢
-2. **网络策略阻断**: [[NetworkPolicy|NetworkPolicy]] 意外阻断了 Pod 到 kube-dns Service（UDP/TCP 53 端口）的流量，导致 DNS 查询被丢弃
+2. **网络策略阻断**: [[networkpolicy|NetworkPolicy]] 意外阻断了 Pod 到 kube-dns Service（UDP/TCP 53 端口）的流量，导致 DNS 查询被丢弃
 3. **外部 DNS 不可达**: CoreDNS 的 upstream DNS 服务器（通常是节点的 `/etc/resolv.conf` 中配置的 DNS）不可达或响应超慢，导致外部域名解析失败
 4. **ndots 配置问题**: 默认 `ndots=5` 导致对外部域名（如 `api.example.com`）的查询先经过 5 次无效的搜索域扩展，产生大量不必要的 DNS 查询，造成严重延迟
 5. **conntrack 竞态条件**: Linux 内核 conntrack 表在 UDP DNS 查询时存在已知的竞态条件（race condition），导致间歇性 DNS 解析失败——这是一个著名的 Linux 内核问题

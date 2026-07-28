@@ -1,7 +1,7 @@
 ---
 title: 08 - Linux 容器技术深度解析：生产环境容器运维专家指南
 description: '# 08 - Linux 容器技术深度解析：生产环境容器运维专家指南'
-summary: '容器技术是 [[Kubernetes|Kubernetes]] 和云原生生态的基石。理解容器的底层原理——Linux Namespaces、Cgroups、OverlayFS、Seccomp、Capabilities——对于排查容器问题、优化容器性能、实施容器安全策略至关重要。本文档从内核原理出发，深入解析每一项容器核心技术的实现机制，'
+summary: '容器技术是 [[kubernetes|Kubernetes]] 和云原生生态的基石。理解容器的底层原理——Linux Namespaces、Cgroups、OverlayFS、Seccomp、Capabilities——对于排查容器问题、优化容器性能、实施容器安全策略至关重要。本文档从内核原理出发，深入解析每一项容器核心技术的实现机制，'
 category: linux
 tags:
 - linux
@@ -67,7 +67,7 @@ cross_refs:
 
 <!-- chunk: 概述 -->## 概述
 
-容器技术是 [[Kubernetes|Kubernetes]] 和云原生生态的基石。理解容器的底层原理——Linux Namespaces、Cgroups、OverlayFS、Seccomp、Capabilities——对于排查容器问题、优化容器性能、实施容器安全策略至关重要。本文档从内核原理出发，深入解析每一项容器核心技术的实现机制，并通过手动创建容器的实践帮助读者建立直观理解。同时，本文档详细阐述了这些技术与 Kubernetes Pod 模型、容器运行时接口（CRI）、安全策略之间的关联，为构建企业级容器平台提供扎实的技术基础。
+容器技术是 [[kubernetes|Kubernetes]] 和云原生生态的基石。理解容器的底层原理——Linux Namespaces、Cgroups、OverlayFS、Seccomp、Capabilities——对于排查容器问题、优化容器性能、实施容器安全策略至关重要。本文档从内核原理出发，深入解析每一项容器核心技术的实现机制，并通过手动创建容器的实践帮助读者建立直观理解。同时，本文档详细阐述了这些技术与 Kubernetes Pod 模型、容器运行时接口（CRI）、安全策略之间的关联，为构建企业级容器平台提供扎实的技术基础。
 
 ---
 

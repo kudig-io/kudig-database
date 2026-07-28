@@ -67,7 +67,7 @@ status: reviewed
 
 ### 前置知识
 
-- Kubernetes 核心概念（Deployment、[[Service|Service]]、[[Ingress|Ingress]]）
+- Kubernetes 核心概念（Deployment、[[service|Service]]、[[ingress|Ingress]]）
 - 部署基础（滚动更新、回滚、版本管理）
 - CI/CD 基础（持续集成、持续部署）
 

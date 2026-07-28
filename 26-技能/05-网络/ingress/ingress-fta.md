@@ -39,9 +39,9 @@ severity: critical
 
 
 ---
-title: "[[Ingress|Ingress]] 异常故障树分析"
+title: "[[ingress|Ingress]] 异常故障树分析"
 category: skills
-summary: "<!-- condition: kubectl get [[Pods|pods]] -n ingress-nginx -l app=ingress-nginx -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 Ingress Cont..."
+summary: "<!-- condition: kubectl get [[pods|pods]] -n ingress-nginx -l app=ingress-nginx -o jsonpath='{range .items[?(@.status.phase!=\'Running\')]} {.metadata.name}{\'\n\'}{end}' 显示 Ingress Cont..."
 tags: ["k8s", "fta", "troubleshooting"]
 sources: ["故障诊断/FTA故障树/list/ingress-fta.md"]
 created: 2026-05-21

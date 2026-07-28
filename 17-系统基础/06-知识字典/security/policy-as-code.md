@@ -47,7 +47,7 @@ prerequisites:
 
 ## 概述
 
-**策略即代码（Policy as Code）** 是将组织的安全、合规和运维策略以可版本化、可自动化验证的代码形式定义和执行的方法论。在 [[Kubernetes|Kubernetes]] 环境中，策略即代码通过准入控制器（Admission Controller）在资源创建或更新时进行实时校验和变异，确保集群状态始终符合组织策略。2026 年的主流实现包括 **Open Policy Agent（OPA/Gatekeeper）** 和 **[[Kyverno|Kyverno]]**。
+**策略即代码（Policy as Code）** 是将组织的安全、合规和运维策略以可版本化、可自动化验证的代码形式定义和执行的方法论。在 [[kubernetes|Kubernetes]] 环境中，策略即代码通过准入控制器（Admission Controller）在资源创建或更新时进行实时校验和变异，确保集群状态始终符合组织策略。2026 年的主流实现包括 **Open Policy Agent（OPA/Gatekeeper）** 和 **[[kyverno|Kyverno]]**。
 
 ## 核心概念/原理
 
@@ -57,7 +57,7 @@ prerequisites:
 - 防止开发者使用 `latest` 镜像标签
 - 强制所有 Pod 必须定义资源请求和限制
 - 禁止特权容器（Privileged Containers）
-- 确保所有 [[Ingress|Ingress]] 使用 TLS
+- 确保所有 [[ingress|Ingress]] 使用 TLS
 - 强制指定标签或注解以支持成本分摊
 
 策略即代码将这些要求自动化，实现"安全左移"。

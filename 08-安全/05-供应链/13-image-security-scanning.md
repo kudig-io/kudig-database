@@ -1,7 +1,7 @@
 ---
 title: 13 - 镜像安全扫描与漏洞管理
 description: '# 13 - 镜像安全扫描与漏洞管理'
-summary: 'IMAGES=$(curl -s "http://harbor-api/api/v2.0/projects/library/repositories/app/tags" | jq -r '.[].name')'
+summary: "IMAGES=$(curl -s \"http://harbor-api/api/v2.0/projects/library/repositories/app/tags\" | jq -r '.[].name')"
 category: security
 tags:
 - k8s
@@ -66,7 +66,7 @@ cross_refs:
 
 # 13 - 镜像安全扫描与漏洞管理
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[23-实体/06-安全/trivy.md|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **难度**: 中高级 | **参考**: [[23-实体/06-安全/trivy.md|Trivy]] Documentation](https://aquasecurity.github.io/trivy/) | [Clair Documentation](https://github.com/quay/clair)
 
 <!-- chunk: 一、镜像安全扫描架构 -->
 ## 一、镜像安全扫描架构
@@ -792,7 +792,7 @@ spec:
 ## Obsidian 相关文档
 
 - 安全 KUDIG Database — Global MOC
-- [[08-安全/README.md|[[Security Domain|Security Domain]]]]
+- [[08-安全/README.md|[[37-归档/domain-indexes/security/README-from-domain-7|Security Domain]]]]
 - index.md|Domain-7 安全 — 开源项目索引]]
 - Kubernetes 认证授权体系详解
 - 网络安全策略与零信任架构

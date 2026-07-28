@@ -56,7 +56,7 @@ tags:
 - platform
 - operations
 - devops
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - hpa
 - gpu
@@ -72,7 +72,7 @@ estimated_read_time: 10min
 intent_queries:
 - 容量规划与资源评估 (Capacity Planning & Resource Assessment) 是什么
 - 如何 容量规划与资源评估 (Capacity Planning & Resource Assessment)
-- [[Kubernetes|Kubernetes]] 9 platform ops 最佳实践
+- [[kubernetes|Kubernetes]] 9 platform ops 最佳实践
 trigger_keywords:
 - 容量规划与资源评估
 - Capacity

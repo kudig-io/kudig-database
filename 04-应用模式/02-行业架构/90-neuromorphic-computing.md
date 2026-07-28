@@ -57,7 +57,7 @@ audience:
 - 阿里云 HPC 解决方案架构师
 estimated_read_time: 5min
 intent_queries:
-- 类脑计算 SNN 脉冲神经网络 [[Kubernetes|Kubernetes]] 部署
+- 类脑计算 SNN 脉冲神经网络 [[kubernetes|Kubernetes]] 部署
 - 神经形态芯片 AI 推理架构
 - ANN-to-SNN 转换工具链
 - 边缘类脑计算低功耗推理
@@ -692,7 +692,7 @@ spec:
 | 对象存储 | **OSS** |
 | 数据库 | **PolarDB** |
 | 可观测性 | **ARMS + SLS** |
-| 工作流 | **[[Argo|Argo]]go Workflows|Argo Workflows]]** |
+| 工作流 | **[[argo\|Argo]]go Workflows|Argo Workflows]]** |
 
 ## 8.2 生产检查清单
 

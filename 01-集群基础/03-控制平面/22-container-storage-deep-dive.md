@@ -233,7 +233,7 @@ cross_refs:
 | **代码位置** | Kubernetes 核心 | 外部可执行文件 | 外部容器化驱动 |
 | **发布周期** | 与 K8s 同步 | 独立 | 独立 |
 | **接口类型** | Go 接口 | Shell 脚本 | gRPC |
-| **部署方式** | 内置 | 主机二进制 | [[DaemonSet|DaemonSet]] + Deployment |
+| **部署方式** | 内置 | 主机二进制 | [[daemonset\|DaemonSet]] + Deployment |
 | **动态配置** | 有限 | 有限 | 完整支持 |
 | **功能丰富度** | 完整 | 有限 | 完整 |
 | **社区支持** | 逐步废弃 | 已废弃 | 活跃 |
@@ -1777,7 +1777,7 @@ spec:
 #   - type: Resizing                  # 正在扩展
 ```
 
-### 6.5 [[StatefulSet|StatefulSet]] 存储配置
+### 6.5 [[statefulset|StatefulSet]] 存储配置
 
 ```yaml
 apiVersion: apps/v1

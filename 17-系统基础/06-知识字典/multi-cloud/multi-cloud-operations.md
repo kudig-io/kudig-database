@@ -54,7 +54,7 @@ prerequisites:
 
 # 10 - 多云混合云运维手册
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler | **质量等级**: ⭐⭐⭐⭐⭐ 专家级
 
 ---
 
@@ -110,7 +110,7 @@ prerequisites:
 | **专线连接** | AWS Direct Connect、Azure ExpressRoute | 低延迟、高带宽 | 最高安全 | 高成本 | ⭐⭐⭐⭐ |
 | **SD-WAN** | 软件定义广域网 | 智能路由、优化传输 | 中等安全 | 中等成本 | ⭐⭐⭐ |
 | **云间对等** | VPC Peering、Private Link | 最低延迟、原生性能 | 云厂商限制 | 低成本 | ⭐⭐ |
-| **服务网格** | Istio多集群、[[Linkerd|Linkerd]] | 应用层透明 | 高级安全 | 中等成本 | ⭐⭐⭐⭐⭐ |
+| **服务网格** | Istio多集群、[[linkerd\|Linkerd]] | 应用层透明 | 高级安全 | 中等成本 | ⭐⭐⭐⭐⭐ |
 
 ### 1.3 多云架构设计原则
 
@@ -643,9 +643,9 @@ spec:
 
 | 监控层级 | 监控内容 | 技术方案 | 数据流向 | 实施要点 |
 |----------|----------|----------|----------|----------|
-| **基础设施层** | VM、容器、网络、存储 | [[Prometheus|Prometheus]] + Exporter | 各云厂商 → 中央Prometheus | 标准化指标格式 |
+| **基础设施层** | VM、容器、网络、存储 | [[prometheus\|Prometheus]] + Exporter | 各云厂商 → 中央Prometheus | 标准化指标格式 |
 | **平台服务层** | K8s组件、中间件、数据库 | kube-state-metrics、服务Exporter | 集群内收集 → 远程写入 | 统一服务发现 |
-| **应用层** | 业务指标、APM、日志 | [[OpenTelemetry|OpenTelemetry]]、EFK Stack | Sidecar注入 → 中央存储 | 应用埋点标准化 |
+| **应用层** | 业务指标、APM、日志 | [[opentelemetry\|OpenTelemetry]]、EFK Stack | Sidecar注入 → 中央存储 | 应用埋点标准化 |
 | **用户体验层** | 前端性能、用户行为 | RUM、Synthetic Monitoring | 客户端 → 监控平台 | 真实用户监控 |
 | **安全层** | 威胁检测、合规审计 | SIEM、安全事件日志 | 各组件 → 安全平台 | 统一日志格式 |
 

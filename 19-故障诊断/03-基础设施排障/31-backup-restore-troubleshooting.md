@@ -60,9 +60,9 @@ tags:
 - disaster-recovery
 - snapshot
 - minio
-- [[DaemonSet|daemonset]]
+- [[daemonset|daemonset]]
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-02
 difficulty: advanced
 reading_level: advanced

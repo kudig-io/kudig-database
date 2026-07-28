@@ -68,7 +68,7 @@ cross_refs:
 
 # 36 - AI平台增强可观测性
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **AI栈版本**: [[Prometheus|Prometheus]] 2.40+ | **最后更新**: 2026-02 | **质量等级**: 专家级
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **AI栈版本**: [[prometheus|Prometheus]] 2.40+ | **最后更新**: 2026-02 | **质量等级**: 专家级
 
 <!-- chunk: 一、AI平台可观测性全景架构 -->
 ## 一、AI平台可观测性全景架构

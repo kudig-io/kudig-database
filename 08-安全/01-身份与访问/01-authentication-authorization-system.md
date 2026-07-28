@@ -42,8 +42,8 @@ prerequisites:
 
 
 ---
-title: [[Kubernetes|Kubernetes]] 认证授权体系详解
-description: 深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、[[Service|Service]]
+title: [[kubernetes|Kubernetes]] 认证授权体系详解
+description: 深入解析 K8s 认证授权体系：RBAC、ServiceAccount、TokenReview、Webhook、OIDC、[[service|Service]]
   Account Token Volume Projection 与最小权限原则
 category: 安全
 tags:
@@ -56,7 +56,7 @@ tags:
 - security
 - access-control
 - apiserver
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - best-practice
 last_updated: 2026-05
 difficulty: intermediate

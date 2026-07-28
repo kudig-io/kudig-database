@@ -61,7 +61,7 @@ prerequisites:
 
 ## 关键机制或特性
 
-- 控制平面组件通过 [[Leases|Lease]] 对象实现领导者选举。
+- 控制平面组件通过 [[leases|Lease]] 对象实现领导者选举。
 - API Server 支持水平扩展，通过负载均衡器对外提供服务。
 - etcd 的 compaction 和 defragmentation 需要定期执行以保证性能。
 - 控制平面节点通常添加 `node-role.kubernetes.io/control-plane` 标签并设置污点以阻止普通工作负载调度。

@@ -59,9 +59,9 @@ tags:
 - multi-agent
 - [[etcd|etcd]]
 - apiserver
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - redis
-- [[NetworkPolicy|networkpolicy]]
+- [[networkpolicy|networkpolicy]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

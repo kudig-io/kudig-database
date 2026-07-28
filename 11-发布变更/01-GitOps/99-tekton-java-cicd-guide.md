@@ -91,9 +91,9 @@ cross_refs:
 
 本指南是 Tekton CI/CD 实践的 Java 语言专项指南，提供从 Maven/Gradle 构建到容器镜像推送的完整 CI/CD 流水线方案。Java 是企业级应用开发的主流语言，Spring Boot 和 Quarkus 等框架在微服务架构中被广泛采用。在云原生场景中，Java 应用的 CI/CD 流水线需要处理编译构建、依赖管理、单元测试、代码质量、安全扫描、容器镜像构建和多环境部署等环节。
 
-Tekton 在 Java CI/CD 中的优势在于完全容器化的构建环境——每个构建步骤在独立的容器中执行，避免了构建环境的"雪崩效应"。通过 Workspace PVC 缓存 Maven 本地仓库（`~/.m2/repository`），可以显著加速依赖下载。Jib 和 [[Buildpacks|Buildpacks]] 提供了无需 Dockerfile 的 Java 容器镜像构建能力，且无需 Docker 守护进程（Dockerless），非常适合 Tekton 的非特权执行环境。
+Tekton 在 Java CI/CD 中的优势在于完全容器化的构建环境——每个构建步骤在独立的容器中执行，避免了构建环境的"雪崩效应"。通过 Workspace PVC 缓存 Maven 本地仓库（`~/.m2/repository`），可以显著加速依赖下载。Jib 和 [[buildpacks|Buildpacks]] 提供了无需 Dockerfile 的 Java 容器镜像构建能力，且无需 Docker 守护进程（Dockerless），非常适合 Tekton 的非特权执行环境。
 
-本指南覆盖 Maven/Gradle Task 定义、Jib/Buildpacks 镜像构建、安全扫描集成、GitOps 集成、缓存策略和完整 Pipeline 模板，帮助 Java 团队在 [[Kubernetes|Kubernetes]] 上构建高效、安全的 CI/CD 流水线。
+本指南覆盖 Maven/Gradle Task 定义、Jib/Buildpacks 镜像构建、安全扫描集成、GitOps 集成、缓存策略和完整 Pipeline 模板，帮助 Java 团队在 [[kubernetes|Kubernetes]] 上构建高效、安全的 CI/CD 流水线。
 
 ---
 

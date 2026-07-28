@@ -43,7 +43,7 @@ prerequisites:
 # Pods
 
 ## 概述
-Pod 是 [[Kubernetes|Kubernetes]] 中最小的可部署计算单元，它是一组共享存储和网络资源、并协同运行的一个或多个容器的集合。Pod 中的容器始终被共位（co-located）和共调度（co-scheduled），在共享上下文中运行，相当于一个应用专属的"逻辑主机"。
+Pod 是 [[kubernetes|Kubernetes]] 中最小的可部署计算单元，它是一组共享存储和网络资源、并协同运行的一个或多个容器的集合。Pod 中的容器始终被共位（co-located）和共调度（co-scheduled），在共享上下文中运行，相当于一个应用专属的"逻辑主机"。
 
 ## 核心概念/原理
 - **单容器 Pod**：最常见的使用方式，Kubernetes 直接管理 Pod，而不是直接管理容器。

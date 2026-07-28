@@ -57,13 +57,13 @@ prerequisites:
 
 
 
-title: [[Tetragon|Tetragon]] 运行时安全 (Tetragon Runtime Security)
+title: [[tetragon|Tetragon]] 运行时安全 (Tetragon Runtime Security)
 description: '# Tetragon 运行时安全 (Tetragon Runtime Security)'
 category: ebpf-technology
 tags:
 - k8s
 - ebpf
-- [[Cilium|cilium]]
+- [[cilium|cilium]]
 - networking
 - observability
 - kubelet

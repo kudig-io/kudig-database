@@ -82,7 +82,7 @@ authors:
 
 - 镜像安全：[[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]
 - Pod 安全加固：[[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]
-- 可观测性：[[可观测性]]
+- 可观测性：[[09-可观测性/README|可观测性]]
 - Java 运行时：[[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
 
 ## Related

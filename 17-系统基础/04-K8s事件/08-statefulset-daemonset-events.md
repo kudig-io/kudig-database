@@ -62,9 +62,9 @@ cross_refs:
 
 
 
-# 08 - [[StatefulSet|StatefulSet]] 与 [[DaemonSet|DaemonSet]] 控制器事件
+# 08 - [[statefulset|StatefulSet]] 与 [[daemonset|DaemonSet]] 控制器事件
 
-> **适用版本**: [[Kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
+> **适用版本**: [[kubernetes|Kubernetes]] v1.25 - v1.32 | **最后更新**: 2026-02 | **作者**: Allen Galler
 
 > **本文档详细记录 StatefulSet 和 DaemonSet 控制器产生的所有事件。**
 
@@ -113,7 +113,7 @@ cross_refs:
 | **Pod 命名** | 固定序号: name-0, name-1, name-2 | 随机后缀 |
 | **调度方式** | 标准调度器 | v1.12+ 使用标准调度器 |
 | **存储管理** | volumeClaimTemplates 自动创建 PVC | 手动管理 |
-| **网络标识** | Headless [[Service|Service]] 提供稳定网络标识 | 无特殊要求 |
+| **网络标识** | Headless [[service\|Service]] 提供稳定网络标识 | 无特殊要求 |
 | **滚动更新** | 支持 OnDelete/RollingUpdate | 支持 OnDelete/RollingUpdate |
 | **回滚** | 不支持自动回滚 | 不支持自动回滚 |
 

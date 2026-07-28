@@ -75,9 +75,9 @@ cross_refs:
 
 
 
-# 55 - [[CoreDNS|CoreDNS]] 插件完整参考 (Plugins Reference)
+# 55 - [[coredns|CoreDNS]] 插件完整参考 (Plugins Reference)
 
-> **适用版本**: CoreDNS 1.8.0+ / [[Kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
+> **适用版本**: CoreDNS 1.8.0+ / [[kubernetes|Kubernetes]] v1.25-v1.32 | **最后更新**: 2026-01
 
 ---
 
@@ -90,7 +90,7 @@ cross_refs:
 |:---|:---:|:---|:---|
 | **数据源** | 8 | 提供DNS记录数据 | kubernetes, file, hosts, [[etcd|etcd]] |
 | **缓存** | 2 | 缓存DNS响应 | cache, nsid |
-| **转发/代理** | 3 | 转发查询到上游 | forward, proxy, [[gRPC|grpc]] |
+| **转发/代理** | 3 | 转发查询到上游 | forward, proxy, [[grpc\|grpc]] |
 | **修改** | 4 | 修改请求或响应 | rewrite, template, header, metadata |
 | **监控** | 4 | 日志/指标/追踪 | log, prometheus, trace, debug |
 | **安全** | 4 | 访问控制/加密 | acl, dnssec, tls, dnstap |

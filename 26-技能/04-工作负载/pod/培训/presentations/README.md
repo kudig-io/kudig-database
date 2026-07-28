@@ -61,7 +61,7 @@ prerequisites:
 
 ---
 title: 'Topic: Presentations（技术演示文稿）'
-description: '**11 篇 Presentation** | 面向内部培训与技术分享的 [[Kubernetes|Kubernetes]] 专题演示文稿'
+description: '**11 篇 Presentation** | 面向内部培训与技术分享的 [[kubernetes|Kubernetes]] 专题演示文稿'
 category: presentations
 tags:
 - k8s
@@ -70,7 +70,7 @@ tags:
 - [[etcd|etcd]]
 - [[kubelet|kubelet]]
 - scheduler
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - grafana
 - jaeger
 - coredns

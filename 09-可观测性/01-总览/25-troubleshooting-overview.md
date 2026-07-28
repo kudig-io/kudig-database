@@ -50,7 +50,7 @@ prerequisites:
 
 
 
-title: 10 - [[Kubernetes|Kubernetes]] 生产环境故障排查全攻略 (Production Troubleshooting Guide)
+title: 10 - [[kubernetes|Kubernetes]] 生产环境故障排查全攻略 (Production Troubleshooting Guide)
 description: '# 10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)'
 category: observability
 tags:

@@ -55,11 +55,11 @@ tags:
 - operations
 - best-practices
 - [[etcd|etcd]]
-- [[Prometheus|prometheus]]
+- [[prometheus|prometheus]]
 - mysql
-- [[StatefulSet|statefulset]]
+- [[statefulset|statefulset]]
 - job
-- [[CronJob|cronjob]]
+- [[cronjob|cronjob]]
 last_updated: 2026-05
 difficulty: advanced
 reading_level: advanced

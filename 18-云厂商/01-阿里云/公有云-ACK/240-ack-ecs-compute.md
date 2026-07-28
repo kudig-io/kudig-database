@@ -1,7 +1,7 @@
 ---
 title: ACK 关联产品 - ECS 计算资源
-description: 'description: ''- [节点池配置最佳实践](#节点池配置最佳实践)'''
-summary: 'description: ''- [节点池配置最佳实践](#节点池配置最佳实践)'''
+description: ACK 集群 ECS 计算资源实践：规格选型、托管节点池配置、Spot 抢占式实例策略、弹性伸缩与 kubelet 资源预留调优
+summary: ACK 集群 ECS 计算资源实践指南，覆盖规格族选型矩阵、生产级节点池配置、Spot 混合实例策略、Cluster Autoscaler 弹性伸缩链路与 kubelet 资源预留计算，附操作命令与验证方法。
 category: general
 tags:
 - cloud
@@ -55,9 +55,11 @@ prerequisites:
 
 - [ECS 规格选型](#ecs-规格选型)
 - [节点池配置最佳实践](#节点池配置最佳实践)
+- [节点池操作步骤与验证](#节点池操作步骤与验证)
 - [抢占式实例 (Spot) 策略](#抢占式实例-spot-策略)
 - [弹性伸缩组 (ESS) 集成](#弹性伸缩组-ess-集成)
 - [资源预留与性能调优](#资源预留与性能调优)
+- [常见问题排查](#常见问题排查)
 
 ---
 
@@ -109,6 +111,60 @@ prerequisites:
 
 ---
 
+## 节点池操作步骤与验证
+
+### 创建托管节点池（aliyun CLI）
+
+```bash
+# 🟡 中风险：创建节点池会产生 ECS 计费资源
+aliyun cs POST /clusters/${CLUSTER_ID}/nodepools \
+  --header "Content-Type=application/json" \
+  --body '{
+    "nodepool_info": {"name": "prod-general"},
+    "scaling_group": {
+      "instance_types": ["ecs.g7.2xlarge"],
+      "system_disk_category": "cloud_essd",
+      "system_disk_performance_level": "PL1",
+      "system_disk_size": 120,
+      "desired_size": 3
+    },
+    "kubernetes_config": {
+      "runtime": "containerd",
+      "labels": [{"key": "workload-type", "value": "general"}]
+    },
+    "management": {"enable": true, "auto_repair": true}
+  }'
+```
+
+### 验证节点池就绪
+
+```bash
+# 🟢 低风险：查询节点池状态，期望 state 为 active
+aliyun cs GET /clusters/${CLUSTER_ID}/nodepools | jq '.nodepools[] | {name: .nodepool_info.name, state: .status.state}'
+
+# 🟢 低风险：确认新节点 Ready 且标签正确
+kubectl get nodes -l workload-type=general -o wide
+kubectl describe node <node-name> | grep -A5 'Labels\|Taints'
+
+# 🟢 低风险：确认 containerd 运行时与内核版本
+kubectl get nodes -o custom-columns='NAME:.metadata.name,RUNTIME:.status.nodeInfo.containerRuntimeVersion,KERNEL:.status.nodeInfo.kernelVersion'
+```
+
+### 节点池扩缩容
+
+```bash
+# 🟡 中风险：调整期望节点数（扩容安全，缩容会驱逐 Pod）
+aliyun cs PUT /clusters/${CLUSTER_ID}/nodepools/${NODEPOOL_ID} \
+  --header "Content-Type=application/json" \
+  --body '{"scaling_group": {"desired_size": 5}}'
+
+# 缩容前先手动排空目标节点（🟡 中风险）
+kubectl cordon <node-name>
+kubectl drain <node-name> --ignore-daemonsets --delete-emptydir-data --grace-period=120
+```
+
+---
+
 ## 抢占式实例 (Spot) 策略
 
 ### Spot 实例优势与风险
@@ -154,6 +210,17 @@ graph LR
 | **优雅缩容** | 配置 `drain-priority`，确保 Pod 正常迁移 |
 | **防护配置** | 设置 `scale-in-threshold`，防止过度频繁缩容 |
 
+### 验证 Cluster Autoscaler 工作状态
+
+```bash
+# 🟢 低风险：确认 autoscaler 组件运行正常
+kubectl -n kube-system get deploy cluster-autoscaler
+kubectl -n kube-system logs deploy/cluster-autoscaler --tail=50 | grep -E 'ScaleUp|ScaleDown'
+
+# 🟢 低风险：查看触发扩容的 Pending Pod 事件
+kubectl get events --field-selector reason=TriggeredScaleUp -A --sort-by=.lastTimestamp
+```
+
 ---
 
 ## 资源预留与性能调优
@@ -178,19 +245,38 @@ net.ipv4.tcp_max_syn_backlog = 65535
 fs.file-max = 2000000
 ```
 
+### 验证资源预留生效
+
+```bash
+# 🟢 低风险：Allocatable 应等于 Capacity 减去预留与驱逐阈值
+kubectl describe node <node-name> | grep -A8 'Capacity\|Allocatable'
+
+# 🟢 低风险：确认 kubelet 启动参数中的预留配置
+kubectl get --raw "/api/v1/nodes/<node-name>/proxy/configz" | jq '.kubeletconfig | {systemReserved, kubeReserved, evictionHard}'
+```
+
+---
+
+## 常见问题排查
+
+| 现象 | 可能原因 | 排查命令 |
+|:---|:---|:---|
+| **节点 NotReady** | kubelet 异常 / 网络插件未就绪 | `kubectl describe node` 看 Conditions；节点上 `systemctl status kubelet` |
+| **扩容后 Pod 仍 Pending** | 新节点带 Taint / 资源仍不足 | `kubectl describe pod` 看 Events 中的调度失败原因 |
+| **Spot 节点被批量回收** | 竞价策略过低 / 库存不足 | 查看 ESS 伸缩活动记录，增加备选规格 |
+| **节点频繁 OOM** | 资源预留不足，系统进程被挤压 | 检查 `eviction-hard` 与 `system-reserved` 配置 |
+
 ---
 
 ## 相关文档
 
-- [156-alibaba-cloud-integration.md](./156-alibaba-cloud-integration.md) - 阿里云集成总表
-- [245-ack-ebs-storage.md](./245-ack-ebs-storage.md) - 云盘存储详解
-- [39-kubelet-deep-dive.md](./39-kubelet-deep-dive.md) - Kubelet 深度解析
+- [[18-云厂商/01-阿里云/index|阿里云域索引]]
+- [[18-云厂商/01-阿里云/公有云-ACK/245-ack-ebs-storage|245-ack-ebs-storage]] - 云盘存储详解
+- [[01-集群基础/07-性能调优/index|集群性能调优]]
 
 ## Related
 
-- [[17-系统基础/05-速查卡/go.md|[[Go 生产环境速查卡|go]]]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
-- [[23-实体/13-云厂商与发行版/245-ack-ebs-storage.md|245-ack-ebs-storage]]
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - [[23-实体/03-运行时/containerd.md|containerd]]
 - [[21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]

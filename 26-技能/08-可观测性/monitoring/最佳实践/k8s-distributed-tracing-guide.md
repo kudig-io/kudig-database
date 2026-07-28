@@ -1,7 +1,7 @@
 ---
 title: Kubernetes 分布式追踪最佳实践
 description: '# Kubernetes 分布式追踪最佳实践'
-summary: '本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 [[OpenTelemetry|OpenTelemetry]] 集成的全方位内容 ^[inferred]。'
+summary: '本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 [[opentelemetry|OpenTelemetry]] 集成的全方位内容 ^[inferred]。'
 category: skills
 tags:
 - k8s
@@ -45,7 +45,7 @@ prerequisites:
 
 ## 概述
 
-本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 [[OpenTelemetry|OpenTelemetry]] 集成的全方位内容 ^[inferred]。
+本指南提供生产环境 Kubernetes 分布式追踪配置的最佳实践，涵盖从 Jaeger 部署到 [[opentelemetry|OpenTelemetry]] 集成的全方位内容 ^[inferred]。
 
 ## 分布式追踪架构
 
@@ -61,7 +61,7 @@ prerequisites:
 
 ### OpenTelemetry Collector 配置
 
-- 接收器：OTLP（[[gRPC|gRPC]] 4317、HTTP 4318）+ Jaeger 协议（gRPC 14250、thrift_http 14268）^[inferred]
+- 接收器：OTLP（[[grpc|gRPC]] 4317、HTTP 4318）+ Jaeger 协议（gRPC 14250、thrift_http 14268）^[inferred]
 - 处理器：`batch`（timeout: 5s, send_batch_size: 1024）+ `memory_limiter`（limit_mib: 512）^[inferred]
 - 导出器：OTLP 到 Jaeger Collector ^[inferred]
 
@@ -111,8 +111,8 @@ prerequisites:
 
 ## 相关资源
 
-- [[22-概念/k8s-production-best-practices.md|[[Kubernetes 生产环境最佳实践|Kubernetes 生产环境最佳实践]]]]
-- [[22-概念/observability-pillars.md|[[Observability Pillars|Observability Pillars]]]]
+- [[22-概念/k8s-production-best-practices.md|[[22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
+- [[22-概念/observability-pillars.md|[[22-概念/06-可观测性/observability-pillars|Observability Pillars]]]]
 - [[26-技能/08-可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
 - [[26-技能/08-可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
 

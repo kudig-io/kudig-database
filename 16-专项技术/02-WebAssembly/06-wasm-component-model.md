@@ -2326,7 +2326,7 @@ Wasm Component Model 通过 WIT 接口定义、Canonical ABI 和组件组合机�
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-38-webassembly-cloud-native KUDIG Database — Global MOC
-- [[16-专项技术/README.md|[[Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
+- [[16-专项技术/README.md|[[37-归档/domain-indexes/specialty-tech/README-from-domain-38|Domain 38: WebAssembly 云原生 (WebAssembly Cloud Native)]]]]
 - index.md|Domain-38 WebAssembly 云原生 — 开源项目索引]]
 - WebAssembly 云原生基础
 - containerd Wasm 运行时
