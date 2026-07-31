@@ -66,6 +66,93 @@ Submariner 是 Red Hat 主导的 CNCF Sandbox 项目，专注于解决 Kubernete
 - https://submariner.io/
 - https://github.com/submariner-io/submariner
 
+## 架构深度解析
+
+### 组件架构
+
+```
+┌─────────────────────────────────────────────────────┐
+│           Submariner (per cluster)                  │
+├─────────────────────────────────────────────────────┤
+│  ┌───────────┐  ┌────────────┐  ┌─────────────┐  │
+│  │ Gateway   │  │ Route Agent│  │ Lighthouse  │  │
+│  │ (IPsec/   │  │ (DaemonSet)│  │ (DNS 跨集群)│  │
+│  │  VXLAN)   │  │            │  │             │  │
+│  └─────┬─────┘  └──────┬─────┘  └──────┬──────┘  │
+│        │               │               │         │
+│  ┌─────▼───────────────▼───────────────▼─────┐  │
+│  │     Cross-cluster Network Plane          │  │
+│  │  (IPsec Tunnel / VXLAN / Globalnet)     │  │
+│  └───────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
+```
+
+### 源码关键路径（submariner-io/submariner）
+
+| 模块 | 路径 | 职责 |
+|------|------|------|
+| Gateway | `pkg/cableengine/` | IPsec/VXLAN 隧道管理 |
+| Route Agent | `pkg/routeagent/` | 节点路由规则管理 |
+| Lighthouse | `pkg/lighthouse/` | 跨集群 DNS 解析 |
+| Globalnet | `pkg/globalnet/` | 重叠 CIDR 的 SNAT/DNAT |
+| Broker | `pkg/broker/` | 集群间元数据交换 |
+
+### 跨集群连接流程
+
+1. 集群 A/B 通过 Broker 交换 Gateway 端点信息
+2. Gateway 建立 IPsec 隧道（IKEv2 + ESP）
+3. Route Agent 在各节点添加跨集群路由规则
+4. Pod 访问跨集群 Service → 路由到 Gateway → 隧道转发
+5. Lighthouse 提供跨集群 DNS 解析（`svc.clusterB.svc.clusterset.local`）
+
+## 生产案例
+
+### 案例 1：IPsec 隧道 MTU 不匹配导致大包丢失
+
+| 时间 | 事件 |
+|------|------|
+| 11:00 | 跨集群服务访问正常，但大文件传输失败 |
+| 11:15 | 确认：TCP 小包正常，> 1400 字节包丢失 |
+| 11:30 | 根因：IPsec 封装开销未计入 MTU，物理网卡 1500 - 封装 = 1438 |
+| 11:45 | 修复：设置 Pod MTU 为 1400，启用 PMTU Discovery |
+
+**修复命令**：
+```bash
+# 检查隧道 MTU 🟢 只读
+ip link show vx-submariner | grep mtu
+# 测试跨集群连通性 🟢 只读
+subctl verify --only connectivity
+# 调整 CNI MTU 🟡 中风险
+kubectl patch cm cni-config -n kube-system -p '{"data":{"mtu":"1400"}}'
+```
+
+### 案例 2：Globalnet SNAT 端口耗尽
+
+**现象**：重叠 CIDR 场景下，跨集群连接间歇性失败。
+
+**诊断**：Globalnet 使用 SNAT 解决 IP 冲突，但单 IP 端口数有限（~64K），高并发场景耗尽。
+
+**修复**：增加 Globalnet IP 池大小，或重新规划集群 Pod CIDR 避免重叠。
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 所有跨集群隧道断开 | 检查 Gateway 节点状态，重建隧道 |
+| P1 | 单集群 DNS 解析失败 | 重启 Lighthouse Agent，检查 ServiceExport |
+| P2 | 隧道延迟增加 > 50ms | 检查网络质量，考虑切换 Gateway 节点 |
+
+## 面试要点
+
+1. **Q：Submariner 与 Cilium ClusterMesh 有何区别？**
+   A：Submariner 是独立的多集群网络方案，通过 IPsec/VXLAN 隧道连接集群，不依赖特定 CNI；Cilium ClusterMesh 是 Cilium 内置功能，基于 eBPF 实现跨集群负载均衡和策略。Submariner 优势在于 CNI 无关性和 Globalnet（重叠 CIDR 支持）；Cilium 优势在于无隧道开销和统一策略。
+
+2. **Q：Submariner 的 Globalnet 如何解决 IP 地址冲突？**
+   A：Globalnet 为每个集群分配唯一的 GlobalCIDR，跨集群流量经过 SNAT 转换为 GlobalIP。实现：① 集群加入时分配 GlobalCIDR；② 出口流量经 Globalnet 组件 SNAT；③ 返回流量 DNAT 还原。代价是丢失源 IP，需配合 Proxy Protocol 保留。
+
+3. **Q：如何诊断 Submariner 跨集群连接问题？**
+   A：使用 `subctl` 工具链：① `subctl show all` 查看集群状态；② `subctl verify --only connectivity` 运行连通性测试；③ `subctl diagnose all` 全面诊断；④ 检查 Gateway 日志和 Route Agent 路由表。
+
 ## Related
 
 - [[17-系统基础/06-知识字典/networking/cilium.md|Cilium Cluster Mesh]]

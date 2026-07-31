@@ -80,6 +80,98 @@ Cilium 是基于 eBPF 技术的 Kubernetes CNI 插件和网络安全解决方案
 
 - [Cilium Official Documentation](https://docs.cilium.io/)
 
+## 架构深度解析
+
+### 组件架构
+
+```
+┌─────────────────────────────────────────────────────┐
+│              Cilium Agent (DaemonSet)               │
+├─────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────┐  │
+│  │ Policy      │  │ Identity     │  │ Hubble    │  │
+│  │ Compiler    │  │ Manager      │  │ (Flow Log)│  │
+│  └──────┬──────┘  └──────┬───────┘  └───────────┘  │
+│         │                │                         │
+│  ┌──────▼────────────────▼─────────────────────┐  │
+│  │         eBPF Programs (Kernel)              │  │
+│  │  ┌────────┐ ┌────────┐ ┌────────────────┐  │  │
+│  │  │TC/XDP  │ │Socket  │ │ Policy Map     │  │  │
+│  │  │hooks   │ │LB      │ │ (BPF hash)     │  │  │
+│  │  └────────┘ └────────┘ └────────────────┘  │  │
+│  └──────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
+```
+
+### 源码关键路径（cilium/cilium）
+
+| 模块 | 路径 | 职责 |
+|------|------|------|
+| Agent 主循环 | `daemon/cmd/` | 初始化、控制器编排 |
+| eBPF 程序 | `bpf/` | C 语言 eBPF 源码（TC/XDP） |
+| Policy | `pkg/policy/` | 策略编译为 BPF map |
+| Identity | `pkg/identity/` | 安全身份分配与管理 |
+| Hubble | `pkg/hubble/` | 流量可观测性 |
+| K8s Watcher | `pkg/k8s/` | CRD/资源监听 |
+
+### eBPF 数据面流程
+
+1. Pod 发包 → veth → TC eBPF 程序拦截
+2. 查找 Policy Map（源 Identity → 目标 Identity）
+3. 执行 L3/L4/L7 策略检查
+4. 若允许 → 查找 Endpoint Map → 转发到目标
+5. 若跨节点 → VXLAN/Geneve 封装 → 物理网卡
+6. Hubble 记录 Flow Log（可选）
+
+## 生产案例
+
+### 案例 1：eBPF Map 容量耗尽导致策略失效
+
+| 时间 | 事件 |
+|------|------|
+| 16:00 | 新 Pod 无法访问任何服务 |
+| 16:05 | cilium status 显示 policy map full |
+| 16:15 | 根因：CiliumNetworkPolicy 规则组合爆炸，超过 map 容量 |
+| 16:30 | 修复：增加 `--bpf-policy-map-max`，合并策略规则 |
+
+**修复命令**：
+```bash
+# 检查 eBPF map 使用情况 🟢 只读
+cilium bpf policy get --all -n kube-system
+# 查看 Cilium 状态 🟢 只读
+cilium status --verbose
+# 调整 map 容量（需重启） 🔴 高风险
+kubectl patch cm cilium-config -n kube-system -p '{"data":{"bpf-policy-map-max":"65536"}}'
+kubectl rollout restart ds/cilium -n kube-system
+```
+
+### 案例 2：Hubble Flow Log 占用过多磁盘
+
+**现象**：节点磁盘使用率告警，/var/run/cilium 目录占用 > 10GB。
+
+**诊断**：Hubble 默认保留所有 Flow Log，未配置轮转。
+
+**修复**：启用 Hubble Relay + 外部存储（ClickHouse），限制本地 Flow Log 保留时间。
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | eBPF 程序加载失败 / 数据面中断 | 回滚 Cilium 版本，临时切换 CNI |
+| P1 | 策略编译错误导致流量拒绝 | 检查 CNP 语法，临时禁用策略 |
+| P2 | Hubble 数据丢失 | 检查 Relay 状态，调整 Flow Log 配置 |
+
+## 面试要点
+
+1. **Q：Cilium 的 Identity 机制如何工作？**
+   A：Cilium 为每个 Pod 分配 Security Identity（基于标签的哈希）：① Pod 创建时根据 Namespace + Labels 计算 Identity；② Identity 存储在 KVStore（etcd）或 CRD；③ 策略编译为 Identity-based BPF map；④ 数据面通过 Identity 而非 IP 执行策略，支持 Pod 漂移后策略不变。
+
+2. **Q：Cilium 如何实现 L7 策略（如 HTTP method 限制）？**
+   A：Cilium 使用 Envoy Sidecar（或嵌入式 Envoy）实现 L7 策略：① TC eBPF 将匹配 L7 策略的流量重定向到 Envoy；② Envoy 解析 HTTP/gRPC 协议；③ 执行 L7 规则（method/path/header）；④ 允许则转发，拒绝则返回 403。实现路径：`pkg/proxy/envoy/`。
+
+3. **Q：Cilium 与 Calico 在 NetworkPolicy 实现上有何差异？**
+   A：Cilium 使用 eBPF map 存储策略，查找复杂度 O(1)，无 iptables 规则数量限制；Calico 使用 iptables/IPVS，规则数随策略增长线性增加。Cilium 支持 L7 策略和 Identity-based 策略；Calico 主要支持 L3/L4。性能上 Cilium 在大规模策略场景优势明显。
+
 ## Related
 
 - [[17-系统基础/06-知识字典/networking/cni.md|CNI]]

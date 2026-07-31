@@ -67,6 +67,107 @@ Kuma 是 Kong 开源的 CNCF Sandbox 服务网格，基于 Envoy Proxy，支持 
 - https://kuma.io/
 - https://github.com/kumahq/kuma
 
+## 架构深度解析
+
+### 组件架构
+
+```
+┌─────────────────────────────────────────────────────┐
+│              Kuma Control Plane (CP)                │
+├─────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────┐  │
+│  │ Policy      │  │ xDS Server   │  │ Mesh      │  │
+│  │ Manager     │  │ (Envoy API)  │  │ Manager   │  │
+│  └──────┬──────┘  └──────┬───────┘  └───────────┘  │
+│         │                │                         │
+│  ┌──────▼────────────────▼─────────────────────┐  │
+│  │     Data Plane Proxy (DPP) - Envoy          │  │
+│  │  (Sidecar / Gateway / VM Agent)             │  │
+│  └──────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
+```
+
+### 源码关键路径（kumahq/kuma）
+
+| 模块 | 路径 | 职责 |
+|------|------|------|
+| CP 主循环 | `app/kuma-cp/` | 控制平面启动与编排 |
+| xDS 生成 | `pkg/xds/` | Envoy 配置生成与推送 |
+| Policy | `pkg/plugins/policies/` | 流量策略实现（路由/限流/熔断） |
+| Mesh | `pkg/core/resources/` | Mesh 资源模型与存储 |
+| DPP | `app/kuma-dp/` | 数据平面代理管理 |
+
+### 多网格隔离机制
+
+1. 每个 Mesh 是独立的逻辑网络边界
+2. 服务通过 `kuma.io/mesh` 标签归属到特定 Mesh
+3. 跨 Mesh 通信需显式声明 MeshTrafficPermission
+4. 每个 Mesh 可配置独立的 mTLS、日志、追踪策略
+
+## 生产案例
+
+### 案例 1：mTLS 证书轮转导致服务中断
+
+| 时间 | 事件 |
+|------|------|
+| 04:00 | 自动证书轮转触发（默认 30 天） |
+| 04:01 | 部分旧版 Envoy 不支持热证书更新，连接断开 |
+| 04:05 | 确认：Envoy 1.24 以下版本需要重启才能加载新证书 |
+| 04:10 | 修复：升级 DPP 到最新版本，启用 `builtin` CA 的渐进式轮转 |
+
+**修复命令**：
+```bash
+# 检查 Mesh mTLS 状态 🟢 只读
+kubectl get mesh default -o yaml | grep -A10 "mtls:"
+# 查看 DPP 版本 🟢 只读
+kubectl get pods -A -l app=kuma-dp -o jsonpath='{.items[*].spec.containers[*].image}'
+# 重启 DPP 加载新证书 🟡 中风险
+kubectl rollout restart deploy/my-service
+```
+
+### 案例 2：跨 Mesh 流量被默认拒绝
+
+**现象**：服务 A（mesh-a）无法访问服务 B（mesh-b），返回 RBAC 拒绝。
+
+**诊断**：Kuma 默认禁止跨 Mesh 通信，需显式创建 MeshTrafficPermission。
+
+**修复**：创建跨 Mesh 访问策略：
+```yaml
+apiVersion: kuma.io/v1alpha1
+kind: MeshTrafficPermission
+metadata:
+  name: cross-mesh-access
+spec:
+  targetRef:
+    kind: MeshService
+    name: service-b
+  from:
+    - targetRef:
+        kind: Mesh
+        name: mesh-a
+      default:
+        action: Allow
+```
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 控制平面不可用，所有 DPP 断开 | 恢复 CP，从备份恢复 Mesh 配置 |
+| P1 | mTLS 证书过期导致连接失败 | 手动触发证书轮转，重启 DPP |
+| P2 | 策略下发延迟 > 10s | 检查 CP 负载，扩容实例 |
+
+## 面试要点
+
+1. **Q：Kuma 与 Istio 的核心差异是什么？**
+   A：Kuma 基于 Envoy 但架构更简单：单一控制平面（无 istiod 的复杂组件），原生支持多 Mesh 隔离，同时支持 K8s 和 VM 环境。Istio 功能更丰富（Telemetry、安全策略）但复杂度高。Kuma 适合需要简单操作体验和多环境支持的团队；Istio 适合需要完整服务网格功能的企业。
+
+2. **Q：Kuma 的多 Mesh 隔离如何实现？**
+   A：每个 Mesh 是独立的逻辑网络：① 服务通过 `kuma.io/mesh` 标签归属；② xDS 配置按 Mesh 隔离下发；③ mTLS 证书按 Mesh 独立签发；④ 跨 Mesh 通信需 MeshTrafficPermission 显式授权。这比 Istio 的 Namespace 隔离更彻底。
+
+3. **Q：如何在 K8s + VM 混合环境中部署 Kuma？**
+   A：① K8s 中部署 CP（Helm）；② K8s Pod 通过 Sidecar Injector 自动注入 DPP；③ VM 上安装 kuma-dp Agent，通过 token 注册到 CP；④ 使用 Mesh 统一管理服务发现和策略；⑤ VM 服务通过 `kuma.io/service` 标签暴露。
+
 ## Related
 
 - [[17-系统基础/06-知识字典/networking/istio.md|Istio]]

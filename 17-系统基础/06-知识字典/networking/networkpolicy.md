@@ -80,6 +80,103 @@ NetworkPolicy 是 Kubernetes 中控制 Pod 之间以及 Pod 与外部网络之�
 
 - [NetworkPolicy - Kubernetes Docs](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
 
+## 架构深度解析
+
+### 实现机制对比
+
+```
+┌─────────────────────────────────────────────────────┐
+│           NetworkPolicy 实现方式                    │
+├─────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────┐  │
+│  │ Calico      │  │ Cilium       │  │ Antrea    │  │
+│  │ (iptables/  │  │ (eBPF map)   │  │ (OVS      │  │
+│  │  IPVS)      │  │              │  │  flow)    │  │
+│  └─────────────┘  └──────────────┘  └───────────┘  │
+├─────────────────────────────────────────────────────┤
+│  K8s API: NetworkPolicy CR (spec.podSelector +     │
+│           ingress/egress rules)                     │
+└─────────────────────────────────────────────────────┘
+```
+
+### 各 CNI 实现路径
+
+| CNI | 实现机制 | 性能特点 | L7 支持 |
+|-----|----------|----------|----------|
+| Calico | iptables/IPVS 规则 | 规则数线性增长 | 否 |
+| Cilium | eBPF Policy Map | O(1) 查找，高性能 | 是（Envoy） |
+| Antrea | OVS conjunctive flow | O(1) 匹配 | 部分 |
+| OVN-K8s | OVN ACL + OVS flow | 分布式执行 | 否 |
+
+### 策略评估流程（以 Cilium 为例）
+
+1. Pod 创建 → Cilium 计算 Security Identity（基于标签）
+2. NetworkPolicy 变更 → 编译为 BPF Policy Map 条目
+3. 数据包到达 → TC eBPF 程序拦截
+4. 查找 Policy Map（源 Identity + 目标 Identity + 端口）
+5. 匹配允许 → 转发；匹配拒绝 → 丢弃 + 日志
+
+## 生产案例
+
+### 案例 1：默认拒绝策略导致 DNS 中断
+
+| 时间 | 事件 |
+|------|------|
+| 14:00 | 应用部署默认拒绝 NetworkPolicy（deny-all） |
+| 14:01 | 所有 Pod 无法解析 DNS，服务全面中断 |
+| 14:05 | 确认：egress 规则未允许 UDP 53 到 kube-dns |
+| 14:10 | 修复：添加 egress 规则允许 DNS 查询 |
+
+**修复命令**：
+```bash
+# 检查 NetworkPolicy 🟢 只读
+kubectl get networkpolicy -A -o wide
+# 测试 DNS 解析 🟢 只读
+kubectl exec -it test-pod -- nslookup kubernetes.default
+# 添加 DNS egress 规则 🟡 中风险
+kubectl apply -f - <<EOF
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-dns
+spec:
+  podSelector: {}
+  egress:
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: UDP
+      port: 53
+EOF
+```
+
+### 案例 2：策略规则冲突导致流量异常
+
+**现象**：两个 NetworkPolicy 同时匹配同一 Pod，行为不符合预期。
+
+**诊断**：NetworkPolicy 是叠加（additive）模型，多个策略同时生效，任一允许即允许。
+
+**修复**：使用 `kubectl describe networkpolicy` 分析所有匹配策略，合并或调整 podSelector 避免冲突。
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | 策略导致全集群网络中断 | 紧急删除问题策略，恢复连通性 |
+| P1 | 单服务被意外隔离 | 检查策略匹配，添加允许规则 |
+| P2 | 策略生效延迟 | 检查 CNI 控制器状态 |
+
+## 面试要点
+
+1. **Q：NetworkPolicy 的默认行为是什么？如何实现零信任网络？**
+   A：默认情况下，K8s 没有 NetworkPolicy 时所有 Pod 间流量允许（全通）。实现零信任：① 每个 Namespace 创建 default-deny（ingress+egress）；② 显式允许必要的服务间通信；③ 允许 DNS egress（UDP 53）；④ 配合 mTLS（Istio/Linkerd）实现传输层加密。
+
+2. **Q：为什么 iptables 实现的 NetworkPolicy 在大规模场景性能差？**
+   A：iptables 规则是线性链表：① 每条 NetworkPolicy 生成多条 iptables 规则；② 数据包需逐条匹配（O(n) 复杂度）；③ 规则更新需要全量刷新（短暂中断）；④ conntrack 表压力大。Cilium 的 eBPF 使用哈希表（O(1)），Antrea 使用 OVS conjunctive match（O(1)），性能更优。
+
+3. **Q：如何测试 NetworkPolicy 是否生效？**
+   A：① 使用 `kubectl exec` 从测试 Pod 发起连接；② 使用 `kubectl describe networkpolicy` 查看匹配 Pod；③ Cilium：`cilium policy trace --src-identity X --dst-identity Y`；④ Calico：`calicoctl node status` + iptables-save；⑤ 使用网络策略测试工具（如 `network-policy-api` 测试套件）。
+
 ## Related
 
 - [[17-系统基础/06-知识字典/networking/cni.md|CNI]]

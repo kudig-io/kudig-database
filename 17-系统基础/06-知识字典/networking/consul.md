@@ -79,6 +79,93 @@ Consul 可补充 K8s 的服务发现：跨集群、非 K8s 服务、多数据中
 
 - [Consul Official](https://www.consul.io/)
 
+## 架构深度解析
+
+### 组件架构
+
+```
+┌─────────────────────────────────────────────────────┐
+│              HashiCorp Consul                       │
+├─────────────────────────────────────────────────────┤
+│  ┌─────────────┐  ┌──────────────┐  ┌───────────┐  │
+│  │ Server      │  │ Client Agent │  │ Connect   │  │
+│  │ (Raft 集群) │  │ (每节点)     │  │ (Service  │  │
+│  │             │  │              │  │  Mesh)    │  │
+│  └──────┬──────┘  └──────┬───────┘  └───────────┘  │
+│         │                │                         │
+│  ┌──────▼────────────────▼─────────────────────┐  │
+│  │     Service Catalog + KV Store + DNS        │  │
+│  └──────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────┘
+```
+
+### 源码关键路径（hashicorp/consul）
+
+| 模块 | 路径 | 职责 |
+|------|------|------|
+| Agent | `agent/` | Client/Server Agent 主循环 |
+| Catalog | `agent/consul/` | 服务注册与发现 |
+| Raft | `agent/consul/fsm/` | 一致性协议与状态机 |
+| Connect | `connect/` | Service Mesh（mTLS/意图） |
+| DNS | `agent/dns/` | DNS 接口（service.consul） |
+| K8s | `connect/kube/` | Kubernetes 集成 |
+
+### 服务发现流程
+
+1. 服务启动 → 向本地 Client Agent 注册
+2. Client Agent 同步到 Server 集群（Raft 共识）
+3. 服务发现：DNS（`svc.service.consul`）或 HTTP API
+4. 健康检查失败 → 自动从 Catalog 摘除
+5. Connect：服务间 mTLS + 意图（Intention）授权
+
+## 生产案例
+
+### 案例 1：Raft 集群失去 Leader
+
+| 时间 | 事件 |
+|------|------|
+| 05:00 | Consul Server 集群 3 节点中 2 节点宕机 |
+| 05:01 | 服务发现失败，DNS 查询超时 |
+| 05:10 | 确认：Raft 无法选举 Leader（需要多数派） |
+| 05:20 | 修复：恢复宕机节点，或使用 `consul operator raft remove-peer` 移除故障节点 |
+
+**修复命令**：
+```bash
+# 检查 Raft 状态 🟢 只读
+consul operator raft list-peers
+# 查看服务健康 🟢 只读
+consul catalog services -tags
+# 移除故障节点 🔴 高风险
+consul operator raft remove-peer -address="10.0.0.5:8300"
+```
+
+### 案例 2：Connect mTLS 证书轮转失败
+
+**现象**：服务间通信失败，日志显示 `certificate has expired`。
+
+**诊断**：Consul Connect CA 的中间证书过期，未自动轮转。
+
+**修复**：手动触发 CA 轮转，或切换到 Vault 作为 Connect CA。
+
+## 升级决策点
+
+| 级别 | 条件 | 动作 |
+|------|------|------|
+| P0 | Raft 集群不可用 | 恢复多数派节点，从快照恢复 |
+| P1 | 服务发现延迟 > 5s | 检查 Server 负载，扩容集群 |
+| P2 | 单节点健康检查异常 | 检查该节点 Agent 状态 |
+
+## 面试要点
+
+1. **Q：Consul 与 Kubernetes 内置服务发现的区别？**
+   A：K8s 服务发现基于 DNS + Service/Endpoint，仅限集群内部；Consul 支持跨集群/跨数据中心服务发现，支持 VM 和容器混合环境。Consul 提供 KV Store、多数据中心、Connect Service Mesh 等额外功能。适合混合云/多云环境；纯 K8s 环境可使用内置 DNS。
+
+2. **Q：Consul Connect 如何实现 Service Mesh？**
+   A：Connect 通过 Sidecar Proxy（默认 Envoy）实现：① 服务注册时自动注入 Proxy；② Proxy 间建立 mTLS（基于 Consul CA）；③ Intention（意图）控制服务间访问权限；④ 支持 L7 流量管理（路由/重试/超时）。与 Istio 相比，Consul Connect 更轻量，与 Consul 服务发现深度集成。
+
+3. **Q：Consul 的 Raft 一致性协议如何工作？**
+   A：Consul Server 集群使用 Raft 保证一致性：① 选举 Leader（多数派投票）；② 写请求转发到 Leader；③ Leader 复制日志到 Follower；④ 多数派确认后提交；⑤ 读请求可由任意节点处理（可配置一致性级别）。建议 3 或 5 个 Server 节点。
+
 ## Related
 
 - [[17-系统基础/06-知识字典/networking/istio.md|Istio]]
