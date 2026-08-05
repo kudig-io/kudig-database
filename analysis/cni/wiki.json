@@ -1,0 +1,179 @@
+{
+  "id": "2026-04-21-203445",
+  "generated_at": "2026-04-21T12:34:45.772448Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi",
+      "title": "项目概述：CNI 是什么及其核心价值",
+      "file": "1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi",
+      "title": "快速上手：环境搭建与运行第一个 CNI 配置",
+      "file": "2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo",
+      "title": "使用 cnitool 命令行工具管理容器网络",
+      "file": "3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan",
+      "title": "CNI 规范演进历史与版本差异一览",
+      "file": "4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie",
+      "title": "CNI 规范全景：网络配置格式详解",
+      "file": "5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie.md",
+      "section": "深入解析",
+      "group": "规范与协议",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo",
+      "title": "执行协议：ADD、DEL、CHECK、GC、STATUS 五大操作",
+      "file": "6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md",
+      "section": "深入解析",
+      "group": "规范与协议",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi",
+      "title": "插件链式执行与委托（Delegation）机制",
+      "file": "7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi.md",
+      "section": "深入解析",
+      "group": "规范与协议",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan",
+      "title": "结果类型（Result Types）与版本兼容转换",
+      "file": "8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md",
+      "section": "深入解析",
+      "group": "规范与协议",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian",
+      "title": "扩展约定：Capabilities、args 与 CNI_ARGS 的最佳实践",
+      "file": "9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md",
+      "section": "深入解析",
+      "group": "规范与协议",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou",
+      "title": "libcni 库：运行时集成的完整 API 接口",
+      "file": "10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go",
+      "title": "网络配置加载与解析（conf.go）",
+      "file": "11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li",
+      "title": "插件执行引擎：查找、调用与结果处理",
+      "file": "12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian",
+      "title": "skel 骨架包：构建 CNI 插件的起点",
+      "file": "13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan",
+      "title": "类型系统：多版本类型定义与自动转换",
+      "file": "14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi",
+      "title": "版本协商与兼容性校验机制",
+      "file": "15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "16-wang-luo-ming-ming-kong-jian-namespace-guan-li",
+      "title": "网络命名空间（Namespace）管理",
+      "file": "16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong",
+      "title": "缓存机制：Result 持久化与 Attachment 追踪",
+      "file": "17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md",
+      "section": "深入解析",
+      "group": "核心库架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "18-cong-ling-kai-fa-ge-cni-cha-jian",
+      "title": "从零开发一个 CNI 插件",
+      "file": "18-cong-ling-kai-fa-ge-cni-cha-jian.md",
+      "section": "深入解析",
+      "group": "插件开发",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao",
+      "title": "Debug 插件源码解析与测试技巧",
+      "file": "19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md",
+      "section": "深入解析",
+      "group": "插件开发",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng",
+      "title": "插件委托调用：IPAM 及其他委托插件集成",
+      "file": "20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md",
+      "section": "深入解析",
+      "group": "插件开发",
+      "level": "Advanced"
+    },
+    {
+      "slug": "21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng",
+      "title": "项目构建、测试与 CI 流程",
+      "file": "21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md",
+      "section": "深入解析",
+      "group": "工程实践",
+      "level": "Beginner"
+    },
+    {
+      "slug": "22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan",
+      "title": "为 CNI 项目贡献代码的流程与规范",
+      "file": "22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md",
+      "section": "深入解析",
+      "group": "工程实践",
+      "level": "Intermediate"
+    }
+  ]
+}

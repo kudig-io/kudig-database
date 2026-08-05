@@ -417,6 +417,6 @@ groups:
 ## Related
 
 - [[15-AI基础设施/index.md|AI 基础设施]]
-- [[15-AI基础设施/GPU调度/index.md|GPU 调度]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|GPU 调度]]
 - [[02-工作负载/index.md|工作负载]]
 - [[13-生产运维/01-成本治理/index.md|成本治理]]

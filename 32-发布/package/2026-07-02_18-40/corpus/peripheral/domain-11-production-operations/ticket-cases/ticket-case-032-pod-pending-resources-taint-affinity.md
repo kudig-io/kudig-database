@@ -24,9 +24,9 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: data-platform
 ticket_type: 调度失败
 skill_ref:
-- '[[domain-02-workloads-applications/核心工作负载/19-scheduler-configuration.md|Scheduler
+- '[[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/00-core-workloads/04-scheduler-configuration|Scheduler
   配置]]'
-- '[[domain-02-workloads-applications/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]'
+- '[[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/00-core-workloads/05-cluster-capacity-planning|集群容量规划]]'
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/scheduler-fta.md|FTA: 调度失败]]'
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/pod-fta.md|FTA: Pod 异常]]'
@@ -232,7 +232,7 @@ kubectl exec -n data-platform deploy/spark-history-server -- hdfs dfs -ls /etl/o
 > **当前状态：** 新 driver Pod 已调度并 Running，任务日志显示已开始读取数据。
 >
 > **后续建议：**
-> - 参考 [[domain-02-workloads-applications/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]] 在批处理高峰前预扩容大数据节点池；
+> - 参考 [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/00-core-workloads/05-cluster-capacity-planning|集群容量规划]] 在批处理高峰前预扩容大数据节点池；
 > - 在 SparkApplication 模板中统一注入大数据节点污点容忍，避免遗漏；
 > - 配置 Spark on K8s 监控，对 Pending 超过 5 分钟的 driver 触发 P2 告警；
 > - 评估是否引入 Cluster Autoscaler 自动按队列长度扩容大数据节点池。

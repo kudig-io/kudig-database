@@ -484,7 +484,7 @@ EOF
 ## 相关文档
 
 - [02-block-file-object-storage](./02-block-file-object-storage.md) - 存储类型详解
-- [Linux 存储管理](../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
+- [Linux 存储管理](../../17-系统基础/01-Linux/06-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
 - [K8s 存储架构](../01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md) - Kubernetes 存储架构与核心组件
 
 ## See Also

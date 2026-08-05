@@ -315,9 +315,9 @@ aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 - [K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
 - [K8s 核心组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [kubectl 命令参考](../../../../../../01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
 - [集群生命周期管理](../../../../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/02-%E8%BF%90%E7%BB%B4/02-cluster-lifecycle-management.md)
-- [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
+- [ECS 计算资源](001-ack-ecs-compute.md)
 
 ## Related
 
@@ -333,7 +333,7 @@ aliyun cs GET /k8s/<cluster_id>/user_config | jq -r '.config' > ~/.kube/config
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

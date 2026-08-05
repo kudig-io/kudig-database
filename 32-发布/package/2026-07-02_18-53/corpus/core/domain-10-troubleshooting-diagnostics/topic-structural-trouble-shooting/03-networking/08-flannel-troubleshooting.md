@@ -787,7 +787,7 @@ fi
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md|06-gateway-api-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-higress-troubleshooting.md|09-higress-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/10-nginx-ingress-troubleshooting|09-nginx-ingress-troubleshooting]]
 
 
 <!-- risk-assessed -->

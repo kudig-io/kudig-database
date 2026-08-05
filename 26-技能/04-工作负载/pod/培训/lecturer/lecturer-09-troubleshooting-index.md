@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/04-工作负载/pod/培训/lecturer/09-common-problems.md|Common Problems]]
-- [[26-技能/04-工作负载/pod/培训/lecturer/09-health-check.md|Health Check]]
+- [[26-技能/04-工作负载/pod/培训/lecturer/04-common-problems.md|Common Problems]]
+- [[26-技能/04-工作负载/pod/培训/lecturer/05-health-check.md|Health Check]]
 

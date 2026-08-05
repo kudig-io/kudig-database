@@ -355,13 +355,13 @@ Day 19（故障排查方法论）是本周最关键的一天。FTA 和 FEBM 方�
 ## 延伸阅读
 
 - [认证授权系统](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/07-rbac-matrix-configuration.md)
-- [Pod 安全标准](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
+- [RBAC 矩阵配置](../../../../../../08-安全/01-身份与访问/06-rbac-matrix-configuration.md)
+- [Pod 安全标准](../../../安全/03-pod-security-standards.md)
 - [可观测性架构总览](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/01-%E6%80%BB%E8%A7%88/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-%E6%8C%87%E6%A0%87/10-monitoring-metrics-prometheus.md)
+- [Prometheus 监控](../../../../../../09-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
 - [FTA 故障树分析](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/04-fta-core-principles.md)
 - [FEBM 取证循证方法](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/01-febm-theory-foundations.md)
-- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
+- [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
 - [Node NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
 
 ## Related
@@ -378,7 +378,7 @@ Day 19（故障排查方法论）是本周最关键的一天。FTA 和 FEBM 方�
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

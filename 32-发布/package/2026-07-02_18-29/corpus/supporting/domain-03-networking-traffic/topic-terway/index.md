@@ -23,11 +23,11 @@ last_updated: 2026-07
 
 - [[domain-03-networking-traffic/Terway/01-product.md|Product]]
 - [[domain-03-networking-traffic/Terway/02-architecture.md|Architecture]]
-- [[domain-03-networking-traffic/Terway/03-usage.md|Usage]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/topic-terway/01-usage|Usage]]
 - [[domain-03-networking-traffic/Terway/03b-crd-operations.md|03B Crd Operations]]
-- [[domain-03-networking-traffic/Terway/04-operations.md|Operations]]
-- [[domain-03-networking-traffic/Terway/05-testing.md|Testing]]
-- [[domain-03-networking-traffic/Terway/06-performance.md|Performance]]
-- [[domain-03-networking-traffic/Terway/07-troubleshooting-fta.md|Troubleshooting Fta]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/topic-terway/03-operations|Operations]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/topic-terway/04-testing|Testing]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/topic-terway/01-performance|Performance]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/topic-terway/05-troubleshooting-fta|Troubleshooting Fta]]
 - [[domain-03-networking-traffic/Terway/terway-index.md|Terway Index]]
 

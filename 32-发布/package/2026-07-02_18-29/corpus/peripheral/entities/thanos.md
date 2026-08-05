@@ -74,7 +74,7 @@ description: '## 项目概述'
 ## Related
 
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/05-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
 - [[bank-vaults]] — Bank-Vaults
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

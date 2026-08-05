@@ -217,7 +217,7 @@ kubectl patch tc basic -n tidb-cluster --type=merge -p '{"spec":{"tikv":{"replic
 
 ## Related
 
-- [[21-生态参考/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[23-实体/15-参考与索引/cncf-observability.md|cncf-observability]] — CNCF 可观测性项目全景
 - [[chaos-mesh]] — Chaos Mesh
 - [[kubean]] — Kubean

@@ -492,8 +492,8 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 ## 延伸阅读
 
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
+- [核心组件深入](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive.md)
+- [kubectl 命令参考](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference.md)
 - [K8s 速查手册](../../domain-17-system-foundation/速查卡/k8s.md)
 
 ## Related

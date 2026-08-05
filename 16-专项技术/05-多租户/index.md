@@ -10,4 +10,4 @@ created: '2026-07-25'
 
 ## 文档
 
-- [[16-专项技术/05-多租户/04-multi-tenancy-isolation-governance.md|04-multi-tenancy-isolation-governance]]
+- [[16-专项技术/05-多租户/01-multi-tenancy-isolation-governance.md|04-multi-tenancy-isolation-governance]]

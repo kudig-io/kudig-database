@@ -103,12 +103,12 @@ prerequisites:
 ## 相关导航
 
 - [[concepts/gitops-tool-evolution.md|GitOps 工具演进]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-cli-tools]] — 发布说明索引 — CLI 工具
 - [[entities/k8s-production-operations.md|k8s-production-operations]] — 生产运维：GitOps、FinOps、灾备恢复与变更管理
 - [[flux]] — Flux
 - [[helm]] — Helm

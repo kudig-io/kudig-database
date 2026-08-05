@@ -26,5 +26,5 @@ last_updated: 2026-07
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md|Terway Troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md|Flannel Troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-higress-troubleshooting.md|Higress Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|Nginx Ingress Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/10-nginx-ingress-troubleshooting|Nginx Ingress Troubleshooting]]
 

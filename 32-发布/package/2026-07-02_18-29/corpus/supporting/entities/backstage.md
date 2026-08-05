@@ -76,7 +76,7 @@ description: '## 项目概述'
 
 - [[wasmedge]] — WasmEdge
 - [[entities/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
-- [[04-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/06-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
 - [[spin]] — Spin
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

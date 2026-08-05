@@ -26,12 +26,12 @@ last_updated: 2026-07
 - 网络/02-service-mesh/
 - 网络/03-api-gateway/
 - 网络/04-ebpf/
-- [[05-网络/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - 网络/99-attachments/
 - 网络/topic-terway/
 - [[05-网络/00-总览/index.md|00-总览]]
 
 ## 文档
 
-- [[05-网络/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[05-网络/00-总览/02-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

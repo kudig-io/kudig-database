@@ -429,10 +429,10 @@ Target down 意味着 Prometheus 无法从目标拉取指标。排查步骤：1)
 ## 延伸阅读
 
 - [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
-- [监控指标系统](../../domain-06-observability/02-monitoring-metrics-system.md)
-- [Prometheus 生产级配置](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
-- [告警管理](../../domain-06-observability/05-alerting-management.md)
-- [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
+- [监控指标系统](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-06-observability/02-metrics/01-monitoring-metrics-system.md)
+- [Prometheus 生产级配置](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-06-observability/02-metrics/04-monitoring-metrics-prometheus.md)
+- [告警管理](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-06-observability/05-alerting/04-alerting-management.md)
+- [SLO/SLI 体系](32-发布/package/2026-07-02_18-40/corpus/core/domain-06-observability/03-slo-sli/01-slo-sli-system.md)
 
 ## Related
 

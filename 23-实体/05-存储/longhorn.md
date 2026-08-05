@@ -274,7 +274,7 @@ kubectl delete volumes.longhorn.io pvc-xxxx -n longhorn-system
 - [[23-实体/05-存储/hwameistor.md|HwameiStor]]
 - [[23-实体/05-存储/carina.md|Carina]]
 - [[23-实体/15-参考与索引/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[22-概念/12-研究/storage-tool-evolution.md|存储工具演进]] — Cross-reference
 - [[21-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
 - [[21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]

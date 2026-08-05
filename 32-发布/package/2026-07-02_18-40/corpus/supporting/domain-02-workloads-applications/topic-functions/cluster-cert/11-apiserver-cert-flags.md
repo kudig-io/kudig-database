@@ -477,8 +477,8 @@ openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 - [[domain-17-system-foundation/速查卡/go.md|go]]
 - [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-07-platform-engineering/代码分析/cluster-cert/08-rbac-mapping.md|08-rbac-mapping]]
-- [[domain-07-platform-engineering/代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/03-rbac-mapping|08-rbac-mapping]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-kubeconfig-certs|12-kubeconfig-certs]]
 
 
 <!-- risk-assessed -->

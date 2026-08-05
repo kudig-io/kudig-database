@@ -319,14 +319,14 @@ PVC Pending 通常有几个原因：1) 没有满足条件的 PV（大小不够�
 
 ## 延伸阅读
 
-- [网络架构总览](../../domain-03-networking-traffic/01-network-architecture-overview.md)
-- [CNI 架构基础](../../domain-03-networking-traffic/02-cni-architecture-fundamentals.md)
-- [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [Ingress 基础](../../domain-03-networking-traffic/19-ingress-fundamentals.md)
-- [Nginx Ingress 完整指南](../../domain-03-networking-traffic/21-nginx-ingress-complete-guide.md)
+- [网络架构总览](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/02-network-architecture-overview.md)
+- [CNI 架构基础](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/01-cni-architecture-fundamentals.md)
+- [Service 概念与类型](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/05-service-concepts-types.md)
+- [Ingress 基础](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/05-ingress-fundamentals.md)
+- [Nginx Ingress 完整指南](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/07-nginx-ingress-complete-guide.md)
 - [存储架构总览](../../domain-04-storage-data/01-storage-architecture-overview.md)
 - [PV 架构基础](../../domain-04-storage-data/02-pv-architecture-fundamentals.md)
-- [StorageClass 动态供给](../../domain-04-storage-data/04-storageclass-dynamic-provisioning.md)
+- [StorageClass 动态供给](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-04-storage-data/01-k8s-storage/02-storageclass-dynamic-provisioning.md)
 - [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
 
 ---
@@ -388,12 +388,12 @@ ReadWriteOnce (单节点读写)、ReadOnlyMany (多节点只读)、ReadWriteMany
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

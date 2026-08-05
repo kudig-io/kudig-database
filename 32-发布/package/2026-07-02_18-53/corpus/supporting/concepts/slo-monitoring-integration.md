@@ -89,7 +89,7 @@ relationships:
 
 ## 相关 Domain
 
-- [[domain-09-reliability-engineering/SLO-SLI/01-sli-definition-selection.md|01 sli definition selection]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-09-reliability-engineering/02-slo-sli/01-sli-definition-selection|01 sli definition selection]]
 - [[domain-17-system-foundation/知识字典/observability/observability.md|observability]]/02-metrics/02-[[skills/best-practices/best-practices/observability/monitoring.md|monitoring]]-metrics-system]]
 - domain-08-release-change-management/01-[[domain-17-system-foundation/速查卡/gitops.md|gitops]]/01-gitops-principles
 ## Related

@@ -59,9 +59,9 @@ prerequisites:
 - **[01-Harbor企业级镜像仓库](../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/02-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/01-harbor-enterprise-image-registry.md)** - Harbor镜像仓库深度实践，涵盖高可用部署、安全扫描、镜像复制等完整技术方案
 - **[02-Docker Registry企业级分发](../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/02-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/02-docker-registry-enterprise-distribution.md)** - Docker Registry分发系统深度实践，包括高可用配置、安全认证、性能优化等
 - **[03-JFrog Artifactory企业级平台](../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/02-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/03-jfrog-artifactory-enterprise.md)** - JFrog Artifactory通用制品管理平台实践，支持多格式制品管理
-- **[04-Quay企业级镜像管理](../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/02-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/04-quay-enterprise-registry.md)** - Quay容器镜像仓库深度实践，涵盖安全扫描、签名验证、CI/CD集成等
-- **[05-GitLab Container Registry企业级实践](../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/02-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/05-gitlab-container-registry-enterprise.md)** - GitLab集成容器注册表深度实践，包括CI/CD集成、安全扫描、权限管理等
-- **[06-Amazon ECR企业级容器注册表](../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/02-%E9%95%9C%E5%83%8F%E7%AE%A1%E7%90%86/06-amazon-ecr-enterprise.md)** - AWS弹性容器注册表深度实践，涵盖跨账户共享、安全扫描、成本优化等
+- **[04-Quay企业级镜像管理](../../../14-容器运行时/02-镜像管理/05-quay-enterprise-registry.md)** - Quay容器镜像仓库深度实践，涵盖安全扫描、签名验证、CI/CD集成等
+- **[05-GitLab Container Registry企业级实践](../../../14-容器运行时/02-镜像管理/06-gitlab-container-registry-enterprise.md)** - GitLab集成容器注册表深度实践，包括CI/CD集成、安全扫描、权限管理等
+- **[06-Amazon ECR企业级容器注册表](../../../14-容器运行时/02-镜像管理/07-amazon-ecr-enterprise.md)** - AWS弹性容器注册表深度实践，涵盖跨账户共享、安全扫描、成本优化等
 
 ## 🎯 学习路径建议
 

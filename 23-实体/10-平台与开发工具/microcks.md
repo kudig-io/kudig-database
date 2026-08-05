@@ -254,7 +254,7 @@ curl -X DELETE http://localhost:8080/api/services/<service-id>
 
 ## Related
 
-- [[02-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
+- [[23-实体/03-运行时/01-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
 - [[karmada]] — Karmada
 - [[rook]] — Rook
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

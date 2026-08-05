@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-08
 affected_namespace: recommendation-engine
 ticket_type: 自动扩缩容异常
 skill_ref:
-- '[[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|节点自动扩缩容指南]]'
+- '[[32-发布/package/2026-07-02_18-53/corpus/core/domain-07-platform-engineering/01-karpenter-node-autoscaling-guide|节点自动扩缩容指南]]'
 - Cluster Autoscaler 排查
 fta_ref:
 - 'FTA: Cluster Autoscaler 不扩容'

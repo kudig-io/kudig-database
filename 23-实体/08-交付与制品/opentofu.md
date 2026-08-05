@@ -263,7 +263,7 @@ tofu force-unlock <lock-id>
 
 - [[kubeedge]] — KubeEdge
 - [[telepresence]] — Telepresence
-- [[08-containerd-multi-tenant]] — containerd 多租户
+- [[07-containerd-multi-tenant]] — containerd 多租户
 - [[harbor]] — Harbor
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

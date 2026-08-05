@@ -65,7 +65,7 @@ cross_refs:
 
 # 09 - [[Kubernetes|Kubernetes]] 源码结构与阅读指南 (Source Code)
 
-> **交叉引用**：Domain-1 中有更详细的 Kubernetes 源码架构分析，请参考 [Domain-1: 源码结构](../domain-01-cluster-fundamentals/04-source-code-structure.md) 和 [Domain-1: 源码架构](../domain-01-cluster-fundamentals/11-kubernetes-source-code-architecture.md)。
+> **交叉引用**：Domain-1 中有更详细的 Kubernetes 源码架构分析，请参考 [Domain-1: 源码结构](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-01-cluster-fundamentals/01-architecture-overview/01-source-code-structure.md) 和 [Domain-1: 源码架构](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-01-cluster-fundamentals/01-architecture-overview/05-kubernetes-source-code-architecture.md)。
 
 <!-- chunk: 阅读建议：先看抽象，再看实现 -->
 ## 阅读建议：先看抽象，再看实现

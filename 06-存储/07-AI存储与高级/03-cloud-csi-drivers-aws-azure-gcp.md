@@ -355,13 +355,13 @@ aws ec2 describe-volumes-modifications --volume-ids vol-xxx \
 4. **性能分级**：为不同工作负载创建多级 StorageClass（如 gp3-standard、io2-highperf），参考 [[06-存储/02-存储基础/06-storage-performance-iops.md|存储性能与 IOPS]]
 5. **多云一致性**：使用 Kustomize/Helm 抽象 StorageClass 差异，实现跨云可移植
 6. **监控告警**：监控 CSI 驱动 Pod 健康、卷操作延迟、快照成功率
-7. **定期快照**：通过 VolumeSnapshotSchedule 或 [[06-存储/01-K8s存储/17-volume-snapshot-scheduling.md|快照调度]] 实现自动化数据保护
+7. **定期快照**：通过 VolumeSnapshotSchedule 或 [[06-存储/01-K8s存储/18-volume-snapshot-scheduling.md|快照调度]] 实现自动化数据保护
 8. **AI 场景**：大规模训练数据建议使用文件存储（EFS/Azure File/NAS）或专用高性能存储，参考 [[06-存储/07-AI存储与高级/02-high-perf-ai-storage-weka-lustre.md|AI 高性能存储]]
 
 ## Related
 
-- [[06-存储/01-K8s存储/05-csi-drivers-integration.md|CSI 驱动集成]]
-- [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
+- [[06-存储/01-K8s存储/06-csi-drivers-integration.md|CSI 驱动集成]]
+- [[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
 - [[06-存储/07-AI存储与高级/05-csi-topology-awareness.md|CSI 拓扑感知调度]]
 - [[06-存储/02-存储基础/02-block-file-object-storage.md|块/文件/对象存储]]
 - [[12-可靠性/01-备份恢复/03-pv-backup-snapshot.md|PV 备份与快照]]

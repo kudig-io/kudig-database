@@ -100,7 +100,7 @@ description: '## 项目概述'
 - [[entities/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
 - [[etcd]] — etcd
 
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/03-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]
 - ovn-kubernetes
 - 99-spring-cloud-kubernetes-service-mesh-guide
 - 08-kubernetes-network-policies-security-micro-segmentation
@@ -133,7 +133,7 @@ description: '## 项目概述'
 - 99-kubernetes-v1.33-platform-ops-guide
 - 99-kubernetes-deployment-patterns-architecture
 - 99-kubernetes-multi-tenant-architecture
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/06-kubernetes-production-architecture-blueprint|99-kubernetes-production-architecture-blueprint]]
 - 13-kubernetes-cost-governance
 - 99-kubernetes-v1.33-workloads-guide
 - 99-spring-boot-kubernetes-guide
@@ -181,11 +181,11 @@ description: '## 项目概述'
 - 99-java-security-kubernetes-guide
 - 05-ibm-cloud-kubernetes-service-enterprise
 - 02-kubernetes-gateway-api-deep-dive
-- [[domain-02-workloads-applications/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[domain-02-workloads-applications/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[domain-02-workloads-applications/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[domain-02-workloads-applications/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/02-quarkus-native-kubernetes|05-quarkus-native-kubernetes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/01-spring-boot-kubernetes-production|02-spring-boot-kubernetes-production]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/04-java-observability-kubernetes|07-java-observability-kubernetes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/02-jvm-gc-container-tuning|03-jvm-gc-container-tuning]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/01-java-operator-sdk-development|04-java-operator-sdk-development]]
 - [[domain-02-workloads-applications/README.md|Java on Kubernetes 综合实践指南]]
 - domain-java-kubernetes MOC
 - 16-kubernetes-hardware-troubleshooting
@@ -209,7 +209,7 @@ description: '## 项目概述'
 - [[entities/root-terms.md|K8s Root术语参考]] — Cross-reference
 - [[entities/scheduling-terms.md|K8s 调度术语参考]] — Cross-reference
 - [[entities/kudig-contribution-guide.md|贡献指南、项目概览与版本发布说明]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[entities/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[entities/storage-terms.md|K8s 存储术语参考]] — Cross-reference
 - [[entities/observability-terms.md|K8s 可观测性术语参考]] — Cross-reference

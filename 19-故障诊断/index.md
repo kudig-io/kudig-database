@@ -26,7 +26,7 @@ last_updated: 2026-07
 - 故障诊断/02-infrastructure-troubleshooting/
 - 故障诊断/03-advanced-troubleshooting/
 - 故障诊断/04-jvm-tuning/
-- [[19-故障诊断/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - 故障诊断/tools/
 - 故障诊断/FEBM方法论/
 - 故障诊断/FTA故障树/
@@ -38,6 +38,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[19-故障诊断/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[19-故障诊断/00-总览/02-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 - [[19-故障诊断/SUMMARY.md|Summary]]
 

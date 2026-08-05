@@ -89,8 +89,8 @@ graph TD
 ## 相关文档
 
 - domain-02-workloads-applications/02-deployment-production-patterns.md
-- [[domain-02-workloads-applications/核心工作负载/03-statefulset-advanced-operations.md|03 statefulset advanced operations]]
-- [[domain-02-workloads-applications/核心工作负载/04-daemonset-management.md|04 daemonset management]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/01-statefulset-advanced-operations|03 statefulset advanced operations]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/02-daemonset-management|04 daemonset management]]
 - [[domain-18-manifests-patterns/README.md|README]]
 
 

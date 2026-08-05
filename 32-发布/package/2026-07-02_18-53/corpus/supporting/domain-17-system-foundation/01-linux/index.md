@@ -18,13 +18,13 @@ last_updated: 2026-07
 ## 文档
 
 - [[domain-17-system-foundation/01-linux/01-linux-system-architecture.md|Linux System Architecture]]
-- [[domain-17-system-foundation/01-linux/02-linux-process-management.md|Linux Process Management]]
-- [[domain-17-system-foundation/01-linux/03-linux-filesystem-deep-dive.md|Linux Filesystem Deep Dive]]
-- [[domain-17-system-foundation/01-linux/04-linux-networking-configuration.md|Linux Networking Configuration]]
-- [[domain-17-system-foundation/01-linux/05-linux-storage-management.md|Linux Storage Management]]
-- [[domain-17-system-foundation/01-linux/06-linux-performance-tuning.md|Linux Performance Tuning]]
-- [[domain-17-system-foundation/01-linux/07-linux-security-hardening.md|Linux Security Hardening]]
-- [[domain-17-system-foundation/01-linux/08-linux-container-fundamentals.md|Linux Container Fundamentals]]
-- [[domain-17-system-foundation/01-linux/09-linux-operations-basics.md|Linux Operations Basics]]
-- [[domain-17-system-foundation/01-linux/99-linux-commands-reference.md|Linux Commands Reference]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-17-system-foundation/01-linux/01-linux-process-management|Linux Process Management]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/02-linux-filesystem-deep-dive|Linux Filesystem Deep Dive]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/03-linux-networking-configuration|Linux Networking Configuration]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/04-linux-storage-management|Linux Storage Management]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/05-linux-performance-tuning|Linux Performance Tuning]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/06-linux-security-hardening|Linux Security Hardening]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/07-linux-container-fundamentals|Linux Container Fundamentals]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/08-linux-operations-basics|Linux Operations Basics]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-17-system-foundation/01-linux/09-linux-commands-reference|Linux Commands Reference]]
 

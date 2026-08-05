@@ -85,7 +85,7 @@ prerequisites:
 
 ### CNI 生态
 
-- [[domain-02-workloads-applications/核心工作负载/15-container-runtime-interfaces.md|15 container runtime interfaces]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/00-core-workloads/04-container-runtime-interfaces|15 container runtime interfaces]]
 - Calico 网络
 - Cilium eBPF 网络与安全实践指南
 

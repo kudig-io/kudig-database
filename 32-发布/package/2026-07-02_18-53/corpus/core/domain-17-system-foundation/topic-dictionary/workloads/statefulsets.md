@@ -273,7 +273,7 @@ kubectl get pvc -n prod -l app=postgres
 ```
 ## 交叉引用
 
-- [StatefulSet 高级运维](../../domain-02-workloads-applications/03-statefulset-advanced-operations.md)
+- [StatefulSet 高级运维](32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/01-statefulset-advanced-operations.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [StatefulSet 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/statefulset-fta.md)
 - [存储 CSI 故障排查](../../[[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]].md)

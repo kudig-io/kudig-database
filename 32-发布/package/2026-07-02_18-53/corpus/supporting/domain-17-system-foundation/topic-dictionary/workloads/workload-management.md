@@ -244,7 +244,7 @@ kubectl get deployments -n prod -o custom-columns='NAME:.metadata.name,DESIRED:.
 - [CronJob](./cronjob.md)
 - [Managing Workloads（操作指南）](./managing-workloads.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
-- [工作负载故障排查手册](../../domain-02-workloads-applications/07-workload-troubleshooting-handbook.md)
+- [工作负载故障排查手册](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/03-workload-troubleshooting-handbook.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/

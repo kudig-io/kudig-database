@@ -26,7 +26,7 @@ status: stable
 
 # GitOps 与生产运维
 
-> 相关领域：[[21-生态参考/98-merged-indexes/index.md|index]] | [[22-概念/08-可靠性与运维/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
+> 相关领域：[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] | [[22-概念/08-可靠性与运维/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
 
 ---
 

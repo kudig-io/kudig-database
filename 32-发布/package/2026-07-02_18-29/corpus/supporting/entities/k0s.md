@@ -85,7 +85,7 @@ K0s 是一个轻量级、全功能的 Kubernetes 发行版，打包为单一二�
 
 - [[bank-vaults]] — Bank-Vaults
 - [[thanos]] — Thanos
-- [[03-containerd-security-hardening]] — containerd 安全加固
+- [[02-containerd-security-hardening]] — containerd 安全加固
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

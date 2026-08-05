@@ -319,14 +319,14 @@ PVC Pending 通常有几个原因：1) 没有满足条件的 PV（大小不够�
 
 ## 延伸阅读
 
-- [网络架构总览](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/01-network-architecture-overview.md)
-- [CNI 架构基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md)
-- [Service 概念与类型](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md)
-- [Ingress 基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md)
-- [Nginx Ingress 完整指南](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/21-nginx-ingress-complete-guide.md)
+- [网络架构总览](../../../../../../05-网络/01-K8s网络核心/02-network-architecture-overview.md)
+- [CNI 架构基础](../../../../../../05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md)
+- [Service 概念与类型](../../../../../../05-网络/01-K8s网络核心/07-service-concepts-types.md)
+- [Ingress 基础](../../../../../../05-网络/01-K8s网络核心/20-ingress-fundamentals.md)
+- [Nginx Ingress 完整指南](../../../../../../05-网络/01-K8s网络核心/22-nginx-ingress-complete-guide.md)
 - [存储架构总览](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md)
 - [PV 架构基础](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/02-pv-architecture-fundamentals.md)
-- [StorageClass 动态供给](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md)
+- [StorageClass 动态供给](../../../../../../06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md)
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 
 ---
@@ -393,7 +393,7 @@ ReadWriteOnce (单节点读写)、ReadOnlyMany (多节点只读)、ReadWriteMany
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

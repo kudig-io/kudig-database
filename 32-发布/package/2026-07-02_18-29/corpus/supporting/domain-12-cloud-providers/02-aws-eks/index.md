@@ -22,12 +22,12 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/AWS-EKS/02-eks-cluster-lifecycle-management.md|Eks Cluster Lifecycle Management]]
-- [[domain-12-cloud-providers/AWS-EKS/03-eks-networking-vpc-cni.md|Eks Networking Vpc Cni]]
-- [[domain-12-cloud-providers/AWS-EKS/04-eks-storage-efs-fsx.md|Eks Storage Efs Fsx]]
-- [[domain-12-cloud-providers/AWS-EKS/05-eks-iam-irsa-pod-identity.md|Eks Iam Irsa Pod Identity]]
-- [[domain-12-cloud-providers/AWS-EKS/06-eks-troubleshooting-playbook.md|Eks Troubleshooting Playbook]]
-- [[domain-12-cloud-providers/AWS-EKS/99-aws-eks-production-runbook.md|Aws Eks Production Runbook]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-12-cloud-providers/02-aws-eks/01-eks-cluster-lifecycle-management|Eks Cluster Lifecycle Management]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-12-cloud-providers/02-aws-eks/02-eks-networking-vpc-cni|Eks Networking Vpc Cni]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-12-cloud-providers/02-aws-eks/03-eks-storage-efs-fsx|Eks Storage Efs Fsx]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-12-cloud-providers/02-aws-eks/04-eks-iam-irsa-pod-identity|Eks Iam Irsa Pod Identity]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-12-cloud-providers/02-aws-eks/05-eks-troubleshooting-playbook|Eks Troubleshooting Playbook]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/02-aws-eks/01-aws-eks-production-runbook|Aws Eks Production Runbook]]
 - [[domain-12-cloud-providers/AWS-EKS/aws-eks-overview.md|Aws Eks Overview]]
 
 

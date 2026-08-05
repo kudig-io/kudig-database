@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/02-getting-started/02-pod-basics.md|Pod Basics]]
-- [[skills/training-lecturer/02-getting-started/03-deployment-basics.md|Deployment Basics]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/01-getting-started/01-pod-basics|Pod Basics]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/01-getting-started/02-deployment-basics|Deployment Basics]]
 

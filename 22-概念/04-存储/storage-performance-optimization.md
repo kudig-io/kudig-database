@@ -29,7 +29,7 @@ status: stable
 
 存储性能优化是 Kubernetes 数据密集型工作负载（数据库、AI/ML 训练、日志分析）的关键环节。本文涵盖基准测试方法论、硬件级优化、云厂商特化配置以及存储 QoS 策略。
 
-相关：[[22-概念/04-存储/csi-drivers.md|csi drivers]] | [[22-概念/04-存储/storageclass.md|storageclass]] | [[21-生态参考/98-merged-indexes/index.md|index]]
+相关：[[22-概念/04-存储/csi-drivers.md|csi drivers]] | [[22-概念/04-存储/storageclass.md|storageclass]] | [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]]
 
 ---
 

@@ -46,7 +46,7 @@ authors:
 # kube-controller-manager 源码深度剖析
 
 > **源码基线**：`33-源码/控制平面/kubernetes-1.36.2/`
-> 概念层配套阅读：[[01-集群基础/03-控制平面/13-kube-controller-manager-deep-dive.md|控制平面：KCM Deep Dive]] · [[01-集群基础/02-设计原则/03-controller-pattern.md|控制器模式与调谐循环]]
+> 概念层配套阅读：[[01-集群基础/03-控制平面/13-kube-controller-manager-deep-dive.md|控制平面：KCM Deep Dive]] · [[01-集群基础/02-设计原则/04-controller-pattern.md|控制器模式与调谐循环]]
 
 ## 概述
 
@@ -210,7 +210,7 @@ func (gc *GarbageCollector) Sync(ctx context.Context, discoveryClient ..., perio
 | Foreground | owner 挂 `foregroundDeletion` finalizer，等子级删完 | GC 负责在子级清空后摘除 finalizer |
 | Orphan | owner 挂 `orphan` finalizer，GC 抹掉子级的 ownerRef | 子级保留、脱管 |
 
-**生产陷阱**：跨 namespace 或 cluster-scoped 子级引用 namespaced owner 属非法引用，GC 会打 event 并可能直接删除子级——「资源被莫名删除」时先 `kubectl get events | grep OwnerRefInvalidNamespace`。机制详见 [[01-集群基础/02-设计原则/19-garbage-collection-owner-reference.md|GC 与 OwnerReference]]。
+**生产陷阱**：跨 namespace 或 cluster-scoped 子级引用 namespaced owner 属非法引用，GC 会打 event 并可能直接删除子级——「资源被莫名删除」时先 `kubectl get events | grep OwnerRefInvalidNamespace`。机制详见 [[01-集群基础/02-设计原则/20-garbage-collection-owner-reference.md|GC 与 OwnerReference]]。
 
 ---
 
@@ -241,4 +241,4 @@ worker → processNextWorkItem → syncHandler(key)
 - [[10-平台工程/06-代码分析/deployment-create/README.md|代码分析：应用部署流程]]（操作视角）
 - [[01-集群基础/03-控制平面/13-kube-controller-manager-deep-dive.md|控制平面：KCM Deep Dive]]
 - [[02-工作负载/README.md|工作负载域]]
-- [[01-集群基础/02-设计原则/12-operator-development-guide.md|Operator 开发指南]]（自定义控制器套用同一骨架）
+- [[01-集群基础/02-设计原则/13-operator-development-guide.md|Operator 开发指南]]（自定义控制器套用同一骨架）

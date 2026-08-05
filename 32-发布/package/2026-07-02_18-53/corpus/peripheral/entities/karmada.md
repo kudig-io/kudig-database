@@ -84,7 +84,7 @@ Karmada（Kubernetes Armada）是开放的多云多集群 Kubernetes 管理系�
 
 - [[entities/virtual-kubelet.md|kubelet]]]] — Virtual Kubelet
 - [[kudo]] — KUDO
-- [[02-containerd-v2-features]] — containerd 2.0 新特性
+- [[32-发布/package/2026-07-02_18-53/corpus/core/entities/01-containerd-v2-features]] — containerd 2.0 新特性
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[armada]] — Armada
 

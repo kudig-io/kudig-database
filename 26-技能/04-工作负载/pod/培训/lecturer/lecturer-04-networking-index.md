@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/05-网络/ingress/培训/lecturer/04-ingress-basics.md|Ingress Basics]]
+- [[26-技能/05-网络/ingress/培训/lecturer/01-ingress-basics.md|Ingress Basics]]
 

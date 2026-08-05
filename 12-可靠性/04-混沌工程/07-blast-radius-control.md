@@ -436,6 +436,6 @@ echo "=== 紧急停止完成 ==="
 
 - [[12-可靠性/04-混沌工程/05-chaos-experiment-automation.md|05 chaos experiment automation]]
 - [[12-可靠性/04-混沌工程/03-chaos-experiment-design.md|03 chaos experiment design]]
-- [[12-可靠性/06-SRE实践/07-incident-command-field-guide.md|07 incident command field guide]]
+- [[12-可靠性/06-SRE实践/10-incident-command-field-guide.md|07 incident command field guide]]
 
 <!-- risk-assessed -->

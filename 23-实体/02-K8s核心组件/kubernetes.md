@@ -100,7 +100,7 @@ description: '## 项目概述'
 - [[23-实体/15-参考与索引/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
 - [[etcd]] — etcd
 
-- [[02-工作负载/02-Java-on-K8s/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
 - ovn-kubernetes
 - 99-spring-cloud-kubernetes-service-mesh-guide
 - 08-kubernetes-network-policies-security-micro-segmentation
@@ -133,7 +133,7 @@ description: '## 项目概述'
 - 99-kubernetes-v1.33-platform-ops-guide
 - 99-kubernetes-deployment-patterns-architecture
 - 99-kubernetes-multi-tenant-architecture
-- [[01-集群基础/00-总览/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
 - 13-kubernetes-cost-governance
 - 99-kubernetes-v1.33-workloads-guide
 - 99-spring-boot-kubernetes-guide
@@ -181,11 +181,11 @@ description: '## 项目概述'
 - 99-java-security-kubernetes-guide
 - 05-ibm-cloud-kubernetes-service-enterprise
 - 02-kubernetes-gateway-api-deep-dive
-- [[02-工作负载/02-Java-on-K8s/05-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
-- [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
-- [[02-工作负载/02-Java-on-K8s/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
-- [[02-工作负载/02-Java-on-K8s/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
-- [[02-工作负载/02-Java-on-K8s/04-java-operator-sdk-development.md|04-java-operator-sdk-development]]
+- [[02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[02-工作负载/02-Java-on-K8s/06-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development.md|04-java-operator-sdk-development]]
 - [[02-工作负载/README.md|Java on Kubernetes 综合实践指南]]
 - domain-java-kubernetes MOC
 - 16-kubernetes-hardware-troubleshooting
@@ -209,7 +209,7 @@ description: '## 项目概述'
 - [[23-实体/15-参考与索引/root-terms.md|K8s Root术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/scheduling-terms.md|K8s 调度术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/kudig-contribution-guide.md|贡献指南、项目概览与版本发布说明]] — Cross-reference
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[23-实体/15-参考与索引/storage-terms.md|K8s 存储术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/observability-terms.md|K8s 可观测性术语参考]] — Cross-reference

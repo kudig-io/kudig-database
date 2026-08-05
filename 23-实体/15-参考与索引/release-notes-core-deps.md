@@ -128,7 +128,7 @@ prerequisites:
 
 - [[22-概念/01-核心架构/core-dependency-version-matrix.md|核心依赖版本矩阵]]
 - [[23-实体/15-参考与索引/core-deps-changelog.md|核心依赖变更日志索引]]
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related

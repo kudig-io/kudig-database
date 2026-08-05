@@ -72,12 +72,12 @@ prerequisites:
 |:---:|:---|:---:|:---|:---|
 | 1 | [01-product.md](./01-product.md) | 330+ | 产品概览 | 定位与价值、版本历史(v1.0-v1.5)、5 种模式总览、CNI 对比(12 项)、依赖与限制、ECS 规格速查、适用场景 |
 | 2 | [02-architecture.md](./02-architecture.md) | 950+ | 架构原理 | 整体架构图、控制面/数据面、5 种模式详解(含 ASCII 架构图)、IPAM 流程、5 个 CRD 模型、四层安全体系、CNI 规范集成、BoltDB 持久化 |
-| 3 | [03-usage.md](./03-usage.md) | 730+ | 使用指南 | 安装初始化、5 种模式配置(YAML)、[[NetworkPolicy|NetworkPolicy]](iptables/Cilium)、固定 IP(PodNetworking/ReservedIP)、Pod 安全组、IPv6 双栈、Annotation 速查(20+)、容量规划 |
-| 4 | [04-operations.md](./04-operations.md) | 860+ | 运维手册 | 健康检查脚本、GC 机制(设计原则/触发链路/参数调优)、[[Prometheus|Prometheus]] 告警(3 规则)、升级/回滚、故障排查决策树、IP 泄漏紧急处理、巡检清单、SRE 红线(7 条) |
-| 5 | [05-testing.md](./05-testing.md) | 1040+ | 测试验证 | Pod 网络验证、6 类跨节点测试、NetworkPolicy 3 场景测试、ENI 密度压测(50 Pod)、固定 IP/GC/安全组验证、iperf3 基准、MTU 测试、端到端测试套件(可执行脚本) |
-| 6 | [06-performance.md](./06-performance.md) | 600+ | 性能调优 | 5 模式性能基准、Pod 容量计算(5 规格)、内核调优(网卡多队列/sysctl/NUMA)、IP 池预热、eBPF 加速与迁移、生产基线(5 项指标+告警阈值)、性能故障排查 |
+| 3 | [03-usage.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/topic-terway/01-usage.md) | 730+ | 使用指南 | 安装初始化、5 种模式配置(YAML)、[[NetworkPolicy|NetworkPolicy]](iptables/Cilium)、固定 IP(PodNetworking/ReservedIP)、Pod 安全组、IPv6 双栈、Annotation 速查(20+)、容量规划 |
+| 4 | [04-operations.md](03-operations.md) | 860+ | 运维手册 | 健康检查脚本、GC 机制(设计原则/触发链路/参数调优)、[[Prometheus|Prometheus]] 告警(3 规则)、升级/回滚、故障排查决策树、IP 泄漏紧急处理、巡检清单、SRE 红线(7 条) |
+| 5 | [05-testing.md](04-testing.md) | 1040+ | 测试验证 | Pod 网络验证、6 类跨节点测试、NetworkPolicy 3 场景测试、ENI 密度压测(50 Pod)、固定 IP/GC/安全组验证、iperf3 基准、MTU 测试、端到端测试套件(可执行脚本) |
+| 6 | [06-performance.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/topic-terway/01-performance.md) | 600+ | 性能调优 | 5 模式性能基准、Pod 容量计算(5 规格)、内核调优(网卡多队列/sysctl/NUMA)、IP 池预热、eBPF 加速与迁移、生产基线(5 项指标+告警阈值)、性能故障排查 |
 | 7 | [03b-crd-operations.md](./03b-crd-operations.md) | 740+ | CRD 操作 | 5 个 CRD 全量清单、PodENI/NodeNetworking/PodNetworking/ReservedIP/IPInstance 完整 CRUD、ConfigMap 管理(jq)、综合诊断脚本、命令速查表 |
-| 8 | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) | 510+ | 故障树速查 | Mermaid FTA 全景图、6 大问题类别诊断、32 条错误信息目录、AND 门组合问题、SRE on-call 参考 |
+| 8 | [07-troubleshooting-fta.md](05-troubleshooting-fta.md) | 510+ | 故障树速查 | Mermaid FTA 全景图、6 大问题类别诊断、32 条错误信息目录、AND 门组合问题、SRE on-call 参考 |
 
 ---
 
@@ -87,12 +87,12 @@ prerequisites:
 |:---|:---|
 | **快速了解 Terway** | [01-product.md](./01-product.md) — 产品定位、模式对比、CNI 选型 |
 | **理解架构原理** | [02-architecture.md](./02-architecture.md) — 5 种模式数据流、IPAM、CRD 模型 |
-| **上手使用配置** | [03-usage.md](./03-usage.md) — 安装、模式配置 YAML、NetworkPolicy、固定 IP |
-| **生产运维排障** | [04-operations.md](./04-operations.md) — GC 机制、问题决策树、告警规则 |
-| **网络测试验证** | [05-testing.md](./05-testing.md) — 端到端测试套件、压测、基准测试 |
+| **上手使用配置** | [03-usage.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/topic-terway/01-usage.md) — 安装、模式配置 YAML、NetworkPolicy、固定 IP |
+| **生产运维排障** | [04-operations.md](03-operations.md) — GC 机制、问题决策树、告警规则 |
+| **网络测试验证** | [05-testing.md](04-testing.md) — 端到端测试套件、压测、基准测试 |
 | **CRD 资源管理** | [03b-crd-operations.md](./03b-crd-operations.md) — 5 个 CRD 完整 CRUD、诊断脚本 |
-| **性能调优优化** | [06-performance.md](./06-performance.md) — 内核调优、eBPF 迁移、生产基线 |
-| **SRE 故障树速查** | [07-troubleshooting-fta.md](./07-troubleshooting-fta.md) — FTA 全景图、错误信息目录、诊断命令表 |
+| **性能调优优化** | [06-performance.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/topic-terway/01-performance.md) — 内核调优、eBPF 迁移、生产基线 |
+| **SRE 故障树速查** | [07-troubleshooting-fta.md](05-troubleshooting-fta.md) — FTA 全景图、错误信息目录、诊断命令表 |
 
 ---
 
@@ -102,15 +102,15 @@ prerequisites:
 
 | 文档 | 说明 |
 |:---|:---|
-| [domain-03-networking-traffic/05-terway-advanced-guide.md](../domain-03-networking-traffic/05-terway-advanced-guide.md) | Terway 高级指南（模式对比、ENIIP 详解、容量规划） |
-| [domain-03-networking-traffic/37-terway-resources-crud-operations.md](../domain-03-networking-traffic/37-terway-resources-crud-operations.md) | Terway 实例 CRUD 操作指南（CRD 资源管理，1521 行） |
-| [domain-03-networking-traffic/38-terway-gc-mechanism.md](../domain-03-networking-traffic/38-terway-gc-mechanism.md) | Terway GC 垃圾回收机制详解（942 行） |
-| [domain-03-networking-traffic/02-cni-architecture-fundamentals.md](../domain-03-networking-traffic/02-cni-architecture-fundamentals.md) | CNI 架构基础与核心原理 |
-| [domain-03-networking-traffic/03-cni-plugins-comparison.md](../domain-03-networking-traffic/03-cni-plugins-comparison.md) | CNI 插件对比与选型指南 |
-| [domain-03-networking-traffic/04-flannel-complete-guide.md](../domain-03-networking-traffic/04-flannel-complete-guide.md) | Flannel 完整指南 |
-| [domain-03-networking-traffic/16-networkpolicy-deep-practice.md](../domain-03-networking-traffic/16-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
-| [domain-03-networking-traffic/34-network-performance-tuning.md](../domain-03-networking-traffic/34-network-performance-tuning.md) | 网络性能调优 |
-| [domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md](../domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md) | ACK VPC 网络规划与 Terway 集成 |
+| [domain-03-networking-traffic/05-terway-advanced-guide.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/01-terway-advanced-guide.md) | Terway 高级指南（模式对比、ENIIP 详解、容量规划） |
+| [domain-03-networking-traffic/37-terway-resources-crud-operations.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/29-terway-resources-crud-operations.md) | Terway 实例 CRUD 操作指南（CRD 资源管理，1521 行） |
+| [domain-03-networking-traffic/38-terway-gc-mechanism.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/30-terway-gc-mechanism.md) | Terway GC 垃圾回收机制详解（942 行） |
+| [domain-03-networking-traffic/02-cni-architecture-fundamentals.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/01-cni-architecture-fundamentals.md) | CNI 架构基础与核心原理 |
+| [domain-03-networking-traffic/03-cni-plugins-comparison.md](04-cni-plugins-comparison.md) | CNI 插件对比与选型指南 |
+| [domain-03-networking-traffic/04-flannel-complete-guide.md](05-flannel-complete-guide.md) | Flannel 完整指南 |
+| [domain-03-networking-traffic/16-networkpolicy-deep-practice.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/12-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
+| [domain-03-networking-traffic/34-network-performance-tuning.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/26-network-performance-tuning.md) | 网络性能调优 |
+| [domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/entities/010-ack-vpc-network.md) | ACK VPC 网络规划与 Terway 集成 |
 
 ### Topic 专题
 
@@ -147,12 +147,12 @@ CRD 管理路径: 03-usage → 03b-crd-operations → domain-03-networking-traff
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

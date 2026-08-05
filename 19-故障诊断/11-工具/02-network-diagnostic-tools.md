@@ -477,7 +477,7 @@ tshark -r /tmp/order-service.pcap -q -z io,stat,1
 ## Related
 
 - [[19-故障诊断/11-工具/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[19-故障诊断/03-基础设施排障/25-network-connectivity-troubleshooting.md|网络连通性故障诊断]]
+- [[19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting.md|网络连通性故障诊断]]
 
 ## See Also
 

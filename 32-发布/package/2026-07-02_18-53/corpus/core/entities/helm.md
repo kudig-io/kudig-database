@@ -94,7 +94,7 @@ description: '## 项目概述'
 - 36-ecosystem-kustomize-helm-argocd
 - 07-helm-advanced-operations
 - 06-helm-charts-management
-- [[domain-10-troubleshooting-diagnostics/高级排障/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/01-helm-chart-troubleshooting|36-helm-chart-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/helm-fta.md|Helm 发布异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
 - helm

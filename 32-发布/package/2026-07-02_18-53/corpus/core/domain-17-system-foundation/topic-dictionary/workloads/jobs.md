@@ -249,11 +249,11 @@ kubectl patch job <job-name> -n prod -p '{"spec":{"suspend":true}}'
 ```
 ## 交叉引用
 
-- [Job/CronJob 高级用法](../../domain-02-workloads-applications/05-job-cronjob-advanced.md)
+- [Job/CronJob 高级用法](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/00-core-workloads/02-job-cronjob-advanced.md)
 - [CronJob 定时任务](./cronjob.md)
 - [已完成 Job 自动清理](./automatic-cleanup-for-finished-jobs.md)
 - [Job/CronJob 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/job-cronjob-fta.md)
-- [工作负载故障排查手册](../../domain-02-workloads-applications/07-workload-troubleshooting-handbook.md)
+- [工作负载故障排查手册](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/03-workload-troubleshooting-handbook.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/job/

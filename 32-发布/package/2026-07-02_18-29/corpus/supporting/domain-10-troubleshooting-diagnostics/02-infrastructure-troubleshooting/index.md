@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/25-network-connectivity-troubleshooting.md|Network Connectivity Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/26-dns-troubleshooting.md|Dns Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/27-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/28-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/29-cloud-provider-troubleshooting.md|Cloud Provider Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/30-monitoring-alerting-troubleshooting.md|Monitoring Alerting Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/31-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/32-security-troubleshooting.md|Security Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/33-performance-bottleneck-troubleshooting.md|Performance Bottleneck Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/34-upgrade-migration-troubleshooting.md|Upgrade Migration Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting|Network Connectivity Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-dns-troubleshooting|Dns Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/02-image-registry-troubleshooting|Image Registry Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/02-cluster-autoscaler-troubleshooting|Cluster Autoscaler Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/03-cloud-provider-troubleshooting|Cloud Provider Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/04-monitoring-alerting-troubleshooting|Monitoring Alerting Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/05-backup-restore-troubleshooting|Backup Restore Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/03-security-troubleshooting|Security Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/06-performance-bottleneck-troubleshooting|Performance Bottleneck Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/07-upgrade-migration-troubleshooting|Upgrade Migration Troubleshooting]]
 

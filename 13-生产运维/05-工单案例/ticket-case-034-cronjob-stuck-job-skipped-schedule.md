@@ -23,7 +23,7 @@ ticket_type: CronJob 执行失败
 skill_ref:
 - '[[02-工作负载/01-核心工作负载/05-job-cronjob-advanced.md|Job/CronJob
   进阶]]'
-- '[[11-发布变更/01-GitOps/99-argo-cd-gitops-guide.md|GitOps
+- '[[11-发布变更/01-GitOps/17-argo-cd-gitops-guide.md|GitOps
   变更管理]]'
 fta_ref:
 - '[[19-故障诊断/06-FTA故障树/list/job-cronjob-fta.md|FTA:

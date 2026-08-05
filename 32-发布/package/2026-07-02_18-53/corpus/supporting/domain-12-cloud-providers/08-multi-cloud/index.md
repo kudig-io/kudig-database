@@ -22,17 +22,17 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/多云混合/00-multi-cloud-hybrid-deployment-strategy.md|Multi Cloud Hybrid Deployment Strategy]]
-- [[domain-12-cloud-providers/多云混合/01-aws-eks-enterprise-multicloud.md|Aws Eks Enterprise Multicloud]]
-- [[domain-12-cloud-providers/多云混合/02-azure-aks-enterprise-multicloud.md|Azure Aks Enterprise Multicloud]]
-- [[domain-12-cloud-providers/多云混合/03-enterprise-multicloud-governance.md|Enterprise Multicloud Governance]]
-- [[domain-12-cloud-providers/多云混合/04-google-gke-enterprise-multicloud.md|Google Gke Enterprise Multicloud]]
-- [[domain-12-cloud-providers/多云混合/05-ibm-cloud-kubernetes-service-enterprise.md|Ibm Cloud Kubernetes Service Enterprise]]
-- [[domain-12-cloud-providers/多云混合/06-alibaba-ack-enterprise-hybrid.md|Alibaba Ack Enterprise Hybrid]]
-- [[domain-12-cloud-providers/多云混合/07-huawei-cce-enterprise.md|Huawei Cce Enterprise]]
-- [[domain-12-cloud-providers/多云混合/08-multicloud-federation-karmada.md|Multicloud Federation Karmada]]
-- [[domain-12-cloud-providers/多云混合/09-multicloud-network-interconnect.md|Multicloud Network Interconnect]]
-- [[domain-12-cloud-providers/多云混合/10-multicloud-disaster-recovery.md|Multicloud Disaster Recovery]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/00-multi-cloud-hybrid-deployment-strategy|Multi Cloud Hybrid Deployment Strategy]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/01-aws-eks-enterprise-multicloud|Aws Eks Enterprise Multicloud]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/02-azure-aks-enterprise-multicloud|Azure Aks Enterprise Multicloud]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/03-enterprise-multicloud-governance|Enterprise Multicloud Governance]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/04-google-gke-enterprise-multicloud|Google Gke Enterprise Multicloud]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/05-ibm-cloud-kubernetes-service-enterprise|Ibm Cloud Kubernetes Service Enterprise]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/06-alibaba-ack-enterprise-hybrid|Alibaba Ack Enterprise Hybrid]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/07-huawei-cce-enterprise|Huawei Cce Enterprise]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/08-multicloud-federation-karmada|Multicloud Federation Karmada]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/09-multicloud-network-interconnect|Multicloud Network Interconnect]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-12-cloud-providers/01-multi-cloud/10-multicloud-disaster-recovery|Multicloud Disaster Recovery]]
 
 
 

@@ -84,20 +84,20 @@ Kubernetes 集群的认证与授权体系高度依赖 PKI（Public Key Infrastru
 | [01-pki-architecture](01-pki-architecture.md) | PKI 架构总览：三组 CA、证书依赖关系、信任链 | `cmd/kubeadm/app/phases/certs/` | 1 |
 | [02-ca-generation](02-ca-generation.md) | CA 证书生成源码分析：kubeadm CA、etcd CA、Front Proxy CA | `cmd/kubeadm/app/phases/certs/ca.go` | 2 |
 | [03-apiserver-cert](03-apiserver-cert.md) | API Server 证书：SAN 生成逻辑、扩展属性、证书用途 | `cmd/kubeadm/app/phases/certs/apiserver.go` | 3 |
-| [04-etcd-cert](04-etcd-cert.md) | etcd 证书体系：Server/Peer/Client 证书及健康检查证书 | `cmd/kubeadm/app/phases/certs/etcd.go` | 4 |
+| [04-etcd-cert](02-etcd-cert.md) | etcd 证书体系：Server/Peer/Client 证书及健康检查证书 | `cmd/kubeadm/app/phases/certs/etcd.go` | 4 |
 | [05-kubelet-cert](05-kubelet-cert.md) | kubelet 证书：引导证书、CSR 机制、自动轮换源码 | `pkg/kubelet/certificate/` | 5 |
 | [06-cert-rotation](06-cert-rotation.md) | 证书轮换机制：kubeadm renew、kubelet 自动轮换、Controller | `cmd/kubeadm/app/phases/certs/renew/` | 6 |
 | [07-service-account-keys](07-service-account-keys.md) | ServiceAccount 密钥对：JWT 签名、Token 验证、密钥轮换 | `pkg/serviceaccount/` | 7 |
-| [08-rbac-mapping](08-rbac-mapping.md) | 证书身份到 RBAC 的映射：CommonName/Organization、front-proxy | `pkg/kube-apiserver/authorizer/rbac/` | 8 |
+| [08-rbac-mapping](03-rbac-mapping.md) | 证书身份到 RBAC 的映射：CommonName/Organization、front-proxy | `pkg/kube-apiserver/authorizer/rbac/` | 8 |
 | [09-join-cert-flow](09-join-cert-flow.md) | kubeadm join 证书分发：Bootstrap Token、CSR、HA 证书复制 | `cmd/kubeadm/app/phases/kubeconfig/` | 9 |
 | [10-front-proxy-workflow](10-front-proxy-workflow.md) | Front Proxy 聚合层完整工作流：APIService、metrics-server、安全边界 | `vendor/k8s.io/apiserver/pkg/endpoints/handlers/` | 10 |
-| [11-apiserver-cert-flags](11-apiserver-cert-flags.md) | API Server 证书启动参数汇总：全量标志、验证脚本、配置陷阱 | `cmd/kube-apiserver/app/options/` | 11 |
+| [11-apiserver-cert-flags](04-apiserver-cert-flags.md) | API Server 证书启动参数汇总：全量标志、验证脚本、配置陷阱 | `cmd/kube-apiserver/app/options/` | 11 |
 | [12-kubeconfig-certs](12-kubeconfig-certs.md) | kubeconfig 证书嵌入逻辑：admin/controller-manager/scheduler、Base64 编码 | `cmd/kubeadm/app/phases/kubeconfig/` | 12 |
-| [13-cert-config](13-cert-config.md) | kubeadm 配置对证书的影响：certSANs、CertificatesDir、controlPlaneEndpoint | `cmd/kubeadm/app/util/pkiutil/` | 13 |
+| [13-cert-config](05-cert-config.md) | kubeadm 配置对证书的影响：certSANs、CertificatesDir、controlPlaneEndpoint | `cmd/kubeadm/app/util/pkiutil/` | 13 |
 | [14-admission-webhook-certs](14-admission-webhook-certs.md) | Webhook 证书体系：caBundle、cainjector、证书轮换、故障排查 | `cmd/kubeadm/app/phases/certs/` | 14 |
 | [15-cert-format-encoding](15-cert-format-encoding.md) | 证书格式与编码：PEM/DER/ASN.1、X.509v3 扩展字段 | `staging/src/k8s.io/client-go/util/cert/` | 15 |
 | [16-openssl-cookbook](16-openssl-cookbook.md) | OpenSSL 速查手册：查看/验证/生成/转换/调试 | 外部工具 | 16 |
-| [17-pki-security-best-practices](17-pki-security-best-practices.md) | PKI 安全最佳实践：私钥保护、监控告警、CIS 合规 | 最佳实践 | 17 |
+| [17-pki-security-best-practices](06-pki-security-best-practices.md) | PKI 安全最佳实践：私钥保护、监控告警、CIS 合规 | 最佳实践 | 17 |
 
 ---
 
@@ -157,20 +157,20 @@ Kubernetes PKI 架构:
 | [01-pki-architecture](01-pki-architecture.md) | PKI 架构总览 | 1 |
 | [02-ca-generation](02-ca-generation.md) | CA 证书生成 | 2 |
 | [03-apiserver-cert](03-apiserver-cert.md) | API Server 证书 | 3 |
-| [04-etcd-cert](04-etcd-cert.md) | etcd 证书 | 4 |
+| [04-etcd-cert](02-etcd-cert.md) | etcd 证书 | 4 |
 | [05-kubelet-cert](05-kubelet-cert.md) | kubelet 证书 | 5 |
 | [06-cert-rotation](06-cert-rotation.md) | 证书轮换 | 6 |
 | [07-service-account-keys](07-service-account-keys.md) | SA 密钥对 | 7 |
-| [08-rbac-mapping](08-rbac-mapping.md) | 证书 RBAC 映射 | 8 |
+| [08-rbac-mapping](03-rbac-mapping.md) | 证书 RBAC 映射 | 8 |
 | [09-join-cert-flow](09-join-cert-flow.md) | join 证书流程 | 9 |
 | [10-front-proxy-workflow](10-front-proxy-workflow.md) | Front Proxy | 10 |
-| [11-apiserver-cert-flags](11-apiserver-cert-flags.md) | API Server 启动参数 | 11 |
+| [11-apiserver-cert-flags](04-apiserver-cert-flags.md) | API Server 启动参数 | 11 |
 | [12-kubeconfig-certs](12-kubeconfig-certs.md) | kubeconfig 证书 | 12 |
-| [13-cert-config](13-cert-config.md) | kubeadm 配置影响 | 13 |
+| [13-cert-config](05-cert-config.md) | kubeadm 配置影响 | 13 |
 | [14-admission-webhook-certs](14-admission-webhook-certs.md) | Webhook 证书 | 14 |
 | [15-cert-format-encoding](15-cert-format-encoding.md) | 证书格式编码 | 15 |
 | [16-openssl-cookbook](16-openssl-cookbook.md) | OpenSSL 速查 | 16 |
-| [17-pki-security-best-practices](17-pki-security-best-practices.md) | 安全最佳实践 | 17 |
+| [17-pki-security-best-practices](06-pki-security-best-practices.md) | 安全最佳实践 | 17 |
 
 ---
 
@@ -262,7 +262,7 @@ func CreateAsCA(cfg *kubeadmapi.InitConfiguration) (*x509.Certificate, crypto.Si
 - [[entities/kubernetes.md|kubernetes]]
 - [[scripts/templates/cheat-sheet-template.md|cheat sheet template]]
 - [[domain-17-system-foundation/知识字典/operations/certificates.md|certificates]]
-- [[domain-07-platform-engineering/代码分析/cluster-cert/11-apiserver-cert-flags.md|11-apiserver-cert-flags]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/04-apiserver-cert-flags|11-apiserver-cert-flags]]
 
 - [[domain-07-platform-engineering/代码分析/node-create/README.md|Node Create 模块函数索引]]
 - [[domain-07-platform-engineering/代码分析/cluster-create/README.md|Cluster Create — Kubernetes 集群新建源码分析]]
@@ -273,12 +273,12 @@ func CreateAsCA(cfg *kubeadmapi.InitConfiguration) (*x509.Certificate, crypto.Si
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

@@ -70,7 +70,7 @@ description: '## 项目概述'
 
 - [[vineyard]] — Vineyard
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — [[Istio|Istio]]io 安全加固|Istio 安全加固]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/04-istio-security-hardening]] — [[Istio|Istio]]io 安全加固|Istio 安全加固]]
 - [[copa]] — Copa (Copacetic)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

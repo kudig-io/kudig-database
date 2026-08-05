@@ -118,7 +118,7 @@ graph TD
 
 - [[entities/kudig-metadata-index.md|README]].md|README]]
 - MOC.md|MOC]]
-- [[domain-07-platform-engineering/代码分析/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/topic-code-analysis/cluster-delete/01-troubleshooting|12-troubleshooting]]
 
 
 <!-- risk-assessed -->

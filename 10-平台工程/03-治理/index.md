@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[10-平台工程/03-治理/03-capacity-planning-resource-assessment.md|Capacity Planning Resource Assessment]]
-- [[10-平台工程/03-治理/04-performance-benchmarking-tuning.md|Performance Benchmarking Tuning]]
-- [[10-平台工程/03-治理/09-cost-optimization-finops.md|Cost Optimization Finops]]
-- [[10-平台工程/03-治理/10-security-compliance.md|Security Compliance]]
-- [[10-平台工程/03-治理/14-large-scale-cluster-optimization.md|Large Scale Cluster Optimization]]
-- [[10-平台工程/03-治理/17-multi-tenant-management.md|Multi Tenant Management]]
+- [[10-平台工程/03-治理/01-capacity-planning-resource-assessment.md|Capacity Planning Resource Assessment]]
+- [[10-平台工程/03-治理/02-performance-benchmarking-tuning.md|Performance Benchmarking Tuning]]
+- [[10-平台工程/03-治理/03-cost-optimization-finops.md|Cost Optimization Finops]]
+- [[10-平台工程/03-治理/04-security-compliance.md|Security Compliance]]
+- [[10-平台工程/03-治理/05-large-scale-cluster-optimization.md|Large Scale Cluster Optimization]]
+- [[10-平台工程/03-治理/06-multi-tenant-management.md|Multi Tenant Management]]
 

@@ -509,7 +509,7 @@ cp /etc/kubernetes/admin.conf ~/.kube/config
 
 - [`CreatePKIAssets`](02-ca-generation.md) — 证书生成主入口
 - [`GetEtcdAltNames`](04-etcd-cert.md) — etcd SAN 收集
-- [`buildKubeConfigFromSpec`]([[domain-07-platform-engineering/代码分析/cluster-cert/12-kubeconfig-certs.md|12-kubeconfig-certs]].md) — kubeconfig 生成
+- [`buildKubeConfigFromSpec`]([[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/topic-code-analysis/cluster-cert/01-kubeconfig-certs|12-kubeconfig-certs]].md) — kubeconfig 生成
 - [`kubeadm certs renew`](README.md) — 证书续期
 - [`kubeadm config validate`](17-init-phases.md) — 配置验证
 

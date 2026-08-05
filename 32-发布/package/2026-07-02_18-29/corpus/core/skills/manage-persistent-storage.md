@@ -1,8 +1,8 @@
 ---
 title: Manage Persistent Storage
-description: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]]
+description: '- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-storage]]
   — 发布说明索引 — 存储'
-summary: '- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]]
+summary: '- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-storage]]
   — 发布说明索引 — 存储'
 category: skills
 tags:
@@ -109,7 +109,7 @@ kubectl get pv                           # Check PV status and reclaim policy
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-storage]] — 发布说明索引 — 存储
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-storage]] — 发布说明索引 — 存储
 - [[skills/ts-storage.md|ts-storage]] — 存储故障排查
 - [[skills/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[skills/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
 - [[deployment]] — Deployment

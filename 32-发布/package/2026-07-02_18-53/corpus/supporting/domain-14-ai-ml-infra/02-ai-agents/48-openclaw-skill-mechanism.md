@@ -276,7 +276,7 @@ Agent 输出:
    根因: 节点 CPU 不足
    ...
    <!-- chunk: 深度参考 -->## 深度参考
-   - [Pod Pending 完整诊断指南](domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
+   - [Pod Pending 完整诊断指南](01-pod-pending-diagnosis.md)
    - [故障树: Pod 调度失败](domain-10-troubleshooting-diagnostics/FTA故障树/pod-scheduling-failure.md)
    这些文档包含更详细的排查步骤和历史案例。"
 ```

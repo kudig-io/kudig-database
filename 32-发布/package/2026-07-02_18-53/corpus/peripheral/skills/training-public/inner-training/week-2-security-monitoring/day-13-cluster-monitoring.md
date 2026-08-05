@@ -529,9 +529,9 @@ Day 14 将学习集群资源配额与 License 管理。
 
 ## 延伸阅读
 
-- [监控指标系统](../../domain-06-observability/02-monitoring-metrics-system.md)
-- [告警管理](../../domain-06-observability/05-alerting-management.md)
-- [Prometheus 监控](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
+- [监控指标系统](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/02-metrics/01-monitoring-metrics-system.md)
+- [告警管理](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/05-alerting/04-alerting-management.md)
+- [Prometheus 监控](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/02-metrics/04-monitoring-metrics-prometheus.md)
 - [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
 
 ```

@@ -227,7 +227,7 @@ kubectl delete tenant gas-station
 
 - [[buildpacks]] — Cloud Native Buildpacks
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQL 高级查询
+- [[23-实体/07-可观测性/01-prometheus-promql-advanced]] — PromQL 高级查询
 - [[23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

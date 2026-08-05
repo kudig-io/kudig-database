@@ -359,7 +359,7 @@ Pod 异常
 
 ## 最佳实践
 
-第一，镜像构建采用多阶段加 slim 基底，使用 --no-cache-dir 并锁定依赖版本与哈希。第二，并发模型上，IO 密集型用 uvicorn 异步，CPU 密集型用 gunicorn 多进程，worker 数量要与内存联动评估。第三，资源管理方面，memory limit 必须设置以防泄漏拖垮节点，CPU 则谨慎设置硬 limit。第四，环境变量要配置 PYTHONUNBUFFERED 保证日志实时、PYTHONFAULTHANDLER 输出崩溃栈。第五，ML 专项实践中，模型与镜像分离存储到 PVC 或对象存储，startup 探针留足加载时间，GPU 配置详见 [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]。第六，安全方面坚持非 root 运行和 readOnlyRootFilesystem，并接入 [[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]。第七，可观测性方面导出 python_gc 和 process 系列指标，并接入分布式追踪。
+第一，镜像构建采用多阶段加 slim 基底，使用 --no-cache-dir 并锁定依赖版本与哈希。第二，并发模型上，IO 密集型用 uvicorn 异步，CPU 密集型用 gunicorn 多进程，worker 数量要与内存联动评估。第三，资源管理方面，memory limit 必须设置以防泄漏拖垮节点，CPU 则谨慎设置硬 limit。第四，环境变量要配置 PYTHONUNBUFFERED 保证日志实时、PYTHONFAULTHANDLER 输出崩溃栈。第五，ML 专项实践中，模型与镜像分离存储到 PVC 或对象存储，startup 探针留足加载时间，GPU 配置详见 [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]。第六，安全方面坚持非 root 运行和 readOnlyRootFilesystem，并接入 [[08-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]。第七，可观测性方面导出 python_gc 和 process 系列指标，并接入分布式追踪。
 
 ```yaml
 # 🟢 低风险：Pod 安全加固
@@ -379,6 +379,6 @@ securityContext:
 - [[02-工作负载/04-多语言运行时/01-go-on-kubernetes-production.md|Go 应用 Kubernetes 生产实践]]
 - [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]
 - [[02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production.md|Rust 应用 Kubernetes 生产实践]]
-- [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
+- [[08-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]
 - [[09-可观测性/README|可观测性]]

@@ -1050,10 +1050,10 @@ sequenceDiagram
 
 ## See Also
 
-- [[08-安全/06-合规审计/99-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
-- [[安全/07-incident-response/20-incident-response-process.md|20-incident-response-process]]
-- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
-- [[37-归档/domain-indexes/security/00-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
+- [[08-安全/06-合规审计/14-java-security-kubernetes-guide.md|99-java-security-kubernetes-guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-05-security-compliance/02-incident-response/01-incident-response-process|20-incident-response-process]]
+- [[37-归档/domain-indexes/security/01-open-source-projects-index-from-domain-39.md|00-open-source-projects-index-from-安全]]
+- [[37-归档/domain-indexes/security/02-open-source-projects-index-from-domain-7.md|00-open-source-projects-index-from-安全]]
 
 - [[08-安全/README.md|返回目录]]
 

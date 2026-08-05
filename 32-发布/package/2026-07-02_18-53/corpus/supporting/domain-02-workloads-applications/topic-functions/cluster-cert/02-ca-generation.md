@@ -489,7 +489,7 @@ systemctl restart kubelet
 - [[domain-17-system-foundation/速查卡/go.md|go]]
 - [[domain-17-system-foundation/速查卡/k8s.md|k8s]]
 - [[entities/kubernetes.md|kubernetes]]
-- [[domain-07-platform-engineering/代码分析/cluster-cert/04-etcd-cert.md|04-etcd-cert]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/02-etcd-cert|04-etcd-cert]]
 
 
 <!-- risk-assessed -->

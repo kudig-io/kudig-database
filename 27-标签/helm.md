@@ -49,9 +49,9 @@ last_updated: '2026-07-21'
 
 ## GitOps 与 Helm (GitOps & Helm)
 
-- [[11-发布变更/01-GitOps/99-helm-production-guide|Helm 生产指南]]
+- [[11-发布变更/01-GitOps/19-helm-production-guide|Helm 生产指南]]
 - [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
-- [[11-发布变更/01-GitOps/99-tekton-cicd-guide|Tekton CI/CD 指南]]
+- [[11-发布变更/01-GitOps/20-tekton-cicd-guide|Tekton CI/CD 指南]]
 
 ## 概念 (Concepts)
 
@@ -62,43 +62,43 @@ last_updated: '2026-07-21'
 
 ## 故障诊断 (Troubleshooting)
 
-- [[19-故障诊断/04-高级排障/36-helm-chart-troubleshooting|Helm Chart 排障]]
+- [[19-故障诊断/04-高级排障/02-helm-chart-troubleshooting|Helm Chart 排障]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting|Helm 结构化排障]]
 - [[19-故障诊断/06-FTA故障树/list/helm-fta|Helm 故障树分析]]
-- [[19-故障诊断/08-技能体系/26-helm-chart-failure|Helm Chart 故障]]
+- [[19-故障诊断/08-技能体系/28-helm-chart-failure|Helm Chart 故障]]
 - [[26-技能/01-集群运维/helm/helm-fta|Helm FTA]]
 
 ## 集群基础 (Cluster Fundamentals)
 
-- [[01-集群基础/03-控制平面/31-kubectl-complete-reference|kubectl 完整参考]]
-- [[01-集群基础/01-架构总览/99-kubernetes-v1.33-practical-cookbook|K8s v1.33 实用手册]]
-- [[01-集群基础/02-设计原则/11-extensibility-design-patterns|扩展性设计模式]]
+- [[01-集群基础/03-控制平面/34-kubectl-complete-reference|kubectl 完整参考]]
+- [[01-集群基础/01-架构总览/23-kubernetes-v1.33-practical-cookbook|K8s v1.33 实用手册]]
+- [[01-集群基础/02-设计原则/12-extensibility-design-patterns|扩展性设计模式]]
 
 ## 安全 (Security)
 
-- [[08-安全/04-策略治理/99-kyverno-policy-guide|Kyverno 策略指南]]
+- [[08-安全/04-策略治理/08-kyverno-policy-guide|Kyverno 策略指南]]
 - [[08-安全/05-供应链/02-supply-chain-maturity-model|供应链成熟度模型]]
-- [[08-安全/01-身份与访问/11-secret-management-tools|密钥管理工具]]
+- [[08-安全/01-身份与访问/07-secret-management-tools|密钥管理工具]]
 
 ## 存储 (Storage)
 
-- [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning|StorageClass 动态供给]]
-- [[06-存储/01-K8s存储/14-cloud-native-storage|云原生存储]]
-- [[06-存储/01-K8s存储/16-csi-migration-in-tree-to-csi|CSI 迁移]]
+- [[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning|StorageClass 动态供给]]
+- [[06-存储/01-K8s存储/15-cloud-native-storage|云原生存储]]
+- [[06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi|CSI 迁移]]
 
 ## 网络与可观测性 (Networking & Observability)
 
 - [[05-网络/04-API网关/14-api-gateway-production-operations|API 网关生产运营]]
-- [[05-网络/03-服务网格/99-istio-service-mesh-guide|Istio Service Mesh 指南]]
-- [[09-可观测性/02-指标/99-prometheus-enterprise-guide|Prometheus 企业级指南]]
-- [[09-可观测性/01-总览/14-chaos-engineering|混沌工程]]
+- [[05-网络/03-服务网格/11-istio-service-mesh-guide|Istio Service Mesh 指南]]
+- [[09-可观测性/02-指标/13-prometheus-enterprise-guide|Prometheus 企业级指南]]
+- [[09-可观测性/01-总览/06-chaos-engineering|混沌工程]]
 
 ## 平台工程 (Platform Engineering)
 
 - [[10-平台工程/01-构建/01-platform-engineering-overview|平台工程概览]]
 - [[10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
-- [[10-平台工程/02-运维/07-gitops-configuration-management|GitOps 配置管理]]
-- [[10-平台工程/01-构建/20-crd-operator-development|CRD/Operator 开发]]
+- [[10-平台工程/02-运维/05-gitops-configuration-management|GitOps 配置管理]]
+- [[10-平台工程/01-构建/10-crd-operator-development|CRD/Operator 开发]]
 
 ## 技能 (Skills)
 
@@ -111,13 +111,13 @@ last_updated: '2026-07-21'
 ## 容器运行时 (Container Runtime)
 
 - [[14-容器运行时/02-镜像管理/01-harbor-enterprise-image-registry|Harbor 企业级镜像仓库]]
-- [[14-容器运行时/02-镜像管理/99-harbor-enterprise-guide|Harbor 企业级指南]]
+- [[14-容器运行时/02-镜像管理/08-harbor-enterprise-guide|Harbor 企业级指南]]
 
 ## 数据库中间件 (Database Middleware)
 
 - [[07-数据库中间件/01-数据库/07-redis-kubernetes-operator|Redis K8s Operator]]
 - [[07-数据库中间件/01-数据库/08-kafka-kubernetes-strimzi|Kafka Strimzi]]
-- [[07-数据库中间件/01-数据库/99-cloudnativepg-enterprise-guide|CloudNativePG 企业级指南]]
+- [[07-数据库中间件/01-数据库/19-cloudnativepg-enterprise-guide|CloudNativePG 企业级指南]]
 - [[07-数据库中间件/03-消息队列/03-message-queue-comparison|消息队列对比]]
 
 ## 知识字典 (Knowledge Dictionary)

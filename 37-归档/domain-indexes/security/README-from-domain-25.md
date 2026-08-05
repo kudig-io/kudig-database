@@ -418,8 +418,8 @@ spec:
 
 | 文档 | 描述 | 难度 | 核心覆盖 |
 |:---|:---|:---|:---|
-| [04-Kyverno 策略管理](../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/04-kyverno-enterprise-policy-management.md) | Kyverno 企业级策略引擎实践 | ⭐⭐⭐⭐ | 验证/变异/生成/清理/镜像验证 |
-| [09-OPA Gatekeeper 策略](../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/09-opa-gatekeeper-policy.md) | OPA Gatekeeper 策略即代码深度实践 | ⭐⭐⭐⭐ | Rego 策略、ConstraintTemplate |
+| [04-Kyverno 策略管理](../../../08-安全/04-策略治理/01-kyverno-enterprise-policy-management.md) | Kyverno 企业级策略引擎实践 | ⭐⭐⭐⭐ | 验证/变异/生成/清理/镜像验证 |
+| [09-OPA Gatekeeper 策略](../../../08-安全/04-策略治理/04-opa-gatekeeper-policy.md) | OPA Gatekeeper 策略即代码深度实践 | ⭐⭐⭐⭐ | Rego 策略、ConstraintTemplate |
 
 ### 密钥与证书管理
 
@@ -431,19 +431,19 @@ spec:
 
 | 文档 | 描述 | 难度 | 核心覆盖 |
 |:---|:---|:---|:---|
-| [10-镜像安全扫描](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/10-image-security-scanning.md) | Trivy/Grype 漏洞扫描、SBOM、Cosign 签名 | ⭐⭐⭐⭐ | CI/CD 安全门禁 |
-| [11-Kubernetes 安全加固](../../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/11-kubernetes-security-hardening.md) | CIS Benchmark、PSS、NetworkPolicy、Secrets 加密 | ⭐⭐⭐⭐⭐ | 全栈安全基线 |
+| [10-镜像安全扫描](../../../08-安全/05-供应链/12-image-security-scanning.md) | Trivy/Grype 漏洞扫描、SBOM、Cosign 签名 | ⭐⭐⭐⭐ | CI/CD 安全门禁 |
+| [11-Kubernetes 安全加固](../../../08-安全/06-合规审计/08-kubernetes-security-hardening.md) | CIS Benchmark、PSS、NetworkPolicy、Secrets 加密 | ⭐⭐⭐⭐⭐ | 全栈安全基线 |
 
 ### 实践指南
 
 | 文档 | 描述 | 难度 | 核心覆盖 |
 |:---|:---|:---|:---|
-| [99-cert-manager TLS 指南](../../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/99-cert-manager-tls-guide.md) | cert-manager 自动证书管理实践 | ⭐⭐⭐ | ACME、私有 CA、mTLS |
-| [99-Falco 运行时安全指南](../../../08-%E5%AE%89%E5%85%A8/03-%E8%BF%90%E8%A1%8C%E6%97%B6%E5%AE%89%E5%85%A8/99-falco-runtime-security-guide.md) | Falco 部署与规则定制 | ⭐⭐⭐⭐ | 规则语法、自定义检测 |
-| [99-Java 安全加固指南](../../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/99-java-security-kubernetes-guide.md) | Java 应用 K8s 安全加固 | ⭐⭐⭐⭐⭐ | SecurityContext、Spring Security |
-| [99-Kyverno 策略指南](../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/99-kyverno-policy-guide.md) | Kyverno 策略编写快速参考 | ⭐⭐⭐ | YAML 策略、最佳实践 |
-| [99-OPA Gatekeeper 指南](../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/99-opa-gatekeeper-policy-guide.md) | OPA Gatekeeper 快速入门 | ⭐⭐⭐ | Rego 语法、策略模板 |
-| [99-Vault K8s 集成指南](../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/99-vault-k8s-secrets-guide.md) | Vault 与 K8s 密钥管理集成 | ⭐⭐⭐⭐ | Agent Sidecar、ESO、CSI |
+| [99-cert-manager TLS 指南](../../../08-安全/06-合规审计/13-cert-manager-tls-guide.md) | cert-manager 自动证书管理实践 | ⭐⭐⭐ | ACME、私有 CA、mTLS |
+| [99-Falco 运行时安全指南](../../../08-安全/03-运行时安全/08-falco-runtime-security-guide.md) | Falco 部署与规则定制 | ⭐⭐⭐⭐ | 规则语法、自定义检测 |
+| [99-Java 安全加固指南](../../../08-安全/06-合规审计/14-java-security-kubernetes-guide.md) | Java 应用 K8s 安全加固 | ⭐⭐⭐⭐⭐ | SecurityContext、Spring Security |
+| [99-Kyverno 策略指南](../../../08-安全/04-策略治理/08-kyverno-policy-guide.md) | Kyverno 策略编写快速参考 | ⭐⭐⭐ | YAML 策略、最佳实践 |
+| [99-OPA Gatekeeper 指南](../../../08-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md) | OPA Gatekeeper 快速入门 | ⭐⭐⭐ | Rego 语法、策略模板 |
+| [99-Vault K8s 集成指南](../../../08-安全/01-身份与访问/10-vault-k8s-secrets-guide.md) | Vault 与 K8s 密钥管理集成 | ⭐⭐⭐⭐ | Agent Sidecar、ESO、CSI |
 
 ## 学习路径建议
 

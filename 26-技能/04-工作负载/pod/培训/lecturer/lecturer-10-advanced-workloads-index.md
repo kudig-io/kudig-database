@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/04-工作负载/daemonset/培训/lecturer/10-daemonset-basics.md|Daemonset Basics]]
-- [[26-技能/04-工作负载/statefulset/培训/lecturer/11-statefulset-basics.md|Statefulset Basics]]
+- [[26-技能/04-工作负载/daemonset/培训/lecturer/01-daemonset-basics.md|Daemonset Basics]]
+- [[26-技能/04-工作负载/statefulset/培训/lecturer/01-statefulset-basics.md|Statefulset Basics]]
 

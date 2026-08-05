@@ -34,6 +34,6 @@ last_updated: 2026-07
 ## 文档
 
 - [[26-技能/04-工作负载/pod/培训/00-beginner-learning-roadmap.md|Beginner Learning Roadmap]]
-- [[26-技能/04-工作负载/pod/培训/00-learning-gaps-analysis.md|Learning Gaps Analysis]]
+- [[26-技能/04-工作负载/pod/培训/01-learning-gaps-analysis.md|Learning Gaps Analysis]]
 - [[26-技能/04-工作负载/pod/培训/training-public-MOC.md|Moc]]
 

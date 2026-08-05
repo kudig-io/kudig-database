@@ -493,7 +493,7 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 
 - [K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
 - [核心组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [kubectl 命令参考](../../../../../../01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
 - [K8s 速查手册](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/05-%E9%80%9F%E6%9F%A5%E5%8D%A1/k8s.md)
 
 ## Related

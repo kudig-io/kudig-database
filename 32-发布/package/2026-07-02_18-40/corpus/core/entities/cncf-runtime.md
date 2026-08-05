@@ -59,9 +59,9 @@ containerd 是行业标准容器运行时，K8s 最常用的 CRI 实现。
 - **安全加固**: seccomp、AppArmor、rootless
 - **迁移升级**: 从 dockershim 迁移
 - **多租户**: 资源隔离与配额
-- **可观测性**: [[entities/06-containerd-observability.md|observability]]|指标与日志]]
+- **可观测性**: [[32-发布/package/2026-07-02_18-40/corpus/core/entities/08-containerd-observability|observability]]|指标与日志]]
 - **Windows 支持**: Windows 容器支持
-- **灾备**: [[07-containerd-disaster-recovery|状态备份与恢复]]
+- **灾备**: [[32-发布/package/2026-07-02_18-40/corpus/supporting/entities/02-containerd-disaster-recovery|状态备份与恢复]]
 
 ### [[cri-o]] — 毕业项目
 

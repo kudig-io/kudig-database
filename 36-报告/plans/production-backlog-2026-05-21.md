@@ -61,7 +61,7 @@ last_updated: 2026-05-24
 **修复策略**:
 - **方案 A**（推荐）: 将不存在的 wikilink 替换为纯文本描述，或创建对应的 stub 页面
 - **方案 B**: 创建缺失的 troubleshooting/skill 页面（工作量大，但最完整）
-- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` → `[[故障诊断/98-merged-indexes/index.md|故障诊断]]`）
+- **方案 C**: 修改 wikilink 指向到现有最接近的页面（如 `[[19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/SKILL.md|ingress-gateway-troubleshooting]]` → `[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|故障诊断]]`）
 
 **建议**: 先执行方案 A（纯文本化）确保生产可用，后续再按需创建 stub。
 

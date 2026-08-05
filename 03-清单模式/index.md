@@ -34,12 +34,12 @@ last_updated: 2026-07
 - [[03-清单模式/06-安全模式/index.md|Security Patterns]]
 - [[03-清单模式/07-AI-ML模式/index.md|AI/ML Patterns]]
 - [[03-清单模式/08-韧性模式/index.md|Resilience Patterns]]
-- [[03-清单模式/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - [[03-清单模式/00-总览/index.md|00-总览]]
 
 ## 文档
 
-- [[03-清单模式/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[03-清单模式/00-总览/02-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 
 
 

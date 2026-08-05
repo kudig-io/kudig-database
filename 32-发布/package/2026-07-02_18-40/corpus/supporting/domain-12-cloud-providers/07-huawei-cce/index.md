@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/华为云CCE/02-cce-networking-vpc-router.md|Cce Networking Vpc Router]]
-- [[domain-12-cloud-providers/华为云CCE/03-cce-storage-evs-sfs.md|Cce Storage Evs Sfs]]
-- [[domain-12-cloud-providers/华为云CCE/04-cce-iam-aad-integration.md|Cce Iam Aad Integration]]
-- [[domain-12-cloud-providers/华为云CCE/05-cce-troubleshooting-playbook.md|Cce Troubleshooting Playbook]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/07-huawei-cce/01-cce-networking-vpc-router|Cce Networking Vpc Router]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/07-huawei-cce/02-cce-storage-evs-sfs|Cce Storage Evs Sfs]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/07-huawei-cce/03-cce-iam-aad-integration|Cce Iam Aad Integration]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/07-huawei-cce/04-cce-troubleshooting-playbook|Cce Troubleshooting Playbook]]
 - [[domain-12-cloud-providers/华为云CCE/huawei-cce-overview.md|Huawei Cce Overview]]
 

@@ -26,8 +26,8 @@ last_updated: 2026-05-23
 # Prometheus OOM + 日志采集中断并发
 
 ## 关联Skill
-- [[15-monitoring-alerting-failure]]
-- [[16-logging-pipeline-failure]]
+- [[16-monitoring-alerting-failure]]
+- [[17-logging-pipeline-failure]]
 
 ## 场景描述
 监控系统Prometheus因高基数指标OOM，同时日志采集代理Fluentd缓冲溢出导致日志丢失。

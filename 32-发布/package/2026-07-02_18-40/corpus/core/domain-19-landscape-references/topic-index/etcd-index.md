@@ -62,14 +62,14 @@ prerequisites:
 
 ### 深度技术
 
-- [[domain-01-cluster-fundamentals/控制平面/11-etcd-deep-dive.md|11 etcd deep dive]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/04-etcd-deep-dive|11 etcd deep dive]]
 - etcd运维操作
 
 ### 故障排查与维护
 
 - etcd 故障排查 (etcd Troubleshooting)
 - [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/13-etcd-maintenance|etcd 维护专项文档]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/etcd-fta.md|etcd 异常故障树分析 (etcd FTA)]]
 
 ### CNCF 生态
@@ -92,9 +92,9 @@ prerequisites:
 
 ### 集群创建与证书
 
-- [[domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md|etcd 集群初始化细节]]
-- [[domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/04-etcd-cert.md|etcd 证书体系源码分析]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/topic-functions/cluster-create/01-etcd|etcd 集群初始化细节]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/topic-functions/cluster-create/02-etcd-advanced|etcd 进阶: 数据存储与维护]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/02-etcd-cert|etcd 证书体系源码分析]]
 
 ### 平台运维
 
@@ -224,7 +224,7 @@ prerequisites:
 - [[domain-12-cloud-providers/AWS-EKS/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
 - [[domain-12-cloud-providers/Google-GKE/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
 - [[domain-12-cloud-providers/Azure-AKS/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
-- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/05-alicloud-ack/007-ack-ebs-storage|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
 - [[domain-12-cloud-providers/阿里云/ack/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
 - [[domain-12-cloud-providers/腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[domain-12-cloud-providers/华为云CCE/huawei-cce-overview.md|华为云 CCE (Cloud Container Engine) 企业级深度实战指南]]
@@ -234,7 +234,7 @@ prerequisites:
 - [[domain-12-cloud-providers/其他云/火山引擎-VEK/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
 - [[domain-12-cloud-providers/其他云/天翼云-TKE/ctyun-tke-overview.md|天翼云 TKE (Tianyi Cloud Kubernetes Engine) 概述]]
 - [[domain-12-cloud-providers/其他云/移动云-CKE/ecloud-cke-overview.md|移动云 CKE (China Mobile Cloud Kubernetes Engine) 企业级深度实战指南]]
-- [[domain-12-cloud-providers/阿里云/apsara/alicloud-apsara-ack-overview.md|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/08-alicloud-apsara-ack/alicloud-apsara-ack-overview|阿里云专有版 ACK (Apsara Stack ACK) 金融级深度解析]]
 
 ## 生产运维
 
@@ -266,21 +266,21 @@ prerequisites:
 - Kubernetes 大规模集群性能优化深度实践 (Large-Scale Cluster Performance Optimization)
 - Kubernetes 安全零信任架构实施指南 (Zero Trust Security Architecture Implementation)
 - Kubernetes GitOps 完整实践指南 (GitOps Complete Practice Guide)
-- [[domain-19-landscape-references/论文/07-kubernetes-csi-storage-deep-practice.md|07 kubernetes csi storage deep practice]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-19-landscape-references/02-papers/02-kubernetes-csi-storage-deep-practice|07 kubernetes csi storage deep practice]]
 - Kubernetes 自动化运维与SRE实践 (Automation and SRE Practices)
-- [[domain-19-landscape-references/论文/11-kubernetes-api-server-deep-optimization-extension.md|11 kubernetes api server deep optimization extension]]
-- [[domain-19-landscape-references/论文/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12 kubernetes scheduler deep optimization custom scheduling]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-19-landscape-references/02-papers/04-kubernetes-api-server-deep-optimization-extension|11 kubernetes api server deep optimization extension]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-19-landscape-references/02-papers/05-kubernetes-scheduler-deep-optimization-custom-scheduling|12 kubernetes scheduler deep optimization custom scheduling]]
 - Kubernetes 多租户安全隔离与资源配额管理 (Multi-Tenancy Security Isolation and Resource Quota Management)
 - Kubernetes 事件驱动架构与异步处理 (Event-Driven Architecture and Asynchronous Processing)
 - Kubernetes 混沌工程与故障注入测试 (Chaos Engineering and Fault Injection Testing)
 - Kubernetes 边缘计算与KubeEdge实践 (Edge Computing and KubeEdge Practice)
 - Kubernetes Gateway API 与现代流量管理实践
 - Kubernetes 供应链安全实践 (Supply Chain Security: SBOM, SLSA, and Sigstore)
-- [[domain-19-landscape-references/论文/21-kubernetes-platform-engineering-internal-developer-platform.md|21 kubernetes platform engineering internal developer platform]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-19-landscape-references/02-papers/07-kubernetes-platform-engineering-internal-developer-platform|21 kubernetes platform engineering internal developer platform]]
 - Kubernetes WebAssembly (Wasm) 工作负载实践 (WebAssembly Workloads on Kubernetes)
 - Kubernetes OpenTelemetry 原生可观测性 (OpenTelemetry Native Observability)
 - Kubernetes 策略即代码与治理自动化 (Policy-as-Code and Governance Automation)
-- [[domain-19-landscape-references/论文/25-gke-autopilot-google-cloud-ai-infrastructure.md|25 gke autopilot google cloud ai infrastructure]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-19-landscape-references/02-papers/08-gke-autopilot-google-cloud-ai-infrastructure|25 gke autopilot google cloud ai infrastructure]]
 - Kubernetes vCluster 与虚拟集群多租户 (vCluster and Virtual Cluster Multi-Tenancy)
 
 ## CNCF 生态

@@ -22,9 +22,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-01-cluster-fundamentals/kubectl/03-kubectl-debug-ephemeral-containers.md|Kubectl Debug Ephemeral Containers]]
-- [[domain-01-cluster-fundamentals/kubectl/05-kubectl-commands-reference.md|Kubectl Commands Reference]]
-- [[domain-01-cluster-fundamentals/kubectl/99-kubectl-v1.29-v1.33-new-commands-guide.md|Kubectl V1.29 V1.33 New Commands Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/05-kubectl/01-kubectl-debug-ephemeral-containers|Kubectl Debug Ephemeral Containers]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference|Kubectl Commands Reference]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/05-kubectl/02-kubectl-v1.29-v1.33-new-commands-guide|Kubectl V1.29 V1.33 New Commands Guide]]
 
 
 

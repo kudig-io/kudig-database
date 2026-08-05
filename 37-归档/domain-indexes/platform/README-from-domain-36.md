@@ -98,11 +98,11 @@ tier: peripheral---
 
 ### 📊 开发者体验与度量 (08-10)
 - **[08-Golden Paths黄金路径设计](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/01-%E6%9E%84%E5%BB%BA/08-golden-paths-design.md)** - 黄金路径模式、最佳实践、模板设计
-- **[09-开发者体验度量](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/04-%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C/09-developer-experience-metrics.md)** - DORA 指标、SPACE 框架、平台 KPI
-- **[10-平台团队拓扑与运营](../../../10-%E5%B9%B3%E5%8F%B0%E5%B7%A5%E7%A8%8B/04-%E5%BC%80%E5%8F%91%E4%BD%93%E9%AA%8C/10-platform-team-topology.md)** - Team Topologies、平台运营、支持模式
+- **[09-开发者体验度量](../../../10-平台工程/04-开发体验/03-developer-experience-metrics.md)** - DORA 指标、SPACE 框架、平台 KPI
+- **[10-平台团队拓扑与运营](../../../10-平台工程/04-开发体验/04-platform-team-topology.md)** - Team Topologies、平台运营、支持模式
 
 ### 🌐 前端部署平台 (11)
-- **[11-Vercel前端部署平台](./[[10-平台工程/01-构建/11-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]].md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
+- **[11-Vercel前端部署平台](./[[10-平台工程/01-构建/09-vercel-frontend-deployment-platform.md|11-vercel-frontend-deployment-platform]].md)** - Vercel 平台深度指南，涵盖零配置部署、Serverless/Edge Functions、企业级安全与性能优化
 
 ## 🎯 学习路径建议
 

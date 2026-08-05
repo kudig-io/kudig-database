@@ -57,7 +57,7 @@ authors:
 
 # MySQL on Kubernetes 生产指南
 
-本指南面向需要在 Kubernetes 上以生产标准运行 MySQL 的 SRE 与数据库工程师，提供高可用架构、Group Replication / Operator 选型、备份、监控告警、故障转移与慢查询治理的完整操作路径。MySQL 作为广泛使用的关系型数据库，在 Kubernetes 上运行时需要特别关注一致性复制、自动故障切换、备份可恢复性与性能调优。与无状态应用不同，数据库的运维需要理解存储、网络、复制拓扑与 Operator 行为之间的复杂关系。本指南中的命令与配置可直接在已安装 `kubectl` 与 `helm` 的环境中执行，所有重大变更应先在测试集群验证，并遵循 [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产就绪运维框架]] 中的变更管理要求。
+本指南面向需要在 Kubernetes 上以生产标准运行 MySQL 的 SRE 与数据库工程师，提供高可用架构、Group Replication / Operator 选型、备份、监控告警、故障转移与慢查询治理的完整操作路径。MySQL 作为广泛使用的关系型数据库，在 Kubernetes 上运行时需要特别关注一致性复制、自动故障切换、备份可恢复性与性能调优。与无状态应用不同，数据库的运维需要理解存储、网络、复制拓扑与 Operator 行为之间的复杂关系。本指南中的命令与配置可直接在已安装 `kubectl` 与 `helm` 的环境中执行，所有重大变更应先在测试集群验证，并遵循 [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产就绪运维框架]] 中的变更管理要求。
 
 ## 1. 适用场景与范围
 
@@ -299,10 +299,10 @@ UPDATE performance_schema.setup_consumers SET ENABLED='YES' WHERE NAME LIKE '%st
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
+- [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - [[07-数据库中间件/01-数据库/01-mysql-enterprise-database.md|MySQL 企业数据库]]
-- [[07-数据库中间件/01-数据库/13-mysql-group-replication-topology.md|MySQL Group Replication 拓扑]]
-- [[06-存储/00-总览/99-production-readiness-operations-guide.md|存储数据域生产就绪指南]]
+- [[07-数据库中间件/01-数据库/14-mysql-group-replication-topology.md|MySQL Group Replication 拓扑]]
+- [[06-存储/00-总览/01-production-readiness-operations-guide.md|存储数据域生产就绪指南]]
 - [[12-可靠性/README.md|可靠性工程域]]
 - [[08-安全/README.md|安全合规域]]
 

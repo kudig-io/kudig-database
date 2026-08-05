@@ -136,8 +136,8 @@ prerequisites:
 - 36 - AI平台增强可观测性
 
 ### 故障排查域
-- [[19-故障诊断/03-基础设施排障/30-monitoring-alerting-troubleshooting.md|30 - 监控告警故障排查]]
-- [[19-故障诊断/04-高级排障/39-enterprise-monitoring-alerting-system.md|39 - 企业级监控告警体系]]
+- [[19-故障诊断/03-基础设施排障/06-monitoring-alerting-troubleshooting.md|30 - 监控告警故障排查]]
+- [[19-故障诊断/04-高级排障/05-enterprise-monitoring-alerting-system.md|39 - 企业级监控告警体系]]
 
 ### 结构化故障排查
 - [[19-故障诊断/04-高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
@@ -149,18 +149,18 @@ prerequisites:
 
 ### 企业级监控方案
 - Prometheus企业级监控系统深度实践
-- [[09-可观测性/07-工具/02-grafana-enterprise-observability.md|02 grafana enterprise observability]]
+- [[09-可观测性/07-工具/01-grafana-enterprise-observability.md|02 grafana enterprise observability]]
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践
 - Datadog 企业级监控平台深度实践
-- [[09-可观测性/07-工具/07-zabbix-enterprise-monitoring.md|07 zabbix enterprise monitoring]]
-- [[09-可观测性/07-工具/08-new-relic-enterprise-apm.md|08 new relic enterprise apm]]
+- [[09-可观测性/07-工具/04-zabbix-enterprise-monitoring.md|07 zabbix enterprise monitoring]]
+- [[09-可观测性/07-工具/05-new-relic-enterprise-apm.md|08 new relic enterprise apm]]
 
 ### 日志管理与分析
 - ELK Stack企业级日志管理系统深度实践
 - Fluentd企业级日志收集与处理深度实践
-- [[09-可观测性/03-日志/03-loki-enterprise-log-aggregation.md|03 loki enterprise log aggregation]]
+- [[09-可观测性/03-日志/04-loki-enterprise-log-aggregation.md|03 loki enterprise log aggregation]]
 - 企业级日志治理与合规审计深度实践
 - Graylog 企业级日志管理平台深度实践
 - Splunk企业级日志分析与安全智能平台深度实践
@@ -171,8 +171,8 @@ prerequisites:
 - Prometheus 企业级监控部署指南
 
 ### 技能卡片
-- [[19-故障诊断/08-技能体系/15-monitoring-alerting-failure.md|监控告警体系故障诊断与修复]]
-- [[19-故障诊断/08-技能体系/16-logging-pipeline-failure.md|日志收集与管理故障诊断与修复]]
+- [[19-故障诊断/08-技能体系/16-monitoring-alerting-failure.md|监控告警体系故障诊断与修复]]
+- [[19-故障诊断/08-技能体系/17-logging-pipeline-failure.md|日志收集与管理故障诊断与修复]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL.md|K8s Node NotReady 诊断与修复]]
 
 ### 术语词典

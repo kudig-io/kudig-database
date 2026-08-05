@@ -306,14 +306,14 @@ kubectl --context=azure-prod get certificates -A
 2. **统一 GitOps**：所有集群使用 ArgoCD/Flux 管理，配置存储在统一 Git 仓库
 3. **统一监控**：Prometheus + Grafana 多云联邦，或 Datadog/New Relic SaaS
 4. **统一安全**：OPA/Kyverno 策略跨云一致，镜像扫描统一标准
-5. **成本治理**：OpenCost 多云成本归因，参考 [[10-平台工程/03-治理/09-cost-optimization-finops|FinOps]]
-6. **参考各云详细实践**：[[18-云厂商/05-腾讯云TKE/06-tke-production-best-practices|TKE]]、[[18-云厂商/06-华为云CCE/06-cce-production-best-practices|CCE]]
+5. **成本治理**：OpenCost 多云成本归因，参考 [[10-平台工程/03-治理/03-cost-optimization-finops|FinOps]]
+6. **参考各云详细实践**：[[18-云厂商/05-腾讯云TKE/05-tke-production-best-practices|TKE]]、[[18-云厂商/06-华为云CCE/05-cce-production-best-practices|CCE]]
 
 ## Related
 
-- [[18-云厂商/05-腾讯云TKE/06-tke-production-best-practices|腾讯 TKE 生产实践]]
-- [[18-云厂商/06-华为云CCE/06-cce-production-best-practices|华为 CCE 生产实践]]
-- [[10-平台工程/03-治理/09-cost-optimization-finops|成本优化与 FinOps]]
+- [[18-云厂商/05-腾讯云TKE/05-tke-production-best-practices|腾讯 TKE 生产实践]]
+- [[18-云厂商/06-华为云CCE/05-cce-production-best-practices|华为 CCE 生产实践]]
+- [[10-平台工程/03-治理/03-cost-optimization-finops|成本优化与 FinOps]]
 - [[23-实体/02-K8s核心组件/cni-plugins|CNI 插件]]
 - [[10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
 - [[24-综合/06-可靠性与成本/multitenancy-resource-isolation-governance|多租户资源隔离治理]]

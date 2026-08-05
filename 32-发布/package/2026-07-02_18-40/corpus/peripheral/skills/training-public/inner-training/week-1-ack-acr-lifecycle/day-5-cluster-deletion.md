@@ -506,7 +506,7 @@ Day 6 将学习集群升级策略，掌握版本升级的操作步骤和风险�
 
 - [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+- [集群生命周期管理](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/operate/01-cluster-lifecycle-management.md)
 
 
 <!-- risk-assessed -->

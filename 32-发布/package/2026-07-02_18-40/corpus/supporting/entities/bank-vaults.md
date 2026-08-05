@@ -78,7 +78,7 @@ Bank-Vaults 是一套围绕 HashiCorp Vault 构建的 Kubernetes 原生密钥管
 ## Related
 
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/05-prometheus-ha-deployment]] — [[Prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
 - [[entities/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -280,7 +280,7 @@ k0s image import airgap-images.tar
 
 - [[bank-vaults]] — Bank-Vaults
 - [[thanos]] — Thanos
-- [[03-containerd-security-hardening]] — containerd 安全加固
+- [[02-containerd-security-hardening]] — containerd 安全加固
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

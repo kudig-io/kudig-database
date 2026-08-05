@@ -19,9 +19,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[22-概念/03-网络/54-hostnetwork-hostport-deep-dive.md|hostNetwork 与 hostPort 深度解析]]
-- [[22-概念/03-网络/52-sctp-multicast-kubernetes.md|SCTP 与 Multicast 在 Kubernetes 中的支持]]
-- [[22-概念/03-网络/53-cni-plugin-development-guide.md|CNI 插件开发实战指南]]
+- [[22-概念/03-网络/03-hostnetwork-hostport-deep-dive.md|hostNetwork 与 hostPort 深度解析]]
+- [[22-概念/03-网络/01-sctp-multicast-kubernetes.md|SCTP 与 Multicast 在 Kubernetes 中的支持]]
+- [[22-概念/03-网络/02-cni-plugin-development-guide.md|CNI 插件开发实战指南]]
 - [[22-概念/03-网络/cilium-ebpf-networking.md|cilium-ebpf-networking]]
 - [[22-概念/03-网络/cni-networking-model.md|cni-networking-model]]
 - [[22-概念/03-网络/headless-service.md|headless-service]]

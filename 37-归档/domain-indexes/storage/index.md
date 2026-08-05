@@ -24,7 +24,7 @@ last_updated: 2026-05-21
 - [[README]] — Domain 总览
 
 ## 根目录文档
-- [[02-pvc-expansion-guide]] — Pvc expansion guide
+- [[03-pvc-expansion-guide]] — Pvc expansion guide
 
 ## 按主题分组
 
@@ -32,20 +32,20 @@ last_updated: 2026-05-21
 
 - [[01-storage-architecture-overview]] — Storage architecture overview
 - [[02-pv-architecture-fundamentals]] — Pv architecture fundamentals
-- [[03-pvc-patterns-practices]] — Pvc patterns practices
-- [[04-storageclass-dynamic-provisioning]] — Storageclass dynamic provisioning
-- [[05-csi-drivers-integration]] — Csi drivers integration
-- [[06-storage-fundamental-concepts]] — Storage fundamental concepts
-- [[07-storage-daily-operations]] — Storage daily operations
-- [[08-storage-performance-tuning]] — Storage performance tuning
-- [[09-pv-pvc-troubleshooting]] — Pv pvc troubleshooting
-- [[10-storage-backup-disaster-recovery]] — Storage backup disaster recovery
-- [[11-storage-advanced-features]] — Storage advanced features
-- [[12-storage-monitoring-alerting]] — Storage monitoring alerting
-- [[13-storage-security-compliance]] — Storage security compliance
-- [[14-cloud-native-storage]] — Cloud native storage
-- [[15-storage-disaster-recovery]] — Storage disaster recovery
-- [[16-csi-migration-in-tree-to-csi]] — Csi migration in tree to csi
+- [[04-pvc-patterns-practices]] — Pvc patterns practices
+- [[05-storageclass-dynamic-provisioning]] — Storageclass dynamic provisioning
+- [[06-csi-drivers-integration]] — Csi drivers integration
+- [[07-storage-fundamental-concepts]] — Storage fundamental concepts
+- [[08-storage-daily-operations]] — Storage daily operations
+- [[09-storage-performance-tuning]] — Storage performance tuning
+- [[10-pv-pvc-troubleshooting]] — Pv pvc troubleshooting
+- [[11-storage-backup-disaster-recovery]] — Storage backup disaster recovery
+- [[12-storage-advanced-features]] — Storage advanced features
+- [[13-storage-monitoring-alerting]] — Storage monitoring alerting
+- [[14-storage-security-compliance]] — Storage security compliance
+- [[15-cloud-native-storage]] — Cloud native storage
+- [[16-storage-disaster-recovery]] — Storage disaster recovery
+- [[17-csi-migration-in-tree-to-csi]] — Csi migration in tree to csi
 - [[completion-summary]] — Completion summary
 - [[quality-check-report]] — Quality check report
 
@@ -61,12 +61,12 @@ last_updated: 2026-05-21
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-16]] — Open source projects index from domain 16
-- [[00-open-source-projects-index-from-domain-6]] — Open source projects index from domain 6
+- [[01-open-source-projects-index-from-domain-6]] — Open source projects index from domain 6
 - [[MOC-from-domain-16]] — MOC from domain 16
 - [[MOC-from-domain-6]] — MOC from domain 6
 - [[README-from-domain-16]] — README from domain 16
 - [[README-from-domain-6]] — README from domain 6
 
 ## 相关 Domain
-- [[网络/98-merged-indexes/index.md|Domain 03 网络与流量 索引]]
-- [[数据库中间件/98-merged-indexes/index.md|Domain 16 数据库与中间件 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 03 网络与流量 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 16 数据库与中间件 索引]]

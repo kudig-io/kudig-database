@@ -84,9 +84,9 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
 - [[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
-- [[19-故障诊断/02-资源排障/21-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/13-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
 - [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 - [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
 - [[19-故障诊断/04-高级排障/structural-04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
@@ -101,7 +101,7 @@ prerequisites:
 
 ### 技能卡片
 
-- [[19-故障诊断/08-技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
+- [[19-故障诊断/08-技能体系/08-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
 - [[19-故障诊断/08-技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
 
 ### K8s 事件

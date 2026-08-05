@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/05-configuration/05-configmap-secret.md|Configmap Secret]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/03-configuration/01-configmap-secret|Configmap Secret]]
 

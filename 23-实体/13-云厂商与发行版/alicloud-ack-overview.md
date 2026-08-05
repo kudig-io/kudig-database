@@ -583,10 +583,10 @@ echo "Logs collected to: $LOG_DIR"
 
 ## See Also
 
-- [[18-云厂商/01-阿里云/公有云-ACK/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[18-云厂商/01-阿里云/公有云-ACK/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[18-云厂商/01-阿里云/公有云-ACK/006-ack-ros-iac.md|244-ack-ros-iac]]
+- [[18-云厂商/01-阿里云/公有云-ACK/007-ack-ebs-storage.md|245-ack-ebs-storage]]
 - [[18-云厂商/01-阿里云/公有云-ACK/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[18-云厂商/01-阿里云/公有云-ACK/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[18-云厂商/01-阿里云/公有云-ACK/002-ack-ecs-compute.md|240-ack-ecs-compute]]
 
 
 <!-- risk-assessed -->

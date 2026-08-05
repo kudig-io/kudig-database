@@ -64,7 +64,7 @@ Go 语言凭借静态编译、低内存占用、原生并发模型与极快的�
 
 然而，"Go 天然适合容器"是一种危险的错觉。在我们的生产实践中，见过太多 Go 服务因为对运行时机制理解不足而引发严重故障：有的服务因为 GOMAXPROCS 误判宿主机核数导致上下文切换风暴，P99 延迟剧烈抖动；有的服务因为缺少 graceful shutdown，在每次滚动更新时都会产生大量 502 错误；还有的服务把 pprof 调试端口直接暴露到公网，造成严重的安全隐患。这些问题都不是 Go 语言本身的缺陷，而是工程实践不到位的结果。
 
-本文从生产实战视角出发，系统梳理 Go 应用在 Kubernetes 上从镜像构建到运行调优、从健康检查到故障排查的完整链路。所有配置均经过万核级集群的长期验证，可以直接借鉴落地。需要特别说明的是，与 [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]] 不同，Go 没有 JVM 那样的垃圾回收调优负担，但它有运行时调度器与 cgroup 资源限制协同的独特挑战，这正是本文要重点解决的问题。
+本文从生产实战视角出发，系统梳理 Go 应用在 Kubernetes 上从镜像构建到运行调优、从健康检查到故障排查的完整链路。所有配置均经过万核级集群的长期验证，可以直接借鉴落地。需要特别说明的是，与 [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]] 不同，Go 没有 JVM 那样的垃圾回收调优负担，但它有运行时调度器与 cgroup 资源限制协同的独特挑战，这正是本文要重点解决的问题。
 
 ---
 
@@ -330,7 +330,7 @@ kubectl -n production exec deploy/go-api -- cat /sys/fs/cgroup/cpu.stat
 # 关注 nr_throttled 与 throttled_time
 ```
 
-这是 Go 服务在容器中最常见的性能问题。根因通常是 GOMAXPROCS 远大于实际可用的 CPU 核数，或者 CPU limit 设置过低。当 nr_throttled 持续增长时，说明进程频繁触及 CPU 配额上限被强制暂停。处置方法是引入 automaxprocs 让 GOMAXPROCS 与 limit 对齐，或者将 CPU limit 提高到 request 的两倍以内。对于延迟敏感服务，我们更倾向于完全不设置 CPU limit，仅通过 request 保证资源，参考 [[02-工作负载/02-Java-on-K8s/03-jvm-gc-container-tuning.md|JVM GC 与容器调优]] 中对类似问题的讨论。
+这是 Go 服务在容器中最常见的性能问题。根因通常是 GOMAXPROCS 远大于实际可用的 CPU 核数，或者 CPU limit 设置过低。当 nr_throttled 持续增长时，说明进程频繁触及 CPU 配额上限被强制暂停。处置方法是引入 automaxprocs 让 GOMAXPROCS 与 limit 对齐，或者将 CPU limit 提高到 request 的两倍以内。对于延迟敏感服务，我们更倾向于完全不设置 CPU limit，仅通过 request 保证资源，参考 [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning.md|JVM GC 与容器调优]] 中对类似问题的讨论。
 
 ### 症状 2：goroutine 泄漏导致内存持续增长
 
@@ -360,7 +360,7 @@ curl -s http://localhost:6060/debug/pprof/goroutine?debug=1 | head -50
 
 ## 最佳实践
 
-第一，镜像构建始终采用多阶段构建加 distroless 或 static 基底，最终镜像控制在 20MB 以内，并启用 nonroot 用户运行。第二，运行时默认引入 automaxprocs，CPU 密集型服务谨慎设置硬 limit，延迟敏感服务可考虑只设 request。第三，生命周期管理方面，terminationGracePeriodSeconds 应大于等于 shutdown 超时加上 preStop sleep 的时间，并且务必实现完整的信号处理逻辑。第四，探针配置遵循 liveness 不查依赖、readiness 查依赖的原则，慢启动服务必须加 startupProbe 防止被误杀。第五，pprof 调试端口只绑定 localhost，通过 port-forward 访问，严禁暴露到任何 Service。第六，坚持可重现构建，使用 -trimpath 并固定 base image 的 digest。第七，安全加固方面启用 readOnlyRootFilesystem 和 allowPrivilegeEscalation: false，具体参考 [[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]。
+第一，镜像构建始终采用多阶段构建加 distroless 或 static 基底，最终镜像控制在 20MB 以内，并启用 nonroot 用户运行。第二，运行时默认引入 automaxprocs，CPU 密集型服务谨慎设置硬 limit，延迟敏感服务可考虑只设 request。第三，生命周期管理方面，terminationGracePeriodSeconds 应大于等于 shutdown 超时加上 preStop sleep 的时间，并且务必实现完整的信号处理逻辑。第四，探针配置遵循 liveness 不查依赖、readiness 查依赖的原则，慢启动服务必须加 startupProbe 防止被误杀。第五，pprof 调试端口只绑定 localhost，通过 port-forward 访问，严禁暴露到任何 Service。第六，坚持可重现构建，使用 -trimpath 并固定 base image 的 digest。第七，安全加固方面启用 readOnlyRootFilesystem 和 allowPrivilegeEscalation: false，具体参考 [[08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]。
 
 ```yaml
 # 🟢 低风险：securityContext 加固（Restricted 级别）
@@ -379,10 +379,10 @@ securityContext:
 
 ## Related
 
-- [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
-- [[02-工作负载/02-Java-on-K8s/03-jvm-gc-container-tuning.md|JVM GC 与容器调优]]
-- [[02-工作负载/02-Java-on-K8s/05-quarkus-native-kubernetes.md|Quarkus Native Kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
+- [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning.md|JVM GC 与容器调优]]
+- [[02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes.md|Quarkus Native Kubernetes]]
 - [[02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production.md|Rust 应用 Kubernetes 生产实践]]
 - [[02-工作负载/04-多语言运行时/02-python-on-kubernetes-production.md|Python 应用 Kubernetes 生产实践]]
-- [[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]
+- [[08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
 - [[09-可观测性/README|可观测性]]

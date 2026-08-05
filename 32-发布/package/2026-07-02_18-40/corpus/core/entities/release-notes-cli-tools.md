@@ -121,13 +121,13 @@ prerequisites:
 
 ## 相关导航
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
 - [[entities/k8s-platform-extensions.md|k8s-platform-extensions]] — 平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-core-deps]] — 发布说明索引 — 核心依赖
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-core-deps]] — 发布说明索引 — 核心依赖
 - [[helm]] — Helm
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

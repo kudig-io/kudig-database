@@ -775,7 +775,7 @@ symptom_mappings:
       - path: "domain-01-cluster-fundamentals/02-etcd-troubleshooting.md"
         type: "domain"
         relevance: 0.95
-      - path: "[[domain-10-troubleshooting-diagnostics/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]].md"
+      - path: "[[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/13-etcd-maintenance|10-etcd-maintenance]].md"
         type: "domain"
         relevance: 0.90
 
@@ -2067,8 +2067,8 @@ compliance:
 - [[domain-10-troubleshooting-diagnostics/高级排障/MOC.md|topic-structural-trouble-shooting MOC]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/README.md|Kubernetes 结构化故障排查知识库]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md|疑难问题系统性排查方法论：配置优先（Configuration-First）]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/09-dra-troubleshooting.md|DRA（动态资源分配）故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-etcd-maintenance.md|etcd 维护专项文档]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-dra-troubleshooting|DRA（动态资源分配）故障排查指南]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/13-etcd-maintenance|etcd 维护专项文档]]
 
 ## Related
 
@@ -2077,10 +2077,10 @@ compliance:
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-dra-troubleshooting|09-dra-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/13-etcd-maintenance|10-etcd-maintenance]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/00-configuration-first-methodology.md|00-configuration-first-methodology]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/09-dra-troubleshooting.md|09-dra-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/11-dra-troubleshooting|09-dra-troubleshooting]]
 
 
 <!-- risk-assessed -->

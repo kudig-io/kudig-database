@@ -52,10 +52,10 @@ last_updated: '2026-07-21'
 - [[12-可靠性/06-SRE实践/01-availability-calculation-model|可用性计算模型]]
 - [[12-可靠性/06-SRE实践/02-release-gate-slo-based|基于 SLO 的发布门禁]]
 - [[12-可靠性/06-SRE实践/03-incident-command-system|事件指挥系统]]
-- [[12-可靠性/06-SRE实践/04-toil-reduction-automation|减少琐事自动化]]
-- [[12-可靠性/06-SRE实践/05-error-budget-automation|错误预算自动化]]
-- [[12-可靠性/06-SRE实践/06-slo-dashboard-design|SLO 仪表盘设计]]
-- [[12-可靠性/06-SRE实践/07-incident-command-field-guide|事件指挥现场指南]]
+- [[12-可靠性/06-SRE实践/06-toil-reduction-automation|减少琐事自动化]]
+- [[12-可靠性/06-SRE实践/07-error-budget-automation|错误预算自动化]]
+- [[12-可靠性/06-SRE实践/09-slo-dashboard-design|SLO 仪表盘设计]]
+- [[12-可靠性/06-SRE实践/10-incident-command-field-guide|事件指挥现场指南]]
 
 ## 混沌工程 (Chaos Engineering)
 
@@ -72,30 +72,30 @@ last_updated: '2026-07-21'
 - [[12-可靠性/03-容量规划/01-capacity-planning-framework|容量规划框架]]
 - [[12-可靠性/03-容量规划/02-hpa-vpa-cluster-autoscaler-karpenter|HPA/VPA/Cluster Autoscaler/Karpenter]]
 - [[12-可靠性/03-容量规划/03-resource-quota-limitrange|ResourceQuota/LimitRange]]
-- [[12-可靠性/03-容量规划/06-autoscaling-best-practices|自动伸缩最佳实践]]
-- [[12-可靠性/03-容量规划/07-resource-right-sizing-guide|资源合理配置指南]]
-- [[12-可靠性/03-容量规划/24-capacity-planning-forecasting|容量规划预测]]
-- [[12-可靠性/03-容量规划/25-ai-driven-capacity-planning-cost-optimization-2025|AI 驱动容量规划与成本优化]]
+- [[12-可靠性/03-容量规划/04-autoscaling-best-practices|自动伸缩最佳实践]]
+- [[12-可靠性/03-容量规划/05-resource-right-sizing-guide|资源合理配置指南]]
+- [[12-可靠性/03-容量规划/06-capacity-planning-forecasting|容量规划预测]]
+- [[12-可靠性/03-容量规划/07-ai-driven-capacity-planning-cost-optimization-2025|AI 驱动容量规划与成本优化]]
 
 ## 灾难恢复 (Disaster Recovery)
 
 - [[12-可靠性/02-灾难恢复/01-multi-region-dr-architecture|多区域灾备架构]]
-- [[12-可靠性/02-灾难恢复/02-dr-automation-playbook|灾备自动化 Playbook]]
-- [[12-可靠性/02-灾难恢复/07-kubernetes-backup-restore-deep-dive|Kubernetes 备份恢复深度指南]]
-- [[12-可靠性/02-灾难恢复/08-chaos-engineering-platforms|混沌工程平台]]
-- [[12-可靠性/02-灾难恢复/10-dr-scenarios-catalog|灾备场景目录]]
-- [[12-可靠性/02-灾难恢复/11-az-failure-playbook|AZ 故障 Playbook]]
-- [[12-可靠性/02-灾难恢复/13-etcd-corruption-recovery-playbook|etcd 损坏恢复 Playbook]]
-- [[12-可靠性/02-灾难恢复/14-node-failure-bulk-recovery-playbook|节点批量故障恢复 Playbook]]
-- [[12-可靠性/02-灾难恢复/15-cluster-upgrade-failure-rollback-playbook|集群升级失败回滚 Playbook]]
-- [[12-可靠性/02-灾难恢复/16-control-plane-loss-recovery-playbook|控制平面丢失恢复 Playbook]]
-- [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills|灾备演练]]
-- [[12-可靠性/02-灾难恢复/18-cross-region-disaster-recovery|跨区域灾备]]
-- [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide|Velero 备份恢复指南]]
+- [[12-可靠性/02-灾难恢复/03-dr-automation-playbook|灾备自动化 Playbook]]
+- [[12-可靠性/02-灾难恢复/08-kubernetes-backup-restore-deep-dive|Kubernetes 备份恢复深度指南]]
+- [[12-可靠性/02-灾难恢复/09-chaos-engineering-platforms|混沌工程平台]]
+- [[12-可靠性/02-灾难恢复/11-dr-scenarios-catalog|灾备场景目录]]
+- [[12-可靠性/02-灾难恢复/12-az-failure-playbook|AZ 故障 Playbook]]
+- [[12-可靠性/02-灾难恢复/14-etcd-corruption-recovery-playbook|etcd 损坏恢复 Playbook]]
+- [[12-可靠性/02-灾难恢复/15-node-failure-bulk-recovery-playbook|节点批量故障恢复 Playbook]]
+- [[12-可靠性/02-灾难恢复/16-cluster-upgrade-failure-rollback-playbook|集群升级失败回滚 Playbook]]
+- [[12-可靠性/02-灾难恢复/17-control-plane-loss-recovery-playbook|控制平面丢失恢复 Playbook]]
+- [[12-可靠性/02-灾难恢复/18-disaster-recovery-drills|灾备演练]]
+- [[12-可靠性/02-灾难恢复/20-cross-region-disaster-recovery|跨区域灾备]]
+- [[12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide|Velero 备份恢复指南]]
 
 ## 备份恢复 (Backup & Restore)
 
-- [[12-可靠性/01-备份恢复/16-enterprise-backup-strategy|企业级备份策略]]
+- [[12-可靠性/01-备份恢复/06-enterprise-backup-strategy|企业级备份策略]]
 
 ## 事后复盘 (Postmortem)
 
@@ -106,9 +106,9 @@ last_updated: '2026-07-21'
 
 - [[12-可靠性/07-性能测试/01-load-testing-methodology|负载测试方法论]]
 - [[12-可靠性/07-性能测试/02-chaos-load-integration|混沌负载集成]]
-- [[12-可靠性/07-性能测试/02-k6-load-testing-k8s|K6 K8s 负载测试]]
-- [[12-可靠性/07-性能测试/03-locust-distributed-testing|Locust 分布式测试]]
-- [[12-可靠性/07-性能测试/04-production-load-testing-playbook|生产负载测试 Playbook]]
+- [[12-可靠性/07-性能测试/03-k6-load-testing-k8s|K6 K8s 负载测试]]
+- [[12-可靠性/07-性能测试/05-locust-distributed-testing|Locust 分布式测试]]
+- [[12-可靠性/07-性能测试/06-production-load-testing-playbook|生产负载测试 Playbook]]
 
 ## 概念 (Concepts)
 
@@ -147,8 +147,8 @@ last_updated: '2026-07-21'
 ## 生产运维 (Production Operations)
 
 - [[13-生产运维/07-运维手册/06-sla-slo-definition-templates|SLA/SLO 定义模板]]
-- [[12-可靠性/06-SRE实践/04-error-budget-policy-template|错误预算策略模板]]
-- [[12-可靠性/06-SRE实践/05-reliability-maturity-model|可靠性成熟度模型]]
+- [[12-可靠性/06-SRE实践/05-error-budget-policy-template|错误预算策略模板]]
+- [[12-可靠性/06-SRE实践/08-reliability-maturity-model|可靠性成熟度模型]]
 
 ## 研究 (Research)
 

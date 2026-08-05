@@ -236,7 +236,7 @@ kubectl delete inferenceservice fraud-detection -n ml-serving
 
 ## Related
 
-- [[07-containerd-disaster-recovery]] — containerd 灾难恢复
+- [[06-containerd-disaster-recovery]] — containerd 灾难恢复
 - [[chaosblade]] — ChaosBlade
 - [[network-service-mesh]] — Network Service Mesh (NSM)
 - [[knative]] — Knative

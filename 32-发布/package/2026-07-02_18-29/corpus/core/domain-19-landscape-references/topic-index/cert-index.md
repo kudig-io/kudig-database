@@ -76,10 +76,10 @@ prerequisites:
 
 ### 集群证书
 
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/06-cert-rotation.md|证书轮换机制源码分析]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/07-service-account-keys.md|ServiceAccount 密钥对源码分析]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/13-cert-config.md|kubeadm 配置对证书生成的影响]]
-- [[domain-02-workloads-applications/topic-functions/cluster-cert/17-pki-security-best-practices.md|Kubernetes PKI 安全最佳实践]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-cert/04-cert-rotation|证书轮换机制源码分析]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-cert/05-service-account-keys|ServiceAccount 密钥对源码分析]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/05-cert-config|kubeadm 配置对证书生成的影响]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/06-pki-security-best-practices|Kubernetes PKI 安全最佳实践]]
 
 ---
 

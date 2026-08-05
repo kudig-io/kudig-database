@@ -22,8 +22,8 @@ affected_cluster: ack-zyy-prod-05
 affected_namespace: risk-engine
 ticket_type: 调度故障
 skill_ref:
-- '[[domain-02-workloads-applications/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]'
-- '[[domain-02-workloads-applications/核心工作负载/23-resource-management.md|资源管理]]'
+- '[[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/00-core-workloads/05-cluster-capacity-planning|集群容量规划]]'
+- '[[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-02-workloads-applications/00-core-workloads/07-resource-management|资源管理]]'
 - '[[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-deployment-rollout/SKILL.md|Deployment
   滚动发布诊断 Skill]]'
 fta_ref:
@@ -273,7 +273,7 @@ kubectl run risk-test --image=registry.aliyuncs.com/acs/busybox -n risk-engine -
 >
 > 当前所有 Pending Pod 已 Running，Deployment 副本数达到 60/60，风控接口健康检查正常。建议后续：
 > - 在发布模板中固化 Toleration 与亲和性配置，避免后续版本误删；
-> - 配置发布前容量预检，参考 [[domain-02-workloads-applications/核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]；
+> - 配置发布前容量预检，参考 [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/00-core-workloads/05-cluster-capacity-planning|集群容量规划]]；
 > - 为 `risk-engine` 节点池启用 Cluster Autoscaler，参考 ACK 集群自动扩缩容。
 >
 > 如有新异常，请随时联系。

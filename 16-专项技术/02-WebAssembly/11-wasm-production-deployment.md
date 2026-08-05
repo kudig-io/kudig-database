@@ -57,7 +57,7 @@ authors:
 
 # WebAssembly 生产部署指南
 
-本指南面向希望在 Kubernetes 上以生产标准运行 WebAssembly（Wasm）工作负载的 SRE 与平台工程师，提供 Wasm 运行时选型、节点配置、调度、网络/存储、可观测性、安全与 CI/CD 的完整操作路径。WebAssembly 以其快速启动、小体积和强隔离特性，逐渐成为云原生场景中运行无状态函数和微服务的有效补充。然而，Wasm 生态仍在快速演进，运行时、工具链和可观测性与传统容器存在显著差异。本指南中的命令可直接在已安装 `kubectl`、`containerd` 与相关 CLI 的环境中执行，所有变更应先在测试环境验证，并遵循 [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产就绪运维框架]] 中的变更管理要求。
+本指南面向希望在 Kubernetes 上以生产标准运行 WebAssembly（Wasm）工作负载的 SRE 与平台工程师，提供 Wasm 运行时选型、节点配置、调度、网络/存储、可观测性、安全与 CI/CD 的完整操作路径。WebAssembly 以其快速启动、小体积和强隔离特性，逐渐成为云原生场景中运行无状态函数和微服务的有效补充。然而，Wasm 生态仍在快速演进，运行时、工具链和可观测性与传统容器存在显著差异。本指南中的命令可直接在已安装 `kubectl`、`containerd` 与相关 CLI 的环境中执行，所有变更应先在测试环境验证，并遵循 [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产就绪运维框架]] 中的变更管理要求。
 
 ## 1. 适用场景与范围
 
@@ -319,7 +319,7 @@ EOF
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
+- [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - [[01-wasm-fundamentals-cloud-native.md|Wasm 云原生基础]]
 - [[02-containerd-wasm-shim.md|containerd-wasm-shim]]
 - [[03-spinkube-framework.md|SpinKube 框架]]

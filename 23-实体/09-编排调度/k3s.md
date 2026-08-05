@@ -307,7 +307,7 @@ k3s 集群异常
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[19-故障诊断/04-高级排障/44-kind-k3s-single-node-troubleshooting.md|44-kind-k3s-single-node-troubleshooting]]
+- [[19-故障诊断/04-高级排障/10-kind-k3s-single-node-troubleshooting.md|44-kind-k3s-single-node-troubleshooting]]
 - k3s
 - [[23-实体/15-参考与索引/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

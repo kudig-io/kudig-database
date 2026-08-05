@@ -91,18 +91,18 @@ prerequisites:
 
 | 序号 | 文档 | 内容概要 | 适用角色 | 阅读耗时 |
 |:---:|------|---------|---------|---------|
-| 21 | [OpenCode 概述与核心架构](./21-opencode-overview-architecture.md) | 项目定位、核心能力、系统架构、与竞品对比 | 所有工程师 | 25min |
-| 22 | [安装与快速开始](./22-opencode-installation-quickstart.md) | 多平台安装、配置初始化、首次使用、Hello World | 所有工程师 | 15min |
-| 23 | [Provider 与模型配置](./23-opencode-providers-models.md) | 75+ Provider 支持、API Key 配置、模型选择、本地模型 | AI 工程师 | 20min |
-| 24 | [Agent 系统架构](./24-opencode-agents-system.md) | Agent 模式、多 Agent 协作、上下文管理、记忆系统 | 研发工程师 | 30min |
-| 25 | [工具与权限管理](./25-opencode-tools-permissions.md) | 内置工具、权限控制、确认模式、安全策略 | 研发工程师 | 25min |
-| 26 | [MCP 集成指南](./26-opencode-mcp-integration.md) | MCP 协议、Servers 配置、Stdio/SSE 传输、工具发现 | 研发工程师 | 30min |
-| 27 | [LSP 与代码格式化](./27-opencode-lsp-formatters.md) | LSP 支持、Diagnostics、Formatter 配置、代码修复 | 研发工程师 | 20min |
-| 28 | [Skills 与自定义命令](./28-opencode-skills-commands.md) | 内置 Skills、自定义 Skill 开发、命令系统、快捷键 | 研发工程师 | 25min |
-| 29 | [TUI 界面与定制](./29-opencode-tui-customization.md) | 终端界面、主题配置、布局定制、交互模式 | 所有工程师 | 20min |
-| 30 | [Server 模式与 API](./30-opencode-server-api.md) | HTTP Server、WebSocket、API 端点、远程连接 | 架构师、SRE | 25min |
-| 31 | [GitHub 自动化](./31-opencode-github-automation.md) | PR 创建、Issue 管理、代码审查、CI/CD 集成 | 研发工程师 | 25min |
-| 32 | [高级主题与最佳实践](./32-opencode-advanced-topics.md) | 性能优化、调试技巧、故障排查、企业部署 | 架构师、SRE | 30min |
+| 21 | [OpenCode 概述与核心架构](13-opencode-overview-architecture.md) | 项目定位、核心能力、系统架构、与竞品对比 | 所有工程师 | 25min |
+| 22 | [安装与快速开始](14-opencode-installation-quickstart.md) | 多平台安装、配置初始化、首次使用、Hello World | 所有工程师 | 15min |
+| 23 | [Provider 与模型配置](15-opencode-providers-models.md) | 75+ Provider 支持、API Key 配置、模型选择、本地模型 | AI 工程师 | 20min |
+| 24 | [Agent 系统架构](16-opencode-agents-system.md) | Agent 模式、多 Agent 协作、上下文管理、记忆系统 | 研发工程师 | 30min |
+| 25 | [工具与权限管理](17-opencode-tools-permissions.md) | 内置工具、权限控制、确认模式、安全策略 | 研发工程师 | 25min |
+| 26 | [MCP 集成指南](18-opencode-mcp-integration.md) | MCP 协议、Servers 配置、Stdio/SSE 传输、工具发现 | 研发工程师 | 30min |
+| 27 | [LSP 与代码格式化](19-opencode-lsp-formatters.md) | LSP 支持、Diagnostics、Formatter 配置、代码修复 | 研发工程师 | 20min |
+| 28 | [Skills 与自定义命令](20-opencode-skills-commands.md) | 内置 Skills、自定义 Skill 开发、命令系统、快捷键 | 研发工程师 | 25min |
+| 29 | [TUI 界面与定制](21-opencode-tui-customization.md) | 终端界面、主题配置、布局定制、交互模式 | 所有工程师 | 20min |
+| 30 | [Server 模式与 API](22-opencode-server-api.md) | HTTP Server、WebSocket、API 端点、远程连接 | 架构师、SRE | 25min |
+| 31 | [GitHub 自动化](23-opencode-github-automation.md) | PR 创建、Issue 管理、代码审查、CI/CD 集成 | 研发工程师 | 25min |
+| 32 | [高级主题与最佳实践](24-opencode-advanced-topics.md) | 性能优化、调试技巧、故障排查、企业部署 | 架构师、SRE | 30min |
 
 ---
 
@@ -230,7 +230,7 @@ graph TB
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
@@ -242,11 +242,11 @@ graph TB
 - [[15-AI基础设施/04-AI编码/01-openrouter-overview-architecture.md|01-openrouter-overview-architecture]]
 - [[15-AI基础设施/04-AI编码/09-openrouter-frameworks-integrations.md|09-openrouter-frameworks-integrations]]
 - [[15-AI基础设施/04-AI编码/10-openrouter-streaming-multimedia.md|10-openrouter-streaming-multimedia]]
-- [[15-AI基础设施/04-AI编码/29-opencode-tui-customization.md|29-opencode-tui-customization]]
+- [[15-AI基础设施/04-AI编码/21-opencode-tui-customization.md|29-opencode-tui-customization]]
 - [[15-AI基础设施/04-AI编码/03-openrouter-models-providers.md|03-openrouter-models-providers]]
 - [[15-AI基础设施/04-AI编码/07-openrouter-plugins-web-search.md|07-openrouter-plugins-web-search]]
 - [[15-AI基础设施/04-AI编码/02-openrouter-quickstart-setup.md|02-openrouter-quickstart-setup]]
-- [[15-AI基础设施/04-AI编码/23-opencode-providers-models.md|23-opencode-providers-models]]
+- [[15-AI基础设施/04-AI编码/15-opencode-providers-models.md|23-opencode-providers-models]]
 
 
 <!-- risk-assessed -->

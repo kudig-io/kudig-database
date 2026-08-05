@@ -383,7 +383,7 @@ echo "Deploy image: ${IMAGE}"
 - [[14-容器运行时/04-镜像构建/01-buildkit-production-guide.md|BuildKit 生产指南]]
 - [[14-容器运行时/04-镜像构建/02-cloud-native-buildpacks-guide.md|Cloud Native Buildpacks 指南]]
 - [[14-容器运行时/02-镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
-- [[11-发布变更/01-GitOps/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
+- [[11-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
 
 
 <!-- risk-assessed -->

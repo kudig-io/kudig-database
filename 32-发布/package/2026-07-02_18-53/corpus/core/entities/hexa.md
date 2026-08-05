@@ -73,7 +73,7 @@ Hexa 是一个统一的策略编排引擎，使用 IDQL (Identity Query Language
 
 ## Related
 
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[04-istio-security-hardening]] — Istio 安全加固
 - [[copa]] — Copa (Copacetic)
 - [[nats]] — NATS
 - [[paralus]] — Paralus

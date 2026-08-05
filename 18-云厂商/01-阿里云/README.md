@@ -63,10 +63,10 @@ last_updated: '2026-07-23'
 
 ## 快速入口
 
-- **节点问题**：[[18-云厂商/01-阿里云/09-ack-node-pool-management.md|节点池管理]] → 查看阿里云特定分支
+- **节点问题**：[[18-云厂商/01-阿里云/07-ack-node-pool-management.md|节点池管理]] → 查看阿里云特定分支
 - **网络问题**：[[18-云厂商/01-阿里云/03-Terway-CNI网络.md|Terway 网络]] → 查看 CNI 排障
-- **存储问题**：[[18-云厂商/01-阿里云/专有云-Apsara/256-apsara-pangu-storage-troubleshooting.md|盘古存储排障]] → 专有云存储故障手册
+- **存储问题**：[[18-云厂商/01-阿里云/专有云-Apsara/008-apsara-pangu-storage-troubleshooting.md|盘古存储排障]] → 专有云存储故障手册
 - **Ingress 问题**：[[18-云厂商/01-阿里云/05-阿里云SLB与Ingress.md|SLB 与 Ingress]] → 查看 SLB 特定分支
 - **底座组件**：[[18-云厂商/01-阿里云/apsara-stack-components.md|Apsara Stack 组件索引]] → 工单→底座组件映射
-- **故障手册**：[[18-云厂商/01-阿里云/专有云-Apsara/99-apsara-stack-troubleshooting-runbook.md|专有云故障手册]] → 可执行 runbook
-- **合规加固**：[[18-云厂商/01-阿里云/专有云-Apsara/255-apsara-compliance-hardening.md|合规加固]] → 等保四级/国密
+- **故障手册**：[[18-云厂商/01-阿里云/专有云-Apsara/01-apsara-stack-troubleshooting-runbook.md|专有云故障手册]] → 可执行 runbook
+- **合规加固**：[[18-云厂商/01-阿里云/专有云-Apsara/007-apsara-compliance-hardening.md|合规加固]] → 等保四级/国密

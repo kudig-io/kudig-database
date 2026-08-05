@@ -24,14 +24,14 @@ last_updated: 2026-05-21
 - [[README]] — Domain 总览
 
 ## 根目录文档
-- [[02-spring-boot-kubernetes-production]] — Spring boot kubernetes production
-- [[03-jvm-gc-container-tuning]] — Jvm gc container tuning
-- [[04-java-operator-sdk-development]] — Java operator sdk development
-- [[05-quarkus-native-kubernetes]] — Quarkus native kubernetes
-- [[06-java-cicd-tekton-argocd]] — Java cicd tekton argocd
-- [[07-java-observability-kubernetes]] — Java observability kubernetes
-- [[99-kubernetes-deployment-patterns-architecture]] — Kubernetes deployment patterns architecture
-- [[99-kubernetes-multi-tenant-architecture]] — Kubernetes multi tenant architecture
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production]] — Spring boot kubernetes production
+- [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning]] — Jvm gc container tuning
+- [[02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development]] — Java operator sdk development
+- [[02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes]] — Quarkus native kubernetes
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd]] — Java cicd tekton argocd
+- [[02-工作负载/02-Java-on-K8s/06-java-observability-kubernetes]] — Java observability kubernetes
+- [[01-kubernetes-deployment-patterns-architecture]] — Kubernetes deployment patterns architecture
+- [[02-kubernetes-multi-tenant-architecture]] — Kubernetes multi tenant architecture
 
 ## 按主题分组
 
@@ -60,8 +60,8 @@ last_updated: 2026-05-21
 - [[21-hpa-vpa-autoscaling]] — Hpa vpa autoscaling
 - [[22-cluster-capacity-planning]] — Cluster capacity planning
 - [[23-resource-management]] — Resource management
-- [[99-kubernetes-v1.33-workloads-guide]] — Kubernetes v1.33 workloads guide
-- [[99-spring-boot-kubernetes-guide]] — Spring boot kubernetes guide
+- [[24-kubernetes-v1.33-workloads-guide]] — Kubernetes v1.33 workloads guide
+- [[25-spring-boot-kubernetes-guide]] — Spring boot kubernetes guide
 - [[QUALITY_REPORT]] — QUALITY REPORT
 - [[README-old]] — README old
 
@@ -172,14 +172,14 @@ last_updated: 2026-05-21
 
 ### Java on Kubernetes
 
-- [[02-spring-boot-kubernetes-production]] — Spring boot kubernetes production
-- [[03-jvm-gc-container-tuning]] — Jvm gc container tuning
-- [[04-java-operator-sdk-development]] — Java operator sdk development
-- [[05-quarkus-native-kubernetes]] — Quarkus native kubernetes
-- [[06-java-cicd-tekton-argocd]] — Java cicd tekton argocd
-- [[07-java-observability-kubernetes]] — Java observability kubernetes
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production]] — Spring boot kubernetes production
+- [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning]] — Jvm gc container tuning
+- [[02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development]] — Java operator sdk development
+- [[02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes]] — Quarkus native kubernetes
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd]] — Java cicd tekton argocd
+- [[02-工作负载/02-Java-on-K8s/06-java-observability-kubernetes]] — Java observability kubernetes
 - [[README]] — README
 
 ## 相关 Domain
-- [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
-- [[网络/98-merged-indexes/index.md|Domain 03 网络与流量 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 01 集群基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 03 网络与流量 索引]]

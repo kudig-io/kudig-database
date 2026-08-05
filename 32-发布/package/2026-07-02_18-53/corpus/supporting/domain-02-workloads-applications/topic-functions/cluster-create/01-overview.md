@@ -780,9 +780,9 @@ kubeadm init phase addon all --config=kubeadm-config.yaml
 - [控制面组件](05-control-plane.md) — static Pod 创建
 - [etcd 管理](07-etcd.md) — etcd 静态 Pod
 - [节点加入](06-join.md) — worker 节点 join 流程
-- [初始化阶段](17-init-phases.md) — phase 详细说明
-- [CRI 运行时](18-cri-runtime.md) — CRI 预检和容器运行时
-- [高级配置](11-advanced.md) — InitConfiguration 详解
+- [初始化阶段](14-init-phases.md) — phase 详细说明
+- [CRI 运行时](15-cri-runtime.md) — CRI 预检和容器运行时
+- [高级配置](10-advanced.md) — InitConfiguration 详解
 
 ```
 

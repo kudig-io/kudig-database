@@ -341,9 +341,9 @@ sudo runsc --debug logs list
 
 ## 11. 相关文档
 
-- [[domain-13-container-runtime/containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
-- [[domain-13-container-runtime/containerd-CRI-O/02-cri-o-production-guide.md|CRI-O 生产指南]]
-- [[domain-02-workloads-applications/核心工作负载/16-runtime-class-configuration.md|RuntimeClass 配置]]
+- [[02-containerd-production-operations|containerd 生产运维指南]]
+- [[03-cri-o-production-guide|CRI-O 生产指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-02-workloads-applications/00-core-workloads/05-runtime-class-configuration|RuntimeClass 配置]]
 - Falco 运行时安全指南
 
 

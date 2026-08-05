@@ -23,7 +23,7 @@ last_updated: 2026-05-23
 # Helm release历史过多导致ConfigMap超限
 
 **日期**: 2026-06-01  
-**关联Skill**: [[26-helm-chart-failure]]  
+**关联Skill**: [[28-helm-chart-failure]]  
 **严重级别**: P2
 
 ## 场景描述

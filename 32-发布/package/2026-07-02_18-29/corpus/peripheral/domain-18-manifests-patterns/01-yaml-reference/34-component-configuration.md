@@ -3374,10 +3374,10 @@ kubectl get --raw /metrics | grep scheduler_schedule_attempts_total
 - 35-advanced-pod-patterns
 - 36-ecosystem-kustomize-helm-argocd
 
-- [[domain-07-platform-engineering/代码分析/node-create/10-kubelet-config.md|10-kubelet-config]]
-- [[domain-07-platform-engineering/代码分析/cluster-create/04-kubeconfig.md|04-kubeconfig]]
-- [[domain-07-platform-engineering/代码分析/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
-- [[domain-07-platform-engineering/代码分析/cluster-cert/13-cert-config.md|13-cert-config]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/node-create/03-kubelet-config|10-kubelet-config]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-create/01-kubeconfig|04-kubeconfig]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/topic-functions/cluster-create/21-what-kubeadm-does-not-install|24-what-kubeadm-does-not-install]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/05-cert-config|13-cert-config]]
 ```
 
 <!-- risk-assessed -->

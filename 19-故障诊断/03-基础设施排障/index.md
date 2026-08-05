@@ -17,14 +17,14 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[19-故障诊断/03-基础设施排障/25-network-connectivity-troubleshooting.md|Network Connectivity Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/26-dns-troubleshooting.md|Dns Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/27-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/28-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/29-cloud-provider-troubleshooting.md|Cloud Provider Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/30-monitoring-alerting-troubleshooting.md|Monitoring Alerting Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/31-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/32-security-troubleshooting.md|Security Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/33-performance-bottleneck-troubleshooting.md|Performance Bottleneck Troubleshooting]]
-- [[19-故障诊断/03-基础设施排障/34-upgrade-migration-troubleshooting.md|Upgrade Migration Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting.md|Network Connectivity Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/02-dns-troubleshooting.md|Dns Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/03-image-registry-troubleshooting.md|Image Registry Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/04-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/05-cloud-provider-troubleshooting.md|Cloud Provider Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/06-monitoring-alerting-troubleshooting.md|Monitoring Alerting Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/07-backup-restore-troubleshooting.md|Backup Restore Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/08-security-troubleshooting.md|Security Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/09-performance-bottleneck-troubleshooting.md|Performance Bottleneck Troubleshooting]]
+- [[19-故障诊断/03-基础设施排障/10-upgrade-migration-troubleshooting.md|Upgrade Migration Troubleshooting]]
 

@@ -335,7 +335,7 @@ trivy image --severity HIGH,CRITICAL registry.example.com/app:v1.0
 
 ## 最佳实践
 
-第一，分层门禁设计，SAST 和 Secret 扫描在提交阶段执行（反馈最快），SCA 和镜像扫描在构建阶段执行，签名验证在准入阶段执行。第二，严格度渐进，新引入的扫描先用 warn 模式让团队适应，确认无误报后再切 block。第三，SBOM 是必备项，每个镜像生成并附加 SBOM，导入 Dependency-Track 进行持续漏洞监控。第四，镜像签名使用 Cosign keyless 模式加 Rekor 透明日志，准入阶段验证签名和来源。第五，漏洞白名单需要严格治理，每个条目附注释、负责人和到期日，定期复审。第六，统一受信任基础镜像，减少漏洞面并简化扫描，参考 [[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]。第七，向 SLSA Level 3 演进，建立完整的供应链可信度，见 [[08-安全/05-供应链/05-slsa-levels-implementation.md|SLSA 等级实现]]。第八，建立安全度量体系，跟踪漏洞修复时长（MTTR）、门禁通过率、白名单数量等指标，持续改进。
+第一，分层门禁设计，SAST 和 Secret 扫描在提交阶段执行（反馈最快），SCA 和镜像扫描在构建阶段执行，签名验证在准入阶段执行。第二，严格度渐进，新引入的扫描先用 warn 模式让团队适应，确认无误报后再切 block。第三，SBOM 是必备项，每个镜像生成并附加 SBOM，导入 Dependency-Track 进行持续漏洞监控。第四，镜像签名使用 Cosign keyless 模式加 Rekor 透明日志，准入阶段验证签名和来源。第五，漏洞白名单需要严格治理，每个条目附注释、负责人和到期日，定期复审。第六，统一受信任基础镜像，减少漏洞面并简化扫描，参考 [[08-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]。第七，向 SLSA Level 3 演进，建立完整的供应链可信度，见 [[08-安全/05-供应链/05-slsa-levels-implementation.md|SLSA 等级实现]]。第八，建立安全度量体系，跟踪漏洞修复时长（MTTR）、门禁通过率、白名单数量等指标，持续改进。
 
 ```yaml
 # 🟢 低风险：Tekton 流水线中的扫描 Task 示例
@@ -363,6 +363,6 @@ spec:
 - [[08-安全/05-供应链/01-supply-chain-security-overview.md|供应链安全总览]]
 - [[08-安全/05-供应链/03-sbom-generation-management.md|SBOM 生成与管理]]
 - [[08-安全/05-供应链/07-sigstore-cosign-signing.md|Sigstore Cosign 签名]]
-- [[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]
+- [[08-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]
 - [[08-安全/05-供应链/05-slsa-levels-implementation.md|SLSA 等级实现]]
-- [[08-安全/04-策略治理/04-kyverno-enterprise-policy-management.md|Kyverno 企业策略管理]]
+- [[08-安全/04-策略治理/01-kyverno-enterprise-policy-management.md|Kyverno 企业策略管理]]

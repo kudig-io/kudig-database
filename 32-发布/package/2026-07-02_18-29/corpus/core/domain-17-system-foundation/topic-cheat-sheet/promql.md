@@ -556,7 +556,7 @@ histogram_quantile(0.99, metric_bucket)   # 确保 bucket 粒度合适
 
 ## 相关文档
 
-- [domain-06-observability/02-monitoring-metrics-system.md](../domain-06-observability/02-monitoring-metrics-system.md) - Prometheus 监控体系
+- [domain-06-observability/02-monitoring-metrics-system.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/01-monitoring-metrics-system.md) - Prometheus 监控体系
 - [domain-06-observability/](../domain-06-observability/) - 企业监控告警
 
 ## Related

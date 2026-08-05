@@ -454,7 +454,7 @@ spec:
 ---
 
 **关联文档**:
-- [domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md](../domain-10-troubleshooting-diagnostics/技能体系/18-security-incident-response.md) — 安全事件 Skill
+- [domain-10-troubleshooting-diagnostics/topic-skills/18-security-incident-response.md](32-发布/package/2026-07-02_18-29/profiles/sre/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/05-security-incident-response.md) — 安全事件 Skill
 - [domain-05-security-compliance/](../domain-05-security-compliance/) — 云原生安全
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
 ```

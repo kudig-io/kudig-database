@@ -224,7 +224,7 @@ prerequisites:
 - [[18-云厂商/02-AWS-EKS/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
 - [[18-云厂商/03-Google-GKE/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
 - [[18-云厂商/04-Azure-AKS/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
-- [[18-云厂商/01-阿里云/公有云-ACK/245-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
+- [[18-云厂商/01-阿里云/公有云-ACK/007-ack-ebs-storage.md|ACK 关联产品 - EBS 云盘存储 (Elastic Block Storage)]]
 - [[18-云厂商/01-阿里云/公有云-ACK/alicloud-ack-overview.md|阿里云 ACK (Alibaba Cloud Container Service for Kubernetes) 概述]]
 - [[18-云厂商/05-腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[18-云厂商/06-华为云CCE/huawei-cce-overview.md|华为云 CCE (Cloud Container Engine) 企业级深度实战指南]]

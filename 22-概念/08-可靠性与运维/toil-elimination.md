@@ -38,7 +38,7 @@ status: stable
 | 手工重启 CrashLoop Pod | 自愈控制器 + 告警降噪 | [[19-故障诊断/08-技能体系/01-node-notready|技能体系诊断闭环]] |
 | 手工签发/续期证书 | cert-manager 自动轮转 | [[08-安全/01-身份与访问/index|身份与访问]] |
 | 手工扩缩容 | HPA/VPA/Karpenter | [[12-可靠性/03-容量规划/02-hpa-vpa-cluster-autoscaler-karpenter|弹性伸缩体系]] |
-| 手工发布与回滚 | GitOps + Progressive Delivery | [[11-发布变更/01-GitOps/01-gitops-argocd-flux-production|GitOps 生产实践]] |
+| 手工发布与回滚 | GitOps + Progressive Delivery | [[11-发布变更/01-GitOps/02-gitops-argocd-flux-production|GitOps 生产实践]] |
 | 手工处理工单类问答 | Runbook 沉淀 + AI Agent | [[19-故障诊断/README|故障诊断域]] |
 | 手工节点维护（cordon/drain） | 节点生命周期自动化 | [[22-概念/08-可靠性与运维/node-lifecycle-management|节点生命周期管理]] |
 
@@ -65,4 +65,4 @@ status: stable
 
 - [[22-概念/08-可靠性与运维/sre-principles|SRE 核心原则]]
 - [[09-可观测性/06-SLO-SLI/02-error-budget-policy|错误预算策略]]
-- [[12-可靠性/06-SRE实践/11-mttr-framework-optimization|MTTR 框架优化]]
+- [[12-可靠性/06-SRE实践/14-mttr-framework-optimization|MTTR 框架优化]]

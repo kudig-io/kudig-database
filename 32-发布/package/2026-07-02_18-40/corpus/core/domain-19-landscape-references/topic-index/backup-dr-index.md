@@ -56,7 +56,7 @@ prerequisites:
 
 ### 灾备方案
 
-- [[domain-01-cluster-fundamentals/控制平面/10-plane-backup-disaster-recovery.md|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/03-plane-backup-disaster-recovery|控制平面备份与灾备方案 (Control Plane Backup & Disaster Recovery)]]
 - 存储备份与灾难恢复
 - 存储灾备与迁移策略
 
@@ -86,8 +86,8 @@ prerequisites:
 
 ### etcd 备份
 
-- [[domain-02-workloads-applications/topic-functions/cluster-create/07-etcd.md|etcd 集群初始化细节]]
-- [[domain-02-workloads-applications/topic-functions/cluster-create/13-etcd-advanced.md|etcd 进阶: 数据存储与维护]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/topic-functions/cluster-create/01-etcd|etcd 集群初始化细节]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/topic-functions/cluster-create/02-etcd-advanced|etcd 进阶: 数据存储与维护]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/02-etcd-troubleshooting.md|etcd 故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/etcd-fta.md|etcd 异常 FTA 树]]
 
@@ -99,7 +99,7 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/31-backup-restore-troubleshooting.md|备份恢复故障排查 (Backup and Restore Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/05-backup-restore-troubleshooting|备份恢复故障排查 (Backup and Restore Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
 

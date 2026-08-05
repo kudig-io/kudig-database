@@ -382,8 +382,8 @@ kubectl describe secret <name>
 ---
 
 **关联文档**:
-- [../06-configuration/06-namespace-resource-quota.md](../../../07-%E5%AE%89%E5%85%A8/resource-quota/%E5%9F%B9%E8%AE%AD/lecturer/06-namespace-resource-quota.md) — 命名空间与资源配额
-- [../../故障诊断/topic-skills/14-configmap-secret-failure.md](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/14-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
+- [../06-configuration/06-namespace-resource-quota.md](../../../07-安全/resource-quota/培训/lecturer/01-namespace-resource-quota.md) — 命名空间与资源配额
+- [../../故障诊断/topic-skills/14-configmap-secret-failure.md](../../../../19-故障诊断/08-技能体系/15-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
 - [../../安全/](../../安全/) — K8s 安全文档
 
 ## Related

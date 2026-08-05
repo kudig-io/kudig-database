@@ -139,7 +139,7 @@ agent_execution_mode: L2-semi-auto
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../15-monitoring-alerting-failure.md](../15-monitoring-alerting-failure.md) |
+| 单文件完整版 | [../15-monitoring-alerting-failure.md](32-发布/package/2026-07-02_18-29/profiles/sre/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/13-monitoring-alerting-failure.md) |
 
 ## Related
 

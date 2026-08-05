@@ -10,8 +10,8 @@ created: '2026-07-25'
 
 ## 文档
 
-- [[23-实体/07-可观测性/02-prometheus-promql-advanced.md|02-prometheus-promql-advanced]]
-- [[23-实体/07-可观测性/03-prometheus-ha-deployment.md|03-prometheus-ha-deployment]]
+- [[23-实体/07-可观测性/01-prometheus-promql-advanced.md|02-prometheus-promql-advanced]]
+- [[23-实体/07-可观测性/02-prometheus-ha-deployment.md|03-prometheus-ha-deployment]]
 - [[23-实体/07-可观测性/cortex.md|cortex]]
 - [[23-实体/07-可观测性/fluentd.md|fluentd]]
 - [[23-实体/07-可观测性/holmesgpt.md|holmesgpt]]

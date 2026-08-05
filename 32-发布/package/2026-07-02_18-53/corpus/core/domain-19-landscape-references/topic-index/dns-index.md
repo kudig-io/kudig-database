@@ -51,7 +51,7 @@ prerequisites:
 ### 网络知识域 ([[entities/coredns.md|CoreDNS]]/DNS 核心)
 
 - 04 - DNS 服务发现与 CoreDNS 调优
-- 33 - 服务发现与 DNS 配置 ([[domain-03-networking-traffic/K8s网络核心/11-dns-service-discovery-coredns.md|11 dns service discovery coredns]]
+- 33 - 服务发现与 DNS 配置 ([[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/04-dns-service-discovery-coredns|11 dns service discovery coredns]]
 - 53 - CoreDNS 架构与核心原理 (Architecture & Principles)
 - 54 - CoreDNS Corefile 配置详解 (Corefile Configuration)
 - 55 - CoreDNS 插件完整参考 (Plugins Reference)
@@ -59,8 +59,8 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-dns-troubleshooting|26 - DNS 故障排查 (DNS Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 
 ### 术语词典

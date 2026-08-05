@@ -26,8 +26,8 @@ last_updated: 2026-05-23
 # HPA不扩容 + 节点资源压力并发
 
 ## 关联Skill
-- [[12-autoscaling-failure]]
-- [[19-node-resource-pressure]]
+- [[13-autoscaling-failure]]
+- [[20-node-resource-pressure]]
 
 ## 场景描述
 业务高峰期HPA未触发扩容，同时多个节点因磁盘压力进入DiskPressure状态，Pod被驱逐。

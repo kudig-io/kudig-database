@@ -27,7 +27,7 @@ last_updated: 2026-05-23
 
 ## 关联Skill
 - [[06-certificate-expiry]]
-- [[11-control-plane-failure]]
+- [[12-control-plane-failure]]
 
 ## 场景描述
 集群证书过期导致apiserver拒绝所有连接，同时etcd因磁盘压力 unhealthy，控制平面完全不可用。

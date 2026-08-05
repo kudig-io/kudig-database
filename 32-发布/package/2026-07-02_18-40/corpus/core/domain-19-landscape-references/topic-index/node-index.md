@@ -52,13 +52,13 @@ prerequisites:
 
 - 27 - 节点与节点池管理 (Node & NodePool Management)
 - [[entities/kubefleet.md|Kubelet 配置与调优]]
-- [[domain-01-cluster-fundamentals/控制平面/15-kubelet-deep-dive.md|kubelet 深度解析 (kubelet Deep Dive)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/06-kubelet-deep-dive|kubelet 深度解析 (kubelet Deep Dive)]]
 
 ### 故障排查
 
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|06 - 节点 NotReady 状态深度诊断 (Node NotReady Diagnosis)]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/09-node-comprehensive-troubleshooting.md|09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/35-node-component-troubleshooting.md|35 - 节点组件故障排查 (Node Component Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-node-comprehensive-troubleshooting|09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/01-node-component-troubleshooting|35 - 节点组件故障排查 (Node Component Troubleshooting)]]
 
 ### 结构化故障排查
 
@@ -114,7 +114,7 @@ prerequisites:
 ### 生产运维
 
 - 19-集群性能调优
-- [[domain-09-reliability-engineering/容量规划/24-capacity-planning-forecasting.md|24 capacity planning forecasting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-09-reliability-engineering/03-capacity-planning/04-capacity-planning-forecasting|24 capacity planning forecasting]]
 - K8s FinOps 成本优化实践指南
 
 

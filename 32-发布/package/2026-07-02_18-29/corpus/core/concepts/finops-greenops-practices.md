@@ -24,7 +24,7 @@ last_updated: 2026-05-24
 
 # FinOps 与 GreenOps 实践
 
-> 关联索引：[[domain-19-landscape-references/98-merged-indexes/index.md|index]] · [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
+> 关联索引：[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] · [[concepts/capacity-planning-cost-optimization.md|capacity planning cost optimization]]
 
 ---
 

@@ -418,8 +418,8 @@ aliyun ram CreatePolicy --PolicyName ack-custom --PolicyDocument '{"Version":"1"
 ## Related
 
 - [[domain-17-system-foundation/知识字典/networking/service.md|Service]]
-- [[domain-17-system-foundation/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-17-system-foundation/K8s事件/10-service-networking-events.md|10 - Service 与网络事件]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-17-system-foundation/02-kubernetes-events/01-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-17-system-foundation/03-kubernetes-events/01-service-networking-events|10 - Service 与网络事件]]
 
 
 <!-- risk-assessed -->

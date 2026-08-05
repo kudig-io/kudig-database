@@ -237,7 +237,7 @@ spec:
 ## 相关概念
 
 - [[22-概念/05-安全/pod-security-policy.md|Pod Security Policy]]
-- [[08-安全/98-merged-indexes/index.md|安全合规索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|安全合规索引]]
 
 ```
 

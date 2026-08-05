@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: kube-system
 ticket_type: 自动扩缩容故障
 skill_ref:
-- '[[10-平台工程/02-运维/99-karpenter-node-autoscaling-guide.md|节点自动扩缩容指南]]'
+- '[[10-平台工程/02-运维/17-karpenter-node-autoscaling-guide.md|节点自动扩缩容指南]]'
 - '[[19-故障诊断/06-FTA故障树/list/cluster-autoscaler-fta.md|Cluster
   Autoscaler 异常故障树分析]]'
 fta_ref:

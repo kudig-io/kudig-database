@@ -120,9 +120,9 @@ cross_refs:
 
 | 文档 | 描述 | 核心内容 | 难度 |
 |:---|:---|:---|:---|
-| **[99-Istio 入门指南](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-istio-service-mesh-guide.md)** | Istio 快速上手 | Sidecar + Ambient双模式安装、istioctl/Helm两种方式、VirtualService/DestinationRule核心配置、mTLS/JWT安全、Kiali/Jaeger/Prometheus可观测性、多集群部署 | 中级→高级 |
-| **[99-Linkerd 入门指南](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-linkerd-service-mesh-guide.md)** | Linkerd 极简入门 | CLI/Helm安装、零配置mTLS自动启用、SMI TrafficSplit金丝雀、黄金指标(stat/top/edges/tap)、多集群连接、vs Istio详细选型对比 | 初级→中级 |
-| **[99-Spring Cloud K8s 指南](../../../05-%E7%BD%91%E7%BB%9C/03-%E6%9C%8D%E5%8A%A1%E7%BD%91%E6%A0%BC/99-spring-cloud-kubernetes-service-mesh-guide.md)** | 传统微服务迁移 | Spring Cloud Netflix → Spring Cloud K8s → Istio三阶段演进、Eureka→K8s DNS迁移、Ribbon→Istio负载均衡、Hystrix→Resilience4j+Istio、Spring Cloud Gateway on K8s、Seata分布式事务 | 高级 |
+| **[99-Istio 入门指南](../../../05-网络/03-服务网格/11-istio-service-mesh-guide.md)** | Istio 快速上手 | Sidecar + Ambient双模式安装、istioctl/Helm两种方式、VirtualService/DestinationRule核心配置、mTLS/JWT安全、Kiali/Jaeger/Prometheus可观测性、多集群部署 | 中级→高级 |
+| **[99-Linkerd 入门指南](../../../05-网络/03-服务网格/12-linkerd-service-mesh-guide.md)** | Linkerd 极简入门 | CLI/Helm安装、零配置mTLS自动启用、SMI TrafficSplit金丝雀、黄金指标(stat/top/edges/tap)、多集群连接、vs Istio详细选型对比 | 初级→中级 |
+| **[99-Spring Cloud K8s 指南](../../../05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide.md)** | 传统微服务迁移 | Spring Cloud Netflix → Spring Cloud K8s → Istio三阶段演进、Eureka→K8s DNS迁移、Ribbon→Istio负载均衡、Hystrix→Resilience4j+Istio、Spring Cloud Gateway on K8s、Seata分布式事务 | 高级 |
 
 ---
 

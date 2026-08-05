@@ -27,6 +27,6 @@ last_updated: 2026-07
 - [[domain-12-cloud-providers/阿里云/04-阿里云存储集成.md|阿里云存储集成]]
 - [[domain-12-cloud-providers/阿里云/05-阿里云SLB与Ingress.md|阿里云Slb与Ingress]]
 - [[domain-12-cloud-providers/阿里云/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
-- [[domain-12-cloud-providers/阿里云/09-ack-node-pool-management.md|Ack Node Pool Management]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-12-cloud-providers/01-alibaba-cloud/01-ack-node-pool-management|Ack Node Pool Management]]
 - [[domain-12-cloud-providers/阿里云/apsara-stack-components.md|Apsara Stack Components]]
 

@@ -18,9 +18,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[22-概念/01-核心架构/19-garbage-collection-owner-reference.md|垃圾回收与 ownerReference 级联删除机制]]
-- [[22-概念/01-核心架构/20-server-side-apply-field-ownership.md|Server-Side Apply 与字段所有权]]
-- [[22-概念/01-核心架构/17-operator-sdk-go-helm-ansible-types.md|Operator SDK 三种类型 (Go/Helm/Ansible)]]
+- [[22-概念/01-核心架构/02-garbage-collection-owner-reference.md|垃圾回收与 ownerReference 级联删除机制]]
+- [[22-概念/01-核心架构/03-server-side-apply-field-ownership.md|Server-Side Apply 与字段所有权]]
+- [[22-概念/01-核心架构/01-operator-sdk-go-helm-ansible-types.md|Operator SDK 三种类型 (Go/Helm/Ansible)]]
 - [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
 - [[22-概念/01-核心架构/cloud-provider-k8s-integration.md|cloud-provider-k8s-integration]]
 - [[22-概念/01-核心架构/controller-pattern.md|controller-pattern]]

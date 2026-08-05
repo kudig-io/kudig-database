@@ -38,7 +38,7 @@ last_updated: 2026-05-21
 - [[06-redis-enterprise-cache]] — Redis enterprise cache
 - [[07-redis-kubernetes-operator]] — Redis kubernetes operator
 - [[08-kafka-kubernetes-strimzi]] — Kafka kubernetes strimzi
-- [[99-cloudnativepg-enterprise-guide]] — Cloudnativepg enterprise guide
+- [[19-cloudnativepg-enterprise-guide]] — Cloudnativepg enterprise guide
 
 ### 消息队列
 
@@ -68,5 +68,5 @@ last_updated: 2026-05-21
 - [[README-from-domain-28]] — README from domain 28
 
 ## 相关 Domain
-- [[存储/98-merged-indexes/index.md|Domain 04 存储与数据 索引]]
-- [[工作负载/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 04 存储与数据 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 02 工作负载与应用 索引]]

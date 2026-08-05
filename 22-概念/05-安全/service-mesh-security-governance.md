@@ -251,7 +251,7 @@ allow {
 - [[23-实体/04-网络/istio.md|Istio (entities)]]
 - [[17-系统基础/06-知识字典/networking/service.md|Service]]
 - [[05-网络/03-服务网格/01-istio-enterprise-service-mesh.md|Istio 企业级服务网格架构与实践]]
-- [[23-实体/04-网络/02-istio-advanced-traffic-management.md|Istio 高级流量管理 (entities)]]
+- [[23-实体/04-网络/01-istio-advanced-traffic-management.md|Istio 高级流量管理 (entities)]]
 
 
 <!-- risk-assessed -->

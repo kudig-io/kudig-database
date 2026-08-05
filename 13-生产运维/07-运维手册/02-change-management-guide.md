@@ -421,10 +421,10 @@ echo "scale=2; $FAILED / $TOTAL * 100" | bc
 
 - [[13-生产运维/07-运维手册/01-production-sre-daily-ops.md|production-sre-daily-ops]] — 日常巡检与值班手册
 - [[22-概念/08-可靠性与运维/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径
-- [[11-发布变更/98-merged-indexes/index.md|gitops-deployment-patterns]] — GitOps 部署模式
-- [[11-发布变更/00-总览/02-release-engineering-strategy.md|发布工程策略]] — 版本管理与发布流水线
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|gitops-deployment-patterns]] — GitOps 部署模式
+- [[11-发布变更/00-总览/01-release-engineering-strategy.md|发布工程策略]] — 版本管理与发布流水线
 - [[11-发布变更/03-Progressive-Delivery/index.md|Progressive Delivery]] — 渐进式交付
-- [[13-生产运维/03-事件响应/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
+- [[13-生产运维/03-事件响应/05-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
 
 ## Related
 

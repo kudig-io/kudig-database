@@ -75,7 +75,7 @@ description: '## 项目概述'
 
 - [[ratify]] — Ratify
 - [[container2wasm]] — container2wasm
-- [[06-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[05-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[stacker]] — Stacker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

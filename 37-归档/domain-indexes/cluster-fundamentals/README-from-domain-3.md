@@ -136,23 +136,23 @@ Kubernetes 控制平面域深入解析 API Server、[[etcd]]、Scheduler、Contr
 ### 生产环境最佳实践 (24-28)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 24 | [生产环境部署最佳实践](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/24-production-deployment-best-practices.md) | 企业级部署、硬件规格、安全合规 | ⭐⭐⭐⭐⭐ |
-| 25 | [多云混合部署架构](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/25-multi-cloud-hybrid-deployment.md) | 多云策略、混合云架构、跨云互联 | ⭐⭐⭐⭐⭐ |
-| 26 | [GitOps自动化运维实践](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/26-gitops-automation-operations.md) | GitOps流程、CI/CD集成、自动化运维 | ⭐⭐⭐⭐⭐ |
-| 27 | [认证授权深度解析](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/27-authz-authn-deep-dive.md) | 认证机制、RBAC、准入控制、安全配置 | ⭐⭐⭐⭐⭐ |
-| 28 | [API扩展深度解析](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/28-api-extension-deep-dive.md) | CRD、API聚合、Operator模式、扩展开发 | ⭐⭐⭐⭐⭐ |
+| 24 | [生产环境部署最佳实践](../../../01-集群基础/03-控制平面/25-production-deployment-best-practices.md) | 企业级部署、硬件规格、安全合规 | ⭐⭐⭐⭐⭐ |
+| 25 | [多云混合部署架构](../../../01-集群基础/03-控制平面/26-multi-cloud-hybrid-deployment.md) | 多云策略、混合云架构、跨云互联 | ⭐⭐⭐⭐⭐ |
+| 26 | [GitOps自动化运维实践](../../../01-集群基础/03-控制平面/27-gitops-automation-operations.md) | GitOps流程、CI/CD集成、自动化运维 | ⭐⭐⭐⭐⭐ |
+| 27 | [认证授权深度解析](../../../01-集群基础/03-控制平面/28-authz-authn-deep-dive.md) | 认证机制、RBAC、准入控制、安全配置 | ⭐⭐⭐⭐⭐ |
+| 28 | [API扩展深度解析](../../../01-集群基础/03-控制平面/29-api-extension-deep-dive.md) | CRD、API聚合、Operator模式、扩展开发 | ⭐⭐⭐⭐⭐ |
 
 ### K8s 1.30+ 前沿特性 (29-30)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 29 | [原地Pod资源调整](./29-in-place-pod-resize.md) | 在线调整CPU/内存、resizePolicy、与VPA集成 | ⭐⭐⭐⭐ |
-| 30 | [动态资源分配DRA](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/30-dynamic-resource-allocation.md) | 下一代硬件资源分配、ResourceClaim、GPU共享 | ⭐⭐⭐⭐ |
+| 29 | [原地Pod资源调整](30-in-place-pod-resize.md) | 在线调整CPU/内存、resizePolicy、与VPA集成 | ⭐⭐⭐⭐ |
+| 30 | [动态资源分配DRA](../../../01-集群基础/03-控制平面/32-dynamic-resource-allocation.md) | 下一代硬件资源分配、ResourceClaim、GPU共享 | ⭐⭐⭐⭐ |
 
 ### 运维工具与集群管理 (31-32)
 | # | 文档 | 关键内容 | 重要程度 |
 |:---:|:---|:---|:---|
-| 31 | [kubectl完全命令参考](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/31-kubectl-complete-reference.md) | 完整kubectl命令族、生产速查表 | ⭐⭐⭐⭐⭐ |
-| 32 | [kubeadm集群生命周期](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/32-kubeadm-cluster-lifecycle.md) | 集群初始化、升级、证书管理、HA | ⭐⭐⭐⭐⭐ |
+| 31 | [kubectl完全命令参考](../../../01-集群基础/03-控制平面/34-kubectl-complete-reference.md) | 完整kubectl命令族、生产速查表 | ⭐⭐⭐⭐⭐ |
+| 32 | [kubeadm集群生命周期](../../../01-集群基础/03-控制平面/35-kubeadm-cluster-lifecycle.md) | 集群初始化、升级、证书管理、HA | ⭐⭐⭐⭐⭐ |
 
 ---
 

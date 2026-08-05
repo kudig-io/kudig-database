@@ -77,7 +77,7 @@ Copa (Copacetic) 是一个容器镜像漏洞修补工具，能够直接在现有
 
 - [[vineyard]] — Vineyard
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/04-istio-security-hardening]] — Istio 安全加固
 - [[entities/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

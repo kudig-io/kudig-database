@@ -369,13 +369,13 @@ kubectl exec -n ai-training training-pod-0 -- df -h /data
 5. **回取策略**：冷数据回取（restore）需要明确 SLA，归档层回取可能需要数小时
 6. **合规保留**：涉及用户数据的训练集需满足数据保留法规，归档层设置不可删除的 Object Lock
 7. **自动化优先**：所有分层策略通过 CronJob/Operator 自动执行，避免人工操作遗漏
-8. **监控覆盖**：为每层存储设置容量水位告警（70%/85%/95%），参考 [[06-存储/01-K8s存储/12-storage-monitoring-alerting.md|存储监控告警]]
+8. **监控覆盖**：为每层存储设置容量水位告警（70%/85%/95%），参考 [[06-存储/01-K8s存储/13-storage-monitoring-alerting.md|存储监控告警]]
 9. **灾备考虑**：分层策略需与 [[12-可靠性/02-灾难恢复/01-multi-region-dr-architecture.md|灾备架构]] 协调，确保各层数据均有备份
 
 ## Related
 
 - [[06-存储/07-AI存储与高级/01-minio-object-storage-ai.md|MinIO 对象存储 for AI/ML]]
-- [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
+- [[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
 - [[15-AI基础设施/01-基础设施/06-ai-data-pipeline.md|AI 数据管线]]
 - [[22-概念/08-可靠性与运维/finops-greenops-practices.md|FinOps 与 GreenOps 实践]]
 - [[12-可靠性/02-灾难恢复/01-multi-region-dr-architecture.md|多区域灾备架构]]

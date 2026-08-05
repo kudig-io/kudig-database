@@ -102,7 +102,7 @@ prerequisites:
 ## 相关导航
 
 - [[22-概念/12-研究/storage-tool-evolution.md|存储工具演进]]
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## 存储组件升级检查
@@ -197,7 +197,7 @@ kubectl exec -n rook-ceph deploy/rook-ceph-tools -- ceph df
 - [[23-实体/15-参考与索引/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
 - [[rook]] — Rook
 - [[longhorn]] — Longhorn
-- [[21-生态参考/98-merged-indexes/index.md|release-notes-networking]] — 发布说明索引 — 网络
-- [[21-生态参考/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-networking]] — 发布说明索引 — 网络
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-observability]] — 发布说明索引 — 可观测性
 
 <!-- risk-assessed -->

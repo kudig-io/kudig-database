@@ -22,16 +22,16 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/35-node-component-troubleshooting.md|Node Component Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/36-helm-chart-troubleshooting.md|Helm Chart Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/37-multi-cluster-management-troubleshooting.md|Multi Cluster Management Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/38-gitops-argocd-troubleshooting.md|Gitops Argocd Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/39-enterprise-monitoring-alerting-system.md|Enterprise Monitoring Alerting System]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/40-large-scale-cluster-operations.md|Large Scale Cluster Operations]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/41-event-driven-architecture-troubleshooting.md|Event Driven Architecture Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/42-chaos-engineering-fault-injection-testing.md|Chaos Engineering Fault Injection Testing]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/43-symptom-sop-mapping.md|Symptom Sop Mapping]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/44-kind-k3s-single-node-troubleshooting.md|Kind K3S Single Node Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/01-node-component-troubleshooting|Node Component Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/01-helm-chart-troubleshooting|Helm Chart Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/02-multi-cluster-management-troubleshooting|Multi Cluster Management Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/03-gitops-argocd-troubleshooting|Gitops Argocd Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/04-enterprise-monitoring-alerting-system|Enterprise Monitoring Alerting System]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/02-large-scale-cluster-operations|Large Scale Cluster Operations]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/05-event-driven-architecture-troubleshooting|Event Driven Architecture Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/06-chaos-engineering-fault-injection-testing|Chaos Engineering Fault Injection Testing]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/07-symptom-sop-mapping|Symptom Sop Mapping]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/08-kind-k3s-single-node-troubleshooting|Kind K3S Single Node Troubleshooting]]
 
 
 

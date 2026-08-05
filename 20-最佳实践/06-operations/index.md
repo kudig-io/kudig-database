@@ -20,5 +20,5 @@ last_updated: 2026-07
 - [[20-最佳实践/06-operations/deployment.md|Deployment]]
 - [[20-最佳实践/06-operations/disaster-recovery.md|Disaster Recovery]]
 - [[20-最佳实践/06-operations/scaling.md|Scaling]]
-- [[20-最佳实践/06-operations/03-production-operations-excellence-checklist.md|03-production-operations-excellence-checklist]]
+- [[20-最佳实践/06-operations/01-production-operations-excellence-checklist.md|03-production-operations-excellence-checklist]]
 

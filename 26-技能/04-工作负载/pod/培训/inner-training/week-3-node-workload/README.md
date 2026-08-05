@@ -385,12 +385,12 @@ Pod Pending 通常有两个原因：一是没有节点满足调度条件（资�
 
 - [K8s 架构与组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
-- [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
-- [Pod 生命周期事件](../../../%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E4%B8%8E%E4%BA%8B%E4%BB%B6/11-pod-lifecycle-events.md)
+- [ECS 计算资源](001-ack-ecs-compute.md)
+- [Pod 生命周期事件](../../../生命周期与事件/02-pod-lifecycle-events.md)
 - [HPA/VPA 自动伸缩](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/21-hpa-vpa-autoscaling.md)
 - [节点 NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
-- [集群自动伸缩排障](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/28-cluster-autoscaler-troubleshooting.md)
+- [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
+- [集群自动伸缩排障](../../../../../../19-故障诊断/03-基础设施排障/04-cluster-autoscaler-troubleshooting.md)
 
 ## Related
 
@@ -406,7 +406,7 @@ Pod Pending 通常有两个原因：一是没有节点满足调度条件（资�
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

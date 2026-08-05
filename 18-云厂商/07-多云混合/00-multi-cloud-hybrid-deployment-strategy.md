@@ -715,7 +715,7 @@ data:
 - 生产运维 MOC
 - [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 03-边缘计算生产部署
 - 04-企业级监控体系
 - 05-日志收集分析平台
@@ -728,13 +728,13 @@ data:
 ## Related
 
 - 22-production-checklist
-- [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ## See Also
 
-- [[01-集群基础/00-总览/99-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
+- [[01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles.md|01-production-architecture-design-principles]]
 - 03-edge-computing-production-deployment
 - 04-enterprise-monitoring-system
 

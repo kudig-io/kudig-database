@@ -24,8 +24,8 @@ affected_cluster: ack-zyy-prod-06
 affected_namespace: db-mysql
 ticket_type: 存储故障 / 有状态应用故障
 skill_ref:
-- '[[06-存储/01-K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
-- '[[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass
+- '[[06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
+- '[[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md|StorageClass
   动态供给]]'
 - '[[06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用存储模式]]'
 fta_ref:
@@ -315,7 +315,7 @@ kubectl logs -n kube-system -l app=csi-provisioner -c csi-provisioner --tail=50 
 > - 更新 StatefulSet 引用新的 StorageClass 并重新创建。
 >
 > 当前 3 个 MySQL Pod 均已 Running，PVC 全部 Bound，数据目录可读写，MySQL 服务可正常登录。建议后续：
-> - 为数据库类有状态应用统一使用 `volumeBindingMode: WaitForFirstConsumer` 的 StorageClass，参考 [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]；
+> - 为数据库类有状态应用统一使用 `volumeBindingMode: WaitForFirstConsumer` 的 StorageClass，参考 [[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]；
 > - 在云侧提前确认目标可用区支持的 ESSD 性能级别；
 > - 将本案例纳入数据库上线 Checklist，参考 [[06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用存储模式]]。
 >

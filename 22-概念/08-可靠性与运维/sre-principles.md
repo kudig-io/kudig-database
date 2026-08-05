@@ -62,7 +62,7 @@ SLI 采集 → SLO 目标 (如 30 天 99.9%)
 - 指标与告警落地：[[09-可观测性/06-SLO-SLI/01-slo-engineering-practice|SLO 工程实践]]
 - 事件响应与复盘：[[22-概念/08-可靠性与运维/incident-management-patterns|事件管理与复盘模式]]
 - 容量与混沌：[[12-可靠性/03-容量规划/01-capacity-planning-framework|容量规划框架]]、[[12-可靠性/04-混沌工程/01-chaos-engineering-overview|混沌工程总览]]
-- MTTR 优化：[[12-可靠性/06-SRE实践/11-mttr-framework-optimization|MTTR 框架优化]]
+- MTTR 优化：[[12-可靠性/06-SRE实践/14-mttr-framework-optimization|MTTR 框架优化]]
 
 ## 相关阅读
 

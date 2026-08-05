@@ -1041,7 +1041,7 @@ if __name__ == "__main__":
 - observability/MOC.md|domain-20-enterprise-monitoring-alerting MOC]]
 - [[domain-06-observability/README.md|[[Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)|Domain 20: 企业级监控与告警 (Enterprise Monitoring & Alerting)]]]]
 - index.md|Domain-20 企业监控与告警 — 开源项目索引]]
-- [[domain-06-observability/工具/02-grafana-enterprise-observability.md|02 grafana enterprise observability]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/07-tools/01-grafana-enterprise-observability|02 grafana enterprise observability]]
 - OpenTelemetry分布式追踪与可观测性深度实践
 - Thanos Enterprise Metrics Federation and Long-term Storage
 - Datadog企业级APM深度实践

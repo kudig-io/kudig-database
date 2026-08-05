@@ -245,7 +245,7 @@ kcl mod metadata
 
 ## Related
 
-- [[06-containerd-observability]] — containerd 可观测性
+- [[05-containerd-observability]] — containerd 可观测性
 - [[stacker]] — Stacker
 - [[opentelemetry]] — OpenTelemetry
 - [[kcl]] — KCL (Kusion Configuration Language)

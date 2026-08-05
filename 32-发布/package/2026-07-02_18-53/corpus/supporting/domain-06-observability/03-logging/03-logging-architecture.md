@@ -905,7 +905,7 @@ end
 ## Related
 
 - 77-fusion-energy-monitoring
-- [[domain-02-workloads-applications/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/topic-java-kubernetes/06-java-observability-kubernetes|07-java-observability-kubernetes]]
 
 - [[domain-06-observability/README.md|返回目录]]- [[domain-19-landscape-references/领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 

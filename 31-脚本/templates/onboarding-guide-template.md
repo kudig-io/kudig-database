@@ -145,7 +145,7 @@ git clone [repo-url]
 |------|------|---------|---------|---------|
 | 第 2 周 | Kubernetes 基础 | [[13-生产运维/topic-learn/k8s-basics|K8s 基础]] | 在 staging 部署一个应用 | Pod 正常运行 |
 | 第 2 周 | Helm 包管理 | [Helm 官方文档] | 用 Helm 部署一个 chart | Release 成功 |
-| 第 3 周 | 监控与告警 | [[10-平台工程/02-运维/06-monitoring-alerting-system|监控体系]] | 配置一个告警规则 | 告警可触发 |
+| 第 3 周 | 监控与告警 | [[10-平台工程/02-运维/04-monitoring-alerting-system|监控体系]] | 配置一个告警规则 | 告警可触发 |
 | 第 3 周 | CI/CD 流程 | [CI/CD 文档] | 走完一个完整 pipeline | 部署成功 |
 | 第 4 周 | 安全合规 | [[17-系统基础/06-知识字典/security/pod-security-standards|PSS 标准]] | 审计一个命名空间 | 生成报告 |
 | 第 4 周 | 故障排查 | [[19-故障诊断/06-FTA故障树/MOC|FTA 故障树]] | 模拟故障并排查 | 找到根因 |

@@ -34,7 +34,7 @@ last_updated: 2026-05-21
 
 - [[01-yaml-syntax-resource-conventions]] — Yaml syntax resource conventions
 - [[02-namespace-resourcequota-limitrange]] — Namespace resourcequota limitrange
-- [[03-pod-specification-complete]] — Pod specification complete
+- [[01-pod-specification-complete]] — Pod specification complete
 - [[04-deployment-replicaset]] — Deployment replicaset
 - [[05-statefulset-reference]] — Statefulset reference
 - [[06-daemonset-reference]] — Daemonset reference
@@ -54,19 +54,19 @@ last_updated: 2026-05-21
 - [[20-rbac-role-rolebinding]] — Rbac role rolebinding
 - [[21-rbac-clusterrole-clusterrolebinding]] — Rbac clusterrole clusterrolebinding
 - [[22-networkpolicy-reference]] — Networkpolicy reference
-- [[23-pod-security-standards]] — Pod security standards
+- [[03-pod-security-standards]] — Pod security standards
 - [[24-admission-webhook-configuration]] — Admission webhook configuration
 - [[25-validatingadmissionpolicy]] — Validatingadmissionpolicy
 - [[26-priorityclass-runtimeclass]] — Priorityclass runtimeclass
 - [[27-hpa-autoscaling-v2]] — Hpa autoscaling v2
-- [[28-poddisruptionbudget-reference]] — Poddisruptionbudget reference
+- [[04-poddisruptionbudget-reference]] — Poddisruptionbudget reference
 - [[29-customresourcedefinition]] — Customresourcedefinition
 - [[30-apiservice-aggregation]] — Apiservice aggregation
 - [[31-api-priority-fairness]] — Api priority fairness
 - [[32-lease-event-node]] — Lease event node
 - [[33-kubeadm-cluster-bootstrap]] — Kubeadm cluster bootstrap
 - [[34-component-configuration]] — Component configuration
-- [[35-advanced-pod-patterns]] — Advanced pod patterns
+- [[05-advanced-pod-patterns]] — Advanced pod patterns
 - [[36-ecosystem-kustomize-helm-argocd]] — Ecosystem kustomize helm argocd
 
 ### 98 Merged Indexes
@@ -76,8 +76,8 @@ last_updated: 2026-05-21
 - [[README-from-domain-32]] — README from domain 32
 
 ## 相关 Domain
-- [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
-- [[发布变更/98-merged-indexes/index.md|Domain 08 发布与变更管理 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 01 集群基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 08 发布与变更管理 索引]]
 
 
 <!-- risk-assessed -->

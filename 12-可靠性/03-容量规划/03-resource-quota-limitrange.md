@@ -469,11 +469,11 @@ kubectl describe limitrange -n <namespace>
 ## Related
 
 - [[12-可靠性/03-容量规划/01-capacity-planning-framework.md|容量规划框架]]
-- [[13-生产运维/02-集群治理/14-resource-quota-management.md|资源配额管理]]
+- [[13-生产运维/02-集群治理/06-resource-quota-management.md|资源配额管理]]
 
 ## See Also
 
-- [[19-故障诊断/02-资源排障/24-quota-limitrange-troubleshooting.md|ResourceQuota/LimitRange 故障诊断]]
+- [[19-故障诊断/02-资源排障/16-quota-limitrange-troubleshooting.md|ResourceQuota/LimitRange 故障诊断]]
 - [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]]
 
 

@@ -788,9 +788,9 @@ ls -la /etc/kubernetes/manifests/
 - [集群概览](01-overview.md) — init 整体流程
 - [证书管理](03-certs.md) — static Pod 挂载的证书
 - [etcd 管理](07-etcd.md) — etcd static Pod
-- [初始化阶段](17-init-phases.md) — phase 执行引擎
-- [集群升级](09-upgrade.md) — 升级时更新 manifest
-- [高级配置](11-advanced.md) — 自定义 static Pod 参数
+- [初始化阶段](14-init-phases.md) — phase 执行引擎
+- [集群升级](08-upgrade.md) — 升级时更新 manifest
+- [高级配置](10-advanced.md) — 自定义 static Pod 参数
 
 ## Related
 

@@ -83,7 +83,7 @@ ChaosBlade 是阿里巴巴开源的混沌工程实验工具，用于模拟各种
 
 - [[kcp]] — kcp
 - [[entities/cncf-security.md|cncf-security]] — CNCF 安全与合规项目全景
-- [[07-containerd-disaster-recovery]] — containerd 灾难恢复
+- [[02-containerd-disaster-recovery]] — containerd 灾难恢复
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

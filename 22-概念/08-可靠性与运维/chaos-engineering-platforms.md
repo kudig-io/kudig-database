@@ -11,7 +11,7 @@ tags:
 - gremlin
 tier: core
 relationships:
-  - target: '[[21-生态参考/98-merged-indexes/index.md|index]]'
+  - target: '[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]]'
     type: related_to
   - target: '[[22-概念/08-可靠性与运维/slo-error-budget-framework.md|slo error budget framework]]'
     type: related_to
@@ -442,7 +442,7 @@ spec:
 
 ## 8. 相关资源
 
-- [[21-生态参考/98-merged-indexes/index.md|index]] — 可靠性工程领域总览
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] — 可靠性工程领域总览
 - [[22-概念/08-可靠性与运维/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
 - [Chaos Mesh 官方文档](https://chaos-mesh.org/docs/)
 - [Litmus 官方文档](https://litmuschaos.io/docs/)

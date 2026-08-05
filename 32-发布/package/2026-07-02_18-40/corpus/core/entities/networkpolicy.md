@@ -100,7 +100,7 @@ Then add explicit allow policies for required traffic flows.
 - [[concepts/CNI 插件 × NetworkPolicy.md|CNI 插件 × NetworkPolicy]]
 - 22-networkpolicy-reference
 - 16-networkpolicy-deep-practice
-- [[domain-10-troubleshooting-diagnostics/资源排障/16-networkpolicy-troubleshooting.md|16-networkpolicy-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-networkpolicy-troubleshooting|16-networkpolicy-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md|04-networkpolicy-troubleshooting]]
 - [[skills/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference

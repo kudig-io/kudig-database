@@ -77,7 +77,7 @@ MySQL 是全球使用最广泛的开源关系型数据库管理系统，在 Web 
 
 企业级 MySQL 运维需要关注的核心维度包括：高可用架构设计（MHA、Orchestrator、MGR）、性能调优（InnoDB 参数优化、查询优化器调优）、数据安全（SSL 加密、审计日志、透明数据加密）、监控告警体系（[[Prometheus|Prometheus]] + Grafana）、以及自动化运维平台建设。本文档从生产环境运维专家视角，系统覆盖上述所有领域。
 
-MySQL 8.0 引入了诸多企业级特性：窗口函数、通用表表达式（CTE）、角色管理、数据字典、降序索引、JSON 增强、invisible index 等。MySQL 9.x 进一步增强了并行查询、HeatWave 内存加速引擎等功能。生产环境建议采用 MySQL 8.4 LTS 版本以获得长期支持。对于 K8s 上的完整生产部署指南（高可用架构、MySQL Group Replication / Operator 选型、备份、监控告警、故障转移与慢查询治理），参见 [[domain-16-database-middleware/数据库/17-mysql-kubernetes-production-guide|MySQL on Kubernetes 生产指南]]。
+MySQL 8.0 引入了诸多企业级特性：窗口函数、通用表表达式（CTE）、角色管理、数据字典、降序索引、JSON 增强、invisible index 等。MySQL 9.x 进一步增强了并行查询、HeatWave 内存加速引擎等功能。生产环境建议采用 MySQL 8.4 LTS 版本以获得长期支持。对于 K8s 上的完整生产部署指南（高可用架构、MySQL Group Replication / Operator 选型、备份、监控告警、故障转移与慢查询治理），参见 [[32-发布/package/2026-07-02_18-29/corpus/core/domain-16-database-middleware/01-databases/04-mysql-kubernetes-production-guide|MySQL on Kubernetes 生产指南]]。
 
 ---
 

@@ -64,7 +64,7 @@ last_updated: 2026-05-21
 - [[35-model-drift-monitoring]] — Model drift monitoring
 - [[36-ai-platform-observability-enhanced]] — Ai platform observability enhanced
 - [[37-agent-sandbox-security]] — Agent sandbox security
-- [[99-kubeflow-ai-platform-guide]] — Kubeflow ai platform guide
+- [[39-kubeflow-ai-platform-guide]] — Kubeflow ai platform guide
 
 ### AI Agent 系统
 
@@ -219,20 +219,20 @@ last_updated: 2026-05-21
 - [[10-openrouter-streaming-multimedia]] — Openrouter streaming multimedia
 - [[11-openrouter-security-privacy]] — Openrouter security privacy
 - [[12-openrouter-enterprise-advanced]] — Openrouter enterprise advanced
-- [[21-opencode-overview-architecture]] — Opencode overview architecture
-- [[22-opencode-installation-quickstart]] — Opencode installation quickstart
-- [[23-opencode-providers-models]] — Opencode providers models
-- [[24-opencode-agents-system]] — Opencode agents system
-- [[25-opencode-tools-permissions]] — Opencode tools permissions
-- [[26-opencode-mcp-integration]] — Opencode mcp integration
-- [[27-opencode-lsp-formatters]] — Opencode lsp formatters
-- [[28-opencode-skills-commands]] — Opencode skills commands
-- [[29-opencode-tui-customization]] — Opencode tui customization
-- [[30-opencode-server-api]] — Opencode server api
-- [[31-opencode-github-automation]] — Opencode github automation
-- [[32-opencode-advanced-topics]] — Opencode advanced topics
+- [[13-opencode-overview-architecture]] — Opencode overview architecture
+- [[14-opencode-installation-quickstart]] — Opencode installation quickstart
+- [[15-opencode-providers-models]] — Opencode providers models
+- [[16-opencode-agents-system]] — Opencode agents system
+- [[17-opencode-tools-permissions]] — Opencode tools permissions
+- [[18-opencode-mcp-integration]] — Opencode mcp integration
+- [[19-opencode-lsp-formatters]] — Opencode lsp formatters
+- [[20-opencode-skills-commands]] — Opencode skills commands
+- [[21-opencode-tui-customization]] — Opencode tui customization
+- [[22-opencode-server-api]] — Opencode server api
+- [[23-opencode-github-automation]] — Opencode github automation
+- [[24-opencode-advanced-topics]] — Opencode advanced topics
 - [[README]] — README
 
 ## 相关 Domain
-- [[工作负载/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]
-- [[应用模式/98-merged-indexes/index.md|Domain 20 应用场景与架构 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 02 工作负载与应用 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 20 应用场景与架构 索引]]

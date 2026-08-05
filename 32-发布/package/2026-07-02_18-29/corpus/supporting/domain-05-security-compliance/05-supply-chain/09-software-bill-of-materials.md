@@ -783,7 +783,7 @@ spec:
 - domain-11-production-operations MOC
 - [[domain-11-production-operations/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-01-cluster-fundamentals/02-production-architecture-design-principles|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系

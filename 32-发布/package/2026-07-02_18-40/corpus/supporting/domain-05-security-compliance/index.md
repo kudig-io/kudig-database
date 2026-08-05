@@ -28,11 +28,11 @@ last_updated: 2026-07
 - domain-05-security-compliance/05-supply-chain/
 - domain-05-security-compliance/06-compliance/
 - domain-05-security-compliance/07-incident-response/
-- [[domain-05-security-compliance/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
 - [[domain-05-security-compliance/00-open-source-projects-index.md|Open Source Projects Index]]
-- [[domain-05-security-compliance/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 - [[domain-05-security-compliance/P3-11-security-incident-sop-compliance-checklist.md|P3 11 Security Incident Sop Compliance Checklist]]
 

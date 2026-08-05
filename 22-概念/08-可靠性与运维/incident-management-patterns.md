@@ -11,7 +11,7 @@ tags:
 - sre
 tier: core
 relationships:
-  - target: '[[21-生态参考/98-merged-indexes/index.md|index]]'
+  - target: '[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]]'
     type: related_to
   - target: '[[22-概念/08-可靠性与运维/slo-error-budget-framework.md|slo error budget framework]]'
     type: related_to
@@ -490,7 +490,7 @@ jobs:
 
 ## 7. 相关资源
 
-- [[21-生态参考/98-merged-indexes/index.md|index]] — 可靠性工程领域总览
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] — 可靠性工程领域总览
 - [[22-概念/08-可靠性与运维/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
 - [[22-概念/08-可靠性与运维/chaos-engineering-platforms.md|chaos engineering platforms]] — 混沌工程平台对比
 - [Google SRE Book - Postmortem Culture](https://sre.google/sre-book/postmortem-culture/)

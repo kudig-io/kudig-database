@@ -245,7 +245,7 @@ curl -s https://registrar:8890/v2.1/agents/node-01 | jq .
 
 ## Related
 
-- [[02-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
+- [[23-实体/03-运行时/01-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
 - [[karmada]] — Karmada
 - [[rook]] — Rook
 - [[microcks]] — Microcks

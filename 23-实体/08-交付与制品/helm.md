@@ -224,7 +224,7 @@ helm uninstall my-release -n web --keep-history
 - 36-ecosystem-kustomize-helm-argocd
 - 07-helm-advanced-operations
 - 06-helm-charts-management
-- [[19-故障诊断/04-高级排障/36-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
+- [[19-故障诊断/04-高级排障/02-helm-chart-troubleshooting.md|36-helm-chart-troubleshooting]]
 - [[19-故障诊断/06-FTA故障树/list/helm-fta.md|Helm 发布异常故障树分析]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting.md|03-helm-troubleshooting]]
 - helm

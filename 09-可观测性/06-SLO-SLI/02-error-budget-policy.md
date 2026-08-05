@@ -403,13 +403,13 @@ spec:
 
 ## Related
 
-- [[09-可观测性/06-SLO-SLI/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
+- [[09-可观测性/06-SLO-SLI/08-slo-sli-system.md|SLO/SLI体系建设与管理]]
 - [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice.md|SLO 工程实践]]
 
 ## See Also
 
 - [[09-可观测性/06-SLO-SLI/06-error-budget-management.md|错误预算管理]]
-- [[09-可观测性/05-告警/05-alerting-management.md|告警管理策略]]
+- [[09-可观测性/05-告警/04-alerting-management.md|告警管理策略]]
 
 
 <!-- risk-assessed -->

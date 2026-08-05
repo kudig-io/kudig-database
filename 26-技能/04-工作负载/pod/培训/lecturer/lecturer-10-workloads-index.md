@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/04-工作负载/job-cronjob/培训/lecturer/10-job-cronjob.md|Job Cronjob]]
+- [[26-技能/04-工作负载/job-cronjob/培训/lecturer/01-job-cronjob.md|Job Cronjob]]
 

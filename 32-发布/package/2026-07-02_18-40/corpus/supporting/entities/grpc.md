@@ -71,7 +71,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[46-terway-performance-tuning]] — Terway 性能调优
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/entities/07-terway-performance-tuning]] — Terway 性能调优
 - [[volcano]] — Volcano
 - [[bpfman]] — bpfman
 - [[in-toto]] — in-toto

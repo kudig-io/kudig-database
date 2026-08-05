@@ -230,5 +230,5 @@ last_updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[工作负载/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]
-- [[AI基础设施/98-merged-indexes/index.md|Domain 14 AI/ML 基础设施 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 02 工作负载与应用 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 14 AI/ML 基础设施 索引]]

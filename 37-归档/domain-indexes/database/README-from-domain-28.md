@@ -463,7 +463,7 @@ graph TD
 | [06-Redis企业级缓存](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/06-redis-enterprise-cache.md) | Redis Sentinel/Cluster、持久化策略、大Key治理、缓存一致性 | 中级→高级 |
 | [07-Redis Kubernetes Operator](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/07-redis-kubernetes-operator.md) | Redis on K8s、OT-CONTAINER-KIT Operator、Sentinel vs Cluster 模式 | 中级→高级 |
 | [08-Kafka Kubernetes Strimzi](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/08-kafka-kubernetes-strimzi.md) | Strimzi Operator、KRaft 模式、Topic 管理、Exactly-Once 语义 | 中级→高级 |
-| [99-CloudNativePG企业指南](../../../07-%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E9%97%B4%E4%BB%B6/01-%E6%95%B0%E6%8D%AE%E5%BA%93/99-cloudnativepg-enterprise-guide.md) | CNPG Operator、PITR、PgBouncer、滚动升级、多租户 | 中级→高级 |
+| [99-CloudNativePG企业指南](../../../07-数据库中间件/01-数据库/19-cloudnativepg-enterprise-guide.md) | CNPG Operator、PITR、PgBouncer、滚动升级、多租户 | 中级→高级 |
 
 ### 学习路径建议
 

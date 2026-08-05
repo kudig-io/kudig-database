@@ -30,13 +30,13 @@ last_updated: 2026-07
 - 可靠性/07-sre-practices/
 - 可靠性/08-performance-testing/
 - 可靠性/09-disaster-recovery-playbooks/
-- [[12-可靠性/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - [[12-可靠性/00-总览/index.md|00-总览]]
 
 ## 文档
 
-- [[12-可靠性/06-SRE实践/03-slo-sli-guide.md|Slo Sli Guide]]
-- [[12-可靠性/06-SRE实践/04-error-budget-policy-template.md|Error Budget Policy Template]]
-- [[12-可靠性/06-SRE实践/05-reliability-maturity-model.md|Reliability Maturity Model]]
-- [[12-可靠性/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[12-可靠性/06-SRE实践/04-slo-sli-guide.md|Slo Sli Guide]]
+- [[12-可靠性/06-SRE实践/05-error-budget-policy-template.md|Error Budget Policy Template]]
+- [[12-可靠性/06-SRE实践/08-reliability-maturity-model.md|Reliability Maturity Model]]
+- [[12-可靠性/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

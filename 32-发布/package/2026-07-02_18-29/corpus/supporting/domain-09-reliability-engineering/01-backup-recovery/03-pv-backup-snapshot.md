@@ -509,13 +509,13 @@ spec:
 
 ## 11. Related
 
-- [[domain-04-storage-data/K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
-- [[domain-04-storage-data/K8s存储/15-storage-disaster-recovery.md|存储灾难恢复]]
-- [[domain-04-storage-data/K8s存储/05-csi-drivers-integration.md|CSI 驱动集成]]
-- [[domain-04-storage-data/K8s存储/03-pvc-patterns-practices.md|PVC 模式与最佳实践]]
-- [[domain-09-reliability-engineering/备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-04-storage-data/01-k8s-storage/03-storage-backup-disaster-recovery|存储备份与灾难恢复]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-04-storage-data/01-k8s-storage/06-storage-disaster-recovery|存储灾难恢复]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-04-storage-data/01-k8s-storage/03-csi-drivers-integration|CSI 驱动集成]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-04-storage-data/01-k8s-storage/01-pvc-patterns-practices|PVC 模式与最佳实践]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-09-reliability-engineering/01-backup-recovery/01-enterprise-backup-strategy|企业级备份策略]]
 - [[domain-09-reliability-engineering/备份恢复/02-namespace-backup-restore.md|Namespace 级别备份恢复：Velero]]
-- [[domain-09-reliability-engineering/灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-09-reliability-engineering/02-disaster-recovery/02-velero-backup-recovery-guide|Velero 备份恢复指南]]
 
 
 <!-- risk-assessed -->

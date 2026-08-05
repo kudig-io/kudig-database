@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/06-configuration/06-namespace-resource-quota.md|Namespace Resource Quota]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/05-configuration/01-namespace-resource-quota|Namespace Resource Quota]]
 

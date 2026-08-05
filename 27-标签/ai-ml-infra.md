@@ -53,9 +53,9 @@ last_updated: '2026-07-21'
 - [[15-AI基础设施/01-基础设施/12-ai-cost-analysis-finops|AI 成本分析 FinOps]]
 - [[15-AI基础设施/01-基础设施/13-ai-platform-observability|AI 平台可观测性]]
 - [[15-AI基础设施/01-基础设施/14-troubleshooting-performance|AI 性能故障排查]]
-- [[15-AI基础设施/01-基础设施/45-ai-ml-ops-runbook|AI/ML Ops Runbook]]
-- [[15-AI基础设施/01-基础设施/99-kubeflow-ai-platform-guide|Kubeflow AI 平台指南]]
-- [[15-AI基础设施/00-总览/99-production-readiness-operations-guide|AI 基础设施生产就绪指南]]
+- [[15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook|AI/ML Ops Runbook]]
+- [[15-AI基础设施/01-基础设施/39-kubeflow-ai-platform-guide|Kubeflow AI 平台指南]]
+- [[15-AI基础设施/00-总览/01-production-readiness-operations-guide|AI 基础设施生产就绪指南]]
 
 ## LLM 推理与服务 (LLM Inference & Serving)
 
@@ -100,8 +100,8 @@ last_updated: '2026-07-21'
 ## AI 编码 (AI Coding)
 
 - [[15-AI基础设施/04-AI编码/README|AI 编码索引]]
-- [[15-AI基础设施/04-AI编码/21-opencode-overview-architecture|OpenCode 概览架构]]
-- [[15-AI基础设施/04-AI编码/24-opencode-agents-system|OpenCode Agents 系统]]
+- [[15-AI基础设施/04-AI编码/13-opencode-overview-architecture|OpenCode 概览架构]]
+- [[15-AI基础设施/04-AI编码/16-opencode-agents-system|OpenCode Agents 系统]]
 
 ## MLOps
 

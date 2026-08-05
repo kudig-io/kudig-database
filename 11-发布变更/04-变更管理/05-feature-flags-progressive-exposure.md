@@ -54,7 +54,7 @@ authors:
 
 Feature Flag（特性开关）是现代软件交付的核心基础设施，它将代码部署（Deployment）与功能发布（Release）解耦，使团队能够在不重新部署的情况下控制功能的可见性和行为。在 Kubernetes 环境中，Feature Flag 与渐进式交付（Progressive Delivery）深度结合，实现从内部测试 → 小流量验证 → 全量发布的平滑过渡。
 
-本文覆盖 Feature Flag 的完整生产实践：平台选型与部署、渐进式暴露策略设计、A/B 测试框架、Flag 生命周期管理以及与 [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts]] 的集成模式。
+本文覆盖 Feature Flag 的完整生产实践：平台选型与部署、渐进式暴露策略设计、A/B 测试框架、Flag 生命周期管理以及与 [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts]] 的集成模式。
 
 ## 核心概念
 
@@ -278,7 +278,7 @@ spec:
 
 ### 与 Argo Rollouts 集成的渐进式发布
 
-将 Feature Flag 与 [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts]] 结合，实现基于 Flag 的渐进式发布：
+将 Feature Flag 与 [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts]] 结合，实现基于 Flag 的渐进式发布：
 
 ```yaml
 # 🟡 中风险：Rollout 配置变更影响发布行为
@@ -564,7 +564,7 @@ kubectl argo rollouts get rollout checkout-service -n production -o json | \
 
 ### 与发布流程集成
 
-Feature Flag 应与 [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略]] 和 [[11-发布变更/01-GitOps/11-flagger-automated-canary.md|Flagger 自动化金丝雀]] 深度集成：
+Feature Flag 应与 [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略]] 和 [[11-发布变更/01-GitOps/13-flagger-automated-canary.md|Flagger 自动化金丝雀]] 深度集成：
 - 部署阶段：代码部署但 Flag 关闭（Dark Launch）
 - 验证阶段：逐步开启 Flag（渐进式暴露）
 - 稳定阶段：Flag 全量，安排代码清理
@@ -580,9 +580,9 @@ Feature Flag 应与 [[11-发布变更/04-变更管理/02-canary-release-strategy
 ## Related
 
 - [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略]]
-- [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
-- [[11-发布变更/01-GitOps/11-flagger-automated-canary.md|Flagger 自动化金丝雀]]
+- [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
+- [[11-发布变更/01-GitOps/13-flagger-automated-canary.md|Flagger 自动化金丝雀]]
 - [[11-发布变更/04-变更管理/01-change-window-and-approval.md|变更窗口与审批]]
 - [[11-发布变更/04-变更管理/03-change-rollback-playbook.md|变更回滚手册]]
-- [[11-发布变更/01-GitOps/07-gitops-security-compliance.md|GitOps 安全合规]]
+- [[11-发布变更/01-GitOps/08-gitops-security-compliance.md|GitOps 安全合规]]
 - [[12-可靠性/06-SRE实践/02-release-gate-slo-based.md|基于 SLO 的发布门控]]

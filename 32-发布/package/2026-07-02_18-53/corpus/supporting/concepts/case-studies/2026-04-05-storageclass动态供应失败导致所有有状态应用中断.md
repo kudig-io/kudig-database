@@ -18,7 +18,7 @@ last_updated: 2026-05-23
 # StorageClass动态供应失败导致所有有状态应用中断
 
 **日期**: 2026-04-05  
-**关联Skill**: [[07-pvc-storage-failure]]  
+**关联Skill**: [[08-pvc-storage-failure]]  
 **严重级别**: P0
 
 ## 场景描述

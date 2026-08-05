@@ -46,24 +46,24 @@ last_updated: '2026-07-21'
 ## 容器运行时 (Container Runtime)
 
 - [[14-容器运行时/03-containerd-CRI-O/01-containerd-deep-guide|containerd 深度指南]]
-- [[14-容器运行时/00-总览/99-production-readiness-operations-guide|容器运行时生产就绪指南]]
-- [[14-容器运行时/06-沙箱运行时/05-gvisor-sandbox-production|gVisor 沙箱生产实践]]
-- [[14-容器运行时/06-沙箱运行时/06-firecracker-microvm-guide|Firecracker MicroVM 指南]]
+- [[14-容器运行时/00-总览/01-production-readiness-operations-guide|容器运行时生产就绪指南]]
+- [[14-容器运行时/06-沙箱运行时/01-gvisor-sandbox-production|gVisor 沙箱生产实践]]
+- [[14-容器运行时/06-沙箱运行时/02-firecracker-microvm-guide|Firecracker MicroVM 指南]]
 
 ## containerd / CRI-O
 
-- [[14-容器运行时/03-containerd-CRI-O/01-containerd-production-operations|containerd 生产运营]]
-- [[14-容器运行时/03-containerd-CRI-O/03-oci-runtimes-comparison|OCI 运行时对比]]
-- [[14-容器运行时/03-containerd-CRI-O/04-kata-containers-secure-container|Kata Containers 安全容器]]
-- [[14-容器运行时/03-containerd-CRI-O/05-gvisor-sandbox-runtime|gVisor 沙箱运行时]]
-- [[14-容器运行时/03-containerd-CRI-O/06-runtime-security-hardening|运行时安全加固]]
-- [[14-容器运行时/03-containerd-CRI-O/06-rootless-containers-guide|Rootless 容器指南]]
-- [[14-容器运行时/03-containerd-CRI-O/07-containerd-configuration-deep-guide|containerd 配置深度指南]]
-- [[14-容器运行时/03-containerd-CRI-O/08-cri-interface-internals|CRI 接口内部机制]]
-- [[14-容器运行时/03-containerd-CRI-O/09-container-runtime-lifecycle|容器运行时生命周期]]
-- [[14-容器运行时/03-containerd-CRI-O/10-snapshotter-strategies|Snapshotter 策略]]
-- [[14-容器运行时/03-containerd-CRI-O/11-nerdctl-production-guide|nerdctl 生产指南]]
-- [[14-容器运行时/03-containerd-CRI-O/12-container-shim-v2|Container Shim v2]]
+- [[14-容器运行时/03-containerd-CRI-O/02-containerd-production-operations|containerd 生产运营]]
+- [[14-容器运行时/03-containerd-CRI-O/04-oci-runtimes-comparison|OCI 运行时对比]]
+- [[14-容器运行时/03-containerd-CRI-O/05-kata-containers-secure-container|Kata Containers 安全容器]]
+- [[14-容器运行时/03-containerd-CRI-O/06-gvisor-sandbox-runtime|gVisor 沙箱运行时]]
+- [[14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening|运行时安全加固]]
+- [[14-容器运行时/03-containerd-CRI-O/07-rootless-containers-guide|Rootless 容器指南]]
+- [[14-容器运行时/03-containerd-CRI-O/10-containerd-configuration-deep-guide|containerd 配置深度指南]]
+- [[14-容器运行时/03-containerd-CRI-O/11-cri-interface-internals|CRI 接口内部机制]]
+- [[14-容器运行时/03-containerd-CRI-O/12-container-runtime-lifecycle|容器运行时生命周期]]
+- [[14-容器运行时/03-containerd-CRI-O/13-snapshotter-strategies|Snapshotter 策略]]
+- [[14-容器运行时/03-containerd-CRI-O/14-nerdctl-production-guide|nerdctl 生产指南]]
+- [[14-容器运行时/03-containerd-CRI-O/15-container-shim-v2|Container Shim v2]]
 
 ## Docker
 
@@ -71,7 +71,7 @@ last_updated: '2026-07-21'
 - [[14-容器运行时/01-Docker/03-docker-container-lifecycle|Docker 容器生命周期]]
 - [[14-容器运行时/01-Docker/06-docker-compose-orchestration|Docker Compose 编排]]
 - [[14-容器运行时/01-Docker/11-docker-automation-devops|Docker 自动化 DevOps]]
-- [[14-容器运行时/01-Docker/99-docker-commands-reference|Docker 命令参考]]
+- [[14-容器运行时/01-Docker/13-docker-commands-reference|Docker 命令参考]]
 
 ## 镜像管理 (Image Management)
 
@@ -79,9 +79,9 @@ last_updated: '2026-07-21'
 - [[14-容器运行时/02-镜像管理/02-docker-registry-enterprise-distribution|Docker Registry 企业级 Distribution]]
 - [[14-容器运行时/02-镜像管理/03-jfrog-artifactory-enterprise|JFrog Artifactory 企业级]]
 - [[14-容器运行时/02-镜像管理/04-harbor-enterprise-security-scanning|Harbor 企业级安全扫描]]
-- [[14-容器运行时/02-镜像管理/04-quay-enterprise-registry|Quay 企业级仓库]]
-- [[14-容器运行时/02-镜像管理/06-amazon-ecr-enterprise|Amazon ECR 企业级]]
-- [[14-容器运行时/02-镜像管理/99-harbor-enterprise-guide|Harbor 企业级指南]]
+- [[14-容器运行时/02-镜像管理/05-quay-enterprise-registry|Quay 企业级仓库]]
+- [[14-容器运行时/02-镜像管理/07-amazon-ecr-enterprise|Amazon ECR 企业级]]
+- [[14-容器运行时/02-镜像管理/08-harbor-enterprise-guide|Harbor 企业级指南]]
 
 ## 镜像构建 (Image Build)
 
@@ -94,15 +94,15 @@ last_updated: '2026-07-21'
 
 - [[14-容器运行时/05-运行时迁移/01-docker-to-containerd-migration|Docker 到 containerd 迁移]]
 - [[14-容器运行时/05-运行时迁移/02-containerd-to-cri-o-migration|containerd 到 CRI-O 迁移]]
-- [[14-容器运行时/05-运行时迁移/02-runtime-class-configuration|RuntimeClass 配置]]
+- [[14-容器运行时/05-运行时迁移/03-runtime-class-configuration|RuntimeClass 配置]]
 
 ## 集群基础 (Cluster Fundamentals)
 
 - [[01-集群基础/03-控制平面/21-container-runtime-deep-dive|容器运行时深度指南]]
 - [[01-集群基础/03-控制平面/22-container-storage-deep-dive|容器存储深度指南]]
-- [[01-集群基础/03-控制平面/29-in-place-pod-resize|原地 Pod 调整]]
-- [[01-集群基础/03-控制平面/30-dynamic-resource-allocation|动态资源分配]]
-- [[01-集群基础/01-架构总览/10-windows-containers-support|Windows 容器支持]]
+- [[01-集群基础/03-控制平面/30-in-place-pod-resize|原地 Pod 调整]]
+- [[01-集群基础/03-控制平面/32-dynamic-resource-allocation|动态资源分配]]
+- [[01-集群基础/01-架构总览/08-windows-containers-support|Windows 容器支持]]
 
 ## 概念 (Concepts)
 
@@ -127,26 +127,26 @@ last_updated: '2026-07-21'
 - [[19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting|kubelet 排障]]
 - [[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting|容器运行时排障]]
 - [[19-故障诊断/04-高级排障/structural-02-node-components/05-image-registry-troubleshooting|镜像仓库排障]]
-- [[19-故障诊断/04-高级排障/35-node-component-troubleshooting|节点组件排障]]
-- [[19-故障诊断/03-基础设施排障/27-image-registry-troubleshooting|镜像仓库基础设施排障]]
-- [[19-故障诊断/08-技能体系/10-image-pull-failure|镜像拉取失败]]
+- [[19-故障诊断/04-高级排障/01-node-component-troubleshooting|节点组件排障]]
+- [[19-故障诊断/03-基础设施排障/03-image-registry-troubleshooting|镜像仓库基础设施排障]]
+- [[19-故障诊断/08-技能体系/11-image-pull-failure|镜像拉取失败]]
 
 ## 安全 (Security)
 
 - [[08-安全/03-运行时安全/02-sysdig-enterprise-container-security|Sysdig 容器安全]]
-- [[08-安全/03-运行时安全/03-runtime-security-defense|运行时安全防御]]
-- [[08-安全/03-运行时安全/17-gvisor-container-sandbox|gVisor 容器沙箱]]
+- [[08-安全/03-运行时安全/04-runtime-security-defense|运行时安全防御]]
+- [[08-安全/03-运行时安全/06-gvisor-container-sandbox|gVisor 容器沙箱]]
 - [[08-安全/05-供应链/13-image-security-scanning|镜像安全扫描]]
 
 ## 平台工程 (Platform Engineering)
 
 - [[10-平台工程/06-代码分析/cluster-create/18-cri-runtime|CRI 运行时管理]]
-- [[10-平台工程/02-运维/08-automation-toolchain|自动化工具链]]
-- [[10-平台工程/02-运维/12-automated-operations-toolchain|自动化运维工具链]]
+- [[10-平台工程/02-运维/06-automation-toolchain|自动化工具链]]
+- [[10-平台工程/02-运维/08-automated-operations-toolchain|自动化运维工具链]]
 
 ## 生产运维 (Production Operations)
 
-- [[13-生产运维/07-运维手册/13-node-and-runtime-ops|节点与运行时运维]]
+- [[13-生产运维/07-运维手册/10-node-and-runtime-ops|节点与运行时运维]]
 
 ## WebAssembly / 边缘计算
 
@@ -165,8 +165,8 @@ last_updated: '2026-07-21'
 - [[17-系统基础/06-知识字典/workloads/runtime-class|RuntimeClass]]
 - [[17-系统基础/06-知识字典/workloads/user-namespaces|User Namespaces]]
 - [[17-系统基础/06-知识字典/platform-engineering/network-plugins|网络插件]]
-- [[17-系统基础/01-Linux/08-linux-container-fundamentals|Linux 容器基础]]
-- [[17-系统基础/01-Linux/05-linux-storage-management|Linux 存储管理]]
+- [[17-系统基础/01-Linux/09-linux-container-fundamentals|Linux 容器基础]]
+- [[17-系统基础/01-Linux/06-linux-storage-management|Linux 存储管理]]
 - [[17-系统基础/05-速查卡/docker|Docker 速查卡]]
 
 ## 发布说明 (Release Notes)

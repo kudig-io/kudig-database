@@ -23,13 +23,13 @@ last_updated: 2026-07
 ## 文档
 
 - [[domain-13-container-runtime/镜像管理/01-harbor-enterprise-image-registry.md|Harbor Enterprise Image Registry]]
-- [[domain-13-container-runtime/镜像管理/02-docker-registry-enterprise-distribution.md|Docker Registry Enterprise Distribution]]
-- [[domain-13-container-runtime/镜像管理/03-jfrog-artifactory-enterprise.md|Jfrog Artifactory Enterprise]]
-- [[domain-13-container-runtime/镜像管理/04-harbor-enterprise-security-scanning.md|Harbor Enterprise Security Scanning]]
-- [[domain-13-container-runtime/镜像管理/04-quay-enterprise-registry.md|Quay Enterprise Registry]]
-- [[domain-13-container-runtime/镜像管理/05-gitlab-container-registry-enterprise.md|Gitlab Container Registry Enterprise]]
-- [[domain-13-container-runtime/镜像管理/06-amazon-ecr-enterprise.md|Amazon Ecr Enterprise]]
-- [[domain-13-container-runtime/镜像管理/99-harbor-enterprise-guide.md|Harbor Enterprise Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/02-image-management/01-docker-registry-enterprise-distribution|Docker Registry Enterprise Distribution]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/02-image-management/02-jfrog-artifactory-enterprise|Jfrog Artifactory Enterprise]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/02-image-management/03-harbor-enterprise-security-scanning|Harbor Enterprise Security Scanning]]
+- [[05-quay-enterprise-registry|Quay Enterprise Registry]]
+- [[06-gitlab-container-registry-enterprise|Gitlab Container Registry Enterprise]]
+- [[07-amazon-ecr-enterprise|Amazon Ecr Enterprise]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/02-image-management/07-harbor-enterprise-guide|Harbor Enterprise Guide]]
 
 
 

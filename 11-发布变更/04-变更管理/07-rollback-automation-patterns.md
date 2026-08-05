@@ -612,7 +612,7 @@ kubectl patch deployment rollback-controller -n release-system \
 
 ### 与发布流程集成
 
-回滚自动化应与 [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]] 和 [[11-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md|Feature Flag 渐进式暴露]] 深度集成：
+回滚自动化应与 [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]] 和 [[11-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md|Feature Flag 渐进式暴露]] 深度集成：
 - Feature Flag 提供秒级功能回滚（关闭 Flag）
 - Argo Rollouts 提供分钟级版本回滚
 - 数据库回滚作为最后手段，需要人工审批
@@ -622,9 +622,9 @@ kubectl patch deployment rollback-controller -n release-system \
 ## Related
 
 - [[11-发布变更/04-变更管理/03-change-rollback-playbook.md|变更回滚手册]]
-- [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
+- [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
 - [[11-发布变更/04-变更管理/06-database-migration-release-strategy.md|数据库迁移发布策略]]
 - [[11-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md|Feature Flag 与渐进式暴露]]
 - [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略]]
 - [[12-可靠性/06-SRE实践/03-incident-command-system.md|事件指挥系统]]
-- [[11-发布变更/01-GitOps/11-flagger-automated-canary.md|Flagger 自动化金丝雀]]
+- [[11-发布变更/01-GitOps/13-flagger-automated-canary.md|Flagger 自动化金丝雀]]

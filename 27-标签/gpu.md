@@ -43,8 +43,8 @@ last_updated: '2026-07-21'
 - [[15-AI基础设施/01-基础设施/10-model-deployment-management|模型部署管理]]
 - [[15-AI基础设施/01-基础设施/12-ai-cost-analysis-finops|AI 成本分析 FinOps]]
 - [[15-AI基础设施/01-基础设施/14-troubleshooting-performance|AI 性能故障排查]]
-- [[15-AI基础设施/01-基础设施/45-ai-ml-ops-runbook|AI/ML Ops Runbook]]
-- [[15-AI基础设施/01-基础设施/99-kubeflow-ai-platform-guide|Kubeflow AI 平台指南]]
+- [[15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook|AI/ML Ops Runbook]]
+- [[15-AI基础设施/01-基础设施/39-kubeflow-ai-platform-guide|Kubeflow AI 平台指南]]
 
 ## LLM 推理 (LLM Inference/Serving)
 
@@ -110,8 +110,8 @@ last_updated: '2026-07-21'
 
 ## 平台工程 (Platform Engineering)
 
-- [[10-平台工程/02-运维/99-karpenter-node-autoscaling-guide|Karpenter 节点弹性伸缩指南]]
-- [[10-平台工程/03-治理/03-capacity-planning-resource-assessment|容量规划与资源评估]]
+- [[10-平台工程/02-运维/17-karpenter-node-autoscaling-guide|Karpenter 节点弹性伸缩指南]]
+- [[10-平台工程/03-治理/01-capacity-planning-resource-assessment|容量规划与资源评估]]
 - [[10-平台工程/06-代码分析/cluster-create/23-scheduler|kube-scheduler 调度详解]]
 - [[10-平台工程/06-代码分析/node-create/07-autoscaling|节点弹性伸缩]]
 

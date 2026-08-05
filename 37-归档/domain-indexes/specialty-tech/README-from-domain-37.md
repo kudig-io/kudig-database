@@ -90,20 +90,20 @@ tier: peripheral---
 - **[02-云边协同设计模式](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/02-cloud-edge-collaboration.md)** - 云边通信、数据同步、状态管理
 
 ### 🌐 KubeEdge 深度实践 (03-04)
-- **[03-KubeEdge架构与部署](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/03-kubeedge-architecture-deployment.md)** - CloudCore/EdgeCore 架构、部署配置
-- **[04-KubeEdge设备管理与边缘应用](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/04-kubeedge-device-edge-apps.md)** - DeviceModel、DeviceTwin、边缘应用部署
+- **[03-KubeEdge架构与部署](../../../16-专项技术/01-边缘计算/04-kubeedge-architecture-deployment.md)** - CloudCore/EdgeCore 架构、部署配置
+- **[04-KubeEdge设备管理与边缘应用](../../../16-专项技术/01-边缘计算/05-kubeedge-device-edge-apps.md)** - DeviceModel、DeviceTwin、边缘应用部署
 
 ### 🔧 其他边缘框架 (05-06)
-- **[05-OpenYurt边缘方案](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/05-openyurt-architecture.md)** - YurtHub、YurtTunnel、NodePool 设计
-- **[06-SuperEdge架构实践](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/06-superedge-architecture.md)** - SuperEdge 组件、边缘自治、分布式健康检查
+- **[05-OpenYurt边缘方案](../../../16-专项技术/01-边缘计算/06-openyurt-architecture.md)** - YurtHub、YurtTunnel、NodePool 设计
+- **[06-SuperEdge架构实践](../../../16-专项技术/01-边缘计算/07-superedge-architecture.md)** - SuperEdge 组件、边缘自治、分布式健康检查
 
 ### ⚡ 边缘 AI 与存储 (07-08)
-- **[07-边缘AI推理与联邦学习](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/07-edge-ai-inference-federated-learning.md)** - ONNX/TFLite、边缘推理、联邦学习架构
-- **[08-边缘存储与网络](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/08-edge-storage-network.md)** - 边缘存储方案、弱网络优化、断网续传
+- **[07-边缘AI推理与联邦学习](../../../16-专项技术/01-边缘计算/08-edge-ai-inference-federated-learning.md)** - ONNX/TFLite、边缘推理、联邦学习架构
+- **[08-边缘存储与网络](../../../16-专项技术/01-边缘计算/09-edge-storage-network.md)** - 边缘存储方案、弱网络优化、断网续传
 
 ### 🔒 边缘安全与场景 (09-10)
-- **[09-边缘安全架构](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/09-edge-security.md)** - 边缘身份、通信安全、设备安全
-- **[10-边缘场景案例](../../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/10-edge-use-cases.md)** - 智慧工厂、智慧城市、车联网、零售
+- **[09-边缘安全架构](../../../16-专项技术/01-边缘计算/10-edge-security.md)** - 边缘身份、通信安全、设备安全
+- **[10-边缘场景案例](../../../16-专项技术/01-边缘计算/11-edge-use-cases.md)** - 智慧工厂、智慧城市、车联网、零售
 
 ## 🎯 学习路径建议
 

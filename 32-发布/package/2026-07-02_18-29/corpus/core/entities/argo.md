@@ -96,8 +96,8 @@ description: '## 项目概述'
 - 99-argo-cd-gitops-guide
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[domain-10-troubleshooting-diagnostics/高级排障/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/03-gitops-argocd-troubleshooting|38-gitops-argocd-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-02-workloads-applications/03-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.8
@@ -143,11 +143,11 @@ description: '## 项目概述'
 - [[entities/kuberhealthy.md|Kuberhealthy]]
 - [[entities/kubescape.md|Kubescape]]
 - [[entities/perses.md|Perses]]
-- [[entities/03-prometheus-ha-deployment.md|Prometheus 高可用部署]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/05-prometheus-ha-deployment|Prometheus 高可用部署]]
 - [[entities/trickster.md|Trickster]]
 - [[entities/distribution.md|Distribution]]
 - [[entities/hami.md|HAMI]]
-- [[entities/06-containerd-observability.md|containerd 可观测性]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/08-containerd-observability|containerd 可观测性]]
 - [[entities/kubeelasti.md|KubeElastic]]
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
 - [[entities/kudig-ecosystem-guide.md|KUDIG 开源生态指南与深度研究指南]] — Cross-reference

@@ -249,7 +249,7 @@ exit ${EXIT_CODE}
 
 ## 2. GC (垃圾回收) 机制
 
-> 本节内容综合整理自 [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md)
+> 本节内容综合整理自 [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md)
 
 ### 2.1 为什么需要 GC
 
@@ -446,7 +446,7 @@ kubectl rollout restart ds/terway-eniip -n kube-system
 
 ### 2.9 GC 源码级执行流程
 
-> 本节内容提取自 [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) 第 4 节。
+> 本节内容提取自 [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md) 第 4 节。
 
 #### 2.9.1 源码默认值表
 
@@ -1482,9 +1482,9 @@ kubectl get ipinstances -A -o json | jq -r '
 
 | 文档 | 说明 |
 |:---|:---|
-| [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) | GC 机制详解: 架构、源码分析、执行流程 |
-| [网络/37-terway-resources-crud-operations.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) | CRD 资源 CRUD 操作 |
-| [网络/05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) | Terway 高级指南: 容量规划、模式对比 |
+| [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md) | GC 机制详解: 架构、源码分析、执行流程 |
+| [网络/37-terway-resources-crud-operations.md](../01-K8s网络核心/39-terway-resources-crud-operations.md) | CRD 资源 CRUD 操作 |
+| [网络/05-terway-advanced-guide.md](../01-K8s网络核心/06-terway-advanced-guide.md) | Terway 高级指南: 容量规划、模式对比 |
 
 ### 关联 Topic
 

@@ -38,13 +38,13 @@ last_updated: '2026-07-21'
 ## Operator 清单模式 (Operator Manifest Patterns)
 
 - [[03-清单模式/04-Operator模式/01-operator-cr-design-patterns|Operator CR 设计模式]]
-- [[03-清单模式/04-Operator模式/02-operator-reconciliation-patterns|Operator 调和模式]]
-- [[03-清单模式/04-Operator模式/03-operator-finalizer-cleanup|Operator Finalizer 清理]]
-- [[03-清单模式/04-Operator模式/04-operator-leader-election|Operator Leader Election]]
-- [[03-清单模式/04-Operator模式/05-operator-webhook-patterns|Operator Webhook 模式]]
-- [[03-清单模式/04-Operator模式/06-operator-status-conditions|Operator 状态条件]]
-- [[03-清单模式/04-Operator模式/07-operator-metrics-observability|Operator 指标可观测性]]
-- [[03-清单模式/04-Operator模式/08-operator-testing-strategies|Operator 测试策略]]
+- [[03-清单模式/04-Operator模式/03-operator-reconciliation-patterns|Operator 调和模式]]
+- [[03-清单模式/04-Operator模式/04-operator-finalizer-cleanup|Operator Finalizer 清理]]
+- [[03-清单模式/04-Operator模式/05-operator-leader-election|Operator Leader Election]]
+- [[03-清单模式/04-Operator模式/06-operator-webhook-patterns|Operator Webhook 模式]]
+- [[03-清单模式/04-Operator模式/07-operator-status-conditions|Operator 状态条件]]
+- [[03-清单模式/04-Operator模式/08-operator-metrics-observability|Operator 指标可观测性]]
+- [[03-清单模式/04-Operator模式/09-operator-testing-strategies|Operator 测试策略]]
 
 ## 扩展机制 (Extension Mechanisms)
 
@@ -67,21 +67,21 @@ last_updated: '2026-07-21'
 
 ## 集群基础 (Cluster Fundamentals)
 
-- [[01-集群基础/02-设计原则/03-controller-pattern|控制器模式]]
-- [[01-集群基础/02-设计原则/05-informer-workqueue|Informer/WorkQueue]]
-- [[01-集群基础/02-设计原则/10-cap-theorem-distributed-systems|CAP 定理分布式系统]]
-- [[01-集群基础/02-设计原则/12-operator-development-guide|Operator 开发指南]]
+- [[01-集群基础/02-设计原则/04-controller-pattern|控制器模式]]
+- [[01-集群基础/02-设计原则/06-informer-workqueue|Informer/WorkQueue]]
+- [[01-集群基础/02-设计原则/11-cap-theorem-distributed-systems|CAP 定理分布式系统]]
+- [[01-集群基础/02-设计原则/13-operator-development-guide|Operator 开发指南]]
 
 ## 平台工程 (Platform Engineering)
 
-- [[10-平台工程/01-构建/20-crd-operator-development|CRD/Operator 开发]]
-- [[10-平台工程/01-构建/21-api-aggregation|API 聚合]]
-- [[10-平台工程/01-构建/22-client-libraries|客户端库]]
-- [[10-平台工程/01-构建/99-java-k8s-client-operator-guide|Java K8s 客户端/Operator 指南]]
+- [[10-平台工程/01-构建/10-crd-operator-development|CRD/Operator 开发]]
+- [[10-平台工程/01-构建/11-api-aggregation|API 聚合]]
+- [[10-平台工程/01-构建/12-client-libraries|客户端库]]
+- [[10-平台工程/01-构建/16-java-k8s-client-operator-guide|Java K8s 客户端/Operator 指南]]
 
 ## 工作负载 (Workloads)
 
-- [[02-工作负载/02-Java-on-K8s/04-java-operator-sdk-development|Java Operator SDK 开发]]
+- [[02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development|Java Operator SDK 开发]]
 - [[02-工作负载/01-核心工作负载/12-advanced-pod-patterns|高级 Pod 模式]]
 
 ## 技能 (Skills)
@@ -110,7 +110,7 @@ last_updated: '2026-07-21'
 
 - [[20-最佳实践/01-best-practices/observability/monitoring|监控最佳实践]]
 - [[20-最佳实践/01-best-practices/observability/tracing|追踪最佳实践]]
-- [[03-清单模式/04-Operator模式/07-operator-metrics-observability|Operator 指标可观测性]]
+- [[03-清单模式/04-Operator模式/08-operator-metrics-observability|Operator 指标可观测性]]
 
 ## 研究 (Research)
 

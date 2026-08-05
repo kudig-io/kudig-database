@@ -218,7 +218,7 @@ kubectl delete mapping backend
 
 ## Related
 
-- [[04-containerd-upgrade-migration]] — containerd 升级迁移
+- [[03-containerd-upgrade-migration]] — containerd 升级迁移
 - [[spin]] — Spin
 - [[backstage]] — Backstage
 - [[envoy]] — Envoy

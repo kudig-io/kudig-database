@@ -33,7 +33,7 @@ prerequisites:
 - iac-basics
 - policy-basics
 relationships:
-- target: '[[domain-07-platform-engineering/运维/13-multi-cluster-management.md]]'
+- target: '[[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/02-multi-cluster-management]]'
   type: uses
 - target: '[[domain-17-system-foundation/知识字典/configuration/secrets.md]]'
   type: uses
@@ -49,7 +49,7 @@ relationships:
 
 
 ---
-title: 基础设施即代码 x [[domain-07-platform-engineering/运维/13-multi-cluster-management.md|多集群管理]]
+title: 基础设施即代码 x [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/02-multi-cluster-management|多集群管理]]
 category: synthesis
 tags:
 - k8s

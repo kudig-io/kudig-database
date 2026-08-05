@@ -514,7 +514,7 @@ spec:
 
 ## Related
 
-- [[11-发布变更/04-变更管理/22-change-management-process.md|变更管理流程]]
+- [[11-发布变更/04-变更管理/08-change-management-process.md|变更管理流程]]
 - [[11-发布变更/04-变更管理/01-change-window-and-approval.md|变更窗口与审批流程]]
 
 ## See Also

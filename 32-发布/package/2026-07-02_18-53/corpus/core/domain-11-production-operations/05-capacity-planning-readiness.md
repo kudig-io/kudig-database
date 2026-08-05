@@ -329,12 +329,12 @@ kubectl get pods -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[domain-11-production-operations/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-11-production-operations/10-production-readiness-operations-guide|生产运维域生产就绪运维指南]]
 - [[domain-09-reliability-engineering/容量规划/01-capacity-planning-framework.md|容量规划框架]]
 - [[domain-09-reliability-engineering/容量规划/02-hpa-vpa-cluster-autoscaler-karpenter.md|HPA/VPA/Cluster Autoscaler/Karpenter]]
-- [[domain-11-production-operations/成本治理/13-kubernetes-cost-governance.md|Kubernetes 成本治理]]
-- [[domain-11-production-operations/集群治理/14-resource-quota-management.md|资源配额管理]]
-- [[domain-09-reliability-engineering/SLO-SLI/02-slo-implementation-guide.md|SLO 设定与实施指南]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-11-production-operations/01-finops/01-kubernetes-cost-governance|Kubernetes 成本治理]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-11-production-operations/02-governance/05-resource-quota-management|资源配额管理]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-09-reliability-engineering/02-slo-sli/02-slo-implementation-guide|SLO 设定与实施指南]]
 
 ---
 

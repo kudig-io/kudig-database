@@ -222,8 +222,8 @@ kubectl argo rollouts abort my-app -n production
 - 99-argo-cd-gitops-guide
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[19-故障诊断/04-高级排障/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
-- [[02-工作负载/02-Java-on-K8s/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[19-故障诊断/04-高级排障/04-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
 - [[19-故障诊断/06-FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.8
@@ -269,11 +269,11 @@ kubectl argo rollouts abort my-app -n production
 - [[23-实体/07-可观测性/kuberhealthy.md|Kuberhealthy]]
 - [[23-实体/06-安全/kubescape.md|Kubescape]]
 - [[23-实体/07-可观测性/perses.md|Perses]]
-- [[23-实体/07-可观测性/03-prometheus-ha-deployment.md|Prometheus 高可用部署]]
+- [[23-实体/07-可观测性/02-prometheus-ha-deployment.md|Prometheus 高可用部署]]
 - [[23-实体/07-可观测性/trickster.md|Trickster]]
 - [[23-实体/08-交付与制品/distribution.md|Distribution]]
 - [[23-实体/11-AI与边缘/hami.md|HAMI]]
-- [[23-实体/03-运行时/06-containerd-observability.md|containerd 可观测性]]
+- [[23-实体/03-运行时/05-containerd-observability.md|containerd 可观测性]]
 - [[23-实体/09-编排调度/kubeelasti.md|KubeElastic]]
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
 - [[23-实体/15-参考与索引/kudig-ecosystem-guide.md|KUDIG 开源生态指南与深度研究指南]] — Cross-reference

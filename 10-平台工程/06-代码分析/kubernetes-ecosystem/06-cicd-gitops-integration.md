@@ -146,4 +146,4 @@ sync waves（`argocd.argoproj.io/sync-wave` 注解）解决资源顺序：CRD/Na
 - [[03-清单模式/05-GitOps模式/index.md|清单模式域：GitOps 模式]]
 - [[03-清单模式/03-Helm值模式/index.md|清单模式域：Helm 值模式]]
 - [[11-发布变更/README.md|发布变更域]]
-- [[02-工作负载/02-Java-on-K8s/06-java-cicd-tekton-argocd.md|工作负载域：Java CI/CD（Tekton+ArgoCD）实践]]
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd.md|工作负载域：Java CI/CD（Tekton+ArgoCD）实践]]

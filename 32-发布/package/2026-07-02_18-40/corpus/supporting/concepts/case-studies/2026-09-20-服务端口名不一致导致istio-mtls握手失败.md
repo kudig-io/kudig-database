@@ -18,7 +18,7 @@ last_updated: 2026-05-23
 # 服务端口名不一致导致Istio mTLS握手失败
 
 **日期**: 2026-09-20  
-**关联Skill**: [[13-ingress-gateway-failure]]  
+**关联Skill**: [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure]]  
 **严重级别**: P1
 
 ## 场景描述

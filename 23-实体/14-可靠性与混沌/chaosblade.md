@@ -235,7 +235,7 @@ kubectl patch chaosblade <name> -p '{"metadata":{"finalizers":null}}' --type=mer
 
 - [[kcp]] — kcp
 - [[23-实体/15-参考与索引/cncf-security.md|cncf-security]] — CNCF 安全与合规项目全景
-- [[07-containerd-disaster-recovery]] — containerd 灾难恢复
+- [[06-containerd-disaster-recovery]] — containerd 灾难恢复
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

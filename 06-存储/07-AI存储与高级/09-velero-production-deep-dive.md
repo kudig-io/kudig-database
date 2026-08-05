@@ -433,10 +433,10 @@ kubectl get pods -n velero-system -l velero.io/backup-name
 ## 最佳实践
 
 1. **3-2-1 备份策略**：3 份副本、2 种介质、1 份异地，BSL 配置跨区域对象存储
-2. **定期恢复演练**：每月至少执行一次恢复演练，验证备份有效性，参考 [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills.md|灾备演练]]
+2. **定期恢复演练**：每月至少执行一次恢复演练，验证备份有效性，参考 [[12-可靠性/02-灾难恢复/18-disaster-recovery-drills.md|灾备演练]]
 3. **CSI 快照优先**：块存储 PV 使用 CSI 快照备份（速度快），NFS/共享存储使用 Kopia 文件级备份
 4. **TTL 管理**：按数据重要性设置不同 TTL，避免对象存储成本失控
-5. **监控告警**：监控备份成功率、持续时间、BSL 容量，参考 [[06-存储/01-K8s存储/12-storage-monitoring-alerting.md|存储监控告警]]
+5. **监控告警**：监控备份成功率、持续时间、BSL 容量，参考 [[06-存储/01-K8s存储/13-storage-monitoring-alerting.md|存储监控告警]]
 6. **AI Checkpoint 保护**：为训练 Checkpoint PVC 添加 `backup=ai-platform` 标签，纳入高频备份策略
 7. **跨集群 DR**：配置 `snapshotMoveData=true` 实现跨集群/跨云恢复能力，参考 [[12-可靠性/02-灾难恢复/01-multi-region-dr-architecture.md|多区域灾备架构]]
 8. **版本升级**：Velero 升级前备份 BSL 配置，遵循 N-1 兼容原则
@@ -445,7 +445,7 @@ kubectl get pods -n velero-system -l velero.io/backup-name
 ## Related
 
 - [[12-可靠性/01-备份恢复/03-pv-backup-snapshot.md|PV 备份与快照]]
-- [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
 - [[06-存储/03-分布式存储/01-velero-backup-recovery.md|Velero 备份恢复]]
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾备]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md|存储备份与灾备]]
 - [[12-可靠性/02-灾难恢复/01-multi-region-dr-architecture.md|多区域灾备架构]]

@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/腾讯云TKE/02-tke-networking-vpc-cni.md|Tke Networking Vpc Cni]]
-- [[domain-12-cloud-providers/腾讯云TKE/03-tke-storage-cbs-cfs.md|Tke Storage Cbs Cfs]]
-- [[domain-12-cloud-providers/腾讯云TKE/04-tke-iam-cam-integration.md|Tke Iam Cam Integration]]
-- [[domain-12-cloud-providers/腾讯云TKE/05-tke-troubleshooting-playbook.md|Tke Troubleshooting Playbook]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/06-tencent-tke/01-tke-networking-vpc-cni|Tke Networking Vpc Cni]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/06-tencent-tke/02-tke-storage-cbs-cfs|Tke Storage Cbs Cfs]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/06-tencent-tke/03-tke-iam-cam-integration|Tke Iam Cam Integration]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/06-tencent-tke/04-tke-troubleshooting-playbook|Tke Troubleshooting Playbook]]
 - [[domain-12-cloud-providers/腾讯云TKE/tencent-tke-overview.md|Tencent Tke Overview]]
 

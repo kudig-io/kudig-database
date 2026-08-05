@@ -656,7 +656,7 @@ jobs:
 
 ## Related
 
-- [[domain-08-release-change-management/GitOps/07-gitops-security-compliance|GitOps 安全合规]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-08-release-change-management/01-gitops/05-gitops-security-compliance|GitOps 安全合规]]
 - [[domain-08-release-change-management/变更管理/01-change-window-and-approval|变更窗口与审批]]
 
 ## See Also

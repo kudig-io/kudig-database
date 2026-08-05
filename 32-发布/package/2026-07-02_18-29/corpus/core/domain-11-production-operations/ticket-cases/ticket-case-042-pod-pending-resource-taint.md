@@ -22,7 +22,7 @@ affected_namespace: data-proc
 ticket_type: 调度失败
 skill_ref:
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/pod-fta.md|Pod 异常故障树分析]]'
-- '[[domain-07-platform-engineering/治理/03-capacity-planning-resource-assessment.md|容量规划与资源评估]]'
+- '[[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/governance/01-capacity-planning-resource-assessment|容量规划与资源评估]]'
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/scheduler-fta.md|FTA: Scheduler
   异常]]'
@@ -189,7 +189,7 @@ ack-cli nodepool status --cluster ack-zyy-prod-04 --nodepool np-data-compute
 > 当前 Pending Pod 已全部调度并进入 Running。建议后续：
 > - 版本发布前在测试环境验证资源请求变化对调度容量的影响；
 > - 建立 taint 操作台账，临时污点必须设置自动过期或人工复核；
-> - 配置 [[domain-07-platform-engineering/治理/03-capacity-planning-resource-assessment.md|容量规划]] 流程，评估节点池是否需要升级实例规格。
+> - 配置 [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/governance/01-capacity-planning-resource-assessment|容量规划]] 流程，评估节点池是否需要升级实例规格。
 >
 > 如有新异常请随时联系。
 

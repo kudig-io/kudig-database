@@ -99,10 +99,10 @@ related_docs:
 
 ### 🔗 关联故障排查文档
 - **[01-API Server故障排查](./01-control-plane-apiserver-troubleshooting.md)** - etcd是API Server的核心存储依赖
-- **[31-备份恢复故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/31-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
-- **[34-升级迁移故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/34-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
-- **[33-性能瓶颈故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/33-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
-- **[39-企业级监控告警体系](../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/39-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
+- **[31-备份恢复故障排查](../03-基础设施排障/07-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
+- **[34-升级迁移故障排查](../03-基础设施排障/10-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
+- **[33-性能瓶颈故障排查](../03-基础设施排障/09-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
+- **[39-企业级监控告警体系](../04-高级排障/05-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
 
 ### 📚 扩展学习资料
 - **[etcd官方文档](https://etcd.io/docs/)** - etcd完整技术文档
@@ -659,8 +659,8 @@ groups:
 - [[19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
 - [[19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
 - [[19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
 - [[19-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]

@@ -24,11 +24,11 @@ last_updated: 2026-07
 - domain-17-system-foundation/01-linux/
 - domain-17-system-foundation/02-hardware/
 - domain-17-system-foundation/03-kubernetes-events/
-- [[domain-17-system-foundation/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - domain-17-system-foundation/topic-cheat-sheet/
 - domain-17-system-foundation/topic-dictionary/
 
 ## 文档
 
-- [[domain-17-system-foundation/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

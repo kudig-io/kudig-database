@@ -276,7 +276,7 @@ kubectl exec -it postgresql-0 -n database -- nslookup postgresql-0.postgresql-he
 - 08-statefulset-daemonset-events
 - 05-statefulset-reference
 - 03-statefulset-advanced-operations
-- [[19-故障诊断/02-资源排障/21-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
+- [[19-故障诊断/02-资源排障/13-statefulset-troubleshooting.md|21-statefulset-troubleshooting]]
 - [[19-故障诊断/06-FTA故障树/list/statefulset-fta.md|StatefulSet 异常故障树分析]]
 - [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
 - [[26-技能/04-工作负载/statefulset/statefulset-fta.md|StatefulSet 异常故障树分析]] — Cross-reference

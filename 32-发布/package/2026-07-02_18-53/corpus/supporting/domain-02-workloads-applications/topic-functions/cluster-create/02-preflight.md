@@ -618,10 +618,10 @@ ports:
 ## 相关函数
 
 - [集群概览](01-overview.md) — init 流程的第一个 phase
-- [CRI 运行时](18-cri-runtime.md) — CRI 预检详细分析
+- [CRI 运行时](15-cri-runtime.md) — CRI 预检详细分析
 - [节点加入](06-join.md) — join 预检
 - [证书管理](03-certs.md) — 证书相关预检
-- [集群升级](09-upgrade.md) — 升级预检
+- [集群升级](08-upgrade.md) — 升级预检
 
 ### 内核参数检查详解
 

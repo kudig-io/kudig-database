@@ -76,7 +76,7 @@ related_domains:
   - domain-05-security-compliance
 related_topics:
   - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[domain-02-workloads-applications/topic-functions/cluster-create/16-security.md|16-security]]-2
+  - domain-11-production-operations/topic-learn/public-training/one-month/week-3-operations/day-[[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-create/14-security|16-security]]-2
   - domain-11-production-operations/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 
@@ -413,12 +413,12 @@ Kyverno 使用 Admission Webhook 机制，每个 API 请求都会经过策略验
 
 ## 延伸阅读
 
-- [Kyverno 企业策略管理](../../domain-05-security-compliance/04-kyverno-enterprise-policy-management.md)
+- [Kyverno 企业策略管理](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/04-policy-governance/01-kyverno-enterprise-policy-management.md)
 - [Vault 企业 Secret 管理](../../domain-05-security-compliance/05-vault-enterprise-secrets-management.md)
-- [零信任安全架构](../../domain-11-production-operations/07-zero-trust-security-architecture.md)
+- [零信任安全架构](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/02-network-security/02-zero-trust-security-architecture.md)
 - [认证授权系统](../../domain-05-security-compliance/01-authentication-authorization-system.md)
-- [Pod 安全标准](../../domain-05-security-compliance/06-pod-security-standards.md)
-- [Secret 管理工具](../../domain-05-security-compliance/11-secret-management-tools.md)
+- [Pod 安全标准](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/04-policy-governance/03-pod-security-standards.md)
+- [Secret 管理工具](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/01-identity-access/07-secret-management-tools.md)
 
 
 <!-- risk-assessed -->

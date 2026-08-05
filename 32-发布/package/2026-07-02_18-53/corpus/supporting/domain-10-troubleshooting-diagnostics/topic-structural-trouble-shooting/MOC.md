@@ -108,7 +108,7 @@ prerequisites:
 | 24 | [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md|Terway（阿里云 CNI）[[ts-networking]]指南]] |  | troubleshooting, guide |  |
 | 25 | [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md|Flannel 网络故障排查指南]] |  | troubleshooting, guide |  |
 | 26 | [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-higress-troubleshooting.md|Higress 网关故障排查指南]] |  | troubleshooting, guide |  |
-| 27 | [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|nginx-ingress-controller 故障排查指南]] |  | troubleshooting, guide |  |
+| 27 | [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/10-nginx-ingress-troubleshooting|nginx-ingress-controller 故障排查指南]] |  | troubleshooting, guide |  |
 | 28 | [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]] |  | troubleshooting, guide |  |
 | 29 | [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]] |  | troubleshooting, guide |  |
 | 30 | [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]] |  | troubleshooting, guide, backup-restore |  |
@@ -163,13 +163,13 @@ prerequisites:
 - [[entities/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
 - [[entities/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
-- [[domain-03-networking-traffic/K8s网络核心/02-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/01-cni-architecture-fundamentals|CNI 架构与核心原理]] — Cross-reference
 - [[domain-06-observability/总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
-- [[domain-01-cluster-fundamentals/kubectl/05-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
-- [[domain-01-cluster-fundamentals/架构总览/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference|kubectl 命令完整参考]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive|Kubernetes 核心组件深度剖析]] — Cross-reference
 - [[domain-04-storage-data/K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
 - [[domain-04-storage-data/K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 

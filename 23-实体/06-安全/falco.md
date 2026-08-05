@@ -234,7 +234,7 @@ kubectl scale daemonset/falco -n falco --replicas=0
 - RELEASE-NOTES-0.15
 - RELEASE-NOTES-0.31
 - [[23-实体/15-参考与索引/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[22-概念/11-交叉分析/纵深防御 × 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
 - [[22-概念/11-交叉分析/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[22-概念/12-研究/security-tool-evolution.md|安全工具演进]] — Cross-reference

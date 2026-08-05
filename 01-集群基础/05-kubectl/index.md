@@ -22,9 +22,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[01-集群基础/05-kubectl/03-kubectl-debug-ephemeral-containers.md|Kubectl Debug Ephemeral Containers]]
-- [[01-集群基础/05-kubectl/05-kubectl-commands-reference.md|Kubectl Commands Reference]]
-- [[01-集群基础/05-kubectl/99-kubectl-v1.29-v1.33-new-commands-guide.md|Kubectl V1.29 V1.33 New Commands Guide]]
+- [[01-集群基础/05-kubectl/01-kubectl-debug-ephemeral-containers.md|Kubectl Debug Ephemeral Containers]]
+- [[01-集群基础/05-kubectl/02-kubectl-commands-reference.md|Kubectl Commands Reference]]
+- [[01-集群基础/05-kubectl/04-kubectl-v1.29-v1.33-new-commands-guide.md|Kubectl V1.29 V1.33 New Commands Guide]]
 
 
 

@@ -353,7 +353,7 @@ spec:
 ## Related
 
 - [[26-技能/05-网络/networkpolicy/最佳实践/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[02-istio-security-hardening]] — Istio 安全加固
 - [[envoy]] — Envoy
 - [[22-概念/08-可靠性与运维/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
 - [[22-概念/03-网络/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture

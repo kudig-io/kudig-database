@@ -26,8 +26,8 @@ last_updated: 2026-05-23
 # RBAC权限不足 + 镜像拉取失败并发
 
 ## 关联Skill
-- [[09-rbac-quota-failure]]
-- [[10-image-pull-failure]]
+- [[10-rbac-quota-failure]]
+- [[11-image-pull-failure]]
 
 ## 场景描述
 CI/CD流水线部署失败，Pod报告ImagePullBackOff，同时服务账户无权限创建ConfigMap。

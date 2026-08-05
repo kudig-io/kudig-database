@@ -72,7 +72,7 @@ prerequisites:
 
 - 01 - NetworkPolicy 深度实践指南
 - 83 - 网络加密与mTLS
-- [[23-实体/03-运行时/03-containerd-security-hardening.md|03 containerd security hardening]]
+- [[23-实体/03-运行时/02-containerd-security-hardening.md|03 containerd security hardening]]
 
 ### 术语词典
 
@@ -94,9 +94,9 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/02-资源排障/12-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
-- [[19-故障诊断/02-资源排障/13-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
-- [[19-故障诊断/03-基础设施排障/32-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/04-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/05-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
+- [[19-故障诊断/03-基础设施排障/08-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
 - [[19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
@@ -112,9 +112,9 @@ prerequisites:
 
 ### 技能卡片
 
-- [[19-故障诊断/08-技能体系/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]
-- [[19-故障诊断/08-技能体系/14-configmap-secret-failure.md|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]
-- [[19-故障诊断/08-技能体系/18-security-incident-response.md|安全事件应急响应 / Security Incident Response]]
+- [[19-故障诊断/08-技能体系/10-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]
+- [[19-故障诊断/08-技能体系/15-configmap-secret-failure.md|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]
+- [[19-故障诊断/08-技能体系/19-security-incident-response.md|安全事件应急响应 / Security Incident Response]]
 
 ### FTA 故障树
 

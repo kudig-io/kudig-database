@@ -26,7 +26,7 @@ last_updated: 2026-07
 - domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/
 - domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/
 - domain-10-troubleshooting-diagnostics/04-jvm-tuning/
-- [[domain-10-troubleshooting-diagnostics/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-gitops-devops/index|Merged Indexes]]
 - domain-10-troubleshooting-diagnostics/tools/
 - domain-10-troubleshooting-diagnostics/topic-febm/
 - domain-10-troubleshooting-diagnostics/topic-fta/
@@ -37,6 +37,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-10-troubleshooting-diagnostics/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 - [[domain-10-troubleshooting-diagnostics/SUMMARY.md|Summary]]
 

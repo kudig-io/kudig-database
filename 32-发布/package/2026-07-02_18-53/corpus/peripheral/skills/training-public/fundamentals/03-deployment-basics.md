@@ -444,8 +444,8 @@ kubectl delete deployment my-app
 ---
 
 **关联文档**:
-- [../03-networking/03-service-basics.md](../03-networking/03-service-basics.md) — Service 基础
-- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/08-deployment-rollout-failure.md) — 滚动更新问题 [[SKILL|Skill]]
+- [../03-networking/03-service-basics.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/02-networking/01-service-basics.md) — Service 基础
+- [../../domain-10-troubleshooting-diagnostics/topic-skills/08-deployment-rollout-failure.md](09-deployment-rollout-failure.md) — 滚动更新问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 
 ## See Also
@@ -458,7 +458,7 @@ kubectl delete deployment my-app
 
 ## 参见
 
-- [[skills/training-lecturer/02-getting-started/03-deployment-basics.md|讲师版]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/01-getting-started/02-deployment-basics|讲师版]]
 
 
 <!-- risk-assessed -->

@@ -154,7 +154,7 @@ Terway 提供五种网络模式，按性能和容量密度递增排列：
 | 极致可观测性需求 | Cilium + Hubble |
 | 简单 Overlay 网络 | Flannel |
 
-> 详细对比参考: [domain-03-networking-traffic/03-cni-plugins-comparison.md](../domain-03-networking-traffic/03-cni-plugins-comparison.md)
+> 详细对比参考: [domain-03-networking-traffic/03-cni-plugins-comparison.md](04-cni-plugins-comparison.md)
 
 ---
 
@@ -356,23 +356,23 @@ Terway 以 Apache 2.0 协议开源，允许自由使用、修改和分发。ACK 
 | 文档 | 说明 |
 |:---|:---|
 | [02-architecture.md](./02-architecture.md) | Terway 架构原理深度解析 (数据面/控制面/IPAM/CRD) |
-| [03-usage.md](./[[domain-03-networking-traffic/Terway/03-usage.md|03-usage]].md) | 使用指南 (安装配置、模式切换、NetworkPolicy、固定 IP) |
-| [04-operations.md](./04-operations.md) | 运维手册 (健康检查、GC 机制、升级策略、故障排查) |
-| [05-testing.md](./05-testing.md) | 测试验证 (Pod 网络连通性、NetworkPolicy 测试、ENI 配额验证) |
-| [06-performance.md](./06-performance.md) | 性能调优 (模式对比、内核调优、基准测试) |
+| [03-usage.md](./[[32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/topic-terway/01-usage|03-usage]].md) | 使用指南 (安装配置、模式切换、NetworkPolicy、固定 IP) |
+| [04-operations.md](03-operations.md) | 运维手册 (健康检查、GC 机制、升级策略、故障排查) |
+| [05-testing.md](04-testing.md) | 测试验证 (Pod 网络连通性、NetworkPolicy 测试、ENI 配额验证) |
+| [06-performance.md](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-03-networking-traffic/topic-terway/01-performance.md) | 性能调优 (模式对比、内核调优、基准测试) |
 
 ### Domain 知识库 (domain-03-networking-traffic/)
 
 | 文档 | 说明 |
 |:---|:---|
-| [05-terway-advanced-guide.md](../domain-03-networking-traffic/05-terway-advanced-guide.md) | Terway 高级指南 (模式对比、ENIIP 详解、容量规划) |
-| [37-terway-resources-crud-operations.md](../domain-03-networking-traffic/37-terway-resources-crud-operations.md) | Terway CRD 资源 CRUD 操作指南 |
-| [38-terway-gc-mechanism.md](../domain-03-networking-traffic/38-terway-gc-mechanism.md) | Terway GC 垃圾回收机制详解 |
-| [02-cni-architecture-fundamentals.md](../domain-03-networking-traffic/02-cni-architecture-fundamentals.md) | CNI 架构基础与核心原理 |
-| [03-cni-plugins-comparison.md](../domain-03-networking-traffic/03-cni-plugins-comparison.md) | CNI 插件对比与选型指南 |
-| [04-flannel-complete-guide.md](../domain-03-networking-traffic/04-flannel-complete-guide.md) | Flannel 完整指南 (Terway 前身对比参考) |
-| [34-network-performance-tuning.md](../domain-03-networking-traffic/34-network-performance-tuning.md) | 网络性能调优实践 |
-| [domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md](../domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md) | ACK VPC 网络规划 |
+| [05-terway-advanced-guide.md](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/01-terway-advanced-guide.md) | Terway 高级指南 (模式对比、ENIIP 详解、容量规划) |
+| [37-terway-resources-crud-operations.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/29-terway-resources-crud-operations.md) | Terway CRD 资源 CRUD 操作指南 |
+| [38-terway-gc-mechanism.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/30-terway-gc-mechanism.md) | Terway GC 垃圾回收机制详解 |
+| [02-cni-architecture-fundamentals.md](32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/01-cni-architecture-fundamentals.md) | CNI 架构基础与核心原理 |
+| [03-cni-plugins-comparison.md](04-cni-plugins-comparison.md) | CNI 插件对比与选型指南 |
+| [04-flannel-complete-guide.md](05-flannel-complete-guide.md) | Flannel 完整指南 (Terway 前身对比参考) |
+| [34-network-performance-tuning.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/26-network-performance-tuning.md) | 网络性能调优实践 |
+| [domain-12-cloud-providers/04-alicloud-ack/242-ack-vpc-network.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/entities/010-ack-vpc-network.md) | ACK VPC 网络规划 |
 
 ### 其他关联专题
 

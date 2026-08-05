@@ -33,15 +33,15 @@ last_updated: 2026-07
 - 集群基础/05-kubectl/
 - 集群基础/06-upgrade-paths/
 - 集群基础/07-performance-tuning/
-- [[01-集群基础/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - [[01-集群基础/00-总览/index.md|00-总览]]
 
 ## 文档
 
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|Production Architecture Design Principles]]
-- [[01-集群基础/00-总览/37-kubespray-production-guide.md|Kubespray Production Guide]]
-- [[01-集群基础/00-总览/99-kubernetes-production-architecture-blueprint.md|Kubernetes Production Architecture Blueprint]]
-- [[01-集群基础/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles.md|Production Architecture Design Principles]]
+- [[01-集群基础/00-总览/01-kubespray-production-guide.md|Kubespray Production Guide]]
+- [[01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint.md|Kubernetes Production Architecture Blueprint]]
+- [[01-集群基础/00-总览/03-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 
 
 

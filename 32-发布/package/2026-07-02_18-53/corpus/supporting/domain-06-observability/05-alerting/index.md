@@ -20,7 +20,7 @@ last_updated: 2026-07
 - [[domain-06-observability/告警/01-alertmanager-deep-configuration.md|Alertmanager Deep Configuration]]
 - [[domain-06-observability/告警/02-pagerduty-opsgenie-integration.md|Pagerduty Opsgenie Integration]]
 - [[domain-06-observability/告警/03-alert-fatigue-reduction-strategies.md|Alert Fatigue Reduction Strategies]]
-- [[domain-06-observability/告警/05-alerting-management.md|Alerting Management]]
-- [[domain-06-observability/告警/06-monitoring-alerting-practice.md|Monitoring Alerting Practice]]
-- [[domain-06-observability/告警/21-monitoring-playbooks.md|Monitoring Playbooks]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/05-alerting/04-alerting-management|Alerting Management]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/05-alerting/05-monitoring-alerting-practice|Monitoring Alerting Practice]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/05-alerting/06-monitoring-playbooks|Monitoring Playbooks]]
 

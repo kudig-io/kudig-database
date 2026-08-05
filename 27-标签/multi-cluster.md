@@ -43,35 +43,35 @@ last_updated: '2026-07-21'
 
 ## 生产运维 (Production Operations)
 
-- [[13-生产运维/07-运维手册/06-multi-cluster-operations|多集群运营]]
+- [[13-生产运维/07-运维手册/05-multi-cluster-operations|多集群运营]]
 
 ## GitOps 多集群 (GitOps Multi-Cluster)
 
-- [[11-发布变更/01-GitOps/08-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
-- [[11-发布变更/01-GitOps/12-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
+- [[11-发布变更/01-GitOps/10-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
+- [[11-发布变更/01-GitOps/14-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
 - [[03-清单模式/05-GitOps模式/02-argocd-applicationset-multi-cluster|ArgoCD ApplicationSet 多集群]]
 
 ## 网络 (Networking)
 
-- [[05-网络/01-K8s网络核心/31-multi-cluster-federation|多集群联邦]]
-- [[05-网络/01-K8s网络核心/32-multi-cluster-networking|多集群网络]]
+- [[05-网络/01-K8s网络核心/33-multi-cluster-federation|多集群联邦]]
+- [[05-网络/01-K8s网络核心/34-multi-cluster-networking|多集群网络]]
 - [[05-网络/01-K8s网络核心/04d-flannel-multi-cluster|Flannel 多集群]]
 
 ## 可靠性 / 灾备 (Reliability & DR)
 
-- [[12-可靠性/02-灾难恢复/20-automated-dr-patterns-2025|自动化 DR 模式 2025]]
+- [[12-可靠性/02-灾难恢复/23-automated-dr-patterns-2025|自动化 DR 模式 2025]]
 - [[04-应用模式/03-生产模式/multi-cluster-dr-patterns|多集群 DR 模式]]
 
 ## 故障诊断 (Troubleshooting)
 
-- [[19-故障诊断/04-高级排障/37-multi-cluster-management-troubleshooting|多集群管理排障]]
-- [[19-故障诊断/04-高级排障/40-large-scale-cluster-operations|大规模集群运营]]
+- [[19-故障诊断/04-高级排障/03-multi-cluster-management-troubleshooting|多集群管理排障]]
+- [[19-故障诊断/04-高级排障/06-large-scale-cluster-operations|大规模集群运营]]
 - [[22-概念/14-case-studies/2026-09-15-multicluster-network-partition|多集群网络分区案例]]
 
 ## 平台工程 (Platform Engineering)
 
-- [[10-平台工程/02-运维/13-multi-cluster-management|多集群管理]]
-- [[10-平台工程/02-运维/25-virtual-clusters|虚拟集群]]
+- [[10-平台工程/02-运维/10-multi-cluster-management|多集群管理]]
+- [[10-平台工程/02-运维/16-virtual-clusters|虚拟集群]]
 
 ## 云厂商 (Cloud Providers)
 
@@ -115,7 +115,7 @@ last_updated: '2026-07-21'
 
 ## 集群基础 (Cluster Fundamentals)
 
-- [[01-集群基础/03-控制平面/25-multi-cloud-hybrid-deployment|多云混合部署架构]]
+- [[01-集群基础/03-控制平面/26-multi-cloud-hybrid-deployment|多云混合部署架构]]
 - [[21-生态参考/02-论文/04-kubernetes-multi-cloud-hybrid-deployment|多云混合部署架构与实践]]
 - [[21-生态参考/02-论文/26-kubernetes-vcluster-virtual-cluster-multi-tenancy|vCluster 虚拟集群多租户]]
 

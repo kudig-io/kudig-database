@@ -220,7 +220,7 @@ kubectl exec -n hexa-system deploy/hexa-operator -- hexa-cli validate-policy /po
 
 ## Related
 
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[02-istio-security-hardening]] — Istio 安全加固
 - [[copa]] — Copa (Copacetic)
 - [[nats]] — NATS
 - [[paralus]] — Paralus

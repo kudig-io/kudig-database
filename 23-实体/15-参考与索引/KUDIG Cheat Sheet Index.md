@@ -88,7 +88,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[23-实体/15-参考与索引/k8s-supply-chain-yaml-cheatsheet.md|k8s-supply-chain-yaml-cheatsheet]]
 
-- [[18-云厂商/01-阿里云/公有云-ACK/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[18-云厂商/01-阿里云/公有云-ACK/003-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
 
 - [[23-实体/15-参考与索引/kudig-gitbook-mac-plan.md|kudig-gitbook-mac-plan]]
 
@@ -102,7 +102,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[23-实体/15-参考与索引/k8s-ai-corpus-configuration.md|k8s-ai-corpus-configuration]]
 
-- [[21-生态参考/98-merged-indexes/index.md|release-notes-kubernetes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-kubernetes]]
 
 - [[23-实体/15-参考与索引/k8s-glossary-index.md|k8s-glossary-index]]
 
@@ -110,7 +110,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[23-实体/15-参考与索引/k8s-design-principles-deep-dive.md|k8s-design-principles-deep-dive]]
 
-- [[243-ack-ram-authorization]]
+- [[23-实体/13-云厂商与发行版/004-ack-ram-authorization]]
 
 - [[23-实体/15-参考与索引/linux-sysctl-reference.md|linux-sysctl-reference]]
 

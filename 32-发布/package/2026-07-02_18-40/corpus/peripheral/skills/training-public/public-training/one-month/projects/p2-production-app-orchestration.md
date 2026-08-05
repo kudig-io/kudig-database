@@ -843,10 +843,10 @@ kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名
 
 ## 延伸阅读
 
-- [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
-- [StatefulSet 高级操作](../../domain-02-workloads-applications/03-statefulset-advanced-operations.md)
-- [Service 概念与类型](../../domain-03-networking-traffic/06-service-concepts-types.md)
-- [Ingress 基础](../../domain-03-networking-traffic/19-ingress-fundamentals.md)
+- [Deployment 生产模式](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-02-workloads-applications/00-core-workloads/01-deployment-production-patterns.md)
+- [StatefulSet 高级操作](32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/00-core-workloads/01-statefulset-advanced-operations.md)
+- [Service 概念与类型](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/05-service-concepts-types.md)
+- [Ingress 基础](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/05-ingress-fundamentals.md)
 - [存储架构总览](../../domain-04-storage-data/01-storage-architecture-overview.md)
 
 ## Related

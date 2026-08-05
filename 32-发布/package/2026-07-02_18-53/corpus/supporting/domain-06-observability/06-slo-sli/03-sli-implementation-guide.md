@@ -469,7 +469,7 @@ spec:
 
 ## Related
 
-- [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-06-observability/03-slo-sli/01-slo-sli-system|SLO/SLI体系建设与管理]]
 - [[domain-06-observability/SLO-SLI/01-slo-engineering-practice.md|SLO 工程实践]]
 
 ## See Also

@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/07-storage/07-pv-pvc-basics.md|Pv Pvc Basics]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/06-storage/01-pv-pvc-basics|Pv Pvc Basics]]
 

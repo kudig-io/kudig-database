@@ -17,11 +17,11 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-05-security-compliance/策略治理/04-kyverno-enterprise-policy-management.md|Kyverno Enterprise Policy Management]]
-- [[domain-05-security-compliance/策略治理/05-policy-validation-tools.md|Policy Validation Tools]]
-- [[domain-05-security-compliance/策略治理/06-pod-security-standards.md|Pod Security Standards]]
-- [[domain-05-security-compliance/策略治理/09-opa-gatekeeper-policy.md|Opa Gatekeeper Policy]]
-- [[domain-05-security-compliance/策略治理/14-policy-engines-opa-kyverno.md|Policy Engines Opa Kyverno]]
-- [[domain-05-security-compliance/策略治理/99-kyverno-policy-guide.md|Kyverno Policy Guide]]
-- [[domain-05-security-compliance/策略治理/99-opa-gatekeeper-policy-guide.md|Opa Gatekeeper Policy Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/01-kyverno-enterprise-policy-management|Kyverno Enterprise Policy Management]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/02-policy-validation-tools|Policy Validation Tools]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/03-pod-security-standards|Pod Security Standards]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/04-opa-gatekeeper-policy|Opa Gatekeeper Policy]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/05-policy-engines-opa-kyverno|Policy Engines Opa Kyverno]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/06-kyverno-policy-guide|Kyverno Policy Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/04-policy-governance/07-opa-gatekeeper-policy-guide|Opa Gatekeeper Policy Guide]]
 

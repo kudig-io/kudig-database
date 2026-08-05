@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-01-cluster-fundamentals/升级路径/06-cluster-configuration-parameters.md|Cluster Configuration Parameters]]
-- [[domain-01-cluster-fundamentals/升级路径/07-upgrade-paths-strategy.md|Upgrade Paths Strategy]]
-- [[domain-01-cluster-fundamentals/升级路径/18-upgrade-migration-strategy.md|Upgrade Migration Strategy]]
-- [[domain-01-cluster-fundamentals/升级路径/99-kubernetes-v1.33-upgrade-guide.md|Kubernetes V1.33 Upgrade Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-01-cluster-fundamentals/05-upgrade-paths/01-cluster-configuration-parameters|Cluster Configuration Parameters]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-01-cluster-fundamentals/05-upgrade-paths/02-upgrade-paths-strategy|Upgrade Paths Strategy]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-01-cluster-fundamentals/05-upgrade-paths/03-upgrade-migration-strategy|Upgrade Migration Strategy]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-01-cluster-fundamentals/06-upgrade-paths/01-kubernetes-v1.33-upgrade-guide|Kubernetes V1.33 Upgrade Guide]]
 

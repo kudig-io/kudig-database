@@ -92,9 +92,9 @@ kubectl get workflows -n ai-platform --sort-by=.metadata.creationTimestamp | tai
 
 ## Related
 
-- [[10-平台工程/01-构建/25-ai-platform-engineering|AI 平台工程]]
+- [[10-平台工程/01-构建/14-ai-platform-engineering|AI 平台工程]]
 - [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU Scheduling × Cost Optimization]]
 - [[24-综合/01-AI与机器学习/gpu-operator-device-plugin-ecosystem|GPU Operator × Device Plugin × CDI]]
-- [[10-平台工程/03-治理/18-gpu-cluster-governance-ai-platform|GPU 集群治理]]
+- [[10-平台工程/03-治理/07-gpu-cluster-governance-ai-platform|GPU 集群治理]]
 - [[24-综合/06-可靠性与成本/multitenancy-resource-isolation-governance|多租户 × 资源隔离 × 治理]]
 - [[15-AI基础设施/05-K8s-AI基础设施/index|K8s AI 基础设施]]

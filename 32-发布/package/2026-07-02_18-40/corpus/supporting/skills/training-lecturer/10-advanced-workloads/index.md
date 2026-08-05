@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/10-advanced-workloads/10-daemonset-basics.md|Daemonset Basics]]
-- [[skills/training-lecturer/10-advanced-workloads/11-statefulset-basics.md|Statefulset Basics]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/skills/training-lecturer/09-advanced-workloads/01-daemonset-basics|Daemonset Basics]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/skills/training-lecturer/09-advanced-workloads/02-statefulset-basics|Statefulset Basics]]
 

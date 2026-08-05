@@ -661,7 +661,7 @@ kubectl delete statefulset <name>
 ---
 
 **关联文档**:
-- [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — DaemonSet
+- [../10-advanced-workloads/10-daemonset-basics.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/09-advanced-workloads/01-daemonset-basics.md) — DaemonSet
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/17-daemonset-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/17-daemonset-pdb-failure.md) — StatefulSet 问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 

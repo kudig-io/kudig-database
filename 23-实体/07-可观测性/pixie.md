@@ -203,7 +203,7 @@ kubectl delete namespace px
 
 ## Related
 
-- [[02-istio-advanced-traffic-management]] — Istio 高级流量管理
+- [[01-istio-advanced-traffic-management]] — Istio 高级流量管理
 - [[vscode-kubernetes-tools]] — VS Code Kubernetes Tools
 - [[litmus]] — LitmusChaos
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

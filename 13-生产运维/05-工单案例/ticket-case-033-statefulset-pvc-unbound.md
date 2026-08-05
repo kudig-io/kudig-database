@@ -23,7 +23,7 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: middleware
 ticket_type: 有状态应用启动失败
 skill_ref:
-- '[[06-存储/01-K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
+- '[[06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md|PV/PVC 排障]]'
 - '[[02-工作负载/01-核心工作负载/03-statefulset-advanced-operations.md|StatefulSet
   进阶运维]]'
 fta_ref:
@@ -303,7 +303,7 @@ kubectl logs -n kube-system -l app=csi-plugin -c csi-plugin --tail=100 | grep -i
 > **当前状态：** `mysql-0/1/2` 全部 Running，主从同步状态正常，业务连接测试通过。
 >
 > **后续建议：**
-> - 参考 [[06-存储/01-K8s存储/09-pv-pvc-troubleshooting.md|PV/PVC 排障]] 建立 StorageClass 与可用区库存的联动监控；
+> - 参考 [[06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md|PV/PVC 排障]] 建立 StorageClass 与可用区库存的联动监控；
 > - 为 `alicloud-disk-ssd` StorageClass 配置 `allowedTopologies` 或 StatefulSet 中显式 topology 约束，避免调度到无盘区；
 > - 若需三可用区部署，请提交 c 区 ESSD 库存扩容工单，库存恢复后再解除 nodeAffinity 限制；
 > - 定期演练 MySQL StatefulSet 备份恢复，确保数据可恢复。

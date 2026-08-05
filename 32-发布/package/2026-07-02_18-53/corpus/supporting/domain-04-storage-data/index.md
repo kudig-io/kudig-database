@@ -25,10 +25,10 @@ last_updated: 2026-07
 - domain-04-storage-data/02-storage-fundamentals/
 - domain-04-storage-data/03-distributed-storage/
 - domain-04-storage-data/04-stateful-app-storage/
-- [[domain-04-storage-data/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-04-storage-data/04-distributed-storage/index|Merged Indexes]]
 
 ## 文档
 
-- [[domain-04-storage-data/02-pvc-expansion-guide.md|Pvc Expansion Guide]]
-- [[domain-04-storage-data/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[03-pvc-expansion-guide|Pvc Expansion Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

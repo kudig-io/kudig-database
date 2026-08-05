@@ -21,12 +21,12 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[04-应用模式/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - 应用模式/sub-patterns/
 - 应用模式/topic-application-architecture/
 - [[04-应用模式/00-总览/index.md|00-总览]]
 
 ## 文档
 
-- [[04-应用模式/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[04-应用模式/00-总览/02-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

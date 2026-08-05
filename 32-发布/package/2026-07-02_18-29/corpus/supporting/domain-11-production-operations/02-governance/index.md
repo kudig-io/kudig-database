@@ -21,5 +21,5 @@ last_updated: 2026-07
 - [[domain-11-production-operations/集群治理/02-label-convention-governance.md|Label Convention Governance]]
 - [[domain-11-production-operations/集群治理/03-admission-policy-governance.md|Admission Policy Governance]]
 - [[domain-11-production-operations/集群治理/04-rbac-governance-model.md|Rbac Governance Model]]
-- [[domain-11-production-operations/集群治理/14-resource-quota-management.md|Resource Quota Management]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-11-production-operations/02-governance/05-resource-quota-management|Resource Quota Management]]
 

@@ -202,7 +202,7 @@ etcdctl defrag --cluster
 
 ## Related
 
-- [[21-生态参考/98-merged-indexes/index.md|release-notes-core-deps]] — 发布说明索引 — 核心依赖
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-core-deps]] — 发布说明索引 — 核心依赖
 - [[23-实体/15-参考与索引/k8s-architecture-fundamentals.md|k8s-architecture-fundamentals]] — K8s 架构基础与核心组件原理
 - [[docker]] — Docker
 - [[etcd]] — etcd

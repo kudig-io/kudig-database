@@ -22,9 +22,9 @@ last_updated: 2026-07
 ## 文档
 
 - [[domain-02-workloads-applications/topic-functions/deployment-create/01-overview.md|Overview]]
-- [[domain-02-workloads-applications/topic-functions/deployment-create/02-deployment-controller.md|Deployment Controller]]
-- [[domain-02-workloads-applications/topic-functions/deployment-create/03-replicaset-controller.md|Replicaset Controller]]
-- [[domain-02-workloads-applications/topic-functions/deployment-create/04-rolling-update.md|Rolling Update]]
-- [[domain-02-workloads-applications/topic-functions/deployment-create/05-deployment-status.md|Deployment Status]]
-- [[domain-02-workloads-applications/topic-functions/deployment-create/06-revision-history.md|Revision History]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-02-workloads-applications/topic-functions/deployment-create/01-deployment-controller|Deployment Controller]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-02-workloads-applications/topic-functions/deployment-create/02-replicaset-controller|Replicaset Controller]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-02-workloads-applications/topic-functions/deployment-create/03-rolling-update|Rolling Update]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-02-workloads-applications/topic-functions/deployment-create/04-deployment-status|Deployment Status]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-02-workloads-applications/topic-functions/deployment-create/05-revision-history|Revision History]]
 

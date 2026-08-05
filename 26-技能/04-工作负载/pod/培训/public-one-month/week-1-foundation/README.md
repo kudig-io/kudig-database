@@ -342,11 +342,11 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 - [Docker 容器生命周期](../../../../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/03-docker-container-lifecycle.md)
 - [Docker 网络深入](../../../../../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/04-docker-networking-deep-dive.md)
 - [Linux 系统架构](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/01-linux-system-architecture.md)
-- [Linux 进程管理](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/02-linux-process-management.md)
-- [Linux 网络配置](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/04-linux-networking-configuration.md)
+- [Linux 进程管理](../../../../../../17-系统基础/01-Linux/03-linux-process-management.md)
+- [Linux 网络配置](../../../../../../17-系统基础/01-Linux/05-linux-networking-configuration.md)
 - [K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
 - [K8s 核心组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [kubectl 命令参考](../../../../../../01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
 
 ## Related
 
@@ -362,7 +362,7 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

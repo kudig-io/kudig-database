@@ -93,10 +93,10 @@ prerequisites:
 - [[etcd]] — etcd
 - [[apiserver-fta]] — API Server 异常故障树分析
 - observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference
-- [[domain-06-observability/总览/25-troubleshooting-overview.md|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/01-overview/11-troubleshooting-overview|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
 - [[skills/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
-- [[domain-01-cluster-fundamentals/控制平面/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
-- [[domain-07-platform-engineering/运维/15-production-troubleshooting.md|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/02-plane-troubleshooting|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/operate/02-production-troubleshooting|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
 
 
 <!-- risk-assessed -->

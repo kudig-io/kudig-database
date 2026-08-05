@@ -284,7 +284,7 @@ groups:
 - [[23-实体/15-参考与索引/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[23-实体/15-参考与索引/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-architecture-fundamentals.md|K8s 架构基础与核心组件原理]] — Cross-reference
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[23-实体/15-参考与索引/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[23-实体/15-参考与索引/kubectl-quick-reference.md|Kubectl Quick Reference]] — Cross-reference

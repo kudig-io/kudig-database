@@ -504,5 +504,5 @@ conntrack -D -p tcp --dport <port>  # 🟡 删除特定连接
 
 - [[17-系统基础/05-速查卡/networking.md|网络速查卡]]
 - [[17-系统基础/06-知识字典/networking/index.md|网络知识字典]]
-- [[17-系统基础/01-Linux/04-linux-networking-configuration.md|Linux 网络配置]]
+- [[17-系统基础/01-Linux/05-linux-networking-configuration.md|Linux 网络配置]]
 - [[17-系统基础/02-硬件/08-network-hardware-technology.md|网络硬件技术]]

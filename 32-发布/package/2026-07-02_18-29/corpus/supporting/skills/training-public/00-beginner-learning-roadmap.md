@@ -94,8 +94,8 @@ authors:
 |------|---------|---------|---------|---------|
 | W1 | [云原生演进故事](beginner-guides/01-cloud-native-evolution-story.md) | [本地环境搭建](beginner-guides/02-local-lab-environment.md) | Docker 基础（镜像/容器/Dockerfile） | 实践：本地跑第一个容器 |
 | W2 | Linux 基础命令（文件/进程/网络） | 实践：在容器里玩 Linux | Git 基础（clone/add/commit/push） | 实践：把代码推到 GitHub |
-| W3 | [K8s 是什么](fundamentals/01-what-is-[[Kubernetes|kubernetes]].md) | [Pod 基础](fundamentals/02-pod-basics.md) | 实践：本地 kind 集群跑第一个 Pod | kubectl 基础命令练习 |
-| W4 | [Deployment 基础](fundamentals/03-deployment-basics.md) | [Service 基础](fundamentals/04-service-basics.md) | 实践：部署一个 Nginx 并暴露服务 | [Ingress 基础](fundamentals/05-ingress-basics.md) |
+| W3 | [K8s 是什么](fundamentals/01-what-is-[[Kubernetes|kubernetes]].md) | [Pod 基础](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/01-getting-started/01-pod-basics.md) | 实践：本地 kind 集群跑第一个 Pod | kubectl 基础命令练习 |
+| W4 | [Deployment 基础](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/01-getting-started/02-deployment-basics.md) | [Service 基础](26-技能/05-网络/service/培训/01-service-basics.md) | 实践：部署一个 Nginx 并暴露服务 | [Ingress 基础](26-技能/05-网络/ingress/培训/01-ingress-basics.md) |
 
 **阶段检查点**: 能独立在本地 kind 集群部署一个可访问的 Nginx 网站
 
@@ -103,12 +103,12 @@ authors:
 
 | 周次 | 重点内容 |
 |------|---------|
-| W5 | [ConfigMap & Secret](fundamentals/06-configmap-secret.md) + 实践：配置外置化 |
-| W6 | [Namespace & 资源配额](fundamentals/07-namespace-resource-quota.md) + 多租户模拟 |
-| W7 | [PV & PVC 基础](fundamentals/08-pv-pvc-basics.md) + 实践：给 Nginx 加持久化日志 |
-| W8 | [HPA 基础](fundamentals/09-hpa-basics.md) + [健康检查](fundamentals/10-health-check.md) |
-| W9 | [Job & CronJob](fundamentals/11-job-cronjob.md) + [DaemonSet](fundamentals/13-daemonset-basics.md) |
-| W10 | [StatefulSet](fundamentals/14-statefulset-basics.md) + [调度基础](fundamentals/15-scheduling-basics.md) |
+| W5 | [ConfigMap & Secret](04-configmap-secret.md) + 实践：配置外置化 |
+| W6 | [Namespace & 资源配额](26-技能/07-安全/resource-quota/培训/01-namespace-resource-quota.md) + 多租户模拟 |
+| W7 | [PV & PVC 基础](26-技能/06-存储/csi-storage/培训/01-pv-pvc-basics.md) + 实践：给 Nginx 加持久化日志 |
+| W8 | [HPA 基础](26-技能/04-工作负载/hpa-vpa/培训/01-hpa-basics.md) + [健康检查](26-技能/04-工作负载/pod/培训/05-health-check.md) |
+| W9 | [Job & CronJob](26-技能/04-工作负载/job-cronjob/培训/01-job-cronjob.md) + [DaemonSet](26-技能/04-工作负载/daemonset/培训/01-daemonset-basics.md) |
+| W10 | [StatefulSet](26-技能/04-工作负载/statefulset/培训/01-statefulset-basics.md) + [调度基础](26-技能/02-控制面/scheduler/培训/01-scheduling-basics.md) |
 
 **阶段检查点**: 能画出 K8s 核心对象的关系图（Pod → Deployment → Service → Ingress → PV）
 
@@ -310,7 +310,7 @@ authors:
 ---
 
 **关联文档**:
-- [[00-learning-gaps-analysis]] — 本路线图的缺口分析依据
+- [[01-learning-gaps-analysis]] — 本路线图的缺口分析依据
 - [[README]] — topic-learn 总入口
 - [[skills/training-public/beginner-guides/01-cloud-native-evolution-story.md|01 cloud native evolution story]] — 推荐第一课
 - [[skills/training-public/beginner-guides/02-local-lab-environment.md|02 local lab environment]] — 本地实验环境搭建

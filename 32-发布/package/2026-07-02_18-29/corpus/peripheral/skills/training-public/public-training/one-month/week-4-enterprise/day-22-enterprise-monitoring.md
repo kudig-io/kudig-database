@@ -397,10 +397,10 @@ SLO 不是越高越好。过高的 SLO 意味着几乎不允许出错，这会�
 ## 延伸阅读
 
 - [Prometheus 企业级监控](../../domain-06-observability/01-prometheus-enterprise-monitoring.md)
-- [Grafana 企业级可观测性](../../domain-06-observability/02-grafana-enterprise-observability.md)
-- [SLO/SLI 体系](../../domain-06-observability/18-slo-sli-system.md)
+- [Grafana 企业级可观测性](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/07-tools/01-grafana-enterprise-observability.md)
+- [SLO/SLI 体系](32-发布/package/2026-07-02_18-29/corpus/core/domain-06-observability/03-slo-sli/01-slo-sli-system.md)
 - [可观测性架构总览](../../domain-06-observability/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../domain-06-observability/10-monitoring-metrics-prometheus.md)
+- [Prometheus 监控](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/04-monitoring-metrics-prometheus.md)
 
 
 <!-- risk-assessed -->

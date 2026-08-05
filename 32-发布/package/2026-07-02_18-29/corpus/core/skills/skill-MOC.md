@@ -60,11 +60,11 @@ prerequisites:
 | 4 | [[domain-10-troubleshooting-diagnostics/技能体系/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
 | 5 | [[domain-10-troubleshooting-diagnostics/技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |
 | 6 | [[domain-10-troubleshooting-diagnostics/技能体系/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]] |  | skill, daily-ops |  |
-| 7 | [[domain-10-troubleshooting-diagnostics/技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]] |  | skill, daily-ops, storage |  |
-| 8 | [[domain-10-troubleshooting-diagnostics/技能体系/08-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]] |  | skill, daily-ops, deployment |  |
-| 9 | [[domain-10-troubleshooting-diagnostics/技能体系/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
-| 10 | [[domain-10-troubleshooting-diagnostics/技能体系/10-image-pull-failure.md|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
-| 11 | [[domain-10-troubleshooting-diagnostics/技能体系/11-control-plane-failure.md|11-control-plane-failure]]
+| 7 | [[08-pvc-storage-failure|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]] |  | skill, daily-ops, storage |  |
+| 8 | [[09-deployment-rollout-failure|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]] |  | skill, daily-ops, deployment |  |
+| 9 | [[10-rbac-quota-failure|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
+| 10 | [[11-image-pull-failure|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
+| 11 | [[12-control-plane-failure|11-control-plane-failure]]
 - [[skills/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## Related

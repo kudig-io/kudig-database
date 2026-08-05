@@ -721,7 +721,7 @@ class HumanInLoopGate:
 | [05 - Tool Use & Function Calling](./05-tool-use-function-calling.md) | Agent 工具调用的详细规范 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 单 Agent 到多 Agent 架构升级 |
 | [14 - Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | K8s 运维 Agent 的顶层设计 |
-| [domain-14-ai-ml-infra/17-llm-inference-serving.md](../domain-14-ai-ml-infra/17-llm-inference-serving.md) | LLM 推理服务部署 |
+| [domain-14-ai-ml-infra/17-llm-inference-serving.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-14-ai-ml-infra/01-ai-infra/15-llm-inference-serving.md) | LLM 推理服务部署 |
 
 ---
 

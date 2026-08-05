@@ -33,7 +33,7 @@ prerequisites:
 - iac-basics
 - policy-basics
 relationships:
-- target: '[[10-平台工程/02-运维/13-multi-cluster-management.md]]'
+- target: '[[10-平台工程/02-运维/10-multi-cluster-management.md]]'
   type: uses
 - target: '[[17-系统基础/06-知识字典/configuration/secrets.md]]'
   type: uses
@@ -50,7 +50,7 @@ status: reviewed
 
 
 ---
-title: 基础设施即代码 x [[10-平台工程/02-运维/13-multi-cluster-management.md|多集群管理]]
+title: 基础设施即代码 x [[10-平台工程/02-运维/10-multi-cluster-management.md|多集群管理]]
 category: synthesis
 tags:
 - k8s

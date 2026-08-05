@@ -75,7 +75,7 @@ Helm 解决了 K8s 应用的"打包与配置"问题（Chart = 模板 + values）
 
 ## Related
 
-- [[11-发布变更/01-GitOps/99-helm-production-guide.md|99 helm production guide]]
+- [[11-发布变更/01-GitOps/19-helm-production-guide.md|99 helm production guide]]
 - [[21-生态参考/03-领域索引/README.md|README]]
 - [[11-发布变更/04-变更管理/02-canary-release-strategy.md|02 canary release strategy]]
 - [[11-发布变更/04-变更管理/03-change-rollback-playbook.md|03 change rollback playbook]]

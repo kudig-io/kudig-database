@@ -90,9 +90,9 @@ kubectl delete pod gpu-test
 
 ## Related
 
-- [[14-容器运行时/03-containerd-CRI-O/16-gpu-runtime-nvidia-cdi|GPU 运行时：NVIDIA Container Toolkit 与 CDI]]
+- [[14-容器运行时/03-containerd-CRI-O/19-gpu-runtime-nvidia-cdi|GPU 运行时：NVIDIA Container Toolkit 与 CDI]]
 - [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU Scheduling × Cost Optimization]]
-- [[10-平台工程/03-治理/18-gpu-cluster-governance-ai-platform|GPU 集群治理]]
+- [[10-平台工程/03-治理/07-gpu-cluster-governance-ai-platform|GPU 集群治理]]
 - [[24-综合/01-AI与机器学习/training-inference-data-lifecycle|训练 × 推理 × 数据生命周期]]
-- [[14-容器运行时/03-containerd-CRI-O/12-container-shim-v2|containerd shim v2 架构]]
+- [[14-容器运行时/03-containerd-CRI-O/15-container-shim-v2|containerd shim v2 架构]]
 - [[15-AI基础设施/05-K8s-AI基础设施/index|K8s AI 基础设施]]

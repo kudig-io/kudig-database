@@ -261,8 +261,8 @@ graph TB
 | 文档 | 关系 |
 |------|------|
 | [02 - 快速接入与环境配置](./02-openrouter-quickstart-setup.md) | 下一步：安装 SDK 并发送首次请求 |
-| [04 - 智能路由与 Provider 选择](./04-openrouter-provider-routing.md) | 深入路由架构 |
-| [08 - Prompt Caching 与成本优化](./08-openrouter-prompt-caching-optimization.md) | 深入缓存与成本控制 |
+| [04 - 智能路由与 Provider 选择](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-14-ai-ml-infra/topic-ai-coding/01-openrouter-provider-routing.md) | 深入路由架构 |
+| [08 - Prompt Caching 与成本优化](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-14-ai-ml-infra/topic-ai-coding/03-openrouter-prompt-caching-optimization.md) | 深入缓存与成本控制 |
 | [topic-coding/03](../topic-coding/03-opencode-providers-models.md) | OpenCode 中配置 OpenRouter Provider |
 
 ---

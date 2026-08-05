@@ -172,7 +172,7 @@ spec:
 - **PVC 扩容需要存储驱动支持**：不是所有 CSI 驱动都支持在线扩容——扩容前确认 StorageClass 的 `allowVolumeExpansion: true`
 - **删除 PVC 不会自动删除 PV**：默认 PV reclaimPolicy 为 Retain，删除 PVC 后 PV 变为 Released 状态但数据仍在——需要手动清理或设置 Delete 策略
 
-更多存储排错方法请参考 [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]]，备份恢复策略参见 [[22-概念/04-存储/data-protection-k8s.md|data-protection-k8s]]。
+更多存储排错方法请参考 [[19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]]，备份恢复策略参见 [[22-概念/04-存储/data-protection-k8s.md|data-protection-k8s]]。
 
 ## 源码实现分析
 

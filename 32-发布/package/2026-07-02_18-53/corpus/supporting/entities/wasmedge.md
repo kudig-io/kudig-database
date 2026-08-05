@@ -78,7 +78,7 @@ WasmEdge 是一个轻量级、高性能、可扩展的 WebAssembly (Wasm) 运行
 ## Related
 
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
+- [[01-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
 - [[capsule]] — Capsule
 - [[spinkube]] — SpinKube
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

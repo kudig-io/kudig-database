@@ -699,9 +699,9 @@ Week 2 将深入 K8s 核心技术：控制平面组件详解（etcd、API Server
 ## 延伸阅读
 
 - [K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
-- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [kubectl 命令参考](../../../../../../01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
 - [Deployment 生产模式](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
-- [Service 概念与类型](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md)
+- [Service 概念与类型](../../../../../../05-网络/01-K8s网络核心/07-service-concepts-types.md)
 - [K8s 速查手册](../../../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/05-%E9%80%9F%E6%9F%A5%E5%8D%A1/k8s.md)
 
 ## Related

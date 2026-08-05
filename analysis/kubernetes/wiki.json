@@ -1,0 +1,234 @@
+{
+  "id": "2026-04-20-160244",
+  "generated_at": "2026-04-20T08:02:44.738157Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing",
+      "title": "项目总览：Kubernetes 源码全景",
+      "file": "1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes",
+      "title": "快速上手：从源码构建 Kubernetes",
+      "file": "2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi",
+      "title": "项目目录结构与代码组织",
+      "file": "3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha",
+      "title": "开发工作流：构建、测试与代码检查",
+      "file": "4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "5-gong-xian-zhi-nan-yu-she-qu-gui-fan",
+      "title": "贡献指南与社区规范",
+      "file": "5-gong-xian-zhi-nan-yu-she-qu-gui-fan.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi",
+      "title": "控制平面组件总览与协作关系",
+      "file": "6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md",
+      "section": "深入剖析",
+      "group": "核心组件架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu",
+      "title": "API Server 启动流程与请求处理链路",
+      "file": "7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md",
+      "section": "深入剖析",
+      "group": "核心组件架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu",
+      "title": "Kubelet Pod 生命周期管理与容器运行时交互",
+      "file": "8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md",
+      "section": "深入剖析",
+      "group": "核心组件架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi",
+      "title": "控制器管理器与内置控制器体系",
+      "file": "9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md",
+      "section": "深入剖析",
+      "group": "核心组件架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi",
+      "title": "调度器架构与调度框架插件机制",
+      "file": "10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md",
+      "section": "深入剖析",
+      "group": "核心组件架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables",
+      "title": "Kube-proxy 网络代理模式（iptables、IPVS、nftables）",
+      "file": "11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md",
+      "section": "深入剖析",
+      "group": "核心组件架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis",
+      "title": "API 资源定义与类型系统（pkg/apis）",
+      "file": "12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md",
+      "section": "深入剖析",
+      "group": "API 与资源模型",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry",
+      "title": "API 注册表与存储抽象（pkg/registry）",
+      "file": "13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md",
+      "section": "深入剖析",
+      "group": "API 与资源模型",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-openapi-gui-fan-yu-api-fa-xian-ji-zhi",
+      "title": "OpenAPI 规范与 API 发现机制",
+      "file": "14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md",
+      "section": "深入剖析",
+      "group": "API 与资源模型",
+      "level": "Advanced"
+    },
+    {
+      "slug": "15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng",
+      "title": "调度框架接口与扩展点（Filter、Score、Bind 等）",
+      "file": "15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng.md",
+      "section": "深入剖析",
+      "group": "调度与资源管理",
+      "level": "Advanced"
+    },
+    {
+      "slug": "16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng",
+      "title": "调度器内置插件详解（节点亲和性、污点容忍、拓扑分布等）",
+      "file": "16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md",
+      "section": "深入剖析",
+      "group": "调度与资源管理",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li",
+      "title": "动态资源分配（DRA）与设备管理",
+      "file": "17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md",
+      "section": "深入剖析",
+      "group": "调度与资源管理",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng",
+      "title": "存储卷插件体系与 CSI 集成",
+      "file": "18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md",
+      "section": "深入剖析",
+      "group": "存储与卷管理",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi",
+      "title": "卷管理器与挂载生命周期",
+      "file": "19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md",
+      "section": "深入剖析",
+      "group": "存储与卷管理",
+      "level": "Advanced"
+    },
+    {
+      "slug": "20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi",
+      "title": "认证与授权机制（RBAC、Node Authorizer、准入控制）",
+      "file": "20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi.md",
+      "section": "深入剖析",
+      "group": "安全、认证与授权",
+      "level": "Advanced"
+    },
+    {
+      "slug": "21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa",
+      "title": "服务账户令牌管理与 JWT 签发",
+      "file": "21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md",
+      "section": "深入剖析",
+      "group": "安全、认证与授权",
+      "level": "Advanced"
+    },
+    {
+      "slug": "22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan",
+      "title": "kubectl 命令行架构与插件扩展",
+      "file": "22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md",
+      "section": "深入剖析",
+      "group": "客户端与命令行工具",
+      "level": "Beginner"
+    },
+    {
+      "slug": "23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li",
+      "title": "kubeadm 集群引导与证书管理",
+      "file": "23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md",
+      "section": "深入剖析",
+      "group": "客户端与命令行工具",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi",
+      "title": "测试策略总览：单元测试、集成测试与端到端测试",
+      "file": "24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md",
+      "section": "深入剖析",
+      "group": "测试体系",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi",
+      "title": "端到端测试框架与测试套件组织",
+      "file": "25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md",
+      "section": "深入剖析",
+      "group": "测试体系",
+      "level": "Advanced"
+    },
+    {
+      "slug": "26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi",
+      "title": "节点级别测试（e2e_node）与性能基准测试",
+      "file": "26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md",
+      "section": "深入剖析",
+      "group": "测试体系",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li",
+      "title": "Staging 仓库机制与多模块依赖管理",
+      "file": "27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md",
+      "section": "深入剖析",
+      "group": "构建与发布工程",
+      "level": "Advanced"
+    },
+    {
+      "slug": "28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li",
+      "title": "特性门控系统与功能生命周期管理",
+      "file": "28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md",
+      "section": "深入剖析",
+      "group": "构建与发布工程",
+      "level": "Advanced"
+    },
+    {
+      "slug": "29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi",
+      "title": "Hack 脚本与 Makefile 构建体系",
+      "file": "29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md",
+      "section": "深入剖析",
+      "group": "构建与发布工程",
+      "level": "Intermediate"
+    }
+  ]
+}

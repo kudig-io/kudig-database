@@ -134,7 +134,7 @@ graph TD
 
 ## See Also
 
-- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/02-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
 - [[37-归档/domain-indexes/observability/FINAL-QUALITY-ASSESSMENT.md|FINAL-QUALITY-ASSESSMENT]]
 - [[37-归档/domain-indexes/observability/MOC-from-domain-21.md|MOC-from-可观测性]]
 - [[37-归档/domain-indexes/observability/MOC-from-domain-8.md|MOC-from-可观测性]]

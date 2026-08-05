@@ -701,9 +701,9 @@ resources:
 - [Pod Security Standards 官方文档](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 - [Kyverno 官方文档](https://kyverno.io/docs/)
 - [Secret 最佳实践](https://kubernetes.io/docs/concepts/configuration/secret/#good-practices)
-- [文件: `../../安全/06-pod-security-standards.md`](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
-- [文件: `../../安全/11-secret-management-tools.md`](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/11-secret-management-tools.md)
-- [文件: `../../安全/14-policy-engines-opa-kyverno.md`](../../../../../../08-%E5%AE%89%E5%85%A8/04-%E7%AD%96%E7%95%A5%E6%B2%BB%E7%90%86/14-policy-engines-opa-kyverno.md)
+- [文件: `../../安全/06-pod-security-standards.md`](../../../安全/03-pod-security-standards.md)
+- [文件: `../../安全/11-secret-management-tools.md`](../../../../../../08-安全/01-身份与访问/07-secret-management-tools.md)
+- [文件: `../../安全/14-policy-engines-opa-kyverno.md`](../../../../../../08-安全/04-策略治理/05-policy-engines-opa-kyverno.md)
 
 ```
 

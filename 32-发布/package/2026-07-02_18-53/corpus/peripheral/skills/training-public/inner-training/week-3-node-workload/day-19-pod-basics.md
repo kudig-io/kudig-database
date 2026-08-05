@@ -603,7 +603,7 @@ Init Container 失败后，Pod 不会继续启动主容器。如果 restartPolic
 
 - [Pod 基础概念](../../domain-09-workload/01-pod-overview.md)
 - [Pod 生命周期详解](../../domain-09-workload/02-pod-lifecycle.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [Pod 综合排障](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting.md)
 - [ACK 工作负载管理](../../domain-12-cloud-providers/04-alicloud-ack/250-ack-workload.md)
 
 ```

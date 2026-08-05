@@ -92,10 +92,10 @@ cross_refs:
 
 ### 🔗 关联故障排查文档
 - **[06-Node NotReady诊断](./06-node-notready-diagnosis.md)** - 节点状态异常是Pod Pending的常见原因
-- **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存不足导致的Pod调度失败
-- **[14-PVC存储故障排查](./14-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
-- **[24-Quota/LimitRange故障排查](./24-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
-- **[25-网络连通性故障排查](./25-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
+- **[07-OOM内存诊断](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis.md)** - 内存不足导致的Pod调度失败
+- **[14-PVC存储故障排查](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/06-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
+- **[24-Quota/LimitRange故障排查](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/10-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
+- **[25-网络连通性故障排查](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
 
 ### 📚 扩展学习资料
 - **[Kubernetes调度器原理](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)** - 深入理解调度机制
@@ -1861,10 +1861,10 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-service-comprehensive-troubleshooting|Service 全面故障排查]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
@@ -1874,7 +1874,7 @@ spec:
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|06-node-notready-diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|07-oom-memory-diagnosis]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis|07-oom-memory-diagnosis]]
 
 ## Related
 

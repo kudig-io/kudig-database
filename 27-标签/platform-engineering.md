@@ -56,19 +56,19 @@ last_updated: '2026-07-21'
 ## 运维管理 (Operations)
 
 - [[10-平台工程/02-运维/02-cluster-lifecycle-management|集群生命周期管理]]
-- [[10-平台工程/02-运维/13-multi-cluster-management|多集群管理]]
-- [[10-平台工程/02-运维/15-production-troubleshooting|生产环境故障排查]]
-- [[10-平台工程/02-运维/99-karpenter-node-autoscaling-guide|Karpenter 节点弹性伸缩指南]]
+- [[10-平台工程/02-运维/10-multi-cluster-management|多集群管理]]
+- [[10-平台工程/02-运维/12-production-troubleshooting|生产环境故障排查]]
+- [[10-平台工程/02-运维/17-karpenter-node-autoscaling-guide|Karpenter 节点弹性伸缩指南]]
 
 ## 治理 (Governance)
 
 - [[10-平台工程/03-治理/index|平台治理模型]]
 - [[25-研究/02-网络与安全/policy-as-code-security|策略即代码治理]]
-- [[10-平台工程/03-治理/09-cost-optimization-finops|成本治理优化]]
+- [[10-平台工程/03-治理/03-cost-optimization-finops|成本治理优化]]
 
 ## 开发体验 (Developer Experience)
 
-- [[10-平台工程/04-开发体验/27-developer-experience-engineering|开发者体验概览]]
+- [[10-平台工程/04-开发体验/07-developer-experience-engineering|开发者体验概览]]
 - [[10-平台工程/04-开发体验/index|自助式基础设施]]
 - [[10-平台工程/01-构建/08-golden-paths-design|黄金路径模板]]
 
@@ -79,15 +79,15 @@ last_updated: '2026-07-21'
 ## GitOps 与交付
 
 - [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
-- [[11-发布变更/01-GitOps/06-flux-gitops-continuous-delivery|Flux 企业级 GitOps]]
-- [[11-发布变更/01-GitOps/08-fleet-gitops-operations-guide|Fleet GitOps 运营]]
+- [[11-发布变更/01-GitOps/07-flux-gitops-continuous-delivery|Flux 企业级 GitOps]]
+- [[11-发布变更/01-GitOps/10-fleet-gitops-operations-guide|Fleet GitOps 运营]]
 - [[11-发布变更/02-IaC/01-terraform-enterprise-iac|Terraform K8s 基础设施]]
 - [[11-发布变更/02-IaC/05-crossplane-enterprise-orchestration|Crossplane 云原生 IaC]]
 
 ## 生产就绪评估
 
-- [[10-平台工程/00-总览/99-production-readiness-review-template|生产就绪评估模板]]
-- [[10-平台工程/02-运维/12-automated-operations-toolchain|自动化运维工具链]]
+- [[10-平台工程/00-总览/02-production-readiness-review-template|生产就绪评估模板]]
+- [[10-平台工程/02-运维/08-automated-operations-toolchain|自动化运维工具链]]
 
 ## 平台工程关键指标
 

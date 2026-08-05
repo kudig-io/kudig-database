@@ -185,8 +185,8 @@ kubectl debug node/<node-name> -it --image=ubuntu:22.04
 ```
 ## 交叉引用
 
-- [Pod 综合故障排查手册](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
-- [高级 Pod 运维模式](../../工作负载/12-advanced-pod-patterns.md)
+- [Pod 综合故障排查手册](02-pod-comprehensive-troubleshooting.md)
+- [高级 Pod 运维模式](02-advanced-pod-patterns.md)
 - [容器运行时接口 (CRI)](./container-runtime-interface-cri.md)
 - [Pod 生命周期](./pod-lifecycle.md)
 - [Pod 故障树分析 (FTA)](../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/pod-fta.md)

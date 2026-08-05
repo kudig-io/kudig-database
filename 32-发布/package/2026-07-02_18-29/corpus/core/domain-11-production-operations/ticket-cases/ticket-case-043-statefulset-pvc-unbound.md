@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: middleware
 ticket_type: 存储故障
 skill_ref:
-- '[[domain-04-storage-data/02-pvc-expansion-guide.md|PVC 扩容指南]]'
+- '[[03-pvc-expansion-guide|PVC 扩容指南]]'
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/csi-fta.md|CSI 异常故障树分析]]'
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/csi-fta.md|FTA: CSI 存储异常]]'

@@ -136,7 +136,7 @@ ConfigMap 和 Secret 是 [[Kubernetes|Kubernetes]] 中管理应用配置和敏�
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../14-configmap-secret-failure.md](../14-configmap-secret-failure.md) |
+| 单文件完整版 | [../14-configmap-secret-failure.md](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/03-configmap-secret-failure.md) |
 
 ## Related
 

@@ -80,7 +80,7 @@ bpfman 是一个 eBPF 程序管理器，提供系统守护进程和 Kubernetes O
 
 - [[opentofu]] — OpenTofu
 - [[cartography]] — Cartography
-- [[46-terway-performance-tuning]] — Terway 性能调优
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/entities/07-terway-performance-tuning]] — Terway 性能调优
 - [[volcano]] — Volcano
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

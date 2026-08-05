@@ -105,11 +105,11 @@ related_docs:
 ### 🔗 关联故障排查文档
 - **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - API Server依赖etcd存储，etcd问题会直接影响API Server
 - **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 网络问题可能导致API Server无法正常通信
-- **[35-节点组件故障排查](../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/35-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
-- **[30-监控告警故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/30-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
-- **[12-RBAC配额故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/12-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
-- **[13-证书故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/13-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
-- **[39-企业级监控告警体系](../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/39-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
+- **[35-节点组件故障排查](../04-高级排障/01-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
+- **[30-监控告警故障排查](../03-基础设施排障/06-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
+- **[12-RBAC配额故障排查](../02-资源排障/04-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
+- **[13-证书故障排查](../02-资源排障/05-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
+- **[39-企业级监控告警体系](../04-高级排障/05-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
 
 ### 📚 扩展学习资料
 - **[Kubernetes官方文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)** - API Server详细配置参考
@@ -596,15 +596,15 @@ groups:
 - [[19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
 - [[19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
 - [[19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
 - [[19-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[19-故障诊断/05-JVM调优/99-jvm-gc-container-tuning-guide.md|99-jvm-gc-container-tuning-guide]]
+- [[19-故障诊断/05-JVM调优/03-jvm-gc-container-tuning-guide.md|99-jvm-gc-container-tuning-guide]]
 - [[19-故障诊断/SUMMARY.md|SUMMARY]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]

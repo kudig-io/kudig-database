@@ -37,15 +37,15 @@ last_updated: 2026-05-21
 
 - [[01-edge-computing-architecture]] — Edge computing architecture
 - [[02-cloud-edge-collaboration]] — Cloud edge collaboration
-- [[03-kubeedge-architecture-deployment]] — Kubeedge architecture deployment
-- [[04-kubeedge-device-edge-apps]] — Kubeedge device edge apps
-- [[05-openyurt-architecture]] — Openyurt architecture
-- [[06-superedge-architecture]] — Superedge architecture
-- [[07-edge-ai-inference-federated-learning]] — Edge ai inference federated learning
-- [[08-edge-storage-network]] — Edge storage network
-- [[09-edge-security]] — Edge security
-- [[10-edge-use-cases]] — Edge use cases
-- [[99-kubernetes-developer-toolchain-guide]] — Kubernetes developer toolchain guide
+- [[04-kubeedge-architecture-deployment]] — Kubeedge architecture deployment
+- [[05-kubeedge-device-edge-apps]] — Kubeedge device edge apps
+- [[06-openyurt-architecture]] — Openyurt architecture
+- [[07-superedge-architecture]] — Superedge architecture
+- [[08-edge-ai-inference-federated-learning]] — Edge ai inference federated learning
+- [[09-edge-storage-network]] — Edge storage network
+- [[10-edge-security]] — Edge security
+- [[11-edge-use-cases]] — Edge use cases
+- [[15-kubernetes-developer-toolchain-guide]] — Kubernetes developer toolchain guide
 
 ### WebAssembly
 
@@ -59,7 +59,7 @@ last_updated: 2026-05-21
 - [[08-wasm-ai-inference]] — Wasm ai inference
 - [[09-wasm-serverless]] — Wasm serverless
 - [[10-wasm-security-sandbox]] — Wasm security sandbox
-- [[99-wasmedge-cloud-native-guide]] — Wasmedge cloud native guide
+- [[12-wasmedge-cloud-native-guide]] — Wasmedge cloud native guide
 
 ### K8s 扩展
 
@@ -79,15 +79,15 @@ last_updated: 2026-05-21
 - [[14-multi-cluster-management]] — Multi cluster management
 - [[15-monitoring-alerting-system]] — Monitoring alerting system
 - [[16-security-compliance-management]] — Security compliance management
-- [[99-graalvm-native-image-guide]] — Graalvm native image guide
-- [[99-quarkus-micronaut-cloud-native-java-guide]] — Quarkus micronaut cloud native java guide
-- [[99-serverless-faas-guide]] — Serverless faas guide
+- [[18-graalvm-native-image-guide]] — Graalvm native image guide
+- [[19-quarkus-micronaut-cloud-native-java-guide]] — Quarkus micronaut cloud native java guide
+- [[20-serverless-faas-guide]] — Serverless faas guide
 
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-10]] — Open source projects index from domain 10
-- [[00-open-source-projects-index-from-domain-37]] — Open source projects index from domain 37
-- [[00-open-source-projects-index-from-domain-38]] — Open source projects index from domain 38
+- [[01-open-source-projects-index-from-domain-37]] — Open source projects index from domain 37
+- [[02-open-source-projects-index-from-domain-38]] — Open source projects index from domain 38
 - [[MOC-from-domain-10]] — MOC from domain 10
 - [[MOC-from-domain-37]] — MOC from domain 37
 - [[MOC-from-domain-38]] — MOC from domain 38
@@ -96,8 +96,8 @@ last_updated: 2026-05-21
 - [[README-from-domain-38]] — README from domain 38
 
 ## 相关 Domain
-- [[AI基础设施/98-merged-indexes/index.md|Domain 14 AI/ML 基础设施 索引]]
-- [[网络/98-merged-indexes/index.md|Domain 03 网络与流量 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 14 AI/ML 基础设施 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 03 网络与流量 索引]]
 
 
 <!-- risk-assessed -->

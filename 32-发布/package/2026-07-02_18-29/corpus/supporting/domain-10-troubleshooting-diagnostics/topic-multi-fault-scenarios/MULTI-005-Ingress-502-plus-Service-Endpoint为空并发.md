@@ -26,7 +26,7 @@ last_updated: 2026-05-23
 # Ingress 502 + Service Endpoint为空并发
 
 ## 关联Skill
-- [[13-ingress-gateway-failure]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure]]
 - [[05-service-connectivity]]
 
 ## 场景描述

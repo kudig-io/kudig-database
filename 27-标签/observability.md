@@ -71,43 +71,43 @@ last_updated: '2026-07-21'
 ## 总览 (Overview)
 
 - [[09-可观测性/01-总览/01-observability-architecture-overview|可观测性架构概览]]
-- [[09-可观测性/01-总览/04-enterprise-monitoring-system|企业监控系统]]
-- [[09-可观测性/01-总览/06-apm-application-performance-monitoring|APM 应用性能监控]]
-- [[09-可观测性/01-总览/13-cluster-health-check|集群健康检查]]
-- [[09-可观测性/01-总览/14-chaos-engineering|混沌工程]]
-- [[09-可观测性/01-总览/19-security-compliance-governance|安全合规治理]]
-- [[09-可观测性/01-总览/22-best-practices-case-studies|最佳实践与案例]]
-- [[09-可观测性/01-总览/24-observability-tool-ecosystem|可观测性工具生态]]
-- [[09-可观测性/01-总览/25-troubleshooting-overview|故障排查概览]]
+- [[09-可观测性/01-总览/02-enterprise-monitoring-system|企业监控系统]]
+- [[09-可观测性/01-总览/03-apm-application-performance-monitoring|APM 应用性能监控]]
+- [[09-可观测性/01-总览/05-cluster-health-check|集群健康检查]]
+- [[09-可观测性/01-总览/06-chaos-engineering|混沌工程]]
+- [[09-可观测性/01-总览/07-security-compliance-governance|安全合规治理]]
+- [[09-可观测性/01-总览/09-best-practices-case-studies|最佳实践与案例]]
+- [[09-可观测性/01-总览/11-observability-tool-ecosystem|可观测性工具生态]]
+- [[09-可观测性/01-总览/12-troubleshooting-overview|故障排查概览]]
 
 ## 指标 (Metrics)
 
 - [[09-可观测性/02-指标/01-prometheus-enterprise-monitoring|Prometheus 企业级监控]]
 - [[09-可观测性/02-指标/02-monitoring-metrics-system|监控系统指标体系]]
-- [[09-可观测性/02-指标/04-thanos-enterprise-metrics-federation|Thanos 企业级指标联邦]]
-- [[09-可观测性/02-指标/07-monitoring-dashboards|监控仪表盘]]
-- [[09-可观测性/02-指标/10-monitoring-metrics-prometheus|Prometheus 监控指标]]
-- [[09-可观测性/02-指标/11-custom-metrics-adapter|自定义指标适配器]]
-- [[09-可观测性/02-指标/15-enterprise-scale-monitoring|企业级大规模监控]]
-- [[09-可观测性/02-指标/16-multi-cluster-monitoring-governance|多集群监控治理]]
-- [[09-可观测性/02-指标/17-monitoring-cost-optimization|监控成本优化]]
-- [[09-可观测性/02-指标/99-prometheus-enterprise-guide|Prometheus 企业级指南]]
+- [[09-可观测性/02-指标/03-thanos-enterprise-metrics-federation|Thanos 企业级指标联邦]]
+- [[09-可观测性/02-指标/04-monitoring-dashboards|监控仪表盘]]
+- [[09-可观测性/02-指标/05-monitoring-metrics-prometheus|Prometheus 监控指标]]
+- [[09-可观测性/02-指标/06-custom-metrics-adapter|自定义指标适配器]]
+- [[09-可观测性/02-指标/07-enterprise-scale-monitoring|企业级大规模监控]]
+- [[09-可观测性/02-指标/08-multi-cluster-monitoring-governance|多集群监控治理]]
+- [[09-可观测性/02-指标/09-monitoring-cost-optimization|监控成本优化]]
+- [[09-可观测性/02-指标/13-prometheus-enterprise-guide|Prometheus 企业级指南]]
 
 ## 日志 (Logging)
 
 - [[09-可观测性/03-日志/01-elk-stack-enterprise-logging|ELK Stack 企业级日志]]
 - [[09-可观测性/03-日志/02-fluentd-enterprise-log-processing|Fluentd 企业级日志处理]]
 - [[09-可观测性/03-日志/03-logging-architecture|日志架构]]
-- [[09-可观测性/03-日志/03-loki-enterprise-log-aggregation|Loki 企业级日志聚合]]
-- [[09-可观测性/03-日志/05-logging-collection-analysis-platform|日志采集分析平台]]
-- [[09-可观测性/03-日志/08-logging-audit-compliance|日志审计合规]]
-- [[09-可观测性/03-日志/09-events-audit-logs|事件审计日志]]
+- [[09-可观测性/03-日志/04-loki-enterprise-log-aggregation|Loki 企业级日志聚合]]
+- [[09-可观测性/03-日志/08-logging-collection-analysis-platform|日志采集分析平台]]
+- [[09-可观测性/03-日志/13-logging-audit-compliance|日志审计合规]]
+- [[09-可观测性/03-日志/14-events-audit-logs|事件审计日志]]
 
 ## 链路追踪 (Tracing)
 
-- [[09-可观测性/04-链路追踪/03-opentelemetry-distributed-tracing|OpenTelemetry 分布式追踪]]
-- [[09-可观测性/04-链路追踪/04-distributed-tracing|分布式追踪]]
-- [[09-可观测性/04-链路追踪/99-distributed-tracing-guide|分布式追踪指南]]
+- [[09-可观测性/04-链路追踪/04-opentelemetry-distributed-tracing|OpenTelemetry 分布式追踪]]
+- [[09-可观测性/04-链路追踪/05-distributed-tracing|分布式追踪]]
+- [[09-可观测性/04-链路追踪/08-distributed-tracing-guide|分布式追踪指南]]
 
 ## SLO / SLI
 
@@ -115,22 +115,22 @@ last_updated: '2026-07-21'
 - [[09-可观测性/06-SLO-SLI/02-error-budget-policy|错误预算策略]]
 - [[09-可观测性/06-SLO-SLI/03-sli-implementation-guide|SLI 实现指南]]
 - [[09-可观测性/06-SLO-SLI/04-sli-definition-selection|SLI 定义选择]]
-- [[09-可观测性/06-SLO-SLI/18-slo-sli-system|SLO/SLI 系统]]
-- [[09-可观测性/06-SLO-SLI/99-slo-operations-guide|SLO 运营指南]]
+- [[09-可观测性/06-SLO-SLI/08-slo-sli-system|SLO/SLI 系统]]
+- [[09-可观测性/06-SLO-SLI/09-slo-operations-guide|SLO 运营指南]]
 
 ## 告警 (Alerting)
 
-- [[09-可观测性/05-告警/05-alerting-management|告警管理]]
-- [[09-可观测性/05-告警/06-monitoring-alerting-practice|监控告警实践]]
-- [[09-可观测性/05-告警/21-monitoring-playbooks|监控 Playbook]]
+- [[09-可观测性/05-告警/04-alerting-management|告警管理]]
+- [[09-可观测性/05-告警/05-monitoring-alerting-practice|监控告警实践]]
+- [[09-可观测性/05-告警/07-monitoring-playbooks|监控 Playbook]]
 
 ## 工具 (Tools)
 
-- [[09-可观测性/07-工具/02-grafana-enterprise-observability|Grafana 企业级可观测性]]
-- [[09-可观测性/07-工具/05-datadog-enterprise-apm|Datadog 企业级 APM]]
-- [[09-可观测性/07-工具/07-zabbix-enterprise-monitoring|Zabbix 企业级监控]]
-- [[09-可观测性/07-工具/26-troubleshooting-tools|排障工具]]
-- [[09-可观测性/07-工具/27-performance-profiling-tools|性能分析工具]]
+- [[09-可观测性/07-工具/01-grafana-enterprise-observability|Grafana 企业级可观测性]]
+- [[09-可观测性/07-工具/02-datadog-enterprise-apm|Datadog 企业级 APM]]
+- [[09-可观测性/07-工具/04-zabbix-enterprise-monitoring|Zabbix 企业级监控]]
+- [[09-可观测性/07-工具/06-troubleshooting-tools|排障工具]]
+- [[09-可观测性/07-工具/07-performance-profiling-tools|性能分析工具]]
 
 ## 概念 (Concepts)
 

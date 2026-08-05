@@ -242,7 +242,7 @@ pack sbom download registry.cn-hangzhou.aliyuncs.com/demo/spring-app:v1.0.0 \
 
 ### 8.1 Tekton 集成
 
-在 [[domain-08-release-change-management/GitOps/05-tekton-cloud-native-cicd.md|Tekton]] Pipeline 中，可使用 `buildpacks-io/pack` Task 触发构建。
+在 [[32-发布/package/2026-07-02_18-53/corpus/core/domain-08-release-change-management/01-gitops/01-tekton-cloud-native-cicd|Tekton]] Pipeline 中，可使用 `buildpacks-io/pack` Task 触发构建。
 
 ```yaml
 # tekton-buildpacks-taskrun.yaml
@@ -412,8 +412,8 @@ syncPolicy:
 - [[domain-13-container-runtime/镜像构建/01-buildkit-production-guide.md|BuildKit 生产指南]]
 - [[domain-13-container-runtime/镜像构建/03-kaniko-ko-build-guide.md|Kaniko 与 ko 构建指南]]
 - [[domain-13-container-runtime/镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
-- [[domain-08-release-change-management/GitOps/05-tekton-cloud-native-cicd.md|Tekton 云原生 CI/CD]]
-- [[domain-08-release-change-management/GitOps/08-cicd-pipeline-patterns.md|CI/CD 流水线模式]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-08-release-change-management/01-gitops/01-tekton-cloud-native-cicd|Tekton 云原生 CI/CD]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-08-release-change-management/01-gitops/02-cicd-pipeline-patterns|CI/CD 流水线模式]]
 
 
 <!-- risk-assessed -->

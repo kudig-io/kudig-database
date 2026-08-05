@@ -27,8 +27,8 @@ last_updated: 2026-07
 - [[domain-08-release-change-management/IaC/03-pulumi-enterprise-iac.md|Pulumi Enterprise Iac]]
 - [[domain-08-release-change-management/IaC/04-azure-resource-manager-enterprise.md|Azure Resource Manager Enterprise]]
 - [[domain-08-release-change-management/IaC/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Orchestration]]
-- [[domain-08-release-change-management/IaC/11-infrastructure-as-code.md|Infrastructure As Code]]
-- [[domain-08-release-change-management/IaC/99-crossplane-platform-guide.md|Crossplane Platform Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-08-release-change-management/02-iac/01-infrastructure-as-code|Infrastructure As Code]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-08-release-change-management/02-iac/06-crossplane-platform-guide|Crossplane Platform Guide]]
 
 
 

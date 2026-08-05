@@ -79,7 +79,7 @@ SpinKube 是一个在 Kubernetes 上运行 WebAssembly (Wasm) 微服务和应用
 ## Related
 
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
+- [[01-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
 - [[capsule]] — Capsule
 - [[spin]] — Spin
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -206,7 +206,7 @@ WHERE falco.priority IN ('CRITICAL', 'WARNING');
 
 - [[23-实体/06-安全/falco.md|Falco (entities)]]
 - [[16-专项技术/01-边缘计算/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[23-实体/07-可观测性/03-prometheus-ha-deployment.md|Prometheus 高可用部署 (entities)]]
+- [[23-实体/07-可观测性/02-prometheus-ha-deployment.md|Prometheus 高可用部署 (entities)]]
 - [[log|Wiki Log]]
 
 

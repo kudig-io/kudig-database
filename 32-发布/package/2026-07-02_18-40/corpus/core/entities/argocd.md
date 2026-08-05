@@ -163,8 +163,8 @@ kubectl logs -n argocd -l app.kubernetes.io/name=argocd-application-controller
 
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[domain-10-troubleshooting-diagnostics/高级排障/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
-- [[domain-02-workloads-applications/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/03-gitops-argocd-troubleshooting|38-gitops-argocd-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-02-workloads-applications/03-java-cicd-tekton-argocd|06-java-cicd-tekton-argocd]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 
 <!-- risk-assessed -->

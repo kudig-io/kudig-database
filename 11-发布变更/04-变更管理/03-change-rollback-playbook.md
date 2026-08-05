@@ -460,13 +460,13 @@ flyway undo -url=jdbc:mysql://mysql-primary.production.svc.cluster.local:3306/or
 
 ## Related
 
-- [[11-发布变更/04-变更管理/22-change-management-process.md|变更管理流程]]
+- [[11-发布变更/04-变更管理/08-change-management-process.md|变更管理流程]]
 - [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略与回滚]]
 
 ## See Also
 
-- [[12-可靠性/01-备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
-- [[13-生产运维/03-事件响应/03-on-call-playbook.md|值班手册]]
+- [[12-可靠性/01-备份恢复/06-enterprise-backup-strategy.md|企业级备份策略]]
+- [[13-生产运维/03-事件响应/04-on-call-playbook.md|值班手册]]
 
 ```
 

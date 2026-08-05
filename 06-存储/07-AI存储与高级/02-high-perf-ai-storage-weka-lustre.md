@@ -362,5 +362,5 @@ kubectl get volumeattachment | grep -i "weka\|beegfs\|lustre"
 - [[06-存储/07-AI存储与高级/01-minio-object-storage-ai.md|MinIO 对象存储 for AI/ML]]
 - [[06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md|存储性能基准测试方法论]]
 - [[15-AI基础设施/01-基础设施/06-ai-data-pipeline.md|AI 数据管线]]
-- [[06-存储/01-K8s存储/08-storage-performance-tuning.md|存储性能调优]]
+- [[06-存储/01-K8s存储/09-storage-performance-tuning.md|存储性能调优]]
 - [[06-存储/03-分布式存储/04-openebs-production.md|OpenEBS 生产部署]]

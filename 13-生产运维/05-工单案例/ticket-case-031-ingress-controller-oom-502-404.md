@@ -24,9 +24,9 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: ingress-nginx
 ticket_type: 应用入口访问故障
 skill_ref:
-- '[[05-网络/01-K8s网络核心/21-nginx-ingress-complete-guide.md|Nginx
+- '[[05-网络/01-K8s网络核心/22-nginx-ingress-complete-guide.md|Nginx
   Ingress 完全指南]]'
-- '[[05-网络/01-K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress
+- '[[05-网络/01-K8s网络核心/26-ingress-monitoring-troubleshooting.md|Ingress
   监控与排障]]'
 fta_ref:
 - '[[19-故障诊断/06-FTA故障树/list/nginx-ingress-fta.md|FTA:
@@ -260,7 +260,7 @@ kubectl get events -n ingress-nginx --field-selector reason=OOMKilled --sort-by=
 >
 > **后续建议：**
 > - 为 Ingress Controller 开启 HPA，建议最小副本 2，最大 8，避免单点故障；
-> - 参考 [[05-网络/01-K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]] 配置入口延迟、5xx 比例、Controller CPU/内存使用率告警；
+> - 参考 [[05-网络/01-K8s网络核心/26-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]] 配置入口延迟、5xx 比例、Controller CPU/内存使用率告警；
 > - 升级 Nginx Ingress 前在预发环境按实际证书与 Ingress 数量压测内存占用；
 > - 将 Controller 接入 Prometheus，采集 `nginx_ingress_controller_requests` 与容器 OOM 指标。
 >

@@ -75,13 +75,13 @@ description: '## 项目概述'
 
 - [[ratify]] — Ratify
 - [[container2wasm]] — container2wasm
-- [[06-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[08-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[stacker]] — Stacker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - 23-kubernetes-opentelemetry-native-observability
 - 03-opentelemetry-distributed-tracing
-- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/02-opentelemetry-troubleshooting|02-opentelemetry-troubleshooting]]
 - opentelemetry
 - RELEASE-NOTES-0.43
 - RELEASE-NOTES-0.12

@@ -399,11 +399,11 @@ containerd 是从 Docker 中拆分出来的容器运行时组件。Docker 的架
 ## 延伸阅读
 
 - [Docker 架构总览](../../domain-13-container-runtime/01-docker-architecture-overview.md)
-- [Docker 容器生命周期](../../domain-13-container-runtime/03-docker-container-lifecycle.md)
+- [Docker 容器生命周期](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-13-container-runtime/01-docker/02-docker-container-lifecycle.md)
 - [Docker 镜像构建优化](../../domain-13-container-runtime/02-docker-image-build-optimization.md)
-- [Docker 网络深入](../../domain-13-container-runtime/04-docker-networking-deep-dive.md)
-- [Docker 安全最佳实践](../../domain-13-container-runtime/07-docker-security-best-practices.md)
-- [Docker 命令参考](../../domain-13-container-runtime/99-docker-commands-reference.md)
+- [Docker 网络深入](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-13-container-runtime/01-docker/03-docker-networking-deep-dive.md)
+- [Docker 安全最佳实践](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-13-container-runtime/01-docker/06-docker-security-best-practices.md)
+- [Docker 命令参考](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-13-container-runtime/01-docker/11-docker-commands-reference.md)
 
 ```
 

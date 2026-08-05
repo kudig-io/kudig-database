@@ -336,7 +336,7 @@ curl -s http://fluent-bit:2020/api/v1/metrics | jq '.input.records, .output.reco
 
 ## Related
 
-- [[06-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[05-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[stacker]] — Stacker
 - [[opentelemetry]] — OpenTelemetry
 - [[kusionstack]] — KusionStack

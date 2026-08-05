@@ -23,7 +23,7 @@ last_updated: 2026-07
 
 - 生态参考/01-cncf-landscape/
 - 生态参考/02-papers/
-- [[21-生态参考/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - 生态参考/_archived-release-notes/
 - 生态参考/topic-index/
 - 生态参考/topic-release-notes/
@@ -31,5 +31,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[21-生态参考/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[21-生态参考/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

@@ -99,7 +99,7 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/03-基础设施排障/31-backup-restore-troubleshooting.md|备份恢复故障排查 (Backup and Restore Troubleshooting)]]
+- [[19-故障诊断/03-基础设施排障/07-backup-restore-troubleshooting.md|备份恢复故障排查 (Backup and Restore Troubleshooting)]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
 

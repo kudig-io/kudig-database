@@ -2093,7 +2093,7 @@ kubectl logs -n gateway-system -l app=gateway-controller
 - [12 - Gateway API 高级路由](./12-gateway-api-advanced-routes.md)
 - [Ingress 完整配置参考](./08-ingress-all-classes.md)
 - [Service YAML 参考](08-service-all-types.md)
-- [Gateway API 深度解析](../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md)
+- [Gateway API 深度解析](../../05-网络/01-K8s网络核心/37-gateway-api-overview.md)
 
 ---
 

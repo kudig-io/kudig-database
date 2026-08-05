@@ -18,13 +18,13 @@ last_updated: 2026-07
 ## 文档
 
 - [[domain-06-observability/指标/01-prometheus-enterprise-monitoring.md|Prometheus Enterprise Monitoring]]
-- [[domain-06-observability/指标/02-monitoring-metrics-system.md|Monitoring Metrics System]]
-- [[domain-06-observability/指标/04-thanos-enterprise-metrics-federation.md|Thanos Enterprise Metrics Federation]]
-- [[domain-06-observability/指标/07-monitoring-dashboards.md|Monitoring Dashboards]]
-- [[domain-06-observability/指标/10-monitoring-metrics-prometheus.md|Monitoring Metrics Prometheus]]
-- [[domain-06-observability/指标/11-custom-metrics-adapter.md|Custom Metrics Adapter]]
-- [[domain-06-observability/指标/15-enterprise-scale-monitoring.md|Enterprise Scale Monitoring]]
-- [[domain-06-observability/指标/16-multi-cluster-monitoring-governance.md|Multi Cluster Monitoring Governance]]
-- [[domain-06-observability/指标/17-monitoring-cost-optimization.md|Monitoring Cost Optimization]]
-- [[domain-06-observability/指标/99-prometheus-enterprise-guide.md|Prometheus Enterprise Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/01-monitoring-metrics-system|Monitoring Metrics System]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/02-thanos-enterprise-metrics-federation|Thanos Enterprise Metrics Federation]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/03-monitoring-dashboards|Monitoring Dashboards]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/04-monitoring-metrics-prometheus|Monitoring Metrics Prometheus]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/05-custom-metrics-adapter|Custom Metrics Adapter]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/06-enterprise-scale-monitoring|Enterprise Scale Monitoring]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/07-multi-cluster-monitoring-governance|Multi Cluster Monitoring Governance]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/08-monitoring-cost-optimization|Monitoring Cost Optimization]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-06-observability/02-metrics/09-prometheus-enterprise-guide|Prometheus Enterprise Guide]]
 

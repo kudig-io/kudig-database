@@ -22,16 +22,16 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[19-故障诊断/04-高级排障/35-node-component-troubleshooting.md|Node Component Troubleshooting]]
-- [[19-故障诊断/04-高级排障/36-helm-chart-troubleshooting.md|Helm Chart Troubleshooting]]
-- [[19-故障诊断/04-高级排障/37-multi-cluster-management-troubleshooting.md|Multi Cluster Management Troubleshooting]]
-- [[19-故障诊断/04-高级排障/38-gitops-argocd-troubleshooting.md|Gitops Argocd Troubleshooting]]
-- [[19-故障诊断/04-高级排障/39-enterprise-monitoring-alerting-system.md|Enterprise Monitoring Alerting System]]
-- [[19-故障诊断/04-高级排障/40-large-scale-cluster-operations.md|Large Scale Cluster Operations]]
-- [[19-故障诊断/04-高级排障/41-event-driven-architecture-troubleshooting.md|Event Driven Architecture Troubleshooting]]
-- [[19-故障诊断/04-高级排障/42-chaos-engineering-fault-injection-testing.md|Chaos Engineering Fault Injection Testing]]
-- [[19-故障诊断/04-高级排障/43-symptom-sop-mapping.md|Symptom Sop Mapping]]
-- [[19-故障诊断/04-高级排障/44-kind-k3s-single-node-troubleshooting.md|Kind K3S Single Node Troubleshooting]]
+- [[19-故障诊断/04-高级排障/01-node-component-troubleshooting.md|Node Component Troubleshooting]]
+- [[19-故障诊断/04-高级排障/02-helm-chart-troubleshooting.md|Helm Chart Troubleshooting]]
+- [[19-故障诊断/04-高级排障/03-multi-cluster-management-troubleshooting.md|Multi Cluster Management Troubleshooting]]
+- [[19-故障诊断/04-高级排障/04-gitops-argocd-troubleshooting.md|Gitops Argocd Troubleshooting]]
+- [[19-故障诊断/04-高级排障/05-enterprise-monitoring-alerting-system.md|Enterprise Monitoring Alerting System]]
+- [[19-故障诊断/04-高级排障/06-large-scale-cluster-operations.md|Large Scale Cluster Operations]]
+- [[19-故障诊断/04-高级排障/07-event-driven-architecture-troubleshooting.md|Event Driven Architecture Troubleshooting]]
+- [[19-故障诊断/04-高级排障/08-chaos-engineering-fault-injection-testing.md|Chaos Engineering Fault Injection Testing]]
+- [[19-故障诊断/04-高级排障/09-symptom-sop-mapping.md|Symptom Sop Mapping]]
+- [[19-故障诊断/04-高级排障/10-kind-k3s-single-node-troubleshooting.md|Kind K3S Single Node Troubleshooting]]
 
 
 

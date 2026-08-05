@@ -30,10 +30,10 @@ last_updated: 2026-07
 - domain-09-reliability-engineering/07-sre-practices/
 - domain-09-reliability-engineering/08-performance-testing/
 - domain-09-reliability-engineering/09-disaster-recovery-playbooks/
-- [[domain-09-reliability-engineering/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-09-reliability-engineering/05-slo-sli/index|Merged Indexes]]
 
 ## 文档
 
-- [[domain-09-reliability-engineering/03-slo-sli-guide.md|Slo Sli Guide]]
-- [[domain-09-reliability-engineering/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-09-reliability-engineering/04-slo-sli-guide|Slo Sli Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

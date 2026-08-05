@@ -1502,8 +1502,8 @@ watch -n 1 'kubectl get pods -o wide | grep oom-test'
 - [[19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
 - [[19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
 - [[19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
 - [[19-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
@@ -1513,7 +1513,7 @@ watch -n 1 'kubectl get pods -o wide | grep oom-test'
 - [[19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md|05-pod-pending-diagnosis]]
 - [[19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|06-node-notready-diagnosis]]
 - [[19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|08-pod-comprehensive-troubleshooting]]
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting.md|09-node-comprehensive-troubleshooting]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md|09-node-comprehensive-troubleshooting]]
 
 
 <!-- risk-assessed -->

@@ -27,10 +27,10 @@ last_updated: 2026-07
 - domain-16-database-middleware/04-time-series-db/
 - domain-16-database-middleware/05-operator-management/
 - domain-16-database-middleware/06-data-streaming/
-- [[domain-16-database-middleware/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-16-database-middleware/03-cache/index|Merged Indexes]]
 
 ## 文档
 
 - [[domain-16-database-middleware/01-database-on-kubernetes-guide.md|Database On Kubernetes Guide]]
-- [[domain-16-database-middleware/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

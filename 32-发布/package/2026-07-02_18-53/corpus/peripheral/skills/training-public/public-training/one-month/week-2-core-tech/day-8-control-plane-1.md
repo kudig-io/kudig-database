@@ -548,9 +548,9 @@ kubectl exec -n kube-system $ETCD_POD -- \
 - [etcd 官方文档](https://etcd.io/docs/)
 - [Raft 论文](https://raft.github.io/raft.pdf)
 - [Kubernetes API Server 文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
-- [文件: `../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md`](../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md)
-- [文件: `../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md`](../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md)
-- [文件: `../../domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md`](../../domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md)
+- [文件: `../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md`](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/04-etcd-deep-dive.md)
+- [文件: `../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md`](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/05-apiserver-deep-dive.md)
+- [文件: `../../domain-01-cluster-fundamentals/07-distributed-consensus-etcd.md`](08-distributed-consensus-etcd.md)
 
 ---
 

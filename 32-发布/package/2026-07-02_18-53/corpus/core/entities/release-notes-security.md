@@ -128,7 +128,7 @@ prerequisites:
 ## 相关导航
 
 - [[concepts/security-tool-evolution.md|安全工具演进]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related

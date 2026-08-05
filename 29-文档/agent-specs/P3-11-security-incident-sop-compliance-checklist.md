@@ -454,7 +454,7 @@ spec:
 ---
 
 **关联文档**:
-- [故障诊断/topic-skills/18-security-incident-response.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/18-security-incident-response.md) — 安全事件 Skill
+- [故障诊断/topic-skills/18-security-incident-response.md](../../19-故障诊断/08-技能体系/19-security-incident-response.md) — 安全事件 Skill
 - [安全/](../安全/) — 云原生安全
 - [P0-1: 工单分类体系](./P0-1-ticket-classification-intent-recognition.md)
 ```

@@ -115,7 +115,7 @@ prerequisites:
 - Volcano
 - Fluid
 - HAMi (Heterogeneous AI Computing Virtualization Middleware)
-- [[16-专项技术/01-边缘计算/99-kubernetes-developer-toolchain-guide.md|99 kubernetes developer toolchain guide]]
+- [[16-专项技术/01-边缘计算/15-kubernetes-developer-toolchain-guide.md|99 kubernetes developer toolchain guide]]
 - HolmesGPT
 - ModelPack
 

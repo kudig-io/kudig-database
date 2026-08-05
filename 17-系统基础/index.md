@@ -68,7 +68,7 @@ audience:
 ## 核心文档
 
 - [[17-系统基础/01-Linux/02-linux-kernel-container-fundamentals.md|Linux 内核与容器基础]]
-- [[17-系统基础/00-总览/99-production-readiness-operations-guide.md|生产就绪运维指南]]
+- [[17-系统基础/00-总览/01-production-readiness-operations-guide.md|生产就绪运维指南]]
 - [[17-系统基础/README.md|Readme]]
 
 ## 跨域关联

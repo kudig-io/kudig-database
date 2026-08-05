@@ -41,7 +41,7 @@ relationships:
 
 ## Cross-References Added (orphan rescue)
 - `synthesis/gitops-sre-release-gate.md` — now linked from: [[23-实体/08-交付与制品/argo.md|argo]]-cd-enterprise-gitops.md]], [[12-可靠性/06-SRE实践/02-release-gate-slo-based.md|02 release gate slo based]]
-- `[[17-系统基础/06-知识字典/networking/service.md|service]]-mesh-zero-trust-security.md` — now linked from: [[23-实体/04-网络/istio.md|istio]]-enterprise-service-mesh.md]], [[08-安全/02-网络安全/07-zero-trust-security-architecture.md|07 zero trust security architecture]]
+- `[[17-系统基础/06-知识字典/networking/service.md|service]]-mesh-zero-trust-security.md` — now linked from: [[23-实体/04-网络/istio.md|istio]]-enterprise-service-mesh.md]], [[08-安全/02-网络安全/02-zero-trust-security-architecture.md|07 zero trust security architecture]]
 - `synthesis/finops-resource-governance.md` — already linked (previously fixed)
 
 ## Scope

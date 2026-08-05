@@ -514,7 +514,7 @@ spec:
 
 ## Related
 
-- [[domain-08-release-change-management/变更管理/22-change-management-process.md|变更管理流程]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-08-release-change-management/03-change-management/05-change-management-process|变更管理流程]]
 - [[domain-08-release-change-management/变更管理/01-change-window-and-approval.md|变更窗口与审批流程]]
 
 ## See Also

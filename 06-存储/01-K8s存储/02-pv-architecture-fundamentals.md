@@ -193,7 +193,7 @@ related_docs:
 <!-- chunk: 4. 访问模式 (Access Modes) 深度解析 -->
 ## 4. 访问模式 (Access Modes) 深度解析
 
-> 基础概念和访问模式选择指南详见 [06-存储基础概念](./06-storage-fundamental-concepts.md)。本节侧重 PV 层面的访问模式约束和生产注意事项。
+> 基础概念和访问模式选择指南详见 [06-存储基础概念](07-storage-fundamental-concepts.md)。本节侧重 PV 层面的访问模式约束和生产注意事项。
 
 | 模式 | 全称 | 说明 | 典型场景 |
 |:---:|:---|:---|:---|
@@ -223,7 +223,7 @@ related_docs:
 <!-- chunk: 5. 回收策略 (Reclaim Policy) 详解 -->
 ## 5. 回收策略 (Reclaim Policy) 详解
 
-> 基础概念和运维操作详见 [06-存储基础概念 - 回收策略机制](./06-storage-fundamental-concepts.md)。本节侧重 PV 层面的回收策略选择和生产实践。
+> 基础概念和运维操作详见 [06-存储基础概念 - 回收策略机制](07-storage-fundamental-concepts.md)。本节侧重 PV 层面的回收策略选择和生产实践。
 
 | 策略 | 行为 | 适用场景 | 风险 |
 |:---|:---|:---|:---|

@@ -99,10 +99,10 @@ related_docs:
 
 ### 🔗 关联故障排查文档
 - **[01-API Server故障排查](./01-control-plane-apiserver-troubleshooting.md)** - etcd是API Server的核心存储依赖
-- **[31-备份恢复故障排查](./31-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
-- **[34-升级迁移故障排查](./34-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
-- **[33-性能瓶颈故障排查](./33-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
-- **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
+- **[31-备份恢复故障排查](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/05-backup-restore-troubleshooting.md)** - etcd数据备份恢复最佳实践
+- **[34-升级迁移故障排查](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/07-upgrade-migration-troubleshooting.md)** - etcd版本升级注意事项
+- **[33-性能瓶颈故障排查](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/06-performance-bottleneck-troubleshooting.md)** - etcd性能监控分析
+- **[39-企业级监控告警体系](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/04-enterprise-monitoring-alerting-system.md)** - etcd企业级监控告警配置
 
 ### 📚 扩展学习资料
 - **[etcd官方文档](https://etcd.io/docs/)** - etcd完整技术文档
@@ -655,12 +655,12 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
+- [[01-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-service-comprehensive-troubleshooting|Service 全面故障排查]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]

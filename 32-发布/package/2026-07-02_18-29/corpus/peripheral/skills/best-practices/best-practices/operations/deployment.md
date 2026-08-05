@@ -717,9 +717,9 @@ kubectl rollout undo deployment/myapp -n production
 - [[entities/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[entities/k8s-supply-chain-yaml-cheatsheet.md|供应链安全、YAML 配置清单与速查表]] — Cross-reference
 - [[entities/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]] — Cross-reference
-- [[domain-02-workloads-applications/核心工作负载/19-scheduler-configuration.md|调度器配置与优化]] — Cross-reference
-- [[domain-02-workloads-applications/核心工作负载/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
-- [[domain-02-workloads-applications/核心工作负载/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-02-workloads-applications/00-core-workloads/04-scheduler-configuration|调度器配置与优化]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/00-core-workloads/03-workload-controllers-overview|工作负载控制器详解]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-02-workloads-applications/00-core-workloads/03-pod-lifecycle-events|Pod 生命周期事件表]] — Cross-reference
 - [[concepts/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[concepts/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — Cross-reference
 - [[concepts/控制器模式 × Deployment.md|控制器模式 × Deployment]] — Cross-reference

@@ -93,7 +93,7 @@ authors:
 |:-----|:---------|:-------------|:---------|
 | **Flannel** | [flannel-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/flannel-fta.md) | [08-flannel-troubleshooting](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md) | VXLAN/host-gw 路由 |
 | **Calico** | [calico-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/calico-fta.md) | [05-calico-troubleshooting](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-calico-troubleshooting.md) | [[entities/networkpolicy.md|NetworkPolicy]] |
-| **[[Cilium|Cilium]]** | [cilium-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](../domain-03-networking-traffic/99-cilium-ebpf-network-guide.md) | eBPF/XDP |
+| **[[Cilium|Cilium]]** | [cilium-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/cilium-fta.md) | [99-cilium-ebpf-network-guide](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-03-networking-traffic/01-fundamentals/07-cilium-ebpf-network-guide.md) | eBPF/XDP |
 | **[[Antrea|Antrea]]** | (待补充) | - | - |
 | **Kube-OVN** | (待补充) | - | - |
 | **CNI 通用** | [01-cni-troubleshooting.md](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) | - | CNI 配置/插件 |

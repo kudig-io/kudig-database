@@ -234,11 +234,11 @@ kanctl create actionset --action delete --namespace default \
 
 ## Related
 
-- [[47-terway-troubleshooting-fta]]
+- [[23-实体/04-网络/10-terway-troubleshooting-fta]]
 
 - changelog.md|ecosystem-changelog]]
 
-- [[42-terway-usage-guide]]
+- [[23-实体/04-网络/05-terway-usage-guide]]
 
 - metal3-io
 

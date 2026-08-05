@@ -479,7 +479,7 @@ Endpoints 的更新依赖 kube-proxy 的 Watch 机制，通常在几秒内完成
 - [Service 概念与类型](../../domain-06-service-networking/01-service-overview.md)
 - [kube-proxy 模式详解](../../domain-06-service-networking/02-kube-proxy.md)
 - [ACK 网络管理](../../domain-12-cloud-providers/04-alicloud-ack/260-ack-networking.md)
-- [网络架构总览](../../domain-03-networking-traffic/01-network-architecture-overview.md)
+- [网络架构总览](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/02-network-architecture-overview.md)
 
 
 <!-- risk-assessed -->

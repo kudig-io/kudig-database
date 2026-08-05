@@ -387,13 +387,13 @@ spec:
 
 ## Related
 
-- [[domain-09-reliability-engineering/容量规划/24-capacity-planning-forecasting.md|容量规划与预测]]
-- [[domain-09-reliability-engineering/容量规划/25-ai-driven-capacity-planning-cost-optimization-2025.md|AI 驱动的容量规划与成本优化]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-09-reliability-engineering/03-capacity-planning/04-capacity-planning-forecasting|容量规划与预测]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-09-reliability-engineering/02-capacity-planning/01-ai-driven-capacity-planning-cost-optimization-2025|AI 驱动的容量规划与成本优化]]
 
 ## See Also
 
 - [[domain-06-observability/指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
-- [[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|Karpenter 节点自动扩缩容指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/01-karpenter-node-autoscaling-guide|Karpenter 节点自动扩缩容指南]]
 
 
 <!-- risk-assessed -->

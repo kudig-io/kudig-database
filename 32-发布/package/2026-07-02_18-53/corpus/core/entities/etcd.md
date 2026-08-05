@@ -96,7 +96,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - 19-etcd-operations
 - 07-distributed-consensus-etcd
 - [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-etcd-maintenance.md|10-etcd-maintenance]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/13-etcd-maintenance|10-etcd-maintenance]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/02-etcd-troubleshooting.md|02-etcd-troubleshooting]]
 - RELEASE-NOTES-0.2
@@ -122,7 +122,7 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[entities/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[entities/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
 - [[entities/k8s-architecture-fundamentals.md|K8s 架构基础与核心组件原理]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[entities/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
 - [[entities/k8s-control-plane-deep-dive.md|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]] — Cross-reference
 - [[entities/kubectl-quick-reference.md|Kubectl Quick Reference]] — Cross-reference
@@ -179,8 +179,8 @@ Every write increments a global revision number. Watch streams track from a spec
 - [[skills/ts-storage.md|存储故障排查]] — Cross-reference
 - [[skills/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
 - [[skills/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
-- [[domain-01-cluster-fundamentals/控制平面/11-etcd-deep-dive.md|etcd 深度解析]] — Cross-reference
-- [[domain-01-cluster-fundamentals/控制平面/12-apiserver-deep-dive.md|kube-apiserver 深度解析]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/04-etcd-deep-dive|etcd 深度解析]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/05-apiserver-deep-dive|kube-apiserver 深度解析]] — Cross-reference
 - Domain-3: Kubernetes控制平面 — Cross-reference
 - [[entities/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

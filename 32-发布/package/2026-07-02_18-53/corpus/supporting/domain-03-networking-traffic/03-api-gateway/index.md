@@ -30,6 +30,6 @@ last_updated: 2026-07
 - [[domain-03-networking-traffic/API网关/11-api-gateway-security-practices.md|Api Gateway Security Practices]]
 - [[domain-03-networking-traffic/API网关/12-api-gateway-observability.md|Api Gateway Observability]]
 - [[domain-03-networking-traffic/API网关/13-api-gateway-performance-benchmarks.md|Api Gateway Performance Benchmarks]]
-- [[domain-03-networking-traffic/API网关/14-api-gateway-production-operations.md|Api Gateway Production Operations]]
-- [[domain-03-networking-traffic/API网关/99-envoy-gateway-enterprise-guide.md|Envoy Gateway Enterprise Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-03-networking-traffic/03-api-gateway/01-api-gateway-production-operations|Api Gateway Production Operations]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/03-api-gateway/14-envoy-gateway-enterprise-guide|Envoy Gateway Enterprise Guide]]
 

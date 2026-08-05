@@ -31,16 +31,16 @@ last_updated: 2026-07
 - 容器运行时/03-containerd-cri-o/
 - 容器运行时/04-image-build/
 - 容器运行时/05-runtime-migration/
-- [[14-容器运行时/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - [[14-容器运行时/00-总览/index.md|00-总览]]
 - [[14-容器运行时/06-沙箱运行时/index.md|06-沙箱运行时]]
 
 ## 文档
 
 - [[14-容器运行时/03-containerd-CRI-O/01-containerd-deep-guide.md|Containerd Deep Guide]]
-- [[14-容器运行时/06-沙箱运行时/05-gvisor-sandbox-production.md|Gvisor Sandbox Production]]
-- [[14-容器运行时/06-沙箱运行时/06-firecracker-microvm-guide.md|Firecracker Microvm Guide]]
-- [[14-容器运行时/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[14-容器运行时/06-沙箱运行时/01-gvisor-sandbox-production.md|Gvisor Sandbox Production]]
+- [[14-容器运行时/06-沙箱运行时/02-firecracker-microvm-guide.md|Firecracker Microvm Guide]]
+- [[14-容器运行时/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 
 
 

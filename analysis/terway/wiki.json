@@ -1,0 +1,236 @@
+{
+  "id": "2026-04-21-161834",
+  "generated_at": "2026-04-21T08:18:34.895774Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi",
+      "title": "项目概览：Terway CNI 插件的核心定位与价值",
+      "file": "1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md",
+      "section": "快速入门",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway",
+      "title": "快速开始：构建、测试与运行 Terway",
+      "file": "2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md",
+      "section": "快速入门",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-kai-fa-gui-fan-yu-gong-xian-zhi-nan",
+      "title": "开发规范与贡献指南",
+      "file": "3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md",
+      "section": "快速入门",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi",
+      "title": "整体架构设计：Daemon、CNI Binary 与控制平面的协作机制",
+      "file": "4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md",
+      "section": "深入理解",
+      "group": "系统架构",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi",
+      "title": "gRPC 通信协议：Daemon 与 CNI Binary 的接口定义",
+      "file": "5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi.md",
+      "section": "深入理解",
+      "group": "系统架构",
+      "level": "Advanced"
+    },
+    {
+      "slug": "6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi",
+      "title": "网络模式全解析：VPC、ENI、ENI 多 IP 与 Trunk 模式",
+      "file": "6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md",
+      "section": "深入理解",
+      "group": "网络模式与数据路径",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian",
+      "title": "数据路径驱动层：Veth、IPVlan、VLAN、NIC 与 VF 驱动实现",
+      "file": "7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md",
+      "section": "深入理解",
+      "group": "网络模式与数据路径",
+      "level": "Advanced"
+    },
+    {
+      "slug": "8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li",
+      "title": "策略路由与网络连通性：Pod 间、Pod 与节点、跨节点通信原理",
+      "file": "8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md",
+      "section": "深入理解",
+      "group": "网络模式与数据路径",
+      "level": "Advanced"
+    },
+    {
+      "slug": "9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi",
+      "title": "ENI 资源管理器：IP 池化、水位控制与资源回收机制",
+      "file": "9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md",
+      "section": "深入理解",
+      "group": "IP 地址管理（IPAM）与资源池",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou",
+      "title": "中心化 IPAM：控制平面与节点协同的 IP 分配架构",
+      "file": "10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md",
+      "section": "深入理解",
+      "group": "IP 地址管理（IPAM）与资源池",
+      "level": "Advanced"
+    },
+    {
+      "slug": "11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue",
+      "title": "IP Prefix 模式：基于子网前缀的大规模 IP 分配策略",
+      "file": "11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md",
+      "section": "深入理解",
+      "group": "IP 地址管理（IPAM）与资源池",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi",
+      "title": "空闲 IP 回收与资源调度：DevicePlugin 与节点容量感知",
+      "file": "12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi.md",
+      "section": "深入理解",
+      "group": "IP 地址管理（IPAM）与资源池",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface",
+      "title": "自定义资源定义（CRD）：PodENI、PodNetworking、Node、NetworkInterface",
+      "file": "13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md",
+      "section": "深入理解",
+      "group": "CRD 与控制器体系",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi",
+      "title": "控制平面控制器详解：ENI 控制器、Multi-IP 控制器与 Pod 控制器",
+      "file": "14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md",
+      "section": "深入理解",
+      "group": "CRD 与控制器体系",
+      "level": "Advanced"
+    },
+    {
+      "slug": "15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji",
+      "title": "Webhook 机制：Pod 变更准入控制与校验逻辑",
+      "file": "15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md",
+      "section": "深入理解",
+      "group": "CRD 与控制器体系",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an",
+      "title": "NetworkPolicy 实现：Felix（Calico）与 Cilium 集成方案",
+      "file": "16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md",
+      "section": "深入理解",
+      "group": "网络策略与安全",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi",
+      "title": "安全组与 Trunk 模式：Pod 维度的安全组与 vSwitch 配置",
+      "file": "17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md",
+      "section": "深入理解",
+      "group": "网络策略与安全",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li",
+      "title": "多网卡（Multi-Network）：Pod 多网络平面配置与路由管理",
+      "file": "18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li.md",
+      "section": "深入理解",
+      "group": "高级特性",
+      "level": "Advanced"
+    },
+    {
+      "slug": "19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi",
+      "title": "IPv6 双栈支持与 IP 协议栈配置",
+      "file": "19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md",
+      "section": "深入理解",
+      "group": "高级特性",
+      "level": "Advanced"
+    },
+    {
+      "slug": "20-pod-liu-liang-kong-zhi-qos-ji-yu-tc-de-dai-kuan-xian-su-shi-xian",
+      "title": "Pod 流量控制（QoS）：基于 TC 的带宽限速实现",
+      "file": "20-pod-liu-liang-kong-zhi-qos-ji-yu-tc-de-dai-kuan-xian-su-shi-xian.md",
+      "section": "深入理解",
+      "group": "高级特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "21-erdma-zhi-chi-yu-ling-jun-eflo-gua-pei",
+      "title": "eRDMA 支持与灵骏（EFLO）适配",
+      "file": "21-erdma-zhi-chi-yu-ling-jun-eflo-gua-pei.md",
+      "section": "深入理解",
+      "group": "高级特性",
+      "level": "Advanced"
+    },
+    {
+      "slug": "22-gu-ding-ip-ce-lue-statefulset-pod-de-ip-bao-chi-yu-ttl-hui-shou",
+      "title": "固定 IP 策略：StatefulSet Pod 的 IP 保持与 TTL 回收",
+      "file": "22-gu-ding-ip-ce-lue-statefulset-pod-de-ip-bao-chi-yu-ttl-hui-shou.md",
+      "section": "深入理解",
+      "group": "高级特性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "23-a-li-yun-openapi-feng-zhuang-ecs-vpc-yu-eflo-fu-wu-jie-kou",
+      "title": "阿里云 OpenAPI 封装：ECS、VPC 与 EFLO 服务接口",
+      "file": "23-a-li-yun-openapi-feng-zhuang-ecs-vpc-yu-eflo-fu-wu-jie-kou.md",
+      "section": "深入理解",
+      "group": "阿里云 API 集成",
+      "level": "Advanced"
+    },
+    {
+      "slug": "24-ping-zheng-guan-li-yu-ren-zheng-lian-accesskey-ecs-metadata-ji-jia-mi-wen-jian-ti-gong-zhe",
+      "title": "凭证管理与认证链：AccessKey、ECS Metadata 及加密文件提供者",
+      "file": "24-ping-zheng-guan-li-yu-ren-zheng-lian-accesskey-ecs-metadata-ji-jia-mi-wen-jian-ti-gong-zhe.md",
+      "section": "深入理解",
+      "group": "阿里云 API 集成",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "25-terway-cli-diao-shi-gong-ju-zi-yuan-ying-she-yuan-shu-ju-cha-xun-yu-wen-ti-zhen-duan",
+      "title": "Terway CLI 调试工具：资源映射、元数据查询与问题诊断",
+      "file": "25-terway-cli-diao-shi-gong-ju-zi-yuan-ying-she-yuan-shu-ju-cha-xun-yu-wen-ti-zhen-duan.md",
+      "section": "深入理解",
+      "group": "可观测性与运维",
+      "level": "Beginner"
+    },
+    {
+      "slug": "26-jian-kong-zhi-biao-ti-xi-prometheus-zhi-biao-grafana-mian-ban-yu-rpc-yan-chi-zhui-zong",
+      "title": "监控指标体系：Prometheus 指标、Grafana 面板与 RPC 延迟追踪",
+      "file": "26-jian-kong-zhi-biao-ti-xi-prometheus-zhi-biao-grafana-mian-ban-yu-rpc-yan-chi-zhui-zong.md",
+      "section": "深入理解",
+      "group": "可观测性与运维",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "27-dong-tai-pei-zhi-yu-re-jia-zai-configmap-qu-dong-de-yun-xing-shi-pei-zhi-bian-geng",
+      "title": "动态配置与热加载：ConfigMap 驱动的运行时配置变更",
+      "file": "27-dong-tai-pei-zhi-yu-re-jia-zai-configmap-qu-dong-de-yun-xing-shi-pei-zhi-bian-geng.md",
+      "section": "深入理解",
+      "group": "可观测性与运维",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "28-dan-yuan-ce-shi-ce-lue-mock-kuang-jia-mockery-gomonkey-da-zhuang-yu-envtest-ji-cheng-ce-shi",
+      "title": "单元测试策略：Mock 框架（Mockery）、Gomonkey 打桩与 Envtest 集成测试",
+      "file": "28-dan-yuan-ce-shi-ce-lue-mock-kuang-jia-mockery-gomonkey-da-zhuang-yu-envtest-ji-cheng-ce-shi.md",
+      "section": "深入理解",
+      "group": "测试体系",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "29-e2e-ce-shi-kuang-jia-lian-tong-xing-yan-zheng-prefix-ce-shi-yu-ya-li-ce-shi",
+      "title": "E2E 测试框架：连通性验证、Prefix 测试与压力测试",
+      "file": "29-e2e-ce-shi-kuang-jia-lian-tong-xing-yan-zheng-prefix-ce-shi-yu-ya-li-ce-shi.md",
+      "section": "深入理解",
+      "group": "测试体系",
+      "level": "Advanced"
+    }
+  ]
+}

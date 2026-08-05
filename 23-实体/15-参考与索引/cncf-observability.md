@@ -64,7 +64,7 @@ Prometheus 是 CNCF 第二个毕业项目，事实上的云原生监控标准。
 
 - **数据模型**: 多维时间序列，基于标签（label）的键值对
 - **查询语言**: PromQL 支持丰富的聚合与计算
-- **高可用**: [[03-prometheus-ha-deployment|联邦集群与 Thanos/Cortex 方案]]
+- **高可用**: [[02-prometheus-ha-deployment|联邦集群与 Thanos/Cortex 方案]]
 - **生态集成**: 与 Grafana、Alertmanager 深度集成
 - **核心指标**: 拉取（pull）模式采集，服务发现自动感知
 

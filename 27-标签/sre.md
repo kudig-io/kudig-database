@@ -52,8 +52,8 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 - [[09-可观测性/06-SLO-SLI/02-error-budget-policy|错误预算策略]]
 - [[09-可观测性/06-SLO-SLI/03-sli-implementation-guide|SLI 实现指南]]
 - [[09-可观测性/06-SLO-SLI/04-sli-definition-selection|SLI 定义选择]]
-- [[09-可观测性/06-SLO-SLI/18-slo-sli-system|SLO/SLI 系统]]
-- [[09-可观测性/06-SLO-SLI/99-slo-operations-guide|SLO 运营指南]]
+- [[09-可观测性/06-SLO-SLI/08-slo-sli-system|SLO/SLI 系统]]
+- [[09-可观测性/06-SLO-SLI/09-slo-operations-guide|SLO 运营指南]]
 
 ### SLO 设计框架
 
@@ -67,12 +67,12 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 
 ## 事件管理 (Incident Management)
 
-- [[13-生产运维/03-事件响应/04-incident-response-template|事故响应模板与流程]]
+- [[13-生产运维/03-事件响应/05-incident-response-template|事故响应模板与流程]]
 - [[13-生产运维/03-事件响应/01-escalation-matrix-severity-levels|升级矩阵与严重性级别]]
 - [[13-生产运维/03-事件响应/02-war-room-coordination-procedures|作战室协调流程]]
-- [[13-生产运维/03-事件响应/05-security-incident-response-playbook|安全事件响应 Playbook]]
-- [[13-生产运维/03-事件响应/23-incident-response-handling|事件响应处理]]
-- [[13-生产运维/03-事件响应/24-incident-response-runbook-template|事件响应 Runbook 模板]]
+- [[13-生产运维/03-事件响应/06-security-incident-response-playbook|安全事件响应 Playbook]]
+- [[13-生产运维/03-事件响应/10-incident-response-handling|事件响应处理]]
+- [[13-生产运维/03-事件响应/11-incident-response-runbook-template|事件响应 Runbook 模板]]
 
 ### 事件严重性分级
 
@@ -85,9 +85,9 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 
 ## 容量规划 (Capacity Planning)
 
-- [[13-生产运维/07-运维手册/05-capacity-planning-readiness|容量规划就绪]]
+- [[13-生产运维/07-运维手册/03-capacity-planning-readiness|容量规划就绪]]
 - [[12-可靠性/03-容量规划/01-capacity-planning-framework|容量规划方法论]]
-- [[12-可靠性/03-容量规划/24-capacity-planning-forecasting|资源预测模型]]
+- [[12-可靠性/03-容量规划/06-capacity-planning-forecasting|资源预测模型]]
 - [[02-工作负载/01-核心工作负载/22-cluster-capacity-planning|集群容量规划]]
 
 ## 混沌工程 (Chaos Engineering)
@@ -100,10 +100,10 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 
 ## 灾难恢复 (Disaster Recovery)
 
-- [[12-可靠性/02-灾难恢复/12-disaster-recovery-bc-runbook-v1|灾备 BC Runbook v1]]
-- [[12-可靠性/02-灾难恢复/21-disaster-recovery-bc-runbook-v2|灾备 BC Runbook v2]]
-- [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills|灾备演练]]
-- [[12-可靠性/02-灾难恢复/17-storage-backend-failure-playbook|存储后端故障 Playbook]]
+- [[12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1|灾备 BC Runbook v1]]
+- [[12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2|灾备 BC Runbook v2]]
+- [[12-可靠性/02-灾难恢复/18-disaster-recovery-drills|灾备演练]]
+- [[12-可靠性/02-灾难恢复/19-storage-backend-failure-playbook|存储后端故障 Playbook]]
 
 ## 事后复盘 (Postmortem)
 
@@ -114,7 +114,7 @@ SRE 是 DevOps 的一种实现 (SRE is a specific implementation of DevOps)
 ## On-Call 运营
 
 - [[13-生产运维/07-运维手册/01-production-sre-daily-ops|生产环境日常巡检与值班手册]]
-- [[13-生产运维/03-事件响应/03-on-call-playbook|值班手册与告警响应]]
+- [[13-生产运维/03-事件响应/04-on-call-playbook|值班手册与告警响应]]
 - [[13-生产运维/07-运维手册/07-change-freeze-policy|变更冻结策略]]
 
 ### On-Call 最佳实践

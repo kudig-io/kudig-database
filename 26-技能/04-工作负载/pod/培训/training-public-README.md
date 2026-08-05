@@ -255,7 +255,7 @@ Step 4: 场景化 Q&A
 
 **关联文档**:
 - MOC.md](MOC.md) — 本专题完整文档导航
-- [00-learning-gaps-analysis.md](00-learning-gaps-analysis.md) — 内容缺口分析
+- [00-learning-gaps-analysis.md](01-learning-gaps-analysis.md) — 内容缺口分析
 - [00-beginner-learning-roadmap.md](00-beginner-learning-roadmap.md) — 多路径学习路线图
 - [beginner-guides/](beginner-guides/) — 🆕 小白补充教程
 - [../故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill（深度技术细节）
@@ -277,7 +277,7 @@ Step 4: 场景化 Q&A
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

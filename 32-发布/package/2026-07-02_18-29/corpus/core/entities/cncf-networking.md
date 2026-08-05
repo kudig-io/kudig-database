@@ -98,7 +98,7 @@ Istio 是最广泛使用的服务网格。
 - **流量管理**: 金丝雀、蓝绿、A/B 测试、故障注入
 - **安全**: mTLS、RBAC、JWT 验证
 - **可观测性**: 分布式追踪、指标、访问日志
-- **高级功能**: 高级流量管理、[[03-istio-security-hardening|安全加固]]
+- **高级功能**: 高级流量管理、[[04-istio-security-hardening|安全加固]]
 - Ambient Mesh 模式减少 sidecar 开销
 
 ### [[linkerd]] — 毕业项目
@@ -251,7 +251,7 @@ Telepresence 让本地开发环境连接远程 K8s 集群。
 
 ## Related
 
-- [[41-terway-architecture-deep-dive]] — Terway 架构深度解析
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/04-terway-architecture-deep-dive]] — Terway 架构深度解析
 - [[entities/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
 - [[aeraki-mesh]] — Aeraki Mesh
 - [[network-service-mesh]] — Network Service Mesh (NSM)

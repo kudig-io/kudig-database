@@ -12,7 +12,7 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[10-平台工程/02-运维/13-multi-cluster-management.md]]'
+- target: '[[10-平台工程/02-运维/10-multi-cluster-management.md]]'
   type: uses
 - target: '[[22-概念/11-交叉分析/Deployment × Secret 管理.md]]'
   type: uses
@@ -89,7 +89,7 @@ status: reviewed
 - Pod 生命周期 × Secret 管理 — Secret 注入
 - [[22-概念/11-交叉分析/Deployment × Secret 管理.md|Deployment × Secret 管理]] — 部署与 Secret
 - Secret 管理 × 存储模型 — Secret 存储
-- IaC × [[10-平台工程/02-运维/13-multi-cluster-management.md|多集群管理]] — 基础设施即代码
+- IaC × [[10-平台工程/02-运维/10-multi-cluster-management.md|多集群管理]] — 基础设施即代码
 
 ### SRE/可靠性
 

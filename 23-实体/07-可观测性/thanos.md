@@ -240,7 +240,7 @@ Thanos 异常
 ## Related
 
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — [[prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
+- [[02-prometheus-ha-deployment]] — [[prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
 - [[bank-vaults]] — Bank-Vaults
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -186,7 +186,7 @@ flowchart TD
 - [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[23-实体/03-运行时/containerd.md|containerd]] — containerd
 - [[19-故障诊断/04-高级排障/structural-02-node-components/03-container-runtime-troubleshooting.md|容器运行时故障排查指南]]
-- [[14-容器运行时/03-containerd-CRI-O/01-containerd-production-operations.md|containerd 生产运维指南]]
+- [[14-容器运行时/03-containerd-CRI-O/02-containerd-production-operations.md|containerd 生产运维指南]]
 
 
 <!-- risk-assessed -->

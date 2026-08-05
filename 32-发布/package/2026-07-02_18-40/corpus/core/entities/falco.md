@@ -124,7 +124,7 @@ Falco deploys as a [[DaemonSet|DaemonSet]] with one pod per node, monitoring all
 - RELEASE-NOTES-0.15
 - RELEASE-NOTES-0.31
 - [[entities/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
 - [[concepts/纵深防御 x 供应链安全.md|纵深防御 x 供应链安全]] — Cross-reference
 - [[concepts/eBPF x 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[concepts/security-tool-evolution.md|安全工具演进]] — Cross-reference

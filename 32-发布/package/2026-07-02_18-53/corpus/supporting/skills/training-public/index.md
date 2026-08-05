@@ -34,6 +34,6 @@ last_updated: 2026-07
 ## 文档
 
 - [[skills/training-public/00-beginner-learning-roadmap.md|Beginner Learning Roadmap]]
-- [[skills/training-public/00-learning-gaps-analysis.md|Learning Gaps Analysis]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-public/01-learning-gaps-analysis|Learning Gaps Analysis]]
 - [[skills/training-public/MOC.md|Moc]]
 

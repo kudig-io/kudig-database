@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/Azure-AKS/02-aks-cluster-lifecycle-upgrades.md|Aks Cluster Lifecycle Upgrades]]
-- [[domain-12-cloud-providers/Azure-AKS/03-aks-networking-azure-cni.md|Aks Networking Azure Cni]]
-- [[domain-12-cloud-providers/Azure-AKS/04-aks-storage-managed-disk.md|Aks Storage Managed Disk]]
-- [[domain-12-cloud-providers/Azure-AKS/05-aks-identity-workload-identity.md|Aks Identity Workload Identity]]
-- [[domain-12-cloud-providers/Azure-AKS/06-aks-troubleshooting-playbook.md|Aks Troubleshooting Playbook]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/04-azure-aks/01-aks-cluster-lifecycle-upgrades|Aks Cluster Lifecycle Upgrades]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/04-azure-aks/02-aks-networking-azure-cni|Aks Networking Azure Cni]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/04-azure-aks/03-aks-storage-managed-disk|Aks Storage Managed Disk]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/04-azure-aks/04-aks-identity-workload-identity|Aks Identity Workload Identity]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-12-cloud-providers/04-azure-aks/05-aks-troubleshooting-playbook|Aks Troubleshooting Playbook]]
 - [[domain-12-cloud-providers/Azure-AKS/azure-aks-overview.md|Azure Aks Overview]]
 

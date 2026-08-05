@@ -497,7 +497,7 @@ done
 ## 相关文档
 
 - [01-storage-technologies-overview](./01-storage-technologies-overview.md) - 存储技术概述
-- Linux 存储管理](../domain-17-system-foundation/05-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
+- Linux 存储管理](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-17-system-foundation/01-linux/04-linux-storage-management.md) - Linux 存储管理（LVM/RAID/IO调度）
 - [04-distributed-storage-systems](./04-distributed-storage-systems.md) - 分布式存储
 
 ## See Also

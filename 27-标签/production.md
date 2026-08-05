@@ -50,66 +50,66 @@ last_updated: '2026-07-21'
 ## 生产运维核心 (Production Ops Core)
 
 - [[13-生产运维/07-运维手册/01-production-sre-daily-ops|生产环境日常巡检与值班手册]]
-- [[13-生产运维/03-事件响应/03-on-call-playbook|值班手册与告警响应]]
-- [[13-生产运维/03-事件响应/04-incident-response-template|事故响应模板与流程]]
-- [[13-生产运维/07-运维手册/05-capacity-planning-readiness|容量规划就绪]]
-- [[13-生产运维/07-运维手册/06-multi-cluster-operations|多集群运营]]
+- [[13-生产运维/03-事件响应/04-on-call-playbook|值班手册与告警响应]]
+- [[13-生产运维/03-事件响应/05-incident-response-template|事故响应模板与流程]]
+- [[13-生产运维/07-运维手册/03-capacity-planning-readiness|容量规划就绪]]
+- [[13-生产运维/07-运维手册/05-multi-cluster-operations|多集群运营]]
 - [[13-生产运维/07-运维手册/07-change-freeze-policy|变更冻结策略]]
 - [[13-生产运维/07-运维手册/08-security-operations-runbook|安全运营 Runbook]]
-- [[13-生产运维/07-运维手册/10-observability-operations|可观测性运营]]
-- [[13-生产运维/07-运维手册/13-node-and-runtime-ops|节点与运行时运维]]
-- [[13-生产运维/07-运维手册/05-production-runbook-generator|生产 Runbook 编写规范]]
-- [[13-生产运维/00-总览/99-production-readiness-operations-guide|安全生产就绪指南]]
+- [[13-生产运维/07-运维手册/09-observability-operations|可观测性运营]]
+- [[13-生产运维/07-运维手册/10-node-and-runtime-ops|节点与运行时运维]]
+- [[13-生产运维/07-运维手册/04-production-runbook-generator|生产 Runbook 编写规范]]
+- [[13-生产运维/00-总览/01-production-readiness-operations-guide|安全生产就绪指南]]
 
 ## 成本治理 (Cost Governance)
 
 - [[13-生产运维/01-成本治理/01-cost-allocation-chargeback|成本分配与计费回收]]
 - [[13-生产运维/01-成本治理/02-idle-resource-right-sizing|空闲资源合理配置]]
 - [[13-生产运维/01-成本治理/03-spot-instance-strategy|Spot 实例策略]]
-- [[13-生产运维/01-成本治理/13-kubernetes-cost-governance|Kubernetes 成本治理]]
-- [[13-生产运维/01-成本治理/99-finops-cost-optimization-guide|FinOps 成本优化指南]]
+- [[13-生产运维/01-成本治理/05-kubernetes-cost-governance|Kubernetes 成本治理]]
+- [[13-生产运维/01-成本治理/07-finops-cost-optimization-guide|FinOps 成本优化指南]]
 
 ## 事件响应 (Incident Response)
 
 - [[13-生产运维/03-事件响应/01-escalation-matrix-severity-levels|升级矩阵与严重性级别]]
 - [[13-生产运维/03-事件响应/02-war-room-coordination-procedures|作战室协调流程]]
-- [[13-生产运维/03-事件响应/05-security-incident-response-playbook|安全事件响应 Playbook]]
-- [[13-生产运维/03-事件响应/23-incident-response-handling|事件响应处理]]
-- [[13-生产运维/03-事件响应/24-incident-response-runbook-template|事件响应 Runbook 模板]]
+- [[13-生产运维/03-事件响应/06-security-incident-response-playbook|安全事件响应 Playbook]]
+- [[13-生产运维/03-事件响应/10-incident-response-handling|事件响应处理]]
+- [[13-生产运维/03-事件响应/11-incident-response-runbook-template|事件响应 Runbook 模板]]
 
 ## 集群治理 (Cluster Governance)
 
 - [[13-生产运维/02-集群治理/04-rbac-governance-model|RBAC 治理模型]]
-- [[13-生产运维/02-集群治理/14-resource-quota-management|资源配额管理]]
+- [[13-生产运维/02-集群治理/06-resource-quota-management|资源配额管理]]
 
 ## 绿色计算 (Green Computing)
 
-- [[13-生产运维/04-绿色计算/15-green-computing-sustainability|绿色计算可持续性]]
-- [[13-生产运维/04-绿色计算/99-greenops-sustainable-computing-guide|GreenOps 可持续计算指南]]
+- [[13-生产运维/04-绿色计算/01-green-computing-sustainability|绿色计算可持续性]]
+- [[13-生产运维/04-绿色计算/03-greenops-sustainable-computing-guide|GreenOps 可持续计算指南]]
 
 ## 生产就绪指南 (Production Readiness)
 
-- [[15-AI基础设施/00-总览/99-production-readiness-operations-guide|AI 基础设施生产就绪指南]]
-- [[08-安全/00-总览/99-production-readiness-operations-guide|安全生产就绪指南]]
-- [[06-存储/00-总览/99-production-readiness-operations-guide|存储生产就绪指南]]
-- [[11-发布变更/00-总览/99-production-readiness-operations-guide|发布变更生产就绪指南]]
-- [[09-可观测性/01-总览/99-production-readiness-operations-guide|可观测性生产就绪指南]]
-- [[12-可靠性/00-总览/99-production-readiness-operations-guide|可靠性生产就绪指南]]
-- [[01-集群基础/00-总览/99-production-readiness-operations-guide|集群基础生产就绪指南]]
-- [[10-平台工程/00-总览/99-production-readiness-operations-guide|平台工程生产就绪指南]]
-- [[14-容器运行时/00-总览/99-production-readiness-operations-guide|容器运行时生产就绪指南]]
-- [[05-网络/00-总览/99-production-readiness-operations-guide|网络生产就绪指南]]
-- [[16-专项技术/00-总览/99-production-readiness-operations-guide|专项技术生产就绪指南]]
-- [[18-云厂商/00-总览/99-production-readiness-operations-guide|云厂商生产就绪指南]]
+- [[15-AI基础设施/00-总览/01-production-readiness-operations-guide|AI 基础设施生产就绪指南]]
+- [[08-安全/00-总览/01-production-readiness-operations-guide|安全生产就绪指南]]
+- [[06-存储/00-总览/01-production-readiness-operations-guide|存储生产就绪指南]]
+- [[11-发布变更/00-总览/02-production-readiness-operations-guide|发布变更生产就绪指南]]
+- [[09-可观测性/01-总览/16-production-readiness-operations-guide|可观测性生产就绪指南]]
+- [[12-可靠性/00-总览/01-production-readiness-operations-guide|可靠性生产就绪指南]]
+- [[01-集群基础/00-总览/03-production-readiness-operations-guide|集群基础生产就绪指南]]
+- [[10-平台工程/00-总览/01-production-readiness-operations-guide|平台工程生产就绪指南]]
+- [[14-容器运行时/00-总览/01-production-readiness-operations-guide|容器运行时生产就绪指南]]
+- [[05-网络/00-总览/02-production-readiness-operations-guide|网络生产就绪指南]]
+- [[16-专项技术/00-总览/01-production-readiness-operations-guide|专项技术生产就绪指南]]
+- [[18-云厂商/00-总览/01-production-readiness-operations-guide|云厂商生产就绪指南]]
 
 ## 集群基础 (Cluster Fundamentals)
 
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles|生产架构设计原则]]
-- [[01-集群基础/00-总览/99-kubernetes-production-architecture-blueprint|K8s 生产架构蓝图]]
-- [[01-集群基础/03-控制平面/24-production-deployment-best-practices|生产环境部署最佳实践]]
-- [[01-集群基础/03-控制平面/34-certificate-pki-lifecycle-runbook|证书 PKI 生命周期 Runbook]]
-- [[01-集群基础/03-控制平面/35-cluster-upgrade-runbook|集群升级 Runbook]]
-- [[01-集群基础/07-性能调优/19-cluster-performance-tuning|集群性能调优]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles|生产架构设计原则]]
+- [[01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint|K8s 生产架构蓝图]]
+- [[01-集群基础/03-控制平面/25-production-deployment-best-practices|生产环境部署最佳实践]]
+- [[01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook|证书 PKI 生命周期 Runbook]]
+- [[01-集群基础/03-控制平面/39-cluster-upgrade-runbook|集群升级 Runbook]]
+- [[01-集群基础/07-性能调优/03-cluster-performance-tuning|集群性能调优]]
 
 ## 概念 (Concepts)
 
@@ -129,14 +129,14 @@ last_updated: '2026-07-21'
 
 ## 可靠性 (Reliability)
 
-- [[12-可靠性/07-性能测试/04-production-load-testing-playbook|生产负载测试 Playbook]]
-- [[12-可靠性/02-灾难恢复/12-disaster-recovery-bc-runbook-v1|灾备 BC Runbook v1]]
-- [[12-可靠性/02-灾难恢复/21-disaster-recovery-bc-runbook-v2|灾备 BC Runbook v2]]
-- [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills|灾备演练]]
+- [[12-可靠性/07-性能测试/06-production-load-testing-playbook|生产负载测试 Playbook]]
+- [[12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1|灾备 BC Runbook v1]]
+- [[12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2|灾备 BC Runbook v2]]
+- [[12-可靠性/02-灾难恢复/18-disaster-recovery-drills|灾备演练]]
 
 ## 应用模式 (Application Patterns)
 
-- [[04-应用模式/00-总览/99-production-readiness-operations-guide|应用模式生产就绪指南]]
+- [[04-应用模式/00-总览/02-production-readiness-operations-guide|应用模式生产就绪指南]]
 - [[04-应用模式/03-生产模式/application-security-hardening|应用安全加固]]
 - [[04-应用模式/03-生产模式/cost-optimization-finops|成本优化 FinOps]]
 - [[04-应用模式/03-生产模式/stateful-app-patterns|有状态应用模式]]
@@ -144,29 +144,29 @@ last_updated: '2026-07-21'
 
 ## 平台工程 (Platform Engineering)
 
-- [[10-平台工程/00-总览/99-production-readiness-review-template|生产就绪评估模板]]
-- [[10-平台工程/02-运维/15-production-troubleshooting|生产环境故障排查]]
-- [[10-平台工程/02-运维/12-automated-operations-toolchain|自动化运维工具链]]
+- [[10-平台工程/00-总览/02-production-readiness-review-template|生产就绪评估模板]]
+- [[10-平台工程/02-运维/12-production-troubleshooting|生产环境故障排查]]
+- [[10-平台工程/02-运维/08-automated-operations-toolchain|自动化运维工具链]]
 
 ## 部署方案 (Deployment)
 
 - [[11-发布变更/06-部署方案/04-production-environment-deployment|生产环境部署]]
 - [[11-发布变更/06-部署方案/02-single-node-deployment|单节点部署]]
-- [[11-发布变更/01-GitOps/08-fleet-gitops-operations-guide|Fleet GitOps 运营]]
+- [[11-发布变更/01-GitOps/10-fleet-gitops-operations-guide|Fleet GitOps 运营]]
 
 ## 云厂商 Runbook (Cloud Provider Runbooks)
 
-- [[18-云厂商/02-AWS-EKS/99-aws-eks-production-runbook|AWS EKS 生产 Runbook]]
-- [[18-云厂商/04-Azure-AKS/99-azure-aks-production-runbook|Azure AKS 生产 Runbook]]
-- [[18-云厂商/03-Google-GKE/99-gke-production-runbook|GKE 生产 Runbook]]
-- [[18-云厂商/01-阿里云/公有云-ACK/99-alicloud-ack-production-runbook|阿里云 ACK 生产 Runbook]]
-- [[18-云厂商/06-华为云CCE/99-huawei-cce-production-runbook|华为云 CCE 生产 Runbook]]
-- [[18-云厂商/05-腾讯云TKE/99-tencent-tke-production-runbook|腾讯云 TKE 生产 Runbook]]
+- [[18-云厂商/02-AWS-EKS/06-aws-eks-production-runbook|AWS EKS 生产 Runbook]]
+- [[18-云厂商/04-Azure-AKS/06-azure-aks-production-runbook|Azure AKS 生产 Runbook]]
+- [[18-云厂商/03-Google-GKE/06-gke-production-runbook|GKE 生产 Runbook]]
+- [[18-云厂商/01-阿里云/公有云-ACK/01-alicloud-ack-production-runbook|阿里云 ACK 生产 Runbook]]
+- [[18-云厂商/06-华为云CCE/06-huawei-cce-production-runbook|华为云 CCE 生产 Runbook]]
+- [[18-云厂商/05-腾讯云TKE/06-tencent-tke-production-runbook|腾讯云 TKE 生产 Runbook]]
 
 ## 专项技术 (Specialized Technologies)
 
 - [[16-专项技术/01-边缘计算/03-edge-computing-production-deployment|边缘计算生产部署]]
-- [[16-专项技术/01-边缘计算/14-edge-production-runbook|边缘生产 Runbook]]
+- [[16-专项技术/01-边缘计算/12-edge-production-runbook|边缘生产 Runbook]]
 - [[16-专项技术/02-WebAssembly/11-wasm-production-deployment|Wasm 生产部署]]
 
 ## 数据库中间件 (Database Middleware)
@@ -178,7 +178,7 @@ last_updated: '2026-07-21'
 
 ## 系统基础 (System Foundation)
 
-- [[17-系统基础/01-Linux/13-k8s-node-os-image-hardening-baseline|K8s 节点 OS 镜像加固基线]]
+- [[17-系统基础/01-Linux/11-k8s-node-os-image-hardening-baseline|K8s 节点 OS 镜像加固基线]]
 
 ## 生产环境全景
 

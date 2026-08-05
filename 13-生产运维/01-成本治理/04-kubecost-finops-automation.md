@@ -523,4 +523,4 @@ echo -e "\n═══════════════════════
 
 - [[13-生产运维/01-成本治理/index.md|成本治理]]
 - [[13-生产运维/01-成本治理/02-idle-resource-right-sizing.md|资源 Right-Sizing]]
-- [[01-集群基础/07-性能调优/06-autoscaling-hpa-vpa-keda.md|自动缩放]]
+- [[01-集群基础/07-性能调优/02-autoscaling-hpa-vpa-keda.md|自动缩放]]

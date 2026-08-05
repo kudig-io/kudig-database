@@ -78,19 +78,19 @@ Cloud (云平台) → Cluster (集群) → Container (容器) → Code (代码)
 
 - [[08-安全/01-身份与访问/01-authentication-authorization-system|认证授权体系]]
 - [[08-安全/01-身份与访问/05-vault-enterprise-secrets-management|Vault 企业级密钥管理]]
-- [[08-安全/01-身份与访问/07-rbac-matrix-configuration|RBAC 矩阵配置]]
-- [[08-安全/01-身份与访问/11-secret-management-tools|密钥管理工具]]
-- [[08-安全/01-身份与访问/99-vault-k8s-secrets-guide|Vault K8s 密钥指南]]
+- [[08-安全/01-身份与访问/06-rbac-matrix-configuration|RBAC 矩阵配置]]
+- [[08-安全/01-身份与访问/07-secret-management-tools|密钥管理工具]]
+- [[08-安全/01-身份与访问/10-vault-k8s-secrets-guide|Vault K8s 密钥指南]]
 
 ## 策略治理 (Policy Governance)
 
-- [[08-安全/04-策略治理/04-kyverno-enterprise-policy-management|Kyverno 企业级策略管理]]
-- [[08-安全/04-策略治理/05-policy-validation-tools|策略验证工具]]
-- [[08-安全/04-策略治理/06-pod-security-standards|Pod 安全标准]]
-- [[08-安全/04-策略治理/09-opa-gatekeeper-policy|OPA Gatekeeper 策略]]
-- [[08-安全/04-策略治理/14-policy-engines-opa-kyverno|策略引擎 OPA/Kyverno]]
-- [[08-安全/04-策略治理/99-kyverno-policy-guide|Kyverno 策略指南]]
-- [[08-安全/04-策略治理/99-opa-gatekeeper-policy-guide|OPA Gatekeeper 策略指南]]
+- [[08-安全/04-策略治理/01-kyverno-enterprise-policy-management|Kyverno 企业级策略管理]]
+- [[08-安全/04-策略治理/02-policy-validation-tools|策略验证工具]]
+- [[08-安全/04-策略治理/03-pod-security-standards|Pod 安全标准]]
+- [[08-安全/04-策略治理/04-opa-gatekeeper-policy|OPA Gatekeeper 策略]]
+- [[08-安全/04-策略治理/05-policy-engines-opa-kyverno|策略引擎 OPA/Kyverno]]
+- [[08-安全/04-策略治理/08-kyverno-policy-guide|Kyverno 策略指南]]
+- [[08-安全/04-策略治理/09-opa-gatekeeper-policy-guide|OPA Gatekeeper 策略指南]]
 
 ## 供应链安全 (Supply Chain Security)
 
@@ -99,36 +99,36 @@ Cloud (云平台) → Cluster (集群) → Container (容器) → Code (代码)
 - [[08-安全/05-供应链/03-sbom-generation-management|SBOM 生成与管理]]
 - [[08-安全/05-供应链/05-slsa-levels-implementation|SLSA 级别实施]]
 - [[08-安全/05-供应链/07-sigstore-cosign-signing|Sigstore Cosign 签名]]
-- [[08-安全/05-供应链/10-image-security-scanning|镜像安全扫描]]
+- [[08-安全/05-供应链/12-image-security-scanning|镜像安全扫描]]
 - [[08-安全/05-供应链/14-supply-chain-security-runbook|供应链安全 Runbook]]
-- [[08-安全/05-供应链/99-slsa-supply-chain-security-guide|SLSA 供应链安全指南]]
+- [[08-安全/05-供应链/16-slsa-supply-chain-security-guide|SLSA 供应链安全指南]]
 
 ## 合规审计 (Compliance & Audit)
 
-- [[08-安全/06-合规审计/04-audit-logging-compliance|审计日志合规]]
-- [[08-安全/06-合规审计/08-cis-benchmark-compliance-audit|CIS Benchmark 合规审计]]
-- [[08-安全/06-合规审计/08-security-best-practices|安全最佳实践]]
-- [[08-安全/06-合规审计/09-security-hardening-production|生产环境安全加固]]
-- [[08-安全/06-合规审计/11-kubernetes-security-hardening|Kubernetes 安全加固]]
-- [[08-安全/06-合规审计/12-compliance-certification|合规认证]]
-- [[08-安全/06-合规审计/99-cert-manager-tls-guide|cert-manager TLS 指南]]
+- [[08-安全/06-合规审计/03-audit-logging-compliance|审计日志合规]]
+- [[08-安全/06-合规审计/04-cis-benchmark-compliance-audit|CIS Benchmark 合规审计]]
+- [[08-安全/06-合规审计/05-security-best-practices|安全最佳实践]]
+- [[08-安全/06-合规审计/06-security-hardening-production|生产环境安全加固]]
+- [[08-安全/06-合规审计/08-kubernetes-security-hardening|Kubernetes 安全加固]]
+- [[08-安全/06-合规审计/09-compliance-certification|合规认证]]
+- [[08-安全/06-合规审计/13-cert-manager-tls-guide|cert-manager TLS 指南]]
 
 ## 网络安全 (Network Security)
 
-- [[08-安全/02-网络安全/02-network-security-policies|网络安全策略]]
-- [[08-安全/02-网络安全/07-zero-trust-security-architecture|零信任安全架构]]
-- [[08-安全/02-网络安全/18-network-defense-depth|网络纵深防御]]
-- [[08-安全/02-网络安全/19-zero-trust-architecture|零信任架构]]
-- [[08-安全/02-网络安全/21-multicluster-security|多集群安全]]
+- [[08-安全/02-网络安全/01-network-security-policies|网络安全策略]]
+- [[08-安全/02-网络安全/02-zero-trust-security-architecture|零信任安全架构]]
+- [[08-安全/02-网络安全/03-network-defense-depth|网络纵深防御]]
+- [[08-安全/02-网络安全/04-zero-trust-architecture|零信任架构]]
+- [[08-安全/02-网络安全/05-multicluster-security|多集群安全]]
 
 ## 运行时安全 (Runtime Security)
 
 - [[08-安全/03-运行时安全/01-falco-cloud-native-security|Falco 云原生安全]]
 - [[08-安全/03-运行时安全/02-sysdig-enterprise-container-security|Sysdig 企业级容器安全]]
-- [[08-安全/03-运行时安全/03-runtime-security-defense|运行时安全防御]]
-- [[08-安全/03-运行时安全/15-runtime-security-detection|运行时安全检测]]
-- [[08-安全/03-运行时安全/17-gvisor-container-sandbox|gVisor 容器沙箱]]
-- [[08-安全/03-运行时安全/99-falco-runtime-security-guide|Falco 运行时安全指南]]
+- [[08-安全/03-运行时安全/04-runtime-security-defense|运行时安全防御]]
+- [[08-安全/03-运行时安全/05-runtime-security-detection|运行时安全检测]]
+- [[08-安全/03-运行时安全/06-gvisor-container-sandbox|gVisor 容器沙箱]]
+- [[08-安全/03-运行时安全/08-falco-runtime-security-guide|Falco 运行时安全指南]]
 
 ## AI 安全 (AI Security)
 
@@ -158,7 +158,7 @@ Cloud (云平台) → Cluster (集群) → Container (容器) → Code (代码)
 
 ## 故障诊断 (Troubleshooting)
 
-- [[19-故障诊断/03-基础设施排障/32-security-troubleshooting|安全故障排查]]
+- [[19-故障诊断/03-基础设施排障/08-security-troubleshooting|安全故障排查]]
 - [[19-故障诊断/04-高级排障/structural-06-security-auth/03-pod-security-troubleshooting|Pod 安全排障]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-rbac-quota/DIALOGUE|RBAC 权限问题对话]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-security-incident/DIALOGUE|安全事件响应对话]]

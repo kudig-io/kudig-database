@@ -23,7 +23,7 @@ last_updated: 2026-05-23
 # Secret未更新导致Rolling Update新旧版本配置不一致
 
 **日期**: 2026-10-25  
-**关联Skill**: [[14-configmap-secret-failure]]  
+**关联Skill**: [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/03-configmap-secret-failure]]  
 **严重级别**: P1
 
 ## 场景描述

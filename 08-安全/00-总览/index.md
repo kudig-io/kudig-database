@@ -11,4 +11,4 @@ created: '2026-07-25'
 ## 文档
 
 - [[08-安全/00-总览/00-open-source-projects-index.md|00-open-source-projects-index]]
-- [[08-安全/00-总览/99-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]
+- [[08-安全/00-总览/01-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]

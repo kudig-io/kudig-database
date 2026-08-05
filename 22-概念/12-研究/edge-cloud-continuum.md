@@ -202,8 +202,8 @@ spec:
 
 ## Related
 
-- [[19-故障诊断/04-高级排障/37-multi-cluster-management-troubleshooting.md|多集群管理故障排查]]
-- [[19-故障诊断/04-高级排障/40-large-scale-cluster-operations.md|大规模集群运维]]
+- [[19-故障诊断/04-高级排障/03-multi-cluster-management-troubleshooting.md|多集群管理故障排查]]
+- [[19-故障诊断/04-高级排障/06-large-scale-cluster-operations.md|大规模集群运维]]
 
 
 <!-- risk-assessed -->

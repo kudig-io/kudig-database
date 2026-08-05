@@ -76,7 +76,7 @@ description: '## 项目概述'
 
 - [[bank-vaults]] — Bank-Vaults
 - [[thanos]] — Thanos
-- [[03-containerd-security-hardening]] — [[containerd|containerd]]rd 安全加固|containerd 安全加固]]
+- [[02-containerd-security-hardening]] — [[containerd|containerd]]rd 安全加固|containerd 安全加固]]
 - [[k0s]] — K0s
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

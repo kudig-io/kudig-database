@@ -109,15 +109,15 @@ etcdctl endpoint health --cluster
 
 ## 资源排障 (Resource Troubleshooting)
 
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting|节点综合排障]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting|Service 综合排障]]
-- [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting|PVC 存储排障]]
-- [[19-故障诊断/02-资源排障/16-networkpolicy-troubleshooting|NetworkPolicy 排障]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting|节点综合排障]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting|Service 综合排障]]
+- [[19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting|PVC 存储排障]]
+- [[19-故障诊断/02-资源排障/08-networkpolicy-troubleshooting|NetworkPolicy 排障]]
 
 ## 基础设施排障 (Infrastructure Troubleshooting)
 
-- [[19-故障诊断/03-基础设施排障/25-network-connectivity-troubleshooting|网络连通性排障]]
-- [[19-故障诊断/03-基础设施排障/32-security-troubleshooting|安全故障排查]]
+- [[19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting|网络连通性排障]]
+- [[19-故障诊断/03-基础设施排障/08-security-troubleshooting|安全故障排查]]
 
 ## 高级排障 (Advanced Troubleshooting)
 
@@ -140,8 +140,8 @@ etcdctl endpoint health --cluster
 ## 排障工具 (Troubleshooting Tools)
 
 - [[19-故障诊断/11-工具/README|排障工具索引]]
-- [[09-可观测性/07-工具/26-troubleshooting-tools|排障工具集]]
-- [[09-可观测性/07-工具/27-performance-profiling-tools|性能分析工具]]
+- [[09-可观测性/07-工具/06-troubleshooting-tools|排障工具集]]
+- [[09-可观测性/07-工具/07-performance-profiling-tools|性能分析工具]]
 
 ## 多故障场景 (Multi-Fault Scenarios)
 
@@ -173,7 +173,7 @@ etcdctl endpoint health --cluster
 
 ## 概念 (Concepts)
 
-- [[19-故障诊断/00-总览/03-systematic-troubleshooting-methodology|故障排查方法论]]
+- [[19-故障诊断/00-总览/01-systematic-troubleshooting-methodology|故障排查方法论]]
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook|生产故障排查 Playbook]]
 - [[19-故障诊断/06-FTA故障树/glossary/fault-tree-analysis|故障树分析]]
 - [[23-实体/15-参考与索引/fta-febm-methodology|根因分析]]

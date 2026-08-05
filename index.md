@@ -87,7 +87,7 @@ trigger_keywords:
 ## 其他顶层目录
 
 - [[25-研究/index.md|research]] — 研究资料
-- [[32-发布/index.md|release]] — 发布产物
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release]] — 发布产物
 - [[27-标签/index.md|tags]] — 标签索引
 - [[24-综合/index.md|synthesis]] — 综合分析
 

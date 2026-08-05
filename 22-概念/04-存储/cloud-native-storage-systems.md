@@ -18,7 +18,7 @@ relationships:
     type: related_to
   - target: '[[22-概念/04-存储/pv.md|pv]]'
     type: related_to
-  - target: '[[21-生态参考/98-merged-indexes/index.md|index]]'
+  - target: '[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]]'
     type: related_to
 created: 2026-05-24
 updated: 2026-05-24
@@ -53,7 +53,7 @@ status: stable
 云原生存储通过 [[22-概念/04-存储/csi-drivers.md|csi drivers]] 标准化接口暴露能力，配合 [[22-概念/04-存储/storageclass.md|storageclass]]
 实现声明式供给，最终以 [[22-概念/04-存储/pv.md|pv]] 绑定到工作负载。
 
-> 相关领域索引：[[21-生态参考/98-merged-indexes/index.md|index]]
+> 相关领域索引：[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]]
 
 ---
 
@@ -437,7 +437,7 @@ volumeBindingMode: WaitForFirstConsumer   # 拓扑感知
 - [[22-概念/04-存储/csi-drivers.md|csi drivers]] — CSI 驱动规范与实现
 - [[22-概念/04-存储/storageclass.md|storageclass]] — StorageClass 配置详解
 - [[22-概念/04-存储/pv.md|pv]] — 持久卷生命周期
-- [[21-生态参考/98-merged-indexes/index.md|index]] — 存储与数据领域索引
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] — 存储与数据领域索引
 
 ## Related
 

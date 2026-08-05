@@ -99,7 +99,7 @@ prerequisites:
 
 ### 技能卡片
 
-- [[19-故障诊断/08-技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
+- [[19-故障诊断/08-技能体系/08-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
 
 ### FTA 故障树
 

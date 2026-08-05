@@ -26,7 +26,7 @@ last_updated: 2026-05-23
 # NetworkPolicy阻断 + DNS解析失败并发
 
 ## 关联Skill
-- [[20-networkpolicy-connectivity]]
+- [[22-networkpolicy-connectivity]]
 - [[04-dns-resolution-failure]]
 
 ## 场景描述

@@ -237,7 +237,7 @@ spec:
 ## 相关概念
 
 - [[concepts/pod-security-policy.md|Pod Security Policy]]
-- [[domain-05-security-compliance/98-merged-indexes/index.md|安全合规索引]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-gitops-devops/index|安全合规索引]]
 
 ```
 

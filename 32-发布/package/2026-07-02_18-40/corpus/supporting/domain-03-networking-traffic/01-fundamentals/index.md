@@ -23,5 +23,5 @@ last_updated: 2026-07
 - [[domain-03-networking-traffic/网络基础/04-load-balancing-technologies.md|Load Balancing Technologies]]
 - [[domain-03-networking-traffic/网络基础/05-network-security-fundamentals.md|Network Security Fundamentals]]
 - [[domain-03-networking-traffic/网络基础/06-sdn-network-virtualization.md|Sdn Network Virtualization]]
-- [[domain-03-networking-traffic/网络基础/99-cilium-ebpf-network-guide.md|Cilium Ebpf Network Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-03-networking-traffic/01-fundamentals/07-cilium-ebpf-network-guide|Cilium Ebpf Network Guide]]
 

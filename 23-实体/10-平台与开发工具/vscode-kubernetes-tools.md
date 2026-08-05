@@ -213,7 +213,7 @@ kubectl cluster-info
 - [[opengitops]] — OpenGitOps
 - [[cadence]] — Cadence
 - [[openkruise]] — OpenKruise
-- [[02-istio-advanced-traffic-management]] — [[istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
+- [[01-istio-advanced-traffic-management]] — [[istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - vscode-kubernetes-tools

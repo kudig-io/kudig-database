@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/04-工作负载/pod/培训/lecturer/05-configmap-secret.md|Configmap Secret]]
+- [[26-技能/04-工作负载/pod/培训/lecturer/03-configmap-secret.md|Configmap Secret]]
 

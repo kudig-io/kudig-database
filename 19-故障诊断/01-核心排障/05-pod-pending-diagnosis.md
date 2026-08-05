@@ -93,9 +93,9 @@ cross_refs:
 ### 🔗 关联故障排查文档
 - **[06-Node NotReady诊断](./06-node-notready-diagnosis.md)** - 节点状态异常是Pod Pending的常见原因
 - **[07-OOM内存诊断](./07-oom-memory-diagnosis.md)** - 内存不足导致的Pod调度失败
-- **[14-PVC存储故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/14-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
-- **[24-Quota/LimitRange故障排查](../02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/24-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
-- **[25-网络连通性故障排查](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/25-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
+- **[14-PVC存储故障排查](../02-资源排障/06-pvc-storage-troubleshooting.md)** - 存储卷绑定问题影响Pod启动
+- **[24-Quota/LimitRange故障排查](../02-资源排障/16-quota-limitrange-troubleshooting.md)** - 资源配额限制导致调度失败
+- **[25-网络连通性故障排查](../03-基础设施排障/01-network-connectivity-troubleshooting.md)** - 网络策略可能阻止Pod调度
 
 ### 📚 扩展学习资料
 - **[Kubernetes调度器原理](https://kubernetes.io/docs/concepts/scheduling-eviction/kube-scheduler/)** - 深入理解调度机制
@@ -1863,8 +1863,8 @@ spec:
 - [[19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
 - [[19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
 - [[19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
 - [[19-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]

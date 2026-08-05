@@ -583,9 +583,9 @@ hybrid_observability:
 
 - [02-监控指标体系详解](../02-%E6%8C%87%E6%A0%87/02-monitoring-metrics-system.md) - 深入了解指标监控的实现细节
 - [03-日志架构设计与实现](../03-%E6%97%A5%E5%BF%97/03-logging-architecture.md) - 掌握企业级日志收集方案
-- [04-分布式追踪体系](../04-%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/04-distributed-tracing.md) - 学习全链路追踪技术实践
-- [16-大规模集群监控最佳实践](../02-%E6%8C%87%E6%A0%87/15-enterprise-scale-monitoring.md) - 了解企业级监控架构
-- [22-SLO/SLI体系建设与管理](../06-SLO-SLI/18-slo-sli-system.md) - 掌握服务质量管理方法论
+- [04-分布式追踪体系](../04-链路追踪/05-distributed-tracing.md) - 学习全链路追踪技术实践
+- [16-大规模集群监控最佳实践](../02-指标/07-enterprise-scale-monitoring.md) - 了解企业级监控架构
+- [22-SLO/SLI体系建设与管理](../06-SLO-SLI/08-slo-sli-system.md) - 掌握服务质量管理方法论
 
 ---
 

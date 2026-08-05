@@ -33,18 +33,18 @@ last_updated: 2026-05-21
 ### GitOps 与 CI/CD
 
 - [[01-argo-cd-enterprise-gitops]] — Argo cd enterprise gitops
-- [[02-jenkins-enterprise-cicd]] — Jenkins enterprise cicd
-- [[03-gitlab-enterprise-cicd]] — Gitlab enterprise cicd
-- [[04-github-actions-enterprise]] — Github actions enterprise
-- [[05-tekton-cloud-native-cicd]] — Tekton cloud native cicd
-- [[06-flux-gitops-continuous-delivery]] — Flux gitops continuous delivery
-- [[07-gitops-security-compliance]] — Gitops security compliance
-- [[08-cicd-pipeline-patterns]] — Cicd pipeline patterns
-- [[10-gitops-pipeline-practices]] — Gitops pipeline practices
-- [[99-argo-cd-gitops-guide]] — Argo cd gitops guide
-- [[99-flux-gitops-guide]] — Flux gitops guide
-- [[99-tekton-cicd-guide]] — Tekton cicd guide
-- [[99-tekton-java-cicd-guide]] — Tekton java cicd guide
+- [[03-jenkins-enterprise-cicd]] — Jenkins enterprise cicd
+- [[04-gitlab-enterprise-cicd]] — Gitlab enterprise cicd
+- [[05-github-actions-enterprise]] — Github actions enterprise
+- [[06-tekton-cloud-native-cicd]] — Tekton cloud native cicd
+- [[07-flux-gitops-continuous-delivery]] — Flux gitops continuous delivery
+- [[08-gitops-security-compliance]] — Gitops security compliance
+- [[09-cicd-pipeline-patterns]] — Cicd pipeline patterns
+- [[12-gitops-pipeline-practices]] — Gitops pipeline practices
+- [[17-argo-cd-gitops-guide]] — Argo cd gitops guide
+- [[18-flux-gitops-guide]] — Flux gitops guide
+- [[20-tekton-cicd-guide]] — Tekton cicd guide
+- [[21-tekton-java-cicd-guide]] — Tekton java cicd guide
 
 ### 基础设施即代码
 
@@ -53,26 +53,26 @@ last_updated: 2026-05-21
 - [[03-pulumi-enterprise-iac]] — Pulumi enterprise iac
 - [[04-azure-resource-manager-enterprise]] — Azure resource manager enterprise
 - [[05-crossplane-enterprise-orchestration]] — Crossplane enterprise orchestration
-- [[11-infrastructure-as-code]] — Infrastructure as code
-- [[99-crossplane-platform-guide]] — Crossplane platform guide
+- [[06-infrastructure-as-code]] — Infrastructure as code
+- [[07-crossplane-platform-guide]] — Crossplane platform guide
 
 ### 变更管理
 
-- [[22-change-management-process]] — Change management process
+- [[08-change-management-process]] — Change management process
 
 ### 测试与质量
 
 - [[01-selenium-enterprise-automation]] — Selenium enterprise automation
 - [[02-junit5-enterprise-testing]] — Junit5 enterprise testing
 - [[03-ai-testing-quality-assurance]] — Ai testing quality assurance
-- [[05-cypress-enterprise-automation]] — Cypress enterprise automation
-- [[06-playwright-enterprise-automation]] — Playwright enterprise automation
+- [[04-cypress-enterprise-automation]] — Cypress enterprise automation
+- [[05-playwright-enterprise-automation]] — Playwright enterprise automation
 
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-23]] — Open source projects index from domain 23
-- [[00-open-source-projects-index-from-domain-24]] — Open source projects index from domain 24
-- [[00-open-source-projects-index-from-domain-29]] — Open source projects index from domain 29
+- [[01-open-source-projects-index-from-domain-24]] — Open source projects index from domain 24
+- [[02-open-source-projects-index-from-domain-29]] — Open source projects index from domain 29
 - [[MOC-from-domain-23]] — MOC from domain 23
 - [[MOC-from-domain-24]] — MOC from domain 24
 - [[MOC-from-domain-29]] — MOC from domain 29
@@ -103,8 +103,8 @@ last_updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[平台工程/98-merged-indexes/index.md|Domain 07 平台工程 索引]]
-- [[可靠性/98-merged-indexes/index.md|Domain 09 可靠性工程 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 07 平台工程 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 09 可靠性工程 索引]]
 
 
 <!-- risk-assessed -->

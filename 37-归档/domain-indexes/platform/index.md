@@ -29,16 +29,16 @@ last_updated: 2026-05-21
 - [[README]] — Domain 总览
 
 ## 根目录文档
-- [[12-automated-operations-toolchain]] — Automated operations toolchain
-- [[99-karpenter-node-autoscaling-guide]] — Karpenter node autoscaling guide
-- [[99-keda-event-driven-autoscaling-guide]] — Keda event driven autoscaling guide
+- [[08-automated-operations-toolchain]] — Automated operations toolchain
+- [[17-karpenter-node-autoscaling-guide]] — Karpenter node autoscaling guide
+- [[18-keda-event-driven-autoscaling-guide]] — Keda event driven autoscaling guide
 
 ## 按主题分组
 
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-36]] — Open source projects index from domain 36
-- [[00-open-source-projects-index-from-domain-9]] — Open source projects index from domain 9
+- [[01-open-source-projects-index-from-domain-9]] — Open source projects index from domain 9
 - [[MOC-from-domain-36]] — MOC from domain 36
 - [[MOC-from-domain-9]] — MOC from domain 9
 - [[README-from-domain-36]] — README from domain 36
@@ -54,47 +54,47 @@ last_updated: 2026-05-21
 - [[06-kratix-platform-as-code]] — Kratix platform as code
 - [[07-crossplane-platform-composition]] — Crossplane platform composition
 - [[08-golden-paths-design]] — Golden paths design
-- [[11-vercel-frontend-deployment-platform]] — Vercel frontend deployment platform
-- [[20-crd-operator-development]] — Crd operator development
-- [[21-api-aggregation]] — Api aggregation
-- [[22-client-libraries]] — Client libraries
-- [[24-addons-extensions]] — Addons extensions
-- [[99-backstage-idp-guide]] — Backstage idp guide
-- [[99-java-k8s-client-operator-guide]] — Java k8s client operator guide
+- [[09-vercel-frontend-deployment-platform]] — Vercel frontend deployment platform
+- [[10-crd-operator-development]] — Crd operator development
+- [[11-api-aggregation]] — Api aggregation
+- [[12-client-libraries]] — Client libraries
+- [[13-addons-extensions]] — Addons extensions
+- [[15-backstage-idp-guide]] — Backstage idp guide
+- [[16-java-k8s-client-operator-guide]] — Java k8s client operator guide
 
 ### 开发者体验
 
-- [[09-developer-experience-metrics]] — Developer experience metrics
-- [[10-platform-team-topology]] — Platform team topology
-- [[23-cli-enhancement-tools]] — Cli enhancement tools
-- [[26-kubectl-plugin-ecosystem]] — Kubectl plugin ecosystem
+- [[03-developer-experience-metrics]] — Developer experience metrics
+- [[04-platform-team-topology]] — Platform team topology
+- [[05-cli-enhancement-tools]] — Cli enhancement tools
+- [[06-kubectl-plugin-ecosystem]] — Kubectl plugin ecosystem
 
 ### 治理与管控
 
-- [[03-capacity-planning-resource-assessment]] — Capacity planning resource assessment
-- [[04-performance-benchmarking-tuning]] — Performance benchmarking tuning
-- [[09-cost-optimization-finops]] — Cost optimization finops
-- [[10-security-compliance]] — Security compliance
-- [[14-large-scale-cluster-optimization]] — Large scale cluster optimization
-- [[17-multi-tenant-management]] — Multi tenant management
+- [[10-平台工程/03-治理/01-capacity-planning-resource-assessment]] — Capacity planning resource assessment
+- [[02-performance-benchmarking-tuning]] — Performance benchmarking tuning
+- [[03-cost-optimization-finops]] — Cost optimization finops
+- [[04-security-compliance]] — Security compliance
+- [[05-large-scale-cluster-optimization]] — Large scale cluster optimization
+- [[06-multi-tenant-management]] — Multi tenant management
 
 ### 平台运维
 
 - [[01-platform-ops-overview]] — Platform ops overview
 - [[02-cluster-lifecycle-management]] — Cluster lifecycle management
-- [[05-operations-metrics-system]] — Operations metrics system
-- [[06-monitoring-alerting-system]] — Monitoring alerting system
-- [[07-gitops-configuration-management]] — Gitops configuration management
-- [[08-automation-toolchain]] — Automation toolchain
-- [[11-disaster-recovery-business-continuity]] — Disaster recovery business continuity
-- [[12-backup-recovery-strategy]] — Backup recovery strategy
+- [[03-operations-metrics-system]] — Operations metrics system
+- [[04-monitoring-alerting-system]] — Monitoring alerting system
+- [[05-gitops-configuration-management]] — Gitops configuration management
+- [[06-automation-toolchain]] — Automation toolchain
+- [[07-disaster-recovery-business-continuity]] — Disaster recovery business continuity
+- [[09-backup-recovery-strategy]] — Backup recovery strategy
 - [[13-multi-cluster-management]] — Multi cluster management
-- [[15-production-troubleshooting]] — Production troubleshooting
-- [[16-platform-upgrade-migration]] — Platform upgrade migration
-- [[18-platform-observability-practice]] — Platform observability practice
-- [[19-lease-leader-election]] — Lease leader election
-- [[25-virtual-clusters]] — Virtual clusters
-- [[99-kubernetes-v1.33-platform-ops-guide]] — Kubernetes v1.33 platform ops guide
+- [[12-production-troubleshooting]] — Production troubleshooting
+- [[13-platform-upgrade-migration]] — Platform upgrade migration
+- [[14-platform-observability-practice]] — Platform observability practice
+- [[15-lease-leader-election]] — Lease leader election
+- [[16-virtual-clusters]] — Virtual clusters
+- [[19-kubernetes-v1.33-platform-ops-guide]] — Kubernetes v1.33 platform ops guide
 
 ### 代码分析专题
 
@@ -206,8 +206,8 @@ last_updated: 2026-05-21
 - [[10-平台工程/06-代码分析/node-create/README.md|README]] — README
 
 ## 相关 Domain
-- [[发布变更/98-merged-indexes/index.md|Domain 08 发布与变更管理 索引]]
-- [[生产运维/98-merged-indexes/index.md|Domain 11 生产运维 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 08 发布与变更管理 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 11 生产运维 索引]]
 
 
 <!-- risk-assessed -->

@@ -211,7 +211,7 @@ conversion:
 ## Related
 
 - [[03-清单模式/01-YAML参考/29-customresourcedefinition|CRD 完整参考]]
-- [[03-清单模式/04-Operator模式/02-operator-reconciliation-patterns|调谐循环模式]]
+- [[03-清单模式/04-Operator模式/03-operator-reconciliation-patterns|调谐循环模式]]
 
 ## See Also
 

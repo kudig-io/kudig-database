@@ -798,7 +798,7 @@ kubectl get pod <pod-name> -o yaml | grep -A10 "probe"
 ---
 
 **关联文档**:
-- [../10-workloads/10-job-cronjob.md](../10-workloads/10-job-cronjob.md) — Job 和 CronJob
+- [../10-workloads/10-job-cronjob.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/10-workloads/01-job-cronjob.md) — Job 和 CronJob
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/01-pod-crash-loop.md](../../domain-10-troubleshooting-diagnostics/技能体系/01-pod-crash-loop.md) — Pod 崩溃问题 [[SKILL|Skill]]
 - [../../domain-10-troubleshooting-diagnostics/](../../domain-10-troubleshooting-diagnostics/) — 故障排查文档
 

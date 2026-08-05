@@ -139,7 +139,7 @@ Ingress 和 Gateway 是 [[Kubernetes|Kubernetes]] 集群对外暴露服务的核
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../13-ingress-gateway-failure.md](../13-ingress-gateway-failure.md) |
+| 单文件完整版 | [../13-ingress-gateway-failure.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md) |
 
 ## Related
 

@@ -27,9 +27,9 @@ last_updated: 2026-05-23
 # StatefulSet PVC未绑定 + 节点NotReady并发
 
 ## 关联Skill
-- [[21-statefulset-failure]]
+- [[23-statefulset-failure]]
 - [[01-node-notready]]
-- [[07-pvc-storage-failure]]
+- [[08-pvc-storage-failure]]
 
 ## 场景描述
 数据库StatefulSet无法启动，PVC未绑定，同时承载PV的存储节点进入NotReady状态。

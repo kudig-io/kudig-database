@@ -96,7 +96,7 @@ prerequisites:
 ## 扩展参考
 
 ### 存储技能与故障处理
-- [[domain-10-troubleshooting-diagnostics/技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复]]
+- [[08-pvc-storage-failure|PVC/PV/CSI 存储故障诊断与修复]]
 - PV/PVC故障排查
 
 ### 存储术语词典

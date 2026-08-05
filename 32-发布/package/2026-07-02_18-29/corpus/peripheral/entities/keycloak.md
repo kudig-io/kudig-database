@@ -96,11 +96,11 @@ Keycloak 是开源的身份和访问管理（IAM）解决方案，提供单点�
 - [[entities/kuberhealthy.md|Kuberhealthy]]
 - [[entities/kubescape.md|Kubescape]]
 - [[entities/perses.md|Perses]]
-- [[entities/03-prometheus-ha-deployment.md|Prometheus 高可用部署]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/05-prometheus-ha-deployment|Prometheus 高可用部署]]
 - [[entities/trickster.md|Trickster]]
 - [[entities/distribution.md|Distribution]]
 - [[entities/hami.md|HAMI]]
-- [[entities/06-containerd-observability.md|containerd 可观测性]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/08-containerd-observability|containerd 可观测性]]
 - [[entities/kubeelasti.md|KubeElastic]]
 - [[entities/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 

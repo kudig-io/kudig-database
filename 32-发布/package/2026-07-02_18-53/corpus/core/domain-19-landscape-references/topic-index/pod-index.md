@@ -61,7 +61,7 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断 (Pod Pending Diagnosis)]]
+- [[01-pod-pending-diagnosis|Pod Pending 状态深度诊断 (Pod Pending Diagnosis)]]
 - Pod 全面故障排查 (Pod Comprehensive Troubleshooting)
 - [[domain-10-troubleshooting-diagnostics/高级排障/05-workloads/01-pod-troubleshooting.md|Pod 故障排查与运行机制深度指南]]
 

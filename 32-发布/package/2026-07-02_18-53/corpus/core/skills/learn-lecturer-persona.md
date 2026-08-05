@@ -208,7 +208,7 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 **关联文档**:
 - [../fundamentals/](../fundamentals/) — 15 课 K8s 基础概念
 - [../oncall-qa/oncall-quick-qa.md](../oncall-qa/oncall-quick-qa.md) — 20 个 On-Call 快速问答场景
-- [../troubleshooting/decision-tree-mermaid.md](../troubleshooting/decision-tree-mermaid.md) — 10 个 Mermaid 决策树
+- [../troubleshooting/decision-tree-mermaid.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/13-decision-tree/decision-tree-mermaid.md) — 10 个 Mermaid 决策树
 - [../resources/analogy-dictionary.md](../resources/analogy-dictionary.md) — 类比词典
 
 ## Related

@@ -864,17 +864,17 @@ OLM v0（当前主流）→ OLM v1 + RukPak 是社区演进方向。OLM v1 更�
 
 - [[16-专项技术/03-扩展机制/02-operator-development-patterns.md|Operator 开发模式]]
 - [[16-专项技术/03-扩展机制/01-crd-development-guide.md|CRD 开发指南]]
-- [[01-集群基础/02-设计原则/12-operator-development-guide.md|Operator 开发指南]]
+- [[01-集群基础/02-设计原则/13-operator-development-guide.md|Operator 开发指南]]
 - [[22-概念/01-核心架构/operator-pattern.md|Operator 模式]]
-- [[11-发布变更/01-GitOps/13-helm-production-patterns.md|Helm 生产模式]]
+- [[11-发布变更/01-GitOps/15-helm-production-patterns.md|Helm 生产模式]]
 - [[16-专项技术/03-扩展机制/03-admission-webhook-configuration.md|准入 Webhook 配置]]
 - [[16-专项技术/03-扩展机制/05-package-management-tools.md|包管理工具]]
 
 ## See Also
 
 - [[22-概念/01-核心架构/operator-pattern.md|Operator 模式]]
-- [[01-集群基础/02-设计原则/03-controller-pattern.md|控制器模式]]
-- [[01-集群基础/02-设计原则/05-informer-workqueue.md|Informer 与 WorkQueue]]
+- [[01-集群基础/02-设计原则/04-controller-pattern.md|控制器模式]]
+- [[01-集群基础/02-设计原则/06-informer-workqueue.md|Informer 与 WorkQueue]]
 - [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md|ArgoCD 企业 GitOps]]
 
 ## 参考链接

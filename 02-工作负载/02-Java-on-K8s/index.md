@@ -21,10 +21,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot Kubernetes Production]]
-- [[02-工作负载/02-Java-on-K8s/03-jvm-gc-container-tuning.md|Jvm Gc Container Tuning]]
-- [[02-工作负载/02-Java-on-K8s/04-java-operator-sdk-development.md|Java Operator Sdk Development]]
-- [[02-工作负载/02-Java-on-K8s/05-quarkus-native-kubernetes.md|Quarkus Native Kubernetes]]
-- [[02-工作负载/02-Java-on-K8s/06-java-cicd-tekton-argocd.md|Java Cicd Tekton Argocd]]
-- [[02-工作负载/02-Java-on-K8s/07-java-observability-kubernetes.md|Java Observability Kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|Spring Boot Kubernetes Production]]
+- [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning.md|Jvm Gc Container Tuning]]
+- [[02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development.md|Java Operator Sdk Development]]
+- [[02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes.md|Quarkus Native Kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd.md|Java Cicd Tekton Argocd]]
+- [[02-工作负载/02-Java-on-K8s/06-java-observability-kubernetes.md|Java Observability Kubernetes]]
 

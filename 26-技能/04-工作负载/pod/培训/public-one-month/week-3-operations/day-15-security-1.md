@@ -427,9 +427,9 @@ default ServiceAccount 默认没有任何权限（除了通过自动挂载的 To
 ## 延伸阅读
 
 - [认证授权系统](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/07-rbac-matrix-configuration.md)
-- [证书管理](../../../../../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/10-certificate-management.md)
-- [Pod 安全标准](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
+- [RBAC 矩阵配置](../../../../../../08-安全/01-身份与访问/06-rbac-matrix-configuration.md)
+- [证书管理](../../../../../../08-安全/06-合规审计/07-certificate-management.md)
+- [Pod 安全标准](../../../安全/03-pod-security-standards.md)
 
 
 <!-- risk-assessed -->

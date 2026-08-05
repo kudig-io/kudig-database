@@ -45,17 +45,17 @@ last_updated: '2026-07-21'
 ## GitOps 平台 (GitOps Platforms)
 
 - [[11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
-- [[11-发布变更/01-GitOps/02-jenkins-enterprise-cicd|Jenkins 企业级 CI/CD]]
-- [[11-发布变更/01-GitOps/03-gitlab-enterprise-cicd|GitLab 企业级 CI/CD]]
-- [[11-发布变更/01-GitOps/04-github-actions-enterprise|GitHub Actions 企业级]]
-- [[11-发布变更/01-GitOps/05-tekton-cloud-native-cicd|Tekton 云原生 CI/CD]]
-- [[11-发布变更/01-GitOps/06-flux-gitops-continuous-delivery|Flux GitOps 持续交付]]
-- [[11-发布变更/01-GitOps/07-gitops-security-compliance|GitOps 安全合规]]
-- [[11-发布变更/01-GitOps/08-cicd-pipeline-patterns|CI/CD 管道模式]]
-- [[11-发布变更/01-GitOps/08-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
-- [[11-发布变更/01-GitOps/99-argo-cd-gitops-guide|ArgoCD GitOps 指南]]
-- [[11-发布变更/01-GitOps/99-flux-gitops-guide|Flux GitOps 指南]]
-- [[11-发布变更/01-GitOps/99-tekton-cicd-guide|Tekton CI/CD 指南]]
+- [[11-发布变更/01-GitOps/03-jenkins-enterprise-cicd|Jenkins 企业级 CI/CD]]
+- [[11-发布变更/01-GitOps/04-gitlab-enterprise-cicd|GitLab 企业级 CI/CD]]
+- [[11-发布变更/01-GitOps/05-github-actions-enterprise|GitHub Actions 企业级]]
+- [[11-发布变更/01-GitOps/06-tekton-cloud-native-cicd|Tekton 云原生 CI/CD]]
+- [[11-发布变更/01-GitOps/07-flux-gitops-continuous-delivery|Flux GitOps 持续交付]]
+- [[11-发布变更/01-GitOps/08-gitops-security-compliance|GitOps 安全合规]]
+- [[11-发布变更/01-GitOps/09-cicd-pipeline-patterns|CI/CD 管道模式]]
+- [[11-发布变更/01-GitOps/10-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
+- [[11-发布变更/01-GitOps/17-argo-cd-gitops-guide|ArgoCD GitOps 指南]]
+- [[11-发布变更/01-GitOps/18-flux-gitops-guide|Flux GitOps 指南]]
+- [[11-发布变更/01-GitOps/20-tekton-cicd-guide|Tekton CI/CD 指南]]
 
 ## 清单模式 (Manifest Patterns)
 
@@ -87,17 +87,17 @@ last_updated: '2026-07-21'
 
 ## IaC (Infrastructure as Code)
 
-- [[11-发布变更/02-IaC/11-infrastructure-as-code|基础设施即代码]]
-- [[11-发布变更/02-IaC/99-crossplane-platform-guide|Crossplane 平台指南]]
+- [[11-发布变更/02-IaC/06-infrastructure-as-code|基础设施即代码]]
+- [[11-发布变更/02-IaC/07-crossplane-platform-guide|Crossplane 平台指南]]
 
 ## 集群基础 (Cluster Fundamentals)
 
-- [[01-集群基础/03-控制平面/26-gitops-automation-operations|GitOps 自动化运营]]
-- [[01-集群基础/02-设计原则/11-extensibility-design-patterns|扩展性设计模式]]
+- [[01-集群基础/03-控制平面/27-gitops-automation-operations|GitOps 自动化运营]]
+- [[01-集群基础/02-设计原则/12-extensibility-design-patterns|扩展性设计模式]]
 
 ## 故障诊断 (Troubleshooting)
 
-- [[19-故障诊断/04-高级排障/38-gitops-argocd-troubleshooting|GitOps ArgoCD 排障]]
+- [[19-故障诊断/04-高级排障/04-gitops-argocd-troubleshooting|GitOps ArgoCD 排障]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting|Helm 排障]]
 - [[19-故障诊断/04-高级排障/structural-11-gitops-devops/01-gitops-devops-troubleshooting|GitOps/DevOps 排障]]
 - [[19-故障诊断/06-FTA故障树/list/gitops-argocd-fta|GitOps ArgoCD 故障树]]
@@ -110,8 +110,8 @@ last_updated: '2026-07-21'
 
 ## 平台工程 (Platform Engineering)
 
-- [[10-平台工程/02-运维/07-gitops-configuration-management|GitOps 配置管理]]
-- [[10-平台工程/02-运维/08-automation-toolchain|自动化工具链]]
+- [[10-平台工程/02-运维/05-gitops-configuration-management|GitOps 配置管理]]
+- [[10-平台工程/02-运维/06-automation-toolchain|自动化工具链]]
 
 ## 研究 (Research)
 

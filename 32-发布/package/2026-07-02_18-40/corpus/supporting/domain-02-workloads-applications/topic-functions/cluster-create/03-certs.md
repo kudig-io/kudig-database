@@ -847,8 +847,8 @@ done
 - [控制面组件](05-control-plane.md) — static Pod 挂载证书
 - [etcd 管理](07-etcd.md) — etcd 使用证书进行 TLS 通信
 - [安全机制](16-security.md) — ServiceAccount 密钥和审计
-- [集群升级](09-upgrade.md) — 升级时自动续签证书
-- [高可用进阶](14-ha-advanced.md) — upload-certs 分发证书
+- [集群升级](08-upgrade.md) — 升级时自动续签证书
+- [高可用进阶](12-ha-advanced.md) — upload-certs 分发证书
 
 ## Related
 

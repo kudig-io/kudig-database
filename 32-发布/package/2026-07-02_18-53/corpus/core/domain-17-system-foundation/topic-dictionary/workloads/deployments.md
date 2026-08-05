@@ -263,10 +263,10 @@ kubectl get rs -n prod -l app=web-api --sort-by=.metadata.creationTimestamp
 ```
 ## 交叉引用
 
-- [Deployment 生产模式详解](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
+- [Deployment 生产模式详解](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/00-core-workloads/01-deployment-production-patterns.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
-- [工作负载监控与告警](../../domain-02-workloads-applications/06-workload-monitoring-alerting.md)
-- [工作负载故障排查手册](../../domain-02-workloads-applications/07-workload-troubleshooting-handbook.md)
+- [工作负载监控与告警](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/02-workload-monitoring-alerting.md)
+- [工作负载故障排查手册](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/03-workload-troubleshooting-handbook.md)
 - [Deployment 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/deployment-fta.md)
 - [HPA 水平自动扩缩](./horizontal-pod-autoscaling.md)
 

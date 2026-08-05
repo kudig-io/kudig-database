@@ -134,7 +134,7 @@ last_updated: '2026-07-21'
 - [[10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs|kubeconfig 中的证书嵌入逻辑 (topic-code-analysis)]]
 - [[10-平台工程/06-代码分析/cluster-create/04-kubeconfig|kubeconfig 阶段 — Kubeconfig Generation 源码分析]]
 - [[10-平台工程/06-代码分析/cluster-create/04-kubeconfig|kubeconfig 阶段 — Kubeconfig Generation 源码分析]]
-- [[01-集群基础/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]]
+- [[01-集群基础/05-kubectl/02-kubectl-commands-reference|kubectl 命令完整参考]]
 - [[10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert|kubelet 证书与 CSR 机制源码分析 (topic-code-analysis)]]
 - [[10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert|kubelet 证书与 CSR 机制源码分析 (topic-code-analysis)]]
 - [[10-平台工程/06-代码分析/node-create/10-kubelet-config|kubelet 进阶配置 — cgroup / 资源管理 / 日志]]

@@ -17,10 +17,10 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-07-platform-engineering/治理/03-capacity-planning-resource-assessment.md|Capacity Planning Resource Assessment]]
-- [[domain-07-platform-engineering/治理/04-performance-benchmarking-tuning.md|Performance Benchmarking Tuning]]
-- [[domain-07-platform-engineering/治理/09-cost-optimization-finops.md|Cost Optimization Finops]]
-- [[domain-07-platform-engineering/治理/10-security-compliance.md|Security Compliance]]
-- [[domain-07-platform-engineering/治理/14-large-scale-cluster-optimization.md|Large Scale Cluster Optimization]]
-- [[domain-07-platform-engineering/治理/17-multi-tenant-management.md|Multi Tenant Management]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/governance/01-capacity-planning-resource-assessment|Capacity Planning Resource Assessment]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/governance/01-performance-benchmarking-tuning|Performance Benchmarking Tuning]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/governance/02-cost-optimization-finops|Cost Optimization Finops]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/governance/01-security-compliance|Security Compliance]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/governance/02-large-scale-cluster-optimization|Large Scale Cluster Optimization]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/governance/03-multi-tenant-management|Multi Tenant Management]]
 

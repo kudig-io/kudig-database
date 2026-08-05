@@ -1514,8 +1514,8 @@ groups:
 - 18-csi-driver-resources
 - 19-serviceaccount-token
 
-- [[domain-07-platform-engineering/代码分析/node-create/14-storage-node.md|14-storage-node]]
-- [[domain-07-platform-engineering/代码分析/cluster-create/22-storage-volumes.md|22-storage-volumes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-02-workloads-applications/topic-functions/node-create/01-storage-node|14-storage-node]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-02-workloads-applications/topic-functions/cluster-create/19-storage-volumes|22-storage-volumes]]
 
 ## Related
 

@@ -501,12 +501,12 @@ Kafka 的数据备份通常不采用传统数据库的定期全量备份方式�
 ## Related
 
 - [[06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用 Kubernetes 存储模式]]
-- [[06-存储/01-K8s存储/08-storage-performance-tuning.md|存储性能调优]]
+- [[06-存储/01-K8s存储/09-storage-performance-tuning.md|存储性能调优]]
 
 ## See Also
 
 - [[09-可观测性/02-指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
-- [[19-故障诊断/03-基础设施排障/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
+- [[19-故障诊断/03-基础设施排障/09-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
 
 
 <!-- risk-assessed -->

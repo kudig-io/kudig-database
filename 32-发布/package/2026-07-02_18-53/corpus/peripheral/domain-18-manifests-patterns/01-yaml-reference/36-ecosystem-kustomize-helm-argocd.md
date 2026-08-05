@@ -3162,7 +3162,7 @@ patches:
 ---
 
 <!-- chunk: 🔗 相关文档 -->## 🔗 相关文档
-- [35 - Gateway API 和 API Gateway](./35-gateway-api-overview.md)
+- [35 - Gateway API 和 API Gateway](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/27-gateway-api-overview.md)
 - [34 - Ingress 和 IngressClass](./34-ingress-ingressclass.md)
 - [33 - PodMonitor 和 ServiceMonitor](./33-podmonitor-servicemonitor.md)
 

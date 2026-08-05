@@ -533,12 +533,12 @@ kubectl exec -n production-drill deploy/app -c app -- /health-check.sh
 
 ## 12. Related
 
-- [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[12-可靠性/02-灾难恢复/07-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份恢复深度解析]]
-- [[12-可靠性/01-备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[12-可靠性/02-灾难恢复/08-kubernetes-backup-restore-deep-dive.md|Kubernetes 备份恢复深度解析]]
+- [[12-可靠性/01-备份恢复/06-enterprise-backup-strategy.md|企业级备份策略]]
 - [[12-可靠性/01-备份恢复/03-pv-backup-snapshot.md|PV 快照：云盘快照、CSI 快照、恢复演练]]
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
-- [[06-存储/01-K8s存储/15-storage-disaster-recovery.md|存储灾难恢复]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+- [[06-存储/01-K8s存储/16-storage-disaster-recovery.md|存储灾难恢复]]
 
 
 <!-- risk-assessed -->

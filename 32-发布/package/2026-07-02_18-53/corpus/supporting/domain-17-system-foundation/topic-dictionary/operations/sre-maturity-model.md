@@ -2801,7 +2801,7 @@ Q5-Q6: 全面推广
 | [./operations-best-practices.md](././operations-best-practices.md) | 前置阅读 | 运维最佳实践是SRE成熟度提升的基础,建议先理解基础运维规范 |
 | [./failure-patterns-analysis.md](././failure-patterns-analysis.md) | 关联实践 | 故障模式分析帮助识别成熟度短板,指导改进方向 |
 | [./performance-tuning-expert.md](././performance-tuning-expert.md) | 深化学习 | 性能调优是Level 4-5阶段的核心能力,提升运维成熟度 |
-| [../domain-03-networking-traffic/30-service-mesh-deep-dive.md](../domain-03-networking-traffic/30-service-mesh-deep-dive.md) | 技术实现 | 服务网格是自动化和可观测性建设的重要工具 |
+| [../domain-03-networking-traffic/30-service-mesh-deep-dive.md](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/22-service-mesh-deep-dive.md) | 技术实现 | 服务网格是自动化和可观测性建设的重要工具 |
 | [../domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/README.md](../domain-10-troubleshooting-diagnostics/高级排障/README.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
 | [../domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md](../domain-11-production-operations/topic-presentations/kubernetes-observability-presentation.md) | 知识扩展 | 可观测性演讲稿深入讲解监控体系建设,是第3节的补充 |
 

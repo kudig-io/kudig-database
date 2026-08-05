@@ -292,7 +292,7 @@ data:
 
 ## Related
 
-- [[08-containerd-multi-tenant]] — [[containerd|containerd]]rd 多租户|containerd 多租户]]租户|多租户]]
+- [[07-containerd-multi-tenant]] — [[containerd|containerd]]rd 多租户|containerd 多租户]]租户|多租户]]
 - [[harbor]] — Harbor
 - [[opentofu]] — OpenTofu
 - [[cartography]] — Cartography

@@ -270,7 +270,7 @@ kubectl get chaosexperiment -A
 ## Related
 
 - [[openkruise]] — OpenKruise
-- [[02-istio-advanced-traffic-management]] — Istio 高级流量管理
+- [[01-istio-advanced-traffic-management]] — Istio 高级流量管理
 - [[vscode-kubernetes-tools]] — VS Code Kubernetes Tools
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

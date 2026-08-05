@@ -154,7 +154,7 @@ Pod 状态迁移：
 
 两个值得注意的方向：
 
-- **dynamicresources**：DRA 调度落点，AI 场景 GPU/NPU 拓扑调度的上游实现，关联 [[15-AI基础设施/README.md|AI基础设施域]] 与 [[01-集群基础/03-控制平面/30-dynamic-resource-allocation.md|DRA 深度解析]]
+- **dynamicresources**：DRA 调度落点，AI 场景 GPU/NPU 拓扑调度的上游实现，关联 [[15-AI基础设施/README.md|AI基础设施域]] 与 [[01-集群基础/03-控制平面/32-dynamic-resource-allocation.md|DRA 深度解析]]
 - **gangscheduling**：上游原生 gang 调度（此前由 Volcano 等外部调度器承担），基于 Permit 扩展点的 Wait 语义实现「凑齐才放行」
 
 自定义调度行为的正确姿势是 KubeSchedulerConfiguration 的 Profile 覆盖插件启停与权重，而非 fork 调度器。

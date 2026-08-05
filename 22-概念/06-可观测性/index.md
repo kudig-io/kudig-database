@@ -18,8 +18,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[22-概念/06-可观测性/19-kube-state-metrics-deep-dive.md|kube-state-metrics 深度解析]]
-- [[22-概念/06-可观测性/20-cadvisor-kubelet-metrics.md|cAdvisor 与 kubelet 指标采集]]
+- [[22-概念/06-可观测性/01-kube-state-metrics-deep-dive.md|kube-state-metrics 深度解析]]
+- [[22-概念/06-可观测性/02-cadvisor-kubelet-metrics.md|cAdvisor 与 kubelet 指标采集]]
 - [[22-概念/06-可观测性/ai-ml-observability.md|ai-ml-observability]]
 - [[22-概念/06-可观测性/k8s-observability-stack.md|k8s-observability-stack]]
 - [[22-概念/06-可观测性/metrics-server.md|metrics-server]]

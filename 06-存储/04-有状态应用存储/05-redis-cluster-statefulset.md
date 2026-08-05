@@ -557,12 +557,12 @@ kubectl exec -it -n production redis-cluster-0 -- redis-cli --cluster add-node  
 ## Related
 
 - [[06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md|有状态应用 Kubernetes 存储模式]]
-- [[06-存储/01-K8s存储/08-storage-performance-tuning.md|存储性能调优]]
+- [[06-存储/01-K8s存储/09-storage-performance-tuning.md|存储性能调优]]
 
 ## See Also
 
 - [[09-可观测性/02-指标/01-prometheus-enterprise-monitoring.md|Prometheus 企业监控]]
-- [[19-故障诊断/02-资源排障/21-statefulset-troubleshooting.md|StatefulSet 故障诊断]]
+- [[19-故障诊断/02-资源排障/13-statefulset-troubleshooting.md|StatefulSet 故障诊断]]
 
 
 <!-- risk-assessed -->

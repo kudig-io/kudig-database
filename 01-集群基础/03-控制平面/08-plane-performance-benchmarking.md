@@ -1896,7 +1896,7 @@ performance_test_checklist:
 
 - [[deep-dive|#deep-dive Hub]] — tag hub
 
-- [[02-工作负载/02-Java-on-K8s/03-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
 
 ## See Also
 

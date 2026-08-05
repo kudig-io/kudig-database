@@ -702,8 +702,8 @@ kubectl get nodes
 
 - [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [K8s 版本升级策略](../../domain-01-cluster-fundamentals/07-upgrade-paths-strategy.md)
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
+- [K8s 版本升级策略](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-01-cluster-fundamentals/05-upgrade-paths/02-upgrade-paths-strategy.md)
+- [集群生命周期管理](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-07-platform-engineering/operate/01-cluster-lifecycle-management.md)
 
 ## Related
 

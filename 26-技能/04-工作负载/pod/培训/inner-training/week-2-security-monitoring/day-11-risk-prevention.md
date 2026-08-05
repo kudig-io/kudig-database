@@ -641,9 +641,9 @@ Day 12 将学习集群审计日志的配置与分析方法。
 
 ## 延伸阅读
 
-- [Pod 安全标准](../../../%E5%AE%89%E5%85%A8/06-pod-security-standards.md)
-- [Secret 管理工具](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/11-secret-management-tools.md)
-- [RBAC 矩阵配置](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/07-rbac-matrix-configuration.md)
+- [Pod 安全标准](../../../安全/03-pod-security-standards.md)
+- [Secret 管理工具](../../../../../../08-安全/01-身份与访问/07-secret-management-tools.md)
+- [RBAC 矩阵配置](../../../../../../08-安全/01-身份与访问/06-rbac-matrix-configuration.md)
 - [认证授权系统](../../../../../../08-%E5%AE%89%E5%85%A8/01-%E8%BA%AB%E4%BB%BD%E4%B8%8E%E8%AE%BF%E9%97%AE/01-authentication-authorization-system.md)
 - [NetworkPolicy 实践](../../domain-6-networking/12-network-policy-practice.md)
 

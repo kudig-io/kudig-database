@@ -469,13 +469,13 @@ kubectl create cronjob redis-backup --image=redis:7 --schedule="0 2 * * *"   --n
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[07-数据库中间件/00-总览/99-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
+- [[07-数据库中间件/00-总览/02-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
 - [[07-数据库中间件/01-数据库/06-redis-enterprise-cache.md|Redis 企业级缓存]]
 - [[07-数据库中间件/01-数据库/07-redis-kubernetes-operator.md|Redis Kubernetes Operator]]
 - [[07-数据库中间件/02-缓存/01-redis-cluster-sentinel-topology.md|Redis Cluster/Sentinel 拓扑]]
-- [[06-存储/00-总览/99-production-readiness-operations-guide.md|存储与数据生产就绪运维指南]]
-- [[08-安全/00-总览/99-production-readiness-operations-guide.md|安全与合规生产就绪运维指南]]
-- [[09-可观测性/01-总览/99-production-readiness-operations-guide.md|可观测性生产就绪运维指南]]
+- [[06-存储/00-总览/01-production-readiness-operations-guide.md|存储与数据生产就绪运维指南]]
+- [[08-安全/00-总览/01-production-readiness-operations-guide.md|安全与合规生产就绪运维指南]]
+- [[09-可观测性/01-总览/16-production-readiness-operations-guide.md|可观测性生产就绪运维指南]]
 
 ---
 

@@ -196,7 +196,7 @@ curl -X POST -u admin:<password> \
 
 ## Related
 
-- [[08-containerd-multi-tenant]] — containerd 多租户
+- [[07-containerd-multi-tenant]] — containerd 多租户
 - [[docker]] — Docker
 - [[helm]] — Helm
 - [[23-实体/06-安全/trivy.md|trivy]] — Trivy

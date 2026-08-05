@@ -28,59 +28,59 @@ last_updated: 2026-05-21
 ### 核心 K8s 网络
 
 - [[00-network-in-nutshell]] — Network in nutshell
-- [[01-network-architecture-overview]] — Network architecture overview
+- [[05-网络/01-K8s网络核心/02-network-architecture-overview]] — Network architecture overview
 - [[01-network-architecture-overview-faq]] — Network architecture overview faq
-- [[02-cni-architecture-fundamentals]] — Cni architecture fundamentals
-- [[03-cni-plugins-comparison]] — Cni plugins comparison
-- [[04-flannel-complete-guide]] — Flannel complete guide
+- [[03-cni-architecture-fundamentals]] — Cni architecture fundamentals
+- [[04-cni-plugins-comparison]] — Cni plugins comparison
+- [[05-flannel-complete-guide]] — Flannel complete guide
 - [[04a-flannel-wireguard-backend]] — Flannel wireguard backend
 - [[04b-flannel-ipv6-dual-stack]] — Flannel ipv6 dual stack
 - [[04c-flannel-windows-support]] — Flannel windows support
 - [[04d-flannel-multi-cluster]] — Flannel multi cluster
 - [[04e-flannel-command-reference]] — Flannel command reference
-- [[05-terway-advanced-guide]] — Terway advanced guide
-- [[06-service-concepts-types]] — Service concepts types
-- [[07-service-implementation-details]] — Service implementation details
-- [[08-service-topology-aware]] — Service topology aware
-- [[09-kube-proxy-modes-performance]] — Kube proxy modes performance
-- [[10-service-advanced-features]] — Service advanced features
-- [[11-dns-service-discovery-coredns]] — Dns service discovery coredns
-- [[12-dns-service-discovery]] — Dns service discovery
-- [[13-coredns-architecture-principles]] — Coredns architecture principles
-- [[14-coredns-configuration-corefile]] — Coredns configuration corefile
-- [[15-coredns-plugins-reference]] — Coredns plugins reference
-- [[16-networkpolicy-deep-practice]] — Networkpolicy deep practice
-- [[17-network-policy-advanced]] — Network policy advanced
-- [[18-network-encryption-mtls]] — Network encryption mtls
-- [[19-ingress-fundamentals]] — Ingress fundamentals
-- [[20-ingress-controller-deep-dive]] — Ingress controller deep dive
-- [[21-nginx-ingress-complete-guide]] — Nginx ingress complete guide
-- [[22-ingress-tls-certificate]] — Ingress tls certificate
-- [[23-ingress-advanced-routing]] — Ingress advanced routing
-- [[24-ingress-security-hardening]] — Ingress security hardening
-- [[25-ingress-monitoring-troubleshooting]] — Ingress monitoring troubleshooting
-- [[26-ingress-production-best-practices]] — Ingress production best practices
-- [[27-cni-troubleshooting-optimization]] — Cni troubleshooting optimization
-- [[28-coredns-troubleshooting-optimization]] — Coredns troubleshooting optimization
-- [[29-egress-traffic-management]] — Egress traffic management
-- [[30-service-mesh-deep-dive]] — Service mesh deep dive
-- [[31-multi-cluster-federation]] — Multi cluster federation
-- [[32-multi-cluster-networking]] — Multi cluster networking
-- [[33-network-troubleshooting]] — Network troubleshooting
-- [[34-network-performance-tuning]] — Network performance tuning
-- [[35-gateway-api-overview]] — Gateway api overview
-- [[36-api-gateway-patterns]] — Api gateway patterns
-- [[37-terway-resources-crud-operations]] — Terway resources crud operations
-- [[38-terway-gc-mechanism]] — Terway gc mechanism
-- [[39-csi-cni-version-matrix]] — Csi cni version matrix
-- [[40-terway-product-overview]] — Terway product overview
-- [[41-terway-architecture-deep-dive]] — Terway architecture deep dive
-- [[42-terway-usage-guide]] — Terway usage guide
-- [[43-terway-crd-operations]] — Terway crd operations
-- [[44-terway-operations-manual]] — Terway operations manual
-- [[45-terway-testing-validation]] — Terway testing validation
-- [[46-terway-performance-tuning]] — Terway performance tuning
-- [[47-terway-troubleshooting-fta]] — Terway troubleshooting fta
+- [[06-terway-advanced-guide]] — Terway advanced guide
+- [[07-service-concepts-types]] — Service concepts types
+- [[08-service-implementation-details]] — Service implementation details
+- [[09-service-topology-aware]] — Service topology aware
+- [[10-kube-proxy-modes-performance]] — Kube proxy modes performance
+- [[11-service-advanced-features]] — Service advanced features
+- [[12-dns-service-discovery-coredns]] — Dns service discovery coredns
+- [[13-dns-service-discovery]] — Dns service discovery
+- [[14-coredns-architecture-principles]] — Coredns architecture principles
+- [[15-coredns-configuration-corefile]] — Coredns configuration corefile
+- [[16-coredns-plugins-reference]] — Coredns plugins reference
+- [[17-networkpolicy-deep-practice]] — Networkpolicy deep practice
+- [[18-network-policy-advanced]] — Network policy advanced
+- [[19-network-encryption-mtls]] — Network encryption mtls
+- [[20-ingress-fundamentals]] — Ingress fundamentals
+- [[21-ingress-controller-deep-dive]] — Ingress controller deep dive
+- [[22-nginx-ingress-complete-guide]] — Nginx ingress complete guide
+- [[23-ingress-tls-certificate]] — Ingress tls certificate
+- [[24-ingress-advanced-routing]] — Ingress advanced routing
+- [[25-ingress-security-hardening]] — Ingress security hardening
+- [[26-ingress-monitoring-troubleshooting]] — Ingress monitoring troubleshooting
+- [[27-ingress-production-best-practices]] — Ingress production best practices
+- [[28-cni-troubleshooting-optimization]] — Cni troubleshooting optimization
+- [[29-coredns-troubleshooting-optimization]] — Coredns troubleshooting optimization
+- [[30-egress-traffic-management]] — Egress traffic management
+- [[32-service-mesh-deep-dive]] — Service mesh deep dive
+- [[33-multi-cluster-federation]] — Multi cluster federation
+- [[34-multi-cluster-networking]] — Multi cluster networking
+- [[35-network-troubleshooting]] — Network troubleshooting
+- [[36-network-performance-tuning]] — Network performance tuning
+- [[37-gateway-api-overview]] — Gateway api overview
+- [[38-api-gateway-patterns]] — Api gateway patterns
+- [[39-terway-resources-crud-operations]] — Terway resources crud operations
+- [[40-terway-gc-mechanism]] — Terway gc mechanism
+- [[41-csi-cni-version-matrix]] — Csi cni version matrix
+- [[23-实体/04-网络/03-terway-product-overview]] — Terway product overview
+- [[23-实体/04-网络/04-terway-architecture-deep-dive]] — Terway architecture deep dive
+- [[23-实体/04-网络/05-terway-usage-guide]] — Terway usage guide
+- [[23-实体/04-网络/06-terway-crd-operations]] — Terway crd operations
+- [[23-实体/04-网络/07-terway-operations-manual]] — Terway operations manual
+- [[23-实体/04-网络/08-terway-testing-validation]] — Terway testing validation
+- [[23-实体/04-网络/09-terway-performance-tuning]] — Terway performance tuning
+- [[23-实体/04-网络/10-terway-troubleshooting-fta]] — Terway troubleshooting fta
 
 ### 网络基础
 
@@ -90,7 +90,7 @@ last_updated: 2026-05-21
 - [[04-load-balancing-technologies]] — Load balancing technologies
 - [[05-network-security-fundamentals]] — Network security fundamentals
 - [[06-sdn-network-virtualization]] — Sdn network virtualization
-- [[99-cilium-ebpf-network-guide]] — Cilium ebpf network guide
+- [[09-cilium-ebpf-network-guide]] — Cilium ebpf network guide
 
 ### 服务网格
 
@@ -104,9 +104,9 @@ last_updated: 2026-05-21
 - [[08-ambient-mesh-l7-policy]] — Ambient mesh l7 policy
 - [[09-microservice-resilience-patterns]] — Microservice resilience patterns
 - [[10-api-gateway-service-mesh-integration]] — Api gateway service mesh integration
-- [[99-istio-service-mesh-guide]] — Istio service mesh guide
-- [[99-linkerd-service-mesh-guide]] — Linkerd service mesh guide
-- [[99-spring-cloud-kubernetes-service-mesh-guide]] — Spring cloud kubernetes service mesh guide
+- [[11-istio-service-mesh-guide]] — Istio service mesh guide
+- [[12-linkerd-service-mesh-guide]] — Linkerd service mesh guide
+- [[13-spring-cloud-kubernetes-service-mesh-guide]] — Spring cloud kubernetes service mesh guide
 
 ### API 网关
 
@@ -124,7 +124,7 @@ last_updated: 2026-05-21
 - [[12-api-gateway-observability]] — Api gateway observability
 - [[13-api-gateway-performance-benchmarks]] — Api gateway performance benchmarks
 - [[14-api-gateway-production-operations]] — Api gateway production operations
-- [[99-envoy-gateway-enterprise-guide]] — Envoy gateway enterprise guide
+- [[15-envoy-gateway-enterprise-guide]] — Envoy gateway enterprise guide
 
 ### eBPF 技术
 
@@ -142,10 +142,10 @@ last_updated: 2026-05-21
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-15]] — Open source projects index from domain 15
-- [[00-open-source-projects-index-from-domain-26]] — Open source projects index from domain 26
-- [[00-open-source-projects-index-from-domain-35]] — Open source projects index from domain 35
-- [[00-open-source-projects-index-from-domain-40]] — Open source projects index from domain 40
-- [[00-open-source-projects-index-from-domain-5]] — Open source projects index from domain 5
+- [[01-open-source-projects-index-from-domain-26]] — Open source projects index from domain 26
+- [[02-open-source-projects-index-from-domain-35]] — Open source projects index from domain 35
+- [[03-open-source-projects-index-from-domain-40]] — Open source projects index from domain 40
+- [[04-open-source-projects-index-from-domain-5]] — Open source projects index from domain 5
 - [[MOC-from-domain-15]] — MOC from domain 15
 - [[MOC-from-domain-26]] — MOC from domain 26
 - [[MOC-from-domain-35]] — MOC from domain 35
@@ -171,5 +171,5 @@ last_updated: 2026-05-21
 - [[terway-index]] — Terway index
 
 ## 相关 Domain
-- [[工作负载/98-merged-indexes/index.md|Domain 02 工作负载与应用 索引]]
-- [[存储/98-merged-indexes/index.md|Domain 04 存储与数据 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 02 工作负载与应用 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 04 存储与数据 索引]]

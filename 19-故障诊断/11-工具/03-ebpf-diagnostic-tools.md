@@ -441,7 +441,7 @@ bpftrace -e 'kprobe:tcp_sendmsg /pid == <pid>/ { @start[tid] = nsecs; } kretprob
 ## Related
 
 - [[19-故障诊断/11-工具/README.md|Domain-12 故障排查工具套件使用说明]]
-- [[19-故障诊断/03-基础设施排障/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
+- [[19-故障诊断/03-基础设施排障/09-performance-bottleneck-troubleshooting.md|性能瓶颈故障诊断]]
 
 ## See Also
 

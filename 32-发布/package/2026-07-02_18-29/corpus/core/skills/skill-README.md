@@ -1,9 +1,9 @@
 ---
 title: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库 (skills)
 description: '- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md)
-  | [13-ingress](./13-ingress-gateway-failure.md)'
+  | [13-ingress](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md)'
 summary: '- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md)
-  | [13-ingress](./13-ingress-gateway-failure.md)'
+  | [13-ingress](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md)'
 category: skills
 tags:
 - k8s
@@ -46,11 +46,11 @@ prerequisites:
 
 ### 故障诊断
 
-- 节点问题: [01-node-notready](./01-node-notready.md) | [11-control-plane](./11-control-plane-failure.md)
-- Pod 异常: [02-crashloop](./02-pod-crashloop-oomkilled.md) | [03-pending](./03-pod-pending.md) | [10-image-pull](./10-image-pull-failure.md)
-- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-[[Service|service]]](./05-service-connectivity.md) | [13-[[Ingress|ingress]]](./13-ingress-gateway-failure.md)
-- 存储问题: [07-pvc-storage](./07-pvc-storage-failure.md)
-- 配置问题: [14-configmap-secret](./14-configmap-secret-failure.md)
+- 节点问题: [01-node-notready](./01-node-notready.md) | [11-control-plane](12-control-plane-failure.md)
+- Pod 异常: [02-crashloop](./02-pod-crashloop-oomkilled.md) | [03-pending](./03-pod-pending.md) | [10-image-pull](11-image-pull-failure.md)
+- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-[[Service|service]]](./05-service-connectivity.md) | [13-[[Ingress|ingress]]](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md)
+- 存储问题: [07-pvc-storage](08-pvc-storage-failure.md)
+- 配置问题: [14-configmap-secret](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/03-configmap-secret-failure.md)
 
 ### 3. 症状 → Skill 快速查找
 

@@ -1,0 +1,260 @@
+---
+title: Platform Ops Domain (平台运维领域)
+description: 'title: Platform Ops Domain (平台运维领域)'
+summary: 'title: Platform Ops Domain (平台运维领域)'
+category: general
+tags:
+- k8s
+- crd
+- operator
+tier: peripheral
+created: '2026-05-23'
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 5min
+intent_queries:
+- Platform Ops Domain (平台运维领域) 是什么
+- 如何 Platform Ops Domain (平台运维领域)
+- Kubernetes 07 platform engineering 最佳实践
+trigger_keywords:
+- Platform
+- Ops
+- Domain
+- 平台运维领域
+- platform
+- engineering
+prerequisites:
+- kubectl-basics
+- platform-engineering-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+
+---
+title: Platform Ops Domain (平台运维领域)
+description: '# Platform Ops Domain (平台运维领域)'
+category: platform-ops
+tags:
+- k8s
+- platform
+- operations
+- devops
+- crd
+- operator
+last_updated: 2026-05
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- SRE
+- 平台工程师
+- 运维工程师
+estimated_read_time: 5min
+intent_queries:
+- Platform Ops Domain (平台运维领域) 是什么
+- 如何 Platform Ops Domain (平台运维领域)
+- Kubernetes 9 platform ops 最佳实践
+trigger_keywords:
+- Platform
+- Ops
+- Domain
+- 平台运维领域
+- platform
+- ops
+cross_refs:
+- type: domain
+  path: ../domain-06-observability/
+  label: '相关知识域: domain-06-observability'
+- type: domain
+  path: ../domain-15-specialized-tech/
+  label: '相关知识域: domain-15-specialized-tech'
+- type: domain
+  path: ../domain-10-troubleshooting-diagnostics/
+  label: '相关知识域: domain-10-troubleshooting-diagnostics'
+
+tier: peripheral---
+
+# Platform Ops Domain (平台运维领域)
+
+> **文档数量**: 26 篇 | **最后更新**: 2026-04 | **版本**: v2.2 | **专业级别**: 企业级生产环境 ⭐⭐⭐⭐⭐ | **适用版本**: Kubernetes 1.25 - 1.33+
+
+## 概述
+
+Platform Ops Domain 提供完整的Kubernetes平台运维知识体系，涵盖从基础运维到高级平台管理的全方位内容。所有文档均基于生产环境实践经验，面向企业级应用场景，从资深平台工程师和架构师视角提供专业指导。
+
+---
+
+## 📚 文档结构概览
+
+### 第一部分：运维基础与规划 (01-05)
+01. [平台运维概述与成熟度模型](01-platform-ops-overview.md) - 平台运维核心概念和企业级成熟度评估
+02. [集群生命周期管理](02-cluster-lifecycle-management.md) - 集群从创建到退役的全周期管理
+03. [容量规划与资源评估](32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/governance/01-capacity-planning-resource-assessment.md) - 科学的资源规划方法论和AI预测模型
+04. [性能基准测试与调优](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/governance/01-performance-benchmarking-tuning.md) - 系统性能优化实践和调优策略
+05. [运维指标体系建设](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/02-operations-metrics-system.md) - 四级指标体系和监控实践
+
+### 第二部分：核心运维能力 (06-12)
+06. [监控告警系统](32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system.md) - 企业级监控告警架构和智能告警策略
+07. [GitOps配置管理](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/03-gitops-configuration-management.md) - 声明式基础设施管理和自动化流水线
+08. [运维自动化工具链](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/04-automation-toolchain.md) - 端到端自动化流程和工具集成
+09. [成本优化与FinOps](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/governance/02-cost-optimization-finops.md) - 云成本管理和优化策略
+10. [安全合规管理](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/governance/01-security-compliance.md) - 零信任安全架构实践和合规治理
+11. [灾难恢复与业务连续性](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/05-disaster-recovery-business-continuity.md) - DR策略和BCP计划
+12. [备份恢复策略与实践](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/06-backup-recovery-strategy.md) - 完整的数据保护方案和实战案例
+
+### 第三部分：高级平台管理 (13-18)
+13. [多集群管理与联邦](13-multi-cluster-management.md) - 多集群统一管理方案和联邦架构
+14. [大规模集群性能优化](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/governance/02-large-scale-cluster-optimization.md) - 千节点以上集群优化和调优
+15. [生产环境故障诊断](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/operate/02-production-troubleshooting.md) - 系统性故障排查方法和工具链
+16. [平台升级与迁移策略](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/07-platform-upgrade-migration.md) - 平稳的版本升级实践和迁移方案 ⭐新增⭐
+17. [多租户管理与资源隔离](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/governance/03-multi-tenant-management.md) - 企业多租户架构和安全隔离 ⭐新增⭐
+18. [平台可观测性深度实践](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/08-platform-observability-practice.md) - 全栈可观测性建设和智能分析 ⭐新增⭐
+
+### 第四部分：专项技术主题 (19-25)
+19. [Lease与Leader选举机制](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/09-lease-leader-election.md) - 分布式协调原语和高可用设计
+20. [CRD与Operator开发](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/build/09-crd-operator-development.md) - 自定义资源扩展和控制器开发
+21. [API聚合扩展](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/build/10-api-aggregation.md) - Kubernetes API扩展机制和最佳实践
+22. [客户端库深度实践](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/build/11-client-libraries.md) - 编程访问Kubernetes和SDK使用
+23. [CLI增强工具](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/developer-experience/03-cli-enhancement-tools.md) - 命令行工具生态和效率提升
+24. [插件与扩展组件](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/build/12-addons-extensions.md) - 生态系统组件集成和管理
+25. [虚拟集群技术](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/10-virtual-clusters.md) - 多租户虚拟化方案和隔离技术
+
+---
+
+## 🎯 学习路径建议
+
+### 🟢 入门级 (01-05) - 平台运维基础
+适合初学者和运维新手，建立平台运维基础认知
+- **学习重点**: 基础概念、架构理解、规划方法
+- **预计时长**: 2-3周
+- **实践建议**: 搭建实验环境，完成基础操作
+
+### 🟡 进阶级 (06-12) - 核心运维技能  
+适合有一定经验的运维工程师，掌握核心运维技能
+- **学习重点**: 监控告警、自动化、安全管理
+- **预计时长**: 4-6周
+- **实践建议**: 生产环境部署，参与故障处理
+
+### 🔴 专家级 (13-18) - 复杂场景处理
+适合资深SRE和架构师，处理复杂平台管理场景
+- **学习重点**: 多集群管理、性能优化、高级架构
+- **预计时长**: 6-8周
+- **实践建议**: 设计企业级方案，领导技术决策
+
+### ⚡ 专项级 (19-25) - 技术深度研究
+适合特定技术领域深入研究和技术专家
+- **学习重点**: 专项技术、扩展开发、前沿实践
+- **预计时长**: 4-6周
+- **实践建议**: 技术创新，社区贡献
+
+---
+
+## 🏆 适用人群
+
+- **平台运维工程师** - 构建和维护Kubernetes平台
+- **SRE工程师** - 确保系统可靠性和性能
+- **架构师** - 设计企业级平台架构方案
+- **技术管理者** - 制定平台运维战略和标准
+- **安全合规专家** - 确保平台安全和合规要求
+- **成本优化专家** - 实施FinOps和成本治理策略
+
+---
+
+## 📈 内容特色
+
+### 💼 企业级专业性
+- 基于真实企业场景的最佳实践
+- 大规模集群运维经验总结
+- 金融级安全和可靠性标准
+- 成本优化与治理策略
+
+### 🎯 实战导向
+- 生产环境深度实践案例
+- 可直接使用的配置示例
+- 故障排查标准流程
+- 性能调优实操指南
+
+### 🔄 持续更新
+- 紧跟Kubernetes最新版本特性
+- 融合云原生最佳实践
+- 定期更新行业标准规范
+- 实战案例持续丰富
+
+---
+
+## 📊 质量保证体系
+
+### ✅ 内容完整性检查
+- [x] 技术概念准确无误
+- [x] 实践案例真实可靠
+- [x] 配置示例可直接使用
+- [x] 版本兼容性明确标注
+
+### ✅ 结构标准化
+- [x] 统一的文档格式规范
+- [x] 清晰的章节层次结构
+- [x] 完整的交叉引用体系
+- [x] 详尽的索引和导航
+
+### ✅ 实用性验证
+- [x] 代码示例经过验证
+- [x] 命令行指令可执行
+- [x] 配置文件格式正确
+- [x] 最佳实践经过生产验证
+
+---
+
+## 📝 更新日志
+
+### v2.2 (2026-04) ⭐最新⭐
+- ✅ 新增 K8s v1.29-v1.33 平台运维新特性指南 (Queueing Hints、协调领导者选举、Karpenter 集成)
+- ✅ 适用版本更新至 Kubernetes 1.25-1.33+
+
+### v2.1 (2026-02)
+- ✅ 新增平台升级与迁移策略文档
+- ✅ 新增多租户管理与资源隔离文档
+- ✅ 新增平台可观测性深度实践文档
+- ✅ 增强现有文档的专业深度和实战案例
+- ✅ 统一文档格式标准和质量规范
+- ✅ 补充企业级生产环境深度实践
+- ✅ 完善文档头部信息标准化
+- ✅ 优化学习路径和适用人群描述
+
+### v2.0 (2026-02)
+- ✅ 重新组织文档结构，建立25篇完整体系
+- ✅ 新增容量规划、性能调优、指标体系等核心文档
+- ✅ 增强大规模集群优化和故障诊断内容
+- ✅ 统一文档格式和标准
+- ✅ 补充生产环境深度实践案例
+
+### v1.0 (2025-12)
+- 🎯 初始版本发布
+- 📚 基础运维文档集合
+
+---
+
+## 🤝 贡献与反馈
+
+欢迎提出宝贵意见和建议：
+- 📧 邮箱: allengaller@gmail.com
+- 🐛 问题反馈: GitHub Issues
+- 💡 功能建议: GitHub Discussions
+
+---
+**维护**: Kusheet Project | **作者**: Allen Galler (allengaller@gmail.com) | **许可证**: MIT
+
+## Related
+
+- 相关知识域: domain-06-observability
+- 相关知识域: domain-15-specialized-tech
+- 相关知识域: domain-10-troubleshooting-diagnostics
+
+
+<!-- risk-assessed -->

@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-public/troubleshooting/decision-tree-mermaid.md|Decision Tree Mermaid]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/skills/training-lecturer/13-decision-tree/decision-tree-mermaid|Decision Tree Mermaid]]
 

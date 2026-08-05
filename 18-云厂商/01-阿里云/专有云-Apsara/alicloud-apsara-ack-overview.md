@@ -20,11 +20,11 @@ last_updated: 2026-07-23
 relationships:
 - target: '[[18-云厂商/01-阿里云/01-专有云架构概述.md]]'
   type: related_to
-- target: '[[18-云厂商/01-阿里云/专有云-Apsara/255-apsara-compliance-hardening.md]]'
+- target: '[[18-云厂商/01-阿里云/专有云-Apsara/007-apsara-compliance-hardening.md]]'
   type: related_to
-- target: '[[18-云厂商/01-阿里云/专有云-Apsara/254-apsara-upgrade-patch-management.md]]'
+- target: '[[18-云厂商/01-阿里云/专有云-Apsara/006-apsara-upgrade-patch-management.md]]'
   type: related_to
-- target: '[[18-云厂商/01-阿里云/专有云-Apsara/99-apsara-stack-troubleshooting-runbook.md]]'
+- target: '[[18-云厂商/01-阿里云/专有云-Apsara/01-apsara-stack-troubleshooting-runbook.md]]'
   type: related_to
 difficulty: advanced
 audience:
@@ -125,7 +125,7 @@ spec:
           periodSeconds: 10
 ```
 
-> 详细的国密/合规加固见 [[18-云厂商/01-阿里云/专有云-Apsara/255-apsara-compliance-hardening.md|255 合规加固]]。
+> 详细的国密/合规加固见 [[18-云厂商/01-阿里云/专有云-Apsara/007-apsara-compliance-hardening.md|255 合规加固]]。
 
 ---
 
@@ -150,7 +150,7 @@ spec:
 | 数据分析 | 16 核 128GB 内存优化 | 保险、基金 |
 | 办公系统 | 8 核 32GB | 政府、企业 |
 
-> 详细的节点池生命周期管理见 [[18-云厂商/01-阿里云/09-ack-node-pool-management.md|09 ACK 节点池管理]]。
+> 详细的节点池生命周期管理见 [[18-云厂商/01-阿里云/07-ack-node-pool-management.md|09 ACK 节点池管理]]。
 
 ---
 
@@ -227,7 +227,7 @@ rules:
   verbs: ["create", "get", "list", "delete"]
 ```
 
-> 完整的合规加固（等保/国密 KMS/审计）见 [[18-云厂商/01-阿里云/专有云-Apsara/255-apsara-compliance-hardening.md|255 合规加固]]。
+> 完整的合规加固（等保/国密 KMS/审计）见 [[18-云厂商/01-阿里云/专有云-Apsara/007-apsara-compliance-hardening.md|255 合规加固]]。
 
 ---
 
@@ -304,7 +304,7 @@ groups:
 | 服务恢复 | 15-60 min | 验证核心功能 → 恢复业务 → 监控 KPI |
 | 事后总结 | 24h 内 | 复盘 → 事故报告 → 改进预案 → 监管报告 |
 
-> 完整的专有云故障手册见 [[18-云厂商/01-阿里云/专有云-Apsara/99-apsara-stack-troubleshooting-runbook.md|99 专有云故障手册]]。
+> 完整的专有云故障手册见 [[18-云厂商/01-阿里云/专有云-Apsara/01-apsara-stack-troubleshooting-runbook.md|99 专有云故障手册]]。
 
 ### 5.2 诊断脚本
 
@@ -348,10 +348,10 @@ echo "诊断报告: $REPORT"
 
 - [[18-云厂商/01-阿里云/01-专有云架构概述.md|01 专有云架构概述]]
 - [[18-云厂商/01-阿里云/apsara-stack-components.md|Apsara Stack 组件索引]]
-- [[18-云厂商/01-阿里云/专有云-Apsara/255-apsara-compliance-hardening.md|255 合规加固]]
-- [[18-云厂商/01-阿里云/专有云-Apsara/254-apsara-upgrade-patch-management.md|254 升级与补丁管理]]
-- [[18-云厂商/01-阿里云/专有云-Apsara/99-apsara-stack-troubleshooting-runbook.md|99 专有云故障手册]]
-- [[18-云厂商/01-阿里云/专有云-Apsara/253-apsara-tianji-aso-operations.md|253 天基/ASO 运维]]
+- [[18-云厂商/01-阿里云/专有云-Apsara/007-apsara-compliance-hardening.md|255 合规加固]]
+- [[18-云厂商/01-阿里云/专有云-Apsara/006-apsara-upgrade-patch-management.md|254 升级与补丁管理]]
+- [[18-云厂商/01-阿里云/专有云-Apsara/01-apsara-stack-troubleshooting-runbook.md|99 专有云故障手册]]
+- [[18-云厂商/01-阿里云/专有云-Apsara/005-apsara-tianji-aso-operations.md|253 天基/ASO 运维]]
 
 ## Related
 

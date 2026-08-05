@@ -175,12 +175,12 @@ domain-11-production-operations/topic-k8s-lecturer/
 | ImagePullBackOff | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q3-pod-imagepullbackoff-怎么办) | - | [03-imagepull-failure](../domain-10-troubleshooting-diagnostics/技能体系/03-imagepull-failure.md) |
 | Service 无法访问 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q5-service-无法访问怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#3-service-无法访问) | [05-service-connectivity](../domain-10-troubleshooting-diagnostics/技能体系/05-service-connectivity.md) |
 | DNS 解析失败 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q6-dns-解析失败怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#4-dns-解析失败) | [04-dns-failure](../domain-10-troubleshooting-diagnostics/技能体系/04-dns-failure.md) |
-| Ingress 404 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q7-ingress-返回-404-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#9-ingress-404) | [13-ingress-gateway-failure](../domain-10-troubleshooting-diagnostics/技能体系/13-ingress-gateway-failure.md) |
+| Ingress 404 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q7-ingress-返回-404-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#9-ingress-404) | [13-ingress-gateway-failure](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md) |
 | 节点 NotReady | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q13-节点-notready-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#5-节点-notready) | [domain-10-troubleshooting-diagnostics](../domain-10-troubleshooting-diagnostics/03-node-notready-diagnosis.md) |
 | HPA 不工作 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q11-hpa-不工作怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#6-hpa-不触发扩容) | [07-hpa-scaling-failure](../domain-10-troubleshooting-diagnostics/技能体系/07-hpa-scaling-failure.md) |
 | PVC Pending | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q15-pvc-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#7-pvc-pending) | [06-pvc-storage-failure](../domain-10-troubleshooting-diagnostics/技能体系/06-pvc-storage-failure.md) |
-| RBAC Forbidden | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q17-rbac-forbidden-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#10-rbac-forbidden) | [09-rbac-quota-failure](../domain-10-troubleshooting-diagnostics/技能体系/09-rbac-quota-failure.md) |
-| 滚动更新卡住 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q19-deployment-滚动更新卡住怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#8-deployment-滚动更新卡住) | [08-deployment-rollout-failure](../domain-10-troubleshooting-diagnostics/技能体系/08-deployment-rollout-failure.md) |
+| RBAC Forbidden | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q17-rbac-forbidden-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#10-rbac-forbidden) | [09-rbac-quota-failure](10-rbac-quota-failure.md) |
+| 滚动更新卡住 | [Q&A](../11-oncall-qa/oncall-quick-qa.md#q19-deployment-滚动更新卡住怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#8-deployment-滚动更新卡住) | [08-deployment-rollout-failure](09-deployment-rollout-failure.md) |
 | DaemonSet 问题 | [Q&A](../10-advanced-workloads/10-daemonset-basics.md#6-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../domain-10-troubleshooting-diagnostics/技能体系/17-daemonset-pdb-failure.md) |
 | StatefulSet 问题 | [Q&A](../10-advanced-workloads/11-statefulset-basics.md#7-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../domain-10-troubleshooting-diagnostics/技能体系/17-daemonset-pdb-failure.md) |
 | 调度/亲和性问题 | [Q&A](../11-scheduling/12-scheduling-basics.md#7-数字人-qa-场景) | - | [16-scheduling-pdb-failure](../domain-10-troubleshooting-diagnostics/技能体系/16-scheduling-pdb-failure.md) |
@@ -461,12 +461,12 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

@@ -77,7 +77,7 @@ prerequisites:
 
 - Istio 企业级服务网格入门指南
 - Linkerd 轻量级服务网格实践指南
-- [[02-工作负载/01-核心工作负载/99-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
+- [[02-工作负载/01-核心工作负载/25-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
 
 ### 故障排查
 

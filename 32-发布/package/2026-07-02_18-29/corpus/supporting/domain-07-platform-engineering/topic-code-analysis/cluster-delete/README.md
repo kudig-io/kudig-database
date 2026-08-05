@@ -378,11 +378,11 @@ kubectl get nodes
 ## 相关函数
 
 - [`runCleanupNode`](04-cleanup.md) — 节点清理详细实现
-- [`runRemoveEtcd`](05-etcd-cleanup.md) — etcd 成员移除
+- [`runRemoveEtcd`](03-etcd-cleanup.md) — etcd 成员移除
 - [`CleanDir`](04-cleanup.md) — 目录清理工具
-- [`安全清理`](10-security-delete.md) — 证书/密钥安全删除
-- [`网络清理`](11-network-cleanup.md) — CNI/iptables 清理
-- [`删除前备份检查`](13-pre-delete-backup-checklist.md) — 集群删除前的数据备份与迁移检查清单
+- [`安全清理`](05-security-delete.md) — 证书/密钥安全删除
+- [`网络清理`](06-network-cleanup.md) — CNI/iptables 清理
+- [`删除前备份检查`](07-pre-delete-backup-checklist.md) — 集群删除前的数据备份与迁移检查清单
 
 ## 版本说明
 
@@ -404,12 +404,12 @@ kubectl get nodes
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

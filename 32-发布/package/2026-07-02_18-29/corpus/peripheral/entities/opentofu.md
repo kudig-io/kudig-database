@@ -79,7 +79,7 @@ OpenTofu 是 Terraform 的开源分支，在 Terraform 转向 BSL 许可后由�
 
 - [[kubeedge]] — KubeEdge
 - [[telepresence]] — Telepresence
-- [[08-containerd-multi-tenant]] — containerd 多租户
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/09-containerd-multi-tenant]] — containerd 多租户
 - [[harbor]] — Harbor
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

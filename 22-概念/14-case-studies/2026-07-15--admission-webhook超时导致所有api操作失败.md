@@ -24,7 +24,7 @@ last_updated: 2026-05-23
 #  admission webhook超时导致所有API操作失败
 
 **日期**: 2026-07-15  
-**关联Skill**: [[11-control-plane-failure]]  
+**关联Skill**: [[12-control-plane-failure]]  
 **严重级别**: P0
 
 ## 场景描述

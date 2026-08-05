@@ -70,14 +70,14 @@ prerequisites:
 - Linkerd 企业级服务网格深度实践
 - Consul Connect 企业级服务网格管理
 - Envoy Proxy 企业级服务网格数据平面深度实践
-- [[domain-16-database-middleware/数据库/03-distributed-database-enterprise.md|03 distributed database enterprise]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-16-database-middleware/02-databases/01-distributed-database-enterprise|03 distributed database enterprise]]
 - Traefik Mesh (Maesh) Enterprise Service Mesh 深度实践
 
 ### 入门指南
 
 - Istio 企业级服务网格入门指南
 - Linkerd 轻量级服务网格实践指南
-- [[domain-02-workloads-applications/核心工作负载/99-spring-boot-kubernetes-guide.md|99 spring boot kubernetes guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/00-core-workloads/08-spring-boot-kubernetes-guide|99 spring boot kubernetes guide]]
 
 ### 故障排查
 

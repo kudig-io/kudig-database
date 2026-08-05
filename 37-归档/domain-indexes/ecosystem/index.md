@@ -45,13 +45,13 @@ last_updated: 2026-05-21
 - [[cert-manager|cert-manager]] — Cert manager
 - [[cilium|cilium]] — Cilium
 - [[cloudevents|cloudevents]] — Cloudevents
-- [[02-containerd-v2-features|02-containerd-v2-features]] — Containerd v2 features
-- [[03-containerd-security-hardening|03-containerd-security-hardening]] — Containerd security hardening
-- [[04-containerd-upgrade-migration|04-containerd-upgrade-migration]] — Containerd upgrade migration
-- [[05-containerd-windows-support|05-containerd-windows-support]] — Containerd windows support
-- [[06-containerd-observability|06-containerd-observability]] — Containerd observability
-- [[07-containerd-disaster-recovery|07-containerd-disaster-recovery]] — Containerd disaster recovery
-- [[08-containerd-multi-tenant|08-containerd-multi-tenant]] — Containerd multi tenant
+- [[23-实体/03-运行时/01-containerd-v2-features|02-containerd-v2-features]] — Containerd v2 features
+- [[02-containerd-security-hardening|03-containerd-security-hardening]] — Containerd security hardening
+- [[03-containerd-upgrade-migration|04-containerd-upgrade-migration]] — Containerd upgrade migration
+- [[04-containerd-windows-support|05-containerd-windows-support]] — Containerd windows support
+- [[05-containerd-observability|06-containerd-observability]] — Containerd observability
+- [[06-containerd-disaster-recovery|07-containerd-disaster-recovery]] — Containerd disaster recovery
+- [[07-containerd-multi-tenant|08-containerd-multi-tenant]] — Containerd multi tenant
 - [[containerd|containerd]] — Containerd
 - [[coredns|coredns]] — Coredns
 - [[cri-o|cri-o]] — Cri o
@@ -67,8 +67,8 @@ last_updated: 2026-05-21
 - [[harbor|harbor]] — Harbor
 - [[helm|helm]] — Helm
 - [[in-toto|in-toto]] — In toto
-- [[02-istio-advanced-traffic-management|02-istio-advanced-traffic-management]] — Istio advanced traffic management
-- [[03-istio-security-hardening|03-istio-security-hardening]] — Istio security hardening
+- [[01-istio-advanced-traffic-management|02-istio-advanced-traffic-management]] — Istio advanced traffic management
+- [[02-istio-security-hardening|03-istio-security-hardening]] — Istio security hardening
 - [[istio|istio]] — Istio
 - [[jaeger|jaeger]] — Jaeger
 - [[keda|keda]] — Keda
@@ -77,8 +77,8 @@ last_updated: 2026-05-21
 - [[kubernetes|kubernetes]] — Kubernetes
 - [[linkerd|linkerd]] — Linkerd
 - [[opa|opa]] — Opa
-- [[02-prometheus-promql-advanced|02-prometheus-promql-advanced]] — Prometheus promql advanced
-- [[03-prometheus-ha-deployment|03-prometheus-ha-deployment]] — Prometheus ha deployment
+- [[23-实体/07-可观测性/01-prometheus-promql-advanced|02-prometheus-promql-advanced]] — Prometheus promql advanced
+- [[02-prometheus-ha-deployment|03-prometheus-ha-deployment]] — Prometheus ha deployment
 - [[prometheus|prometheus]] — Prometheus
 - [[rook|rook]] — Rook
 - [[spiffe|spiffe]] — Spiffe
@@ -309,7 +309,7 @@ last_updated: 2026-05-21
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-19]] — Open source projects index from domain 19
-- [[00-open-source-projects-index-from-domain-34]] — Open source projects index from domain 34
+- [[01-open-source-projects-index-from-domain-34]] — Open source projects index from domain 34
 - [[MOC-from-domain-19]] — MOC from domain 19
 - [[MOC-from-domain-34]] — MOC from domain 34
 - [[README-from-domain-19]] — README from domain 19
@@ -349,8 +349,8 @@ last_updated: 2026-05-21
 - [[README]] — README
 
 ## 相关 Domain
-- [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
-- [[平台工程/98-merged-indexes/index.md|Domain 07 平台工程 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 01 集群基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 07 平台工程 索引]]
 
 
 <!-- risk-assessed -->

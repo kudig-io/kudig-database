@@ -29,11 +29,11 @@ last_updated: 2026-07
 - domain-18-manifests-patterns/01-yaml-reference/
 - domain-18-manifests-patterns/02-kustomize-patterns/
 - domain-18-manifests-patterns/03-helm-values-patterns/
-- [[domain-18-manifests-patterns/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
-- [[domain-18-manifests-patterns/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 
 
 

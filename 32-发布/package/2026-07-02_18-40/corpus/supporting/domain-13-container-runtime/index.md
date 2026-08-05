@@ -31,12 +31,12 @@ last_updated: 2026-07
 - domain-13-container-runtime/03-containerd-cri-o/
 - domain-13-container-runtime/04-image-build/
 - domain-13-container-runtime/05-runtime-migration/
-- [[domain-13-container-runtime/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
 - [[domain-13-container-runtime/01-containerd-deep-guide.md|Containerd Deep Guide]]
-- [[domain-13-container-runtime/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 
 
 

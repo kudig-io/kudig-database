@@ -132,7 +132,7 @@ tier: peripheral---
 
 | # | 文档 | 关键内容 | 专有云特色 | 混合云能力 |
 |:---:|:---|:---|:---|:---|
-| 13 | [阿里云专有云](./13-alicloud-apsara-ack/alicloud-apsara-ack-overview.md) | Apsara Stack、专有云K8s、混合云架构 | 专有云架构、深度定制 | 混合云部署、离线环境、安全隔离 |
+| 13 | [阿里云专有云](32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/08-alicloud-apsara-ack/alicloud-apsara-ack-overview.md) | Apsara Stack、专有云K8s、混合云架构 | 专有云架构、深度定制 | 混合云部署、离线环境、安全隔离 |
 
 ---
 

@@ -72,7 +72,7 @@ KubeStellar 是一个多集群配置管理和工作负载分发平台，专注�
 
 ## Related
 
-- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/07-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[kepler]] — Kepler
 - [[kcp]] — kcp

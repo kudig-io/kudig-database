@@ -640,7 +640,7 @@ Patroni + etcd 方案对网络稳定性要求较高。建议将 PostgreSQL 集�
 
 ## See Also
 
-- [[12-可靠性/01-备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[12-可靠性/01-备份恢复/06-enterprise-backup-strategy.md|企业级备份策略]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障诊断]]
 
 ```

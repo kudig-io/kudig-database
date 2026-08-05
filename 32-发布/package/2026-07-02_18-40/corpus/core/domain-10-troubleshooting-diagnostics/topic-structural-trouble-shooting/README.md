@@ -187,26 +187,26 @@ prerequisites:
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-ai-ml-workloads-troubleshooting.md](10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md) | AI/ML 工作负载通用故障排查 | GPU 调度、分布式训练、模型服务、数据处理 |
-| [02-kubeflow-troubleshooting.md](10-ai-ml-workloads/02-kubeflow-troubleshooting.md) | Kubeflow 平台故障排查 | Pipeline 失败、Katib 实验、KServe 推理、Notebook |
-| [03-mpi-operator-troubleshooting.md](10-ai-ml-workloads/03-mpi-operator-troubleshooting.md) | MPI Operator 与分布式训练故障排查 | MPIJob 启动、NCCL 通信、多节点 GPU 训练 |
+| [01-ai-ml-workloads-troubleshooting.md](12-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md) | AI/ML 工作负载通用故障排查 | GPU 调度、分布式训练、模型服务、数据处理 |
+| [02-kubeflow-troubleshooting.md](12-ai-ml-workloads/02-kubeflow-troubleshooting.md) | Kubeflow 平台故障排查 | Pipeline 失败、Katib 实验、KServe 推理、Notebook |
+| [03-mpi-operator-troubleshooting.md](12-ai-ml-workloads/03-mpi-operator-troubleshooting.md) | MPI Operator 与分布式训练故障排查 | MPIJob 启动、NCCL 通信、多节点 GPU 训练 |
 
 ### 11-gitops-devops（GitOps 与 DevOps）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-gitops-devops-troubleshooting.md](11-gitops-devops/01-gitops-devops-troubleshooting.md) | GitOps/DevOps 通用故障排查 | ArgoCD/Flux 同步、CI/CD 流水线、Secret 管理 |
-| [02-tekton-troubleshooting.md](11-gitops-devops/02-tekton-troubleshooting.md) | Tekton CI/CD 流水线故障排查 | PipelineRun 失败、Workspace 问题、触发器异常 |
-| [03-flux-image-automation-troubleshooting.md](11-gitops-devops/03-flux-image-automation-troubleshooting.md) | Flux 镜像自动化故障排查 | 镜像扫描失败、策略不匹配、Git 自动提交异常 |
+| [01-gitops-devops-troubleshooting.md](14-gitops-devops/01-gitops-devops-troubleshooting.md) | GitOps/DevOps 通用故障排查 | ArgoCD/Flux 同步、CI/CD 流水线、Secret 管理 |
+| [02-tekton-troubleshooting.md](14-gitops-devops/02-tekton-troubleshooting.md) | Tekton CI/CD 流水线故障排查 | PipelineRun 失败、Workspace 问题、触发器异常 |
+| [03-flux-image-automation-troubleshooting.md](14-gitops-devops/03-flux-image-automation-troubleshooting.md) | Flux 镜像自动化故障排查 | 镜像扫描失败、策略不匹配、Git 自动提交异常 |
 
 ### 12-monitoring-01-observability-architecture-overview（可观测性）
 
 | 文档 | 说明 | 适用场景 |
 |------|------|----------|
-| [01-monitoring-observability-troubleshooting.md](12-monitoring-observability/01-monitoring-observability-troubleshooting.md) | 可观测性通用故障排查 | Prometheus/Grafana/Loki/Jaeger/AlertManager |
-| [02-opentelemetry-troubleshooting.md](12-monitoring-observability/02-opentelemetry-troubleshooting.md) | OpenTelemetry Collector 故障排查 | OTLP 接收/导出失败、采样、数据丢失 |
-| [03-ebpf-observability-troubleshooting.md](12-monitoring-observability/03-ebpf-observability-troubleshooting.md) | eBPF 可观测性故障排查 | Cilium Hubble、Tetragon、Pixie、eBPF 加载 |
-| [04-finops-cost-optimization-troubleshooting.md](12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md) | FinOps 成本优化故障排查 | 成本飙升、闲置资源、Spot 优化、预算告警 |
+| [01-monitoring-observability-troubleshooting.md](15-monitoring-observability/01-monitoring-observability-troubleshooting.md) | 可观测性通用故障排查 | Prometheus/Grafana/Loki/Jaeger/AlertManager |
+| [02-opentelemetry-troubleshooting.md](15-monitoring-observability/02-opentelemetry-troubleshooting.md) | OpenTelemetry Collector 故障排查 | OTLP 接收/导出失败、采样、数据丢失 |
+| [03-ebpf-observability-troubleshooting.md](15-monitoring-observability/03-ebpf-observability-troubleshooting.md) | eBPF 可观测性故障排查 | Cilium Hubble、Tetragon、Pixie、eBPF 加载 |
+| [04-finops-cost-optimization-troubleshooting.md](15-monitoring-observability/04-finops-cost-optimization-troubleshooting.md) | FinOps 成本优化故障排查 | 成本飙升、闲置资源、Spot 优化、预算告警 |
 
 ---
 
@@ -466,12 +466,12 @@ prerequisites:
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
@@ -564,28 +564,28 @@ prerequisites:
 
 ### 09 Command Output
 
-- [[_archives/troubleshooting-diagnostics/高级排障/09-command-output/00-command-output-root-cause-parser.md|00-command-output-root-cause-parser]]
-- [[_archives/troubleshooting-diagnostics/高级排障/09-command-output/01-kubectl-watch-output-parser.md|01-kubectl-watch-output-parser]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-command-output/00-command-output-root-cause-parser|00-command-output-root-cause-parser]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/10-command-output/01-kubectl-watch-output-parser|01-kubectl-watch-output-parser]]
 
 ### 10 Ai Ml Workloads
 
-- [[_archives/troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|01-ai-ml-workloads-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|02-kubeflow-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|03-mpi-operator-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/01-ai-ml-workloads-troubleshooting|01-ai-ml-workloads-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/02-kubeflow-troubleshooting|02-kubeflow-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/03-mpi-operator-troubleshooting|03-mpi-operator-troubleshooting]]
 
 ### 11 Gitops Devops
 
-- [[_archives/troubleshooting-diagnostics/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|01-gitops-devops-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|02-tekton-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/11-gitops-devops/04-backup-restore-troubleshooting.md|04-backup-restore-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/01-gitops-devops-troubleshooting|01-gitops-devops-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/02-tekton-troubleshooting|02-tekton-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/04-backup-restore-troubleshooting|04-backup-restore-troubleshooting]]
 
 ### 12 Monitoring Observability
 
-- [[_archives/troubleshooting-diagnostics/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|01-monitoring-observability-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|02-opentelemetry-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/12-monitoring-observability/03-ebpf-observability-troubleshooting.md|03-ebpf-observability-troubleshooting]]
-- [[_archives/troubleshooting-diagnostics/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|04-finops-cost-optimization-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/01-monitoring-observability-troubleshooting|01-monitoring-observability-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/02-opentelemetry-troubleshooting|02-opentelemetry-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/03-ebpf-observability-troubleshooting|03-ebpf-observability-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/04-finops-cost-optimization-troubleshooting|04-finops-cost-optimization-troubleshooting]]
 
 
 

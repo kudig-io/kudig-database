@@ -485,7 +485,7 @@ kubectl logs -n cert-manager deployment/cert-manager-cainjector
 
 ## 相关文档
 
-- [安全/10-certificate-management.md](../../08-%E5%AE%89%E5%85%A8/06-%E5%90%88%E8%A7%84%E5%AE%A1%E8%AE%A1/10-certificate-management.md) - 完整证书管理指南
+- [安全/10-certificate-management.md](../../08-安全/06-合规审计/07-certificate-management.md) - 完整证书管理指南
 - [man/man8/cert-manager.8](../man/man8/cert-manager.8) - cert-manager manpage
 - [故障诊断/FTA故障树/list/certificate-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/certificate-fta.md) - 证书故障树分析
 

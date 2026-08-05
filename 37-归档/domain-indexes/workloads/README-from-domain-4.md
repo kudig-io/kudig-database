@@ -97,8 +97,8 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
 | 10 | [工作负载控制器概览](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/10-workload-controllers-overview.md) | 控制器特性矩阵、基础配置 | ⭐⭐⭐⭐ |
-| 11 | [Pod生命周期事件](./11-pod-lifecycle-events.md) | Pod状态转换、事件处理 | ⭐⭐⭐⭐ |
-| 12 | [高级Pod模式](./12-advanced-pod-patterns.md) | Pod设计模式、最佳实践 | ⭐⭐⭐ |
+| 11 | [Pod生命周期事件](02-pod-lifecycle-events.md) | Pod状态转换、事件处理 | ⭐⭐⭐⭐ |
+| 12 | [高级Pod模式](02-advanced-pod-patterns.md) | Pod设计模式、最佳实践 | ⭐⭐⭐ |
 | 13 | [容器生命周期钩子](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/13-container-lifecycle-hooks.md) | 启动/停止钩子、健康检查 | ⭐⭐⭐⭐⭐ |
 | 14 | [Sidecar容器模式](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/14-sidecar-containers-patterns.md) | 边车模式、服务网格集成 | ⭐⭐⭐⭐⭐ |
 | 15 | [容器运行时接口](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/15-container-runtime-interfaces.md) | CRI架构、运行时选型 | ⭐⭐⭐⭐ |
@@ -138,7 +138,7 @@ Kubernetes工作负载管理域专注于生产环境下的工作负载控制器�
 ### K8s v1.29-v1.33 工作负载新特性参考 (99-系列)
 | # | 文档 | 关键内容 | 生产成熟度 |
 |:---:|:---|:---|:---|
-| 99 | [v1.29-v1.33 工作负载管理新特性指南](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/99-kubernetes-v1.33-workloads-guide.md) | Sidecar GA、原地Resize、Job成功策略、AppArmor、用户命名空间 | ⭐⭐⭐⭐⭐ |
+| 99 | [v1.29-v1.33 工作负载管理新特性指南](../../../02-工作负载/01-核心工作负载/24-kubernetes-v1.33-workloads-guide.md) | Sidecar GA、原地Resize、Job成功策略、AppArmor、用户命名空间 | ⭐⭐⭐⭐⭐ |
 
 ---
 

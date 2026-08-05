@@ -41,11 +41,11 @@ last_updated: 2026-07
 - domain-12-cloud-providers/13-ctyun-tke/
 - domain-12-cloud-providers/14-ecloud-cke/
 - domain-12-cloud-providers/15-alicloud-apsara-ack/
-- [[domain-12-cloud-providers/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
-- [[domain-12-cloud-providers/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 
 
 

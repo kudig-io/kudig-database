@@ -245,4 +245,4 @@ plugin/pkg/
 - [[10-平台工程/06-代码分析/kubernetes-core/06-declarative-api-informer-mechanism.md|06 - 声明式 API 与 Informer 机制源码剖析]]
 - [[10-平台工程/06-代码分析/kubernetes-core/07-component-interaction-dataflow.md|07 - 组件交互关系与数据流向]]
 - [[01-集群基础/01-架构总览/04-source-code-structure.md|集群基础：源码结构深度解析]]（宏观表格版）
-- [[01-集群基础/02-设计原则/09-source-code-walkthrough.md|设计原则：源码阅读指南]]
+- [[01-集群基础/02-设计原则/10-source-code-walkthrough.md|设计原则：源码阅读指南]]

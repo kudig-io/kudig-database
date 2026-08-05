@@ -203,7 +203,7 @@ kubectl -n rook-ceph exec deploy/rook-ceph-tools -- ceph osd purge <id> --yes-i-
 
 - [[23-实体/02-K8s核心组件/virtual-kubelet.md|kubelet]]]] — Virtual Kubelet
 - [[kudo]] — KUDO
-- [[02-containerd-v2-features]] — containerd 2.0 新特性
+- [[23-实体/03-运行时/01-containerd-v2-features]] — containerd 2.0 新特性
 - [[karmada]] — Karmada
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

@@ -391,7 +391,7 @@ for i in {1..10}; do curl -s -o /dev/null -w "%{http_code}\n" https://api.exampl
 
 ## Related
 
-- [[11-发布变更/04-变更管理/22-change-management-process.md|变更管理流程]]
+- [[11-发布变更/04-变更管理/08-change-management-process.md|变更管理流程]]
 - [[13-生产运维/07-运维手册/02-change-management-guide.md|变更管理指南]]
 
 ## See Also

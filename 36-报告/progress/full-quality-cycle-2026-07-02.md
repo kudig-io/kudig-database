@@ -157,6 +157,6 @@ _reports/
 ## 下一步建议
 
 1. **`release-sre/` 孤岛问题**: 465 个自动生成页无 MOC，建议为 `release-sre/corpus/` 创建顶层 index.md（但当前 skill 约定"不自动创建新页"，故本轮跳过）
-2. **Vault 真实孤岛 355 个**: 多为 `domain-*/subdir/index.md` 目录索引页，建议下一轮统一以 `[[subdir/index]]` 形式引用
+2. **Vault 真实孤岛 355 个**: 多为 `domain-*/subdir/index.md` 目录索引页，建议下一轮统一以 `[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index]]` 形式引用
 3. **Synthesis 扩展**: 仍有 5 个共现 ≥ 100 的对子未覆盖（Kubernetes × kubelet、Kubernetes × Helm 等），下轮可继续扩展
 4. **QA embedding**: `qa-index.json` 已就绪，可直接喂给向量数据库构建语义索引

@@ -63,7 +63,7 @@ authors:
 
 正是这些限制，使得多集群架构成为大型平台的必然选择。而多集群工作负载分发，作为多集群架构的核心能力，解决的是"一份应用定义，如何按策略部署到多个集群，并在某个集群故障时自动将负载转移到其他集群"这一核心问题。
 
-本文覆盖主流分发方案（Karmada、OCM、Argo CD ApplicationSet），详解权重路由、故障转移、一致性保障三大核心能力，并给出生产级配置。需要特别强调的是，多集群之间的网络打通是工作负载分发的前提条件，如果集群间网络不通，分发再多的工作负载也无法正常通信，这部分内容需要结合 [[05-网络/01-K8s网络核心/49-multicluster-network-federation.md|多集群网络联邦]] 一起阅读。
+本文覆盖主流分发方案（Karmada、OCM、Argo CD ApplicationSet），详解权重路由、故障转移、一致性保障三大核心能力，并给出生产级配置。需要特别强调的是，多集群之间的网络打通是工作负载分发的前提条件，如果集群间网络不通，分发再多的工作负载也无法正常通信，这部分内容需要结合 [[05-网络/01-K8s网络核心/51-multicluster-network-federation.md|多集群网络联邦]] 一起阅读。
 
 ---
 
@@ -365,7 +365,7 @@ kubectl --kubeconfig=/etc/karmada/karmada-apiserver.config \
 
 ## 最佳实践
 
-第一，选型上，需要强分发和故障转移能力选 Karmada，纯 GitOps 驱动选 ApplicationSet，侧重集群注册管理选 OCM。第二，网络先行，跨集群分发前必须先打通集群间网络，见 [[05-网络/01-K8s网络核心/49-multicluster-network-federation.md|多集群网络联邦]]。第三，故障转移必须配置 tolerationSeconds 和 failover 策略，并定期演练验证。第四，差异管理用 OverridePolicy 或 Helm values 处理，禁止 fork 多份 YAML。第五，一致性保障启用 selfHeal，确保单一控制平面为唯一真相源。第六，流量调度必须与分发配套，否则故障转移无法真正生效。第七，建立跨集群统一可观测视图。第八，渐进推进，先双集群验证再扩展到多区域。
+第一，选型上，需要强分发和故障转移能力选 Karmada，纯 GitOps 驱动选 ApplicationSet，侧重集群注册管理选 OCM。第二，网络先行，跨集群分发前必须先打通集群间网络，见 [[05-网络/01-K8s网络核心/51-multicluster-network-federation.md|多集群网络联邦]]。第三，故障转移必须配置 tolerationSeconds 和 failover 策略，并定期演练验证。第四，差异管理用 OverridePolicy 或 Helm values 处理，禁止 fork 多份 YAML。第五，一致性保障启用 selfHeal，确保单一控制平面为唯一真相源。第六，流量调度必须与分发配套，否则故障转移无法真正生效。第七，建立跨集群统一可观测视图。第八，渐进推进，先双集群验证再扩展到多区域。
 
 ```yaml
 # 🟢 低风险：集群健康监控告警
@@ -388,9 +388,9 @@ spec:
 
 ## Related
 
-- [[05-网络/01-K8s网络核心/49-multicluster-network-federation.md|多集群网络联邦]]
-- [[05-网络/01-K8s网络核心/31-multi-cluster-federation.md|多集群联邦]]
-- [[05-网络/01-K8s网络核心/32-multi-cluster-networking.md|多集群网络]]
+- [[05-网络/01-K8s网络核心/51-multicluster-network-federation.md|多集群网络联邦]]
+- [[05-网络/01-K8s网络核心/33-multi-cluster-federation.md|多集群联邦]]
+- [[05-网络/01-K8s网络核心/34-multi-cluster-networking.md|多集群网络]]
 - [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]
-- [[02-工作负载/00-总览/99-kubernetes-deployment-patterns-architecture.md|Kubernetes 部署模式架构]]
+- [[02-工作负载/00-总览/01-kubernetes-deployment-patterns-architecture.md|Kubernetes 部署模式架构]]
 - [[12-可靠性/02-灾难恢复/index|02-灾难恢复]]

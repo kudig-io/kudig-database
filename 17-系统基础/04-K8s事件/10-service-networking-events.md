@@ -2313,7 +2313,7 @@ chmod +x service-diagnostics.sh
 - **[06-node-lifecycle-condition-events.md](./06-node-lifecycle-condition-events.md)** - 节点事件,NodeNotReady 影响 LoadBalancer 后端健康检查
 - **[15-ecosystem-addon-events.md](./15-ecosystem-addon-events.md)** - Ingress Controller 和 CoreDNS 事件
 - **[Domain-5: 网络 - Service 深度解析](../网络/20-service-deep-dive.md)** - Service 工作原理和架构
-- **[Domain-5: 网络 - Ingress 与 Gateway API](../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md)** - 七层负载均衡方案
+- **[Domain-5: 网络 - Ingress 与 Gateway API](../../05-网络/01-K8s网络核心/37-gateway-api-overview.md)** - 七层负载均衡方案
 
 ---
 

@@ -99,14 +99,14 @@ prerequisites:
 - [[entities/kubernetes-changelog.md|Kubernetes 变更日志索引]]
 - [[concepts/kubernetes-version-evolution.md|Kubernetes 版本演进]]
 - [[entities/version-upgrade-guide.md|版本升级指南]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-reading-guide]] — 发布说明阅读指南
 - [[entities/kudig-contribution-guide.md|kudig-contribution-guide]] — 贡献指南、项目概览与版本发布说明
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-security]] — 发布说明索引 — 安全
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-security]] — 发布说明索引 — 安全
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

@@ -145,7 +145,7 @@ GitOps 和平台工程在 wiki 中被当作两个独立学科来处理——[[co
 - [[sops]] — SOPS (Secrets OPerationS)
 - [[entities/argocd.md|argocd]] — ArgoCD
 - [[entities/argo.md|Argo Workflows]]
-- [[domain-15-specialized-tech/扩展机制/06-helm-charts-management.md|47 - Helm Chart开发与管理]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-15-specialized-tech/04-extensions/01-helm-charts-management|47 - Helm Chart开发与管理]]
 
 
 <!-- risk-assessed -->

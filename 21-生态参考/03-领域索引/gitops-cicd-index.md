@@ -62,7 +62,7 @@ prerequisites:
 
 - [[22-概念/01-核心架构/kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
 - [[01-集群基础/01-架构总览/02-core-components-deep-dive.md|02 core components deep dive]]
-- [[01-集群基础/05-kubectl/05-kubectl-commands-reference.md|05 kubectl commands reference]]
+- [[01-集群基础/05-kubectl/02-kubectl-commands-reference.md|05 kubectl commands reference]]
 - 07 - 升级路径与策略指南
 - 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 - 12 - Kubernetes 集群部署架构模式指南
@@ -152,8 +152,8 @@ prerequisites:
 
 ## 技能卡片
 
-- [[19-故障诊断/08-技能体系/08-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]]
-- [[19-故障诊断/08-技能体系/16-logging-pipeline-failure.md|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]]
+- [[19-故障诊断/08-技能体系/09-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]]
+- [[19-故障诊断/08-技能体系/17-logging-pipeline-failure.md|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]]
 
 ## YAML 清单参考
 
@@ -227,8 +227,8 @@ prerequisites:
 - [[18-云厂商/02-AWS-EKS/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
 - [[18-云厂商/03-Google-GKE/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
 - [[18-云厂商/04-Azure-AKS/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
-- [[18-云厂商/01-阿里云/公有云-ACK/241-ack-slb-nlb-alb.md|ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)]]
-- [[18-云厂商/01-阿里云/公有云-ACK/244-ack-ros-iac.md|ACK 关联产品 - ROS 资源编排 (IaC)]]
+- [[18-云厂商/01-阿里云/公有云-ACK/003-ack-slb-nlb-alb.md|ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)]]
+- [[18-云厂商/01-阿里云/公有云-ACK/006-ack-ros-iac.md|ACK 关联产品 - ROS 资源编排 (IaC)]]
 - [[18-云厂商/05-腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[18-云厂商/08-其他云/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
 - [[18-云厂商/08-其他云/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]

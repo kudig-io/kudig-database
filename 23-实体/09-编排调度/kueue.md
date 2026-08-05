@@ -119,6 +119,6 @@ spec:
 
 ## 相关阅读
 
-- [[15-AI基础设施/05-K8s-AI基础设施/07-batch-scheduling-kueue-yunikorn|Kueue 与 YuniKorn 批量调度实践]]
+- [[15-AI基础设施/05-K8s-AI基础设施/08-batch-scheduling-kueue-yunikorn|Kueue 与 YuniKorn 批量调度实践]]
 - [[23-实体/09-编排调度/volcano|Volcano]]
 - [[22-概念/07-调度与资源/gang-scheduling|Gang Scheduling 概念]]

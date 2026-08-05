@@ -370,9 +370,9 @@ kubectl exec -n kafka prod-kafka-broker-0 -- \
 ## 8. 相关 Runbook / 推荐阅读
 
 - [[07-数据库中间件/01-数据库/08-kafka-kubernetes-strimzi.md|Kafka Kubernetes 企业级实践 — Strimzi Operator 深度指南]]
-- [[07-数据库中间件/00-总览/99-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
-- [[12-可靠性/00-总览/99-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
-- [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
+- [[07-数据库中间件/00-总览/02-production-readiness-operations-guide.md|Database & Middleware 生产就绪运维指南]]
+- [[12-可靠性/00-总览/01-production-readiness-operations-guide.md|可靠性工程生产就绪运维指南]]
+- [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - Kafka MirrorMaker2 跨集群复制运维（待补充）
 - Kafka 安全加固与 mTLS 最佳实践（待补充）
 

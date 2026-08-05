@@ -163,7 +163,7 @@ bash scripts/verify-deployment.sh <namespace> <deployment-name>
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
 | 根因目录 | [reference/root-cause-catalog.md](./reference/root-cause-catalog.md) |
-| 单文件完整版 | [../08-deployment-rollout-failure.md](../08-deployment-rollout-failure.md) |
+| 单文件完整版 | [../08-deployment-rollout-failure.md](09-deployment-rollout-failure.md) |
 
 ## Related
 

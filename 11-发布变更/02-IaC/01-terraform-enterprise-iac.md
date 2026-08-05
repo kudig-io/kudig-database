@@ -1630,7 +1630,7 @@ IaC技术发展趋势:
 - [[11-发布变更/README.md|[[37-归档/domain-indexes/release-change/README-from-domain-24|Domain 24: 基础设施即代码 (Infrastructure as Code)]]e|Infrastructure as Code]])]]
 - Domain-24 基础设施即代码 — 开源项目索引
 - Ansible企业级自动化运维深度实践
-- [[11-发布变更/02-IaC/11-infrastructure-as-code.md|11 infrastructure as code]]
+- [[11-发布变更/02-IaC/06-infrastructure-as-code.md|11 infrastructure as code]]
 - Azure Resource Manager (ARM) Enterprise 深度实践
 - Crossplane Enterprise Infrastructure Orchestration 深度实践
 - Crossplane 平台工程实践指南

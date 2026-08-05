@@ -29,38 +29,38 @@ last_updated: 2026-05-21
 - [[README]] — Domain 总览
 
 ## 根目录文档
-- [[03-slo-sli-guide]] — Slo sli guide
+- [[12-可靠性/06-SRE实践/04-slo-sli-guide]] — Slo sli guide
 
 ## 按主题分组
 
 ### 备份恢复
 
-- [[16-enterprise-backup-strategy]] — Enterprise backup strategy
+- [[06-enterprise-backup-strategy]] — Enterprise backup strategy
 
 ### 灾难恢复
 
 - [[01-vmware-vsphere-enterprise-dr]] — Vmware vsphere enterprise dr
 - [[02-veeam-enterprise-backup]] — Veeam enterprise backup
 - [[03-enterprise-disaster-recovery-chaos-engineering]] — Enterprise disaster recovery chaos engineering
-- [[05-commvault-enterprise-disaster-recovery]] — Commvault enterprise disaster recovery
-- [[06-rubrik-enterprise-disaster-recovery]] — Rubrik enterprise disaster recovery
-- [[07-kubernetes-backup-restore-deep-dive]] — Kubernetes backup restore deep dive
-- [[08-chaos-engineering-platforms]] — Chaos engineering platforms
-- [[09-application-level-disaster-recovery]] — Application level disaster recovery
-- [[17-disaster-recovery-drills]] — Disaster recovery drills
-- [[18-cross-region-disaster-recovery]] — Cross region disaster recovery
-- [[99-velero-backup-recovery-guide]] — Velero backup recovery guide
+- [[06-commvault-enterprise-disaster-recovery]] — Commvault enterprise disaster recovery
+- [[07-rubrik-enterprise-disaster-recovery]] — Rubrik enterprise disaster recovery
+- [[08-kubernetes-backup-restore-deep-dive]] — Kubernetes backup restore deep dive
+- [[09-chaos-engineering-platforms]] — Chaos engineering platforms
+- [[10-application-level-disaster-recovery]] — Application level disaster recovery
+- [[18-disaster-recovery-drills]] — Disaster recovery drills
+- [[20-cross-region-disaster-recovery]] — Cross region disaster recovery
+- [[26-velero-backup-recovery-guide]] — Velero backup recovery guide
 
 ### 容量规划
 
-- [[24-capacity-planning-forecasting]] — Capacity planning forecasting
+- [[06-capacity-planning-forecasting]] — Capacity planning forecasting
 
 ### SLO/SLI 管理
 
 - [[01-sli-definition-selection]] — Sli definition selection
 - [[02-slo-implementation-guide]] — Slo implementation guide
 - [[03-error-budget-management]] — Error budget management
-- [[04-burn-rate-alerting]] — Burn rate alerting
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-09-reliability-engineering/05-slo-sli/01-burn-rate-alerting]] — Burn rate alerting
 
 ### 混沌工程
 
@@ -79,7 +79,7 @@ last_updated: 2026-05-21
 - [[01-availability-calculation-model]] — Availability calculation model
 - [[02-release-gate-slo-based]] — Release gate slo based
 - [[03-incident-command-system]] — Incident command system
-- [[04-toil-reduction-automation]] — Toil reduction automation
+- [[06-toil-reduction-automation]] — Toil reduction automation
 
 ### 性能测试
 
@@ -89,7 +89,7 @@ last_updated: 2026-05-21
 ### 灾难恢复手册
 
 - [[01-dr-scenarios-catalog]] — Dr scenarios catalog
-- [[02-az-failure-playbook]] — Az failure playbook
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-09-reliability-engineering/05-disaster-recovery-playbooks/01-az-failure-playbook]] — Az failure playbook
 
 ### 98 Merged Indexes
 
@@ -98,8 +98,8 @@ last_updated: 2026-05-21
 - [[README-from-domain-30]] — README from domain 30
 
 ## 相关 Domain
-- [[发布变更/98-merged-indexes/index.md|Domain 08 发布与变更管理 索引]]
-- [[生产运维/98-merged-indexes/index.md|Domain 11 生产运维 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 08 发布与变更管理 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 11 生产运维 索引]]
 
 
 <!-- risk-assessed -->

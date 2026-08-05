@@ -224,7 +224,7 @@ kubectl rollout restart deployment/backstage -n backstage
 
 - [[wasmedge]] — WasmEdge
 - [[23-实体/15-参考与索引/cncf-runtime.md|cncf-runtime]] — CNCF 容器运行时与工具链项目全景
-- [[04-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
+- [[03-containerd-upgrade-migration]] — [[containerd|containerd]]rd 升级迁移|containerd 升级迁移]]
 - [[spin]] — Spin
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

@@ -74,67 +74,67 @@ cross_refs:
 ## 目录结构
 
 ### 1. 网络基础架构 (01-05)
-- [01-network-architecture-overview.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/01-network-architecture-overview.md) - 网络架构概览与核心组件
-- [02-cni-architecture-fundamentals.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) - CNI 架构基础与核心原理
-- [03-cni-plugins-comparison.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) - CNI 插件对比与选型指南
-- [04-flannel-complete-guide.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/04-flannel-complete-guide.md) - Flannel 完整指南
-- [05-terway-advanced-guide.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) - Terway 高级指南
+- [01-network-architecture-overview.md](../../../05-网络/01-K8s网络核心/02-network-architecture-overview.md) - 网络架构概览与核心组件
+- [02-cni-architecture-fundamentals.md](../../../05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md) - CNI 架构基础与核心原理
+- [03-cni-plugins-comparison.md](../../../05-网络/01-K8s网络核心/04-cni-plugins-comparison.md) - CNI 插件对比与选型指南
+- [04-flannel-complete-guide.md](../../../05-网络/01-K8s网络核心/05-flannel-complete-guide.md) - Flannel 完整指南
+- [05-terway-advanced-guide.md](../../../05-网络/01-K8s网络核心/06-terway-advanced-guide.md) - Terway 高级指南
 
 ### 2. Service 服务 (06-10)
-- [06-service-concepts-types.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md) - Service 概念与类型深度解析
-- [07-service-implementation-details.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/07-service-implementation-details.md) - Service 实现细节
-- [08-service-topology-aware.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/08-service-topology-aware.md) - Service 拓扑感知
-- [09-kube-proxy-modes-performance.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/09-kube-proxy-modes-performance.md) - kube-proxy 模式与性能优化
-- [10-service-advanced-features.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/10-service-advanced-features.md) - Service 高级特性
+- [06-service-concepts-types.md](../../../05-网络/01-K8s网络核心/07-service-concepts-types.md) - Service 概念与类型深度解析
+- [07-service-implementation-details.md](../../../05-网络/01-K8s网络核心/08-service-implementation-details.md) - Service 实现细节
+- [08-service-topology-aware.md](../../../05-网络/01-K8s网络核心/09-service-topology-aware.md) - Service 拓扑感知
+- [09-kube-proxy-modes-performance.md](../../../05-网络/01-K8s网络核心/10-kube-proxy-modes-performance.md) - kube-proxy 模式与性能优化
+- [10-service-advanced-features.md](../../../05-网络/01-K8s网络核心/11-service-advanced-features.md) - Service 高级特性
 
 ### 3. DNS 服务发现 (11-15)
-- [11-dns-service-discovery-coredns.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/11-dns-service-discovery-coredns.md) - DNS 服务发现与 CoreDNS 调优
-- [12-dns-service-discovery.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/12-dns-service-discovery.md) - DNS 服务发现
-- [13-coredns-architecture-principles.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/13-coredns-architecture-principles.md) - CoreDNS 架构原理
-- [14-coredns-configuration-corefile.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/14-coredns-configuration-corefile.md) - CoreDNS 配置 Corefile
-- [15-coredns-plugins-reference.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/15-coredns-plugins-reference.md) - CoreDNS 插件参考
+- [11-dns-service-discovery-coredns.md](../../../05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md) - DNS 服务发现与 CoreDNS 调优
+- [12-dns-service-discovery.md](../../../05-网络/01-K8s网络核心/13-dns-service-discovery.md) - DNS 服务发现
+- [13-coredns-architecture-principles.md](../../../05-网络/01-K8s网络核心/14-coredns-architecture-principles.md) - CoreDNS 架构原理
+- [14-coredns-configuration-corefile.md](../../../05-网络/01-K8s网络核心/15-coredns-configuration-corefile.md) - CoreDNS 配置 Corefile
+- [15-coredns-plugins-reference.md](../../../05-网络/01-K8s网络核心/16-coredns-plugins-reference.md) - CoreDNS 插件参考
 
 ### 4. 网络策略与安全 (16-18)
-- [16-networkpolicy-deep-practice.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/16-networkpolicy-deep-practice.md) - NetworkPolicy 深度实践指南
-- [17-network-policy-advanced.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/17-network-policy-advanced.md) - NetworkPolicy 高级配置
-- [18-network-encryption-mtls.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/18-network-encryption-mtls.md) - 网络加密与 mTLS
+- [16-networkpolicy-deep-practice.md](../../../05-网络/01-K8s网络核心/17-networkpolicy-deep-practice.md) - NetworkPolicy 深度实践指南
+- [17-network-policy-advanced.md](../../../05-网络/01-K8s网络核心/18-network-policy-advanced.md) - NetworkPolicy 高级配置
+- [18-network-encryption-mtls.md](../../../05-网络/01-K8s网络核心/19-network-encryption-mtls.md) - 网络加密与 mTLS
 
 ### 5. Ingress 入站流量 (19-26)
-- [19-ingress-fundamentals.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md) - Ingress 基础概念与核心原理
-- [20-ingress-controller-deep-dive.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/20-ingress-controller-deep-dive.md) - Ingress Controller 深入解析
-- [21-nginx-ingress-complete-guide.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/21-nginx-ingress-complete-guide.md) - Nginx Ingress 完整指南
-- [22-ingress-tls-certificate.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/22-ingress-tls-certificate.md) - Ingress TLS 证书管理
-- [23-ingress-advanced-routing.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/23-ingress-advanced-routing.md) - Ingress 高级路由配置
-- [24-ingress-security-hardening.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/24-ingress-security-hardening.md) - Ingress 安全加固
-- [25-ingress-monitoring-troubleshooting.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/25-ingress-monitoring-troubleshooting.md) - Ingress 监控与排错
-- [26-ingress-production-best-practices.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/26-ingress-production-best-practices.md) - Ingress 生产最佳实践
+- [19-ingress-fundamentals.md](../../../05-网络/01-K8s网络核心/20-ingress-fundamentals.md) - Ingress 基础概念与核心原理
+- [20-ingress-controller-deep-dive.md](../../../05-网络/01-K8s网络核心/21-ingress-controller-deep-dive.md) - Ingress Controller 深入解析
+- [21-nginx-ingress-complete-guide.md](../../../05-网络/01-K8s网络核心/22-nginx-ingress-complete-guide.md) - Nginx Ingress 完整指南
+- [22-ingress-tls-certificate.md](../../../05-网络/01-K8s网络核心/23-ingress-tls-certificate.md) - Ingress TLS 证书管理
+- [23-ingress-advanced-routing.md](../../../05-网络/01-K8s网络核心/24-ingress-advanced-routing.md) - Ingress 高级路由配置
+- [24-ingress-security-hardening.md](../../../05-网络/01-K8s网络核心/25-ingress-security-hardening.md) - Ingress 安全加固
+- [25-ingress-monitoring-troubleshooting.md](../../../05-网络/01-K8s网络核心/26-ingress-monitoring-troubleshooting.md) - Ingress 监控与排错
+- [26-ingress-production-best-practices.md](../../../05-网络/01-K8s网络核心/27-ingress-production-best-practices.md) - Ingress 生产最佳实践
 
 ### 6. 网络故障排查 (27-29)
-- [27-cni-troubleshooting-optimization.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/27-cni-troubleshooting-optimization.md) - CNI 故障排查与优化
-- [28-coredns-troubleshooting-optimization.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/28-coredns-troubleshooting-optimization.md) - CoreDNS 故障排查与优化
-- [29-egress-traffic-management.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/29-egress-traffic-management.md) - 出站流量管理
+- [27-cni-troubleshooting-optimization.md](../../../05-网络/01-K8s网络核心/28-cni-troubleshooting-optimization.md) - CNI 故障排查与优化
+- [28-coredns-troubleshooting-optimization.md](../../../05-网络/01-K8s网络核心/29-coredns-troubleshooting-optimization.md) - CoreDNS 故障排查与优化
+- [29-egress-traffic-management.md](../../../05-网络/01-K8s网络核心/30-egress-traffic-management.md) - 出站流量管理
 
 ### 7. 高级主题 (30-39)
-- [30-service-mesh-deep-dive.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/30-service-mesh-deep-dive.md) - Service Mesh 深度解析与生产实践 (Istio Ambient Mesh)
-- [31-multi-cluster-federation.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/31-multi-cluster-federation.md) - 多集群网络联邦与跨集群通信 (Karmada & MCS)
-- [32-multi-cluster-networking.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/32-multi-cluster-networking.md) - 多集群网络
-- [33-network-troubleshooting.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/33-network-troubleshooting.md) - 网络故障排查
-- [34-network-performance-tuning.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/34-network-performance-tuning.md) - 网络性能调优
-- [35-gateway-api-overview.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/35-gateway-api-overview.md) - Gateway API 概览 (GAMMA & Mesh)
-- [36-api-gateway-patterns.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/36-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
-- [37-terway-resources-crud-operations.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
-- [38-terway-gc-mechanism.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) - Terway GC (垃圾回收) 机制详解
-- [39-csi-cni-version-matrix.md](../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/39-csi-cni-version-matrix.md) - CSI/CNI 版本兼容矩阵
+- [30-service-mesh-deep-dive.md](../../../05-网络/01-K8s网络核心/32-service-mesh-deep-dive.md) - Service Mesh 深度解析与生产实践 (Istio Ambient Mesh)
+- [31-multi-cluster-federation.md](../../../05-网络/01-K8s网络核心/33-multi-cluster-federation.md) - 多集群网络联邦与跨集群通信 (Karmada & MCS)
+- [32-multi-cluster-networking.md](../../../05-网络/01-K8s网络核心/34-multi-cluster-networking.md) - 多集群网络
+- [33-network-troubleshooting.md](../../../05-网络/01-K8s网络核心/35-network-troubleshooting.md) - 网络故障排查
+- [34-network-performance-tuning.md](../../../05-网络/01-K8s网络核心/36-network-performance-tuning.md) - 网络性能调优
+- [35-gateway-api-overview.md](../../../05-网络/01-K8s网络核心/37-gateway-api-overview.md) - Gateway API 概览 (GAMMA & Mesh)
+- [36-api-gateway-patterns.md](../../../05-网络/01-K8s网络核心/38-api-gateway-patterns.md) - API 网关模式 (Envoy Gateway)
+- [37-terway-resources-crud-operations.md](../../../05-网络/01-K8s网络核心/39-terway-resources-crud-operations.md) - Terway 实例 CRUD 操作指南
+- [38-terway-gc-mechanism.md](../../../05-网络/01-K8s网络核心/40-terway-gc-mechanism.md) - Terway GC (垃圾回收) 机制详解
+- [39-csi-cni-version-matrix.md](../../../05-网络/01-K8s网络核心/41-csi-cni-version-matrix.md) - CSI/CNI 版本兼容矩阵
 
 ### 8. Terway 阿里云 CNI 专题 (40-47)
-- [40-terway-product-overview.md](40-terway-product-overview.md) - Terway 产品概览：定位、版本历史、5 种网络模式、CNI 对比
-- [41-terway-architecture-deep-dive.md](41-terway-architecture-deep-dive.md) - Terway 架构原理：控制面/数据面、IPAM、CRD 模型、安全体系
-- [42-terway-usage-guide.md](42-terway-usage-guide.md) - Terway 使用指南：安装配置、NetworkPolicy、固定 IP、容量规划
-- [43-terway-crd-operations.md](43-terway-crd-operations.md) - Terway CRD 深度操作：PodENI/NodeNetworking/PodNetworking/ReservedIP 全量 CRUD
-- [44-terway-operations-manual.md](44-terway-operations-manual.md) - Terway 运维手册：健康检查、GC 调优、告警规则、升级回滚、巡检清单
-- [45-terway-testing-validation.md](45-terway-testing-validation.md) - Terway 测试验证：端到端测试套件、ENI 压测、性能基准、MTU 测试
-- [46-terway-performance-tuning.md](46-terway-performance-tuning.md) - Terway 性能调优：内核调优、eBPF 加速、IP 池预热、生产基线
-- [47-terway-troubleshooting-fta.md](47-terway-troubleshooting-fta.md) - Terway 故障树速查：FTA 全景图、6 大问题类别、32 条错误信息目录
+- [40-terway-product-overview.md](23-实体/04-网络/03-terway-product-overview.md) - Terway 产品概览：定位、版本历史、5 种网络模式、CNI 对比
+- [41-terway-architecture-deep-dive.md](23-实体/04-网络/04-terway-architecture-deep-dive.md) - Terway 架构原理：控制面/数据面、IPAM、CRD 模型、安全体系
+- [42-terway-usage-guide.md](23-实体/04-网络/05-terway-usage-guide.md) - Terway 使用指南：安装配置、NetworkPolicy、固定 IP、容量规划
+- [43-terway-crd-operations.md](23-实体/04-网络/06-terway-crd-operations.md) - Terway CRD 深度操作：PodENI/NodeNetworking/PodNetworking/ReservedIP 全量 CRUD
+- [44-terway-operations-manual.md](23-实体/04-网络/07-terway-operations-manual.md) - Terway 运维手册：健康检查、GC 调优、告警规则、升级回滚、巡检清单
+- [45-terway-testing-validation.md](23-实体/04-网络/08-terway-testing-validation.md) - Terway 测试验证：端到端测试套件、ENI 压测、性能基准、MTU 测试
+- [46-terway-performance-tuning.md](23-实体/04-网络/09-terway-performance-tuning.md) - Terway 性能调优：内核调优、eBPF 加速、IP 池预热、生产基线
+- [47-terway-troubleshooting-fta.md](23-实体/04-网络/10-terway-troubleshooting-fta.md) - Terway 故障树速查：FTA 全景图、6 大问题类别、32 条错误信息目录
 
 > **深度参考**: 关于各主流 API 网关产品（Higress、APISIX、Kong、Envoy Gateway、Traefik）的企业级实践，请参考 [Domain-98: 云原生 API 网关](../domain-40-cloud-native-api-gateway)。
 

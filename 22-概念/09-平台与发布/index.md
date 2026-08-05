@@ -19,8 +19,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[22-概念/09-平台与发布/14-cluster-api-deep-dive.md|Cluster API (CAPI) 深度解析]]
-- [[22-概念/09-平台与发布/37-kubespray-production-guide.md|Kubespray 生产部署指南]]
+- [[22-概念/09-平台与发布/01-cluster-api-deep-dive.md|Cluster API (CAPI) 深度解析]]
+- [[22-概念/09-平台与发布/02-kubespray-production-guide.md|Kubespray 生产部署指南]]
 - [[22-概念/09-平台与发布/backstage-platform-catalog.md|backstage-platform-catalog]]
 - [[22-概念/09-平台与发布/blue-green-deployment.md|blue-green-deployment]]
 - [[22-概念/09-平台与发布/canary-deployment.md|canary-deployment]]

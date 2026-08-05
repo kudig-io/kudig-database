@@ -1014,7 +1014,7 @@ escalation:
 
 - [[09-可观测性/06-SLO-SLI/04-sli-definition-selection.md|01 sli definition selection]] — SLI 定义与选择方法论
 - [[09-可观测性/06-SLO-SLI/06-error-budget-management.md|03 error budget management]] — 错误预算管理
-- [[09-可观测性/06-SLO-SLI/18-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述
+- [[09-可观测性/06-SLO-SLI/08-slo-sli-system.md|18 slo sli system]] — SLO/SLI 体系概述
 
 
 <!-- risk-assessed -->

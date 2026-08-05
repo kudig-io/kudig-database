@@ -889,9 +889,9 @@ kubectl get events --field-selector reason=Evicted -A
 ## 相关函数
 
 - [集群概览](../cluster-create/01-overview.md) — kubeadm 整体架构
-- [节点加入](../cluster-create/06-join.md) — 节点加入集群
-- [集群升级](../cluster-create/09-upgrade.md) — 升级时 drain 操作
-- [安全机制](../cluster-create/16-security.md) — PodDisruptionBudget 安全策略
+- [节点加入](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-create/05-join.md) — 节点加入集群
+- [集群升级](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-create/08-upgrade.md) — 升级时 drain 操作
+- [安全机制](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-create/14-security.md) — PodDisruptionBudget 安全策略
 
 ## Related
 

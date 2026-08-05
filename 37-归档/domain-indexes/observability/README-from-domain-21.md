@@ -92,10 +92,10 @@ tier: peripheral---
 ### 📝 核心日志系统 (01-06)
 - **[01-ELK Stack企业级日志](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/01-elk-stack-enterprise-logging.md)** - ELK Stack日志管理系统深度实践，涵盖高可用部署、安全配置、性能优化等完整技术方案
 - **[02-Fluentd企业级日志处理](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/02-fluentd-enterprise-log-processing.md)** - Fluentd日志收集和处理深度实践，包括高性能配置、插件开发、安全加固等
-- **[03-Loki企业级日志聚合](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/03-loki-enterprise-log-aggregation.md)** - Loki轻量级日志聚合系统实践，支持水平扩展和云原生部署
-- **[04-Graylog企业级日志管理](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/04-graylog-enterprise-logging.md)** - Graylog统一日志管理平台深度实践，涵盖集群部署、告警配置、可视化分析等
-- **[05-Splunk企业级日志分析](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/05-splunk-enterprise-log-analytics.md)** - Splunk企业级SIEM和日志分析平台深度实践，包括搜索语言、安全分析、性能优化等
-- **[06-Loggly云日志管理](../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/06-loggly-cloud-log-management.md)** - Loggly云原生日志管理平台实践，支持快速部署、实时分析和智能告警
+- **[03-Loki企业级日志聚合](../../../09-可观测性/03-日志/04-loki-enterprise-log-aggregation.md)** - Loki轻量级日志聚合系统实践，支持水平扩展和云原生部署
+- **[04-Graylog企业级日志管理](../../../09-可观测性/03-日志/06-graylog-enterprise-logging.md)** - Graylog统一日志管理平台深度实践，涵盖集群部署、告警配置、可视化分析等
+- **[05-Splunk企业级日志分析](../../../09-可观测性/03-日志/10-splunk-enterprise-log-analytics.md)** - Splunk企业级SIEM和日志分析平台深度实践，包括搜索语言、安全分析、性能优化等
+- **[06-Loggly云日志管理](../../../09-可观测性/03-日志/12-loggly-cloud-log-management.md)** - Loggly云原生日志管理平台实践，支持快速部署、实时分析和智能告警
 
 ## 🎯 学习路径建议
 

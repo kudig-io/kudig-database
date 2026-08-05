@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/06-存储/csi-storage/培训/lecturer/07-pv-pvc-basics.md|Pv Pvc Basics]]
+- [[26-技能/06-存储/csi-storage/培训/lecturer/01-pv-pvc-basics.md|Pv Pvc Basics]]
 

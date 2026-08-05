@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[01-集群基础/04-API版本/03-api-versions-features.md|Api Versions Features]]
-- [[01-集群基础/04-API版本/99-kubernetes-api-version-matrix.md|Kubernetes Api Version Matrix]]
-- [[01-集群基础/04-API版本/99-kubernetes-version-lifecycle-support-policy.md|Kubernetes Version Lifecycle Support Policy]]
+- [[01-集群基础/04-API版本/01-api-versions-features.md|Api Versions Features]]
+- [[01-集群基础/04-API版本/03-kubernetes-api-version-matrix.md|Kubernetes Api Version Matrix]]
+- [[01-集群基础/04-API版本/04-kubernetes-version-lifecycle-support-policy.md|Kubernetes Version Lifecycle Support Policy]]
 

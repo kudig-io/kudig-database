@@ -57,8 +57,8 @@ prerequisites:
 ### 故障排查
 
 - [[19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|06 - 节点 NotReady 状态深度诊断 (Node NotReady Diagnosis)]]
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting.md|09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)]]
-- [[19-故障诊断/04-高级排障/35-node-component-troubleshooting.md|35 - 节点组件故障排查 (Node Component Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md|09 - Node 全面故障排查 (Node Comprehensive Troubleshooting)]]
+- [[19-故障诊断/04-高级排障/01-node-component-troubleshooting.md|35 - 节点组件故障排查 (Node Component Troubleshooting)]]
 
 ### 结构化故障排查
 
@@ -114,7 +114,7 @@ prerequisites:
 ### 生产运维
 
 - 19-集群性能调优
-- [[12-可靠性/03-容量规划/24-capacity-planning-forecasting.md|24 capacity planning forecasting]]
+- [[12-可靠性/03-容量规划/06-capacity-planning-forecasting.md|24 capacity planning forecasting]]
 - K8s FinOps 成本优化实践指南
 
 

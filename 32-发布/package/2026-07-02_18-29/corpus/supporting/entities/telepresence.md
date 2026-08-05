@@ -78,7 +78,7 @@ Telepresence 是一个 Kubernetes 本地开发工具，它在本地开发环境�
 
 ## Related
 
-- [[03-containerd-security-hardening]] — [[containerd|containerd]]rd 安全加固|containerd 安全加固]]
+- [[02-containerd-security-hardening]] — [[containerd|containerd]]rd 安全加固|containerd 安全加固]]
 - [[k0s]] — K0s
 - [[kubeedge]] — KubeEdge
 - [[docker]] — Docker

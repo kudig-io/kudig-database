@@ -711,7 +711,7 @@ aliyun oss lifecycle --method put oss://${BUCKET} lifecycle.xml
 
 ## Related
 
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
 - [[06-存储/README|Storage Domain 存储领域知识库]]
 - [[18-云厂商/01-阿里云/apsara-stack-components|专有云组件索引]]
 

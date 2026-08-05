@@ -41,6 +41,6 @@ last_updated: '2026-07-21'
 
 ## Related
 
-- [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
-- [[11-发布变更/01-GitOps/11-flagger-automated-canary.md|Flagger 自动化金丝雀]]
+- [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
+- [[11-发布变更/01-GitOps/13-flagger-automated-canary.md|Flagger 自动化金丝雀]]
 - [[11-发布变更/06-部署方案/index.md|部署方案]]

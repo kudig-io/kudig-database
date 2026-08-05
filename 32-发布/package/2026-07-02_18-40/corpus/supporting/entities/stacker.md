@@ -73,7 +73,7 @@ Stacker 是一个无需特权即可构建 OCI 容器镜像的工具。它使用�
 
 - [[ratify]] — Ratify
 - [[container2wasm]] — container2wasm
-- [[entities/06-containerd-observability.md|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/08-containerd-observability|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

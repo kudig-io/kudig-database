@@ -20,8 +20,8 @@ last_updated: 2026-07
 - [[domain-05-security-compliance/运行时安全/01-falco-cloud-native-security.md|Falco Cloud Native Security]]
 - [[domain-05-security-compliance/运行时安全/02-sysdig-enterprise-container-security.md|Sysdig Enterprise Container Security]]
 - [[domain-05-security-compliance/运行时安全/03-aqua-enterprise-container-security.md|Aqua Enterprise Container Security]]
-- [[domain-05-security-compliance/运行时安全/03-runtime-security-defense.md|Runtime Security Defense]]
-- [[domain-05-security-compliance/运行时安全/15-runtime-security-detection.md|Runtime Security Detection]]
-- [[domain-05-security-compliance/运行时安全/17-gvisor-container-sandbox.md|Gvisor Container Sandbox]]
-- [[domain-05-security-compliance/运行时安全/99-falco-runtime-security-guide.md|Falco Runtime Security Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/03-runtime-security/04-runtime-security-defense|Runtime Security Defense]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/03-runtime-security/05-runtime-security-detection|Runtime Security Detection]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/03-runtime-security/06-gvisor-container-sandbox|Gvisor Container Sandbox]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/03-runtime-security/07-falco-runtime-security-guide|Falco Runtime Security Guide]]
 

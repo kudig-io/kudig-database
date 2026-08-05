@@ -224,9 +224,9 @@ kubectl get pod <pod-name> -n prod -o jsonpath='{.status.conditions[?(@.type=="I
 
 - [Sidecar 容器](./sidecar-containers.md)
 - [容器生命周期钩子](./container-lifecycle-hooks.md)
-- [Pod 生命周期事件](../../工作负载/11-pod-lifecycle-events.md)
-- [高级 Pod 运维模式](../../工作负载/12-advanced-pod-patterns.md)
-- [Pod 综合故障排查手册](../../故障诊断/08-pod-comprehensive-troubleshooting.md)
+- [Pod 生命周期事件](02-pod-lifecycle-events.md)
+- [高级 Pod 运维模式](02-advanced-pod-patterns.md)
+- [Pod 综合故障排查手册](02-pod-comprehensive-troubleshooting.md)
 
 ## 参考链接
 - https://[[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]].io/docs/concepts/workloads/pods/init-containers/

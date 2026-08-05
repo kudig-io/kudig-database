@@ -82,7 +82,7 @@ authors:
 
 - **首次通读**：01 → 06 → 02 → 03 → 04 → 05 → 07（先掌握 Informer 公分母，再看各组件如何消费它），节点侧续读 08 → 09
 - **排障导向**：直接进 07 篇的「8 步主线」，按 Pod 卡住的位置跳到对应分篇的排障速查表；节点/网络侧症状进 08/09 篇
-- **Operator 开发者**：06 篇（client-go 原语与陷阱）→ 03 篇（标准控制器写法参照）→ [[01-集群基础/02-设计原则/12-operator-development-guide.md|Operator 开发指南]]
+- **Operator 开发者**：06 篇（client-go 原语与陷阱）→ 03 篇（标准控制器写法参照）→ [[01-集群基础/02-设计原则/13-operator-development-guide.md|Operator 开发指南]]
 - **性能/稳定性调优**：02 篇（APF/watchCache）→ 05 篇（compaction/defrag/NOSPACE）→ 04 篇（调度吞吐采样）
 
 ## 与各技术域的衔接
@@ -95,5 +95,5 @@ authors:
 
 - [[33-源码/README.md|33-源码 目录总索引]]（源码 ↔ 领域文档双向映射）
 - [[01-集群基础/01-架构总览/04-source-code-structure.md|源码结构导读]]（概念层）
-- [[01-集群基础/02-设计原则/09-source-code-walkthrough.md|源码阅读指南]]（方法论）
+- [[01-集群基础/02-设计原则/10-source-code-walkthrough.md|源码阅读指南]]（方法论）
 - [[10-平台工程/06-代码分析/README.md|集群操作函数库]]（操作层）

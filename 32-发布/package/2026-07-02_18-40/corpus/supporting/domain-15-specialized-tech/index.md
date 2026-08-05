@@ -26,10 +26,10 @@ last_updated: 2026-07
 - domain-15-specialized-tech/03-extensions/
 - domain-15-specialized-tech/04-serverless/
 - domain-15-specialized-tech/05-ebpf-programming/
-- [[domain-15-specialized-tech/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-15-specialized-tech/04-extensions/index|Merged Indexes]]
 
 ## 文档
 
 - [[domain-15-specialized-tech/03-edge-computing-production-deployment.md|Edge Computing Production Deployment]]
-- [[domain-15-specialized-tech/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

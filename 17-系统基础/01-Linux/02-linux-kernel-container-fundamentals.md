@@ -429,6 +429,6 @@ iostat -xz 1
 ## Related
 
 - [[17-系统基础/index.md|系统基础]]
-- [[17-系统基础/00-总览/99-production-readiness-operations-guide.md|生产就绪运维指南]]
+- [[17-系统基础/00-总览/01-production-readiness-operations-guide.md|生产就绪运维指南]]
 - [[05-网络/05-eBPF/index.md|eBPF 网络]]
 - [[14-容器运行时/03-containerd-CRI-O/index.md|容器运行时]]

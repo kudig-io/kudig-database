@@ -1070,9 +1070,9 @@ cat /proc/modules | wc -l
 
 <!-- chunk: 相关文档 -->## 相关文档
 
-- [02-linux-process-management](./02-linux-process-management.md) - 进程管理
-- [03-linux-filesystem-deep-dive](./03-linux-filesystem-deep-dive.md) - 文件系统
-- [08-linux-container-fundamentals](./08-linux-container-fundamentals.md) - 容器基础
+- [02-linux-process-management](03-linux-process-management.md) - 进程管理
+- [03-linux-filesystem-deep-dive](04-linux-filesystem-deep-dive.md) - 文件系统
+- [08-linux-container-fundamentals](09-linux-container-fundamentals.md) - 容器基础
 
 ---
 

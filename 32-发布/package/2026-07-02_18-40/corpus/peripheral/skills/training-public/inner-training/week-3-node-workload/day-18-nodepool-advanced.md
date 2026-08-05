@@ -596,8 +596,8 @@ spec:
 
 ## 延伸阅读
 
-- [集群自动伸缩排障](../../domain-10-troubleshooting-diagnostics/28-cluster-autoscaler-troubleshooting.md)
-- [ECS 计算资源](../../domain-12-cloud-providers/04-alicloud-ack/240-ack-ecs-compute.md)
+- [集群自动伸缩排障](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/02-cluster-autoscaler-troubleshooting.md)
+- [ECS 计算资源](32-发布/package/2026-07-02_18-40/corpus/supporting/entities/003-ack-ecs-compute.md)
 - [集群升级策略](../../domain-12-cloud-providers/04-alicloud-ack/220-ack-upgrade.md)
 - [K8s 调度策略](../../domain-09-workload/05-pod-scheduling.md)
 

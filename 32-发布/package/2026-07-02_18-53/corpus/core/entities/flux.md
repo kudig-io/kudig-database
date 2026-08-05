@@ -75,7 +75,7 @@ Flux is lighter and simpler, with built-in SOPS decryption and image automation.
 
 - 06-flux-gitops-continuous-delivery
 - 99-flux-gitops-guide
-- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|03-flux-image-automation-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/03-flux-image-automation-troubleshooting|03-flux-image-automation-troubleshooting]]
 - flux
 - RELEASE-NOTES-0.12
 - RELEASE-NOTES-0.26

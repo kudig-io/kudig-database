@@ -26,9 +26,9 @@ ticket_type: 网络故障 / Ingress 故障
 skill_ref:
 - '[[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-ingress-gateway/SKILL.md|Ingress
   网关诊断 Skill]]'
-- '[[domain-03-networking-traffic/K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress
+- '[[32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/02-ingress-monitoring-troubleshooting|Ingress
   监控与排障]]'
-- '[[domain-02-workloads-applications/核心工作负载/11-pod-lifecycle-events.md|Pod
+- '[[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/03-pod-lifecycle-events|Pod
   生命周期事件]]'
 fta_ref:
 - 'FTA: Ingress 返回 404/502'
@@ -288,7 +288,7 @@ kubectl logs -n kube-system -l app.kubernetes.io/name=ingress-nginx --since=5m |
 >
 > 当前外部探测 `api.order.example.com` 与 `shop.example.com` 已稳定返回 200，5xx 比例已回落至正常水平。建议后续：
 > - 为 Ingress Controller 配置基于连接数与内存的 HPA，参考 HPA 最佳实践；
-> - 在 CI/CD 中增加 Ingress 注解语法校验，参考 [[domain-03-networking-traffic/K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]]；
+> - 在 CI/CD 中增加 Ingress 注解语法校验，参考 [[32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/02-ingress-monitoring-troubleshooting|Ingress 监控与排障]]；
 > - 配置 Ingress Controller 内存使用率告警：`container_memory_usage_bytes / container_spec_memory_limit_bytes > 0.8` 持续 3 分钟触发 P2 告警。
 >
 > 如有波动，请随时联系。

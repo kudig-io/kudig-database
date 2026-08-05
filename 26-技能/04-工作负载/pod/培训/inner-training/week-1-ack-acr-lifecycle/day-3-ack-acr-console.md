@@ -551,7 +551,7 @@ Day 4 将学习 K8S 集群创建的完整流程，包括参数配置、网络规
 
 - [ACK 实操指南](../../云厂商/04-alicloud-ack/service-ack-practical-guide.md)
 - [K8s 核心组件](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/05-kubectl/05-kubectl-commands-reference.md)
+- [kubectl 命令参考](../../../../../../01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
 
 
 <!-- risk-assessed -->

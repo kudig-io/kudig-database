@@ -314,7 +314,7 @@ scratch 和 distroless 镜像没有 shell 和常用工具，这给运行时诊�
 
 ### 症状 2：musl 镜像 DNS 解析异常
 
-musl 的 DNS 解析实现与 glibc 存在行为差异，最典型的问题是不完整支持 /etc/resolv.conf 中的 ndots 和 search domain 选项，导致某些域名解析失败或解析到错误地址。处置方法有三种：改用 glibc 加 distroless 基底；在代码中使用独立的 DNS 解析库如 hickory-dns 绕过系统解析器；或者调整 Pod 的 dnsPolicy 和 dnsConfig 配置，具体参考 [[05-网络/01-K8s网络核心/11-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS]]。
+musl 的 DNS 解析实现与 glibc 存在行为差异，最典型的问题是不完整支持 /etc/resolv.conf 中的 ndots 和 search domain 选项，导致某些域名解析失败或解析到错误地址。处置方法有三种：改用 glibc 加 distroless 基底；在代码中使用独立的 DNS 解析库如 hickory-dns 绕过系统解析器；或者调整 Pod 的 dnsPolicy 和 dnsConfig 配置，具体参考 [[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS]]。
 
 ### 症状 3：编译时间过长拖慢 CI
 
@@ -338,7 +338,7 @@ musl 的 DNS 解析实现与 glibc 存在行为差异，最典型的问题是不
 
 ## 最佳实践
 
-第一，镜像构建采用 musl 静态链接加 scratch 基底（需要 CA 证书时用 distroless/static），release profile 启用 lto、strip 和适当的 panic 策略。第二，运行时通过 TOKIO_WORKER_THREADS 将 worker 线程数与 CPU limit 对齐，使用 RUST_LOG 实现结构化日志。第三，资源规划上充分利用 Rust 内存极省的优势，memory limit 可以设小，但需为突发缓冲留余量。第四，健壮性方面在 handler 层捕获 panic，关键路径避免使用 unwrap 和 expect，改用合理的错误处理。第五，可观测性方面导出 tokio runtime 指标和进程指标，接入 tracing 生态。第六，CI 优化采用层缓存加 sccache 加 mold 链接器的组合。第七，安全方面充分利用 scratch/distroless 加 nonroot 加 readOnlyRootFilesystem 的最小攻击面配置，参考 [[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]。
+第一，镜像构建采用 musl 静态链接加 scratch 基底（需要 CA 证书时用 distroless/static），release profile 启用 lto、strip 和适当的 panic 策略。第二，运行时通过 TOKIO_WORKER_THREADS 将 worker 线程数与 CPU limit 对齐，使用 RUST_LOG 实现结构化日志。第三，资源规划上充分利用 Rust 内存极省的优势，memory limit 可以设小，但需为突发缓冲留余量。第四，健壮性方面在 handler 层捕获 panic，关键路径避免使用 unwrap 和 expect，改用合理的错误处理。第五，可观测性方面导出 tokio runtime 指标和进程指标，接入 tracing 生态。第六，CI 优化采用层缓存加 sccache 加 mold 链接器的组合。第七，安全方面充分利用 scratch/distroless 加 nonroot 加 readOnlyRootFilesystem 的最小攻击面配置，参考 [[08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]。
 
 ```yaml
 # 🟢 低风险：HPA 基于 CPU 弹性伸缩
@@ -370,6 +370,6 @@ spec:
 - [[02-工作负载/04-多语言运行时/01-go-on-kubernetes-production.md|Go 应用 Kubernetes 生产实践]]
 - [[02-工作负载/04-多语言运行时/02-python-on-kubernetes-production.md|Python 应用 Kubernetes 生产实践]]
 - [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]
-- [[05-网络/01-K8s网络核心/11-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS]]
-- [[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]
+- [[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS]]
+- [[08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
 - [[09-可观测性/README|可观测性]]

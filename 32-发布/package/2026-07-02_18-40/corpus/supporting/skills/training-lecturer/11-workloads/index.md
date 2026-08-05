@@ -1,0 +1,21 @@
+---
+title: Workloads
+description: Workloads 目录索引
+summary: Workloads 目录索引
+category: index
+tags:
+- index
+tier: supporting
+created: '2026-07-02'
+last_updated: 2026-07
+---
+
+
+# Workloads
+
+> 本页为 `skills/training-lecturer/10-workloads` 目录的自动索引。
+
+## 文档
+
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/skills/training-lecturer/10-workloads/01-job-cronjob|Job Cronjob]]
+

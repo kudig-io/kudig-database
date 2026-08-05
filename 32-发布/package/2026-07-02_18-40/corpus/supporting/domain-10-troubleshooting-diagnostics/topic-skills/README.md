@@ -104,18 +104,18 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 | 04 | SKILL-NET-001 | DNS 解析故障诊断 | Network | [04-dns-resolution-failure.md](./04-dns-resolution-failure.md) | GA |
 | 05 | SKILL-NET-002 | Service 连通性故障诊断 | Network | [05-service-connectivity.md](./05-service-connectivity.md) | GA |
 | 06 | SKILL-SEC-001 | 证书过期与 TLS 故障诊断 | Security | [06-certificate-expiry.md](./06-certificate-expiry.md) | GA |
-| 07 | SKILL-STORE-001 | PVC/PV/CSI 存储故障诊断 | Storage | [07-pvc-storage-failure.md](./07-pvc-storage-failure.md) | GA |
-| 08 | SKILL-WORK-001 | Deployment 滚动更新故障诊断 | Workload | [08-deployment-rollout-failure.md](./08-deployment-rollout-failure.md) | GA |
-| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 问题 | Security | [09-rbac-quota-failure.md](./09-rbac-quota-failure.md) | GA |
-| 10 | SKILL-IMAGE-001 | 镜像拉取与仓库故障诊断 | Image | [10-image-pull-failure.md](./10-image-pull-failure.md) | GA |
-| 11 | SKILL-CP-001 | etcd 与控制平面故障诊断 | ControlPlane | [11-control-plane-failure.md](./11-control-plane-failure.md) | GA |
-| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩问题 | Scaling | [12-autoscaling-failure.md](./12-autoscaling-failure.md) | GA |
-| 13 | SKILL-NET-003 | Ingress/Gateway 路由故障诊断 | Network | [13-ingress-gateway-failure.md](./13-ingress-gateway-failure.md) | GA |
-| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理问题 | Configuration | [14-configmap-secret-failure.md](./14-configmap-secret-failure.md) | GA |
-| 15 | SKILL-MONITOR-001 | 监控告警体系故障诊断 | Observability | [15-monitoring-alerting-failure.md](./15-monitoring-alerting-failure.md) | GA |
-| 16 | SKILL-LOG-001 | 日志收集与管理故障诊断 | Observability | [16-logging-pipeline-failure.md](./16-logging-pipeline-failure.md) | GA |
-| 17 | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | [17-performance-bottleneck.md](./17-performance-bottleneck.md) | GA |
-| 18 | SKILL-SECURITY-001 | 安全事件应急响应 | Security | [18-security-incident-response.md](./18-security-incident-response.md) | GA |
+| 07 | SKILL-STORE-001 | PVC/PV/CSI 存储故障诊断 | Storage | [07-pvc-storage-failure.md](08-pvc-storage-failure.md) | GA |
+| 08 | SKILL-WORK-001 | Deployment 滚动更新故障诊断 | Workload | [08-deployment-rollout-failure.md](09-deployment-rollout-failure.md) | GA |
+| 09 | SKILL-SEC-002 | RBAC 权限与 ResourceQuota 问题 | Security | [09-rbac-quota-failure.md](10-rbac-quota-failure.md) | GA |
+| 10 | SKILL-IMAGE-001 | 镜像拉取与仓库故障诊断 | Image | [10-image-pull-failure.md](11-image-pull-failure.md) | GA |
+| 11 | SKILL-CP-001 | etcd 与控制平面故障诊断 | ControlPlane | [11-control-plane-failure.md](12-control-plane-failure.md) | GA |
+| 12 | SKILL-SCALE-001 | HPA/VPA/CA 弹性伸缩问题 | Scaling | [12-autoscaling-failure.md](02-autoscaling-failure.md) | GA |
+| 13 | SKILL-NET-003 | Ingress/Gateway 路由故障诊断 | Network | [13-ingress-gateway-failure.md](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md) | GA |
+| 14 | SKILL-CONFIG-001 | ConfigMap/Secret 配置管理问题 | Configuration | [14-configmap-secret-failure.md](03-configmap-secret-failure.md) | GA |
+| 15 | SKILL-MONITOR-001 | 监控告警体系故障诊断 | Observability | [15-monitoring-alerting-failure.md](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/13-monitoring-alerting-failure.md) | GA |
+| 16 | SKILL-LOG-001 | 日志收集与管理故障诊断 | Observability | [16-logging-pipeline-failure.md](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/14-logging-pipeline-failure.md) | GA |
+| 17 | SKILL-PERF-001 | 性能瓶颈诊断与调优 | Performance | [17-performance-bottleneck.md](04-performance-bottleneck.md) | GA |
+| 18 | SKILL-SECURITY-001 | 安全事件应急响应 | Security | [18-security-incident-response.md](05-security-incident-response.md) | GA |
 
 ---
 
@@ -132,27 +132,27 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 ## 按运维场景快速导航
 
 ### 故障诊断
-- 节点问题: [01-node-notready](./01-node-notready.md) | [11-control-plane](./11-control-plane-failure.md)
-- Pod 异常: [02-crashloop](./02-pod-crashloop-oomkilled.md) | [03-pending](./03-pod-pending.md) | [10-image-pull](./10-image-pull-failure.md)
-- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md) | [13-ingress](./13-ingress-gateway-failure.md)
-- 存储问题: [07-pvc-storage](./07-pvc-storage-failure.md)
-- 配置问题: [14-configmap-secret](./14-configmap-secret-failure.md)
+- 节点问题: [01-node-notready](./01-node-notready.md) | [11-control-plane](12-control-plane-failure.md)
+- Pod 异常: [02-crashloop](./02-pod-crashloop-oomkilled.md) | [03-pending](./03-pod-pending.md) | [10-image-pull](11-image-pull-failure.md)
+- 网络问题: [04-dns](./04-dns-resolution-failure.md) | [05-service](./05-service-connectivity.md) | [13-ingress](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md)
+- 存储问题: [07-pvc-storage](08-pvc-storage-failure.md)
+- 配置问题: [14-configmap-secret](03-configmap-secret-failure.md)
 
 ### 工作负载管理
-- 部署与更新: [08-deployment-rollout](./08-deployment-rollout-failure.md)
-- 弹性伸缩: [12-autoscaling](./12-autoscaling-failure.md)
+- 部署与更新: [08-deployment-rollout](09-deployment-rollout-failure.md)
+- 弹性伸缩: [12-autoscaling](02-autoscaling-failure.md)
 
 ### 安全合规
-- 权限管理: [09-rbac-quota](./09-rbac-quota-failure.md)
+- 权限管理: [09-rbac-quota](10-rbac-quota-failure.md)
 - 证书管理: [06-certificate-expiry](./06-certificate-expiry.md)
-- 安全事件: [18-security-incident](./18-security-incident-response.md)
+- 安全事件: [18-security-incident](05-security-incident-response.md)
 
 ### 可观测性
-- 监控告警: [15-monitoring-alerting](./15-monitoring-alerting-failure.md)
-- 日志管理: [16-logging-pipeline](./16-logging-pipeline-failure.md)
+- 监控告警: [15-monitoring-alerting](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/13-monitoring-alerting-failure.md)
+- 日志管理: [16-logging-pipeline](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/14-logging-pipeline-failure.md)
 
 ### 性能调优
-- 性能瓶颈: [17-performance-bottleneck](./17-performance-bottleneck.md)
+- 性能瓶颈: [17-performance-bottleneck](04-performance-bottleneck.md)
 
 ---
 
@@ -175,26 +175,26 @@ Skill 是工单智能体（Ticket Handling Agent）在运行时可直接调用�
 | `x509: certificate has expired` 错误 | [06-certificate-expiry](./06-certificate-expiry.md) | 0.95 |
 | TLS handshake failure | [06-certificate-expiry](./06-certificate-expiry.md) | 0.80 |
 | kubelet 无法连接 apiserver | [01-node-notready](./01-node-notready.md) + [06-certificate-expiry](./06-certificate-expiry.md) | 0.70 |
-| PVC 一直 Pending 状态 | [07-pvc-storage-failure](./07-pvc-storage-failure.md) | 0.95 |
-| StorageClass 不存在或配置错误 | [07-pvc-storage-failure](./07-pvc-storage-failure.md) | 0.90 |
-| Deployment rollout 卡住 | [08-deployment-rollout-failure](./08-deployment-rollout-failure.md) | 0.90 |
-| ReplicaSet 无法创建新 Pod | [08-deployment-rollout-failure](./08-deployment-rollout-failure.md) | 0.85 |
-| RBAC Forbidden / Unauthorized | [09-rbac-quota-failure](./09-rbac-quota-failure.md) | 0.95 |
-| ResourceQuota exceeded | [09-rbac-quota-failure](./09-rbac-quota-failure.md) | 0.90 |
-| ImagePullBackOff / ErrImagePull | [10-image-pull-failure](./10-image-pull-failure.md) | 0.95 |
-| 私有仓库认证失败 | [10-image-pull-failure](./10-image-pull-failure.md) | 0.90 |
-| etcd 集群不健康 / leader 选举失败 | [11-control-plane-failure](./11-control-plane-failure.md) | 0.95 |
-| API Server 无响应 | [11-control-plane-failure](./11-control-plane-failure.md) | 0.90 |
-| HPA 不触发扩容 | [12-autoscaling-failure](./12-autoscaling-failure.md) | 0.90 |
-| Metrics Server 无数据 | [12-autoscaling-failure](./12-autoscaling-failure.md) | 0.85 |
-| Ingress 404/502/503 错误 | [13-ingress-gateway-failure](./13-ingress-gateway-failure.md) | 0.90 |
-| ConfigMap/Secret 未挂载 | [14-configmap-secret-failure](./14-configmap-secret-failure.md) | 0.90 |
-| Prometheus 指标缺失 | [15-monitoring-alerting-failure](./15-monitoring-alerting-failure.md) | 0.85 |
-| AlertManager 告警不发送 | [15-monitoring-alerting-failure](./15-monitoring-alerting-failure.md) | 0.85 |
-| 日志收集中断 | [16-logging-pipeline-failure](./16-logging-pipeline-failure.md) | 0.85 |
-| 应用响应延迟高 | [17-performance-bottleneck](./17-performance-bottleneck.md) | 0.80 |
-| 容器 CPU/内存持续高位 | [17-performance-bottleneck](./17-performance-bottleneck.md) | 0.85 |
-| 疑似入侵/异常访问 | [18-security-incident-response](./18-security-incident-response.md) | 0.90 |
+| PVC 一直 Pending 状态 | [07-pvc-storage-failure](08-pvc-storage-failure.md) | 0.95 |
+| StorageClass 不存在或配置错误 | [07-pvc-storage-failure](08-pvc-storage-failure.md) | 0.90 |
+| Deployment rollout 卡住 | [08-deployment-rollout-failure](09-deployment-rollout-failure.md) | 0.90 |
+| ReplicaSet 无法创建新 Pod | [08-deployment-rollout-failure](09-deployment-rollout-failure.md) | 0.85 |
+| RBAC Forbidden / Unauthorized | [09-rbac-quota-failure](10-rbac-quota-failure.md) | 0.95 |
+| ResourceQuota exceeded | [09-rbac-quota-failure](10-rbac-quota-failure.md) | 0.90 |
+| ImagePullBackOff / ErrImagePull | [10-image-pull-failure](11-image-pull-failure.md) | 0.95 |
+| 私有仓库认证失败 | [10-image-pull-failure](11-image-pull-failure.md) | 0.90 |
+| etcd 集群不健康 / leader 选举失败 | [11-control-plane-failure](12-control-plane-failure.md) | 0.95 |
+| API Server 无响应 | [11-control-plane-failure](12-control-plane-failure.md) | 0.90 |
+| HPA 不触发扩容 | [12-autoscaling-failure](02-autoscaling-failure.md) | 0.90 |
+| Metrics Server 无数据 | [12-autoscaling-failure](02-autoscaling-failure.md) | 0.85 |
+| Ingress 404/502/503 错误 | [13-ingress-gateway-failure](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure.md) | 0.90 |
+| ConfigMap/Secret 未挂载 | [14-configmap-secret-failure](03-configmap-secret-failure.md) | 0.90 |
+| Prometheus 指标缺失 | [15-monitoring-alerting-failure](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/13-monitoring-alerting-failure.md) | 0.85 |
+| AlertManager 告警不发送 | [15-monitoring-alerting-failure](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/13-monitoring-alerting-failure.md) | 0.85 |
+| 日志收集中断 | [16-logging-pipeline-failure](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/14-logging-pipeline-failure.md) | 0.85 |
+| 应用响应延迟高 | [17-performance-bottleneck](04-performance-bottleneck.md) | 0.80 |
+| 容器 CPU/内存持续高位 | [17-performance-bottleneck](04-performance-bottleneck.md) | 0.85 |
+| 疑似入侵/异常访问 | [18-security-incident-response](05-security-incident-response.md) | 0.90 |
 
 ### 按 Kubernetes Event Reason 查找
 
@@ -364,13 +364,13 @@ Agent 在执行 Skill 后应记录：
 | Skill 文档模板 | [skill-schema.md](./skill-schema.md) | 新建 Skill 的规范化模板 |
 | IDE 目录格式 Skill | [k8s-node-notready/](./skill-set/k8s-node-notready/) | Node NotReady 的 IDE 标准 Skill 目录（含脚本、数据、参考文档） |
 | **本地 Demo** | [skills-run/](./skills-run/) | **本地 Kind 集群运行 Skill 执行闭环 Demo** |
-| Demo 运行指南 | [19-skill-local-demo-guide.md](./19-skill-local-demo-guide.md) | 详细的 Demo 场景说明与 Skill 映射 |
+| Demo 运行指南 | [19-skill-local-demo-guide.md](06-skill-local-demo-guide.md) | 详细的 Demo 场景说明与 Skill 映射 |
 
 ---
 
 ## 7. 本地运行 Demo
 
-在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](./19-skill-local-demo-guide.md) 和 [skills-run/README.md](./skills-run/README.md)。
+在本地 Kind 集群中实际运行 Skill 的完整执行闭环。详见 [Demo 运行指南](06-skill-local-demo-guide.md) 和 [skills-run/README.md](./skills-run/README.md)。
 
 ```bash
 # 快速开始
@@ -456,12 +456,12 @@ skill-set/k8s-node-notready/
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

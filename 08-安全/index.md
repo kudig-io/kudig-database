@@ -28,12 +28,12 @@ last_updated: 2026-07
 - 安全/05-supply-chain/
 - 安全/06-compliance/
 - 安全/07-incident-response/
-- [[08-安全/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - [[08-安全/00-总览/index.md|00-总览]]
 
 ## 文档
 
 - [[08-安全/00-总览/00-open-source-projects-index.md|Open Source Projects Index]]
-- [[08-安全/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[08-安全/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 - [[08-安全/06-合规审计/P3-11-security-incident-sop-compliance-checklist.md|P3 11 Security Incident Sop Compliance Checklist]]
 

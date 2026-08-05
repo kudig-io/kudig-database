@@ -307,10 +307,10 @@ cross_refs:
 
 ## See Also
 
-- [[09-可观测性/07-工具/26-troubleshooting-tools.md|26-troubleshooting-tools]]
-- [[09-可观测性/07-工具/27-performance-profiling-tools.md|27-performance-profiling-tools]]
-- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-可观测性]]
-- [[37-归档/domain-indexes/observability/00-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
+- [[09-可观测性/07-工具/06-troubleshooting-tools.md|26-troubleshooting-tools]]
+- [[09-可观测性/07-工具/07-performance-profiling-tools.md|27-performance-profiling-tools]]
+- [[37-归档/domain-indexes/observability/01-open-source-projects-index-from-domain-21.md|00-open-source-projects-index-from-可观测性]]
+- [[37-归档/domain-indexes/observability/02-open-source-projects-index-from-domain-8.md|00-open-source-projects-index-from-可观测性]]
 
 - [[09-可观测性/README.md|返回目录]]
 

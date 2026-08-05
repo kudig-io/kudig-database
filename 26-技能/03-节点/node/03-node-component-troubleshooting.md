@@ -563,5 +563,5 @@ crictl info | jq '.config'
 - [[26-技能/03-节点/node/02-node-resource-pressure.md|节点资源压力诊断]]
 - [[26-技能/03-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
 - [[26-技能/03-节点/node/reference/node-version-differences.md|版本差异对比]]
-- [[19-故障诊断/04-高级排障/35-node-component-troubleshooting.md|节点组件故障排查（详细版）]]
+- [[19-故障诊断/04-高级排障/01-node-component-troubleshooting.md|节点组件故障排查（详细版）]]
 - [[19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南（原始文件）]]

@@ -844,11 +844,11 @@ done
 
 - [集群概览](01-overview.md) — init 流程中 certs phase 的位置
 - [预检流程](02-preflight.md) — 预检中检查证书有效期
-- [控制面组件](05-control-plane.md) — static Pod 挂载证书
-- [etcd 管理](07-etcd.md) — etcd 使用证书进行 TLS 通信
-- [安全机制](16-security.md) — ServiceAccount 密钥和审计
-- [集群升级](09-upgrade.md) — 升级时自动续签证书
-- [高可用进阶](14-ha-advanced.md) — upload-certs 分发证书
+- [控制面组件](04-control-plane.md) — static Pod 挂载证书
+- [etcd 管理](06-etcd.md) — etcd 使用证书进行 TLS 通信
+- [安全机制](14-security.md) — ServiceAccount 密钥和审计
+- [集群升级](08-upgrade.md) — 升级时自动续签证书
+- [高可用进阶](13-ha-advanced.md) — upload-certs 分发证书
 
 ## Related
 

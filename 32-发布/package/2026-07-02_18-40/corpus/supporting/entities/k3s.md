@@ -96,7 +96,7 @@ k3s 是经过 CNCF 认证的轻量级 Kubernetes 发行版，专为资源受限�
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/44-kind-k3s-single-node-troubleshooting.md|44-kind-k3s-single-node-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/08-kind-k3s-single-node-troubleshooting|44-kind-k3s-single-node-troubleshooting]]
 - k3s
 - [[entities/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[entities/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference

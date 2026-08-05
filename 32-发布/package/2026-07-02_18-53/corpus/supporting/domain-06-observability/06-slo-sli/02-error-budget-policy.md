@@ -403,13 +403,13 @@ spec:
 
 ## Related
 
-- [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-06-observability/03-slo-sli/01-slo-sli-system|SLO/SLI体系建设与管理]]
 - [[domain-06-observability/SLO-SLI/01-slo-engineering-practice.md|SLO 工程实践]]
 
 ## See Also
 
-- [[domain-09-reliability-engineering/SLO-SLI/03-error-budget-management.md|错误预算管理]]
-- [[domain-06-observability/告警/05-alerting-management.md|告警管理策略]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-09-reliability-engineering/02-slo-sli/03-error-budget-management|错误预算管理]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/05-alerting/04-alerting-management|告警管理策略]]
 
 
 <!-- risk-assessed -->

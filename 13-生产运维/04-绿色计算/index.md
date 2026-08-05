@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[13-生产运维/04-绿色计算/15-green-computing-sustainability.md|Green Computing Sustainability]]
-- [[13-生产运维/04-绿色计算/99-greenops-sustainable-computing-guide.md|Greenops Sustainable Computing Guide]]
+- [[13-生产运维/04-绿色计算/01-green-computing-sustainability.md|Green Computing Sustainability]]
+- [[13-生产运维/04-绿色计算/03-greenops-sustainable-computing-guide.md|Greenops Sustainable Computing Guide]]
 

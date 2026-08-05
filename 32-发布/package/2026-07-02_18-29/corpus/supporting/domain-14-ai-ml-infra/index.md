@@ -23,11 +23,11 @@ last_updated: 2026-07
 
 - domain-14-ai-ml-infra/01-ai-infra/
 - domain-14-ai-ml-infra/02-ai-agents/
-- [[domain-14-ai-ml-infra/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - domain-14-ai-ml-infra/02-ai-agents/
 - domain-14-ai-ml-infra/topic-ai-coding/
 
 ## 文档
 
-- [[domain-14-ai-ml-infra/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

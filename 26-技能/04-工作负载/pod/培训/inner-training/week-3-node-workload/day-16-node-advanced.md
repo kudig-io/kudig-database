@@ -634,7 +634,7 @@ data:
 - [节点管理文档](https://kubernetes.io/docs/concepts/architecture/nodes/)
 - [Taint 和 Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 - [节点维护](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
-- [文件: `../../../故障诊断/09-node-comprehensive-troubleshooting.md`](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/09-node-comprehensive-troubleshooting.md)
+- [文件: `../../../故障诊断/09-node-comprehensive-troubleshooting.md`](../../../../../../19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md)
 - [文件: `../../../工作负载/02-deployment-production-patterns.md`](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
 
 ---

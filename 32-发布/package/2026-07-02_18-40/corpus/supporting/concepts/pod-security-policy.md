@@ -81,7 +81,7 @@ PSA 通过命名空间标签启用，相比 PSP 的 RBAC 绑定机制更易理�
 - **迁移优先级**：建议优先处理生产命名空间，测试环境可作为 PSA 迁移的试点
 - **替代方案建议**：若 PSA 的三级模型过于粗粒度，推荐引入 Kyverno 或 Gatekeeper 实现更细粒度的策略控制
 
-安全合规相关内容参见 [[domain-05-security-compliance/98-merged-indexes/index.md|security-compliance]]。
+安全合规相关内容参见 [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|security-compliance]]。
 
 ## Related
 

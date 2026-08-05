@@ -733,7 +733,7 @@ amtool silence expire <silence-id>
 - [Alertmanager 配置文档](https://prometheus.io/docs/alerting/latest/configuration/)
 - [Kubernetes 日志架构](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
 - [文件: `../../可观测性/03-logging-architecture.md`](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-%E6%97%A5%E5%BF%97/03-logging-architecture.md)
-- [文件: `../../可观测性/04-distributed-tracing.md`](../../../../../../09-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/04-%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/04-distributed-tracing.md)
+- [文件: `../../可观测性/04-distributed-tracing.md`](../../../../../../09-可观测性/04-链路追踪/05-distributed-tracing.md)
 
 ## Related
 

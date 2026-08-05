@@ -73,7 +73,7 @@ Keylime 是一个基于 TPM (Trusted Platform Module) 的远程引导完整性�
 
 ## Related
 
-- [[02-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/entities/01-containerd-v2-features]] — [[containerd|containerd]]rd 2.0 新特性|containerd 2.0 新特性]]
 - [[karmada]] — Karmada
 - [[rook]] — Rook
 - [[microcks]] — Microcks

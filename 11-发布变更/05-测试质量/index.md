@@ -20,6 +20,6 @@ last_updated: 2026-07
 - [[11-发布变更/05-测试质量/01-selenium-enterprise-automation.md|Selenium Enterprise Automation]]
 - [[11-发布变更/05-测试质量/02-junit5-enterprise-testing.md|Junit5 Enterprise Testing]]
 - [[11-发布变更/05-测试质量/03-ai-testing-quality-assurance.md|Ai Testing Quality Assurance]]
-- [[11-发布变更/05-测试质量/05-cypress-enterprise-automation.md|Cypress Enterprise Automation]]
-- [[11-发布变更/05-测试质量/06-playwright-enterprise-automation.md|Playwright Enterprise Automation]]
+- [[11-发布变更/05-测试质量/04-cypress-enterprise-automation.md|Cypress Enterprise Automation]]
+- [[11-发布变更/05-测试质量/05-playwright-enterprise-automation.md|Playwright Enterprise Automation]]
 

@@ -194,7 +194,7 @@ kubectl set image deployment/myapp myapp=registry.company.com/myapp:1.2.3-patche
 
 - [[vineyard]] — Vineyard
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[02-istio-security-hardening]] — Istio 安全加固
 - [[23-实体/06-安全/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

@@ -589,7 +589,7 @@ openssl x509 -in /etc/kubernetes/pki/etcd/server.crt -text -noout
 
 ---
 
-> **交叉引用**：etcd 的详细操作实践（成员管理、备份恢复、性能调优）请参考 [Domain-3: etcd 深度解析](../domain-01-cluster-fundamentals/11-etcd-deep-dive.md) 和 [Domain-3: etcd 运维操作](../domain-01-cluster-fundamentals/19-etcd-operations.md)。
+> **交叉引用**：etcd 的详细操作实践（成员管理、备份恢复、性能调优）请参考 [Domain-3: etcd 深度解析](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/04-etcd-deep-dive.md) 和 [Domain-3: etcd 运维操作](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/07-etcd-operations.md)。
 
 ---
 

@@ -19,7 +19,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[22-概念/07-调度与资源/21-resource-overcommit-qos-eviction.md|资源超额订阅 (Overcommit) 与 QoS 驱逐联动]]
+- [[22-概念/07-调度与资源/01-resource-overcommit-qos-eviction.md|资源超额订阅 (Overcommit) 与 QoS 驱逐联动]]
 - [[22-概念/07-调度与资源/autoscaling-strategies.md|autoscaling-strategies]]
 - [[22-概念/07-调度与资源/dynamic-resource-allocation.md|dynamic-resource-allocation]]
 - [[22-概念/07-调度与资源/gang-scheduling.md|gang-scheduling]]

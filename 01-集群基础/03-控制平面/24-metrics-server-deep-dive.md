@@ -282,7 +282,7 @@ openssl x509 -in /var/lib/kubelet/pki/kubelet-server-current.pem -noout -issuer
 - [[23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[09-可观测性/02-指标/19-kube-state-metrics-deep-dive.md|kube-state-metrics 深度解析]]
+- [[09-可观测性/02-指标/11-kube-state-metrics-deep-dive.md|kube-state-metrics 深度解析]]
 - [[10-平台工程/06-代码分析/cluster-create/23-scheduler.md|kube-scheduler 代码分析]]
 
 

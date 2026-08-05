@@ -21,11 +21,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-20-application-patterns/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - domain-20-application-patterns/sub-patterns/
 - domain-20-application-patterns/topic-application-architecture/
 
 ## 文档
 
-- [[domain-20-application-patterns/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

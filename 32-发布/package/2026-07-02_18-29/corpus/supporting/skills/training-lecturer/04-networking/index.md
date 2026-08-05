@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/04-networking/04-ingress-basics.md|Ingress Basics]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/04-networking/01-ingress-basics|Ingress Basics]]
 

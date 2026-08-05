@@ -518,7 +518,7 @@ spec:
 ## Related
 
 - [[domain-05-security-compliance/合规审计/01-kubernetes-audit-logging-configuration|审计日志配置]]
-- [[domain-05-security-compliance/身份与访问/07-rbac-matrix-configuration|RBAC 最佳实践]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-05-security-compliance/01-identity-access/06-rbac-matrix-configuration|RBAC 最佳实践]]
 
 ## See Also
 

@@ -45,6 +45,6 @@ last_updated: '2026-07-21'
 
 ## 文档
 
-- [[13-生产运维/03-事件响应/03-on-call-playbook.md|03-on-call-playbook]]
-- [[13-生产运维/03-事件响应/04-incident-response-template.md|04-incident-response-template]]
+- [[13-生产运维/03-事件响应/04-on-call-playbook.md|03-on-call-playbook]]
+- [[13-生产运维/03-事件响应/05-incident-response-template.md|04-incident-response-template]]
 - [[13-生产运维/03-事件响应/escalation-playbook.md|escalation-playbook]]

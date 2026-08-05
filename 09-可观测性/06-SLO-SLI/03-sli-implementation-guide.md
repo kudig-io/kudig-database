@@ -469,7 +469,7 @@ spec:
 
 ## Related
 
-- [[09-可观测性/06-SLO-SLI/18-slo-sli-system.md|SLO/SLI体系建设与管理]]
+- [[09-可观测性/06-SLO-SLI/08-slo-sli-system.md|SLO/SLI体系建设与管理]]
 - [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice.md|SLO 工程实践]]
 
 ## See Also

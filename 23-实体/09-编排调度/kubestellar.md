@@ -224,7 +224,7 @@ kubectl label managedcluster edge-cluster-1 tier=edge --overwrite
 
 ## Related
 
-- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
+- [[04-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[kepler]] — Kepler
 - [[kcp]] — kcp

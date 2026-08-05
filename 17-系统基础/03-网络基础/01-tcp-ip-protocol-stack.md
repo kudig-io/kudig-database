@@ -489,5 +489,5 @@ A: 数据中心内部（低延迟、低丢包）用 CUBIC 即可；跨地域/公
 
 - [[17-系统基础/03-网络基础/index.md|网络基础总索引]]
 - [[17-系统基础/03-网络基础/03-iptables-nftables-packet-filtering.md|iptables/nftables]]
-- [[17-系统基础/01-Linux/04-linux-networking-configuration.md|Linux 网络配置]]
+- [[17-系统基础/01-Linux/05-linux-networking-configuration.md|Linux 网络配置]]
 - [[17-系统基础/05-速查卡/networking.md|网络速查卡]]

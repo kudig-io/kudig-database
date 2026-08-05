@@ -40,8 +40,8 @@ last_updated: 2026-07
 - [[02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling.md|Hpa Vpa Autoscaling]]
 - [[02-工作负载/01-核心工作负载/22-cluster-capacity-planning.md|Cluster Capacity Planning]]
 - [[02-工作负载/01-核心工作负载/23-resource-management.md|Resource Management]]
-- [[02-工作负载/01-核心工作负载/99-kubernetes-v1.33-workloads-guide.md|Kubernetes V1.33 Workloads Guide]]
-- [[02-工作负载/01-核心工作负载/99-spring-boot-kubernetes-guide.md|Spring Boot Kubernetes Guide]]
+- [[02-工作负载/01-核心工作负载/24-kubernetes-v1.33-workloads-guide.md|Kubernetes V1.33 Workloads Guide]]
+- [[02-工作负载/01-核心工作负载/25-spring-boot-kubernetes-guide.md|Spring Boot Kubernetes Guide]]
 - [[02-工作负载/01-核心工作负载/QUALITY_REPORT.md|Quality Report]]
 - [[02-工作负载/01-核心工作负载/README-old.md|Readme Old]]
 

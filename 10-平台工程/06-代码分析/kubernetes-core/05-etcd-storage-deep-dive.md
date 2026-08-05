@@ -49,7 +49,7 @@ authors:
 # etcd 与 Kubernetes 存储链路源码剖析
 
 > **源码基线**：`33-源码/控制平面/etcd-3.7.0/` + `kubernetes-1.36.2/`
-> 概念层配套阅读：[[01-集群基础/03-控制平面/11-etcd-deep-dive.md|控制平面：etcd Deep Dive]] · [[01-集群基础/02-设计原则/07-distributed-consensus-etcd.md|分布式共识与 etcd 原理]]
+> 概念层配套阅读：[[01-集群基础/03-控制平面/11-etcd-deep-dive.md|控制平面：etcd Deep Dive]] · [[01-集群基础/02-设计原则/08-distributed-consensus-etcd.md|分布式共识与 etcd 原理]]
 
 ## 概述
 
@@ -195,7 +195,7 @@ etcd 集群运维操作（备份/恢复/成员管理）见 [[01-集群基础/03-
 - [[10-平台工程/06-代码分析/kubernetes-core/02-kube-apiserver-deep-dive.md|02 - kube-apiserver 源码深度剖析]]（存储链路前半程）
 - [[10-平台工程/06-代码分析/kubernetes-core/07-component-interaction-dataflow.md|07 - 组件交互关系与数据流向]]
 - [[01-集群基础/03-控制平面/11-etcd-deep-dive.md|控制平面：etcd Deep Dive]]
-- [[01-集群基础/02-设计原则/07-distributed-consensus-etcd.md|分布式共识与 etcd 原理]]
-- [[01-集群基础/02-设计原则/06-resource-version-control.md|资源版本与并发控制]]
+- [[01-集群基础/02-设计原则/08-distributed-consensus-etcd.md|分布式共识与 etcd 原理]]
+- [[01-集群基础/02-设计原则/07-resource-version-control.md|资源版本与并发控制]]
 - [[07-数据库中间件/README.md|数据库中间件域]]（etcd 作为分布式 KV 的横向对比）
 - [[12-可靠性/README.md|可靠性域]]（etcd 灾备与恢复）

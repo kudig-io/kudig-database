@@ -26,11 +26,11 @@ last_updated: 2026-07
 - domain-03-networking-traffic/02-service-mesh/
 - domain-03-networking-traffic/03-api-gateway/
 - domain-03-networking-traffic/04-ebpf/
-- [[domain-03-networking-traffic/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - domain-03-networking-traffic/99-attachments/
 - domain-03-networking-traffic/topic-terway/
 
 ## 文档
 
-- [[domain-03-networking-traffic/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

@@ -129,53 +129,53 @@ graph TB
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 1 | [Java 容器化最佳实践](./domain-13-container-runtime/12-java-containerization-guide.md) | Dockerfile 模板、Jib/Buildpacks、分层 JAR、多架构构建、安全加固 | 中级 |
-| 2 | [GraalVM Native Image 指南](./domain-15-specialized-tech/99-graalvm-native-image-guide.md) | Spring Boot 3 原生编译、Quarkus/Micronaut 原生、Metadata 配置、K8s 部署 | 高级 |
+| 1 | [Java 容器化最佳实践](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-13-container-runtime/01-docker/10-java-containerization-guide.md) | Dockerfile 模板、Jib/Buildpacks、分层 JAR、多架构构建、安全加固 | 中级 |
+| 2 | [GraalVM Native Image 指南](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-15-specialized-tech/03-extensions/16-graalvm-native-image-guide.md) | Spring Boot 3 原生编译、Quarkus/Micronaut 原生、Metadata 配置、K8s 部署 | 高级 |
 
 ### 2.2 运行时 (2 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 3 | JVM GC 容器调优深度指南](./domain-10-troubleshooting-diagnostics/99-jvm-gc-container-tuning-guide.md) | G1GC/ZGC/Shenandoah 对比、容器感知参数、GC 监控告警 | 高级 |
-| 4 | [Java 性能调优与资源 Sizing](./domain-10-troubleshooting-diagnostics/99-java-performance-resource-sizing-guide.md) | 资源 Sizing 公式、启动优化、线程池调优、CDS/AppCDS | 高级 |
+| 3 | JVM GC 容器调优深度指南](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/04-jvm-tuning/03-jvm-gc-container-tuning-guide.md) | G1GC/ZGC/Shenandoah 对比、容器感知参数、GC 监控告警 | 高级 |
+| 4 | [Java 性能调优与资源 Sizing](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/04-jvm-tuning/02-java-performance-resource-sizing-guide.md) | 资源 Sizing 公式、启动优化、线程池调优、CDS/AppCDS | 高级 |
 
 ### 2.3 框架 (3 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 5 | [Spring Boot on Kubernetes](./domain-02-workloads-applications/99-spring-boot-kubernetes-guide.md) | 探针、配置管理、优雅停机、数据库连接池、生产 Deployment | 中级 |
-| 6 | [Spring Cloud K8s + 服务网格](./domain-03-networking-traffic/99-spring-cloud-kubernetes-service-mesh-guide.md) | Spring Cloud → K8s 原生映射、Istio 集成、Resilience4j、迁移路径 | 高级 |
-| 7 | [Quarkus/Micronaut 云原生 Java](./domain-15-specialized-tech/99-quarkus-micronaut-cloud-native-java-guide.md) | Quarkus vs Micronaut vs Spring Boot、Dev Services、反应式编程 | 中级 |
+| 5 | [Spring Boot on Kubernetes](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-02-workloads-applications/00-core-workloads/08-spring-boot-kubernetes-guide.md) | 探针、配置管理、优雅停机、数据库连接池、生产 Deployment | 中级 |
+| 6 | [Spring Cloud K8s + 服务网格](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-03-networking-traffic/02-service-mesh/12-spring-cloud-kubernetes-service-mesh-guide.md) | Spring Cloud → K8s 原生映射、Istio 集成、Resilience4j、迁移路径 | 高级 |
+| 7 | [Quarkus/Micronaut 云原生 Java](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-15-specialized-tech/03-extensions/17-quarkus-micronaut-cloud-native-java-guide.md) | Quarkus vs Micronaut vs Spring Boot、Dev Services、反应式编程 | 中级 |
 
 ### 2.4 CI/CD (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 8 | [Tekton Java CI/CD 流水线](./domain-08-release-change-management/99-tekton-java-cicd-guide.md) | Maven/Gradle Task、Jib 构建、安全扫描、GitOps 集成 | 中级 |
+| 8 | [Tekton Java CI/CD 流水线](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-08-release-change-management/01-gitops/09-tekton-java-cicd-guide.md) | Maven/Gradle Task、Jib 构建、安全扫描、GitOps 集成 | 中级 |
 
 ### 2.5 可观测性 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 9 | [Java 可观测性整合指南](./domain-06-observability/99-java-observability-kubernetes-guide.md) | Micrometer + JMX Exporter + OTel Agent + 日志 JSON + Grafana Dashboard | 高级 |
+| 9 | [Java 可观测性整合指南](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-06-observability/01-overview/12-java-observability-kubernetes-guide.md) | Micrometer + JMX Exporter + OTel Agent + 日志 JSON + Grafana Dashboard | 高级 |
 
 ### 2.6 安全 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 10 | [Java 安全加固指南](./domain-05-security-compliance/99-java-security-kubernetes-guide.md) | SecurityContext、KeyStore/TrustStore、OAuth2、SBOM、NetworkPolicy | 高级 |
+| 10 | [Java 安全加固指南](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/06-compliance/13-java-security-kubernetes-guide.md) | SecurityContext、KeyStore/TrustStore、OAuth2、SBOM、NetworkPolicy | 高级 |
 
 ### 2.7 平台开发 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 11 | [Java K8s Client / Operator SDK](./domain-07-platform-engineering/99-java-k8s-client-operator-guide.md) | fabric8/client-java、Java Operator SDK、Informer 模式 | 高级 |
+| 11 | [Java K8s Client / Operator SDK](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/build/14-java-k8s-client-operator-guide.md) | fabric8/client-java、Java Operator SDK、Informer 模式 | 高级 |
 
 ### 2.8 运维 (1 篇)
 
 | # | 指南 | 说明 | 难度 |
 |---|------|------|------|
-| 12 | [Java 性能与资源 Sizing](./domain-10-troubleshooting-diagnostics/99-java-performance-resource-sizing-guide.md) | 容器资源公式、启动优化、线程池、连接池 Sizing | 高级 |
+| 12 | [Java 性能与资源 Sizing](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/04-jvm-tuning/02-java-performance-resource-sizing-guide.md) | 容器资源公式、启动优化、线程池、连接池 Sizing | 高级 |
 
 ---
 
@@ -718,12 +718,12 @@ EOF
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

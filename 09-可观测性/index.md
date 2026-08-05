@@ -28,11 +28,11 @@ last_updated: 2026-07
 - 可观测性/05-alerting/
 - 可观测性/06-slo-sli/
 - 可观测性/07-tools/
-- [[09-可观测性/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
 - [[09-可观测性/01-总览/00-open-source-projects-index.md|Open Source Projects Index]]
-- [[09-可观测性/01-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
-- [[09-可观测性/06-SLO-SLI/99-slo-operations-guide.md|Slo Operations Guide]]
+- [[09-可观测性/01-总览/16-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[09-可观测性/06-SLO-SLI/09-slo-operations-guide.md|Slo Operations Guide]]
 

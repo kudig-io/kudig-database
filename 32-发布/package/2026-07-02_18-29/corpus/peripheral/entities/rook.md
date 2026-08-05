@@ -76,7 +76,7 @@ description: '## 项目概述'
 
 - [[entities/virtual-kubelet.md|kubelet]]]] — Virtual Kubelet
 - [[kudo]] — KUDO
-- [[02-containerd-v2-features]] — containerd 2.0 新特性
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/01-containerd-v2-features]] — containerd 2.0 新特性
 - [[karmada]] — Karmada
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

@@ -50,7 +50,7 @@ authors:
 # 声明式 API 与 Informer 机制源码剖析
 
 > **源码基线**：`33-源码/控制平面/kubernetes-1.36.2/staging/src/k8s.io/client-go/`
-> 概念层配套阅读：[[01-集群基础/02-设计原则/02-declarative-api-pattern.md|声明式 API 模式]] · [[01-集群基础/02-设计原则/04-watch-list-mechanism.md|List-Watch 机制]] · [[01-集群基础/02-设计原则/05-informer-workqueue.md|Informer 与工作队列]]
+> 概念层配套阅读：[[01-集群基础/02-设计原则/03-declarative-api-pattern.md|声明式 API 模式]] · [[01-集群基础/02-设计原则/05-watch-list-mechanism.md|List-Watch 机制]] · [[01-集群基础/02-设计原则/06-informer-workqueue.md|Informer 与工作队列]]
 
 ## 概述
 
@@ -189,7 +189,7 @@ apiserver            │ Reflector → DeltaFIFO → Indexer(缓存)     │    
                                                                  读缓存(Lister) + 写 apiserver
 ```
 
-controller-runtime（Operator 开发框架）只是这套原语的再封装：Manager 的 Cache=SharedInformerFactory，`Reconcile(ctx, req)` 的 req 就是队列里的 `ns/name`。因此本篇所有陷阱（墓碑处理、DeepCopy、WaitForCacheSync、Forget 时机）对 Operator 开发同样成立，详见 [[01-集群基础/02-设计原则/12-operator-development-guide.md|Operator 开发指南]] 与 [[01-集群基础/02-设计原则/09-source-code-walkthrough.md|源码阅读指南]]的 controller-runtime 章节。
+controller-runtime（Operator 开发框架）只是这套原语的再封装：Manager 的 Cache=SharedInformerFactory，`Reconcile(ctx, req)` 的 req 就是队列里的 `ns/name`。因此本篇所有陷阱（墓碑处理、DeepCopy、WaitForCacheSync、Forget 时机）对 Operator 开发同样成立，详见 [[01-集群基础/02-设计原则/13-operator-development-guide.md|Operator 开发指南]] 与 [[01-集群基础/02-设计原则/10-source-code-walkthrough.md|源码阅读指南]]的 controller-runtime 章节。
 
 ---
 
@@ -212,8 +212,8 @@ controller-runtime（Operator 开发框架）只是这套原语的再封装：Ma
 - [[10-平台工程/06-代码分析/kubernetes-core/02-kube-apiserver-deep-dive.md|02 - kube-apiserver 源码深度剖析]]（服务端 watchCache 一侧）
 - [[10-平台工程/06-代码分析/kubernetes-core/03-kube-controller-manager-deep-dive.md|03 - KCM 源码深度剖析]]（本机制的最大消费者）
 - [[10-平台工程/06-代码分析/kubernetes-core/07-component-interaction-dataflow.md|07 - 组件交互关系与数据流向]]
-- [[01-集群基础/02-设计原则/02-declarative-api-pattern.md|声明式 API 模式]]
-- [[01-集群基础/02-设计原则/03-controller-pattern.md|控制器模式与调谐循环]]
-- [[01-集群基础/02-设计原则/04-watch-list-mechanism.md|List-Watch 机制深度解析]]
-- [[01-集群基础/02-设计原则/05-informer-workqueue.md|Informer 架构与工作队列]]
+- [[01-集群基础/02-设计原则/03-declarative-api-pattern.md|声明式 API 模式]]
+- [[01-集群基础/02-设计原则/04-controller-pattern.md|控制器模式与调谐循环]]
+- [[01-集群基础/02-设计原则/05-watch-list-mechanism.md|List-Watch 机制深度解析]]
+- [[01-集群基础/02-设计原则/06-informer-workqueue.md|Informer 架构与工作队列]]
 - [[22-概念/11-交叉分析/声明式 API × 控制器模式.md|概念：声明式 API × 控制器模式]]

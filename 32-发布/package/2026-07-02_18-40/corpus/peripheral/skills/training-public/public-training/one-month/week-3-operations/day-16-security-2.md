@@ -701,9 +701,9 @@ resources:
 - [Pod Security Standards 官方文档](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 - [Kyverno 官方文档](https://kyverno.io/docs/)
 - [Secret 最佳实践](https://kubernetes.io/docs/concepts/configuration/secret/#good-practices)
-- [文件: `../../domain-05-security-compliance/06-pod-security-standards.md`](../../domain-05-security-compliance/06-pod-security-standards.md)
-- [文件: `../../domain-05-security-compliance/11-secret-management-tools.md`](../../domain-05-security-compliance/11-secret-management-tools.md)
-- [文件: `../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md`](../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md)
+- [文件: `../../domain-05-security-compliance/06-pod-security-standards.md`](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/04-policy-governance/03-pod-security-standards.md)
+- [文件: `../../domain-05-security-compliance/11-secret-management-tools.md`](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/01-identity-access/07-secret-management-tools.md)
+- [文件: `../../domain-05-security-compliance/14-policy-engines-opa-kyverno.md`](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-05-security-compliance/04-policy-governance/05-policy-engines-opa-kyverno.md)
 
 ```
 

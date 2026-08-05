@@ -89,7 +89,7 @@ spec:
 ## 相关 Domain
 
 - domain-08-release-change-management/01-gitops/01-gitops-principles
-- [[domain-09-reliability-engineering/SRE实践/02-release-gate-slo-based.md|02 release gate slo based]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-09-reliability-engineering/04-sre-practices/01-release-gate-slo-based|02 release gate slo based]]
 - domain-05-security-compliance/01-security-baseline/01-security-scanning-ci-cd
 ## Related
 

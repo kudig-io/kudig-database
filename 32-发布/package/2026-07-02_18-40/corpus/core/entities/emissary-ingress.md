@@ -83,7 +83,7 @@ Emissary-Ingress（原 Ambassador API Gateway）是 Kubernetes 原生的 API 网
 
 ## Related
 
-- [[04-containerd-upgrade-migration]] — containerd 升级迁移
+- [[06-containerd-upgrade-migration]] — containerd 升级迁移
 - [[spin]] — Spin
 - [[backstage]] — Backstage
 - [[envoy]] — Envoy

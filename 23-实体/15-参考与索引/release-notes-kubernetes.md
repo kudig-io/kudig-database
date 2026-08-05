@@ -99,7 +99,7 @@ prerequisites:
 - [[23-实体/15-参考与索引/kubernetes-changelog.md|Kubernetes 变更日志索引]]
 - [[22-概念/12-研究/kubernetes-version-evolution.md|Kubernetes 版本演进]]
 - [[23-实体/15-参考与索引/version-upgrade-guide.md|版本升级指南]]
-- [[21-生态参考/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## 升级前检查命令
@@ -203,7 +203,7 @@ Kubernetes 版本升级
 
 ## Related
 
-- [[21-生态参考/98-merged-indexes/index.md|release-notes-reading-guide]] — 发布说明阅读指南
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-reading-guide]] — 发布说明阅读指南
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[23-实体/15-参考与索引/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引

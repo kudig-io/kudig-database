@@ -610,7 +610,7 @@ echo "========================================"
 
 - [K8s 核心组件深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
 - [Node NotReady 诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../../%E8%AF%8A%E6%96%AD%E6%8E%92%E9%9A%9C/08-pod-comprehensive-troubleshooting.md)
+- [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
 - [OOM 内存诊断](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/07-oom-memory-diagnosis.md)
 
 ```

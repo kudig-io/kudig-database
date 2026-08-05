@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-08-release-change-management/测试质量/01-selenium-enterprise-automation.md|Selenium Enterprise Automation]]
-- [[domain-08-release-change-management/测试质量/02-junit5-enterprise-testing.md|Junit5 Enterprise Testing]]
-- [[domain-08-release-change-management/测试质量/03-ai-testing-quality-assurance.md|Ai Testing Quality Assurance]]
-- [[domain-08-release-change-management/测试质量/05-cypress-enterprise-automation.md|Cypress Enterprise Automation]]
-- [[domain-08-release-change-management/测试质量/06-playwright-enterprise-automation.md|Playwright Enterprise Automation]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-08-release-change-management/03-testing-quality/01-selenium-enterprise-automation|Selenium Enterprise Automation]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-08-release-change-management/03-testing-quality/02-junit5-enterprise-testing|Junit5 Enterprise Testing]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-08-release-change-management/03-testing-quality/03-ai-testing-quality-assurance|Ai Testing Quality Assurance]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-08-release-change-management/04-testing-quality/01-cypress-enterprise-automation|Cypress Enterprise Automation]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-08-release-change-management/03-testing-quality/04-playwright-enterprise-automation|Playwright Enterprise Automation]]
 

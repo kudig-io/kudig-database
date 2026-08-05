@@ -17,9 +17,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-05-security-compliance/网络安全/02-network-security-policies.md|Network Security Policies]]
-- [[domain-05-security-compliance/网络安全/07-zero-trust-security-architecture.md|Zero Trust Security Architecture]]
-- [[domain-05-security-compliance/网络安全/18-network-defense-depth.md|Network Defense Depth]]
-- [[domain-05-security-compliance/网络安全/19-zero-trust-architecture.md|Zero Trust Architecture]]
-- [[domain-05-security-compliance/网络安全/21-multicluster-security.md|Multicluster Security]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/02-network-security/01-network-security-policies|Network Security Policies]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/02-network-security/02-zero-trust-security-architecture|Zero Trust Security Architecture]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/02-network-security/03-network-defense-depth|Network Defense Depth]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/02-network-security/04-zero-trust-architecture|Zero Trust Architecture]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/02-network-security/05-multicluster-security|Multicluster Security]]
 

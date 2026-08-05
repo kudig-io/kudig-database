@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-08
 affected_namespace: kube-system
 ticket_type: 可观测性故障 / DaemonSet 调度异常
 skill_ref:
-- '[[domain-02-workloads-applications/核心工作负载/04-daemonset-management.md|DaemonSet
+- '[[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/02-daemonset-management|DaemonSet
   管理]]'
 - Logtail 排障
 - '[[domain-10-troubleshooting-diagnostics/技能体系/skill-set/k8s-node-notready/SKILL.md|节点诊断
@@ -336,7 +336,7 @@ kubectl get node cn-zhangjiakou.172.16.8.12 -o jsonpath='{.status.conditions[?(@
 > - 将 Logtail 镜像拉取策略调整为 `IfNotPresent`，并计划预加载镜像到节点。
 >
 > 当前所有节点日志已恢复上传至 SLS。建议后续：
-> - 对带 Taint 的节点建立标准化 Toleration 清单，参考 [[domain-02-workloads-applications/核心工作负载/04-daemonset-management.md|DaemonSet 管理]]；
+> - 对带 Taint 的节点建立标准化 Toleration 清单，参考 [[32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/02-daemonset-management|DaemonSet 管理]]；
 > - 配置节点磁盘使用率告警：`node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.15` 触发 P2 告警；
 > - 在 SLS 侧配置机器组心跳告警，及时发现日志采集 Agent 缺失。
 >

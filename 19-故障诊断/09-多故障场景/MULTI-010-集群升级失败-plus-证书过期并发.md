@@ -26,7 +26,7 @@ last_updated: 2026-05-23
 # 集群升级失败 + 证书过期并发
 
 ## 关联Skill
-- [[25-cluster-upgrade-migration]]
+- [[27-cluster-upgrade-migration]]
 - [[06-certificate-expiry]]
 
 ## 场景描述

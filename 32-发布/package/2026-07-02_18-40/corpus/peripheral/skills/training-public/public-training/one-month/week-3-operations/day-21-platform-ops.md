@@ -156,7 +156,7 @@ related_topics:
    - 重点: etcd 备份、Velero
 
 3. **监控 Playbooks**
-   - 文件: `../../[[domain-06-observability/告警/21-monitoring-playbooks.md|21-monitoring-playbooks]].md`
+   - 文件: `../../[[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-06-observability/05-alerting/06-monitoring-playbooks|21-monitoring-playbooks]].md`
    - 重点: 监控配置模板
 
 ---
@@ -564,10 +564,10 @@ Week 4 将学习网络与存储，包括 Service/Ingress 配置、Terway/Flannel
 
 ## 延伸阅读
 
-- [集群生命周期管理](../../domain-07-platform-engineering/02-cluster-lifecycle-management.md)
-- [备份恢复策略](../../domain-07-platform-engineering/12-backup-recovery-strategy.md)
-- [监控 Playbooks](../../domain-06-observability/21-monitoring-playbooks.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [集群生命周期管理](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-07-platform-engineering/operate/01-cluster-lifecycle-management.md)
+- [备份恢复策略](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/operate/06-backup-recovery-strategy.md)
+- [监控 Playbooks](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-06-observability/05-alerting/06-monitoring-playbooks.md)
+- [Pod 综合排障](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting.md)
 
 ```
 

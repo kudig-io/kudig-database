@@ -521,14 +521,14 @@ containerLogMaxFiles: 5
 - [[domain-12-cloud-providers/阿里云/04-阿里云存储集成.md|阿里云存储集成]]
 - [[domain-12-cloud-providers/阿里云/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
 - [[domain-12-cloud-providers/阿里云/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
-- [[242-ack-vpc-network|ACK VPC网络]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/05-alicloud-ack/004-ack-vpc-network|ACK VPC网络]]
 - [[alicloud-ack-overview|阿里云ACK概述]]
 ## Related
 
 - [[domain-17-system-foundation/知识字典/networking/ingress.md|Ingress]]
-- [[domain-03-networking-traffic/K8s网络核心/19-ingress-fundamentals.md|Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)]]
-- [[domain-03-networking-traffic/K8s网络核心/20-ingress-controller-deep-dive.md|128 - Ingress Controller 深入剖析]]
-- [[domain-03-networking-traffic/K8s网络核心/21-nginx-ingress-complete-guide.md|129 - NGINX Ingress 完整配置指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/05-ingress-fundamentals|Kubernetes Ingress 基础概念与核心原理 (Ingress Fundamentals)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/06-ingress-controller-deep-dive|128 - Ingress Controller 深入剖析]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/07-nginx-ingress-complete-guide|129 - NGINX Ingress 完整配置指南]]
 
 
 <!-- risk-assessed -->

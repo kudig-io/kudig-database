@@ -573,9 +573,9 @@ echo "========== 排查完毕 =========="
 - [结构化故障排查框架](../../domain-10-troubleshooting-diagnostics/高级排障/README.md)
 - [FTA 核心原理](../../domain-10-troubleshooting-diagnostics/FTA故障树/04-fta-core-principles.md)
 - [FEBM 理论基础](../../domain-10-troubleshooting-diagnostics/FEBM方法论/01-febm-theory-foundations.md)
-- [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
+- [Pod Pending 诊断](01-pod-pending-diagnosis.md)
 - [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [Pod 综合排障](32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting.md)
 
 ```
 

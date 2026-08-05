@@ -89,7 +89,7 @@ Pixie 是一个 Kubernetes 原生的可观测性平台，使用 eBPF 自动采�
 
 ## Related
 
-- [[02-istio-advanced-traffic-management]] — Istio 高级流量管理
+- [[01-istio-advanced-traffic-management]] — Istio 高级流量管理
 - [[vscode-kubernetes-tools]] — VS Code Kubernetes Tools
 - [[litmus]] — LitmusChaos
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

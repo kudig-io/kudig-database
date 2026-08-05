@@ -11,4 +11,4 @@ created: '2026-07-25'
 ## 文档
 
 - [[07-数据库中间件/00-总览/01-database-on-kubernetes-guide.md|01-database-on-kubernetes-guide]]
-- [[07-数据库中间件/00-总览/99-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]
+- [[07-数据库中间件/00-总览/02-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]

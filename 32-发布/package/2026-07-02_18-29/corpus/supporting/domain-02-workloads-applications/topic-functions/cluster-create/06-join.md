@@ -640,9 +640,9 @@ echo "Node $(hostname) joined successfully!"
 
 - [集群概览](01-overview.md) — kubeadm init 创建 Bootstrap Token
 - [预检流程](02-preflight.md) — join 预检
-- [节点加入进阶](12-join-advanced.md) — Discovery 和 TLS Bootstrap 详解
+- [节点加入进阶](11-join-advanced.md) — Discovery 和 TLS Bootstrap 详解
 - [证书管理](03-certs.md) — TLS 证书体系
-- [高可用进阶](14-ha-advanced.md) — control-plane join
+- [高可用进阶](12-ha-advanced.md) — control-plane join
 - [安全机制](16-security.md) — Bootstrap Token 安全
 
 ### 配置文件发现模式

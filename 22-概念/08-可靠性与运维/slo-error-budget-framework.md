@@ -28,7 +28,7 @@ status: stable
 
 > 可靠性不是越高越好——它是**刚好够用**的工程权衡。Error Budget 是连接可靠性目标与产品迭代速度的桥梁。
 
-相关索引：[[21-生态参考/98-merged-indexes/index.md|index]] · [[22-概念/08-可靠性与运维/incident-management-patterns.md|incident management patterns]]
+相关索引：[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] · [[22-概念/08-可靠性与运维/incident-management-patterns.md|incident management patterns]]
 
 ---
 

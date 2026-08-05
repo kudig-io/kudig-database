@@ -14,7 +14,7 @@ created: 2026-05-24
 updated: 2026-05-24
 last_updated: 2026-05-24
 related:
-- '[[domain-19-landscape-references/98-merged-indexes/index.md|index]]'
+- '[[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]]'
 - '[[concepts/slo-error-budget-framework.md|slo error budget framework]]'
 ---
 
@@ -440,7 +440,7 @@ spec:
 
 ## 8. 相关资源
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|index]] — 可靠性工程领域总览
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|index]] — 可靠性工程领域总览
 - [[concepts/slo-error-budget-framework.md|slo error budget framework]] — SLO 与 Error Budget 框架
 - [Chaos Mesh 官方文档](https://chaos-mesh.org/docs/)
 - [Litmus 官方文档](https://litmuschaos.io/docs/)

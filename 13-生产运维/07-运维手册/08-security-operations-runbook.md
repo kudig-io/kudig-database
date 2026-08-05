@@ -77,7 +77,7 @@ authors:
 - 需要执行 CIS Kubernetes Benchmark 修复与持续合规检查。
 - 需要响应镜像漏洞、容器逃逸、凭据泄露等安全事件。
 - 需要配置审计日志并基于审计数据进行溯源与告警。
-- 需要将安全基线纳入日常巡检与 [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产就绪运维框架]]。
+- 需要将安全基线纳入日常巡检与 [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产就绪运维框架]]。
 
 ## 2. 前置条件与工具
 
@@ -391,7 +391,7 @@ kubectl logs <pod> -n <ns> --previous > /evidence/<pod>-logs.txt
 kubectl get pod <pod> -n <ns> -o yaml > /evidence/<pod>-spec.yaml
 kubectl describe node <node> > /evidence/<node>-describe.txt
 ```
-事件隔离后，应立即启动 [[13-生产运维/03-事件响应/04-incident-response-template.md|事故响应流程]]，并按 [[13-生产运维/03-事件响应/03-on-call-playbook.md|值班手册]] 进行升级。证据保存应包括容器镜像、运行时日志、网络连接记录与节点状态快照。在完成取证后，应彻底重建受感染节点，并轮换所有可能暴露的凭据，包括 ServiceAccount token、镜像仓库凭据、数据库密码与 TLS 证书。同时应进行事后复盘，更新检测规则与防护策略，防止类似事件再次发生。
+事件隔离后，应立即启动 [[13-生产运维/03-事件响应/05-incident-response-template.md|事故响应流程]]，并按 [[13-生产运维/03-事件响应/04-on-call-playbook.md|值班手册]] 进行升级。证据保存应包括容器镜像、运行时日志、网络连接记录与节点状态快照。在完成取证后，应彻底重建受感染节点，并轮换所有可能暴露的凭据，包括 ServiceAccount token、镜像仓库凭据、数据库密码与 TLS 证书。同时应进行事后复盘，更新检测规则与防护策略，防止类似事件再次发生。
 
 ## 5. 关键检查点与验证命令
 
@@ -432,13 +432,13 @@ kubectl describe node <node> > /evidence/<node>-describe.txt
 
 ## 8. 相关 Runbook / 推荐阅读
 
-- [[13-生产运维/00-总览/99-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
+- [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产运维域生产就绪运维指南]]
 - [[13-生产运维/07-运维手册/02-change-management-guide.md|变更管理指南]]
-- [[13-生产运维/03-事件响应/03-on-call-playbook.md|值班手册与告警响应规范]]
-- [[13-生产运维/03-事件响应/04-incident-response-template.md|事故响应模板与流程规范]]
+- [[13-生产运维/03-事件响应/04-on-call-playbook.md|值班手册与告警响应规范]]
+- [[13-生产运维/03-事件响应/05-incident-response-template.md|事故响应模板与流程规范]]
 - [[08-安全/README.md|安全合规域]]
 - [[08-安全/04-策略治理/index.md|策略治理]]
-- [[14-容器运行时/03-containerd-CRI-O/06-runtime-security-hardening.md|运行时安全加固]]
+- [[14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md|运行时安全加固]]
 - [[09-可观测性/README.md|可观测性域]]
 
 

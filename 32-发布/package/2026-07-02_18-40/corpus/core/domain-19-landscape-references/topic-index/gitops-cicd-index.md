@@ -61,8 +61,8 @@ prerequisites:
 ## 架构基础
 
 - [[concepts/kubernetes-architecture-overview.md|Kubernetes 架构全景图 (Architecture Overview)]]
-- [[domain-01-cluster-fundamentals/架构总览/02-core-components-deep-dive.md|02 core components deep dive]]
-- [[domain-01-cluster-fundamentals/kubectl/05-kubectl-commands-reference.md|05 kubectl commands reference]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive|02 core components deep dive]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference|05 kubectl commands reference]]
 - 07 - 升级路径与策略指南
 - 08 - 多租户架构设计 (Multi-Tenancy Architecture)
 - 12 - Kubernetes 集群部署架构模式指南
@@ -118,19 +118,19 @@ prerequisites:
 
 ## 结构化故障排查 - AI/ML
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/02-kubeflow-troubleshooting|Kubeflow 平台故障排查指南]]
 
 ## 结构化故障排查 - GitOps/DevOps
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/01-gitops-devops-troubleshooting.md|GitOps/DevOps 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/02-tekton-troubleshooting.md|Tekton CI/CD 流水线故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/11-gitops-devops/03-flux-image-automation-troubleshooting.md|Flux 镜像自动化故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/01-gitops-devops-troubleshooting|GitOps/DevOps 故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/02-tekton-troubleshooting|Tekton CI/CD 流水线故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/14-gitops-devops/03-flux-image-automation-troubleshooting|Flux 镜像自动化故障排查指南]]
 
 ## 结构化故障排查 - 可观测性
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/01-monitoring-observability-troubleshooting.md|可观测性故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/02-opentelemetry-troubleshooting.md|OpenTelemetry Collector 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/01-monitoring-observability-troubleshooting|可观测性故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/02-opentelemetry-troubleshooting|OpenTelemetry Collector 故障排查指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/04-finops-cost-optimization-troubleshooting|FinOps 成本优化与云费用故障排查指南]]
 
 ## 结构化故障排查
 
@@ -152,8 +152,8 @@ prerequisites:
 
 ## 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/技能体系/08-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/技能体系/16-logging-pipeline-failure.md|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]]
+- [[09-deployment-rollout-failure|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/14-logging-pipeline-failure|日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation]]
 
 ## YAML 清单参考
 
@@ -227,8 +227,8 @@ prerequisites:
 - [[domain-12-cloud-providers/AWS-EKS/aws-eks-overview.md|AWS EKS (Elastic Kubernetes Service) 概述]]
 - [[domain-12-cloud-providers/Google-GKE/google-cloud-gke-overview.md|Google Cloud GKE (Google Kubernetes Engine) 概述]]
 - [[domain-12-cloud-providers/Azure-AKS/azure-aks-overview.md|Azure AKS (Azure Kubernetes Service) 概述]]
-- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)]]
-- [[domain-12-cloud-providers/阿里云/ack/244-ack-ros-iac.md|ACK 关联产品 - ROS 资源编排 (IaC)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/05-alicloud-ack/003-ack-slb-nlb-alb|ACK 关联产品 - 负载均衡 (SLB/NLB/ALB)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/05-alicloud-ack/006-ack-ros-iac|ACK 关联产品 - ROS 资源编排 (IaC)]]
 - [[domain-12-cloud-providers/腾讯云TKE/tencent-tke-overview.md|腾讯云 TKE (Tencent Kubernetes Engine) 概述]]
 - [[domain-12-cloud-providers/其他云/UCloud-UK8S/ucloud-uk8s-overview.md|UCloud UK8S (UCloud Kubernetes Service) 高性价比企业级实战指南]]
 - [[domain-12-cloud-providers/其他云/火山引擎-VEK/volcengine-vek-overview.md|火山引擎 VEK (Volcengine Kubernetes) 字节级深度实战指南]]
@@ -239,7 +239,7 @@ prerequisites:
 
 ## 技术论文
 
-- [[domain-19-landscape-references/论文/05-kubernetes-gitops-complete-practice-guide.md|05 kubernetes gitops complete practice guide]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-19-landscape-references/01-papers/01-kubernetes-gitops-complete-practice-guide|05 kubernetes gitops complete practice guide]]
 
 ## GitOps / CI-CD
 

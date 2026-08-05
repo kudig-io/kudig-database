@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[26-技能/07-安全/resource-quota/培训/lecturer/06-namespace-resource-quota.md|Namespace Resource Quota]]
+- [[26-技能/07-安全/resource-quota/培训/lecturer/01-namespace-resource-quota.md|Namespace Resource Quota]]
 

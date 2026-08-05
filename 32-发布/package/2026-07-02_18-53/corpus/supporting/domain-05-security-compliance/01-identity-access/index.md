@@ -22,7 +22,7 @@ last_updated: 2026-07
 - [[domain-05-security-compliance/身份与访问/03-service-account-token-management.md|Service Account Token Management]]
 - [[domain-05-security-compliance/身份与访问/04-oidc-identity-provider-integration.md|Oidc Identity Provider Integration]]
 - [[domain-05-security-compliance/身份与访问/05-vault-enterprise-secrets-management.md|Vault Enterprise Secrets Management]]
-- [[domain-05-security-compliance/身份与访问/07-rbac-matrix-configuration.md|Rbac Matrix Configuration]]
-- [[domain-05-security-compliance/身份与访问/11-secret-management-tools.md|Secret Management Tools]]
-- [[domain-05-security-compliance/身份与访问/99-vault-k8s-secrets-guide.md|Vault K8S Secrets Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/01-identity-access/06-rbac-matrix-configuration|Rbac Matrix Configuration]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/01-identity-access/07-secret-management-tools|Secret Management Tools]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/01-identity-access/08-vault-k8s-secrets-guide|Vault K8S Secrets Guide]]
 

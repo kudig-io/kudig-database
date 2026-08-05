@@ -111,93 +111,93 @@ related_docs:
 | 负载均衡技术 | [04-load-balancing-technologies.md](../domain-03-networking-traffic/04-load-balancing-technologies.md) | L4/L7负载均衡、LVS/IPVS、Keepalived高可用 |
 | 网络安全基础 | [05-network-security-fundamentals.md](../domain-03-networking-traffic/05-network-security-fundamentals.md) | iptables防护、WireGuard VPN、DDoS防御 |
 | SDN 与网络虚拟化 | [06-sdn-network-virtualization.md](../domain-03-networking-traffic/06-sdn-network-virtualization.md) | OVS/Linux Bridge、VXLAN/GENEVE/GRE、Overlay网络 |
-| Linux 网络配置 | [04-linux-networking-configuration.md](../domain-17-system-foundation/04-linux-networking-configuration.md) | ip命令、NetworkManager、Netplan、内核参数调优 |
-| Docker 网络深度解析 | [04-docker-networking-deep-dive.md](../domain-13-container-runtime/04-docker-networking-deep-dive.md) | bridge/host/overlay网络模式、容器网络基础 |
+| Linux 网络配置 | [04-linux-networking-configuration.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/01-linux/03-linux-networking-configuration.md) | ip命令、NetworkManager、Netplan、内核参数调优 |
+| Docker 网络深度解析 | [04-docker-networking-deep-dive.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/01-docker/03-docker-networking-deep-dive.md) | bridge/host/overlay网络模式、容器网络基础 |
 
 ### B. Kubernetes 网络架构与 CNI
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| 网络核心组件 | [01-network-architecture-overview.md](../domain-03-networking-traffic/01-network-architecture-overview.md) | K8s网络模型、Service/DNS/Ingress全景、拓扑感知 |
-| CNI 容器网络接口深度解析 | [23-container-network-deep-dive.md](../domain-01-cluster-fundamentals/23-container-network-deep-dive.md) | CNI规范、VXLAN/IPIP/BGP原理、Calico/Cilium架构 |
-| CNI 架构与核心原理 | [02-cni-architecture-fundamentals.md](../domain-03-networking-traffic/02-cni-architecture-fundamentals.md) | CNI接口规范、插件链、IPAM、生产配置 |
-| CNI 插件深度对比 | [03-cni-plugins-comparison.md](../domain-03-networking-traffic/03-cni-plugins-comparison.md) | Calico/Flannel/Cilium/Terway功能性能对比 |
-| Flannel 完整指南 | [04-flannel-complete-guide.md](../domain-03-networking-traffic/04-flannel-complete-guide.md) | VXLAN/Host-GW模式、配置与调优 |
-| Terway 高级指南 | [05-terway-advanced-guide.md](../domain-03-networking-traffic/05-terway-advanced-guide.md) | 阿里云ENI/ENIIP模式、VPC网络集成 |
-| Terway 实例 CRUD 操作 | [37-terway-resources-crud-operations.md](../domain-03-networking-traffic/37-terway-resources-crud-operations.md) | Terway资源管理、网络策略检查 |
-| Cilium CNI 架构与部署 | [03-cilium-cni-architecture.md](../domain-03-networking-traffic/03-cilium-cni-architecture.md) | eBPF数据平面、BPF Maps、安全身份、部署配置 |
+| 网络核心组件 | [01-network-architecture-overview.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/02-network-architecture-overview.md) | K8s网络模型、Service/DNS/Ingress全景、拓扑感知 |
+| CNI 容器网络接口深度解析 | [23-container-network-deep-dive.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/09-container-network-deep-dive.md) | CNI规范、VXLAN/IPIP/BGP原理、Calico/Cilium架构 |
+| CNI 架构与核心原理 | [02-cni-architecture-fundamentals.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/01-cni-architecture-fundamentals.md) | CNI接口规范、插件链、IPAM、生产配置 |
+| CNI 插件深度对比 | [03-cni-plugins-comparison.md](04-cni-plugins-comparison.md) | Calico/Flannel/Cilium/Terway功能性能对比 |
+| Flannel 完整指南 | [04-flannel-complete-guide.md](05-flannel-complete-guide.md) | VXLAN/Host-GW模式、配置与调优 |
+| Terway 高级指南 | [05-terway-advanced-guide.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/01-terway-advanced-guide.md) | 阿里云ENI/ENIIP模式、VPC网络集成 |
+| Terway 实例 CRUD 操作 | [37-terway-resources-crud-operations.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/29-terway-resources-crud-operations.md) | Terway资源管理、网络策略检查 |
+| Cilium CNI 架构与部署 | [03-cilium-cni-architecture.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/04-ebpf/02-cilium-cni-architecture.md) | eBPF数据平面、BPF Maps、安全身份、部署配置 |
 
 ### C. Service 与服务发现
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| Service 核心概念与类型 | [06-service-concepts-types.md](../domain-03-networking-traffic/06-service-concepts-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName |
-| Service 实现机制 | [07-service-implementation-details.md](../domain-03-networking-traffic/07-service-implementation-details.md) | iptables/IPVS规则链路、Endpoints控制器 |
-| 服务拓扑与端点切片 | [08-service-topology-aware.md](../domain-03-networking-traffic/08-service-topology-aware.md) | EndpointSlice、拓扑感知路由 |
-| Kube-proxy 模式与性能 | [09-kube-proxy-modes-performance.md](../domain-03-networking-traffic/09-kube-proxy-modes-performance.md) | iptables/IPVS/nftables模式、性能基准、调优 |
-| Service 高级特性 | [10-service-advanced-features.md](../domain-03-networking-traffic/10-service-advanced-features.md) | 会话保持、ExternalTrafficPolicy、多端口Service |
+| Service 核心概念与类型 | [06-service-concepts-types.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/05-service-concepts-types.md) | ClusterIP/NodePort/LoadBalancer/ExternalName |
+| Service 实现机制 | [07-service-implementation-details.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/06-service-implementation-details.md) | iptables/IPVS规则链路、Endpoints控制器 |
+| 服务拓扑与端点切片 | [08-service-topology-aware.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/07-service-topology-aware.md) | EndpointSlice、拓扑感知路由 |
+| Kube-proxy 模式与性能 | [09-kube-proxy-modes-performance.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/02-kube-proxy-modes-performance.md) | iptables/IPVS/nftables模式、性能基准、调优 |
+| Service 高级特性 | [10-service-advanced-features.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/03-service-advanced-features.md) | 会话保持、ExternalTrafficPolicy、多端口Service |
 
 ### D. DNS 与 CoreDNS
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| DNS 服务发现与 CoreDNS 调优 | [11-dns-service-discovery-coredns.md](../domain-03-networking-traffic/11-dns-service-discovery-coredns.md) | K8s DNS规范、CoreDNS配置、NodeLocal DNSCache |
-| 服务发现与 DNS 配置 | [12-dns-service-discovery.md](../domain-03-networking-traffic/12-dns-service-discovery.md) | DNS记录类型、search域、ndots配置 |
-| CoreDNS 架构与核心原理 | [13-coredns-architecture-principles.md](../domain-03-networking-traffic/13-coredns-architecture-principles.md) | 插件链架构、请求处理流程 |
-| CoreDNS Corefile 配置详解 | [14-coredns-configuration-corefile.md](../domain-03-networking-traffic/14-coredns-configuration-corefile.md) | Corefile语法、zone配置、上游转发 |
-| CoreDNS 插件完整参考 | [15-coredns-plugins-reference.md](../domain-03-networking-traffic/15-coredns-plugins-reference.md) | 内置/外部插件、cache/forward/log等 |
+| DNS 服务发现与 CoreDNS 调优 | [11-dns-service-discovery-coredns.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/04-dns-service-discovery-coredns.md) | K8s DNS规范、CoreDNS配置、NodeLocal DNSCache |
+| 服务发现与 DNS 配置 | [12-dns-service-discovery.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/08-dns-service-discovery.md) | DNS记录类型、search域、ndots配置 |
+| CoreDNS 架构与核心原理 | [13-coredns-architecture-principles.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/09-coredns-architecture-principles.md) | 插件链架构、请求处理流程 |
+| CoreDNS Corefile 配置详解 | [14-coredns-configuration-corefile.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/10-coredns-configuration-corefile.md) | Corefile语法、zone配置、上游转发 |
+| CoreDNS 插件完整参考 | [15-coredns-plugins-reference.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/11-coredns-plugins-reference.md) | 内置/外部插件、cache/forward/log等 |
 
 ### E. NetworkPolicy 网络策略
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| NetworkPolicy 深度实践指南 | [16-networkpolicy-deep-practice.md](../domain-03-networking-traffic/16-networkpolicy-deep-practice.md) | 零信任策略、多层隔离、微服务策略 |
-| NetworkPolicy 高级配置 | [17-network-policy-advanced.md](../domain-03-networking-traffic/17-network-policy-advanced.md) | Egress策略、CIDR规则、高级选择器 |
-| 网络加密与 mTLS | [18-network-encryption-mtls.md](../domain-03-networking-traffic/18-network-encryption-mtls.md) | WireGuard加密、mTLS配置 |
-| Cilium 网络策略 L3/L4/L7 | [04-cilium-network-policy.md](../domain-03-networking-traffic/04-cilium-network-policy.md) | CiliumNetworkPolicy、FQDN过滤、HTTP/Kafka L7策略 |
-| 网络安全策略与零信任架构 | [02-network-security-policies.md](../domain-05-security-compliance/02-network-security-policies.md) | 零信任网络、策略设计模式 |
-| 网络安全纵深防御体系 | [18-network-defense-depth.md](../domain-05-security-compliance/18-network-defense-depth.md) | 多层防御、入侵检测、安全审计 |
+| NetworkPolicy 深度实践指南 | [16-networkpolicy-deep-practice.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/12-networkpolicy-deep-practice.md) | 零信任策略、多层隔离、微服务策略 |
+| NetworkPolicy 高级配置 | [17-network-policy-advanced.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/13-network-policy-advanced.md) | Egress策略、CIDR规则、高级选择器 |
+| 网络加密与 mTLS | [18-network-encryption-mtls.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/14-network-encryption-mtls.md) | WireGuard加密、mTLS配置 |
+| Cilium 网络策略 L3/L4/L7 | [04-cilium-network-policy.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/04-ebpf/03-cilium-network-policy.md) | CiliumNetworkPolicy、FQDN过滤、HTTP/Kafka L7策略 |
+| 网络安全策略与零信任架构 | [02-network-security-policies.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-05-security-compliance/02-network-security/01-network-security-policies.md) | 零信任网络、策略设计模式 |
+| 网络安全纵深防御体系 | [18-network-defense-depth.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-05-security-compliance/02-network-security/03-network-defense-depth.md) | 多层防御、入侵检测、安全审计 |
 | NetworkPolicy YAML 参考 | [22-networkpolicy-reference.md](../domain-18-manifests-patterns/22-networkpolicy-reference.md) | 完整YAML模板库 |
 
 ### F. Ingress 与流量管理
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| Ingress 基础概念 | [19-ingress-fundamentals.md](../domain-03-networking-traffic/19-ingress-fundamentals.md) | Ingress资源规范、路径匹配、TLS |
-| Ingress Controller 深入剖析 | [20-ingress-controller-deep-dive.md](../domain-03-networking-traffic/20-ingress-controller-deep-dive.md) | NGINX/Traefik/HAProxy Controller原理 |
-| NGINX Ingress 完整配置指南 | [21-nginx-ingress-complete-guide.md](../domain-03-networking-traffic/21-nginx-ingress-complete-guide.md) | annotations、自定义配置、限流 |
-| Ingress TLS 与证书管理 | [22-ingress-tls-certificate.md](../domain-03-networking-traffic/22-ingress-tls-certificate.md) | cert-manager、ACME自动证书 |
-| Ingress 高级路由 | [23-ingress-advanced-routing.md](../domain-03-networking-traffic/23-ingress-advanced-routing.md) | 金丝雀发布、蓝绿部署、A/B测试 |
-| Ingress 安全加固 | [24-ingress-security-hardening.md](../domain-03-networking-traffic/24-ingress-security-hardening.md) | WAF、速率限制、IP白名单 |
-| Ingress 监控与故障排查 | [25-ingress-monitoring-troubleshooting.md](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) | Prometheus指标、日志分析、常见问题 |
-| Ingress 生产最佳实践 | [26-ingress-production-best-practices.md](../domain-03-networking-traffic/26-ingress-production-best-practices.md) | 高可用部署、Kustomize环境管理 |
-| Gateway API 配置 | [35-gateway-api-overview.md](../domain-03-networking-traffic/35-gateway-api-overview.md) | Gateway/HTTPRoute/GRPCRoute |
-| Ingress 和 API Gateway 对比 | [36-api-gateway-patterns.md](../domain-03-networking-traffic/36-api-gateway-patterns.md) | Ingress vs API Gateway选型 |
+| Ingress 基础概念 | [19-ingress-fundamentals.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/05-ingress-fundamentals.md) | Ingress资源规范、路径匹配、TLS |
+| Ingress Controller 深入剖析 | [20-ingress-controller-deep-dive.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/06-ingress-controller-deep-dive.md) | NGINX/Traefik/HAProxy Controller原理 |
+| NGINX Ingress 完整配置指南 | [21-nginx-ingress-complete-guide.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/07-nginx-ingress-complete-guide.md) | annotations、自定义配置、限流 |
+| Ingress TLS 与证书管理 | [22-ingress-tls-certificate.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/15-ingress-tls-certificate.md) | cert-manager、ACME自动证书 |
+| Ingress 高级路由 | [23-ingress-advanced-routing.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/16-ingress-advanced-routing.md) | 金丝雀发布、蓝绿部署、A/B测试 |
+| Ingress 安全加固 | [24-ingress-security-hardening.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/17-ingress-security-hardening.md) | WAF、速率限制、IP白名单 |
+| Ingress 监控与故障排查 | [25-ingress-monitoring-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/02-ingress-monitoring-troubleshooting.md) | Prometheus指标、日志分析、常见问题 |
+| Ingress 生产最佳实践 | [26-ingress-production-best-practices.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/18-ingress-production-best-practices.md) | 高可用部署、Kustomize环境管理 |
+| Gateway API 配置 | [35-gateway-api-overview.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/27-gateway-api-overview.md) | Gateway/HTTPRoute/GRPCRoute |
+| Ingress 和 API Gateway 对比 | [36-api-gateway-patterns.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/28-api-gateway-patterns.md) | Ingress vs API Gateway选型 |
 
 ### G. Egress、Service Mesh 与多集群
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| Egress 流量管理 | [29-egress-traffic-management.md](../domain-03-networking-traffic/29-egress-traffic-management.md) | Egress Gateway、SNAT、出站策略 |
-| Service Mesh 深度解析 | [30-service-mesh-deep-dive.md](../domain-03-networking-traffic/30-service-mesh-deep-dive.md) | Sidecar注入、iptables劫持、Envoy配置 |
-| Cilium Service Mesh | [05-cilium-service-mesh.md](../domain-03-networking-traffic/05-cilium-service-mesh.md) | eBPF替代Sidecar、mTLS/SPIFFE、Gateway API |
-| 多集群网络联邦 | [31-multi-cluster-federation.md](../domain-03-networking-traffic/31-multi-cluster-federation.md) | Karmada/Submariner/ClusterMesh |
-| 多集群网络互联 | [32-multi-cluster-networking.md](../domain-03-networking-traffic/32-multi-cluster-networking.md) | Submariner/Cilium ClusterMesh/Istio多集群 |
+| Egress 流量管理 | [29-egress-traffic-management.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/21-egress-traffic-management.md) | Egress Gateway、SNAT、出站策略 |
+| Service Mesh 深度解析 | [30-service-mesh-deep-dive.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/22-service-mesh-deep-dive.md) | Sidecar注入、iptables劫持、Envoy配置 |
+| Cilium Service Mesh | [05-cilium-service-mesh.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/04-ebpf/04-cilium-service-mesh.md) | eBPF替代Sidecar、mTLS/SPIFFE、Gateway API |
+| 多集群网络联邦 | [31-multi-cluster-federation.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/23-multi-cluster-federation.md) | Karmada/Submariner/ClusterMesh |
+| 多集群网络互联 | [32-multi-cluster-networking.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/24-multi-cluster-networking.md) | Submariner/Cilium ClusterMesh/Istio多集群 |
 
 ### H. 网络故障排查 (核心排查文档)
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
 | **CNI 网络插件故障排查** | **本文** | CNI诊断流程、Pod网络不通、DNS解析、跨节点通信 |
-| 网络连通性故障排查 | [25-network-connectivity-troubleshooting.md](25-network-connectivity-troubleshooting.md) | Pod-to-Pod/Pod-to-Node/Node-to-Node场景排查、数据路径分析、iptables TRACE |
-| DNS 故障排查 | [26-dns-troubleshooting.md](26-dns-troubleshooting.md) | CoreDNS状态检查、解析失败、DNS延迟、上游DNS |
-| Ingress 故障排查 | [15-ingress-troubleshooting.md](15-ingress-troubleshooting.md) | Controller状态、502/504错误、TLS问题 |
-| NetworkPolicy 故障排查 | [16-networkpolicy-troubleshooting.md](16-networkpolicy-troubleshooting.md) | 策略不生效、CNI兼容性、规则调试 |
-| Service 全面故障排查 | [10-service-comprehensive-troubleshooting.md](10-service-comprehensive-troubleshooting.md) | Endpoints异常、LoadBalancer挂起、端口映射 |
-| CNI 故障排查与优化 | [27-cni-troubleshooting-optimization.md](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md) | IP池管理、veth诊断、多跳tcpdump、conntrack |
-| CoreDNS 故障排查与优化 | [28-coredns-troubleshooting-optimization.md](../domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md) | 解析慢、OOM、插件异常、性能优化 |
-| 网络故障诊断与链路排查 | [33-network-troubleshooting.md](../domain-03-networking-traffic/33-network-troubleshooting.md) | 数据路径总览、场景速查、MTU诊断、内核参数 |
-| 网络性能调优 | [34-network-performance-tuning.md](../domain-03-networking-traffic/34-network-performance-tuning.md) | CNI性能配置、网卡队列、IRQ亲和性 |
+| 网络连通性故障排查 | [25-network-connectivity-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting.md) | Pod-to-Pod/Pod-to-Node/Node-to-Node场景排查、数据路径分析、iptables TRACE |
+| DNS 故障排查 | [26-dns-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-dns-troubleshooting.md) | CoreDNS状态检查、解析失败、DNS延迟、上游DNS |
+| Ingress 故障排查 | [15-ingress-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/07-ingress-troubleshooting.md) | Controller状态、502/504错误、TLS问题 |
+| NetworkPolicy 故障排查 | [16-networkpolicy-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-networkpolicy-troubleshooting.md) | 策略不生效、CNI兼容性、规则调试 |
+| Service 全面故障排查 | [10-service-comprehensive-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-service-comprehensive-troubleshooting.md) | Endpoints异常、LoadBalancer挂起、端口映射 |
+| CNI 故障排查与优化 | [27-cni-troubleshooting-optimization.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/19-cni-troubleshooting-optimization.md) | IP池管理、veth诊断、多跳tcpdump、conntrack |
+| CoreDNS 故障排查与优化 | [28-coredns-troubleshooting-optimization.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/20-coredns-troubleshooting-optimization.md) | 解析慢、OOM、插件异常、性能优化 |
+| 网络故障诊断与链路排查 | [33-network-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/25-network-troubleshooting.md) | 数据路径总览、场景速查、MTU诊断、内核参数 |
+| 网络性能调优 | [34-network-performance-tuning.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/26-network-performance-tuning.md) | CNI性能配置、网卡队列、IRQ亲和性 |
 
 ### I. 结构化深度排查指南
 
@@ -214,36 +214,36 @@ related_docs:
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| Hubble 网络可观测性 | [07-hubble-network-observability.md](../domain-03-networking-traffic/07-hubble-network-observability.md) | Flow观测、Hubble UI、网络拓扑可视化 |
-| 网络性能优化（生产运维） | [20-network-performance-optimization.md](../domain-06-observability/20-network-performance-optimization.md) | Calico/Cilium生产调优、eBPF模式、Service Mesh优化 |
+| Hubble 网络可观测性 | [07-hubble-network-observability.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/04-ebpf/06-hubble-network-observability.md) | Flow观测、Hubble UI、网络拓扑可视化 |
+| 网络性能优化（生产运维） | [20-network-performance-optimization.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-01-cluster-fundamentals/06-performance-tuning/02-network-performance-optimization.md) | Calico/Cilium生产调优、eBPF模式、Service Mesh优化 |
 
 ### K. 参考资料与事件
 
 | 文档 | 路径 | 核心内容 |
 |------|------|----------|
-| Service 与网络事件 | [10-service-networking-events.md](../domain-17-system-foundation/10-service-networking-events.md) | K8s网络相关Event解读 |
+| Service 与网络事件 | [10-service-networking-events.md](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-17-system-foundation/03-kubernetes-events/01-service-networking-events.md) | K8s网络相关Event解读 |
 | NetworkPolicy 异常 FTA 树 | [networkpolicy-fta.md](../domain-10-troubleshooting-diagnostics/FTA故障树/list/networkpolicy-fta.md) | 故障树分析 |
-| 网络硬件技术 | [08-network-hardware-technology.md](../domain-17-system-foundation/08-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡 |
-| 网络硬件故障排查 | [13-network-hardware-troubleshooting.md](../domain-17-system-foundation/13-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、ethtool |
+| 网络硬件技术 | [08-network-hardware-technology.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/02-hardware/07-network-hardware-technology.md) | 高速网卡、RDMA、智能网卡 |
+| 网络硬件故障排查 | [13-network-hardware-troubleshooting.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/02-hardware/12-network-hardware-troubleshooting.md) | 网卡诊断、光模块问题、ethtool |
 
 ### 排查场景快速导航
 
 | 排查场景 | 首选文档 | 深度参考 |
 |---------|---------|----------|
-| **Pod-to-Pod 不通（同节点）** | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md) | [25-网络连通性](25-network-connectivity-troubleshooting.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
-| **Pod-to-Pod 不通（跨节点）** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
-| **Pod-to-Node 不通** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | 本文、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
-| **Node-to-Node 不通** | [25-网络连通性](25-network-connectivity-troubleshooting.md) | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md)、[Linux网络配置](../domain-17-system-foundation/04-linux-networking-configuration.md) |
-| **Pod-to-Service 不通** | [10-Service排查](10-service-comprehensive-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md) |
-| **DNS 解析失败** | [26-DNS排查](26-dns-troubleshooting.md) | [DNS深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md)、[CoreDNS优化](../domain-03-networking-traffic/28-coredns-troubleshooting-optimization.md) |
-| **Ingress 访问异常** | [15-Ingress排查](15-ingress-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md)、[Ingress监控](../domain-03-networking-traffic/25-ingress-monitoring-troubleshooting.md) |
-| **NetworkPolicy 不生效** | [16-NP排查](16-networkpolicy-troubleshooting.md) | [NP深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md) |
-| **CNI 插件问题** | 本文 | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
-| **Service Mesh 问题** | [Istio排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md) | [Service Mesh解析](../domain-03-networking-traffic/30-service-mesh-deep-dive.md)、[Cilium Mesh](../domain-03-networking-traffic/05-cilium-service-mesh.md) |
-| **Gateway API 问题** | [Gateway API排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md) | [Gateway API配置](../domain-03-networking-traffic/35-gateway-api-overview.md) |
-| **网络性能问题** | [34-网络性能调优](../domain-03-networking-traffic/34-network-performance-tuning.md) | [生产网络优化](../domain-06-observability/20-network-performance-optimization.md) |
-| **conntrack 表满** | [27-CNI排查优化](../domain-03-networking-traffic/27-cni-troubleshooting-optimization.md) | [CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md)、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
-| **MTU/分片问题** | [33-网络诊断](../domain-03-networking-traffic/33-network-troubleshooting.md) | [CNI容器网络深度](../domain-01-cluster-fundamentals/23-container-network-deep-dive.md) |
+| **Pod-to-Pod 不通（同节点）** | [33-网络诊断](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/25-network-troubleshooting.md) | [25-网络连通性](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
+| **Pod-to-Pod 不通（跨节点）** | [25-网络连通性](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting.md) | [27-CNI排查优化](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/19-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
+| **Pod-to-Node 不通** | [25-网络连通性](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting.md) | 本文、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
+| **Node-to-Node 不通** | [25-网络连通性](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting.md) | [33-网络诊断](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/25-network-troubleshooting.md)、[Linux网络配置](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/01-linux/03-linux-networking-configuration.md) |
+| **Pod-to-Service 不通** | [10-Service排查](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-service-comprehensive-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md) |
+| **DNS 解析失败** | [26-DNS排查](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-dns-troubleshooting.md) | [DNS深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md)、[CoreDNS优化](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/20-coredns-troubleshooting-optimization.md) |
+| **Ingress 访问异常** | [15-Ingress排查](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/07-ingress-troubleshooting.md) | [Service与Ingress排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md)、[Ingress监控](32-发布/package/2026-07-02_18-29/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/02-ingress-monitoring-troubleshooting.md) |
+| **NetworkPolicy 不生效** | [16-NP排查](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-networkpolicy-troubleshooting.md) | [NP深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/04-networkpolicy-troubleshooting.md) |
+| **CNI 插件问题** | 本文 | [27-CNI排查优化](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/19-cni-troubleshooting-optimization.md)、[CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md) |
+| **Service Mesh 问题** | [Istio排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/05-service-mesh-istio-troubleshooting.md) | [Service Mesh解析](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/22-service-mesh-deep-dive.md)、[Cilium Mesh](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/04-ebpf/04-cilium-service-mesh.md) |
+| **Gateway API 问题** | [Gateway API排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/06-gateway-api-troubleshooting.md) | [Gateway API配置](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/27-gateway-api-overview.md) |
+| **网络性能问题** | [34-网络性能调优](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/26-network-performance-tuning.md) | [生产网络优化](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-01-cluster-fundamentals/06-performance-tuning/02-network-performance-optimization.md) |
+| **conntrack 表满** | [27-CNI排查优化](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/19-cni-troubleshooting-optimization.md) | [CNI深度排查](../domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md)、[网络协议栈](../domain-03-networking-traffic/01-network-protocols-stack.md) |
+| **MTU/分片问题** | [33-网络诊断](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/25-network-troubleshooting.md) | [CNI容器网络深度](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/09-container-network-deep-dive.md) |
 
 ---
 <!-- chunk: 1. CNI 网络故障诊断总览 (CNI Diagnosis Overview) -->
@@ -934,12 +934,12 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
+- [[01-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-service-comprehensive-troubleshooting|Service 全面故障排查]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
@@ -949,7 +949,7 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/核心排障/01-control-plane-apiserver-troubleshooting.md|01-control-plane-apiserver-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|04-storage-csi-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|05-pod-pending-diagnosis]]
+- [[01-pod-pending-diagnosis|05-pod-pending-diagnosis]]
 
 ## Related
 

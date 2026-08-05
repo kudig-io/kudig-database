@@ -79,7 +79,7 @@ OVN-Kubernetes 是一个基于 OVN (Open Virtual Network) 的 Kubernetes CNI 网
 
 ## Related
 
-- [[43-terway-crd-operations]] — Terway CRD 资源操作
+- [[04-terway-crd-operations]] — Terway CRD 资源操作
 - [[sops]] — SOPS (Secrets OPerationS)
 - [[entities/argocd.md|argocd]] — ArgoCD
 - [[cni]] — CNI (Container Network Interface)

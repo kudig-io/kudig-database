@@ -198,7 +198,7 @@ kubectl debug -it <pod-name> --image=busybox --target=<sidecar-name> -n prod
 - [Sidecar 容器高级模式](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/14-sidecar-containers-patterns.md)
 - [容器生命周期钩子](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/13-container-lifecycle-hooks.md)
 - [Init 容器](./init-containers.md)
-- [Pod 生命周期事件](../../工作负载/11-pod-lifecycle-events.md)
+- [Pod 生命周期事件](02-pod-lifecycle-events.md)
 - [工作负载故障排查手册](../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/07-workload-troubleshooting-handbook.md)
 
 ## 参考链接

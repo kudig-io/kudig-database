@@ -54,12 +54,12 @@ prerequisites:
 ### 网络知识域 (核心)
 
 - [[domain-03-networking-traffic/K8s网络核心/00-network-in-nutshell.md|Kubernetes 网络基础 Network in a Nutshell]]
-- 141 - [[domain-01-cluster-fundamentals/控制平面/23-container-network-deep-dive.md|CNI 架构与核心原理 (CNI Architecture & Fundamentals)]]
+- 141 - [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/09-container-network-deep-dive|CNI 架构与核心原理 (CNI Architecture & Fundamentals)]]
 - 76 - CNI插件深度对比
 - Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 - 77 - Service实现机制
 - Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
-- [[domain-03-networking-traffic/K8s网络核心/10-service-advanced-features.md|10 service advanced features]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/03-service-advanced-features|10 service advanced features]]
 
 ### DNS 与服务发现
 
@@ -96,9 +96,9 @@ prerequisites:
 ### 故障排查
 
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/07-ingress-troubleshooting|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-network-connectivity-troubleshooting|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/01-dns-troubleshooting|26 - DNS 故障排查 (DNS Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
@@ -111,7 +111,7 @@ prerequisites:
 ### 技能卡片
 
 - [[domain-10-troubleshooting-diagnostics/技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/技能体系/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/12-ingress-gateway-failure|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
 
 ### FTA 故障树
 

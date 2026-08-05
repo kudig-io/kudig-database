@@ -474,10 +474,10 @@ echo "Prometheus running: $(kubectl get pods -n monitoring -l app.kubernetes.io/
 
 - [毕业项目详细指南](../projects/p5-graduation-project.md)
 - [终极自测题](./checkpoint.md)
-- [生产架构设计原则](../../domain-11-production-operations/01-production-architecture-design-principles.md)
-- [变更管理流程](../../domain-11-production-operations/22-change-management-process.md)
-- [事故响应处理](../../domain-11-production-operations/23-incident-response-handling.md)
-- [容量规划预测](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
+- [生产架构设计原则](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/02-production-architecture-design-principles.md)
+- [变更管理流程](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-08-release-change-management/03-change-management/05-change-management-process.md)
+- [事故响应处理](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-11-production-operations/02-incident-response/01-incident-response-handling.md)
+- [容量规划预测](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-09-reliability-engineering/03-capacity-planning/04-capacity-planning-forecasting.md)
 
 ---
 

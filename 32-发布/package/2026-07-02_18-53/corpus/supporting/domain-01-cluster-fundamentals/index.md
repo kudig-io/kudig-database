@@ -33,13 +33,13 @@ last_updated: 2026-07
 - domain-01-cluster-fundamentals/05-kubectl/
 - domain-01-cluster-fundamentals/06-upgrade-paths/
 - domain-01-cluster-fundamentals/07-performance-tuning/
-- [[domain-01-cluster-fundamentals/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
-- [[domain-01-cluster-fundamentals/01-production-architecture-design-principles.md|Production Architecture Design Principles]]
-- [[domain-01-cluster-fundamentals/99-kubernetes-production-architecture-blueprint.md|Kubernetes Production Architecture Blueprint]]
-- [[domain-01-cluster-fundamentals/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/02-production-architecture-design-principles|Production Architecture Design Principles]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/06-kubernetes-production-architecture-blueprint|Kubernetes Production Architecture Blueprint]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 
 
 

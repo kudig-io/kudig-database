@@ -614,9 +614,9 @@ namespace 是进程级别的隔离，共享宿主机内核。虚拟机是硬件�
 ## 延伸阅读
 
 - [Linux 系统架构](../../domain-17-system-foundation/01-linux-system-architecture.md)
-- [Linux 进程管理](../../[[domain-17-system-foundation/01-linux/02-linux-process-management.md|02-linux-process-management]].md)
-- [Linux 容器基础原理](../../domain-17-system-foundation/08-linux-container-fundamentals.md)
-- [Linux 命令参考](../../domain-17-system-foundation/99-linux-commands-reference.md)
+- [Linux 进程管理](../../[[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-17-system-foundation/01-linux/01-linux-process-management|02-linux-process-management]].md)
+- [Linux 容器基础原理](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/01-linux/07-linux-container-fundamentals.md)
+- [Linux 命令参考](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/01-linux/09-linux-commands-reference.md)
 
 ```
 

@@ -72,7 +72,7 @@ prerequisites:
 
 - 01 - NetworkPolicy 深度实践指南
 - 83 - 网络加密与mTLS
-- [[entities/03-containerd-security-hardening.md|03 containerd security hardening]]
+- [[02-containerd-security-hardening|03 containerd security hardening]]
 
 ### 术语词典
 
@@ -94,9 +94,9 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/资源排障/12-rbac-quota-troubleshooting.md|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/13-certificate-troubleshooting.md|13 - 证书故障排查 (Certificate Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/32-security-troubleshooting.md|32 - 安全相关故障排查 (Security Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/04-rbac-quota-troubleshooting|12 - RBAC与ResourceQuota 故障排查 (RBAC & Quota Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/05-certificate-troubleshooting|13 - 证书故障排查 (Certificate Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/03-security-troubleshooting|32 - 安全相关故障排查 (Security Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/01-rbac-troubleshooting.md|RBAC 与认证故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/02-certificate-troubleshooting.md|Kubernetes 证书故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/06-security-auth/03-pod-security-troubleshooting.md|Pod 安全与 SecurityContext 故障排查指南]]
@@ -112,9 +112,9 @@ prerequisites:
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/技能体系/09-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/技能体系/14-configmap-secret-failure.md|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/技能体系/18-security-incident-response.md|安全事件应急响应 / Security Incident Response]]
+- [[10-rbac-quota-failure|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/03-configmap-secret-failure|ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/05-security-incident-response|安全事件应急响应 / Security Incident Response]]
 
 ### FTA 故障树
 
@@ -133,8 +133,8 @@ prerequisites:
 
 ### 供应链安全
 
-- [[domain-05-security-compliance/供应链/05-slsa-levels-implementation.md|05 slsa levels implementation]]
-- [[domain-05-security-compliance/供应链/07-sigstore-cosign-signing.md|07 sigstore cosign signing]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-05-security-compliance/05-supply-chain/04-slsa-levels-implementation|05 slsa levels implementation]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-05-security-compliance/05-supply-chain/06-sigstore-cosign-signing|07 sigstore cosign signing]]
 
 ### 安全生态项目
 

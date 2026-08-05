@@ -57,12 +57,12 @@ last_updated: 2026-05-21
 
 ### 阿里云 ACK
 
-- [[240-ack-ecs-compute]] — Ack ecs compute
-- [[241-ack-slb-nlb-alb]] — Ack slb nlb alb
-- [[242-ack-vpc-network]] — Ack vpc network
-- [[243-ack-ram-authorization]] — Ack ram authorization
-- [[244-ack-ros-iac]] — Ack ros iac
-- [[245-ack-ebs-storage]] — Ack ebs storage
+- [[001-ack-ecs-compute]] — Ack ecs compute
+- [[002-ack-slb-nlb-alb]] — Ack slb nlb alb
+- [[003-ack-vpc-network]] — Ack vpc network
+- [[23-实体/13-云厂商与发行版/004-ack-ram-authorization]] — Ack ram authorization
+- [[005-ack-ros-iac]] — Ack ros iac
+- [[006-ack-ebs-storage]] — Ack ebs storage
 - [[alicloud-ack-overview]] — Alicloud ack overview
 - [[service-ack-practical-guide]] — Service ack practical guide
 
@@ -113,23 +113,23 @@ last_updated: 2026-05-21
 
 ### 阿里云专有云
 
-- [[250-apsara-stack-ess-scaling]] — Apsara stack ess scaling
-- [[251-apsara-stack-sls-logging]] — Apsara stack sls logging
-- [[252-apsara-stack-pop-operations]] — Apsara stack pop operations
+- [[007-apsara-stack-ess-scaling]] — Apsara stack ess scaling
+- [[008-apsara-stack-sls-logging]] — Apsara stack sls logging
+- [[009-apsara-stack-pop-operations]] — Apsara stack pop operations
 - [[alicloud-apsara-ack-overview]] — Alicloud apsara ack overview
 
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-17]] — Open source projects index from domain 17
-- [[00-open-source-projects-index-from-domain-27]] — Open source projects index from domain 27
+- [[01-open-source-projects-index-from-domain-27]] — Open source projects index from domain 27
 - [[MOC-from-domain-17]] — MOC from domain 17
 - [[MOC-from-domain-27]] — MOC from domain 27
 - [[README-from-domain-17]] — README from domain 17
 - [[README-from-domain-27]] — README from domain 27
 
 ## 相关 Domain
-- [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
-- [[平台工程/98-merged-indexes/index.md|Domain 07 平台工程 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 01 集群基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 07 平台工程 索引]]
 
 
 <!-- risk-assessed -->

@@ -18,5 +18,5 @@ last_updated: 2026-07
 ## 文档
 
 - [[26-技能/04-工作负载/pod/培训/lecturer/02-pod-basics.md|Pod Basics]]
-- [[26-技能/04-工作负载/deployment/培训/lecturer/03-deployment-basics.md|Deployment Basics]]
+- [[26-技能/04-工作负载/deployment/培训/lecturer/01-deployment-basics.md|Deployment Basics]]
 

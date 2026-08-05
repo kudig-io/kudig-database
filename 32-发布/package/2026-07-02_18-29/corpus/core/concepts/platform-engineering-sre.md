@@ -74,7 +74,7 @@ SRE 定义:
 ## 相关 Domain
 
 - domain-07-platform-engineering/01-idp/01-internal-developer-platform
-- [[domain-09-reliability-engineering/SRE实践/04-toil-reduction-automation.md|04 toil reduction automation]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-09-reliability-engineering/08-sre-practices/01-toil-reduction-automation|04 toil reduction automation]]
 ## Related
 
 - [[domain-17-system-foundation/知识字典/security/runtime-security.md|运行时安全]]

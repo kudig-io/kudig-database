@@ -314,8 +314,8 @@ kubectl get pod <ingress-pod> -n kube-system -o wide
 ## Related
 
 - [[domain-12-cloud-providers/阿里云/05-阿里云SLB与Ingress.md|阿里云SLB与Ingress]]
-- [[domain-17-system-foundation/K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-17-system-foundation/02-kubernetes-events/01-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/07-ingress-troubleshooting|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
 - [[entities/argo.md|Argo Workflows]]
 
 

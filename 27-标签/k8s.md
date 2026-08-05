@@ -167,12 +167,12 @@ last_updated: '2026-07-21'
 
 - [[01-集群基础/01-架构总览/01-kubernetes-architecture-overview|Kubernetes 架构总览]]
 - [[01-集群基础/03-控制平面/15-kubelet-deep-dive|kubelet 深度解析]]
-- [[01-集群基础/03-控制平面/32-kubeadm-upgrade-complete-guide|kubeadm 升级完整路径指南]]
-- [[01-集群基础/03-控制平面/34-certificate-pki-lifecycle-runbook|证书 PKI 生命周期 Runbook]]
-- [[01-集群基础/07-性能调优/19-cluster-performance-tuning|集群性能调优]]
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles|生产架构设计原则]]
-- [[01-集群基础/00-总览/99-kubernetes-production-architecture-blueprint|Kubernetes 生产架构蓝图]]
-- [[01-集群基础/05-kubectl/05-kubectl-commands-reference|kubectl 命令完整参考]]
+- [[01-集群基础/03-控制平面/36-kubeadm-upgrade-complete-guide|kubeadm 升级完整路径指南]]
+- [[01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook|证书 PKI 生命周期 Runbook]]
+- [[01-集群基础/07-性能调优/03-cluster-performance-tuning|集群性能调优]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles|生产架构设计原则]]
+- [[01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint|Kubernetes 生产架构蓝图]]
+- [[01-集群基础/05-kubectl/02-kubectl-commands-reference|kubectl 命令完整参考]]
 
 ## 工作负载 (Workloads)
 
@@ -180,68 +180,68 @@ last_updated: '2026-07-21'
 - [[02-工作负载/01-核心工作负载/02-deployment-production-patterns|Deployment 生产模式]]
 - [[02-工作负载/01-核心工作负载/12-advanced-pod-patterns|高级 Pod 模式]]
 - [[02-工作负载/01-核心工作负载/15-container-runtime-interfaces|容器运行时接口]]
-- [[02-工作负载/00-总览/99-kubernetes-deployment-patterns-architecture|部署模式架构]]
-- [[02-工作负载/02-Java-on-K8s/04-java-operator-sdk-development|Java Operator SDK 开发]]
+- [[02-工作负载/00-总览/01-kubernetes-deployment-patterns-architecture|部署模式架构]]
+- [[02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development|Java Operator SDK 开发]]
 
 ## 网络 (Networking)
 
-- [[05-网络/01-K8s网络核心/01-network-architecture-overview|网络架构概览]]
-- [[05-网络/01-K8s网络核心/02-cni-architecture-fundamentals|CNI 架构基础]]
-- [[05-网络/01-K8s网络核心/06-service-concepts-types|Service 概念与类型]]
-- [[05-网络/01-K8s网络核心/11-dns-service-discovery-coredns|DNS 服务发现 CoreDNS]]
-- [[05-网络/01-K8s网络核心/16-networkpolicy-deep-practice|NetworkPolicy 深度实践]]
-- [[05-网络/01-K8s网络核心/19-ingress-fundamentals|Ingress 基础]]
-- [[05-网络/01-K8s网络核心/30-service-mesh-deep-dive|Service Mesh 深度指南]]
-- [[05-网络/01-K8s网络核心/35-gateway-api-overview|Gateway API 概览]]
+- [[05-网络/01-K8s网络核心/02-network-architecture-overview|网络架构概览]]
+- [[05-网络/01-K8s网络核心/03-cni-architecture-fundamentals|CNI 架构基础]]
+- [[05-网络/01-K8s网络核心/07-service-concepts-types|Service 概念与类型]]
+- [[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns|DNS 服务发现 CoreDNS]]
+- [[05-网络/01-K8s网络核心/17-networkpolicy-deep-practice|NetworkPolicy 深度实践]]
+- [[05-网络/01-K8s网络核心/20-ingress-fundamentals|Ingress 基础]]
+- [[05-网络/01-K8s网络核心/32-service-mesh-deep-dive|Service Mesh 深度指南]]
+- [[05-网络/01-K8s网络核心/37-gateway-api-overview|Gateway API 概览]]
 
 ## 存储 (Storage)
 
 - [[06-存储/01-K8s存储/01-storage-architecture-overview|存储架构概览]]
-- [[06-存储/01-K8s存储/03-pvc-patterns-practices|PVC 模式与实践]]
-- [[06-存储/01-K8s存储/05-csi-drivers-integration|CSI 驱动集成]]
-- [[06-存储/01-K8s存储/09-pv-pvc-troubleshooting|PV/PVC 故障排查]]
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery|存储备份与灾备]]
+- [[06-存储/01-K8s存储/04-pvc-patterns-practices|PVC 模式与实践]]
+- [[06-存储/01-K8s存储/06-csi-drivers-integration|CSI 驱动集成]]
+- [[06-存储/01-K8s存储/10-pv-pvc-troubleshooting|PV/PVC 故障排查]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery|存储备份与灾备]]
 
 ## 安全 (Security)
 
 - [[08-安全/01-身份与访问/01-authentication-authorization-system|认证授权体系]]
-- [[08-安全/04-策略治理/04-kyverno-enterprise-policy-management|Kyverno 企业级策略管理]]
+- [[08-安全/04-策略治理/01-kyverno-enterprise-policy-management|Kyverno 企业级策略管理]]
 - [[08-安全/05-供应链/01-supply-chain-security-overview|供应链安全概览]]
 - [[08-安全/03-运行时安全/01-falco-cloud-native-security|Falco 云原生安全]]
-- [[08-安全/06-合规审计/11-kubernetes-security-hardening|Kubernetes 安全加固]]
-- [[08-安全/00-总览/99-production-readiness-operations-guide|安全生产就绪指南]]
+- [[08-安全/06-合规审计/08-kubernetes-security-hardening|Kubernetes 安全加固]]
+- [[08-安全/00-总览/01-production-readiness-operations-guide|安全生产就绪指南]]
 
 ## 可观测性 (Observability)
 
 - [[09-可观测性/01-总览/01-observability-architecture-overview|可观测性架构概览]]
 - [[09-可观测性/02-指标/01-prometheus-enterprise-monitoring|Prometheus 企业级监控]]
-- [[09-可观测性/03-日志/03-loki-enterprise-log-aggregation|Loki 企业级日志聚合]]
-- [[09-可观测性/04-链路追踪/04-distributed-tracing|分布式追踪]]
+- [[09-可观测性/03-日志/04-loki-enterprise-log-aggregation|Loki 企业级日志聚合]]
+- [[09-可观测性/04-链路追踪/05-distributed-tracing|分布式追踪]]
 - [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice|SLO 工程实践]]
-- [[09-可观测性/06-SLO-SLI/99-slo-operations-guide|SLO 运营指南]]
+- [[09-可观测性/06-SLO-SLI/09-slo-operations-guide|SLO 运营指南]]
 
 ## 平台工程 (Platform Engineering)
 
 - [[10-平台工程/01-构建/01-platform-engineering-overview|平台工程概览]]
 - [[10-平台工程/01-构建/03-backstage-deployment|Backstage 部署]]
 - [[10-平台工程/02-运维/02-cluster-lifecycle-management|集群生命周期管理]]
-- [[10-平台工程/02-运维/13-multi-cluster-management|多集群管理]]
-- [[10-平台工程/02-运维/15-production-troubleshooting|生产环境故障排查]]
-- [[10-平台工程/02-运维/99-karpenter-node-autoscaling-guide|Karpenter 节点弹性伸缩指南]]
+- [[10-平台工程/02-运维/10-multi-cluster-management|多集群管理]]
+- [[10-平台工程/02-运维/12-production-troubleshooting|生产环境故障排查]]
+- [[10-平台工程/02-运维/17-karpenter-node-autoscaling-guide|Karpenter 节点弹性伸缩指南]]
 
 ## 生产运维 (Production Operations)
 
 - [[13-生产运维/07-运维手册/01-production-sre-daily-ops|生产环境日常巡检]]
-- [[13-生产运维/03-事件响应/03-on-call-playbook|值班手册与告警响应]]
-- [[13-生产运维/03-事件响应/04-incident-response-template|事故响应模板]]
+- [[13-生产运维/03-事件响应/04-on-call-playbook|值班手册与告警响应]]
+- [[13-生产运维/03-事件响应/05-incident-response-template|事故响应模板]]
 - [[13-生产运维/07-运维手册/08-security-operations-runbook|安全运营 Runbook]]
-- [[13-生产运维/01-成本治理/13-kubernetes-cost-governance|Kubernetes 成本治理]]
+- [[13-生产运维/01-成本治理/05-kubernetes-cost-governance|Kubernetes 成本治理]]
 
 ## 故障诊断 (Troubleshooting)
 
-- [[19-故障诊断/02-资源排障/09-node-comprehensive-troubleshooting|节点综合排障]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting|Service 综合排障]]
-- [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting|PVC 存储排障]]
+- [[19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting|节点综合排障]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting|Service 综合排障]]
+- [[19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting|PVC 存储排障]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE|Pod CrashLoopBackOff 深度解析]]
 - [[19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE|K8s Node NotReady 深度解析]]
 

@@ -905,7 +905,7 @@ end
 ## Related
 
 - 77-fusion-energy-monitoring
-- [[02-工作负载/02-Java-on-K8s/07-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[02-工作负载/02-Java-on-K8s/06-java-observability-kubernetes.md|07-java-observability-kubernetes]]
 
 - [[09-可观测性/README.md|返回目录]]- [[21-生态参考/03-领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 

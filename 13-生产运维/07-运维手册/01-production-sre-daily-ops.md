@@ -348,8 +348,8 @@ Level 5: 自愈 (Self-Healing)
 - [[19-故障诊断/08-技能体系/01-node-notready|node-notready]] — 节点异常的排查方法
 - [[22-概念/08-可靠性与运维/cluster-upgrade-paths.md|cluster-upgrade-paths]] — 集群升级路径与版本兼容性
 - [[13-生产运维/07-运维手册/02-change-management-guide.md|change-management-guide]] — 变更管理的详细流程
-- [[13-生产运维/03-事件响应/04-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
-- [[13-生产运维/03-事件响应/03-on-call-playbook.md|值班手册]] — 告警响应与值班规范
+- [[13-生产运维/03-事件响应/05-incident-response-template.md|incident-response-playbook]] — 事件响应操作手册
+- [[13-生产运维/03-事件响应/04-on-call-playbook.md|值班手册]] — 告警响应与值班规范
 - [[09-可观测性/02-指标/index.md|指标监控]] — 监控体系设计
 
 ## Related

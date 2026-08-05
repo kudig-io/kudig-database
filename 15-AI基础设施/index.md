@@ -23,12 +23,12 @@ last_updated: 2026-07
 
 - AI基础设施/01-ai-infra/
 - AI基础设施/02-ai-agents/
-- [[15-AI基础设施/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - AI基础设施/02-ai-agents/
 - AI基础设施/topic-ai-coding/
 - [[15-AI基础设施/00-总览/index.md|00-总览]]
 
 ## 文档
 
-- [[15-AI基础设施/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[15-AI基础设施/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 

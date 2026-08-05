@@ -137,5 +137,5 @@ func (ns *nodeServer) NodePublishVolume(ctx, req)                       // nodes
 - [[10-平台工程/06-代码分析/kubernetes-core/08-kubelet-deep-dive.md|kubernetes-core 08 - kubelet 源码深度剖析]]（volumemanager 一侧）
 - [[10-平台工程/06-代码分析/kubernetes-core/03-kube-controller-manager-deep-dive.md|kubernetes-core 03 - KCM 源码深度剖析]]（AD controller 一侧）
 - [[06-存储/01-K8s存储/index.md|存储域：K8s 存储]]
-- [[06-存储/01-K8s存储/02-pvc-expansion-guide.md|存储域：PVC 扩容指南]]
+- [[06-存储/01-K8s存储/03-pvc-expansion-guide.md|存储域：PVC 扩容指南]]
 - [[07-数据库中间件/00-总览/01-database-on-kubernetes-guide.md|数据库域：Database on K8s]]（有状态负载存储实践）

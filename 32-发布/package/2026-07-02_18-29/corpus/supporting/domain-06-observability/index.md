@@ -28,11 +28,11 @@ last_updated: 2026-07
 - domain-06-observability/05-alerting/
 - domain-06-observability/06-slo-sli/
 - domain-06-observability/07-tools/
-- [[domain-06-observability/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 
 ## 文档
 
 - [[domain-06-observability/00-open-source-projects-index.md|Open Source Projects Index]]
-- [[domain-06-observability/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
-- [[domain-06-observability/99-slo-operations-guide.md|Slo Operations Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-06-observability/06-slo-operations-guide|Slo Operations Guide]]
 

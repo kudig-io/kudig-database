@@ -870,7 +870,7 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 - 生产运维 MOC
 - [[13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 04-企业级监控体系
 - 05-日志收集分析平台
@@ -882,7 +882,7 @@ echo "Diagnostic package created: ${DIAG_DIR}.tar.gz"
 
 ## See Also
 
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles.md|01-production-architecture-design-principles]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles.md|01-production-architecture-design-principles]]
 - 02-multi-cloud-hybrid-deployment-strategy
 - 04-enterprise-monitoring-system
 - 05-logging-collection-analysis-platform

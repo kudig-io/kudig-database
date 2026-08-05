@@ -143,7 +143,7 @@ spec:
 1. **每季度全链路切换演练**：从 DNS 切换到真实流量接管，不能只"看一眼备区在不在"。
 2. **演练产出 = 工单**：每次演练发现的问题必须开工单，下季度验证修复。
 3. **轮换演练区域**：这次切到 B，下次切到 A，避免"备区永远是备区"的隐性腐烂。
-4. **故障注入演练**：见 [[12-可靠性/02-灾难恢复/03-enterprise-disaster-recovery-chaos-engineering.md]]，用混沌工程模拟区域级故障。
+4. **故障注入演练**：见 [[12-可靠性/02-灾难恢复/05-enterprise-disaster-recovery-chaos-engineering.md]]，用混沌工程模拟区域级故障。
 
 ## 常见陷阱
 
@@ -545,8 +545,8 @@ spec:
 
 ## 相关
 
-- [[12-可靠性/02-灾难恢复/02-dr-automation-playbook.md|02 dr automation playbook]]
-- [[12-可靠性/02-灾难恢复/18-cross-region-disaster-recovery.md|18 cross region disaster recovery]]
-- [[12-可靠性/02-灾难恢复/03-enterprise-disaster-recovery-chaos-engineering.md|03 enterprise dr chaos]]
+- [[12-可靠性/02-灾难恢复/03-dr-automation-playbook.md|02 dr automation playbook]]
+- [[12-可靠性/02-灾难恢复/20-cross-region-disaster-recovery.md|18 cross region disaster recovery]]
+- [[12-可靠性/02-灾难恢复/05-enterprise-disaster-recovery-chaos-engineering.md|03 enterprise dr chaos]]
 
 <!-- risk-assessed -->

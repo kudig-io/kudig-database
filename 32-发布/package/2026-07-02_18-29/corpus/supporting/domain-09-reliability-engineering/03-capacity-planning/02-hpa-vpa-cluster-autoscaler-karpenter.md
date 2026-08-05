@@ -440,13 +440,13 @@ aliyun cs nodepool create   --ClusterId <cluster-id>   --Name spot-pool   --Inst
 
 ## Related
 
-- [[domain-09-reliability-engineering/容量规划/24-capacity-planning-forecasting.md|容量规划与预测]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-09-reliability-engineering/03-capacity-planning/04-capacity-planning-forecasting|容量规划与预测]]
 - [[domain-09-reliability-engineering/容量规划/01-capacity-planning-framework.md|容量规划框架]]
 
 ## See Also
 
-- [[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|Karpenter 节点自动扩缩容指南]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/17-hpa-vpa-troubleshooting.md|HPA/VPA 故障诊断]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/01-karpenter-node-autoscaling-guide|Karpenter 节点自动扩缩容指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-hpa-vpa-troubleshooting|HPA/VPA 故障诊断]]
 
 
 <!-- risk-assessed -->

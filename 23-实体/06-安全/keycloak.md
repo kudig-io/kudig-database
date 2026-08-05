@@ -251,11 +251,11 @@ kubectl exec -n keycloak keycloak-0 -- /opt/keycloak/bin/kcadm.sh get \
 - [[23-实体/07-可观测性/kuberhealthy.md|Kuberhealthy]]
 - [[23-实体/06-安全/kubescape.md|Kubescape]]
 - [[23-实体/07-可观测性/perses.md|Perses]]
-- [[23-实体/07-可观测性/03-prometheus-ha-deployment.md|Prometheus 高可用部署]]
+- [[23-实体/07-可观测性/02-prometheus-ha-deployment.md|Prometheus 高可用部署]]
 - [[23-实体/07-可观测性/trickster.md|Trickster]]
 - [[23-实体/08-交付与制品/distribution.md|Distribution]]
 - [[23-实体/11-AI与边缘/hami.md|HAMI]]
-- [[23-实体/03-运行时/06-containerd-observability.md|containerd 可观测性]]
+- [[23-实体/03-运行时/05-containerd-observability.md|containerd 可观测性]]
 - [[23-实体/09-编排调度/kubeelasti.md|KubeElastic]]
 - [[23-实体/15-参考与索引/cncf-security.md|CNCF 安全与合规项目全景]] — Cross-reference
 

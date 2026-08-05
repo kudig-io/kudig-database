@@ -519,8 +519,8 @@ ip netns list
 
 ## Related
 
-- [[14-容器运行时/03-containerd-CRI-O/01-containerd-production-operations|containerd 生产运维]]
-- [[14-容器运行时/03-containerd-CRI-O/02-cri-o-production-guide|CRI-O 生产指南]]
+- [[14-容器运行时/03-containerd-CRI-O/02-containerd-production-operations|containerd 生产运维]]
+- [[14-容器运行时/03-containerd-CRI-O/03-cri-o-production-guide|CRI-O 生产指南]]
 - [[14-容器运行时/05-运行时迁移/01-docker-to-containerd-migration|Docker 到 containerd 迁移]]
 
 ## See Also

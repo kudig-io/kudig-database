@@ -1,0 +1,218 @@
+{
+  "id": "2026-04-21-203407",
+  "generated_at": "2026-04-21T12:34:07.750435Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao",
+      "title": "项目概述：etcd 是什么以及为什么重要",
+      "file": "1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian",
+      "title": "快速上手：构建、运行与本地集群搭建",
+      "file": "2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie",
+      "title": "多模块工程结构与 Go Workspace 详解",
+      "file": "3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng",
+      "title": "开发环境搭建与贡献流程",
+      "file": "4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan",
+      "title": "命令行工具 etcdctl 与 etcdutl 使用指南",
+      "file": "5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji",
+      "title": "整体架构：从嵌入层到存储层的分层设计",
+      "file": "6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md",
+      "section": "深度剖析",
+      "group": "核心架构与启动流程",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd",
+      "title": "服务器启动链路：从 main.go 到 embed.StartEtcd",
+      "file": "7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md",
+      "section": "深度剖析",
+      "group": "核心架构与启动流程",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du",
+      "title": "EtcdServer 核心实现：提案提交、Apply 循环与线性一致性读",
+      "file": "8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md",
+      "section": "深度剖析",
+      "group": "核心架构与启动流程",
+      "level": "Advanced"
+    },
+    {
+      "slug": "9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan",
+      "title": "Raft 共识算法集成：raftNode 适配层与消息流转",
+      "file": "9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md",
+      "section": "深度剖析",
+      "group": "共识与复制",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi",
+      "title": "集群成员管理与动态重配置",
+      "file": "10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md",
+      "section": "深度剖析",
+      "group": "共识与复制",
+      "level": "Advanced"
+    },
+    {
+      "slug": "11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu",
+      "title": "MVCC 存储模型：Revision、KeyIndex 与事务视图",
+      "file": "11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md",
+      "section": "深度剖析",
+      "group": "存储引擎",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu",
+      "title": "WAL（预写日志）：持久化与崩溃恢复",
+      "file": "12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md",
+      "section": "深度剖析",
+      "group": "存储引擎",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "13-backend-chou-xiang-yu-boltdb-ji-cheng",
+      "title": "Backend 抽象与 BoltDB 集成",
+      "file": "13-backend-chou-xiang-yu-boltdb-ji-cheng.md",
+      "section": "深度剖析",
+      "group": "存储引擎",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-compaction-yu-schema-ban-ben-qian-yi",
+      "title": "Compaction 与 Schema 版本迁移",
+      "file": "14-compaction-yu-schema-ban-ben-qian-yi.md",
+      "section": "深度剖析",
+      "group": "存储引擎",
+      "level": "Advanced"
+    },
+    {
+      "slug": "15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai",
+      "title": "gRPC API 定义与 Protocol Buffers 契约（api 模块）",
+      "file": "15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md",
+      "section": "深度剖析",
+      "group": "API 与客户端",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng",
+      "title": "Go 客户端库（client/v3）：连接管理、重试与负载均衡",
+      "file": "16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md",
+      "section": "深度剖析",
+      "group": "API 与客户端",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng",
+      "title": "Watch 机制：事件推送、缓存层（cache 模块）与一致性保证",
+      "file": "17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md",
+      "section": "深度剖析",
+      "group": "API 与客户端",
+      "level": "Advanced"
+    },
+    {
+      "slug": "18-ren-zheng-ti-xi-yong-hu-jiao-se-quan-xian-yu-token-simple-jwt",
+      "title": "认证体系：用户、角色、权限与 Token（Simple / JWT）",
+      "file": "18-ren-zheng-ti-xi-yong-hu-jiao-se-quan-xian-yu-token-simple-jwt.md",
+      "section": "深度剖析",
+      "group": "安全与权限",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "19-tls-an-quan-pei-zhi-yu-mtls-shuang-xiang-ren-zheng",
+      "title": "TLS 安全配置与 mTLS 双向认证",
+      "file": "19-tls-an-quan-pei-zhi-yu-mtls-shuang-xiang-ren-zheng.md",
+      "section": "深度剖析",
+      "group": "安全与权限",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "20-lease-zu-yue-xi-tong-ttl-guan-li-xu-yue-yu-checkpoint",
+      "title": "Lease 租约系统：TTL 管理、续约与 Checkpoint",
+      "file": "20-lease-zu-yue-xi-tong-ttl-guan-li-xu-yue-yu-checkpoint.md",
+      "section": "深度剖析",
+      "group": "分布式协调原语",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "21-bing-fa-kong-zhi-fen-bu-shi-hu-chi-suo-leader-xuan-ju-yu-ruan-jian-shi-wu-nei-cun-stm",
+      "title": "并发控制：分布式互斥锁、Leader 选举与软件事务内存（STM）",
+      "file": "21-bing-fa-kong-zhi-fen-bu-shi-hu-chi-suo-leader-xuan-ju-yu-ruan-jian-shi-wu-nei-cun-stm.md",
+      "section": "深度剖析",
+      "group": "分布式协调原语",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "22-grpc-proxy-yu-tcp-gateway-jia-gou",
+      "title": "gRPC Proxy 与 TCP Gateway 架构",
+      "file": "22-grpc-proxy-yu-tcp-gateway-jia-gou.md",
+      "section": "深度剖析",
+      "group": "代理与可观测性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "23-zhi-biao-bao-lu-prometheus-ri-zhi-ti-xi-zap-yu-fen-bu-shi-zhui-zong-opentelemetry",
+      "title": "指标暴露（Prometheus）、日志体系（Zap）与分布式追踪（OpenTelemetry）",
+      "file": "23-zhi-biao-bao-lu-prometheus-ri-zhi-ti-xi-zap-yu-fen-bu-shi-zhui-zong-opentelemetry.md",
+      "section": "深度剖析",
+      "group": "代理与可观测性",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "24-ce-shi-ti-xi-gai-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi",
+      "title": "测试体系概览：单元测试、集成测试与端到端测试",
+      "file": "24-ce-shi-ti-xi-gai-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md",
+      "section": "深度剖析",
+      "group": "测试与质量保障",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "25-jian-zhuang-xing-ce-shi-robustness-yu-gu-zhang-zhu-ru-yan-zheng",
+      "title": "健壮性测试（Robustness）与故障注入验证",
+      "file": "25-jian-zhuang-xing-ce-shi-robustness-yu-gu-zhang-zhu-ru-yan-zheng.md",
+      "section": "深度剖析",
+      "group": "测试与质量保障",
+      "level": "Advanced"
+    },
+    {
+      "slug": "26-gou-jian-jiao-ben-fa-bu-liu-cheng-yu-ci-cd-makefile-yu-scripts",
+      "title": "构建脚本、发布流程与 CI/CD（Makefile 与 scripts）",
+      "file": "26-gou-jian-jiao-ben-fa-bu-liu-cheng-yu-ci-cd-makefile-yu-scripts.md",
+      "section": "深度剖析",
+      "group": "工具链与运维",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "27-zhen-duan-gong-ju-ji-benchmark-etcd-dump-db-rw-heatmaps",
+      "title": "诊断工具集：benchmark、etcd-dump-db、rw-heatmaps",
+      "file": "27-zhen-duan-gong-ju-ji-benchmark-etcd-dump-db-rw-heatmaps.md",
+      "section": "深度剖析",
+      "group": "工具链与运维",
+      "level": "Intermediate"
+    }
+  ]
+}

@@ -775,7 +775,7 @@ symptom_mappings:
       - path: "集群基础/02-etcd-troubleshooting.md"
         type: "domain"
         relevance: 0.95
-      - path: "[[19-故障诊断/04-高级排障/10-etcd-maintenance.md|10-etcd-maintenance]].md"
+      - path: "[[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/13-etcd-maintenance|10-etcd-maintenance]].md"
         type: "domain"
         relevance: 0.90
 

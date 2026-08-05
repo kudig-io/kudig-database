@@ -98,25 +98,25 @@ CNCF (Cloud Native Computing Foundation) Landscape 是云原生生态系统的�
 ### containerd (8 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| 02-containerd-v2-features.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/02-containerd-v2-features.md) | containerd v2 新特性 |
-| 03-containerd-security-hardening.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/03-containerd-security-hardening.md) | 安全加固 |
-| 04-containerd-upgrade-migration.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/04-containerd-upgrade-migration.md) | 升级迁移 |
-| 05-containerd-windows-support.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/05-containerd-windows-support.md) | Windows 支持 |
-| 06-containerd-observability.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/06-containerd-observability.md) | 可观测性 |
-| [07-containerd-disaster-recovery.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/07-containerd-disaster-recovery.md) | 灾难恢复 |
-| 08-containerd-multi-tenant.md](../../../23-%E5%AE%9E%E4%BD%93/03-%E8%BF%90%E8%A1%8C%E6%97%B6/08-containerd-multi-tenant.md) | 多租户 |
+| 02-containerd-v2-features.md](../../../23-实体/03-运行时/01-containerd-v2-features.md) | containerd v2 新特性 |
+| 03-containerd-security-hardening.md](../../../23-实体/03-运行时/02-containerd-security-hardening.md) | 安全加固 |
+| 04-containerd-upgrade-migration.md](../../../23-实体/03-运行时/03-containerd-upgrade-migration.md) | 升级迁移 |
+| 05-containerd-windows-support.md](../../../23-实体/03-运行时/04-containerd-windows-support.md) | Windows 支持 |
+| 06-containerd-observability.md](../../../23-实体/03-运行时/05-containerd-observability.md) | 可观测性 |
+| [07-containerd-disaster-recovery.md](../../../23-实体/03-运行时/06-containerd-disaster-recovery.md) | 灾难恢复 |
+| 08-containerd-multi-tenant.md](../../../23-实体/03-运行时/07-containerd-multi-tenant.md) | 多租户 |
 
 ### Istio (3 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| [02-istio-advanced-traffic-management.md](../../../23-%E5%AE%9E%E4%BD%93/04-%E7%BD%91%E7%BB%9C/02-istio-advanced-traffic-management.md) | 高级流量管理 |
-| [03-istio-security-hardening.md](../../../23-%E5%AE%9E%E4%BD%93/04-%E7%BD%91%E7%BB%9C/03-istio-security-hardening.md) | 安全加固 |
+| [02-istio-advanced-traffic-management.md](../../../23-实体/04-网络/01-istio-advanced-traffic-management.md) | 高级流量管理 |
+| [03-istio-security-hardening.md](../../../23-实体/04-网络/02-istio-security-hardening.md) | 安全加固 |
 
 ### Prometheus (3 篇)
 | 文档 | 说明 |
 |:-----|:-----|
-| [02-prometheus-promql-advanced.md](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/02-prometheus-promql-advanced.md) | 高级 PromQL |
-| 03-prometheus-ha-deployment.md](../../../23-%E5%AE%9E%E4%BD%93/07-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/03-prometheus-ha-deployment.md) | 高可用部署 |
+| [02-prometheus-promql-advanced.md](../../../23-实体/07-可观测性/01-prometheus-promql-advanced.md) | 高级 PromQL |
+| 03-prometheus-ha-deployment.md](../../../23-实体/07-可观测性/02-prometheus-ha-deployment.md) | 高可用部署 |
 
 ---
 

@@ -90,8 +90,8 @@ prerequisites:
 
 ### 故障排查
 
-- [[19-故障诊断/03-基础设施排障/34-upgrade-migration-troubleshooting.md|34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)]]
-- [[19-故障诊断/04-高级排障/40-large-scale-cluster-operations.md|40 - 大规模集群运维 (Large Scale Cluster Operations)]]
+- [[19-故障诊断/03-基础设施排障/10-upgrade-migration-troubleshooting.md|34 - 升级迁移故障排查 (Upgrade and Migration Troubleshooting)]]
+- [[19-故障诊断/04-高级排障/06-large-scale-cluster-operations.md|40 - 大规模集群运维 (Large Scale Cluster Operations)]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/01-cluster-maintenance-troubleshooting.md|集群运维与升级故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-08-cluster-operations/04-ha-disaster-recovery-troubleshooting.md|集群高可用与灾备故障排查指南]]
 
@@ -115,7 +115,7 @@ prerequisites:
 
 ### 平台运维
 
-- [[10-平台工程/03-治理/14-large-scale-cluster-optimization.md|14 large scale cluster optimization]]
+- [[10-平台工程/03-治理/05-large-scale-cluster-optimization.md|14 large scale cluster optimization]]
 - Karpenter 节点自动扩展实践指南
 
 

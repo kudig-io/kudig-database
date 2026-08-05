@@ -404,7 +404,7 @@ spec:
 
 - [[02-工作负载/04-多语言运行时/02-python-on-kubernetes-production.md|Python 应用 Kubernetes 生产实践]]
 - [[02-工作负载/04-多语言运行时/05-multicluster-workload-distribution.md|多集群工作负载分发]]
-- [[02-工作负载/00-总览/99-kubernetes-deployment-patterns-architecture.md|Kubernetes 部署模式架构]]
+- [[02-工作负载/00-总览/01-kubernetes-deployment-patterns-architecture.md|Kubernetes 部署模式架构]]
 - [[09-可观测性/README|可观测性]]
 - [[12-可靠性/03-容量规划/index|03-容量规划]]
 - [[15-AI基础设施/README|AI基础设施]]

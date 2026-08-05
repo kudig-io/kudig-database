@@ -76,7 +76,7 @@ KusionStack 是一个云原生可编程技术栈，提供以应用为中心的�
 
 ## Related
 
-- [[06-containerd-observability]] — containerd 可观测性
+- [[32-发布/package/2026-07-02_18-53/corpus/core/entities/08-containerd-observability]] — containerd 可观测性
 - [[stacker]] — Stacker
 - [[opentelemetry]] — OpenTelemetry
 - [[kcl]] — KCL (Kusion Configuration Language)

@@ -573,7 +573,7 @@ OIDC 集成检查清单：
 
 ## Related
 
-- [[08-安全/01-身份与访问/07-rbac-matrix-configuration|RBAC 最佳实践]]
+- [[08-安全/01-身份与访问/06-rbac-matrix-configuration|RBAC 最佳实践]]
 - [[08-安全/01-身份与访问/03-service-account-token-management|SA Token 管理]]
 
 ## See Also

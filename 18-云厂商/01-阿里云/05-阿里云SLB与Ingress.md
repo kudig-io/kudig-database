@@ -500,7 +500,7 @@ kubectl run -it --rm test --image=busybox:1.36 --restart=Never -- \
 - [[18-云厂商/01-阿里云/03-Terway-CNI网络.md|Terway-CNI网络]]
 - [[18-云厂商/01-阿里云/04-阿里云存储集成.md|阿里云存储集成]]
 - [[18-云厂商/01-阿里云/06-阿里云专有云远程顾问指南.md|阿里云专有云远程顾问指南]]
-- [[241-ack-slb-nlb-alb|ACK SLB/NLB/ALB]]
+- [[18-云厂商/01-阿里云/公有云-ACK/003-ack-slb-nlb-alb|ACK SLB/NLB/ALB]]
 - [[alicloud-ack-overview|阿里云ACK概述]]
 ## Related
 

@@ -71,7 +71,7 @@ Athenz 是由 Yahoo (Verizon Media) 开发的开源平台，提供基于 X.509 �
 
 ## Related
 
-- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/07-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[kepler]] — Kepler
 - [[kubestellar]] — KubeStellar

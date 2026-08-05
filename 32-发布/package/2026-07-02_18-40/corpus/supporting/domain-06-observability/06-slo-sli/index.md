@@ -20,5 +20,5 @@ last_updated: 2026-07
 - [[domain-06-observability/SLO-SLI/01-slo-engineering-practice.md|Slo Engineering Practice]]
 - [[domain-06-observability/SLO-SLI/02-error-budget-policy.md|Error Budget Policy]]
 - [[domain-06-observability/SLO-SLI/03-sli-implementation-guide.md|Sli Implementation Guide]]
-- [[domain-06-observability/SLO-SLI/18-slo-sli-system.md|Slo Sli System]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-06-observability/03-slo-sli/01-slo-sli-system|Slo Sli System]]
 

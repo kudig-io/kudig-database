@@ -468,7 +468,7 @@ spec:
 
 ## Related
 
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
 - [[06-存储/README|Storage Domain 存储领域知识库]]
 
 ## See Also

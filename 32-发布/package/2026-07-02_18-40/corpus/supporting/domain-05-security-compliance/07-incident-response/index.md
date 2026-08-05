@@ -20,5 +20,5 @@ last_updated: 2026-07
 - [[domain-05-security-compliance/事件响应/01-security-incident-response-playbook.md|Security Incident Response Playbook]]
 - [[domain-05-security-compliance/事件响应/02-container-runtime-threat-response.md|Container Runtime Threat Response]]
 - [[domain-05-security-compliance/事件响应/03-supply-chain-incident-response.md|Supply Chain Incident Response]]
-- [[domain-05-security-compliance/事件响应/20-incident-response-process.md|Incident Response Process]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-05-security-compliance/02-incident-response/01-incident-response-process|Incident Response Process]]
 

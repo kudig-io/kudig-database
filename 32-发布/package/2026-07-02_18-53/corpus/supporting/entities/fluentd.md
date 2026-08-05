@@ -67,7 +67,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[06-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/entities/08-containerd-observability]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[stacker]] — Stacker
 - [[opentelemetry]] — OpenTelemetry
 - [[kusionstack]] — KusionStack

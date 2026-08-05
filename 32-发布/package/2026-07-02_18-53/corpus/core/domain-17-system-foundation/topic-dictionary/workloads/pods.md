@@ -272,13 +272,13 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 ```
 ## 交叉引用
 
-- [Pod 生命周期事件深度解析](../../domain-02-workloads-applications/11-pod-lifecycle-events.md)
-- [高级 Pod 运维模式](../../domain-02-workloads-applications/12-advanced-pod-patterns.md)
+- [Pod 生命周期事件深度解析](32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/03-pod-lifecycle-events.md)
+- [高级 Pod 运维模式](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/06-advanced-pod-patterns.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
-- [Pod 综合故障排查手册](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [Pod 综合故障排查手册](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting.md)
 - [Pod 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/pod-fta.md)
-- [Pod Pending 诊断](../../domain-10-troubleshooting-diagnostics/05-pod-pending-diagnosis.md)
-- [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
+- [Pod Pending 诊断](01-pod-pending-diagnosis.md)
+- [OOM 内存诊断](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/

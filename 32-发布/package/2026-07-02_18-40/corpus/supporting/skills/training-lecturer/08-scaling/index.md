@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/08-scaling/08-hpa-basics.md|Hpa Basics]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/skills/training-lecturer/07-scaling/01-hpa-basics|Hpa Basics]]
 

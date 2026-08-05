@@ -91,7 +91,7 @@ trigger_keywords:
 - certificate expired
 related_domains:
 - domain-01-cluster-fundamentals
-- domain-[[domain-07-platform-engineering/代码分析/cluster-delete/12-troubleshooting.md|12-troubleshooting]]
+- domain-[[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/topic-functions/cluster-delete/04-troubleshooting|12-troubleshooting]]
 - domain-03-networking-traffic
 related_topics:
 - node-create/03-condition

@@ -107,7 +107,7 @@ func CreateServerChain(config CompletedConfig) (*aggregatorapiserver.APIAggregat
         notFoundHandler → 404
 ```
 
-**生产含义**：`kubectl get --raw /apis/metrics.k8s.io/v1beta1` 超时，问题大概率不在 apiserver 本身，而在 Aggregator 代理的后端（metrics-server）——三层结构决定了排障时要先分清请求落在哪一层。参见 [[01-集群基础/03-控制平面/28-api-extension-deep-dive.md|API 扩展机制深度剖析]]。
+**生产含义**：`kubectl get --raw /apis/metrics.k8s.io/v1beta1` 超时，问题大概率不在 apiserver 本身，而在 Aggregator 代理的后端（metrics-server）——三层结构决定了排障时要先分清请求落在哪一层。参见 [[01-集群基础/03-控制平面/29-api-extension-deep-dive.md|API 扩展机制深度剖析]]。
 
 ---
 
@@ -192,7 +192,7 @@ for {
 }
 ```
 
-这就是 HTTP 409 Conflict / `the object has been modified` 的源码出处；resourceVersion 即 etcd ModRevision 的透出。并发模型详见 [[01-集群基础/02-设计原则/06-resource-version-control.md|资源版本与并发控制]]。
+这就是 HTTP 409 Conflict / `the object has been modified` 的源码出处；resourceVersion 即 etcd ModRevision 的透出。并发模型详见 [[01-集群基础/02-设计原则/07-resource-version-control.md|资源版本与并发控制]]。
 
 ### 3.3 Watch Cache — apiserver 内置的读缓存
 
@@ -256,5 +256,5 @@ HTTP POST /api/v1/namespaces/default/pods
 - [[10-平台工程/06-代码分析/kubernetes-core/07-component-interaction-dataflow.md|07 - 组件交互关系与数据流向]]
 - [[01-集群基础/03-控制平面/12-apiserver-deep-dive.md|控制平面：APIServer Deep Dive]]（运维视角）
 - [[01-集群基础/03-控制平面/17-apiserver-tuning.md|APIServer 调优]]
-- [[01-集群基础/03-控制平面/27-authz-authn-deep-dive.md|认证授权深度剖析]]
+- [[01-集群基础/03-控制平面/28-authz-authn-deep-dive.md|认证授权深度剖析]]
 - [[08-安全/01-身份与访问/index.md|安全域：身份与访问]]

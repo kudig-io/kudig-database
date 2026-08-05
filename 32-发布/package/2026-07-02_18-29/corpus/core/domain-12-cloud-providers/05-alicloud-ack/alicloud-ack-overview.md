@@ -631,10 +631,10 @@ echo "Logs collected to: $LOG_DIR"
 
 ## See Also
 
-- [[domain-12-cloud-providers/阿里云/ack/244-ack-ros-iac.md|244-ack-ros-iac]]
-- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/05-alicloud-ack/006-ack-ros-iac|244-ack-ros-iac]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/05-alicloud-ack/007-ack-ebs-storage|245-ack-ebs-storage]]
 - [[domain-12-cloud-providers/阿里云/ack/service-ack-practical-guide.md|service-ack-practical-guide]]
-- [[domain-12-cloud-providers/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/05-alicloud-ack/002-ack-ecs-compute|240-ack-ecs-compute]]
 
 
 <!-- risk-assessed -->

@@ -595,9 +595,9 @@ API Server 暴露了 Prometheus 指标（`:443/metrics`），关键指标包括 
 
 ## 延伸阅读
 
-- [K8s 架构与组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [etcd 深入分析](../../domain-01-cluster-fundamentals/11-etcd-deep-dive.md)
-- [API Server 深入分析](../../domain-01-cluster-fundamentals/12-apiserver-deep-dive.md)
+- [K8s 架构与组件深入](32-发布/package/2026-07-02_18-40/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive.md)
+- [etcd 深入分析](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/04-etcd-deep-dive.md)
+- [API Server 深入分析](32-发布/package/2026-07-02_18-40/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/05-apiserver-deep-dive.md)
 - [ACK 集群管理](../../domain-12-cloud-providers/04-alicloud-ack/210-ack-cluster-management.md)
 - [组件故障排查总览](../../domain-10-troubleshooting-diagnostics/01-troubleshooting-overview.md)
 - [CoreDNS 排障指南](../../domain-10-troubleshooting-diagnostics/11-coredns-troubleshooting.md)

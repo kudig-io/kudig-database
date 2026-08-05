@@ -95,6 +95,6 @@ YAML
 
 ## 相关阅读
 
-- [[15-AI基础设施/05-K8s-AI基础设施/08-vector-database-k8s-milvus-qdrant|向量数据库上 K8s 生产实践（Milvus/Qdrant）]]
+- [[15-AI基础设施/05-K8s-AI基础设施/09-vector-database-k8s-milvus-qdrant|向量数据库上 K8s 生产实践（Milvus/Qdrant）]]
 - [[07-数据库中间件/README|数据库中间件域总览]]
-- [[15-AI基础设施/05-K8s-AI基础设施/11-llm-gateway-routing-cost|LLM Gateway 与推理路由]]
+- [[15-AI基础设施/05-K8s-AI基础设施/12-llm-gateway-routing-cost|LLM Gateway 与推理路由]]

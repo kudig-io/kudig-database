@@ -230,7 +230,7 @@ kubectl logs -n paralus -l app=paralus-audit --tail=50 | grep "denied"
 ## Related
 
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — [[istio|Istio]]io 安全加固|Istio 安全加固]]
+- [[02-istio-security-hardening]] — [[istio|Istio]]io 安全加固|Istio 安全加固]]
 - [[copa]] — Copa (Copacetic)
 - [[nats]] — NATS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

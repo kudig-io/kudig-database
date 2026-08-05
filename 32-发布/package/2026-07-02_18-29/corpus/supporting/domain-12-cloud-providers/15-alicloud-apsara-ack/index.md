@@ -17,8 +17,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-12-cloud-providers/阿里云/apsara/250-apsara-stack-ess-scaling.md|Apsara Stack Ess Scaling]]
-- [[domain-12-cloud-providers/阿里云/apsara/251-apsara-stack-sls-logging.md|Apsara Stack Sls Logging]]
-- [[domain-12-cloud-providers/阿里云/apsara/252-apsara-stack-pop-operations.md|Apsara Stack Pop Operations]]
-- [[domain-12-cloud-providers/阿里云/apsara/alicloud-apsara-ack-overview.md|Alicloud Apsara Ack Overview]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/08-alicloud-apsara-ack/001-apsara-stack-ess-scaling|Apsara Stack Ess Scaling]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/08-alicloud-apsara-ack/002-apsara-stack-sls-logging|Apsara Stack Sls Logging]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/08-alicloud-apsara-ack/003-apsara-stack-pop-operations|Apsara Stack Pop Operations]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/08-alicloud-apsara-ack/alicloud-apsara-ack-overview|Alicloud Apsara Ack Overview]]
 

@@ -221,9 +221,9 @@ kubectl describe node <node-name> | grep -A 5 "eviction"
 ## 交叉引用
 
 - [Pod 生命周期](./pod-lifecycle.md)
-- [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
+- [OOM 内存诊断](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis.md)
 - [高级 Pod 配置](./advanced-pod-configuration.md)
-- [工作负载监控与告警](../../domain-02-workloads-applications/06-workload-monitoring-alerting.md)
+- [工作负载监控与告警](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/02-workload-monitoring-alerting.md)
 - [VPA 垂直自动扩缩](./vertical-pod-autoscaling.md)
 
 ## 参考链接

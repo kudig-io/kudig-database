@@ -820,8 +820,8 @@ resource "alicloud_cs_kubernetes_node_pool" "app_pool" {
 ## 延伸阅读
 
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
-- [ECS 计算资源](../../云厂商/04-alicloud-ack/240-ack-ecs-compute.md)
-- [集群自动伸缩排障](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/28-cluster-autoscaler-troubleshooting.md)
+- [ECS 计算资源](001-ack-ecs-compute.md)
+- [集群自动伸缩排障](../../../../../../19-故障诊断/03-基础设施排障/04-cluster-autoscaler-troubleshooting.md)
 - [K8s 架构与组件](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/02-core-components-deep-dive.md)
 
 

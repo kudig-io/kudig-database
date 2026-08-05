@@ -2266,7 +2266,7 @@ kubectl exec -it frontend-pod -n production -- tcpdump -i any port 8080
 - 23-pod-security-standards
 - 24-admission-webhook-configuration
 
-- [[domain-07-platform-engineering/代码分析/cluster-create/19-cni-networking.md|19-cni-networking]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-02-workloads-applications/topic-functions/cluster-create/16-cni-networking|19-cni-networking]]
 
 ## Related
 

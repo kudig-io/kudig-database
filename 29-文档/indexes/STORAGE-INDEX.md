@@ -56,14 +56,14 @@ prerequisites:
 
 | 我要做什么 | 推荐阅读 |
 |-----------|---------|
-| 从零学习 K8s 存储 | [06-存储基础概念](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/06-storage-fundamental-concepts.md) → [端到端三步示例](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/06-storage-fundamental-concepts.md) |
-| 理解 PV/PVC/SC 关系 | [三者关系全景图](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/06-storage-fundamental-concepts.md) |
-| PVC 出问题了 | [PVC 状态速查](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/03-pvc-patterns-practices.md) → [深度排查](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/09-pv-pvc-troubleshooting.md) |
-| 配置 StorageClass | [动态供给详解](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md) → [YAML 参考](../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/17-storageclass-volumesnapshot.md) |
+| 从零学习 K8s 存储 | [06-存储基础概念](../../06-存储/01-K8s存储/07-storage-fundamental-concepts.md) → [端到端三步示例](../../06-存储/01-K8s存储/07-storage-fundamental-concepts.md) |
+| 理解 PV/PVC/SC 关系 | [三者关系全景图](../../06-存储/01-K8s存储/07-storage-fundamental-concepts.md) |
+| PVC 出问题了 | [PVC 状态速查](../../06-存储/01-K8s存储/04-pvc-patterns-practices.md) → [深度排查](../../06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md) |
+| 配置 StorageClass | [动态供给详解](../../06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md) → [YAML 参考](../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/17-storageclass-volumesnapshot.md) |
 | CSI 驱动开发/调试 | [CSI 深度解析](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/22-container-storage-deep-dive.md) → [CSI 排障](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-04-storage/02-csi-troubleshooting.md) |
-| 性能调优 | [性能调优](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/08-storage-performance-tuning.md) → [生产优化](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/07-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/21-storage-performance-optimization.md) |
-| 备份容灾 | [备份方案](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/10-storage-backup-disaster-recovery.md) → [灾备策略](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/15-storage-disaster-recovery.md) |
-| 存储迁移 | [迁移指南](../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/07-%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88/04-storage-data-migration.md) → [CSI 迁移](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/16-csi-migration-in-tree-to-csi.md) |
+| 性能调优 | [性能调优](../../06-存储/01-K8s存储/09-storage-performance-tuning.md) → [生产优化](../../01-集群基础/07-性能调优/05-storage-performance-optimization.md) |
+| 备份容灾 | [备份方案](../../06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md) → [灾备策略](../../06-存储/01-K8s存储/16-storage-disaster-recovery.md) |
+| 存储迁移 | [迁移指南](../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/07-%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88/04-storage-data-migration.md) → [CSI 迁移](../../06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md) |
 | 快速查阅术语 | [字典条目](#字典条目-topic-dictionarystorage-17-篇) |
 | 培训教学 | [全栈培训](生产运维/topic-presentations/kubernetes-storage-presentation.md) → [4 周课程](#培训材料-topic-learn-4-篇) |
 
@@ -77,47 +77,47 @@ prerequisites:
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 06 | [存储基础概念详解](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/06-storage-fundamental-concepts.md) | 978 | **入门起点**。PV/PVC/SC 三者关系全景图、端到端三步示例、访问模式、回收策略、诊断脚本、实操练习 |
+| 06 | [存储基础概念详解](../../06-存储/01-K8s存储/07-storage-fundamental-concepts.md) | 978 | **入门起点**。PV/PVC/SC 三者关系全景图、端到端三步示例、访问模式、回收策略、诊断脚本、实操练习 |
 | 01 | [存储架构概览与核心组件](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md) | 1,638 | 全面架构概览：PV/PVC/StorageClass、动态供给、CSI 生态、性能优化、成本优化、监控告警 |
 | 02 | [PV 核心概念与企业级实践](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/02-pv-architecture-fundamentals.md) | 1,080 | PV 分层架构、规格字段、生命周期状态机、绑定算法与保护机制、Local PV、企业模板 |
-| 03 | [PVC 使用模式与最佳实践](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/03-pvc-patterns-practices.md) | 1,091 | PVC 状态详解、volumeMode 选择、跨命名空间限制、动态/静态供给、StatefulSet VCT、扩容（在线/离线）、快照克隆、ResourceQuota |
+| 03 | [PVC 使用模式与最佳实践](../../06-存储/01-K8s存储/04-pvc-patterns-practices.md) | 1,091 | PVC 状态详解、volumeMode 选择、跨命名空间限制、动态/静态供给、StatefulSet VCT、扩容（在线/离线）、快照克隆、ResourceQuota |
 
 ### 配置与驱动
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 04 | [StorageClass 动态供给](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md) | 1,608 | 动态供给时序、SC 参数详解、变更影响、多云配置（8 家云厂商）、多租户隔离、企业四级模板、CSI 对比矩阵 |
-| 05 | [CSI 驱动集成与运维](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/05-csi-drivers-integration.md) | 1,322 | CSI 架构、组件角色、RPC 规格、阿里云 CSI 部署、VolumeSnapshot、性能调优、安全加固 |
-| 16 | [CSI 迁移：In-Tree 到 CSI](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/16-csi-migration-in-tree-to-csi.md) | 545 | 迁移背景与必要性、翻译机制原理、各云厂商迁移状态、5 阶段操作流程、评估/验证脚本、回滚方案 |
+| 04 | [StorageClass 动态供给](../../06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md) | 1,608 | 动态供给时序、SC 参数详解、变更影响、多云配置（8 家云厂商）、多租户隔离、企业四级模板、CSI 对比矩阵 |
+| 05 | [CSI 驱动集成与运维](../../06-存储/01-K8s存储/06-csi-drivers-integration.md) | 1,322 | CSI 架构、组件角色、RPC 规格、阿里云 CSI 部署、VolumeSnapshot、性能调优、安全加固 |
+| 16 | [CSI 迁移：In-Tree 到 CSI](../../06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md) | 545 | 迁移背景与必要性、翻译机制原理、各云厂商迁移状态、5 阶段操作流程、评估/验证脚本、回滚方案 |
 
 ### 运维与性能
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 07 | [存储日常运维操作手册](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/07-storage-daily-operations.md) | 607 | 资源查询、PVC 管理、卷扩容、备份恢复、CSI 驱动运维、日常巡检脚本、应急响应 |
-| 08 | [存储性能调优](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/08-storage-performance-tuning.md) | 803 | 存储类型性能对比、StorageClass 性能配置、本地存储优化、CSI 调优、数据库优化、fio 基准测试 |
-| 12 | [存储监控与告警](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/12-storage-monitoring-alerting.md) | 856 | 监控指标体系、KPI 定义、Prometheus 配置、自定义 Exporter、容量规划（sklearn）、Grafana 仪表板 |
+| 07 | [存储日常运维操作手册](../../06-存储/01-K8s存储/08-storage-daily-operations.md) | 607 | 资源查询、PVC 管理、卷扩容、备份恢复、CSI 驱动运维、日常巡检脚本、应急响应 |
+| 08 | [存储性能调优](../../06-存储/01-K8s存储/09-storage-performance-tuning.md) | 803 | 存储类型性能对比、StorageClass 性能配置、本地存储优化、CSI 调优、数据库优化、fio 基准测试 |
+| 12 | [存储监控与告警](../../06-存储/01-K8s存储/13-storage-monitoring-alerting.md) | 856 | 监控指标体系、KPI 定义、Prometheus 配置、自定义 Exporter、容量规划（sklearn）、Grafana 仪表板 |
 
 ### 问题排查
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 09 | [PV/PVC 问题排查](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/09-pv-pvc-troubleshooting.md) | 1,736 | PV/PVC 生命周期诊断、PVC Pending 决策树、多云 StorageClass 示例、VolumeSnapshot 排障、Prometheus 规则 |
+| 09 | [PV/PVC 问题排查](../../06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md) | 1,736 | PV/PVC 生命周期诊断、PVC Pending 决策树、多云 StorageClass 示例、VolumeSnapshot 排障、Prometheus 规则 |
 
 ### 安全与合规
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 11 | [存储高级特性](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/11-storage-advanced-features.md) | 914 | 快照高级配置、PVC 克隆、增量快照、在线扩容、存储 QoS、加密（静态+传输）、分层缓存 |
-| 13 | [存储安全与合规](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/13-storage-security-compliance.md) | 1,062 | 静态加密（StorageClass+KMS）、RBAC、PodSecurityPolicy、存储审计、密钥轮换、合规检查 |
+| 11 | [存储高级特性](../../06-存储/01-K8s存储/12-storage-advanced-features.md) | 914 | 快照高级配置、PVC 克隆、增量快照、在线扩容、存储 QoS、加密（静态+传输）、分层缓存 |
+| 13 | [存储安全与合规](../../06-存储/01-K8s存储/14-storage-security-compliance.md) | 1,062 | 静态加密（StorageClass+KMS）、RBAC、PodSecurityPolicy、存储审计、密钥轮换、合规检查 |
 
 ### 容灾与云原生
 
 | 编号 | 文档 | 行数 | 内容概要 |
 |:---:|------|-----:|---------|
-| 10 | [存储备份与灾难恢复](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/10-storage-backup-disaster-recovery.md) | 621 | 多层备份策略、Velero 企业方案、VolumeSnapshot 自动化、MySQL/PostgreSQL 备份、跨区域 DR |
-| 14 | [云原生存储方案](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/14-cloud-native-storage.md) | 758 | 多云架构、混合云策略、跨云数据同步、成本分析、云厂商对比、成熟度模型 |
-| 15 | [存储灾备与迁移](../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/15-storage-disaster-recovery.md) | 599 | 灾备分层架构、自动/手动问题转移、存储迁移、跨集群同步、灾备演练、RTO/RPO SLA 管理 |
+| 10 | [存储备份与灾难恢复](../../06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md) | 621 | 多层备份策略、Velero 企业方案、VolumeSnapshot 自动化、MySQL/PostgreSQL 备份、跨区域 DR |
+| 14 | [云原生存储方案](../../06-存储/01-K8s存储/15-cloud-native-storage.md) | 758 | 多云架构、混合云策略、跨云数据同步、成本分析、云厂商对比、成熟度模型 |
+| 15 | [存储灾备与迁移](../../06-存储/01-K8s存储/16-storage-disaster-recovery.md) | 599 | 灾备分层架构、自动/手动问题转移、存储迁移、跨集群同步、灾备演练、RTO/RPO SLA 管理 |
 
 ### 索引与管理
 
@@ -166,7 +166,7 @@ prerequisites:
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
 | [CSI 存储驱动排障](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/01-%E6%A0%B8%E5%BF%83%E6%8E%92%E9%9A%9C/04-storage-csi-troubleshooting.md) | 513 | CSI 驱动供给/挂载/卸载/快照/扩容问题、紧急恢复脚本、Prometheus 告警 |
-| [PVC 与存储全面排障](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/02-%E8%B5%84%E6%BA%90%E6%8E%92%E9%9A%9C/14-pvc-storage-troubleshooting.md) | 827 | PVC 状态流程图、Pending 诊断、Multi-Attach 解决、扩容排障、多云命令参考 |
+| [PVC 与存储全面排障](../../19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting.md) | 827 | PVC 状态流程图、Pending 诊断、Multi-Attach 解决、扩容排障、多云命令参考 |
 
 ### 结构化排障系列 (故障诊断/高级排障/structural-04-storage)
 
@@ -182,7 +182,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [PVC/PV/CSI 存储问题诊断技能](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/07-pvc-storage-failure.md) | 1,885 | 结构化诊断技能、症状模式匹配、2 分钟快速分诊、3 阶段诊断流程、13 类根因（含概率）、分级修复操作 |
+| [PVC/PV/CSI 存储问题诊断技能](../../19-故障诊断/08-技能体系/08-pvc-storage-failure.md) | 1,885 | 结构化诊断技能、症状模式匹配、2 分钟快速分诊、3 阶段诊断流程、13 类根因（含概率）、分级修复操作 |
 
 ---
 
@@ -190,7 +190,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [存储性能优化](../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/07-%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98/21-storage-performance-optimization.md) | 1,208 | 本地存储优化（NVMe/Local PV）、云 CSI 调优、Python 性能分析器、智能分层、Prometheus+Grafana 配置 |
+| [存储性能优化](../../01-集群基础/07-性能调优/05-storage-performance-optimization.md) | 1,208 | 本地存储优化（NVMe/Local PV）、云 CSI 调优、Python 性能分析器、智能分层、Prometheus+Grafana 配置 |
 
 ---
 
@@ -224,7 +224,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [边缘存储与网络](../../16-%E4%B8%93%E9%A1%B9%E6%8A%80%E6%9C%AF/01-%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97/08-edge-storage-network.md) | 2,380 | 边缘存储架构、RocksDB/SQLite 本地引擎、Longhorn/MinIO 边缘部署、弱网优化（QUIC）、离线数据同步（CRDT） |
+| [边缘存储与网络](../../16-专项技术/01-边缘计算/09-edge-storage-network.md) | 2,380 | 边缘存储架构、RocksDB/SQLite 本地引擎、Longhorn/MinIO 边缘部署、弱网优化（QUIC）、离线数据同步（CRDT） |
 
 ---
 
@@ -233,7 +233,7 @@ prerequisites:
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
 | [Docker 存储与数据卷](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/05-docker-storage-volumes.md) | 601 | Docker overlay2 驱动、named volumes、bind mounts、tmpfs、NFS 卷驱动、备份恢复自动化 |
-| [Linux 存储管理](../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/01-Linux/05-linux-storage-management.md) | 651 | LVM（PV/VG/LV）、软件 RAID（mdadm）、I/O 调度器、fio 测试、磁盘配额、文件系统调优（ext4/XFS）、NFS/iSCSI |
+| [Linux 存储管理](../../17-系统基础/01-Linux/06-linux-storage-management.md) | 651 | LVM（PV/VG/LV）、软件 RAID（mdadm）、I/O 调度器、fio 测试、磁盘配额、文件系统调优（ext4/XFS）、NFS/iSCSI |
 
 ---
 
@@ -241,7 +241,7 @@ prerequisites:
 
 | 文档 | 行数 | 内容概要 |
 |------|-----:|---------|
-| [ACK EBS 云盘存储](云厂商/04-alicloud-ack/245-ack-ebs-storage.md) | 119 | 阿里云 ESSD 性能等级（PL0-PL3）、ACK CSI StorageClass、磁盘加密、快照管理、成本模型 |
+| [ACK EBS 云盘存储](006-ack-ebs-storage.md) | 119 | 阿里云 ESSD 性能等级（PL0-PL3）、ACK CSI StorageClass、磁盘加密、快照管理、成本模型 |
 | [存储与数据迁移](../../11-%E5%8F%91%E5%B8%83%E5%8F%98%E6%9B%B4/07-%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88/04-storage-data-migration.md) | 551 | 自建 K8s → ACK 迁移、StorageClass 映射、NFS→NAS/Ceph→ESSD/Local PV→云盘迁移、Velero 工作流 |
 
 ---

@@ -74,7 +74,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[02-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
+- [[01-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
 - [[vscode-kubernetes-tools]] — VS Code Kubernetes Tools
 - [[litmus]] — LitmusChaos
 - [[pixie]] — Pixie

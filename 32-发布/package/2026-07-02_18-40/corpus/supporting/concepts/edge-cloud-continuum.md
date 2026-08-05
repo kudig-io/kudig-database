@@ -94,8 +94,8 @@ relationships:
 - domain-03-[[domain-17-system-foundation/速查卡/networking.md|networking]]-traffic/07-edge-networking/01-edge-network-patterns
 ## Related
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/37-multi-cluster-management-troubleshooting.md|多集群管理故障排查]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/40-large-scale-cluster-operations.md|大规模集群运维]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/02-multi-cluster-management-troubleshooting|多集群管理故障排查]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/02-large-scale-cluster-operations|大规模集群运维]]
 
 
 <!-- risk-assessed -->

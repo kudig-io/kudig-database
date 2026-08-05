@@ -410,10 +410,10 @@ spec:
 
 ## See Also
 
-- [[domain-12-cloud-providers/阿里云/ack/245-ack-ebs-storage.md|245-ack-ebs-storage]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/05-alicloud-ack/007-ack-ebs-storage|245-ack-ebs-storage]]
 - [[domain-12-cloud-providers/阿里云/ack/alicloud-ack-overview.md|alicloud-ack-overview]]
-- [[domain-12-cloud-providers/阿里云/ack/240-ack-ecs-compute.md|240-ack-ecs-compute]]
-- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/05-alicloud-ack/002-ack-ecs-compute|240-ack-ecs-compute]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-12-cloud-providers/05-alicloud-ack/003-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]
 
 
 <!-- risk-assessed -->

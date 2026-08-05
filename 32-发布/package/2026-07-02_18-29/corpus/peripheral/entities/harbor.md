@@ -82,7 +82,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[08-containerd-multi-tenant]] — containerd 多租户
+- [[32-发布/package/2026-07-02_18-29/corpus/core/entities/09-containerd-multi-tenant]] — containerd 多租户
 - [[docker]] — Docker
 - [[helm]] — Helm
 - [[entities/trivy.md|trivy]] — Trivy

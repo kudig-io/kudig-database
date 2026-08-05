@@ -90,7 +90,7 @@ behavior:
 4. **maxReplicas 已达上限**：检查 HPA 的 `maxReplicas` 是否已等于当前副本数，或 Deployment 本身受其他配额（ResourceQuota）限制无法继续创建 Pod。同时检查集群整体节点资源是否充足。
 5. **指标类型配置错误**：若使用 Custom Metrics 或 External Metrics，确认 Prometheus Adapter 或对应指标暴露器正常运行，且 HPA 中 `metrics` 字段的 API 版本与指标名称拼写正确。
 
-更多排查细节可参考 [[domain-10-troubleshooting-diagnostics/资源排障/17-hpa-vpa-troubleshooting.md|hpa-vpa-troubleshooting]] 与技能页面 [[domain-10-troubleshooting-diagnostics/资源排障/17-hpa-vpa-troubleshooting.md|k8s-hpa-vpa]]。
+更多排查细节可参考 [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-hpa-vpa-troubleshooting|hpa-vpa-troubleshooting]] 与技能页面 [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-hpa-vpa-troubleshooting|k8s-hpa-vpa]]。
 
 ## 相关概念
 

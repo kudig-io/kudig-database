@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: kube-system, multi-app
 ticket_type: 节点压力/磁盘资源告警
 skill_ref:
-- '[[01-集群基础/03-控制平面/33-kubelet-eviction-thresholds.md|kubelet
+- '[[01-集群基础/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet
   驱逐阈值]]'
 - '[[02-工作负载/01-核心工作负载/18-node-management-operations.md|节点管理运维]]'
 fta_ref:
@@ -271,7 +271,7 @@ kubectl get pod -n rec-service -o wide | grep -v Running
 > **当前状态：** 节点 `DiskPressure` 条件已消失，磁盘使用率降至 65% 以下，业务 Pod 全部 Running，无新驱逐事件。
 >
 > **后续建议：**
-> - 参考 [[01-集群基础/03-控制平面/33-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]] 为节点池配置合理的磁盘告警；
+> - 参考 [[01-集群基础/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]] 为节点池配置合理的磁盘告警；
 > - 为推荐服务容器配置 日志轮转 Sidecar 或限制 stdout 日志量，关闭不必要的 debug 日志；
 > - 在节点初始化脚本中配置 `logrotate` 与 `journalctl --vacuum-size`，并定期清理镜像；
 > - 通过 节点维护手册 将磁盘清理纳入月度巡检；

@@ -391,11 +391,11 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 - [Scheduler 深入](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/20-kube-scheduler-deep-dive.md)
 - [Deployment 生产模式](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/02-deployment-production-patterns.md)
 - [StatefulSet 高级操作](../../../../../../02-%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/01-%E6%A0%B8%E5%BF%83%E5%B7%A5%E4%BD%9C%E8%B4%9F%E8%BD%BD/03-statefulset-advanced-operations.md)
-- [网络架构总览](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/01-network-architecture-overview.md)
-- [Service 概念与类型](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/06-service-concepts-types.md)
-- [Ingress 基础](../../../../../../05-%E7%BD%91%E7%BB%9C/01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/19-ingress-fundamentals.md)
+- [网络架构总览](../../../../../../05-网络/01-K8s网络核心/02-network-architecture-overview.md)
+- [Service 概念与类型](../../../../../../05-网络/01-K8s网络核心/07-service-concepts-types.md)
+- [Ingress 基础](../../../../../../05-网络/01-K8s网络核心/20-ingress-fundamentals.md)
 - [存储架构总览](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/01-storage-architecture-overview.md)
-- [StorageClass 动态供给](../../../../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/04-storageclass-dynamic-provisioning.md)
+- [StorageClass 动态供给](../../../../../../06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md)
 
 ## Related
 
@@ -411,7 +411,7 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 - 发布变更 MOC — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[26-技能/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[10-平台工程/02-运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

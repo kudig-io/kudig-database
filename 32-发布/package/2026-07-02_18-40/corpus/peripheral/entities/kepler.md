@@ -88,7 +88,7 @@ Kepler (Kubernetes-based Efficient Power Level Exporter) 使用 eBPF 探测器�
 ## Related
 
 - [[openebs]] — OpenEBS
-- [[05-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/07-containerd-windows-support]] — [[containerd|containerd]]rd Windows 支持|containerd Windows 支持]]
 - [[cortex]] — Cortex
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

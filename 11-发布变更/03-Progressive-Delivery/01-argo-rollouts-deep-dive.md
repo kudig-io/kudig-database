@@ -412,5 +412,5 @@ kubectl logs -n argo-rollouts -l app.kubernetes.io/name=argo-rollouts
 
 - [[11-发布变更/03-Progressive-Delivery/index.md|Progressive Delivery 索引]]
 - [[11-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md|金丝雀分析模式]]
-- [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 基础]]
+- [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 基础]]
 - [[09-可观测性/02-指标/index.md|指标监控]]

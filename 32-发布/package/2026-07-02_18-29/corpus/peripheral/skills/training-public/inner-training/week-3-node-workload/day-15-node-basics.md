@@ -608,10 +608,10 @@ echo "========================================"
 
 ## 延伸阅读
 
-- [K8s 核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
+- [K8s 核心组件深入](32-发布/package/2026-07-02_18-29/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive.md)
 - [Node NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
-- [Pod 综合排障](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
-- [OOM 内存诊断](../../domain-10-troubleshooting-diagnostics/07-oom-memory-diagnosis.md)
+- [Pod 综合排障](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting.md)
+- [OOM 内存诊断](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis.md)
 
 ```
 

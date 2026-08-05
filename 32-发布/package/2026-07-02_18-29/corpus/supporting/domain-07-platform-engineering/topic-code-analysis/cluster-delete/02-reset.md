@@ -568,8 +568,8 @@ systemctl daemon-reload
 
 - [`newCmdReset`](01-overview.md) — reset 命令入口
 - [`runCleanupNode`](04-cleanup.md) — cleanup-node 阶段详细实现
-- [`runRemoveEtcd`](05-etcd-cleanup.md) — etcd 成员移除详细实现
-- [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — 移除本地 stacked etcd
+- [`runRemoveEtcd`](03-etcd-cleanup.md) — etcd 成员移除详细实现
+- [`RemoveStackedEtcdMember`](03-etcd-cleanup.md) — 移除本地 stacked etcd
 - [`CleanDir`](04-cleanup.md) — 目录清理工具函数
 - [`InteractivelyConfirmAction`](01-overview.md) — 交互式确认
 

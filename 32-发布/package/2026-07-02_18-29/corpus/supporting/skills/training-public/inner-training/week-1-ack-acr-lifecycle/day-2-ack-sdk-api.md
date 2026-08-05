@@ -568,7 +568,7 @@ Day 3 将学习 ACK/ACR 控制台操作，熟悉界面功能入口和核心操�
 ## 延伸阅读
 
 - [ACK 服务总览](../../domain-12-cloud-providers/04-alicloud-ack/alicloud-ack-overview.md)
-- [ACK RAM 授权](../../domain-12-cloud-providers/04-alicloud-ack/243-ack-ram-authorization.md)
+- [ACK RAM 授权](32-发布/package/2026-07-02_18-29/corpus/supporting/entities/004-ack-ram-authorization.md)
 - [ACK OpenAPI 文档](https://help.aliyun.com/document_detail/260907.html)
 
 

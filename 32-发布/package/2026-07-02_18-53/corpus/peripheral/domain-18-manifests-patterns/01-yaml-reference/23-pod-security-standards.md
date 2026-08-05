@@ -2593,9 +2593,9 @@ spec:
 - 24-admission-webhook-configuration
 - 25-validatingadmissionpolicy
 
-- [[domain-07-platform-engineering/代码分析/node-create/13-security.md|13-security]]
-- [[domain-07-platform-engineering/代码分析/cluster-delete/10-security-delete.md|10-security-delete]]
-- [[domain-07-platform-engineering/代码分析/cluster-cert/17-pki-security-best-practices.md|17-pki-security-best-practices]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/node-create/04-security|13-security]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/topic-functions/cluster-delete/02-security-delete|10-security-delete]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/cluster-cert/06-pki-security-best-practices|17-pki-security-best-practices]]
 
 ## Related
 

@@ -85,7 +85,7 @@ Capsule 是一个 Kubernetes 多租户框架，允许在单个集群中实现多
 
 - [[buildpacks]] — Cloud Native Buildpacks
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQL 高级查询
+- [[01-prometheus-promql-advanced]] — PromQL 高级查询
 - [[entities/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

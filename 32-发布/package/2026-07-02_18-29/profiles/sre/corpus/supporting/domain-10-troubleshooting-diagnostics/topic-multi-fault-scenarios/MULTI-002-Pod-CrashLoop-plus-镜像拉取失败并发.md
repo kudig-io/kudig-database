@@ -27,7 +27,7 @@ last_updated: 2026-05-23
 
 ## 关联Skill
 - [[02-pod-crashloop-oomkilled]]
-- [[10-image-pull-failure]]
+- [[11-image-pull-failure]]
 
 ## 场景描述
 新部署的服务所有Pod处于ImagePullBackOff，部分已存在的Pod反复CrashLoopBackOff。

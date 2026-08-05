@@ -40,6 +40,6 @@ last_updated: '2026-07-23'
 
 ## 文档
 
-- [[18-云厂商/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[18-云厂商/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 
 <!-- risk-assessed -->

@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/01-introduction/01-what-is-kubernetes.md|What Is Kubernetes]]
+- [[02-what-is-kubernetes|What Is Kubernetes]]
 

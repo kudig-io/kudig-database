@@ -354,7 +354,7 @@ s  - s
 
 ## 参见
 
-- [[skills/training-public/fundamentals/01-what-is-kubernetes.md|公开版]]
+- [[02-what-is-kubernetes|公开版]]
 
 
 <!-- risk-assessed -->

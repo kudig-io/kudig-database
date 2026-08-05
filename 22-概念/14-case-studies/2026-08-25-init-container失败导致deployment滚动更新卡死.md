@@ -19,7 +19,7 @@ last_updated: 2026-05-23
 # Init Container失败导致Deployment滚动更新卡死
 
 **日期**: 2026-08-25  
-**关联Skill**: [[08-deployment-rollout-failure]]  
+**关联Skill**: [[09-deployment-rollout-failure]]  
 **严重级别**: P1
 
 ## 场景描述

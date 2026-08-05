@@ -574,10 +574,10 @@ spec:
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 - [ITIL 变更管理](https://www.axelos.com/best-practice-solutions/itil)
 - [PagerDuty 事故响应指南](https://response.pagerduty.com/)
-- [文件: `../../domain-11-production-operations/01-production-architecture-design-principles.md`](../../domain-11-production-operations/01-production-architecture-design-principles.md)
-- [文件: `../../domain-11-production-operations/22-change-management-process.md`](../../domain-11-production-operations/22-change-management-process.md)
-- [文件: `../../domain-11-production-operations/23-incident-response-handling.md`](../../domain-11-production-operations/23-incident-response-handling.md)
-- [文件: `../../domain-11-production-operations/24-capacity-planning-forecasting.md`](../../domain-11-production-operations/24-capacity-planning-forecasting.md)
+- [文件: `../../domain-11-production-operations/01-production-architecture-design-principles.md`](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/02-production-architecture-design-principles.md)
+- [文件: `../../domain-11-production-operations/22-change-management-process.md`](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-08-release-change-management/03-change-management/05-change-management-process.md)
+- [文件: `../../domain-11-production-operations/23-incident-response-handling.md`](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-11-production-operations/02-incident-response/01-incident-response-handling.md)
+- [文件: `../../domain-11-production-operations/24-capacity-planning-forecasting.md`](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-09-reliability-engineering/03-capacity-planning/04-capacity-planning-forecasting.md)
 
 ```
 

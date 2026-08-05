@@ -21,6 +21,6 @@ last_updated: 2026-07
 - [[domain-11-production-operations/事件响应/02-war-room-coordination-procedures.md|War Room Coordination Procedures]]
 - [[domain-11-production-operations/事件响应/03-communication-templates-stakeholder.md|Communication Templates Stakeholder]]
 - [[domain-11-production-operations/事件响应/04-incident-postmortem-template.md|Incident Postmortem Template]]
-- [[domain-11-production-operations/事件响应/23-incident-response-handling.md|Incident Response Handling]]
-- [[domain-11-production-operations/事件响应/24-incident-response-runbook-template.md|Incident Response Runbook Template]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-11-production-operations/02-incident-response/01-incident-response-handling|Incident Response Handling]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-11-production-operations/04-incident-response/01-incident-response-runbook-template|Incident Response Runbook Template]]
 

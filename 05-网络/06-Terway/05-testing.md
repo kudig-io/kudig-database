@@ -812,7 +812,7 @@ echo "=== 验证已删除 Pod 的 IPInstance 已清理 ==="
 kubectl get ipinstance -A -o json | jq -r '.items[] | select(.status.podName | test("gc-test")) | .metadata.name'
 echo "预期: 无输出 (已清理)"
 ```
-> GC 机制详解参考: [04-operations.md](./04-operations.md) 第 2 节 | [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md)
+> GC 机制详解参考: [04-operations.md](./04-operations.md) 第 2 节 | [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md)
 
 ---
 
@@ -1223,12 +1223,12 @@ chmod +x terway-e2e-test.sh
 
 | 文档 | 说明 |
 |:---|:---|
-| [网络/05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) | Terway 高级指南（模式对比、容量规划） |
-| [网络/37-terway-resources-crud-operations.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) | Terway CRD 资源 CRUD 操作 |
-| [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) | GC 垃圾回收机制详解 |
-| [网络/16-networkpolicy-deep-practice.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/16-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
-| [网络/34-network-performance-tuning.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/34-network-performance-tuning.md) | 网络性能调优 |
-| [网络/03-cni-plugins-comparison.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) | CNI 插件对比 |
+| [网络/05-terway-advanced-guide.md](../01-K8s网络核心/06-terway-advanced-guide.md) | Terway 高级指南（模式对比、容量规划） |
+| [网络/37-terway-resources-crud-operations.md](../01-K8s网络核心/39-terway-resources-crud-operations.md) | Terway CRD 资源 CRUD 操作 |
+| [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md) | GC 垃圾回收机制详解 |
+| [网络/16-networkpolicy-deep-practice.md](../01-K8s网络核心/17-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
+| [网络/34-network-performance-tuning.md](../01-K8s网络核心/36-network-performance-tuning.md) | 网络性能调优 |
+| [网络/03-cni-plugins-comparison.md](../01-K8s网络核心/04-cni-plugins-comparison.md) | CNI 插件对比 |
 
 ### Topic 专题
 

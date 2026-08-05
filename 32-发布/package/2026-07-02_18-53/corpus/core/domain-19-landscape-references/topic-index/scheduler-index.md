@@ -68,16 +68,16 @@ prerequisites:
 ### 故障排查
 
 - [[domain-10-troubleshooting-diagnostics/高级排障/01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/17-hpa-vpa-troubleshooting.md|HPA/VPA 故障排查 (HPA/VPA Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/28-cluster-autoscaler-troubleshooting.md|集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-hpa-vpa-troubleshooting|HPA/VPA 故障排查 (HPA/VPA Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/10-quota-limitrange-troubleshooting|Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/02-cluster-autoscaler-troubleshooting|集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/06-performance-bottleneck-troubleshooting|性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/技能体系/12-autoscaling-failure.md|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/02-autoscaling-failure|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]]
 
 ### YAML 配置
 
@@ -92,7 +92,7 @@ prerequisites:
 
 ### 技术论文
 
-- [[domain-19-landscape-references/论文/12-kubernetes-scheduler-deep-optimization-custom-scheduling.md|12 kubernetes scheduler deep optimization custom scheduling]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-19-landscape-references/02-papers/05-kubernetes-scheduler-deep-optimization-custom-scheduling|12 kubernetes scheduler deep optimization custom scheduling]]
 
 ---
 
@@ -107,7 +107,7 @@ prerequisites:
 
 ### 资源管理
 
-- [[domain-07-platform-engineering/治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-07-platform-engineering/governance/01-capacity-planning-resource-assessment|03 capacity planning resource assessment]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/07-resources-scheduling/01-resources-quota-troubleshooting.md|资源与调度故障排查指南]]
 
 ### Pod调度

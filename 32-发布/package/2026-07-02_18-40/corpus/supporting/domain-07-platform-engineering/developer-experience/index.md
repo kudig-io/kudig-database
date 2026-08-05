@@ -24,10 +24,10 @@ last_updated: 2026-07
 
 - [[domain-07-platform-engineering/开发体验/01-inner-source-contribution-model.md|Inner Source Contribution Model]]
 - [[domain-07-platform-engineering/开发体验/02-developer-onboarding-automation.md|Developer Onboarding Automation]]
-- [[domain-07-platform-engineering/开发体验/09-developer-experience-metrics.md|Developer Experience Metrics]]
-- [[domain-07-platform-engineering/开发体验/10-platform-team-topology.md|Platform Team Topology]]
-- [[domain-07-platform-engineering/开发体验/23-cli-enhancement-tools.md|Cli Enhancement Tools]]
-- [[domain-07-platform-engineering/开发体验/26-kubectl-plugin-ecosystem.md|Kubectl Plugin Ecosystem]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/developer-experience/01-developer-experience-metrics|Developer Experience Metrics]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/developer-experience/02-platform-team-topology|Platform Team Topology]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/developer-experience/03-cli-enhancement-tools|Cli Enhancement Tools]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-07-platform-engineering/developer-experience/04-kubectl-plugin-ecosystem|Kubectl Plugin Ecosystem]]
 
 
 

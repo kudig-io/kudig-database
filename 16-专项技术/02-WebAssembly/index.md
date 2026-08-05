@@ -27,5 +27,5 @@ last_updated: 2026-07
 - [[16-专项技术/02-WebAssembly/08-wasm-ai-inference.md|Wasm Ai Inference]]
 - [[16-专项技术/02-WebAssembly/09-wasm-serverless.md|Wasm Serverless]]
 - [[16-专项技术/02-WebAssembly/10-wasm-security-sandbox.md|Wasm Security Sandbox]]
-- [[16-专项技术/02-WebAssembly/99-wasmedge-cloud-native-guide.md|Wasmedge Cloud Native Guide]]
+- [[16-专项技术/02-WebAssembly/12-wasmedge-cloud-native-guide.md|Wasmedge Cloud Native Guide]]
 

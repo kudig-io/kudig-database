@@ -126,32 +126,32 @@ last_updated: '2026-07-21'
 
 ## 集群基础 (Cluster Fundamentals)
 
-- [[01-集群基础/03-控制平面/24-production-deployment-best-practices|生产环境部署最佳实践]]
-- [[01-集群基础/07-性能调优/19-cluster-performance-tuning|集群性能调优]]
-- [[01-集群基础/07-性能调优/20-network-performance-optimization|网络性能优化]]
-- [[01-集群基础/07-性能调优/21-storage-performance-optimization|存储性能优化]]
-- [[01-集群基础/03-控制平面/34-certificate-pki-lifecycle-runbook|证书 PKI 生命周期]]
+- [[01-集群基础/03-控制平面/25-production-deployment-best-practices|生产环境部署最佳实践]]
+- [[01-集群基础/07-性能调优/03-cluster-performance-tuning|集群性能调优]]
+- [[01-集群基础/07-性能调优/04-network-performance-optimization|网络性能优化]]
+- [[01-集群基础/07-性能调优/05-storage-performance-optimization|存储性能优化]]
+- [[01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook|证书 PKI 生命周期]]
 
 ## 安全最佳实践 (Security Best Practices)
 
-- [[08-安全/06-合规审计/08-cis-benchmark-compliance-audit|CIS Benchmark 合规审计]]
-- [[08-安全/06-合规审计/08-security-best-practices|安全最佳实践]]
-- [[08-安全/02-网络安全/07-zero-trust-security-architecture|零信任安全架构]]
-- [[08-安全/03-运行时安全/03-runtime-security-defense|运行时安全防御]]
-- [[08-安全/05-供应链/09-software-bill-of-materials|SBOM 软件物料清单]]
+- [[08-安全/06-合规审计/04-cis-benchmark-compliance-audit|CIS Benchmark 合规审计]]
+- [[08-安全/06-合规审计/05-security-best-practices|安全最佳实践]]
+- [[08-安全/02-网络安全/02-zero-trust-security-architecture|零信任安全架构]]
+- [[08-安全/03-运行时安全/04-runtime-security-defense|运行时安全防御]]
+- [[08-安全/05-供应链/10-software-bill-of-materials|SBOM 软件物料清单]]
 
 ## 可观测性最佳实践 (Observability Best Practices)
 
-- [[09-可观测性/01-总览/22-best-practices-case-studies|可观测性最佳实践与案例]]
-- [[09-可观测性/01-总览/04-enterprise-monitoring-system|企业监控系统]]
-- [[09-可观测性/03-日志/05-logging-collection-analysis-platform|日志采集分析平台]]
+- [[09-可观测性/01-总览/09-best-practices-case-studies|可观测性最佳实践与案例]]
+- [[09-可观测性/01-总览/02-enterprise-monitoring-system|企业监控系统]]
+- [[09-可观测性/03-日志/08-logging-collection-analysis-platform|日志采集分析平台]]
 
 ## 可靠性最佳实践 (Reliability Best Practices)
 
-- [[12-可靠性/01-备份恢复/16-enterprise-backup-strategy|企业级备份策略]]
-- [[12-可靠性/02-灾难恢复/17-disaster-recovery-drills|灾备演练]]
-- [[12-可靠性/02-灾难恢复/18-cross-region-disaster-recovery|跨区域灾备]]
-- [[12-可靠性/02-灾难恢复/12-disaster-recovery-bc-runbook-v1|灾备 BC Runbook]]
+- [[12-可靠性/01-备份恢复/06-enterprise-backup-strategy|企业级备份策略]]
+- [[12-可靠性/02-灾难恢复/18-disaster-recovery-drills|灾备演练]]
+- [[12-可靠性/02-灾难恢复/20-cross-region-disaster-recovery|跨区域灾备]]
+- [[12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1|灾备 BC Runbook]]
 
 ## FTA / FEBM 最佳实践
 
@@ -160,15 +160,15 @@ last_updated: '2026-07-21'
 
 ## 成本治理 (Cost Governance)
 
-- [[13-生产运维/01-成本治理/13-kubernetes-cost-governance|Kubernetes 成本治理]]
-- [[13-生产运维/01-成本治理/99-finops-cost-optimization-guide|FinOps 成本优化指南]]
-- [[13-生产运维/04-绿色计算/15-green-computing-sustainability|绿色计算]]
+- [[13-生产运维/01-成本治理/05-kubernetes-cost-governance|Kubernetes 成本治理]]
+- [[13-生产运维/01-成本治理/07-finops-cost-optimization-guide|FinOps 成本优化指南]]
+- [[13-生产运维/04-绿色计算/01-green-computing-sustainability|绿色计算]]
 
 ## 生产就绪 (Production Readiness)
 
-- [[10-平台工程/00-总览/99-production-readiness-review-template|生产就绪评估模板]]
-- [[01-集群基础/02-设计原则/01-production-architecture-design-principles|生产架构设计原则]]
-- [[01-集群基础/00-总览/99-kubernetes-production-architecture-blueprint|K8s 生产架构蓝图]]
+- [[10-平台工程/00-总览/02-production-readiness-review-template|生产就绪评估模板]]
+- [[01-集群基础/02-设计原则/02-production-architecture-design-principles|生产架构设计原则]]
+- [[01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint|K8s 生产架构蓝图]]
 
 ## 生态参考 (Ecosystem)
 

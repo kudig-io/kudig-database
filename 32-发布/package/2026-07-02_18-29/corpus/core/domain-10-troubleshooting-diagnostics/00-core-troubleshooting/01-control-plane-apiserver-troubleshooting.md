@@ -105,11 +105,11 @@ related_docs:
 ### 🔗 关联故障排查文档
 - **[02-etcd故障排查](./02-control-plane-etcd-troubleshooting.md)** - API Server依赖etcd存储，etcd问题会直接影响API Server
 - **[03-CNI网络故障排查](./03-networking-cni-troubleshooting.md)** - 网络问题可能导致API Server无法正常通信
-- **[35-节点组件故障排查](./35-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
-- **[30-监控告警故障排查](./30-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
-- **[12-RBAC配额故障排查](./12-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
-- **[13-证书故障排查](./13-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
-- **[39-企业级监控告警体系](./39-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
+- **[35-节点组件故障排查](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/01-node-component-troubleshooting.md)** - kubelet和容器运行时问题可能影响API Server
+- **[30-监控告警故障排查](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/04-monitoring-alerting-troubleshooting.md)** - 监控API Server健康状态的最佳实践
+- **[12-RBAC配额故障排查](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/04-rbac-quota-troubleshooting.md)** - 权限认证问题可能导致API访问失败
+- **[13-证书故障排查](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/05-certificate-troubleshooting.md)** - TLS证书问题会影响API Server安全通信
+- **[39-企业级监控告警体系](32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/04-enterprise-monitoring-alerting-system.md)** - 企业级API Server监控告警最佳实践
 
 ### 📚 扩展学习资料
 - **[Kubernetes官方文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)** - API Server详细配置参考
@@ -592,19 +592,19 @@ groups:
 - [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|CSI 存储驱动故障排查]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]
+- [[01-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|Node NotReady 状态深度诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|OOM 和内存问题诊断]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/09-node-comprehensive-troubleshooting.md|Node 全面故障排查]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/10-service-comprehensive-troubleshooting.md|Service 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis|OOM 和内存问题诊断]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/01-node-comprehensive-troubleshooting|Node 全面故障排查]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/02-service-comprehensive-troubleshooting|Service 全面故障排查]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
 - [[domain-10-troubleshooting-diagnostics/FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
-- [[domain-10-troubleshooting-diagnostics/JVM调优/99-jvm-gc-container-tuning-guide.md|99-jvm-gc-container-tuning-guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-10-troubleshooting-diagnostics/04-jvm-tuning/03-jvm-gc-container-tuning-guide|99-jvm-gc-container-tuning-guide]]
 - [[domain-10-troubleshooting-diagnostics/SUMMARY.md|SUMMARY]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|03-networking-cni-troubleshooting]]

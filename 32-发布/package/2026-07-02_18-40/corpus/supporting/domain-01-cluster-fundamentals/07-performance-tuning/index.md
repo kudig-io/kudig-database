@@ -17,7 +17,7 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-01-cluster-fundamentals/性能调优/19-cluster-performance-tuning.md|Cluster Performance Tuning]]
-- [[domain-01-cluster-fundamentals/性能调优/20-network-performance-optimization.md|Network Performance Optimization]]
-- [[domain-01-cluster-fundamentals/性能调优/21-storage-performance-optimization.md|Storage Performance Optimization]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-01-cluster-fundamentals/06-performance-tuning/01-cluster-performance-tuning|Cluster Performance Tuning]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-01-cluster-fundamentals/06-performance-tuning/02-network-performance-optimization|Network Performance Optimization]]
+- [[32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-01-cluster-fundamentals/06-performance-tuning/03-storage-performance-optimization|Storage Performance Optimization]]
 

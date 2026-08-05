@@ -166,14 +166,14 @@ spec:
 3. **存储瓶颈排查**
    - 检查 PVC 使用率：`kubectl get pvc` + `df -h`
    - 检查 StorageClass 的 IOPS/吞吐量限制
-   - 如达到存储上限，参考 [[06-存储/01-K8s存储/02-pvc-expansion-guide.md|pvc-expansion-guide]] 进行扩容
+   - 如达到存储上限，参考 [[06-存储/01-K8s存储/03-pvc-expansion-guide.md|pvc-expansion-guide]] 进行扩容
 
 > 数据库问题往往涉及数据安全，远程顾问应谨慎建议操作，关键操作（如删除数据、切换主从）需客户书面确认。
 
 ## 相关链接
 
 - [[19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|statefulset-troubleshooting]] — StatefulSet 问题排查
-- [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]] — PVC 与存储问题排查
+- [[19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting.md|pvc-storage-troubleshooting]] — PVC 与存储问题排查
 - [[persistent-volume-claim]] — PVC 原理与配置
 - [[07-数据库中间件/00-总览/01-database-on-kubernetes-guide.md|mysql-operator-guide]] — MySQL Operator 详细配置
 

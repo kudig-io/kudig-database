@@ -889,7 +889,7 @@ class ProductionRAGPipeline:
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LlamaIndex/LangChain RAG 实现 |
 | [07 - 记忆管理](./07-memory-context-management.md) | 长期记忆 vs RAG 的边界 |
 | [08 - 评测与可观测性](./08-agent-evaluation-observability.md) | RAGAS 评估框架详细配置 |
-| [domain-14-ai-ml-infra/20-vector-database-rag.md](../domain-14-ai-ml-infra/20-vector-database-rag.md) | 向量数据库基础设施 |
+| [domain-14-ai-ml-infra/20-vector-database-rag.md](32-发布/package/2026-07-02_18-40/corpus/peripheral/domain-14-ai-ml-infra/01-ai-infra/18-vector-database-rag.md) | 向量数据库基础设施 |
 | [15 - Agent 语料库差距分析](./15-agent-corpus-gap-analysis.md) | kudig-database 作为 RAG 语料的分析 |
 
 ---

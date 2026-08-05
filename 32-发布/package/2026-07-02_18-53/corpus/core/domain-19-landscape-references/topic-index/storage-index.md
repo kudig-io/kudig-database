@@ -63,7 +63,7 @@ prerequisites:
 
 ### CSI 深度解析
 
-- [[domain-01-cluster-fundamentals/控制平面/22-container-storage-deep-dive.md|CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/08-container-storage-deep-dive|CSI 容器存储接口深度解析 (Container Storage Interface Deep Dive)]]
 
 ### YAML 配置参考
 
@@ -99,7 +99,7 @@ prerequisites:
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
+- [[08-pvc-storage-failure|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
 
 ### FTA 故障树
 

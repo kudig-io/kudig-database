@@ -1,9 +1,9 @@
 ---
 title: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库 (skills)
 description: '- 网络问题: [04-dns](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | [05-service](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/05-service-connectivity.md)
-  | [13-ingress](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/13-ingress-gateway-failure.md)'
+  | [13-ingress](../../../../19-故障诊断/08-技能体系/14-ingress-gateway-failure.md)'
 summary: '- 网络问题: [04-dns](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | [05-service](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/05-service-connectivity.md)
-  | [13-ingress](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/13-ingress-gateway-failure.md)'
+  | [13-ingress](../../../../19-故障诊断/08-技能体系/14-ingress-gateway-failure.md)'
 category: skills
 tags:
 - k8s
@@ -46,11 +46,11 @@ prerequisites:
 
 ### 故障诊断
 
-- 节点问题: [01-node-notready](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/01-node-notready.md) | [11-control-plane](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/11-control-plane-failure.md)
-- Pod 异常: [02-crashloop](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/02-pod-crashloop-oomkilled.md) | [03-pending](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/03-pod-pending.md) | [10-image-pull](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/10-image-pull-failure.md)
-- 网络问题: [04-dns](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | [05-[[service|service]]](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/05-service-connectivity.md) | [13-[[ingress|ingress]]](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/13-ingress-gateway-failure.md)
-- 存储问题: [07-pvc-storage](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/07-pvc-storage-failure.md)
-- 配置问题: [14-configmap-secret](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/14-configmap-secret-failure.md)
+- 节点问题: [01-node-notready](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/01-node-notready.md) | [11-control-plane](../../../../19-故障诊断/08-技能体系/12-control-plane-failure.md)
+- Pod 异常: [02-crashloop](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/02-pod-crashloop-oomkilled.md) | [03-pending](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/03-pod-pending.md) | [10-image-pull](../../../../19-故障诊断/08-技能体系/11-image-pull-failure.md)
+- 网络问题: [04-dns](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | [05-[[service|service]]](../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/05-service-connectivity.md) | [13-[[ingress|ingress]]](../../../../19-故障诊断/08-技能体系/14-ingress-gateway-failure.md)
+- 存储问题: [07-pvc-storage](../../../../19-故障诊断/08-技能体系/08-pvc-storage-failure.md)
+- 配置问题: [14-configmap-secret](../../../../19-故障诊断/08-技能体系/15-configmap-secret-failure.md)
 
 ### 3. 症状 → Skill 快速查找
 

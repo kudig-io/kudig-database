@@ -366,7 +366,7 @@ kubectl get events --all-namespaces --field-selector reason=ProvisioningSucceede
 1. **配额先行**：每个 Namespace 创建时必须配置 ResourceQuota，按 StorageClass 细分限额
 2. **最小权限**：通过 RBAC 限制团队只能使用授权的 StorageClass，参考 [[22-概念/05-安全/rbac-authorization.md|RBAC 授权]]
 3. **存储网络分离**：存储流量（iSCSI/NFS/MinIO）使用独立 VLAN 或 NetworkPolicy 隔离
-4. **加密隔离**：敏感数据使用 per-tenant KMS Key 加密，参考 [[06-存储/01-K8s存储/18-storage-encryption-at-rest.md|存储加密]]
+4. **加密隔离**：敏感数据使用 per-tenant KMS Key 加密，参考 [[06-存储/01-K8s存储/19-storage-encryption-at-rest.md|存储加密]]
 5. **定期审计**：每月生成各团队存储使用报告，识别异常增长和闲置资源
 6. **标签规范**：所有 PVC 必须携带 `team`、`project`、`data-classification` 标签
 7. **自动清理**：配置 CronJob 清理超过保留期的 PVC 和快照，参考 [[06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md|数据分层与生命周期管理]]
@@ -377,6 +377,6 @@ kubectl get events --all-namespaces --field-selector reason=ProvisioningSucceede
 
 - [[22-概念/05-安全/multi-tenancy-isolation.md|多租户隔离概念]]
 - [[22-概念/05-安全/rbac-authorization.md|RBAC 授权]]
-- [[06-存储/01-K8s存储/18-storage-encryption-at-rest.md|存储加密]]
+- [[06-存储/01-K8s存储/19-storage-encryption-at-rest.md|存储加密]]
 - [[06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md|数据分层与生命周期管理]]
-- [[06-存储/01-K8s存储/13-storage-security-compliance.md|存储安全合规]]
+- [[06-存储/01-K8s存储/14-storage-security-compliance.md|存储安全合规]]

@@ -76,11 +76,11 @@ Kanister 是一个面向 Kubernetes 的应用级数据管理框架，专门用�
 
 ## Related
 
-- [[47-terway-troubleshooting-fta]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/10-terway-troubleshooting-fta]]
 
 - changelog.md|ecosystem-changelog]]
 
-- [[42-terway-usage-guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-03-networking-traffic/00-core-k8s-networking/05-terway-usage-guide]]
 
 - metal3-io
 

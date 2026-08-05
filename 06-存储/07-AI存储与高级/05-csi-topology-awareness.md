@@ -388,15 +388,15 @@ kubectl get pods -n ai-platform -o json | \
 2. **拓扑分散约束**：StatefulSet 配合 `topologySpreadConstraints` 确保副本分布在不同 AZ
 3. **AZ 容量规划**：确保每个 AZ 有足够的节点容量承载故障转移的 Pod
 4. **共享存储免拓扑**：EFS/Azure File/NFS 等 ReadWriteMany 存储使用 `Immediate` 绑定
-5. **快照跨 AZ**：利用 VolumeSnapshot 实现跨 AZ 数据复制，作为 [[12-可靠性/02-灾难恢复/11-az-failure-playbook.md|AZ 故障预案]] 的一部分
+5. **快照跨 AZ**：利用 VolumeSnapshot 实现跨 AZ 数据复制，作为 [[12-可靠性/02-灾难恢复/12-az-failure-playbook.md|AZ 故障预案]] 的一部分
 6. **标签标准化**：统一使用 `topology.kubernetes.io/zone` 标准标签，避免厂商私有标签
 7. **调度器日志**：开启 kube-scheduler 的 VolumeBinding 插件 debug 日志辅助排查
 8. **测试验证**：新 StorageClass 上线前在非生产环境验证拓扑行为，参考 [[06-存储/07-AI存储与高级/10-storage-chaos-engineering.md|存储混沌工程]]
 
 ## Related
 
-- [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
-- [[06-存储/01-K8s存储/05-csi-drivers-integration.md|CSI 驱动集成]]
+- [[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md|StorageClass 动态供给]]
+- [[06-存储/01-K8s存储/06-csi-drivers-integration.md|CSI 驱动集成]]
 - [[06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md|云厂商 CSI 驱动对比]]
-- [[12-可靠性/02-灾难恢复/11-az-failure-playbook.md|AZ 故障预案]]
+- [[12-可靠性/02-灾难恢复/12-az-failure-playbook.md|AZ 故障预案]]
 - [[22-概念/07-调度与资源/kube-scheduler.md|Kube-Scheduler 调度器]]

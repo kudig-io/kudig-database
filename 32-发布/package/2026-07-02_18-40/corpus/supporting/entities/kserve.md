@@ -85,7 +85,7 @@ KServe（前身 KFServing）是 Kubernetes 上的标准化模型推理平台。�
 
 ## Related
 
-- [[07-containerd-disaster-recovery]] — containerd 灾难恢复
+- [[02-containerd-disaster-recovery]] — containerd 灾难恢复
 - [[chaosblade]] — ChaosBlade
 - [[network-service-mesh]] — Network Service Mesh (NSM)
 - [[knative]] — Knative

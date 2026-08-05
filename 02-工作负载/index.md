@@ -29,9 +29,9 @@ last_updated: '2026-07-21'
 
 ## 根目录文档（架构与模式）
 
-- [[02-工作负载/00-总览/99-kubernetes-deployment-patterns-architecture.md|部署模式与架构]]
-- [[02-工作负载/00-总览/99-kubernetes-multi-tenant-architecture.md|多租户架构]]
-- [[02-工作负载/00-总览/99-production-readiness-operations-guide.md|生产就绪运维指南]]
+- [[02-工作负载/00-总览/01-kubernetes-deployment-patterns-architecture.md|部署模式与架构]]
+- [[02-工作负载/00-总览/02-kubernetes-multi-tenant-architecture.md|多租户架构]]
+- [[02-工作负载/00-总览/03-production-readiness-operations-guide.md|生产就绪运维指南]]
 
 ## 知识域导航
 

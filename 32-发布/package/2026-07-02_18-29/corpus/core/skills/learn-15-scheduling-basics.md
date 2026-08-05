@@ -831,8 +831,8 @@ kubectl label nodes <node> key=value
 ---
 
 **关联文档**:
-- [../10-advanced-workloads/10-daemonset-basics.md](../10-advanced-workloads/10-daemonset-basics.md) — [[DaemonSet|DaemonSet]]
-- [../10-advanced-workloads/11-statefulset-basics.md](../10-advanced-workloads/11-statefulset-basics.md) — [[StatefulSet|StatefulSet]]
+- [../10-advanced-workloads/10-daemonset-basics.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/09-advanced-workloads/01-daemonset-basics.md) — [[DaemonSet|DaemonSet]]
+- [../10-advanced-workloads/11-statefulset-basics.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/09-advanced-workloads/02-statefulset-basics.md) — [[StatefulSet|StatefulSet]]
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/16-scheduling-pdb-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/16-scheduling-pdb-failure.md) — 调度与 PDB 问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 

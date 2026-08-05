@@ -493,7 +493,7 @@ spec:
 
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/07-terway-troubleshooting.md|07-terway-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/08-flannel-troubleshooting.md|08-flannel-troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/09-nginx-ingress-troubleshooting.md|09-nginx-ingress-troubleshooting]]
+- [[32-发布/package/2026-07-02_18-29/profiles/sre/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/03-networking/10-nginx-ingress-troubleshooting|09-nginx-ingress-troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/03-networking/01-cni-troubleshooting.md|01-cni-troubleshooting]]
 
 ```

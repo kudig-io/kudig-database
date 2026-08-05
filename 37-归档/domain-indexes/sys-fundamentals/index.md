@@ -33,15 +33,15 @@ last_updated: 2026-05-21
 ### Linux 系统
 
 - [[01-linux-system-architecture]] — Linux system architecture
-- [[02-linux-process-management]] — Linux process management
-- [[03-linux-filesystem-deep-dive]] — Linux filesystem deep dive
-- [[04-linux-networking-configuration]] — Linux networking configuration
-- [[05-linux-storage-management]] — Linux storage management
-- [[06-linux-performance-tuning]] — Linux performance tuning
-- [[07-linux-security-hardening]] — Linux security hardening
-- [[08-linux-container-fundamentals]] — Linux container fundamentals
-- [[09-linux-operations-basics]] — Linux operations basics
-- [[99-linux-commands-reference]] — Linux commands reference
+- [[03-linux-process-management]] — Linux process management
+- [[04-linux-filesystem-deep-dive]] — Linux filesystem deep dive
+- [[05-linux-networking-configuration]] — Linux networking configuration
+- [[06-linux-storage-management]] — Linux storage management
+- [[07-linux-performance-tuning]] — Linux performance tuning
+- [[08-linux-security-hardening]] — Linux security hardening
+- [[09-linux-container-fundamentals]] — Linux container fundamentals
+- [[10-linux-operations-basics]] — Linux operations basics
+- [[15-linux-commands-reference]] — Linux commands reference
 
 ### 硬件技术
 
@@ -85,8 +85,8 @@ last_updated: 2026-05-21
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-14]] — Open source projects index from domain 14
-- [[00-open-source-projects-index-from-domain-31]] — Open source projects index from domain 31
-- [[00-open-source-projects-index-from-domain-33]] — Open source projects index from domain 33
+- [[01-open-source-projects-index-from-domain-31]] — Open source projects index from domain 31
+- [[02-open-source-projects-index-from-domain-33]] — Open source projects index from domain 33
 - [[MOC-from-domain-14]] — MOC from domain 14
 - [[MOC-from-domain-31]] — MOC from domain 31
 - [[MOC-from-domain-33]] — MOC from domain 33
@@ -366,8 +366,8 @@ last_updated: 2026-05-21
 - [[17-系统基础/06-知识字典/workloads/workload-reference.md|workload-reference]] — Workload reference
 
 ## 相关 Domain
-- [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
-- [[容器运行时/98-merged-indexes/index.md|Domain 13 容器运行时 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 01 集群基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 13 容器运行时 索引]]
 
 
 <!-- risk-assessed -->

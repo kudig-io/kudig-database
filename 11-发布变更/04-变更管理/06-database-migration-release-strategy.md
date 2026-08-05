@@ -578,7 +578,7 @@ mysql -h $REPLICA_HOST -u $DB_USER -p$DB_PASSWORD -e "SHOW SLAVE STATUS\G" | \
 
 ### 与 CI/CD 集成
 
-数据库迁移应集成到 [[11-发布变更/01-GitOps/08-cicd-pipeline-patterns.md|CI/CD 流水线]] 中：
+数据库迁移应集成到 [[11-发布变更/01-GitOps/09-cicd-pipeline-patterns.md|CI/CD 流水线]] 中：
 - PR 阶段：自动检测 Schema 变更，运行迁移脚本的 dry-run
 - 部署阶段：先执行 Expand 迁移，再部署新代码
 - 验证阶段：运行数据一致性校验
@@ -597,8 +597,8 @@ mysql -h $REPLICA_HOST -u $DB_USER -p$DB_PASSWORD -e "SHOW SLAVE STATUS\G" | \
 
 - [[11-发布变更/04-变更管理/03-change-rollback-playbook.md|变更回滚手册]]
 - [[11-发布变更/04-变更管理/01-change-window-and-approval.md|变更窗口与审批]]
-- [[11-发布变更/01-GitOps/08-cicd-pipeline-patterns.md|CI/CD 流水线模式]]
+- [[11-发布变更/01-GitOps/09-cicd-pipeline-patterns.md|CI/CD 流水线模式]]
 - [[11-发布变更/04-变更管理/07-rollback-automation-patterns.md|回滚自动化模式]]
 - [[12-可靠性/01-备份恢复/index|01-备份恢复]]
-- [[11-发布变更/01-GitOps/09-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
+- [[11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]]
 - [[11-发布变更/04-变更管理/02-canary-release-strategy.md|金丝雀发布策略]]

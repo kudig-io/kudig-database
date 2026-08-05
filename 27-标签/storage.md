@@ -82,17 +82,17 @@ last_updated: '2026-07-21'
 
 - [[06-存储/01-K8s存储/01-storage-architecture-overview|存储架构概览]]
 - [[06-存储/01-K8s存储/02-pv-architecture-fundamentals|PV 架构基础]]
-- [[06-存储/01-K8s存储/03-pvc-patterns-practices|PVC 模式与实践]]
-- [[06-存储/01-K8s存储/04-storageclass-dynamic-provisioning|StorageClass 动态供给]]
-- [[06-存储/01-K8s存储/05-csi-drivers-integration|CSI 驱动集成]]
-- [[06-存储/01-K8s存储/08-storage-performance-tuning|存储性能调优]]
-- [[06-存储/01-K8s存储/09-pv-pvc-troubleshooting|PV/PVC 故障排查]]
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery|存储备份与灾备]]
-- [[06-存储/01-K8s存储/11-storage-advanced-features|存储高级特性]]
-- [[06-存储/01-K8s存储/12-storage-monitoring-alerting|存储监控告警]]
-- [[06-存储/01-K8s存储/13-storage-security-compliance|存储安全合规]]
-- [[06-存储/01-K8s存储/17-volume-snapshot-scheduling|卷快照调度]]
-- [[06-存储/01-K8s存储/18-storage-encryption-at-rest|静态加密存储]]
+- [[06-存储/01-K8s存储/04-pvc-patterns-practices|PVC 模式与实践]]
+- [[06-存储/01-K8s存储/05-storageclass-dynamic-provisioning|StorageClass 动态供给]]
+- [[06-存储/01-K8s存储/06-csi-drivers-integration|CSI 驱动集成]]
+- [[06-存储/01-K8s存储/09-storage-performance-tuning|存储性能调优]]
+- [[06-存储/01-K8s存储/10-pv-pvc-troubleshooting|PV/PVC 故障排查]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery|存储备份与灾备]]
+- [[06-存储/01-K8s存储/12-storage-advanced-features|存储高级特性]]
+- [[06-存储/01-K8s存储/13-storage-monitoring-alerting|存储监控告警]]
+- [[06-存储/01-K8s存储/14-storage-security-compliance|存储安全合规]]
+- [[06-存储/01-K8s存储/18-volume-snapshot-scheduling|卷快照调度]]
+- [[06-存储/01-K8s存储/19-storage-encryption-at-rest|静态加密存储]]
 
 ## 存储基础 (Storage Fundamentals)
 
@@ -138,22 +138,22 @@ last_updated: '2026-07-21'
 ## 故障诊断 (Troubleshooting)
 
 - [[19-故障诊断/01-核心排障/04-storage-csi-troubleshooting|存储 CSI 排障]]
-- [[19-故障诊断/02-资源排障/14-pvc-storage-troubleshooting|PVC 存储排障]]
+- [[19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting|PVC 存储排障]]
 - [[19-故障诊断/04-高级排障/structural-04-storage/04-storage-performance-troubleshooting|存储性能排障]]
 - [[19-故障诊断/04-高级排障/structural-04-storage/05-storageclass-troubleshooting|StorageClass 排障]]
 
 ## 可靠性 (Reliability)
 
 - [[12-可靠性/01-备份恢复/03-pv-backup-snapshot|PV 备份快照]]
-- [[12-可靠性/02-灾难恢复/17-storage-backend-failure-playbook|存储后端故障 Playbook]]
+- [[12-可靠性/02-灾难恢复/19-storage-backend-failure-playbook|存储后端故障 Playbook]]
 
 ## 云厂商存储 (Cloud Provider Storage)
 
-- [[18-云厂商/02-AWS-EKS/04-eks-storage-efs-fsx|AWS EKS 存储 EFS/FSx]]
-- [[18-云厂商/04-Azure-AKS/04-aks-storage-managed-disk|Azure AKS 存储托管磁盘]]
-- [[18-云厂商/03-Google-GKE/04-gke-storage-filestore-gcs|GKE 存储 Filestore/GCS]]
+- [[18-云厂商/02-AWS-EKS/03-eks-storage-efs-fsx|AWS EKS 存储 EFS/FSx]]
+- [[18-云厂商/04-Azure-AKS/03-aks-storage-managed-disk|Azure AKS 存储托管磁盘]]
+- [[18-云厂商/03-Google-GKE/03-gke-storage-filestore-gcs|GKE 存储 Filestore/GCS]]
 - [[18-云厂商/01-阿里云/04-阿里云存储集成|阿里云存储集成]]
-- [[18-云厂商/06-华为云CCE/03-cce-storage-evs-sfs|华为云 CCE 存储 EVS/SFS]]
+- [[18-云厂商/06-华为云CCE/02-cce-storage-evs-sfs|华为云 CCE 存储 EVS/SFS]]
 
 ## 知识字典 (Knowledge Dictionary)
 

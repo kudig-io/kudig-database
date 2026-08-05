@@ -88,7 +88,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[entities/k8s-supply-chain-yaml-cheatsheet.md|k8s-supply-chain-yaml-cheatsheet]]
 
-- [[domain-12-cloud-providers/阿里云/ack/241-ack-slb-nlb-alb.md|241-ack-slb-nlb-alb]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/05-alicloud-ack/003-ack-slb-nlb-alb|241-ack-slb-nlb-alb]]
 
 - [[entities/kudig-gitbook-mac-plan.md|kudig-gitbook-mac-plan]]
 
@@ -102,7 +102,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[entities/k8s-ai-corpus-configuration.md|k8s-ai-corpus-configuration]]
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-kubernetes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-kubernetes]]
 
 - [[entities/k8s-glossary-index.md|k8s-glossary-index]]
 
@@ -110,7 +110,7 @@ The scenario-based cheatsheet is organized by **fault scenario** rather than res
 
 - [[entities/k8s-design-principles-deep-dive.md|k8s-design-principles-deep-dive]]
 
-- [[243-ack-ram-authorization]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-12-cloud-providers/05-alicloud-ack/005-ack-ram-authorization]]
 
 - [[entities/linux-sysctl-reference.md|linux-sysctl-reference]]
 

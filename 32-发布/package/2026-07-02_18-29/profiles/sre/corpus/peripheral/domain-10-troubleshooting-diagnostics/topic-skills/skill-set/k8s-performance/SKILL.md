@@ -151,7 +151,7 @@ agent_execution_mode: L2-semi-auto
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../17-performance-bottleneck.md](../17-performance-bottleneck.md) |
+| 单文件完整版 | [../17-performance-bottleneck.md](32-发布/package/2026-07-02_18-29/profiles/sre/corpus/supporting/domain-10-troubleshooting-diagnostics/topic-skills/04-performance-bottleneck.md) |
 
 ## Related
 

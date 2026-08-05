@@ -420,13 +420,13 @@ nfsstat -c  # NFS 客户端统计
 5. **对比测试**：同一测试配置在不同存储类型上执行，确保可比性
 6. **预热与稳态**：SSD 需要预写入达到稳态后再测试，避免新盘虚高结果
 7. **记录环境**：完整记录内核版本、文件系统参数、驱动版本，确保可复现
-8. **定期回归**：存储变更后重新执行基准测试，建立性能基线，参考 [[06-存储/01-K8s存储/08-storage-performance-tuning.md|存储性能调优]]
+8. **定期回归**：存储变更后重新执行基准测试，建立性能基线，参考 [[06-存储/01-K8s存储/09-storage-performance-tuning.md|存储性能调优]]
 9. **GPU 联动**：最终验证需在实际训练任务中观察 GPU utilization，存储基准只是参考
 
 ## Related
 
 - [[06-存储/07-AI存储与高级/02-high-perf-ai-storage-weka-lustre.md|AI 高性能存储]]
 - [[06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md|文件系统对比]]
-- [[06-存储/01-K8s存储/08-storage-performance-tuning.md|存储性能调优]]
+- [[06-存储/01-K8s存储/09-storage-performance-tuning.md|存储性能调优]]
 - [[06-存储/02-存储基础/06-storage-performance-iops.md|存储性能与 IOPS]]
 - [[15-AI基础设施/01-基础设施/06-ai-data-pipeline.md|AI 数据管线]]

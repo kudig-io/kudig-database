@@ -21,7 +21,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[10-平台工程/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - 平台工程/build/
 - 平台工程/developer-experience/
 - 平台工程/governance/
@@ -31,9 +31,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[10-平台工程/02-运维/12-automated-operations-toolchain.md|Automated Operations Toolchain]]
-- [[10-平台工程/02-运维/99-karpenter-node-autoscaling-guide.md|Karpenter Node Autoscaling Guide]]
-- [[10-平台工程/02-运维/99-keda-event-driven-autoscaling-guide.md|Keda Event Driven Autoscaling Guide]]
-- [[10-平台工程/00-总览/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
-- [[10-平台工程/00-总览/99-production-readiness-review-template.md|Production Readiness Review Template]]
+- [[10-平台工程/02-运维/08-automated-operations-toolchain.md|Automated Operations Toolchain]]
+- [[10-平台工程/02-运维/17-karpenter-node-autoscaling-guide.md|Karpenter Node Autoscaling Guide]]
+- [[10-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md|Keda Event Driven Autoscaling Guide]]
+- [[10-平台工程/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[10-平台工程/00-总览/02-production-readiness-review-template.md|Production Readiness Review Template]]
 

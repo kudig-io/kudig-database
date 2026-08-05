@@ -339,14 +339,14 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 ## 延伸阅读
 
 - [Docker 架构总览](../../domain-13-container-runtime/01-docker-architecture-overview.md)
-- [Docker 容器生命周期](../../domain-13-container-runtime/03-docker-container-lifecycle.md)
-- [Docker 网络深入](../../domain-13-container-runtime/04-docker-networking-deep-dive.md)
+- [Docker 容器生命周期](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/01-docker/02-docker-container-lifecycle.md)
+- [Docker 网络深入](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-13-container-runtime/01-docker/03-docker-networking-deep-dive.md)
 - [Linux 系统架构](../../domain-17-system-foundation/01-linux-system-architecture.md)
-- [Linux 进程管理](../../domain-17-system-foundation/02-linux-process-management.md)
-- [Linux 网络配置](../../domain-17-system-foundation/04-linux-networking-configuration.md)
+- [Linux 进程管理](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-17-system-foundation/01-linux/01-linux-process-management.md)
+- [Linux 网络配置](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-17-system-foundation/01-linux/03-linux-networking-configuration.md)
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件深入](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
+- [K8s 核心组件深入](32-发布/package/2026-07-02_18-29/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive.md)
+- [kubectl 命令参考](32-发布/package/2026-07-02_18-29/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference.md)
 
 ## Related
 
@@ -357,12 +357,12 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

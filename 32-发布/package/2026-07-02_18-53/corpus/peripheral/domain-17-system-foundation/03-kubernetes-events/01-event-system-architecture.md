@@ -330,20 +330,20 @@ type: Normal
 
 | 事件来源 | 详细文档 |
 |:---|:---|
-| kubelet (容器生命周期) | [02-pod-container-lifecycle-events.md](./02-pod-container-lifecycle-events.md) |
-| kubelet (镜像拉取) | [03-image-pull-events.md](./03-image-pull-events.md) |
-| kubelet (探针) | [04-probe-health-check-events.md](./04-probe-health-check-events.md) |
-| kube-scheduler | [05-scheduling-preemption-events.md](./05-scheduling-preemption-events.md) |
-| kubelet + node-controller (节点) | [06-node-lifecycle-condition-events.md](./06-node-lifecycle-condition-events.md) |
-| deployment-controller + replicaset-controller | [07-deployment-replicaset-events.md](./07-deployment-replicaset-events.md) |
-| statefulset-controller + daemonset-controller | [08-statefulset-daemonset-events.md](./08-statefulset-daemonset-events.md) |
-| job-controller + cronjob-controller | [09-job-cronjob-batch-events.md](./09-job-cronjob-batch-events.md) |
-| service-controller + endpoint-controller | [10-service-networking-events.md](./10-service-networking-events.md) |
-| pv-controller + attach-detach-controller | [11-storage-volume-events.md](./11-storage-volume-events.md) |
-| horizontal-pod-autoscaler | [12-autoscaling-events.md](./12-autoscaling-events.md) |
-| certificate-controller + admission | [13-security-admission-rbac-events.md](./13-security-admission-rbac-events.md) |
-| namespace-controller + gc-controller | [14-namespace-resource-gc-events.md](./14-namespace-resource-gc-events.md) |
-| 生态插件 | [15-ecosystem-addon-events.md](./15-ecosystem-addon-events.md) |
+| kubelet (容器生命周期) | [02-pod-container-lifecycle-events.md](32-发布/package/2026-07-02_18-53/corpus/core/domain-17-system-foundation/02-kubernetes-events/01-pod-container-lifecycle-events.md) |
+| kubelet (镜像拉取) | [03-image-pull-events.md](02-image-pull-events.md) |
+| kubelet (探针) | [04-probe-health-check-events.md](03-probe-health-check-events.md) |
+| kube-scheduler | [05-scheduling-preemption-events.md](04-scheduling-preemption-events.md) |
+| kubelet + node-controller (节点) | [06-node-lifecycle-condition-events.md](05-node-lifecycle-condition-events.md) |
+| deployment-controller + replicaset-controller | [07-deployment-replicaset-events.md](06-deployment-replicaset-events.md) |
+| statefulset-controller + daemonset-controller | [08-statefulset-daemonset-events.md](07-statefulset-daemonset-events.md) |
+| job-controller + cronjob-controller | [09-job-cronjob-batch-events.md](08-job-cronjob-batch-events.md) |
+| service-controller + endpoint-controller | [10-service-networking-events.md](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-17-system-foundation/03-kubernetes-events/01-service-networking-events.md) |
+| pv-controller + attach-detach-controller | [11-storage-volume-events.md](09-storage-volume-events.md) |
+| horizontal-pod-autoscaler | [12-autoscaling-events.md](10-autoscaling-events.md) |
+| certificate-controller + admission | [13-security-admission-rbac-events.md](11-security-admission-rbac-events.md) |
+| namespace-controller + gc-controller | [14-namespace-resource-gc-events.md](12-namespace-resource-gc-events.md) |
+| 生态插件 | [15-ecosystem-addon-events.md](13-ecosystem-addon-events.md) |
 
 ---
 
@@ -585,10 +585,10 @@ echo "Warning: $(kubectl get events -A --field-selector type=Warning --no-header
 
 <!-- chunk: 相关文档交叉引用 -->## 相关文档交叉引用
 
-- **[Domain-8: 可观测性 - 事件与审计日志](../domain-06-observability/09-events-audit-logs.md)** - 审计日志体系和合规性
-- **[Domain-4: 工作负载 - Pod生命周期事件表](../domain-02-workloads-applications/11-pod-lifecycle-events.md)** - Pod 事件速查表
-- **[Domain-12: 故障排查 - 事件驱动架构](../domain-10-troubleshooting-diagnostics/41-event-driven-architecture-troubleshooting.md)** - 事件驱动系统故障排查
-- **[Domain-1: 架构基础 - kubectl命令参考](../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)** - kubectl 事件相关命令
+- **[Domain-8: 可观测性 - 事件与审计日志](32-发布/package/2026-07-02_18-53/corpus/supporting/domain-06-observability/03-logging/14-events-audit-logs.md)** - 审计日志体系和合规性
+- **[Domain-4: 工作负载 - Pod生命周期事件表](32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/03-pod-lifecycle-events.md)** - Pod 事件速查表
+- **[Domain-12: 故障排查 - 事件驱动架构](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/03-advanced-troubleshooting/05-event-driven-architecture-troubleshooting.md)** - 事件驱动系统故障排查
+- **[Domain-1: 架构基础 - kubectl命令参考](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference.md)** - kubectl 事件相关命令
 
 ---
 

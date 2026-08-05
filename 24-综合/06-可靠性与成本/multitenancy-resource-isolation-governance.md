@@ -108,8 +108,8 @@ curl -s "http://opencost.cost-management:9003/allocation/compute?window=7d&aggre
 
 ## Related
 
-- [[10-平台工程/03-治理/17-multi-tenant-management|多租户管理]]
-- [[10-平台工程/03-治理/18-gpu-cluster-governance-ai-platform|GPU 集群治理]]
+- [[10-平台工程/03-治理/06-multi-tenant-management|多租户管理]]
+- [[10-平台工程/03-治理/07-gpu-cluster-governance-ai-platform|GPU 集群治理]]
 - [[24-综合/04-安全与合规/rbac-multitenancy|RBAC × 多租户]]
 - [[24-综合/01-AI与机器学习/gpu-scheduling-cost|GPU Scheduling × Cost Optimization]]
 - [[24-综合/01-AI与机器学习/training-inference-data-lifecycle|训练 × 推理 × 数据生命周期]]

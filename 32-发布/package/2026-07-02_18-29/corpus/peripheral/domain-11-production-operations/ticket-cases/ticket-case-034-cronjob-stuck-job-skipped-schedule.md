@@ -21,9 +21,9 @@ affected_cluster: ack-zyy-prod-01
 affected_namespace: etl
 ticket_type: CronJob 执行失败
 skill_ref:
-- '[[domain-02-workloads-applications/核心工作负载/05-job-cronjob-advanced.md|Job/CronJob
+- '[[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/00-core-workloads/02-job-cronjob-advanced|Job/CronJob
   进阶]]'
-- '[[domain-08-release-change-management/GitOps/99-argo-cd-gitops-guide.md|GitOps
+- '[[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-08-release-change-management/01-gitops/05-argo-cd-gitops-guide|GitOps
   变更管理]]'
 fta_ref:
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/job-cronjob-fta.md|FTA:
@@ -220,7 +220,7 @@ kubectl logs -n kube-system -l component=kube-controller-manager --tail=100 | gr
 > **当前状态：** 手动验证 Job 已 Complete，报表文件已生成到 MinIO 指定目录。
 >
 > **后续建议：**
-> - 参考 [[domain-02-workloads-applications/核心工作负载/05-job-cronjob-advanced.md|Job/CronJob 进阶]] review 所有 CronJob 的 `concurrencyPolicy` 与超时设置；
+> - 参考 [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/00-core-workloads/02-job-cronjob-advanced|Job/CronJob 进阶]] review 所有 CronJob 的 `concurrencyPolicy` 与超时设置；
 > - 对关键 ETL 任务配置 Job 失败/漏调告警，监控 `kube_job_status_failed` 与 CronJob `last_successful_time`；
 > - 在 GitOps 仓库中为 CronJob 增加 lint 规则，禁止生产环境使用无 `activeDeadlineSeconds` 的 `Forbid` 策略；
 > - 对 Hive/Presto 等外部依赖增加超时熔断，避免单个任务挂起阻塞整条链路。

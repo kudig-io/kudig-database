@@ -103,7 +103,7 @@ tier: peripheral---
 
 ### 🛡️ 策略与合规 (09-10)
 - **[09-Policy Controller镜像验证](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/09-policy-controller-verification.md)** - Kyverno/Gatekeeper 签名验证、准入控制
-- **[10-合规自动化与审计](../../../08-%E5%AE%89%E5%85%A8/05-%E4%BE%9B%E5%BA%94%E9%93%BE/10-compliance-automation-audit.md)** - SOC 2、PCI-DSS、FedRAMP 合规自动化
+- **[10-合规自动化与审计](../../../08-安全/05-供应链/11-compliance-automation-audit.md)** - SOC 2、PCI-DSS、FedRAMP 合规自动化
 
 ## 🎯 学习路径建议
 

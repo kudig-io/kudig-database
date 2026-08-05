@@ -949,9 +949,9 @@ kubectl label namespace frontend name=frontend
 
 - [Docker 基础概念](../../domain-13-container-runtime/01-docker-fundamentals-concepts.md)
 - [K8s 架构总览](../../domain-01-cluster-fundamentals/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件](../../domain-01-cluster-fundamentals/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../domain-01-cluster-fundamentals/05-kubectl-commands-reference.md)
-- [Pod 排障指南](../../domain-10-troubleshooting-diagnostics/08-pod-comprehensive-troubleshooting.md)
+- [K8s 核心组件](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/01-architecture-overview/01-core-components-deep-dive.md)
+- [kubectl 命令参考](32-发布/package/2026-07-02_18-53/corpus/core/domain-01-cluster-fundamentals/04-kubectl/01-kubectl-commands-reference.md)
+- [Pod 排障指南](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting.md)
 
 ## Related
 

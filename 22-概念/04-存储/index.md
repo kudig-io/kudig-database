@@ -18,8 +18,8 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[22-概念/04-存储/19-volume-attachment-controller.md|VolumeAttachment 与 Attach/Detach 控制器]]
-- [[22-概念/04-存储/20-csi-storage-capacity-tracking.md|CSIStorageCapacity 与存储容量感知调度]]
+- [[22-概念/04-存储/01-volume-attachment-controller.md|VolumeAttachment 与 Attach/Detach 控制器]]
+- [[22-概念/04-存储/02-csi-storage-capacity-tracking.md|CSIStorageCapacity 与存储容量感知调度]]
 - [[22-概念/04-存储/block-file-object-storage.md|block-file-object-storage]]
 - [[22-概念/04-存储/cloud-native-storage-systems.md|cloud-native-storage-systems]]
 - [[22-概念/04-存储/csi-drivers.md|csi-drivers]]

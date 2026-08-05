@@ -17,5 +17,5 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/03-networking/03-service-basics.md|Service Basics]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/02-networking/01-service-basics|Service Basics]]
 

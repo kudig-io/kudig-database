@@ -87,7 +87,7 @@ Falco → Alertmanager → Loki (日志) + Prometheus (指标)
 
 - [[entities/falco.md|Falco (entities)]]
 - [[domain-15-specialized-tech/03-edge-computing-production-deployment.md|03-边缘计算生产部署]]
-- [[entities/03-prometheus-ha-deployment.md|Prometheus 高可用部署 (entities)]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/05-prometheus-ha-deployment|Prometheus 高可用部署 (entities)]]
 - [[log|Wiki Log]]
 
 

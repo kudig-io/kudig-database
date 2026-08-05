@@ -466,13 +466,13 @@ kubectl run debug --rm -it --image=busybox --restart=Never -- sh
 
 ## Related
 
-- [[domain-05-security-compliance/事件响应/20-incident-response-process.md|安全事件响应与应急处理流程]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-05-security-compliance/02-incident-response/01-incident-response-process|安全事件响应与应急处理流程]]
 - [[domain-05-security-compliance/运行时安全/01-falco-cloud-native-security.md|Falco 云原生安全]]
 
 ## See Also
 
-- [[domain-05-security-compliance/供应链/01-supply-chain-security-overview.md|供应链安全概述]]
-- [[domain-10-troubleshooting-diagnostics/基础设施排障/32-security-troubleshooting.md|安全故障诊断]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-05-security-compliance/01-supply-chain/01-supply-chain-security-overview|供应链安全概述]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/02-infrastructure-troubleshooting/03-security-troubleshooting|安全故障诊断]]
 
 
 <!-- risk-assessed -->

@@ -574,9 +574,9 @@ kubeadm reset --dry-run  # ⚠️ 清理节点所有 K8s 配置
 ## 相关函数
 
 - [`runPreflight`](02-reset.md) — 预检阶段：root 权限检查和用户确认
-- [`runRemoveEtcd`](05-etcd-cleanup.md) — etcd 成员移除阶段
+- [`runRemoveEtcd`](03-etcd-cleanup.md) — etcd 成员移除阶段
 - [`runCleanupNode`](04-cleanup.md) — 节点清理阶段
-- [`RemoveStackedEtcdMember`](05-etcd-cleanup.md) — 移除本地 stacked etcd 成员
+- [`RemoveStackedEtcdMember`](03-etcd-cleanup.md) — 移除本地 stacked etcd 成员
 - [`CleanDir`](04-cleanup.md) — 清理目录内容但保留目录本身
 - [`InteractivelyConfirmAction`](02-reset.md) — 交互式确认操作
 

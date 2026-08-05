@@ -22,8 +22,8 @@ last_updated: 2026-07
 - [[domain-10-troubleshooting-diagnostics/核心排障/02-control-plane-etcd-troubleshooting.md|Control Plane Etcd Troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/03-networking-cni-troubleshooting.md|Networking Cni Troubleshooting]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|Storage Csi Troubleshooting]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/05-pod-pending-diagnosis.md|Pod Pending Diagnosis]]
+- [[01-pod-pending-diagnosis|Pod Pending Diagnosis]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/06-node-notready-diagnosis.md|Node Notready Diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/07-oom-memory-diagnosis.md|Oom Memory Diagnosis]]
-- [[domain-10-troubleshooting-diagnostics/核心排障/08-pod-comprehensive-troubleshooting.md|Pod Comprehensive Troubleshooting]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/01-oom-memory-diagnosis|Oom Memory Diagnosis]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/00-core-troubleshooting/07-pod-comprehensive-troubleshooting|Pod Comprehensive Troubleshooting]]
 

@@ -1,0 +1,144 @@
+---
+title: 事故响应模板与流程规范
+summary: 事故响应模板与流程规范：生产事故不可避免，但事故响应的质量决定了业务恢复速度和客户信任度。本文档提供标准化的事故响应流程、角色定义和沟通模板，帮助远程顾问指导客户建立高效的事故响应机制。
+category: domain-11
+tags:
+- domain-11
+- 事故响应
+- incident
+- MTTR
+- 复盘
+- Commander
+- visibility/public
+tier: supporting
+sources:
+- KUDIG Gap Analysis 2026-05-21
+created: 2026-05-21
+updated: 2026-05-21
+last_updated: 2026-05-21
+status: reviewed
+---
+
+
+
+# 事故响应模板与流程规范
+
+## 概述
+
+生产事故不可避免，但事故响应的质量决定了业务恢复速度和客户信任度。本文档提供标准化的事故响应流程、角色定义和沟通模板，帮助远程顾问指导客户建立高效的事故响应机制。
+
+## 事故响应六阶段
+
+| 阶段 | 目标 | 关键动作 | 时间约束 |
+|---|---|---|---|
+| 发现 | 尽早感知异常 | 监控告警、用户反馈、巡检发现 | MTTD 目标 < 5 分钟 |
+| 遏制 | 阻止影响扩大 | 流量切换、服务降级、回滚变更 | 越快越好 |
+| 根因 | 定位根本原因 | 日志分析、链路追踪、变更比对 | 不阻塞恢复 |
+| 修复 | 恢复业务正常 | 执行修复操作、验证恢复 | MTTR 目标因级别而异 |
+| 验证 | 确认修复有效性 | 监控指标、业务测试、用户反馈 | 修复后 15 分钟 |
+| 复盘 | 总结经验教训 | 时间线整理、根因分析、改进项 | 事故关闭后 48 小时内 |
+
+> **原则**：遏制和修复优先于根因定位。先止血，后手术。
+
+## 事故 Commander 职责
+
+事故 Commander（指挥官）是事故响应的核心角色，不一定是技术最高的人，但必须具备以下能力：
+
+### 信息收集
+
+- 维护实时事故时间线
+- 汇总各排查通道的发现（日志、指标、链路）
+- 记录已尝试的方案和结果
+
+### 决策
+
+- 判断是否启动升级流程
+- 决定采用哪种遏制方案（回滚 / 降级 / 切换）
+- 授权执行可能影响数据的修复操作
+
+### 沟通
+
+- 每 15 分钟向内部群同步进展
+- 评估是否需要通知客户
+- 控制信息口径，避免未经确认的猜测对外传播
+
+## 关键时间节点记录
+
+| 指标 | 定义 | 计算方法 |
+|---|---|---|
+| MTTD | Mean Time To Detect | 故障发生时间 → 告警触发时间 |
+| MTTA | Mean Time To Acknowledge | 告警触发时间 → 值班人员确认时间 |
+| MTTR | Mean Time To Repair | 故障发生时间 → 业务恢复时间 |
+| MTBF | Mean Time Between Failures | 两次故障之间的平均时间 |
+
+```yaml
+# 事故时间线示例（YAML 格式便于归档）
+incident_id: INC-2026-0521-001
+severity: P0
+timeline:
+  - time: "2026-05-21T14:03:00Z"
+    event: "故障发生"
+  - time: "2026-05-21T14:05:00Z"
+    event: "Prometheus 告警触发"
+  - time: "2026-05-21T14:06:00Z"
+    event: "值班人员确认"
+  - time: "2026-05-21T14:12:00Z"
+    event: "执行回滚"
+  - time: "2026-05-21T14:18:00Z"
+    event: "业务指标恢复正常"
+```
+
+## 沟通模板
+
+### 内部通知（即时通讯）
+
+```
+【P0 事故】支付服务异常
+- 发现时间：14:03
+- 影响范围：支付接口延迟 > 10s，成功率 < 50%
+- 当前状态：正在排查
+- Commander：张三
+- 进度同步：每 15 分钟更新
+```
+
+### 客户通知（邮件）
+
+```
+主题：[事故通知] XX 服务异常 — 已恢复 / 处理中
+尊敬的客户：
+我们发现 XX 服务于 XX:XX 出现异常，影响范围包括 XXX。
+当前状态：已定位 / 已恢复 / 预计 XX:XX 恢复
+我们将于事故关闭后 24 小时内提供详细报告。
+```
+
+### 升级邮件
+
+```
+主题：[升级] P0 事故 INC-XXXX — 需要高层决策
+事故已持续 XX 分钟，当前方案存在风险：
+- 方案 A：回滚（预计 5 分钟恢复，可能丢失 3 分钟数据）
+- 方案 B：修复（预计 30 分钟恢复，无数据丢失）
+请确认采用哪种方案。
+```
+
+## 远程顾问在事故中的角色
+
+远程顾问不是事故 Commander，但扮演关键的辅助角色：
+
+1. **诊断建议**：基于经验提供排查方向，帮助缩小根因范围
+2. **方案审核**：对客户提出的修复方案进行风险评估，指出潜在副作用
+3. **事后复盘**：参与复盘会议，提供外部视角，帮助发现盲点和流程改进点
+4. **知识沉淀**：将事故处理过程写入 [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-09-reliability-engineering/07-postmortem/02-postmortem-culture-guide|postmortem]]，补充到 [[concepts/KUDIG Knowledge Base Architecture.md|knowledge-base]]
+
+> 远程顾问应避免直接「接管」指挥权，而是帮助客户 Commander 做出更 informed 的决策。
+
+## 相关链接
+
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-11-production-operations/04-on-call-playbook|on-call-playbook]] — 值班手册与告警响应规范
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-11-production-operations/03-change-management-guide|change-management-guide]] — 变更管理指南
+- [[32-发布/package/2026-07-02_18-40/corpus/core/domain-11-production-operations/02-production-sre-daily-ops|production-sre-daily-ops]] — 日常巡检与值班手册
+- [[node-notready]] — 节点异常排查
+
+## Related
+
+- [[visibility-public|#visibility/public Hub]] — tag hub

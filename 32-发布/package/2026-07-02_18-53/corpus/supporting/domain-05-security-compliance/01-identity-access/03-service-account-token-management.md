@@ -445,7 +445,7 @@ spec:
 
 ## Related
 
-- [[domain-05-security-compliance/身份与访问/07-rbac-matrix-configuration|RBAC 最佳实践]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/domain-05-security-compliance/01-identity-access/06-rbac-matrix-configuration|RBAC 最佳实践]]
 - [[domain-05-security-compliance/身份与访问/04-oidc-identity-provider-integration|OIDC 身份集成]]
 
 ## See Also

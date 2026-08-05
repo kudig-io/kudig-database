@@ -526,7 +526,7 @@ spec:
 - [Gateway API 官方文档](https://gateway-api.sigs.k8s.io/)
 - [Gateway API GitHub](https://github.com/kubernetes-sigs/gateway-api)
 - [GEP (Gateway Enhancement Proposals)](https://gateway-api.sigs.k8s.io/geps/overview/)
-- [Domain-5: 网络 - Gateway API 概览](../domain-03-networking-traffic/35-gateway-api-overview.md)
+- [Domain-5: 网络 - Gateway API 概览](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-03-networking-traffic/00-core-k8s-networking/27-gateway-api-overview.md)
 
 ---
 

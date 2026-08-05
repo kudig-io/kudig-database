@@ -350,4 +350,4 @@ kubectl logs -n keda -l app=keda-operator --tail=50
 
 - [[16-专项技术/04-无服务器/index.md|无服务器]]
 - [[16-专项技术/04-无服务器/01-knative-serving-deep-dive.md|Knative Serving]]
-- [[01-集群基础/07-性能调优/06-autoscaling-hpa-vpa-keda.md|自动缩放]]
+- [[01-集群基础/07-性能调优/02-autoscaling-hpa-vpa-keda.md|自动缩放]]

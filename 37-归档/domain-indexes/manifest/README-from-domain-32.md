@@ -79,7 +79,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 ### 核心工作负载 (03-07)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 03 | [Pod 完整规格](./03-pod-specification-complete.md) | Pod 所有字段、容器规格、卷挂载、安全上下文、调度 | ⭐⭐⭐⭐⭐ |
+| 03 | [Pod 完整规格](01-pod-specification-complete.md) | Pod 所有字段、容器规格、卷挂载、安全上下文、调度 | ⭐⭐⭐⭐⭐ |
 | 04 | [Deployment/ReplicaSet](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/04-deployment-replicaset.md) | 无状态部署、滚动更新、版本管理 | ⭐⭐⭐⭐⭐ |
 | 05 | [StatefulSet](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/05-statefulset-reference.md) | 有状态应用、稳定标识、有序部署 | ⭐⭐⭐⭐ |
 | 06 | [DaemonSet](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/06-daemonset-reference.md) | 节点守护进程、滚动更新 | ⭐⭐⭐⭐ |
@@ -111,7 +111,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 | 20 | [Role/RoleBinding](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/20-rbac-role-rolebinding.md) | 命名空间级 RBAC | ⭐⭐⭐⭐⭐ |
 | 21 | [ClusterRole/ClusterRoleBinding](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/21-rbac-clusterrole-clusterrolebinding.md) | 集群级 RBAC、访问审查 | ⭐⭐⭐⭐ |
 | 22 | [NetworkPolicy](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/22-networkpolicy-reference.md) | 网络策略、微分段、零信任 | ⭐⭐⭐⭐⭐ |
-| 23 | [Pod Security Standards](./23-pod-security-standards.md) | PSS 三级别、PSA 配置 | ⭐⭐⭐⭐ |
+| 23 | [Pod Security Standards](26-技能/04-工作负载/pod/清单规范/03-pod-security-standards.md) | PSS 三级别、PSA 配置 | ⭐⭐⭐⭐ |
 | 24 | [Admission Webhook](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/24-admission-webhook-configuration.md) | Validating/Mutating Webhook | ⭐⭐⭐ |
 | 25 | [ValidatingAdmissionPolicy](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/25-validatingadmissionpolicy.md) | 原生准入策略、CEL 表达式 (v1.30+) | ⭐⭐⭐ |
 
@@ -120,7 +120,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 |:---:|:---|:---|:---|
 | 26 | [PriorityClass/RuntimeClass](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/26-priorityclass-runtimeclass.md) | 优先级抢占、运行时类、DRA | ⭐⭐⭐⭐ |
 | 27 | [HPA v2](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/27-hpa-autoscaling-v2.md) | 水平扩缩容、自定义指标、行为策略 | ⭐⭐⭐⭐⭐ |
-| 28 | [PodDisruptionBudget](./28-poddisruptionbudget-reference.md) | Pod 中断预算、升级保护 | ⭐⭐⭐⭐ |
+| 28 | [PodDisruptionBudget](04-poddisruptionbudget-reference.md) | Pod 中断预算、升级保护 | ⭐⭐⭐⭐ |
 
 ### 扩展与 API 管理 (29-31)
 | # | 文档 | 关键内容 | 适用层级 |
@@ -139,7 +139,7 @@ Kubernetes 生产运维终极 YAML 配置参考手册，覆盖所有原生 API �
 ### 高级模式与生态工具 (35-36)
 | # | 文档 | 关键内容 | 适用层级 |
 |:---:|:---|:---|:---|
-| 35 | [高级 Pod 模式](./35-advanced-pod-patterns.md) | Init/Sidecar 容器、亲和性、拓扑分布、探针 | ⭐⭐⭐⭐⭐ |
+| 35 | [高级 Pod 模式](05-advanced-pod-patterns.md) | Init/Sidecar 容器、亲和性、拓扑分布、探针 | ⭐⭐⭐⭐⭐ |
 | 36 | [[23-实体/08-交付与制品/helm.md|helm]]/ArgoCD](../../../03-%E6%B8%85%E5%8D%95%E6%A8%A1%E5%BC%8F/01-YAML%E5%8F%82%E8%80%83/36-ecosystem-kustomize-helm-argocd.md) | 生态工具 YAML 配置参考 | ⭐⭐⭐⭐ |
 
 ---

@@ -590,7 +590,7 @@ Agent 在执行配置检查时可使用以下结构化输出：
 |------|------|------|
 | **DNS 故障树分析** | [故障诊断/FTA故障树/list/dns-fta.md](../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/dns-fta.md) | FTA 因果分析模型 |
 | **DNS 结构化排查指南** | [03-networking/02-dns-troubleshooting.md](structural-03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
-| **DNS 故障排查（domain-12）** | [故障诊断/26-dns-troubleshooting.md](../03-%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8E%92%E9%9A%9C/26-dns-troubleshooting.md) | 按组件分类的完整指南 |
+| **DNS 故障排查（domain-12）** | [故障诊断/26-dns-troubleshooting.md](../03-基础设施排障/02-dns-troubleshooting.md) | 按组件分类的完整指南 |
 | **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
 | **FEBM 取证方法论** | [故障诊断/FEBM方法论/](../故障诊断/FEBM方法论/) | 事后复盘取证分析 |
 | **FTA 方法论合集** | [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |

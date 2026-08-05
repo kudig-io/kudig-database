@@ -1,0 +1,202 @@
+{
+  "id": "2026-04-21-162044",
+  "generated_at": "2026-04-21T08:20:44.890589Z",
+  "language": "zh",
+  "pages": [
+    {
+      "slug": "1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei",
+      "title": "项目概述：Flannel 网络架构的核心价值与定位",
+      "file": "1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel",
+      "title": "快速上手：在 Kubernetes 集群中部署 Flannel",
+      "file": "2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "3-gou-jian-yu-kai-fa-huan-jing-pei-zhi",
+      "title": "构建与开发环境配置",
+      "file": "3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md",
+      "section": "入门指南",
+      "level": "Beginner"
+    },
+    {
+      "slug": "4-shi-yong-helm-chart-zi-ding-yi-bu-shu",
+      "title": "使用 Helm Chart 自定义部署",
+      "file": "4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md",
+      "section": "入门指南",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng",
+      "title": "整体架构：从 main.go 到各子系统的启动流程",
+      "file": "5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md",
+      "section": "深入解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you",
+      "title": "VXLAN 后端：内核态封装与直连路由",
+      "file": "6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md",
+      "section": "深入解析",
+      "group": "后端系统：网络封装与数据平面实现",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you",
+      "title": "host-gw 后端：基于二层直连的高性能路由",
+      "file": "7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md",
+      "section": "深入解析",
+      "group": "后端系统：网络封装与数据平面实现",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi",
+      "title": "WireGuard 后端：加密隧道与双栈支持",
+      "file": "8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md",
+      "section": "深入解析",
+      "group": "后端系统：网络封装与数据平面实现",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an",
+      "title": "UDP、IPIP 与 IPsec 后端：特殊场景的封装方案",
+      "file": "9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md",
+      "section": "深入解析",
+      "group": "后端系统：网络封装与数据平面实现",
+      "level": "Advanced"
+    },
+    {
+      "slug": "10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi",
+      "title": "Extension 后端：自定义后端的原型开发机制",
+      "file": "10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md",
+      "section": "深入解析",
+      "group": "后端系统：网络封装与数据平面实现",
+      "level": "Advanced"
+    },
+    {
+      "slug": "11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi",
+      "title": "后端注册机制：init() 与构造函数映射模式",
+      "file": "11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md",
+      "section": "深入解析",
+      "group": "后端系统：网络封装与数据平面实现",
+      "level": "Advanced"
+    },
+    {
+      "slug": "12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi",
+      "title": "etcd 子网管理器：独立部署模式",
+      "file": "12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md",
+      "section": "深入解析",
+      "group": "子网管理：地址分配与租约维护",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li",
+      "title": "Kubernetes 子网管理器：基于 API 的声明式管理",
+      "file": "13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md",
+      "section": "深入解析",
+      "group": "子网管理：地址分配与租约维护",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting",
+      "title": "子网租约生命周期：获取、续约与事件监听",
+      "file": "14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md",
+      "section": "深入解析",
+      "group": "子网管理：地址分配与租约维护",
+      "level": "Advanced"
+    },
+    {
+      "slug": "15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li",
+      "title": "iptables 模式：MASQUERADE 与 FORWARD 规则管理",
+      "file": "15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md",
+      "section": "深入解析",
+      "group": "流量管理：iptables 与 nftables 规则引擎",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing",
+      "title": "nftables 模式（实验性）：下一代规则引擎",
+      "file": "16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md",
+      "section": "深入解析",
+      "group": "流量管理：iptables 与 nftables 规则引擎",
+      "level": "Advanced"
+    },
+    {
+      "slug": "17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang",
+      "title": "网络配置详解：JSON 配置、命令行参数与环境变量",
+      "file": "17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md",
+      "section": "深入解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi",
+      "title": "双栈与纯 IPv6 模式：多协议网络支持",
+      "file": "18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md",
+      "section": "深入解析",
+      "level": "Advanced"
+    },
+    {
+      "slug": "19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach",
+      "title": "网络接口选择策略：iface、iface-regex 与 iface-can-reach",
+      "file": "19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md",
+      "section": "深入解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi",
+      "title": "CNI 集成：与 Kubernetes CNI 插件的协作方式",
+      "file": "20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md",
+      "section": "深入解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi",
+      "title": "健康检查与优雅关闭机制",
+      "file": "21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi.md",
+      "section": "深入解析",
+      "level": "Advanced"
+    },
+    {
+      "slug": "22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia",
+      "title": "单元测试与端到端测试框架",
+      "file": "22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md",
+      "section": "深入解析",
+      "group": "测试体系与持续集成",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "23-github-actions-ci-cd-liu-shui-xian-jie-xi",
+      "title": "GitHub Actions CI/CD 流水线解析",
+      "file": "23-github-actions-ci-cd-liu-shui-xian-jie-xi.md",
+      "section": "深入解析",
+      "group": "测试体系与持续集成",
+      "level": "Advanced"
+    },
+    {
+      "slug": "24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan",
+      "title": "云平台集成：TencentCloud VPC 等专用后端",
+      "file": "24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md",
+      "section": "深入解析",
+      "level": "Advanced"
+    },
+    {
+      "slug": "25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan",
+      "title": "故障排查指南：日志、连通性与性能诊断",
+      "file": "25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md",
+      "section": "深入解析",
+      "level": "Intermediate"
+    },
+    {
+      "slug": "26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian",
+      "title": "发布流程与多架构镜像构建",
+      "file": "26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md",
+      "section": "深入解析",
+      "level": "Advanced"
+    }
+  ]
+}

@@ -54,6 +54,6 @@ last_updated: 2026-07
 - [[15-AI基础设施/01-基础设施/35-model-drift-monitoring.md|Model Drift Monitoring]]
 - [[15-AI基础设施/01-基础设施/36-ai-platform-observability-enhanced.md|Ai Platform Observability Enhanced]]
 - [[15-AI基础设施/01-基础设施/37-agent-sandbox-security.md|Agent Sandbox Security]]
-- [[15-AI基础设施/01-基础设施/45-ai-ml-ops-runbook.md|Ai Ml Ops Runbook]]
-- [[15-AI基础设施/01-基础设施/99-kubeflow-ai-platform-guide.md|Kubeflow Ai Platform Guide]]
+- [[15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md|Ai Ml Ops Runbook]]
+- [[15-AI基础设施/01-基础设施/39-kubeflow-ai-platform-guide.md|Kubeflow Ai Platform Guide]]
 

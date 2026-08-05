@@ -470,7 +470,7 @@ Falco/Tetragon 规则需要定期维护，以适应业务变化并降低误报�
 
 ## Related
 
-- [[domain-05-security-compliance/事件响应/20-incident-response-process.md|安全事件响应与应急处理流程]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-05-security-compliance/02-incident-response/01-incident-response-process|安全事件响应与应急处理流程]]
 - [[domain-05-security-compliance/运行时安全/01-falco-cloud-native-security.md|Falco 云原生安全]]
 
 ## See Also

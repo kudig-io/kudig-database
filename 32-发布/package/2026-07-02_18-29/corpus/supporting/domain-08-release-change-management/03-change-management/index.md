@@ -21,5 +21,5 @@ last_updated: 2026-07
 - [[domain-08-release-change-management/变更管理/02-canary-release-strategy.md|Canary Release Strategy]]
 - [[domain-08-release-change-management/变更管理/03-change-rollback-playbook.md|Change Rollback Playbook]]
 - [[domain-08-release-change-management/变更管理/04-secret-rotation-cicd.md|Secret Rotation Cicd]]
-- [[domain-08-release-change-management/变更管理/22-change-management-process.md|Change Management Process]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-08-release-change-management/03-change-management/05-change-management-process|Change Management Process]]
 

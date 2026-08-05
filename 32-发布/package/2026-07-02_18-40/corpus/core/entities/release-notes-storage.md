@@ -102,14 +102,14 @@ prerequisites:
 ## 相关导航
 
 - [[concepts/storage-tool-evolution.md|存储工具演进]]
-- [[domain-19-landscape-references/98-merged-indexes/index.md|发布说明阅读指南]]
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]]
 - [[MOC|发布说明总目录]]
 
 ## Related
 
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-networking]] — 发布说明索引 — 网络
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-networking]] — 发布说明索引 — 网络
 - [[entities/k8s-storage-ecosystem.md|k8s-storage-ecosystem]] — 存储体系：PV、PVC、StorageClass、CSI 驱动与灾备恢复
-- [[domain-19-landscape-references/98-merged-indexes/index.md|release-notes-observability]] — 发布说明索引 — 可观测性
+- [[32-发布/package/2026-07-02_18-40/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-observability]] — 发布说明索引 — 可观测性
 - [[rook]] — Rook
 - [[longhorn]] — Longhorn
 

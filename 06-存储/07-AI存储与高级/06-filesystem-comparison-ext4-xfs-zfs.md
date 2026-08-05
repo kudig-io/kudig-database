@@ -340,7 +340,7 @@ cat /sys/module/overlay/parameters/metacopy
 4. **ZFS 特定场景**：需要原生快照、压缩或数据校验的存储节点可考虑 ZFS，但需注意 ARC 内存占用
 5. **noatime 必选**：所有 K8s 节点文件系统挂载添加 `noatime,nodiratime`，减少元数据写入
 6. **镜像层数控制**：容器镜像层数不超过 20 层，过多层显著影响 OverlayFS 性能，参考 [[22-概念/15-运行时与系统/overlayfs-storage.md|OverlayFS 存储]]
-7. **inode 监控**：将 inode 使用率纳入节点监控告警（阈值 80%），参考 [[06-存储/01-K8s存储/12-storage-monitoring-alerting.md|存储监控告警]]
+7. **inode 监控**：将 inode 使用率纳入节点监控告警（阈值 80%），参考 [[06-存储/01-K8s存储/13-storage-monitoring-alerting.md|存储监控告警]]
 8. **NVMe 优化**：NVMe 磁盘使用 `none` I/O 调度器，增大 `nr_requests` 和 `read_ahead_kb`
 9. **Checkpoint 写入**：大模型 Checkpoint 写入使用 `O_DIRECT` 或 `sync_file_range` 避免 page cache 压力，参考 [[15-AI基础设施/01-基础设施/06-ai-data-pipeline.md|AI 数据管线]]
 
@@ -348,6 +348,6 @@ cat /sys/module/overlay/parameters/metacopy
 
 - [[06-存储/02-存储基础/01-storage-technologies-overview.md|存储技术概览]]
 - [[22-概念/15-运行时与系统/overlayfs-storage.md|OverlayFS 存储]]
-- [[06-存储/01-K8s存储/08-storage-performance-tuning.md|存储性能调优]]
+- [[06-存储/01-K8s存储/09-storage-performance-tuning.md|存储性能调优]]
 - [[06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md|存储性能基准测试方法论]]
 - [[15-AI基础设施/01-基础设施/06-ai-data-pipeline.md|AI 数据管线]]

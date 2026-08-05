@@ -509,13 +509,13 @@ spec:
 
 ## 11. Related
 
-- [[06-存储/01-K8s存储/10-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
-- [[06-存储/01-K8s存储/15-storage-disaster-recovery.md|存储灾难恢复]]
-- [[06-存储/01-K8s存储/05-csi-drivers-integration.md|CSI 驱动集成]]
-- [[06-存储/01-K8s存储/03-pvc-patterns-practices.md|PVC 模式与最佳实践]]
-- [[12-可靠性/01-备份恢复/16-enterprise-backup-strategy.md|企业级备份策略]]
+- [[06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md|存储备份与灾难恢复]]
+- [[06-存储/01-K8s存储/16-storage-disaster-recovery.md|存储灾难恢复]]
+- [[06-存储/01-K8s存储/06-csi-drivers-integration.md|CSI 驱动集成]]
+- [[06-存储/01-K8s存储/04-pvc-patterns-practices.md|PVC 模式与最佳实践]]
+- [[12-可靠性/01-备份恢复/06-enterprise-backup-strategy.md|企业级备份策略]]
 - [[12-可靠性/01-备份恢复/02-namespace-backup-restore.md|Namespace 级别备份恢复：Velero]]
-- [[12-可靠性/02-灾难恢复/99-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
 
 
 <!-- risk-assessed -->

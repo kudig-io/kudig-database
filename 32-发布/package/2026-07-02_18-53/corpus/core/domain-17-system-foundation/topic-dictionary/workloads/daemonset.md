@@ -237,11 +237,11 @@ kubectl describe ds node-exporter -n monitoring | tail -20
 ```
 ## 交叉引用
 
-- [DaemonSet 管理详解](../../domain-02-workloads-applications/04-daemonset-management.md)
+- [DaemonSet 管理详解](32-发布/package/2026-07-02_18-53/corpus/core/domain-02-workloads-applications/00-core-workloads/02-daemonset-management.md)
 - [工作负载概览与架构](../../domain-02-workloads-applications/01-workload-overview-architecture.md)
 - [DaemonSet 故障树分析 (FTA)](../../domain-10-troubleshooting-diagnostics/FTA故障树/list/daemonset-fta.md)
 - [节点 NotReady 诊断](../../domain-10-troubleshooting-diagnostics/06-node-notready-diagnosis.md)
-- [工作负载监控与告警](../../domain-02-workloads-applications/06-workload-monitoring-alerting.md)
+- [工作负载监控与告警](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-02-workloads-applications/00-core-workloads/02-workload-monitoring-alerting.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/

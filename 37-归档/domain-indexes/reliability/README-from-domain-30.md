@@ -289,25 +289,25 @@ disaster_recovery_maturity_checklist:
 | 文档 | 主题 | 难度 | 核心技术 |
 |:---|:---|:---|:---|
 | [00-开源项目索引](./00-open-source-projects-index.md) | 灾备与混沌工程开源项目选型参考 | 入门 | 项目评估、选型矩阵 |
-| [01-VMware vSphere 企业级灾备](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/01-vmware-vsphere-enterprise-dr.md) | vSphere 灾备架构、SRM 配置、存储复制 | 高级 | SRM、vSphere Replication、存储策略 |
-| [02-Veeam 企业级备份恢复](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/02-veeam-enterprise-backup.md) | Veeam 备份策略、即时恢复、CDP | 高级 | SOBR、CDP、SureBackup、勒索防护 |
-| [03-企业级灾备混沌工程](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/03-enterprise-disaster-recovery-chaos-engineering.md) | 容灾架构设计、混沌工程框架 | 专家 | Game Day、稳态假设、故障注入 |
-| [05-Commvault 企业级灾备](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/05-commvault-enterprise-disaster-recovery.md) | Commvault 统一数据保护 | 高级 | 分层存储、自动化恢复编排 |
-| [06-Rubrik 企业级灾备](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/06-rubrik-enterprise-disaster-recovery.md) | Rubrik 云数据管理 | 高级 | SLA策略、Live Mount、Radar防护 |
+| [01-VMware vSphere 企业级灾备](../../../12-可靠性/02-灾难恢复/02-vmware-vsphere-enterprise-dr.md) | vSphere 灾备架构、SRM 配置、存储复制 | 高级 | SRM、vSphere Replication、存储策略 |
+| [02-Veeam 企业级备份恢复](../../../12-可靠性/02-灾难恢复/04-veeam-enterprise-backup.md) | Veeam 备份策略、即时恢复、CDP | 高级 | SOBR、CDP、SureBackup、勒索防护 |
+| [03-企业级灾备混沌工程](../../../12-可靠性/02-灾难恢复/05-enterprise-disaster-recovery-chaos-engineering.md) | 容灾架构设计、混沌工程框架 | 专家 | Game Day、稳态假设、故障注入 |
+| [05-Commvault 企业级灾备](../../../12-可靠性/02-灾难恢复/06-commvault-enterprise-disaster-recovery.md) | Commvault 统一数据保护 | 高级 | 分层存储、自动化恢复编排 |
+| [06-Rubrik 企业级灾备](../../../12-可靠性/02-灾难恢复/07-rubrik-enterprise-disaster-recovery.md) | Rubrik 云数据管理 | 高级 | SLA策略、Live Mount、Radar防护 |
 
 ### Kubernetes 与云原生灾备
 
 | 文档 | 主题 | 难度 | 核心技术 |
 |:---|:---|:---|:---|
-| [07-Kubernetes 备份与恢复深度实践](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/07-kubernetes-backup-restore-deep-dive.md) | Velero 深度配置、etcd 备份 | 高级 | CSI快照、FS Backup、集群迁移 |
-| [08-混沌工程平台实践](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/08-chaos-engineering-platforms.md) | LitmusChaos、Chaos Mesh | 中级→高级 | 稳态假设、问题实验、Game Day |
-| [09-应用级灾备架构](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/09-application-level-disaster-recovery.md) | 多区域部署、流量切换 | 专家 | Istio多集群、DNS故障转移、数据复制 |
+| [07-Kubernetes 备份与恢复深度实践](../../../12-可靠性/02-灾难恢复/08-kubernetes-backup-restore-deep-dive.md) | Velero 深度配置、etcd 备份 | 高级 | CSI快照、FS Backup、集群迁移 |
+| [08-混沌工程平台实践](../../../12-可靠性/02-灾难恢复/09-chaos-engineering-platforms.md) | LitmusChaos、Chaos Mesh | 中级→高级 | 稳态假设、问题实验、Game Day |
+| [09-应用级灾备架构](../../../12-可靠性/02-灾难恢复/10-application-level-disaster-recovery.md) | 多区域部署、流量切换 | 专家 | Istio多集群、DNS故障转移、数据复制 |
 
 ### 工具指南
 
 | 文档 | 主题 | 难度 |
 |:---|:---|:---|
-| [99-Velero 备份恢复指南](../../../12-%E5%8F%AF%E9%9D%A0%E6%80%A7/02-%E7%81%BE%E9%9A%BE%E6%81%A2%E5%A4%8D/99-velero-backup-recovery-guide.md) | Velero 快速上手与生产最佳实践 | 中级 |
+| [99-Velero 备份恢复指南](../../../12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md) | Velero 快速上手与生产最佳实践 | 中级 |
 
 ---
 

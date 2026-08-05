@@ -278,7 +278,7 @@ kubectl get events -A --field-selector reason=BackOff -o json | \
 ## 相关 Domain
 
 - 平台工程/01-idp/01-internal-developer-platform
-- [[12-可靠性/06-SRE实践/04-toil-reduction-automation.md|04 toil reduction automation]]
+- [[12-可靠性/06-SRE实践/06-toil-reduction-automation.md|04 toil reduction automation]]
 
 ## 相关页面
 

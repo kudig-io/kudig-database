@@ -73,7 +73,7 @@ Paralus 是一个 Kubernetes 零信任访问管理平台，为多集群环境提
 ## Related
 
 - [[distribution]] — Distribution
-- [[03-istio-security-hardening]] — [[Istio|Istio]]io 安全加固|Istio 安全加固]]
+- [[32-发布/package/2026-07-02_18-40/corpus/core/entities/04-istio-security-hardening]] — [[Istio|Istio]]io 安全加固|Istio 安全加固]]
 - [[copa]] — Copa (Copacetic)
 - [[nats]] — NATS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

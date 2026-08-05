@@ -102,7 +102,7 @@ authors:
 
 本目录与以下知识库模块紧密关联：
 
-- [[06-存储/01-K8s存储/05-csi-drivers-integration.md|K8s 存储 / CSI 驱动集成]] — CSI 驱动基础与 in-tree 迁移
+- [[06-存储/01-K8s存储/06-csi-drivers-integration.md|K8s 存储 / CSI 驱动集成]] — CSI 驱动基础与 in-tree 迁移
 - [[06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md|分布式存储 / JuiceFS]] — 分布式文件系统实践
 - [[06-存储/02-存储基础/02-block-file-object-storage.md|存储基础 / 块文件对象存储]] — 存储类型基础概念
 - [[12-可靠性/01-备份恢复/03-pv-backup-snapshot.md|备份恢复 / PV 备份快照]] — PV 级数据保护

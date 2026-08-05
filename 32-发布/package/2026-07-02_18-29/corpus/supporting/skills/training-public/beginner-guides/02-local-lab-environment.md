@@ -624,11 +624,11 @@ newgrp docker
 
 | 序号 | 实验 | 对应文档 |
 |------|------|---------|
-| 1 | 跑第一个 Pod | [../fundamentals/02-pod-basics.md](../fundamentals/02-pod-basics.md) |
-| 2 | 用 Deployment 部署应用 | [../fundamentals/03-deployment-basics.md](../fundamentals/03-deployment-basics.md) |
-| 3 | 用 Service 暴露服务 | [../fundamentals/04-service-basics.md](../fundamentals/04-service-basics.md) |
-| 4 | 配置 Ingress | [../fundamentals/05-ingress-basics.md](../fundamentals/05-ingress-basics.md) |
-| 5 | 挂载存储 | [../fundamentals/08-pv-pvc-basics.md](../fundamentals/08-pv-pvc-basics.md) |
+| 1 | 跑第一个 Pod | [../fundamentals/02-pod-basics.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/01-getting-started/01-pod-basics.md) |
+| 2 | 用 Deployment 部署应用 | [../fundamentals/03-deployment-basics.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/01-getting-started/02-deployment-basics.md) |
+| 3 | 用 Service 暴露服务 | [../fundamentals/04-service-basics.md](26-技能/05-网络/service/培训/01-service-basics.md) |
+| 4 | 配置 Ingress | [../fundamentals/05-ingress-basics.md](26-技能/05-网络/ingress/培训/01-ingress-basics.md) |
+| 5 | 挂载存储 | [../fundamentals/08-pv-pvc-basics.md](26-技能/06-存储/csi-storage/培训/01-pv-pvc-basics.md) |
 
 ---
 

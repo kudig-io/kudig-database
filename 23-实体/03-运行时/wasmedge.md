@@ -216,7 +216,7 @@ Wasm Pod 启动失败
 ## Related
 
 - [[kube-rs]] — kube-rs
-- [[02-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
+- [[23-实体/07-可观测性/01-prometheus-promql-advanced]] — PromQLQL 高级查询|PromQL 高级查询]]
 - [[capsule]] — Capsule
 - [[spinkube]] — SpinKube
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -76,7 +76,7 @@ Benefits: lower resource overhead, simpler operations, no sidecar injection issu
 ## Related
 
 - [[skills/k8s-network-security-guide.md|k8s-network-security-guide]] — Kubernetes 网络安全最佳实践
-- [[03-istio-security-hardening]] — Istio 安全加固
+- [[04-istio-security-hardening]] — Istio 安全加固
 - [[envoy]] — Envoy
 - [[concepts/microservice-resilience-patterns.md|microservice-resilience-patterns]] — Microservice Resilience Patterns
 - [[concepts/service-mesh-architecture.md|service-mesh-architecture]] — Service Mesh Architecture

@@ -114,8 +114,8 @@ prerequisites:
 
 | 文件 | 说明 |
 |------|------|
-| [诊断排障/08-pod-comprehensive-troubleshooting.md](诊断排障/08-pod-comprehensive-troubleshooting.md) | Pod 综合排障（核心排障篇） |
-| [诊断排障/05-pod-pending-diagnosis.md](诊断排障/05-pod-pending-diagnosis.md) | Pending 诊断 |
+| [诊断排障/08-pod-comprehensive-troubleshooting.md](诊断排障/02-pod-comprehensive-troubleshooting.md) | Pod 综合排障（核心排障篇） |
+| [诊断排障/05-pod-pending-diagnosis.md](诊断排障/01-pod-pending-diagnosis.md) | Pending 诊断 |
 | [诊断排障/troubleshoot-pod-issues.md](诊断排障/troubleshoot-pod-issues.md) | Pod 问题排查（上游文档） |
 | [诊断排障/structural-01-pod-troubleshooting.md](诊断排障/structural-01-pod-troubleshooting.md) | 结构化 Pod 排障流程 |
 | [诊断排障/MULTI-002-Pod-CrashLoop-镜像拉取失败并发.md](诊断排障/MULTI-002-Pod-CrashLoop-镜像拉取失败并发.md) | 多故障并发场景 |
@@ -149,8 +149,8 @@ Pod 定义、生命周期、架构关系及与其他组件的交叉主题。
 
 | 文件 | 说明 |
 |------|------|
-| [生命周期与事件/02-pod-container-lifecycle-events.md](生命周期与事件/02-pod-container-lifecycle-events.md) | Pod 与容器生命周期事件 |
-| [生命周期与事件/11-pod-lifecycle-events.md](生命周期与事件/11-pod-lifecycle-events.md) | 生命周期事件详解 |
+| [生命周期与事件/02-pod-container-lifecycle-events.md](生命周期与事件/01-pod-container-lifecycle-events.md) | Pod 与容器生命周期事件 |
+| [生命周期与事件/11-pod-lifecycle-events.md](生命周期与事件/02-pod-lifecycle-events.md) | 生命周期事件详解 |
 
 ### 🗓️ 调度 · [调度/](调度/)
 
@@ -171,7 +171,7 @@ Pod 定义、生命周期、架构关系及与其他组件的交叉主题。
 | [资源与自动扩缩/pod-quality-of-service-classes.md](资源与自动扩缩/pod-quality-of-service-classes.md) | QoS 分级 |
 | [资源与自动扩缩/horizontal-pod-autoscaler.md](资源与自动扩缩/horizontal-pod-autoscaler.md) | HPA 水平扩缩 |
 | [资源与自动扩缩/vertical-pod-autoscaling.md](资源与自动扩缩/vertical-pod-autoscaling.md) | VPA 垂直扩缩 |
-| [资源与自动扩缩/29-in-place-pod-resize.md](资源与自动扩缩/29-in-place-pod-resize.md) | 原地扩缩（In-Place Resize） |
+| [资源与自动扩缩/29-in-place-pod-resize.md](资源与自动扩缩/01-in-place-pod-resize.md) | 原地扩缩（In-Place Resize） |
 | [资源与自动扩缩/字典-horizontal-pod-autoscaling.md](资源与自动扩缩/字典-horizontal-pod-autoscaling.md) | HPA 字典 |
 
 ### 🔐 安全 · [安全/](安全/)
@@ -181,9 +181,9 @@ Pod 安全标准（PSS）、安全准入（PSA）、安全策略（PSP）、内�
 | 文件 | 说明 |
 |------|------|
 | [安全/01-pod-security-standards-reference.md](安全/01-pod-security-standards-reference.md) | PSS 标准参考 |
-| [安全/06-pod-security-standards.md](安全/06-pod-security-standards.md) | PSS 标准 |
+| [安全/06-pod-security-standards.md](安全/03-pod-security-standards.md) | PSS 标准 |
 | [安全/02-pod-security-admission-deep-dive.md](安全/02-pod-security-admission-deep-dive.md) | PSA 准入深入 |
-| [安全/15-pod-security-standards-migration.md](安全/15-pod-security-standards-migration.md) | PSP→PSA 迁移 |
+| [安全/15-pod-security-standards-migration.md](安全/04-pod-security-standards-migration.md) | PSP→PSA 迁移 |
 | [安全/k8s-pod-security-guide.md](安全/k8s-pod-security-guide.md) | Pod 安全指南 |
 | [安全/best-practices-pod-security.md](安全/best-practices-pod-security.md)、[安全/security-pod-security.md](安全/security-pod-security.md) | 安全最佳实践（两来源） |
 | [安全/linux-kernel-security-constraints-for-pods-and-containers.md](安全/linux-kernel-security-constraints-for-pods-and-containers.md) | 内核安全约束 |
@@ -194,10 +194,10 @@ Pod 安全标准（PSS）、安全准入（PSA）、安全策略（PSP）、内�
 
 | 文件 | 说明 |
 |------|------|
-| [清单规范/03-pod-specification-complete.md](清单规范/03-pod-specification-complete.md) | Pod 规格完整参考 |
-| [清单规范/12-advanced-pod-patterns.md](清单规范/12-advanced-pod-patterns.md)、[清单规范/35-advanced-pod-patterns.md](清单规范/35-advanced-pod-patterns.md) | 高级 Pod 模式 |
-| [清单规范/23-pod-security-standards.md](清单规范/23-pod-security-standards.md) | 清单中的 PSS |
-| [清单规范/28-poddisruptionbudget-reference.md](清单规范/28-poddisruptionbudget-reference.md) | PodDisruptionBudget 参考 |
+| [清单规范/03-pod-specification-complete.md](清单规范/01-pod-specification-complete.md) | Pod 规格完整参考 |
+| [清单规范/12-advanced-pod-patterns.md](清单规范/02-advanced-pod-patterns.md)、[清单规范/35-advanced-pod-patterns.md](清单规范/05-advanced-pod-patterns.md) | 高级 Pod 模式 |
+| [清单规范/23-pod-security-standards.md](清单规范/03-pod-security-standards.md) | 清单中的 PSS |
+| [清单规范/28-poddisruptionbudget-reference.md](清单规范/04-poddisruptionbudget-reference.md) | PodDisruptionBudget 参考 |
 
 ### ⚙️ 配置与字典 · [配置与字典/](配置与字典/)
 
@@ -220,7 +220,7 @@ Pod 安全标准（PSS）、安全准入（PSA）、安全策略（PSP）、内�
 
 | 文件 | 说明 |
 |------|------|
-| [云厂商/05-eks-iam-irsa-pod-identity.md](云厂商/05-eks-iam-irsa-pod-identity.md) | AWS EKS IAM/IRSA/Pod Identity |
+| [云厂商/05-eks-iam-irsa-pod-identity.md](云厂商/01-eks-iam-irsa-pod-identity.md) | AWS EKS IAM/IRSA/Pod Identity |
 
 ### 🗂️ 生态索引 · [生态索引/](生态索引/)
 

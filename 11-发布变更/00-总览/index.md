@@ -10,5 +10,5 @@ created: '2026-07-25'
 
 ## 文档
 
-- [[11-发布变更/00-总览/02-release-engineering-strategy.md|02-release-engineering-strategy]]
-- [[11-发布变更/00-总览/99-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]
+- [[11-发布变更/00-总览/01-release-engineering-strategy.md|02-release-engineering-strategy]]
+- [[11-发布变更/00-总览/02-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]

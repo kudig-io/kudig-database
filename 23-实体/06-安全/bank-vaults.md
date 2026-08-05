@@ -257,7 +257,7 @@ Bank-Vaults 异常
 ## Related
 
 - [[submariner]] — Submariner
-- [[03-prometheus-ha-deployment]] — [[prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
+- [[02-prometheus-ha-deployment]] — [[prometheus|Prometheus]]us 高可用部署|Prometheus 高可用部署]]
 - [[inclavare-containers]] — Inclavare Containers
 - [[23-实体/06-安全/vault.md|vault]] — HashiCorp Vault
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

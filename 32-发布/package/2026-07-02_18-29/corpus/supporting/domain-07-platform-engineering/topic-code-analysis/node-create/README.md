@@ -541,19 +541,19 @@ kubectl describe node worker-1
 
 ## 相关函数
 
-- [`kubeadm join`](../cluster-create/06-join.md) — 节点加入流程
-- [`CSR 自动审批`](../cluster-create/12-join-advanced.md) — 证书签名请求
+- [`kubeadm join`](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-07-platform-engineering/topic-code-analysis/cluster-create/05-join.md) — 节点加入流程
+- [`CSR 自动审批`](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/topic-functions/cluster-create/11-join-advanced.md) — 证书签名请求
 - [`证书轮换`](06-certificate.md) — kubelet 证书自动续期
 - [`节点驱逐`](04-drain.md) — drain/cordon/uncordon
 - [`CNI 节点配置`](09-cni-node.md) — Pod 网络命名空间
-- [`Windows 节点接入`](16-windows-node.md) — Windows 容器混合集群
-- [`ARM 节点与多架构`](17-arm-multiarch.md) — ARM64/Graviton 节点管理与多架构镜像
+- [`Windows 节点接入`](06-windows-node.md) — Windows 容器混合集群
+- [`ARM 节点与多架构`](07-arm-multiarch.md) — ARM64/Graviton 节点管理与多架构镜像
 
 ## Related
 
 - [[entities/kubernetes.md|kubernetes]]
 - [[entities/cni.md|cni]]
-- [[domain-07-platform-engineering/代码分析/node-create/16-windows-node.md|16-windows-node]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-07-platform-engineering/topic-code-analysis/node-create/06-windows-node|16-windows-node]]
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
 - [[entities/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - domain-03-networking-traffic MOC — Cross-reference
@@ -561,12 +561,12 @@ kubectl describe node worker-1
 - topic-application-architecture MOC — Cross-reference
 - [[concepts/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[concepts/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[domain-14-ai-ml-infra/基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/01-gpu-scheduling-management|GPU 调度与管理]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/01-ai-infra/02-distributed-training-frameworks|分布式训练框架]] — Cross-reference
 - domain-08-release-change-management MOC — Cross-reference
 - [[skills/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[domain-07-platform-engineering/运维/06-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-07-platform-engineering/operate/01-monitoring-alerting-system|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
 - [[entities/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
 - [[domain-19-landscape-references/领域索引/cluster-index.md|Cluster 集群知识图谱索引]]

@@ -51,4 +51,4 @@ last_updated: '2026-07-21'
 
 ## 文档
 
-- [[09-可观测性/06-SLO-SLI/99-slo-operations-guide.md|99-slo-operations-guide]]
+- [[09-可观测性/06-SLO-SLI/09-slo-operations-guide.md|99-slo-operations-guide]]

@@ -76,14 +76,14 @@ authors:
 
 - **新手入门**：先读 [[02-工作负载/04-多语言运行时/01-go-on-kubernetes-production.md|Go 生产实践]]，理解通用的探针、生命周期与镜像构建模式。
 - **AI 平台工程师**：重点阅读 [[02-工作负载/04-多语言运行时/02-python-on-kubernetes-production.md|Python 生产实践]] 与 [[02-工作负载/04-多语言运行时/04-gpu-workload-management.md|GPU 工作负载管理]]。
-- **平台架构师**：关注 [[02-工作负载/04-多语言运行时/05-multicluster-workload-distribution.md|多集群工作负载分发]] 与 [[05-网络/01-K8s网络核心/49-multicluster-network-federation.md|多集群网络联邦]]。
+- **平台架构师**：关注 [[02-工作负载/04-多语言运行时/05-multicluster-workload-distribution.md|多集群工作负载分发]] 与 [[05-网络/01-K8s网络核心/51-multicluster-network-federation.md|多集群网络联邦]]。
 
 ## 跨域关联
 
-- 镜像安全：[[08-安全/05-供应链/10-image-security-scanning.md|镜像安全扫描]]
-- Pod 安全加固：[[08-安全/04-策略治理/06-pod-security-standards.md|Pod Security Standards]]
+- 镜像安全：[[08-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]
+- Pod 安全加固：[[08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
 - 可观测性：[[09-可观测性/README|可观测性]]
-- Java 运行时：[[02-工作负载/02-Java-on-K8s/02-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
+- Java 运行时：[[02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
 
 ## Related
 

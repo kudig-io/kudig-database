@@ -549,9 +549,9 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 
 ## 延伸阅读
 
-- [集群配置参数](../../domain-01-cluster-fundamentals/06-cluster-configuration-parameters.md)
-- [API 版本与特性](../../domain-01-cluster-fundamentals/03-api-versions-features.md)
-- [Deployment 生产模式](../../domain-02-workloads-applications/02-deployment-production-patterns.md)
+- [集群配置参数](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-01-cluster-fundamentals/05-upgrade-paths/01-cluster-configuration-parameters.md)
+- [API 版本与特性](32-发布/package/2026-07-02_18-29/corpus/peripheral/domain-01-cluster-fundamentals/04-api-versions/01-api-versions-features.md)
+- [Deployment 生产模式](32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/00-core-workloads/01-deployment-production-patterns.md)
 - [K8s 速查手册](../../domain-17-system-foundation/速查卡/k8s.md)
 
 ## Related

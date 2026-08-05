@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: kube-system
 ticket_type: 网络故障
 skill_ref:
-- '[[domain-03-networking-traffic/K8s网络核心/09-kube-proxy-modes-performance.md|kube-proxy
+- '[[32-发布/package/2026-07-02_18-40/corpus/supporting/domain-03-networking-traffic/00-core-k8s-networking/02-kube-proxy-modes-performance|kube-proxy
   模式与性能]]'
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/service-fta.md|Service 异常故障树分析]]'
 fta_ref:

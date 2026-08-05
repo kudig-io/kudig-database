@@ -68,16 +68,16 @@ prerequisites:
 ### 故障排查
 
 - [[19-故障诊断/04-高级排障/structural-01-control-plane/03-scheduler-troubleshooting.md|Scheduler 故障排查指南]]
-- [[19-故障诊断/02-资源排障/17-hpa-vpa-troubleshooting.md|HPA/VPA 故障排查 (HPA/VPA Troubleshooting)]]
-- [[19-故障诊断/02-资源排障/24-quota-limitrange-troubleshooting.md|Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)]]
-- [[19-故障诊断/03-基础设施排障/28-cluster-autoscaler-troubleshooting.md|集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)]]
-- [[19-故障诊断/03-基础设施排障/33-performance-bottleneck-troubleshooting.md|性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/09-hpa-vpa-troubleshooting.md|HPA/VPA 故障排查 (HPA/VPA Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/16-quota-limitrange-troubleshooting.md|Quota/LimitRange 故障排查 (Quota/LimitRange Troubleshooting)]]
+- [[19-故障诊断/03-基础设施排障/04-cluster-autoscaler-troubleshooting.md|集群自动扩缩容故障排查 (Cluster Autoscaler Troubleshooting)]]
+- [[19-故障诊断/03-基础设施排障/09-performance-bottleneck-troubleshooting.md|性能瓶颈故障排查 (Performance Bottleneck Troubleshooting)]]
 - [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/02-autoscaling-troubleshooting.md|HPA 与 VPA 自动扩缩容故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md|Cluster Autoscaler 节点自动扩缩容故障排查指南]]
 
 ### 技能卡片
 
-- [[19-故障诊断/08-技能体系/12-autoscaling-failure.md|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]]
+- [[19-故障诊断/08-技能体系/13-autoscaling-failure.md|HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation]]
 
 ### YAML 配置
 
@@ -107,7 +107,7 @@ prerequisites:
 
 ### 资源管理
 
-- [[10-平台工程/03-治理/03-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
+- [[10-平台工程/03-治理/01-capacity-planning-resource-assessment.md|03 capacity planning resource assessment]]
 - [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/01-resources-quota-troubleshooting.md|资源与调度故障排查指南]]
 
 ### Pod调度

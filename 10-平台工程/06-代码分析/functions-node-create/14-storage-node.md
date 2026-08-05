@@ -500,8 +500,8 @@ echo "  CSI mounters: $(ls /var/lib/kubelet/plugins/kubernetes.io/csi/ 2>/dev/nu
 ## 相关文档
 
 - [22-storage-volumes](../cluster-create/22-storage-volumes.md) - 集群存储卷管理
-- [../../存储/06-storage-fundamental-concepts.md](../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/06-storage-fundamental-concepts.md) - 存储基础概念
-- [../../存储/09-pv-pvc-troubleshooting.md](../../../06-%E5%AD%98%E5%82%A8/01-K8s%E5%AD%98%E5%82%A8/09-pv-pvc-troubleshooting.md) - PV/PVC 故障排查
+- [../../存储/06-storage-fundamental-concepts.md](../../../06-存储/01-K8s存储/07-storage-fundamental-concepts.md) - 存储基础概念
+- [../../存储/09-pv-pvc-troubleshooting.md](../../../06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md) - PV/PVC 故障排查
 - [../../集群基础/22-container-storage-deep-dive.md](../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/03-%E6%8E%A7%E5%88%B6%E5%B9%B3%E9%9D%A2/22-container-storage-deep-dive.md) - CSI 架构深度解析
 
 ---

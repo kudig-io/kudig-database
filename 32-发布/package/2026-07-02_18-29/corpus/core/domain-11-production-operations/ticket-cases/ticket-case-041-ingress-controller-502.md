@@ -21,7 +21,7 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: ingress-nginx
 ticket_type: 应用入口故障
 skill_ref:
-- '[[domain-03-networking-traffic/API网关/14-api-gateway-production-operations.md|API
+- '[[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-03-networking-traffic/03-api-gateway/01-api-gateway-production-operations|API
   网关生产运维]]'
 - '[[domain-10-troubleshooting-diagnostics/FTA故障树/list/ingress-fta.md|Ingress 异常故障树分析]]'
 fta_ref:

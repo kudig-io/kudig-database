@@ -47,7 +47,7 @@ last_updated: 2026-05-21
 - [[10-docker-logging-management]] — Docker logging management
 - [[11-docker-automation-devops]] — Docker automation devops
 - [[12-java-containerization-guide]] — Java containerization guide
-- [[99-docker-commands-reference]] — Docker commands reference
+- [[13-docker-commands-reference]] — Docker commands reference
 
 ### 镜像管理
 
@@ -55,23 +55,23 @@ last_updated: 2026-05-21
 - [[02-docker-registry-enterprise-distribution]] — Docker registry enterprise distribution
 - [[03-jfrog-artifactory-enterprise]] — Jfrog artifactory enterprise
 - [[04-harbor-enterprise-security-scanning]] — Harbor enterprise security scanning
-- [[04-quay-enterprise-registry]] — Quay enterprise registry
-- [[05-gitlab-container-registry-enterprise]] — Gitlab container registry enterprise
-- [[06-amazon-ecr-enterprise]] — Amazon ecr enterprise
-- [[99-harbor-enterprise-guide]] — Harbor enterprise guide
+- [[05-quay-enterprise-registry]] — Quay enterprise registry
+- [[06-gitlab-container-registry-enterprise]] — Gitlab container registry enterprise
+- [[07-amazon-ecr-enterprise]] — Amazon ecr enterprise
+- [[08-harbor-enterprise-guide]] — Harbor enterprise guide
 
 ### 98 Merged Indexes
 
 - [[00-open-source-projects-index-from-domain-13]] — Open source projects index from domain 13
-- [[00-open-source-projects-index-from-domain-22]] — Open source projects index from domain 22
+- [[01-open-source-projects-index-from-domain-22]] — Open source projects index from domain 22
 - [[MOC-from-domain-13]] — MOC from domain 13
 - [[MOC-from-domain-22]] — MOC from domain 22
 - [[README-from-domain-13]] — README from domain 13
 - [[README-from-domain-22]] — README from domain 22
 
 ## 相关 Domain
-- [[集群基础/98-merged-indexes/index.md|Domain 01 集群基础 索引]]
-- [[系统基础/98-merged-indexes/index.md|Domain 17 系统基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 01 集群基础 索引]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Domain 17 系统基础 索引]]
 
 
 <!-- risk-assessed -->

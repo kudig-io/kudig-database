@@ -69,7 +69,7 @@ description: '## 项目概述'
 
 ## Related
 
-- [[08-containerd-multi-tenant]] — [[containerd|containerd]]rd 多租户|containerd 多租户]]租户|多租户]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/entities/09-containerd-multi-tenant]] — [[containerd|containerd]]rd 多租户|containerd 多租户]]租户|多租户]]
 - [[harbor]] — Harbor
 - [[opentofu]] — OpenTofu
 - [[cartography]] — Cartography

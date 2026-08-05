@@ -84,9 +84,9 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/资源排障/14-pvc-storage-troubleshooting.md|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/06-pvc-storage-troubleshooting|14 - PVC与存储全面故障排查 (PVC & Storage Comprehensive Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/核心排障/04-storage-csi-troubleshooting.md|04 - CSI 存储驱动故障排查 (CSI Driver Troubleshooting)]]
-- [[domain-10-troubleshooting-diagnostics/资源排障/21-statefulset-troubleshooting.md|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/01-resource-troubleshooting/08-statefulset-troubleshooting|21 - StatefulSet 故障排查 (StatefulSet Troubleshooting)]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/01-pv-pvc-troubleshooting.md|PV/PVC 存储深度排查与持久化治理指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/02-csi-troubleshooting.md|CSI 存储驱动深度排查与架构优化指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/04-storage/03-snapshot-backup-troubleshooting.md|CSI 快照与卷备份故障排查指南]]
@@ -96,12 +96,12 @@ prerequisites:
 
 ### 控制平面组件
 
-- [[domain-01-cluster-fundamentals/控制平面/22-container-storage-deep-dive.md|22 container storage deep dive]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-01-cluster-fundamentals/03-control-plane/08-container-storage-deep-dive|22 container storage deep dive]]
 - cloud-controller-manager 深度解析 (CCM Deep Dive)
 
 ### 技能卡片
 
-- [[domain-10-troubleshooting-diagnostics/技能体系/07-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
+- [[08-pvc-storage-failure|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]]
 - [[domain-10-troubleshooting-diagnostics/技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]]
 
 ### K8s 事件
@@ -110,8 +110,8 @@ prerequisites:
 
 ### 功能操作
 
-- [[domain-02-workloads-applications/topic-functions/cluster-create/22-storage-volumes.md|存储与卷管理]]
-- [[domain-02-workloads-applications/topic-functions/node-create/14-storage-node.md|节点存储]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/topic-functions/cluster-create/19-storage-volumes|存储与卷管理]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-02-workloads-applications/topic-functions/node-create/01-storage-node|节点存储]]
 
 ### 设计原则
 

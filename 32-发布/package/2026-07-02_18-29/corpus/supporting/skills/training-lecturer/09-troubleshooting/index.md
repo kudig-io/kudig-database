@@ -17,6 +17,6 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[skills/training-lecturer/09-troubleshooting/09-common-problems.md|Common Problems]]
-- [[skills/training-lecturer/09-troubleshooting/09-health-check.md|Health Check]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/08-troubleshooting/01-common-problems|Common Problems]]
+- [[32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/08-troubleshooting/02-health-check|Health Check]]
 

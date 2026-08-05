@@ -12,7 +12,7 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-05-23
 relationships:
-- target: '[[domain-07-platform-engineering/运维/13-multi-cluster-management.md]]'
+- target: '[[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/02-multi-cluster-management]]'
   type: uses
 - target: '[[concepts/Deployment × Secret 管理.md]]'
   type: uses
@@ -88,7 +88,7 @@ relationships:
 - Pod 生命周期 × Secret 管理 — Secret 注入
 - [[concepts/Deployment × Secret 管理.md|Deployment × Secret 管理]] — 部署与 Secret
 - Secret 管理 × 存储模型 — Secret 存储
-- IaC × [[domain-07-platform-engineering/运维/13-multi-cluster-management.md|多集群管理]] — 基础设施即代码
+- IaC × [[32-发布/package/2026-07-02_18-40/corpus/core/domain-07-platform-engineering/operate/02-multi-cluster-management|多集群管理]] — 基础设施即代码
 
 ### SRE/可靠性
 

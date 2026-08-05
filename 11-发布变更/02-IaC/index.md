@@ -27,8 +27,8 @@ last_updated: 2026-07
 - [[11-发布变更/02-IaC/03-pulumi-enterprise-iac.md|Pulumi Enterprise Iac]]
 - [[11-发布变更/02-IaC/04-azure-resource-manager-enterprise.md|Azure Resource Manager Enterprise]]
 - [[11-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md|Crossplane Enterprise Orchestration]]
-- [[11-发布变更/02-IaC/11-infrastructure-as-code.md|Infrastructure As Code]]
-- [[11-发布变更/02-IaC/99-crossplane-platform-guide.md|Crossplane Platform Guide]]
+- [[11-发布变更/02-IaC/06-infrastructure-as-code.md|Infrastructure As Code]]
+- [[11-发布变更/02-IaC/07-crossplane-platform-guide.md|Crossplane Platform Guide]]
 
 
 

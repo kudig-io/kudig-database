@@ -25,11 +25,11 @@ last_updated: 2026-07
 - domain-08-release-change-management/02-iac/
 - domain-08-release-change-management/03-change-management/
 - domain-08-release-change-management/04-testing-quality/
-- [[domain-08-release-change-management/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - domain-08-release-change-management/topic-deployment/
 - domain-08-release-change-management/topic-migration/
 
 ## 文档
 
-- [[domain-08-release-change-management/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
 

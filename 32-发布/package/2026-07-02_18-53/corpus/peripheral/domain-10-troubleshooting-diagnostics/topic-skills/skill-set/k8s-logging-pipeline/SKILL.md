@@ -140,7 +140,7 @@ agent_execution_mode: L2-semi-auto
 | 资源 | 路径 |
 |------|------|
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
-| 单文件完整版 | [../16-logging-pipeline-failure.md](../16-logging-pipeline-failure.md) |
+| 单文件完整版 | [../16-logging-pipeline-failure.md](32-发布/package/2026-07-02_18-53/corpus/core/domain-10-troubleshooting-diagnostics/topic-skills/14-logging-pipeline-failure.md) |
 
 ## Related
 

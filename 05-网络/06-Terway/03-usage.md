@@ -1079,7 +1079,7 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 - vSwitch 可用 IP 需要额外预留（CEN 路由传播）
 - 建议使用 Terraform 管理多集群网络配置
 
-> 相关参考：[云厂商/04-alicloud-ack/242-ack-vpc-network.md](../云厂商/04-alicloud-ack/242-ack-vpc-network.md)
+> 相关参考：[云厂商/04-alicloud-ack/242-ack-vpc-network.md](003-ack-vpc-network.md)
 
 ---
 
@@ -1099,13 +1099,13 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 
 | 文档 | 说明 |
 |:---|:---|
-| [网络/05-terway-advanced-guide.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/05-terway-advanced-guide.md) | Terway 高级指南（模式对比、ENIIP 详解、容量规划） |
-| [网络/37-terway-resources-crud-operations.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/37-terway-resources-crud-operations.md) | CRD 完整 CRUD 操作 |
-| [网络/38-terway-gc-mechanism.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/38-terway-gc-mechanism.md) | GC 垃圾回收机制详解 |
-| [云厂商/04-alicloud-ack/242-ack-vpc-network.md](../云厂商/04-alicloud-ack/242-ack-vpc-network.md) | VPC 网络规划参考 |
-| [网络/16-networkpolicy-deep-practice.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/16-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
-| [网络/02-cni-architecture-fundamentals.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/02-cni-architecture-fundamentals.md) | CNI 架构基础 |
-| [网络/03-cni-plugins-comparison.md](../01-K8s%E7%BD%91%E7%BB%9C%E6%A0%B8%E5%BF%83/03-cni-plugins-comparison.md) | CNI 插件对比选型 |
+| [网络/05-terway-advanced-guide.md](../01-K8s网络核心/06-terway-advanced-guide.md) | Terway 高级指南（模式对比、ENIIP 详解、容量规划） |
+| [网络/37-terway-resources-crud-operations.md](../01-K8s网络核心/39-terway-resources-crud-operations.md) | CRD 完整 CRUD 操作 |
+| [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md) | GC 垃圾回收机制详解 |
+| [云厂商/04-alicloud-ack/242-ack-vpc-network.md](003-ack-vpc-network.md) | VPC 网络规划参考 |
+| [网络/16-networkpolicy-deep-practice.md](../01-K8s网络核心/17-networkpolicy-deep-practice.md) | NetworkPolicy 深度实践 |
+| [网络/02-cni-architecture-fundamentals.md](../01-K8s网络核心/03-cni-architecture-fundamentals.md) | CNI 架构基础 |
+| [网络/03-cni-plugins-comparison.md](../01-K8s网络核心/04-cni-plugins-comparison.md) | CNI 插件对比选型 |
 
 ### 13.3 Topic 专题
 

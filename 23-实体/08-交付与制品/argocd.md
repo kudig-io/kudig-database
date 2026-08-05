@@ -227,8 +227,8 @@ argocd app delete my-app --cascade
 
 - 36-ecosystem-kustomize-helm-argocd
 - 09-gitops-workflow-argocd
-- [[19-故障诊断/04-高级排障/38-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
-- [[02-工作负载/02-Java-on-K8s/06-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- [[19-故障诊断/04-高级排障/04-gitops-argocd-troubleshooting.md|38-gitops-argocd-troubleshooting]]
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
 - [[19-故障诊断/06-FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 
 <!-- risk-assessed -->

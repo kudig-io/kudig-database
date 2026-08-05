@@ -59,7 +59,7 @@ prerequisites:
 - Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 - 77 - Service实现机制
 - Kube-proxy 实现模式与性能优化 (Kube-proxy Modes & Performance)
-- [[05-网络/01-K8s网络核心/10-service-advanced-features.md|10 service advanced features]]
+- [[05-网络/01-K8s网络核心/11-service-advanced-features.md|10 service advanced features]]
 
 ### DNS 与服务发现
 
@@ -96,9 +96,9 @@ prerequisites:
 ### 故障排查
 
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting.md|03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)]]
-- [[19-故障诊断/02-资源排障/15-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
-- [[19-故障诊断/03-基础设施排障/25-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
-- [[19-故障诊断/03-基础设施排障/26-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
+- [[19-故障诊断/02-资源排障/07-ingress-troubleshooting.md|15 - Ingress 故障排查 (Ingress Troubleshooting)]]
+- [[19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting.md|25 - 网络连通性故障排查 (Network Connectivity Troubleshooting)]]
+- [[19-故障诊断/03-基础设施排障/02-dns-troubleshooting.md|26 - DNS 故障排查 (DNS Troubleshooting)]]
 - [[19-故障诊断/04-高级排障/structural-03-networking/01-cni-troubleshooting.md|CNI 网络插件故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md|CoreDNS/DNS 故障排查指南]]
 - [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md|Service 与 Ingress 故障排查指南]]
@@ -111,7 +111,7 @@ prerequisites:
 ### 技能卡片
 
 - [[19-故障诊断/08-技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]]
-- [[19-故障诊断/08-技能体系/13-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
+- [[19-故障诊断/08-技能体系/14-ingress-gateway-failure.md|Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation]]
 
 ### FTA 故障树
 

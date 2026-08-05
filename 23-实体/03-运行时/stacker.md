@@ -205,7 +205,7 @@ stacker clean --all
 
 - [[ratify]] — Ratify
 - [[container2wasm]] — container2wasm
-- [[23-实体/03-运行时/06-containerd-observability.md|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
+- [[23-实体/03-运行时/05-containerd-observability.md|observability]]]] — [[containerd|containerd]]rd 可观测性|containerd 可观测性]]
 - [[docker]] — Docker
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

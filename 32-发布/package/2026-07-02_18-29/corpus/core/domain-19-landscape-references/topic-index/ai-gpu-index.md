@@ -90,9 +90,9 @@ prerequisites:
 
 ### 故障排查
 
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/01-ai-ml-workloads-troubleshooting.md|AI/ML 工作负载故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/02-kubeflow-troubleshooting.md|Kubeflow 平台故障排查指南]]
-- [[domain-10-troubleshooting-diagnostics/高级排障/10-ai-ml-workloads/03-mpi-operator-troubleshooting.md|MPI Operator 与分布式训练故障排查指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/01-ai-ml-workloads-troubleshooting|AI/ML 工作负载故障排查指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/02-kubeflow-troubleshooting|Kubeflow 平台故障排查指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/12-ai-ml-workloads/03-mpi-operator-troubleshooting|MPI Operator 与分布式训练故障排查指南]]
 - [[domain-10-troubleshooting-diagnostics/高级排障/02-node-components/06-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查指南]]
 
 ### 调度与资源
@@ -104,7 +104,7 @@ prerequisites:
 
 - 141 - AI成本分析与FinOps实践 (AI Cost Analysis & FinOps)
 - AI平台可观测性体系
-- [[domain-10-troubleshooting-diagnostics/高级排障/12-monitoring-observability/04-finops-cost-optimization-troubleshooting.md|FinOps 成本优化与云费用故障排查指南]]
+- [[32-发布/package/2026-07-02_18-29/corpus/core/domain-10-troubleshooting-diagnostics/topic-structural-trouble-shooting/15-monitoring-observability/04-finops-cost-optimization-troubleshooting|FinOps 成本优化与云费用故障排查指南]]
 
 ## 扩展参考
 
@@ -115,13 +115,13 @@ prerequisites:
 - Volcano
 - Fluid
 - HAMi (Heterogeneous AI Computing Virtualization Middleware)
-- [[domain-15-specialized-tech/边缘计算/99-kubernetes-developer-toolchain-guide.md|99 kubernetes developer toolchain guide]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-15-specialized-tech/01-edge-computing/01-kubernetes-developer-toolchain-guide|99 kubernetes developer toolchain guide]]
 - HolmesGPT
 - ModelPack
 
 ### 技术论文
 
-- [[domain-19-landscape-references/论文/17-kubernetes-aiml-gpu-scheduling-llm-inference.md|17 kubernetes aiml gpu scheduling llm inference]]
+- [[32-发布/package/2026-07-02_18-29/corpus/supporting/domain-19-landscape-references/02-papers/06-kubernetes-aiml-gpu-scheduling-llm-inference|17 kubernetes aiml gpu scheduling llm inference]]
 
 
 <!-- risk-assessed -->

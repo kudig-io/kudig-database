@@ -609,7 +609,7 @@ kubectl delete cronjob <name>
 ---
 
 **关联文档**:
-- [../09-troubleshooting/09-health-check.md](../09-troubleshooting/09-health-check.md) — 健康检查
+- [../09-troubleshooting/09-health-check.md](32-发布/package/2026-07-02_18-29/corpus/peripheral/skills/training-lecturer/08-troubleshooting/02-health-check.md) — 健康检查
 - [../../domain-10-troubleshooting-diagnostics/topic-skills/11-job-cronjob-failure.md](../../domain-10-troubleshooting-diagnostics/技能体系/11-job-cronjob-failure.md) — Job/CronJob 问题 [[SKILL|Skill]]
 - [../../domain-02-workloads-applications/](../../domain-02-workloads-applications/) — 工作负载文档
 

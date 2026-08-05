@@ -353,8 +353,8 @@ const fast = await openRouter.chat.send({
 |------|------|
 | [01 - 概述与核心架构](./01-openrouter-overview-architecture.md) | 理解 OpenRouter 全貌 |
 | [03 - 模型与 Provider 生态](./03-openrouter-models-providers.md) | 深入模型选型与定价 |
-| [05 - API 参考](./05-openrouter-api-reference.md) | 完整请求/响应 Schema |
-| [09 - 框架集成](./09-openrouter-frameworks-integrations.md) | 主流框架接入指南 |
+| [05 - API 参考](32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-14-ai-ml-infra/topic-ai-coding/02-openrouter-api-reference.md) | 完整请求/响应 Schema |
+| [09 - 框架集成](06-openrouter-frameworks-integrations.md) | 主流框架接入指南 |
 
 ---
 

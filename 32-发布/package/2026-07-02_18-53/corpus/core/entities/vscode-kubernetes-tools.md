@@ -81,7 +81,7 @@ VS Code Kubernetes Tools 是一个功能强大的 Visual Studio Code 扩展，�
 - [[opengitops]] — OpenGitOps
 - [[cadence]] — Cadence
 - [[openkruise]] — OpenKruise
-- [[02-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
+- [[01-istio-advanced-traffic-management]] — [[Istio|Istio]]io 高级流量管理|Istio 高级流量管理]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 - vscode-kubernetes-tools

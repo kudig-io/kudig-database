@@ -21,7 +21,7 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[domain-07-platform-engineering/98-merged-indexes/index.md|Merged Indexes]]
+- [[32-发布/package/2026-07-02_18-53/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
 - domain-07-platform-engineering/build/
 - domain-07-platform-engineering/developer-experience/
 - domain-07-platform-engineering/governance/
@@ -30,9 +30,9 @@ last_updated: 2026-07
 
 ## 文档
 
-- [[domain-07-platform-engineering/12-automated-operations-toolchain.md|Automated Operations Toolchain]]
-- [[domain-07-platform-engineering/99-karpenter-node-autoscaling-guide.md|Karpenter Node Autoscaling Guide]]
-- [[domain-07-platform-engineering/99-keda-event-driven-autoscaling-guide.md|Keda Event Driven Autoscaling Guide]]
-- [[domain-07-platform-engineering/99-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
-- [[domain-07-platform-engineering/99-production-readiness-review-template.md|Production Readiness Review Template]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-07-platform-engineering/01-automated-operations-toolchain|Automated Operations Toolchain]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-07-platform-engineering/01-karpenter-node-autoscaling-guide|Karpenter Node Autoscaling Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/peripheral/domain-07-platform-engineering/03-keda-event-driven-autoscaling-guide|Keda Event Driven Autoscaling Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-14-ai-ml-infra/03-production-readiness-operations-guide|Production Readiness Operations Guide]]
+- [[32-发布/package/2026-07-02_18-53/corpus/core/domain-07-platform-engineering/03-production-readiness-review-template|Production Readiness Review Template]]
 

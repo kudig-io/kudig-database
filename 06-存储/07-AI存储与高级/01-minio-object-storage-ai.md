@@ -388,7 +388,7 @@ kubectl exec -n ai-platform ai-training-storage-pool-0-0 -- \
 
 ## Related
 
-- [[06-存储/01-K8s存储/05-csi-drivers-integration.md|CSI 驱动集成]]
+- [[06-存储/01-K8s存储/06-csi-drivers-integration.md|CSI 驱动集成]]
 - [[06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md|JuiceFS 分布式文件系统]]
 - [[15-AI基础设施/01-基础设施/06-ai-data-pipeline.md|AI 数据管线]]
 - [[12-可靠性/01-备份恢复/03-pv-backup-snapshot.md|PV 备份与快照]]

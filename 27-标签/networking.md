@@ -83,30 +83,30 @@ last_updated: '2026-07-21'
 ## K8s 网络核心 (K8s Networking Core)
 
 - [[05-网络/01-K8s网络核心/00-network-in-nutshell|网络核心概要]]
-- [[05-网络/01-K8s网络核心/01-network-architecture-overview|网络架构概览]]
-- [[05-网络/01-K8s网络核心/02-cni-architecture-fundamentals|CNI 架构基础]]
-- [[05-网络/01-K8s网络核心/03-cni-plugins-comparison|CNI 插件对比]]
-- [[05-网络/01-K8s网络核心/04-flannel-complete-guide|Flannel 完整指南]]
-- [[05-网络/01-K8s网络核心/05-terway-advanced-guide|Terway 高级指南]]
-- [[05-网络/01-K8s网络核心/06-service-concepts-types|Service 概念与类型]]
-- [[05-网络/01-K8s网络核心/07-service-implementation-details|Service 实现细节]]
-- [[05-网络/01-K8s网络核心/09-kube-proxy-modes-performance|kube-proxy 模式与性能]]
-- [[05-网络/01-K8s网络核心/11-dns-service-discovery-coredns|DNS 服务发现 CoreDNS]]
-- [[05-网络/01-K8s网络核心/13-coredns-architecture-principles|CoreDNS 架构原理]]
-- [[05-网络/01-K8s网络核心/16-networkpolicy-deep-practice|NetworkPolicy 深度实践]]
-- [[05-网络/01-K8s网络核心/17-network-policy-advanced|高级网络策略]]
-- [[05-网络/01-K8s网络核心/18-network-encryption-mtls|网络加密与 mTLS]]
-- [[05-网络/01-K8s网络核心/19-ingress-fundamentals|Ingress 基础]]
-- [[05-网络/01-K8s网络核心/20-ingress-controller-deep-dive|Ingress Controller 深度指南]]
-- [[05-网络/01-K8s网络核心/21-nginx-ingress-complete-guide|Nginx Ingress 完整指南]]
-- [[05-网络/01-K8s网络核心/26-ingress-production-best-practices|Ingress 生产最佳实践]]
-- [[05-网络/01-K8s网络核心/30-service-mesh-deep-dive|Service Mesh 深度指南]]
-- [[05-网络/01-K8s网络核心/31-multi-cluster-federation|多集群联邦]]
-- [[05-网络/01-K8s网络核心/32-multi-cluster-networking|多集群网络]]
-- [[05-网络/01-K8s网络核心/33-network-troubleshooting|网络故障排查]]
-- [[05-网络/01-K8s网络核心/34-network-performance-tuning|网络性能调优]]
-- [[05-网络/01-K8s网络核心/35-gateway-api-overview|Gateway API 概览]]
-- [[05-网络/01-K8s网络核心/36-api-gateway-patterns|API 网关模式]]
+- [[05-网络/01-K8s网络核心/02-network-architecture-overview|网络架构概览]]
+- [[05-网络/01-K8s网络核心/03-cni-architecture-fundamentals|CNI 架构基础]]
+- [[05-网络/01-K8s网络核心/04-cni-plugins-comparison|CNI 插件对比]]
+- [[05-网络/01-K8s网络核心/05-flannel-complete-guide|Flannel 完整指南]]
+- [[05-网络/01-K8s网络核心/06-terway-advanced-guide|Terway 高级指南]]
+- [[05-网络/01-K8s网络核心/07-service-concepts-types|Service 概念与类型]]
+- [[05-网络/01-K8s网络核心/08-service-implementation-details|Service 实现细节]]
+- [[05-网络/01-K8s网络核心/10-kube-proxy-modes-performance|kube-proxy 模式与性能]]
+- [[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns|DNS 服务发现 CoreDNS]]
+- [[05-网络/01-K8s网络核心/14-coredns-architecture-principles|CoreDNS 架构原理]]
+- [[05-网络/01-K8s网络核心/17-networkpolicy-deep-practice|NetworkPolicy 深度实践]]
+- [[05-网络/01-K8s网络核心/18-network-policy-advanced|高级网络策略]]
+- [[05-网络/01-K8s网络核心/19-network-encryption-mtls|网络加密与 mTLS]]
+- [[05-网络/01-K8s网络核心/20-ingress-fundamentals|Ingress 基础]]
+- [[05-网络/01-K8s网络核心/21-ingress-controller-deep-dive|Ingress Controller 深度指南]]
+- [[05-网络/01-K8s网络核心/22-nginx-ingress-complete-guide|Nginx Ingress 完整指南]]
+- [[05-网络/01-K8s网络核心/27-ingress-production-best-practices|Ingress 生产最佳实践]]
+- [[05-网络/01-K8s网络核心/32-service-mesh-deep-dive|Service Mesh 深度指南]]
+- [[05-网络/01-K8s网络核心/33-multi-cluster-federation|多集群联邦]]
+- [[05-网络/01-K8s网络核心/34-multi-cluster-networking|多集群网络]]
+- [[05-网络/01-K8s网络核心/35-network-troubleshooting|网络故障排查]]
+- [[05-网络/01-K8s网络核心/36-network-performance-tuning|网络性能调优]]
+- [[05-网络/01-K8s网络核心/37-gateway-api-overview|Gateway API 概览]]
+- [[05-网络/01-K8s网络核心/38-api-gateway-patterns|API 网关模式]]
 
 ## eBPF / Cilium
 
@@ -139,7 +139,7 @@ last_updated: '2026-07-21'
 - [[05-网络/03-服务网格/02-linkerd-enterprise-service-mesh|Linkerd 企业级 Service Mesh]]
 - [[05-网络/03-服务网格/05-dapr-enterprise-distributed-runtime|Dapr 企业级分布式运行时]]
 - [[05-网络/03-服务网格/07-service-mesh-comparison-selection|Service Mesh 对比选型]]
-- [[05-网络/03-服务网格/99-istio-service-mesh-guide|Istio Service Mesh 指南]]
+- [[05-网络/03-服务网格/11-istio-service-mesh-guide|Istio Service Mesh 指南]]
 
 ## 网络基础 (Networking Fundamentals)
 
@@ -148,7 +148,7 @@ last_updated: '2026-07-21'
 - [[05-网络/02-网络基础/03-dns-principles-configuration|DNS 原理与配置]]
 - [[05-网络/02-网络基础/04-load-balancing-technologies|负载均衡技术]]
 - [[05-网络/02-网络基础/05-network-security-fundamentals|网络安全基础]]
-- [[05-网络/02-网络基础/99-cilium-ebpf-network-guide|Cilium eBPF 网络指南]]
+- [[05-网络/02-网络基础/09-cilium-ebpf-network-guide|Cilium eBPF 网络指南]]
 
 ## 概念 (Concepts)
 
@@ -162,19 +162,19 @@ last_updated: '2026-07-21'
 ## 故障诊断 (Troubleshooting)
 
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting|CNI 网络排障]]
-- [[19-故障诊断/03-基础设施排障/25-network-connectivity-troubleshooting|网络连通性排障]]
-- [[19-故障诊断/02-资源排障/10-service-comprehensive-troubleshooting|Service 综合排障]]
-- [[19-故障诊断/02-资源排障/16-networkpolicy-troubleshooting|NetworkPolicy 排障]]
+- [[19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting|网络连通性排障]]
+- [[19-故障诊断/02-资源排障/02-service-comprehensive-troubleshooting|Service 综合排障]]
+- [[19-故障诊断/02-资源排障/08-networkpolicy-troubleshooting|NetworkPolicy 排障]]
 - [[19-故障诊断/04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting|高级网络策略排障]]
 
 ## 云厂商网络 (Cloud Provider Networking)
 
-- [[18-云厂商/02-AWS-EKS/03-eks-networking-vpc-cni|AWS EKS 网络 VPC CNI]]
-- [[18-云厂商/04-Azure-AKS/03-aks-networking-azure-cni|Azure AKS 网络 Azure CNI]]
-- [[18-云厂商/03-Google-GKE/03-gke-networking-dataplane-v2|GKE 网络 Dataplane V2]]
+- [[18-云厂商/02-AWS-EKS/02-eks-networking-vpc-cni|AWS EKS 网络 VPC CNI]]
+- [[18-云厂商/04-Azure-AKS/02-aks-networking-azure-cni|Azure AKS 网络 Azure CNI]]
+- [[18-云厂商/03-Google-GKE/02-gke-networking-dataplane-v2|GKE 网络 Dataplane V2]]
 - [[18-云厂商/01-阿里云/03-Terway-CNI网络|阿里云 Terway CNI 网络]]
-- [[18-云厂商/06-华为云CCE/02-cce-networking-vpc-router|华为云 CCE 网络 VPC Router]]
-- [[18-云厂商/05-腾讯云TKE/02-tke-networking-vpc-cni|腾讯云 TKE 网络 VPC CNI]]
+- [[18-云厂商/06-华为云CCE/01-cce-networking-vpc-router|华为云 CCE 网络 VPC Router]]
+- [[18-云厂商/05-腾讯云TKE/01-tke-networking-vpc-cni|腾讯云 TKE 网络 VPC CNI]]
 
 ## 知识字典 (Knowledge Dictionary)
 
