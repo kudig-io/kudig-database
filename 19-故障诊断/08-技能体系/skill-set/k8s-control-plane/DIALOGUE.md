@@ -442,7 +442,7 @@ kubectl无法连接
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
+- [[22-概念/14-案例研究/2026-07-15--admission-webhook超时导致所有api操作失败.md|2026-07-15--admission-webhook超时导致所有api操作失败]]
 ## Related
 
 - [[17-系统基础/04-K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]

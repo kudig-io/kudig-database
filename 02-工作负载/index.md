@@ -36,5 +36,5 @@ last_updated: '2026-07-21'
 ## 知识域导航
 
 - [[02-工作负载/README.md|README]] — 域入口与跨域导航
-- [[27-标签/k8s|k8s 标签枢纽]] — Kubernetes 核心知识
-- [[27-标签/production|production 标签枢纽]] — 生产实践
+- [[27-标签/01-核心平台/k8s|k8s 标签枢纽]] — Kubernetes 核心知识
+- [[27-标签/05-交付与运维/production|production 标签枢纽]] — 生产实践

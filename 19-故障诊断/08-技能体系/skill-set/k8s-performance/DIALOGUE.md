@@ -661,8 +661,8 @@ aliyun ess ExecuteScalingRule --ScalingRuleId <rule-id>
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-09-01-gpu-memory-leak.md|2026-09-01-gpu-memory-leak]]
-- [[22-概念/14-case-studies/2026-10-05-节点内核参数不一致导致sysctl配置冲突.md|2026-10-05-节点内核参数不一致导致sysctl配置冲突]]
+- [[22-概念/14-案例研究/2026-09-01-gpu-memory-leak.md|2026-09-01-gpu-memory-leak]]
+- [[22-概念/14-案例研究/2026-10-05-节点内核参数不一致导致sysctl配置冲突.md|2026-10-05-节点内核参数不一致导致sysctl配置冲突]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/deployment.md|Deployment]]

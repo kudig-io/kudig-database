@@ -414,7 +414,7 @@ aliyun ram CreatePolicy --PolicyName ack-custom --PolicyDocument '{"Version":"1"
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-06-25-resourcequota-exceeded.md|2026-06-25-resourcequota-exceeded]]
+- [[22-概念/14-案例研究/2026-06-25-resourcequota-exceeded.md|2026-06-25-resourcequota-exceeded]]
 ## Related
 
 - [[17-系统基础/06-知识字典/networking/service.md|Service]]

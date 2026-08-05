@@ -552,8 +552,8 @@ kubectl exec -it <pod-name> -n <namespace> -- /bin/bash
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-03-15-oomkilled-java-restart.md|2026-03-15-oomkilled-java-restart]]
-- [[22-概念/14-case-studies/2026-08-10-容器内存限制过严导致java应用频繁oom.md|2026-08-10-容器内存限制过严导致java应用频繁oom]]
+- [[22-概念/14-案例研究/2026-03-15-oomkilled-java-restart.md|2026-03-15-oomkilled-java-restart]]
+- [[22-概念/14-案例研究/2026-08-10-容器内存限制过严导致java应用频繁oom.md|2026-08-10-容器内存限制过严导致java应用频繁oom]]
 ## Related
 
 - [[31-脚本/video-scripts/pod-crashloop.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复 — 数字人播报脚本 (video-scripts)]]

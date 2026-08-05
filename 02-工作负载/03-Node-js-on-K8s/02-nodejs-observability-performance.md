@@ -552,5 +552,5 @@ export default function () {
 
 - [[02-工作负载/03-Node-js-on-K8s/01-nodejs-production-kubernetes.md|Node.js 生产部署]]
 - [[09-可观测性/README.md|可观测性知识域]]
-- [[27-标签/observability|observability 标签枢纽]]
+- [[27-标签/04-可观测性/observability|observability 标签枢纽]]
 - [[24-综合/05-可观测性/opentelemetry-prometheus.md|OpenTelemetry × Prometheus]]

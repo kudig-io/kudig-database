@@ -90,6 +90,6 @@ WebAssembly (Wasm) 最初为浏览器设计，但 WASI (WebAssembly System Inter
 
 ## Related Tags
 
-- [[27-标签/k8s|k8s]]
-- [[27-标签/containerd|containerd]]
-- [[27-标签/production|production]]
+- [[27-标签/01-核心平台/k8s|k8s]]
+- [[27-标签/01-核心平台/containerd|containerd]]
+- [[27-标签/05-交付与运维/production|production]]

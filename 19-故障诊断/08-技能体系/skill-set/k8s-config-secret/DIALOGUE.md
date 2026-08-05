@@ -283,8 +283,8 @@ kubectl annotate secret <secret-name> kms-key-id=<new-key-id> --overwrite
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-05-15-configmap-no-rolling-update.md|2026-05-15-configmap-no-rolling-update]]
-- [[22-概念/14-case-studies/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致.md|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
+- [[22-概念/14-案例研究/2026-05-15-configmap-no-rolling-update.md|2026-05-15-configmap-no-rolling-update]]
+- [[22-概念/14-案例研究/2026-10-25-secret未更新导致rolling-update新旧版本配置不一致.md|2026-10-25-secret未更新导致rolling-update新旧版本配置不一致]]
 ## Related
 
 - [[17-系统基础/04-K8s事件/02-pod-container-lifecycle-events.md|02 - Pod 与容器生命周期事件]]

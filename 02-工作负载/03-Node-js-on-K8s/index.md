@@ -39,4 +39,4 @@ last_updated: '2026-07-21'
 
 - [[02-工作负载/01-核心工作负载/index.md|核心工作负载]] — K8s 原生工作负载控制器
 - [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|多语言运行时]] — Go/Python/Rust 实践
-- [[27-标签/production|production 标签枢纽]] — 生产实践
+- [[27-标签/05-交付与运维/production|production 标签枢纽]] — 生产实践

@@ -111,7 +111,7 @@ status: done
 
 ## Related Tags
 
-- [[27-标签/ai-ml-infra|ai-ml-infra]]
-- [[27-标签/gpu|gpu]]
-- [[27-标签/k8s|k8s]]
-- [[27-标签/security|security]]
+- [[27-标签/06-AI与专项/ai-ml-infra|ai-ml-infra]]
+- [[27-标签/06-AI与专项/gpu|gpu]]
+- [[27-标签/01-核心平台/k8s|k8s]]
+- [[27-标签/03-安全与合规/security|security]]

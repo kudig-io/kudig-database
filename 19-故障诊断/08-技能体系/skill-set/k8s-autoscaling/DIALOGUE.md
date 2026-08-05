@@ -700,8 +700,8 @@ kubectl get vpa <vpa-name> -n <namespace> -o yaml | grep -A 20 "recommendation"
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-02-18-hpa-thrashing.md|2026-02-18-hpa-thrashing]]
-- [[22-概念/14-case-studies/2026-08-18-cluster-autoscaler-scale-down-delay.md|2026-08-18-cluster-autoscaler-scale-down-delay]]
+- [[22-概念/14-案例研究/2026-02-18-hpa-thrashing.md|2026-02-18-hpa-thrashing]]
+- [[22-概念/14-案例研究/2026-08-18-cluster-autoscaler-scale-down-delay.md|2026-08-18-cluster-autoscaler-scale-down-delay]]
 ## Related
 
 - [[23-实体/02-K8s核心组件/deployment.md|Deployment]]

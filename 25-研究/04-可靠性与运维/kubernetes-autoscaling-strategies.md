@@ -83,6 +83,6 @@ GPU 推理服务:    HPA (QPS/GPU利用率) + 预留节点池
 
 ## Related Tags
 
-- [[27-标签/k8s|k8s]]
-- [[27-标签/production|production]]
-- [[27-标签/best-practices|best-practices]]
+- [[27-标签/01-核心平台/k8s|k8s]]
+- [[27-标签/05-交付与运维/production|production]]
+- [[27-标签/07-参考与最佳实践/best-practices|best-practices]]

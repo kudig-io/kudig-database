@@ -39,4 +39,4 @@ last_updated: '2026-07-21'
 
 - [[06-存储/01-K8s存储/index.md|K8s 存储]] — PV/PVC/CSI 核心概念
 - [[06-存储/03-分布式存储/index.md|分布式存储]] — Ceph/Longhorn/OpenEBS
-- [[27-标签/storage|storage 标签枢纽]]
+- [[27-标签/02-网络与存储/storage|storage 标签枢纽]]

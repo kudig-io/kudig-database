@@ -88,6 +88,6 @@ Git Push → ArgoCD Sync → Argo Rollout
 
 ## Related Tags
 
-- [[27-标签/gitops|gitops]]
-- [[27-标签/production|production]]
-- [[27-标签/best-practices|best-practices]]
+- [[27-标签/05-交付与运维/gitops|gitops]]
+- [[27-标签/05-交付与运维/production|production]]
+- [[27-标签/07-参考与最佳实践/best-practices|best-practices]]

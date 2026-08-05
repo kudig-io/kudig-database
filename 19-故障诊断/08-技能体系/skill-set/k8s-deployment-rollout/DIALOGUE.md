@@ -18,7 +18,7 @@ last_updated: 2026-05-23
 relationships:
 - target: '[[26-技能/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md]]'
   type: uses
-- target: '[[22-概念/14-case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]'
+- target: '[[22-概念/14-案例研究/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md]]'
   type: uses
 - target: '[[23-实体/02-K8s核心组件/deployment.md]]'
   type: uses
@@ -456,10 +456,10 @@ kubectl patch deployment <deploy> -p '{"spec":{"template":{"spec":{"imagePullSec
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-05-28-daemonset-affinity-miss.md|2026-05-28-daemonset-affinity-miss]]
-- [[22-概念/14-case-studies/2026-06-20-节点时区不一致导致cronjob调度错乱.md|2026-06-20-节点时区不一致导致cronjob调度错乱]]
-- [[22-概念/14-case-studies/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
-- [[22-概念/14-case-studies/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
+- [[22-概念/14-案例研究/2026-05-28-daemonset-affinity-miss.md|2026-05-28-daemonset-affinity-miss]]
+- [[22-概念/14-案例研究/2026-06-20-节点时区不一致导致cronjob调度错乱.md|2026-06-20-节点时区不一致导致cronjob调度错乱]]
+- [[22-概念/14-案例研究/2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点.md|污点容忍度配置错误导致pod无法调度到专用节点]].md|2026-09-05-污点容忍度配置错误导致pod无法调度到专用节点]]
+- [[22-概念/14-案例研究/2026-10-15-pod-disruption-budget阻止节点维护排空.md|2026-10-15-pod-disruption-budget阻止节点维护排空]]
 ## Related
 
 - [[17-系统基础/06-知识字典/fundamentals/nodes.md|Nodes（节点）]]

@@ -98,10 +98,10 @@ last_updated: '2026-07-21'
 
 ## Related
 
-- [[27-标签/k8s|k8s 标签枢纽]] — Kubernetes 核心知识
-- [[27-标签/observability|observability 标签枢纽]] — 可观测性知识
-- [[27-标签/security|security 标签枢纽]] — 安全知识
-- [[27-标签/production|production 标签枢纽]] — 生产实践
+- [[27-标签/01-核心平台/k8s|k8s 标签枢纽]] — Kubernetes 核心知识
+- [[27-标签/04-可观测性/observability|observability 标签枢纽]] — 可观测性知识
+- [[27-标签/03-安全与合规/security|security 标签枢纽]] — 安全知识
+- [[27-标签/05-交付与运维/production|production 标签枢纽]] — 生产实践
 
 ## 子目录
 

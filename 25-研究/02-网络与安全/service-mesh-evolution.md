@@ -117,6 +117,6 @@ Phase 4: 多集群
 
 ## Related Tags
 
-- [[27-标签/networking|networking]]
-- [[27-标签/k8s|k8s]]
-- [[27-标签/production|production]]
+- [[27-标签/02-网络与存储/networking|networking]]
+- [[27-标签/01-核心平台/k8s|k8s]]
+- [[27-标签/05-交付与运维/production|production]]

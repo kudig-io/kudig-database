@@ -39,4 +39,4 @@ last_updated: '2026-07-21'
 
 - [[07-数据库中间件/01-数据库/index.md|数据库]] — 关系型/NoSQL 数据库
 - [[09-可观测性/README.md|可观测性知识域]] — 日志分析体系
-- [[27-标签/storage|storage 标签枢纽]]
+- [[27-标签/02-网络与存储/storage|storage 标签枢纽]]

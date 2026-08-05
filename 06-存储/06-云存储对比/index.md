@@ -39,4 +39,4 @@ last_updated: '2026-07-21'
 - [[06-存储/01-K8s存储/index.md|K8s 存储]] — PV/PVC/CSI 核心概念
 - [[06-存储/07-AI存储与高级/index.md|AI 存储与高级]] — 云 CSI 驱动详解
 - [[18-云厂商/README.md|云厂商知识域]] — 各云 K8s 服务对比
-- [[27-标签/storage|storage 标签枢纽]]
+- [[27-标签/02-网络与存储/storage|storage 标签枢纽]]

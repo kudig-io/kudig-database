@@ -825,7 +825,7 @@ kubectl get endpointslices -n <namespace>
 
 ## 相关案例
 
-- [[22-概念/14-case-studies/2026-09-15-multicluster-network-partition.md|2026-09-15-multicluster-network-partition]]
+- [[22-概念/14-案例研究/2026-09-15-multicluster-network-partition.md|2026-09-15-multicluster-network-partition]]
 
 
 <!-- risk-assessed -->

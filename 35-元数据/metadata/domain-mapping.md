@@ -48,7 +48,7 @@ last_updated: '2026-07-23'
 
 | 目录 | 原名 | 二级前缀 | 用途 |
 |---|---|---|---|
-| `22-概念/` | `concepts/` | 有（`01-核心架构/` … `14-case-studies/`） | 概念页（obsidian-wiki 分类） |
+| `22-概念/` | `concepts/` | 有（`01-核心架构/` … `14-案例研究/`） | 概念页（obsidian-wiki 分类） |
 | `23-实体/` | `entities/` | 有（`01-research/`） | 实体页：工具/产品/公司（obsidian-wiki 分类） |
 | `24-综合/` | `synthesis/` | 无 | 跨域综合文章（obsidian-wiki 分类） |
 | `25-研究/` | `research/` | 无 | 研究性笔记 |

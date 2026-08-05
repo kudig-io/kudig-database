@@ -156,15 +156,15 @@ estimated_read_time: 5min
 
 ### gitops
 - [[11-发布变更/01-GitOps/index.md|01-GitOps]] — GitOps 工作流、ArgoCD、Flux
-- [[27-标签/gitops|gitops 标签枢纽]]
+- [[27-标签/05-交付与运维/gitops|gitops 标签枢纽]]
 
 ### helm
 - [[03-清单模式/03-Helm值模式/index.md|03-Helm值模式]] — Helm Chart 配置参考
-- [[27-标签/helm|helm 标签枢纽]]
+- [[27-标签/05-交付与运维/helm|helm 标签枢纽]]
 
 ### operator
 - [[07-数据库中间件/05-Operator管理/index.md|05-Operator管理]] — Operator 开发与管理
-- [[27-标签/operator|operator 标签枢纽]]
+- [[27-标签/01-核心平台/operator|operator 标签枢纽]]
 
 ---
 
@@ -172,7 +172,7 @@ estimated_read_time: 5min
 
 ### docker
 - [[14-容器运行时/01-Docker/index.md|01-Docker]] — Docker 架构与运维
-- [[27-标签/containerd|containerd 标签枢纽]]
+- [[27-标签/01-核心平台/containerd|containerd 标签枢纽]]
 
 ### containerd
 - [[14-容器运行时/03-containerd-CRI-O/index.md|03-containerd-CRI-O]] — containerd/CRI-O 运行时
@@ -183,7 +183,7 @@ estimated_read_time: 5min
 
 ### sre
 - [[12-可靠性/06-SRE实践/index.md|06-SRE实践]] — SRE 方法论与实践
-- [[27-标签/sre|sre 标签枢纽]]
+- [[27-标签/05-交付与运维/sre|sre 标签枢纽]]
 
 ### chaos-engineering
 - [[12-可靠性/04-混沌工程/index.md|04-混沌工程]] — 混沌工程实践

@@ -29,14 +29,14 @@ KUDIG Database 是一个**双层结构**的云原生运维知识库：
 每个编号 Domain 均提供入口级生产就绪运维指南，另有关键跨域 Runbook：
 
 - **Per-Domain 生产就绪指南**：各知识域目录下的 `99-production-readiness-operations-guide.md`
-- **证书 / PKI 生命周期 Runbook**：`01-集群基础/03-控制平面/34-certificate-pki-lifecycle-runbook.md`
-- **集群升级 Runbook**：`01-集群基础/03-控制平面/35-cluster-upgrade-runbook.md`
-- **灾难恢复与业务连续性 Runbook**：`12-可靠性/02-灾难恢复/21-disaster-recovery-bc-runbook-v2.md`
-- **Fleet GitOps 操作指南**：`11-发布变更/01-GitOps/08-fleet-gitops-operations-guide.md`
-- **事件响应 Runbook 模板**：`13-生产运维/03-事件响应/24-incident-response-runbook-template.md`
-- **FinOps 成本治理 Runbook**：`13-生产运维/01-成本治理/14-finops-cost-governance-runbook.md`
-- **AI/ML 运维 Runbook**：`15-AI基础设施/01-基础设施/45-ai-ml-ops-runbook.md`
-- **边缘生产运维 Runbook**：`16-专项技术/01-边缘计算/14-edge-production-runbook.md`
+- **证书 / PKI 生命周期 Runbook**：`01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook.md`
+- **集群升级 Runbook**：`01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md`
+- **灾难恢复与业务连续性 Runbook**：`12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md`
+- **Fleet GitOps 操作指南**：`11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md`
+- **事件响应 Runbook 模板**：`13-生产运维/03-事件响应/11-incident-response-runbook-template.md`
+- **FinOps 成本治理 Runbook**：`13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md`
+- **AI/ML 运维 Runbook**：`15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md`
+- **边缘生产运维 Runbook**：`16-专项技术/01-边缘计算/12-edge-production-runbook.md`
 
 详细说明与缺口分析参见 `36-报告/assessments/domain-production-readiness-content-push-2026-07-01.md` 与 `36-报告/assessments/domain-content-gap-analysis-2026-07-01.md`。
 
