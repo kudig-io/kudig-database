@@ -1,0 +1,138 @@
+# Kubernetes 硬件支持调研 - 字段定义
+# 生成日期: 2026-08-06
+
+fields:
+  # ====== 基本信息 ======
+  - name: 基本信息
+    detail_level: 极简
+    fields:
+      - name: 名称
+        description: "硬件/技术的标准名称"
+        required: true
+      - name: 类别
+        description: "所属大类 (架构/内存/存储/网络/加速器/控制平面/资源管理/安全/运维)"
+        required: true
+      - name: 官方文档链接
+        description: "K8s 上游文档、厂商文档、CNCF 项目链接"
+        required: true
+
+  # ====== 硬件规格 ======
+  - name: 硬件规格
+    detail_level: 简要
+    fields:
+      - name: 最低配置
+        description: "功能可运行的最小硬件要求"
+        required: true
+      - name: 推荐配置
+        description: "生产环境推荐的硬件规格"
+        required: true
+      - name: 生产级配置
+        description: "大规模/高可用场景的硬件规格"
+        required: false
+      - name: 功耗基线
+        description: "空载/满载功耗、TDP、每瓦性能"
+        required: false
+
+  # ====== 兼容性 ======
+  - name: 兼容性
+    detail_level: 简要
+    fields:
+      - name: 支持的 K8s 版本范围
+        description: "在哪个 K8s 版本开始支持 / 需要的最低版本"
+        required: true
+      - name: 操作系统兼容性
+        description: "支持的操作系统与版本 (Linux 发行版、Windows Server 版本)"
+        required: true
+      - name: K8s 上游支持阶段
+        description: "GA / Beta / Alpha / 社区项目，代表生产就绪程度"
+        required: true
+      - name: 生态兼容性矩阵
+        description: "兼容的 CNI 列表、CSI 驱动、Operator、监控集成 (Prometheus exporter)"
+        required: false
+
+  # ====== 限制与约束 ======
+  - name: 限制与约束
+    detail_level: 简要
+    fields:
+      - name: 已知限制
+        description: "已知的功能限制、性能瓶颈、不支持的特性"
+        required: true
+      - name: 混部兼容性
+        description: "与其它硬件/工作负载混部时的兼容问题和影响"
+        required: false
+      - name: 性能开销
+        description: "虚拟化/抽象层引入的性能开销百分比"
+        required: false
+      - name: 固件与驱动依赖
+        description: "必需固件版本、内核模块、驱动兼容性矩阵、重启/热插拔影响"
+        required: false
+
+  # ====== 配置与部署 ======
+  - name: 配置与部署
+    detail_level: 详细
+    fields:
+      - name: 配置方式
+        description: "配置方法 (Device Plugin / DRA / CRD / Operator / 手动配置)"
+        required: true
+      - name: 配置示例
+        description: "典型配置 YAML 或命令示例"
+        required: false
+      - name: 部署位置与环境
+        description: "云 (公有/私有)、裸金属、虚拟机、边缘、混合部署兼容性"
+        required: false
+      - name: 虚拟化兼容性
+        description: "嵌套虚拟化、VM 热迁移对加速器的影响、PCIe 直通/透传、SR-IOV"
+        required: false
+
+  # ====== 性能特征 ======
+  - name: 性能特征
+    detail_level: 详细
+    fields:
+      - name: 基准性能数据
+        description: "官方或社区公布的基准测试结果 (如吞吐量、延迟、IOPS)"
+        required: true
+      - name: 扩展性上限
+        description: "该硬件下的最大节点数/Pod 数/卷数，瓶颈拐点"
+        required: false
+      - name: 每节点密度
+        description: "每节点可运行的最大 Pod 数、GPU 分片数等"
+        required: false
+
+  # ====== 安全 ======
+  - name: 安全
+    detail_level: 详细
+    fields:
+      - name: 安全特性
+        description: "TPM 支持、Secure Boot、机密计算、远程证明、硬件信任根"
+        required: true
+      - name: 合规与认证
+        description: "K8s 一致性认证、行业合规 (FIPS 140-2/3、PCI DSS、HIPAA)、硬件安全认证"
+        required: false
+
+  # ====== 运维与生命周期 ======
+  - name: 运维与生命周期
+    detail_level: 详细
+    fields:
+      - name: 可观测性支持
+        description: "硬件指标暴露 (Prometheus metrics)、健康检查接口、故障诊断工具、遥测数据"
+        required: false
+      - name: 维护与生命周期
+        description: "热插拔/热迁移支持、固件升级流程、节点排水影响、硬件 MTBF、NVMe 写入耐久度"
+        required: false
+      - name: 弹性与故障恢复
+        description: "单点故障影响、故障切换时间、数据持久化策略、硬件冗余要求 (RAID、多路径 I/O)"
+        required: false
+
+  # ====== 经济性 ======
+  - name: 经济性
+    detail_level: 详细
+    fields:
+      - name: 总拥有成本 (TCO)
+        description: "硬件采购成本、运行成本 (功耗/冷却)、维护成本、每节点/每 Pod 成本"
+        required: false
+      - name: 成熟度与社区支持
+        description: "社区活跃度、主要厂商支持、上下游生态成熟度"
+        required: false
+
+# 不确定字段 (deep 阶段自动填充)
+uncertain: []

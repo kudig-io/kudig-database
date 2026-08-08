@@ -68,6 +68,8 @@ Linux 是 Kubernetes 的操作系统基石，包括：
 | [[17-系统基础/01-Linux/12-arm-architecture-k8s-optimization.md|ARM 架构优化]] | ARM64、多架构、性能 | 440 |
 | [[17-系统基础/01-Linux/13-kernel-tuning-container-performance.md|内核调优]] | sysctl、容器场景优化 | 436 |
 | [[17-系统基础/01-Linux/14-windows-containers-k8s.md|Windows 容器]] | Windows 节点、混合集群 | 444 |
+| [[17-系统基础/01-Linux/16-k8s-node-os-support-matrix.md|节点 OS 支持矩阵]] | Linux 发行版、Windows Server、不可变 OS、云厂商默认 OS | 280+ |
+| [[17-系统基础/01-Linux/17-k8s-node-os-issues.md|节点 OS 问题全清单]] | 兼容性、资源耗尽、内核运行时、网络、Windows、安全问题 | 800+ |
 
 ## 核心概念速查
 

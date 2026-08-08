@@ -1,0 +1,120 @@
+{
+  "基本信息": {
+    "名称": "存储系统（节点本地存储、CSI 驱动、持久化存储后端、文件系统、NVMe 耐久度、本地 PV 调度）",
+    "类别": "存储",
+    "官方文档链接": [
+      "https://kubernetes.io/docs/concepts/storage/persistent-volumes/",
+      "https://kubernetes.io/docs/concepts/storage/storage-classes/",
+      "https://kubernetes.io/docs/concepts/storage/ephemeral-storage/",
+      "https://kubernetes.io/docs/concepts/storage/volumes/",
+      "https://kubernetes.io/docs/concepts/storage/volume-snapshots/",
+      "https://kubernetes.io/docs/concepts/storage/storage-capacity/",
+      "https://kubernetes.io/docs/concepts/storage/container-storage-interface/",
+      "https://kubernetes.io/docs/concepts/scheduling-eviction/node-pressure-eviction/",
+      "https://kubernetes.io/docs/concepts/storage/local-persistent-volumes/",
+      "https://kubernetes.io/blog/2019/01/15/container-storage-interface-ga/",
+      "https://kubernetes.io/blog/2019/04/04/kubernetes-1.14-local-persistent-volumes-ga/",
+      "https://kubernetes.io/blog/2022/09/26/storage-in-tree-to-csi-migration-status-update-1.25/",
+      "https://kubernetes.io/blog/2022/05/06/storage-capacity-ga/",
+      "https://kubernetes.io/blog/2022/05/05/volume-expansion-ga/",
+      "https://kubernetes.io/blog/2025/04/30/kubernetes-v1-33-storage-capacity-scoring-feature/",
+      "https://etcd.io/docs/v3.5/op-guide/hardware/",
+      "https://docs.ceph.com/en/reef/start/hardware-recommendations/",
+      "https://kubernetes-csi.github.io/docs/drivers.html",
+      "https://github.com/kubernetes-sigs/sig-storage-local-static-provisioner",
+      "https://rook.io/docs/rook/latest-release/"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": {
+      "工作节点": "本地磁盘约 20-40 GB（nodefs，存放容器镜像、可写层、日志与 emptyDir 临时数据）；官方未规定硬性容量下限，社区实践建议至少 20 GB；无持久化需求时可仅依赖节点本地盘，不要求任何特定 IOPS",
+      "控制面节点": "etcd 数据盘官方要求常规负载 50 顺序 IOPS、恢复带宽 10 MB/s，且明确建议使用 SSD（万不得已用 HDD 时选择 15000 RPM）；容量无官方规定，社区实践约 8-16 GB 起",
+      "说明": "Kubernetes 官方未发布节点本地存储的统一最低容量标准；上述为官方 IOPS 建议（etcd）与社区实践的汇总"
+    },
+    "推荐配置": {
+      "工作节点": "本地磁盘 100-500 GB SSD/NVMe；生产环境建议 nodefs 与 imagefs 分离（根盘与镜像盘独立）；运行本地 PV 时按需配置独立 NVMe 数据盘（如 1-2 块企业级 NVMe）",
+      "控制面节点": "etcd 专用 SSD（推荐 NVMe），重负载 500 顺序 IOPS、恢复带宽 100 MB/s 以上；磁盘容量建议 50 GB 以上以容纳 WAL、快照与压缩余量；强烈建议避免使用 NAS/网络存储承载 etcd",
+      "说明": "etcd 对磁盘写延迟（fsync）高度敏感，官方硬件指南明确要求 SSD 承载，慢盘会导致心跳超时与集群不稳定"
+    },
+    "生产级配置": {
+      "控制面节点": "etcd 独立 NVMe 数据盘（建议 3 DWPD 及以上写入耐久度），建议 RAID1/双盘镜像；3 副本集群；磁盘 IOPS 预留 2-3 倍余量以应对峰值写入与快照恢复",
+      "工作节点": "nodefs/imagefs/数据盘三分离（根盘 + 镜像盘 + 本地 PV 数据盘），全部使用企业级 NVMe；大规模集群建议存储网络 10GbE 及以上并做链路聚合",
+      "分布式存储（Ceph/Rook）": "每个 OSD 独立磁盘且容量不低于 1 TB（官方建议），每 BlueStore OSD 分配约 8 GB 内存，OSD 节点至少 1 核（推荐 2 核）/OSD，网络官方建议 10 Gb/s 并做 bonding；WAL/DB 放 SSD/NVMe 加速，1 块 NVMe 可支撑约 10 个 HDD OSD，SATA SSD 约 4-5 个",
+      "NFS 高可用": "双机 keepalived + DRBD 或商业 HA NFS 方案，消除单点故障"
+    },
+    "功耗基线": "[不确定]"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "CSI 规范 v1.0 GA（K8s v1.13+）；Local Persistent Volume v1.10 Alpha、v1.14 GA；in-tree 到 CSI 迁移 v1.17 Alpha、v1.25 整体 GA；CSIStorageCapacity v1.21 Alpha、v1.24 GA；卷快照（VolumeSnapshot）v1.20 GA；卷在线扩容 v1.24 GA（CSI）；v1.33 新增存储容量节点评分（Storage Capacity Scoring）；in-tree 存储插件自 v1.25/v1.26 起逐步移除（ScaleIO、Quobyte、StorageOS、GlusterFS 等，具体以各版本 Release Notes 为准）",
+    "操作系统兼容性": "Linux 为主流（主流发行版的 ext4/xfs/btrfs 均可作节点根文件系统）；containerd 默认 overlayfs 快照器要求底层文件系统支持 d_type（XFS 必须以 ftype=1 格式化）；Windows Server 2019/2022 仅支持 NTFS，本地 PV 与多数本地存储 CSI 不支持 Windows；各 CSI 驱动有独立 OS 支持矩阵，云厂商驱动通常支持主流 Linux 发行版",
+    "K8s 上游支持阶段": "CSI：GA（v1.13+）；Local PV：GA（v1.14+）；CSI 迁移：GA（v1.25+）；CSIStorageCapacity：GA（v1.24+）；卷快照：GA（v1.20+）；卷扩容：GA（v1.24，CSI）；本地存储调度依赖 kube-scheduler 的 WaitForFirstConsumer 延迟绑定（GA）；in-tree NFS/hostPath/emptyDir 仍可用但 in-tree 插件整体弃用，推荐迁移至 CSI",
+    "生态兼容性矩阵": "本地存储：kubernetes-sigs/local-static-provisioner（sig-storage 官方参考实现）、TopoLVM（LVM 动态供应）、HwameiStor、Open-Local、Rancher Local Path Provisioner；分布式存储：Rook（Ceph 编排，CNCF 毕业项目 2020）、ceph-csi（RBD/CephFS）、Longhorn、OpenEBS、CubeFS（CNCF 毕业 2025）；NFS：nfs.csi.k8s.io（kubernetes-csi 官方维护）；云厂商：AWS EBS/EFS/FSx for Lustre/Mountpoint S3、GCE PD/Filestore/GCS、Azure Disk/File/Blob、阿里云/腾讯云/华为云 CSI；企业存储：vSphere CSI、OpenStack Cinder CSI、NetApp Trident、Dell/EMC CSI、HPE CSI、Portworx；监控集成：node_exporter（node_filesystem_*、node_disk_*）、smartmon_exporter、Ceph mgr Prometheus 模块、kubelet cAdvisor 卷指标（kubelet_volume_stats_*）"
+  },
+  "限制与约束": {
+    "已知限制": [
+      "本地 PV 与节点强绑定，节点故障会导致数据不可用，必须依赖应用层复制（etcd Raft、数据库主从）或上层备份兜底",
+      "本地 PV 无动态供应能力：需预建目录/磁盘，由 local-static-provisioner 自动发现或手动创建 PV；PV 容量等于目录/磁盘大小，无法超卖",
+      "emptyDir 与节点临时存储无性能 SLA，官方明确说明应用不能期望任何 IOPS 保障",
+      "NFS 存在单点故障风险（非 HA 场景）、锁语义与强一致性较弱，不适合高并发随机写与数据库类负载",
+      "Ceph 对网络要求高（官方建议 10 Gb/s+），OSD 故障恢复占用带宽与 IO，小规模集群（数节点）管理与资源开销偏大",
+      "云盘（EBS/GCE PD/Azure Disk）绑定单一可用区，跨可用区容灾需快照复制或应用层复制；IOPS/吞吐受卷类型与容量限制",
+      "XFS 必须 ftype=1 格式化才能作为 overlayfs 底层；btrfs 与 overlayfs 不兼容，containerd 需改用 btrfs 原生快照器",
+      "Windows 节点仅支持 NTFS，不支持本地 PV 及多数本地存储 CSI 驱动",
+      "CSI 快照、扩容、容量跟踪等特性依赖具体驱动实现，并非所有驱动完整支持；部分驱动需要额外用户态依赖（如 Ceph RBD 需 open-iscsi）",
+      "in-tree 存储插件已弃用，GlusterFS、ScaleIO、Quobyte、StorageOS 等已被移除，存量数据需迁移至 CSI"
+    ],
+    "混部兼容性": "本地盘与计算负载混部时存在 IO 竞争，建议为高写入负载（etcd、数据库）独占 NVMe 盘或启用 IO 限流；Ceph OSD 与计算混部需预留 CPU/内存（每 OSD 约 1-2 核、8 GB 内存），避免影响延迟敏感应用；日志/大数据类高写入负载加速 NVMe 磨损，需按 DWPD 规划寿命；本地 PV 数据盘不建议与 kubelet 临时目录（nodefs）共用同一磁盘，避免磁盘压力驱逐",
+    "性能开销": "CSI 块/文件挂载路径为内核原生机制，开销通常可忽略（<1%）；NFS 每次读写增加网络往返，局域网约 0.1-1 ms 额外延迟；Ceph 引入网络与 CPU 开销，典型约 5-15%；FUSE 用户态驱动（S3 挂载类，如 Mountpoint S3）开销较大，约 10-30%；磁盘加密（LUKS/dm-crypt/云盘加密）增加 CPU 开销约 1-5%（具体取决于加密算法与 CPU 指令集，如 AES-NI）",
+    "固件与驱动依赖": "Ceph RBD 要求节点安装 open-iscsi（iscsi-initiator-utils）与 multipath-tools（多路径场景）；NFS 卷要求节点安装 nfs-utils（含 rpcbind）；NVMe 需要内核 nvme 模块与厂商固件支持；XFS 需 ftype=1 格式化；overlayfs 需要内核 4.9+；磁盘健康监控依赖 smartmontools/nvme-cli；NVMe 固件升级通常需节点排水后离线执行，部分场景影响热插拔探测"
+  },
+  "配置与部署": {
+    "配置方式": [
+      "CSI 驱动部署（Helm/DaemonSet/Operator，如 Rook、TopoLVM、云厂商 CSI 驱动）",
+      "StorageClass 定义（provisioner、volumeBindingMode、参数、allowVolumeExpansion）",
+      "PVC/PV 声明与绑定（动态供应或静态预建）",
+      "本地静态供应器（local-static-provisioner DaemonSet + 目录自动发现）",
+      "kubelet 配置（evictionHard 磁盘驱逐阈值、imagefs 分离、--max-pods）",
+      "手动 PV（hostPath、emptyDir、NFS 等 in-tree 卷）"
+    ],
+    "配置示例": {
+      "本地存储 StorageClass（延迟绑定）": "apiVersion: storage.k8s.io/v1\nkind: StorageClass\nmetadata:\n  name: local-storage\nprovisioner: kubernetes.io/no-provisioner\nvolumeBindingMode: WaitForFirstConsumer",
+      "本地 PV（带节点亲和性）": "apiVersion: v1\nkind: PersistentVolume\nmetadata:\n  name: local-pv-1\nspec:\n  capacity:\n    storage: 500Gi\n  volumeMode: Filesystem\n  accessModes:\n  - ReadWriteOnce\n  persistentVolumeReclaimPolicy: Retain\n  storageClassName: local-storage\n  local:\n    path: /mnt/local-pv/vol-1\n  nodeAffinity:\n    required:\n      nodeSelectorTerms:\n      - matchExpressions:\n        - key: kubernetes.io/hostname\n          operator: In\n          values:\n          - node-01",
+      "Ceph（Rook）StorageClass": "apiVersion: storage.k8s.io/v1\nkind: StorageClass\nmetadata:\n  name: rook-ceph-block\nprovisioner: rook-ceph.rbd.csi.ceph.com\nparameters:\n  clusterID: rook-ceph\n  pool: replicapool\n  csi.storage.k8s.io/fstype: ext4\nallowVolumeExpansion: true",
+      "NFS CSI StorageClass": "apiVersion: storage.k8s.io/v1\nkind: StorageClass\nmetadata:\n  name: nfs-csi\nprovisioner: nfs.csi.k8s.io\nparameters:\n  server: nfs-server.example.com\n  share: /exports/data\nreclaimPolicy: Delete\nvolumeBindingMode: Immediate",
+      "kubelet 磁盘驱逐阈值": "evictionHard:\n  memory.available: \"100Mi\"\n  nodefs.available: \"10%\"\n  nodefs.inodesFree: \"5%\"\n  imagefs.available: \"15%\"",
+      "PVC 声明": "apiVersion: v1\nkind: PersistentVolumeClaim\nmetadata:\n  name: data-claim\nspec:\n  accessModes:\n  - ReadWriteOnce\n  storageClassName: local-storage\n  resources:\n    requests:\n      storage: 100Gi"
+    },
+    "部署位置与环境": "公有云（EBS/GCE PD/Azure Disk 等云盘 CSI 成熟，推荐动态供应，按需快照与扩容）；裸金属（本地 NVMe + 本地 PV，或 Ceph/Rook 分布式存储）；虚拟机（虚拟磁盘支持快照、在线扩容与热迁移，数据位于存储后端；本地直通盘不支持热迁移）；边缘（以本地存储为主，K3s + Local Path Provisioner/本地 CSI）；混合云（跨云复制依赖应用层或对象存储中转）",
+    "虚拟化兼容性": "VM 中的云盘/虚拟磁盘支持快照、在线扩容与热迁移（数据在存储后端，VM 位置无关）；PCIe 直通 NVMe 盘不支持 VM 热迁移，需冷迁移；嵌套虚拟化下直通与 SR-IOV 存储设备依赖宿主支持；Ceph RBD 可同时作为 OpenStack VM 磁盘后端与 K8s 卷后端；NFS/CephFS 卷对 VM 位置无要求，天然支持迁移"
+  },
+  "性能特征": {
+    "基准性能数据": "etcd 官方硬件基准：常规负载 50 顺序 IOPS、重负载 500 顺序 IOPS，恢复带宽 10/100 MB/s；企业级 NVMe SSD 典型随机读 100 万+ IOPS、随机写 10-50 万 IOPS、顺序读 3-7 GB/s（视型号）；企业级 SATA SSD 典型随机读约 10 万 IOPS；企业 HDD 约 100-200 IOPS；社区测试表明 etcd 采用 NVMe 相比 HDD 可将 fsync 提交延迟降低一个数量级以上；Ceph 性能按“每核 IOPS”选型，单 OSD 吞吐受磁盘与网络双重限制",
+    "扩展性上限": "K8s 官方：单集群最大 5000 节点、全集群 150000 Pod、单节点默认 110 Pod；每节点可挂载卷数由驱动限制（GCE PD 16、Azure Disk 16、AWS EBS 视实例类型默认约 39）；etcd 建议 3-5 成员；Ceph 可扩展至数千 OSD，但集群越大故障恢复时间越长；CSIStorageCapacity 提供拓扑感知调度，缓解卷容量不足导致的调度失败",
+    "每节点密度": "默认每节点 110 Pod（kubelet --max-pods 可调）；每节点卷数受驱动限额约束；本地 PV 密度受物理磁盘/目录数量限制（通常 1-2 块 NVMe 数据盘 + 若干子目录分区）；Ceph 建议一盘一 OSD，避免单盘多 OSD 争抢 IO"
+  },
+  "安全": {
+    "安全特性": "静态加密：云盘加密（EBS/GCE PD/Azure Disk）、LUKS/dm-crypt、Ceph OSD 加密、支持加密卷的 CSI 驱动；传输加密：Ceph msgr2 加密、NFS Kerberos（krb5）、云 API TLS；访问控制：RBAC 隔离 StorageClass/PVC/VolumeSnapshot/CSI 资源，PVC 可限定拓扑（allowedTopologies）；CSI 凭据通过 Secret 管理；PV 采用 Retain 回收策略防止误删数据；本地 PV 数据残留需手动安全擦除（shred 或依赖全盘加密）",
+    "合规与认证": "CSI 驱动可通过 CSI 一致性测试（CSI Conformance）；Kubernetes 一致性认证（SIG Storage）覆盖存储 API；FIPS 140-2/3 合规取决于加密实现（LUKS/云盘加密/内核加密模块）；PCI DSS、HIPAA 等要求静态数据加密与访问审计，可通过云盘加密、LUKS、Ceph 加密满足"
+  },
+  "运维与生命周期": {
+    "可观测性支持": [
+      "kubelet cAdvisor：kubelet_volume_stats_available_bytes/used_bytes/inodes 等卷级指标",
+      "node_exporter：node_filesystem_*、node_disk_*（IOPS、吞吐、延迟、队列深度）",
+      "smartmontools（smartctl）与 nvme-cli（nvme smart-log）：磁盘健康、温度、剩余寿命与写入量",
+      "Ceph：mgr Prometheus 模块 + Rook CRD 状态，提供集群健康、OSD 状态与性能指标",
+      "CSI 驱动自身指标（如卷状态、请求统计）",
+      "Kubernetes Events：卷挂载失败、Attach/Detach 错误、VolumeFailedMount 等事件",
+      "kubectl describe pv/pvc、kubectl get events 排查绑定与挂载问题"
+    ],
+    "维护与生命周期": "NVMe 寿命管理：依据 TBW（总写入字节）与 DWPD（每日整盘写入次数）评估寿命，读写混合型 1-3 DWPD、写入密集型 3-5 DWPD 为常见等级，5 年质保期内耗尽 TBW 是主要失效模式；定期执行 smartctl/nvme smart-log 检查剩余寿命、温度与重映射扇区；固件升级需 drain 节点离线执行；NVMe 支持热插拔，但 K8s 侧通常需重新探测或重启 kubelet；节点排水前确认 PVC 数据已迁移或备份；etcd 定期压缩（defrag）与快照备份；Ceph OSD 更换遵循 Rook 删除-替换流程；卷扩容与快照可通过 CSI 在线执行",
+    "弹性与故障恢复": "本地盘建议 RAID1/RAID10 或硬件 RAID（etcd 等关键场景）；FC/iSCSI 多路径（DM Multipath）提供链路冗余；Ceph 默认 3 副本或纠删码（EC）自愈，容忍 OSD/节点故障；NFS 高可用通过双机 keepalived+DRBD 或商业 HA 方案；云盘依赖快照与跨可用区复制（通常需应用层配合）；本地 PV 单节点故障即数据不可用，必须依赖应用层复制（etcd Raft 3/5、数据库主从）；备份策略：Velero（支持 CSI 快照）+ 定期恢复演练"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "[不确定]",
+    "成熟度与社区支持": "存储生态成熟：CSI 规范 GA 多年，AWS/GCP/Azure 及主流存储厂商全面支持；Rook 为 CNCF 毕业项目（2020 年），CubeFS 2025 年 CNCF 毕业；local-static-provisioner 为 sig-storage 官方参考实现；ceph-csi 与 nfs.csi.k8s.io 由 kubernetes-csi 社区维护；Longhorn、OpenEBS、TopoLVM 等社区活跃；本地 NVMe 方案硬件成本低但冗余依赖应用层，Ceph/云盘方案单 GB 成本更高但自带冗余与运维便利"
+  },
+  "uncertain": [
+    "功耗基线",
+    "总拥有成本 (TCO)"
+  ]
+}

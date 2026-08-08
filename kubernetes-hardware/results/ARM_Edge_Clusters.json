@@ -1,0 +1,195 @@
+{
+  "基本信息": {
+    "名称": "轻量级发行版 / ARM 边缘集群",
+    "类别": "架构",
+    "官方文档链接": "K3s: https://docs.k3s.io/ (Rancher/SUSE); KubeEdge: https://kubeedge.io/ (CNCF Graduated/Huawei); MicroK8s: https://canonical.com/microk8s (Canonical); K0s: https://k0sproject.io/ (CNCF); Talos Linux: https://www.siderolabs.com/ (Sidero Labs, 2025 边缘参考架构)"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "K3s": "服务器节点: 2 核 CPU、2 GB RAM、建议 SSD 存储; 工作节点: 1 核 CPU、512 MB RAM、建议 SSD 存储。二进制文件 < 100 MB。",
+      "KubeEdge": "云端部分: 与上游 K8s 一致，约 2 核 CPU、2 GB RAM; 边缘节点 (EdgeCore): 最低 70-80 MB 内存，可在 100 MB RAM 设备上运行，需 1 核 CPU。",
+      "MicroK8s": "1 核 CPU、1 GB RAM (512 MB 不足以运行)、数 GB 磁盘空间 (snap 包约 216 MB)。需启用 cgroups。",
+      "K0s": "控制节点: 1 vCPU、1 GB RAM、约 0.5 GB 磁盘; 工作节点: 1 vCPU、0.5 GB RAM、约 1.3 GB 磁盘; 合设节点: 1 vCPU、1 GB RAM、约 1.7 GB 磁盘。",
+      "Talos Linux (Sidero Labs 2025)": "ARM64 设备: Raspberry Pi 4/5 (4 核, 1-8 GB RAM), NVIDIA Jetson 系列, Pine64/Rock 板。需 UEFI 或 DTB 引导。"
+    },
+    "推荐配置": {
+      "K3s": "服务器节点: 4 核 CPU、4-8 GB RAM、SSD 存储; 工作节点: 2 核 CPU、1-2 GB RAM、SSD 存储。用于生产的小规模集群。",
+      "KubeEdge": "云端部分: 4 核 CPU、8 GB RAM、SSD; 边缘节点: 1-2 核 CPU、256 MB-1 GB RAM，根据实际工作负载调整。",
+      "MicroK8s": "2 核 CPU、2-4 GB RAM、SSD 存储 (避免 USB/SD 卡作为主存储因 I/O 压力)。",
+      "K0s": "控制节点: 2 核 CPU、2 GB RAM、SSD; 工作节点: 1-2 核 CPU、1 GB RAM、SSD。小规模集群 1-2 GB 内存即可。",
+      "Talos Linux (Sidero Labs 2025)": "4 核 CPU、4-8 GB RAM、SSD (eMMC 或 NVMe), 支持 Ampere Altra 等服务器级 ARM64 平台。"
+    },
+    "生产级配置": {
+      "K3s": "服务器节点: 8-16 核 CPU、16-32 GB RAM、SSD/NVMe、嵌入式 etcd 或外部数据库; 支持 1800+ 工作节点。",
+      "KubeEdge": "云端部分: 8-128 核 CPU、32-256 GB RAM、SSD (已验证 100,000 边缘节点规模); 边缘节点: 2-4 核 CPU、1-4 GB RAM、eMMC/SSD。",
+      "MicroK8s": "4-8 核 CPU、8-16 GB RAM、SSD/NVMe、高可用集群 (3+ 节点)。",
+      "K0s": "控制节点: 4-8 核 CPU、8-32 GB RAM、SSD; 大规模集群 (1000+ 节点): 32-64 GB RAM。",
+      "Talos Linux (Sidero Labs 2025)": "零售、工厂自动化和机器人场景: 经认证的硬件设备，单节点可调度 K8s 环境，支持可信启动，Omni 管理平台进行集群生命周期管理。"
+    },
+    "功耗基线": "[不确定] 各发行版官方未提供标准功耗基线数据。ARM64 设备 (如 Raspberry Pi 4) 空载约 2-5W，满载约 5-15W。NVIDIA Jetson 系列空载约 5-10W，满载约 10-30W。具体功耗取决于 SoC 型号、外设和 K8s 工作负载。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "K3s": "随上游 K8s 发布节奏同步更新，当前最新 v1.36.3+k3s1。支持从 v1.20 起的所有版本 (通过版本选择)。",
+      "KubeEdge": "v1.23 支持 K8s 1.27-1.32; v1.22 支持 K8s 1.29-1.31; v1.20/1.21 支持 K8s 1.28-1.30; v1.19 支持 K8s 1.27-1.29。HEAD 分支支持 1.30-1.32。",
+      "MicroK8s": "随上游 K8s 发布节奏同步更新，当前最新 MicroK8s 1.36 (对应 K8s 1.36)。支持通过 snap 通道选择版本。",
+      "K0s": "直接基于上游 K8s 构建，版本号格式为 v{upstream_k8s}+k0s.X (如 v1.30.2+k0s.0)。支持 K8s 1.24+。",
+      "Talos Linux (Sidero Labs 2025)": "通过 Omni 管理平台管理 K8s 版本，支持近期上游 K8s 版本。以不可变 OS 镜像方式提供。"
+    },
+    "操作系统兼容性": {
+      "K3s": "大多数现代 Linux 发行版: Ubuntu、Debian、Raspbian/Raspberry Pi OS、CentOS、RHEL、Fedora、openSUSE、SUSE Linux Enterprise。ARM64 需内核支持 vxlan。",
+      "KubeEdge": "云端: Ubuntu、CentOS、Debian 等主流 Linux; 边缘节点: 主流 Linux 发行版，容器化 EdgeCore 运行。",
+      "MicroK8s": "Ubuntu (首选，通过 snap 安装)、Debian、Raspberry Pi OS (64-bit)、以及其他支持 snapd 的 Linux 发行版。",
+      "K0s": "Linux (所有主流发行版)、Windows Server 2019/2022 (仅工作节点)。",
+      "Talos Linux (Sidero Labs 2025)": "专用不可变 Linux 操作系统 (Talos Linux)，非通用发行版。支持 ARM64 平台: Raspberry Pi 4/5 (rpi_generic)、NVIDIA Jetson (sbc-jetson)、Ampere Altra (metal-arm64)、AWS Graviton (aws-arm64)、Pine64/Rock 板 (SBC overlay)。"
+    },
+    "K8s 上游支持阶段": {
+      "K3s": "CNCF 孵化项目 (Incubation)，Rancher/SUSE 主导。生产就绪度高，广泛用于边缘和生产环境。",
+      "KubeEdge": "CNCF 毕业项目 (Graduated, 2024 年 10 月)，华为云主导。云边协同场景的行业标准。",
+      "MicroK8s": "Canonical 官方项目，社区项目 (非 CNCF)。生产就绪，广泛用于开发、测试和轻量级生产环境。",
+      "K0s": "CNCF 项目 (Sandbox/Incubation, 2024 年 CNCF 接受)，社区活跃度高。生产就绪，零摩擦 K8s 发行版。",
+      "Talos Linux (Sidero Labs 2025)": "Sidero Labs 商业产品+开源项目。不可变 OS 方案，2025 边缘参考架构，面向生产级边缘部署。"
+    },
+    "生态兼容性矩阵": {
+      "CNI": "Flannel (K3s 默认, K0s 默认)、Calico、Cilium、Canal、Weave Net。所有发行版均支持主流 CNI 插件。",
+      "CSI": "Rook/Ceph、Longhorn、OpenEBS、Local Path Provisioner (K3s 内置)。KubeEdge 支持边缘本地存储。",
+      "监控集成": "Prometheus 指标暴露、Grafana 仪表板、Kube-state-metrics、cAdvisor、Metrics Server。K3s 内置 Metrics Server。",
+      "Ingress/Service Mesh": "Traefik (K3s 默认)、NGINX Ingress、Istio、Linkerd。KubeEdge 专为云边协同优化。",
+      "Operator 支持": "标准 K8s Operator 均可运行。KubeEdge 有专用 EdgeMesh 和 Device Management Operator。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "K3s": "默认使用 SQLite 而非 etcd (单节点)，HA 模式需嵌入式 etcd 或外部数据库。部分高级 K8s 功能 (如特定准入控制器) 默认禁用。",
+      "KubeEdge": "云边网络依赖消息中间件 (CloudHub/EdgeHub)，断连恢复后需重新同步状态。边缘节点不支持 kubectl exec/logs 直接操作 (需通过 cloud 中转)。设备孪生更新可能存在延迟。",
+      "MicroK8s": "仅通过 snap 包分发，非 Ubuntu 系统支持有限。资源占用高于 K3s/K0s。较新版本对 ARM64 的严格安全限制 (AppArmor) 可能影响某些工作负载。",
+      "K0s": "相对较新的项目，生态工具和文档丰富度不如 K3s。Windows 工作节点功能有限。",
+      "Talos Linux (Sidero Labs 2025)": "不可变 OS 设计，无法在节点上直接安装额外软件包。需通过 系统扩展 (system extensions) 添加驱动和工具。对通用 Linux 用户的操作习惯有较大差异。"
+    },
+    "混部兼容性": "[不确定] 轻量级发行版在 ARM64 边缘设备上混部时，主要受限于有限的内存和 CPU 资源。K3s 和 K0s 资源占用较低，适合与轻量级工作负载混部。KubeEdge 专为云边协同设计，EdgeCore 可与业务容器混部在同一节点。MicroK8s 资源占用较高，在 1-2 GB RAM 设备上混部空间有限。",
+    "性能开销": {
+      "K3s": "控制面开销约 5-6% CPU (Intel), 25-30% CPU (Pi4B)。内存开销约 1.2-1.6 GB (服务器), 268 MB (工作节点)。",
+      "KubeEdge": "EdgeCore 内存开销约 70-100 MB。云端部分开销与上游 K8s 一致。",
+      "MicroK8s": "[不确定] 资源占用中等，高于 K3s/K0s 但低于完整 K8s 部署。测试显示 1 GB RAM 节点在应用部署后可能超限。",
+      "K0s": "空载时约 658 MB RAM (单节点合设), 略低于 K3s (750 MB)。CPU 开销与 K3s 相当。",
+      "Talos Linux (Sidero Labs 2025)": "不可变 OS 无额外用户态进程，OS 自身开销极低。K8s 控制面开销取决于所选发行版组件。"
+    },
+    "固件与驱动依赖": {
+      "K3s": "ARM64 需内核模块支持 vxlan (Ubuntu 默认已包含)。Raspberry Pi 需启用 cgroups (cmdline.txt 中加 cgroup_memory=1 cgroup_enable=memory)。",
+      "KubeEdge": "边缘节点需 MQTT Broker (默认 Mosquitto) 用于设备通信。ARM64 设备需内核支持 device mapper 和网络隧道。",
+      "MicroK8s": "ARM64 需启用 cgroups (boot 参数)。严格限制模式 (strict confinement) 需 AppArmor 支持。",
+      "K0s": "ARM64 需内核支持 overlay 文件系统和 vxlan。标准 Linux 内核配置即可。",
+      "Talos Linux (Sidero Labs 2025)": "通过系统扩展 (system extensions) 提供 GPU 驱动、固件和内核模块。Raspberry Pi 需特定 DTB 和 EEPROM 固件。Jetson 需 NVIDIA 驱动扩展。"
+    }
+  },
+  "配置与部署": {
+    "配置方式": {
+      "K3s": "单二进制安装脚本 (install.sh)，配置文件 /etc/rancher/k3s/config.yaml。支持环境变量、CLI 标志和配置文件三种方式。通过 Agent/Server 模式区分角色。",
+      "KubeEdge": "云端: keadm 命令行工具部署 CloudCore; 边缘: keadm 部署 EdgeCore。需配置 CloudHub IP/端口、边缘节点 ID、MQTT 代理。支持 Device CRD 进行设备管理。",
+      "MicroK8s": "snap 安装 (snap install microk8s --classic)。通过 microk8s 命令管理 (如 microk8s.enable dns, microk8s.enable storage)。支持 add-node 命令加入集群。",
+      "K0s": "k0s CLI 工具: k0s install controller, k0s install worker, k0s start。配置文件 /etc/k0s/k0s.yaml。支持自动生成 token 加入集群。",
+      "Talos Linux (Sidero Labs 2025)": "通过 Omni SaaS 或 Talos CLI 进行声明式配置。使用 Image Factory 生成定制镜像。配置格式为 YAML，通过 talosctl 应用。"
+    },
+    "配置示例": "[不确定] 每种发行版有自己的配置方式，此处不提供具体 YAML 示例。K3s 配置示例见 docs.k3s.io/advanced; KubeEdge 配置示例见 kubeedge.io/docs; MicroK8s 配置示例见 microk8s.io/docs; K0s 配置示例见 docs.k0sproject.io; Talos 配置示例见 siderolabs.com/docs。",
+    "部署位置与环境": {
+      "K3s": "边缘 (Raspberry Pi、工业网关、嵌入式设备)、裸金属、虚拟机、公有云 (AWS、GCP、Azure)、混合部署。支持单节点和 HA 集群。",
+      "KubeEdge": "边缘计算 (IoT、工业互联网、车联网、智慧城市)、移动节点、RF 恶劣环境 (断连场景)。云边协同架构: CloudCore 部署在云/数据中心，EdgeCore 部署在边缘。",
+      "MicroK8s": "开发/测试环境、边缘节点、IoT 网关、Ubuntu Core 设备、工作站。适合单节点和多节点集群。",
+      "K0s": "裸金属、虚拟机、边缘、IoT、公有云、私有云。支持静态 Pod 和控制器工作节点合设。",
+      "Talos Linux (Sidero Labs 2025)": "零售业、工厂自动化、机器人领域。边缘设备 (Raspberry Pi、Jetson、Ampere Altra)。Omni 管理平台提供 SaaS 式集群管理。支持单节点可调度 K8s 环境。"
+    },
+    "虚拟化兼容性": "[不确定] 轻量级发行版在 ARM64 上的虚拟化兼容性信息有限。K3s/K0s/MicroK8s 可在虚拟机中运行 (如运行在 ARM64 的 KVM/VMware/Proxmox 上)。KubeEdge 的云端部分可在虚拟化环境运行，边缘节点通常运行在裸金属上。Talos Linux 支持 metal-arm64 镜像用于 UEFI 引导的虚拟化环境。嵌套虚拟化在 ARM64 上支持有限。"
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "K3s": "服务器空闲: CPU 5% (Intel i7) / 25% (Pi4B), 内存 1215-1613 MB, 存储 10-50 IOPS, 250-500 KiB/sec, 延迟 < 10 ms。工作节点空闲: CPU 3% (Intel) / 5% (Pi4B), 内存 268-275 MB。大规模集群: 1800+ 工作节点时服务器需 16+ 核、32 GB RAM。",
+      "KubeEdge": "EdgeCore 内存占用: 空闲约 42 MB RSS (5 个 Pod 时约 42,784 KB RSS)。100,000 边缘节点验证: 云端控制面 128 核/256 GB RAM, 边缘节点上行流量约 0.25 kbit/s, 负载均衡入向约 3 MB/s。Pod 启动 P99 约 4087 ms (< 5000 ms 目标)。",
+      "MicroK8s": "[不确定] 官方未发布标准基准测试数据。社区测试显示 1 GB RAM 节点在部署应用后可能超限。建议 2 GB+ RAM 以获得稳定性能。",
+      "K0s": "空载单节点合设约 658 MB RAM, 低于 K3s (750 MB)。1 vCPU/1 GB RAM VM 中部署 MySQL 后内存升至 868 MB, API 服务器可能无响应。",
+      "Talos Linux (Sidero Labs 2025)": "[不确定] 不可变 OS 自身开销极小，K8s 控制面性能取决于所选发行版和硬件配置。Sidero Labs 未公布独立基准测试数据。"
+    },
+    "扩展性上限": {
+      "K3s": "官方测试支持 1800+ 工作节点。CPU 是主要瓶颈 (内存利用率 < 80% 时 CPU 先达到上限)。加入 50-100 节点批次时服务器 CPU 峰值约增长 20%。",
+      "KubeEdge": "已验证支持 100,000 边缘节点、1,000,000 容器 (400 个逻辑分区, 每分区 250 节点, 每节点 10 容器)。云端需 5 个管理实例。",
+      "MicroK8s": "[不确定] 通常用于小规模集群 (3-10 节点)。大规模生产部署建议使用 Charmed Kubernetes 或更成熟的发行版。",
+      "K0s": "[不确定] 官方未公布明确扩展性上限。架构设计支持大规模集群，但实际上限取决于硬件配置和网络。",
+      "Talos Linux (Sidero Labs 2025)": "[不确定] 取决于底层硬件和管理平台 (Omni)。Sidero Labs 2025 参考架构主要面向边缘场景，规模通常为数到数百节点。"
+    },
+    "每节点密度": {
+      "K3s": "默认 Pod 密度: 每节点 110 Pod (默认上限)。实际密度受限于节点硬件 (ARM 边缘设备 1-4 GB RAM 通常支持 10-30 个轻量级 Pod)。",
+      "KubeEdge": "边缘节点 Pod 密度取决于硬件: 256 MB RAM 设备可运行 5-10 个容器; 1 GB RAM 设备可运行 20-50 个容器。验证测试中每节点 10 容器。",
+      "MicroK8s": "[不确定] 标准 K8s Pod 上限 (默认 110/节点)。实际受限于 ARM 边缘设备的内存和 CPU。",
+      "K0s": "[不确定] 标准 K8s Pod 上限 (默认 110/节点)。实际密度受限于硬件配置。",
+      "Talos Linux (Sidero Labs 2025)": "[不确定] 取决于所选硬件和 K8s 发行版。Talos OS 本身不限制 Pod 密度。"
+    }
+  },
+  "安全": {
+    "安全特性": {
+      "K3s": "CIS Kubernetes Benchmark 加固指南 (v1.7/v1.12 自评可用); Secrets 加密 (默认 AES-CBC); 网络策略 (基于 Canal/Calico); RBAC; Pod Security Standards; 配置文件只读权限; 支持使用 etcd TLS 加密。",
+      "KubeEdge": "边缘节点设备认证 (证书轮换); 云边通道 TLS 加密 (CloudHub-EdgeHub); 节点间通信加密; 设备身份管理; 可选的节点准入控制; 断连期间本地运行不受影响。",
+      "MicroK8s": "CIS 加固指南 (MicroK8s 1.28+); 严格限制模式 (strict confinement, snap 隔离); AppArmor 强制访问控制; seccomp 系统调用过滤; RBAC; 网络策略 (Calico 默认); TLS 加密。",
+      "K0s": "CIS Benchmark 合规 (v1.21+); 默认安全配置; RBAC; 网络策略 (Calico/Konvoy); 控制面组件 TLS 加密; etcd 加密; 支持 FIPS 140-2 合规。",
+      "Talos Linux (Sidero Labs 2025)": "不可变文件系统 (只读根分区); 无 SSH (通过 talosctl API 管理); 可信启动 (trusted boot); 最小攻击面 (无包管理器、无 Shell)。Omni 提供集中式认证和审计。"
+    },
+    "合规与认证": {
+      "K3s": "CIS Kubernetes Benchmark 自评指南 (v1.7, v1.12)。Rancher/SUSE 提供企业级加固方案。无独立 K8s 一致性认证。",
+      "KubeEdge": "CNCF 毕业项目，通过 K8s 一致性认证。边缘计算场景特有合规要求 (如设备管理、数据本地化) 需用户自行评估。",
+      "MicroK8s": "CIS 加固指南 (1.28+)。Canonical 提供企业支持。Ubuntu 基础有 FIPS 140-2/3 和 Common Criteria 认证可选。",
+      "K0s": "CIS Benchmark 合规。支持 FIPS 140-2 加密模块。K8s 一致性认证。",
+      "Talos Linux (Sidero Labs 2025)": "不可变 OS 安全模型有助于满足合规要求 (如 PCI DSS、HIPAA 的不可变基础设施要求)。无独立安全认证。"
+    }
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "K3s": "内置 Metrics Server; Prometheus 指标暴露 (通过 /metrics); 支持集成 Grafana; 日志: journald 和文件日志; 健康检查: k3s check-health; 支持 Kubernetes 事件监控。",
+      "KubeEdge": "EdgeCore 暴露 Prometheus 指标; EdgeMesh 提供服务网格可观测性; 云端 CloudCore 提供 Metrics; 边缘节点日志收集支持; 设备孪生状态监控。",
+      "MicroK8s": "内置 Metrics Server (可通过 microk8s.enable 启用); Prometheus Operator 可安装; 集成 Cosmos (Canonical 可观测性栈); 健康检查: microk8s status。",
+      "K0s": "标准 K8s Metrics Server; Prometheus 兼容; 支持 k0s status 和 k0s info 命令; 日志通过 journald 管理。",
+      "Talos Linux (Sidero Labs 2025)": "Talos 健康检查 API (talosctl health); 系统日志通过 talosctl logs 获取; 支持 Prometheus Node Exporter; Omni 控制面提供集中监控。"
+    },
+    "维护与生命周期": {
+      "K3s": "升级: 内置升级控制器 (system-upgrade-controller); 支持自动升级。节点排水: 标准 kubectl drain。更新回滚: 通过二进制替换。数据存储: 默认 SQLite 或嵌入式 etcd, 支持外部 etcd。",
+      "KubeEdge": "升级: keadm 工具支持 CloudCore/EdgeCore 升级; 边缘节点需逐个升级。节点排水: 边缘节点需手动处理。边缘设备断连后自动恢复同步。",
+      "MicroK8s": "升级: snap refresh microk8s (自动更新); 支持通道切换 (stable/candidate/edge)。节点排水: 标准 kubectl drain。快照回滚: snap 支持自动回滚。",
+      "K0s": "升级: k0s upgrade 命令; 支持滚动升级。节点排水: 标准 kubectl drain。配置变更: 修改 k0s.yaml 后重启服务。",
+      "Talos Linux (Sidero Labs 2025)": "升级: talosctl upgrade 命令 (不可变 OS 原子升级, 升级失败自动回滚)。节点排水: 自动执行。固件升级: 通过系统扩展。Omni 提供集群级生命周期管理。"
+    },
+    "弹性与故障恢复": {
+      "K3s": "单点故障: 单节点模式无 HA; HA 模式需 3+ 个 server 节点 + 嵌入式 etcd 或外部数据库。故障切换: 嵌入式 etcd 选举, 约 30 秒。数据持久化: 内置 Local Path Provisioner 支持本地存储。",
+      "KubeEdge": "边缘自治: 断连后工作负载继续运行, 恢复后自动同步。单点故障: CloudCore 可 HA 部署。边缘节点故障: 需手动恢复。数据持久化: 边缘节点支持本地存储。",
+      "MicroK8s": "HA 模式: 3+ 节点, 内置 dqlite (分布式 SQLite)。故障切换: dqlite 选举, 约 30-60 秒。数据持久化: 支持 HostPath 和 CSI 存储。",
+      "K0s": "HA 模式: 3+ 控制节点, 内置 etcd。故障切换: etcd 选举, 约 30 秒。数据持久化: 标准 K8s 存储方案。",
+      "Talos Linux (Sidero Labs 2025)": "不可变 OS 自带故障恢复: 系统分区损坏自动回滚。控制面 HA: 标准 etcd 集群。Omni 提供集群级故障检测和自动修复。边缘节点: 支持单节点可调度模式。"
+    }
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件采购成本": "ARM64 边缘设备 (Raspberry Pi 4/5: $35-80, NVIDIA Jetson Nano: $150-500, 工业 ARM 网关: $200-1000)。相比 x86 服务器 (入门级 $500-2000) 大幅降低。",
+      "运行成本": "ARM64 设备功耗 5-30W (vs x86 服务器 50-200W), 年电费节省 70-90%。无需专用冷却。",
+      "维护成本": "开源发行版免费 (K3s/KubeEdge/MicroK8s/K0s/Talos 均为开源)。企业支持: Rancher/SUSE 支持 (K3s), Canonical 支持 (MicroK8s), Sidero Labs Omni 商业订阅。",
+      "每节点成本": "ARM 边缘节点: 总拥有成本约 $50-500/节点/年 (含硬件、功耗、运维)。等效 x86 节点: $500-2000/节点/年。"
+    },
+    "成熟度与社区支持": {
+      "K3s": "GitHub Stars: 28,000+; CNCF 孵化项目; Rancher/SUSE 主导; 生产用户包括大量企业; 社区活跃度极高; 文档完善。",
+      "KubeEdge": "GitHub Stars: 13,000+; CNCF 毕业项目 (2024); 华为云主导; 厂商支持: 华为、ARM、Kubernetes 社区; 边缘计算领域影响力最大。",
+      "MicroK8s": "GitHub Stars: 8,500+; Canonical 主导; 与 Ubuntu 生态深度集成; 企业支持来自 Canonical; 社区活跃但规模小于 K3s。",
+      "K0s": "GitHub Stars: 6,000+; CNCF 项目; 社区驱动; 2024 年 CNCF 接受; 增长迅速; 文档完善。",
+      "Talos Linux (Sidero Labs 2025)": "Sidero Labs 商业支持; 开源社区 (GitHub 约 7,000+ Stars); 2025 边缘参考架构发布; 在零售、工厂自动化和机器人领域有商业部署。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.功耗基线",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销.MicroK8s",
+    "配置与部署.配置示例",
+    "配置与部署.虚拟化兼容性",
+    "性能特征.基准性能数据.MicroK8s",
+    "性能特征.基准性能数据.Talos Linux (Sidero Labs 2025)",
+    "性能特征.扩展性上限.MicroK8s",
+    "性能特征.扩展性上限.K0s",
+    "性能特征.扩展性上限.Talos Linux (Sidero Labs 2025)",
+    "性能特征.每节点密度.MicroK8s",
+    "性能特征.每节点密度.K0s",
+    "性能特征.每节点密度.Talos Linux (Sidero Labs 2025)"
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "基本信息": {
+    "名称": "CXL 内存池化与分层（Compute Express Link Memory Pooling & Tiering）",
+    "类别": "内存",
+    "官方文档链接": [
+      "https://computeexpresslink.org/",
+      "https://www.computeexpresslink.org/spec-landing",
+      "https://docs.kernel.org/driver-api/cxl/linux/overview.html",
+      "https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/",
+      "https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/",
+      "https://semiconductor.samsung.com/cxl-memory/cmm-d/",
+      "https://www.marvell.com/products/cxl.html",
+      "https://www.asteralabs.com/",
+      "https://lwn.net/Articles/894598/",
+      "https://kernel-internals.org/mm/cxl-memory-tiering/",
+      "https://arxiv.org/html/2508.15980v1"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": {
+      "平台": "支持 CXL 的 CPU：Intel 第四代至强 Sapphire Rapids 及以上（CXL 1.1）、AMD 第四代 EPYC Genoa 及以上（CXL 1.1）、NVIDIA Grace 等",
+      "内存模块": "至少 1 个 CXL 内存扩展模块（如三星 CMM-D 128GB，EDSFF E3.S 2T 或 AIC 形态）",
+      "链路": "PCIe Gen5 x16 CXL 端口",
+      "软件": "Linux 内核 5.12+（cxl 驱动），推荐 6.0+（内存热插拔成熟）",
+      "说明": "功能验证级最小配置"
+    },
+    "推荐配置": {
+      "服务器": "双路服务器，每路 1-2 个 CXL 端口（PCIe Gen5 x16）",
+      "内存模块": "2-4 个 CXL 内存模块（单模块 128-256GB，总计 256GB-1TB）",
+      "软件": "Linux 内核 6.x，cxl-cli/daxctl 工具链",
+      "固件": "BIOS/UEFI 启用 CXL 并配置 Memory Mode（1LM+Vol 软件分层模式）",
+      "说明": "生产环境起步配置，适用于内存扩展与单节点分层场景"
+    },
+    "生产级配置": {
+      "内存池化控制器": "Astera Labs Leo P 系列 CXL 内存控制器 SoC（DDR5-5600，Gen5 x16，双内存通道）",
+      "CXL 交换机": "Marvell Structera 系列（Structera S 30260：260 通道 CXL 3.0 交换机，机架级内存池，亚微秒访问，客户送样 Q3 2026）",
+      "池化容量": "机架级数百 GB 至数 TB，集群级目标最高 100 TiB",
+      "说明": "大规模/高可用场景当前仍处于送样与预生产阶段，量产生态尚未成熟"
+    },
+    "功耗基线": "[不确定]（CXL 内存模块功耗无官方公开数据；EDSFF E3.S 形态估计约 10-25W/模块，未经厂商确认）"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "Kubernetes 无原生 CXL 支持；扩展资源（Extended Resource）自 v1.10 起可将 CXL 内存暴露为可调度资源；DRA（Dynamic Resource Allocation）自 v1.26 Alpha 引入，结构化参数于 v1.32 GA（resource.k8s.io/v1beta1），可用于动态分配 CXL 池化内存；Topology Manager（v1.27 GA）提供 NUMA 拓扑感知调度；实际可用性取决于 Linux 内核版本（5.12+ CXL 驱动、6.0+ 热插拔）",
+    "操作系统兼容性": "Linux 为主：Ubuntu 24.04 LTS（HWE 内核）、RHEL 9.4/9.5、SLES 15.6（存在已知问题）等；内核需 5.12+（CXL 驱动），6.0+ 内存热插拔，6.15+ 修复 cgroup 分层限制；Windows Server 暂无 CXL 支持",
+    "K8s 上游支持阶段": "社区/研究阶段（无上游 GA 功能）：CXL 内存需通过 Device Plugin 扩展资源或 DRA 暴露；Linux 内核内存分层（demotion/promotion）处于持续演进阶段；K8s 官方无 CXL 专用 KEP，相关研究包括 CXLAimPod、XpuPod、Tiresias 等",
+    "生态兼容性矩阵": "Linux 工具链：cxl-cli（cxl list/create-region）、ndctl/daxctl（mode=system-ram/devdax）、numactl（NUMA 节点视图）；监控：Prometheus 搭配 node_exporter 的 NUMA 内存指标；CNCF 生态：Koordinator v1.6+ 支持异构资源调度；硬件生态：三星 CMM-D、SK 海力士 CMM-DDR5、Marvell Structera 交换机、Astera Labs Leo 控制器、Micron CZ120；软件栈：MemVerge 等 CXL 内存管理中间件"
+  },
+  "限制与约束": {
+    "已知限制": [
+      "CXL 内存延迟约为本地 DRAM 的 2 倍（实测约 214-394ns vs 本地 81-114ns；跨插槽访问最高约 621ns）",
+      "CXL 内存带宽远低于本地（实测约 18-52 GB/s vs 本地 52-246 GB/s）",
+      "流式/内存密集型负载性能下降可超过 50%，最坏情况执行时间增加 5.3 倍；实测约 1/5 的负载降幅超过 50%",
+      "硬件生态处于早期市场阶段：三星计划 2026 年底量产 CXL 3.2 CMM-D，SK 海力士未公布量产时间表",
+      "K8s 无原生 CXL 内存支持，需自研 Device Plugin/DRA 驱动与调度策略",
+      "部分发行版存在已知问题：SLES 15.6 无法运行 CXL 分层配置、RHEL 9.4 CXL CLI 工具异常、Ubuntu 24.04/RHEL 9.5 误报 CXL 相关消息、cxl list 与 numactl 的 NUMA 节点报告不一致",
+      "内存池化扩大故障域：CXL 交换机或池化设备故障可能影响多个主机",
+      "内核分层机制在 v6.15 前存在 cgroup demotion 限制"
+    ],
+    "混部兼容性": "CXL 内存与本地内存混部时需要分层策略（热数据留在本地、冷数据下沉 CXL），否则热数据驻留 CXL 层会导致显著性能下降；与 GPU/AI 工作负载混部时，CXL 池化内存可缓解内存墙但需避免带宽争用；多租户共享内存池时的隔离机制（配额/DRA 资源管理）仍不成熟 [不确定]",
+    "性能开销": "相对本地 DRAM 的访问延迟开销约 100-300ns（约 2 倍）；内核分层（demotion/promotion）的页面迁移开销在热页命中率高时远程流量可控制在 5% 以内；虚拟化（VM 直通 CXL 设备）场景的额外开销 [不确定]",
+    "固件与驱动依赖": "BIOS/UEFI 需启用 CXL 端口并设置 Memory Mode（1LM+Vol 软件分层或 1LM 纯扩展）；固件需提供 CDAT/HMAT 表（内存性能坐标）；内核依赖：cxl 驱动（5.12+）、内存热插拔（6.0+）、cgroup demotion 修复（6.15+）；工具链 cxl-cli/daxctl/ndctl；PCIe Gen5 链路与 EDSFF E3.S/AIC 形态模块"
+  },
+  "配置与部署": {
+    "配置方式": [
+      "BIOS/UEFI：启用 CXL 端口，Memory Mode 设为 1LM+Vol（软件分层）或 1LM（纯容量扩展）",
+      "Linux 内核：激活 CXL region 并配置内存模式（system-ram 或 devdax）",
+      "命令行工具：cxl create-region、daxctl reconfigure-device --mode=system-ram",
+      "K8s Device Plugin：将 CXL 内存暴露为扩展资源（如 cxl.io/memory）",
+      "K8s DRA：通过 ResourceClass/ResourceClaim 动态分配池化内存（结构化参数 v1.32 GA）",
+      "调度策略：节点亲和/反亲和、污点与容忍、Topology Manager NUMA 对齐"
+    ],
+    "配置示例": {
+      "CXL 设备配置为系统内存": "cxl create-region -d decoder0.0 -w 1 -m system-ram -s 128G\ndaxctl reconfigure-device --mode=system-ram dax0.0",
+      "Device Plugin 暴露扩展资源": "apiVersion: v1\nkind: Node\nmetadata:\n  name: node-with-cxl\nstatus:\n  capacity:\n    cxl.io/memory: 128Gi",
+      "DRA ResourceClaim（结构化参数）": "apiVersion: resource.k8s.io/v1beta1\nkind: ResourceClaim\nmetadata:\n  name: cxl-memory-claim\nspec:\n  devices:\n    requests:\n    - deviceClassName: cxl-memory\n      selectors:\n      - cel:\n          matchExpressions:\n          - key: capacity\n            operator: In\n            values: [\"256Gi\"]",
+      "Topology Manager 配置": "--topology-manager-policy=single-numa-node\n--topology-manager-scope=pod"
+    },
+    "部署位置与环境": "裸金属为主要目标场景（需支持 CXL 的 CPU 平台）；私有云数据中心支持机架级内存池化；公有云支持情况 [不确定]（部分云厂商已开始测试 CXL 实例，尚未广泛开放）；边缘场景生态不成熟；虚拟机可通过 PCIe 直通/VFIO 使用 CXL 设备",
+    "虚拟化兼容性": "CXL 内存模块可通过 VFIO/PCIe 直通透传给虚拟机（OSDI'24 已有虚拟化环境下 CXL 内存分层研究）；VM 热迁移时 CXL 内存分配与 NUMA 亲和性可能丢失；嵌套虚拟化场景支持有限 [不确定]；池化内存向 VM 的共享分配依赖 Hypervisor 与 K8s DRA 联动 [不确定]"
+  },
+  "性能特征": {
+    "基准性能数据": "实测（arXiv 2409.14317）：本地 DRAM 延迟 81-114ns、带宽 52-246 GB/s；CXL 扩展器延迟约 214-394ns、带宽 18-52 GB/s；跨插槽 CXL 访问延迟最高约 621ns。共享内存池相对 200G RDMA 有 3.8 倍加速、相对 100G RDMA 有 6.5 倍加速（CXL 联盟）；语义化访问延迟 200-500ns。分层优化后热页远程流量可降至 5% 以下，LLM 训练性能损失小于 3%（Emergent Mind 综述）；向量检索 6.72 倍、专家混合路由 8.7 倍吞吐提升（精度损失仅 0.13%）。CXLAimPod（eBPF 调度框架）：LLM 文本生成提升 71.6%、向量数据库查询提升 9.1%、KV 存储平均提升 7.4%（顺序场景最高 150%）。数据库类负载（Redis/MySQL 类）在纯 CXL 内存上受延迟约束明显，流式负载最坏性能下降 5.3 倍",
+    "扩展性上限": "CXL 联盟宣称集群级内存池可扩展至 100 TiB；机架级池化需 CXL 交换机（Marvell Structera S 30260：260 通道）；单池化域规模上限 [不确定]；K8s 集群整体仍受上游 5000 节点/150000 Pod 限制",
+    "每节点密度": "每节点 CXL 模块数受 PCIe 通道数量限制，典型 4-8 个 EDSFF E3.S 模块；单模块 128-256GB（三星 CMM-D），每节点 CXL 容量可达 1-2 TB；每节点最大模块数/容量上限 [不确定]；Pod 密度仍受 kubelet max-pods（默认 110）限制"
+  },
+  "安全": {
+    "安全特性": "CXL 3.x 支持基于 PCIe IDE（Integrity and Data Encryption）的链路完整性与加密保护；内存池化的多租户隔离主要依赖软件层（K8s 配额、DRA、内核内存隔离），硬件级隔离能力有限；CXL 内存模块本身不提供 TPM 类硬件信任根；机密计算（Intel TDX/AMD SEV）与 CXL 内存的结合仍在研究阶段 [不确定]",
+    "合规与认证": "CXL 联盟提供合规测试与认证（CXL Consortium Compliance Program）；无 K8s 相关的专门 CXL 认证；FIPS 等行业合规取决于上层平台与加密方案，CXL 本身不直接涉及 [不确定]"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "cxl list（设备/region/拓扑信息）、dmesg（热插拔事件）、numactl -H（NUMA 节点视图）、/sys/bus/cxl 内核接口、HMAT/CDAT 性能坐标（内核根据 access_coordinate 计算层级）；Prometheus 通过 node_exporter NUMA 内存指标监控；内核内存分层（demotion/promotion）的细粒度统计指标 [不确定]",
+    "维护与生命周期": "CXL 内存支持热插拔（内核 6.0+，dmesg 可见 hotplug memory 事件）；模块固件与平台固件升级流程 [不确定]；节点排水前需将 CXL 池化内存中的活跃页面迁移或回收；DRAM 介质无 NVMe 式写入耐久度问题，但 CXL 3.2 引入的 NVM 类介质（CMM）耐久度与寿命特性 [不确定]",
+    "弹性与故障恢复": "内存池化引入新的故障域：CXL 交换机/控制器故障可能影响多个主机，需冗余设计（多模块、多通道、交换机冗余）；内核支持 CXL 内存在线移除（热拔出）；池化内存故障切换时间与数据持久化策略 [不确定]"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "CXL 联盟称内存池化可降低 AI 负载 TCO（动态共享内存池、提高资源利用率、减少数据搬运能耗）；研究显示多主机内存池化可降低约 17% 成本并提升 3 倍扩展性；具体模块单价/每 GB 成本未公开 [不确定]",
+    "成熟度与社区支持": "生态处于早期市场阶段（三星官方称硬件生态尚不成熟）：三星 CMM-D（128/256GB，计划 2026 年底量产 CXL 3.2）、SK 海力士 CMM-DDR5（第二代原型，无量产时间表）、Marvell Structera 交换机（Structera S 30260 送样 Q3 2026）、Astera Labs Leo P 系列（已有数据中心实际部署）、Intel/AMD 平台支持（Sapphire Rapids/Genoa 起 CXL 1.1，Granite Rapids/Turin 支持 CXL 2.0）；Linux 内核社区活跃（cxl 驱动、内存分层 demotion/promotion）；K8s 侧无官方支持但学术与开源研究活跃（CXLAimPod、Tiresias、Beluga、OSDI'24）"
+  },
+  "uncertain": [
+    "功耗基线",
+    "混部兼容性",
+    "性能开销",
+    "部署位置与环境",
+    "虚拟化兼容性",
+    "扩展性上限",
+    "每节点密度",
+    "安全特性",
+    "合规与认证",
+    "可观测性支持",
+    "维护与生命周期",
+    "弹性与故障恢复",
+    "总拥有成本 (TCO)"
+  ]
+}

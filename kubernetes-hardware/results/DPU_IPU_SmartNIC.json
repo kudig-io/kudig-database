@@ -1,0 +1,166 @@
+{
+  "基本信息": {
+    "名称": "DPU / IPU / SmartNIC 硬件卸载（NVIDIA BlueField、Intel IPU、AMD Pensando，配套 OVN-Kubernetes DPU 模式与模拟器）",
+    "类别": "网络",
+    "官方文档链接": "NVIDIA BlueField: https://www.nvidia.com/en-us/networking/products/data-processing-unit/ ; NVIDIA DOCA: https://developer.nvidia.com/doca ; NVIDIA DPF (DOCA Data Path Framework): https://networking-docs.nvidia.com/dpf ; OVN-Kubernetes: https://ovn-kubernetes.io/ (DPU 部署: https://ovn-kubernetes.io/installation/launching-ovn-kubernetes-with-dpu/ ; OVS-DOCA 卸载: https://ovn-kubernetes.io/features/hardware-offload/ovs-doca/) ; OVN-Kubernetes DPU 模拟器: https://github.com/ovn-kubernetes/dpu-simulator ; Intel IPU: https://www.intel.com/content/www/us/en/products/details/networking/ipu.html ; Intel IPU SoC E2100 规格书: https://cdrdv2-public.intel.com/818147/Intel%20Infrastructure%20Processing%20Unit%20SOC%20E2100.pdf ; AMD Pensando: https://www.amd.com/en/products/data-processing-units/pensando.html ; Platform9 DPU/SmartNIC 集成: https://docs.platform9.com/private-cloud-director/virtualized-networking/dpu-smartnic-integration-and-hardware-offloading"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "NVIDIA BlueField-2": "单口 25GbE (ConnectX-6 Dx 控制器)，8 核 Arm A72 (2.2GHz)，16GB DDR4 + 64GB eMMC，PCIe Gen4 x8/x16 槽位，12V 供电最高 75W（部分型号需 6-pin ATX 辅助供电）。主机需 x86_64 或 arm64 Linux 服务器、支持 SR-IOV 与 switchdev。",
+      "NVIDIA BlueField-3": "单口 100GbE/200GbE (E 系列 8 核 Arm、16GB DDR5) 或 400GbE (P 系列 16 核 Arm、32GB DDR5)，PCIe Gen5 x16，需 DOCA 2.x+ 软件栈。",
+      "Intel IPU E2100 (Mount Evans)": "200GbE 双口 SoC 适配卡，16 核 Arm Neoverse N1，约 16GB 内存 [不确定]，PCIe Gen4 x16，需支持 IDPF/DPDK 驱动的服务器 [不确定]。",
+      "AMD Pensando DSC2-200 (Elba)": "2x100GbE 或 2x200GbE 分布式服务卡，16 核 Arm A72 @2.0GHz [不确定]，16GB DDR4 [不确定]，P4 可编程流水线，PCIe Gen4 x16 主机接口 [不确定]。",
+      "软件侧 (OVN-Kubernetes DPU 模式)": "DPU 卡 + 支持 switchdev 的 DPU 主机，DPU 侧运行 arm64 容器镜像；DPU 模拟器最低要求：Kind 模式 8GB RAM + 容器运行时，VM 模式 12GB RAM + 100GB 磁盘 + KVM/QEMU (libvirt)，操作系统限 Fedora/RHEL/CentOS。"
+    },
+    "推荐配置": {
+      "NVIDIA BlueField-3": "双口 200GbE 或 400GbE (B3220/B3210E 等)，16 核 Arm、32GB DDR5，PCIe Gen5 x16，配合 DOCA DPF 25.x + OVN-Kubernetes DPU 模式，用于生产裸金属 K8s 集群的完整网络/存储/安全卸载。",
+      "NVIDIA BlueField-2": "双口 100GbE (ConnectX-6 Dx)，8 核 Arm、16GB DDR4，用于 25-100GbE 规模的卸载场景或开发测试。",
+      "Intel IPU E2100": "双口 200GbE，16 核 Arm Neoverse N1，用于虚拟化/裸金属基础设施卸载场景 [不确定内存]。",
+      "AMD Pensando DSC2-200": "2x200GbE，P4 流水线硬件加速交换/路由/防火墙/负载均衡/加密，适合云厂商与 vSphere 8/OpenStack 环境 [不确定内存与功耗]。",
+      "软件侧": "主机: RHEL 9.x / Ubuntu 22.04/24.04 LTS，内核支持 switchdev；部署 NVIDIA Network Operator (DPF)、SR-IOV Network Operator、Multus、cert-manager、Node Feature Discovery；DPU 侧 arm64 Ubuntu/RHEL 运行 ovnkube-node-dpu。"
+    },
+    "生产级配置": {
+      "NVIDIA BlueField-3 + DOCA DPF": "双口 400GbE (NDR InfiniBand 或 400GbE) P 系列 16 核/32GB DDR5 型号，双集群架构: x86 管理集群 (运行应用与控制面) + DPU 上运行的 arm64 承载集群 (处理 OVN 覆盖网络、隧道封装/解封装、连接跟踪、安全策略)，Red Hat OpenShift 与 Canonical K8s (Ubuntu 24.04 + K8s 1.32) 已验证；支持裸金属大规模云。",
+      "AMD Pensando (云厂商场景)": "IBM Cloud 裸金属等大规模云环境使用 Pensando DSC 实现可扩展云原生架构；配合 vSphere 8/NSX 与 Dell PowerEdge 16G 服务器 [不确定具体集群规模]。",
+      "Intel IPU E2200 (Mount Morgan)": "2025 年 8 月 Hot Chips 发布，TSMC N5 工艺，400G MAC + PCIe Gen5 x32 (内置 PCIe 交换机)，最高 24 核 Arm Neoverse N2 + 4 通道 LPDDR5，P4 可编程、内联加密引擎、RDMA 传输引擎、流量整形，支持多主机/无头/融合部署模式，面向下一代 400G 数据中心 [不确定量产状态]。"
+    },
+    "功耗基线": "[不确定] 官方未公布统一的空载/满载功耗基线。已知数据: BlueField-2 通过 PCIe 槽供电 12V、最高 75W（部分型号需辅助供电）；BlueField-3 型号间差异大（含液冷/冷通道型号，具体 TDP 未公开，估计 25-75W 区间）；Intel E2100/E2200 与 Pensando DSC 的 TDP 未公开 [不确定]。DPU 功耗相对主机 CPU 卸载收益而言通常可忽略，但每节点新增一块 25-75W 的卡会增加机架功耗与散热需求。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "OVN-Kubernetes (核心载体)": "DPU/SmartNIC 卸载能力随 OVN-Kubernetes 版本演进，官方策略为支持最近 3 个 K8s minor 版本；DPU 模式约在 2022 年 (v1.9 前后) 引入 [不确定]，当前 2025 年版本支持 K8s 1.31-1.34 区间 [不确定]。",
+      "NVIDIA DPF": "25.4.0 / 25.7.x / 25.10.x / 26.4.0 等版本，支持双口 BlueField-3；Canonical 集成验证组合为 Ubuntu 24.04 LTS + K8s 1.32.2 + DPF 25.1；OpenShift 4.12+ 支持 DPU 相关功能 (OVN-Kubernetes DPU 模式)。",
+      "Intel IPU / AMD Pensando": "通过各自 CNI/卸载方案接入 K8s [不确定]；Pensando 主要面向 vSphere 8 (NSX) 与 OpenStack，K8s 原生支持依赖 OVN/OVS 硬件卸载通道 [不确定]。",
+      "DPU 模拟器": "kubeadm 引导控制面，K8s 版本跟随 OVN-Kubernetes 上游测试矩阵 [不确定]。"
+    },
+    "操作系统兼容性": {
+      "主机侧": "RHEL 8/9、Rocky Linux、Ubuntu 22.04/24.04 LTS、Fedora、CentOS Stream (DPU 模拟器明确要求 Fedora/RHEL/CentOS)；需要内核支持 switchdev、SR-IOV、VF representor。",
+      "DPU 侧": "arm64 Linux (Ubuntu、RHEL 系)，运行 OVS/OVN 数据面与 ovnkube-node-dpu 容器；NVIDIA DOCA 支持 Ubuntu/RHEL/Rocky 特定版本。",
+      "不支持": "Windows Server 节点无法作为 DPU 主机使用；DPU 卸载为 Linux-only 技术栈 [不确定]。"
+    },
+    "K8s 上游支持阶段": {
+      "OVN-Kubernetes": "CNCF 项目 (2023 年进入 CNCF Sandbox [不确定当前阶段])，由 Red Hat/IBM/NVIDIA 等主导，生产就绪；DPU 模式与 SmartNIC (硬件卸载) 模式为 OVN-Kubernetes 提供的成熟功能。",
+      "NVIDIA DOCA DPF": "厂商 (NVIDIA) 方案，文档完善、版本化发布 (25.4-26.4)，与 OpenShift、Canonical、Spectro Palette、Platform9 等集成，生产级。",
+      "K8s 上游": "K8s 上游无独立的 DPU GA 标准；依赖 CNI 生态 (OVN-Kubernetes)、设备插件 (SR-IOV Device Plugin) 与 DRA (Dynamic Resource Allocation) 演进承载 [不确定 DRA 对 DPU 的正式支持]。",
+      "Intel / AMD": "Intel IPU E2100 已出货、E2200 刚发布 (2025)；AMD Pensando 在云厂商 (IBM Cloud) 与 vSphere 8 环境生产使用，K8s 生态集成度低于 NVIDIA 方案。"
+    },
+    "生态兼容性矩阵": {
+      "CNI": "OVN-Kubernetes (DPU 模式强制)、Multus (多网卡)、SR-IOV CNI + SR-IOV Network Device Plugin (VF 分配)、Cilium/Calico 无 DPU 卸载通道 [不确定]。",
+      "CSI/存储": "BlueField 支持 NVMe-over-Fabric / NVMe TCP 卸载 (Intel IPU 支持 NVMe 传输硬件加速)；存储 CSI 需配合相应厂商方案 [不确定]。",
+      "Operator": "NVIDIA Network Operator (DPF)、SR-IOV Network Operator、Node Feature Discovery、cert-manager、NVIDIA GPU Operator (可共存)；Canonical Juju/MAAS charms；Mirantis k0rdent；Spectro Cloud Palette 模板化集成。",
+      "监控集成": "Prometheus: OVN-Kubernetes/OVS exporter、NVIDIA Network Operator 指标、DOCA Flow 遥测、SR-IOV Operator 指标；Pensando 内置 P4 遥测 [不确定 Prometheus 导出器细节]。",
+      "平台集成": "Red Hat OpenShift、Canonical Kubernetes (Ubuntu 24.04 + DPF 25.1)、Spectro Cloud Palette、Platform9 Private Cloud Director (OpenStack 虚拟化网络)、Mirantis k0rdent、IBM Cloud 裸金属 (Pensando)。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "硬件依赖": "必须采购专用 DPU/IPU 卡 (BlueField-2/3、E2100/E2200、DSC2-200)，成本高、供货渠道有限；PCIe 槽位与功耗占用 (x16 槽)。",
+      "OVN-Kubernetes DPU 模式": "双集群架构 (主机集群 + DPU 集群) 显著增加部署与运维复杂度；官方明确 identity 功能 (UserDefinedNetwork 相关) 当前不支持 DPU/DPU-Host 集群；主机侧 OVS 被旁路，故障排查链路改变。",
+      "硬件卸载能力边界": "OVS 硬件卸载 (tc offload) 无法覆盖全部流表项，未命中硬件的流量回退软件路径 (性能毛刺)；连接跟踪、NAT 等有状态功能卸载受 ASIC/流水线能力限制 (Pensando P4 灵活但受表项容量约束)。",
+      "软件栈绑定": "NVIDIA 方案要求 DOCA 版本、MLNX_OFED、固件与 OVN-Kubernetes 版本严格对齐；Intel E2200 2025 年才发布，量产与生态验证有限；Pensando 在 K8s 原生场景资料较少。",
+      "DPU 模拟器": "仅用于开发/CI 模拟，无法完全复现硬件卸载性能与行为；要求 Fedora/RHEL/CentOS 主机。"
+    },
+    "混部兼容性": "[不确定] DPU 与 GPU/FPGA 等其他加速器混部时需共享 PCIe 通道与机箱功耗预算 (DPU 占 x16 槽、最高约 75W)；DPU 上可运行 DOCA 微服务 (如防火墙、负载均衡、遥测)，与主机应用隔离互不干扰；与 DPDK 工作负载混部时 SR-IOV VF 分配需协调，避免 PF 资源竞争。",
+    "性能开销": "[不确定] 官方未给出统一百分比。典型对比: 纯软件 OVS 内核数据面处理 100GbE 流量需占用主机多个 CPU 核 (高吞吐场景可达 30-60% 总核数 [不确定])；硬件卸载后主机数据面 CPU 开销趋近于零 (仅控制面保留)，这是 DPU 方案的核心收益；DPU 侧自身存在少量处理延迟 (微秒级 [不确定])，DPU 模拟器无真实硬件加速，仅反映控制面行为。",
+    "固件与驱动依赖": "NVIDIA: 需 doca-networking 安装配置 (MLNX_OFED 驱动、DOCA Core、MLNX-DPDK、OVS-DOCA)，网卡需启用 switchdev 模式并配置大页 (huge pages)，大页需在重启后保持 (文档明确此项由管理员负责)；固件升级通过 DOCA 工具/NVIDIA Network Operator 执行。Intel: 依赖 IDPF 驱动与 DPDK [不确定]。Pensando: 依赖 DSC 固件与驱动栈 [不确定]。升级/重启会影响节点网络，需先排水节点。"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "NVIDIA DPF + OVN-Kubernetes": "声明式 Operator/Helm/CRD 方式: 安装 NVIDIA Network Operator (DPF)、SR-IOV Network Operator、Multus、cert-manager、Node Feature Discovery；主机节点打标签 k8s.ovn.org/dpu-host=，DPU 节点打标签 k8s.ovn.org/dpu=；OVN-Kubernetes 控制面自动检测数据面类型，无需集群侧特殊开关。",
+      "SmartNIC 硬件卸载 (单集群)": "手动配置: 分配大页、网卡切 switchdev 模式、启用 OVS 硬件卸载 (ovs-vsctl set Open_vSwitch . other_config:hw-offload=true)、外部 OVS 网桥与 OVN 集成网桥使用 netdev datapath、部署 SR-IOV 设备插件 + Multus 将 VF 分配给 Pod。",
+      "OVN-Kubernetes DPU 模拟器": "YAML 配置 + dpu-sim CLI (依赖检查、生命周期管理、集群引导)；VM 模式走 libvirt/KVM + cloud-init + SSH，Kind 模式走 Docker/Podman 容器 + veth 数据通道；模拟环境需设置 global.simulateDpu=true。",
+      "平台方案": "Platform9: 管理面启用 DPU/SmartNIC 卸载支持，创建 switchdev 模式端口挂到服务器；Canonical: Juju/MAAS charms 声明式部署；Palette: 8 个变量的引导式模板约 30 分钟完成集群搭建。"
+    },
+    "配置示例": "[不确定] 以下为关键配置要点 (非完整示例): 节点标签 kubectl label node <dpu-host> k8s.ovn.org/dpu-host= ; OVS 卸载开关 ovs-vsctl set Open_vSwitch . other_config:hw-offload=true ; 模拟器 Helm 值 global.simulateDpu: true。完整 YAML 示例见 ovn-kubernetes.io/installation/launching-ovn-kubernetes-with-dpu/ 与 github.com/ovn-kubernetes/dpu-simulator。",
+    "部署位置与环境": {
+      "主要场景": "裸金属数据中心 K8s 集群 (OpenShift、Canonical K8s、RKE2 类发行版)、私有云 (OpenStack/Platform9 PCD)、公有云裸金属 (IBM Cloud 使用 Pensando)。",
+      "支持环境": "x86_64 主机 + DPU 卡；BlueField-3 + DPF 验证于 OpenShift 与 Ubuntu 24.04；Pensando 验证于 vSphere 8/Dell PowerEdge 16G 与 OpenStack。",
+      "不适用/受限": "边缘小型设备 (成本与功耗不适合)；VM 云实例无物理 DPU 直通则无法使用；K3s/MicroK8s 等轻量发行版无官方 DPU 集成 [不确定]。"
+    },
+    "虚拟化兼容性": {
+      "SR-IOV": "核心机制: Pod/VM 通过 SR-IOV VF + VF representor 接入，数据面绕过主机内核直达 DPU。",
+      "虚拟机场景": "Pensando 深度集成 vSphere 8 (NSX) 与 OpenStack (Platform9 使用 SR-IOV 加速 VM 到网卡连接)；KubeVirt 等 K8s 内 VM 与 DPU 组合使用 [不确定]。",
+      "限制": "嵌套虚拟化环境下 DPU 卸载不可用；VM 热迁移涉及 VF 直通设备，需平台级支持 (vSphere 8 + Pensando 支持相关能力 [不确定])；K8s 节点本身不建议虚拟化部署 DPU 卸载。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "吞吐": "BlueField-3: 400GbE/NDR InfiniBand 双口，Spectro Cloud 报告可卸载最高 400Gbps 网络带宽；BlueField-2: 25/100GbE；Intel E2100: 200GbE；E2200: 400G MAC；Pensando DSC2-200: 2x200GbE 线速。",
+      "CPU 节省": "官方无统一百分比。定性数据: Red Hat/Canonical/NVIDIA 均报告卸载后主机 CPU 利用率极低 (数据面开销趋近于零)，Spectro Cloud 报告将 vSwitch 任务移入专用芯片后可释放 CPU 循环给应用 [不确定具体核数]。",
+      "OVS-DOCA 卸载": "使用 DOCA-flow API 硬件流表替代软件流表，显著提升流表插入速率 (insertion rate) 与连接跟踪 (CT) 规模、吞吐与扩展性，支持更快的功能迭代。",
+      "Pensando": "Principled Technologies 发布过 DSC-200 性能报告 (转发/安全功能硬件加速) [不确定具体数字]。",
+      "DPU 模拟器": "无硬件性能数据，仅模拟控制面行为供开发测试。"
+    },
+    "扩展性上限": "[不确定] 无官方最大节点数声明。集群规模上限主要受 OVN-Kubernetes 控制面 (etcd/API Server) 限制，与普通 OVN-Kubernetes 集群一致；DPF 面向大规模裸金属云设计；每节点聚合带宽上限为 DPU 卡端口速率 (BlueField-3 400GbE/卡)。",
+    "每节点密度": "[不确定] Pod 密度受 SR-IOV VF 数量限制 (每口可分配 VF 数受网卡型号与 PCIe 资源约束，通常数十至数百个 VF [不确定])，同时受 K8s 默认 110 Pod/节点上限约束；流量卸载能力 (连接跟踪表项、流表容量) 决定高并发 Pod 场景的实际密度。"
+  },
+  "安全": {
+    "安全特性": {
+      "NVIDIA BlueField": "Secure Boot、UEFI 安全启动选项、硬件加密加速 (crypto engine，支持 IPsec/TLS 卸载)、硬件信任根 (RoT)、DOCA 远程证明 (attestation) 能力；DPF/HBN 提供零信任安全隔离，每个 Pod/VM 独立安全域，安全策略在 DPU 硬件上强制执行 (OVN 网络策略卸载)。",
+      "Intel IPU": "基础设施与租户应用强隔离 (基础设施任务在 IPU 上独立运行)、P4 可编程流水线支持防火墙/加密卸载、内联加密引擎 (E2200)、Intel 平台安全特性 [不确定 TPM]。",
+      "AMD Pensando": "硬件状态防火墙、负载均衡、加密 (IPsec) 卸载、内嵌遥测，P4 流水线实现可编程安全策略，支持零信任多租户隔离 (IBM Cloud 采用)。",
+      "OVN-Kubernetes DPU": "网络策略/ACL 下放到 DPU 硬件执行，主机侧攻击面减小；DPU 集群通过 service account token 访问主机集群 (需安全保管)。"
+    },
+    "合规与认证": "[不确定] 无针对 DPU 卸载方案的独立 K8s 一致性认证或行业合规认证公开资料。NVIDIA BlueField 加密引擎通常支持 FIPS 相关算法加速，但整机合规认证取决于上层发行版 (OpenShift/Ubuntu 的 FIPS 模式) [不确定]；Pensando 有面向云安全的硬件设计但具体认证未公开。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "NVIDIA": "NVIDIA Network Operator 暴露指标、DOCA Flow 流表统计、OVN-Kubernetes/OVS Prometheus exporter、SR-IOV Operator 指标；支持遥测卸载 (DPU 上收集)。",
+      "Pensando": "P4 流水线内嵌遥测 (丢包、延迟、流统计) [不确定 Prometheus 导出方式]；DSC 管理接口提供健康状态。",
+      "Intel": "DPDK/IDPF 统计与遥测 [不确定]；DPU 模拟器提供 dpu-sim 状态与日志命令用于开发诊断。"
+    },
+    "维护与生命周期": "[不确定] DPU 固件升级流程: NVIDIA 通过 DOCA 工具链与 Network Operator 执行 (Canonical DPF 支持声明式固件更新)，升级需排水节点并重启 DPU 生效；Intel/Pensando 固件升级依赖厂商工具 [不确定]；硬件为无机械部件网卡形态，MTBF 无公开数据 [不确定]；节点排水对 DPU 集群的影响: 双集群架构下需同步处理两个集群的调度状态，较普通节点复杂。",
+    "弹性与故障恢复": "[不确定] DPU 卡故障将导致该节点网络中断，Pod 需重新调度；双口 DPU 支持链路聚合 (LAG) 提供链路冗余；OVN-Kubernetes DPU 双集群架构中 DPU 集群控制面故障的恢复机制依赖 OVN 自身的 HA 能力 [不确定]；无数据持久化要求 (网络设备)，不涉及 RAID/多路径 I/O。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件采购成本": "[不确定] BlueField-2 约 $1,000-2,500/卡，BlueField-3 约 $2,500-6,000/卡 (400GbE 型号)，Intel E2100 约 $2,000-4,000 [不确定]，Pensando DSC2-200 约 $2,000-5,000 [不确定]；每节点额外一块 x16 卡的成本。",
+      "运行成本": "每卡额外 25-75W 功耗 (含散热)；软件成本: DOCA/DPF 免费，但集成平台 (OpenShift、Canonical、Palette、Platform9) 需相应订阅许可。",
+      "节省项": "减少主机 CPU 核数采购 (软件网络栈每 100GbE 需 4-16 核 [不确定]，卸载后可释放给应用)、降低 vSphere/NSX 等虚拟化软件资源占用 (Pensando 在 vSphere 8 场景)、网络/安全设备整合。",
+      "适用性判断": "单节点省下的 CPU 与许可成本需覆盖 DPU 卡成本，通常在大规模裸金属集群、高带宽 (100G+) 或强隔离多租户场景才具经济性；小集群或低带宽场景回本周期长 [不确定]。"
+    },
+    "成熟度与社区支持": {
+      "NVIDIA BlueField/DOCA": "生态最成熟: 与 Red Hat OpenShift、Canonical、Spectro Palette、Platform9、Mirantis k0rdent、IBM 等大量集成；DOCA 文档与社区活跃；OVN-Kubernetes 为 CNCF 项目，由 Red Hat/IBM/NVIDIA 主导，是 K8s DPU 卸载的事实标准载体。",
+      "Intel IPU": "E2100 已量产出货，E2200 (Mount Morgan) 2025 年 8 月发布，生态与部署案例少于 NVIDIA；有 DPDK/存储生态支撑。",
+      "AMD Pensando": "云厂商采用 (IBM Cloud 裸金属、vSphere 8/NSX、Dell PowerEdge 16G)，在虚拟化网络领域成熟；K8s 原生集成资料与社区活跃度较低。",
+      "DPU 模拟器": "ovn-kubernetes 官方项目，用于 CNI 上游 CI/CD，社区持续维护。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.最低配置.Intel IPU E2100 (Mount Evans)",
+    "硬件规格.最低配置.AMD Pensando DSC2-200 (Elba)",
+    "硬件规格.推荐配置.Intel IPU E2100",
+    "硬件规格.推荐配置.AMD Pensando DSC2-200",
+    "硬件规格.生产级配置.Intel IPU E2200 (Mount Morgan)",
+    "硬件规格.生产级配置.AMD Pensando (云厂商场景)",
+    "硬件规格.功耗基线",
+    "兼容性.支持的 K8s 版本范围.OVN-Kubernetes (核心载体)",
+    "兼容性.支持的 K8s 版本范围.Intel IPU / AMD Pensando",
+    "兼容性.支持的 K8s 版本范围.DPU 模拟器",
+    "兼容性.操作系统兼容性.不支持",
+    "兼容性.K8s 上游支持阶段.OVN-Kubernetes",
+    "兼容性.K8s 上游支持阶段.K8s 上游",
+    "兼容性.生态兼容性矩阵.CNI",
+    "兼容性.生态兼容性矩阵.CSI/存储",
+    "兼容性.生态兼容性矩阵.监控集成",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销",
+    "限制与约束.固件与驱动依赖.Intel / Pensando",
+    "配置与部署.配置示例",
+    "配置与部署.部署位置与环境.不适用/受限",
+    "配置与部署.虚拟化兼容性.虚拟机场景",
+    "配置与部署.虚拟化兼容性.限制",
+    "性能特征.基准性能数据.CPU 节省",
+    "性能特征.基准性能数据.Pensando",
+    "性能特征.扩展性上限",
+    "性能特征.每节点密度",
+    "安全.合规与认证",
+    "运维与生命周期.可观测性支持.Pensando",
+    "运维与生命周期.可观测性支持.Intel",
+    "运维与生命周期.维护与生命周期",
+    "运维与生命周期.弹性与故障恢复",
+    "经济性.总拥有成本 (TCO).硬件采购成本",
+    "经济性.总拥有成本 (TCO).节省项",
+    "经济性.总拥有成本 (TCO).适用性判断"
+  ]
+}

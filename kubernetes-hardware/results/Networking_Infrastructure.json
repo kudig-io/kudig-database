@@ -1,0 +1,114 @@
+{
+  "基本信息": {
+    "名称": "网络基础设施（CNI 插件、网卡、DPDK、SR-IOV、服务网格与 eBPF 硬件要求）",
+    "类别": "网络",
+    "官方文档链接": [
+      "https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/",
+      "https://kubernetes.io/docs/concepts/cluster-administration/networking/",
+      "https://kubernetes.io/docs/setup/best-practices/cluster-large/",
+      "https://github.com/containernetworking/cni",
+      "https://docs.tigera.io/calico/latest/getting-started/kubernetes/requirements",
+      "https://docs.cilium.io/en/stable/operations/system_requirements/",
+      "https://docs.cilium.io/en/stable/operations/performance/benchmark/",
+      "https://github.com/flannel-io/flannel",
+      "https://ovn-kubernetes.io/",
+      "https://github.com/k8snetworkplumbingwg/multus-cni",
+      "https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin",
+      "https://github.com/intel/userspace-cni-network-plugin",
+      "https://istio.io/latest/docs/ops/deployment/performance-and-scalability/",
+      "https://linkerd.io/2021/05/27/linkerd-vs-istio-benchmarks/"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": {
+      "网卡": "任意 1GbE 网卡（Linux 内核驱动支持即可，如 Intel、Realtek、Broadcom、Mellanox 常见型号）；Kubernetes 官方对节点网络带宽无硬性要求",
+      "CPU/内存": "无额外硬性要求；CNI 组件为轻量级守护进程（Calico/Cilium Agent 通常占用数百 MB 内存级），kube-proxy 约 50-200 MB 内存",
+      "内核": "常规数据面需要 Linux 内核 4.18+；Calico 官方要求内核 5.10+；eBPF 数据面需要支持 BTF（CONFIG_DEBUG_INFO_BTF=y）的内核",
+      "说明": "1GbE 足以运行小规模测试/开发集群"
+    },
+    "推荐配置": {
+      "网卡": "每节点 10GbE/25GbE（生产集群通用推荐）；网卡应支持硬件校验和卸载（checksum offload）、GRO/GSO、多队列（RSS），队列数建议与 vCPU 数匹配",
+      "控制面节点": "1-10GbE 即可，但要求低延迟网络；etcd 与 API Server 之间网络延迟应保持在毫秒级",
+      "说明": "主流云厂商工作节点实例默认提供 10-25 Gbps 带宽；数据密集型工作负载（存储、AI 训练、大数据）建议 25GbE 起步"
+    },
+    "生产级配置": {
+      "网卡": "25/40/100GbE（大规模集群或网络密集型工作负载）；建议管理网络与数据网络物理分离（多网卡）；SR-IOV/DPDK 场景需支持虚拟化直通的高级网卡（Intel E810/X710、Mellanox ConnectX-5/6/7 等）",
+      "内核与系统": "Linux 内核 5.10+（eBPF 数据面）；BIOS 开启 VT-d/IOMMU（SR-IOV/DPDK）；预留大页内存 HugePages（DPDK 建议 1GiB 大页）；CPU 核隔离（isolcpus）供 DPDK 轮询模式使用",
+      "大规模集群": ">1000 节点建议节点间 10GbE+；控制面与 etcd 需要稳定低延迟网络；服务网格场景需为 sidecar 预留每 Pod 约 0.1-0.25 vCPU 与 50-150 MB 内存",
+      "说明": "eBPF 数据面在普通商用硬件上即可达到 100Gbps 近线速（Cilium 官方基准使用 AMD Ryzen 9 3950X + 128GB 内存 + 双口 Intel E810-CQDA2 100G 网卡）"
+    },
+    "功耗基线": "无权威汇总数据；网络软件组件（CNI、kube-proxy、OVS）功耗占比极低（通常数瓦以内），主要功耗来自物理网卡：10GbE 网卡典型数瓦至十几瓦，25GbE 约 10-20W，100GbE 约 15-30W（具体取决于型号与负载）[不确定]"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "CNI 规范要求插件兼容 v0.4.0+（Kubernetes 推荐 v1.0.0 兼容）；kubelet 直接管理 CNI 的机制已在 v1.24 移除，由容器运行时负责加载；NetworkPolicy 自 v1.7 起 GA。各主流 CNI 跟踪支持最近数个 K8s 次要版本：Cilium 文档要求 Kubernetes 1.16+；Calico v3.x 支持 K8s 1.16+；OVN-Kubernetes 与 OpenShift/上游同步演进；Flannel 无严格版本下限（精确版本矩阵以各项目发行说明为准）",
+    "操作系统兼容性": "Calico：Ubuntu 20.04+、RHEL 8+、Debian 10+、Bottlerocket、Talos 等 Linux 发行版，另支持 Windows 节点（HNS，功能受限）；Cilium：仅 Linux（AMD64/AArch64），支持 Ubuntu 20.04+、Debian 10+、RHEL/CentOS 8.6+、Fedora CoreOS、Bottlerocket、Flatcar、Talos 1.5+、Amazon Linux 2、COS 85+；Flannel：Linux 与 Windows（VXLAN 后端，Windows 容器场景常用）；OVN-Kubernetes：主要 Linux，OpenShift 通过混合覆盖网络支持 Windows 节点",
+    "K8s 上游支持阶段": "CNI 为 CNCF 项目（规范 v1.0.0 已发布）；NetworkPolicy 为 GA（v1.7+）；kube-proxy iptables 模式为默认且 GA，IPVS 模式为 GA（大集群推荐）；eBPF 数据面与 kube-proxy 替代（Cilium、Calico 社区实现）已在生产环境广泛使用；OVN-Kubernetes 为 OpenShift 默认网络插件；Multus 为 k8snetworkplumbingwg 维护的 CNI 元插件（多网卡事实标准）",
+    "生态兼容性矩阵": "Calico：兼容 kube-proxy、提供自研 eBPF 数据面（可替代 kube-proxy）、完整 NetworkPolicy、与 Istio 集成、Prometheus 指标、支持 EKS/GKE/AKS/裸金属；Cilium：Hubble 可观测性、Tetragon 安全、Gateway API、kube-proxy 替代、ambient 服务网格、Prometheus 指标；Flannel：轻量 overlay，无原生网络策略（常与 Calico 组合为 Canal）；OVN-Kubernetes：OpenShift 深度集成、EgressFirewall、Prometheus、支持 DPU 硬件卸载；多网卡生态：Multus + SR-IOV 设备插件 + Intel userspace CNI（DPDK/vhost-user）+ RDMA 设备插件"
+  },
+  "限制与约束": {
+    "已知限制": [
+      "Flannel：无 NetworkPolicy、无高级路由/多网段能力、封装性能较低，不适合大规模与多租户场景",
+      "Calico：IPIP/VXLAN 封装带来额外开销；eBPF 数据面需要较新内核（5.10+）且不支持 Windows；大规模 BGP 需要部署路由反射器",
+      "Cilium：内核要求高（5.10+ 且需 BTF），不支持 Windows 节点，功能面大导致学习与排障成本高",
+      "OVN-Kubernetes：节点资源占用较高（ovs-vswitchd、ovn-controller 常驻，内存数百 MB 级），排障复杂度高，主要依赖 OpenShift/上游社区支持",
+      "kube-proxy iptables 模式：服务数超过约 3000 时规则线性遍历导致性能退化，大集群建议 IPVS 或 eBPF",
+      "SR-IOV：VF 固定分配不可超卖，直通设备无法随 VM/Pod 热迁移，每节点 VF 数量受网卡与 PCIe 资源限制，需专用支持 SR-IOV 的网卡",
+      "DPDK：应用必须使用 DPDK 轮询模式库改造（普通应用无法直接受益），需要大页内存与 CPU 核隔离，与容器网络模型集成复杂（需 userspace CNI）",
+      "服务网格：每个 Pod 增加 sidecar 资源开销（Envoy 约 60-155 MB 内存、0.1-0.25 vCPU）与路径延迟，mTLS 加密带来额外 CPU 开销",
+      "overlay 网络（VXLAN/Geneve/IPIP）存在封装开销，多一跳封装对延迟敏感型工作负载不利"
+    ],
+    "混部兼容性": "网络数据面（CNI、kube-proxy）与业务工作负载混部时会争抢节点 CPU（软中断/数据包处理），高吞吐网络负载与 CPU 密集型业务互相影响；DPDK 轮询模式会占满所绑定的 CPU 核，必须通过 isolcpus/cpuset 与业务隔离；SR-IOV 多租户共享同一物理网卡时缺乏默认带宽隔离，需借助网卡 QoS/限速策略；服务网格 sidecar 与业务容器同 Pod 共享资源，内存/CPU 预留不足会导致请求排队与尾延迟上升",
+    "性能开销": "Flannel VXLAN（内核封装）吞吐较裸网络下降约 10-20%（社区测试，取决于 MTU 与 CPU）；Calico IPIP/VXLAN 开销相近，eBPF 数据面显著更低；Cilium eBPF 数据面在 100Gbps 接口可达近线速，官方基准显示并行压测时约消耗 30% 系统资源；OVN-Kubernetes 经 OVS 内核数据路径存在额外开销（社区测试 p99 延迟高于直连路由方案）；服务网格：Linkerd 官方基准 P50 延迟增加约 9-19ms，Envoy sidecar 内存约 155MB（Linkerd 约 18MB）；DPDK 可消除内核协议栈开销，在 10/25/40/100G 上达到近线速并大幅降低 CPU 占用",
+    "固件与驱动依赖": "网卡固件版本（Intel NVM、Mellanox/Marvell 固件）与内核驱动（ice、i40e、ixgbe、mlx5_core）需匹配，固件升级通常需要节点维护窗口；SR-IOV 需要 BIOS 开启 VT-d/IOMMU 并加载 vfio-pci 模块；DPDK 需要 vfio-pci 与 IOMMU（iommu=pt），建议 1GiB HugePages；OVN-Kubernetes 依赖内核 openvswitch 模块；WireGuard/IPsec 加密依赖内核模块支持；eBPF 数据面依赖内核 BTF（CONFIG_DEBUG_INFO_BTF=y）与 bpffs（挂载于 /sys/fs/bpf）；PCIe 热插拔对 SR-IOV/DPDK 设备支持有限，设备变更通常需重建 Pod 或重启节点"
+  },
+  "配置与部署": {
+    "配置方式": [
+      "CNI 配置文件（/etc/cni/net.d）与插件二进制（/opt/cni/bin）由容器运行时（containerd/CRI-O）加载管理（K8s v1.24+）",
+      "Helm Chart / Operator 部署（Cilium、Calico、Multus、SR-IOV 设备插件均有官方 Helm/Operator）",
+      "Multus：通过 NetworkAttachmentDefinition CRD 声明 Pod 附加网络（多网卡）",
+      "SR-IOV：SriovNetworkNodePolicy CRD 配置 VF 分配，sriov-network-device-plugin 暴露资源",
+      "DPDK：userspace CNI（Intel）+ HugePages + vfio-pci 直通 + Pod 资源注解（内存大页、CPU）",
+      "kube-proxy 模式选择：iptables（默认）/ IPVS / 由 eBPF 数据面替代（Cilium/Calico）",
+      "DRA（Dynamic Resource Allocation）可声明网卡带宽预留等网络硬件资源（K8s 1.34+ 演进方向）"
+    ],
+    "配置示例": {
+      "Multus SR-IOV 附加网络": "apiVersion: k8s.cni.cncf.io/v1\nkind: NetworkAttachmentDefinition\nmetadata:\n  name: sriov-net\n  annotations:\n    k8s.v1.cni.cncf.io/resourceName: intel.com/sriov\nspec:\n  config: '{\"type\": \"sriov\", \"ipam\": {\"type\": \"host-local\", \"subnet\": \"10.56.217.0/24\"}}'",
+      "Pod 请求 SR-IOV VF": "metadata:\n  annotations:\n    k8s.v1.cni.cncf.io/networks: sriov-net\nspec:\n  containers:\n  - name: app\n    resources:\n      limits:\n        intel.com/sriov: '1'",
+      "Cilium Helm 安装（eBPF 数据面）": "helm install cilium cilium/cilium --version 1.16.x \\\n  --namespace kube-system \\\n  --set kubeProxyReplacement=true \\\n  --set ipam.mode=cluster-pool",
+      "kube-proxy IPVS 模式": "kube-proxy 配置:\n  mode: ipvs",
+      "DPDK 大页与 vfio 内核参数": "GRUB_CMDLINE_LINUX=\"iommu=pt intel_iommu=on default_hugepagesz=1G hugepagesz=1G hugepages=8\"\n# 加载 vfio-pci 并绑定网卡（echo <pci> > /sys/bus/pci/drivers/vfio-pci/bind）"
+    },
+    "部署位置与环境": "公有云：EKS 默认 AWS VPC CNI、GKE 默认 Dataplane V2（基于 Cilium）、AKS 默认 Azure CNI（可选 Cilium），均支持 Calico/Cilium 自选；裸金属：Calico/Cilium/OVN-Kubernetes 全功能（BGP、eBPF、SR-IOV/DPDK 直通），是高性能网络场景的最佳环境；虚拟机：支持各类 overlay（VXLAN/Geneve），但 SR-IOV/DPDK 需要虚拟机透传（依赖虚拟化平台支持），嵌套虚拟化封装性能下降；边缘：Flannel/K3s 轻量方案为主，Cilium 也支持边缘（kube-router 替代）；混合部署兼容性良好，overlay 网络天然跨环境互通",
+    "虚拟化兼容性": "嵌套虚拟化下 VXLAN/Geneve 软件封装性能显著下降，建议关闭硬件卸载或使用直通；SR-IOV 需要宿主机 IOMMU 透传（vfio-pci），VM 热迁移（vMotion/在线迁移）不支持直通设备，迁移前需摘除 VF；云 VM 通常无法使用 SR-IOV/DPDK（需裸金属实例或专用 vCPU 类型）；DPDK 在云环境一般不可用；虚拟机内多网卡（virtio）与 Multus 兼容，但带宽受虚拟化层限制"
+  },
+  "性能特征": {
+    "基准性能数据": "Cilium 官方基准：eBPF 数据面在 100Gbps 接口上可接近线速，并行压测时约消耗 30% 系统资源（测试硬件：AMD Ryzen 9 3950X、128GB DDR4、双口 Intel E810-CQDA2 100G）；社区 CNI 对比测试（sanj.dev、DaoCloud 等）：Cilium（eBPF）TCP 吞吐最高、延迟最低，Calico 次之，Flannel VXLAN 吞吐最低（约低 10-20%）；服务网格（Linkerd 官方 2021 基准，Equinix Metal 裸金属）：200/2000 RPS 下 Linkerd P50 延迟总值为 17ms（较基线 +11ms/+9ms），Istio 较基线 +19ms/+15ms，P99.9 时 Linkerd 约 90ms、Istio 约 200ms；数据面内存：Linkerd proxy 平均最大 17.8MB，Envoy（Istio）154.6MB；Istio 官方：1000 RPS/线程负载下 sidecar 0.20 vCPU+60MB、waypoint 0.25 vCPU+60MB、ztunnel 0.06 vCPU+12MB，2000 Pod 规模下全网格 70000 RPS",
+    "扩展性上限": "Kubernetes 官方大规模集群上限：5000 节点、150000 Pod、300000 容器、每节点默认 100-110 Pod、全集群约 10000 个 Service；kube-proxy iptables 模式在数千条 Service 规则时性能退化，IPVS/eBPF 可支撑万级 Service；Flannel 适合中小规模（社区经验数百节点以内），Calico/Cilium/OVN-Kubernetes 均支持数千节点（Calico/Cilium 需 route reflectors/cluster-pool IPAM 等调优）；服务网格规模受控制面资源与 sidecar 数量约束（Istio 官方测试 2000 Pod，社区实践可达上万 Pod，需横向扩展控制面）；etcd 网络延迟敏感，成员间 RTT 建议毫秒级",
+    "每节点密度": "Kubernetes 默认每节点最多 110 个 Pod（kubelet --max-pods 可调）；SR-IOV 场景每节点可用 VF 数量取决于网卡型号与 PCIe 资源（常见高端网卡每端口 32-128 个 VF，如 Intel X710 每端口 64 VF、E810 与 Mellanox ConnectX-5/6 支持 64-128 VF/端口[不确定]，具体以厂商规格为准）；启用服务网格后每节点可运行的 Pod 数受 sidecar 资源开销限制（例如 32GB 节点运行数百个含 Envoy sidecar 的 Pod 会明显吃紧）；每节点网卡队列数与 vCPU 数匹配可避免接收路径瓶颈"
+  },
+  "安全": {
+    "安全特性": "NetworkPolicy（K8s 原生，GA）实现 Pod 级网络隔离；Calico 提供全局网络策略与 Istio 集成（L4 为主，可扩展 L7）；Cilium 提供 L3-L7 策略（HTTP/gRPC/Kafka/FQDN），eBPF 下发策略无 iptables 规则膨胀问题；加密：Calico/Cilium/OVN-Kubernetes 支持 IPsec，Calico/Cilium 支持 WireGuard（内核级加密，性能优于 IPsec）；服务网格提供 mTLS 双向认证（Istio/Linkerd，自动证书轮换）；eBPF 安全可观测性（Tetragon）实现运行时威胁检测；DPDK/SR-IOV 直通场景需注意 VF 隔离与 vfio 权限控制（cgroup/设备插件限制）；网络安全策略误配置会导致服务不可达，建议变更前评审",
+    "合规与认证": "Kubernetes 一致性认证涵盖网络功能（CNI 需通过 CNI 规范一致性测试）；Cilium、Linkerd、Istio 均为 CNCF 毕业项目，生态成熟；OpenShift（OVN-Kubernetes）支持 FIPS 模式，满足政府/金融合规要求；IPsec/WireGuard/mTLS 加密传输有助于满足 PCI DSS、HIPAA 等对传输加密的要求；Calico Enterprise 提供面向合规的审计与策略报告（商业版）；网络组件本身不直接涉及 FIPS 140-2/3 硬件密码模块认证，但可运行于满足 FIPS 的 OS 之上"
+  },
+  "运维与生命周期": {
+    "可观测性支持": [
+      "Prometheus 指标：Calico（felix、calico-node）、Cilium（cilium_agent、cilium_endpoint）、Hubble（网络流可观测性）、OVN-Kubernetes（ovnkube 指标）、kube-proxy（iptables/ipvs 指标）",
+      "node-exporter 提供 node_network_* 网卡收发字节/错误/丢包指标",
+      "诊断工具：cilium CLI（cilium monitor/bugtool）、calicoctl/calico-node、ovnkube-trace、netshoot、Multus 事件",
+      "Hubble UI 可视化服务依赖与流量拓扑（Cilium 生态）",
+      "Tetragon 提供 eBPF 级进程/网络事件审计",
+      "Kubernetes Events 记录 CNI 添加/删除网络失败事件"
+    ],
+    "维护与生命周期": "CNI 组件（DaemonSet）支持滚动升级，升级期间建议逐个节点排水；节点排水后 Pod 重建会重新创建网络接口与 IP；网卡固件升级需要节点维护窗口（固件升级期间网卡不可用）；SR-IOV VF 策略（SriovNetworkNodePolicy）变更需要节点重启或重建相关 Pod；内核升级（含 BTF 变更）需验证 eBPF 程序兼容性；服务网格证书轮换（mTLS）自动化但需监控；etcd 与 API Server 的网络路径变更需谨慎（先验证再切换）；OVS（OVN-Kubernetes）升级需注意数据路径版本兼容",
+    "弹性与故障恢复": "overlay 网络（VXLAN/Geneve）天然容忍底层链路故障（路由收敛）；Calico/Cilium BGP 模式支持 ECMP 多路径与故障切换；节点网卡故障导致 NodeNotReady，Pod 由控制器驱逐重调度（受 PDB 约束）；建议管理网与数据网分离并可选网卡绑定（bonding/链路聚合）提升可靠性；控制面多副本 + etcd 集群保障网络组件配置源高可用；NetworkPolicy/服务网格误配置可能导致大面积中断，建议灰度发布与策略先行验证；DPDK/SR-IOV 直通设备故障时对应 Pod 需重建（设备不可热迁移），关键负载建议保留备用 VF/回退网络路径"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "[不确定]",
+    "成熟度与社区支持": "网络生态高度成熟：Calico 为最广泛部署的 CNI 之一（Tigera 主导），Cilium 为 CNCF 毕业项目且是 eBPF 数据面事实标准（2023 年毕业），Flannel 历史悠久但维护节奏放缓，OVN-Kubernetes 由 Red Hat 主导并作为 OpenShift 默认网络，Istio/Linkerd 均为 CNCF 毕业项目；主要云厂商（AWS EKS、GKE、AKS）均提供多种 CNI 选择；多网卡生态（Multus、SR-IOV 设备插件、Intel userspace CNI、RDMA 插件）由 k8snetworkplumbingwg 与 Intel/NVIDIA/Mellanox 等厂商持续维护；社区基准与性能调优资料丰富，厂商支持（Tigera、Isovalent/Cisco、Red Hat、Buoyant）完善"
+  },
+  "uncertain": [
+    "功耗基线",
+    "每节点密度",
+    "总拥有成本 (TCO)"
+  ]
+}

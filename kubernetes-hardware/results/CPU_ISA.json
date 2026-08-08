@@ -1,0 +1,131 @@
+{
+  "基本信息": {
+    "名称": "CPU 指令集架构 (ISA) - amd64/x86_64、arm64、s390x、ppc64le",
+    "类别": "架构",
+    "官方文档链接": [
+      "https://kubernetes.io/docs/concepts/containers/images/",
+      "https://kubernetes.io/docs/reference/labels-annotations-taints/",
+      "https://www.kubernetes.dev/docs/guide/platforms/",
+      "https://dl.k8s.io/",
+      "https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/",
+      "https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": {
+      "amd64/x86_64": "1 核 CPU、1 GB 内存、10 GB 磁盘空间，可运行最小化 Kubernetes 集群（kubeadm 单节点）",
+      "arm64": "1 核 CPU、1 GB 内存、10 GB 磁盘空间，可运行最小化 Kubernetes 集群（树莓派类设备）",
+      "s390x": "IBM Z 或 LinuxONE 环境，最低 1 个 IFL（集成固件处理器）、4 GB 内存、50 GB 磁盘空间",
+      "ppc64le": "IBM Power 服务器，最低 1 核 CPU、2 GB 内存、20 GB 磁盘空间"
+    },
+    "推荐配置": {
+      "amd64/x86_64": "4 核 CPU、8 GB 内存、100 GB SSD 磁盘，适用于生产环境控制面节点",
+      "arm64": "4 核 CPU、8 GB 内存、100 GB SSD 磁盘，AWS Graviton / Ampere Altra 实例（如 m7g.medium）",
+      "s390x": "2-4 IFL、16 GB 内存、100 GB 磁盘，搭配 z/VM 或 KVM 虚拟化环境",
+      "ppc64le": "4 核 CPU、16 GB 内存、100 GB 磁盘，IBM Power9/10 服务器"
+    },
+    "生产级配置": {
+      "amd64/x86_64": "8 核以上 CPU、32 GB 以上内存、NVMe SSD 磁盘，HA 控制面至少 3 节点",
+      "arm64": "8 核以上 CPU、32 GB 以上内存、NVMe SSD 磁盘，AWS Graviton3/4 实例（如 c7g.2xlarge 以上）",
+      "s390x": "4-8 IFL、64 GB 以上内存、企业级存储，HA 控制面配置，IBM Z 或 LinuxONE 企业环境",
+      "ppc64le": "8 核以上 CPU、64 GB 以上内存、企业级存储，IBM Power 服务器集群"
+    },
+    "功耗基线": "[不确定] 各架构功耗差异显著：amd64 典型 TDP 65-280W（桌面至服务器）；arm64 典型 TDP 10-200W（树莓派 5W 至 Graviton 实例约 50-150W）；s390x 和 ppc64le 为大型机/企业级服务器，功耗较高（数百瓦至数千瓦），通常以整机柜功耗评估"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "从 Kubernetes 1.0 起即支持 amd64；arm64 自 K8s 1.3 开始获得官方支持；ppc64le 和 s390x 自 K8s 1.5-1.6 开始加入 CI 构建管道。当前所有受支持架构（amd64、arm64、arm、ppc64le、s390x）均可在最新稳定版 Kubernetes（v1.33+）中使用，具体支持程度取决于各架构的 CI 测试覆盖级别",
+    "操作系统兼容性": {
+      "amd64/x86_64": "所有主流 Linux 发行版（Ubuntu、Debian、RHEL、CentOS、Rocky Linux、AlmaLinux、SUSE Linux Enterprise Server、Fedora CoreOS、Flatcar Container Linux）、Windows Server 2019/2022/2025、macOS（开发环境）",
+      "arm64": "Ubuntu、Debian、RHEL、Fedora、Rocky Linux、AlmaLinux、SUSE Linux Enterprise Server、Flatcar Container Linux、Amazon Linux 2/2023（ARM 版本）。不支持 Windows Server 原生 arm64",
+      "s390x": "RHEL for IBM Z and LinuxONE、SUSE Linux Enterprise Server for IBM Z、Ubuntu for IBM Z。支持有限，发行版选择较少",
+      "ppc64le": "RHEL for Power (little endian)、Ubuntu for Power、SUSE Linux Enterprise Server for Power。支持有限，发行版选择较少"
+    },
+    "K8s 上游支持阶段": {
+      "amd64/x86_64": "GA（生产就绪），release-blocking CI 测试覆盖，是 Kubernetes 最成熟、测试最充分的架构",
+      "arm64": "GA（生产就绪），release-blocking CI 测试覆盖，AWS Graviton、Ampere、华为鲲鹏等主流云厂商均提供 arm64 实例",
+      "arm": "Beta/社区维护，非 release-blocking CI 测试，主要适用于边缘/IoT 场景",
+      "ppc64le": "Beta/社区维护，release-informing CI 测试，IBM Power 生态系统支持，OpenShift 提供完整支持",
+      "s390x": "Beta/社区维护，release-informing CI 测试，IBM Z 和 LinuxONE 生态系统支持，OpenShift 提供完整支持"
+    },
+    "生态兼容性矩阵": "[不确定] 主流 CNI（Calico、Cilium、Flannel、OVN-Kubernetes）均支持 amd64 和 arm64，ppc64le 和 s390x 支持有限。CSI 驱动（AWS EBS CSI、Azure Disk CSI、GCE PD CSI、Ceph RBD/NFS）已支持多架构。Prometheus node_exporter、CoreDNS、etcd 等核心组件均已发布多架构镜像。部分第三方 Operator 和监控工具可能仅提供 amd64 镜像"
+  },
+  "限制与约束": {
+    "已知限制": {
+      "amd64/x86_64": "x86 架构专利壁垒，生态封闭；功耗相对较高；部分遗留应用可能依赖特定 x86 指令集扩展（AVX、AVX-512、AMX）",
+      "arm64": "部分 x86 原生二进制/容器镜像无法直接运行，需重新编译或使用模拟层（如 QEMU 用户态模拟）；高性能计算中 AVX-512 等 SIMD 指令集不可用；某些专有软件（如 Oracle 数据库）对 arm64 支持有限",
+      "s390x": "生态最小，第三方软件和容器镜像支持极度有限；开发测试环境获取困难；高昂的硬件成本限制大规模部署；无法使用主流云服务商的基础设施即服务",
+      "ppc64le": "生态较小，第三方软件和容器镜像支持有限；硬件成本较高；云实例选择有限（仅 IBM Cloud 提供）",
+      "通用": "多架构集群中，kubelet 自动通过 kubernetes.io/arch 标签标记节点架构，但调度器本身不自动阻止跨架构 Pod 调度（需用户配置 nodeSelector/nodeAffinity）"
+    },
+    "混部兼容性": "多架构（混合 x86_64 + arm64）集群中，需要确保容器镜像架构与节点架构匹配。常见策略包括：(1) 使用多架构镜像（manifest list / OCI image index），由容器运行时（containerd）自动选择正确架构层；(2) 使用 nodeSelector 或 nodeAffinity 约束 Pod 调度到匹配架构的节点；(3) 使用 QEMU 用户态模拟（binfmt_misc）在非原生架构上运行异架构容器，但性能有显著损耗。混部时需注意 kubelet 和节点组件必须为原生架构编译",
+    "性能开销": "[不确定] 跨架构容器镜像模拟运行（如 arm64 上运行 x86 镜像 via QEMU）性能损耗约 50-80%。多架构镜像本身无运行时开销。ppc64le 和 s390x 上的虚拟化层（z/VM、KVM on Power）引入 5-15% 性能开销。amd64 和 arm64 原生容器运行无额外架构开销",
+    "固件与驱动依赖": "[不确定] amd64 依赖 UEFI/BIOS 固件，常见于所有 x86 服务器；arm64 依赖 UEFI（ARM UEFI）或设备树（Device Tree），不同厂商实施差异大；s390x 依赖 IBM Z 固件和 z/VM 或 KVM 管理程序；ppc64le 依赖 PowerVM 或 PowerKVM 固件层。内核模块方面，各架构均需对应架构编译的内核模块"
+  },
+  "配置与部署": {
+    "配置方式": "Kubernetes 原生使用 kubernetes.io/arch 标签自动标记节点架构，通过 nodeSelector 或 nodeAffinity 控制 Pod 调度到指定架构节点。无需额外 Device Plugin 或 Operator。多架构镜像构建通过 docker buildx（基于 QEMU 模拟或原生构建器）或手动 manifest 操作实现",
+    "配置示例": {
+      "nodeSelector 方式": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: multi-arch-pod\nspec:\n  nodeSelector:\n    kubernetes.io/arch: arm64\n  containers:\n  - name: app\n    image: registry.k8s.io/pause:3.10",
+      "nodeAffinity 方式": "apiVersion: v1\nkind: Deployment\nmetadata:\n  name: multi-arch-deploy\nspec:\n  replicas: 3\n  template:\n    spec:\n      affinity:\n        nodeAffinity:\n          requiredDuringSchedulingIgnoredDuringExecution:\n            nodeSelectorTerms:\n            - matchExpressions:\n              - key: kubernetes.io/arch\n                operator: In\n                values:\n                - amd64\n                - arm64\n      containers:\n      - name: app\n        image: myregistry/myapp:latest",
+      "docker buildx 构建多架构镜像": "# 创建构建器并构建多架构镜像\ndocker buildx create --name multiarch --driver docker-container --use\ndocker buildx build --platform linux/amd64,linux/arm64,linux/ppc64le,linux/s390x -t myregistry/myapp:latest --push .",
+      "手动创建 manifest list": "docker manifest create myregistry/myapp:latest \\\n  myregistry/myapp:amd64 \\\n  myregistry/myapp:arm64\ndocker manifest push myregistry/myapp:latest"
+    },
+    "部署位置与环境": {
+      "amd64/x86_64": "所有主流云服务商（AWS、Azure、GCP、阿里云、华为云）、裸金属服务器、虚拟机、边缘设备、混合云环境。覆盖最广泛的部署场景",
+      "arm64": "AWS（Graviton）、GCP（Tau T2A）、Azure（Ampere Altra）、阿里云（倚天 710）、华为云（鲲鹏）、Oracle Cloud（Ampere）、裸金属服务器（如 Ampere Altra）、树莓派/Rockchip 等边缘设备。混合部署可通过多架构节点池实现",
+      "s390x": "IBM Cloud、裸金属 IBM Z 和 LinuxONE 服务器、z/VM 虚拟化环境。主要面向金融、保险、大型企业核心交易系统",
+      "ppc64le": "IBM Cloud、裸金属 IBM Power 服务器、PowerVM 虚拟化环境。主要面向企业传统工作负载迁移"
+    },
+    "虚拟化兼容性": "[不确定] amd64 支持完整嵌套虚拟化（KVM、VMware、Hyper-V）、PCIe 直通、SR-IOV；arm64 支持 KVM 虚拟化，嵌套虚拟化支持有限（KVM on KVM 需特定硬件支持），PCIe 直通取决于具体 SoC/服务器实现；s390x 通过 z/VM 或 KVM on Z 提供企业级虚拟化，支持 PCIe 直通（通过 PCIe Function 虚拟化）；ppc64le 通过 PowerVM 或 PowerKVM 提供虚拟化支持，SR-IOV 支持取决于具体 Power 服务器型号"
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "amd64/x86_64": "单核性能领先，AVX-512/AMX 等 SIMD 指令集提供卓越的向量化计算能力。典型 SPEC CPU 2017 整数评分约 10-15/核（取决于具体型号）。内存延迟约 60-100ns（NUMA 架构）。Kubernetes 控制面性能基准：etcd 磁盘 IOPS 建议 10,000+，API Server 建议 2-4 核 CPU",
+      "arm64": "每瓦性能优势明显，AWS Graviton3 相较于同代 x86 实例提供高达 40% 的性价比提升。Graviton3 提供 30% 更好的计算性能、50% 更多核心、2x 内存带宽。ARM 容量在 Kubernetes 中以 3.5 倍于 x86 的速度增长，目前约占 Kubernetes 总 CPU 容量的 9%。SPEC CPU 2017 整数评分约 8-12/核",
+      "s390x": "企业级事务处理性能卓越，专为高可靠性、高可用性设计。单 IFL 可支撑大量并发容器。在 IBM Z 上运行 K8s 主要面向核心交易系统而非吞吐量敏感型批处理。具体基准数据需参考 IBM Z 性能手册",
+      "ppc64le": "IBM Power 架构提供高吞吐量并行计算能力，适合大规模数据分析。具体基准数据需参考 IBM Power 性能指标"
+    },
+    "扩展性上限": "[不确定] 各架构在 Kubernetes 中的扩展性上限主要受限于节点硬件规格而非架构本身。amd64 和 arm64 均支持 5000 节点集群规模。s390x 和 ppc64le 集群规模通常较小（数十至数百节点），但单节点可承载更多工作负载。Kubernetes 社区官方扩展性测试主要针对 amd64 架构",
+    "每节点密度": "[不确定] 每节点 Pod 密度取决于节点硬件资源而非架构。amd64 和 arm64 节点默认 Pod 上限为 110（kubelet 默认配置），可通过 --max-pods 参数调整。s390x 和 ppc64le 节点通常配置更大硬件资源，单节点可运行更多容器"
+  },
+  "安全": {
+    "安全特性": {
+      "amd64/x86_64": "支持 TPM 2.0（可信平台模块）、UEFI Secure Boot、Intel TDX（机密计算）、AMD SEV-SNP（机密计算）、Intel SGX（飞地执行）、硬件信任根。Kubernetes 中可通过 Confidential Containers (CoCo) 项目使用 TDX/SEV-SNP",
+      "arm64": "支持 TPM 2.0（部分服务器级 SoC）、UEFI Secure Boot（ARM 版本）、ARM CCA（机密计算架构，较新硬件）、TrustZone（TEE）。ARM CCA 在 Kubernetes 中的集成仍在发展中",
+      "s390x": "IBM Z 提供业界领先的硬件安全特性：Secure Execution（类似机密计算）、Crypto Express（硬件加密加速）、Secure Boot、逻辑分区（LPAR）隔离。IBM Z 是最高安全等级的硬件平台之一",
+      "ppc64le": "支持 TPM 2.0、Secure Boot、PowerVM 逻辑分区隔离。IBM Power 架构提供硬件加密加速。机密计算支持相对有限"
+    },
+    "合规与认证": "[不确定] Kubernetes 一致性认证（CNCF Conformance）适用于所有架构，前提是通过一致性测试套件。amd64 和 arm64 是主流合规认证覆盖最广泛的架构。s390x 和 ppc64le 需特定一致性测试。FIPS 140-2/3 认证、PCI DSS、HIPAA 等合规要求取决于具体硬件平台和操作系统组合，非架构本身特性"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "[不确定] Kubernetes 核心可观测性组件（Metrics Server、Prometheus node_exporter、cAdvisor、CoreDNS 指标）均已支持多架构。node_exporter 提供 CPU 架构相关指标（如 node_cpu_architecture）。各架构的硬件性能计数器（PMU）接口不同：amd64 通过 MSR 和 perf，arm64 通过 PMUv3，s390x 通过 CPU Measurement Counter Facility，ppc64le 通过 Performance Monitor Unit",
+    "维护与生命周期": "[不确定] 各架构的固件/BIOS 升级流程不同：amd64 通过 UEFI capsule 更新或厂商工具；arm64 取决于具体 SoC（U-Boot、UEFI、TF-A）；s390x 通过 IBM Support Element 进行微码升级；ppc64le 通过 IBM Power 固件更新流程。节点排水（drain）和替换流程在所有架构中一致，不受架构差异影响。热插拔支持：amd64 和 arm64 支持 CPU/内存热插拔（取决于平台）；s390x 支持逻辑 CPU 和内存的动态添加/移除；ppc64le 支持动态 LPAR 调整",
+    "弹性与故障恢复": "[不确定] 弹性架构取决于节点级冗余设计而非架构。amd64 集群可通过多可用区、多节点实现高可用。arm64 集群架构相同。s390x 和 ppc64le 硬件本身具有更高的可靠性（MTBF 更长），IBM Z 的单系统可靠性可达 99.999% 以上。所有架构的 Kubernetes 故障恢复机制（控制器管理器、etcd 集群、Pod 自动恢复）一致"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "amd64/x86_64": "硬件采购成本相对较低（x86 服务器市场成熟、竞争充分），但功耗较高。每核授权费用可能因软件许可模式而异。在 Kubernetes 场景中，按需实例价格约为 arm64 的 1.2 倍",
+      "arm64": "硬件成本优势明显，AWS Graviton 按需实例每小时成本比同规格 x86 实例低约 19%。Spot 实例折扣可高达 90%。每瓦性能更高，可降低数据中心电力和冷却成本。部分软件许可（如按核付费）可进一步降低成本",
+      "s390x": "初始硬件采购成本极高（IBM Z 大型机），但单系统整合能力极强，可替代大量 x86 服务器。在大型企业核心交易场景中，综合 TCO 可能具有竞争力。IBM 提供按需容量（Tailored Fit Pricing）模式",
+      "ppc64le": "硬件成本高于 x86 但低于 IBM Z。IBM Power 服务器适合工作负载整合。在特定企业场景中具有竞争力"
+    },
+    "成熟度与社区支持": {
+      "amd64/x86_64": "最成熟、社区支持最广泛的架构。Kubernetes 上游 CI 的主力测试架构。所有主流云服务商、操作系统、第三方工具、Operator 均优先支持 amd64。社区活跃度最高",
+      "arm64": "成熟度快速提升，已进入生产就绪阶段。AWS、GCP、Azure、阿里云、华为云均提供 arm64 K8s 节点。ARM 服务器在 Kubernetes 中的采用率快速增长（约占总容量的 9%）。社区支持日益完善，但仍有部分第三方工具仅支持 amd64",
+      "s390x": "生态较小，社区活跃度有限。主要由 IBM 和 Red Hat 推动（OpenShift on IBM Z），社区贡献者较少。Kubernetes 上游 s390x CI 为非 release-blocking 级别",
+      "ppc64le": "生态较小，社区活跃度有限。主要由 IBM 推动（OpenShift on Power），社区贡献者较少。Kubernetes 上游 ppc64le CI 为非 release-blocking 级别"
+    }
+  },
+  "uncertain": [
+    "功耗基线",
+    "生态兼容性矩阵",
+    "性能开销",
+    "固件与驱动依赖",
+    "虚拟化兼容性",
+    "扩展性上限",
+    "每节点密度",
+    "合规与认证",
+    "可观测性支持",
+    "维护与生命周期",
+    "弹性与故障恢复"
+  ]
+}

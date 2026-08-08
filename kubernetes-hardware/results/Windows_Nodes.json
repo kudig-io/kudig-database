@@ -1,0 +1,52 @@
+{
+  "基本信息": {
+    "名称": "Windows 节点",
+    "类别": "架构",
+    "官方文档链接": "https://kubernetes.io/docs/concepts/windows/intro/"
+  },
+  "硬件规格": {
+    "最低配置": "2 vCPU, 4 GB 内存, 128 GB 磁盘。Windows Server 2022/2025 操作系统, containerd 1.7.0+ 或 Docker 容器运行时。AKS 系统节点池要求至少 2 vCPU 和 4 GB 内存, 用户节点池要求至少 2 vCPU 和 2 GB 内存。不支持 B 系列或 Av1 系列 VM。Windows 容器基础进程 (Server Core) 需额外约 512 MB 内存。",
+    "推荐配置": "4 vCPU, 8 GB 内存, 256 GB SSD。Windows Server 2025 LTSC 操作系统, Gen2 VM (默认), containerd 运行时。AKS 推荐 Standard_D2s_v3 或更高规格 VM。配合 Linux 系统节点池 (至少 2 节点) 运行集群基础设施组件。",
+    "生产级配置": "8 vCPU, 32 GB 内存, 512 GB SSD。多节点 Windows 节点池 (建议至少 2 个节点), 配合 Linux 系统节点池。使用 Gen2 VM 和 Trusted Launch。如需 GPU 工作负载, 使用 GPU 加速型 VM (如 Standard_NC* 系列)。使用 Azure CNI Overlay 网络模式以获得最佳可扩展性。",
+    "功耗基线": "[不确定]"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "Kubernetes 1.14 及以上版本 (Windows 节点支持自 1.14 起正式 GA)。Windows Server 2022 支持 K8s 1.25 至 1.35 (AKS 默认), 不支持 K8s 1.37+。Windows Server 2025 支持 K8s 1.36+ (AKS 默认)。Windows Server 2019 不支持 K8s 1.33+。",
+    "操作系统兼容性": "Windows Server 2025 LTSC (推荐), Windows Server 2022 LTSC, Windows Server 2019 LTSC (已终止支持, 不支持 K8s 1.33+)。不支持 Windows Server Annual Channel (AKS 将于 2026-2027 停止支持)。Kubernetes 仅支持 process isolation 模式, 不支持 Hyper-V 隔离。控制面必须运行在 Linux 节点上。Windows Server 容器主机必须将 Windows 安装到 C: 盘。",
+    "K8s 上游支持阶段": "GA (自 Kubernetes 1.14 起 Windows 节点支持已正式 GA)",
+    "生态兼容性矩阵": "CNI: Azure CNI (AKS 默认, 推荐 Overlay 模式), Calico (支持网络策略), Flannel (overlay)。CSI: Azure Disk (NTFS 卷), Azure Files (NTFS 卷)。监控: Windows Exporter (Prometheus, 端口 19182), Managed Prometheus + Grafana (AKS)。认证: gMSA (Group Managed Service Account) - GA。容器运行时: containerd (推荐), Docker (遗留支持)。网络策略: Azure Network Policy Manager, Calico Network Policy。"
+  },
+  "限制与约束": {
+    "已知限制": "1) 不支持 Hyper-V 隔离 (Kubernetes 仅支持 process isolation)。2) 不支持 HugePages。3) 不支持特权容器 (需使用 HostProcess Containers 替代)。4) 不支持 hostPID、hostIPC、shareProcessNamespace。5) 不支持 Linux 安全上下文 (SELinux、seccomp、Capabilities、readOnlyRootFilesystem、allowPrivilegeEscalation、procMount)。6) Windows kubelet 不强制执行内存/CPU 限制 (--kube-reserved / --system-reserved 仅从 NodeAllocatable 扣除, 不保证资源预留)。7) 不支持 OOM 驱逐和 PIDPressure 检测。8) 集群约 500 个服务时可能遇到端口耗尽 (External Traffic Policy=Cluster, 约 16K 动态端口池)。9) 不支持客户端源 IP 保留。10) 默认 TCP 超时 4 分钟 (不可配置)。11) 不能与 Linux 容器在同一个 Pod 中运行。12) Windows Server 2019 不支持 Gen2 VM。13) GKE 上不支持 GPU/TPU、Autopilot、Dataplane V2、机密节点。14) 仅支持 NTFS 文件系统。15) Windows 容器镜像较大 (Server Core ~4GB, Nano Server ~1GB)。16) 不支持 kubenet 网络模式 (AKS Windows 必须使用 Azure CNI)。",
+    "混部兼容性": "支持 Windows/Linux 混合节点集群。控制面必须运行在 Linux 节点上。每个 Pod 只能包含单一操作系统的容器 (Windows 和 Linux 容器不能混部于同一 Pod)。通过 nodeSelector (kubernetes.io/os: windows) 或 os.name 字段指定目标操作系统。Kubernetes 自动为 Windows 节点添加 node.kubernetes.io/os=windows:NoSchedule 污点。建议使用 Linux 节点池运行基础设施组件 (如 NGINX ingress、CoreDNS、监控代理)。Windows 和 Linux 工作负载可以共享同一集群但使用不同的节点池。AKS 创建集群时默认创建 Linux 系统节点池。",
+    "性能开销": "Windows 容器基线内存开销: 每个 Server Core 容器约 2 GB+ (基础系统进程), Nano Server 约 1 GB+。容器镜像大小: Server Core ~4 GB, Nano Server ~1 GB (远大于 Linux 容器镜像)。Windows 节点上 kubelet 和系统进程的资源开销高于 Linux 节点。Hyper-V 隔离额外开销 (K8s 不支持, 仅作为参考): 额外 ~256 MB+ VM 开销。容器启动时间较 Linux 慢, 因基础镜像较大。",
+    "固件与驱动依赖": "Windows Server 主机必须安装容器功能 (Docker 或 containerd)。需要 containerd 1.7.0+ 或 Docker 引擎。GPU 加速: 需要 NVIDIA WDDM/MCDM 驱动 (Windows Server), 需使用第三方设备插件 (如 TensorWorks 开源方案)。GPU 直通需要特定 GPU 设备类 GUID (5B45201D-F2F2-4F3B-85BB-30FF1F953599)。AKS 每月发布新的 Windows 节点 VHD (包含最新安全更新)。Windows 节点更新需要创建新节点池并迁移工作负载。Windows 必须安装在 C: 盘 (process isolation 容器)。gMSA 需要 Active Directory 域环境。"
+  },
+  "配置与部署": {
+    "配置方式": "云服务商节点池配置 (AKS/GKE/EKS 的 Windows 节点池)。节点污点 (node.kubernetes.io/os=windows:NoSchedule 自动添加)。Pod 调度: nodeSelector kubernetes.io/os: windows 或 spec.os.name: windows。HostProcess Containers 替代特权容器。gMSA 配置 (Group Managed Service Account) 用于 Windows 身份验证。GPU 加速: 第三方设备插件 (TensorWorks 开源方案, 支持 WDDM/MCDM)。AKS 推荐使用 Azure CNI Overlay 网络模式。",
+    "配置示例": "apiVersion: v1\nkind: Pod\nmetadata:\n  name: windows-app\nspec:\n  os:\n    name: windows\n  containers:\n  - name: windows-container\n    image: mcr.microsoft.com/windows/servercore:ltsc2025\n  nodeSelector:\n    kubernetes.io/os: windows",
+    "部署位置与环境": "公有云: 支持 AKS (Azure)、GKE (Google Cloud)、EKS (AWS)。私有云/本地数据中心: 支持 (需要 Windows Server 许可)。裸金属: 支持 Windows Server 直接部署。虚拟机: 支持 Hyper-V、VMware 等虚拟化平台。边缘: 有限支持 (Windows IoT / Windows Server 边缘场景)。不支持仅 Windows 集群 (必须至少有一个 Linux 节点池运行系统组件)。",
+    "虚拟化兼容性": "支持 Gen2 VM (Windows Server 2022+), Gen2 是 Windows Server 2025 的默认配置。支持嵌套虚拟化 (但 Hyper-V 隔离在 K8s 中不支持)。不支持 PCIe 直通/透传 (GPU 直通仅通过第三方设备插件方案, 非原生 K8s 支持)。不支持 SR-IOV (Windows 网络受限)。不支持 VM 热迁移对加速器的影响。Azure 上 Windows Server 2025 默认使用 Gen2 VM。"
+  },
+  "性能特征": {
+    "基准性能数据": "Windows 容器启动时间: 较 Linux 容器慢, 因基础镜像较大 (Server Core ~4 GB, Nano Server ~1 GB)。内存基线: 每个 Server Core 容器约 2 GB+ (含系统进程), Nano Server 约 1 GB+。端口限制: 约 500 个服务 (External Traffic Policy=Cluster 时, 约 16K 动态端口池)。单节点 Pod 密度: 受限于 Windows 资源开销, 通常低于同等 Linux 节点。AKS 默认最大 Pod 数: 每节点 30 (Azure CNI Overlay) 至 110 (取决于网络配置)。Windows 节点 kubelet 不强制执行资源限制。",
+    "扩展性上限": "集群约 500 个服务时可能遇到端口耗尽 (External Traffic Policy=Cluster 时)。TCP 动态端口池约 16,384 个端口 (默认)。节点数上限与云服务商限制相同 (AKS 标准限制)。建议每节点运行 10-30 个 Windows Pod 以获得最佳性能。",
+    "每节点密度": "每节点最大 Pod 数: 取决于节点规格和网络配置 (AKS 默认 30, 可配置至 110)。实际密度受限于 Windows 容器内存开销, 建议每节点运行 10-30 个 Windows Pod。GPU 分片: 不支持原生 GPU 分片 (MIG/MPS 不适用于 Windows)。"
+  },
+  "安全": {
+    "安全特性": "gMSA (Group Managed Service Account) 支持 - GA, 支持 Active Directory 集成。HostProcess Containers 替代特权容器。Windows 安全标识符 (SID) 替代 Linux UID/GID。Windows 访问控制列表 (ACL) 替代 POSIX 权限位。TPM 支持 (通过 Windows 节点硬件)。Secure Boot 支持 (Gen2 VM / AKS Trusted Launch)。FIPS 支持 (AKS 支持 FIPS 节点)。不支持 Linux 安全上下文 (SELinux、seccomp、AppArmor)。不支持机密计算节点 (Confidential Containers / CoCo)。不支持 Hyper-V 隔离增强安全。",
+    "合规与认证": "K8s 一致性认证: Windows 节点通过 Kubernetes 一致性测试套件。FIPS 140-2/3: AKS 支持 FIPS 节点。Windows Server 安全合规: 符合 Windows Server 安全基线。Active Directory 集成: 支持 Windows 身份验证。PCI DSS / HIPAA: 取决于底层云服务商合规认证, Windows 节点本身不额外提供认证。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "Windows Exporter (Prometheus), 端口 19182。默认采集器: cpu, cpu_info, cs, container, logical_disk, memory, net, os, process, service, system, textfile。Grafana 仪表板: Kubernetes/Compute Resources/Cluster (Windows), Kubernetes/Compute Resources/Namespace (Windows), Kubernetes/Compute Resources/Pod (Windows), Kubernetes/USE Method/Cluster (Windows), Kubernetes/USE Method/Node (Windows)。Managed Prometheus + Managed Grafana (AKS)。容器日志: kubectl logs (通过 Windows 事件跟踪)。不支持原生 PIDPressure 和 OOM 指标暴露。",
+    "维护与生命周期": "每月 Windows 节点更新: AKS 每月发布新 VHD (含最新安全补丁)。Windows OS 版本升级 (如从 2022 升级到 2025): 需创建新节点池并迁移工作负载, 不支持原地升级。节点排水: 支持标准 kubectl drain。不支持热迁移 (Windows 容器)。不支持热插拔。固件升级: 通过节点池镜像更新。Windows Server 2022 支持至 2028 年 6 月 (AKS)。Windows Server 2025 为当前推荐版本。",
+    "弹性与故障恢复": "单点故障: 建议至少 2 个 Windows 节点以确保高可用。自动修复: AKS 提供 Windows 节点自动修复功能。节点故障: 标准 Pod 驱逐和重新调度机制。Windows 更新后需要重启节点 (通过节点池镜像升级实现)。数据持久化: 使用 Azure Disk / Azure Files 作为持久卷 (NTFS)。冗余: 建议配合 Linux 系统节点池 (2+ 节点) 运行集群关键组件。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "Windows Server 许可费用: 显著额外成本 (每个节点需 Windows Server 授权)。更大的 VM 规格需求: 因 Windows 容器 ~2 GB+ 内存基线开销, 需选择更大规格 VM。更大的存储需求: Windows 容器镜像 ~4 GB+ (Server Core)。每月维护窗口: Windows 更新需要节点池滚动更新, 增加运维成本。总体拥有成本显著高于同等 Linux 节点。建议评估 Windows 容器化是否确实必要 (通常仅用于 .NET Framework 等 Windows 依赖应用)。",
+    "成熟度与社区支持": "微软: 主要厂商支持 (Azure AKS, Windows Server 团队持续投入)。Google: GKE 支持 Windows 节点池。AWS: EKS 支持 Windows 节点池。上游 K8s: GA 级支持 (自 1.14)。社区: 活跃度低于 Linux 生态, 但微软持续贡献 SIG Windows。生态: 专注于 .NET Framework 应用迁移、传统 Windows 工作负载容器化、以及 Active Directory 集成场景。Windows 容器生态成熟度仍在发展中, 不如 Linux 容器成熟。"
+  },
+  "uncertain": [
+    "功耗基线"
+  ]
+}

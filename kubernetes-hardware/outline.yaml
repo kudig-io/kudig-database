@@ -1,0 +1,130 @@
+# Kubernetes 硬件支持调研 - Outline
+# 生成日期: 2026-08-06
+# 适用范围: 2024-2026
+
+topic: "Kubernetes 硬件支持: 指令集架构、内存、存储、网络、加速器等各维度硬件要求"
+
+items:
+  # ====== 架构 ======
+  - id: cpu-isa
+    name: "CPU 指令集架构 (ISA)"
+    description: "amd64/x86_64、arm64、s390x、ppc64le 等官方支持指令集。各架构成熟度、混合架构集群调度策略、操作系统兼容性、Docker/containerd 镜像多架构构建 (manifest list)、Node 污点与容忍度策略"
+    category: "架构"
+
+  - id: windows-nodes
+    name: "Windows 节点"
+    description: "Windows Server 2025 on AKS 预览、Windows 容器基线内存开销 (~2GB+)、Hyper-V 隔离额外开销、GPU 透传差异、Windows 驱动依赖、Windows/Linux 混合节点调度"
+    category: "架构"
+
+  - id: lightweight-edge-arm
+    name: "轻量级发行版 / ARM 边缘集群"
+    description: "K3s、KubeEdge、MicroK8s、K0s 等轻量发行版在 ARM64 边缘设备上的硬件约束 (1-4 核 CPU、1-4GB 内存、eMMC/SD 存储)、IoT 场景、边缘参考架构 (Sidero Labs 2025)"
+    category: "架构"
+
+  # ====== 内存 ======
+  - id: memory-management
+    name: "内存管理"
+    description: "控制面与工作节点最小/推荐内存、内存预留与驱逐策略、HugePages 支持、NUMA 拓扑感知调度 (Topology Manager)、cgroup v2 迁移、Memory QoS (K8s 1.36 Tiered Memory Protection)、OOM 行为"
+    category: "内存"
+
+  - id: cxl-memory
+    name: "CXL 内存池化与分层"
+    description: "Compute Express Link Type 2/3 设备量产状态、跨节点内存池化、CXL 内存分层对 K8s 调度的影响、CXL 感知调度研究、对 AI 推理/数据库等内存密集型负载的意义"
+    category: "内存"
+
+  # ====== 存储 ======
+  - id: storage
+    name: "存储系统"
+    description: "节点本地存储要求、CSI 驱动兼容性、持久化存储后端 (本地 SSD、NVMe、NFS、Ceph、云存储)、文件系统要求 (ext4/xfs/btrfs)、NVMe 寿命与写入耐久度、本地 PV 调度"
+    category: "存储"
+
+  # ====== 网络 ======
+  - id: networking
+    name: "网络基础设施"
+    description: "CNI 插件兼容性 (Calico、Cilium、Flannel、OVN-Kubernetes)、网卡要求与带宽推荐、多网卡支持、DPDK 加速、SR-IOV 直通、网络延迟与吞吐量要求、服务网格 (Istio/Linkerd) 对硬件的影响、ebpf 硬件要求"
+    category: "网络"
+
+  - id: dpu-ipu-smartnic
+    name: "DPU / IPU / SmartNIC 硬件卸载"
+    description: "NVIDIA BlueField DPU、Intel IPU、AMD Pensando 等方案。将网络/存储/安全从主机 CPU 卸载到专用处理器。OVN-Kubernetes DPU 模拟器、裸金属 K8s 部署中的 CPU 开销节省、Platform9 集成方案"
+    category: "网络"
+
+  - id: rdma-infiniBand
+    name: "RDMA / InfiniBand 高速互联"
+    description: "RDMA (RoCE v2、InfiniBand) 在 K8s 中的支持、设备插件配置、对 HPC/AI 训练场景的意义、rootless RDMA 容器支持 (2025 研究)、多租户隔离"
+    category: "网络"
+
+  # ====== 加速器 ======
+  - id: gpu
+    name: "GPU 加速器"
+    description: "NVIDIA GPU Operator、AMD ROCm 设备插件、Intel XPU 插件。GPU 显存共享与分片 (MIG、MPS)、Time-Slicing、DRA 与 GPU 调度演进、GPU 直通/透传、GPU 预热时间、多实例 GPU"
+    category: "加速器"
+
+  - id: fpga
+    name: "FPGA 可重构加速"
+    description: "Intel FPGA 设备插件、AMD/Xilinx FPGA 方案。Partial Reconfiguration 区域管理、Funky 云原生 FPGA 编排 (2025)、5G PHY、金融计算、视频处理等场景"
+    category: "加速器"
+
+  - id: intel-qat
+    name: "Intel QAT (QuickAssist Technology)"
+    description: "硬件级加密/压缩加速 (TLS 终结、IPSec、gzip 压缩)、Intel 设备插件 Operator、Red Hat 认证容器镜像、API 网关/数据压缩场景性能收益"
+    category: "加速器"
+
+  - id: intel-dsa-iaa
+    name: "Intel DSA / IAA 片上加速器"
+    description: "Intel 4/5 代至强内置 DSA (Data Streaming Accelerator: 数据搬运减少 CPU 拷贝) 和 IAA (In-Memory Analytics Accelerator: 内存压缩/解压)、Intel K8s 设备插件、大数据分析和 AI 数据管道场景"
+    category: "加速器"
+
+  - id: vpu-media
+    name: "VPU / 媒体加速器"
+    description: "Intel QSV、NVIDIA NVENC/NVDEC、AMD VCE 等硬件编解码器。K8s 设备插件管理、云原生实时视频转码 (直播、VOD、视频会议)、Netint VPU as a Service"
+    category: "加速器"
+
+  - id: npu-ai
+    name: "NPU / AI 推理芯片"
+    description: "Intel NPU、Hailo、Rockchip NPU、Qualcomm AI Engine 等专用神经处理单元。DRA/设备插件管理 NPU 资源、边缘 KubeEdge 场景部署、与 GPU 的选型对比"
+    category: "加速器"
+
+  # ====== 控制平面 ======
+  - id: control-plane
+    name: "控制平面硬件"
+    description: "etcd 磁盘 I/O 要求 (NVMe SSD 推荐)、API Server CPU/内存需求、HA 控制面硬件建议、节点数扩展时机器的瓶颈拐点、K8s 1.35 突破 8-NUMA 限制"
+    category: "控制平面"
+
+  # ====== 资源管理框架 ======
+  - id: dra
+    name: "DRA (Dynamic Resource Allocation)"
+    description: "K8s 1.34 GA、1.36 扩展。设备插件机制的演进替代、灵活硬件资源声明 (GPU 分片、网卡带宽预留、加速器组合)、DRA 驱动架构、CNCF 理解 DRA (2026)"
+    category: "资源管理"
+
+  # ====== 安全 ======
+  - id: tee-confidential
+    name: "可信执行环境 (TEE) / 机密计算"
+    description: "Intel TDX、AMD SEV-SNP、NVIDIA Confidential Computing、Intel SGX。Confidential Containers (CoCo) 项目集成、TPM 设备插件与远程证明 (CNCF 2025)、密钥管理"
+    category: "安全"
+
+  - id: secure-boot
+    name: "Secure Boot / 硬件信任根"
+    description: "UEFI Secure Boot、measured boot、2026 年 Secure Boot 签名证书过期事件影响、边缘/金融场景强制要求、Spectro Cloud 可信启动实践"
+    category: "安全"
+
+  # ====== 运维 ======
+  - id: power-management
+    name: "电源管理与能效"
+    description: "Intel K8s Power Manager、AMD EPYC 能效优化、CPU 频率/C-state/P-state 控制、StarlingX 可配置电源管理、碳感知调度 (2025 学术研究)、能耗可观测性"
+    category: "运维"
+
+  - id: multi-arch-cluster
+    name: "异构 / 多架构集群管理"
+    description: "混合 x86_64 + ARM64 集群调度策略、镜像 manifest list 构建、跨架构 Pod 调度、节点污点与容忍度、AWS EKS 多架构、Oracle 多架构部署、硬件兼容性矩阵"
+    category: "运维"
+
+  - id: autoscaling-hardware
+    name: "节点自动扩缩容硬件要求"
+    description: "Cluster Autoscaler、Karpenter 对节点硬件规格的要求、节点启动时间、云实例类型兼容性、GPU 实例预热时间、K8s 1.35 Workload Aware Scheduling、硬件感知调度"
+    category: "运维"
+
+execution:
+  batch_size: 4
+  items_per_agent: 1
+  output_dir: "./kubernetes-hardware"
