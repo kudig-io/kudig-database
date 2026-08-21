@@ -49,13 +49,13 @@ authors:
   role: contributor
 cross_refs:
 - type: skill
-  path: ../故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  path: ../../08-技能体系/16-monitoring-alerting-failure.md  # H3: 旧路径 ../../08-技能体系/ 修复（编号 15→16 对齐）
   label: '运维技能: 15-monitoring-alerting-failure'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/08-cluster-operations/02-logging-monitoring-troubleshooting.md
+  path: ../../04-高级排障/structural-08-cluster-operations/02-logging-monitoring-troubleshooting.md  # H3: 旧路径 topic-structural-trouble-shooting 修复
   label: '结构化排障: 02-logging-monitoring-troubleshooting'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/12-monitoring-observability/01-monitoring-observability-troubleshooting.md
+  path: ../../04-高级排障/structural-12-monitoring-observability/01-monitoring-observability-troubleshooting.md  # H3: 旧路径 topic-structural-trouble-shooting 修复
   label: '结构化排障: 01-monitoring-observability-troubleshooting'
 tier: supporting
 ---

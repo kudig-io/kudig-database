@@ -1,7 +1,7 @@
 ---
 title: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
-description: '## 1. 概述'
-summary: '证书（Certificate）是 [[kubernetes|Kubernetes]] 安全模型的基石。'
+description: Kubernetes 证书过期与 TLS 故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 证书过期与 TLS 故障的完整诊断-修复-验证工单处理 Skill
 category: security
 tags:
 - k8s
@@ -46,7 +46,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - tls-basics
-skill_id: SKILL-06_CERTIFICATE_EXPIRY-001
+skill_id: SKILL-SEC-001
 skill_name: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 version: 1.0.0
 k8s_versions:
@@ -2013,12 +2013,12 @@ kubectl delete namespace test-webhook-verify 2>/dev/null  # ⚠️ 不可逆：�
 |------|---------|---------|
 | Kubernetes PKI 体系架构 | `domain-7-security-compliance/` | 理解 K8s 证书体系的完整设计、各证书的角色和关系 |
 | kubeadm 证书管理机制 | `domain-7-security-compliance/` | 理解 kubeadm 如何生成、管理和续签证书 |
-| 证书故障树分析 | `故障诊断/FTA故障树/list/certificate-fta.md` | 证书过期的完整因果链和概率模型 |
-| 结构化故障排查方法论 | `故障诊断/高级排障/structural-` | 系统化证书排查的理论基础 |
-| Kubernetes 故障排查总论 | `故障诊断/` | 跨组件的故障排查方法论 |
+| 证书故障树分析 | `19-故障诊断/06-FTA故障树/list/certificate-fta.md` | 证书过期的完整因果链和概率模型 |
+| 结构化故障排查方法论 | `19-故障诊断/04-高级排障/structural-` | 系统化证书排查的理论基础 |
+| Kubernetes 故障排查总论 | `19-故障诊断/` | 跨组件的故障排查方法论 |
 | 节点 NotReady 诊断 | `SKILL-NODE-001` (01-node-notready.md) | 当证书过期导致节点 NotReady 时的关联诊断 |
 | 网络故障诊断 | `SKILL-NET-002` | 区分网络问题和 TLS 问题 |
-| etcd 运维与恢复 | `故障诊断/` | etcd 证书恢复后的集群健康验证 |
+| etcd 运维与恢复 | `19-故障诊断/` | etcd 证书恢复后的集群健康验证 |
 
 ### 10.3 预防措施与最佳实践
 

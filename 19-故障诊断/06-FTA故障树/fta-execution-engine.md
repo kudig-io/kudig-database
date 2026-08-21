@@ -1,6 +1,7 @@
 ---
 title: FTA 诊断执行引擎
-description: '**定位**: 将 FTA 理论转化为可执行代码的工程化指南'
+description: FTA 诊断执行引擎：将 FTA 理论转化为可执行代码的工程化指南（遍历引擎/证据收集/置信度评估/修复控制器/学习闭环）  # M4: 修复截断 description
+summary: FTA 诊断执行引擎工程化实现：遍历引擎 + 证据收集 + 置信度评估 + 修复控制器 + 学习闭环
 category: fta
 tags:
 - k8s
@@ -869,5 +870,13 @@ Step 6: 学习反馈
 > **版本**: v1.0
 > **维护团队**: Platform Team / SRE
 > **下一步**: 集成到 K8sOpsAgent 实现
+
+---
+
+## 相关文档  <!-- M4: 新增互链 -->
+
+- [第九章 9.2：FTA 驱动的 Agent 执行引擎架构](./09-fta-as-agent-knowledge-skeleton.md#92-fta-驱动的-agent-执行引擎架构) — 本文档的概念原型
+- [症状向量匹配引擎](./symptom-vector-matcher.md) — 顶事件匹配上游
+- [问题排查体系架构](./problem-solving-architecture.md) — 端到端排查体系定位
 
 <!-- risk-assessed -->

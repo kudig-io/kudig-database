@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Domain 10 Troubleshooting Diagnostics
 
-> 本页为 `故障诊断` 目录的自动索引。
+> 本页为 `19-故障诊断` 目录的自动索引。  <!-- N2: 原 `故障诊断` 目录名更新 -->
 
 ## 概览
 
@@ -21,20 +21,18 @@ last_updated: 2026-07
 
 ## 子目录
 
-- 故障诊断/00-core-troubleshooting/
-- 故障诊断/01-resource-troubleshooting/
-- 故障诊断/02-infrastructure-troubleshooting/
-- 故障诊断/03-advanced-troubleshooting/
-- 故障诊断/04-jvm-tuning/
-- [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|Merged Indexes]]
-- 故障诊断/tools/
-- 故障诊断/FEBM方法论/
-- 故障诊断/FTA故障树/
-- 故障诊断/topic-multi-fault-scenarios/
-- 故障诊断/topic-qa-corpus/
-- 故障诊断/topic-skills/
-- 故障诊断/高级排障/structural-
 - [[19-故障诊断/00-总览/index.md|00-总览]]
+- [[19-故障诊断/01-核心排障/index.md|01-核心排障]]
+- [[19-故障诊断/02-资源排障/index.md|02-资源排障]]
+- [[19-故障诊断/03-基础设施排障/index.md|03-基础设施排障]]
+- [[19-故障诊断/04-高级排障/index.md|04-高级排障]]
+- [[19-故障诊断/05-JVM调优/index.md|05-JVM调优]]
+- [[19-故障诊断/06-FTA故障树/index.md|06-FTA故障树]]
+- [[19-故障诊断/07-FEBM方法论/index.md|07-FEBM方法论]]
+- [[19-故障诊断/08-技能体系/index.md|08-技能体系]]
+- [[19-故障诊断/09-多故障场景/index.md|09-多故障场景]]
+- [[19-故障诊断/10-QA语料/index.md|10-QA语料]]
+- [[19-故障诊断/11-工具/index.md|11-工具]]
 
 ## 文档
 

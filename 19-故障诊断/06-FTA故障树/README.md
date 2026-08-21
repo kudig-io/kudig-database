@@ -50,7 +50,9 @@ tier: supporting
 
 # FTA故障树: 故障树分析（FTA）方法论与 AI Agent 智能运维实践
 
-> **文档数量**: 29 篇（23章 + 4附录 + 2主文档） | **最后更新**: 2026-02
+> **文档数量**: 110 篇（39 顶层文档 + 48 组件故障树 + 23 术语卡片） | **最后更新**: 2026-08
+
+> **入口分工**: README（本页，人工维护主入口）· MOC（全量导航）· index（自动目录索引）· [fta-index](./fta-index.md)（故障树编号查询工具）
 
 ---
 
@@ -68,12 +70,14 @@ tier: supporting
 |:---|:---|
 | **快速了解 FTA** | [第1章：FTA 起源与发展史](./01-fta-origin-and-evolution.md) |
 | **快速落地 FTA** | [第23章：生产环境快速启动与 SRE 集成指南](./23-fta-production-quick-start.md) |
-| **K8s 全量故障树** | [Kubernetes 全量故障树分析排查手册](./kubernetes-fta-full-analysis.md) |
+| **K8s 全量故障树（现行 v2）** | [Kubernetes 全量故障树分析排查手册 - 增强版](./kubernetes-fta-full-analysis-v2.md)（[v1 历史版](./kubernetes-fta-full-analysis.md)，已由 v2 取代） |
 | **FTA + AI Agent** | [第8章：AI Agent 时代的运维范式革命](./08-ai-agent-ops-revolution.md) |
 | **通读合集** | [FTA 方法论与 AI Agent 智能运维实践（合集）](./fta-methodology-and-agentic-practices.md) |
 | **FTA vs FEBM 对比** | [topic-febm](../07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/README.md) |
 
-## 最近更新（2026 Q2）
+## 最近更新（2026 Q3）
+- **版本定位（2026-08）**：`kubernetes-fta-full-analysis-v2.md` 为现行全量手册（16 顶事件 / ~300 底事件），v1 已由 v2 取代（保留作历史参考与命令速查）；全量故障树编号查询请用 [fta-index.md](./fta-index.md)。
+- **模块质量修复（2026-08）**：v1 尾部重复内容清理、跨模块失效引用修复、list 索引补齐至 48 个故障树、附录 D 废弃标注、新增 [Agent 评测集设计](./24-fta-agent-evaluation.md)；详见 [FTA 模块质量评审与修复记录](../../36-%E6%8A%A5%E5%91%8A/assessments/fta-module-quality-review-2026-08-13.md)。
 - **生产级落地基线**：新增合集章节 [二十三、生产级落地基线（2026Q2 更新）](./fta-methodology-and-agentic-practices.md#二十三生产级落地基线2026q2-更新)
 - **演练与证据闭环自检**：新增合集章节 [二十四、演练与证据闭环自检](./fta-methodology-and-agentic-practices.md#二十四演练与证据闭环自检)
 
@@ -85,8 +89,9 @@ tier: supporting
 
 | 文档 | 说明 |
 |:---|:---|
-| [kubernetes-fta-full-analysis.md](./kubernetes-fta-full-analysis.md) | 8个顶事件、63个底事件、完整故障树结构、排查命令速查 |
-| [fta-methodology-and-agentic-practices.md](./fta-methodology-and-agentic-practices.md) | 22章完整合集，通读全文或快速搜索定位 |
+| [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md) | **16个顶事件、~300个底事件、ACK 特有覆盖（Terway/ASM/ARMS/ACK-One）【现行版本】** |
+| [kubernetes-fta-full-analysis.md](./kubernetes-fta-full-analysis.md) | 8个顶事件、63个底事件、排查命令速查【历史版本，已由 v2 取代】 |
+| [fta-methodology-and-agentic-practices.md](./fta-methodology-and-agentic-practices.md) | 22章完整合集，通读全文或快速搜索定位（**离线快照，分章为权威来源**） |
 
 ### 第一部分：FTA 方法论理论基础
 
@@ -153,7 +158,19 @@ tier: supporting
 | A | [FTA 术语表](./appendix-a-glossary.md) | 完整FTA术语中英文对照表 |
 | B | [工具与资源清单](./appendix-b-tools-and-resources.md) | FTA建模/知识图谱/Agent框架/混沌工程工具 |
 | C | [参考文献](./appendix-c-references.md) | 国际标准、书籍、论文白皮书 |
-| D | [FTA 模板与检查表](./appendix-d-templates.md) | 顶事件/底事件定义模板、评审检查表 |
+| D | [FTA 模板与检查表](./appendix-d-templates.md) | ⚠️ **已废弃**（历史参考），请使用 [templates/fta-template.md](../../31-%E8%84%9A%E6%9C%AC/templates/fta-template.md) |
+
+### 工具与工程文档
+
+| 文档 | 说明 |
+|:---|:---|
+| [FTA 故障树完整索引](./fta-index.md) | v2 故障树编号查询工具：TE/IE/BE 索引、问题传播路径、概率矩阵、快速查询算法 |
+| [ACK-FTA 生成器增强版提示词](./ack-fta-generator-v2.md) | 生成 ACK 特有 FTA 的 LLM 提示词模板（与 v2 配套） |
+| [FTA 诊断执行引擎](./fta-execution-engine.md) | FTA 理论转化为可执行代码的工程化指南（与第九章 9.2 执行引擎架构配套） |
+| [症状向量匹配引擎](./symptom-vector-matcher.md) | 32 维症状特征向量与顶事件匹配算法 |
+| [问题排查体系架构文档](./problem-solving-architecture.md) | 端到端排查体系架构设计（FTA/FEBM/技能协同） |
+| [FTA 排查逻辑改进建议](./fta-diagnosis-improvement.md) | 底事件时间窗口约束、排查逻辑改进项清单 |
+| [FTA Agent 评测集设计](./24-fta-agent-evaluation.md) | 三指标评测体系（TE 命中率/路径完整率/误报率）+ 20 条评测基准（引用工单与 QA 语料） |  <!-- L2: 新增收录 -->
 
 ---
 
@@ -162,9 +179,9 @@ tier: supporting
 | 专题 | 说明 |
 |:---|:---|
 | [topic-febm](../07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/README.md) | FEBM 法医鉴定循证方法论（归纳法视角，与FTA互补） |
-| [topic-structural-trouble-shooting](../故障诊断/topic-structural-trouble-shooting/README.md) | 结构化故障排查知识库 |
-| [故障诊断](../故障诊断/) | 传统故障排查文档 |
-| [可观测性](../可观测性/) | 可观测性体系 |
+| [04-高级排障（结构化排查）](../04-高级排障/index.md) | 结构化故障排查知识库（structural-* 体系） |  <!-- N7: 原 topic-structural-trouble-shooting 目录已迁移至 04-高级排障（含空格路径修复） -->
+| [19-故障诊断](../README.md) | 传统故障排查文档（故障诊断模块总入口） |  <!-- H3: 原 ../故障诊断/ 路径失效修复 -->
+| [可观测性](../../09-可观测性/README.md) | 可观测性体系 |  <!-- H3: 原 ../可观测性/ 路径失效修复 -->
 
 ---
 

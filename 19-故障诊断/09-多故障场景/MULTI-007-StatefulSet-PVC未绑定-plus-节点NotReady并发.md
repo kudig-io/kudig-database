@@ -13,7 +13,7 @@ type: multi-fault
 skills:
 - 21-statefulset-failure
 - 01-node-notready
-- 07-pvc-storage-failure
+- 08-pvc-storage-failure
 last_updated: 2026-05-23
 ---
 

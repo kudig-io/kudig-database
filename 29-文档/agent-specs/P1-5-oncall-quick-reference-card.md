@@ -310,6 +310,6 @@ kubectl rollout restart daemonset <name> -n <ns>
 **关联文档**:
 - [故障诊断/topic-skills/README.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/README.md) — 完整 Skill 文档
 - [P1-4: 决策树 Mermaid 可视化](./P1-4-decision-tree-mermaid-visualization.md)
-- [故障诊断/](../故障诊断/) — 详细问题排查文档
+- [](../../19-故障诊断) — 详细问题排查文档
 
 <!-- risk-assessed -->

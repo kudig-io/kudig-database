@@ -1,7 +1,7 @@
 ---
 title: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
-description: '- 运维工程师'
-summary: 'DaemonSet 确保集群中每个（或部分）节点上运行一个 Pod 副本，是集群基础设施的核心载体（如 kube-proxy、CNI 插件、日志收集器、监控代理）。当 DaemonSet 问题时，影响的不是单一应用，而是整个节点或集群的基础功能：网络不通、日志丢失、监控中断、安全代理失效。'
+description: Kubernetes DaemonSet 故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes DaemonSet 故障的完整诊断-修复-验证工单处理 Skill
 category: skills
 tags:
 - k8s
@@ -45,9 +45,52 @@ prerequisites:
 - cilium-basics
 - cni-basics
 - logging-basics
-skill_id: SKILL-22_DAEMONSET_FAILURE-001
+skill_id: SKILL-WORK-003
 skill_name: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 version: 1.0.0
+severity_range: P0-P2
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+estimated_resolution_time: 10-45min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
+trigger_events:
+- FailedDaemonPod
+- FailedPlacement
+- InsufficientResource
+- TaintManagerEviction
+trigger_metrics:
+- 'kube_daemonset_status_desired_number_scheduled - kube_daemonset_status_current_number_scheduled > 0'
+- 'kube_daemonset_status_number_ready / kube_daemonset_status_desired_number_scheduled < 1'
+- 'kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}'
+related_skills:
+- SKILL-WORK-001
+- SKILL-NODE-001
+- SKILL-POD-001
+- SKILL-POD-002
+- SKILL-IMAGE-001
+- SKILL-NODE-002
+fta_refs:
+- 19-故障诊断/06-FTA故障树/list/daemonset-fta.md
+knowledge_refs:
+- 19-故障诊断/02-资源排障/12-daemonset-troubleshooting.md
+cross_refs:
+- type: fta
+  path: 19-故障诊断/06-FTA故障树/list/daemonset-fta.md
+  label: DaemonSet 故障树分析
+- type: domain
+  path: 19-故障诊断/02-资源排障/12-daemonset-troubleshooting.md
+  label: DaemonSet 深度排查
+- type: skill
+  path: 19-故障诊断/08-技能体系/01-node-notready.md
+  label: SKILL-NODE-001 节点诊断
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**
@@ -56,82 +99,6 @@ version: 1.0.0
 
 
 
-
----
-skill_id: "SKILL-WORK-003"
-skill_name: "[[daemonset|DaemonSet]] 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation"
-version: "1.0"
-category: "workload"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "10-45min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
-trigger_keywords:
-  - "DaemonSet"
-  - "daemonset"
-  - "ds"
-  - "节点缺少 Pod"
-  - "node missing pod"
-  - "kube-proxy"
-  - "calico-node"
-  - "[[cilium|cilium]]"
-  - "[[fluentd|[[fluentd|Fluentd]]]]"
-  - "node-exporter"
-  - "系统组件"
-  - "污点"
-  - "taint"
-trigger_events:
-  - "FailedDaemonPod"
-  - "FailedPlacement"
-  - "InsufficientResource"
-  - "TaintManagerEviction"
-trigger_metrics:
-  - 'kube_daemonset_status_desired_number_scheduled - kube_daemonset_status_current_number_scheduled > 0'
-  - 'kube_daemonset_status_number_ready / kube_daemonset_status_desired_number_scheduled < 1'
-  - 'kube_pod_container_status_waiting_reason{reason="CrashLoopBackOff"}'
-difficulty: "intermediate"
-reading_level: "intermediate"
-audience:
-  - SRE
-  - 运维工程师
-  - 技术支持
-estimated_read_time: "12min"
-prerequisites:
-  - "工作负载"
-  - "kubectl-basics"
-related_skills:
-  - "SKILL-WORK-001"
-  - "SKILL-NODE-001"
-  - "SKILL-POD-001"
-  - "SKILL-POD-002"
-  - "SKILL-IMAGE-001"
-  - "SKILL-NODE-002"
-fta_refs:
-  - "故障诊断/FTA故障树/list/daemonset-fta.md"
-knowledge_refs:
-  - "故障诊断/20-daemonset-troubleshooting.md"
-  - "工作负载/"
-cross_refs:
-  - type: "fta"
-    path: "../19-故障诊断/06-FTA故障树/list/daemonset-fta.md"
-    label: "DaemonSet 故障树分析"
-  - type: "domain"
-    path: "../19-故障诊断/20-daemonset-troubleshooting.md"
-    label: "DaemonSet 深度排查"
-  - type: "[[SKILL|skill]]"
-    path: "../19-故障诊断/topic-skills/01-node-notready.md"
-    label: "SKILL-NODE-001 节点诊断"
-authors:
-  - name: KUDIG Team
-    role: contributor
-
-tier: peripheral---
 
 # DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 

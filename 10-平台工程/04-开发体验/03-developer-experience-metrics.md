@@ -54,7 +54,8 @@ intent_queries:
 - developer-experience-metrics的使用方法
 - developer-experience-metrics的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 开发者体验度量 (Developer Experience Metrics)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: platform-engineering

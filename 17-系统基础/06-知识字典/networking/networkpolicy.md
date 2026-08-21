@@ -158,6 +158,47 @@ EOF
 
 **修复**：使用 `kubectl describe networkpolicy` 分析所有匹配策略，合并或调整 podSelector 避免冲突。
 
+## 对比评测
+
+| 维度 | 原生 NetworkPolicy | Cilium NetworkPolicy | Calico NetworkPolicy |
+|------|-------------------|---------------------|---------------------|
+| API 标准 | Kubernetes 标准 | CiliumNetworkPolicy 扩展 | NetworkPolicy + 全局扩展 |
+| L7 支持 | 无 | 支持（HTTP/gRPC） | 无（需 Enterprise） |
+| FQDN | 无 | 支持（DNS 策略） | Enterprise |
+| 适用规模 | 通用 | 大规模 + 高安全 | 中小规模 |
+| 迁移成本 | 零（标准） | 需 CNI 切换 | 需 CNI 切换 |
+
+**选型建议**：默认用标准 NetworkPolicy（可移植）；需要 L7/FQDN 策略选 Cilium；已有 Calico 保持标准策略。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 策略未生效 | `kubectl get networkpolicy -A`；检查 CNI 支持 | CNI 不支持、策略选择器不匹配 |
+| 误杀流量 | `kubectl describe networkpolicy`；查看规则 | 空数组语义误解、端口/协议错误 |
+| 更新延迟 | 观察 CNI 控制器日志 | 大规模策略变更、控制器性能 |
+| 与 Service 冲突 | 检查策略端口与服务端口 | 策略使用 Pod 端口而非 Service 端口 |
+
+## 生产部署清单
+
+- [ ] 确认 CNI 支持 NetworkPolicy（Calico/Cilium/Antrea）
+- [ ] 默认拒绝策略在测试命名空间验证后再生产
+- [ ] 系统组件豁免策略（kube-system DNS/443 等）已配置
+- [ ] 策略变更走 GitOps + 审计（避免随意修改）
+- [ ] 定期巡检覆盖率（无策略的敏感命名空间告警）
+
+## 常见误区与设计要点
+
+- **误区 1**：策略端口写成 Service 端口——NetworkPolicy 匹配的是 Pod 实际监听端口。
+- **误区 2**：命名空间选择器用错——`namespaceSelector` 匹配的是策略所在命名空间的标签，而非 Pod 所在命名空间。
+- **设计要点**：默认拒绝 + 白名单模式；用标签语义化（`app`、`tier`）而非 IP；关键服务双写策略并做流量仿真验证（如 `calicoctl policy` 测试）。
+
+## 性能参考
+
+- 规则规模：iptables 模式 1000+ 规则后性能明显下降；eBPF 模式万级策略 O(1)。
+- 生效延迟：策略变更秒级（watch → 编译 → 下发）。
+- 审计开销：启用策略日志（Cilium Hubble）增加 5-10% CPU，按需采样。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

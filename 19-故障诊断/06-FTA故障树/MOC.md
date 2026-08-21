@@ -1,7 +1,7 @@
 ---
 title: topic-fta MOC
-description: topic-fta 专题导航页，覆盖 79 篇文档
-summary: topic-fta 专题导航页，覆盖 79 篇文档
+description: topic-fta 专题导航页，覆盖 110 篇文档  # M1: 数量 79→110 同步
+summary: topic-fta 专题导航页，覆盖 110 篇文档  # M1: 数量 79→110 同步
 category: moc
 tags:
 - k8s
@@ -15,8 +15,8 @@ tags:
 - calico
 - daemonset
 tier: core
-created: '2026-05-23'
-last_updated: '2026-05-21'
+created: '2026-05-21'
+last_updated: '2026-08-13'  # N4: 修复日期倒挂（原 created 05-23 > last_updated 05-21）
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -59,10 +59,10 @@ severity: high
 
 # topic-fta MOC
 
-> **MOC 版本**: 1.0
+> **MOC 版本**: 1.1  <!-- M1: 版本更新 -->
 > **专题**: topic-fta
-> **文档数量**: 79 篇
-> **最后更新**: 2026-05-21
+> **文档数量**: 110 篇  <!-- M1: 数量 79→110（37 顶层 + 48 list + 23 glossary + 2 索引） -->
+> **最后更新**: 2026-08-13
 > **用途**: 本专题的导航入口，汇总所有相关文档
 
 ---
@@ -76,7 +76,7 @@ FTA 故障树 — 故障树分析文档集合
 | 维度 | 说明 |
 |---|---|
 | **专题** | topic-fta |
-| **文档数量** | 79 篇（展示前 50 篇） |
+| **文档数量** | 110 篇（展示前 50 篇） |  <!-- M1: 数量 79→110 同步 -->
 | **难度分布** | 入门 0 / 进阶 1 / 高级 39 / 专家 0 |
 
 ---
@@ -85,9 +85,9 @@ FTA 故障树 — 故障树分析文档集合
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution.md|[[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution\|第一章：FTA 起源与发展史]]]] |  | fta, troubleshooting |  |
-| 2 | [[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations.md|[[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations\|第二章：FTA 数学基础与理论模型]]]] |  | fta, troubleshooting |  |
-| 3 | [[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards.md|[[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards\|第三章：FTA 符号体系与标准规范]]]] |  | fta, troubleshooting |  |
+| 1 | [[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]] |  <!-- M1: 修复双嵌套链接 | fta, troubleshooting |  | -->
+| 2 | [[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]] |  <!-- M1: 修复双嵌套链接 | fta, troubleshooting |  | -->
+| 3 | [[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]] |  <!-- M1: 修复双嵌套链接 | fta, troubleshooting |  | -->
 | 4 | [[19-故障诊断/06-FTA故障树/04-fta-core-principles.md|第四章：FTA 方法论核心原则]] |  | fta, troubleshooting |  |
 | 5 | [[19-故障诊断/06-FTA故障树/05-fta-construction-process.md|第五章：FTA 构建完整流程]] |  | fta, troubleshooting |  |
 | 6 | [[19-故障诊断/06-FTA故障树/06-fta-verification-and-quality.md|第六章：FTA 验证与质量保证]] |  | fta, troubleshooting |  |
@@ -108,34 +108,35 @@ FTA 故障树 — 故障树分析文档集合
 | 21 | [[19-故障诊断/06-FTA故障树/21-self-evolving-ops-system.md|第二十一章：自进化的智能运维系统]] |  | fta, troubleshooting, daily-ops |  |
 | 22 | [[19-故障诊断/06-FTA故障树/22-industry-standardization.md|第二十二章：行业标准化建议]] |  | fta, troubleshooting |  |
 | 23 | [[19-故障诊断/06-FTA故障树/23-fta-production-quick-start.md|第23章：FTA 生产环境快速启动与 SRE 集成指南]] |  | fta, troubleshooting, production |  |
-| 24 | [[19-故障诊断/06-FTA故障树/ack-fta-generator-v2.md|ACK-FTA 生成器增强版提示词]] |  | fta, troubleshooting |  |
-| 25 | [[19-故障诊断/06-FTA故障树/appendix-a-glossary.md|附录 A：FTA 术语表]] |  | fta, troubleshooting |  |
-| 26 | [[19-故障诊断/06-FTA故障树/appendix-b-tools-and-resources.md|附录 B：工具与资源清单]] |  | fta, troubleshooting |  |
-| 27 | [[19-故障诊断/06-FTA故障树/appendix-c-references.md|附录 C：参考文献]] |  | fta, troubleshooting, reference |  |
-| 28 | [[19-故障诊断/06-FTA故障树/appendix-d-templates.md|附录 D：FTA 模板参考 (历史参考)]] |  | fta, troubleshooting |  |
-| 29 | [[19-故障诊断/06-FTA故障树/fta-diagnosis-improvement.md|FTA 排查逻辑改进建议]] |  | fta, troubleshooting |  |
-| 30 | [[19-故障诊断/06-FTA故障树/fta-execution-engine.md|FTA 诊断执行引擎]] |  | fta, troubleshooting |  |
-| 31 | [[19-故障诊断/06-FTA故障树/fta-index.md|FTA 故障树完整索引]] |  | fta, troubleshooting |  |
-| 32 | [[19-故障诊断/06-FTA故障树/fta-methodology-and-agentic-practices.md|FTA 故障树分析方法论与 AI Agent 智能运维实践]] |  | fta, troubleshooting |  |
-| 33 | [[19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis-v2.md|Kubernetes 全量故障树分析(FTA)排查手册 - 增强版]] |  | fta, troubleshooting |  |
-| 34 | [[19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis.md|Kubernetes 全量故障树分析(FTA)排查手册]] |  | fta, troubleshooting |  |
-| 35 | apiserver-fta.md | 高级 | fta, troubleshooting, apiserver | 5min |
-| 36 | backup-restore-fta.md | 高级 | fta, troubleshooting, backup | 5min |
-| 37 | [[19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]] |  | fta, troubleshooting |  |
-| 38 | [[19-故障诊断/06-FTA故障树/list/certificate-fta.md|证书异常故障树分析]] | 高级 | fta, troubleshooting, certificate | 5min |
-| 39 | [[19-故障诊断/06-FTA故障树/list/cilium-fta.md|cilium FTA 树：eBPF/Cilium CNI 故障诊断]] |  | fta, troubleshooting |  |
-| 40 | [[19-故障诊断/06-FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]] | 高级 | fta, troubleshooting, cloud-provider | 5min |
-| 41 | [[19-故障诊断/06-FTA故障树/list/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]] | 高级 | fta, troubleshooting, cluster-autoscaler | 5min |
-| 42 | [[19-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md|集群升级异常故障树分析]] | 高级 | fta, troubleshooting, cluster-upgrade | 5min |
-| 43 | [[19-故障诊断/06-FTA故障树/list/controller-manager-fta.md|Controller Manager 异常故障树分析]] | 高级 | fta, troubleshooting, controller-manager | 5min |
-| 44 | [[19-故障诊断/06-FTA故障树/list/crd-operator-fta.md|CRD/Operator 异常故障树分析]] | 高级 | fta, troubleshooting, crd | 5min |
-| 45 | csi-fta.md | 高级 | fta, troubleshooting, csi | 5min |
-| 46 | [[19-故障诊断/06-FTA故障树/list/daemonset-fta.md|DaemonSet 异常故障树分析]] | 高级 | fta, troubleshooting, daemonset | 5min |
-| 47 | [[19-故障诊断/06-FTA故障树/list/deployment-fta.md|Deployment 异常故障树分析]] | 高级 | fta, troubleshooting, deployment | 5min |
-| 48 | [[19-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 异常故障树分析]] | 高级 | fta, troubleshooting, dns | 5min |
-| 49 | [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]] | 高级 | fta, troubleshooting, etcd | 5min |
-| 50 | flannel-fta.md | 高级 | fta, troubleshooting, flannel | 5min |
-| ... | 共 79 篇文档 | | | |
+| 24 | [[19-故障诊断/06-FTA故障树/24-fta-agent-evaluation.md|FTA Agent 评测集设计]] |  <!-- M1: 新增收录 | fta, troubleshooting, agent |  | -->
+| 25 | [[19-故障诊断/06-FTA故障树/ack-fta-generator-v2.md|ACK-FTA 生成器增强版提示词]] |  | fta, troubleshooting |  |
+| 26 | [[19-故障诊断/06-FTA故障树/appendix-a-glossary.md|附录 A：FTA 术语表]] |  | fta, troubleshooting |  |
+| 27 | [[19-故障诊断/06-FTA故障树/appendix-b-tools-and-resources.md|附录 B：工具与资源清单]] |  | fta, troubleshooting |  |
+| 28 | [[19-故障诊断/06-FTA故障树/appendix-c-references.md|附录 C：参考文献]] |  | fta, troubleshooting, reference |  |
+| 29 | [[19-故障诊断/06-FTA故障树/appendix-d-templates.md|附录 D：FTA 模板参考 (历史参考)]] |  | fta, troubleshooting |  |
+| 30 | [[19-故障诊断/06-FTA故障树/fta-diagnosis-improvement.md|FTA 排查逻辑改进建议]] |  | fta, troubleshooting |  |
+| 31 | [[19-故障诊断/06-FTA故障树/fta-execution-engine.md|FTA 诊断执行引擎]] |  | fta, troubleshooting |  |
+| 32 | [[19-故障诊断/06-FTA故障树/fta-index.md|FTA 故障树完整索引]] |  | fta, troubleshooting |  |
+| 33 | [[19-故障诊断/06-FTA故障树/fta-methodology-and-agentic-practices.md|FTA 故障树分析方法论与 AI Agent 智能运维实践]] |  | fta, troubleshooting |  |
+| 34 | [[19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis-v2.md|Kubernetes 全量故障树分析(FTA)排查手册 - 增强版]] |  | fta, troubleshooting |  |
+| 35 | [[19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis.md|Kubernetes 全量故障树分析(FTA)排查手册]] |  | fta, troubleshooting |  |
+| 36 | apiserver-fta.md | 高级 | fta, troubleshooting, apiserver | 5min |
+| 37 | backup-restore-fta.md | 高级 | fta, troubleshooting, backup | 5min |
+| 38 | [[19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]] |  | fta, troubleshooting |  |
+| 39 | [[19-故障诊断/06-FTA故障树/list/certificate-fta.md|证书异常故障树分析]] | 高级 | fta, troubleshooting, certificate | 5min |
+| 40 | [[19-故障诊断/06-FTA故障树/list/cilium-fta.md|cilium FTA 树：eBPF/Cilium CNI 故障诊断]] |  | fta, troubleshooting |  |
+| 41 | [[19-故障诊断/06-FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]] | 高级 | fta, troubleshooting, cloud-provider | 5min |
+| 42 | [[19-故障诊断/06-FTA故障树/list/cluster-autoscaler-fta.md|Cluster Autoscaler 异常故障树分析]] | 高级 | fta, troubleshooting, cluster-autoscaler | 5min |
+| 43 | [[19-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md|集群升级异常故障树分析]] | 高级 | fta, troubleshooting, cluster-upgrade | 5min |
+| 44 | [[19-故障诊断/06-FTA故障树/list/controller-manager-fta.md|Controller Manager 异常故障树分析]] | 高级 | fta, troubleshooting, controller-manager | 5min |
+| 45 | [[19-故障诊断/06-FTA故障树/list/crd-operator-fta.md|CRD/Operator 异常故障树分析]] | 高级 | fta, troubleshooting, crd | 5min |
+| 46 | csi-fta.md | 高级 | fta, troubleshooting, csi | 5min |
+| 47 | [[19-故障诊断/06-FTA故障树/list/daemonset-fta.md|DaemonSet 异常故障树分析]] | 高级 | fta, troubleshooting, daemonset | 5min |
+| 48 | [[19-故障诊断/06-FTA故障树/list/deployment-fta.md|Deployment 异常故障树分析]] | 高级 | fta, troubleshooting, deployment | 5min |
+| 49 | [[19-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 异常故障树分析]] | 高级 | fta, troubleshooting, dns | 5min |
+| 50 | [[19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd 异常故障树分析]] | 高级 | fta, troubleshooting, etcd | 5min |
+| 51 | flannel-fta.md | 高级 | fta, troubleshooting, flannel | 5min |
+| ... | 共 110 篇文档 | | | |  <!-- M1: 数量 79→110 同步 -->
 
 ---
 
@@ -143,11 +144,11 @@ FTA 故障树 — 故障树分析文档集合
 
 | 指标 | 数值 |
 |---|---|
-| 文档总数 | 79 |
+| 文档总数 | 110 |  <!-- M1: 数量 79→110 同步 -->
 
 ---
 
-*本文档由 scripts/generate-mocs.py 自动生成，最后更新 2026-05-21。*
+*本文档由 scripts/generate-mocs.py 自动生成，2026-08-13 手工修复（双嵌套链接/日期/数量）。*  # M1+N4
 
 ## Related
 
@@ -164,7 +165,7 @@ FTA 故障树 — 故障树分析文档集合
 - [[23-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
 - [[05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[09-可观测性/01-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[09-可观测性/00-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference  <!-- N8: 旧目录名 01-总览→00-总览 -->
 - [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference

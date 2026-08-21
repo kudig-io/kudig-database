@@ -54,7 +54,7 @@ cross_refs:
   path: ../集群基础/17-apiserver-tuning.md
   label: '深度文档: 17-apiserver-tuning'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/01-apiserver-troubleshooting.md
+  path: ../../04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md  # N7: 旧路径 topic-structural 修复（H3 漏网）
   label: '结构化排障: 01-apiserver-troubleshooting'
 tier: supporting
 ---

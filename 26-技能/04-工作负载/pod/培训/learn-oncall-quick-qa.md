@@ -1289,8 +1289,8 @@ kubectl rollout restart deployment/coredns -n kube-system
 **关联文档**:
 - [../README.md](../README.md) — 讲师完整台词设计
 - [../troubleshooting/decision-tree-mermaid.md](troubleshooting/decision-tree-mermaid.md) — Mermaid 决策树
-- [../../故障诊断/topic-skills/](../../故障诊断/技能体系/) — 18 个 GA [[SKILL|Skill]]
-- [../../故障诊断/](../../故障诊断/) — 故障排查文档
+- [08-技能体系/](../../../../19-故障诊断/08-技能体系) — 18 个 GA [[SKILL|Skill]]
+- [](../../../../19-故障诊断) — 故障排查文档
 
 ## Related
 

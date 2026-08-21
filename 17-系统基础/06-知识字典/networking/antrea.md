@@ -149,6 +149,47 @@ iptables-save | grep -c "KUBE-SERVICES"
 kubectl patch ds kube-proxy -n kube-system -p '{"spec":{"template":{"spec":{"nodeSelector":{"non-existing":"true"}}}}}'
 ```
 
+## 对比评测
+
+| 维度 | Antrea | Calico | Cilium |
+|------|--------|--------|--------|
+| 数据面 | Open vSwitch | iptables/BGP/eBPF | eBPF |
+| 网络策略 | 支持 + 增强 | 支持 | 支持（最强） |
+| Traceflow 诊断 | 原生（OVS 流追踪） | 无 | Hubble |
+| 多集群 | Antrea Multi-cluster | Calico 集群互联 | ClusterMesh |
+| 内核依赖 | 需 ovs 模块 | 低 | 5.x+ |
+
+**选型建议**：需要精细化流追踪与 OVS 生态选 Antrea（VMware 背景，企业级）；云原生高性能场景 Cilium；通用选 Calico。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| Pod 不通 | `kubectl get pods -n kube-system -l app=antrea` | antrea-agent 异常、OVS 桥故障 |
+| 流追踪无结果 | `kubectl -n kube-system exec antrea-agent -- antctl traceflow` | Traceflow 目标未匹配、ACL 拦截 |
+| 策略不生效 | `kubectl get networkpolicy`；antctl 查看 | 策略未同步到 OVS、优先级问题 |
+| 性能下降 | 检查 ovs-vswitchd CPU | 流表过大、隧道加密开销 |
+
+## 生产部署清单
+
+- [ ] OVS 内核模块在节点预加载（`modprobe openvswitch`）
+- [ ] antrea-agent DaemonSet 资源与健康检查就绪
+- [ ] 网络策略默认拒绝模式已验证（先测试命名空间）
+- [ ] Traceflow 诊断能力已验证（`antctl traceflow`）
+- [ ] 监控接入（antrea 指标 + OVS 统计）
+
+## 常见误区与设计要点
+
+- **误区 1**：忽略 OVS 内核模块依赖——节点升级内核后必须确认 openvswitch 模块可用。
+- **误区 2**：策略全部用 CIDR——Antrea 支持 FQDN 与应用感知策略，优先语义化规则。
+- **设计要点**：用 Traceflow 做跨节点问题定位第一手段；Multi-cluster 场景先规划网段避免重叠；升级遵循版本矩阵（控制面/agent 同版本）。
+
+## 性能参考
+
+- 吞吐：VXLAN/Geneve 隧道约 75-85% 物理带宽；本地转发接近线速。
+- 延迟：隧道一跳 +0.3ms；OVS datapath 内核态处理开销低于用户态。
+- 规模：社区验证 1000+ 节点；控制面使用 Kubernetes 原生 API，无独立数据库。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

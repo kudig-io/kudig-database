@@ -48,7 +48,8 @@ intent_queries:
 - 如何使用存储？
 - 存储的最佳实践是什么？
 
-tier: peripheral---
+tier: peripheral
+---
 title: SSD固态硬盘技术
 description: '<!-- chunk: 概述' -->## 概述'
 category: hardware

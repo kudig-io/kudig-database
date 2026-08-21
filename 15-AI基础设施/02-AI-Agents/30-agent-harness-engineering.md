@@ -1359,8 +1359,8 @@ L5 - 自进化 Harness
 | [10 - 安全护栏](./10-security-guardrails.md) | 安全框架——Harness Constraints 层的安全实现 |
 | [43 - OpenClaw File-First 架构集成](./43-openclaw-framework-integration.md) | SOUL.md/SKILL.md 分层设计的完整实施方案、File-First 与 Harness 融合 |
 | [openclaw-workspace/](./openclaw-workspace/) | K8S 运维 Agent 的完整 7 文件工作区配置实例 |
-| [故障诊断](../故障诊断/) | K8S 故障排查——K8S Harness 的知识语料库 |
-| [topic-fta](../故障诊断/FTA故障树/) | FTA 故障树——结构化诊断 Harness 的推理骨架 |
+| [故障诊断](../../19-故障诊断) | K8S 故障排查——K8S Harness 的知识语料库 |
+| [topic-fta](../../19-故障诊断/06-FTA故障树) | FTA 故障树——结构化诊断 Harness 的推理骨架 |
 
 ---
 

@@ -1,0 +1,170 @@
+{
+  "基本信息": {
+    "名称": "节点自动扩缩容硬件要求（Cluster Autoscaler / Karpenter 节点自动扩缩容方案，以及 Kubernetes 1.35+ Workload-Aware Scheduling 硬件感知调度）",
+    "类别": "运维",
+    "官方文档链接": "Kubernetes 节点自动扩缩容: https://kubernetes.io/docs/concepts/cluster-administration/node-autoscaling/ ; Cluster Autoscaler 官方仓库: https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler ; Cluster Autoscaler FAQ: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md ; Cluster Autoscaler AWS 支持: https://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/cloudprovider/aws/README.md ; Karpenter 官方文档: https://karpenter.sh/ ; Karpenter NodePools: https://karpenter.sh/docs/concepts/nodepools/ ; Karpenter 兼容性矩阵: https://karpenter.sh/docs/upgrading/compatibility/ ; Karpenter 实例类型参考: https://karpenter.sh/docs/reference/instance-types/ ; Karpenter FAQ: https://karpenter.sh/docs/faq/ ; Kubernetes v1.35 Workload Aware Scheduling 博客: https://kubernetes.io/blog/2025/12/29/kubernetes-v1-35-introducing-workload-aware-scheduling/ ; Kubernetes v1.36 Advancing Workload-Aware Scheduling 博客: https://kubernetes.io/blog/2026/05/13/kubernetes-v1-36-advancing-workload-aware-scheduling/ ; GKE 集群自动扩缩容: https://docs.cloud.google.com/kubernetes-engine/docs/concepts/cluster-autoscaler ; EKS AI/ML 计算与自动扩缩容最佳实践: https://docs.aws.amazon.com/eks/latest/best-practices/aiml-compute.html ; Kueue 拓扑感知调度: https://kueue.sigs.k8s.io/docs/concepts/topology_aware_scheduling/ ; Node 资源拓扑感知调度 KEP (scheduler-plugins): https://github.com/kubernetes-sigs/scheduler-plugins/blob/master/kep/119-node-resource-topology-aware-scheduling/README.md"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "Cluster Autoscaler 控制器": "CA 本身为轻量控制面组件（单 Pod 部署），对节点硬件无特定要求，只需 Kubernetes API 与云提供商 API 的网络及 IAM/RBAC 访问权限；官方 FAQ 建议在较大集群中为其请求完整 1 核 CPU 以保证调度性能 [不确定 CA 自身内存需求精确值]；需 Kubernetes v1.3.0 及以上（实践中建议与集群版本配套）。",
+      "Karpenter 控制器": "以 Helm 部署的控制器，官方示例资源请求/限制为 cpu=1、memory=1Gi；需要访问 Kubernetes API 与云提供商 API（AWS 还要求存在 SQS 队列接收实例中断消息）；不支持在无云 API 的环境（如纯裸金属非云）运行 [不确定]；对 Kubernetes 版本有严格兼容矩阵要求。",
+      "被管理节点": "被自动创建/删除的节点资源最常见为云虚拟机（VM），无统一 CPU/内存最低值，只要满足 kubelet 默认每节点 110 Pod 上限与系统组件资源即可；实例规格完全由节点池/NodePool 配置决定。",
+      "实例类型兼容性": "CA 要求每个节点组（如 AWS ASG）内的实例容量大致相等，跨规格混合会导致调度与缩容异常；Karpenter 支持广泛实例类型（计算/内存/通用/GPU/裸金属），推荐 C、M、R 系列第三代及以上实例，GPU 实例（g/p 系列）与裸金属（metal）受支持。"
+    },
+    "推荐配置": {
+      "控制器部署": "CA 与 Karpenter 控制器各分配约 0.5-1 核 CPU、1Gi 内存即可支撑数百节点集群 [不确定精确推荐值]；生产环境建议将控制器部署在独立 namespace 并启用资源限制与监控告警。",
+      "节点池规划": "按硬件规格拆分节点组/NodePool：CPU 通用池（C/M/R）、内存优化池、GPU 池（g/p 系列，如 L4/A10G/L40S/H100）、spot 池与按需池分离；GPU 节点使用 taint（如 nvidia.com/gpu: NoSchedule）+ toleration 隔离，防止 CPU 工作负载占用昂贵 GPU 节点。",
+      "Karpenter 硬件约束": "NodePool 通过 requirements 声明实例类别（instance-category g/p）、代数（instance-generation Gt 3）、显存（instance-gpu-memory Gt 20480）等硬件属性标签约束实例选择；通过 limits 限制 CPU/内存/GPU 总量，防止超预算创建。",
+      "节点启动优化": "使用最新优化的节点镜像（如 EKS 优化 AMI/Bottlerocket）缩短启动时间；避免复杂 user-data 脚本；GPU 节点镜像预装驱动（Bottlerocket Accelerated AMI 同时预装驱动与设备插件）。"
+    },
+    "生产级配置": {
+      "大规模集群": "GKE 集群上限 15,000 节点；大规模场景推荐 Karpenter 类按需供给方案替代固定节点组（EKS 官方建议动态负载用 Karpenter、稳态负载用 Managed Node Groups）；多实例类型 + 多可用区部署规避单实例容量不足（ICE）；GPU 大训练用 ML Capacity Blocks/预留容量保障 H100 等稀缺容量。",
+      "GPU 生产级": "GPU 节点池单独配置 min/max；用 Karpenter 多 NodePool（spot 推理池 + 按需训练池）；长训练任务关闭激进合并（consolidationPolicy: WhenEmpty、consolidateAfter: 60m）防止缩容中断；MIG/时间切片在节点内提高 GPU 利用率。",
+      "容灾设计": "多 AZ 节点池、跨可用区冗余；GPU 故障由 EKS 节点监控代理自动修复或依赖上层任务 checkpoint 恢复；大规模 AI 集群配 EFA/InfiniBand 网络拓扑感知调度（Kueue TAS/rack 级放置）。"
+    },
+    "功耗基线": "[不确定] 自动扩缩容控制器自身功耗可忽略（CPU 1 核级、约几瓦）；功耗主要由被管理节点决定：CPU 通用节点数百瓦，8 卡 H100 GPU 节点满载约 7-10kW 并需液冷/高密度散热；云实例功耗由云厂商承担，节点自动扩缩容的功耗意义在于缩容至零可整体释放功耗与散热预算 [不确定官方功耗数据]"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "Cluster Autoscaler": "要求 Kubernetes v1.3.0 及以上（CA 官方最低门槛）；实际生产建议 CA 版本与集群 K8s 版本同步（如 EKS 文档要求 CA 版本与 EKS 版本匹配），CA 1.12 起默认优先级阈值策略变化，新特性随版本演进 [不确定完整版本矩阵]。",
+      "Karpenter": "严格兼容矩阵：K8s 1.30 需 Karpenter >= 0.37；1.31 需 >= 1.0.5；1.32 需 >= 1.2；1.33 需 >= 1.5；1.34 需 >= 1.6；1.35 需 >= 1.9；1.36 需 >= 1.13。",
+      "Workload-Aware Scheduling": "v1.35 引入（Alpha，默认关闭）：Workload API（scheduling.k8s.io/v1alpha1）、Gang Scheduling、Opportunistic Batching；v1.36 演进为 scheduling.k8s.io/v1alpha2，新增 PodGroup API、拓扑感知调度与工作负载感知抢占初版、DRA ResourceClaim 支持及 WorkloadWithJob feature gate（Job 控制器自动生成 workload 对象）。",
+      "云托管集成": "GKE/AKS/EKS 内建或托管 CA 随平台版本升级；EKS 上 DRA（Dynamic Resource Allocation）要求 EKS 1.33+ 且仅支持 Managed Node Groups，Karpenter 尚不支持 DRA。"
+    },
+    "操作系统兼容性": {
+      "Cluster Autoscaler": "控制器运行在 Linux 控制面节点（容器镜像）；被管理节点支持各云镜像 OS（Ubuntu、AL2/AL2023、Bottlerocket、RHEL、Windows 节点池等）[不确定 Windows 节点池支持细节]。",
+      "Karpenter": "依赖云提供商 AMI/镜像与 NodeClass 配置；AWS 支持 AL2023、AL2、Bottlerocket、Ubuntu 等 [不确定完整镜像矩阵]；GPU 加速 AMI（Bottlerocket Accelerated / AL2023 Accelerated）预装 NVIDIA 驱动，Bottlerocket 额外预装设备插件，AL2023 需另行部署设备插件。",
+      "裸金属": "Karpenter 支持 metal 实例类型；节点 OS 由 NodeClass 自定义镜像决定。"
+    },
+    "K8s 上游支持阶段": {
+      "Cluster Autoscaler": "Kubernetes 官方子项目（kubernetes/autoscaler），生产就绪 GA 级，事实上的标准节点扩缩容组件。",
+      "Karpenter": "CNCF 项目（由 AWS 主导，2023 年加入 CNCF）[不确定当前 CNCF 孵化阶段]；AWS 提供商生产成熟，Azure/GCP 提供商处于开发/演进阶段 [不确定]。",
+      "Workload-Aware Scheduling": "Kubernetes 上游 Alpha（v1.35 引入，v1.36 迭代至 v1alpha2），尚未 GA，官方明确不建议生产使用；目标是让多 Pod 工作负载成为 kube-scheduler 的一等公民并最终扩展到抢占与自动扩缩容。",
+      "拓扑感知调度 (TAS)": "Kueue TAS 为 Kueue 项目（CNCF）功能；Node 资源拓扑感知调度为 scheduler-plugins 社区项目（KEP-119），均非 K8s 核心 GA。"
+    },
+    "生态兼容性矩阵": {
+      "云提供商": "CA 支持 AWS/GCP/Azure/阿里云/华为云等 40+ 提供商及 Cluster API；Karpenter 官方支持 AWS（karpenter-provider-aws），Azure 与 GCP 提供商已启动 [不确定各自成熟度]。",
+      "调度与队列": "kube-scheduler 原生调度（NodeResourcesFit 等插件）；Kueue（含 Provisioning admission check 与 CA 联动预留配额）；Volcano、Scheduler-plugins（NodeResourceTopologyMatch 硬件拓扑感知）等。",
+      "工作负载伸缩": "HPA/KEDA 应用级伸缩与 CA/Karpenter 节点级伸缩配合；Knative/OpenFaaS 等无服务器框架可驱动 GPU 节点 scale-to-zero。",
+      "监控集成": "CA 暴露 Prometheus 指标与日志；Karpenter 暴露 Prometheus 指标与事件；GKE 提供节点启动延迟监控指标；EKS 节点监控代理（自动修复）[不确定完整指标清单]。",
+      "GPU 生态": "NVIDIA 设备插件/DRA、NVIDIA GPU Operator、DCGM exporter 与 GPU 节点池结合；Karpenter 通过 instance-gpu-name/instance-gpu-memory 等标签精确选择 GPU 硬件。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "决策基于请求而非实际用量": "CA 与 Karpenter 的缩容/合并决策只考虑 Pod 资源请求（requests），不考虑真实资源使用，可能导致过度供应或缩容不精确。",
+      "CA 单节点组扩容": "CA 一次扩容动作只向单个节点组扩容（每个周期选择一个节点组），多规格弹性依赖预配置的多个节点组；节点组内实例规格需近似相等。",
+      "GPU 节点标签问题": "GPU 节点若未在加入集群前打上 GPU 资源标签，CA 会因未发现资源而重复扩容、浪费资源（AWS 文档明确要求预先打标签）。",
+      "Karpenter 与 DRA": "EKS 上 Karpenter 当前不支持 DRA，DRA 仅可用于 Managed Node Groups（EKS 1.33+）。",
+      "云容量与配额": "扩容可能因实例容量不足（ICE）、配额限制、配置不兼容而失败；GKE 失败后进入 5 分钟起、上限 30 分钟的 backoff。",
+      "节点启动延迟": "端到端扩容耗时受实例启动（30-90 秒）、kubelet/CNI 注册（20-60 秒）、镜像拉取与 Pod 启动影响，通常 2-6 分钟，无法由自动扩缩容本身消除。",
+      "GPU 冷启动": "GPU 节点完整冷启动 3-8 分钟（节点就绪 60-120 秒 + 镜像拉取 30-60 秒 + 模型权重下载 60-180 秒 + 权重加载至显存 10-60 秒 + CUDA context 初始化 5-30 秒），70B 级大模型完全冷启动可达 7-9 分钟，严重影响弹性响应。",
+      "缩容保守策略": "CA 默认两次缩容间隔 10 分钟；GKE 缩容优雅终止期最长 1 小时；Karpenter 合并需显式配置策略（WhenEmpty/WhenEmptyOrUnderutilized）。",
+      "GKE 特有限制": "Standard 集群不会缩容到 0 节点（需至少 1 节点运行系统 Pod）；不支持 Local PersistentVolume 的自动扩缩容；不支持严格 DoNotSchedule 拓扑分布约束；不支持自定义调度器的部分场景。"
+    },
+    "混部兼容性": "[不确定] CPU 与 GPU 工作负载混部需通过 taint/toleration 与独立节点池隔离，否则非 GPU 工作负载可能占用 GPU 节点；CA 与 HPA/KEDA 混用时需协调阈值避免抖动；Karpenter 与 CA 不应同时管理同一节点组/NodePool；spot 与按需混部需处理中断重调度；GPU 与 FPGA/DPU 等其它加速器混部受 PCIe 通道与功耗预算限制 [不确定量化数据]。",
+    "性能开销": "[不确定] CA/Karpenter 控制器运行开销极小（约 0.1-1 核 CPU、数百 MiB 内存）；调度延迟开销主要在 kube-scheduler 的扩展（如 Karpenter 模拟调度）；节点资源抽象（VM）相对裸金属开销由云厂商承担 [不确定具体百分比]；GPU 直通实例无虚拟化性能损失。",
+    "固件与驱动依赖": {
+      "GPU 节点": "依赖 NVIDIA 驱动与设备插件；EKS 加速 AMI 预装驱动（Bottlerocket 同时预装设备插件，AL2023 需手动部署）；GPU 节点须在加入前打标签；Karpenter 通过 AMI/NodeClass 管理镜像，新实例规格需对应驱动版本支持 [不确定驱动版本矩阵]。",
+      "网络硬件": "大规模训练节点依赖 EFA/InfiniBand 驱动与拓扑；Karpenter 实例类型选择需考虑 instance-ebs-bandwidth/instance-local-nvme 标签；跨机柜拓扑需 Kueue TAS 或 scheduler-plugins 硬件拓扑感知配合 [不确定]。",
+      "中断处理": "Karpenter 依赖 SQS 队列接收 AWS 实例中断/Spot 通知（约 2 分钟提前量）实现优雅排水。"
+    }
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Cluster Autoscaler": "Helm/kubectl 部署控制器；云提供商凭据使用 IRSA（AWS）或 Workload Identity（GCP/Azure）；通过节点组标签自动发现（如 k8s.io/cluster-autoscaler/enabled）；以 flags 配置行为（--expander、--scale-down-delay-after-add、--balance-similar-node-groups、--max-nodes-total 等）。",
+      "Karpenter": "Helm 部署控制器，声明式 CRD 配置：NodePool（调度约束、需求、limits、中断策略）+ NodeClass（AWS 为 EC2NodeClass：AMI、子网、安全组、实例配置）；AWS 需预建 SQS 队列与 IRSA 角色。",
+      "Workload-Aware Scheduling": "kube-scheduler 内置功能，需在 v1.35+ 开启对应 feature gate（Alpha）；通过 Workload/PodGroup 对象描述多 Pod 工作负载的调度需求（v1.36 可启用 WorkloadWithJob 让 Job 控制器自动生成）；无需部署额外组件。",
+      "GPU 硬件感知": "Karpenter/CA 通过节点标签与资源（nvidia.com/gpu、karpenter.k8s.aws/instance-gpu-*）实现硬件感知；更细粒度硬件属性选择走 DRA（DeviceClass/ResourceSlice，EKS 1.33+ Managed Node Groups）或 Kueue 拓扑资源配额。"
+    },
+    "配置示例": "[不确定] 关键配置要点（示例见官方文档）：Karpenter GPU NodePool 示例 requirements: instance-category In [g,p]、instance-generation Gt 3、instance-gpu-memory Gt 20480，taints: nvidia.com/gpu: NoSchedule，disruption.consolidationPolicy: WhenEmpty、consolidateAfter: 5m；Pod 通过 nodeSelector karpenter.k8s.aws/instance-gpu-name: l40s 选择具体 GPU；CA 部署时通过 --nodes=min:max:asg 或 ASG 标签指定节点组范围 [完整 YAML 以官方文档为准]。",
+    "部署位置与环境": {
+      "公有云": "主要部署场景（AWS EKS、GCP GKE、Azure AKS、阿里云 ACK 等），CA 提供各云 provider，Karpenter 官方 AWS（Azure/GCP 开发中 [不确定]）。",
+      "私有云/混合云": "CA 支持 Cluster API provider 与部分私有云（OpenShift 内置 CA）；Karpenter 在非云环境依赖云 API，通常不适用 [不确定]。",
+      "边缘": "轻量边缘集群可部署 CA 但意义有限（节点池/配额模型与边缘异构硬件不完全适配）[不确定]；节点组模型支持自定义资源（如 GPU、NPU）自动扩缩容。"
+    },
+    "虚拟化兼容性": "[不确定] 自动扩缩容管理的节点绝大多数为云 VM（KVM/ESXi/Hyper-V 等虚拟化之上的实例），实例内再跑 Kubernetes 无额外虚拟化开销；Karpenter 同时支持裸金属（metal）实例；GPU 云实例为物理直通；嵌套虚拟化（VM 内再虚拟化 GPU 直通）一般不可用 [不确定]。"
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "CA 触发延迟": "官方 SLO：小集群从 Pod 不可调度到触发云请求不超过 30 秒（平均约 5 秒），大集群不超过 60 秒（平均约 15 秒）；实例供给时间不取决于 CA 而取决于云提供商。",
+      "Karpenter 供给速度": "AWS 实测节点供给至少约 55 秒、常见 45-50 秒，优化后可达约 31 秒；用户体感 2-4 分钟通常包含 Pod 启动时间；影响因素：AMI、user-data、CNI、实例类型与区域。",
+      "端到端扩容时间": "节点启动（实例启动 30-90 秒 + kubelet 注册 20-60 秒）通常共 1-3 分钟，端到端（不可调度到 Pod 就绪）常见 2-6 分钟；GKE 节点启动约 60-90 秒 [不确定具体数值]。",
+      "GPU 冷启动分解": "节点供给 60-120 秒、镜像拉取 30-60 秒、模型权重下载 60-180 秒、RAM 到显存传输 10-60 秒、CUDA context 5-30 秒，合计 3-8 分钟；70B 级模型完全冷启动（未缓存镜像）7-9 分钟。",
+      "失败回退": "GKE 扩容失败 backoff 从 5 分钟起、上限 30 分钟。",
+      "调度器吞吐": "kube-scheduler 默认约每秒调度数十 Pod [不确定]；Workload-Aware Scheduling 的 Opportunistic Batching 旨在批量调度相同 Pod 以提升吞吐。"
+    },
+    "扩展性上限": "[不确定] GKE 集群上限 15,000 节点；CA 支持数千节点与多节点组（受 etcd/控制面限制）；Karpenter 面向大规模按需供给，无公开硬上限 [不确定]；GPU 节点组受区域 GPU 配额与容量限制；缩容至零（GPU scale-to-zero）可行但受冷启动时间惩罚。",
+    "每节点密度": "[不确定] 由实例规格决定：kubelet 默认每节点 110 Pod 上限；GPU 节点按卡数（如 p5.48xlarge 8 卡 H100）；Karpenter 资源值按实例扣除系统开销后的可分配量计算（文档注明基于 blockDeviceMappings 未配置且 amiFamily=AL2023 的假设）[不确定各实例精确 Pod 密度]。"
+  },
+  "安全": {
+    "安全特性": {
+      "最小权限模型": "CA/Karpenter 控制器使用 IRSA/Workload Identity 获取最小云 API 权限（AWS 建议限定 ASG ARN 或标签条件）；Karpenter 需独立 IAM 角色与 SQS 队列权限。",
+      "工作负载隔离": "GPU/专用硬件节点通过 taint/toleration 隔离；节点池间网络策略与命名空间配额配合；昂贵硬件（GPU）节点建议禁止非容忍工作负载调度。",
+      "镜像与节点安全": "使用官方优化 AMI（Bottlerocket 提供只读根文件系统与安全加固 [不确定]）；节点启动模板可配置加密卷；Karpenter NodeClass 可指定安全组与加密配置。",
+      "Workload-Aware Scheduling 安全": "Alpha 功能默认关闭，无新增安全面；调度决策基于集群内对象，权限模型沿用 RBAC [不确定]。"
+    },
+    "合规与认证": "[不确定] 自动扩缩容组件本身无独立合规认证（无 FIPS/K8s 一致性认证要求）；集群整体合规（PCI DSS、HIPAA、FIPS 140-2/3）由上层发行版与云平台合规认证覆盖（如 GKE/EKS 的合规报告）；密钥与凭据管理建议结合 KMS/Secrets Manager [不确定]。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "CA 指标": "暴露 Prometheus 指标（集群/节点组状态、不可调度 Pod 计数、扩容/缩容事件）与结构化日志；可对接 Grafana [不确定完整指标名列表]。",
+      "Karpenter 指标": "暴露 Prometheus 指标与 Kubernetes 事件（节点供给/中断/合并事件）；AWS 侧可对接 CloudWatch [不确定]。",
+      "平台级监控": "GKE 提供节点启动延迟指标（启动耗时拆分监控）；EKS 节点监控代理（健康检查、自动修复、GPU/EFA 故障检测）；HPA/KEDA 指标与节点级指标联动。"
+    },
+    "维护与生命周期": {
+      "升级流程": "CA 随 autoscaler 仓库独立发版，升级需匹配集群 K8s 版本；Karpenter 升级必须遵循兼容矩阵（如 K8s 1.35 需 Karpenter >= 1.9）；Workload-Aware Scheduling 随 K8s 版本演进（v1.35 v1alpha1 -> v1.36 v1alpha2，API 有破坏性变更）。",
+      "节点排水与缩容": "缩容前自动 drain 节点并尊重 PodDisruptionBudget；CA 默认缩容间隔 10 分钟；Karpenter 通过 disruption 策略控制（WhenEmpty/WhenEmptyOrUnderutilized/Balanced、consolidateAfter 时长）；GKE 缩容优雅终止期最长 1 小时。",
+      "节点硬件维护": "实例生命周期由云平台管理；GPU/EFA 硬件故障由节点健康监控检测并触发替换或任务恢复；固件/驱动升级通常通过更换 AMI 或滚动更新节点池完成（GPU 驱动升级需节点排水重启）[不确定]。"
+    },
+    "弹性与故障恢复": {
+      "Spot 中断": "Karpenter 通过 SQS 接收中断通知（约 2 分钟提前量）优雅排水并补充容量；CA 无原生 Spot 中断处理，依赖上层（KEDA/工作负载重调度）[不确定]。",
+      "容量保障": "多实例类型 + 多 AZ 降低 ICE 概率；GPU 训练可用 ML Capacity Blocks/预留容量；跨可用区节点池冗余。",
+      "故障恢复": "节点级故障由自动修复机制替换节点（EKS 节点监控代理）；训练任务依赖 checkpoint（保存权重到 S3 定期恢复）；Kueue TAS 支持拓扑域 hot swap 在节点故障时寻找替换节点；GPU 冷启动 3-8 分钟决定恢复时间窗。"
+    }
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "控制器成本": "[不确定] CA/Karpenter 控制器成本极低（1 核 CPU 级，约每月几美元云资源 [不确定]），主要 TCO 来自被管理节点。",
+      "节点成本": "由实例类型决定：GPU 实例最贵（如 p5 系列 8x H100 按需约 $98/小时 [不确定]、g5/g6 系列推理实例便宜）；spot 可降 60-90% [不确定]；缩容至零（GPU scale-to-zero）直接消除空闲节点成本。",
+      "效率优化": "consolidation 将低利用率节点合并到更小/更便宜实例；MIG/时间切片提高单卡利用率摊薄成本；GPU 冷启动 3-8 分钟意味着峰值扩容需提前预留缓冲（minReplicas/常驻副本），存在闲置成本与响应速度的权衡 [不确定量化数据]。",
+      "容量预留": "ML Capacity Blocks/HyperPod 预留容量成本高于按需 spot，但保障稀缺 GPU 可用性。"
+    },
+    "成熟度与社区支持": {
+      "Cluster Autoscaler": "最成熟：Kubernetes 官方子项目，多年生产验证，云厂商全支持（EKS/GKE/AKS 均有托管或官方支持），社区活跃。",
+      "Karpenter": "AWS 主导的 CNCF 项目，2023-2025 快速增长，大规模 EKS 用户采用；Azure/GCP 提供商处于早期 [不确定]；文档与社区完善（karpenter-provider-aws 仓库活跃）。",
+      "Workload-Aware Scheduling": "上游 K8s Alpha（v1.35/1.36），跨 SIG 的大工程，2026 年持续演进；尚未 GA，生产采用需谨慎，社区关注度高（AI/ML 大规模调度场景）。",
+      "拓扑感知/硬件感知调度": "Kueue TAS 与 scheduler-plugins 为社区项目，生态中等；云厂商（AWS/GCP）在节点级硬件选择与容量保障上提供托管方案。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.最低配置.Cluster Autoscaler 控制器",
+    "硬件规格.最低配置.Karpenter 控制器",
+    "硬件规格.推荐配置.控制器部署",
+    "硬件规格.功耗基线",
+    "兼容性.操作系统兼容性.Cluster Autoscaler",
+    "兼容性.操作系统兼容性.Karpenter",
+    "兼容性.K8s 上游支持阶段.Karpenter",
+    "兼容性.K8s 上游支持阶段.拓扑感知调度 (TAS)",
+    "兼容性.生态兼容性矩阵.云提供商",
+    "兼容性.生态兼容性矩阵.监控集成",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销",
+    "限制与约束.固件与驱动依赖",
+    "配置与部署.配置示例",
+    "配置与部署.部署位置与环境",
+    "配置与部署.虚拟化兼容性",
+    "性能特征.基准性能数据.端到端扩容时间",
+    "性能特征.基准性能数据.调度器吞吐",
+    "性能特征.扩展性上限",
+    "性能特征.每节点密度",
+    "安全.安全特性.镜像与节点安全",
+    "安全.安全特性.Workload-Aware Scheduling 安全",
+    "安全.合规与认证",
+    "运维与生命周期.可观测性支持",
+    "运维与生命周期.维护与生命周期",
+    "运维与生命周期.弹性与故障恢复.Spot 中断",
+    "经济性.总拥有成本 (TCO)",
+    "经济性.成熟度与社区支持.Karpenter"
+  ]
+}

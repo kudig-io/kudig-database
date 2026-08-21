@@ -508,7 +508,7 @@ kubectl get node <node-name> -o jsonpath='{.status.declaredFeatures}' | jq .
 
 ## 10. 阿里云/专有云特有场景
 
-> 来源：`故障诊断/技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §2
+> 来源：`19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §2
 
 | 场景 | 症状 | 根因 | 排查要点 |
 |------|------|------|----------|
@@ -522,7 +522,7 @@ kubectl get node <node-name> -o jsonpath='{.status.declaredFeatures}' | jq .
 
 ## 11. 边界条件与禁忌操作
 
-> 来源：`故障诊断/技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §3/§5
+> 来源：`19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §3/§5
 
 ### 11.1 边界条件
 

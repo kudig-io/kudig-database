@@ -49,7 +49,7 @@ version: 1.0.0
 
 # 故障排查实验考核
 
-> **适用对象**: SRE/Ops 工程师能力考核 | **版本**: [[23-实体/kubernetes.md|[[17-系统基础/05-速查卡/k8s|k8s]]]] 1.28-1.33 | **时间**: 90 分钟
+> **适用对象**: SRE/Ops 工程师能力考核 | **版本**: [[23-实体/02-K8s核心组件/kubernetes.md|k8s]] 1.28-1.33 | **时间**: 90 分钟
 
 ---
 
@@ -272,8 +272,8 @@ intent_queries:
 difficulty: advanced
 target_roles: [sre, ops-engineer]
 related:
-  - 故障诊断/topic-skills/assessment/k8s-fundamentals-quiz.md
-  - 故障诊断/topic-skills/assessment/daily-check-quiz.md
+  - 19-故障诊断/08-技能体系/assessment/k8s-fundamentals-quiz.md
+  - 19-故障诊断/08-技能体系/assessment/daily-check-quiz.md
 ---
 ```
 

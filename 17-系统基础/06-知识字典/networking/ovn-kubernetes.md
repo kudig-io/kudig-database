@@ -141,6 +141,47 @@ kubectl exec -n ovn-kubernetes ds/ovnkube-node -- ovs-vsctl get interface br-int
 kubectl patch cm ovn-kubernetes-config -n ovn-kubernetes -p '{"data":{"mtu":"1400"}}'
 ```
 
+## 对比评测
+
+| 维度 | OVN-Kubernetes | Calico | Cilium |
+|------|---------------|--------|--------|
+| 数据面 | OVS（OpenFlow） | iptables/eBPF/BGP | eBPF |
+| 网络策略 | 支持（ACL） | 支持 | 支持（最强） |
+| 分布式网关 | 原生 | 需配置 | 原生 |
+| 与 OpenStack 集成 | 同源（OVN） | 无 | 无 |
+| 内核依赖 | 需 ovs 模块 | 低 | 需 5.x+ |
+
+**选型建议**：OpenStack + K8s 混合环境选 OVN-Kubernetes（共享 OVN 架构）；纯 K8s 且性能敏感选 Cilium；通用场景 Calico。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| Pod 不通 | `ovn-nbctl show`；`ovs-vsctl show` | OVN 数据库异常、逻辑交换机端口缺失 |
+| 网关故障 | `kubectl get pods -n ovn-kubernetes` | ovnkube-node 异常、网关节点漂移 |
+| 性能下降 | `ovs-ofctl dump-flows` 检查流表 | 流表膨胀、隧道开销 |
+| 策略不生效 | `ovn-nbctl list ACL` | ACL 优先级冲突、逻辑端口未绑定 |
+
+## 生产部署清单
+
+- [ ] OVN 数据库（NB/SB）高可用与备份已配置
+- [ ] ovnkube-node DaemonSet 资源与健康检查就绪
+- [ ] 网关节点打标签并规划（冗余 ≥ 2）
+- [ ] MTU 调整（Geneve 隧道 50 字节开销）
+- [ ] 监控接入（OVN metrics：`ovnkube_*`）
+
+## 常见误区与设计要点
+
+- **误区 1**：把 OVN 当纯 CNI 部署——它的 NB/SB 数据库是核心，必须 HA。
+- **误区 2**：网关节点混跑业务负载——分布式网关承担跨子网转发，应隔离。
+- **设计要点**：网络策略优先用 ACL 而非本地规则；日志关注 ovnkube-controller 的 reconcile 错误；升级前先备份 NB/SB 数据库。
+
+## 性能参考
+
+- 吞吐：Geneve 隧道模式约 70-85% 物理带宽，同节点直连接近线速。
+- 延迟：隧道一跳增加 ~0.3ms；流表命中 O(1)（OVS 内核 datapath）。
+- 规模：社区验证 500 节点/5 万 Pod 级别；更大规模需调整数据库参数。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

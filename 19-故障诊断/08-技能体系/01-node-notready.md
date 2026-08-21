@@ -1,7 +1,7 @@
 ---
 title: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
-description: '## 1. 概述'
-summary: 'Node NotReady 是 [[kubernetes|Kubernetes]] 集群中**爆炸半径最大**的问题类型之一。当节点进入 NotReady 状态时，'
+description: Kubernetes 节点 NotReady 状态的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 节点 NotReady 状态的完整诊断-修复-验证工单处理 Skill
 category: node
 tags:
 - k8s
@@ -44,7 +44,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - gpu-scheduling-basics
-skill_id: SKILL-01_NODE_NOTREADY-001
+skill_id: SKILL-NODE-001
 skill_name: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 version: 1.0.0
 k8s_versions:
@@ -1471,13 +1471,13 @@ kubectl get node <node-name> -o jsonpath='kubelet={.status.nodeInfo.kubeletVersi
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | kubelet 架构与内部机制 | `集群基础/` | 理解 kubelet 心跳机制、node-lifecycle-controller 的驱逐逻辑 |
-| Node 故障树分析 | `故障诊断/FTA故障树/list/node-fta.md` | 理解 Node NotReady 的完整因果链和概率模型 |
-| 节点级故障排查深度指南 | `故障诊断/高级排障/structural-` | 超出本 Skill 覆盖范围的深度排查方法 |
-| Kubernetes 故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法论 |
+| Node 故障树分析 | `19-故障诊断/06-FTA故障树/list/node-fta.md` | 理解 Node NotReady 的完整因果链和概率模型 |
+| 节点级故障排查深度指南 | `19-故障诊断/04-高级排障/structural-` | 超出本 Skill 覆盖范围的深度排查方法 |
+| Kubernetes 故障排查方法论 | `19-故障诊断/` | 系统化故障排查的理论基础和方法论 |
 | 证书管理与 TLS | `SKILL-SEC-001` (06-certificate-expiry.md) | kubelet 证书过期的详细诊断与修复（本 Skill 的 RC-007 关联） |
 | Pod 驱逐与调度 | `SKILL-POD-002` (03-pod-pending.md) | 节点恢复后 Pod 重新调度的相关问题 |
-| 容器运行时排障 | `故障诊断/高级排障/structural-` | containerd/CRI-O 深度排查 |
-| Linux 内核排障 | `故障诊断/` | OOM Killer、内核 panic、硬件错误的深度分析 |
+| 容器运行时排障 | `19-故障诊断/04-高级排障/structural-` | containerd/CRI-O 深度排查 |
+| Linux 内核排障 | `19-故障诊断/` | OOM Killer、内核 panic、硬件错误的深度分析 |
 
 ### 10.3 Skill 改进记录
 

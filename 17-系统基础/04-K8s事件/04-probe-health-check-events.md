@@ -54,7 +54,8 @@ intent_queries:
 - probe-health-check-events的使用方法
 - probe-health-check-events的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 04 - 探针与健康检查事件
 description: '<!-- chunk: 概述' -->## 概述'
 category: kubernetes-events
@@ -1518,7 +1519,7 @@ groups:
 - **Domain-2: 核心概念**: `05-pod-lifecycle.md`（Pod 生命周期详解）
 - **Domain-6: 可观测性**: `01-logging-architecture.md`（日志收集）
 - **Domain-6: 可观测性**: `02-metrics-monitoring.md`（Prometheus 监控）
-- **Topic: 故障排查**: `故障诊断/高级排障/structural-05-workloads/01-pod-troubleshooting.md`
+- **Topic: 故障排查**: `19-故障诊断/04-高级排障/structural-05-workloads/01-pod-troubleshooting.md`
 
 ## 官方文档
 - [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/)

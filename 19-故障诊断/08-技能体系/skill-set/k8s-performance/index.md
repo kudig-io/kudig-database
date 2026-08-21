@@ -13,12 +13,12 @@ last_updated: 2026-07
 
 # K8S Performance
 
-> 本页为 `故障诊断/topic-skills/skill-set/k8s-performance` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/skill-set/k8s-performance` 目录的自动索引。
 
 ## 子目录
 
-- 故障诊断/topic-skills/skill-set/k8s-performance/reference/
-- 故障诊断/topic-skills/skill-set/k8s-performance/scripts/
+- 19-故障诊断/08-技能体系/skill-set/k8s-performance/reference/
+- 19-故障诊断/08-技能体系/skill-set/k8s-performance/scripts/
 
 ## 文档
 

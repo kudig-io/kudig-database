@@ -1,7 +1,7 @@
 ---
 title: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
-description: '## 1. 概述'
-summary: 'RBAC（Role-Based Access Control）和 ResourceQuota 是 [[kubernetes|Kubernetes]] 中最核心的安全与资源治理机制。RBAC 问题会直接导致用户、ServiceAccount 或控制器无法执行预期操作，严重时可阻断整个 CI/CD 流水线或导致生产服务无法部署。'
+description: Kubernetes RBAC 权限与 ResourceQuota 故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes RBAC 权限与 ResourceQuota 故障的完整诊断-修复-验证工单处理 Skill
 category: security
 tags:
 - k8s
@@ -49,7 +49,7 @@ prerequisites:
 - gitops-basics
 - tls-basics
 - policy-basics
-skill_id: SKILL-09_RBAC_QUOTA_FAILURE-001
+skill_id: SKILL-SEC-002
 skill_name: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 version: 1.0.0
 k8s_versions:
@@ -1251,7 +1251,7 @@ kubectl exec -it POD_NAME -n NS -- curl -sk \
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | RBAC 架构与权限模型 | `安全/07-rbac-matrix-configuration.md` | 理解 Role、ClusterRole、Binding 的完整设计 |
-| ResourceQuota 与 LimitRange | `故障诊断/12-rbac-quota-troubleshooting.md` | 深度配额问题排查 |
+| ResourceQuota 与 LimitRange | `19-故障诊断/02-资源排障/04-rbac-quota-troubleshooting.md` | 深度配额问题排查 |
 | OPA/Gatekeeper 策略引擎 | `安全/14-policy-engines-opa-kyverno.md` | 理解策略引擎的工作原理 |
 | ServiceAccount Token 机制 | `安全/01-authentication-authorization-system.md` | Token 生命周期和轮转机制 |
 | 审计日志分析 | `安全/04-audit-logging-compliance.md` | 分析 403 错误的审计日志 |

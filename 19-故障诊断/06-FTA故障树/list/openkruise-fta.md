@@ -49,10 +49,10 @@ authors:
   role: contributor
 cross_refs:
 - type: cncf
-  path: ../生态参考/incubating/openkruise/openkruise.md
-  label: '核心文档: openkruise.md'
+  path: ../../../21-生态参考/03-领域索引/openkruise-index.md
+  label: '索引文档: openkruise-index'
 - type: index
-  path: ../../生态参考/topic-index/openkruise-index.md
+  path: ../../../21-生态参考/03-领域索引/openkruise-index.md
   label: '索引文档: openkruise-index'
 tier: supporting
 ---
@@ -341,7 +341,7 @@ spec:
 
 ## 相关文档
 
-- [OpenKruise CNCF Landscape](./生态参考/incubating/openkruise/openkruise.md)
+- [OpenKruise 全局索引](../../../21-生态参考/03-领域索引/openkruise-index.md)
 - [OpenKruise 全局索引](../../../21-%E7%94%9F%E6%80%81%E5%8F%82%E8%80%83/03-%E9%A2%86%E5%9F%9F%E7%B4%A2%E5%BC%95/openkruise-index.md)
 - [Deployment 故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/02-deployment-troubleshooting.md)
 - [StatefulSet 故障排查](../../04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-05-workloads/03-statefulset-troubleshooting.md)

@@ -163,3 +163,68 @@ jobs:
               import sys; sys.exit(1)
           print("wikilinks OK")
           PY
+
+  heading-integrity:
+    name: Heading Integrity (一级标题阈值)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Scan 一级标题数量 (fence 感知, 入口文档除外)
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          ROOT = pathlib.Path('.')
+          EXCL = {'node_modules','.venv','.git','__pycache__','30-站点','32-发布','33-源码','37-归档','36-报告','35-元数据','28-资产','31-脚本'}
+          CONTENT = {'22-概念', '23-实体', '26-技能', '24-综合', '29-文档', '20-最佳实践', '25-研究'}
+          DOMAINS = {'01-集群基础','02-工作负载','05-网络','06-存储','08-安全','09-可观测性','10-平台工程','11-发布变更','12-可靠性','19-故障诊断','13-生产运维','18-云厂商','14-容器运行时','15-AI基础设施','16-专项技术','07-数据库中间件','17-系统基础','03-清单模式','21-生态参考','04-应用模式'}
+          # 入口/索引文档允许大量一级标题（如合集快照、SUMMARY），不计入检查
+          ENTRY = {'README.md', 'MOC.md', 'index.md', 'SUMMARY.md', 'fta-index.md', 'fta-methodology-and-agentic-practices.md'}
+          # 已知历史问题文件（2026-08-13 登记 N7，待专项修复后移出；硬失败仅拦截新增异常）
+          KNOWN = {
+              '05-网络/05-eBPF/10-ebpf-security-applications.md',
+              '17-系统基础/06-知识字典/operations/failure-patterns-analysis.md',
+              '17-系统基础/06-知识字典/operations/incident-management-runbooks.md',
+              '17-系统基础/06-知识字典/operations/performance-tuning-expert.md',
+              '21-生态参考/02-论文/24-kubernetes-policy-as-code-governance-automation.md',
+              '26-技能/04-工作负载/pod/培训/learn-inner-training.md',
+              '26-技能/04-工作负载/pod/培训/learn-public-training.md',
+              '26-技能/04-工作负载/pod/培训/public-one-month/week-4-enterprise/day-25-production-best-practices.md',
+          }
+          MAX_H1 = 20  # 内容文档一级标题阈值（正常 1-3 个；>20 说明标题层级损坏）
+          bad, checked = [], 0
+          for p in sorted(ROOT.rglob('*.md')):
+              if any(x in p.parts for x in EXCL) or p.parts[0].startswith('.'):
+                  continue
+              if not (p.parts[0] in DOMAINS or p.parts[0] in CONTENT):
+                  continue
+              if p.name in ENTRY:
+                  continue
+              fence = False
+              h1 = 0
+              for line in p.read_text(encoding='utf-8').split('\n'):
+                  if line.lstrip().startswith('```'):
+                      fence = not fence
+                      continue
+                  if fence:
+                      continue
+                  if line.startswith('# ') or line.startswith('#\t'):
+                      h1 += 1
+              checked += 1
+              if h1 > MAX_H1:
+                  rel = str(p)
+                  if rel in KNOWN:
+                      print(f"  [KNOWN] {rel}: {h1} 个一级标题（登记 N7，待专项修复）")
+                      continue
+                  bad.append(f"{rel}: {h1} 个一级标题（阈值 {MAX_H1}）")
+          print(f"checked {checked} markdown files")
+          if bad:
+              print(f"\n{len(bad)} 个文件标题层级异常（多为排查命令误用 # 或正文层级未降级）:")
+              for b in bad[:20]:
+                  print("  " + b)
+              print("::error::存在标题层级异常文件，请将内容级标题降级为 #### 后重新提交")
+              sys.exit(1)
+          print("heading integrity OK")
+          PY

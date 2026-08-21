@@ -55,7 +55,8 @@ intent_queries:
 - selenium-enterprise-automation的使用方法
 - selenium-enterprise-automation的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: Selenium 企业级自动化测试平台
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: automated-testing-quality

@@ -28,7 +28,7 @@ estimated_read_time: 10min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[19-故障诊断/06-FTA故障树/README.md\|FTA故障树/]] | FTA | 36 个故障树、Mermaid 图、JSON 工作流 |
+| [[19-故障诊断/06-FTA故障树/README.md\|FTA故障树/]] | FTA | 48 个故障树、Mermaid 图、JSON 工作流 |  <!-- M2: 统计 36→48 -->
 | [[19-故障诊断/07-FEBM方法论/README.md\|FEBM方法论/]] | FEBM | 法医鉴定循证、证据链、根因分析 |
 | [[19-故障诊断/01-核心排障/index.md\|核心排障/]] | 核心 | Pod/Deployment/Service 常见故障 |
 | [[19-故障诊断/02-资源排障/index.md\|资源排障/]] | 资源 | CPU/内存/磁盘/配额问题 |

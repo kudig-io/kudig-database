@@ -56,7 +56,7 @@ cross_refs:
   path: ../安全/
   label: '知识域: 安全'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/04-networkpolicy-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/04-networkpolicy-troubleshooting.md
   label: '结构化排障: 04-networkpolicy-troubleshooting'
 tier: supporting
 ---

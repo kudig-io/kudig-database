@@ -149,6 +149,47 @@ kubectl rollout restart deploy/my-service
 
 **修复**：重启 identity Deployment，检查 `linkerd-identity-issuer` Secret 有效性。
 
+## 对比评测
+
+| 维度 | Linkerd | Istio | Kuma |
+|------|---------|-------|------|
+| 数据面 | 自研（Rust，轻量） | Envoy（功能全） | Envoy |
+| 资源开销 | 极低（<10MB/Sidecar） | 高（50-200MB） | 中 |
+| 功能范围 | L4 + HTTP 基础 | L4-L7 全量 | L4 + HTTP |
+| 多集群 | 扩展（服务镜像） | 原生 | 原生（多 Mesh） |
+| 运维复杂度 | 低 | 高 | 中 |
+
+**选型建议**：追求低开销与简单运维选 Linkerd；需要高级流量治理（JWT/熔断/多集群）选 Istio；多租户 Mesh 需求选 Kuma。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 注入失败 | `linkerd check`；`kubectl get ns -L linkerd.io/inject` | 注入 Webhook 异常、命名空间标签缺失 |
+| 流量不走网格 | `linkerd stat deploy` | Pod 未重启（注入需重建） |
+| mTLS 未生效 | `linkerd check --proxy`；`linkerd tap` | 证书信任链问题、旁路流量 |
+| 延迟增加 | `linkerd top`；`linkerd viz top` | 遥测采样过密、代理资源不足 |
+
+## 生产部署清单
+
+- [ ] 控制面（identity/control-plane）HA 与证书轮换（`linkerd upgrade` 自动）
+- [ ] 命名空间注入灰度（`linkerd.io/inject: enabled` 逐步放开）
+- [ ] mTLS 验证（`linkerd check --proxy` 通过）
+- [ ] 可观测性（linkerd-viz：top/stat/tap）接入
+- [ ] 故障演练：网格故障时直连兜底方案验证
+
+## 常见误区与设计要点
+
+- **误区 1**：注入后不重建 Pod——Sidecar 注入是创建时生效，必须滚动重启。
+- **误区 2**：忽略 identity 组件——Linkerd 的 mTLS 依赖 identity 签发证书，故障会导致全网格拒绝。
+- **设计要点**：用 `linkerd check` 作为升级前后必检；生产建议开启 `policy` 与 `audit` 模式灰度授权策略；按命名空间分批接入控制爆炸半径。
+
+## 性能参考
+
+- 代理开销：P99 延迟增加 < 5ms（HTTP），CPU 每代理 < 0.5 核，内存 < 20MB。
+- 吞吐：单代理 2w+ RPS（HTTP/1.1 与 HTTP/2）。
+- 控制面：支持万级 Pod（Rust 高并发），`linkerd check` 秒级完成。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

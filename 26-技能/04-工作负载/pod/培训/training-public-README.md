@@ -258,9 +258,9 @@ Step 4: 场景化 Q&A
 - [00-learning-gaps-analysis.md](01-learning-gaps-analysis.md) — 内容缺口分析
 - [00-beginner-learning-roadmap.md](00-beginner-learning-roadmap.md) — 多路径学习路线图
 - [beginner-guides/](beginner-guides/) — 🆕 小白补充教程
-- [../故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill（深度技术细节）
+- [08-技能体系/](../../../../19-故障诊断/08-技能体系) — 18 个 GA Skill（深度技术细节）
 - [../系统基础/topic-dictionary/k8s-glossary.md](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/k8s-glossary.md) — K8s 术语表
-- [../故障诊断/](../故障诊断/) — 故障排查深度文档
+- [](../../../../19-故障诊断) — 故障排查深度文档
 
 ## Related
 

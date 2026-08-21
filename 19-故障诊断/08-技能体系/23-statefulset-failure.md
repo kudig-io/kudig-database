@@ -1,7 +1,7 @@
 ---
 title: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-description: '- 运维工程师'
-summary: 'StatefulSet 是 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 中管理有状态应用的核心工作负载控制器。与 Deployment 不同，StatefulSet 为每个 Pod 提供稳定的网络标识（hostname）、稳定的存储（PVC）和有序的部署/扩展/更新保证。'
+description: Kubernetes StatefulSet 故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes StatefulSet 故障的完整诊断-修复-验证工单处理 Skill
 category: skills
 tags:
 - k8s
@@ -46,9 +46,55 @@ prerequisites:
 - kafka-basics
 - redis-basics
 - mysql-basics
-skill_id: SKILL-21_STATEFULSET_FAILURE-001
+skill_id: SKILL-WORK-002
 skill_name: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 version: 1.0.0
+severity_range: P0-P2
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+estimated_resolution_time: 15-60min
+risk_level: high
+agent_execution_mode: L2-semi-auto
+trigger_events:
+- FailedCreate
+- FailedDelete
+- SuccessfulDelete
+- RecreatingFailedPod
+trigger_metrics:
+- 'kube_statefulset_status_replicas{status="not_ready"}'
+- 'kube_statefulset_replicas - kube_statefulset_status_replicas_ready'
+- 'kube_persistentvolumeclaim_status_phase{phase="Pending"}'
+- 'kube_pod_status_phase{phase!="Running"}'
+related_skills:
+- SKILL-WORK-001
+- SKILL-STORE-001
+- SKILL-POD-002
+- SKILL-NET-001
+- SKILL-NET-002
+fta_refs:
+- 19-故障诊断/06-FTA故障树/list/statefulset-fta.md
+knowledge_refs:
+- 19-故障诊断/02-资源排障/13-statefulset-troubleshooting.md
+cross_refs:
+- type: fta
+  path: 19-故障诊断/06-FTA故障树/list/statefulset-fta.md
+  label: StatefulSet 故障树分析
+- type: domain
+  path: 19-故障诊断/02-资源排障/13-statefulset-troubleshooting.md
+  label: StatefulSet 深度排查
+- type: skill
+  path: 19-故障诊断/08-技能体系/08-deployment-rollout-failure.md
+  label: SKILL-WORK-001 Deployment 问题
+- type: skill
+  path: 19-故障诊断/08-技能体系/08-pvc-storage-failure.md
+  label: SKILL-STORE-001 PVC 存储问题
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**
@@ -57,87 +103,6 @@ version: 1.0.0
 
 
 
-
----
-skill_id: "SKILL-WORK-002"
-skill_name: "[[statefulset|StatefulSet]] 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation"
-version: "1.0"
-category: "workload"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "15-60min"
-risk_level: "high"
-agent_execution_mode: "L2-semi-auto"
-trigger_keywords:
-  - "StatefulSet"
-  - "statefulset"
-  - "sts"
-  - "PVC pending"
-  - "pod not starting"
-  - "ordinal"
-  - "headless [[service|service]]"
-  - "有状态集"
-  - "数据库集群"
-  - "kafka"
-  - "zookeeper"
-  - "mysql"
-  - "mongodb"
-trigger_events:
-  - "FailedCreate"
-  - "FailedDelete"
-  - "SuccessfulDelete"
-  - "RecreatingFailedPod"
-trigger_metrics:
-  - 'kube_statefulset_status_replicas{status="not_ready"}'
-  - 'kube_statefulset_replicas - kube_statefulset_status_replicas_ready'
-  - 'kube_persistentvolumeclaim_status_phase{phase="Pending"}'
-  - 'kube_pod_status_phase{phase!="Running"}'
-difficulty: "advanced"
-reading_level: "advanced"
-audience:
-  - SRE
-  - 运维工程师
-  - 技术支持
-estimated_read_time: "15min"
-prerequisites:
-  - "工作负载"
-  - "存储"
-  - "kubectl-basics"
-related_skills:
-  - "SKILL-WORK-001"
-  - "SKILL-STORE-001"
-  - "SKILL-POD-002"
-  - "SKILL-NET-001"
-  - "SKILL-NET-002"
-fta_refs:
-  - "故障诊断/FTA故障树/list/statefulset-fta.md"
-knowledge_refs:
-  - "故障诊断/21-statefulset-troubleshooting.md"
-  - "工作负载/"
-  - "存储/"
-cross_refs:
-  - type: "fta"
-    path: "../19-故障诊断/06-FTA故障树/list/statefulset-fta.md"
-    label: "StatefulSet 故障树分析"
-  - type: "domain"
-    path: "../19-故障诊断/21-statefulset-troubleshooting.md"
-    label: "StatefulSet 深度排查"
-  - type: "[[SKILL|skill]]"
-    path: "../19-故障诊断/topic-skills/08-deployment-rollout-failure.md"
-    label: "SKILL-WORK-001 Deployment 问题"
-  - type: "skill"
-    path: "../19-故障诊断/topic-skills/07-pvc-storage-failure.md"
-    label: "SKILL-STORE-001 PVC 存储问题"
-authors:
-  - name: KUDIG Team
-    role: contributor
-
-tier: peripheral---
 
 # StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
@@ -951,8 +916,8 @@ kubectl run -n <namespace> dns-test --image=busybox:1.36 --rm -it --restart=Neve
 
 需要深入了解根因机制时，参考以下资源：
 - StatefulSet 控制器原理 → `工作负载/`
-- 存储故障排查 → `故障诊断/14-pvc-storage-troubleshooting.md`
-- 工作负载管理 → `故障诊断/topic-skills/08-deployment-rollout-failure.md`
+- 存储故障排查 → `19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting.md`
+- 工作负载管理 → `19-故障诊断/08-技能体系/08-deployment-rollout-failure.md`
 
 ### 10.3 Skill 改进记录
 

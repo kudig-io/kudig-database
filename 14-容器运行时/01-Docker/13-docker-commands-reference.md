@@ -51,7 +51,8 @@ intent_queries:
 - 99-docker-commands-reference的所有命令/字段
 - 99-docker-commands-reference速查手册
 
-tier: peripheral---
+tier: peripheral
+---
 title: Docker 命令大全参考
 description: '<!-- chunk: 概述' -->## 概述'
 category: docker

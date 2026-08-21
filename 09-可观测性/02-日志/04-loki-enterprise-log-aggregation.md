@@ -59,7 +59,8 @@ intent_queries:
 - loki-enterprise-log-aggregation的使用方法
 - loki-enterprise-log-aggregation的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: Loki Enterprise Log Aggregation and Analytics Platform
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: logging-management-analytics

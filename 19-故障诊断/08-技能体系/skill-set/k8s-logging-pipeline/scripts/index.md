@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Scripts
 
-> 本页为 `故障诊断/topic-skills/skill-set/k8s-logging-pipeline/scripts` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/skill-set/k8s-logging-pipeline/scripts` 目录的自动索引。
 
 ## 内容
 

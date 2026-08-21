@@ -57,7 +57,7 @@ version: 1.0.0
 
 ## 一、选择题（每题 2 分，共 40 分）
 
-### 1. 以下哪个不是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 的核心组件？
+### 1. 以下哪个不是 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 的核心组件？
 
 A. kube-apiserver
 B. [[etcd|etcd]]
@@ -267,8 +267,8 @@ intent_queries:
 difficulty: intermediate
 target_roles: [sre, ops-engineer]
 related:
-  - 故障诊断/topic-skills/assessment/troubleshooting-lab-exam.md
-  - 故障诊断/topic-skills/assessment/daily-check-quiz.md
+  - 19-故障诊断/08-技能体系/assessment/troubleshooting-lab-exam.md
+  - 19-故障诊断/08-技能体系/assessment/daily-check-quiz.md
 ---
 ```
 

@@ -82,7 +82,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
+tier: peripheral
+---
 # 第三课：Deployment - 应用部署管理器
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 25 分钟

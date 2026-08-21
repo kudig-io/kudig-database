@@ -186,12 +186,12 @@ bash scripts/verify-node.sh <node-name>
 
 | 资源 | 路径 |
 |------|------|
-| FTA 问题树 | [故障诊断/FTA故障树/list/node-fta.md](../../../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/node-fta.md) |
+| FTA 问题树 | [19-故障诊断/06-FTA故障树/list/node-fta.md](../../../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/node-fta.md) |
 | 版本兼容矩阵 | [reference/version-matrix.md](./reference/version-matrix.md) |
 | 诊断工作流详情 | [reference/diagnostic-workflow.md](./reference/diagnostic-workflow.md) |
 | 修复操作手册 | [reference/remediation-playbook.md](./reference/remediation-playbook.md) |
 | 根因目录 | [reference/root-cause-catalog.md](./reference/root-cause-catalog.md) |
-| 结构化排查 | [故障诊断/高级排障/structural-](../../故障诊断/高级排障/) |
+| 结构化排查 | [04-高级排障/](../../../04-高级排障/) |
 | 单文件完整版 | [../01-node-notready.md](../../01-node-notready.md) |
 
 ## Related

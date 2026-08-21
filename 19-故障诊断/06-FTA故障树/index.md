@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Topic Fta
 
-> 本页为 `故障诊断/FTA故障树` 目录的自动索引。
+> 本页为 `19-故障诊断/06-FTA故障树` 目录的自动索引。  <!-- M1: 旧路径说明修复 -->
 
 ## 概览
 
@@ -21,7 +21,8 @@ last_updated: 2026-07
 
 ## 子目录
 
-- [[19-故障诊断/06-FTA故障树/fta-index|List]]
+- [[19-故障诊断/06-FTA故障树/list/README.md|List]]  <!-- M1: 子目录补全 -->
+- [[19-故障诊断/06-FTA故障树/glossary/index.md|Glossary]]  <!-- M1: 子目录补全 -->
 
 ## 文档
 
@@ -42,11 +43,18 @@ last_updated: 2026-07
 - [[19-故障诊断/06-FTA故障树/15-fta-quality-assessment.md|Fta Quality Assessment]]
 - [[19-故障诊断/06-FTA故障树/16-team-capability-building.md|Team Capability Building]]
 - [[19-故障诊断/06-FTA故障树/17-industry-benchmarks.md|Industry Benchmarks]]
+- [[19-故障诊断/06-FTA故障树/18-typical-scenarios.md|Typical Scenarios]]  <!-- M1: 补缺失索引 -->
 - [[19-故障诊断/06-FTA故障树/19-pitfalls-and-best-practices.md|Pitfalls And Best Practices]]
 - [[19-故障诊断/06-FTA故障树/20-fta-llm-opportunities.md|Fta Llm Opportunities]]
 - [[19-故障诊断/06-FTA故障树/21-self-evolving-ops-system.md|Self Evolving Ops System]]
+- [[19-故障诊断/06-FTA故障树/22-industry-standardization.md|Industry Standardization]]  <!-- M1: 补缺失索引 -->
 - [[19-故障诊断/06-FTA故障树/23-fta-production-quick-start.md|Fta Production Quick Start]]
+- [[19-故障诊断/06-FTA故障树/24-fta-agent-evaluation.md|Fta Agent Evaluation]]  <!-- M1: 补缺失索引 -->
 - [[19-故障诊断/06-FTA故障树/ack-fta-generator-v2.md|Ack Fta Generator V2]]
+- [[19-故障诊断/06-FTA故障树/appendix-a-glossary.md|Appendix A Glossary]]  <!-- M1: 补缺失索引 -->
+- [[19-故障诊断/06-FTA故障树/appendix-b-tools-and-resources.md|Appendix B Tools And Resources]]  <!-- M1: 补缺失索引 -->
+- [[19-故障诊断/06-FTA故障树/appendix-c-references.md|Appendix C References]]  <!-- M1: 补缺失索引 -->
+- [[19-故障诊断/06-FTA故障树/appendix-d-templates.md|Appendix D Templates]]  <!-- M1: 补缺失索引 -->
 - [[19-故障诊断/06-FTA故障树/fta-diagnosis-improvement.md|Fta Diagnosis Improvement]]
 - [[19-故障诊断/06-FTA故障树/fta-execution-engine.md|Fta Execution Engine]]
 - [[19-故障诊断/06-FTA故障树/fta-index.md|Fta Index]]

@@ -643,6 +643,6 @@ Integration_Monitoring:
 - [P0-1: 工单分类体系与意图识别语料库](./P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](./P0-2-multi-skill-coordination-protocol.md)
 - [故障诊断/[[06-存储/README.md|README]].md](../故障诊断/topic-skills/README.md)
-- [故障诊断/FTA故障树/list/](../故障诊断/FTA故障树/list/) — FTA 问题树参考
+- [06-FTA故障树/list/](../../19-故障诊断/06-FTA故障树/list) — FTA 问题树参考
 
 <!-- risk-assessed -->

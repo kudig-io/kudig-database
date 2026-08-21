@@ -68,10 +68,10 @@ tier: supporting
 │  ├── 解决：排查顺序问题（先查什么？后查什么？）                              │
 │  └── 输出：结构化排查路径 + 配置验证清单                                   │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  故障诊断/FTA故障树/          → 为什么出问题（故障树因果分析，演绎法）                 │
-│  故障诊断/FEBM方法论/         → 如何从证据推导结论（取证循证，归纳法）                 │
-│  topic-structural/   → 具体怎么查（按组件的详细排查步骤）                    │
-│  故障诊断/topic-skills/       → Agent 怎么做（自动化诊断-修复闭环）                  │
+│  06-FTA故障树/               → 为什么出问题（故障树因果分析，演绎法）                 │  # H3
+│  07-FEBM方法论/              → 如何从证据推导结论（取证循证，归纳法）                 │  # H3
+│  04-高级排障/structural-*/   → 具体怎么查（按组件的详细排查步骤）                    │  # H3
+│  08-技能体系/                → Agent 怎么做（自动化诊断-修复闭环）                  │  # H3
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -454,7 +454,7 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
     │
     ▼
 ┌──────────────────────┐
-│ Skill 路由（症状匹配）  │  ← 故障诊断/topic-skills/ YAML front matter
+│ Skill 路由（症状匹配）  │  ← 08-技能体系/ YAML front matter  # H3
 └──────────┬───────────┘
            │
            ▼
@@ -467,12 +467,12 @@ kubectl get networkpolicy -A -o yaml | grep -A 10 "port: 53"
            │
            ▼
 ┌──────────────────────┐
-│ FTA 故障树遍历         │  ← 故障诊断/FTA故障树/ 因果关系模型
+│ FTA 故障树遍历         │  ← 06-FTA故障树/ 因果关系模型  # H3
 └──────────┬───────────┘
            │
            ▼
 ┌──────────────────────┐
-│ 修复 → 验证 → 闭环    │  ← 故障诊断/topic-skills/ Section 6-7
+│ 修复 → 验证 → 闭环    │  ← 08-技能体系/ Section 6-7  # H3
 └──────────────────────┘
 ```
 
@@ -588,12 +588,12 @@ Agent 在执行配置检查时可使用以下结构化输出：
 
 | 资源 | 路径 | 关系 |
 |------|------|------|
-| **DNS 故障树分析** | [故障诊断/FTA故障树/list/dns-fta.md](../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/dns-fta.md) | FTA 因果分析模型 |
+| **DNS 故障树分析** | [06-FTA故障树/list/dns-fta.md](../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/dns-fta.md) | FTA 因果分析模型 |  # H3: 显示文本旧路径修复
 | **DNS 结构化排查指南** | [03-networking/02-dns-troubleshooting.md](structural-03-networking/02-dns-troubleshooting.md) | 详细排查步骤 |
-| **DNS 故障排查（domain-12）** | [故障诊断/26-dns-troubleshooting.md](../03-基础设施排障/02-dns-troubleshooting.md) | 按组件分类的完整指南 |
-| **DNS Skill（Agent 可执行）** | [故障诊断/topic-skills/04-dns-resolution-failure.md](../08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | Agent 运行时 Runbook |
-| **FEBM 取证方法论** | [故障诊断/FEBM方法论/](../故障诊断/FEBM方法论/) | 事后复盘取证分析 |
-| **FTA 方法论合集** | [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |
+| **DNS 故障排查（domain-12）** | [03-基础设施排障/02-dns-troubleshooting.md](../03-基础设施排障/02-dns-troubleshooting.md) | 按组件分类的完整指南 |  # H3: 显示文本旧路径修复
+| **DNS Skill（Agent 可执行）** | [08-技能体系/04-dns-resolution-failure.md](../08-%E6%8A%80%E8%83%BD%E4%BD%93%E7%B3%BB/04-dns-resolution-failure.md) | Agent 运行时 Runbook |  # H3: 显示文本旧路径修复
+| **FEBM 取证方法论** | [07-FEBM方法论](../07-FEBM方法论/) | 事后复盘取证分析 |  # H3: 旧路径 故障诊断/FEBM方法论/ 修复
+| **FTA 方法论合集** | [06-FTA故障树/fta-methodology-and-agentic-practices.md](../06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/fta-methodology-and-agentic-practices.md) | 故障树分析完整方法论 |  # H3: 显示文本旧路径修复
 
 ---
 

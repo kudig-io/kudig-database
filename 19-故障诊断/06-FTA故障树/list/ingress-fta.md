@@ -53,10 +53,10 @@ cross_refs:
   path: ../网络/22-ingress-tls-certificate.md
   label: '深度文档: 22-ingress-tls-certificate'
 - type: skill
-  path: ../故障诊断/topic-skills/13-ingress-gateway-failure.md
+  path: ../../08-技能体系/14-ingress-gateway-failure.md  # H3: 旧路径 ../../08-技能体系/ 修复（编号 13→14 对齐）
   label: '运维技能: 13-ingress-gateway-failure'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md  # H3: 旧路径 topic-structural-trouble-shooting 修复
   label: '结构化排障: 03-service-ingress-troubleshooting'
 tier: supporting
 ---

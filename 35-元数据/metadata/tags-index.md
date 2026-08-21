@@ -35,17 +35,17 @@ estimated_read_time: 5min
 - 集群基础/07: 分布式共识 etcd
 - 集群基础/11: etcd 深度解析
 - 故障诊断/02: etcd 故障排查
-- 故障诊断/FTA故障树/list/etcd-fta.md
+- 19-故障诊断/06-FTA故障树/list/etcd-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### api-server
 - 集群基础/12: API Server 深度解析
 - 故障诊断/01: API Server 故障排查
-- 故障诊断/FTA故障树/list/apiserver-fta.md
+- 19-故障诊断/06-FTA故障树/list/apiserver-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### scheduler
 - 集群基础/20: Scheduler 深度解析
 - 工作负载/30: 调度器配置
-- 故障诊断/FTA故障树/list/scheduler-fta.md
+- 19-故障诊断/06-FTA故障树/list/scheduler-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ---
 
@@ -54,25 +54,25 @@ estimated_read_time: 5min
 ### cni
 - 集群基础/23: CNI 深度解析
 - 网络/07: CNI 插件对比
-- 故障诊断/FTA故障树/list/cni-fta.md
+- 19-故障诊断/06-FTA故障树/list/cni-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### service
 - 网络/11: Service 概念与类型
-- 故障诊断/FTA故障树/list/service-fta.md
+- 19-故障诊断/06-FTA故障树/list/service-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### dns
 - 网络/16: DNS 服务发现
 - 故障诊断/26: DNS 故障排查
-- 故障诊断/FTA故障树/list/dns-fta.md
+- 19-故障诊断/06-FTA故障树/list/dns-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### ingress
 - 网络/27: Ingress 基础
 - 故障诊断/15: Ingress 故障排查
-- 故障诊断/FTA故障树/[[26-技能/05-网络/ingress/ingress-fta.md|ingress-fta]].md
+- 19-故障诊断/06-FTA故障树/list/ingress-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复（原坏链接 [[26-技能/...]] 替换）
 
 ### gateway-api
 - 网络/35: Gateway API 概览
-- 故障诊断/FTA故障树/list/gateway-api-fta.md
+- 19-故障诊断/06-FTA故障树/list/gateway-api-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ---
 
@@ -94,12 +94,12 @@ estimated_read_time: 5min
 ### rbac
 - 安全/01: 认证授权系统
 - 故障诊断/12: RBAC 故障排查
-- 故障诊断/FTA故障树/list/rbac-fta.md
+- 19-故障诊断/06-FTA故障树/list/rbac-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### network-policy
 - 安全/02: 网络安全策略
 - 故障诊断/16: NetworkPolicy 故障排查
-- 故障诊断/FTA故障树/list/networkpolicy-fta.md
+- 19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
 
 ### runtime-security
 - 安全/03: 运行时安全防御
@@ -139,11 +139,11 @@ estimated_read_time: 5min
 ## 方法论
 
 ### fta
-- 故障诊断/FTA故障树/01-23: FTA 方法论体系
-- 故障诊断/FTA故障树/list: 36 个组件故障树
+- 19-故障诊断/06-FTA故障树/01-23: FTA 方法论体系  # N5: 旧短路径 故障诊断/FTA故障树/ 修复
+- 19-故障诊断/06-FTA故障树/list: 48 个组件故障树  # N5+M2: 旧短路径修复、统计 36→48
 
 ### febm
-- 故障诊断/FEBM方法论/01-08: FEBM 取证方法论
+- 19-故障诊断/07-FEBM方法论/01-08: FEBM 取证方法论  # N5: 旧短路径 故障诊断/FEBM方法论/ 修复
 
 ### troubleshooting
 - domain-12: 42+ 篇故障排查

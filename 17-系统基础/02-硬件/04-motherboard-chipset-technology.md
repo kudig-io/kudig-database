@@ -44,7 +44,8 @@ intent_queries:
 - motherboard-chipset-technology的使用方法
 - motherboard-chipset-technology的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 主板与芯片组技术
 description: '<!-- chunk: 概述' -->## 概述'
 category: hardware

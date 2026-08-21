@@ -55,7 +55,7 @@ severity: high
 # NodePool 异常故障树分析
 
 > **FTA ID**: FTA-NODEPOOL-001
-> **来源**: `故障诊断/FTA故障树/list/nodepool-fta.md`
+> **来源**: `19-故障诊断/06-FTA故障树/list/nodepool-fta.md`
 
 ## 适用范围与说明
 

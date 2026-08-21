@@ -50,7 +50,7 @@ version: 1.0.0
 # 升级消息模板 / Escalation Message Template
 
 > **[[SKILL|Skill]] ID**: SKILL-NODE-001  
-> **数据来源**: 故障诊断/topic-skills/01-node-notready.md Section 8
+> **数据来源**: 19-故障诊断/08-技能体系/01-node-notready.md Section 8
 
 Agent 在触发升级条件时，应使用此模板生成通知消息。
 变量使用 `{variable_name}` 格式，由 Agent 在运行时填充。

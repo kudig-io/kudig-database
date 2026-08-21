@@ -79,7 +79,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
+tier: peripheral
+---
 # 第七课：Namespace 与资源隔离
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟
@@ -480,7 +481,7 @@ kubectl describe resourcequota -n <namespace>
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../../../04-工作负载/pod/培训/lecturer/04-common-problems.md) — 常见问题
 - [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../../../19-故障诊断/08-技能体系/10-rbac-quota-failure.md) — RBAC/配额问题
-- [../../故障诊断/](../../故障诊断/) — 故障排查文档
+- [](../../../../19-故障诊断) — 故障排查文档
 
 ## See Also
 

@@ -1,7 +1,7 @@
 ---
 title: 附录 D：FTA 模板参考 (历史参考) [topic-fta]
-description: — FTA 方法论与 AI Agent 实践'
-summary: — FTA 方法论与 AI Agent 实践'
+description: 附录 D：FTA 模板参考（历史参考）— 已废弃，模板迁移至 31-脚本/templates/fta-template.md
+summary: 附录 D：FTA 模板参考（历史参考）— 已废弃，模板迁移至 31-脚本/templates/fta-template.md
 category: fta
 tags:
 - fta
@@ -10,7 +10,7 @@ tags:
 - agent
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-08
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -48,47 +48,6 @@ severity: high
 
 
 
-
-title: 附录 D：FTA 模板参考 (历史参考)
-description: '- [../fta-methodology-and-agentic-practices.md](fta-methodology-and-agentic-practices.md)
-  — FTA 方法论与 AI Agent 实践'
-category: fta
-tags:
-- k8s
-- fault-tree
-- root-cause
-- troubleshooting
-- [[prometheus|prometheus]]
-- agent
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 附录 D：FTA 模板参考 (历史参考) 是什么
-- 如何 附录 D：FTA 模板参考 (历史参考)
-- 附录 D：FTA 模板参考 (历史参考) 根因分析
-- 附录 D：FTA 模板参考 (历史参考) 故障树
-trigger_keywords:
-- 附录
-- D：FTA
-- 模板参考
-- 历史参考
-- fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # 附录 D：FTA 模板参考 (历史参考)
 
 > **⚠️ 已废弃**: 本文件内容已合并至 `templates/fta-template.md`

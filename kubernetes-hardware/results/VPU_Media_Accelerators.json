@@ -1,0 +1,160 @@
+{
+  "基本信息": {
+    "名称": "VPU / 媒体加速器（Intel QSV、NVIDIA NVENC/NVDEC、AMD VCE/VCN、NETINT VPU 等硬件视频编解码器，含 K8s 设备插件管理与云原生视频转码生态）",
+    "类别": "加速器",
+    "官方文档链接": "K8s 设备插件概念: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/ ; K8s DRA: https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/ ; Intel Device Plugins for Kubernetes (gpu_plugin): https://github.com/intel/intel-device-plugins-for-kubernetes 与 https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/gpu_plugin/README.html ; Intel oneVPL/Media SDK: https://github.com/oneapi-src/oneVPL ; Intel Media Transport Library: https://github.com/OpenVisualCloud/Media-Transport-Library ; Intel Flex 系列媒体基准: https://github.com/intel/media-delivery/blob/master/doc/benchmarks/intel-data-center-gpu-flex-series/intel-data-center-gpu-flex-series.rst ; NVIDIA Video Codec SDK (NVENC/NVDEC): https://developer.nvidia.com/video-codec-sdk ; NVIDIA 编解码支持矩阵: https://forums.developer.nvidia.com/t/video-encode-and-decode-gpu-support-matrix/64780 ; NVIDIA k8s-device-plugin: https://github.com/NVIDIA/k8s-device-plugin ; NVIDIA 容器化 FFmpeg 指南: https://docs.nvidia.com/video-technologies/video-codec-sdk/13.0/ffmpeg-with-nvidia-gpu/index.html ; AMD GPU k8s-device-plugin: https://instinct.docs.amd.com/projects/k8s-device-plugin/en/latest/ 与 https://github.com/ROCm/k8s-device-plugin ; AMD MxGPU 虚拟化: https://instinct.docs.amd.com/projects/virt-drv/en/latest/userguides/Getting_started_with_MxGPU.html ; NETINT k8_device_plugin: https://github.com/NETINT-Technologies/k8_device_plugin ; NETINT VPU as a Service: https://netint.com/research/blog/vpu-as-a-service-video/ ; Akamai VPU 8 卡方案: https://www.akamai.com/blog/cloud/scaling-media-workloads-akamais-new-8-card-vpu-plan ; AWS EC2 VT1 (Alveo U30): https://aws.amazon.com/blogs/aws/new-amazon-ec2-vt1-instances-for-live-multi-stream-video-transcoding/ 与 https://aws.amazon.com/blogs/compute/deep-dive-on-amazon-ec2-vt1-instances/"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "硬件": "Intel QSV：任何带 Quick Sync Video 的 Intel 平台（第 6 代酷睿起核显、部分 Xeon 型号、Arc/Flex/Max 独显），需提供 /dev/dri 设备；NVIDIA：任意支持 NVENC/NVDEC 的 GPU（T4/A2/L4/A10 等数据中心卡或 GeForce/RTX 消费卡）；AMD：带 VCN（Video Core Next，VCE 后继）的 Radeon/Radeon Pro 显卡（amdgpu 驱动）；NETINT：T408/T432（Quadra）VPU 板卡（PCIe）。",
+      "软件": "Linux 节点（x86_64 为主）；Intel：内核 i915/xe 驱动 + libva/iHD 用户态驱动 + oneVPL/Media SDK；NVIDIA：NVIDIA 驱动 + NVIDIA Container Toolkit（运行时注入设备）+ FFmpeg NVENC/CUVID 或 Video Codec SDK；AMD：amdgpu 内核模块 + Mesa VA-API（radeonsi/VCN）；NETINT：主机驱动 + 容器内 libxcoder 库。",
+      "K8s 资源": "设备插件以 DaemonSet 运行（需特权/root 访问 kubelet 设备插件通道）；Pod 通过扩展资源声明（如 gpu.intel.com/i915、nvidia.com/gpu、netint.ca/ASIC）；K8s 1.28+ 可启用 CDI（Container Device Interface，1.29 默认开启）[不确定各插件 CDI 支持完整度]。"
+    },
+    "推荐配置": {
+      "硬件": "Intel：Data Center GPU Flex 140（卡 TDP 75W，支持 SR-IOV）或 Flex 170（150W），或 12/13/14 代酷睿核显做低成本转码；NVIDIA：L4（Ada，支持 AV1 编解码、72W）或 A10/T4（H.264/HEVC 转码）；NETINT：T408/T432 高密度 VPU 卡，按直播/VOD 并发规划每节点卡数。",
+      "软件": "主流 Linux 发行版（Ubuntu 22.04/24.04、RHEL 8-10、Rocky Linux、Debian、SLES 等）+ K8s 1.28+；FFmpeg（qsv/vaapi/nvenc/cuvid/amf 硬件后端）或 GStreamer + 厂商 SDK；部署 intel-gpu-plugin / NVIDIA k8s-device-plugin（或 GPU Operator）/ NETINT k8_device_plugin。",
+      "集群": "按每卡并发会话容量规划调度（媒体会话数限制是关键）；低延迟直播建议 SR-IOV 分片 + NUMA 亲和 + 预留 CPU 核做封装/解复用；配 Node Feature Discovery 为节点打媒体能力标签。"
+    },
+    "生产级配置": {
+      "大规模转码集群": "裸金属多节点 + 每节点多卡（如 4-8 块 NETINT 或 Intel Flex 卡），整卡或 SR-IOV VF 直通给 Pod，配合 HPA/KEDA 按转码队列伸缩、NFD 标签调度、FFmpeg/专用转码服务（Nimble Streamer、OpenVisualCloud、MainConcept 等）[不确定具体大规模案例公开数据]。",
+      "公有云媒体集群": "AWS EC2 VT1 实例（Xilinx/AMD Alveo U30 媒体加速卡，每实例 1-8 卡、约 16-128 路并发转码通道）[不确定精确通道数]；Akamai VPU 计划（NETINT 8 卡/节点、按卡计费）；NetActuate NETINT 加速裸机/云主机。",
+      "视频会议/直播": "低延迟 WebRTC 网关（Intel OWT、LiveKit、mediasoup 等 SFU）与硬件编码边缘节点混部，边缘就近转码降低回源带宽 [不确定主流厂商方案细节]。"
+    },
+    "功耗基线": "Intel Flex 140 卡 TDP 75W、Flex 170 150W（官方媒体基准文档标注）；NVIDIA L4 72W、A10 150W、T4 70W（整卡规格，含媒体引擎）[不确定]；NETINT 每路功耗极低：Akamai/Cires21 实测单 VPU 12W 支撑 19 路 1080p60 同时编码（约 0.63W/路）[不确定整卡 TDP]；Intel 核显 QSV 功耗计入 CPU 封装，无额外功耗预算。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "Device Plugin": "K8s 设备插件框架 v1beta1 自 1.10 起稳定（GA），是媒体加速器的标准接入方式；intel-device-plugins 每个 minor 版本对齐（v0.36.0 支持 K8s 1.36）；NVIDIA k8s-device-plugin、AMD k8s-device-plugin、NETINT 插件支持较广版本范围 [不确定各插件精确下限]。",
+      "CDI": "Intel GPU 插件 CDI 支持要求 K8s 1.28（feature gate）+ containerd 1.7+/CRI-O 1.24+ 运行时，K8s 1.29 起默认启用 [不确定其它插件 CDI 支持状态]。",
+      "DRA": "Dynamic Resource Allocation 自 K8s 1.26 引入（Alpha）并持续演进 [不确定 GA 状态]；媒体加速器场景仍以 Device Plugin 为主，DRA 主要面向 GPU 计算域。"
+    },
+    "操作系统兼容性": {
+      "支持": "Linux x86_64：Ubuntu 22.04/24.04、RHEL 8-10、Rocky Linux、Debian、SLES 等；容器运行时 containerd/CRI-O/Docker；OpenShift、RKE2、k3s 等发行版可用。",
+      "ARM": "NVIDIA Grace Hopper/Orin 等平台提供部分媒体能力 [不确定完整矩阵]；Intel QSV 为 x86 专属；NETINT 板卡主要面向 x86 服务器 [不确定]。",
+      "不支持": "Windows Server 节点（Windows 容器不支持 GPU/媒体设备直通，NVENC 在 Windows 主机可用但不属 K8s 节点生态）；macOS。"
+    },
+    "K8s 上游支持阶段": {
+      "Device Plugin": "K8s 上游 GA 稳定机制，是媒体加速器接入的标准方式。",
+      "厂商插件": "intel-device-plugins（Intel 开源项目，活跃维护、版本对齐 K8s minor）、NVIDIA k8s-device-plugin（NVIDIA 官方，配合 GPU Operator）、ROCm k8s-device-plugin（AMD 官方）、NETINT k8_device_plugin（NETINT 官方）；均为厂商/社区项目，非 CNCF 托管。",
+      "DRA": "K8s 上游演进中（结构化参数等能力逐步加入）[不确定媒体场景 DRA 接入成熟度]。"
+    },
+    "生态兼容性矩阵": {
+      "应用生态": "FFmpeg（qsv/vaapi/nvenc/cuvid/amf 硬件后端）、GStreamer、Intel oneVPL/Media SDK、NVIDIA Video Codec SDK、AMD AMF、Jellyfin/Plex（媒体服务）、OpenVisualCloud（Intel Media Transport Library、Open WebRTC Toolkit）、Nimble Streamer、MainConcept Easy Video API（对接 NETINT VPU）。",
+      "调度与弹性": "原生扩展资源调度、KEDA/HPA（按转码队列/并发伸缩）、Node Feature Discovery（媒体能力标签）、Kueue/Volcano 等批调度 [不确定媒体共享调度成熟度]。",
+      "监控": "NVIDIA DCGM Exporter（GPU 利用率、显存、温度；NVENC 引擎利用率指标有限 [不确定]）、Intel XPU Manager (xpumd)、社区显卡 exporter；无官方 NETINT Prometheus exporter [不确定]。",
+      "CNI/网络": "无强制 CNI 依赖；低延迟/ST 2110 直播场景配合 DPDK + SR-IOV CNI（Intel Media Transport Library 基于 DPDK）。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "NVENC 会话限制": "消费级 GeForce 并发编码会话上限从 5 路提升至 8 路（GTX 1630 仅 3 路），覆盖 Maxwell 至 Ada 架构；专业/数据中心卡（T4/A2/A10/L4、RTX Pro、A 系列）不限制会话数 [不确定官方文档精确表述]。",
+      "Intel 限制": "多卡系统中 QSV/旧式视频加速接口可能无法自动定位正确硬件（官方提供 shell 脚本显式传 render 设备文件名）；-shared-dev-num=1 时每卡仅 1 个 Pod；SR-IOV 需主机 BIOS/驱动配合创建 VF。",
+      "AMD 限制": "VCN 编码生态与质量调优弱于 NVENC；Instinct 计算卡（MI 系列）大多不含视频编码引擎 [不确定]；MxGPU/SR-IOV 主要面向虚拟化 VDI 而非容器 [不确定]。",
+      "NETINT 限制": "Pod 内至少需要 libxcoder 才能使用加速器；默认 Docker Hub 镜像仅支持 Quadra 硬件（T4xx 需自行构建或使用其他镜像）；资源按卡粒度申请，通过 requests/limits 控制每 Pod VPU 数量。",
+      "通用限制": "设备插件为整设备分配，无媒体会话级分片（除 SR-IOV VF 外）；vfio 直通设备不支持 VM 热迁移；调度器不感知每卡会话容量，需自定义策略避免超卖。"
+    },
+    "混部兼容性": "[不确定] 媒体加速器功耗低（约 12-150W/卡），与 CPU/GPU 工作负载混部时主要注意 PCIe 带宽、NUMA 亲和与中断开销；与 GPU 计算混部无直接冲突但共享 PCIe 通道；核显 QSV 与 CPU 负载共享封装功耗预算；直播转码建议预留 CPU 核做解封装/滤波/复用，硬件只做编解码。",
+    "性能开销": "[不确定] 设备插件直通（CRI 设备注入/CDI）对编解码性能开销趋近于零；vfio-pci 直通开销极小；SR-IOV VF 存在少量虚拟化开销 [不确定百分比]；相对纯 CPU（x264/x265）转码，硬件转码可释放绝大多数 CPU 核，但码率/质量依赖预设调优（官方称质量与 x264/x265 medium 相当）。",
+    "固件与驱动依赖": {
+      "Intel": "内核 i915/xe 驱动（随内核演进）+ libva/iHD 用户态驱动 + oneVPL；SR-IOV 需 BIOS 开启 VT-d；GPU 固件由驱动加载，无独立升级流程 [不确定]。",
+      "NVIDIA": "驱动版本与 GPU 型号强绑定，需 NVIDIA Container Toolkit；驱动升级需节点排水并重启；vBIOS 升级需停机窗口 [不确定]。",
+      "AMD": "amdgpu 内核模块 + Mesa 用户态（radeonsi）；固件随内核加载 [不确定]。",
+      "NETINT": "专有主机驱动 + 固件，升级流程 [不确定]；节点重启后需恢复设备状态（插件幂等处理）[不确定]。"
+    }
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Intel（主要）": "intel-device-plugins gpu_plugin DaemonSet，资源名 gpu.intel.com/i915（或新架构 gpu.intel.com/xe）；-shared-dev-num 控制每卡共享 Pod 数（媒体场景常用 >1 实现多容器共享一卡）；-allocation-policy 支持 balanced/packed/none；SR-IOV vGPU 由主机配置后插件将 VF 分配给 Pod；支持 CDI 与监控/健康管理（-enable-monitoring、-health-management、xpumd）。",
+      "NVIDIA": "k8s-device-plugin DaemonSet（或 GPU Operator 全栈），资源名 nvidia.com/gpu；容器内通过 FFmpeg NVENC/CUVID、Video Codec SDK 或 GStreamer 使用编解码引擎；GPU Operator 提供驱动、插件、DCGM 监控一体化管理。",
+      "AMD": "ROCm k8s-device-plugin 注册 amd.com/gpu [不确定媒体专用配置路径]；VA-API 场景将 /dev/dri/renderD* 注入容器。",
+      "NETINT": "Helm 部署（make deploy / make deploy-netint），特权 DaemonSet（kube-system 命名空间，pod 名 netint-device-plugin-#####），资源名 netint.ca/ASIC（T4xx）/ netint.ca/Quadra；Pod 内需 libxcoder。",
+      "DRA（实验）": "可选使用 K8s DRA ResourceClaim 方式声明媒体资源 [不确定媒体场景 DRA 支持]；生产主流仍为传统 Device Plugin。"
+    },
+    "配置示例": "[不确定] 关键示例（非完整）：Intel：resources.limits: {gpu.intel.com/i915: 1}，容器内 ffmpeg -hwaccel qsv -c:v h264_qsv ...；多容器共享一卡时将插件参数设为 -shared-dev-num 4；NVIDIA：resources.limits: {nvidia.com/gpu: 1}，ffmpeg -hwaccel cuda -c:v h264_nvenc ...；NETINT：resources.requests/limits: {netint.ca/ASIC: 1}，容器内置 libxcoder；完整示例见各插件 README 与厂商文档。",
+    "部署位置与环境": {
+      "裸金属（主要）": "数据中心/边缘直播、VOD 批处理转码、视频会议网关（主要生产形态）；OpenShift/RKE2/k3s 均支持。",
+      "公有云": "AWS EC2 VT1（AMD Alveo U30 媒体加速实例）、Akamai VPU 计划（NETINT 8 卡方案，按卡计费）、NetActuate NETINT 加速裸机；国内云厂商媒体加速实例 [不确定]；多数通用云实例无媒体加速器透传。",
+      "虚拟化/边缘": "SR-IOV/VFIO 直通给 VM 或容器；边缘节点就近转码（核显 QSV 常见于边缘媒体网关）。"
+    },
+    "虚拟化兼容性": {
+      "SR-IOV": "Intel Flex 140 支持 SR-IOV（官方媒体基准文档标注 62 个虚拟实例，Flex 170 标注 31 [不确定，与具体配置/固件相关]）；AMD MxGPU（Radeon Pro V340 双 VCN，SR-IOV 分片）；NVIDIA vGPU；VF 可直通给 Pod 或 VM。",
+      "VFIO 直通": "需主机 IOMMU（intel_iommu=on / AMD-Vi）+ BIOS 开启虚拟化；容器/VM 内需自行准备驱动与用户态库；直通设备不支持热迁移。",
+      "限制": "嵌套虚拟化下无法使用媒体加速；同一节点容器与 VM 媒体工作负载不可混部（设备独占）；SR-IOV 需主机配置 VF 数并持久化。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "Intel QSV": "Flex 140/170 提供与软件编码器质量相当的硬件编码（官方 BDRATE 基线：AVC 用 x264 medium、HEVC 用 x265 medium）；AV1 低延迟模式相比 AVC 可省约 30% 码率；官方未公开统一并发流数 [不确定]；社区/第三方实测 Flex 170 可承载数十路 1080p 转码 [不确定]。",
+      "NVIDIA": "数据中心/专业卡并发编码会话不限，消费卡限 8 路；L4（Ada）支持 AV1 编解码，A10/T4 支持 H.264/HEVC 编解码；Video Codec SDK 13.1 引入零拷贝转码、AV1 B 帧与帧精确定位；官方未统一公布每卡 1080p60 流数 [不确定具体 benchmark]。",
+      "NETINT": "Akamai/Cires21 联合测试：单块 NETINT VPU 以 12W 支撑 19 路 1080p60 同时编码（约 0.63W/路），AV1/HEVC 编码质量与 GPU 方案相当且效率更高；T408/T432 每卡支持数十路 1080p60 并发 [不确定精确数字]。",
+      "AWS VT1 (U30)": "每个 AMD（Xilinx）Alveo U30 提供约 16 路 1080p60 转码通道 [不确定]，VT1.24xlarge 最高 8 卡约 128 路。",
+      "对比结论": "硬件转码相对 CPU x264 吞吐高一个数量级、每路功耗低数十倍 [不确定精确倍数]；相比 GPU 转码，VPU（NETINT）在每瓦性能与每流成本上更优（Akamai 测试结论）。"
+    },
+    "扩展性上限": "[不确定] 无官方集群规模上限（受 K8s 控制面约束）；单节点上限 = PCIe 槽位数 × 每卡并发会话数；NVENC 消费卡 8 路硬限、每卡编码引擎吞吐是主要瓶颈拐点；直播场景需按峰值并发预留整卡，否则超卖导致丢帧；大规模集群瓶颈常为转码调度器、存储与网络带宽。",
+    "每节点密度": "[不确定] 视硬件而定：NETINT 单卡数十路 1080p60（Akamai 8 卡方案单节点上百路）；Flex 140 SR-IOV 可分多个 VF（官方标注 62 个虚拟实例 [不确定]）；NVIDIA 数据中心卡按引擎吞吐承载多路（消费卡 8 路硬限）；Pod 数受 kubelet 默认 110/节点上限与每卡共享数（-shared-dev-num）约束。"
+  },
+  "安全": {
+    "安全特性": {
+      "信任根": "媒体加速器是编解码引擎而非安全信任根，不提供 TPM 等效的密钥保护；内容保护依赖上层 DRM（PlayReady/Widevine/FairPlay）与加密传输（SRT/RTMPS/WebRTC DTLS）[不确定硬件级 DRM 支持细节]。",
+      "隔离机制": "SR-IOV VF 提供设备级隔离；vfio-pci 直通依赖 IOMMU；多 Pod 共享整卡（如 Intel -shared-dev-num>1）无硬件级隔离，存在编码会话竞争 [不确定]。",
+      "平台安全": "Secure Boot/TPM/机密计算由服务器平台提供，与媒体加速无直接关联；视频会议安全（E2EE）由应用层（WebRTC/MLS）实现。"
+    },
+    "合规与认证": "[不确定] 媒体加速器无独立 FIPS 140-2/3、PCI DSS 认证公开资料；K8s 一致性认证与设备插件无关；直播/VOD 合规（内容分级、数据驻留、广播许可）属应用层；NETINT/NVIDIA 无公开硬件安全认证 [不确定]。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "[不确定] NVIDIA：nvidia-smi/DCGM（利用率、显存、温度；NVENC/NVDEC 引擎利用率部分驱动版本可通过 nvidia-smi 查询 [不确定]）；Intel：XPU Manager (xpumd) 提供设备遥测 [不确定 Prometheus 导出方式]；NETINT：无官方 Prometheus exporter [不确定]；通用：kubelet 设备插件健康检查、NFD 标签、自定义 exporter 采集会话数/编码错误率/队列深度。",
+    "维护与生命周期": "[不确定] 驱动升级需排水并重启节点（NVIDIA GPU Operator 驱动 DaemonSet 滚动更新；Intel 依赖内核升级）；显卡不支持热插拔，vBIOS/固件升级需停机窗口；SR-IOV VF 配置在节点重启后需重建（插件/init 容器幂等处理）；MTBF 无公开数据 [不确定]。",
+    "弹性与故障恢复": "[不确定] 卡故障 → 设备插件从可分配资源中移除该设备，运行中 Pod 失败后重新调度；转码任务基本无状态，重启可恢复（VOD 从源站重取、直播从输入源重连）；直播场景需上层冗余（多卡/多节点副本、边缘网关切换、源站断流保护）；无 RAID/多路径概念，高可用依赖多节点部署与队列重试。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件成本": "[不确定] NVIDIA L4 约 $4,000、T4 约 $2,000、A10 约 $5,000 [不确定]；Intel Flex 140/170 约 $600-1,500 [不确定]；NETINT T408/T432 [不确定，约 $1,000-3,000]；Intel 核显 QSV 零额外硬件成本。",
+      "运行成本": "功耗极低（NETINT 约 0.63W/路、Flex 140 75W/卡），散热与电费远低于 CPU/GPU 转码；软件栈开源免费（FFmpeg/GStreamer/设备插件）。",
+      "节省项": "相对 CPU x264 转码可削减绝大部分转码核数 [不确定精确百分比]，降低服务器采购与电费；相对 GPU 实例，VPU 每流成本与每瓦性能更优（Akamai/NETINT 测试结论）；云上 VT1/Akamai VPU 按卡/小时计费 [不确定具体单价]。",
+      "适用性判断": "直播、VOD 批处理、视频会议转码规模越大收益越明显；小规模或低并发场景核显 QSV/消费级 NVENC 即可满足，无需独立 VPU。"
+    },
+    "成熟度与社区支持": {
+      "生态成熟度": "NVIDIA NVENC/NVDEC 生态最成熟（FFmpeg/GStreamer/OBS/主流流媒体软件全支持，数据中心卡不限会话）；Intel QSV 生态成熟（Jellyfin/Plex/FFmpeg 广泛支持，Media Transport Library/OpenVisualCloud 开源）；AMD VCN/VA-API 可用但企业 K8s 用例较少 [不确定]；NETINT 为新兴厂商，主攻云转码成本优化（与 Akamai、NetActuate、MainConcept 等合作）[不确定合作名单完整性]。",
+      "社区活跃度": "intel-device-plugins 活跃（版本对齐每个 K8s minor）；NVIDIA k8s-device-plugin/GPU Operator 活跃；AMD k8s-device-plugin 官方维护；NETINT k8_device_plugin 维护节奏一般 [不确定]。"
+    }
+  },
+  "uncertain": [
+    "CDI 各插件支持完整度",
+    "DRA GA 状态及媒体场景接入成熟度",
+    "NVIDIA/AMD/NETINT 插件最低 K8s 版本",
+    "ARM 平台媒体栈支持矩阵",
+    "NETINT 板卡平台（x86 之外）支持",
+    "NVENC 会话限制官方精确表述",
+    "AMD Instinct 计算卡是否含 VCN",
+    "AMD MxGPU 容器场景成熟度",
+    "NETINT 默认镜像对 T4xx 的支持",
+    "混部兼容性细节",
+    "性能开销百分比",
+    "NETINT 驱动/固件升级流程",
+    "Intel GPU 固件升级流程",
+    "Flex 140/170 SR-IOV 虚拟实例数量（62/31）",
+    "Flex 系列官方并发流数",
+    "Flex 170 社区实测流数",
+    "NVIDIA 每卡具体流数 benchmark",
+    "NETINT T408/T432 精确并发流数",
+    "VT1/U30 16 通道数字",
+    "硬件 vs CPU 性能提升倍数",
+    "扩展性上限",
+    "每节点密度",
+    "硬件级 DRM 支持细节",
+    "整卡共享隔离语义",
+    "合规与认证细节",
+    "可观测性 exporter 细节（NVENC 利用率/xpum/NETINT）",
+    "维护与生命周期细节",
+    "弹性与故障恢复细节",
+    "硬件价格",
+    "云上计费单价",
+    "CPU 核数削减精确百分比",
+    "NETINT 合作名单完整性",
+    "NETINT 插件维护活跃度",
+    "AMD 企业 K8s 用例占比",
+    "GPU 整卡功耗基线",
+    "国内云厂商媒体加速实例",
+    "视频会议厂商方案细节"
+  ]
+}

@@ -1,7 +1,7 @@
 ---
 title: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
-description: '# 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation'
-summary: '日志管道问题是 [[kubernetes|Kubernetes]] 可观测性体系中**影响最广泛**的问题类型之一。当日志采集、传输或存储环节出现问题时，会导致应用日志缺失、审计日志不完整、告警延迟甚至安全事件无法追溯。在云原生环境中，'
+description: Kubernetes 日志收集与管理故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 日志收集与管理故障的完整诊断-修复-验证工单处理 Skill
 category: observability
 tags:
 - k8s
@@ -58,7 +58,7 @@ prerequisites:
 - monitoring-basics
 - kafka-basics
 - logging-basics
-skill_id: SKILL-16_LOGGING_PIPELINE_FAILURE-001
+skill_id: SKILL-LOG-001
 skill_name: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 version: 1.0.0
 k8s_versions:
@@ -1631,7 +1631,7 @@ kubectl exec -n logging $(kubectl get pod -n logging -l app=fluent-bit -o jsonpa
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | 日志管理架构与最佳实践 | `可观测性/` | 理解日志管道设计原理 |
-| 企业级监控告警系统 | `故障诊断/39-enterprise-monitoring-alerting-system.md` | 日志系统与监控集成 |
+| 企业级监控告警系统 | `19-故障诊断/04-高级排障/05-enterprise-monitoring-alerting-system.md` | 日志系统与监控集成 |
 | Kubernetes 可观测性 | `可观测性/` | 日志、指标、链路追踪的综合方案 |
 | Elasticsearch 运维指南 | `数据库中间件/` | ES 集群深度运维 |
 | 节点故障排查 | `SKILL-NODE-001` (01-node-notready.md) | 节点 DiskPressure 导致的日志问题 |

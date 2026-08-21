@@ -67,8 +67,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 
-tier: peripheral---
-
+tier: peripheral
+---
 # K8S 讲师角色设定与场景规范
 
 > **版本**: v1.0

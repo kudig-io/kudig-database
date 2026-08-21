@@ -1,0 +1,178 @@
+{
+  "基本信息": {
+    "名称": "GPU 加速器（NVIDIA GPU Operator / AMD ROCm 设备插件 / Intel XPU 插件，含 MIG、MPS、Time-Slicing、DRA 调度、GPU 直通等 GPU 共享与虚拟化技术）",
+    "类别": "加速器",
+    "官方文档链接": "NVIDIA GPU Operator: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/ ; NVIDIA GPU 共享 (MIG/Time-Slicing/MPS): https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-sharing.html ; NVIDIA MIG 用户指南: https://docs.nvidia.com/datacenter/tesla/mig-user-guide/ ; NVIDIA 设备插件: https://github.com/NVIDIA/k8s-device-plugin ; NVIDIA GPU Feature Discovery: https://github.com/NVIDIA/gpu-feature-discovery ; NVIDIA DCGM Exporter: https://github.com/NVIDIA/dcgm-exporter ; NVIDIA DRA 驱动: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/dra-intro-install.html ; GPU Operator + KubeVirt: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/gpu-operator-kubevirt.html ; AMD ROCm k8s-device-plugin: https://github.com/ROCm/k8s-device-plugin (文档: https://instinct.docs.amd.com/projects/k8s-device-plugin/en/latest/) ; AMD GPU Operator: https://github.com/ROCm/gpu-operator (文档: https://instinct.docs.amd.com/projects/gpu-operator/) ; Intel Device Plugins for Kubernetes: https://github.com/intel/intel-device-plugins-for-kubernetes (GPU 插件: https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/gpu_plugin/README.html) ; K8s 设备插件概念: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/ ; K8s DRA: https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "控制面/管理面": "支持 Kubernetes 的 Linux 节点（x86_64 或 arm64），安装 NVIDIA GPU Operator 需 Helm 3；节点需具备离散 GPU（NVIDIA 官方明确仅支持独立 GPU，不支持 Jetson 等嵌入式/集成 GPU）。",
+      "NVIDIA 软件栈": "Linux 内核可加载 NVIDIA 驱动模块（含 open kernel module），容器运行时为 containerd/CRI-O/Docker，配合 NVIDIA Container Toolkit（nvidia-container-runtime hook）注入 GPU 设备；设备插件作为 DaemonSet 通过 kubelet 设备插件通道注册 nvidia.com/gpu 资源。",
+      "AMD 软件栈": "节点预装 ROCm 驱动栈（amdgpu 内核驱动），k8s-device-plugin 以 DaemonSet 运行并注册 amd.com/gpu 资源；要求 Kubernetes v1.18 及以上；文档要求 ROCm-capable AMD GPU 硬件。",
+      "Intel 软件栈": "Linux 内核内置 i915（旧）或 xe（Xe2+ 新架构）驱动，节点提供 /dev/dri 设备；GPU 设备插件以 DaemonSet 注册 gpu.intel.com/i915 或 gpu.intel.com/xe 资源；支持集成显卡与数据中心独立显卡（Intel Data Center GPU Flex/Max）。",
+      "典型入门 GPU": "推理/边缘场景常用 NVIDIA L4 (24GB, 72W)、A10 (24GB, 150W)、Intel Flex 170 等入门级数据中心卡 [不确定具体型号推荐组合]。"
+    },
+    "推荐配置": {
+      "训练/生产": "NVIDIA HGX 8 卡节点（A100/H100/H200），NVLink/NVSwitch 互联，搭配 Ubuntu 22.04/24.04 LTS 或 RHEL 8-10/Rocky 8-10/SLES 15-16，Kubernetes 1.32-1.36；使用 GPU Operator 全栈（驱动 DaemonSet、设备插件、DCGM exporter、GPU Feature Discovery、MIG Manager、validator）。",
+      "AMD 生产": "AMD Instinct MI300X 等 ROCm 数据中心 GPU，Ubuntu 22.04/24.04（AMD GPU Operator v1.2+ 官方支持范围），ROCm 驱动与容器镜像配套。",
+      "Intel 生产": "Intel Data Center GPU Max 系列（推理/训练）或 Flex 系列（媒体/推理），配合 XPU/oneAPI 软件栈。"
+    },
+    "生产级配置": {
+      "大规模 AI 集群": "HGX 8x H100/H200/B200（约 700W/卡以上）液冷或风冷节点，8 卡 NVLink 域 + NVSwitch，节点间 400GbE/InfiniBand (NDR) 网络满足 NCCL 分布式训练带宽；K8s 1.32+ 启用 DRA（v1.35 GA）实现细粒度 GPU 调度与共享，配 Kueue/Volcano 等批调度器承载多租户训练任务。",
+      "高密度共享": "启用 MIG（每 GPU 最多 7 个实例）将 8 卡节点切成最多 56 个 GPU 分片；或 Time-Slicing 实现更高副本数的超卖（无隔离）。",
+      "虚拟化生产": "KubeVirt/OpenShift Virtualization + vGPU（NVIDIA vGPU SR-IOV，Ampere 及以上）或 vfio-pci 直通，为虚拟机提供 GPU [不确定大规模混合容器/VM 的实际生产占比]。"
+    },
+    "功耗基线": "[不确定] 官方无统一功耗基线，公开规格: NVIDIA A100 SXM 400W/PCIe 250W，H100 SXM 700W/PCIe 350W，H200 700W，A10 150W，L4 72W，L40S 350W，B200 约 1000W（液冷）[不确定]；AMD MI300X TBP 约 750W [不确定]；Intel Max 1550 约 600W、Flex 170 约 150W [不确定]。8 卡 H100 节点满载约 5.6kW GPU 功耗，整机加上 CPU/内存/网络约 7-10kW，需配套高功率密度机架与散热（B200 通常要求液冷）。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "NVIDIA GPU Operator": "官方验证 Kubernetes 1.32-1.36（部分配置 1.33-1.35），并支持 Red Hat OpenShift；NVIDIA DRA 驱动要求 Kubernetes v1.34.2 及以上。",
+      "NVIDIA 设备插件": "设备插件机制自 K8s 1.10+ 为稳定功能；NVIDIA k8s-device-plugin 支持较广的 K8s 版本范围 [不确定精确下限]。",
+      "AMD": "ROCm k8s-device-plugin 要求 Kubernetes v1.18+；AMD GPU Operator v1.2+ 支持 Ubuntu 22.04/24.04 上的 K8s，Red Hat OpenShift 4.18 支持在 v1.2.1 起加入 [不确定具体 K8s minor 版本矩阵]。",
+      "Intel": "intel-device-plugins 通过 DaemonSet 部署，CDI（Container Device Interface）支持自 Kubernetes 1.28 起 [不确定最低 K8s 版本]。",
+      "K8s 上游 DRA": "Dynamic Resource Allocation 自 v1.26 引入（Alpha），v1.35 标记为 stable（GA）并默认启用；结构化参数 (structured parameters) 是其核心模型。"
+    },
+    "操作系统兼容性": {
+      "NVIDIA": "Ubuntu 22.04/24.04 LTS、Red Hat CoreOS、RHEL 8/9/10、Rocky Linux 8/9/10、SUSE Linux Enterprise Server 15/16；支持 x86_64 与 arm64（如 Grace Hopper）。",
+      "AMD": "GPU Operator 当前仅启用 Ubuntu 22.04 与 24.04；ROCm 驱动本身支持 Ubuntu/RHEL/Rocky 等更多发行版 [不确定完整矩阵]。",
+      "Intel": "主流 Linux 发行版（Ubuntu、RHEL 系、Fedora 等），依赖内核内置 i915/xe 驱动 [不确定官方认证矩阵]。",
+      "Windows": "Windows Server 节点 GPU 支持有限，设备插件生态以 Linux 为主；NVIDIA 提供 Windows 设备插件但生产环境主流仍为 Linux 节点 [不确定]。"
+    },
+    "K8s 上游支持阶段": {
+      "设备插件机制": "Kubernetes 上游 GA（稳定），是 kubelet 扩展资源的标准机制，但模型简单: 资源整体分配、不支持共享与属性选择，正被 DRA 逐步演进替代。",
+      "DRA": "Kubernetes 上游 GA（v1.35 stable，默认启用），NVIDIA/Intel/AMD 均有 DRA 驱动或规划 [不确定 AMD DRA 驱动成熟度]；NVIDIA DRA 驱动与 GPU Operator 集成（支持 ComputeDomains 多节点 NVLink 域）。",
+      "NVIDIA GPU Operator": "厂商（NVIDIA）主导的成熟生产项目，版本化发布（v25.x），与 OpenShift、RKE2、k3s、Canonical、Spectro Palette 等广泛集成。",
+      "AMD": "k8s-device-plugin 为 ROCm 官方开源项目（社区活跃）；AMD GPU Operator 2024 年推出（v1.0），2025 年迭代至 v1.5，处于快速成长期。",
+      "Intel": "intel-device-plugins 为 Intel 开源社区项目（非 CNCF），GPU 插件长期维护；XPU 是 Intel 的加速器统一抽象（oneAPI/XPU Manager 生态）[不确定其 K8s 上游状态]。"
+    },
+    "生态兼容性矩阵": {
+      "调度器": "原生 kube-scheduler（扩展资源/DRA）、Kueue、Volcano、HAMi、Nebuly NOS 等 GPU 共享调度器 [不确定各方案生产成熟度]；NVIDIA DRA 驱动支持 CUDA 时间切片与 MPS 策略。",
+      "监控": "NVIDIA DCGM Exporter（Prometheus 指标）、AMD Metrics Exporter（30 秒轮询、ECC 健康检查）、Intel XPU Manager (xpumd)、Grafana 仪表盘。",
+      "Operator/发行版": "NVIDIA GPU Operator（Helm/Operator Lifecycle Manager）、AMD GPU Operator（Helm）、Intel Helm charts；Red Hat OpenShift、RKE2、k3s、Canonical Kubernetes 均有 GPU 集成文档。",
+      "虚拟化": "KubeVirt、OpenShift Virtualization、NVIDIA vGPU (SR-IOV)、vfio-pci 直通、Kata Containers（NVIDIA Sandbox Device Plugin）。",
+      "AI 软件栈": "PyTorch/TensorFlow/JAX 的 CUDA、ROCm、oneAPI 版本；NVIDIA Triton/vLLM 等推理栈；NCCL/RCCL 集合通信；GPUDirect Storage/NVMe-oF 存储加速。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "NVIDIA GPU Operator": "仅支持独立（离散）GPU，不支持 Jetson 等嵌入式平台；升级仅支持同一大版本内或升级到下一大版本；GPUDirect Storage 与 Secure Boot 兼容性受限；KubeVirt vGPU 与部分旧软件版本不兼容。",
+      "Time-Slicing": "副本间无内存隔离与故障隔离（共享显存，OOM 可互相影响）；DCGM-Exporter 在启用时无法将指标关联到容器；Operator 忽略 ConfigMap 修改，需手动重启 DaemonSet 生效；请求多个副本不保证获得等比例算力。",
+      "MIG": "仅支持最新几代 NVIDIA GPU（Ampere 及以上：A100/H100/H200 等）；MIG 实例计算与显存硬件级隔离，但分片组合有限制（如 A100/H100 每卡最多 7 实例）；MIG 与 vGPU 混用有约束；配置策略（none/single/mixed）复杂。",
+      "MPS": "仅共享计算资源（SM），不隔离显存；无 K8s 原生支持，需在容器内通过 CUDA_MPS_PIPE_DIRECTORY 等环境变量启用 MPS 控制守护进程；GPU Operator 25.x 起支持基于 MPS 的共享配置 [不确定细节]。",
+      "设备插件模型": "整体分配、不支持设备共享与属性过滤（无 CEL 选择器）；扩展资源数量限制与调度为尽力而为，易碎片化；设备插件崩溃需 kubelet 重启恢复。",
+      "AMD": "k8s-device-plugin 无类似 MIG 的硬件分区能力（MI300 系列无 MIG 等价物）[不确定 AMD GIM 在 K8s 的支持状态]；GPU Operator 早期版本仅支持 Ubuntu 22.04/24.04。",
+      "Intel": "i915/xe 驱动 GPU 主要面向推理/媒体场景，大规模训练生态弱于 CUDA；默认限制每 GPU 仅 1 个容器（-shared-dev-num 可调大）。",
+      "GPU 直通": "vfio-pci 直通要求主机开启 IOMMU（intel_iommu=on 或 AMD-Vi），BIOS 启用虚拟化与 SR-IOV（新硬件）；直通 GPU 不支持热迁移；GPU 节点无法同时运行容器 GPU 工作负载与 VM GPU 工作负载（GPU Operator 文档明确）。",
+      "预热时间": "大模型 GPU Pod 初始化（权重加载、图编译、KV cache 准备）通常 40-90 秒，70B 级模型完全冷启动可达 7-9 分钟，影响弹性伸缩的响应速度。"
+    },
+    "混部兼容性": "[不确定] GPU 与 CPU 工作负载混部: 计算/显存资源隔离良好，但共享 PCIe 带宽、NUMA 拓扑与机箱功耗预算（8 卡 H100 节点整机 7-10kW）；GPU 共享（MPS/Time-Slicing）下多个 GPU 工作负载互相竞争算力，无隔离时显存 OOM 影响整卡；与 FPGA/DPU 等其它加速器混部需协调 PCIe 通道与功耗。",
+    "性能开销": "[不确定] 直通模式（设备插件/CRI 注入）对 GPU 性能开销趋近于零（通常 <1-2%）；vfio-pci 直通给虚拟机的开销极小（硬件直通）；vGPU (SR-IOV) 存在少量虚拟化开销 [不确定百分比]；MPS 引入进程调度层（影响约 1-5% [不确定]）但提升小任务并发效率；Time-Slicing 无内存隔离，同卡多任务存在上下文切换与显存带宽竞争，性能不稳定。",
+    "固件与驱动依赖": "NVIDIA: 驱动版本与 GPU 型号强绑定（如 GH200 与 GPUDirect Storage 要求 open kernel module，RTX PRO 6000 Blackwell 要求驱动 >= 575.57.08）；驱动升级由 GPU Operator 管理，需节点排水并重启；依赖 NVIDIA Container Toolkit。AMD: 节点需预装匹配的 ROCm 驱动，amdgpu 内核模块 [不确定内核版本兼容矩阵]。Intel: 依赖内核内置 i915/xe 驱动版本（in-tree 随内核演进）[不确定]。GPU vBIOS、NVSwitch/NVLink 固件升级通常需整机维护窗口 [不确定]。"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "NVIDIA（推荐）": "GPU Operator（Helm/OLM 声明式）一键部署驱动、设备插件、DCGM exporter、GFD、MIG Manager、validator、Container Toolkit；资源分配支持传统扩展资源 nvidia.com/gpu 或 DRA（ResourceClaim/DeviceClass）；GPU 共享通过 ClusterPolicy 配置 MIG 策略，Time-Slicing 通过 ConfigMap + ClusterPolicy 配置。",
+      "NVIDIA（手动）": "手动安装驱动与 Container Toolkit，部署 k8s-device-plugin DaemonSet，Pod 声明 nvidia.com/gpu: 1。",
+      "AMD": "k8s-device-plugin 以 DaemonSet 部署（kubectl apply），注册 amd.com/gpu；AMD GPU Operator（Helm）管理 ROCm 驱动生命周期、设备插件与 Metrics Exporter；虚拟化场景使用 vfio 模式直通 [不确定配置细节]。",
+      "Intel": "intel-device-plugins GPU plugin DaemonSet（-shared-dev-num 控制每 GPU 容器数），资源名 gpu.intel.com/i915 或 gpu.intel.com/xe；提供分配策略（balanced/packed/none）。",
+      "DRA": "管理员部署 DRA 驱动（如 NVIDIA DRA driver），创建 DeviceClass/ResourceSlice；用户通过 ResourceClaimTemplate 声明 GPU 请求（可含 CEL 选择器、共享、ComputeDomains 等参数）。"
+    },
+    "配置示例": "[不确定] 以下为关键配置要点（非完整示例）: 传统方式 Pod 声明 resources: limits: nvidia.com/gpu: 1；Time-Slicing ConfigMap 设置 replicas: 10 并由 ClusterPolicy 引用；MIG 策略 ClusterPolicy spec.mig.strategy=mixed 并配合 GFD 标签；AMD Pod 声明 amd.com/gpu: 1；Intel Pod 声明 gpu.intel.com/i915: 1；DRA 通过 ResourceClaimTemplate 引用 DeviceClass（如 nvidia.com/gpu 的 memory/compute 参数）。完整示例见各官方仓库文档。",
+    "部署位置与环境": {
+      "主要场景": "裸金属数据中心（HGX/整机柜）、公有云托管节点池（EKS/GKE/AKS 的 GPU 实例）、私有云与 OpenShift；边缘推理（Intel Flex/Arc、NVIDIA L4）[不确定边缘大规模案例]；k3s/RKE2 轻量发行版支持 GPU（RKE2 官方 GPU Operator 文档）。",
+      "虚拟机环境": "云上 GPU 实例本质为物理直通（如 AWS/阿里云 GPU 实例），K8s 节点上正常使用；嵌套虚拟化（VM 中的 K8s 再直通 GPU）一般不可用 [不确定]。"
+    },
+    "虚拟化兼容性": {
+      "GPU 直通 (Passthrough)": "vfio-pci 绑定物理 GPU 直通给 Pod/VM（KubeVirt、OpenShift Virtualization、Kata）；要求 IOMMU 开启；VM 内需自行安装厂商驱动（GPU Operator 不自动安装客户机驱动）；直通 GPU 无法热迁移。",
+      "vGPU (SR-IOV)": "NVIDIA vGPU 要求 Ampere 及以上架构，需私有 vGPU Manager 镜像；GPU Operator 部署 vGPU Manager + Device Manager，可动态创建分片 vGPU（含 MIG-backed 配置）；Intel 亦支持 SR-IOV vGPU [不确定成熟度]。",
+      "限制": "一个 GPU 节点只能服务一种 GPU 工作负载类型（容器或 VM），不可混部；设备需在 KubeVirt CR 中显式授权；SR-IOV 需 BIOS 启用并配置 VF。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "NVIDIA 算力": "A100 (80GB): FP16/BF16 约 312 TFLOPS（稀疏 624）、TF32 156 TFLOPS；H100 SXM: FP16/BF16 约 989 TFLOPS（稀疏 1979）、FP8 约 1.98 PFLOPS；H200 算力同 H100、显存 141GB HBM3e；B200: FP8 约 2.25 PFLOPS [不确定]；显存带宽 A100 2TB/s、H100 3.35TB/s、H200 4.8TB/s、B200 约 8TB/s [不确定]。",
+      "AMD": "MI300X: FP16 约 1.3 PFLOPS（dense）[不确定]、显存 192GB HBM3、带宽 5.3TB/s [不确定]。",
+      "Intel": "Max 1550: FP16 约 [不确定]；Flex 系列面向媒体/推理吞吐 [不确定具体数字]。",
+      "GPU 预热/冷启动": "大模型初始化（权重传输 8-45 秒 + 图编译 12-30 秒 + KV cache 5-10 秒）合计 40-90 秒；70B 模型完全冷启动（未缓存镜像）7-9 分钟，缓存镜像后约 85 秒；用户态 checkpoint（含显存）恢复可降至 2-5 秒（小模型）或约 40 秒（大模型）；图缓存可省 10-30 秒。",
+      "通信": "H100 NVLink 900GB/s（NVSwitch 全互联），节点间 NDR InfiniBand 400Gbps；NCCL 多节点扩展效率是分布式训练关键指标 [不确定具体 benchmark 数字]。"
+    },
+    "扩展性上限": "[不确定] 每节点物理 GPU 上限通常 8 卡（HGX 基板）；GPU Operator/DRA 对集群规模无公开硬性上限（受控制面与 etcd 限制）；MIG 每卡最多 7 实例；多节点扩展受 NCCL/网络拓扑约束，全节点 AllReduce 扩展效率随规模下降 [不确定拐点]。",
+    "每节点密度": "[不确定] 8 卡节点: MIG 模式最多 8x7=56 个 GPU 分片；Time-Slicing 副本数可配置（如每卡 10 副本，8 卡节点 80 个可调度副本），但超卖受显存与实际算力约束；Pod 总数受 kubelet 默认 110 Pod/节点上限；Intel 默认 1 容器/GPU（可调）。"
+  },
+  "安全": {
+    "安全特性": {
+      "MIG 隔离": "硬件级计算与显存隔离（memory and fault isolation at hardware layer），不同 MIG 实例间故障隔离。",
+      "NVIDIA 机密计算": "Hopper 及更新架构（H100/H200/B200）支持 GPU 机密计算（Confidential Computing），GPU Operator 提供相关支持 [不确定在 K8s 中的完整配置细节]。",
+      "虚拟化隔离": "vGPU/SR-IOV 提供设备级隔离；vfio-pci 直通将设备安全暴露给 VM（依赖 IOMMU）；Kata Containers 通过沙箱隔离。",
+      "容器安全": "设备插件/GDU 组件以 DaemonSet 运行，Container Toolkit 通过 CDI 注入设备；GPU 节点建议配合节点专用 (dedicated) 污点与配额。",
+      "AMD/Intel": "AMD MI300 系列支持 SEV-SNP 机密计算 [不确定 K8s 集成度]；Intel GPU 侧机密计算依赖 TDX [不确定]；平台级 TPM/Secure Boot/远程证明由服务器平台提供，GPU 本身无独立信任根。"
+    },
+    "合规与认证": "[不确定] GPU Operator 无独立的 K8s 一致性认证；行业合规（FIPS 140-2/3、PCI DSS、HIPAA）取决于上层发行版（如 OpenShift FIPS 模式）与用户配置；CUDA/ROCm 密码学库有 FIPS 认证版本 [不确定 GPU 硬件级认证]。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "NVIDIA": "DCGM Exporter 暴露 Prometheus 指标（GPU 利用率 DCGM_FI_DEV_GPU_UTIL、显存利用率、温度 DCGM_FI_DEV_GPU_TEMP、功耗 DCGM_FI_DEV_POWER_USAGE、显存容量/使用等），Grafana 官方仪表盘；GPU Operator 提供 validator 与节点就绪状态检查；MIG 模式下可按实例采集指标。",
+      "AMD": "AMD GPU Operator 内置 Metrics Exporter（每 30 秒轮询硬件健康，检测 ECC 错误，节点打标签如 metricsexporter.amd.com.gpu.0.state=unhealthy）[不确定 Prometheus 指标清单]。",
+      "Intel": "XPU Manager (xpumd) 提供设备遥测 [不确定 Prometheus 导出方式]；设备插件可从 xpumd 获取健康数据。",
+      "通用": "kubelet 设备插件健康检查、Pod 级资源监控（K8s 1.26+ 可观测 GPU 指标 [不确定]）、Node Problem Detector 可选。"
+    },
+    "维护与生命周期": "[不确定] 驱动升级: GPU Operator 通过驱动 DaemonSet 滚动更新并自动排水/重启节点，官方仅保证同大版本或相邻大版本升级；GPU（数据中心形态）不支持热插拔，维护需整机断电；vBIOS/NVSwitch 固件升级需专门流程与停机窗口 [不确定]；MTBF 无公开数据 [不确定]；节点排水 (drain) 对运行中 GPU 工作负载需配合应用 checkpoint 与重新调度。",
+    "弹性与故障恢复": "[不确定] GPU 故障（NVIDIA Xid 错误、AMD ECC 错误）: 设备插件/Operator 自动将设备标记为不健康并从可分配资源中移除（AMD 明确支持自动移除不健康 GPU），运行中 Pod 需由上层（PyTorch elastic、Ray、Kueue 重排队）恢复；直通 GPU 无热迁移，节点故障影响面大；训练任务需 checkpoint 定期保存模型权重；GPU 无 RAID/多路径概念，冗余依赖多节点副本与跨可用区部署。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件采购": "[不确定] NVIDIA A100 约 $10k-15k、H100 SXM 约 $25k-35k（市场波动大）、L4 约 $4k [不确定]、B200 更高 [不确定]；AMD MI300X 约 $10k-15k [不确定]；Intel Max 1550 [不确定]。整机成本以 8 卡 GPU 节点为最小采购单元（数十万元级）。",
+      "运行成本": "每 GPU 满载 150-700W（H100 700W、B200 约 1000W），8 卡节点功耗 7-10kW 加散热（液冷投资）；公有云 GPU 实例约 $1-4/卡·小时 [不确定]；GPU 是数据中心单位算力成本最高的部件之一，利用率提升直接决定回收期。",
+      "软件成本": "NVIDIA GPU Operator、CUDA、ROCm、Intel oneAPI 均免费开源；可选商业订阅（NVIDIA AI Enterprise）；托管平台（EKS/GKE/AKS、OpenShift）另计费。",
+      "节省手段": "MIG/Time-Slicing/MPS 提升利用率（将闲置 GPU 切片给推理/小任务）；DRA 精确按显存/算力分配减少浪费；GPU 预热优化（checkpoint、图缓存、常驻副本）降低弹性伸缩成本 [不确定量化数据]。"
+    },
+    "成熟度与社区支持": {
+      "NVIDIA": "最成熟: GPU Operator 为事实标准（支持 K8s 1.32-1.36、OpenShift/RKE2/k3s 等），DCGM/GFD/NRI 生态完善，文档与社区活跃；DRA 驱动与上游 K8s GA 同步。",
+      "AMD": "ROCm 开源生态快速增长，k8s-device-plugin 社区活跃；AMD GPU Operator 2024-2025 快速迭代（v1.2→v1.5），OpenShift 支持推进中，生产案例（云厂商 MI300 集群）增加但整体少于 NVIDIA。",
+      "Intel": "intel-device-plugins 长期维护，XPU/oneAPI 生态成熟于媒体与推理；数据中心 GPU 部署量级小于 NVIDIA/AMD [不确定]。",
+      "上游": "DRA 为 Kubernetes 官方 GA 能力（v1.35），NVIDIA/Intel 已提供 DRA 驱动，标志 GPU 调度从设备插件向 DRA 演进，社区共识度高。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.最低配置.典型入门 GPU",
+    "硬件规格.功耗基线",
+    "硬件规格.生产级配置.虚拟化生产",
+    "兼容性.支持的 K8s 版本范围.NVIDIA 设备插件",
+    "兼容性.支持的 K8s 版本范围.AMD",
+    "兼容性.支持的 K8s 版本范围.Intel",
+    "兼容性.操作系统兼容性.AMD",
+    "兼容性.操作系统兼容性.Intel",
+    "兼容性.操作系统兼容性.Windows",
+    "兼容性.K8s 上游支持阶段.AMD DRA 驱动",
+    "兼容性.K8s 上游支持阶段.Intel",
+    "兼容性.生态兼容性矩阵.调度器",
+    "限制与约束.已知限制.MPS",
+    "限制与约束.已知限制.AMD",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销",
+    "限制与约束.固件与驱动依赖",
+    "配置与部署.配置示例",
+    "配置与部署.配置方式.AMD",
+    "配置与部署.部署位置与环境.主要场景",
+    "配置与部署.部署位置与环境.虚拟机环境",
+    "配置与部署.虚拟化兼容性.vGPU",
+    "性能特征.基准性能数据.NVIDIA B200",
+    "性能特征.基准性能数据.AMD",
+    "性能特征.基准性能数据.Intel",
+    "性能特征.基准性能数据.通信",
+    "性能特征.扩展性上限",
+    "性能特征.每节点密度",
+    "安全.安全特性.NVIDIA 机密计算",
+    "安全.安全特性.AMD/Intel",
+    "安全.合规与认证",
+    "运维与生命周期.可观测性支持.AMD",
+    "运维与生命周期.可观测性支持.Intel",
+    "运维与生命周期.可观测性支持.通用",
+    "运维与生命周期.维护与生命周期",
+    "运维与生命周期.弹性与故障恢复",
+    "经济性.总拥有成本 (TCO).硬件采购",
+    "经济性.总拥有成本 (TCO).运行成本",
+    "经济性.总拥有成本 (TCO).节省手段",
+    "经济性.成熟度与社区支持.Intel"
+  ]
+}

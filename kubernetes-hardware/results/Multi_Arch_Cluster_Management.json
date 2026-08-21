@@ -1,0 +1,168 @@
+{
+  "基本信息": {
+    "名称": "异构 / 多架构集群管理 (Multi-Arch Cluster Management)",
+    "类别": "运维",
+    "官方文档链接": "Kubernetes 污点与容忍度: https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/; Kubernetes Well-Known Labels/Annotations/Taints: https://kubernetes.io/docs/reference/labels-annotations-taints/; Pod 拓扑分布约束: https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/; Docker Buildx 多平台构建: https://docs.docker.com/build/building/multi-platform/; Karpenter NodePools: https://karpenter.sh/docs/concepts/nodepools/; AWS EKS 多架构集群: https://dev.to/aws-builders/multi-architecture-kubernetes-clusters-on-amazon-eks-2nol; AWS Graviton: https://aws.amazon.com/ec2/graviton/; Oracle OKE Arm 节点: https://docs.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengrunningarmnodes.htm; GKE 迁移 x86 到多架构: https://cloud.google.com/kubernetes-engine/docs/tutorials/migrate-x86-to-multi-arch-arm; 阿里云 ACK ARM 调度: https://www.alibabacloud.com/help/zh/ack/ack-managed-and-ack-dedicated/user-guide/schedule-workloads-to-arm-based-nodes"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "控制面节点 (amd64)": "3 节点 etcd 集群每节点最低 2 核 CPU、4 GB RAM、20 GB SSD 磁盘; 单节点测试环境 1 核、2 GB RAM 可运行。",
+      "amd64 工作节点": "1-2 核 CPU、2 GB RAM、10 GB 磁盘，x86_64 (Intel/AMD) 指令集。",
+      "arm64 工作节点": "1-2 核 CPU (ARMv8-A/AArch64 架构，如 AWS Graviton、Ampere Altra、倚天 710)、2 GB RAM、10 GB 磁盘。",
+      "混合集群最小规模": "1 个 amd64 控制面 + 至少各 1 个 amd64/arm64 工作节点即可构成异构集群 (云上建议每架构独立节点组)。"
+    },
+    "推荐配置": {
+      "控制面节点 (amd64)": "4-8 核 CPU、16 GB RAM、NVMe SSD (etcd 写入延迟 < 10 ms)。",
+      "amd64 工作节点": "4-8 核 CPU、16-32 GB RAM、SSD; 生产环境每架构至少 2 个节点。",
+      "arm64 工作节点": "4-8 核 CPU (Graviton3/4、Ampere Altra、倚天 710 等)、16-32 GB RAM、SSD。",
+      "镜像仓库": "支持 OCI manifest list 的镜像仓库 (ECR、GCR、OCIR、Harbor、Docker Hub 等)，用于存放多架构镜像。"
+    },
+    "生产级配置": {
+      "控制面": "8-16 核 CPU、32-64 GB RAM、NVMe SSD，3-5 节点 etcd HA; 控制面统一使用 amd64 以最大化生态兼容。",
+      "工作节点": "按架构划分独立节点池/节点组 (EKS 多节点组、OKE 多节点池、GKE 多节点池)，每架构 3+ 节点支持跨架构容错; 大规模集群 (100+ 节点) 需按架构分别规划容量。",
+      "Karpenter/Cluster Autoscaler": "生产级自动扩缩容配置中，Karpenter 通过 NodePool requirements 同时声明 kubernetes.io/arch in [amd64, arm64]，按 Pod 架构需求自动供给对应架构实例。"
+    },
+    "功耗基线": "[不确定] 无针对\"多架构集群管理\"的统一官方功耗数据。社区与厂商数据: ARM64 服务器 (Graviton/Ampere) 同负载功耗约为 x86 的 50-70%，每瓦性能显著更高; 云端功耗由实例类型决定，用户不可直接测量。具体数值取决于实例规格、负载与冷却条件。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "通用": "Kubernetes 对混合架构集群无特殊版本门槛，所有现代版本 (v1.20+) 均支持 amd64 + arm64 混合调度; amd64 自 v1.0 支持，arm64 自 v1.3 起官方支持，ppc64le/s390x 自 v1.5-1.6 加入。",
+      "Oracle OKE": "ARM 形状 (Ampere A1) 节点池要求集群 Kubernetes 版本 1.19.7 或更高。",
+      "阿里云 ACK": "Kubernetes v1.24 及以上版本自动为 ARM 节点管理架构污点; 较早版本需手动添加。",
+      "GKE": "ARM 节点池 (Tau T2A/T2D) 在所有受支持 GKE 版本可用，默认对 ARM 节点自动添加架构污点。"
+    },
+    "操作系统兼容性": {
+      "amd64": "所有主流 Linux 发行版 (Ubuntu、Debian、RHEL、CentOS、Rocky Linux、AlmaLinux、SLES、Amazon Linux 2/2023、Fedora CoreOS、Flatcar) 及 Windows Server 2019/2022/2025 (Windows 节点仅 amd64)。",
+      "arm64": "Ubuntu、Debian、RHEL、Fedora、Rocky Linux、AlmaLinux、SLES、Amazon Linux 2/2023 (ARM 版)、Flatcar Container Linux; 不支持 Windows Server 原生 arm64。",
+      "s390x": "RHEL for IBM Z and LinuxONE、SLES for IBM Z、Ubuntu for IBM Z (发行版选择较少)。",
+      "ppc64le": "RHEL for Power、Ubuntu for Power、SLES for Power (发行版选择较少)。"
+    },
+    "K8s 上游支持阶段": {
+      "多架构节点 (amd64+arm64)": "GA (生产就绪); amd64/arm64 均为 release-blocking CI 覆盖，是 Kubernetes 官方全量支持架构。",
+      "多架构集群管理能力": "GA; 节点标签 (kubernetes.io/arch)、污点/容忍度、nodeSelector/nodeAffinity、拓扑分布约束均为上游 GA 功能，非实验特性。",
+      "ppc64le/s390x": "社区维护 (release-informing CI)，可加入混合集群但生态镜像与工具支持有限。",
+      "QEMU 模拟运行": "非官方支持方式，仅用于开发/测试或构建阶段，不推荐生产。"
+    },
+    "生态兼容性矩阵": {
+      "CNI": "Calico、Cilium、Flannel、OVN-Kubernetes、Weave Net 均发布 amd64 + arm64 多架构镜像; s390x/ppc64le 支持有限 (Cilium 提供 s390x/ppc64le，部分 CNI 不提供)。",
+      "CSI": "AWS EBS CSI、GCE PD CSI、Azure Disk CSI、Ceph RBD/NFS、Longhorn、OpenEBS 均已支持 arm64; 部分厂商私有 CSI 仅 amd64。",
+      "核心组件": "pause、etcd、CoreDNS、kube-proxy、metrics-server、cAdvisor、Prometheus node_exporter 等上游核心组件均发布多架构镜像 (linux/amd64、linux/arm64、linux/ppc64le、linux/s390x)。",
+      "Operator 与工具": "Karpenter、Cluster Autoscaler、Helm、Argo CD、Prometheus/Grafana、Istio、Linkerd 均支持多架构; 部分第三方业务级 Operator 仅提供 amd64 镜像，需逐项验证。",
+      "云厂商支持": "AWS (EKS + Graviton)、Google Cloud (GKE + Tau T2A)、Azure (AKS + Ampere Dpsv5/Epsv5)、Oracle (OKE + Ampere A1)、阿里云 (ACK + 倚天 710)、华为云 (CCE + 鲲鹏) 均支持同一集群混合 amd64/arm64 节点。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "无内置架构污点": "Kubernetes 默认不自动为节点添加架构污点 (GKE/ACK 等部分云厂商自动添加)，需管理员手动配置; 未加污点时，单架构镜像 Pod 可能被调度到错误架构节点，容器启动即报 \"exec format error\" 并进入 CrashLoopBackOff。",
+      "单架构镜像限制": "仅含单一平台的镜像无法在多架构集群中跨架构运行; 每架构需独立 tag 或多架构 manifest list。",
+      "Windows 架构限制": "Windows 节点仅支持 amd64，无 arm64 Windows Server 支持，混合 Windows/Linux + 混合架构组合受限。",
+      "第三方生态缺口": "部分第三方镜像、Operator、Helm 图表、监控 exporter 仅发布 amd64，arm64 节点上不可用 (无法拉取或运行失败)。",
+      "指令集差异": "依赖 x86 特定指令集 (如 AVX-512、AMX) 或厂商闭源库的应用无法在 arm64 运行，需要源码级重新编译。",
+      "QEMU 模拟不适用生产": "通过 binfmt/QEMU 在 x86 节点模拟运行 arm64 镜像仅适合构建与测试，性能开销巨大，生产不推荐。",
+      "节点池不可变性": "Oracle OKE 等平台中，节点池创建后不可从 ARM 形状切换为 x86 形状 (反之亦然)，需新建节点池迁移。"
+    },
+    "混部兼容性": {
+      "跨架构混部": "同一集群混部 amd64 与 arm64 工作负载是核心场景，前提是镜像为多架构 manifest list; 建议对非默认架构节点添加污点 (如 kubernetes.io/arch=arm64:NoSchedule) 并配合容忍度 + nodeSelector，防止架构不匹配。",
+      "控制面混部": "控制面组件 (kube-apiserver、etcd、kube-controller-manager) 官方镜像为多架构，可在 amd64 或 arm64 节点运行; 生产建议控制面单一架构 (amd64) 以简化运维。",
+      "与 GPU/加速器混部": "GPU 节点 (NVIDIA A100/H100 等) 主要存在于 amd64; arm64 GPU (如 NVIDIA Grace Hopper、Jetson) 生态较弱，混部时需注意驱动镜像架构匹配。"
+    },
+    "性能开销": "[不确定] 多架构集群管理本身 (标签、污点、调度约束) 几乎无性能开销，属于控制面元数据操作。QEMU 用户态模拟运行跨架构容器的性能开销约为 5-20 倍性能损失 (社区数据，因工作负载而异)，生产禁用。运行时按架构选择 manifest 镜像无额外开销。"
+    ,
+    "固件与驱动依赖": {
+      "arm64 节点": "需 ARMv8-A 及以上指令集; UEFI 或引导固件需支持 arm64 (如 Graviton 的 UEFI、Raspberry Pi 的 DTB); 内核模块与设备驱动必须为 aarch64 构建。",
+      "驱动兼容矩阵": "NVIDIA 驱动 (amd64/arm64 双架构提供)、网卡驱动 (部分厂商仅 x86)、存储 HBA 驱动需逐项核对架构支持; 使用 Node Feature Discovery (NFD) 可自动发现 CPU/内核/设备特性并打标签。",
+      "云厂商 AMI/镜像": "EKS/OKE/GKE 需为每架构选择对应 AMI/镜像 (如 EKS 的 AL2/AL2023 arm64 AMI、OKE 的 Oracle Linux 8 arm64 镜像; Oracle Linux 7 Arm 已于 2025-01-01 停止支持并停用 OL7 Arm 平台镜像)。"
+    }
+  },
+  "配置与部署": {
+    "配置方式": {
+      "节点标识": "kubelet 自动打 kubernetes.io/arch / kubernetes.io/os 标签 (云厂商 CCM 额外打 node.kubernetes.io/instance-type); 无需手动配置。",
+      "架构隔离": "手动 kubectl taint 为节点添加架构污点; 云厂商 (GKE、ACK v1.24+) 可自动为 ARM 节点池添加污点。",
+      "Pod 调度": "nodeSelector: kubernetes.io/arch=arm64; nodeAffinity requiredDuringSchedulingIgnoredDuringExecution; topologySpreadConstraints (topologyKey 可用 kubernetes.io/arch 实现跨架构分布)。",
+      "自动扩缩容": "Karpenter NodePool requirements 声明 kubernetes.io/arch in [amd64, arm64]; Cluster Autoscaler 按节点组标签选择架构。",
+      "多架构镜像构建": "Docker Buildx (docker buildx build --platform linux/amd64,linux/arm64 --push)、docker manifest create、Podman/Buildah、buildctl (BuildKit)、ORAS; 通过 CI (GitHub Actions/GitLab) 构建并推送 manifest list。",
+      "污点添加命令示例": "kubectl taint nodes <arm64-node> kubernetes.io/arch=arm64:NoSchedule"
+    },
+    "配置示例": {
+      "Pod 指定 arm64 节点": "spec.tolerations: [{key: kubernetes.io/arch, operator: Equal, value: arm64, effect: NoSchedule}]; spec.nodeSelector: {kubernetes.io/arch: arm64}",
+      "跨架构分布": "spec.topologySpreadConstraints: [{maxSkew: 1, topologyKey: kubernetes.io/arch, whenUnsatisfiable: DoNotSchedule, labelSelector: {matchLabels: {app: demo}}}]",
+      "Karpenter NodePool requirements": "requirements: [{key: kubernetes.io/arch, operator: In, values: [amd64, arm64]}, {key: karpenter.sh/capacity-type, operator: In, values: [on-demand, spot]}]",
+      "Buildx 构建多架构镜像": "docker buildx build --platform linux/amd64,linux/arm64 -t repo/app:v1 --push . (需先 docker buildx create 启用多平台构建器)"
+    },
+    "部署位置与环境": {
+      "公有云": "AWS EKS (amd64 + Graviton 节点组)、GCP GKE (x86 + Tau T2A ARM)、Azure AKS (x86 + Ampere ARM)、Oracle OKE (x86 + Ampere A1)、阿里云 ACK (x86 + 倚天 710)、华为云 CCE (x86 + 鲲鹏) 均原生支持混合架构集群。",
+      "私有云/裸金属": "OpenShift、RKE2、K3s、Kubespray 等发行版支持在裸金属或私有云混合 x86/ARM 服务器组建集群。",
+      "边缘/混合部署": "边缘侧 ARM 节点 (Raspberry Pi、Jetson、工业网关) 与数据中心 x86 节点组成混合集群是常见模式; KubeEdge/轻量发行版可扩展。",
+      "开发环境": "Apple Silicon (M 系列) 与 x86 开发机可组成小型多架构集群用于镜像验证。"
+    },
+    "虚拟化兼容性": {
+      "虚拟机节点": "多架构集群中的节点可以是 VM，虚拟机架构由 vCPU 决定 (x86 宿主机只能提供 amd64 VM，ARM 宿主机提供 arm64 VM); 云端每个架构的实例类型天然对应。",
+      "嵌套虚拟化": "嵌套虚拟化 (KVM-on-KVM) 在云实例中通常受限，架构需与物理宿主机一致; arm64 嵌套虚拟化 (如 Graviton 上运行 KVM) 生态支持有限。",
+      "透传与 SR-IOV": "GPU/网卡直通 (PCIe passthrough、SR-IOV) 在 amd64 生态成熟; arm64 服务器平台的透传支持依赖厂商固件与驱动，需逐项验证。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "AWS Graviton 3/4": "AWS 官方宣称 Graviton3 相比同代 x86 (Ice Lake) 计算性能提升约 25%，性价比提升约 20%; Graviton4 宣称性能/功耗比进一步提升 (厂商数据)。",
+      "Ampere Altra (Oracle A1)": "每核性能与同代 x86 相当 (SPECrate 社区数据)，整机功耗更低; Oracle A1 免费层提供 4 OCPU/24 GB RAM 用于测试。",
+      "社区多架构对比": "Web 服务、容器运行时、内存型负载在 arm64 与 amd64 上性能差异通常在 ±10% 以内 (社区基准，因工作负载而异); 依赖 AVX-512 的计算负载在 x86 显著更快。",
+      "管理面性能": "[不确定] 无官方针对\"多架构集群管理\"的独立基准; 标签/污点/调度约束对调度延迟影响可忽略 (微秒级匹配计算)。"
+    },
+    "扩展性上限": "[不确定] 多架构集群无独立扩展性上限，沿用标准 Kubernetes 规模边界 (官方支持 5000 节点/150000 Pod，社区验证更大规模); 瓶颈拐点取决于控制面规格与每架构节点池的容量规划，而非架构混合本身。"
+    ,
+    "每节点密度": {
+      "通用": "默认每节点 110 Pod (kubelet --max-pods)，与 CPU 架构无关; 实际密度由内存/CPU 决定。",
+      "arm64 边缘节点": "低规格 ARM 节点 (2-4 核/4-8 GB) 通常运行 20-50 个轻量级 Pod。",
+      "云实例": "EKS/GKE 按实例规格设置 max-pods (如 t3.medium 17 个、m6g.large 35 个等)，Graviton 与同规格 x86 实例的 Pod 密度上限一致。"
+    }
+  },
+  "安全": {
+    "安全特性": {
+      "架构隔离": "通过污点 (NoSchedule/NoExecute) 与容忍度实现架构级隔离，限制工作负载只能运行在特定架构节点，减少错误架构镜像执行风险。",
+      "镜像供应链安全": "cosign/notation 支持对多架构 manifest list 整体签名 (签名绑定镜像索引)，SBOM 可逐平台生成; 需在镜像仓库启用签名验证 (Kyverno/Ratify)。",
+      "可信启动与 TPM": "amd64 (Intel/AMD) 与 arm64 服务器均支持 UEFI Secure Boot/TPM; 云厂商提供不可变启动链 (如 AWS Nitro Enclaves、安全启动 AMI)，与架构无关。",
+      "机密计算": "Intel TDX/AMD SEV-SNP (amd64) 生态成熟; arm64 机密计算 (如 Ampere 与厂商合作方案、Confidential Containers 对 ARM 支持) 仍在演进，覆盖面较小。"
+    },
+    "合规与认证": "[不确定] Kubernetes 一致性认证 (CNCF Conformance) 对 amd64/arm64 均可通过，多架构集群本身无独立认证项。FIPS 140-2/3 认证取决于发行版与架构组合 (RHEL/Ubuntu 在 x86 与 ARM 均有 FIPS 模式，认证状态按架构分别公示); PCI DSS/HIPAA 等合规要求不区分架构，但需确保混合集群的镜像来源与节点加固策略统一。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "架构视图": "kubectl get nodes -L kubernetes.io/arch 查看各架构节点分布; 按 kubernetes.io/arch 标签聚合 Prometheus 指标 (节点数、CPU/内存使用率、Pod 数、镜像拉取失败数)。",
+      "镜像监控": "监控 \"exec format error\" 容器崩溃事件 (CrashLoopBackOff、ImagePullBackOff) 以发现单架构镜像调度错误; kubelet 事件与 Prometheus 告警 (KubePodCrashLooping)。",
+      "工具链": "node_exporter、kube-state-metrics、Metrics Server 均有多架构镜像，可在混合集群全部节点部署; K9s/Octant 等客户端工具需与运维工作站架构匹配。"
+    },
+    "维护与生命周期": {
+      "多架构镜像发布流程": "CI 流水线为每架构构建镜像并合并为 manifest list 推送 (buildx bake / GitHub Actions matrix)，单 tag 覆盖所有架构; 镜像更新需回归测试各架构。",
+      "节点生命周期": "每架构节点池独立滚动升级 (EKS 节点组更新、OKE 节点池替换、GKE 节点池升级); kubectl drain 标准流程与架构无关。",
+      "架构迁移": "x86 → arm64 迁移路径: ① 添加 arm64 节点池并打污点 ② 应用改为多架构镜像 ③ 逐步添加容忍度与 nodeSelector 迁移工作负载 ④ 验证后下线 x86 节点 (AWS/GCP 官方迁移指南)。",
+      "退役与替换": "节点池不可变平台 (如 OKE ARM 形状) 需新建节点池并排空旧节点; 节点污点在节点删除后自动消失。"
+    },
+    "弹性与故障恢复": {
+      "跨架构容错": "多架构镜像 Pod 可在任一架构节点重建，某架构节点池故障时仍可调度到另一架构节点 (前提是容量足够); 单架构镜像只能恢复到同架构节点。",
+      "冗余要求": "生产建议每架构至少 2 个节点、跨可用区部署; 控制面统一架构并 3+ 副本保障 etcd 可用性。",
+      "故障切换": "节点故障由 NodeLifecycleController 处理 (默认 40 秒后驱逐，容忍度 300 秒)，与架构无关; Karpenter/CA 会自动补充故障架构的实例。",
+      "数据持久化": "多架构集群中 CSI 存储按节点架构提供，同一 PV 可在不同架构节点间迁移 (取决于存储后端网络可达性)，本地 PV 则受限。"
+    }
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件/实例成本": "ARM64 云实例相比同规格 x86 通常便宜 20-30% (AWS Graviton vs 同代 x86、Ampere A1 vs AMD/Intel，厂商与社区报告); Oracle A1 免费层 (4 OCPU/24 GB) 可零成本起步。",
+      "运行成本": "arm64 服务器功耗约为同性能 x86 的 50-70% (Ampere/Graviton 厂商数据)，云上按小时计费直接节省; 多架构集群可把适合负载 (Web、内存型、CI) 调度到 ARM 节点降本。",
+      "维护/开发成本": "多架构镜像 CI 双架构构建、每架构回归测试、驱动/Operator 兼容性验证增加研发与运维成本; 部分仅 amd64 的第三方软件需替换或自编译，需纳入 TCO 评估。",
+      "综合建议": "社区案例 (EKS 迁移 Graviton) 报告整体集群成本节省 20-30%，但需扣除多架构改造的一次性投入。"
+    },
+    "成熟度与社区支持": {
+      "上游成熟度": "多架构支持 (amd64+arm64) 为 Kubernetes GA 能力，全部主流云厂商与发行版 (EKS、GKE、AKS、OKE、ACK、OpenShift、RKE2、K3s) 原生支持。",
+      "工具生态": "Karpenter、Cluster Autoscaler、Buildx、Podman、Harbor、cosign/notation、Argo CD、Helm 均成熟支持多架构; Node Feature Discovery (CNCF) 提供硬件特性自动发现与标签。",
+      "社区与厂商": "ARM 公司 (learn.arm.com 多架构学习路径)、AWS (Graviton 迁移博客)、Google (GKE 多架构教程)、Oracle (Ampere OKE 指南)、阿里云均有活跃文档与案例; 社区讨论 (kubernetes.io、Reddit r/aws) 活跃。",
+      "认证与支持": "多架构集群为通用功能，无需额外许可; 企业支持由各发行版/云厂商 SLA 覆盖，与架构无关。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.功耗基线",
+    "限制与约束.性能开销",
+    "性能特征.基准性能数据.管理面性能",
+    "性能特征.扩展性上限",
+    "安全.合规与认证"
+  ]
+}

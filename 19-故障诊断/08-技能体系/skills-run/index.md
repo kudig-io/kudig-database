@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Skills Run
 
-> 本页为 `故障诊断/topic-skills/skills-run` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/skills-run` 目录的自动索引。
 
 ## 概览
 
@@ -21,5 +21,5 @@ last_updated: 2026-07
 
 ## 子目录
 
-- 故障诊断/topic-skills/skills-run/scenarios/
+- 19-故障诊断/08-技能体系/skills-run/scenarios/
 

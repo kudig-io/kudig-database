@@ -52,10 +52,10 @@ cross_refs:
   path: ../安全/07-rbac-matrix-configuration.md
   label: '深度文档: 07-rbac-matrix-configuration'
 - type: skill
-  path: ../故障诊断/topic-skills/09-rbac-quota-failure.md
+  path: ../../08-技能体系/10-rbac-quota-failure.md  # H3: 旧路径 ../../08-技能体系/ 修复（编号 09→10 对齐）
   label: '运维技能: 09-rbac-quota-failure'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/06-security-auth/01-rbac-troubleshooting.md
+  path: ../../04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md  # H3: 旧路径 topic-structural-trouble-shooting 修复
   label: '结构化排障: 01-rbac-troubleshooting'
 tier: supporting
 ---

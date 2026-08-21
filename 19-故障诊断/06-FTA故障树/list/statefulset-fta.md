@@ -52,7 +52,7 @@ cross_refs:
   path: ../工作负载/03-statefulset-advanced-operations.md
   label: '深度文档: 03-statefulset-advanced-operations'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/05-workloads/03-statefulset-troubleshooting.md
+  path: ../../04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md
   label: '结构化排障: 03-statefulset-troubleshooting'
 tier: supporting
 ---

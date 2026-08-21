@@ -61,7 +61,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: skill
-  path: ../故障诊断/topic-skills/18-security-incident-response.md
+  path: ../08-技能体系/18-security-incident-response.md
   label: '运维技能: 18-security-incident-response'
 ---
 

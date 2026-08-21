@@ -781,7 +781,7 @@ related_skills: []
 knowledge_refs:
   - 清单模式/33-kubeadm-cluster-bootstrap.md
   - 集群基础/31-kubectl-complete-reference.md
-  - 故障诊断/FTA故障树/list/etcd-fta.md
+  - FTA故障树/list/etcd-fta.md  # N7: 旧路径 故障诊断/FTA故障树 修复（H3 漏网）
 ---
 ```
 

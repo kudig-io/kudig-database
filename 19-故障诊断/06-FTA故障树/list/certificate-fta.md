@@ -50,10 +50,10 @@ authors:
   role: contributor
 cross_refs:
 - type: skill
-  path: ../故障诊断/topic-skills/06-certificate-expiry.md
+  path: ../../08-技能体系/06-certificate-expiry.md
   label: '运维技能: 06-certificate-expiry'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/06-security-auth/02-certificate-troubleshooting.md
+  path: ../../04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md
   label: '结构化排障: 02-certificate-troubleshooting'
 tier: supporting
 ---

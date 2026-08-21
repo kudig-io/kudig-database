@@ -1,7 +1,6 @@
 ---
 title: FTA 故障树完整索引
-description: '| TE-4 | 网络通信异常 | 🟠 P1 | [kubernetes-fta-full-analysis-v2.md](./kubernetes-fta-full-analysis-v2.md#五te-4-网络通信异常-p1)
-  | #5 |'
+description: 'v2 全量故障树的 TE/IE/BE 编号索引、问题传播路径、概率矩阵与快速查询算法（16 顶事件 / ~300 底事件）'  # N6: 修复 description 损坏
 category: fta
 tags:
 - k8s
@@ -14,7 +13,7 @@ tags:
 - envoy
 - coredns
 - ingress
-last_updated: 2026-05
+last_updated: 2026-08  # P3: 更新日期同步
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -49,7 +48,7 @@ tier: supporting
 
 > **文档版本**: v2.0 Enhanced
 > **适用范围**: 所有 FTA 故障树的交叉引用和快速定位
-> **更新日期**: 2026-05-18
+> **更新日期**: 2026-08-13  <!-- P3: 变更日期 -->
 
 ---
 
@@ -327,6 +326,24 @@ tier: supporting
 4. 根据逻辑门类型 → 确定诊断策略 (OR=并行, AND=顺序)
 5. 验证根因 → 修复动作 (HA)
 ```
+
+---
+
+## 八、变更记录
+
+### 2026-08-13 模块质量修复（FTA 模块系统性质量评审）
+
+| 变更项 | 说明 |
+|:---|:---|
+| 新增评测闭环 | 新建 [24-fta-agent-evaluation.md](./24-fta-agent-evaluation.md)：三指标（TE 命中率/路径完整率/误报率）+ 20 条评测基准 |
+| 版本定位 | v2 为现行版本，[v1 历史版](./kubernetes-fta-full-analysis.md) 已标注废弃；[README](./README.md) 主文档表与快速导航同步 |
+| 入口统一 | [README](./README.md)（人工主入口）· MOC（全量导航）· index（自动索引）· 本页（编号查询工具）四者分工声明；文档数量统一为 110 篇 |
+| 组件树补录 | [list/README.md](./list/README.md) 补齐 12 个组件故障树（36→48） |
+| 失效引用修复 | 修复跨模块旧路径引用 40+ 处（`故障诊断/FTA故障树/`、`topic-skills/`、`topic-structural-*` 等）；QA 语料 source 字段旧路径 1900+ 处 |
+| 术语体系互链 | [附录 A](./appendix-a-glossary.md) ↔ [glossary/](./glossary/index.md) 双向链接 |
+| 质量 CI | [quality.yml](../../.github/workflows/quality.yml) 新增 heading-integrity 门禁（一级标题阈值 + 围栏感知） |
+| 技能体系联动 | [08-技能体系](../08-技能体系/README.md) 全景表重建（01-27 连续编号 + 27/28 补录）；28 文件 description/summary 重写 + skill_id 语义化统一（SKILL-NODE-001～SKILL-HELM-001）；删除含空格文件名副本 `07-pvc-storage-failure 2.md`；QA 语料 900+ 处 skill_ref 同步至 08 权威 |
+| 关联 | 详见 [FTA 模块质量评审与修复记录](../../36-报告/assessments/fta-module-quality-review-2026-08-13.md) |
 
 ---
 

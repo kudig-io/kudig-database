@@ -101,7 +101,7 @@ last_updated: '2026-07-09'
 | `01-` 起始 | `安全/01-identity-access/` | 正常 |
 | `00-` 起始 | `网络/00-core-k8s-networking/`、`工作负载/00-core-workloads/` | 与多数域的 `01-` 不一致 |
 | 无编号 | `平台工程/build/`、`生态参考/topic-index/` | 无法通过排序判断章节顺序 |
-| `topic-*` | `故障诊断/FTA故障树/`、`发布变更/topic-deployment/` | 部分跨域主题应归属到全局 `skills/` 或 `concepts/` |
+| `topic-*` | `19-故障诊断/06-FTA故障树/`、`发布变更/topic-deployment/` | 部分跨域主题应归属到全局 `skills/` 或 `concepts/` |
 | `98-merged-indexes` | 各域均有 | 生成索引位置固定，尚可接受 |
 | `99-` 文件 | `99-production-readiness-operations-guide.md` | 作为域级入口文件，位置合理 |
 | `_archived-release-notes` | `生态参考/_archived-release-notes/` | 下划线前缀按规范应仅用于根级元数据目录 |
@@ -117,7 +117,7 @@ last_updated: '2026-07-09'
 ### 3.3 语料配置与实际目录脱节
 
 `_meta/corpus-config/profiles/` 中多个 profile 同时引用：
-- 实际存在的中文目录（如 `集群基础/`、`故障诊断/FTA故障树/`）
+- 实际存在的中文目录（如 `集群基础/`、`19-故障诊断/06-FTA故障树/`）
 - **已不存在的旧版英文目录**（如 `domain-1-architecture-fundamentals/`、`domain-12-troubleshooting/`、`生产运维/topic-learn/`）
 
 这会导致语料生成时路径缺失、部分关键文档未被摄入。

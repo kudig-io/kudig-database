@@ -27,6 +27,7 @@ created: '2026-07-25'
 - [[36-报告/assessments/corpus-completeness-evaluation-2026-06-26.md|corpus-completeness-evaluation-2026-06-26]]
 - [[36-报告/assessments/domain-content-gap-analysis-2026-07-01.md|domain-content-gap-analysis-2026-07-01]]
 - [[36-报告/assessments/domain-production-assessment.md|domain-production-assessment]]
+- [[36-报告/assessments/fta-module-quality-review-2026-08-13.md|fta-module-quality-review-2026-08-13]]
 - [[36-报告/assessments/knowledge-completeness-assessment-2026-05-21.md|knowledge-completeness-assessment-2026-05-21]]
 - [[36-报告/assessments/knowledge-gap-analysis-2026-05-21.md|knowledge-gap-analysis-2026-05-21]]
 - [[36-报告/assessments/obsidian-wiki-skills-evaluation-2026-05-24.md|obsidian-wiki-skills-evaluation-2026-05-24]]

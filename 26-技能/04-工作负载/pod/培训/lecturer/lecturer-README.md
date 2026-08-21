@@ -447,10 +447,10 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ---
 
 **关联文档**:
-- [故障诊断/topic-skills/](../故障诊断/技能体系/) — 18 个 GA Skill（深度技术细节）
+- [08-技能体系/](../../../../../19-故障诊断/08-技能体系) — 18 个 GA Skill（深度技术细节）
 - [P0-1: 工单分类体系](../../../../../29-%E6%96%87%E6%A1%A3/agent-specs/P0-1-ticket-classification-intent-recognition.md) — 工单路由引擎
 - [P0-3: 会话上下文管理](../../../../../29-%E6%96%87%E6%A1%A3/agent-specs/P0-3-session-context-management.md) — 多轮对话管理
-- [故障诊断/](../../故障诊断/) — 故障排查文档
+- [](../../../../../19-故障诊断) — 故障排查文档
 
 ## Related
 

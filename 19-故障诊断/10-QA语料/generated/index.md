@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Generated
 
-> 本页为 `故障诊断/topic-qa-corpus/generated` 目录的自动索引。
+> 本页为 `19-故障诊断/10-QA语料/generated` 目录的自动索引。
 
 ## 文档
 

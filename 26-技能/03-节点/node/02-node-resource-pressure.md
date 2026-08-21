@@ -372,7 +372,7 @@ kubectl get node <node-name> -o jsonpath='{.status}' | jq '.conditions[] | selec
 
 ## 9. 驱逐配置深度治理
 
-> 来源：`故障诊断/高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §3
+> 来源：`19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §3
 
 ### 9.1 驱逐策略完整配置
 
@@ -446,7 +446,7 @@ containerLogMaxFiles: 5
 
 ## 10. 节点健康自愈与自动化预防
 
-> 来源：`故障诊断/高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §4
+> 来源：`19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §4
 
 ### 10.1 Node Problem Detector (NPD) + Draino
 

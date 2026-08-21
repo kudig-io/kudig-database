@@ -225,7 +225,7 @@ prerequisites:
 
 ## 4. 详细根因描述（RC-001 ~ RC-012）
 
-> 以下内容整合自 `故障诊断/技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md`
+> 以下内容整合自 `19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md`
 
 ### RC-001: kubelet 进程崩溃或未运行
 

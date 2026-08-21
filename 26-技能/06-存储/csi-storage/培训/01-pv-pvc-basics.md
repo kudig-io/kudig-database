@@ -82,7 +82,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
+tier: peripheral
+---
 # 第八课：存储 - PV 和 PVC
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟

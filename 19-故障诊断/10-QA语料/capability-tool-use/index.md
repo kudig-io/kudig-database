@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Capability Tool Use
 
-> 本页为 `故障诊断/topic-qa-corpus/capability-tool-use` 目录的自动索引。
+> 本页为 `19-故障诊断/10-QA语料/capability-tool-use` 目录的自动索引。
 
 ## 内容
 

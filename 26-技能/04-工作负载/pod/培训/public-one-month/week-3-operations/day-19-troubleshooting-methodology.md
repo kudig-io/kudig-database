@@ -570,7 +570,7 @@ echo "========== 排查完毕 =========="
 
 ## 延伸阅读
 
-- [结构化故障排查框架](../../故障诊断/高级排障/README.md)
+- [结构化故障排查框架](../../../../../../19-故障诊断/04-高级排障/index.md)
 - [FTA 核心原理](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/04-fta-core-principles.md)
 - [FEBM 理论基础](../../../../../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/07-FEBM%E6%96%B9%E6%B3%95%E8%AE%BA/01-febm-theory-foundations.md)
 - [Pod Pending 诊断](../../../诊断排障/01-pod-pending-diagnosis.md)

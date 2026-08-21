@@ -1,7 +1,7 @@
 ---
 title: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
-description: '## 1. 概述'
-summary: 'Ingress 和 Gateway API 是 [[kubernetes|Kubernetes]] 集群中**南北向流量**的核心入口点。当 Ingress Controller 或 Gateway 发生问题时，所有通过该入口的外部请求都将受到影响，可能导致用户无法访问应用服务、API 调用失败、TLS 连接中断等严重后果。在微服务架构中，'
+description: Kubernetes Ingress/Gateway 路由故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Ingress/Gateway 路由故障的完整诊断-修复-验证工单处理 Skill
 category: network
 tags:
 - k8s
@@ -54,7 +54,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - tls-basics
-skill_id: SKILL-13_INGRESS_GATEWAY_FAILURE-001
+skill_id: SKILL-NET-003
 skill_name: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 version: 1.0.0
@@ -1498,7 +1498,7 @@ kubectl logs -n ingress-nginx deploy/ingress-nginx-controller --tail=20 --since=
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| Ingress 故障排查深度指南 | `故障诊断/15-ingress-troubleshooting.md` | 超出本 Skill 覆盖范围的深度排查 |
+| Ingress 故障排查深度指南 | 19-故障诊断/15-ingress-troubleshooting.md` | 超出本 Skill 覆盖范围的深度排查 |
 | Kubernetes 网络模型 | `网络/` | 理解 Service、Endpoints、网络策略 |
 | Gateway API 详解 | `网络/` | Gateway API 概念和最佳实践 |
 | TLS/证书管理 | `SKILL-SEC-001` | 证书过期和 TLS 配置问题 |

@@ -141,7 +141,7 @@ FTA 使用一套标准化的图形符号来表示不同类型的事件和逻辑�
 
 ## 3.2 事件编号与命名规范
 
-在企业级 FTA 实践中，统一的编号和命名规范是团队协作和工具化的基础。推荐以下规范（与本知识库 [kubernetes-fta-full-analysis.md](./[[23-实体/02-K8s核心组件/kubernetes|kubernetes]]-fta-full-analysis.md) 一致）：
+在企业级 FTA 实践中，统一的编号和命名规范是团队协作和工具化的基础。推荐以下规范（与本知识库 [kubernetes-fta-full-analysis.md](./kubernetes-fta-full-analysis.md) 一致）：  <!-- N8: 嵌套 wiki 链接损坏修复 -->
 
 **编号体系**：
 

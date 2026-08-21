@@ -55,7 +55,8 @@ intent_queries:
 - green-computing-sustainability的使用方法
 - green-computing-sustainability的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 15-绿色计算可持续发展
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'
 category: production-operations

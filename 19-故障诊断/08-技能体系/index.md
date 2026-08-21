@@ -18,7 +18,7 @@ last_updated: 2026-07
 
 # Topic Skills
 
-> 本页为 `故障诊断/topic-skills` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系` 目录的自动索引。
 
 ## 概览
 
@@ -26,11 +26,11 @@ last_updated: 2026-07
 
 ## 子目录
 
-- 故障诊断/topic-skills/assessment/
-- 故障诊断/topic-skills/dialogue/
-- 故障诊断/topic-skills/scripts/
-- 故障诊断/topic-skills/skill-set/
-- 故障诊断/topic-skills/skills-run/
+- 19-故障诊断/08-技能体系/assessment/
+- 19-故障诊断/08-技能体系/dialogue/
+- 19-故障诊断/08-技能体系/scripts/
+- 19-故障诊断/08-技能体系/skill-set/
+- 19-故障诊断/08-技能体系/skills-run/
 
 ## 文档
 
@@ -40,7 +40,6 @@ last_updated: 2026-07
 - [[19-故障诊断/08-技能体系/04-dns-resolution-failure.md|Dns Resolution Failure]]
 - [[19-故障诊断/08-技能体系/05-service-connectivity.md|Service Connectivity]]
 - [[19-故障诊断/08-技能体系/06-certificate-expiry.md|Certificate Expiry]]
-- [[19-故障诊断/08-技能体系/07-pvc-storage-failure 2.md|Pvc Storage Failure 2]]
 - [[19-故障诊断/08-技能体系/08-pvc-storage-failure.md|Pvc Storage Failure]]
 - [[19-故障诊断/08-技能体系/09-deployment-rollout-failure.md|Deployment Rollout Failure]]
 - [[19-故障诊断/08-技能体系/10-rbac-quota-failure.md|Rbac Quota Failure]]

@@ -53,13 +53,13 @@ cross_refs:
   path: ../网络/06-service-concepts-types.md
   label: '深度文档: 06-service-concepts-types'
 - type: skill
-  path: ../故障诊断/topic-skills/05-service-connectivity.md
+  path: ../../08-技能体系/05-service-connectivity.md
   label: '运维技能: 05-service-connectivity'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md
   label: '结构化排障: 05-service-mesh-istio-troubleshooting'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/03-service-ingress-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/03-service-ingress-troubleshooting.md
   label: '结构化排障: 03-service-ingress-troubleshooting'
 tier: supporting
 ---

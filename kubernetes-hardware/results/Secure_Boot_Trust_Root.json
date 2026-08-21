@@ -1,0 +1,61 @@
+{
+  "基本信息": {
+    "名称": "Secure Boot / 硬件信任根（UEFI Secure Boot 与 TPM 2.0 信任根）",
+    "类别": "安全",
+    "官方文档链接": "https://uefi.org/specs/UEFI/2.10/（UEFI Secure Boot 规范）\nhttps://trustedcomputinggroup.org/resource/tpm-library-specification/（TCG TPM 2.0 规范）\nhttps://support.microsoft.com/en-us/servicing/os/secure-boot/2025/06/windows-secure-boot-certificate-expiration-and-ca-updates（2026 证书到期官方公告）\nhttps://docs.spectrocloud.com/clusters/edge/trusted-boot/（Spectro Cloud Palette 可信启动）\nhttps://docs.siderolabs.com/talos/latest/platform-specific-installations/bare-metal-platforms/secureboot（Talos Linux Secure Boot）"
+  },
+  "硬件规格": {
+    "最低配置": "UEFI 固件（2.3.1+，支持 Secure Boot 模式）；64 位 CPU（x86-64 / ARM64）；TPM 2.0 芯片（实现度量启动与密钥密封，无 TPM 时仍可仅启用签名验证但无法密封磁盘密钥）；UEFI 变量存储（NVRAM）至少约 256 KB 以上以存放 PK/KEK/db/dbx 签名数据库；EFI 系统分区（ESP）100 MB+（可信启动需容纳 UKI 统一内核镜像）。启用 Secure Boot 本身不要求额外内存或存储，但引导分区需为 GPT+EFI 布局，传统 BIOS/MBR 不可用。",
+    "推荐配置": "TPM 2.0（优先独立式离散 TPM，FIPS 140-2/3 认证型号）；UEFI 2.7+ 固件并开启 Secure Boot + 度量启动；ESP 分区 512 MB+；服务器平台（Intel/AMD/ARM）或云 vTPM 实例（AKS Gen2 VM、GKE Shielded VM）；用于 Kubernetes 节点时建议配合节点完整性监控（如 GKE Integrity Monitoring）与密钥托管流程（HSM 或离线 CA 保管 PK/KEK）。",
+    "生产级配置": "离散 TPM 2.0（FIPS 140-2/3 认证、支持抗回滚与单调计数器）；HSM 或离线根 CA 管理签名密钥（PK/KEK/db），建立启动镜像签名流水线（CI/CD 对 UKI/启动加载器签名）；大容量固件闪存（≥8 MB）以容纳不断增长的 dbx 吊销列表；远程证明基础设施（Keylime 等）持续校验节点 PCR 度量；边缘场景叠加全盘加密（LUKS/BitLocker）实现可信启动闭环。",
+    "功耗基线": "TPM 2.0 芯片功耗极低（微瓦至毫瓦级，相对整机可忽略），Secure Boot 与度量启动仅启动期运行、不引入持续功耗；若叠加全盘加密（LUKS/BitLocker），功耗影响取决于 CPU 加密引擎（AES-NI）与磁盘负载 [不确定]"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "非 K8s 版本绑定特性（节点平台/固件级能力，K8s 无版本门槛）。云厂商实现有最低版本要求：AKS Trusted Launch 需 Kubernetes 1.25.2+ 且节点为 Gen2 VM、Azure CLI 2.66.0+；GKE Shielded Nodes 覆盖全部受支持 GKE 版本（Autopilot 默认强制启用且不可关闭）；Talos Linux、Kairos、Bottlerocket 等社区方案支持其各自支持的 K8s 版本（通常 1.24+ 至最新版）。",
+    "操作系统兼容性": "Windows：Windows 10（1607–22H2）、Windows 11（21H2–24H2）、Windows Server 2012 ESU 至 2025（微软 2023 证书更新覆盖范围）；Linux：Ubuntu 22.04/24.04、Fedora 38+（Rawhide 已采用多证书签名的 shim）、RHEL/RHCOS（OpenShift）、Debian、openSUSE、Rocky Linux、Talos Linux、Kairos 各受支持发行版、AWS Bottlerocket；Alpine 默认无签名启动产物，需自行生成签名密钥。",
+    "K8s 上游支持阶段": "非 K8s 上游功能（无原生 API 支持，属节点操作系统与平台固件能力）；云厂商实现均为 GA：AKS Trusted Launch（GA）、GKE Shielded Nodes（GA，Autopilot 默认启用）、OpenShift 裸金属/vSphere Secure Boot（GA）；社区项目（Talos Linux、Kairos CNCF、Bottlerocket、Keylime）达到生产可用成熟度。",
+    "生态兼容性矩阵": "云平台：AKS Trusted Launch（vTPM+Secure Boot）、GKE Shielded Nodes（vTPM+Secure Boot+Integrity Monitoring）、AWS EC2 Nitro TPM 与 Bottlerocket（裸金属支持 Secure Boot）；节点 OS/发行版：Talos Linux、Kairos（K3s/PXK-E/RKE2）、Bottlerocket、Ubuntu（shim+GRUB+sbctl）、Fedora、RHCOS；远程证明/监控：Keylime（CNCF 项目，TPM/IMA 度量证明）、Intel Trust Authority、tpm2-tools、GKE Integrity Monitoring 日志、Windows 事件日志（Event ID 1801/5000）。"
+  },
+  "限制与约束": {
+    "已知限制": "1) 仅支持 UEFI 固件模式，传统 BIOS/MBR 布局不可用（Talos 明确不支持 x86 BIOS 模式）；2) 启用 Secure Boot 后无法加载未签名的第三方内核模块（GKE Ubuntu、RHCOS 等需使用签名模块或 MOK）；3) Secure Boot 仅验证启动链签名，不防护启动后的运行时攻击（内核漏洞、恶意容器逃逸），需配合度量启动与远程证明；4) 2026 年证书事件：未在到期前安装 2023 证书的系统将无法接收新的 dbx 吊销更新，吊销列表永久冻结，面临 BlackLotus（CVE-2023-24932）/BootHole 类固件攻击风险，且 BIOS 重置可能导致无法启动（需 SecureBootRecovery.efi 与 BitLocker 恢复密钥）；5) dbx 吊销数据库容量受 NVRAM 限制（空间不足时报 Event ID 1801）；6) Talos 可信启动使用 UKI，内核命令行参数固定、修改需重建镜像，且不支持从 GRUB 布局迁移（需全新安装）；7) Kairos 的 Alpine 发行版不支持 Secure Boot（无默认签名产物）；8) AKS Trusted Launch 不支持 Windows 节点、虚拟节点、可用性集、Flatcar 及部分 GPU 池场景；9) 裸金属需手动注册平台密钥（PK），PK 私钥丢失将导致设备无法信任新签名组件；10) TPM 丢失/损坏会使密封的磁盘密钥无法恢复，必须建立恢复密钥流程。",
+    "混部兼容性": "集群内可混部启用与未启用 Secure Boot 的节点（云厂商按节点池配置，如 AKS 不同节点池 security-type 不同），通过节点标签约束调度（如 kubernetes.azure.com/security-type=TrustedLaunch）；对同一节点上的 Pod 运行无影响；但云厂商限制组合场景（如 AKS Trusted Launch 不能与 Windows 节点池、虚拟节点、可用性集混用）[不确定：各云厂商组合限制存在差异]",
+    "性能开销": "启动阶段：签名验证与 PCR 度量增加启动时间典型约 1–3 秒（视硬件与镜像大小）；GKE 官方文档指出启用后每次启动约增加 0.5 KB 日志；运行时开销可忽略（TPM 主要在启动期参与）；若叠加全盘加密，I/O 吞吐受加密引擎影响，AES-NI 硬件加速下 NVMe 全盘加密吞吐下降通常 <5–10%（具体因盘型/CPU/工作负载而异）[不确定]",
+    "固件与驱动依赖": "固件必须支持 UEFI Secure Boot，并能通过固件更新（capsule update）安装新签名数据库（2023 证书、dbx 吊销列表）；2026 事件要求先安装厂商 BIOS/固件更新、再部署 OS 与 2023 证书（顺序不可颠倒），并更新网络启动镜像（PXE）；NVRAM 容量需容纳 PK/KEK/db/dbx；启用 Secure Boot 后未签名内核驱动不可加载（NVIDIA 等需发行版签名或 MOK 签名流程）；密钥注册、dbx 更新、固件更新均需重启节点（先 kubectl drain 再操作），不支持热插拔类固件操作。"
+  },
+  "配置与部署": {
+    "配置方式": "云厂商管理面配置：AKS（az aks create / az aks nodepool add --enable-secure-boot --enable-vtpm）、GKE（gcloud container clusters create --shielded-secure-boot --enable-shielded-nodes）、EKS 通过 Bottlerocket 镜像变体；裸金属/边缘：固件 Setup 菜单注册平台密钥（PK/KEK/db）、切换 Secure Boot 模式、使用签名工具链（sbctl、talosctl gen secureboot、Kairos 密钥生成）构建并签名 UKI/启动镜像，CI/CD 签名流水线；Kairos/Palette Edge 通过 secure_boot/trusted_boot 配置项 + EdgeForge 构建不可变镜像。",
+    "配置示例": "# GKE 创建启用 Secure Boot 的集群\ngcloud container clusters create CLUSTER --enable-shielded-nodes --shielded-secure-boot\n# AKS 创建启用 Secure Boot + vTPM 的节点池\naz aks create -n CLUSTER -g RG --enable-secure-boot --enable-vtpm\naz aks nodepool add -n NP -c CLUSTER -g RG --enable-secure-boot --enable-vtpm\n# Talos Linux 生成签名 ISO（启动菜单注册密钥）\ntalosctl gen secureboot iso --output secureboot.iso\n# Kairos 构建启用可信启动的镜像（配置中声明 secure_boot / trusted_boot: true）",
+    "部署位置与环境": "公有云：AKS Trusted Launch、GKE Shielded Nodes、EKS Bottlerocket（vTPM，通常无额外费用）；私有云：OpenStack/KVM/VMware 需虚拟化平台提供 vTPM/安全启动支持；裸金属：BIOS/固件配置 + 密钥注册；边缘：Spectro Cloud Palette Edge/Kairos 可信启动（无人值守设备防物理篡改，结合 FDE+Secure Boot+TPM 度量）；混合部署均支持。",
+    "虚拟化兼容性": "VMware vSphere：EFI 固件 + 虚拟 TPM 2.0（vSphere 7.0+），支持 guest Secure Boot，vTPM 的 vMotion 热迁移受平台版本与加密迁移配置限制 [不确定]；Microsoft Hyper-V：Gen2 VM 支持 vTPM + Secure Boot；KVM/libvirt：OVMF + swtpm 虚拟 TPM；云厂商：AKS Trusted Launch（Gen2 VM）、GKE Shielded VM；嵌套虚拟化中的 vTPM 支持因平台/云厂商而异 [不确定]；PCIe 直通/SR-IOV 不影响 Secure Boot，但物理 TPM 直通通常不受支持（使用 vTPM 替代）。"
+  },
+  "性能特征": {
+    "基准性能数据": "无官方 K8s 专项基准；业界公布数据：UEFI 签名验证 + TPM PCR 度量增加启动时间典型 1–3 秒；GKE 文档：启用后启动日志约 +0.5 KB；TPM 密封/解除密封与签名操作耗时毫秒级；全盘加密（LUKS/BitLocker+TPM 密封）在 AES-NI 加速下 NVMe I/O 吞吐下降通常 <5–10%（具体需按盘型与工作负载实测）[不确定]",
+    "扩展性上限": "非节点规模/密度特性；主要扩展性约束为 NVRAM 中 dbx 吊销列表容量（不足时报 Event ID 1801，需固件升级扩大存储或整理签名数据库）；远程证明基础设施（Keylime/云证明服务）需按集群规模规划吞吐与告警通道 [不确定：无公开规模上限数据]",
+    "每节点密度": "不适用：Secure Boot/硬件信任根为平台与固件级安全特性，与每节点 Pod 数、GPU 分片数无直接关系 [不确定]"
+  },
+  "安全": {
+    "安全特性": "UEFI Secure Boot：基于 PK/KEK/db/dbx 四层签名数据库体系，仅允许签名启动代码（固件驱动、引导加载器、内核）执行，阻止 bootkit/rootkit 注入；TPM 2.0 硬件信任根：PCR 平台配置寄存器、密封/解除密封、密钥层级、单调计数器、远程证明，构成可信计算基（TCB）核心；度量启动（Measured Boot）：将各启动阶段哈希写入 TPM PCR 并记录事件日志，供审计与远程证明比对；可信启动（Trusted Boot）：TPM 仅在 PCR 度量匹配已知良好值时释放磁盘加密密钥（BitLocker/LUKS），实现无人值守设备安全解密；vTPM 虚拟化（AKS Trusted Launch、GKE Shielded、EC2 Nitro）；启动完整性监控（GKE Integrity Monitoring 默认开启）；远程证明生态（Keylime、Intel Trust Authority、云厂商证明服务）；与机密计算衔接：Secure Boot/度量启动是机密 VM（SEV-SNP、TDX）信任链的前置环节。",
+    "合规与认证": "NIST SP 800-193（平台固件弹性指南，Secure Boot 为核心控制之一，工业/边缘厂商广泛引用）；FIPS 140-2/3（TPM 模块认证，FedRAMP 等联邦场景要求）；Windows 11 将 TPM 2.0 + Secure Boot 列为强制硬件要求（驱动行业硬件基线普及）；中国等保 2.0（GB/T 22239-2019）三/四级安全计算环境要求'可信验证'（对引导过程、系统程序进行可信度量与恢复，金融机构等保测评常见项）；PCI DSS v4.0.1 未明文单列 Secure Boot，但通过防恶意软件（Req 5）、变更检测（Req 11）、物理安全（Req 9）等要求间接推动 [不确定：具体条款映射存在解释空间]；DORA（欧盟金融数字运营弹性法案）在 ICT 风险管理语境下要求防范固件级攻击 [不确定]；CIS Benchmarks（如 GKE 5.5.5、Windows/Linux 服务器基线）明确要求启用 Secure Boot。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "GKE Integrity Monitoring：启动完整性监控与失败告警；Windows 事件日志：Event ID 1801（UEFI 数据库容量/限制）、Event ID 5000（Secure Boot 相关）[不确定：ID 细节需按版本核对]；tpm2-tools / tpm2_events：读取 PCR 事件日志；Keylime：TPM/IMA 度量连续远程证明，可对接 Prometheus 告警；云安全中心（Azure Defender for Cloud、Google Security Command Center）的启动完整性发现；2026 证书事件前需审计 UEFI 变量（PK/KEK/db/dbx 状态）与固件版本。",
+    "维护与生命周期": "2026 微软 Secure Boot 证书到期为全行业重大维护事件：KEK CA 2011（2026-06-24 到期）、UEFI CA 2011（2026-06 下旬到期，各来源标注 26–27 日存在差异）、Windows Production PCA 2011（2026-10-19 到期），须在到期前安装 2023 证书（Intune/组策略/注册表），按'先固件后 OS'顺序更新，更新 PXE/网络启动镜像，保留 BitLocker 恢复密钥并演练恢复流程；dbx 吊销列表随月度补丁更新（仅持有新 KEK 的系统可接收新吊销）；PK/KEK/db 密钥轮换需固件配合；Talos UKI 内核参数变更需重建镜像并重装；Kairos/Bottlerocket 采用 A/B 不可变镜像滚动更新；节点级固件/密钥操作需 drain 后重启。",
+    "弹性与故障恢复": "平台密钥（PK）私钥丢失 = 设备无法信任任何新签名组件，签名密钥应离线保管或存 HSM，并建立密钥托管与轮换制度；TPM 损坏/更换 = 密封的磁盘密钥丢失，必须依赖 BitLocker 恢复密钥或 LUKS 恢复口令（建议集中管理恢复密钥）；BIOS 重置可能导致已吊销旧签名组件的设备无法启动（需 SecureBootRecovery.efi + 恢复密钥）；启用失败可回退为关闭 Secure Boot 的传统启动（失去保护但可恢复业务）；集群层面建议多节点冗余，避免单节点密钥/固件故障影响控制面（控制面节点也应启用可信启动）。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "硬件增量成本低：TPM 2.0 已成为 PC/服务器/边缘设备主流标配（Windows 11 强制要求推动），单颗 TPM 成本为数美元级，新增硬件投入可忽略 [不确定：具体 BOM 成本因供应链而异]；云厂商 vTPM（AKS Trusted Launch、GKE Shielded）通常无额外费用；主要成本为治理性投入：签名密钥 PKI/HSM 基础设施、2026 证书轮换迁移的人力与测试成本、远程证明/完整性监控平台部署、固件更新与回归测试成本；边缘设备若叠加全盘加密需评估加密对低速存储的吞吐影响。",
+    "成熟度与社区支持": "生态成熟：微软（Windows Secure Boot 与 2026 证书迁移官方 playbook）、Google（GKE Shielded Nodes）、AWS（Bottlerocket、EC2 Nitro TPM）、Red Hat（OpenShift RHCOS Secure Boot）；社区项目活跃：Talos Linux（Sidero Labs）、Kairos（CNCF Sandbox，Spectro Cloud 主导，被 Palette Edge 商业化）、Bottlerocket（AWS 开源）、Keylime（CNCF，远程证明）；2026 证书到期事件为全行业热点，微软与 Fedora 等发行版均已发布迁移指南；上游 K8s 无原生 API，成熟度体现在发行版与云平台层，整体属高成熟度安全基础设施。"
+  },
+  "uncertain": [
+    "功耗基线",
+    "性能开销",
+    "基准性能数据",
+    "扩展性上限",
+    "每节点密度",
+    "合规与认证",
+    "虚拟化兼容性",
+    "混部兼容性",
+    "总拥有成本 (TCO)",
+    "可观测性支持"
+  ]
+}

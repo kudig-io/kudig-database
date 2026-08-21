@@ -50,7 +50,8 @@ intent_queries:
 - 17-hardware-error-codes-reference的所有命令/字段
 - 17-hardware-error-codes-reference速查手册
 
-tier: peripheral---
+tier: peripheral
+---
 title: 硬件错误码速查大全
 description: '<!-- chunk: 概述' -->## 概述'
 category: hardware

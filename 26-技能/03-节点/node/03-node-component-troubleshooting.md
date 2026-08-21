@@ -465,7 +465,7 @@ crictl info | jq '.config'
 
 ## 9. kubelet 内部核心机制详解
 
-> 来源：`故障诊断/高级排障/structural-02-node-components/01-kubelet-troubleshooting.md`
+> 来源：`19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md`
 
 深入理解 kubelet 内部架构是高效排查的关键。kubelet 由以下核心管理器协同工作：
 

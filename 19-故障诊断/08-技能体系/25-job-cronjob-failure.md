@@ -1,7 +1,7 @@
 ---
 title: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
-description: '- 运维工程师'
-summary: 'Job 和 CronJob 是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。'
+description: Kubernetes Job/CronJob 批处理工作负载故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Job/CronJob 批处理工作负载故障的完整诊断-修复-验证工单处理 Skill
 category: skills
 tags:
 - k8s
@@ -43,9 +43,53 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - etcd-basics
-skill_id: SKILL-23_JOB_CRONJOB_FAILURE-001
+skill_id: SKILL-WORK-004
 skill_name: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 version: 1.0.0
+severity_range: P0-P2
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+estimated_resolution_time: 10-45min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
+trigger_events:
+- BackoffLimitExceeded
+- DeadlineExceeded
+- SuccessfulCreate
+- MissSchedule
+- JobAlreadyActive
+trigger_metrics:
+- 'kube_job_status_failed'
+- 'kube_cronjob_status_active'
+- 'kube_job_status_active'
+- 'kube_job_spec_completions - kube_job_status_succeeded'
+related_skills:
+- SKILL-POD-001
+- SKILL-POD-002
+- SKILL-IMAGE-001
+- SKILL-NODE-002
+fta_refs:
+- 19-故障诊断/06-FTA故障树/list/job-cronjob-fta.md
+knowledge_refs:
+- 19-故障诊断/02-资源排障/10-cronjob-troubleshooting.md
+- 19-故障诊断/02-资源排障/14-job-troubleshooting.md
+cross_refs:
+- type: fta
+  path: 19-故障诊断/06-FTA故障树/list/job-cronjob-fta.md
+  label: Job/CronJob 故障树分析
+- type: domain
+  path: 19-故障诊断/02-资源排障/10-cronjob-troubleshooting.md
+  label: CronJob 深度排查
+- type: domain
+  path: 19-故障诊断/02-资源排障/14-job-troubleshooting.md
+  label: Job 深度排查
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**
@@ -55,87 +99,11 @@ version: 1.0.0
 
 
 
----
-skill_id: "SKILL-WORK-004"
-skill_name: "Job/CronJob 故障诊断与修复 / Job & [[cronjob|CronJob]] Failure Diagnosis & Remediation"
-version: "1.0"
-category: "workload"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "10-45min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
-trigger_keywords:
-  - "Job"
-  - "CronJob"
-  - "job failed"
-  - "cronjob not running"
-  - "定时任务"
-  - "批处理"
-  - "batch job"
-  - "exit code"
-  - "backoff"
-  - "missed schedule"
-  - "ttl"
-  - "parallelism"
-trigger_events:
-  - "BackoffLimitExceeded"
-  - "DeadlineExceeded"
-  - "SuccessfulCreate"
-  - "MissSchedule"
-  - "JobAlreadyActive"
-trigger_metrics:
-  - 'kube_job_status_failed'
-  - 'kube_cronjob_status_active'
-  - 'kube_job_status_active'
-  - 'kube_job_spec_completions - kube_job_status_succeeded'
-difficulty: "intermediate"
-reading_level: "intermediate"
-audience:
-  - SRE
-  - 运维工程师
-  - 技术支持
-estimated_read_time: "12min"
-prerequisites:
-  - "工作负载"
-  - "kubectl-basics"
-related_skills:
-  - "SKILL-POD-001"
-  - "SKILL-POD-002"
-  - "SKILL-IMAGE-001"
-  - "SKILL-NODE-002"
-fta_refs:
-  - "故障诊断/FTA故障树/list/job-cronjob-fta.md"
-knowledge_refs:
-  - "故障诊断/18-cronjob-troubleshooting.md"
-  - "故障诊断/22-job-troubleshooting.md"
-  - "工作负载/"
-cross_refs:
-  - type: "fta"
-    path: "../19-故障诊断/06-FTA故障树/list/job-cronjob-fta.md"
-    label: "Job/CronJob 故障树分析"
-  - type: "domain"
-    path: "../19-故障诊断/18-cronjob-troubleshooting.md"
-    label: "CronJob 深度排查"
-  - type: "domain"
-    path: "../19-故障诊断/22-job-troubleshooting.md"
-    label: "Job 深度排查"
-authors:
-  - name: KUDIG Team
-    role: contributor
-
-tier: peripheral---
-
 # Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
-Job 和 CronJob 是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。它们的故障模式与长期运行的工作负载（Deployment/StatefulSet/DaemonSet）有显著差异：任务完成后 Pod 会终止、CronJob 的调度依赖控制器时间同步、Job 的完成条件涉及并行度和成功计数、历史 Job 的清理依赖 TTL 机制。
+Job 和 CronJob 是 [[kubernetes|Kubernetes]] 批处理工作负载的核心控制器。Job 用于一次性任务执行，CronJob 用于定时触发 Job。它们的故障模式与长期运行的工作负载（Deployment/StatefulSet/DaemonSet）有显著差异：任务完成后 Pod 会终止、CronJob 的调度依赖控制器时间同步、Job 的完成条件涉及并行度和成功计数、历史 Job 的清理依赖 TTL 机制。
 
-本 [[SKILL|Skill]] 覆盖 Job 执行失败、CronJob 未触发、错过调度、并发控制问题、重试耗尽、历史堆积、时区偏差等 10 种根因的诊断和修复。
+本 Skill 覆盖 Job 执行失败、CronJob 未触发、错过调度、并发控制问题、重试耗尽、历史堆积、时区偏差等 10 种根因的诊断和修复。
 
 ## 何时使用此 Skill
 

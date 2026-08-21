@@ -544,7 +544,7 @@ flowchart TD
 - [../README.md](../[[23-实体/15-参考与索引/kudig-metadata-index.md|README]]]].md) — 讲师完整台词设计
 - [../oncall-qa/oncall-quick-qa.md](oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../../../29-%E6%96%87%E6%A1%A3/agent-specs/P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
-- [../../故障诊断/](../../故障诊断/) — 故障排查文档
+- [](../../../../19-故障诊断) — 故障排查文档
 
 ## Related
 

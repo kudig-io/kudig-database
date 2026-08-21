@@ -52,7 +52,7 @@ cross_refs:
   path: ../工作负载/04-daemonset-management.md
   label: '深度文档: 04-daemonset-management'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/05-workloads/04-daemonset-troubleshooting.md
+  path: ../../04-高级排障/structural-05-workloads/04-daemonset-troubleshooting.md
   label: '结构化排障: 04-daemonset-troubleshooting'
 tier: supporting
 ---

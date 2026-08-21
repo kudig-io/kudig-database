@@ -51,10 +51,10 @@ authors:
   role: contributor
 cross_refs:
 - type: skill
-  path: ../故障诊断/topic-skills/04-dns-resolution-failure.md
+  path: ../../08-技能体系/04-dns-resolution-failure.md  # H3: 旧路径 ../../08-技能体系/ 修复
   label: '运维技能: 04-dns-resolution-failure'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/02-dns-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/02-dns-troubleshooting.md  # H3: 旧路径 topic-structural-trouble-shooting 修复
   label: '结构化排障: 02-dns-troubleshooting'
 tier: supporting
 ---

@@ -54,17 +54,17 @@ authors:
   role: contributor
 cross_refs:
 - type: domain
-  path: ../集群基础/
+  path: 01-集群基础/
   label: '相关知识域: 集群基础'
 - type: domain
-  path: ../网络/
+  path: 05-网络/
   label: '相关知识域: 网络'
 - type: domain
-  path: ../可观测性/
+  path: 09-可观测性/
   label: '相关知识域: 可观测性'
 - type: skill
-  path: ../故障诊断/topic-skills/07-pvc-storage-failure.md
-  label: '运维技能: 07-pvc-storage-failure'
+  path: 19-故障诊断/08-技能体系/08-pvc-storage-failure.md
+  label: '运维技能: 08-pvc-storage-failure'
 ---
 
 > **生产环境安全提示**

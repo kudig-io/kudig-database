@@ -52,7 +52,8 @@ intent_queries:
 - disaster-recovery-drills的使用方法
 - disaster-recovery-drills的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 17-灾难恢复演练
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'
 category: production-operations

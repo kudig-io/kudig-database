@@ -1,6 +1,7 @@
 ---
 title: 问题排查体系架构文档
-description: '# 问题排查体系架构文档'
+description: 问题排查体系架构：FTA/FEBM/技能协同的端到端排查体系设计（症状映射/向量匹配/执行引擎/学习闭环）  # M4: 修复截断 description
+summary: 端到端问题排查体系架构：症状映射层 + FTA 路径选择 + 详细排查 + 修复执行 + 复盘学习
 category: fta
 tags:
 - k8s
@@ -108,12 +109,12 @@ tier: supporting
 
 | 模块 | 文档位置 | 核心能力 |
 |:---|:---|:---|
-| **症状向量匹配** | `故障诊断/FTA故障树/symptom-vector-matcher.md` | 32维特征向量 + 余弦相似度 + 语义扩展 |
-| **FTA 诊断引擎** | `故障诊断/FTA故障树/fta-execution-engine.md` | 遍历引擎 + 证据收集 + 置信度评估 |
-| **FTA 改进建议** | `故障诊断/FTA故障树/fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
-| **症状快速映射** | `故障诊断/topic-structural-trouble-shooting/symptom-mapping-layer.md` | 快速定位入口 + 决策树 |
-| **FTA 完整索引** | `故障诊断/FTA故障树/fta-index.md` | TE-1~TE-16 完整路径索引 |
-| **FTA-FEBM 联合** | `故障诊断/FEBM方法论/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
+| **症状向量匹配** | `./symptom-vector-matcher.md` | 32维特征向量 + 余弦相似度 + 语义扩展 |
+| **FTA 诊断引擎** | `./fta-execution-engine.md` | 遍历引擎 + 证据收集 + 置信度评估 |
+| **FTA 改进建议** | `./fta-diagnosis-improvement.md` | 动态概率 + 时序约束 + 贝叶斯推理 |
+| **症状快速映射** | `../04-高级排障/structural-symptom-mapping-layer.md` | 快速定位入口 + 决策树 |  <!-- N7: 旧路径 topic-structural-trouble-shooting 修复（H3 漏网） -->
+| **FTA 完整索引** | `./fta-index.md` | TE-1~TE-16 完整路径索引 |
+| **FTA-FEBM 联合** | `../07-FEBM方法论/fta-febm-joint-diagnosis.md` | 联合诊断架构 + 实战案例 |
 
 ---
 
@@ -121,7 +122,7 @@ tier: supporting
 
 ### 2.1 症状向量匹配 (Symptom Vector Matcher)
 
-**文件**: `故障诊断/FTA故障树/symptom-vector-matcher.md`
+**文件**: `./symptom-vector-matcher.md`
 
 **核心能力**:
 - 将问题现象转化为 32 维特征向量
@@ -164,7 +165,7 @@ result = pipeline.match(symptom, context={"cloud_provider": "ACK"})
 
 ### 2.2 FTA 执行引擎 (FTA Execution Engine)
 
-**文件**: `故障诊断/FTA故障树/fta-execution-engine.md`
+**文件**: `./fta-execution-engine.md`
 
 **核心组件**:
 
@@ -193,7 +194,7 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 
 ### 2.3 FTA 诊断改进 (FTA Diagnosis Improvement)
 
-**文件**: `故障诊断/FTA故障树/fta-diagnosis-improvement.md`
+**文件**: `./fta-diagnosis-improvement.md`
 
 **改进项**:
 
@@ -332,7 +333,7 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 | **快速定位问题** | `symptom-mapping-layer.md` | `symptom-vector-matcher.md` |
 | **FTA 路径选择** | `fta-index.md` | `kubernetes-fta-full-analysis-v2.md` |
 | **详细排查执行** | `structural-trouble-shooting/README.md` | 各组件排查文档 |
-| **修复动作执行** | `fta-execution-engine.md#修复执行控制器` | `故障诊断/topic-skills/` |
+| **修复动作执行** | `fta-execution-engine.md#修复执行控制器` | `08-技能体系/` |  <!-- H3: 旧路径故障诊断/topic-skills/ 修复 -->
 | **复盘与学习** | `fta-febm-joint-diagnosis.md` | `febm/` 目录 |
 
 ### 5.2 核心文档关联图
@@ -380,14 +381,14 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  故障诊断/topic-structural-trouble-shooting/ (详细排查)            │
+│  04-高级排障/structural-*/ (详细排查)            │
 │  - 63篇 结构化排查文档                                      │
 │  - 按组件/按现象                                           │
 └─────────────────────────────────────────────────────────────┘
     │
     ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  故障诊断/topic-skills/ (自动修复)                                  │
+│  08-技能体系/ (自动修复)                                  │
 │  - 30篇 自动化技能                                         │
 │  - 可执行修复动作                                           │
 └─────────────────────────────────────────────────────────────┘
@@ -423,5 +424,13 @@ current_prob = 0.05 * 1.5 * 2.0 * 1.5 = 0.225  # 4.5倍提升
 
 > **维护团队**: Platform Team / SRE Team / AI Team
 > **问题反馈**: GitHub Issues
+
+---
+
+## 相关文档  <!-- M4: 新增互链 -->
+
+- [症状向量匹配引擎](./symptom-vector-matcher.md) — 症状映射层实现
+- [FTA 诊断执行引擎](./fta-execution-engine.md) — 修复执行层实现
+- [FTA 故障树完整索引](./fta-index.md) — 故障树编号查询
 
 <!-- risk-assessed -->

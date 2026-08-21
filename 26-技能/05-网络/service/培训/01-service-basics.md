@@ -86,7 +86,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
+tier: peripheral
+---
 # 第四课：Service - 让应用可以被访问
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟

@@ -467,7 +467,7 @@ kubectl get pod <pod-name> -o jsonpath='{.status.conditions[?(@.type=="Disruptio
 
 ## 9. 诊断命令版本差异
 
-> 以下内容整合自 `故障诊断/技能体系/skill-set/k8s-node-notready/reference/version-matrix.md`
+> 以下内容整合自 `19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md`
 
 ### 9.1 诊断命令差异表（v1.28-v1.32）
 

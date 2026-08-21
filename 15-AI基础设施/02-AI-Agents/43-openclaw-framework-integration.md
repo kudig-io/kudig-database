@@ -543,9 +543,9 @@ agent = ReActAgent(
 |--------------|---------------------------|-------------|
 | SOUL.md | [安全](../安全/) | 安全红线规则来源 |
 | USER.md | [平台工程](../平台工程/) | 运维工程师角色定义 |
-| AGENTS.md | [故障诊断](../故障诊断/) | 诊断工作流模板 |
+| AGENTS.md | [故障诊断](../../19-故障诊断) | 诊断工作流模板 |
 | TOOLS.md | [网络](../网络/), [可观测性](../可观测性/) | 工具使用规范 |
-| SKILL.md | [topic-fta](../故障诊断/FTA故障树/), [topic-structural-trouble-shooting](../故障诊断/高级排障/) | 故障树 + SOP 知识 |
+| SKILL.md | [topic-fta](../../19-故障诊断/06-FTA故障树), [topic-structural-trouble-shooting](../../19-故障诊断/04-高级排障) | 故障树 + SOP 知识 |
 | MEMORY.md | [domain-33-kubernetes-events](../系统基础/) | 事件模式知识库 |
 | IDENTITY.md | — | Agent 品牌独立设计 |
 

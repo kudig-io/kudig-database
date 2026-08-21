@@ -44,7 +44,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - monitoring-basics
-skill_id: SKILL-02_POD_CRASHLOOP_OOMKILLED-001
+skill_id: SKILL-POD-001
 skill_name: Pod CrashLoopBackOff & OOMKilled 诊断与修复
 version: 1.0.0
 k8s_versions:
@@ -1487,13 +1487,13 @@ Native Sidecar Containers 改变了 Init Container 的诊断逻辑：
 | 主题 | 参考文件路径 | 适用根因 |
 |------|-----------|---------|
 | Pod 生命周期与容器状态机 | `domain-4-workloads-scheduling/` | 所有根因 |
-| Linux OOM Killer 机制与 cgroup 内存管理 | `故障诊断/高级排障/structural-` | RC-002, RC-003, RC-011 |
+| Linux OOM Killer 机制与 cgroup 内存管理 | `19-故障诊断/04-高级排障/structural-` | RC-002, RC-003, RC-011 |
 | Kubernetes 资源管理 (requests/limits/QoS) | `domain-4-workloads-scheduling/` | RC-002, RC-003 |
 | Container Runtime (containerd) 行为 | `故障诊断/` | RC-001, RC-004 |
-| Pod FTA 故障树分析 | `故障诊断/FTA故障树/list/pod-fta.md` | 所有根因 |
-| Java 内存模型与容器化最佳实践 | `故障诊断/高级排障/structural-` | RC-011 |
+| Pod FTA 故障树分析 | `19-故障诊断/06-FTA故障树/list/pod-fta.md` | 所有根因 |
+| Java 内存模型与容器化最佳实践 | `19-故障诊断/04-高级排障/structural-` | RC-011 |
 | Init Container 与 Sidecar 行为 | `domain-4-workloads-scheduling/` | RC-010 |
-| Probe 配置最佳实践 | `故障诊断/高级排障/structural-` | RC-008 |
+| Probe 配置最佳实践 | `19-故障诊断/04-高级排障/structural-` | RC-008 |
 
 ### 10.3 关键知识点备忘
 

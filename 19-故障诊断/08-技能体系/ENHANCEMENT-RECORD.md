@@ -100,7 +100,7 @@ version: 1.0.0
 
 | 文件 | Skill ID | 名称 | 类别 | 行数 | 覆盖场景 |
 |------|----------|------|------|------|---------|
-| 07-pvc-storage-failure.md | SKILL-STORE-001 | PVC/PV/CSI 存储问题 | Storage | ~1411 | PVC Pending/PV绑定/CSI问题/扩容/数据恢复 |
+| 08-pvc-storage-failure.md | SKILL-STORE-001 | PVC/PV/CSI 存储问题 | Storage | ~1411 | PVC Pending/PV绑定/CSI问题/扩容/数据恢复 |
 | 08-deployment-rollout-failure.md | SKILL-WORK-001 | Deployment 滚动更新问题 | Workload | ~1328 | 滚动更新卡住/回滚/金丝雀/StatefulSet/DaemonSet |
 | 09-rbac-quota-failure.md | SKILL-SEC-002 | RBAC 权限与 Quota 问题 | Security | ~1511 | RBAC 403/Quota耗尽/LimitRange/Admission/多租户 |
 | 10-image-pull-failure.md | SKILL-IMAGE-001 | 镜像拉取与仓库问题 | Image | ~1392 | ImagePullBackOff/认证/限速/Air-Gap/安全扫描 |
@@ -127,7 +127,7 @@ version: 1.0.0
 
 | Skill 文件 | 脚本 | 用途 |
 |-----------|------|------|
-| 07-pvc-storage-failure.md | diagnose-pvc-quick.sh | Phase 1 PVC 快速诊断 |
+| 08-pvc-storage-failure.md | diagnose-pvc-quick.sh | Phase 1 PVC 快速诊断 |
 | | check-csi-health.sh | CSI 驱动健康检查 |
 | | verify-storage.sh | 存储修复验证 |
 | 11-control-plane-failure.md | diagnose-cp-quick.sh | 控制平面快速诊断 |
@@ -175,7 +175,7 @@ version: 1.0.0
 ### 6.1 修改的文件
 
 ```
-故障诊断/topic-skills/
+19-故障诊断/08-技能体系/
 ├── skill-schema.md                    # Schema 规范（新增 Section 11/12 + 分类体系）
 ├── README.md                           # 全景索引（扩展至 18 Skill）
 ├── 01-node-notready.md                 # 增强
@@ -191,8 +191,8 @@ version: 1.0.0
 ### 6.2 新增的文件
 
 ```
-故障诊断/topic-skills/
-├── 07-pvc-storage-failure.md           # 新增 Skill
+19-故障诊断/08-技能体系/
+├── 08-pvc-storage-failure.md           # 新增 Skill
 ├── 08-deployment-rollout-failure.md    # 新增 Skill
 ├── 09-rbac-quota-failure.md            # 新增 Skill
 ├── 10-image-pull-failure.md            # 新增 Skill

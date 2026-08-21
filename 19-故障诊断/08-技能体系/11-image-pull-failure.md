@@ -1,7 +1,7 @@
 ---
 title: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
-description: '## 1. 概述'
-summary: '镜像拉取问题是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，'
+description: Kubernetes 镜像拉取与仓库故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 镜像拉取与仓库故障的完整诊断-修复-验证工单处理 Skill
 category: pod
 tags:
 - k8s
@@ -50,7 +50,7 @@ prerequisites:
 - helm-basics
 - gpu-scheduling-basics
 - policy-basics
-skill_id: SKILL-10_IMAGE_PULL_FAILURE-001
+skill_id: SKILL-IMAGE-001
 skill_name: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 version: 1.0.0
 k8s_versions:
@@ -78,7 +78,7 @@ agent_execution_mode: L2-semi-auto
 
 ## 1. 概述
 
-镜像拉取问题是 [[23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
+镜像拉取问题是 [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 集群中**最常见的 Pod 启动失败原因之一**，约占所有 Pod 异常工单的 20-30%。当容器镜像无法成功拉取时，Pod 将持续处于 `ImagePullBackOff` 或 `ErrImagePull` 状态，导致服务无法启动或扩容失败。对于生产环境中的关键服务，镜像拉取问题可能直接导致业务中断。
 
 ### 典型触发场景
 
@@ -1474,14 +1474,14 @@ kubectl debug node/${NODE} -it --image=busybox -- crictl images | grep "<image-k
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| 镜像仓库排障深度指南 | `故障诊断/27-image-registry-troubleshooting.md` | 超出本 Skill 覆盖的深度仓库问题 |
+| 镜像仓库排障深度指南 | `19-故障诊断/03-基础设施排障/03-image-registry-troubleshooting.md` | 超出本 Skill 覆盖的深度仓库问题 |
 | 容器镜像管理 | `容器运行时/` | 镜像构建、推送、安全扫描全流程 |
 | Docker 基础 | `容器运行时/` | containerd 与 Docker 架构差异 |
 | 网络故障排查 | `SKILL-NET-001` | 仓库网络不通的深度诊断 |
 | 证书管理 | `SKILL-SEC-001` | TLS 证书问题的详细诊断 |
 | Pod 调度 | `SKILL-POD-002` | 镜像拉取后 Pod 仍 Pending 的问题 |
 | 供应链安全 | `安全/` | 镜像签名、验证、SBOM |
-| Air-Gap 部署 | `故障诊断/` | 离线环境完整解决方案 |
+| Air-Gap 部署 | `19-故障诊断/` | 离线环境完整解决方案 |
 
 ### 10.3 Skill 改进记录
 

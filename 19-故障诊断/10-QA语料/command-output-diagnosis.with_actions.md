@@ -3,6 +3,7 @@ title: 命令输出解读语料 — Agent 诊断推理核心数据 [故障诊断
 description: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于问题推理
 summary: kubectl/系统命令输出→诊断结论的结构化映射, 供 Agent 直接用于问题推理
 category: agent-corpus
+source: fta-skills  # M3: 来源标注（由 08-技能体系 Skills 与 06-FTA故障树 FTA 自动提取生成）
 tags:
 - k8s
 - troubleshooting

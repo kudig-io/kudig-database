@@ -510,8 +510,8 @@ related_skills: []
 knowledge_refs:
   - 网络/03-cni-plugins-comparison.md
   - 网络/27-cni-troubleshooting-optimization.md
-  - 故障诊断/FTA故障树/list/networkpolicy-fta.md
-  - 故障诊断/FTA故障树/list/terway-fta.md
+  - networkpolicy-fta.md
+  - terway-fta.md
 ---
 ```
 

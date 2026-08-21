@@ -1,7 +1,7 @@
 ---
 title: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
-description: '## 1. 概述'
-summary: '性能瓶颈是 [[kubernetes|Kubernetes]] 集群和云原生应用中最常见但也最难定位的问题之一。性能问题往往表现为延迟增加、吞吐量下降、资源使用异常等，其根因可能涉及多个层次：从基础设施（CPU/内存/磁盘/网络）到 Kubernetes 平台（API Server/etcd/Scheduler）再到应用层（代码逻辑/GC/连接池）。'
+description: Kubernetes 性能瓶颈的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 性能瓶颈的完整诊断-修复-验证工单处理 Skill
 category: performance
 tags:
 - k8s
@@ -56,7 +56,7 @@ prerequisites:
 - etcd-basics
 - gpu-scheduling-basics
 - tracing-basics
-skill_id: SKILL-17_PERFORMANCE_BOTTLENECK-001
+skill_id: SKILL-PERF-001
 skill_name: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 version: 1.0.0
 k8s_versions:
@@ -1521,7 +1521,7 @@ ssh <node-ip> "mount | grep cgroup"
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| 性能瓶颈深度排查 | `故障诊断/33-performance-bottleneck-troubleshooting.md` | 超出本 Skill 覆盖的复杂性能问题 |
+| 性能瓶颈深度排查 | 19-故障诊断/33-performance-bottleneck-troubleshooting.md` | 超出本 Skill 覆盖的复杂性能问题 |
 | 性能调优指南 | `集群基础/13-performance-tuning-guide.md` | 系统性的性能优化方法论 |
 | cgroup 详解 | `系统基础/08-linux-container-fundamentals.md` | cgroup v1/v2 深入理解 |
 | 网络性能分析 | `网络/` | 网络层面性能问题深入分析 |

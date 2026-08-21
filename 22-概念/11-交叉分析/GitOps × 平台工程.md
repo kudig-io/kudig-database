@@ -77,8 +77,8 @@ base_confidence: 0.88
 lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 
-tier: supporting---
-
+tier: supporting
+---
 # GitOps x 平台工程
 
 ## 连接点

@@ -138,21 +138,21 @@ tags: [node, status, notready, kubelet]
 # 生成全量语料
 cd scripts/corpus-generator
 python3 generate.py --priority all \
-  --output 故障诊断/topic-qa-corpus/generated/
+  --output 19-故障诊断/10-QA语料/generated/  # N6: 旧路径 topic-qa-corpus 修复
 
 # 验证覆盖率
 python3 validators/coverage_checker.py \
-  --skills-dir 故障诊断/topic-skills \
-  --fta-dir 故障诊断/FTA故障树/list \
-  --corpus-dir 故障诊断/topic-qa-corpus/generated
+  --skills-dir 19-故障诊断/08-技能体系 \
+  --fta-dir 19-故障诊断/06-FTA故障树/list \
+  --corpus-dir 19-故障诊断/10-QA语料/generated  # N6: 旧路径修复
 ```
 
 ### 生成流水线
 
 ```
-topic-skills/*.md ──┐
-                   ├──→ extractors → generate.py → topic-qa-corpus/generated/
-topic-fta/list/*.md ┘         ↑
+08-技能体系/*.md ──┐  # N6: 旧路径 topic-skills 修复
+                   ├──→ extractors → generate.py → 10-QA语料/generated/
+06-FTA故障树/list/*.md ┘         ↑  # N6: 旧路径 topic-fta 修复
                               │
 seed/*.md ────────────────────┘  (人工精调覆盖)
 ```

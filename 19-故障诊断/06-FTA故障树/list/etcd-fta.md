@@ -52,7 +52,7 @@ cross_refs:
   path: ../集群基础/11-etcd-deep-dive.md
   label: '深度文档: 11-etcd-deep-dive'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/02-etcd-troubleshooting.md
+  path: ../../04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md
   label: '结构化排障: 02-etcd-troubleshooting'
 tier: supporting
 ---

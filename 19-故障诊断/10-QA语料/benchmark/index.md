@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Benchmark
 
-> 本页为 `故障诊断/topic-qa-corpus/benchmark` 目录的自动索引。
+> 本页为 `19-故障诊断/10-QA语料/benchmark` 目录的自动索引。
 
 ## 内容
 

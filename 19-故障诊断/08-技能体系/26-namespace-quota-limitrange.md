@@ -1,8 +1,8 @@
 ---
 title: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis
   & Remediation
-description: '- 运维工程师'
-summary: 'Namespace、ResourceQuota 和 LimitRange 是 [[kubernetes|Kubernetes]] 多租户资源隔离的核心机制。ResourceQuota 限制 Namespace 级别的资源总量，LimitRange 限制单个 Pod/容器的资源范围。'
+description: Kubernetes Namespace/Quota/LimitRange 资源隔离故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Namespace/Quota/LimitRange 资源隔离故障的完整诊断-修复-验证工单处理 Skill
 category: skills
 tags:
 - k8s
@@ -48,10 +48,50 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - prometheus-basics
-skill_id: SKILL-24_NAMESPACE_QUOTA_LIMITRANGE-001
-skill_name: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
-  Diagnosis & Remediation
+skill_id: SKILL-CONFIG-002
+skill_name: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 version: 1.0.0
+severity_range: P0-P2
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+estimated_resolution_time: 5-30min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
+trigger_events:
+- FailedCreate
+- Forbidden
+- OutOfResource
+- FailedBinding
+trigger_metrics:
+- 'kube_resourcequota_used_hard_ratio > 0.95'
+- 'kube_resourcequota{type="hard"}'
+- 'kube_namespace_status_phase{phase="Terminating"}'
+related_skills:
+- SKILL-POD-002
+- SKILL-NODE-002
+- SKILL-WORK-004
+- SKILL-CP-001
+fta_refs:
+- 19-故障诊断/06-FTA故障树/list/resource-quota-fta.md
+knowledge_refs:
+- 19-故障诊断/02-资源排障/16-quota-limitrange-troubleshooting.md
+cross_refs:
+- type: fta
+  path: 19-故障诊断/06-FTA故障树/list/resource-quota-fta.md
+  label: Quota/LimitRange 故障树分析
+- type: domain
+  path: 19-故障诊断/02-资源排障/16-quota-limitrange-troubleshooting.md
+  label: Quota/LimitRange 深度排查
+- type: skill
+  path: 19-故障诊断/08-技能体系/25-job-cronjob-failure.md
+  label: SKILL-WORK-004 Job/CronJob 故障诊断
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**
@@ -60,80 +100,6 @@ version: 1.0.0
 
 
 
-
----
-skill_id: "SKILL-CONFIG-002"
-skill_name: "Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation"
-version: "1.0"
-category: "configuration"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "5-30min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
-trigger_keywords:
-  - "quota"
-  - "limitrange"
-  - "exceeded quota"
-  - "resourcequota"
-  - "namespace"
-  - "配额"
-  - "资源配额"
-  - "超出配额"
-  - "limits exceeded"
-  - "minimum requirement"
-  - "default request"
-  - "terminating namespace"
-trigger_events:
-  - "FailedCreate"
-  - "Forbidden"
-  - "OutOfResource"
-  - "FailedBinding"
-trigger_metrics:
-  - 'kube_resourcequota_used_hard_ratio > 0.95'
-  - 'kube_resourcequota{type="hard"}'
-  - 'kube_namespace_status_phase{phase="Terminating"}'
-difficulty: "intermediate"
-reading_level: "intermediate"
-audience:
-  - SRE
-  - 运维工程师
-  - 平台工程师
-estimated_read_time: "10min"
-prerequisites:
-  - "故障诊断"
-  - "kubectl-basics"
-  - "namespace-concepts"
-related_skills:
-  - "SKILL-POD-002"
-  - "SKILL-NODE-002"
-  - "SKILL-WORK-004"
-  - "SKILL-CP-001"
-fta_refs:
-  - "故障诊断/FTA故障树/list/resource-quota-fta.md"
-knowledge_refs:
-  - "故障诊断/24-quota-limitrange-troubleshooting.md"
-  - "集群基础/"
-cross_refs:
-  - type: "fta"
-    path: "../19-故障诊断/06-FTA故障树/list/resource-quota-fta.md"
-    label: "Quota/LimitRange 故障树分析"
-  - type: "domain"
-    path: "../19-故障诊断/24-quota-limitrange-troubleshooting.md"
-    label: "Quota/LimitRange 深度排查"
-  - type: "[[SKILL|skill]]"
-    path: "./23-job-cronjob-failure.md"
-    label: "Job/CronJob 故障诊断"
-authors:
-  - name: KUDIG Team
-    role: contributor
-
-tier: peripheral---
 
 # Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 

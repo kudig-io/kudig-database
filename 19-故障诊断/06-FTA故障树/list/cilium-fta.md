@@ -436,7 +436,7 @@ related_skills: []
 knowledge_refs:
   - 网络/05-terway-advanced-guide.md
   - 网络/27-cni-troubleshooting-optimization.md
-  - 故障诊断/FTA故障树/list/terway-fta.md
+  - terway-fta.md
 ---
 ```
 

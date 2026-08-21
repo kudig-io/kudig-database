@@ -54,7 +54,7 @@ cross_refs:
   path: ../集群基础/13-kube-controller-manager-deep-dive.md
   label: '深度文档: 13-kube-controller-manager-deep-dive'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/01-control-plane/04-controller-manager-troubleshooting.md
+  path: ../../04-高级排障/structural-01-control-plane/04-controller-manager-troubleshooting.md
   label: '结构化排障: 04-controller-manager-troubleshooting'
 tier: supporting
 ---

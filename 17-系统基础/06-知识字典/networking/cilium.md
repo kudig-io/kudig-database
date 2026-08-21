@@ -153,6 +153,47 @@ kubectl rollout restart ds/cilium -n kube-system
 
 **修复**：启用 Hubble Relay + 外部存储（ClickHouse），限制本地 Flow Log 保留时间。
 
+## 对比评测
+
+| 维度 | Cilium | Calico | Antrea |
+|------|--------|--------|--------|
+| 数据面 | eBPF（TC/XDP） | iptables/BGP | OVS |
+| 网络策略 | 最强（L7/FQDN/DNS） | 强（L3/L4） | 强（L3/L4） |
+| 可观测性 | Hubble（全流量） | 弱 | Traceflow |
+| 内核要求 | 5.x+（严格） | 低 | 需 ovs 模块 |
+| 服务网格 | 内置（无 Sidecar） | 无 | 无 |
+
+**选型建议**：性能与可观测性优先、内核满足条件选 Cilium；内核受限或团队熟悉 iptables 选 Calico；需要流追踪选 Antrea。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 节点 NotReady | `cilium status`；`kubectl -n kube-system logs ds/cilium` | eBPF 加载失败、内核版本过低 |
+| Pod 不通 | `cilium connectivity test` | 策略误配、隧道/直连模式不一致 |
+| 策略不生效 | `cilium policy get`；Hubble flow | 端点身份未更新、策略未编译 |
+| 性能下降 | `cilium metrics list` | BPF map 满、CPU 亲和配置 |
+
+## 生产部署清单
+
+- [ ] 内核版本验证（≥ 5.10 生产建议）与 eBPF 特性检查（`cilium install --check`）
+- [ ] 数据面模式（隧道/直连/DSR）按云环境选择并压测
+- [ ] 网络策略默认拒绝 + Hubble 流量审计已启用
+- [ ] 升级走 `cilium upgrade` 并验证 rollback 预案
+- [ ] 监控接入（cilium-agent metrics + Hubble UI）
+
+## 常见误区与设计要点
+
+- **误区 1**：直接开 DSR 模式不验证——需要云环境支持（L2 可达或特殊路由）。
+- **误区 2**：忽略 `bpf.masquerade` 与 conntrack 配置——NAT 行为差异导致源 IP 异常。
+- **设计要点**：多集群用 ClusterMesh（服务发现 + 全局策略）；用 Hubble 做故障定位第一手段；升级前跑 `cilium connectivity test` 全量回归。
+
+## 性能参考
+
+- 吞吐：eBPF 直连可达线速（XDP 模式 PPS 更高），隧道模式 80-90% 物理带宽。
+- 延迟：本地转发 +0.05ms，DSR 模式回程最优（源 IP 保留）。
+- 规模：生产验证 5000+ 节点（社区基准），BPF map 需按规模调参。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

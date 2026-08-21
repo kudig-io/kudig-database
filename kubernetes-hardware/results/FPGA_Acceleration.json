@@ -1,0 +1,189 @@
+{
+  "基本信息": {
+    "名称": "FPGA 可重构加速（Intel FPGA 设备插件 / AMD Xilinx Alveo 方案 / Funky 云原生 FPGA 编排 (2025)）",
+    "类别": "加速器",
+    "官方文档链接": "Intel 设备插件: https://github.com/intel/intel-device-plugins-for-kubernetes ; Intel 设备插件文档: https://intel.github.io/kubernetes-docs/device-plugins/index.html ; Intel 设备插件 Operator: https://operatorhub.io/operator/intel-device-plugins-operator ; Intel DRA 资源驱动: https://github.com/intel/intel-resource-drivers-for-kubernetes ; Intel FPGA PAC D5005 数据手册: https://www.mouser.com/pdfDocs/Intel_ds-pac-d5005.pdf ; Intel Open FPGA Stack (OFS): https://ofs.github.io/ ; Intel FlexRAN: https://github.com/intel/FlexRAN ; AMD/Xilinx fpga-operator: https://github.com/Xilinx/fpga-operator ; Xilinx Video SDK 部署到 K8s: https://xilinx.github.io/video-sdk/v1.5/deploying_with_kubernetes.html ; AMD Alveo 加速卡: https://www.amd.com/en/products/accelerators/alveo.html ; AMD XRT 文档: https://docs.amd.com/r/en-US/ug1301-getting-started-guide-alveo-accelerator-cards/XRT-and-Deployment-Platform-Installation-Procedures-on-RedHat-and-CentOS ; K8s 设备插件文档: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/ ; K8s DRA 文档: https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/ ; Funky 论文 (SoCC 2025): https://arxiv.org/html/2510.15755v1 ; Funky 会议 Slides: https://dse.in.tum.de/wp-content/uploads/2025/11/Funky-SoCC-2025-slides.pdf"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "Intel 方案": "任意支持 intel-fpga 驱动 (DFL 框架) 的 FPGA 加速卡，如 Intel PAC A10 (Arria 10 GX) 或 PAC D5005 (Stratix 10 SX)，占用一个 PCIe Gen3 x8/x16 槽位；主机为 x86_64 Linux，内核需包含 FPGA Device Feature List (DFL) 驱动框架 (Linux 4.16+ 合入主线 [不确定])；运行 K8s 设备插件 DaemonSet + fpga admission webhook + OCI createRuntime hook。内存与 CPU 无特殊要求，普通节点即可 [不确定]。",
+      "AMD/Xilinx 方案": "一块 Alveo 系列加速卡 (U50/U250/U280/U30 等)，PCIe Gen3/Gen4 槽位；主机 Linux (Ubuntu/RHEL/CentOS)，需安装 Xilinx Runtime (XRT) 内核模块与驱动、容器运行时补丁 (如 nvidia-container-toolkit 类 runtime 或 Xilinx 容器 runtime [不确定])；部署 k8s-fpga-device-plugin DaemonSet (镜像 public.ecr.aws/xilinx_dcg/k8s-fpga-device-plugin)。Alveo U50 为 75W 低功耗小尺寸卡，单宽 PCIe 即可。",
+      "Funky 原型 (2025)": "Alveo U50 FPGA 卡 + Vitis Shell (XDMA 配置，单一可重构槽位)，标准 x86 服务器；需构建 unikernel 沙箱镜像、host 侧 monitor (瘦 hypervisor) 与扩展编排守护进程，并启用自定义调度器与运行时钩子。"
+    },
+    "推荐配置": {
+      "Intel 方案": "Intel PAC D5005 (Stratix 10 SX，约 2.8M 逻辑单元、32GB DDR4、PCIe Gen3 x16) [不确定具体规格] 或更高性能 Agilex 7 卡；K8s 1.28+ 集群，配合 Node Feature Discovery (NFD) 发现 fpga 标签、Intel Device Plugins Operator (Helm) 声明式部署设备插件、admission webhook 与 OCI hook；位流与 AFU (Accelerator Function Unit) 通过 AcceleratorFunction CRD 管理。",
+      "AMD/Xilinx 方案": "Alveo U250 (UltraScale+ KU15P、4x DDR4、PCIe Gen3 x16 [不确定]) 或 U280 (UltraScale+ VU37P、HBM2 + DDR4、PCIe Gen4 [不确定]) 用于计算密集场景；U50 (8GB HBM2、PCIe Gen4、100GbE、75W) 用于低功耗/边缘；U30 用于视频转码 (每卡 2 个设备)。生产环境建议 2 卡以上并配合 AWS VT1/EKS 或自有裸金属集群。",
+      "5G PHY 场景": "Intel Agilex 7 F-tile FPGA SmartNIC (PAC N6000/N6001，基于 OFS 开源平台) 承载 LDPC/FEC 与 L1 加速，配合 Intel FlexRAN 参考架构 (L1/L2 软件栈) 与 O-RAN O-DU 部署，主机需 100GbE 网络与实时内核配置 [不确定]；金融计算与视频处理场景分别参考 Silicom/Exegy 低延迟方案与 Xilinx Video SDK (FFmpeg + Alveo U30/U50)。"
+    },
+    "生产级配置": {
+      "Intel": "大规模裸金属集群：每节点 2-8 块 FPGA 卡 (受 PCIe 槽位与功耗预算限制)，配合 OFS (Open FPGA Stack) 统一平台、DPDK/OVS 加速、Intel Device Plugins Operator 全生命周期管理；5G 场景为分布式 O-DU 机柜 (ATCA/OTII 形态 [不确定])。",
+      "AMD/Xilinx": "公有云生产环境：AWS EC2 F1 实例 (每实例 8 个 VU9P FPGA 槽 [不确定]) 用于 EDA 仿真/基因分析/视频，VT1 实例 (Alveo U30) 用于大规模视频转码 (EKS 集成)；私有云裸金属：Alveo 卡 + fpga-operator + XRT 全栈自动化。",
+      "Funky": "尚为学术原型 (SoCC 2025)，无生产级配置；论文展望多槽位服务器与硬件辅助 checkpoint 后才有规模化潜力 [不确定]。"
+    },
+    "功耗基线": "[不确定] 官方无统一空载/满载数据。已知参考: Alveo U50 为 75W 低功耗设计 (PCIe 供电即可)；U250/U280 典型满载约 75-150W [不确定]；Intel PAC D5005 最大功耗约 60-75W [不确定]；Agilex 7 N6000 系列约 75-120W [不确定]。FPGA 相对 CPU 每瓦性能优势通常以 10-100 倍宣传 (特定工作负载)，但实测数据因位流而异 [不确定]。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "设备插件框架": "K8s 设备插件机制自 1.8 (Alpha) 引入，v1beta1 API 在 1.14 附近趋于稳定 [不确定]，任何现代 K8s 版本均可承载 FPGA 设备插件。",
+      "Intel 插件": "Intel 设备插件按 K8s 版本节奏发布: v0.36.0 支持 K8s 1.36 (release-0.36)，1.35 (release-0.35)，1.33-1.34 (release-0.34)；通常支持最近 3 个 minor 版本。",
+      "AMD/Xilinx": "Xilinx k8s-fpga-device-plugin (1.0.100) 与 fpga-operator 无明确版本矩阵声明，在 AWS EKS 验证 [不确定]；XRT 版本 (2023.x/2024.x) 决定驱动与卡支持。",
+      "DRA": "Dynamic Resource Allocation 自 K8s 1.26 (Alpha, v1alpha3) 引入，1.30 前后进入 Beta (v1beta1) [不确定]，截至 1.32/1.33 仍为 Beta [不确定 GA 版本]；Intel 的 DRA 资源驱动 (intel-resource-drivers) 目前覆盖 GPU/Gaudi/QAT，FPGA 尚未列入 [不确定]，社区有 intel.com/fpga 与 intel.com/fpga-family 的 DRA 示例 (K8s Recipes) [不确定]。" 
+    },
+    "操作系统兼容性": {
+      "Intel": "Linux 为主: Ubuntu、RHEL/CentOS、Rocky、Clear Linux 等 [不确定]；DFL 驱动框架合入 Linux 主线内核 (约 4.16+) [不确定]，建议使用较新内核；不支持 Windows Server 节点。",
+      "AMD/Xilinx": "Ubuntu 20.04/22.04、RHEL/CentOS 8/9、Rocky Linux [不确定精确版本矩阵]；XRT 提供 .deb/.rpm 安装包；不支持 Windows。",
+      "Funky": "Linux (x86_64)，基于 QEMU/KVM 类虚拟化组件与 CRI 运行时，无发行版限定声明 [不确定]。"
+    },
+    "K8s 上游支持阶段": {
+      "设备插件": "K8s 上游 GA 稳定框架 (v1beta1)，所有厂商 FPGA 方案均基于此，生产就绪。",
+      "DRA": "K8s 上游 Beta 特性 (需启用 DynamicResourceAllocation 特性门控 [不确定])，生产前需评估；FPGA 厂商适配程度不一。",
+      "Intel": "社区项目 (GitHub intel-device-plugins-for-kubernetes)，随 K8s 版本节奏发布 (v0.36)，有 OperatorHub/Helm 支持，成熟度高；DRA 驱动 (intel-resource-drivers) 标注 beta/非生产 [不确定]。",
+      "AMD/Xilinx": "厂商项目 fpga-operator 与 k8s-fpga-device-plugin，在 AWS EKS/VT1、F1 上有生产部署；fpga-operator 仓库更新节奏较慢 [不确定]，社区活跃度低于 Intel。",
+      "Funky": "学术研究原型 (2025 年 SoCC 论文 + GitHub 开源 [不确定仓库地址])，不可用于生产。"
+    },
+    "生态兼容性矩阵": {
+      "CNI": "与任意 CNI 兼容 (FPGA 是计算设备，不参与网络数据面；5G SmartNIC 形态除外) [不确定]；5G/网络场景的 Agilex SmartNIC 走 OVS/DPDK + OFS 通道 [不确定]。",
+      "监控集成": "Intel: fpgainfo/fpgadiag 工具、PMON 遥测，Prometheus exporter 需自建 [不确定]；Xilinx: xbutil/xbmgmt 健康与利用率查询，XRT 日志，Prometheus 集成有限 [不确定]；Funky: 无监控集成 [不确定]。",
+      "Operator/工具": "Intel Device Plugins Operator (Helm/OperatorHub)、Node Feature Discovery (fpga 标签)、Intel DRA 资源驱动、Xilinx fpga-operator (管理 XRT + 容器运行时 + 设备插件)、AWS EKS + VT1/F1 生态、Xilinx Video SDK (FFmpeg 插件)。",
+      "平台集成": "AWS EKS (VT1/F1)、OpenShift (社区验证 [不确定])、RKE2/kubeadm 自建集群、边缘云 (5G MEC/O-RAN)。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "开发门槛": "FPGA 应用开发需要 RTL/VHDL/Verilog 或 HLS (Vitis HLS) 技能，位流 (bitstream) 与具体卡型号及板卡 Shell 强绑定，同一应用跨卡迁移需重新编译 [不确定]；与 GPU (CUDA) 生态相比开发者规模小。",
+      "资源粒度粗": "设备插件模式下资源以整卡/整区域为单位 (U30 卡两个设备必须同时挂载给同一 Pod)；Intel AFU 模式虽可细分，但依赖 admission webhook + OCI hook 组合，配置复杂。",
+      "Funky 限制": "当前实现仅支持单一可重构槽位，不支持空间共享 (space sharing)；checkpoint 为软件实现 (恢复 340.8ms)，无硬件辅助状态保存；依赖特定 Vitis Shell/XDMA 配置。",
+      "PR 管理复杂度": "部分重配置 (PR) 区域划分需在板卡 Shell 设计阶段完成，静态区域与动态区域不可事后调整；运行时加载位流有失败风险，缺少标准化的失败回滚机制 [不确定]。",
+      "厂商锁定": "Intel (DFL/OFS)、AMD/Xilinx (XRT/Vitis)、AWS (aws-shell) 各自独立，资源命名、驱动、工具链互不通用。"
+    },
+    "混部兼容性": "[不确定] FPGA 与 GPU/CPU 混部需共享 PCIe 通道 (Gen3/Gen4 带宽) 与机箱功耗预算 (每卡 75-150W)；多租户隔离依赖 PR 区域划分 (Intel region 模式) 或 unikernel 沙箱 (Funky)，同一区域不能同时加载两个位流；设备插件上报资源 (如 fpga.intel.com/af-...) 后由 K8s 调度器保证互斥，不会超卖 [不确定]。",
+    "性能开销": "Funky 实测相对原生执行仅 7.4% 开销 (unikernel + monitor 虚拟化)；设备插件/容器化本身几乎无性能开销 (<1%) [不确定]；VFIO PCIe 直通虚拟化开销约 0-5% [不确定]；位流加载 (PR) 在 Pod 启动前完成，冷启动增加数十毫秒至秒级 [不确定]。",
+    "固件与驱动依赖": {
+      "Intel": "依赖内核 DFL 驱动 (intel-fpga-dfl-pci 等)、fpgainfo 工具链；位流由 OCI createRuntime hook 在容器启动前加载；固件升级需整卡离线刷新，影响节点 (需排水)；内核升级需同步驱动版本 [不确定]。",
+      "AMD/Xilinx": "依赖 XRT 运行时 (xrt 内核模块 + 用户态库)、xbutil/xbmgmt 工具；XRT 与卡固件 (Shell) 版本需匹配；U30/U50 等卡固件升级需卡离线 [不确定]；容器需挂载 /dev/xclbin、/opt/xilinx/xrt 等资源。",
+      "Funky": "依赖 monitor 与 unikernel 构建工具链、特定 XDMA 驱动配置 [不确定]。"
+    }
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Intel 设备插件": "设备插件以 DaemonSet 部署 + AcceleratorFunction CRD (自定义资源) 定义 AFU (afuId/interfaceId/mode) + fpga admission webhook 将用户友好函数名翻译为资源名 (如 fpga.intel.com/af-695.d84.aVKNtusxV3qMNmj5-qCB9thCTcSko8QT-J5DNoP5BAs) + OCI createRuntime hook 在容器启动前向 PR 区域加载位流；亦可通过 Intel Device Plugins Operator (Helm/OperatorHub) 声明式部署，NFD 自动打 fpga 节点标签。",
+      "AMD/Xilinx": "fpga-operator 自动化安装 XRT、容器运行时与 k8s-fpga-device-plugin；资源通过 extended resource 暴露 (如 xilinx.com/fpga-xilinx_u30_gen3x4_base_1-0)，Pod 在 limits 中请求；Xilinx Video SDK 提供 YAML 模板 + EKS 部署流程。",
+      "Funky": "扩展编排守护进程 + 自定义调度器 (优先级/抢占) + 自定义运行时 (驱逐/checkpoint)；通过标准 CRI/OCI 注解传递硬件元数据，Pod 请求虚拟 FPGA 设备。",
+      "DRA (未来)": "K8s DRA 方式: ResourceClass + ResourceClaim + DRA 驱动 (Intel 的 intel-resource-drivers 目前不含 FPGA [不确定])。"
+    },
+    "配置示例": {
+      "Intel 资源请求": "resources.limits: fpga.intel.com/af-695.d84.aVKNtusxV3qMNmj5-qCB9thCTcSko8QT-J5DNoP5BAs: 1 ; AcceleratorFunction CRD 示例: afuId: d8424dc4a4a3c413f89e433683f9040b (含 interfaceId 与 mode: af/region 字段)；NFD 标签: intel.feature.node.kubernetes.io/fpga-arria10: 'true' [不确定完整 YAML]",
+      "AMD/Xilinx 资源请求": "resources.limits: xilinx.com/fpga-xilinx_u30_gen3x4_base_1-0: 1 (U30 一个 limit 同时挂载卡上两个设备)；设备插件 DaemonSet 镜像 public.ecr.aws/xilinx_dcg/k8s-fpga-device-plugin:1.0.100 [不确定]",
+      "Funky": "通过 CRI/OCI 注解指定虚拟设备与位流标识，具体注解键值未见公开 [不确定]"
+    },
+    "部署位置与环境": {
+      "裸金属": "主要场景: 数据中心裸金属集群 PCIe 直通安装 FPGA 卡，kubeadm/RKE2/OpenShift 均可承载 [不确定 OpenShift 官方验证]；边缘: 5G O-DU/MEC 机柜 (FlexRAN + Agilex)、低功耗 Alveo U50 边缘推理。",
+      "公有云": "AWS EC2 F1 (VU9P)、VT1 (U30 视频转码) 支持 EKS 原生集成；阿里云/腾讯云 FPGA 实例为 F1 类 (VU9P) [不确定具体集成度]；其余公有云 FPGA 实例有限。",
+      "虚拟机": "云主机无 FPGA 直通则不可用；需 PCIe 直通/VFIO 透传的裸金属虚拟化环境 [不确定]。"
+    },
+    "虚拟化兼容性": {
+      "PCIe 直通": "主流方式: VFIO 将整卡直通给 K8s 节点或 VM，设备插件负责分配；FPGA 一般无 SR-IOV VF 概念 (Agilex SmartNIC 除外 [不确定])。",
+      "VM 热迁移": "设备直通场景不支持热迁移；Funky 的 unikernel + checkpoint 是面向 FPGA 状态的软迁移方案 (恢复 340.8ms)。",
+      "嵌套虚拟化": "不支持；K8s 节点本身为 VM 且无直通时 FPGA 不可用 [不确定]。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "Funky (2025)": "相对原生执行仅 7.4% 性能开销；挂起 177.2ms / 恢复 340.8ms (大规模数据集)；基准覆盖 3D 渲染与光流 (optical flow) 等图像/视频任务。",
+      "FPGA vs CPU 加速比": "厂商宣传在特定工作负载 (金融行情解析、5G LDPC FEC、视频转码、基因比对) 实现 10-100 倍加速或等吞吐下数量级功耗降低 [不确定，缺少第三方统一基准]；Xilinx Video SDK 宣称相对软件 x264 转码最高约 30 倍吞吐 [不确定]。",
+      "金融计算": "HFT 行情解码/订单匹配延迟从 CPU 微秒级降至 FPGA 纳秒级 (例如市场数据解析 ~10-100ns [不确定])，Silicom/Exegy 等商用方案采用。",
+      "5G PHY": "Intel FlexRAN + Agilex FPGA 加速 LDPC 编解码/FEC，替代多核 CPU 软编解码，满足 5G NR 实时性要求 [不确定具体吞吐数字]。",
+      "Intel/AWS 场景": "AWS F1 (VU9P) 用于 EDA 仿真加速与基因分析，性能收益依赖具体负载 [不确定]。"
+    },
+    "扩展性上限": "[不确定] 无官方最大节点数声明；集群规模受 K8s 控制面常规限制；每节点 FPGA 数量受 PCIe 槽位与功耗 (每卡 75-150W) 限制，通常 2-8 卡；AWS F1.16xlarge 提供 8 个 FPGA 槽 [不确定]。",
+    "每节点密度": "[不确定] 取决于卡形态: Alveo U30 每卡 2 个可调度设备；U50/U250/U280 与 Intel D5005 每卡 1 个设备；支持多 PR 区域的卡可划分 2-4 个区域 [不确定]；FPGA 不受 Pod 数上限 (110) 约束，但受设备数量约束。"
+  },
+  "安全": {
+    "安全特性": {
+      "位流保护": "Intel (Stratix 10/Agilex) 与 AMD (UltraScale+/Versal) 均支持 AES 位流加密与密钥管理，防止 IP 泄露；Intel 卡支持安全管理器与鉴权加载 [不确定]；AWS F1 位流加密经 aws-shell 管理 [不确定]。",
+      "多租户隔离": "PR 区域划分提供物理隔离 (Intel region 模式)；Funky 通过 unikernel 沙箱 + monitor 实现租户间隔离与状态隔离；设备插件保证设备独占 (不共享)。",
+      "信任根与证明": "无成熟的 FPGA 远程证明集成到 K8s [不确定]；D5005 类卡具备 secure boot 特性 [不确定]；TPM 不在 FPGA 卡上 [不确定]。"
+    },
+    "合规与认证": "[不确定] 无针对 FPGA K8s 集成的独立合规认证公开资料；金融场景遵循交易所/PCI DSS 等自身合规框架；位流加密符合 IP 保护需求，但 FIPS 等加密认证取决于具体卡与配置 [不确定]。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "Intel": "fpgainfo/fpgadiag 命令行工具 (温度、电压、功耗、错误状态)，PMON 遥测；Prometheus exporter 需社区自建 [不确定]；设备插件上报健康状态至 kubelet (ListAndWatch)，设备故障自动从可分配列表移除。",
+      "AMD/Xilinx": "xbutil (运行时状态、利用率、功耗) 与 xbmgmt (管理面、固件) 工具；XRT 日志；Prometheus 集成有限 [不确定]。",
+      "Funky": "无监控集成公开资料 [不确定]；运行时提供驱逐/checkpoint 事件 [不确定]。"
+    },
+    "维护与生命周期": "[不确定] 位流更新: 更新 AcceleratorFunction CRD/镜像后由 OCI hook 重新加载，无需重启节点；固件 (卡 Shell) 升级需整卡离线并排水节点；FPGA 无机械部件，MTBF 数据未公开 [不确定]；内核/驱动升级 (DFL/XRT) 需与卡固件版本对齐，可能要求节点重启 [不确定]。",
+    "弹性与故障恢复": "[不确定] 卡故障时 kubelet 通过设备插件健康上报将设备置为不可用，运行中 Pod 被杀后重新调度 (无状态场景)；FPGA 为计算设备无持久化数据，不涉及 RAID/多路径；Funky 提供状态保存/恢复 (checkpoint 340.8ms) 支持有状态任务迁移；生产建议多节点冗余与卡故障告警 [不确定]。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件采购": "[不确定] Alveo U50 约 $2,000-3,000/卡，U250 约 $2,000-4,000，U280 约 $5,000-8,000，U55C 约 $6,000-10,000 [不确定]；Intel PAC D5005 约 $5,000-8,000 [不确定]，Agilex 7 N6000 系列约 $8,000-15,000 [不确定]；AWS F1 按小时计费 (f1.2xlarge 约 $1.65/小时 [不确定])，VT1 按 vCPU/小时计费。",
+      "运行成本": "每卡 75-150W 额外功耗与散热；XRT/DFL 软件免费，但 Vitis/Vivado 开发工具与 IP 许可 (部分需商业许可) 是隐性成本；专业 FPGA 开发人力成本高。",
+      "节省项": "特定负载下替代多个高功耗 CPU 核 (5G PHY、转码、HFT)，降低整机功耗与延迟；云上按需实例避免闲置硬件投入。",
+      "适用性判断": "仅当工作负载为确定性、低延迟或高吞吐专用计算 (行情、FEC、转码、数据库加速) 且规模足够时才具经济性；通用计算负载不划算 [不确定]。"
+    },
+    "成熟度与社区支持": {
+      "Intel": "生态最完整: intel-device-plugins-for-kubernetes 活跃维护 (v0.36，随 K8s 节奏发布)，Operator/Helm/OperatorHub 支持，OFS 开源平台 + FlexRAN 覆盖 5G 场景，DFL 驱动在主线上游。",
+      "AMD/Xilinx": "fpga-operator 与 k8s-fpga-device-plugin 有 AWS EKS 生产验证 (VT1/F1)，XRT 工具链成熟；但 K8s 侧仓库更新较慢，社区活跃度低于 Intel [不确定]。",
+      "Funky": "学术原型 (SoCC 2025 论文，德国慕尼黑工业大学 dse.in.tum.de 团队)，GitHub 开源供社区评估 [不确定仓库地址]；代表 2025 年云原生 FPGA 编排研究方向，尚未产品化。",
+      "场景生态": "金融 (Silicom/Exegy 等商业方案)、5G (Intel FlexRAN/O-RAN 社区)、视频 (Xilinx Video SDK/FFmpeg)、EDA 与数据库加速均有活跃商业与社区实践。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.最低配置.Intel 方案",
+    "硬件规格.推荐配置.Intel 方案",
+    "硬件规格.推荐配置.AMD/Xilinx 方案",
+    "硬件规格.推荐配置.5G PHY 场景",
+    "硬件规格.生产级配置.Intel",
+    "硬件规格.生产级配置.AMD/Xilinx",
+    "硬件规格.生产级配置.Funky",
+    "硬件规格.功耗基线",
+    "兼容性.支持的 K8s 版本范围.设备插件框架",
+    "兼容性.支持的 K8s 版本范围.AMD/Xilinx",
+    "兼容性.支持的 K8s 版本范围.DRA",
+    "兼容性.操作系统兼容性.Intel",
+    "兼容性.操作系统兼容性.AMD/Xilinx",
+    "兼容性.操作系统兼容性.Funky",
+    "兼容性.K8s 上游支持阶段.DRA",
+    "兼容性.K8s 上游支持阶段.Intel",
+    "兼容性.K8s 上游支持阶段.AMD/Xilinx",
+    "兼容性.K8s 上游支持阶段.Funky",
+    "兼容性.生态兼容性矩阵.CNI",
+    "兼容性.生态兼容性矩阵.监控集成",
+    "兼容性.生态兼容性矩阵.平台集成",
+    "限制与约束.已知限制.开发门槛",
+    "限制与约束.已知限制.PR 管理复杂度",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销",
+    "限制与约束.固件与驱动依赖.Intel",
+    "限制与约束.固件与驱动依赖.AMD/Xilinx",
+    "限制与约束.固件与驱动依赖.Funky",
+    "配置与部署.配置方式.DRA (未来)",
+    "配置与部署.配置示例.Intel 资源请求",
+    "配置与部署.配置示例.AMD/Xilinx 资源请求",
+    "配置与部署.配置示例.Funky",
+    "配置与部署.部署位置与环境.裸金属",
+    "配置与部署.部署位置与环境.公有云",
+    "配置与部署.部署位置与环境.虚拟机",
+    "配置与部署.虚拟化兼容性.PCIe 直通",
+    "配置与部署.虚拟化兼容性.嵌套虚拟化",
+    "性能特征.基准性能数据.FPGA vs CPU 加速比",
+    "性能特征.基准性能数据.金融计算",
+    "性能特征.基准性能数据.5G PHY",
+    "性能特征.基准性能数据.Intel/AWS 场景",
+    "性能特征.扩展性上限",
+    "性能特征.每节点密度",
+    "安全.安全特性.位流保护",
+    "安全.安全特性.信任根与证明",
+    "安全.合规与认证",
+    "运维与生命周期.可观测性支持.Intel",
+    "运维与生命周期.可观测性支持.AMD/Xilinx",
+    "运维与生命周期.可观测性支持.Funky",
+    "运维与生命周期.维护与生命周期",
+    "运维与生命周期.弹性与故障恢复",
+    "经济性.总拥有成本 (TCO).硬件采购",
+    "经济性.总拥有成本 (TCO).适用性判断",
+    "经济性.成熟度与社区支持.AMD/Xilinx",
+    "经济性.成熟度与社区支持.Funky"
+  ]
+}

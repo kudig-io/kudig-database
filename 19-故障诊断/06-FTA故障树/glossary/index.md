@@ -13,7 +13,12 @@ last_updated: 2026-07
 
 # Glossary
 
-> 本页为 `故障诊断/FTA故障树/glossary` 目录的自动索引。
+> 本页为 `19-故障诊断/06-FTA故障树/glossary` 目录的自动索引。  <!-- N6: 旧路径修复 -->
+
+## 关联文档
+
+- 精简对照版术语表: [附录 A：FTA 术语表](../appendix-a-glossary.md)（约 150 行中英文对照）  <!-- L3: 与 appendix-a 互链 -->
+- 术语在故障树中的使用: [FTA 符号体系与标准规范](../03-fta-symbol-system-and-standards.md)
 
 ## 文档
 

@@ -50,7 +50,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md
+  path: ../../04-高级排障/structural-07-resources-scheduling/03-cluster-autoscaler-troubleshooting.md
   label: '结构化排障: 03-cluster-autoscaler-troubleshooting'
 tier: supporting
 ---

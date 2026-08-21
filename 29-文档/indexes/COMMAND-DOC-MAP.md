@@ -76,8 +76,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # KUDIG 命令 → 文档映射
 
 > 创建时间: 2026-05-20

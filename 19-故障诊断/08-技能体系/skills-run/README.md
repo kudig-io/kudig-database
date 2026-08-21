@@ -61,7 +61,7 @@ version: 1.0.0
 
 ```bash
 # 1. 进入 demo 目录
-cd 故障诊断/topic-skills/skills-run
+cd 19-故障诊断/08-技能体系/skills-run
 
 # 2. 创建本地多节点 Kind 集群 (1 control-plane + 2 workers)
 bash setup-kind-cluster.sh

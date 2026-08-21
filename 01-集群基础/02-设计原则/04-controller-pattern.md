@@ -107,9 +107,8 @@ cross_refs:
   path: ../集群基础/
   label: '相关知识域: 集群基础'
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # 03 - 控制器模式与调谐循环 (Controller Pattern)
 
 <!-- chunk: 架构师洞察：水平触发 (Level-triggered) 的力量 -->

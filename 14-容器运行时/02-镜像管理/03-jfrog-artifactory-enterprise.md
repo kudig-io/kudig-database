@@ -59,7 +59,8 @@ intent_queries:
 - jfrog-artifactory-enterprise的使用方法
 - jfrog-artifactory-enterprise的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: JFrog Artifactory Enterprise Container Registry Platform
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: container-image-management

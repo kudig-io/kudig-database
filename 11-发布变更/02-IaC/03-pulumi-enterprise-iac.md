@@ -53,7 +53,8 @@ intent_queries:
 - pulumi-enterprise-iac的使用方法
 - pulumi-enterprise-iac的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: Pulumi Enterprise [[22-概念/09-平台与发布/infrastructure-as-code.md|Infrastructure as Code]] Platform
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: infrastructure-as-code

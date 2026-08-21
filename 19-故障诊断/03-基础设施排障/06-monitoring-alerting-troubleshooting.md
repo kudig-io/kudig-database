@@ -64,10 +64,10 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/FTA故障树/list/monitoring-fta.md
+  path: ../06-FTA故障树/list/monitoring-fta.md
   label: '故障树: monitoring'
 - type: skill
-  path: ../故障诊断/topic-skills/15-monitoring-alerting-failure.md
+  path: ../08-技能体系/15-monitoring-alerting-failure.md
   label: '运维技能: 15-monitoring-alerting-failure'
 ---
 

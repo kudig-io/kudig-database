@@ -95,8 +95,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # 第14课：StatefulSet - 有状态应用管理
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 25 分钟

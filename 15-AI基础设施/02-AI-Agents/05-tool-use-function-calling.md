@@ -918,7 +918,7 @@ def audit_tool_call(tool_name: str, args: dict, user_id: str):
 | [03 - Agent 框架对比](./03-agent-frameworks-comparison.md) | LangChain/LlamaIndex 工具封装 |
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | 工具在多 Agent 间的共享 |
 | [10 - 安全护栏](./10-security-guardrails.md) | 工具调用的安全策略 |
-| [故障诊断](../故障诊断/) | K8s 运维工具对应的知识库 |
+| [故障诊断](../../19-故障诊断) | K8s 运维工具对应的知识库 |
 
 ---
 

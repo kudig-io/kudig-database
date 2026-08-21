@@ -254,8 +254,8 @@ kubectl top pod -n <namespace>
 - [ ] 升级决策框架
 
 **推荐学习**：
-- `故障诊断/topic-skills/skill-set/*/SKILL.md`
-- `故障诊断/topic-skills/skill-set/*/DIALOGUE.md`
+- `19-故障诊断/08-技能体系/skill-set/*/SKILL.md`
+- `19-故障诊断/08-技能体系/skill-set/*/DIALOGUE.md`
 
 ### 5.2 工单处理流程
 - [ ] 工单分级（P0/P1/P2）
@@ -285,8 +285,8 @@ kubectl top pod -n <namespace>
 |:---|:---|---:|
 | 概念文档 | `concepts/` | 62 |
 | 最佳实践 | `best-practices/` | 14 |
-| 诊断Skill | `故障诊断/topic-skills/skill-set/*/` | 17 |
-| 对话脚本 | `故障诊断/topic-skills/skill-set/*/DIALOGUE.md` | 17 |
+| 诊断Skill | `19-故障诊断/08-技能体系/skill-set/*/` | 17 |
+| 对话脚本 | `19-故障诊断/08-技能体系/skill-set/*/DIALOGUE.md` | 17 |
 | 合成分析 | `synthesis/` | 100+ |
 | 案例研究 | `synthesis/case-studies/` | 36 |
 | 阿里云文档 | `云厂商/01-alibaba-cloud/` | 6 |

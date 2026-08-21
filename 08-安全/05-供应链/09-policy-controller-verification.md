@@ -61,7 +61,8 @@ intent_queries:
 - policy-controller-verification的使用方法
 - policy-controller-verification的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: Policy Controller 镜像验证 (Policy Controller Image Verification)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: supply-chain-security

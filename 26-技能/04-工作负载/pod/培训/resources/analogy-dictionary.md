@@ -72,8 +72,8 @@ authors:
 - name: KUDIG Team
   role: contributor
 
-tier: peripheral---
-
+tier: peripheral
+---
 # K8S 概念类比词典
 
 > **用途**: 解释复杂概念时的生活化类比

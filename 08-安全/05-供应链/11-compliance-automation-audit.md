@@ -63,7 +63,8 @@ intent_queries:
 - compliance-automation-audit的使用方法
 - compliance-automation-audit的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 合规自动化与审计 (Compliance Automation and Audit)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: supply-chain-security

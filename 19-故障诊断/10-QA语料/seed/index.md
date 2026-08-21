@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Seed
 
-> 本页为 `故障诊断/topic-qa-corpus/seed` 目录的自动索引。
+> 本页为 `19-故障诊断/10-QA语料/seed` 目录的自动索引。
 
 ## 文档
 

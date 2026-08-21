@@ -2900,7 +2900,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0001",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "high",
     "command": "kubectl auth can-i list persistentvolumes",
@@ -2919,7 +2919,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl"
     ],
     "k8s_versions": [
@@ -2932,7 +2932,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0002",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "high",
     "command": "kubectl get pvc -A \\| grep -v Bound",
@@ -2951,7 +2951,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -2965,7 +2965,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0003",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl describe pod <pod> \\| grep -i \"FailedMount\\|MountVolume\"",
@@ -2985,7 +2985,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "describe"
@@ -3000,7 +3000,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0004",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver",
@@ -3019,7 +3019,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "status"
@@ -3034,7 +3034,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0005",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pv \\| grep Released",
@@ -3055,7 +3055,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3069,7 +3069,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0006",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get volumeattachment",
@@ -3089,7 +3089,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3103,7 +3103,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0007",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl delete pvc test-pvc-diag-*",
@@ -3124,7 +3124,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl"
     ],
     "k8s_versions": [
@@ -3137,7 +3137,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0008",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl delete pod test-mount-diag-*",
@@ -3157,7 +3157,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod"
     ],
@@ -3171,7 +3171,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0009",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get sc",
@@ -3192,7 +3192,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3206,7 +3206,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0010",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'",
@@ -3225,7 +3225,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3239,7 +3239,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0011",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pods -n kube-system -l app=csi-controller",
@@ -3259,7 +3259,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "status"
@@ -3274,7 +3274,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0012",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl logs <csi-pod> -c csi-provisioner",
@@ -3293,7 +3293,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "logs"
@@ -3308,7 +3308,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0013",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get csistoragecapacity -A",
@@ -3329,7 +3329,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3343,7 +3343,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0014",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName",
@@ -3363,7 +3363,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "node",
       "status"
@@ -3378,7 +3378,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0015",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'",
@@ -3399,7 +3399,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure 2",
+      "08-pvc-storage-failure",
       "kubectl",
       "node",
       "status"
@@ -3414,7 +3414,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0016",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl auth can-i list persistentvolumes",
@@ -3432,7 +3432,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl"
     ],
     "k8s_versions": [
@@ -3445,7 +3445,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0017",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pvc -A \\| grep -v Bound",
@@ -3465,7 +3465,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3479,7 +3479,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0018",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl describe pod <pod> \\| grep -i \"FailedMount\\|MountVolume\"",
@@ -3498,7 +3498,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "describe"
@@ -3513,7 +3513,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0019",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver",
@@ -3533,7 +3533,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "status"
@@ -3548,7 +3548,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0020",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pv \\| grep Released",
@@ -3569,7 +3569,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3583,7 +3583,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0021",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get volumeattachment",
@@ -3605,7 +3605,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3619,7 +3619,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0022",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl delete pvc test-pvc-diag-*",
@@ -3640,7 +3640,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl"
     ],
     "k8s_versions": [
@@ -3653,7 +3653,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0023",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl delete pod test-mount-diag-*",
@@ -3675,7 +3675,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod"
     ],
@@ -3689,7 +3689,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0024",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get sc",
@@ -3712,7 +3712,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3726,7 +3726,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0025",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'",
@@ -3746,7 +3746,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3760,7 +3760,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0026",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get pods -n kube-system -l app=csi-controller",
@@ -3779,7 +3779,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "status"
@@ -3794,7 +3794,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0027",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl logs <csi-pod> -c csi-provisioner",
@@ -3814,7 +3814,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "pod",
       "logs"
@@ -3829,7 +3829,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0028",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get csistoragecapacity -A",
@@ -3850,7 +3850,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "status"
     ],
@@ -3864,7 +3864,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0029",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName",
@@ -3886,7 +3886,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "node",
       "status"
@@ -3901,7 +3901,7 @@
   },
   {
     "io_pair_id": "IODIAG-STORAGE-0030",
-    "skill_ref": "07-pvc-storage-failure",
+    "skill_ref": "08-pvc-storage-failure",
     "scenario": "PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation",
     "severity": "medium",
     "command": "kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'",
@@ -3922,7 +3922,7 @@
     ],
     "confidence": 0.8,
     "tags": [
-      "07-pvc-storage-failure",
+      "08-pvc-storage-failure",
       "kubectl",
       "node",
       "status"

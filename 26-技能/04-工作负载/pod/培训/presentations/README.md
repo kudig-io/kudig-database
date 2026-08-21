@@ -90,9 +90,8 @@ trigger_keywords:
 - 技术演示文稿
 - presentations
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # Topic: Presentations（技术演示文稿）
 
 > **11 篇 Presentation** | 面向内部培训与技术分享的 Kubernetes 专题演示文稿
@@ -1276,7 +1275,7 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 |:---|:---|
 | [生产运维/topic-learn/](../生产运维/topic-learn/) | 系统化学习计划（Presentation 可作为课程配套） |
 | [系统基础/topic-cheat-sheet/](../系统基础/速查卡/) | 演示中的命令速查 |
-| [故障诊断/FTA故障树/](../故障诊断/FTA故障树/) | 故障排查方法论 Presentation 的深度参考 |
+| [06-FTA故障树/](../../../../../19-故障诊断/06-FTA故障树) | 故障排查方法论 Presentation 的深度参考 |
 
 ---
 

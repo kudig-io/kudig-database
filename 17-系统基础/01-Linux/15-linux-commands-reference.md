@@ -59,7 +59,8 @@ intent_queries:
 - 99-linux-commands-reference的所有命令/字段
 - 99-linux-commands-reference速查手册
 
-tier: peripheral---
+tier: peripheral
+---
 title: Linux 命令大全参考
 description: '<!-- chunk: 概述' -->## 概述'
 category: linux

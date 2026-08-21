@@ -54,10 +54,10 @@ cross_refs:
   path: ../集群基础/
   label: '知识域: 集群基础'
 - type: skill
-  path: ../故障诊断/topic-skills/01-node-notready.md
+  path: ../../08-技能体系/01-node-notready.md  # H3: 旧路径 ../../08-技能体系/ 修复
   label: '运维技能: 01-node-notready'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/02-node-components/04-node-troubleshooting.md
+  path: ../../04-高级排障/structural-02-node-components/04-node-troubleshooting.md  # H3: 旧路径 topic-structural-trouble-shooting 修复
   label: '结构化排障: 04-node-troubleshooting'
 tier: supporting
 ---

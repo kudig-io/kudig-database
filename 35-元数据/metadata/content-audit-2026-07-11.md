@@ -271,9 +271,9 @@ created: 2026-07-11
 - 多集群排障
 
 **深度抽检**
-- `故障诊断/高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md`: deep
+- `19-故障诊断/04-高级排障/structural-01-control-plane/01-apiserver-troubleshooting.md`: deep
 - `故障诊断/资源排障/09-node-comprehensive-troubleshooting.md`: deep / 15 行引用
-- `故障诊断/FTA故障树/05-fta-construction-process.md`: deep / FTA 方法论
+- `19-故障诊断/06-FTA故障树/05-fta-construction-process.md`: deep / FTA 方法论
 
 **问题与机会**
 - **体量失衡**：362 页占全库 15.5%，其中 QA 语料和技能体系包含大量辅助文件

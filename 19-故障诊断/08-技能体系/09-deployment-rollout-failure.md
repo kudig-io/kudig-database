@@ -1,7 +1,7 @@
 ---
 title: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
-description: '## 1. 概述'
-summary: 'Deployment 滚动更新问题是 [[kubernetes|Kubernetes]] 生产环境中**最常见的工作负载问题类型**之一。当滚动更新失败时，可能导致新版本无法上线、旧版本无法退役、甚至服务完全不可用。Deployment Controller 通过 [[replicaset|ReplicaSet]] 管理 Pod 的创建和删除，'
+description: Kubernetes Deployment 滚动更新与回滚故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Deployment 滚动更新与回滚故障的完整诊断-修复-验证工单处理 Skill
 category: workload
 tags:
 - k8s
@@ -54,7 +54,7 @@ prerequisites:
 - prometheus-basics
 - monitoring-basics
 - gpu-scheduling-basics
-skill_id: SKILL-08_DEPLOYMENT_ROLLOUT_FAILURE-001
+skill_id: SKILL-WORK-001
 skill_name: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 version: 1.0.0
 k8s_versions:
@@ -1443,7 +1443,7 @@ kubectl get deploy NAME -n NS -o jsonpath='{range .status.conditions[*]}{.type}:
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | Deployment Controller 原理 | `工作负载/` | 理解 Deployment 如何管理 ReplicaSet 和滚动更新逻辑 |
-| Deployment 综合故障排查 | `故障诊断/11-deployment-comprehensive-troubleshooting.md` | 深度排查 Deployment 相关问题 |
+| Deployment 综合故障排查 | 19-故障诊断/11-deployment-comprehensive-troubleshooting.md` | 深度排查 Deployment 相关问题 |
 | StatefulSet 更新策略 | `工作负载/` | StatefulSet 有序更新和分区更新机制 |
 | DaemonSet 更新机制 | `工作负载/` | DaemonSet 在不同节点上的更新行为 |
 | PodDisruptionBudget | `平台工程/` | PDB 配置最佳实践和与滚动更新的交互 |

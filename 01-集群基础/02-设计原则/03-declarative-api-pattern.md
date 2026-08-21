@@ -111,8 +111,8 @@ cross_refs:
   path: ../集群基础/
   label: '相关知识域: 集群基础'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # 02 - 声明式 API 与面向终态设计 (Declarative API)
 
 <!-- chunk: 专家视点：为什么 SSA (Server-Side Apply) 是未来？ -->

@@ -1,7 +1,7 @@
 ---
 title: 附录 A：FTA 术语表 [故障诊断]
-description: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
-summary: 'description: ''**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'''
+description: 'FTA 术语中英文对照表（150 行精简版）；详细词条见 glossary/ 术语卡片。关联主文档: FTA 方法论与 AI Agent 智能运维实践'  # N6: 修复 description 嵌套损坏
+summary: 'FTA 术语中英文对照表（150 行精简版）；详细词条见 glossary/ 术语卡片。关联主文档: FTA 方法论与 AI Agent 智能运维实践'  # N6: 修复 summary 嵌套损坏
 category: fta
 tags:
 - fta
@@ -46,48 +46,11 @@ severity: high
 
 
 
-title: 附录 A：FTA 术语表
-description: '**关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)'
-category: fta
-tags:
-- k8s
-- fault-tree
-- root-cause
-- troubleshooting
-- agent
-last_updated: 2026-05
-difficulty: advanced
-reading_level: advanced
-audience:
-- SRE
-- 运维工程师
-- 技术支持
-estimated_read_time: 5min
-intent_queries:
-- 附录 A：FTA 术语表 是什么
-- 如何 附录 A：FTA 术语表
-- 附录 A：FTA 术语表 根因分析
-- 附录 A：FTA 术语表 故障树
-trigger_keywords:
-- 附录
-- A：FTA
-- 术语表
-- fta
-authors:
-- name: KUDIG Team
-  role: contributor
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
----
 # 附录 A：FTA 术语表
 
 > **关联主文档**: [FTA 方法论与 AI Agent 智能运维实践](./fta-methodology-and-agentic-practices.md)  
-> **上一章**: 第二十二章：行业标准化建议](./22-industry-standardization.md)  
-> **下一附录**: 附录 B：工具与资源清单](./[[19-故障诊断/06-FTA故障树/appendix-b-tools-and-resources.md|appendix-b-tools-and-resources]].md)
+> **上一章**: [第二十二章：行业标准化建议](./22-industry-standardization.md)  
+> **下一附录**: [附录 B：工具与资源清单](./appendix-b-tools-and-resources.md)  <!-- N6: 修复损坏链接 -->
 
 ---
 
@@ -120,13 +83,41 @@ k8s_versions:
 
 ---
 
+## 详细词条索引（glossary 术语卡片）  <!-- L3: 与 glossary/ 术语卡片互链 -->
+
+> 下表术语在 [glossary/ 目录](./glossary/index.md) 有独立术语卡片（含图例、示例与相关词条），本表为精简对照；两者保持同一术语体系。
+
+| 术语 | 详细卡片 |
+|------|---------|
+| FTA | [fault-tree-analysis.md](./glossary/fault-tree-analysis.md) |
+| TE 顶事件 | [top-event.md](./glossary/top-event.md) |
+| IE 中间事件 / BE 底事件 | [basic-event.md](./glossary/basic-event.md) |
+| OR 门 / AND 门 | [or-gate.md](./glossary/or-gate.md) · [and-gate.md](./glossary/and-gate.md) |
+| 最小割集 | [minimal-cut-set.md](./glossary/minimal-cut-set.md) |
+| 割集阶数 | [cut-set-order.md](./glossary/cut-set-order.md) |
+| 重要度 | [importance-measure.md](./glossary/importance-measure.md) |
+| MTBF / MTTR / MTTD | [mtbf.md](./glossary/mtbf.md) · [mttr.md](./glossary/mttr.md) · [mttd.md](./glossary/mttd.md) |
+| 可用性 / 可靠度 | [availability.md](./glossary/availability.md) · [reliability.md](./glossary/reliability.md) |
+| 问题率 λ | [failure-rate.md](./glossary/failure-rate.md) |
+| RPN | [rpn.md](./glossary/rpn.md) |
+| FMEA | [fmea.md](./glossary/fmea.md) |
+| 共因失效 CCF | [common-cause-failure.md](./glossary/common-cause-failure.md) |
+| 房屋事件 HE | [house-event.md](./glossary/house-event.md) |
+| 未展开事件 UE | [undeveloped-event.md](./glossary/undeveloped-event.md) |
+| 投票门 k/n | [voting-gate.md](./glossary/voting-gate.md) |
+| 抑制门 | [inhibit-gate.md](./glossary/inhibit-gate.md) |
+| 优先与门 PAND | [priority-and-gate.md](./glossary/priority-and-gate.md) |
+| 转移符号 | [transfer-symbol.md](./glossary/transfer-symbol.md) |
+
+---
+
 > **导航**: [<< 第二十二章 - 行业标准化建议](./22-industry-standardization.md) | [附录 B - 工具与资源清单 >>](./appendix-b-tools-and-resources.md)
 
 ---
 
 ## Obsidian 相关文档
 
-- [[19-故障诊断/06-FTA故障树/MOC.md|topic-fta [[README|MOC]]]]
+- [[19-故障诊断/06-FTA故障树/MOC.md|topic-fta MOC]]  <!-- N6: 修复双嵌套链接 -->
 - [[19-故障诊断/06-FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
 - [[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
 - [[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]

@@ -155,6 +155,47 @@ curl -s localhost:9901/config_dump | jq '.configs[] | select(.dynamic_active_clu
 
 **修复**：检查控制平面 xDS 服务器状态，强制触发全量推送，或重启异常 Envoy 实例。
 
+## 对比评测
+
+| 维度 | Envoy | NGINX | HAProxy |
+|------|-------|-------|---------|
+| 配置模式 | xDS 动态 | 静态 reload | 静态 reload |
+| 协议支持 | HTTP/2、gRPC、TCP、QUIC | HTTP/2 | TCP/HTTP |
+| 可编程性 | Wasm、Lua、External | Lua、NJS | 无 |
+| 可观测性 | 最强（全量指标 + 追踪） | 中 | 中 |
+| 生态 | 网格/网关事实标准 | 广泛部署 | L4 高并发 |
+
+**选型建议**：需要动态配置与可扩展（网格/网关）选 Envoy；简单静态反代用 NGINX；纯 L4 高性能用 HAProxy。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 配置拒绝 | `envoy --mode validate -c <config>` | xDS/静态配置语法错误 |
+| 502/503 | `curl -v`；查看 cluster 状态 | 后端无健康端点、EDS 未更新 |
+| 内存增长 | `envoy --mode stats` 检查 | 路由/LDS 膨胀、连接池泄漏 |
+| 延迟高 | `envoy_http_downstream_rq_time` 指标 | 后端慢、限流/重试放大 |
+
+## 生产部署清单
+
+- [ ] 配置校验流程（`--mode validate`）纳入 CI
+- [ ] 资源限制（内存上限）与优雅退出（`--drain-time-s`）
+- [ ] 健康检查与异常驱逐策略配置（passive/active）
+- [ ] 可观测性接入（`envoy_*` metrics + accesslog 采样）
+- [ ] 版本升级验证（xDS 兼容性、`envoy --version` 检查）
+
+## 常见误区与设计要点
+
+- **误区 1**：把所有路由塞进一个 Listener——按域名/协议拆分 Listener 与 FilterChain，降低耦合。
+- **误区 2**：忽略连接池与重试配置——默认重试策略会放大后端故障（雪崩）。
+- **设计要点**：用 xDS 管理平面（控制面）统一下发；开启 `circuit_breaker` 与 `outlier_detection` 保护后端；日志异步 + 采样避免性能劣化。
+
+## 性能参考
+
+- 单实例吞吐：HTTP 转发 10w+ QPS（4C8G），TLS 终结约 6w（QAT/内核 TLS 可提升）。
+- 延迟：P99 < 3ms（纯转发）；线程模型 worker-per-core 线性扩展。
+- 内存：基础 50MB + 配置/连接开销，生产建议 1-2GB limits。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

@@ -59,7 +59,8 @@ intent_queries:
 - 19-cluster-performance-tuning的性能调优指南
 - 19-cluster-performance-tuning的瓶颈在哪里？
 
-tier: peripheral---
+tier: peripheral
+---
 title: 19-集群性能调优
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'
 category: production-operations

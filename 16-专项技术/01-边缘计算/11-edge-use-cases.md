@@ -59,7 +59,8 @@ intent_queries:
 - edge-use-cases的使用方法
 - edge-use-cases的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 边缘场景案例 (Edge Computing Use Cases)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: edge-computing

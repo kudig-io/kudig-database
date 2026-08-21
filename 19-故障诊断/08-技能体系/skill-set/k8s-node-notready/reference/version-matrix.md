@@ -182,13 +182,13 @@ version: 1.0.0
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | kubelet 架构与内部机制 | `集群基础/` | 理解 kubelet 心跳机制、node-lifecycle-controller 的驱逐逻辑 |
-| Node 问题树分析 | `故障诊断/FTA故障树/list/node-fta.md` | 理解 Node NotReady 的完整因果链和概率模型 |
-| 节点级问题排查深度指南 | `故障诊断/高级排障/structural-` | 超出本 Skill 覆盖范围的深度排查方法 |
-| Kubernetes 问题排查方法论 | `故障诊断/` | 系统化问题排查的理论基础和方法论 |
+| Node 问题树分析 | `19-故障诊断/06-FTA故障树/list/node-fta.md` | 理解 Node NotReady 的完整因果链和概率模型 |
+| 节点级问题排查深度指南 | `19-故障诊断/04-高级排障/structural-` | 超出本 Skill 覆盖范围的深度排查方法 |
+| Kubernetes 问题排查方法论 | `19-故障诊断/` | 系统化问题排查的理论基础和方法论 |
 | 证书管理与 TLS | `SKILL-SEC-001` (06-certificate-expiry.md) | kubelet 证书过期的详细诊断与修复（本 Skill 的 RC-007 关联） |
 | Pod 驱逐与调度 | `SKILL-POD-002` (03-pod-pending.md) | 节点恢复后 Pod 重新调度的相关问题 |
-| 容器运行时排障 | `故障诊断/高级排障/structural-` | containerd/CRI-O 深度排查 |
-| Linux 内核排障 | `故障诊断/` | OOM Killer、内核 panic、硬件错误的深度分析 |
+| 容器运行时排障 | `19-故障诊断/04-高级排障/structural-` | containerd/CRI-O 深度排查 |
+| Linux 内核排障 | `19-故障诊断/` | OOM Killer、内核 panic、硬件错误的深度分析 |
 
 ---
 

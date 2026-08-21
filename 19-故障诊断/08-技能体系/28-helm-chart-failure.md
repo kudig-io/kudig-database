@@ -1,7 +1,7 @@
 ---
 title: Helm Chart 部署与回滚故障诊断
-description: Skill — Helm Chart 部署与回滚故障诊断
-summary: Skill — Helm Chart 部署与回滚故障诊断
+description: Kubernetes Helm Chart 部署与回滚故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Helm Chart 部署与回滚故障的完整诊断-修复-验证工单处理 Skill
 category: skills
 tags:
 - k8s
@@ -35,7 +35,7 @@ prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
 - helm-basics
-skill_id: SKILL-26_HELM_CHART_FAILURE-001
+skill_id: SKILL-HELM-001
 skill_name: Helm Chart 部署与回滚故障诊断
 version: 1.0.0
 k8s_versions:
@@ -53,9 +53,9 @@ k8s_versions:
 
 
 
-# [[helm|Helm]] Chart 部署与回滚故障诊断
+# Helm Chart 部署与回滚故障诊断
 
-> **[[SKILL|Skill]] ID**: `SKILL-HELM-001`  
+> **Skill ID**: `SKILL-HELM-001`  
 > **严重级别**: P2  
 > **执行模式**: L1  
 > **来源**: FTA + Structural 文档派生

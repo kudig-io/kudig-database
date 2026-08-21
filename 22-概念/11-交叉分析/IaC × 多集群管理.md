@@ -78,8 +78,8 @@ base_confidence: 0.88
 lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 
-tier: supporting---
-
+tier: supporting
+---
 # 基础设施即代码 x 多集群管理
 
 ## 连接点

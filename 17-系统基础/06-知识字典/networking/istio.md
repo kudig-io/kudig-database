@@ -147,6 +147,47 @@ istioctl install --set components.cni.enabled=true
 
 **修复**：重启 istiod 触发证书重新签发，检查 `istio-ca-secret` 状态。
 
+## 对比评测
+
+| 维度 | Istio | Linkerd | Consul Connect |
+|------|-------|---------|----------------|
+| 数据面 | Envoy（功能最全） | 自研（轻量） | Envoy |
+| 功能覆盖 | L4-L7 全量 | L4 + 部分 L7 | L4 + HTTP |
+| 多集群 | 原生（多网络/单网络） | 扩展 | WAN 池 |
+| 可观测性 | Kiali/遥测全面 | 内置 Web | 集成 Prometheus |
+| 运维复杂度 | 高 | 低 | 中 |
+
+**选型建议**：功能优先（灰度、熔断、JWT、多集群）选 Istio；轻量低资源选 Linkerd；VM 混合环境选 Consul。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| Sidecar 未注入 | `kubectl get ns -L istio-injection`；`istioctl proxy-status` | 命名空间标签缺失、注入 Webhook 异常 |
+| 流量不按规则走 | `istioctl analyze`；`istioctl proxy-config route <pod>` | VirtualService 优先级、权重错误 |
+| 401/403 | 检查 RequestAuthentication/AuthorizationPolicy | JWT 配置错误、策略范围过宽 |
+| 网格内延迟高 | `istioctl proxy-config listener <pod>` | 重复 listener、无匹配 cluster 兜底 |
+
+## 生产部署清单
+
+- [ ] 控制面（istiod）HA ≥2 且资源充足；升级前 `istioctl x precheck`
+- [ ] 命名空间注入策略灰度（先测试命名空间）
+- [ ] mTLS 模式（STRICT）评估与验证
+- [ ] 遥测（Prometheus + Kiali + 链路追踪）接入
+- [ ] 故障演练：拔掉 Sidecar → 直连恢复方案验证
+
+## 常见误区与设计要点
+
+- **误区 1**：所有流量都进网格——高吞吐批处理服务可保留 mesh 外（annotation 排除）。
+- **误区 2**：忽略 sidecar 资源限制——不设 limits 会导致节点 OOM（Envoy 内存随配置增长）。
+- **设计要点**：先 `istioctl analyze` 校验配置；灰度发布用权重路由 + 请求级匹配；多集群先规划网络拓扑（单网络 vs 多网络）。
+
+## 性能参考
+
+- Sidecar 开销：HTTP P99 增加 5-15ms（含 mTLS 与遥测），CPU < 15%。
+- 控制面：istiod 支持千级服务/万级 Pod（受配置推送模型限制，用 `SIMPLE`/`DELTA` 模式优化）。
+- 内存：单 Sidecar 50-200MB（配置规模相关），大规模路由需调优。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

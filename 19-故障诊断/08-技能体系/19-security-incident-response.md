@@ -1,7 +1,7 @@
 ---
 title: 安全事件应急响应 / Security Incident Response
-description: '# 安全事件应急响应 / Security Incident Response'
-summary: '安全事件应急响应是 [[kubernetes|Kubernetes]] 集群运维中**最紧迫且风险最高**的场景之一。与传统基础设施问题不同，安全事件具有时间敏感性、影响扩散性和取证必要性三大特征。一旦发生活跃入侵，每分钟的延迟都可能导致数据泄露范围扩大、横向移动加剧或证据被销毁。'
+description: Kubernetes 安全事件应急响应的完整诊断-响应-复盘工单处理 Skill
+summary: Kubernetes 安全事件应急响应的完整诊断-响应-复盘工单处理 Skill
 category: security
 tags:
 - k8s
@@ -66,7 +66,7 @@ prerequisites:
 - cni-basics
 - etcd-basics
 - policy-basics
-skill_id: SKILL-18_SECURITY_INCIDENT_RESPONSE-001
+skill_id: SKILL-SECURITY-001
 skill_name: 安全事件应急响应 / Security Incident Response
 version: 1.0.0
 k8s_versions:
@@ -1773,7 +1773,7 @@ kubectl get events -A --field-selector reason=FailedValidation | grep -c securit
 | Kubernetes 安全架构 | `安全/` | 理解 K8s 安全模型和防御深度 |
 | 云原生安全最佳实践 | `安全/` | 安全加固方案设计 |
 | 供应链安全 | `安全/` | 供应链攻击防御和 SBOM 管理 |
-| 安全故障排查 | `故障诊断/32-security-troubleshooting.md` | 详细的安全问题诊断流程 |
+| 安全故障排查 | `19-故障诊断/03-基础设施排障/08-security-troubleshooting.md` | 详细的安全问题诊断流程 |
 | 容器逃逸技术 | 外部引用: container-escape-techniques | 理解攻击者视角，改进防御 |
 | Falco 规则配置 | Falco 官方文档 | 自定义运行时检测规则 |
 | cosign/Sigstore | Sigstore 官方文档 | 镜像签名验证深度配置 |

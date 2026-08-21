@@ -52,7 +52,8 @@ intent_queries:
 - software-bill-of-materials的使用方法
 - software-bill-of-materials的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 09-软件物料清单
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'
 category: production-operations

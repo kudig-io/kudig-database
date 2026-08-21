@@ -134,6 +134,47 @@ kubectl exec -n projectcontour ds/envoy -- curl -s localhost:9001/config_dump | 
 
 **修复**：增加 Contour 副本数，调整 `--xds-address` 和 `--xds-port` 参数，启用 xDS 增量推送。
 
+## 对比评测
+
+| 维度 | Contour | NGINX Ingress | Envoy Gateway |
+|------|---------|---------------|---------------|
+| 数据面 | Envoy（xDS） | NGINX 静态 | Envoy（xDS） |
+| API | Ingress + HTTPProxy CRD | Ingress + 注解 | Gateway API |
+| 配置交付 | 动态（xDS） | reload | 动态（xDS） |
+| 多团队隔离 | HTTPProxy 命名空间隔离 | 弱 | Gateway 资源隔离 |
+| 演进方向 | 稳定维护 | 存量为主 | 新标准 |
+
+**选型建议**：已用 Ingress 且需平滑迁移到 Gateway API 选 Contour（HTTPProxy 是过渡方案）；新项目直接 Envoy Gateway。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 路由 404 | `kubectl get httpproxy -o yaml`（status） | FQDN 冲突、未绑定 IngressClass |
+| 证书不生效 | 检查 Secret 与 TLS 配置 | Secret 缺失、命名空间错误 |
+| 502 | `kubectl get endpoints <svc>` | 后端无端点、TLS 后端配置错误 |
+| xDS 推送失败 | `kubectl logs <contour-pod>` | Contour 与 Envoy 版本不匹配 |
+
+## 生产部署清单
+
+- [ ] Contour 控制面 ≥2 副本 + PDB；数据面 Envoy 按需扩展
+- [ ] IngressClass 配置正确（`contour` 类）且默认类已设置
+- [ ] HTTPProxy 的 FQDN 唯一性校验（避免冲突）
+- [ ] TLS 经 cert-manager 自动轮转，TLS 策略（MinVersion）已设置
+- [ ] 监控接入（Envoy 指标：`envoy_http_downstream_rq_5xx`）
+
+## 常见误区与设计要点
+
+- **误区 1**：HTTPProxy 与 Ingress 混用导致路由规则冲突——一个 FQDN 只走一种资源。
+- **误区 2**：忽略 `IngressClass` 绑定——多个 Ingress Controller 并存时路由被错误控制器接管。
+- **设计要点**：多团队用 HTTPProxy 的 namespace 隔离 + `conditions` 字段做路径委派；灰度用 `weights` 字段权重路由；生产必须开启 TLS 策略与 HSTS。
+
+## 性能参考
+
+- Envoy 数据面单 Pod 吞吐：HTTP 转发 5w+ QPS（2C4G），TLS 终结约 3w。
+- 配置生效：xDS 增量推送秒级生效，无 reload 闪断。
+- 内存：每 1w 条路由约 300MB（Envoy 配置内存模型），大规模路由注意规划。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

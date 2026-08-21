@@ -1,7 +1,7 @@
 ---
 title: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-description: '- 运维工程师'
-summary: '本 Skill 覆盖内存压力、磁盘压力（含 inode 耗尽）、PID 压力、镜像/容器存储膨胀、系统 OOM 等全部 10 种根因的诊断和修复。'
+description: 本 Skill 覆盖内存压力、磁盘压力（含 inode 耗尽）、PID 压力、镜像/容器存储膨胀、系统 OOM 等全部 10 种根因的诊断和修复。
+summary: 本 Skill 覆盖内存压力、磁盘压力（含 inode 耗尽）、PID 压力、镜像/容器存储膨胀、系统 OOM 等全部 10 种根因的诊断和修复。
 category: skills
 tags:
 - k8s
@@ -45,9 +45,60 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 - logging-basics
-skill_id: SKILL-19_NODE_RESOURCE_PRESSURE-001
+skill_id: SKILL-NODE-002
 skill_name: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 version: 1.0.0
+severity_range: P0-P2
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+estimated_resolution_time: 10-60min
+risk_level: high
+agent_execution_mode: L2-semi-auto
+trigger_events:
+- NodeHasDiskPressure
+- NodeHasMemoryPressure
+- NodeHasPIDPressure
+- Evicted
+- NodeHasInsufficientMemory
+- InvalidDiskCapacity
+trigger_metrics:
+- 'kube_node_status_condition{condition="MemoryPressure",status="true"}'
+- 'kube_node_status_condition{condition="DiskPressure",status="true"}'
+- 'kube_node_status_condition{condition="PIDPressure",status="true"}'
+- 'node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < 0.1'
+- 'node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.15'
+related_skills:
+- SKILL-NODE-001
+- SKILL-POD-001
+- SKILL-POD-002
+- SKILL-PERF-001
+- SKILL-STORE-001
+fta_refs:
+- 19-故障诊断/06-FTA故障树/list/node-fta.md
+knowledge_refs:
+- 19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md
+- 19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md
+- 19-故障诊断/04-高级排障/01-node-component-troubleshooting.md
+cross_refs:
+- type: fta
+  path: 19-故障诊断/06-FTA故障树/list/node-fta.md
+  label: Node 故障树分析
+- type: domain
+  path: 19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md
+  label: OOM 内存问题深度诊断
+- type: domain
+  path: 19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md
+  label: Node 全面故障排查
+- type: skill
+  path: 19-故障诊断/08-技能体系/01-node-notready.md
+  label: SKILL-NODE-001 节点 NotReady 诊断
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**
@@ -56,87 +107,6 @@ version: 1.0.0
 
 
 
-
----
-skill_id: "SKILL-NODE-002"
-skill_name: "节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation"
-version: "1.0"
-category: "node"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "10-60min"
-risk_level: "high"
-agent_execution_mode: "L2-semi-auto"
-trigger_keywords:
-  - "MemoryPressure"
-  - "DiskPressure"
-  - "PIDPressure"
-  - "Evicted"
-  - "节点资源压力"
-  - "内存压力"
-  - "磁盘压力"
-  - "inode耗尽"
-  - "OOM"
-  - "节点驱逐"
-trigger_events:
-  - "NodeHasDiskPressure"
-  - "NodeHasMemoryPressure"
-  - "NodeHasPIDPressure"
-  - "Evicted"
-  - "NodeHasInsufficientMemory"
-  - "InvalidDiskCapacity"
-trigger_metrics:
-  - 'kube_node_status_condition{condition="MemoryPressure",status="true"}'
-  - 'kube_node_status_condition{condition="DiskPressure",status="true"}'
-  - 'kube_node_status_condition{condition="PIDPressure",status="true"}'
-  - 'node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes < 0.1'
-  - 'node_filesystem_avail_bytes / node_filesystem_size_bytes < 0.15'
-difficulty: "advanced"
-reading_level: "advanced"
-audience:
-  - SRE
-  - 运维工程师
-  - 技术支持
-estimated_read_time: "15min"
-prerequisites:
-  - "故障诊断"
-  - "kubectl-basics"
-  - "linux-resource-management"
-related_skills:
-  - "SKILL-NODE-001"
-  - "SKILL-POD-001"
-  - "SKILL-POD-002"
-  - "SKILL-PERF-001"
-  - "SKILL-STORE-001"
-fta_refs:
-  - "故障诊断/FTA故障树/list/node-fta.md"
-knowledge_refs:
-  - "故障诊断/07-oom-memory-diagnosis.md"
-  - "故障诊断/09-node-comprehensive-troubleshooting.md"
-  - "故障诊断/35-node-component-troubleshooting.md"
-cross_refs:
-  - type: "fta"
-    path: "../19-故障诊断/06-FTA故障树/list/node-fta.md"
-    label: "Node 故障树分析"
-  - type: "domain"
-    path: "../19-故障诊断/07-oom-memory-diagnosis.md"
-    label: "OOM 内存问题深度诊断"
-  - type: "domain"
-    path: "../19-故障诊断/09-node-comprehensive-troubleshooting.md"
-    label: "Node 全面故障排查"
-  - type: "[[SKILL|skill]]"
-    path: "../19-故障诊断/topic-skills/01-node-notready.md"
-    label: "SKILL-NODE-001 节点 NotReady 诊断"
-authors:
-  - name: KUDIG Team
-    role: contributor
-
-tier: peripheral---
 
 # 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 
@@ -937,10 +907,10 @@ ssh <node-ip> "ps aux --no-heading | wc -l && cat /proc/sys/kernel/pid_max"
 ### 10.2 深度知识引用
 
 需要深入了解根因机制时，参考以下资源：
-- kubelet 驱逐机制 → `集群基础/33-kubelet-eviction-thresholds.md`
-- OOM 内存诊断 → `故障诊断/07-oom-memory-diagnosis.md`
-- 节点全面排查 → `故障诊断/09-node-comprehensive-troubleshooting.md`
-- 性能瓶颈诊断 → `故障诊断/topic-skills/17-performance-bottleneck.md`
+- kubelet 驱逐机制 → `01-集群基础/03-控制平面/37-kubelet-eviction-thresholds.md`
+- OOM 内存诊断 → `19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md`
+- 节点全面排查 → `19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md`
+- 性能瓶颈诊断 → `19-故障诊断/08-技能体系/17-performance-bottleneck.md`
 
 ### 10.3 Skill 改进记录
 

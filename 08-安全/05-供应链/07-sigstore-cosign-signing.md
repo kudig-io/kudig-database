@@ -60,7 +60,8 @@ intent_queries:
 - sigstore-cosign-signing的使用方法
 - sigstore-cosign-signing的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: supply-chain-security

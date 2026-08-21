@@ -109,9 +109,8 @@ cross_refs:
   path: ../系统基础/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # 03 - 运行时安全防护与威胁检测
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/concepts/security](https://kubernetes.io/docs/concepts/security/)

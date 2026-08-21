@@ -128,8 +128,8 @@ aliases:
 - 概览
 - 概述
 
-tier: peripheral---
-
+tier: peripheral
+---
 # 平台运维概述 (Platform Operations Overview)
 
 > **适用版本**: Kubernetes v1.25 - v1.32 | **文档版本**: v2.0 | **最后更新**: 2026-02

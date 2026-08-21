@@ -1,7 +1,7 @@
 ---
 title: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
-description: '## 1. 概述'
-summary: '控制平面（Control Plane）是 [[kubernetes|Kubernetes]] 集群的"大脑"，包括 API Server、etcd、Scheduler、Controller Manager 四大核心组件。控制平面问题是 Kubernetes 中**最严重的问题类型**，直接影响整个集群的可用性。etcd 作为唯一的状态存储，'
+description: Kubernetes etcd 与控制平面故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes etcd 与控制平面故障的完整诊断-修复-验证工单处理 Skill
 category: control-plane
 tags:
 - k8s
@@ -48,7 +48,7 @@ prerequisites:
 - troubleshooting-methodology
 - prometheus-basics
 - etcd-basics
-skill_id: SKILL-11_CONTROL_PLANE_FAILURE-001
+skill_id: SKILL-CP-001
 skill_name: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 version: 1.0.0
 k8s_versions:
@@ -1591,8 +1591,8 @@ kubeadm certs check-expiration
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| API Server 架构与内部机制 | `故障诊断/01-control-plane-apiserver-troubleshooting.md` | 深度理解 API Server 请求处理、限流、Webhook 集成 |
-| etcd 故障排查深度指南 | `故障诊断/02-control-plane-etcd-troubleshooting.md` | 深度理解 etcd 集群运维、数据恢复、性能调优 |
+| API Server 架构与内部机制 | 19-故障诊断/01-control-plane-apiserver-troubleshooting.md` | 深度理解 API Server 请求处理、限流、Webhook 集成 |
+| etcd 故障排查深度指南 | 19-故障诊断/02-control-plane-etcd-troubleshooting.md` | 深度理解 etcd 集群运维、数据恢复、性能调优 |
 | 控制平面组件架构 | `集群基础/` | 理解 Scheduler、Controller Manager 工作原理 |
 | Kubernetes 架构基础 | `集群基础/` | 控制平面整体架构和组件交互 |
 | 证书管理与安全 | `SKILL-SEC-001` | 证书过期的详细诊断与修复 |

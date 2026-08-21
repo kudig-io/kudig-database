@@ -53,7 +53,7 @@ cross_refs:
   path: ../专项技术/07-helm-advanced-operations.md
   label: '深度文档: 07-helm-advanced-operations'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/08-cluster-operations/03-helm-troubleshooting.md
+  path: ../../04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting.md
   label: '结构化排障: 03-helm-troubleshooting'
 tier: supporting
 ---

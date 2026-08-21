@@ -63,7 +63,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: skill
-  path: ../故障诊断/topic-skills/17-performance-bottleneck.md
+  path: ../08-技能体系/17-performance-bottleneck.md
   label: '运维技能: 17-performance-bottleneck'
 ---
 

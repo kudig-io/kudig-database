@@ -112,7 +112,7 @@ prerequisites:
 # 1. 生成语料
 cd scripts/corpus-generator
 python3 generate.py --priority all \
-  --output 故障诊断/topic-qa-corpus/generated/
+  --output 19-故障诊断/10-QA语料/generated/  # N7: 旧路径 topic-qa-corpus 修复
 
 # 2. 验证覆盖率
 python3 validators/coverage_checker.py \

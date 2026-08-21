@@ -104,7 +104,7 @@ related_docs:
 - path: 06-monitoring-alerting-system.md
   type: depth
   desc: 监控告警体系
-- path: ../故障诊断/FTA故障树/list/cluster-upgrade-fta.md
+- path: ../../19-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md  # H3: 旧路径 ../故障诊断/FTA故障树/ 修复
   type: fta
   desc: 集群升级故障树
 cross_refs:
@@ -118,8 +118,8 @@ cross_refs:
   path: ../故障诊断/
   label: '相关知识域: 故障诊断'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # 集群生命周期管理 (Cluster Lifecycle Management)
 
 <!-- chunk: 概述 -->

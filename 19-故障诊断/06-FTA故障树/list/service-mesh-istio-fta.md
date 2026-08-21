@@ -52,7 +52,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/05-service-mesh-istio-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting.md  # N7: 旧路径 topic-structural 修复（H3 漏网）
   label: '结构化排障: 05-service-mesh-istio-troubleshooting'
 tier: supporting
 ---

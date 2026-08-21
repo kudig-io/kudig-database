@@ -1,11 +1,7 @@
 ---
 title: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
-description: Kubernetes 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、etcd、Scheduler、Controller
-  Manager）、节点组件（kubelet、kube-proxy、容器运行时）、插件（CNI、CSI、Ingress Controller）以及工作负载 API
-  版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过
-summary: Kubernetes 集群升级是运维中最具风险的操作之一，涉及控制平面组件（API Server、etcd、Scheduler、Controller
-  Manager）、节点组件（kubelet、kube-proxy、容器运行时）、插件（CNI、CSI、Ingress Controller）以及工作负载 API
-  版本的多层兼容性。升级过程中的版本偏移（Version Skew）、废弃 API、证书过
+description: Kubernetes 集群升级与迁移（Cluster Upgrade & Migration）的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 集群升级与迁移（Cluster Upgrade & Migration）的完整诊断-修复-验证工单处理 Skill
 category: control-plane
 tags:
 - k8s
@@ -51,27 +47,27 @@ prerequisites:
 - 集群基础
 - 故障诊断
 - kubeadm-basics
-skill_id: SKILL-25_CLUSTER_UPGRADE_MIGRATION-001
+skill_id: SKILL-CP-002
 skill_name: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 version: 1.0.0
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 authors:
 - name: KUDIG Team
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/FTA故障树/list/cluster-upgrade-fta.md
+  path: 19-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md
   label: 升级迁移故障树分析
 - type: domain
-  path: ../故障诊断/34-upgrade-migration-troubleshooting.md
+  path: 19-故障诊断/03-基础设施排障/10-upgrade-migration-troubleshooting.md
   label: 升级迁移深度排查
 - type: skill
-  path: ./11-control-plane-failure.md
+  path: 19-故障诊断/08-技能体系/12-control-plane-failure.md
   label: etcd 与控制平面故障诊断
 agent_execution_mode: L2-semi-auto
 ---

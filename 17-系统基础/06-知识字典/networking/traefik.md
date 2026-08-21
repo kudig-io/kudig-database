@@ -153,6 +153,47 @@ kubectl get secret -n traefik acme-cert -o yaml
 
 **修复**：调整 Middleware 顺序：`cors` → `auth` → `ratelimit`。
 
+## 对比评测
+
+| 维度 | Traefik | NGINX Ingress | Envoy Gateway |
+|------|---------|---------------|---------------|
+| 动态配置 | 原生（watch 集群） | reload | xDS |
+| API 支持 | Ingress + CRD + Gateway API | Ingress | Gateway API |
+| 服务发现 | 内置（K8s/Docker/Consul） | 无 | 无 |
+| 可观测性 | 内置 Dashboard/Tracing | 需插件 | Envoy 生态 |
+| 适用场景 | 中小集群快速接入 | 存量环境 | 新标准大规模 |
+
+**选型建议**：中小集群 + 多环境发现需求选 Traefik（开箱即用）；存量 NGINX 保持；大规模/新项目走 Envoy Gateway。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 路由 404 | `kubectl logs <traefik-pod>`；检查 Ingress/CRD | 规则冲突、Service 不存在 |
+| 证书失效 | 查看 traefik 日志证书错误 | ACME 配置错误、DNS 验证失败 |
+| 中间件不生效 | `kubectl get middleware`；检查引用 | Middleware 命名空间/名称错误 |
+| 性能下降 | `kubectl top pods` | 副本不足、accesslog 全量开启 |
+
+## 生产部署清单
+
+- [ ] 副本数 ≥ 2 + PDB；`--providers.kubernetesingress` 与 CRD 提供者配置正确
+- [ ] 入口流量模型（NodePort/LoadBalancer）与网络策略匹配
+- [ ] ACME 证书（Let's Encrypt/内部 CA）自动轮转验证
+- [ ] 中间件（限流/认证/重试）灰度验证
+- [ ] 监控接入（traefik metrics：`traefik_router_requests_total`）
+
+## 常见误区与设计要点
+
+- **误区 1**：开启全量 accesslog 不打样——高流量下日志写盘拖垮性能，用采样或异步输出。
+- **误区 2**：中间件全局引用——Traefik 中间件按命名空间隔离，跨命名空间引用会静默失效。
+- **设计要点**：用 CRD（IngressRoute）获得高级能力（权重/中间件）；Dashboard 仅内网暴露；入口 IP 固定（LB 直挂）便于白名单管理。
+
+## 性能参考
+
+- 单副本 QPS：HTTP 转发 3-5w（2C4G），TLS 终结 2-3w。
+- 延迟：P99 < 10ms（含中间件链路）；开启全量日志 +30% CPU。
+- 扩展：无状态水平扩容，前置 LB 分发即可。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

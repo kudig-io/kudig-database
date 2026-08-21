@@ -48,7 +48,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/09-cloud-provider/01-cloud-provider-integration-troubleshooting.md
+  path: ../../04-高级排障/structural-09-cloud-provider/01-cloud-provider-integration-troubleshooting.md
   label: '结构化排障: 01-cloud-provider-integration-troubleshooting'
 tier: supporting
 ---

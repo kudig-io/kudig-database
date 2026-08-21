@@ -44,7 +44,7 @@ prerequisites:
 - backup-basics
 cross_refs:
 - type: skill
-  path: ../故障诊断/topic-skills/README.md
+  path: ../../08-技能体系/README.md  # H3: 旧路径 ../../08-技能体系/ 修复
   label: '运维技能: README'
 k8s_versions:
 - '1.28'
@@ -63,7 +63,7 @@ tier: supporting
 
 # FTA 故障树清单索引
 
-> **文档数量**: 36 个故障树 | **总大小**: ~1.2 MB | **最后更新**: 2026-03-02
+> **文档数量**: 48 个故障树 | **总大小**: ~1.3 MB | **最后更新**: 2026-08  <!-- M2: 统计 36→48，补齐 12 个缺失 FTA -->
 
 ---
 
@@ -99,6 +99,7 @@ tier: supporting
 | [statefulset-fta.md](statefulset-fta.md) | 20.8 KB | StatefulSet 有序部署/持久卷/网络标识/扩缩容 | ~24 |
 | [daemonset-fta.md](daemonset-fta.md) | 29.9 KB | DaemonSet 节点调度/污点容忍/滚动更新/资源竞争 | ~35 |
 | [job-cronjob-fta.md](job-cronjob-fta.md) | 28.8 KB | Job/CronJob 调度/并发/完成策略/超时/时区 | ~32 |
+| [pod-creation-end-to-end-fta.md](pod-creation-end-to-end-fta.md) | 7.1 KB | Pod 创建全链路（apply→调度→运行时→Service 可访问） | ~10 |  <!-- M2: 新增收录 -->
 
 ### 2. 网络与流量
 
@@ -110,6 +111,13 @@ tier: supporting
 | [networkpolicy-fta.md](networkpolicy-fta.md) | 21.7 KB | NetworkPolicy 入站/出站/选择器/CNI 支持/调试 | ~25 |
 | [gateway-api-fta.md](gateway-api-fta.md) | 24.1 KB | Gateway API/HTTPRoute/GRPCRoute/TLSRoute/ReferenceGrant | ~28 |
 | [terway-fta.md](terway-fta.md) | 16.8 KB | Terway ENI/IP 池/VPC 路由/安全组/控制面依赖 | ~20 |
+| [calico-fta.md](calico-fta.md) | 18.9 KB | Calico 网络/BGP 会话/网络策略/IPAM | ~26 |  <!-- M2: 新增收录 -->
+| [cilium-fta.md](cilium-fta.md) | 13.2 KB | Cilium/eBPF 数据面/网络策略/可观测性 | ~18 |  <!-- M2: 新增收录 -->
+| [cni-fta.md](cni-fta.md) | 5.3 KB | CNI 插件二进制/配置/IPAM/节点路由 | ~7 |  <!-- M2: 新增收录 -->
+| [flannel-fta.md](flannel-fta.md) | 6.8 KB | Flannel VXLAN/host-gw/跨主机通信/IP 分配 | ~9 |  <!-- M2: 新增收录 -->
+| [higress-fta.md](higress-fta.md) | 8.5 KB | Higress 路由/xDS 推送/Wasm 插件/AI 网关 | ~12 |  <!-- M2: 新增收录 -->
+| [kube-proxy-fta.md](kube-proxy-fta.md) | 5.1 KB | kube-proxy 进程/代理模式/Service/Endpoints | ~7 |  <!-- M2: 新增收录 -->
+| [nginx-ingress-fta.md](nginx-ingress-fta.md) | 9.8 KB | nginx-ingress-controller 配置/502 503/TLS 证书 | ~13 |  <!-- M2: 新增收录 -->
 
 ### 3. 控制面组件
 
@@ -143,6 +151,8 @@ tier: supporting
 | [node-fta.md](node-fta.md) | 27.4 KB | 节点状态/kubelet/容器运行时/磁盘/内存/网络 | ~32 |
 | [nodepool-fta.md](nodepool-fta.md) | 20.3 KB | 节点池扩缩/标签/污点/机器配置/云提供商 | ~24 |
 | [gpu-fta.md](gpu-fta.md) | 31.3 KB | GPU 驱动/设备插件/调度/CUDA/内存/多卡 | ~36 |
+| [kubelet-fta.md](kubelet-fta.md) | 5.6 KB | kubelet 进程/证书认证/CRI/CNI/CSI/PLEG/驱逐 | ~8 |  <!-- M2: 新增收录 -->
+| [containerd-fta.md](containerd-fta.md) | 5.8 KB | containerd 进程/CRI socket/镜像存储/shim/snapshot | ~8 |  <!-- M2: 新增收录 -->
 
 ### 7. 扩缩容与可用性
 
@@ -159,6 +169,7 @@ tier: supporting
 |:---|---:|:---|:---:|
 | [cluster-upgrade-fta.md](cluster-upgrade-fta.md) | 52.0 KB | 升级前检查/控制面/工作节点/API 废弃/回滚 | ~60 |
 | [backup-restore-fta.md](backup-restore-fta.md) | 33.4 KB | etcd 备份/Velero/恢复验证/数据一致性 | ~38 |
+| [kubeadm-fta.md](kubeadm-fta.md) | 26.5 KB | kubeadm 初始化/加入/升级/重置/证书管理 | ~36 |  <!-- M2: 新增收录 -->
 
 ### 9. 应用交付与扩展
 
@@ -167,6 +178,7 @@ tier: supporting
 | [helm-fta.md](helm-fta.md) | 14.8 KB | Helm Chart/Hook/API 兼容/RBAC/状态/回滚 | ~18 |
 | [crd-operator-fta.md](crd-operator-fta.md) | 35.9 KB | CRD 定义/Operator/控制器/Finalizer/版本转换 | ~42 |
 | [gitops-argocd-fta.md](gitops-argocd-fta.md) | 30.4 KB | ArgoCD 同步/漂移/Git 仓库/健康检查/RBAC | ~35 |
+| [openkruise-fta.md](openkruise-fta.md) | 9.2 KB | OpenKruise CloneSet/原地升级/Sidecar 管理 | ~12 |  <!-- M2: 新增收录 -->
 
 ### 10. 可观测性与平台
 
@@ -253,12 +265,31 @@ tier: supporting
 |:---|:---|
 | CoreDNS | dns-fta |
 | kube-proxy | service-fta |
-| Nginx Ingress | ingress-fta |
+| Nginx Ingress | ingress-fta, nginx-ingress-fta |
 | cert-manager | certificate-fta |
+| kube-proxy | service-fta, kube-proxy-fta |
+| CNI (Calico/Cilium/Flannel) | calico-fta, cilium-fta, flannel-fta, cni-fta |  <!-- M2: 新增收录 -->
+| containerd | containerd-fta |  <!-- M2: 新增收录 -->
+| kubelet | kubelet-fta |  <!-- M2: 新增收录 -->
+| kubeadm | kubeadm-fta |  <!-- M2: 新增收录 -->
+| OpenKruise | openkruise-fta |  <!-- M2: 新增收录 -->
 | Prometheus | monitoring-fta |
 | Istio | service-mesh-istio-fta |
 | ArgoCD | gitops-argocd-fta |
 | Velero | backup-restore-fta |
+
+### 技能与知识域映射  <!-- M3: 新增衔接小节 -->
+
+| 本目录 FTA | 08-技能体系 诊断 Skill（Agent 可执行） | 26-技能 技能库 FTA 形态 |
+|:---|:---|:---|
+| [node-fta.md](node-fta.md) | [01-node-notready](../../08-技能体系/01-node-notready.md) | [26-技能/03-节点/node-fta.md](../../../26-技能/03-节点/node-fta.md) |
+| [dns-fta.md](dns-fta.md) | [04-dns-resolution-failure](../../08-技能体系/04-dns-resolution-failure.md) | 26-技能/05-网络/dns/ |
+| [ingress-fta.md](ingress-fta.md) | [14-ingress-gateway-failure](../../08-技能体系/14-ingress-gateway-failure.md) | [26-技能/05-网络/ingress/ingress-fta.md](../../../26-技能/05-网络/ingress/ingress-fta.md) |
+| [deployment-fta.md](deployment-fta.md) | [09-deployment-rollout-failure](../../08-技能体系/09-deployment-rollout-failure.md) | — |
+| [rbac-fta.md](rbac-fta.md) | [10-rbac-quota-failure](../../08-技能体系/10-rbac-quota-failure.md) | — |
+| [monitoring-fta.md](monitoring-fta.md) | [16-monitoring-alerting-failure](../../08-技能体系/16-monitoring-alerting-failure.md) | — |
+
+> 职责分工：本目录为**因果推理模型**（顶事件→底事件演绎）；[08-技能体系](../../08-技能体系/README.md) 为 **Agent 可执行闭环**（诊断→修复）；[26-技能](../../../26-技能/README.md) 为**培训技能库**。三者在 Agent 运行时的典型协作：先用故障树定位故障分支，再调用 Skill 获取修复命令。
 
 ---
 
@@ -284,7 +315,7 @@ tier: supporting
 
 | 指标 | 数值 |
 |:---|---:|
-| FTA 文件总数 | 36 |
+| FTA 文件总数 | 48 |  <!-- M2: 统计 36→48 -->
 | 底事件总数 | ~1,200+ |
 | 覆盖 K8s 组件 | 40+ |
 | 支持 K8s 版本 | 1.19–1.30 |
@@ -297,7 +328,7 @@ tier: supporting
 ## 相关资源
 
 - [topic-fta README](../README.md) - FTA 方法论主页
-- [kubernetes-fta-full-analysis.md](../kubernetes-fta-full-analysis.md) - K8s 全量故障树概览
+- [kubernetes-fta-full-analysis-v2.md](../kubernetes-fta-full-analysis-v2.md) - K8s 全量故障树概览（现行 v2）  # H2/M2: v1→v2 联动
 - [23-fta-production-quick-start.md](../23-fta-production-quick-start.md) - 生产环境快速启动指南
 
 ## Related

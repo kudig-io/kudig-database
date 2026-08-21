@@ -258,7 +258,7 @@ Week 4: 网络与存储 (进阶)
 | oncall 速查卡 | `P1-5-oncall-quick-reference-card.md` | 值班快速参考 |
 | kubectl 场景速查卡 | `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | 命令场景对照 |
 | 新人上手路径 | `生产运维/topic-learn/quick-start/` | 快速入门指南 |
-| 考核评估体系 | `故障诊断/topic-skills/assessment/` | 技能评估工具 |
+| 考核评估体系 | `19-故障诊断/08-技能体系/assessment/` | 技能评估工具 |
 | K8s 术语表 | `系统基础/topic-dictionary/k8s-glossary.md` | 术语查询 |
 | 故障排查手册 | `故障诊断/` | 故障排查参考 |
 | 内部培训教案 | `生产运维/topic-learn/inner-training/` | 详细教案 (阿里云版本) |

@@ -51,7 +51,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/05-workloads/05-job-cronjob-troubleshooting.md
+  path: ../../04-高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md
   label: '结构化排障: 05-job-cronjob-troubleshooting'
 tier: supporting
 ---

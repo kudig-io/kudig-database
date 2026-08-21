@@ -147,6 +147,47 @@ consul operator raft remove-peer -address="10.0.0.5:8300"
 
 **修复**：手动触发 CA 轮转，或切换到 Vault 作为 Connect CA。
 
+## 对比评测
+
+| 维度 | Consul | Istio | 自建注册中心 |
+|------|--------|-------|-------------|
+| 服务发现 | 原生（强一致） | 依赖 K8s | 自研 |
+| 服务网格 | 原生（Connect） | 完整 | 无 |
+| 多数据中心 | 原生（WAN 池） | 需多集群 | 自研 |
+| 配置中心 | 原生（KV） | 无 | 自研 |
+| 非 K8s 支持 | VM/裸机原生 | 弱 | 强 |
+
+**选型建议**：VM + K8s 混合架构且需要发现/配置/网格一体化选 Consul；纯 K8s HTTP 生态选 Istio；轻量场景用 K8s 原生 Service。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 服务注册失败 | `consul members`；`consul operator raft list-peers` | Server 不可用、ACL 令牌错误 |
+| 发现返回陈旧 | `consul catalog services`；检查 TTL | 健康检查间隔长、Agent 失联 |
+| 网格流量被拒 | `consul intention list` | Intention 缺失或 deny |
+| KV 不一致 | `consul kv get -recurse` | 跨 DC 同步延迟 |
+
+## 生产部署清单
+
+- [ ] Consul Server ≥3 且跨可用区部署（Raft 多数派）
+- [ ] ACL 开启且令牌管理（bootstrap + 轮换）
+- [ ] 健康检查覆盖关键服务（HTTP/TCP/gRPC 探针）
+- [ ] 数据备份与恢复演练（`consul snapshot`）
+- [ ] 监控接入（`consul_*` metrics：leader 状态、健康检查数量）
+
+## 常见误区与设计要点
+
+- **误区 1**：Agent 与 Server 混部署——Agent 应部署在每节点（含业务），Server 独立 3-5 副本。
+- **误区 2**：忽略 ACL——未开启 ACL 的 Consul 任何网络可达者都可读写。
+- **设计要点**：WAN 池跨数据中心互联（gossip 端口 8302）；服务发现走 DNS 接口（8600）减少代码改动；关键 KV 用 `consul-template` 自动渲染配置。
+
+## 性能参考
+
+- 发现 QPS：单 Server 数千 TPS 写入（受 Raft 提交限制），读可水平扩展。
+- 延迟：本地读 < 1ms，强一致读 +2ms 左右。
+- 规模：社区验证单 DC 数千节点；更大规模启用 `-disable-coordinates` 等调优。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

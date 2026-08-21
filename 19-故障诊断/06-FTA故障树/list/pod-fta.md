@@ -54,16 +54,16 @@ cross_refs:
   path: ../工作负载/11-pod-lifecycle-events.md
   label: '深度文档: 11-pod-lifecycle-events'
 - type: skill
-  path: ../故障诊断/topic-skills/02-pod-crashloop-oomkilled.md
+  path: ../../08-技能体系/02-pod-crashloop-oomkilled.md
   label: '运维技能: 02-pod-crashloop-oomkilled'
 - type: skill
-  path: ../故障诊断/topic-skills/03-pod-pending.md
+  path: ../../08-技能体系/03-pod-pending.md
   label: '运维技能: 03-pod-pending'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/05-workloads/01-pod-troubleshooting.md
+  path: ../../04-高级排障/structural-05-workloads/01-pod-troubleshooting.md
   label: '结构化排障: 01-pod-troubleshooting'
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/06-security-auth/03-pod-security-troubleshooting.md
+  path: ../../04-高级排障/structural-06-security-auth/03-pod-security-troubleshooting.md
   label: '结构化排障: 03-pod-security-troubleshooting'
 tier: supporting
 ---

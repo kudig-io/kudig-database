@@ -1,0 +1,98 @@
+{
+  "基本信息": {
+    "名称": "RDMA / InfiniBand 高速互联（InfiniBand、RoCE v2，含 RDMA 设备插件与 CNI 生态）",
+    "类别": "网络",
+    "官方文档链接": [
+      "https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/",
+      "https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/",
+      "https://github.com/k8snetworkplumbingwg/rdma-shared-device-plugin",
+      "https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin",
+      "https://github.com/k8snetworkplumbingwg/rdma-cni",
+      "https://github.com/k8snetworkplumbingwg/ib-sriov-cni",
+      "https://github.com/Mellanox/network-operator",
+      "https://github.com/Mellanox/ib-kubernetes",
+      "https://docs.nvidia.com/networking/display/kubernetes24101/getting-started-kubernetes.html",
+      "https://docs.nvidia.com/networking/display/kubernetes2540/platform-support.html",
+      "https://engineering.fb.com/2024/08/05/data-center-engineering/roce-network-distributed-ai-training-at-scale/",
+      "https://arxiv.org/abs/2510.12629",
+      "https://inria.hal.science/hal-05236403"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": "至少 1 块支持 RDMA 的网卡：InfiniBand HCA（如 NVIDIA/Mellanox ConnectX-4/5/6/7/8）或支持 RoCE v2 的以太网网卡（ConnectX-5 及以上为主流，Intel/Broadcom 部分型号支持有限）；服务器需支持 SR-IOV（BIOS 开启）以便 VF 直通；Linux 内核需加载 mlx5_core、ib_core、ib_uverbs、ib_umad、rdma_cm 等模块并安装 rdma-core/MLNX_OFED 用户态库；InfiniBand 网络必须存在活动的 Subnet Manager（OpenSM 可部署于任意低配节点，主备模式）；CPU/内存无特殊硬性要求（RDMA 数据面卸载到网卡）",
+    "推荐配置": "每节点 1-8 个 100/200/400Gb/s HCA（生产主流 NVIDIA ConnectX-6/7/8 或 BlueField），AI 训练节点通常按每 GPU 一个 200G/400G 端口配置；RoCE 场景要求无损/半无损以太网基础设施（PFC、ECN、DSCP QoS 分类）；InfiniBand 场景需专用交换机（如 Quantum-2 NDR 400G）与 OpenSM/UFM；GPU 节点启用 GPUDirect RDMA 并与 NCCL 配合；内核 5.6+（RDMA 网络命名空间隔离与 GUID 管理需要）；大页内存与 IOMMU（vfio-pci）用于 DPDK 等场景",
+    "生产级配置": "InfiniBand 方案：NVIDIA Quantum-2（NDR 400G）/Quantum-3 交换机胖树或两层 CLOS 拓扑，全网无损；每节点 8 口 400G HCA（与 8 卡 GPU 一一对应）；UFM（Unified Fabric Manager）集中管理 + OpenSM 主备；多租户启用 PKey 分区与 QoS 策略。RoCE 方案：400G 以太网（Meta 2024 年生产集群已从 200G 升级到 400G，单集群 24K-65K GPU），结合 PFC/ECN 与接收端驱动的流量准入控制。控制面/管理网络与 RDMA 数据网络物理分离",
+    "功耗基线": "NVIDIA ConnectX-7 单卡典型功耗 15.1-25.9W（官方规格，因型号/端口数而异）；400G QSFP112 光模块每端口约 5.1W（热设计上限）；RDMA 相比同等带宽的 TCP 卸载方案每比特功耗更低（硬件卸载降低 CPU 开销）；InfiniBand 交换机功耗较高（Quantum-2 64 端口 400G 交换机满载达数百瓦至千瓦级，具体取决于端口配置与光模块数量）[不确定]"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": "设备插件 API 自 K8s 1.26 起为 stable（GA），RDMA 设备插件（rdma-shared-device-plugin、sriov-network-device-plugin）为社区项目，在 K8s 1.13+ 上长期生产实践；NVIDIA Network Operator v25.4.0 官方验证支持 K8s 1.29-1.32；DevicePluginCDIDevices 特性（CDI 方式分配设备）v1.29 进入 Beta、v1.31 起 GA；DRA（Dynamic Resource Allocation）v1.34 起 GA，面向网络设备的 DRA 资源声明（KEP-4817）仍在演进，是 RDMA/网卡资源管理的下一代方向",
+    "操作系统兼容性": "仅 Linux（Windows 节点不支持 RDMA 设备插件，RDMA 在 Windows 上支持极其有限）；NVIDIA Network Operator v25.4.0 验证的发行版：Ubuntu 22.04/24.04 LTS、RHEL 8/9、Red Hat CoreOS、SLES 15 SP6；MLNX_OFED/DOCA-OFED 驱动支持主流 Linux 发行版与内核版本；RDMA 网络命名空间隔离需要内核 5.6+；rootless/用户命名空间（KEP-2033，K8s 1.36 GA）场景在 Ubuntu 等发行版上已有 2025 年研究验证",
+    "K8s 上游支持阶段": "设备插件 API 为 GA（stable，v1.26+）；DRA 为 GA（v1.34+）；RDMA 相关组件（rdma-shared-device-plugin、rdma-cni、ib-sriov-cni、sriov-network-device-plugin、sriov-network-operator）为 k8snetworkplumbingwg 社区项目，生产环境广泛使用但非 K8s 上游官方特性；NVIDIA Network Operator 为厂商官方支持的生产级部署方案；InfiniBand 本身不是 K8s 上游功能，完全依赖厂商与社区生态",
+    "生态兼容性矩阵": "Multus CNI（Pod 附加网络/多网卡事实标准）、Whereabouts IPAM（跨节点 IP 分配）、sriov-network-operator（SR-IOV 生命周期管理）、NVIDIA Network Operator（NicClusterPolicy CRD 一体化部署驱动/插件/CNI/IPAM）、Node Feature Discovery（NFD 提供 rdma.available 等节点标签供调度）、ib-kubernetes + UFM（InfiniBand PKey/GUID 动态管理）、perftest/ib_write_bw（基准测试）、NCCL/UCX/OpenMPI/MPI（HPC 与 AI 训练通信库，RDMA 是事实标准传输）、Prometheus 指标（UFM 遥测、Network Operator 指标、node_exporter 网卡计数）、Topology Manager（NUMA 感知调度）"
+  },
+  "限制与约束": {
+    "已知限制": [
+      "RDMA 直通设备不可热迁移：节点排水/故障后 Pod 必须重建，VF 重新分配，RDMA 连接无法迁移，训练作业需 checkpoint 恢复",
+      "K8s NetworkPolicy 只作用于主 CNI 网络，无法管控 Multus 附加的 RDMA/RoCE 网络，租户隔离需依赖 IB PKey/分区、VLAN、ACL 或 UFM 策略",
+      "共享模式（rdma-shared-device-plugin）多个 Pod 共享同一 HCA，缺乏原生带宽/QoS 隔离；2025 年研究（Noisy Neighbor）证实恶意租户可发起 RDMA 资源耗尽攻击，导致邻居吞吐下降约 94%、延迟放大千倍以上",
+      "InfiniBand 依赖 Subnet Manager 常驻（OpenSM 主备或 UFM），SM 故障会导致整网不稳定",
+      "RoCE v2 需要无损以太网配置（PFC、ECN、QoS DSCP），公有云 VM 默认不可用，需裸金属或专用 HPC 实例",
+      "网卡生态集中：生产级 RDMA 基本依赖 NVIDIA/Mellanox ConnectX 系列，Intel/Broadcom 的 RoCE 支持有限",
+      "RDMA 数据面无原生加密（InfiniBand 无 IPsec 支持，RoCE 数据面加密方案有限），安全敏感场景需额外措施",
+      "共享 HCA 场景需谨慎管理 /dev/infiniband 设备暴露与 IPC_LOCK 等权限，容器逃逸后攻击面较大",
+      "每端口 VF 数量受限（ConnectX-7 每端口最多 127 个 VF），大规模多租户 VF 资源可能不足"
+    ],
+    "混部兼容性": "RDMA 网卡与普通业务混部时，共享模式下 HCA 的 QP/PD/带宽资源会被多个租户抢占且无内置隔离，网络密集负载会互相干扰（Noisy Neighbor 攻击研究已证实）；与 GPU 混部需保证 PCIe/NUMA 拓扑亲和（Topology Manager + 设备插件 GetPreferredAllocation），避免跨 NUMA 访问降低 GPUDirect RDMA 性能；建议管理网（TCP）与数据网（RDMA）物理分离，避免拥塞互相影响；InfiniBand PKey 分区与 CPU/内存混部无直接冲突",
+    "性能开销": "RDMA 绕过内核协议栈与 CPU 拷贝，容器化开销极低：社区实测 400Gb/s 链路容器内可达约 46GB/s 带宽、约 2.7µs 延迟，较 TCP/IP 延迟降低 20-40 倍；SR-IOV VF 直通无 vSwitch/虚拟化开销；共享模式下多租户争用会导致吞吐与尾延迟劣化；rootless（用户命名空间）容器场景下，2025 年研究（Usernetes + InfiniBand + GPU）显示部分基准测试在大规模下存在可测量的额外开销，需要进一步优化",
+    "固件与驱动依赖": "网卡固件需与 PSID 匹配（NVIDIA ConnectX 系列通过 mlxup/NVIDIA 固件工具升级，升级需节点维护窗口，通常需重启网卡或节点）；驱动依赖 MLNX_OFED/DOCA-OFED 与内核模块（mlx5_core、ib_core、ib_uverbs、ib_umad、rdma_cm）及用户态 rdma-core；RDMA 网络命名空间隔离需内核 5.6+；SR-IOV 需 BIOS 开启 VT-d/IOMMU 并加载 vfio-pci；InfiniBand 交换机固件需与 OpenSM/UFM 版本匹配；网卡热插拔支持有限，设备变更通常需重建 Pod 或重启节点"
+  },
+  "配置与部署": {
+    "配置方式": [
+      "RDMA 共享设备插件（DaemonSet + JSON ConfigMap，NFD 标签选择节点，资源名如 rdma/rdma_shared_device_a，单 HCA 默认最多 1000 Pod 共享）",
+      "SR-IOV 设备插件（sriov-network-operator + SriovNetworkNodePolicy CRD 分配 VF，selectors 中启用 isRdma 声明 RDMA 资源池）",
+      "Multus CNI + rdma-cni / ib-sriov-cni：将 RDMA 接口移入 Pod 网络命名空间或直接挂载 VF（附带 NetworkAttachmentDefinition CRD 与 Pod 注解）",
+      "NVIDIA Network Operator（Helm 安装 + NicClusterPolicy CRD）：一体化部署 DOCA 驱动、RDMA/SR-IOV 设备插件、Multus、IPAM、NFD、OVS 卸载等",
+      "DRA（K8s 1.34+ GA）：以 ResourceClaim 声明网络硬件资源，网络 DRA 驱动（KEP-4817）仍在演进，未来可替代部分 CNI/设备插件职责",
+      "InfiniBand 专用：ib-kubernetes 守护进程 + UFM 插件动态管理 PKey 与 GUID（Pod 携带 mellanox.infiniband.app 标签自动获得分区键）",
+      "手动部署：裸金属上安装驱动（mlnxofedinstall）、加载模块、手工配置设备插件 ConfigMap"
+    ],
+    "配置示例": {
+      "RDMA 共享设备插件 ConfigMap": "kind: ConfigMap\nmetadata:\n  name: rdma-devices\n  namespace: kube-system\ndata:\n  config.json: |\n    {\n      \"periodicUpdateInterval\": 300,\n      \"configList\": [{\n        \"resourceName\": \"rdma_shared_device_a\",\n        \"rdmaHcaMax\": 1000,\n        \"selectors\": {\n          \"vendors\": [\"15b3\"],\n          \"deviceIDs\": [\"101b\", \"101d\"],\n          \"drivers\": [\"mlx5_core\"],\n          \"linkTypes\": [\"IB\", \"Ethernet\"]\n        }\n      }]\n    }",
+      "SriovNetworkNodePolicy（SR-IOV VF + RDMA）": "apiVersion: sriovnetwork.openshift.io/v1\nkind: SriovNetworkNodePolicy\nmetadata:\n  name: rdma-policy\nspec:\n  nodeSelector:\n    feature.node.kubernetes.io/rdma.available: \"true\"\n  numVfs: 8\n  resourceName: rdma_shared_vf\n  deviceType: netdevice\n  isRdma: true\n  nicSelector:\n    vendor: \"15b3\"\n    pfNames: [\"ens1f0\"]",
+      "Pod 请求 RDMA 资源（共享模式）": "spec:\n  containers:\n  - name: hpc-app\n    image: my-hpc-app:latest\n    securityContext:\n      capabilities:\n        add: [\"IPC_LOCK\"]\n    resources:\n      limits:\n        rdma/rdma_shared_device_a: 1\n        memory: 1Gi\n      requests:\n        rdma/rdma_shared_device_a: 1\n        memory: 1Gi",
+      "SR-IOV 附加网络 + Pod 注解（直通模式）": "apiVersion: k8s.cni.cncf.io/v1\nkind: NetworkAttachmentDefinition\nmetadata:\n  name: ib-net\nspec:\n  config: '{\"cniVersion\":\"0.3.1\",\"type\":\"ib-sriov\",\"deviceID\":\"0000:3b:00.2\",\"pkey\":\"0x8001\",\"ipam\":{\"type\":\"whereabouts\",\"range\":\"10.56.217.0/24\"}}'\n---\n# Pod:\nmetadata:\n  annotations:\n    k8s.v1.cni.cncf.io/networks: ib-net\nspec:\n  containers:\n  - name: hpc-app\n    resources:\n      limits:\n        rdma/rdma_shared_vf: 1"
+    },
+    "部署位置与环境": "裸金属自建集群是 RDMA/InfiniBand 的主流与最佳环境（HPC、AI 训练）；私有云（OpenStack/KubeVirt 等）通过 SR-IOV VF 直通支持；公有云：部分云厂商提供 RDMA 能力（Azure HPC/InfiniBand 实例、AWS EFA（类 RDMA 但非 IB/RoCE 标准）、阿里云 eRDMA/RoCE 实例、Oracle Cloud HPC 实例），均需专用实例类型或裸金属；虚拟化环境需 PCIe 直通，VM 内再跑容器（嵌套）性能有损；边缘场景一般不涉及；混合部署兼容性一般，IB 与 RoCE 网络不能直接互通（可经网关/双栈节点桥接，非透明）",
+    "虚拟化兼容性": "SR-IOV VF 直通给虚拟机（KubeVirt/OpenStack/VMware）是常见形态，需宿主机开启 IOMMU（vt-d/amd-vi）并以 vfio-pci 透传；VM 热迁移（vMotion/在线迁移）不支持 RDMA 直通设备，迁移前必须摘除 VF；嵌套虚拟化（VM 中再跑容器使用 RDMA）性能有损但仍可用；公有云普通 VM 无 RDMA 直通能力，需专用 HPC/裸金属实例；DPDK 等用户态数据面在虚拟化环境中依赖同样的 vfio 透传路径"
+  },
+  "性能特征": {
+    "基准性能数据": "InfiniBand 端到端延迟约 0.7µs（HCA 到 HCA，NDR 400G），RoCE v2 约 1.5-2µs；K8s 容器内实测（共享插件 + 400Gb/s 链路）：ib_write_bw 约 46GB/s（接近线速）、延迟约 2.7µs，较 TCP 延迟低 20-40 倍（社区测试）；NVIDIA ConnectX-7 支持 400Gb/s NDR InfiniBand 与 400GbE（PCIe Gen4/5 x16）；Meta SIGCOMM 2024 论文：RoCE 支撑 24K-65K GPU 规模的分布式 AI 训练（200G 起步、400G 演进），通过优化交换机哈希与 QP 扩展使 AllReduce 性能提升最高 40%；NCCL over RDMA（RoCE/IB）是大模型训练通信的事实标准，NVIDIA 官方在 A100/H100 集群上验证 GPUDirect RDMA 显著降低通信时间",
+    "扩展性上限": "InfiniBand 单子网规模受 Subnet Manager 与 LID 空间限制，可支撑数万节点（多子网经 UFM 统一管理可进一步扩展）；Meta 生产验证单集群 24K-65K GPU 规模 RoCE 网络；K8s 侧受标准集群上限（约 5000 节点、15 万 Pod）约束；RDMA 设备插件每节点可分配资源受网卡 VF 数（ConnectX-7 每端口最多 127 VF）与共享上限（rdmaHcaMax 默认 1000）限制；大规模下瓶颈常出现在 Subnet Manager 处理能力、拥塞控制（PFC/ECN）与 NCCL 通信调度",
+    "每节点密度": "K8s 默认每节点最多 110 个 Pod（--max-pods 可调）；SR-IOV 直通模式每端口最多 127 个 VF（ConnectX-7，受 OS 驱动限制，具体以厂商规格为准[不确定]）；共享设备插件模式单 HCA 默认最多 1000 个 Pod 共享（rdmaHcaMax）；典型 AI 训练节点为 8 卡 GPU 配 8 个 200G/400G 端口（每 GPU 一端口），此时 Pod 密度由 GPU 数量决定而非网卡"
+  },
+  "安全": {
+    "安全特性": "InfiniBand PKey（分区键）实现网络级租户隔离，ib-kubernetes + UFM 可动态为 Pod 分配 PKey（自动分区），未授权分区间不可通信；RoCE 场景用 VLAN + QoS（DSCP 优先级）与交换机 ACL 实现租户隔离；SR-IOV VF 提供硬件级设备隔离；设备插件与设备 cgroup 控制 /dev/infiniband 与 uverbs 设备访问；Topology Manager 与设备插件 GetPreferredAllocation 保证 NUMA 亲和；2025 年研究（Noisy Neighbor，arXiv 2510.12629）揭示共享 HCA 的 RDMA 资源耗尽攻击（状态饱和与流水线饱和，可致邻居吞吐下降约 94%、延迟放大千倍以上），提出 HT-Verbs 限流框架（三级温度分层限制恶意任务）作为缓解；rootless/用户命名空间（K8s 1.36 用户命名空间 GA）2025 年研究（Usernetes + RDMA + GPU）证明无特权用户可在 rootless K8s 中使用 RDMA，降低容器逃逸与提权风险，但大规模下有性能开销；RDMA 数据面无原生加密，敏感数据需信任网络或叠加 MACsec 等链路层加密",
+    "合规与认证": "RDMA/InfiniBand 网卡与交换机无公开的独立行业安全认证（如 FIPS 140 硬件密码模块认证）资料[不确定]；HPC/AI 集群通常按数据中心整体合规执行（ISO 27001、SOC 2 等）；K8s 一致性认证（CNCF Conformance）不涵盖 RDMA 设备插件；RDMA 数据面无原生加密可能不满足金融/政府等强制加密要求；NVIDIA UFM 提供审计与租户管理能力，可辅助多租户合规审计"
+  },
+  "运维与生命周期": {
+    "可观测性支持": [
+      "NVIDIA UFM（Unified Fabric Manager）：全网拓扑、遥测、告警、租户（PKey）审计，支持 Prometheus 集成",
+      "命令行工具：ibstat/ibstatus、ibv_devinfo、mst、ibdiagnet（网络健康检查）、opensm 日志",
+      "perftest 套件：ib_write_bw/ib_write_lat、ib_send_bw/lat 等微基准测试",
+      "RoCE 侧：ethtool -S（网卡收发与丢包计数）、PFC/ECN 计数（交换机侧）",
+      "K8s 侧：node_exporter 网卡指标、NVIDIA Network Operator 指标、NFD 节点标签、设备插件资源上报与 Pod 事件"
+    ],
+    "维护与生命周期": "网卡固件升级（NVIDIA mlxup 工具）需要节点维护窗口（升级期间网卡不可用，通常需重启）；节点排水时 RDMA Pod 重建并重新分配 VF/PKey；SriovNetworkNodePolicy 变更需要节点重启或重建相关 Pod；驱动升级（MLNX_OFED/DOCA-OFED）需与内核版本匹配并滚动重启节点；InfiniBand 交换机与 OpenSM/UFM 升级需主备切换保障连续性；共享模式下设备插件可滚动升级而不中断已有连接；RDMA 连接本身无迁移能力，维护事件前建议完成作业 checkpoint",
+    "弹性与故障恢复": "InfiniBand 网络依赖 Subnet Manager 高可用（OpenSM 主备或 UFM HA），SM 故障会导致全网路由不稳定；IB 自适应路由（Adaptive Routing）与多路径（LAG/多网卡）可容忍单链路故障；RoCE 依赖以太网路由收敛与 PFC/ECN 拥塞管理，链路故障收敛速度由以太网协议决定；节点或网卡故障时 RDMA Pod 无法热迁移，需重建并通过 NCCL/MPI 作业重启（结合训练 checkpoint 恢复）；多租户场景建议将不同训练作业隔离到不同分区/VF，缩小单点故障爆炸半径；GPU+RDMA 组合节点故障对训练作业影响大，生产集群普遍要求冗余数据网络与控制面"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "[不确定]（定性结论：InfiniBand 整体 TCO 高于 RoCE——专用交换机（如 Quantum-2 NDR 400G）与光模块成本显著高于标准以太网；RoCE 可复用通用以太网交换机，TCO 更低，是 Meta 等大厂选择 RoCE 的重要原因；功耗方面 ConnectX-7 单卡 15.1-25.9W，400G 光模块每端口约 5.1W，网络功耗占集群总功耗比例较低但交换机与散热成本需计入；公有云 HPC/RDMA 实例按小时计费且溢价较高；具体采购与运行成本因规模、厂商折扣差异大，无公开权威汇总数据）",
+    "成熟度与社区支持": "生态成熟：NVIDIA 主导 InfiniBand/RoCE（ConnectX 系列 HCA、Quantum/Spectrum 交换机、Network Operator、UFM、DOCA），文档完善且为 AI/HPC 行业事实标准；k8snetworkplumbingwg（K8s 网络工作组）维护 rdma-shared-device-plugin、rdma-cni、ib-sriov-cni、sriov-network-device-plugin 等社区项目，长期活跃；NVIDIA Network Operator 是生产级厂商支持方案（OpenShift/RKE/上游 K8s 均有部署指南）；Meta（RoCE 65K GPU）、微软 Azure（InfiniBand HPC）、各大超算中心（Top500 绝大多数使用 InfiniBand）大规模生产验证；NCCL/UCX/MPI 通信库对 RDMA 支持成熟；2025 年研究热点：rootless RDMA 容器（Usernetes）、DRA 网络资源（KEP-4817）、RDMA 多租户安全（Noisy Neighbor 攻击与防御）"
+  },
+  "uncertain": [
+    "功耗基线",
+    "每节点密度",
+    "总拥有成本 (TCO)",
+    "合规与认证"
+  ]
+}

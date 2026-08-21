@@ -82,8 +82,8 @@ base_confidence: 0.88
 lifecycle: reviewed
 lifecycle_changed: 2026-05-21
 
-tier: supporting---
-
+tier: supporting
+---
 # eBPF x 运行时安全
 
 ## 连接点

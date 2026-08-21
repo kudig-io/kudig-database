@@ -1,0 +1,127 @@
+{
+  "基本信息": {
+    "名称": "Kubernetes 控制平面硬件（etcd、kube-apiserver、HA 控制面节点、NUMA 拓扑）",
+    "类别": "控制平面",
+    "官方文档链接": [
+      "https://etcd.io/docs/v3.3/op-guide/hardware/",
+      "https://etcd.io/docs/v3.2/tuning/",
+      "https://kubernetes.io/docs/setup/best-practices/cluster-large/",
+      "https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/high-availability/",
+      "https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/",
+      "https://kubernetes.io/docs/tasks/administer-cluster/topology-manager/",
+      "https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/4622-topologymanager-max-allowable-numa-nodes/README.md",
+      "https://github.com/kubernetes/community/blob/master/sig-scalability/slos/slos.md",
+      "https://kubernetes.io/blog/2024/12/17/kube-apiserver-api-streaming/",
+      "https://kubernetes.io/blog/2025/12/17/kubernetes-v1-35-release/"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": {
+      "控制面节点（kubeadm 官方）": "每台机器 2 GB 以上内存、控制面机器 2 核以上 CPU、全网络连通性与开放端口；仅可运行最小化测试集群，不满足生产需求",
+      "etcd（官方文档）": "2-4 核 CPU、8 GB 内存、50 顺序 IOPS 磁盘（推荐 SSD，若用机械盘需 15,000 RPM）、1GbE 网络；磁盘写延迟是最关键指标",
+      "API Server": "最低 1-2 核 CPU、1-2 GB 内存即可在测试环境启动，生产集群需远高于此"
+    },
+    "推荐配置": {
+      "控制面节点（生产）": "4-8 vCPU、16-32 GB 内存、120-250 GB 本地 SSD/NVMe 磁盘；etcd 所在盘要求 SSD 且 10,000+ IOPS，NVMe 可达 50,000+ IOPS 为最佳",
+      "etcd（高负载）": "8-16 核专用 CPU、16-64 GB 内存、500 顺序 IOPS、10GbE 网络；官方要求 etcd 使用完全专用机器以避免资源争用",
+      "HA 拓扑": "3 台（奇数）控制面机器：堆叠 etcd 拓扑（控制面与 etcd 同机）或外部 etcd 拓扑（另加 3 台以上专用 etcd 机器）；TCP 负载均衡器以 6443 端口健康检查作为 API Server 入口",
+      "托管服务对照": "EKS/AKS/GKE/ACK 等托管控制面由云厂商承载，规格不可见，通常等效于 2-4 vCPU、8-16 GB 的 API Server 实例"
+    },
+    "生产级配置": {
+      "大规模集群（数百至 5,000 节点）": "控制面节点 8-16 vCPU、32-64 GB 内存、500 GB NVMe；etcd 使用独立本地 NVMe 磁盘（与系统盘/日志盘分离）；事件对象写入独立 etcd 集群（--etcd-servers-overrides）；10GbE 控制面网络；3 或 5 节点奇数控制面，每故障域 1-2 个实例；API Server 内存需 16-32 GB+ 以承载 watch cache",
+      "超大规模（超过 5,000 节点）": "官方单集群上限为 5,000 节点，超过需多集群拆分或采用云厂商定制存储后端（实测 30,000-130,000 节点方案均替换了 etcd 存储引擎）；社区经验 500-2,000 节点/集群为'甜蜜点'"
+    },
+    "功耗基线": "[不确定] 控制面节点通常为 4-16 核中等规格服务器：空载约 40-80W、满载约 80-200W/节点；3 节点 HA 控制面整体功耗约 120-600W，另加 NVMe 与网络设备；无官方统一数据，取决于 CPU 型号、平台代际与虚拟化环境"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "etcd": "Kubernetes 1.22+ 默认使用 etcd 3.5.x（kubeadm 在 v1.32-v1.34 支持 etcd v3.5.24），K8s 1.35 升级至 etcd 3.6.6；etcd 硬件建议（NVMe/SSD、IOPS、延迟）适用于所有受支持版本",
+      "Topology Manager / NUMA": "K8s 1.16 引入（Alpha）、1.18 Beta、1.27 GA（TopologyManager feature gate 默认启用）；max-allowable-numa-nodes 策略选项（突破 8-NUMA 限制）1.31 随 TopologyManagerPolicyBetaOptions Beta 默认启用、1.35 GA、1.36 移除 feature gate",
+      "HA 与大规模集群": "kubeadm HA 控制面为 GA 功能；5,000 节点 / 150,000 Pod 扩展目标自 K8s 1.6 确立并沿用至今"
+    },
+    "操作系统兼容性": "控制面硬件与操作系统解耦：所有 K8s 支持的 Linux 发行版（Ubuntu、Debian、RHEL/CentOS/Rocky/AlmaLinux、SUSE、Fedora CoreOS、Flatcar Container Linux 等）均可承载控制面组件；etcd 官方支持 Linux、macOS、BSD、Windows，生产环境仅推荐 Linux；Windows Server 只能作为工作节点，不能作为控制面节点",
+    "K8s 上游支持阶段": {
+      "控制面组件（kube-apiserver/kube-controller-manager/kube-scheduler/etcd）": "GA（生产就绪）；etcd 为 CNCF 毕业项目",
+      "max-allowable-numa-nodes（突破 8-NUMA 限制）": "K8s 1.35 起 GA",
+      "Topology Manager": "K8s 1.27 起 GA",
+      "Streaming List（缓解 API Server 大集群内存压力）": "K8s 1.33 Beta 默认启用，1.35 继续演进",
+      "kubeadm HA 控制面": "GA，多发行版（Talos、RKE2、kOps、KubeSpray）均提供类似能力"
+    },
+    "生态兼容性矩阵": "[不确定] 控制面硬件与生态组件兼容性主要体现为：etcd 原生暴露 Prometheus 指标（etcd_disk_wal_fsync_duration_seconds、etcd_disk_backend_commit_duration_seconds 等），与 Prometheus/kube-prometheus 监控栈、etcdutl/etcd snapshot 备份工具、社区 etcd Operator 兼容；控制面节点可承载任意 CNI 的控制组件（Calico、Cilium、Flannel、OVN-Kubernetes）与 CSI 控制器（须满足其自身资源要求）；node_exporter、kube-state-metrics、日志 Agent 等 DaemonSet 可部署于控制面节点。无官方硬件兼容矩阵，各组件以资源预留与污点容忍方式共存"
+  },
+  "限制与约束": {
+    "已知限制": {
+      "etcd": "默认存储配额 2 GiB、推荐上限 8 GiB，超限进入只读告警模式并冻结控制面；单 key 上限 1 MiB、单请求上限 1.5 MiB；Raft 单 Leader 串行写入限制写吞吐；磁盘 fsync 延迟超过心跳间隔（默认 100ms）会导致心跳丢失、请求超时与临时 Leader 丢失；MVCC 多版本需定期 compact 与 defrag，否则数据库膨胀至配额触发告警",
+      "API Server": "list 请求内存占用随对象数无界增长，曾可在数秒内导致 OOM（K8s 1.33 引入 Streaming List 缓解）；watch cache 为 75 秒滑动窗口；读取约 1 GB 的 Pod 数据约消耗 5 GB 内存（含 etcd 与序列化/gRPC/解码开销）；webhook 与 API Priority and Fairness 排队会额外增加延迟",
+      "扩展瓶颈拐点": "约 1,000+ 节点时 etcd 成为首要瓶颈（每个节点每 10 秒 PUT 一次状态/lease 续约，1,000 节点即约 100 次/秒写请求，快照写入期易超时）；etcd watch 通道爆炸发生在 1-2M 对象规模；调度器约 100 Pod/秒调度上限；控制器管理器在节点批量故障时工作队列堆积、GC 昂贵",
+      "NUMA": "Topology Manager 历史上硬编码最多 8 个 NUMA 节点；K8s 1.35 GA 的 max-allowable-numa-nodes 允许调高，但官方警告高于默认值可能造成准入（admission）阶段性能下降（状态组合爆炸问题仍超出本增强范围）；K8s 1.36 修复了 36 NUMA 节点（如 NVIDIA GB200）上设备管理器 O(2^n) 拓扑枚举导致 kubelet 停滞的问题",
+      "官方规模上限": "单集群 5,000 节点、每节点 110 Pod、总计 150,000 Pod、300,000 容器"
+    },
+    "混部兼容性": "etcd 官方要求完全专用机器，避免与其他高 I/O 负载争用导致 fsync 延迟抖动；控制面节点默认带 node-role.kubernetes.io/control-plane 污点（NoSchedule），不建议与业务工作负载混部；堆叠 etcd 拓扑中 etcd 与控制面组件共享节点资源，须预留足够 CPU/内存并保证 etcd 进程的磁盘优先级（可 ionice）；监控/日志 Agent 等系统组件混部时需控制资源限额，避免 OOM 抢占关键控制面组件",
+    "性能开销": "[不确定] 虚拟机中运行控制面通常引入约 5-15% 性能开销（虚拟化层 CPU/中断开销）；etcd 的 Raft 共识带来写放大（每次写需多数节点 fsync 落盘）；5 节点控制面相比 3 节点写吞吐约下降 5%（Sidero Labs 实测）；使用网络存储（NFS、分布式块存储）承载 etcd 时 fsync 延迟显著升高，生产不可接受，必须本地 NVMe/SSD",
+    "固件与驱动依赖": "[不确定] 无特殊要求：NVMe SSD 依赖 Linux 内核 nvme 驱动（主流发行版内置），建议定期升级 SSD 固件并启用 TRIM；RAID 控制器需使用带断电保护的写回（Write-back）缓存策略，否则 fsync 性能大幅下降；控制面节点需 NTP/chrony 时钟同步，时钟漂移会影响 etcd 租约与证书验证；无额外内核模块要求"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "HA 控制面": "kubeadm 堆叠 etcd（控制面与 etcd 同机）或外部 etcd（3+ 专用 etcd 机器）；TCP 负载均衡器以 kube-apiserver 6443 端口健康检查为入口；每个故障域部署 1-2 个控制面实例，负载均衡器按域路由避免跨域流量瓶颈",
+      "etcd 磁盘与配额": "为 etcd 分配独立本地 SSD/NVMe 分区（或独立物理盘）并预留足够空间（建议 >= 数据量 2 倍）；调整存储配额 --quota-backend-bytes（上限 8 GiB）；事件对象通过 --etcd-servers-overrides=/events#https://... 写入独立 etcd 集群",
+      "NUMA（K8s 1.35+ 突破 8-NUMA）": "kubelet 配置 topologyManagerPolicy（none/best-effort/restricted/single-numa-node，1.27 GA），通过 topologyManagerPolicyOptions.max-allowable-numa-nodes 调高超过 8 个 NUMA 节点的限制",
+      "扩展策略": "先垂直扩展（增大控制面节点 CPU/内存），收益递减后再水平扩展（增加控制面副本）；为监控/日志等 addon 使用 addon-resizer 或 VPA recommender 模式调整资源请求/限制，避免大集群下 OOM 与 CPU 节流"
+    },
+    "配置示例": {
+      "kubelet Topology Manager（1.35 突破 8-NUMA 限制）": "apiVersion: kubelet.config.k8s.io/v1beta1\nkind: KubeletConfiguration\ntopologyManagerPolicy: single-numa-node\ntopologyManagerPolicyOptions:\n  max-allowable-numa-nodes: 16",
+      "kube-apiserver 事件写入独立 etcd": "--etcd-servers=https://10.0.0.10:2379\n--etcd-servers-overrides=/events#https://10.0.1.10:2379",
+      "kubeadm HA 控制面初始化": "# 第一个控制面节点\nsudo kubeadm init --control-plane-endpoint \"lb.example.com:6443\" --upload-certs\n# 其余控制面节点加入（携带 --control-plane）\nsudo kubeadm join lb.example.com:6443 --control-plane --certificate-key <key>"
+    },
+    "部署位置与环境": "公有云托管控制面（EKS/AKS/GKE/ACK/TKE 等，硬件由云厂商承载，通过 SLA 保证 API 可用性）、私有云/裸金属（kubeadm、Talos、RKE2、kOps、KubeSpray）、虚拟机（绝大多数生产 K8s 以 VM 承载控制面，KVM/VMware/Hyper-V 均可）、边缘（K3s/KubeEdge 等轻量单节点或小规模控制面）；混合部署时控制面网络延迟应尽量低（同一数据中心/可用区内）",
+    "虚拟化兼容性": "[不确定] 控制面组件对虚拟化无特殊要求：etcd 所在虚拟磁盘必须为本地存储（避免共享/网络存储的延迟抖动）；VM 需透传 vNUMA 拓扑（或启用 NUMA 亲和）以便 Topology Manager 生效；VM 无感知热迁移会导致 etcd fsync 延迟抖动与时钟跳变，不建议对 etcd 节点热迁移；嵌套虚拟化可行但不推荐用于生产控制面"
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "官方规模与 SLO": "官方支持上限：5,000 节点、150,000 Pod、300,000 容器（每节点 110 Pod）；K8s 上游 SLO：变更类 API 请求 P99 ≤ 1 秒、单资源读 P99 ≤ 1 秒、namespace 级 list ≤ 5 秒、集群级 list ≤ 30 秒、无状态 Pod 启动延迟（不含镜像拉取）P99 ≤ 5 秒",
+      "etcd": "标准集群 50 顺序 IOPS 即可运行，高负载需 500 顺序 IOPS；写延迟为决定性指标（社区实践 fsync p99 < 10 ms，超过心跳间隔 100 ms 即引发不稳定）；默认存储配额 2 GiB、推荐上限 8 GiB",
+      "调度吞吐": "社区实测调度器约 100 Pod/秒 上限；1,000 节点集群中节点状态写入约 100 次/秒，对 etcd 构成持续压力",
+      "大规模实测": "PayPal 公开案例：4,000+ 节点 / 200,000 Pod；云厂商超大规模（30,000-130,000 节点）均以定制分布式存储后端替换 etcd；Sidero Labs 实测 3 节点控制面写性能优于 5 节点（约 -5% 吞吐）",
+      "控制面节点规格效果": "4 vCPU/16 GB 可支撑数百节点；8 vCPU/32 GB 可支撑约 1,000-2,500 节点；8-16 vCPU/32-64 GB + NVMe 方可稳定逼近 5,000 节点上限（经验值）"
+    },
+    "扩展性上限": "单集群官方上限：5,000 节点 / 150,000 Pod / 300,000 容器（每节点 110 Pod）；瓶颈拐点经验值：约 1,000+ 节点时 etcd 成为首要瓶颈（GitHub issue #20540：节点状态写入导致 etcd 超时），500-2,000 节点是社区公认的'甜蜜点'；2,000-5,000 节点需具备：独立事件 etcd、大内存 API Server（16-32 GB+）、10GbE 控制面网络、NVMe 盘、addon-resizer/VPA 调整组件配额、云配额预留；超过 5,000 节点需多集群拆分或定制存储后端",
+    "每节点密度": "[不确定] 控制面节点通常不承载业务 Pod（control-plane 污点 NoSchedule），其'密度'体现为可支撑的工作节点数量：单个 4-8 vCPU/16-32 GB 控制面副本经验上可支撑数百至约 2,000 节点（取决于对象规模与 etcd 磁盘性能），无官方数字；工作节点默认每节点 110 Pod 上限（--max-pods 可调，Kubelet 1.32+ 支持 --max-pods 无硬限制但受节点资源约束）"
+  },
+  "安全": {
+    "安全特性": {
+      "传输安全": "kube-apiserver 与 kubelet、调度器等组件间 mTLS；kube-apiserver 至 etcd 使用 TLS；K8s 1.35 起 kube-apiserver 支持证书双向验证（mTLS）新特性",
+      "静态数据加密": "etcd 支持 EncryptionConfiguration 对 Secret 等敏感资源静态加密（AES-CBC / KMS 提供方），KMS 可由云厂商 KMS/HSM 承载密钥",
+      "硬件信任根与节点身份": "控制面节点可启用 TPM 2.0 + UEFI Secure Boot 建立硬件信任根；通过远程证明/设备插件（如 Confidential Containers、kubelet 节点证明）向控制面验证节点身份",
+      "访问控制与审计": "API Server 内置 RBAC、准入控制与审计日志（控制面安全基线，与硬件配置无关）",
+      "物理隔离": "控制面节点不调度业务负载，降低横向移动与资源争用攻击面；外部 etcd 拓扑进一步隔离数据面"
+    },
+    "合规与认证": "[不确定] Kubernetes 一致性认证（CNCF Conformance）覆盖控制面组件，任何通过一致性测试的发行版均符合；FIPS 140-2/3 合规取决于发行版与编译配置（如 OpenShift FIPS 模式、Go 加密库的 FIPS 化），etcd/API Server 需使用 FIPS 认可的加密实现；PCI DSS、HIPAA 等行业合规取决于静态加密、审计、密钥管理等部署配置，非硬件本身特性"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "etcd 指标": "原生 Prometheus 指标：etcd_disk_wal_fsync_duration_seconds、etcd_disk_backend_commit_duration_seconds、etcd_server_leader_changes_seen_total、etcd_server_slow_apply_total 等；/health 与 /metrics HTTP 端点（kubeadm 1.35 起支持 HTTPEndpoints 与 gRPC 分离，便于安全暴露指标）",
+      "API Server 指标": "apiserver_request_duration_seconds、apiserver_request_sli_duration_seconds（1.27+，不含 webhook 与排队时间）、kubelet_pod_start_sli_duration_seconds；SIG Scalability 提供 clusterloader2 Prometheus 规则与 Grafana SLO 仪表板",
+      "健康检查": "etcd /health、kube-apiserver /healthz、kube-scheduler 与 controller-manager /healthz；kubeadm 1.35 起以 quorum 方式检查 etcd 集群健康（多数成员健康即视为健康）"
+    },
+    "维护与生命周期": "etcd 需定期 compact（压缩历史版本）与 defrag（碎片整理）以回收空间，超配额会触发只读告警；备份使用 etcd snapshot（etcdutl/etcdctl）并定期演练恢复；控制面升级按发行版流程逐节点排空（控制面排空需保证 etcd quorum，一次仅一个节点）；NVMe 需监控写入耐久度（TBW）与健康（nvme-cli、SMART 指标）；控制面节点故障替换需预先备份 etcd 数据目录与 PKI 证书；kubeadm 的 etcd learner 机制（1.35 增强）支持平滑成员加入/替换",
+    "弹性与故障恢复": {
+      "etcd 共识": "3 节点容忍 1 台故障，5 节点容忍 2 台故障；Leader 选举依赖心跳（默认 100ms 间隔），故障切换通常秒级完成；2 节点控制面比 1 节点更差（两节点须同时在线且存在脑裂风险），故必须奇数节点",
+      "跨可用区": "每个故障域至少 1 个控制面实例，负载均衡器按域路由避免跨域流量瓶颈；etcd 官方建议成员部署在同一数据中心（避免分区事件），跨可用区需评估网络延迟对 Raft 心跳与提交延迟的影响",
+      "数据持久化": "etcd 数据（数据目录 + WAL）位于本地持久化磁盘，必须保障磁盘故障不丢数据（硬件冗余/备份快照）；丢失多数 etcd 成员时需从快照 + 增量日志恢复；控制面组件本身无状态，可快速重建"
+    }
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "[不确定] 控制面硬件成本通常占集群总成本 < 10%：3 节点 HA 控制面（4-8 vCPU、16-32 GB、NVMe 盘）云实例成本约为等规模工作节点的 1-3 倍单机价格，但仅需 3-5 台；自建需计入 NVMe 采购、冗余设计（RAID/双副本）、功耗与冷却；托管控制面（EKS/AKS/GKE/ACK）无硬件采购成本，但收取每集群/每 vCPU 管理费；大规模集群中控制面网络（10GbE）与独立事件 etcd 会额外增加成本。具体数字随云厂商与硬件代际差异大",
+    "成熟度与社区支持": "控制面架构（etcd + kube-apiserver + kube-controller-manager + kube-scheduler）是 Kubernetes 最成熟的部分：etcd 为 CNCF 毕业项目，kubeadm HA 为 GA；Talos、RKE2、kOps、KubeSpray、KubeKey 等发行版生态成熟；EKS/AKS/GKE/ACK/TKE 等托管控制面广泛提供；SIG Scalability 持续维护 5,000 节点基准测试与 SLO（slos.md）；Topology Manager/NUMA 相关 KEP 由 SIG Node 活跃维护（1.35 GA、1.36 修复 36-NUMA 设备枚举问题），社区活跃度极高"
+  },
+  "uncertain": [
+    "功耗基线",
+    "生态兼容性矩阵",
+    "性能开销",
+    "固件与驱动依赖",
+    "虚拟化兼容性",
+    "每节点密度",
+    "合规与认证",
+    "总拥有成本 (TCO)"
+  ]
+}

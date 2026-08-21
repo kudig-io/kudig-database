@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Topic Qa Corpus
 
-> 本页为 `故障诊断/topic-qa-corpus` 目录的自动索引。
+> 本页为 `19-故障诊断/10-QA语料` 目录的自动索引。
 
 ## 概览
 
@@ -21,15 +21,15 @@ last_updated: 2026-07
 
 ## 子目录
 
-- 故障诊断/topic-qa-corpus/_schema/
-- 故障诊断/topic-qa-corpus/benchmark/
-- 故障诊断/topic-qa-corpus/capability-conversation/
-- 故障诊断/topic-qa-corpus/capability-knowledge/
-- 故障诊断/topic-qa-corpus/capability-reasoning/
-- 故障诊断/topic-qa-corpus/capability-safety/
-- 故障诊断/topic-qa-corpus/capability-tool-use/
-- 故障诊断/topic-qa-corpus/generated/
-- 故障诊断/topic-qa-corpus/seed/
+- 19-故障诊断/10-QA语料/_schema/
+- 19-故障诊断/10-QA语料/benchmark/
+- 19-故障诊断/10-QA语料/capability-conversation/
+- 19-故障诊断/10-QA语料/capability-knowledge/
+- 19-故障诊断/10-QA语料/capability-reasoning/
+- 19-故障诊断/10-QA语料/capability-safety/
+- 19-故障诊断/10-QA语料/capability-tool-use/
+- 19-故障诊断/10-QA语料/generated/
+- 19-故障诊断/10-QA语料/seed/
 
 ## 文档
 

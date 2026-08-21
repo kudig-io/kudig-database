@@ -60,7 +60,8 @@ intent_queries:
 - edge-ai-inference-federated-learning的使用方法
 - edge-ai-inference-federated-learning的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 边缘 AI 推理与联邦学习 (Edge AI Inference and Federated Learning)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: edge-computing

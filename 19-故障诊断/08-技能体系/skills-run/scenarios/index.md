@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Scenarios
 
-> 本页为 `故障诊断/topic-skills/skills-run/scenarios` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/skills-run/scenarios` 目录的自动索引。
 
 ## 内容
 

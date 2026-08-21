@@ -1,7 +1,7 @@
 ---
 title: Skills + FTA 使用指南 — k8s-node-notready & node-fta
 description: '# Skills + FTA 使用指南 — k8s-node-notready & node-fta'
-summary: '故障诊断/topic-skills/skill-set/k8s-node-notready/'
+summary: '19-故障诊断/08-技能体系/skill-set/k8s-node-notready/'
 category: skills
 tags:
 - k8s
@@ -52,7 +52,7 @@ version: 1.0.0
 
 # Skills + FTA 使用指南 — k8s-node-notready & node-fta
 
-> **范围**：`故障诊断/topic-skills/skill-set/k8s-node-notready/` ↔ `故障诊断/FTA故障树/list/node-fta.md`  
+> **范围**：`19-故障诊断/08-技能体系/skill-set/k8s-node-notready/` ↔ `19-故障诊断/06-FTA故障树/list/node-fta.md`  
 > **受众**：AI Agent 运行时开发者、集成诊断系统的 SRE 团队，以及扩展知识库的贡献者  
 > **版本**：1.0 — 2026-03
 
@@ -79,13 +79,13 @@ version: 1.0.0
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
-│  第 4 层: 故障诊断/topic-skills/              (做什么 — Agent 执行层)        │
+│  第 4 层: 19-故障诊断/08-技能体系/              (做什么 — Agent 执行层)        │
 │  自包含 Runbook: 触发 → 诊断 → 修复 → 验证                          │
 ├────────────────────────────────────────────────────────────────────┤
-│  第 3 层: 故障诊断/FTA故障树/list/            (为什么 — 问题分析模型)         │
+│  第 3 层: 19-故障诊断/06-FTA故障树/list/            (为什么 — 问题分析模型)         │
 │  FTA 问题树: 概率模型、因果链、底事件                                 │
 ├────────────────────────────────────────────────────────────────────┤
-│  第 2 层: 故障诊断/高级排障/structural-  (如何做 — 深度参考)   │
+│  第 2 层: 19-故障诊断/04-高级排障/structural-  (如何做 — 深度参考)   │
 ├────────────────────────────────────────────────────────────────────┤
 │  第 1 层: domain-*/                  (背景知识 — 理论/架构)          │
 └────────────────────────────────────────────────────────────────────┘
@@ -105,7 +105,7 @@ version: 1.0.0
 ### 2.1 Skill 系统文件
 
 ```
-故障诊断/topic-skills/skill-set/k8s-node-notready/
+19-故障诊断/08-技能体系/skill-set/k8s-node-notready/
 ├── SKILL.md                          # 人机共用的主 Skill 文档
 ├── assets/
 │   ├── skill-metadata.yaml           # 机器可解析的路由与 FTA 索引
@@ -128,7 +128,7 @@ version: 1.0.0
 ### 2.2 FTA 系统文件
 
 ```
-故障诊断/FTA故障树/list/node-fta.md            # FTA 问题树主文档
+19-故障诊断/06-FTA故障树/list/node-fta.md            # FTA 问题树主文档
   ├── Mermaid diagram                 # 可视化问题树（供人阅读）
   ├── Diagnostic command tables       # 按分类的快速命令参考
   └── JSON flow_steps array           # 机器可执行的诊断流程图
@@ -167,7 +167,7 @@ routing:
 ```yaml
 references:
   fta:
-    - file: "故障诊断/FTA故障树/list/node-fta.md"
+    - file: "19-故障诊断/06-FTA故障树/list/node-fta.md"
       fta_entry_step: "gate_root_or"       # Start here when running the FTA
       skill_ref_field: "metadata.skill_ref" # Field name for reverse link in FTA
       rc_to_fta_steps:
@@ -206,7 +206,7 @@ references:
     primary: REM-003             # Primary remediation in remediation-playbook.md
     alternatives: [REM-006]
   fta_mapping:                   # Bidirectional link to FTA
-    file: "故障诊断/FTA故障树/list/node-fta.md"
+    file: "19-故障诊断/06-FTA故障树/list/node-fta.md"
     step_ids: ["evt_kubelet_down", "evt_heartbeat_fail"]
   related_causes: [RC-008]       # Causes that may co-occur
 ```
@@ -467,7 +467,7 @@ RC-007（证书过期）和 RC-010（时间偏差/TLS）链接到 `SKILL-SEC-001
 
 ```yaml
 fta_mapping:
-  file: "故障诊断/FTA故障树/list/node-fta.md"   # 必填：相对于仓库根目录的路径
+  file: "19-故障诊断/06-FTA故障树/list/node-fta.md"   # 必填：相对于仓库根目录的路径
   step_ids: ["evt_*", ...]              # 必填：真实 FTA 步骤 ID 数组
   note: "..."                            # 可选：人工注释
 ```

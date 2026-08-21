@@ -2802,7 +2802,7 @@ Q5-Q6: 全面推广
 | [./failure-patterns-analysis.md](././failure-patterns-analysis.md) | 关联实践 | 故障模式分析帮助识别成熟度短板,指导改进方向 |
 | [./performance-tuning-expert.md](././performance-tuning-expert.md) | 深化学习 | 性能调优是Level 4-5阶段的核心能力,提升运维成熟度 |
 | [../网络/30-service-mesh-deep-dive.md](../../../05-网络/01-K8s网络核心/32-service-mesh-deep-dive.md) | 技术实现 | 服务网格是自动化和可观测性建设的重要工具 |
-| [../故障诊断/高级排障/structural-README.md](../故障诊断/高级排障/README.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
+| [04-高级排障/structural-README.md](../../../19-故障诊断/04-高级排障/index.md) | 实战应用 | 结构化故障排查体现SRE工程化思维,验证成熟度水平 |
 | [../生产运维/topic-presentations/kubernetes-observability-presentation.md](../生产运维/topic-presentations/kubernetes-observability-presentation.md) | 知识扩展 | 可观测性演讲稿深入讲解监控体系建设,是第3节的补充 |
 
 ## 故障排查

@@ -495,13 +495,13 @@ Running   Not Running ────────┐
 ### Step 1: 确认问题范围
 
 ```bash
-# 1.1 检查 Service Endpoint 是否就绪
+#### 1.1 检查 Service Endpoint 是否就绪
 kubectl get endpoints <service-name> -n <namespace>
 
-# 1.2 检查 Pod 数量和状态
+#### 1.2 检查 Pod 数量和状态
 kubectl get pods -l app=<service-name> -n <namespace>
 
-# 1.3 检查最近的事件
+#### 1.3 检查最近的事件
 kubectl get events -n <namespace> --sort-by='.lastTimestamp' | tail -20
 ```
 
@@ -518,7 +518,7 @@ kubectl get events -n <namespace> --sort-by='.lastTimestamp' | tail -20
 
 **检测**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
+#### 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 ```
 **常见原因**：
@@ -528,17 +528,17 @@ kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 
 **修复步骤**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
-# 检查 Image 名称和 Tag
+#### 🟢 低风险：只读/信息收集，通常无副作用
+#### 检查 Image 名称和 Tag
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].image}'
 
-# 检查 ImagePullSecret
+#### 检查 ImagePullSecret
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.imagePullSecrets}'
 
-# 验证 Secret 是否存在
+#### 验证 Secret 是否存在
 kubectl get secret <secret-name> -n <namespace>
 
-# 在 Node 上手动拉取镜像测试
+#### 在 Node 上手动拉取镜像测试
 docker pull <image-name>
 ```
 **快速修复**：
@@ -550,7 +550,7 @@ docker pull <image-name>
 
 **检测**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
+#### 🟢 低风险：只读/信息收集，通常无副作用
 kubectl logs <pod-name> -n <namespace> --previous  # 查看上一次运行的日志
 kubectl describe pod <pod-name> -n <namespace>
 ```
@@ -561,17 +561,17 @@ kubectl describe pod <pod-name> -n <namespace>
 
 **修复步骤**：
 ``` bash
-# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
-# 查看容器启动日志
+#### 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
+#### 查看容器启动日志
 kubectl logs <pod-name> -n <namespace> -c <container-name>
 
-# 检查 ConfigMap/Secret 是否正确挂载
+#### 检查 ConfigMap/Secret 是否正确挂载
 kubectl describe pod <pod-name> -n <namespace> | grep -A 5 "Mounts"
 
-# 检查环境变量
+#### 检查环境变量
 kubectl exec <pod-name> -n <namespace> -- env
 
-# 检查 Liveness Probe 配置
+#### 检查 Liveness Probe 配置
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].livenessProbe}'
 ```
 **快速修复**：
@@ -583,7 +583,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].live
 
 **检测**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
+#### 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -i "oom"
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuses[0].lastState.terminated.reason}'
 ```
@@ -594,14 +594,14 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 
 **修复步骤**：
 ``` bash
-# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
-# 查看当前内存限制
+#### 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
+#### 查看当前内存限制
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].resources.limits.memory}'
 
-# 查看历史内存使用情况（Prometheus）
-# container_memory_usage_bytes{pod="<pod-name>"}
+#### 查看历史内存使用情况（Prometheus）
+#### container_memory_usage_bytes{pod="<pod-name>"}
 
-# 临时增加内存限制（紧急情况）
+#### 临时增加内存限制（紧急情况）
 kubectl set resources deployment/<deployment-name> -n <namespace> --limits=memory=2Gi
 ```
 **长期修复**：
@@ -613,9 +613,9 @@ kubectl set resources deployment/<deployment-name> -n <namespace> --limits=memor
 
 **检测**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
+#### 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
-# 查找 "FailedScheduling" 事件
+#### 查找 "FailedScheduling" 事件
 ```
 **常见原因**：
 1. 集群资源不足（CPU/Memory）
@@ -624,15 +624,15 @@ kubectl describe pod <pod-name> -n <namespace> | grep -A 10 "Events"
 
 **修复步骤**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
-# 检查集群可用资源
+#### 🟢 低风险：只读/信息收集，通常无副作用
+#### 检查集群可用资源
 kubectl top nodes
 kubectl describe nodes | grep -A 5 "Allocated resources"
 
-# 检查 Pod 资源请求
+#### 检查 Pod 资源请求
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.containers[0].resources.requests}'
 
-# 检查调度约束
+#### 检查调度约束
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.nodeSelector}'
 kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.affinity}'
 ```
@@ -648,14 +648,14 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.spec.affinity}'
 
 **检测**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
-# 查看 Service Selector
+#### 🟢 低风险：只读/信息收集，通常无副作用
+#### 查看 Service Selector
 kubectl get svc <service-name> -n <namespace> -o jsonpath='{.spec.selector}'
 
-# 查看 Pod Labels
+#### 查看 Pod Labels
 kubectl get pods -n <namespace> --show-labels | grep <service-name>
 
-# 对比是否匹配
+#### 对比是否匹配
 ```
 **快速修复**：
 > **🔴 高风险操作警告**
@@ -668,20 +668,20 @@ kubectl get pods -n <namespace> --show-labels | grep <service-name>
 > - 目标集群、Namespace、节点/资源名称正确无误
 
 ``` bash
-# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
-# 方法1: 修正 Service Selector
+#### 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
+#### 方法1: 修正 Service Selector
 kubectl edit svc <service-name> -n <namespace>
 
-# 方法2: 修正 Pod Labels（修改 Deployment）
+#### 方法2: 修正 Pod Labels（修改 Deployment）
 kubectl edit deployment <deployment-name> -n <namespace>
 ```
 #### E1: Ingress Backend 未配置
 
 **检测**：
 ``` bash
-# 🟢 低风险：只读/信息收集，通常无副作用
+#### 🟢 低风险：只读/信息收集，通常无副作用
 kubectl describe ingress <ingress-name> -n <namespace>
-# 查看 "Backend" 字段
+#### 查看 "Backend" 字段
 ```
 **快速修复**：
 > **🔴 高风险操作警告**
@@ -694,9 +694,9 @@ kubectl describe ingress <ingress-name> -n <namespace>
 > - 目标集群、Namespace、节点/资源名称正确无误
 
 ``` bash
-# 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
+#### 🔴 高风险：可能造成数据丢失或服务中断，执行前需备份、变更审批与回滚方案
 kubectl edit ingress <ingress-name> -n <namespace>
-# 确保 backend.service.name 和 backend.service.port 正确
+#### 确保 backend.service.name 和 backend.service.port 正确
 ```
 ## 升级路径
 

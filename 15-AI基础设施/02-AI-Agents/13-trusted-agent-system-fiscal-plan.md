@@ -845,8 +845,8 @@ graph TB
 | [06 - 多 Agent 编排与协作架构](./06-multi-agent-orchestration.md) | Workflow 编排方案参考 |
 | [09 - 生产部署指南](./09-production-deployment-guide.md) | 智能体部署方案 |
 | [10 - 安全护栏与合规](./10-security-guardrails.md) | 安全质检标准参考 |
-| [topic-fta](../故障诊断/FTA故障树/) | 故障树分析（FTA）方法论 |
-| [故障诊断](../故障诊断/) | 容器问题排障知识源 |
+| [topic-fta](../../19-故障诊断/06-FTA故障树) | 故障树分析（FTA）方法论 |
+| [故障诊断](../../19-故障诊断) | 容器问题排障知识源 |
 
 ---
 

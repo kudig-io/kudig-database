@@ -84,7 +84,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
+tier: peripheral
+---
 # 第二课：Pod - K8s 的最小调度单元
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 20 分钟

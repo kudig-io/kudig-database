@@ -141,7 +141,7 @@ version: 1.0.0
 - [[23-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
 - [[05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[09-可观测性/01-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[09-可观测性/00-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
 - [[15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
 - [[15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference

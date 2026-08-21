@@ -115,9 +115,8 @@ cross_refs:
   path: ../平台工程/
   label: '相关知识域: 平台工程'
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # 21 - CI/CD管道表
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [argoproj.github.io/argo-cd](https://argoproj.github.io/argo-cd/)

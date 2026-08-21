@@ -173,8 +173,8 @@ Agent 自愈流程:
 
 ## Obsidian 相关文档
 
-- [[19-故障诊断/06-FTA故障树/MOC.md|topic-fta MOC]]
-- [[19-故障诊断/06-FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]
+- [[19-故障诊断/06-FTA故障树/MOC.md|topic-fta MOC]]  <!-- N7: 含空格路径修复（H3 漏网） -->
+- [[19-故障诊断/06-FTA故障树/README.md|topic-fta: 故障树分析（FTA）方法论与 AI Agent 智能运维实践]]  <!-- N7: 含空格路径修复（H3 漏网） -->
 - [[19-故障诊断/06-FTA故障树/01-fta-origin-and-evolution.md|第一章：FTA 起源与发展史]]
 - [[19-故障诊断/06-FTA故障树/02-fta-mathematical-foundations.md|第二章：FTA 数学基础与理论模型]]
 - [[19-故障诊断/06-FTA故障树/03-fta-symbol-system-and-standards.md|第三章：FTA 符号体系与标准规范]]

@@ -1,6 +1,7 @@
 ---
 title: 症状向量匹配引擎 (Symptom Vector Matching Engine)
-description: '## 一、设计目标'
+description: 症状向量匹配引擎：32 维症状特征向量与顶事件匹配算法（余弦相似度/语义扩展/未知症状检测）  # M4: 修复截断 description
+summary: 症状向量匹配引擎：32 维特征向量 + 余弦相似度匹配 + 语义扩展，连接症状输入与 FTA 顶事件
 category: fta
 tags:
 - k8s
@@ -784,5 +785,13 @@ proposed_patterns:
 > **版本**: v1.0
 > **维护团队**: Platform Team / AI Team
 > **下一步**: 集成到 K8sOpsAgent 实现
+
+---
+
+## 相关文档  <!-- M4: 新增互链 -->
+
+- [问题排查体系架构](./problem-solving-architecture.md) — 症状映射层的体系定位
+- [FTA 诊断执行引擎](./fta-execution-engine.md) — 匹配结果下游执行
+- [FTA 故障树完整索引](./fta-index.md) — 顶事件/TE 编号查询
 
 <!-- risk-assessed -->

@@ -61,11 +61,13 @@ tier: supporting
 
 # FTA 故障树分析方法论与 AI Agent 智能运维实践
 
+> **📦 快照声明**: 本文档为 23 个分章的**离线快照合集**（2026-02 生成），**分章文档为权威来源**（[第一章](./01-fta-origin-and-evolution.md) ~ [第 23 章](./23-fta-production-quick-start.md)）。内容修改请直接编辑分章，本文档仅作离线阅读与检索使用。  <!-- L1: 快照定位声明 -->
+
 > **文档版本**: v1.0  
 > **适用范围**: 企业级云平台智能运维、SRE 体系建设、AI Agent 架构设计  
 > **更新日期**: 2026-02  
 > **质量等级**: 行业级权威参考  
-> **关联文档**: [Kubernetes 全量故障树分析排查手册](./kubernetes-fta-full-analysis.md)
+> **关联文档**: [Kubernetes 全量故障树分析排查手册（v2）](./kubernetes-fta-full-analysis-v2.md)（[v1 历史版](./kubernetes-fta-full-analysis.md)）  <!-- H2: v2 联动 -->
 
 **关键词**: FTA 方法论、故障树分析、AI Agent、智能运维、AIOps、自动化诊断、知识图谱、工单自动化、Kubernetes SRE
 

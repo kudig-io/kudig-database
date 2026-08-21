@@ -298,7 +298,7 @@ kubectl get kubefedclusters -n kube-federation-system 2>/dev/null || echo "Kubef
 **关联文档**:
 - [发布变更/](../发布变更/) — GitOps CI/CD
 - [专项技术/](../专项技术/) — 边缘计算
-- [故障诊断/topic-skills/](../故障诊断/技能体系/) — 运维 Skill
+- [08-技能体系/](../../19-故障诊断/08-技能体系) — 运维 Skill
 - [P1-5: On-call 快速参考卡](./P1-5-oncall-quick-reference-card.md)
 
 <!-- risk-assessed -->

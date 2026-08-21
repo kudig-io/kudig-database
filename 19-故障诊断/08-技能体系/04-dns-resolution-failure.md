@@ -1,7 +1,7 @@
 ---
 title: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
-description: '# DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation'
-summary: 'DNS 是 Kubernetes 集群中**所有服务发现的基石**。集群内部的 [[service|Service]] 访问（`<service>.<namespace>.svc.cluster.local`）、Headless Service 的 Pod 发现、以及 Pod 对外部域名的访问，全部依赖 DNS 解析。当 DNS 出现问题时，'
+description: Kubernetes DNS 解析故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes DNS 解析故障的完整诊断-修复-验证工单处理 Skill
 category: network
 tags:
 - k8s
@@ -45,7 +45,7 @@ prerequisites:
 - service-mesh-basics
 - prometheus-basics
 - etcd-basics
-skill_id: SKILL-04_DNS_RESOLUTION_FAILURE-001
+skill_id: SKILL-NET-001
 skill_name: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 version: 1.0.0
 k8s_versions:
@@ -2024,9 +2024,9 @@ kubectl run dns-v6 --image=busybox:1.36 --rm -it --restart=Never -- sh -c "time 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
 | Kubernetes DNS 架构与 CoreDNS 原理 | `网络/` | 理解 CoreDNS 的工作原理、Corefile 配置语法、插件链机制 |
-| DNS 故障树分析 | `故障诊断/FTA故障树/list/dns-fta.md` | 理解 DNS 问题的完整因果链和概率模型 |
-| 网络问题深度排查 | `故障诊断/高级排障/structural-` | 超出本 Skill 覆盖范围的深度网络排查方法 |
-| Kubernetes 故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法论 |
+| DNS 故障树分析 | `19-故障诊断/06-FTA故障树/list/dns-fta.md` | 理解 DNS 问题的完整因果链和概率模型 |
+| 网络问题深度排查 | `19-故障诊断/04-高级排障/structural-` | 超出本 Skill 覆盖范围的深度网络排查方法 |
+| Kubernetes 故障排查方法论 | `19-故障诊断/` | 系统化故障排查的理论基础和方法论 |
 | Service 网络问题 | `SKILL-NET-002` | DNS 正常但 Service 连接失败的场景 |
 | 节点 NotReady 影响 DNS | `SKILL-NODE-001` (01-node-notready.md) | 节点级问题导致的间接 DNS 影响 |
 | conntrack 竞态条件详解 | `网络/` | Linux 内核 conntrack 在 UDP/DNAT 场景下的竞态条件技术细节 |

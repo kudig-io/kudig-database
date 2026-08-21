@@ -875,7 +875,7 @@ data:
 - [10-hardware-troubleshooting-methodology.md](./10-hardware-troubleshooting-methodology.md) - 硬件故障排查方法论
 - [11-cpu-memory-troubleshooting.md](./11-cpu-memory-troubleshooting.md) - CPU与内存故障排查
 - [12-storage-troubleshooting.md](./12-storage-troubleshooting.md) - 存储设备故障排查
-- [故障诊断](../故障诊断/) - K8s 故障排查专题
+- [故障诊断](../../19-故障诊断) - K8s 故障排查专题
 
 ---
 

@@ -370,12 +370,14 @@ kubectl logs -n kube-system -l component=kube-apiserver --tail=20
 
 | 故障域 | kudig-database 参考文档 |
 |--------|------------------------|
-| Pod 问题 | `故障诊断/05-pod-pending-diagnosis.md` ~ `08-pod-comprehensive-troubleshooting.md` |
-| Node 问题 | `故障诊断/06-node-notready-diagnosis.md`, `09-node-comprehensive-troubleshooting.md` |
-| Network 问题 | `故障诊断/25-network-connectivity-troubleshooting.md`, `26-dns-troubleshooting.md` |
-| Storage 问题 | `故障诊断/14-pvc-storage-troubleshooting.md`, `04-storage-csi-troubleshooting.md` |
-| 性能问题 | `故障诊断/33-performance-bottleneck-troubleshooting.md` |
-| 故障树 | `故障诊断/FTA故障树/` 完整故障树分析模型 |
+| Pod 问题 | `19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md` ~ `19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md` |
+| Node 问题 | `19-故障诊断/01-核心排障/06-node-notready-diagnosis.md`, `19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md` |
+| Network 问题 | `19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting.md`, `19-故障诊断/03-基础设施排障/02-dns-troubleshooting.md` |
+| Storage 问题 | `19-故障诊断/02-资源排障/06-pvc-storage-troubleshooting.md`, `19-故障诊断/01-核心排障/04-storage-csi-troubleshooting.md` |
+| 性能问题 | `19-故障诊断/03-基础设施排障/09-performance-bottleneck-troubleshooting.md` |
+| 故障树 | `19-故障诊断/06-FTA故障树/` 完整故障树分析模型 |
+
+<!-- N10 补漏: 知识库关联表旧路径修复（根级旧编号路径 → 子目录实际位置，含 19-19- 双重前缀、反引号格式） -->
 
 ---
 

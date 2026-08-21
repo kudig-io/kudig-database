@@ -8,7 +8,7 @@ tier: supporting
 created: '2026-05-23'
 updated: '2026-05-23'
 date: '2026-04-05'
-skill: 07-pvc-storage-failure
+skill: 08-pvc-storage-failure
 severity: P0
 last_updated: 2026-05-23
 ---

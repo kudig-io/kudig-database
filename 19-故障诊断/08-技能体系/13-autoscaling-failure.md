@@ -1,7 +1,7 @@
 ---
 title: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
-description: '## 1. 概述'
-summary: '弹性伸缩是 [[kubernetes|Kubernetes]] 实现资源效率和应用高可用的核心能力。当弹性伸缩失效时，可能导致**资源浪费**（无法缩容）、**服务降级**（无法扩容）或**成本失控**。Kubernetes 提供三个层次的弹性伸缩机制，本 [[SKILL|Skill]] 覆盖它们的完整故障诊断：'
+description: Kubernetes HPA/VPA/Cluster Autoscaler 弹性伸缩故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes HPA/VPA/Cluster Autoscaler 弹性伸缩故障的完整诊断-修复-验证工单处理 Skill
 category: scaling
 tags:
 - k8s
@@ -52,7 +52,7 @@ prerequisites:
 - prometheus-basics
 - kafka-basics
 - gpu-scheduling-basics
-skill_id: SKILL-12_AUTOSCALING_FAILURE-001
+skill_id: SKILL-SCALE-001
 skill_name: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis &
   Remediation
 version: 1.0.0
@@ -1498,8 +1498,8 @@ kubectl get scaledobject -A
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| HPA/VPA 原理与调优 | `故障诊断/17-hpa-vpa-troubleshooting.md` | 理解 HPA 控制循环和 VPA 推荐算法 |
-| Cluster Autoscaler 深度排查 | `故障诊断/28-cluster-autoscaler-troubleshooting.md` | CA 扩缩容决策机制和云厂商集成 |
+| HPA/VPA 原理与调优 | 19-故障诊断/17-hpa-vpa-troubleshooting.md` | 理解 HPA 控制循环和 VPA 推荐算法 |
+| Cluster Autoscaler 深度排查 | 19-故障诊断/28-cluster-autoscaler-troubleshooting.md` | CA 扩缩容决策机制和云厂商集成 |
 | Kubernetes 调度原理 | `工作负载/` | 理解 Pod 调度、资源请求和亲和性 |
 | 云厂商集成 | `云厂商/` | ACK/EKS/GKE 特定配置和限制 |
 | 成本优化 | `AI基础设施/26-cost-optimization-overview.md` | 伸缩策略的成本影响分析 |

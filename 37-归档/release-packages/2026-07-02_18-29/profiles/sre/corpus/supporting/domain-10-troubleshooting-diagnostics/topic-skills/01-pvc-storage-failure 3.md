@@ -1,7 +1,7 @@
 ---
-title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation (故障诊断)
+title: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation (domain-10-troubleshooting-diagnostics)
 description: '# PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation'
-summary: 'PVC/PV/CSI 存储问题是 [[kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键问题类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[statefulset|StatefulSet]]、数据库等有状态工作负载，'
+summary: 'PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键问题类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[StatefulSet|StatefulSet]]、数据库等有状态工作负载，'
 category: storage
 tags:
 - k8s
@@ -76,7 +76,7 @@ k8s_versions:
 
 ## 1. 概述
 
-PVC/PV/CSI 存储问题是 [[kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键问题类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[statefulset|StatefulSet]]、数据库等有状态工作负载，存储问题往往意味着业务完全中断。
+PVC/PV/CSI 存储问题是 [[Kubernetes|Kubernetes]] 集群中**影响数据持久化和有状态服务**的关键问题类型。当存储子系统出现问题时，Pod 无法启动（卡在 ContainerCreating）、数据无法持久化、甚至可能导致数据丢失。对于 [[StatefulSet|StatefulSet]]、数据库等有状态工作负载，存储问题往往意味着业务完全中断。
 
 ### 典型触发场景
 
@@ -1500,12 +1500,12 @@ gcloud compute disks describe <disk-name> --zone <zone>
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| CSI 架构与工作原理 | `存储/` | 理解 Provisioner、Attacher、Mounter 的分工 |
-| 存储类故障排查 | `故障诊断/04-storage-csi-troubleshooting.md` | CSI 驱动级别的深度排查 |
-| PVC 生命周期详解 | `故障诊断/14-pvc-storage-troubleshooting.md` | PVC 各状态转换的详细说明 |
-| 云厂商存储集成 | `云厂商/` | ACK/EKS/GKE 特定的存储配置 |
-| Volume Snapshot 使用 | `存储/` | 快照创建和恢复的详细步骤 |
-| StatefulSet 存储最佳实践 | `工作负载/` | 有状态应用的存储配置建议 |
+| CSI 架构与工作原理 | `domain-04-storage-data/` | 理解 Provisioner、Attacher、Mounter 的分工 |
+| 存储类故障排查 | `domain-10-troubleshooting-diagnostics/04-storage-csi-troubleshooting.md` | CSI 驱动级别的深度排查 |
+| PVC 生命周期详解 | `domain-10-troubleshooting-diagnostics/14-pvc-storage-troubleshooting.md` | PVC 各状态转换的详细说明 |
+| 云厂商存储集成 | `domain-12-cloud-providers/` | ACK/EKS/GKE 特定的存储配置 |
+| Volume Snapshot 使用 | `domain-04-storage-data/` | 快照创建和恢复的详细步骤 |
+| StatefulSet 存储最佳实践 | `domain-02-workloads-applications/` | 有状态应用的存储配置建议 |
 
 ### 10.3 Skill 改进记录
 

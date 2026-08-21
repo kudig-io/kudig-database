@@ -52,7 +52,8 @@ intent_queries:
 - hardware-failure-case-studies的使用方法
 - hardware-failure-case-studies的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: 硬件问题实战案例库
 description: '<!-- chunk: 概述' -->## 概述'
 category: hardware

@@ -134,6 +134,47 @@ kubectl patch cm cni-config -n kube-system -p '{"data":{"mtu":"1400"}}'
 
 **修复**：增加 Globalnet IP 池大小，或重新规划集群 Pod CIDR 避免重叠。
 
+## 对比评测
+
+| 维度 | Submariner | Cilium ClusterMesh | KubeFed + 手动网络 |
+|------|-----------|-------------------|-------------------|
+| 网络连通 | 隧道（IPsec/WireGuard） | eBPF 直连/隧道 | 需自建 |
+| 服务发现 | Lighthouse（DNS） | ClusterIP 全局 | 手动 |
+| 故障转移 | 手动/外部 GSLB | 手动 | 手动 |
+| 多集群规模 | 中（网关节点） | 大（扁平） | 任意 |
+| 部署复杂度 | 中 | 高（统一 CNI） | 低 |
+
+**选型建议**：异构 CNI 多集群互联选 Submariner；统一 Cilium 环境优先 ClusterMesh；仅需服务发现可叠加。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 跨集群不通 | `subctl show connections` | 网关节点 IPsec 隧道 Down |
+| 服务发现失败 | `kubectl get endpoints -n lighthouse` | Lighthouse 同步异常、DNS 配置缺失 |
+| 隧道抖动 | 检查 IPsec/WireGuard 日志 | 防火墙端口未放行、MTU 问题 |
+| 网关漂移 | `subctl show gateways` | 网关节点故障、健康检查剔除 |
+
+## 生产部署清单
+
+- [ ] 网关节点选择（≥2 高可用）且网络可达（UDP 4500/500 或 51820）
+- [ ] IPsec/WireGuard 密钥管理与轮换流程已建立
+- [ ] Lighthouse 的 DNS 配置（CoreDNS 插件）已注入各集群
+- [ ] MTU 调整（隧道封装开销）并验证跨集群大包
+- [ ] 跨集群故障演练（断网关 → 恢复验证）
+
+## 常见误区与设计要点
+
+- **误区 1**：所有集群都要全互联——按业务需求建 Broker 拓扑，避免网状爆炸。
+- **误区 2**：忽略 MTU——隧道封装后不调整 MTU 会导致跨集群大包失败。
+- **设计要点**：网关节点独立打标签并排空业务负载；用 Globalnet 解决集群间网段重叠；监控隧道健康（`subctl diagnose`）。
+
+## 性能参考
+
+- 隧道吞吐：IPsec 约 60-80% 物理带宽（受加密开销），WireGuard 略高。
+- 延迟增加：跨集群一跳约 0.5-1ms（同地域），跨地域受物理距离主导。
+- 网关节点规格建议：8C16G 起，按跨集群流量规划。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

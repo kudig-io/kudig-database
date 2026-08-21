@@ -1,7 +1,7 @@
 ---
 title: Pod Pending 调度失败诊断与修复
-description: '# Pod Pending 调度失败诊断与修复'
-summary: 'Pod Pending 是 Kubernetes 集群中最常见的工单类型之一。当 Pod 被创建但无法被调度到任何节点上运行时，其 `.status.phase` 将保持为 `Pending`。这种状态可能持续数秒（正常调度延迟）到数天（配置错误或资源不足），直接影响业务部署和弹性伸缩。'
+description: Kubernetes Pod Pending 调度失败的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Pod Pending 调度失败的完整诊断-修复-验证工单处理 Skill
 category: pod
 tags:
 - k8s
@@ -44,7 +44,7 @@ prerequisites:
 - troubleshooting-methodology
 - helm-basics
 - gpu-scheduling-basics
-skill_id: SKILL-03_POD_PENDING-001
+skill_id: SKILL-POD-002
 skill_name: Pod Pending 调度失败诊断与修复
 version: 1.0.0
 k8s_versions:
@@ -1586,10 +1586,10 @@ Events:
 | 主题 | 参考路径 | 说明 |
 |------|---------|------|
 | Kubernetes 调度器架构 | `domain-4-workloads-scheduling/` | 调度器工作原理：过滤（Filter）→ 打分（Score）→ 绑定（Bind）流程 |
-| FTA 调度故障树 | `故障诊断/FTA故障树/list/scheduler-fta.md` | 调度器问题的完整 FTA 分析模型，含概率和因果链 |
-| FTA Pod 故障树 | `故障诊断/FTA故障树/list/pod-fta.md` | Pod 生命周期中所有可能的问题点 |
-| 结构化故障排查 — 调度问题 | `故障诊断/高级排障/structural-` | 人类可读的深度排查指南 |
-| 通用故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法 |
+| FTA 调度故障树 | `19-故障诊断/06-FTA故障树/list/scheduler-fta.md` | 调度器问题的完整 FTA 分析模型，含概率和因果链 |
+| FTA Pod 故障树 | `19-故障诊断/06-FTA故障树/list/pod-fta.md` | Pod 生命周期中所有可能的问题点 |
+| 结构化故障排查 — 调度问题 | `19-故障诊断/04-高级排障/structural-` | 人类可读的深度排查指南 |
+| 通用故障排查方法论 | `19-故障诊断/` | 系统化故障排查的理论基础和方法 |
 | 节点资源管理 | `domain-4-workloads-scheduling/` | Node allocatable、eviction threshold、resource requests/limits 的关系 |
 | 存储体系 | `存储/` | PVC/PV/StorageClass 的工作机制和常见问题 |
 | 集群弹性伸缩 | `平台工程/` | Cluster Autoscaler、Karpenter 等自动化扩容机制 |

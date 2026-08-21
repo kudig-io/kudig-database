@@ -51,7 +51,7 @@ authors:
   role: contributor
 cross_refs:
 - type: fta
-  path: ../故障诊断/FTA故障树/list/node-fta.md
+  path: ../../19-故障诊断/06-FTA故障树/list/node-fta.md  # H3: 旧路径 ../故障诊断/FTA故障树/ 修复
   label: '故障树: node'
 ---
 

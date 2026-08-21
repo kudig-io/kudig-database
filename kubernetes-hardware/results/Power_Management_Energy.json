@@ -1,0 +1,166 @@
+{
+  "基本信息": {
+    "名称": "电源管理与能效（CPU 电源管理 / 碳感知调度 / 能耗可观测性）——涵盖 Intel Kubernetes Power Manager、Intel Infrastructure Power Manager (IPM) Operator、AMD EPYC 能效优化（amd-pstate/CPPC）、Linux CPU 频率/C-state/P-state 控制、StarlingX 可配置电源管理（Configurable Power Manager）、碳感知调度（Carbon-aware Scheduling）与 Kepler/Scaphandre 等能耗可观测性方案",
+    "类别": "运维",
+    "官方文档链接": [
+      "https://github.com/intel/kubernetes-power-manager",
+      "https://www.intel.com/content/www/us/en/content-details/864700/intel-infrastructure-power-manager-ipm-operator-deployment-guide.html",
+      "https://docs.kernel.org/admin-guide/pm/amd-pstate.html",
+      "https://docs.kernel.org/admin-guide/pm/intel_pstate.html",
+      "https://wiki.archlinux.org/title/CPU_frequency_scaling",
+      "https://docs.starlingx.io/node_management/kubernetes/configurable-power-manager-04c24b536696.html",
+      "https://www.starlingx.io/blog/starlingx-configurable-power-management/",
+      "https://sustainable-computing.io/",
+      "https://github.com/sustainable-computing-io/kepler",
+      "https://www.cncf.io/projects/kepler/",
+      "https://github.com/hubblo-org/scaphandre",
+      "https://keda.sh/",
+      "https://github.com/Azure/carbon-aware-keda-operator",
+      "https://github.com/Green-Software-Foundation/carbon-aware-sdk",
+      "https://arxiv.org/abs/2508.05949",
+      "https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/",
+      "https://github.com/prometheus/node_exporter"
+    ]
+  },
+  "硬件规格": {
+    "最低配置": {
+      "Intel Kubernetes Power Manager": "需支持 Intel Speed Select Technology (SST) 的 Xeon 处理器：SST-CP 需 Xeon Scalable 系列，uncore 频率控制需 Xeon Scalable/D 系列，P-state 控制需 Sandy Bridge 或更新的 Intel CPU；软件层面至少 1 个节点的 Kubernetes 测试集群（K8s 1.23.3-1.25.4），kubelet 必须启用 static CPU 管理策略并预留系统 CPU",
+      "StarlingX 可配置电源管理": "仅支持第 3 代与第 4 代 Intel Xeon Scalable 处理器；需要 StarlingX 发行版节点并启用 static CPU 管理策略；不支持 AMD 与 Arm 处理器",
+      "AMD EPYC 能效优化": "AMD EPYC 处理器（Zen2/Zen3 及以上，支持 CPPC），Linux 内核 5.x 以上且启用 amd-pstate 驱动（amd_pstate=active 等内核参数），BIOS 开启 CPPC 与 C-state 控制",
+      "Kepler 能耗可观测": "支持 RAPL/powercap 框架的 Intel 或 AMD CPU（RAPL 路径需读取 /sys/class/powercap）；无 RAPL 的硬件可用 ACPI/估算模式，但精度有限；节点需允许容器只读访问宿主机 /proc 与 /sys，无需 CAP_SYSADMIN 特权",
+      "碳感知调度": "任意可运行 KEDA 或自定义调度器的 Kubernetes 集群；需要可访问的区域碳强度数据源（如 WattTime、Electricity Maps 或 Carbon Aware SDK 聚合 API）"
+    },
+    "推荐配置": {
+      "Intel Kubernetes Power Manager": "Intel Xeon Scalable（第 2 代及以上）裸金属服务器，Ubuntu 20.04/Rocky 8.6/CentOS 8，Kubernetes 1.23-1.25 且 kubelet 使用 static CPU 管理策略并预留系统 CPU；搭配 Node Feature Discovery (NFD) 自动检测硬件能力；每集群仅部署一个 PowerConfig",
+      "StarlingX 可配置电源管理": "第 3/4 代 Intel Xeon Scalable 服务器组成的 StarlingX 9.0+ 节点池，控制面与工作负载节点分离，工作负载以 Guaranteed QoS（requests == limits）运行以匹配每核电源配置",
+      "AMD EPYC 能效优化": "AMD EPYC 9004/9005 系列（Genoa/Turin）裸金属节点，BIOS 选择 Maximum Efficiency 或自定义电源档位（Determinism Slider 设为 Power、Efficiency Mode 开启、Memory Power Down 开启），内核启用 amd-pstate active 或 guided 模式，配合 tuned 或 Node Tuning Operator 统一下发 sysfs 配置",
+      "Kepler 能耗可观测": "每节点以 DaemonSet 运行 Kepler 的 Kubernetes 集群（裸金属最佳），搭配 Prometheus 与 Grafana 展示 kepler_node_cpu_watts、kepler_container_package_joules_total 等指标；GPU 节点可附加 NVIDIA DCGM 数据",
+      "碳感知调度": "生产集群部署 KEDA（含碳强度 Scaler）或碳感知调度器扩展（如 CarbonScaler、CNA Operator），接入 WattTime/Electricity Maps API；批处理与弹性任务优先，延迟敏感任务需评估碳延迟时间窗"
+    },
+    "生产级配置": "[不确定] 大规模/高可用场景建议：数百节点统一 BIOS 电源策略（如全局 C-state 控制、CPPC 开启、效率档位），每节点运行 Kepler/Scaphandre DaemonSet 采集能耗，Prometheus + Grafana 集中展示，接入碳强度 API 实现跨区域/跨时段调度，kubelet CPU Manager static 策略 + 预留 CPU 保证电源配置一致性；具体规格因硬件平台与集群规模而异，无官方统一基准",
+    "功耗基线": "[不确定] 功耗基线完全取决于 CPU 型号与负载：Intel Xeon Scalable 典型 TDP 约 105-350W；AMD EPYC 9004/9005 典型 TDP 约 200-400W（旗舰型号可达 500W 级别）；空载功耗显著低于满载（服务器整机空载通常为满载的 30-50%）；Intel 官方声明在支持的 Xeon 上通过 uncore 频率调整最多可节省 40% CPU 功耗；RAPL 可测量 package/DRAM 功耗，但不同平台数值差异大，具体数据需以 SPECpower 或厂商白皮书为准"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "Intel Kubernetes Power Manager": "支持 Kubernetes 1.23.3 至 1.25.4，项目已由 Intel 归档停止维护（仅适用于旧版集群）",
+      "Intel IPM Operator": "面向 Red Hat OpenShift 环境持续发布（如 26.05 版本），支持 OpenShift 相应版本（具体范围见发行说明，未核实）",
+      "StarlingX 可配置电源管理": "随 StarlingX 发行版交付（StarlingX 9.0 起提供），不面向上游 K8s 独立发布；文档覆盖 StarlingX 10.0/11.0/12.0",
+      "Kepler": "兼容主流 Kubernetes 版本（1.23+ 实测广泛），通过 Helm/Kustomize 部署，无严格上游版本绑定",
+      "碳感知调度组件": "KEDA 支持 Kubernetes 1.19+（KEDA 2.x 系列）；碳感知调度研究原型（CarbonScaler 等）多为实验性，无统一版本声明",
+      "Kubernetes 原生能力": "CPU Manager 是 K8s 原生功能（static 策略 GA），是各电源管理方案的前置依赖；K8s 上游本身不提供电源管理 API"
+    },
+    "操作系统兼容性": {
+      "Intel Kubernetes Power Manager": "Ubuntu 20.04、Rocky 8.6、CentOS 8",
+      "Intel IPM Operator": "Red Hat OpenShift（RHEL CoreOS）",
+      "StarlingX 可配置电源管理": "StarlingX 发行版（基于 CentOS Stream 内核的容器化 Linux），版本 9.0 及以上",
+      "AMD EPYC 能效优化": "主流 Linux 发行版（RHEL/Rocky/AlmaLinux、Ubuntu、SLES 等），内核需支持 amd-pstate（内核 5.17+ 完善，SLES 15 SP6 提供 EPYC 9005 优化指南）；Windows Server 上的 K8s 节点无等效 amd-pstate 控制",
+      "Kepler": "主流 Linux（Ubuntu、RHEL、Fedora 等），依赖 powercap/RAPL 或可用的估算接口",
+      "Scaphandre": "GNU/Linux 与 Windows 10/11、Windows Server 2016/2019/2022（提供 RHEL、Debian、Windows、NixOS 软件包）"
+    },
+    "K8s 上游支持阶段": {
+      "Kubernetes 上游": "无原生电源管理功能（非 Alpha/Beta/GA 特性）；最接近的是 CPU Manager（static 策略，GA）与拓扑管理，它们只分配 CPU 不控制功耗",
+      "Intel Kubernetes Power Manager": "社区/厂商项目，已归档（archived），Intel 不再维护，仅适用于旧版集群，不推荐新部署",
+      "Intel IPM Operator": "厂商项目（Intel + Red Hat OpenShift 生态），持续发布，生产可用",
+      "StarlingX 可配置电源管理": "社区项目（StarlingX，OpenInfra 基金会），随 StarlingX 9.0+ 发布，面向电信/边缘生产场景",
+      "Kepler": "CNCF Sandbox 项目（2023 年入选），由 sustainable-computing-io 社区（红帽、IBM 等）维护，生产部署案例持续增长，尚未达到 CNCF 孵化/毕业阶段",
+      "Scaphandre": "社区项目（hubblo-org），早期阶段（v1.0 路线图中），无 CNCF 身份",
+      "碳感知调度": "2025 年学术研究热点（arXiv 调研、HotCarbon/e-Energy 会议），生产落地以 KEDA Scaler（CNCF 毕业项目 KEDA 的扩展）与碳感知 Operator 为主"
+    },
+    "生态兼容性矩阵": "[不确定] Prometheus 生态成熟（node_exporter 提供 node_rapl_*/node_ipmi_* 电源指标、Kepler exporter、Scaphandre Prometheus exporter、Grafana 社区面板）；Node Feature Discovery (NFD) 用于 CPU 电源特性检测；KEDA 碳强度 Scaler（WattTime、Electricity Maps 等数据源）；Carbon Aware SDK（Green Software Foundation）；Intel IPM Operator 集成 OpenShift；tuned / Node Tuning Operator（红帽）统一系统级电源参数；StarlingX 自带节点电源指标（Current Power Consumption、Per Core CPU Power usage）；与 CNI/CSI/Device Plugin 无直接冲突。具体兼容矩阵因项目而异，未完全核实"
+  },
+  "限制与约束": {
+    "已知限制": {
+      "Intel Kubernetes Power Manager": "项目已归档（Intel 停止维护）；仅支持 K8s 1.23.3-1.25.4；每集群仅允许一个 PowerConfig；共享工作负载要求名称带 shared- 前缀；SST-BF 与 SST-TF 仅为规划功能未实现；v2.4.0 对 reservedCPUs CRD 结构引入破坏性不兼容变更；TDP 限制未实现",
+      "StarlingX 可配置电源管理": "仅支持第 3/4 代 Intel Xeon Scalable（不支持 AMD/Arm）；每个 Pod 仅支持单一 Power Profile；CPU 请求与限制不匹配（非 Guaranteed）时不受支持；启用管理标签后最大配置 MHz 参数被禁用；配置不一致可能导致状态异常或设置完全不生效",
+      "CPU 电源控制通用限制": "需要 kubelet CPU Manager static 策略并预留系统 CPU，与默认 CPU 管理/弹性调度冲突；深度 C-state 会引入唤醒延迟（影响延迟敏感型应用）；intel_pstate 的 powersave 与 performance 行为在部分发行版被映射，语义与 acpi-cpufreq 不同；云虚拟机中通常无法访问 RAPL/MSR，电源控制基本不可用",
+      "AMD EPYC 能效优化": "amd-pstate 依赖 CPPC 硬件支持（较老的 Zen1 及部分 Zen2 不支持或支持不完整）；部分 BIOS 默认关闭 CPPC 或 C-state 需要重新配置并重启；动态 EPP（amd_dynamic_epp）默认可能未启用",
+      "Kepler/能耗可观测": "非 RAPL 估算方式（HWMon、NVIDIA GPU、Redfish/BMC）为实验性，准确性有限；云虚拟机环境 RAPL 不可用时只能估算；容器级功耗按活动 CPU 使用量分摊，与实际能耗存在误差",
+      "碳感知调度": "依赖区域碳强度数据 API 的准确性与实时性（WattTime/Electricity Maps 覆盖范围与精度不一）；需要批处理/可延迟任务才有明显收益，在线延迟敏感工作负载收益有限；多数研究原型（CarbonScaler、Caspian、PCAPS 等）仍处于模拟/实验验证阶段"
+    },
+    "混部兼容性": "[不确定] 电源配置按 CPU 核心粒度生效，主要与 Guaranteed QoS（requests==limits）Pod 兼容，BestEffort/Burstable Pod 共享核心时频率/功耗行为不可控；深度 C-state 与低延迟网络/存储工作负载混部时可能增加尾延迟，通常建议按节点或按 CPU 池隔离（电源优化节点池与性能节点池分离）；碳感知调度与常规调度混合部署时需配置优先级与回退策略；Kepler 采集对业务负载影响极小，可安全混部"
+    ,
+    "性能开销": "[不确定] 电源管理机制本身开销很小（RAPL 采样、频率调整、sysfs 写约为毫秒级，对 CPU 影响 <1%）；节能 governor（powersave/平衡省电档）可能降低 10-30% 功耗但引入 5-20% 延迟或吞吐损失（具体数值随负载与平台变化，无统一官方数据）；Kepler 估算器为在线推断，CPU 占用可忽略；碳感知调度仅在调度决策时引入 API 查询延迟，不影响运行时性能",
+    "固件与驱动依赖": "[不确定] 依赖 BIOS/UEFI 电源设置（Intel：SST、Global C-state Control、Speed Shift；AMD：CPPC、Global C-state、DF C-states、Determinism Slider、Efficiency Mode、Memory Power Down）；内核驱动（intel_pstate、amd-pstate、acpi-cpufreq、powercap/RAPL、msr）；Intel SST 需要 Speed Select 工具链与 OS 支持；AMD APML（高级平台管理链接）为可选遥测接口；BIOS 级变更需节点排水并重启生效，sysfs 级变更即时生效；固件/驱动版本不匹配可能导致电源档位不可用或回退默认"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Intel Kubernetes Power Manager": "Kubernetes Operator + CRD（PowerConfig、PowerProfile、PowerWorkload）+ DaemonSet 节点代理，通过扩展资源（Extended Resource）而非 Device Plugin 暴露电源能力；要求 kubelet static CPU 管理策略与预留系统 CPU，推荐 NFD 自动打标签（也支持手动节点标签）；Helm Chart 安装",
+      "StarlingX 可配置电源管理": "Operator + 节点代理 + CRD（NodePM、SharedProfile、WorkloadPM），管理员通过 YAML manifest 或 Helm overrides 定义电源 Profile（performance/balance-performance/balance-power 及自定义），监控 Guaranteed QoS Pod 并按核应用设置",
+      "CPU 频率/C-state/P-state 通用控制": "sysfs 动态配置（/sys/devices/system/cpu/cpu*/cpufreq/scaling_governor、scaling_min/max_freq、cpuidle 状态）、内核启动参数（amd_pstate=active/passive/guided、intel_pstate=passive）、tuned/tuned-adm 配置集或红帽 Node Tuning Operator 统一下发",
+      "AMD EPYC 能效优化": "BIOS 电源档位 + 内核 amd-pstate 驱动 + EPP（Energy Performance Preference）动态调整（amd_dynamic_epp=enable），结合 sysfs 或 tuned 配置 per-node 策略",
+      "碳感知调度": "KEDA ScaledObject + Carbon Intensity Scaler（Watts 指标或 API 数据源）；或碳感知 Operator（如 CNA/Carbon Aware K8s Operator）；或自定义调度器/调度插件（研究原型如 CarbonScaler 动态调整服务器分配、PEAKS、NPAKS 等）；接入 WattTime/Electricity Maps/Carbon Aware SDK",
+      "能耗可观测性": "Kepler（Helm 从 OCI registry 安装、Kustomize、Docker Compose、本地二进制）、Scaphandre（Helm Chart、prometheus exporter）、node_exporter（rapl/ipmi collector）、Redfish/BMC 遥测采集"
+    },
+    "配置示例": {
+      "Intel Kubernetes Power Manager PowerProfile": "apiVersion: power.intel.com/v1\nkind: PowerProfile\nmetadata:\n  name: performance\nspec:\n  powerParameters:\n    epp: performance\n    minFrequency: 2000000\n    maxFrequency: 3800000\n    cStates: [\"C0\", \"C1\"]",
+      "Intel Kubernetes Power Manager PowerConfig": "apiVersion: power.intel.com/v1\nkind: PowerConfig\nmetadata:\n  name: power-config\nspec:\n  powerProfiles:\n  - name: performance\n    max: 100\n  - name: balance-power\n    max: 0",
+      "StarlingX NodePM 配置": "# 通过 kubectl 应用 NodePM CR，指定节点与电源 Profile\napiVersion: starlingx.windriver.com/v1\nkind: NodePM\nmetadata:\n  name: node-pm-worker-0\nspec:\n  nodes:\n  - worker-0\n  powerProfile: balance-performance",
+      "sysfs 手动设置 governor": "echo powersave | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor\necho 1500000 | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_min_freq",
+      "内核参数启用 amd-pstate": "# /etc/default/grub 或内核命令行\nGRUB_CMDLINE_LINUX=\"amd_pstate=active amd_prefcore=enable amd_dynamic_epp=enable\"",
+      "KEDA 碳感知 ScaledObject": "apiVersion: keda.sh/v1alpha1\nkind: ScaledObject\nmetadata:\n  name: carbon-aware-job\nspec:\n  scaleTargetRef:\n    name: my-batch-job\n  triggers:\n  - type: carbon-intensity\n    metadata:\n      index: \"0\"\n      carbon-intensity-percentile: \"50\"",
+      "Kepler Helm 安装": "helm repo add kepler https://sustainable-computing-io.github.io/kepler-helm-chart\nhelm install kepler kepler/kepler --namespace kepler --create-namespace",
+      "tuned 电源 Profile": "sudo tuned-adm profile powersave\nsudo tuned-adm profile balanced"
+    },
+    "部署位置与环境": "[不确定] 裸金属服务器为最佳环境（RAPL/MSR/CPPC 全部可用），各方案均以裸金属为设计前提；云环境仅 Azure 专用主机（dedicated host）等可透传电源控制接口的实例支持部分能力；StarlingX 面向电信/边缘分布式部署（数据中心+边缘节点池统一管控）；Intel IPM Operator 面向 OpenShift 集群；碳感知调度在混合云/多区域部署中收益最大（跨区域选择低碳时段与地点）；总体可同时覆盖公有云、私有云、边缘与混合部署，但虚拟机内电源控制能力大幅受限",
+    "虚拟化兼容性": "[不确定] 虚拟机内 RAPL/powercap 通常不可用（KVM/QEMU 默认不暴露，需实验性透传），电源管理在 VM 中基本失效；嵌套虚拟化场景不支持电源控制；裸金属容器运行时（无虚拟化层）无额外开销；QEMU/KVM 场景下 Scaphandre 可测量 VM 内能耗（基于模型/仿真）；PCIe 直通与 SR-IOV 与电源管理无直接关联，但 GPU/网卡直通会增加节点功耗基线"
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "Intel 电源管理": "Intel 官方：在支持的 Xeon 上通过 uncore 频率调整最多可节省 40% CPU 功耗；Intel 技术文章展示 TuneD + Kubernetes Power Manager 可优化资源利用率（具体数值因负载而异）；SST-CP 通过核心优先级（Performance/Balance Power）分配功率，效果取决于工作负载混合",
+      "AMD EPYC 能效": "amd-pstate 相对 acpi-cpufreq 的每瓦性能测试（Tbench/Gitsource）显示两者差异很小，但 amd-pstate 提供更细粒度频率管理与 EPP 能效偏好；AMD 官方宣称 EPYC 每瓦性能领先（具体百分比未核实）；BIOS Maximum Efficiency 档位（开启 Efficiency Mode、Determinism=Power、Memory Power Down）可显著降低空载功耗（实测数据因平台而异）",
+      "碳感知调度 (2025 学术研究)": "2025 年 arXiv 调研与会议论文：PCAPS 框架在保持性能的同时最多减少 32.9% 排放；CarbonScaler 对批处理任务最高实现 51% 碳节约；Caspian 降低约 33% 排放；PPO 强化学习调度器最高 24% 能耗节约；GreenPod 对 AIoT 工作负载最高 39.1% 能耗节约；综合调度方案减少 10%-20% 功耗",
+      "能耗可观测性": "Kepler 提供节点/容器级功耗指标（如 kepler_node_cpu_watts、kepler_container_package_joules_total），基于 RAPL 的测量误差小（同一 socket RAPL 读数），估算模式精度随模型而异；Scaphandre 提供主机/进程级能耗指标；node_exporter 暴露 node_rapl_package_joules_total 等 RAPL 指标"
+    },
+    "扩展性上限": "[不确定] Intel Kubernetes Power Manager 每集群仅允许一个 PowerConfig，扩展性受限；Kepler/Scaphandre 基于 DaemonSet 随节点横向扩展，数千节点集群可用但采集开销与 Prometheus 存储需规划；碳感知调度器研究原型（CarbonScaler、PEAKS 等）多为模拟验证，未见大规模生产基准；StarlingX CPM 面向电信级边缘节点池，规模取决于发行版支持；无官方统一扩展性上限数据",
+    "每节点密度": "[不确定] 电源管理按 CPU 核心粒度配置，不直接限制每节点 Pod 数；实际密度受 kubelet CPU Manager static 策略约束（仅 Guaranteed QoS 且 requests==limits 的 Pod 可获得独占核心）；节能模式（深度 C-state）下唤醒延迟增加，密度过高时延迟敏感工作负载可能受影响；无电源管理特定的每节点密度基准"
+  },
+  "安全": {
+    "安全特性": {
+      "Kepler": "设计为低权限：仅需只读访问宿主机 /proc 与 /sys，无需 CAP_SYSADMIN 等特权，降低被攻破后的影响面",
+      "RAPL/MSR 侧信道防护": "RAPL 功率读数可被未授权用户态程序用于侧信道信息泄露（Platypus 类攻击），生产环境应锁定 MSR（msr-lock / 限制 msr 模块访问），电源管理 DaemonSet 需最小权限与隔离",
+      "节点隔离": "电源管理组件（Operator/节点代理/DaemonSet）建议使用专用 ServiceAccount 与 RBAC 最小权限，避免授予集群级写权限",
+      "碳感知数据链路": "依赖第三方碳强度 API（WattTime/Electricity Maps 等），需 TLS、API 密钥管理与数据完整性校验，防止篡改导致调度异常",
+      "StarlingX": "基于安全加固的发行版交付（StarlingX 提供认证与密钥管理等安全机制，具体电源管理相关安全特性未详细核实）"
+    },
+    "合规与认证": "[不确定] Kepler 为 CNCF Sandbox 项目（与 K8s 一致性认证无关）；电源管理不影响 Kubernetes Conformance 认证；碳排放报告法规（GHG Protocol、欧盟 CSRD、中国双碳政策等）正推动企业建设能耗/碳可观测性，但暂无电源管理方案的行业强制认证；具体合规要求因地区与行业而异"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "能耗指标": "Kepler（kepler_node_cpu_watts、kepler_container_package_joules_total、kepler_node_platform_watts 等）、Scaphandre Prometheus exporter、node_exporter（node_rapl_package_joules_total、node_ipmi_power_watts）、Redfish/BMC 平台功耗遥测",
+      "电源状态指标": "StarlingX 提供 Current Power Consumption 与 Per Core CPU Power usage 指标；sysfs 可查询当前频率/governor/C-state 状态；tuned-adm active 查看生效 Profile",
+      "碳强度指标": "WattTime / Electricity Maps API 提供区域实时碳强度（gCO2/kWh），KEDA carbon-intensity Scaler 提供 scaledobject 级碳指标",
+      "监控集成": "全部通过 Prometheus + Grafana 生态集成，社区提供 Kepler/Scaphandre Grafana 面板；支持告警（如节点功耗超阈值、碳强度过高触发任务暂停）"
+    },
+    "维护与生命周期": "[不确定] Intel Kubernetes Power Manager 已归档（2024 年后无更新，v2.4.0 为最后版本线），不适用新集群；Intel IPM Operator 与 StarlingX CPM 持续发布（IPM 26.05、StarlingX 10/11/12 文档覆盖）；Kepler 活跃迭代（sustainable-computing-io 社区，红帽/IBM 参与）；Scaphandre 处于早期阶段（v1.0 路线）；sysfs/驱动级电源配置可在线热改，BIOS 级变更需节点排水+重启；节点替换/重建后需重新应用电源 Profile（通过 DaemonSet/Operator 自动或脚本恢复）",
+    "弹性与故障恢复": "[不确定] 电源管理组件故障（RAPL 不可用、驱动加载失败、Operator 异常）通常只回退到系统默认电源行为，不影响节点调度与业务可用性；Kepler/Scaphandre 采集失败不影响业务运行；碳强度 API 不可用时碳感知调度器需回退到默认调度（实现相关，部分原型无回退机制）；节点电源配置不持久于业务数据，重启后由 Operator/DaemonSet 重新收敛；StarlingX CPM 的配置不一致可能导致设置不生效，需监控校验"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": "[不确定] 电能成本占数据中心运营成本的 20%-40%（行业惯例范围，具体因 PUE 与电价而异）；Intel uncore 调整官方宣称最多节省 40% CPU 功耗；碳感知调度研究显示最高 51% 碳节约（对应电量/碳排放账单下降，批处理场景）；AMD EPYC 以每瓦性能优势降低单位计算功耗成本（具体数字未核实）；Kepler/Scaphandre/KEDA 均为开源免费，主要成本为部署与 Prometheus 存储；节能模式以吞吐/延迟为代价，需按工作负载权衡"
+    ,
+    "成熟度与社区支持": {
+      "Kepler": "活跃度高：CNCF Sandbox 项目，sustainable-computing-io 社区（红帽、IBM 等）维护，与 K8s 生态集成成熟，持续发布",
+      "KEDA 碳感知": "KEDA 为 CNCF 毕业项目（碳强度 Scaler 为扩展生态），Azure、社区博客与咨询公司有生产实践分享，活跃度高",
+      "StarlingX CPM": "由 StarlingX/OpenInfra 社区维护，电信边缘场景成熟度较高，版本节奏稳定（半年一版）",
+      "Intel IPM Operator": "Intel + Red Hat 联合维护，面向 OpenShift 生产环境，持续发布，成熟度高",
+      "Intel Kubernetes Power Manager": "已归档，社区停止维护，仅历史参考",
+      "Scaphandre": "社区活跃但项目早期（v1.0 前），CNCF 无官方身份，生产案例有限",
+      "碳感知调度学术生态": "2025 年研究非常活跃（arXiv 2508.05949 综述、HotCarbon 2025、e-Energy 等会议），但生产化工具仍以 KEDA/Operator 为主"
+    }
+  },
+  "uncertain": [
+    "生产级配置",
+    "功耗基线",
+    "生态兼容性矩阵",
+    "混部兼容性",
+    "性能开销",
+    "固件与驱动依赖",
+    "部署位置与环境",
+    "虚拟化兼容性",
+    "扩展性上限",
+    "每节点密度",
+    "合规与认证",
+    "维护与生命周期",
+    "弹性与故障恢复",
+    "总拥有成本 (TCO)"
+  ]
+}

@@ -54,10 +54,10 @@ cross_refs:
   path: ../专项技术/
   label: '相关知识域: 专项技术'
 - type: domain
-  path: ../故障诊断/
+  path: ../../19-故障诊断/
   label: '相关知识域: 故障诊断'
 - type: fta
-  path: ../故障诊断/FTA故障树/list/crd-operator-fta.md
+  path: ../../19-故障诊断/06-FTA故障树/list/crd-operator-fta.md  # H3: 旧路径 ../故障诊断/FTA故障树/ 修复
   label: '故障树: crd-operator'
 ---
 

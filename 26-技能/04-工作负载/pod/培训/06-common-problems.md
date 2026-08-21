@@ -86,8 +86,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # 第十课：常见问题排查
 
 > **章节**: 入门引导 | **难度**: 入门 | **时长**: 25 分钟
@@ -585,8 +585,8 @@ kubectl top pods -n <namespace>
 ---
 
 **关联文档**:
-- [../../故障诊断/](../../故障诊断/) — 故障排查文档
-- [../../故障诊断/topic-skills/](../../故障诊断/技能体系/) — 18 个 GA Skill
+- [](../../../../19-故障诊断) — 故障排查文档
+- [08-技能体系/](../../../../19-故障诊断/08-技能体系) — 18 个 GA Skill
 - [../01-introduction/01-what-is-kubernetes.md](02-what-is-kubernetes.md) — K8s 概念入门
 
 ## See Also

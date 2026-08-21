@@ -1,7 +1,7 @@
 ---
 title: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
-description: '# 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation'
-summary: '监控告警体系是 [[kubernetes|Kubernetes]] 集群可观测性的核心基础设施。当 [[prometheus|Prometheus]]、AlertManager、Grafana 或长期存储组件（Thanos/VictoriaMetrics/Cortex）出现问题时，会直接导致**监控盲区**——运维团队无法感知集群状态变化，'
+description: Kubernetes 监控告警体系故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes 监控告警体系故障的完整诊断-修复-验证工单处理 Skill
 category: observability
 tags:
 - k8s
@@ -54,7 +54,7 @@ prerequisites:
 - monitoring-basics
 - logging-basics
 - observability-basics
-skill_id: SKILL-15_MONITORING_ALERTING_FAILURE-001
+skill_id: SKILL-MONITOR-001
 skill_name: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 version: 1.0.0
 k8s_versions:
@@ -1463,7 +1463,7 @@ curl -s http://localhost:3000/api/health
 |------|---------|---------|
 | Prometheus 架构与 TSDB | `可观测性/` | 理解 TSDB 存储机制、高基数问题根因 |
 | AlertManager 告警路由 | `可观测性/` | 深入理解路由、抑制、静默机制 |
-| 监控告警排障方法论 | `故障诊断/30-monitoring-alerting-troubleshooting.md` | 系统化排障方法 |
+| 监控告警排障方法论 | 19-故障诊断/30-monitoring-alerting-troubleshooting.md` | 系统化排障方法 |
 | 告警风暴治理 | `可观测性/05-alert-noise-reduction.md` | 告警降噪最佳实践 |
 | Thanos 架构 | `可观测性/` | 理解 Thanos 组件交互和查询路径 |
 | 高基数指标治理 | `可观测性/` | 指标设计最佳实践和治理方案 |

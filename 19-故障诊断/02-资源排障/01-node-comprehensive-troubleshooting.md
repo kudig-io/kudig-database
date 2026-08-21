@@ -62,7 +62,7 @@ cross_refs:
   path: ../可观测性/
   label: '相关知识域: 可观测性'
 - type: fta
-  path: ../故障诊断/FTA故障树/list/node-fta.md
+  path: ../06-FTA故障树/list/node-fta.md  # H3: 旧路径 ../故障诊断/FTA故障树/ 修复
   label: '故障树: node'
 ---
 
@@ -655,6 +655,8 @@ kubectl get pods -n kube-system -o wide --field-selector spec.nodeName=$NODE
 - 故障诊断 MOC
 - [[19-故障诊断/README.md|Domain-12 故障排查 (Troubleshooting)]]
 - Domain-12 故障排查 — 开源项目索引
+- [[17-系统基础/01-Linux/17-k8s-node-os-issues.md|K8s 节点 OS 问题全清单]]
+- [[17-系统基础/01-Linux/16-k8s-node-os-support-matrix.md|K8s 节点 OS 支持矩阵]]
 - [[19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting.md|API Server 故障排查]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|etcd 故障排查]]
 - [[19-故障诊断/01-核心排障/03-networking-cni-troubleshooting.md|CNI 网络插件故障排查]]

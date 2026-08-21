@@ -135,9 +135,8 @@ aliases:
 - Service
 - 服务
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # Kubernetes Service 核心概念与类型深度解析 (Service Concepts & Types Deep Dive)
 
 > **适用版本**: Kubernetes v1.25 - v1.32  

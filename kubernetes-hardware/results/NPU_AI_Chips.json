@@ -1,0 +1,203 @@
+{
+  "基本信息": {
+    "名称": "NPU / AI 推理芯片（Intel NPU（AI Boost）、Hailo-8/8L、Rockchip NPU（RK3588/RK3576）、Qualcomm AI Engine（Cloud AI 100/Ultra、Snapdragon NPU）、华为昇腾 NPU 等专用神经处理单元，含 K8s 设备插件/CDI/DRA 管理、KubeEdge 边缘部署、与 GPU 的选型对比）",
+    "类别": "加速器",
+    "官方文档链接": "Intel NPU 设备插件: https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/npu_plugin/README.html ; Intel 设备插件集合: https://github.com/intel/intel-device-plugins-for-kubernetes ; Intel NPU (OpenVINO): https://docs.openvino.ai/2025/openvino-workflow/running-inference/inference-devices-and-modes/npu-device.html ; Hailo-8: https://hailo.ai/products/ai-accelerators/hailo-8-ai-accelerator/ ; Hailo-8L: https://hailo.ai/products/ai-accelerators/hailo-8l-ai-accelerator-for-ai-light-applications/ ; Hailo 社区 K8s 设备插件 (CDI): https://github.com/SNU-RTOS/hailo-device-plugin ; Rockchip RKNN-Toolkit2: https://github.com/airockchip/rknn-toolkit2 ; RKNPU 驱动: https://github.com/rockchip-linux/rknpu2 ; RKLLM/rkllama (llama.cpp NPU 后端): https://github.com/airockchip/rkllm-toolkit ; Qualcomm Cloud AI 100 Ultra: https://www.qualcomm.com/data-center/products/cloud-ai-100-ultra ; Qualcomm Cloud AI SDK (K8s 设备插件): https://quic.github.io/cloud-ai-sdk-pages/latest/Getting-Started/Installation/Docker/k8s/ ; K8s 设备插件概念: https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/ ; K8s DRA: https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/ ; KubeEdge: https://kubeedge.io/ ; 昇腾 CANN/设备插件: https://www.hiascend.com/"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "Intel NPU": "客户端/边缘形态: Intel Core Ultra 处理器内置 NPU（Meteor Lake 11 TOPS、Arrow Lake 13 TOPS、Lunar Lake (200V) 48 TOPS、Panther Lake 约 180 TOPS [不确定]），随 CPU 出货无需独立插卡；Linux 内核需内置 ivpu 驱动，配合 NFD 打节点标签，NPU 设备插件以 DaemonSet 注册 npu.intel.com/accel 资源；该系列 NPU 仅存在于客户端芯片，无数据中心独立 NPU 形态。",
+      "Hailo": "Hailo-8（26 TOPS、典型功耗 2.5W、集成片上内存无外置 DRAM）或 Hailo-8L（13 TOPS [不确定功耗约 1.5W]），以 M.2/PCIe/mPCIe 模块形式插在边缘主机/工控机上；需安装 HailoRT 驱动与固件；K8s 侧使用社区 CDI 设备插件（hailo.ai/npu）或手动挂载设备节点。",
+      "Rockchip": "Rockchip RK3588/RK3588S（6 TOPS INT8，3×2 TOPS 核）或 RK3576（6 TOPS）等 SoC 内置 NPU，常见于 Orange Pi 5、瑞芯微开发板；需 rknpu2 内核驱动（/dev/rknpu）与用户态 librknnrt 库；无官方 K8s 设备插件 [不确定]，社区方案以特权容器挂载 /dev/rknpu 或自研插件为主；推荐板载 4-16GB LPDDR 内存以支撑大模型量化推理。",
+      "Qualcomm": "Cloud AI 100（400 TOPS INT8、75W、集成内存）或 Cloud AI 100 Ultra（800 TOPS INT8、官方 75W TDP [不确定]，64GB LPDDR4X、576MB 片上 SRAM）PCIe 推理卡；需安装 qaic 驱动、Cloud AI SDK（模型编译为 QPC 格式）及 QAic K8s 设备插件（DaemonSet）；明确仅支持推理不支持训练。",
+      "华为昇腾": "Atlas 300I Duo（Ascend 310P、280 TOPS INT8）等 PCIe 推理卡或 Atlas 200/500 边缘盒子 [不确定 310P 精确保密计算规格]；需 CANN 工具链、Ascend 驱动（npu-smi 可查），配合昇腾设备插件（huawei.com/Ascend310 等资源名）接入 K8s。"
+    },
+    "推荐配置": {
+      "边缘推理节点": "4-8 核 CPU + 8-16GB 内存的工控机/迷你主机，配 1 个 Hailo-8 M.2（26 TOPS）或 Rockchip RK3588 板卡（6 TOPS），K3s/KubeEdge/MicroK8s 轻量集群，Ubuntu 22.04/24.04 或 Debian；用于视频分析、质检、车载等单模型 INT8 量化推理。",
+      "服务器推理节点": "双路 x86 服务器插 1-8 张 Cloud AI 100/Ultra 或 Atlas 300I 推理卡，标准 K8s 1.28+，设备插件按卡注册资源；配合 vLLM（Qualcomm 提供 vLLM 适配版）承载 Llama 3.1 8B 等生成式模型服务。",
+      "Intel 客户端": "Core Ultra Series 2 (Lunar Lake) 及以上笔记本/迷你主机（NPU 48 TOPS），OpenVINO 运行时 + NPU 设备插件，本地轻量 LLM/视觉模型推理。"
+    },
+    "生产级配置": {
+      "多卡推理集群": "Cloud AI 100 Ultra 8 卡服务器（单卡 64GB LPDDR4X）或 Atlas 300I 服务器，多卡 + vLLM 分布式推理，K8s + Volcano/Kueue 调度；华为云 CCE 提供昇腾 NPU 节点池托管能力 [不确定大规模生产占比]。",
+      "边缘规模化": "数百至数千台 NPU 边缘设备由 KubeEdge（CNCF 毕业项目）统一纳管，云边协同下发推理任务与模型；单边缘节点 1-2 个 NPU，节点离线自治运行 [不确定] 大规模部署统计。",
+      "NPU 虚拟化切分": "昇腾提供 NPU 虚拟化/软切分（如 MindX、npu-virtualization）将单卡切分为多个推理实例 [不确定在 K8s 中的成熟度]；Intel/Hailo/Rockchip 无等价硬件级切分。"
+    },
+    "功耗基线": "Hailo-8: 典型 2.5W（26 TOPS，能效约 10 TOPS/W）、Hailo-8L: 约 1.5W [不确定]；Rockchip RK3588 NPU: 约 2W [不确定]，整板（含 CPU/内存）约 5-10W；Intel NPU: 集成于 CPU 封装内（11-48 TOPS），平台（笔记本）整机 15-28W 级 [不确定 NPU 单独功耗]；Qualcomm Cloud AI 100: 75W、Ultra 官方 75W [不确定，第三方实测高压测试可达数百瓦级 [不确定] ]；昇腾 310P: 约 8W 级 [不确定]。NPU 相对 GPU 的核心优势是每瓦性能（Cloud AI 100 Ultra 约 2.67 TOPS/W vs NVIDIA A100 约 1.0 TOPS/W [不确定]）。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "设备插件机制": "K8s 设备插件 API 自 1.10 起 GA，NPU 厂商/社区插件均基于该机制，对 K8s 版本无特殊要求；CDI 方案要求容器运行时（containerd 1.7+）启用 CDI。",
+      "DRA": "Dynamic Resource Allocation 自 1.26 引入（Alpha）、1.35 GA；当前 NPU 专用 DRA 驱动成熟度低 [不确定]，华为昇腾有基于设备插件的类 DRA 调度演进 [不确定]，主流 NPU 仍走扩展资源设备插件路线。",
+      "Intel": "NPU 插件随 intel-device-plugins 发布（如 0.36.0），经 NFD/Intel Device Plugin Operator 部署 [不确定精确的 K8s minor 版本矩阵]。",
+      "Qualcomm": "QAic 设备插件随 Cloud AI SDK 发布，文档未明确最低 K8s 版本 [不确定]。",
+      "KubeEdge": "KubeEdge 1.12+ 支持标准设备插件与扩展资源 [不确定精确版本行为]，边缘侧 edged 兼容 kubelet 设备插件通道 [不确定]。"
+    },
+    "操作系统兼容性": {
+      "Linux 主流": "Ubuntu 22.04/24.04、Debian、Fedora、openEuler、麒麟/统信等国产发行版（昇腾生态）；NPU 驱动以内核模块形式提供（ivpu/rknpu/qaic/drv），依赖内核版本 [不确定完整认证矩阵]。",
+      "Windows": "Intel NPU 可在 Windows 上通过 OpenVINO 使用，但 K8s NPU 节点生态以 Linux 为主 [不确定 Windows 节点 NPU 支持]。",
+      "嵌入式": "Rockchip/Hailo 面向嵌入式 Linux（buildroot/Yocto），K8s 侧常用轻量发行版。"
+    },
+    "K8s 上游支持阶段": {
+      "设备插件": "Kubernetes 上游 GA 机制，NPU 资源整体分配、无共享与属性选择，是 NPU 当前主流接入方式。",
+      "DRA": "Kubernetes 上游 GA（1.35），为 NPU 等加速器提供结构化资源声明，但 NPU 厂商 DRA 驱动多为规划或早期阶段 [不确定]。",
+      "NPU 厂商插件": "Intel 设备插件为 Intel 开源社区项目（非 CNCF）；Hailo 无官方 K8s 插件（仅社区项目）[不确定]；Rockchip 无官方插件；Qualcomm QAic 插件为官方 SDK 附带；昇腾设备插件为华为官方开源项目（Gitee/GitHub）[不确定 CNCF 关联]。",
+      "KubeEdge": "CNCF 毕业项目（2024），是边缘 NPU 部署的主要编排层。"
+    },
+    "生态兼容性矩阵": {
+      "Intel": "NFD + Intel Device Plugins Operator + OpenVINO 运行时，资源 npu.intel.com/accel；模型经 OpenVINO IR 优化，兼容 PyTorch/TensorFlow 导出。",
+      "Hailo": "HailoRT 运行时 + Hailo Dataflow Compiler + Hailo Model Zoo（预训练模型仓库）；社区设备插件基于 CDI（containerd 1.7+）；监控依赖 hailortcli [不确定 Prometheus exporter]。",
+      "Rockchip": "RKNN-Toolkit2（模型转换/量化）+ rknpu2 驱动 + RKLLM/rkllama（llama.cpp 的 RKNPU 后端）+ rknn_model_zoo；无官方监控集成 [不确定]。",
+      "Qualcomm": "Cloud AI SDK（ONNX 导入、QPC 编译、部署）+ QAic 设备插件 + vLLM 适配版（On-Prem Appliance）；支持 Llama/Mistral/TinyLlama/Codestral 等量化模型 [不确定完整模型清单]。",
+      "昇腾": "CANN + MindIE（推理引擎）+ MindSpore/PyTorch 适配 + 昇腾设备插件 + npu-exporter；华为云 CCE/CCE Turbo 原生集成，配合 Volcano 批调度。",
+      "调度与监控": "与 K8s 原生调度器扩展资源、Volcano/Kueue 批调度兼容；监控以厂商 CLI（npu-smi/hailortcli）为主，Prometheus exporter 生态弱于 GPU（无 DCGM 等价物）。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "推理专用": "NPU 明确不支持训练（Qualcomm Cloud AI 100 官方声明、Hailo/RKNN 均为推理编译器），模型须经厂商编译器量化转换（RKNN、Hailo Dataflow Compiler、QPC、OpenVINO IR、CANN OM），算子覆盖有限，不支持的算子需改写或回退 CPU。",
+      "编译时间": "Qualcomm 模型初次编译可达数小时 [不确定]；Hailo/RKNN 编译分钟级但迭代成本高。",
+      "内存受限": "Hailo 无外置 DRAM（流式执行，大模型需分块）；Cloud AI 100 Ultra 64GB LPDDR4X 但 70B 级模型扩展效率差（第三方评测显示极端规模有架构权衡）；RK3588 板卡内存 4-32GB 限制量化模型尺寸。",
+      "生态碎片化": "各家编译器/运行时互不兼容，迁移成本高；Rockchip 无官方 K8s 设备插件，Hailo 官方未提供 K8s 集成 [不确定]，社区插件功能不完整（如健康监控未实现）。",
+      "Intel": "NPU 仅客户端形态（无服务器独立卡，数据中心走 Gaudi），默认每 NPU 仅 1 容器（-shared-dev-num 可调）；privileged 方式暴露设备有安全顾虑，官方建议 CDI。",
+      "昇腾": "部分 NPU 虚拟化/切分能力依赖华为云商业组件 [不确定]，开源社区版支持面有限。",
+      "精度": "INT8/INT4 量化引入精度损失，敏感模型需校准；NPU 无 GPU 的 FP64/BF16 大规模训练能力。"
+    },
+    "混部兼容性": "[不确定] NPU 与 CPU 工作负载混部整体良好（推理任务短小、功耗低）；Hailo M.2 与其它 PCIe 设备共享通道带宽；Intel NPU 与核显/CPU 共享平台功耗与散热预算；Rockchip NPU 与 CPU/GPU 共享 SoC 内存带宽，大模型推理会与其它负载争用带宽；与 GPU 混部需协调 PCIe 通道与整机功耗预算 [不确定量化影响]。",
+    "性能开销": "[不确定] 设备插件/CDI 注入对推理性能开销趋近于零（<1-2%）；直通（VFIO）给 VM 开销极小；主要开销来自软件侧：量化+编译的精度/延迟权衡与首次编译时间，而非运行时抽象层 [不确定百分比]。",
+    "固件与驱动依赖": "各厂商驱动/固件与芯片型号强绑定: Intel ivpu 内核模块（随内核版本演进）、HailoRT 驱动+固件（M.2 模块需对应 FW 版本）、Rockchip rknpu2 驱动版本需与 RKNN-Toolkit2/librknnrt 匹配、Qualcomm qaic 驱动与 Cloud AI SDK 版本配套、昇腾驱动与 CANN 版本配套；驱动升级通常需节点排水并重启 [不确定各厂商热升级支持]；NPU 一般不支持热插拔（M.2 模块除外 [不确定]）。"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Intel": "通过 NFD 检测 NPU 并打标签，NPU 设备插件 DaemonSet 注册 npu.intel.com/accel；支持 -shared-dev-num 共享模式（多容器共用 1 个 NPU）；支持 CDI 注入（推荐）或 privileged 模式；Pod 以 limits 声明资源。",
+      "Hailo": "社区 hailo-device-plugin（K8s 设备插件 API v1beta1 + CDI 动态生成）注册 hailo.ai/npu；部署 kubectl create -f 远程清单；要求 containerd 1.7+ 且启用 CDI [不确定对 CRI-O 的支持]。",
+      "Rockchip": "无官方插件；社区做法: 特权容器直接访问 /dev/rknpu 与 /dev/dri，或自研设备插件注册自定义资源 [不确定通用方案]；rkllama/rknn 推理容器以 DaemonSet 或 Deployment 部署在 NPU 节点。",
+      "Qualcomm": "QAic K8s 设备插件（DaemonSet，容器镜像 cloud_ai_k8s_device_plugin）注册 NPU 资源；模型先用 Cloud AI SDK 编译为 QPC 格式并制作容器镜像，再以 vLLM 或 SDK 服务方式部署 [不确定资源名称格式]。",
+      "昇腾": "Ascend 设备插件 DaemonSet（注册 huawei.com/Ascend310 等资源名）+ 驱动/CANN 预装；华为云 CCE 节点池一键开启昇腾 NPU；支持 NPU 虚拟化切分（商业组件 [不确定]）。",
+      "DRA 演进": "K8s DRA 1.35 GA 后，NPU 可作为 DRA 管理对象，但当前 NPU 厂商 DRA 驱动基本处于早期/规划阶段 [不确定]，实践中仍以扩展资源设备插件为主。"
+    },
+    "配置示例": "[不确定] 典型要点（非完整 YAML）: Intel Pod 声明 resources: limits: npu.intel.com/accel: 1；Hailo 社区插件 Pod 声明 hailo.ai/npu: 1（含 CDI 注解）；Rockchip 特权威容器需挂载 /dev/rknpu 并设置环境变量（如 RKNPU 相关路径）[不确定]; 昇腾 Pod 声明 huawei.com/Ascend310: 1 并配资源拓扑；Qualcomm 经 QAic 插件声明设备并在镜像内置 QPC 模型。完整示例见各官方仓库文档。",
+    "部署位置与环境": {
+      "主要场景": "边缘为主战场: KubeEdge 云边协同、K3s/MicroK8s 单机边缘、工控机/车载/安防/零售盒子；服务器推理: Cloud AI 100/Ultra、Atlas 300I 裸金属或私有云；公有云: 华为云 CCE 昇腾节点池、阿里云等信创 NPU 实例 [不确定各云厂商完整矩阵]；混合部署: 边缘节点离线自治 + 云端模型管理（KubeEdge + Sedna）。",
+      "虚拟机环境": "NPU 直通（VFIO）可给 K8s 内 VM（KubeVirt）使用 [不确定常见度]；嵌套虚拟化下 NPU 透传一般不可用；Intel 客户端 NPU 在 VM 内支持有限 [不确定]。"
+    },
+    "虚拟化兼容性": "[不确定] 主流方式为 VFIO 直通（Hailo/Qualcomm/昇腾 PCIe 卡），直通后无法热迁移；Hailo M.2 在边缘主机上通常直接暴露给容器而非 VM；昇腾有 NPU 虚拟化（vNPU 软切分）方案 [不确定 K8s 集成度]；Intel NPU 随 CPU 直通能力取决于平台 IOMMU [不确定]；无厂商提供类似 NVIDIA vGPU/SR-IOV 的成熟 NPU 虚拟化。"
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "Intel NPU": "算力: Meteor Lake 11 TOPS（INT8）、Arrow Lake 13 TOPS、Lunar Lake (Core Ultra 200V) NPU4 48 TOPS、Panther Lake 约 180 TOPS [不确定，官方未完整公布]；OpenVINO 下小参数量化 LLM（如 Llama 3.2 3B 级别）约 10-30 tokens/s [不确定]，主要面向 PC 本地轻量 AI。",
+      "Hailo": "Hailo-8 26 TOPS INT8（典型 2.5W），官方宣称分类任务 1000+ FPS；Hailo-8L 13 TOPS [不确定 8L 具体 FPS]；支持 CNN/Transformer，视觉模型（YOLO 系列、分割、姿态）性能强于同功耗 GPU/CPU [不确定具体 benchmark 表]。",
+      "Rockchip": "RK3588 6 TOPS INT8（3 核）；RKLLM/rkllama 在 Orange Pi 5 Pro 上可运行 Qwen3 等量化小模型，约 10-30 tokens/s [不确定]（受内存带宽与量化等级影响）；RK3576 同为 6 TOPS [不确定]。",
+      "Qualcomm": "Cloud AI 100: 400 TOPS INT8；Ultra: 800 TOPS INT8；vLLM 承载 Llama 3.1/Codestral 等（量化）；第三方评测（arXiv 2507.00418）对 15 个开源模型对比 V100/A6000/A100/GH200: 能效整体占优，小模型最高 26 tokens/(s·W) 提升 [不确定绝对吞吐数字]；初期编译需数小时。",
+      "昇腾": "Atlas 300I Duo (Ascend 310P): 280 TOPS INT8 [不确定]；MindIE 推理引擎在主流大模型（Qwen/Llama 量化版）有官方性能数据 [不确定具体数值]。"
+    },
+    "扩展性上限": "[不确定] NPU 无统一集群扩展模型: 边缘节点通常 1 个 NPU（Hailo 可多 M.2、RK3588 单 SoC）；服务器推理卡可 8 卡/节点（Cloud AI 100 Ultra、Atlas 300I）；多卡 LLM 推理扩展（vLLM 张量并行）受 NPU 间互联带宽限制 [不确定拐点]；KubeEdge 边缘集群规模受控制面与网络约束（社区案例数百至数千节点 [不确定]）。",
+    "每节点密度": "[不确定] Intel NPU: 每客户端 CPU 1 个 NPU，共享模式可多容器（-shared-dev-num，如 4）；Hailo: 每节点视 PCIe 通道 1-8 个模块；Rockchip: 每板 1 个 NPU（3 核）；Qualcomm/昇腾: 服务器每节点 1-8 卡，每卡整卡分配（无硬件分片，昇腾 vNPU 切分除外 [不确定]）。"
+  },
+  "安全": {
+    "安全特性": {
+      "平台信任": "NPU 本身无独立 TPM/信任根，平台安全（Secure Boot、TPM、磁盘加密）依赖服务器/边缘设备主机；无 NPU 专用远程证明 [不确定]。",
+      "机密计算": "主流 NPU 无机密计算支持 [不确定]（Intel NPU 无机密计算；昇腾部分方案宣传安全能力但 K8s 集成度低 [不确定]）。",
+      "容器隔离": "设备暴露方式影响安全: privileged 模式（Intel 默认、Rockchip 社区方案）风险高；CDI（Hailo 社区插件、Intel 可选）为推荐的安全暴露方式；NPU 无 MIG 级硬件隔离，多租户共享 NPU 依赖上层隔离 [不确定]。",
+      "数据保护": "模型与权重以容器镜像形式分发，敏感模型需镜像签名/私有仓库；推理数据明文处理（无 NPU 内存加密公开支持 [不确定]）。"
+    },
+    "合规与认证": "[不确定] NPU 无独立 K8s 一致性认证；昇腾生态面向中国信创/等保合规场景（麒麟、openEuler 认证 [不确定]）；FIPS/PCI DSS 等认证取决于上层发行版与用户配置，无 NPU 硬件级认证 [不确定]。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "Intel": "无独立 NPU Prometheus exporter [不确定]，依赖平台遥测与 OpenVINO 日志 [不确定]。",
+      "Hailo": "hailortcli 提供健康检查与遥测；社区设备插件计划实现基于 hailortcli 的资源监控（尚未完成）[不确定]。",
+      "Rockchip": "无标准 exporter，依赖 rknn_server 日志与板级监控 [不确定]。",
+      "Qualcomm": "Cloud AI SDK 提供运行时遥测/健康接口 [不确定 Prometheus 集成]，设备插件可上报设备健康状态。",
+      "昇腾": "npu-smi 命令行 + npu-exporter（Prometheus 指标：利用率、温度、功耗、HBM 使用），设备插件支持健康检查与故障设备自动剔除 [不确定]。",
+      "通用": "设备插件 ListAndWatch 健康机制、节点标签、Node Problem Detector 可配合 [不确定]。"
+    },
+    "维护与生命周期": "[不确定] 固件/驱动升级依赖厂商工具（HailoRT 升级、RKNPU 固件、qaic 固件、CANN 升级），通常需节点排水与重启；NPU 一般不支持热插拔（Hailo M.2 物理可换但 K8s 感知差 [不确定]）；MTBF 无公开数据 [不确定]；边缘设备生命周期长（5-10 年），注意 NPU 算力过时与驱动 EOL [不确定]。",
+    "弹性与故障恢复": "[不确定] NPU 故障: 设备插件将设备标记不健康并从可分配资源移除（昇腾明确支持 [不确定]，其余厂商依赖插件实现 [不确定]）；运行中推理任务由上层（KubeEdge 边缘重启、K8s Deployment 重建、vLLM 副本）恢复；NPU 无热迁移，直通设备故障影响面较大；KubeEdge 边缘节点支持离线自治（断网时本地任务继续运行），弱网环境下可靠性优于纯云上部署；推理无状态为主，无需数据持久化策略（模型镜像只读）。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件采购": "[不确定] Hailo-8 M.2 模块约 $100-250 [不确定]、Hailo-8L 更低 [不确定]；Rockchip RK3588 开发板约 $80-200；Intel Core Ultra 迷你主机/笔记本 $500-1500+；Cloud AI 100/Ultra 推理卡数千美元级 [不确定]；昇腾 Atlas 300I 卡受供应与渠道影响 [不确定]。",
+      "运行成本": "NPU 核心卖点是低功耗（Hailo 2.5W、RK3588 整板 5-10W、Cloud AI 100 75W），边缘免空调/免 GPU 级散热；同算力推理场景功耗远低于 GPU（Cloud AI 100 Ultra 能效约 A100 的 2.6 倍 [不确定]），长期电费与散热成本优势明显。",
+      "软件与迁移成本": "编译器/运行时免费（OpenVINO、HailoRT、RKNN-Toolkit2、Cloud AI SDK、CANN），但模型迁移（量化+算子适配+重新编译）人力成本高，是 TCO 中被低估的部分；昇腾/华为云商业组件（MindIE 企业版、CCE 托管）另行计费 [不确定]。",
+      "节省手段": "边缘推理场景以 NPU 替代 GPU 可显著降低单点成本（硬件+功耗+散热）；共享模式（Intel -shared-dev-num）提高利用率；vLLM 多卡并发提升服务器 NPU 吞吐 [不确定量化]。"
+    },
+    "成熟度与社区支持": {
+      "Intel": "OpenVINO 生态成熟（PC 侧 AI 事实标准），设备插件随 intel-device-plugins 长期维护；NPU 属 AI PC 战略一部分，社区活跃 [不确定 K8s 侧部署规模]。",
+      "Hailo": "产品成熟（车载 ADAS、安防、工业质检量产级），HailoRT/Model Zoo 完善；K8s 集成薄弱（官方未提供、社区插件早期 [不确定]）。",
+      "Rockchip": "开发者社区活跃（rkllama/rknn_model_zoo、Orange Pi 生态），价格敏感边缘场景广泛使用；官方云原生支持缺失，方案偏 DIY [不确定生产案例]。",
+      "Qualcomm": "Cloud AI SDK 文档完整、vLLM 适配；但数据中心推理业务处于收缩/转型期 [不确定 Cloud AI 100 是否停产]，长期投入存疑。",
+      "昇腾": "中国信创与 AI 推理市场地位强势（华为云 CCE 原生集成、MindIE 生态），社区以中文为主，海外生态弱 [不确定]。",
+      "上游": "KubeEdge 为 CNCF 毕业项目，边缘 AI（Sedna 联邦学习/推理）社区活跃；K8s 侧 NPU 标准化（DRA）仍处早期，整体生态成熟度低于 GPU 的 CUDA 体系。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.最低配置.Intel NPU",
+    "硬件规格.最低配置.Hailo",
+    "硬件规格.最低配置.Rockchip",
+    "硬件规格.最低配置.Qualcomm",
+    "硬件规格.最低配置.华为昇腾",
+    "硬件规格.推荐配置.边缘推理节点",
+    "硬件规格.推荐配置.服务器推理节点",
+    "硬件规格.推荐配置.Intel 客户端",
+    "硬件规格.生产级配置.多卡推理集群",
+    "硬件规格.生产级配置.边缘规模化",
+    "硬件规格.生产级配置.NPU 虚拟化切分",
+    "硬件规格.功耗基线",
+    "兼容性.支持的 K8s 版本范围.DRA",
+    "兼容性.支持的 K8s 版本范围.Intel",
+    "兼容性.支持的 K8s 版本范围.Qualcomm",
+    "兼容性.支持的 K8s 版本范围.KubeEdge",
+    "兼容性.操作系统兼容性.Linux 主流",
+    "兼容性.操作系统兼容性.Windows",
+    "兼容性.K8s 上游支持阶段.DRA",
+    "兼容性.K8s 上游支持阶段.NPU 厂商插件",
+    "兼容性.生态兼容性矩阵.Hailo",
+    "兼容性.生态兼容性矩阵.Rockchip",
+    "兼容性.生态兼容性矩阵.Qualcomm",
+    "兼容性.生态兼容性矩阵.调度与监控",
+    "限制与约束.已知限制.编译时间",
+    "限制与约束.已知限制.生态碎片化",
+    "限制与约束.已知限制.昇腾",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销",
+    "限制与约束.固件与驱动依赖",
+    "配置与部署.配置方式.Hailo",
+    "配置与部署.配置方式.Rockchip",
+    "配置与部署.配置方式.Qualcomm",
+    "配置与部署.配置方式.昇腾",
+    "配置与部署.配置方式.DRA 演进",
+    "配置与部署.配置示例",
+    "配置与部署.部署位置与环境.主要场景",
+    "配置与部署.部署位置与环境.虚拟机环境",
+    "配置与部署.虚拟化兼容性",
+    "性能特征.基准性能数据.Intel NPU",
+    "性能特征.基准性能数据.Hailo",
+    "性能特征.基准性能数据.Rockchip",
+    "性能特征.基准性能数据.Qualcomm",
+    "性能特征.基准性能数据.昇腾",
+    "性能特征.扩展性上限",
+    "性能特征.每节点密度",
+    "安全.安全特性.平台信任",
+    "安全.安全特性.机密计算",
+    "安全.安全特性.容器隔离",
+    "安全.安全特性.数据保护",
+    "安全.合规与认证",
+    "运维与生命周期.可观测性支持.Intel",
+    "运维与生命周期.可观测性支持.Hailo",
+    "运维与生命周期.可观测性支持.Rockchip",
+    "运维与生命周期.可观测性支持.Qualcomm",
+    "运维与生命周期.可观测性支持.昇腾",
+    "运维与生命周期.可观测性支持.通用",
+    "运维与生命周期.维护与生命周期",
+    "运维与生命周期.弹性与故障恢复",
+    "经济性.总拥有成本 (TCO).硬件采购",
+    "经济性.总拥有成本 (TCO).运行成本",
+    "经济性.总拥有成本 (TCO).软件与迁移成本",
+    "经济性.总拥有成本 (TCO).节省手段",
+    "经济性.成熟度与社区支持.Hailo",
+    "经济性.成熟度与社区支持.Rockchip",
+    "经济性.成熟度与社区支持.Qualcomm",
+    "经济性.成熟度与社区支持.昇腾",
+    "经济性.成熟度与社区支持.Intel"
+  ]
+}

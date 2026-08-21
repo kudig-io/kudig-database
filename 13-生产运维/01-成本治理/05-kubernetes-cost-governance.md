@@ -53,7 +53,8 @@ intent_queries:
 - 如何使用Kubernetes？
 - Kubernetes的最佳实践是什么？
 
-tier: peripheral---
+tier: peripheral
+---
 title: 13-Kubernetes成本治理
 description: '<!-- chunk: 📋 概述' -->## 📋 概述'
 category: production-operations

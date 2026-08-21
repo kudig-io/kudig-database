@@ -1,7 +1,7 @@
 ---
 title: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-description: '## 1. 概述'
-summary: 'Service 是 [[kubernetes|Kubernetes]] 中网络连通性的**核心抽象层**。它为一组功能相同的 Pod 提供稳定的虚拟 IP（ClusterIP）和 DNS 名称，解耦了服务消费者与服务提供者。当 Service 连通性出现问题时，表现为集群内部或外部的客户端无法通过 Service 地址访问后端 Pod，'
+description: Kubernetes Service 连通性与 Endpoint 异常的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes Service 连通性与 Endpoint 异常的完整诊断-修复-验证工单处理 Skill
 category: network
 tags:
 - k8s
@@ -49,7 +49,7 @@ prerequisites:
 - ebpf-basics
 - cilium-basics
 - cni-basics
-skill_id: SKILL-05_SERVICE_CONNECTIVITY-001
+skill_id: SKILL-NET-002
 skill_name: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 version: 1.0.0
 k8s_versions:
@@ -1819,15 +1819,15 @@ kubectl get events -n <namespace> --field-selector involvedObject.name=<service>
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| Kubernetes 网络模型与 Service 实现 | `网络/` | 理解 Service 的底层实现（iptables/IPVS/nftables 规则生成机制） |
-| Service 故障树分析 | `故障诊断/FTA故障树/list/service-fta.md` | 理解 Service 连通性问题的完整因果链和概率模型 |
-| Ingress 故障树分析 | `故障诊断/FTA故障树/[[26-技能/05-网络/ingress/ingress-fta.md|ingress-fta]].md` | 当问题涉及 Ingress → Service 链路时的参考 |
-| 网络故障排查深度指南 | `故障诊断/高级排障/structural-` | 超出本 Skill 覆盖范围的深度网络排查方法 |
-| Kubernetes 故障排查方法论 | `故障诊断/` | 系统化故障排查的理论基础和方法论 |
+| Kubernetes 网络模型与 Service 实现 | `05-网络/` | 理解 Service 的底层实现（iptables/IPVS/nftables 规则生成机制） |
+| Service 故障树分析 | `19-故障诊断/06-FTA故障树/list/service-fta.md` | 理解 Service 连通性问题的完整因果链和概率模型 |
+| Ingress 故障树分析 | `19-故障诊断/06-FTA故障树/list/ingress-fta.md` | 当问题涉及 Ingress → Service 链路时的参考 |
+| 网络故障排查深度指南 | `19-故障诊断/04-高级排障/structural-` | 超出本 Skill 覆盖范围的深度网络排查方法 |
+| Kubernetes 故障排查方法论 | `19-故障诊断/` | 系统化故障排查的理论基础和方法论 |
 | DNS 诊断 | `SKILL-NET-001` | 当问题根因在 DNS 层面时的关联 Skill |
 | Pod 崩溃诊断 | `SKILL-POD-001` | 当后端 Pod CrashLoopBackOff 导致 Endpoints 为空时的关联 Skill |
 | 节点 NotReady 诊断 | `SKILL-NODE-001` | 当节点问题间接影响 Service 连通性时的关联 Skill |
-| kube-proxy 架构与实现 | `网络/` | 理解 kube-proxy 的三种模式（iptables/IPVS/nftables）及其规则同步机制 |
+| kube-proxy 架构与实现 | `05-网络/` | 理解 kube-proxy 的三种模式（iptables/IPVS/nftables）及其规则同步机制 |
 | NetworkPolicy 原理与实现 | `网络/` | 理解不同 CNI 插件对 NetworkPolicy 的实现差异 |
 
 ### 10.3 Skill 改进记录

@@ -63,7 +63,8 @@ intent_queries:
 - 07-deployment-replicaset-events的部署模式和最佳实践
 - 07-deployment-replicaset-events生产环境部署
 
-tier: peripheral---
+tier: peripheral
+---
 title: 07 - Deployment 与 [[replicaset|ReplicaSet]] 控制器事件
 description: '<!-- chunk: 📋 文档概述' -->## 📋 文档概述'
 category: kubernetes-events

@@ -678,7 +678,7 @@ Phase 4: Mature（持续）
 | [06 - 多 Agent 编排](./06-multi-agent-orchestration.md) | Supervisor-Worker 模式的实际案例 |
 | [10 - 安全护栏](./10-security-guardrails.md) | 金融案例中的合规护栏实现 |
 | [14 - Agent 赋能设计与落地路径](./14-agent-kudig-design-strategy.md) | K8s Agent 的战略设计 |
-| [topic-fta](../故障诊断/FTA故障树/) | 故障树分析在 AIOps Agent 中的应用 |
+| [topic-fta](../../19-故障诊断/06-FTA故障树) | 故障树分析在 AIOps Agent 中的应用 |
 
 ---
 

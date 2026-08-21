@@ -147,6 +147,47 @@ kubectl patch l2advertisement default -n metallb-system -p '{"spec":{"nodeSelect
 
 **修复**：调整 BGPPeer 的 `holdTime` 和 `keepaliveTime` 参数，启用 BFD 快速检测。
 
+## 对比评测
+
+| 维度 | MetalLB L2 | MetalLB BGP | kube-vip | 云厂商 LB |
+|------|-----------|------------|----------|-----------|
+| 模式 | ARP 宣告 | BGP 路由 | ARP/BGP/VRRP | 云 API |
+| 故障转移 | 秒级（leader 切换） | 依赖 BGP 收敛 | VRRP 秒级 | 云健康检查 |
+| 源 IP 保留 | 支持 | 支持 | 支持 | 视厂商 |
+| 多子网 | 单 L2 域 | 任意 | 多网卡 | 任意 |
+| 适用场景 | 小规模裸金属 | 大规模裸金属 | 高可用 VIP | 公有云 |
+
+**选型建议**：裸金属 L2 小规模用 MetalLB L2；多子网/大规模用 BGP 模式；需要 VIP 双活用 kube-vip；公有云直接云 LB。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| IP 未分配 | `kubectl get svc -o yaml`；`kubectl get ipaddresspool` | 地址池耗尽、pool 未匹配 selector |
+| 外部不通 | `arp -a`；检查节点网卡 | L2 模式下网关 ARP 表未更新 |
+| BGP 邻居断 | `kubectl exec <metallb> -- birdc show protocols` | 防火墙 179 未放行、AS 配置错误 |
+| 负载不均 | 检查 BGP ECMP 配置 | 交换机未启用 ECMP |
+
+## 生产部署清单
+
+- [ ] 地址池规划（避免与 DHCP/物理 IP 冲突）
+- [ ] L2 模式：确认所有节点同 L2 域；BGP 模式：确认交换机支持并放行 179
+- [ ] speaker DaemonSet 资源与 NodeSelector 规划
+- [ ] 故障演练：拔掉 speaker 所在节点 → 验证 IP 漂移
+- [ ] 监控接入（metallb metrics：`metallb_allocator_addresses_in_use`）
+
+## 常见误区与设计要点
+
+- **误区 1**：L2 模式下 LB IP 只能在单节点应答——流量瓶颈在该节点，BGP 模式可 ECMP 分摊。
+- **误区 2**：地址池与物理网络重叠——分配冲突会导致路由黑洞。
+- **设计要点**：BGP 模式对接交换机做 ECMP（等价多路径）；用 `loadBalancerClass` 与云 LB 共存；IP 池按环境拆分避免互抢。
+
+## 性能参考
+
+- L2 模式：单 VIP 吞吐受 leader 节点网卡限制（单节点瓶颈）。
+- BGP 模式：ECMP 多节点分摊，可接近线速聚合（受交换机哈希影响）。
+- 分配性能：控制器分配 IP 毫秒级（watch + 地址池位图）。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

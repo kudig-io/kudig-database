@@ -13,12 +13,12 @@ last_updated: 2026-07
 
 # K8S Certificate Expiry
 
-> 本页为 `故障诊断/topic-skills/skill-set/k8s-certificate-expiry` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry` 目录的自动索引。
 
 ## 子目录
 
-- 故障诊断/topic-skills/skill-set/k8s-certificate-expiry/reference/
-- 故障诊断/topic-skills/skill-set/k8s-certificate-expiry/scripts/
+- 19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/reference/
+- 19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/scripts/
 
 ## 文档
 

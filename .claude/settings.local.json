@@ -68,8 +68,45 @@
       "Bash(xargs -0 stat -f%z)",
       "Bash(awk '{sum+=$1; count++} END {print \"Pages:\", count, \"Total bytes:\", sum, \"Est tokens:\", sum/4}')",
       "Bash(echo \"\")",
-      "Bash(echo \"- [$\\(date -u +%Y-%m-%dT%H:%M:%SZ\\)] LINT issues_found=6436 orphans=2659 broken_links=262 stale=0 contradictions=0 prov_issues=0 missing_summary=3031 fragmented_clusters=31 visibility_issues=407 promotion_candidates=0 synthesis_gaps=36 relationship_issues=0\")"
+      "Bash(echo \"- [$\\(date -u +%Y-%m-%dT%H:%M:%SZ\\)] LINT issues_found=6436 orphans=2659 broken_links=262 stale=0 contradictions=0 prov_issues=0 missing_summary=3031 fragmented_clusters=31 visibility_issues=407 promotion_candidates=0 synthesis_gaps=36 relationship_issues=0\")",
+      "Bash(npm -g config get prefix)",
+      "Bash(ls -la \"$\\(npm -g config get prefix\\)/lib/node_modules/@anthropic-ai/claude-code\")",
+      "Bash(claude *)"
     ]
   },
-  "outputStyle": "Proactive"
+  "outputStyle": "Proactive",
+  "skillOverrides": {
+    "claude-history-ingest": "off",
+    "codex-history-ingest": "off",
+    "copilot-history-ingest": "off",
+    "cross-linker": "off",
+    "daily-update": "off",
+    "data-ingest": "off",
+    "graph-colorize": "off",
+    "hermes-history-ingest": "off",
+    "impl-validator": "off",
+    "ingest-url": "off",
+    "llm-wiki": "off",
+    "memory-bridge": "off",
+    "obsidian-wiki-ingest": "off",
+    "openclaw-history-ingest": "off",
+    "pi-history-ingest": "off",
+    "skill-creator": "off",
+    "tag-taxonomy": "off",
+    "wiki-agent": "off",
+    "wiki-capture": "off",
+    "wiki-context-pack": "off",
+    "wiki-dashboard": "off",
+    "wiki-dedup": "off",
+    "wiki-digest": "off",
+    "wiki-export": "off",
+    "wiki-history-ingest": "off",
+    "wiki-ingest": "off",
+    "wiki-query": "off",
+    "wiki-rebuild": "off",
+    "wiki-setup": "off",
+    "wiki-stage-commit": "off",
+    "wiki-switch": "off",
+    "wiki-update": "off"
+  }
 }

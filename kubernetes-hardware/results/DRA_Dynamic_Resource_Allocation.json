@@ -1,0 +1,155 @@
+{
+  "基本信息": {
+    "名称": "DRA（Dynamic Resource Allocation，动态资源分配）",
+    "类别": "资源管理",
+    "官方文档链接": "K8s 官方概念文档: https://kubernetes.io/docs/concepts/scheduling-eviction/dynamic-resource-allocation/ ; K8s v1.34 DRA GA 博客: https://kubernetes.io/blog/2025/09/01/kubernetes-v1-34-dra-updates/ ; K8s v1.33 DRA 更新博客: https://kubernetes.io/blog/2025/05/01/kubernetes-v1-33-dra-updates/ ; K8s v1.36 DRA 更新博客: https://kubernetes.io/blog/2026/05/07/kubernetes-v1-36-dra-136-updates/ ; CNCF 理解 DRA (2026): https://www.cncf.io/blog/2026/07/01/understanding-dynamic-resource-allocation-in-kubernetes/ ; KEP-3063 (Classic DRA): https://kep.k8s.io/3063 ; KEP-4381 (结构化参数): https://kep.k8s.io/4381 ; KEP-5055 (设备污点与容忍): https://www.kubernetes.dev/resources/keps/5055/ ; NVIDIA DRA 驱动: https://github.com/kubernetes-sigs/dra-driver-nvidia-gpu ; NVIDIA GPU Operator DRA 安装: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/latest/dra-intro-install.html ; AMD DRA 驱动: https://instinct.docs.amd.com/projects/gpu-operator/en/main/dra/dra-driver.html ; Intel 资源驱动: https://github.com/intel/intel-resource-drivers-for-kubernetes ; 上游示例驱动框架: https://github.com/kubernetes/dynamic-resource-allocation ; GKE DRA 文档: https://docs.cloud.google.com/kubernetes-engine/docs/concepts/about-dynamic-resource-allocation ; AWS EKS EFA DRA 公告: https://aws.amazon.com/about-aws/whats-new/2026/05/kubernetes-dra-elastic-fabric-adapter/"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "控制面": "Kubernetes 1.26+（Alpha 实验）至 1.34+（GA 稳定，resource.k8s.io/v1 默认启用），1.35 起功能门控锁定、默认开启；控制面组件（kube-apiserver、kube-scheduler、kube-controller-manager）需启用对应 API 组与功能门控；DRA 本身无专用硬件要求，可运行在标准控制面节点（约 2-4 核 CPU、4-8GB 内存）。",
+      "节点侧": "标准 Linux 工作节点即可，无专用硬件；kubelet 需启用 DRA 支持（GA 后默认开启）；容器运行时需支持 CDI（Container Device Interface，如 containerd 1.7+、CRI-O 1.28+），以便驱动通过 CDI 将设备注入容器。",
+      "驱动要求": "必须部署至少一个 DRA 驱动（由厂商提供，通常为控制器 + kubelet 插件 DaemonSet），驱动负责发布 ResourceSlice 描述节点设备清单并在分配时准备/释放设备。",
+      "示例 (NVIDIA)": "NVIDIA DRA 驱动要求 Kubernetes 1.32+；经 GPU Operator 集成要求 v1.34.2+；使用 v1.34 时需显式启用 resource.k8s.io/v1 API 组 [不确定 v1.34 早期小版本的具体开关方式]。"
+    },
+    "推荐配置": {
+      "生产集群": "Kubernetes 1.34+（GA 核心 API）或 1.35+（功能门控锁定、完全默认启用，CNCF 2026 文章表述为 fully supported）；建议 1.36 以获得分区设备（Beta）、扩展资源过渡（Beta）、设备污点（Beta）、优先列表（Stable）等扩展能力；控制面按标准 HA（3 节点）配置，etcd 使用 NVMe SSD。",
+      "驱动与生态": "选择与硬件匹配的官方 DRA 驱动：NVIDIA（GPU + ComputeDomain）、AMD（gpu.amd.com）、Intel（GPU/Gaudi/QAT，标记 beta/非生产）；生产 GPU 集群建议通过 GPU Operator 集成方式部署 NVIDIA DRA 驱动并为节点打上驱动标签；管理员预先创建集中式 DeviceClass（如 cost-optimized / high-performance）。",
+      "运行时": "containerd 1.7+ / CRI-O 1.28+ 启用 CDI，驱动生成的 CDI spec 由运行时加载以注入设备。",
+      "存储与网络": "DRA 核心无特殊要求；网络型 DRA 驱动（如 DRANET / AWS EFA）需对应网卡硬件（EFA、SR-IOV 网卡等）及驱动。"
+    },
+    "生产级配置": {
+      "大规模异构集群": "管理数千节点的集群可并行部署多个 DRA 驱动（GPU + 网络 + 加速器）实现组合分配；NVIDIA ComputeDomain 支持 GB200/NVL72 级多节点 NVLink 域；每个驱动可管理多个 ResourceSlice 池（每池最多 128 项设备信息）[不确定大规模多驱动组合的公开生产案例]。",
+      "云托管": "EKS 支持 NVIDIA DRA 驱动（P6e/GB200 实例）与 EFA DRA（K8s 1.34+，拓扑感知分配 + EFA 接口共享）；GKE Standard 提供 DRA 预览（仅 GPU）；[不确定 2026 年各云厂商 GA 状态]。",
+      "高可用": "DRA 驱动控制器按多副本部署；分配状态持久化于 etcd（ResourceClaim allocation 状态），调度器重启后可恢复；设备故障通过 DeviceTaint / 硬件健康诊断（1.36）隔离不健康设备 [不确定生产级最佳实践细节]。"
+    },
+    "功耗基线": "不适用：DRA 是 Kubernetes 控制面与节点上的软件框架，本身无独立功耗基线；其功耗影响仅为驱动组件（DaemonSet 容器）的轻微 CPU/内存占用，与所管理硬件（GPU、网卡等）的功耗无关，功耗基线由具体硬件决定。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "DRA 核心": "v1.26 引入（Alpha）；v1.32 API 演进至 v1beta1 并随多个子特性 Beta；v1.34 核心 API（resource.k8s.io/v1）GA 并默认启用；v1.35 功能门控锁定（完全支持、默认开启）；v1.36 继续扩展（分区设备、扩展资源过渡、设备污点、CPU/内存原生资源、PodGroup Claims 等）。",
+      "结构化参数 (KEP-4381)": "自 v1.27 起为推荐模型，GA 后成为唯一核心模型；Classic DRA（KEP-3063）的控制器实现作为可选兼容层未进入主路径。",
+      "NVIDIA DRA 驱动": "要求 Kubernetes 1.32+；GPU Operator 集成要求 v1.34.2+；使用 DRA 扩展资源过渡需 1.36+（对应功能门控默认开启）。",
+      "AMD DRA 驱动": "要求 Kubernetes 1.32+，需启用 DynamicResourceAllocation 功能门控（1.32 上）[不确定后续版本是否默认]；生产建议 1.34+。",
+      "Intel 资源驱动": "Kubernetes 1.26+（项目明确标记 beta / 非生产）。",
+      "云厂商": "EKS（NVIDIA 驱动与 EFA DRA）要求 1.34+；GKE Standard DRA 预览；AKS 支持状态 [不确定]。"
+    },
+    "操作系统兼容性": {
+      "节点 OS": "所有受 Kubernetes 支持的 Linux 发行版（Ubuntu、RHEL/Rocky、SLES、Flatcar、Talos 等），DRA 核心与 OS 无关；Windows 节点 [不确定] 当前无 DRA 驱动生态。",
+      "驱动 OS 支持": "由各厂商驱动决定：NVIDIA 驱动支持主流 Linux（Ubuntu/RHEL 系等）；AMD 驱动要求 amdgpu 内核模块与 CDI 运行时；Intel 驱动依赖内核设备驱动（i915/xe 等）[不确定完整认证矩阵]。",
+      "运行时要求": "容器运行时需支持 CDI（containerd 1.7+、CRI-O 1.28+ 等）以注入 DRA 分配的设备。"
+    },
+    "K8s 上游支持阶段": "GA（稳定）：v1.34 核心 API 稳定并默认启用，v1.35 功能门控锁定，官方承诺核心无破坏性变更；扩展能力分级：Prioritized List（Stable, 1.36）、Partitionable Devices（Beta, 1.36）、Extended Resource 过渡（Beta, 1.36）、Device Taints/Tolerations（Beta, 1.36）、Admin Access（Beta, v1.32 起）、Consumable Capacity（Alpha, 1.34）、ResourcePoolStatusRequest（Alpha, 1.36）、CPU/内存原生资源与 PodGroup Claims（1.36 新特性）；DRA 已被明确为设备插件机制的官方演进替代方向。",
+    "生态兼容性矩阵": {
+      "DRA 驱动": "NVIDIA（GPU/ComputeDomain，Kubernetes SIG 托管仓库）; AMD（GPU，随 AMD GPU Operator 提供）; Intel（GPU/Gaudi/QAT 资源驱动，beta）; 上游社区示例驱动（kubernetes/dynamic-resource-allocation）; 网络类 DRANET 驱动（开源，AWS EFA DRA 基于其构建，支持拓扑感知分配与 EFA 接口共享）; CNI DRA driver（社区探索中，解决与 CNI 的集成问题）。",
+      "调度器": "原生 kube-scheduler（内建 DRA 过滤/打分与分配流程）；Kueue/Volcano 等批调度器配合 DRA 使用 [不确定各批调度器与 DRA 集成的成熟度]；Cluster Autoscaler 对 DRA 的支持处于演进中（CNCF 2026 文章展望按 DRA 需求动态供给 GPU 节点）。",
+      "云平台": "EKS（NVIDIA DRA 驱动 + EFA DRA，2026/05 公告）; GKE Standard（DRA 预览，仅 GPU）; 其他云厂商 [不确定]。",
+      "监控集成": "kubectl describe resourceclaim 查看分配状态与厂商元数据; ResourcePoolStatusRequest（1.36 Alpha）查询池 totalDevices/allocatedDevices/availableDevices; 硬件健康诊断（1.36）; GKE 限制 DRA GPU 节点无法使用托管 DCGM metrics 包 [不确定开箱即用的 Prometheus 指标集]。",
+      "相关项目": "CDI（容器设备接口，DRA 设备注入基础）、NRI（节点资源接口，与 DRA 互补）、KEP-5055 设备污点、NVIDIA GPU Operator（集成 DRA 驱动）、AWS DRANET（网络 DRA）。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "驱动生态成熟度": "NVIDIA GPU 侧部分能力（动态 MIG 分配、time-slicing 参数化）尚未官方支持，GPU kubelet plugin 在 Helm 安装中默认关闭；MIG 配置变更需手动重启驱动 Pod；Intel 资源驱动明确标记 beta/非生产。",
+      "云平台限制": "GKE 仅 Standard 模式集群、仅支持 GPU、不支持 time-sharing/MIG/MPS、DRA GPU 节点不可用托管 DCGM metrics、自动扩缩容受限（第三方驱动需至少 1 个节点、静态 ResourceClaim 时 DaemonSet Pod 上限 128）；EKS 的 DRA 与 Karpenter 不兼容（AWS 明确）。",
+      "调度语义": "拓扑保证完全依赖驱动发布的 ResourceSlice 约束与属性；设备分配在 Pod 生命周期内固定，不支持运行中变更；调度失败原因可见性有限（1.36 ResourcePoolStatusRequest Alpha 改进）。",
+      "滚动更新问题": "滚动更新中终止的工作负载保留其分配，可能导致新工作负载只能接受降级硬件（CNCF 2026 文章指出）。",
+      "配额/限制模型": "DRA 无传统按容器的资源配额语义；每容器限制由驱动与 Consumable Capacity（Alpha）机制决定；ResourceSlice 每池上限 128 项设备。",
+      "与设备插件并存": "AMD 明确 DRA 驱动与设备插件不能同时启用；整体迁移需要应用改造（1.36 扩展资源过渡 Beta 缓解迁移成本）。",
+      "可移植性": "ResourceClaim 引用具体 DeviceClass/驱动，跨集群、跨厂商的可移植性依赖驱动命名与设备属性约定。"
+    },
+    "混部兼容性": "[不确定] DRA 支持同一节点上多驱动、多类型设备（GPU + 网络 + 加速器）的组合分配，比设备插件更适合异构混部；混部冲突（PCIe 带宽、NUMA、功耗预算）由驱动发布属性与调度器约束管理，具体效果取决于驱动实现；PodGroup Claims（1.36）支持同组 Pod 共享设备。",
+    "性能开销": "[不确定] DRA 为控制面/调度机制：设备经 CDI 直通注入容器，无运行时虚拟化开销，分配后容器内性能与原生/直通一致；开销集中在调度器（全集群 ResourceSlice 过滤/打分）与 kubelet prepare/unprepare 资源阶段（毫秒级）；无官方基准百分比；DRASchedulerFilterTimeout（Alpha, 1.34）的存在说明大规模过滤存在性能考量。",
+    "固件与驱动依赖": "依赖各硬件厂商驱动栈：NVIDIA（NVIDIA 驱动 + Container Toolkit + CDI，ComputeDomain 依赖支持多节点 NVLink 的硬件如 GB200，内部编排 IMEX 原语）；AMD（amdgpu 内核模块 + CDI 运行时）；Intel（内核 i915/xe 等设备驱动）；网络（EFA/DRANET 需对应 RDMA 网卡及驱动）；驱动升级通常经 Helm/Operator 滚动更新，设备配置变更（如 MIG）需重启驱动 Pod。"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "管理员": "安装 DRA 驱动（控制器 + kubelet 插件 DaemonSet）；驱动自动发布 ResourceSlice 描述节点设备；管理员创建集中式 DeviceClass 定义设备类别与匹配规则（分配策略：独占或共享）。",
+      "应用开发者": "通过 ResourceClaim（手动生命周期，可被多个 Pod 共享同一设备）或 ResourceClaimTemplate（自动为每个 Pod 生成独立 claim，生命周期绑定 Pod）声明设备请求；使用 CEL 选择器按设备属性（型号、显存、拓扑、NVLink 等）精确过滤。",
+      "NVIDIA": "GPU Operator 集成：为节点打 kubelet 插件标签 → 部署 Operator（关闭默认设备插件）→ 配置环境变量匹配节点标签 → 部署 DRA Helm chart；安装后生成 gpu.nvidia.com、mig.nvidia.com 及 ComputeDomain 等 DeviceClass。",
+      "AMD": "GPU Operator Helm 中设置 deviceConfig.spec.draDriver.enable=true，或直接应用独立 YAML；驱动生成 gpu.amd.com DeviceClass 并发布 ResourceSlice；DRA 驱动与设备插件不能同时启用。",
+      "Intel": "部署 intel-resource-drivers-for-kubernetes（GPU/Gaudi/QAT 驱动），依赖 DRA 框架，K8s 1.26+ [不确定各设备类名与配置细节]。",
+      "网络 (DRANET/EFA)": "基于开源 DRANET 驱动；AWS EKS 提供 EFA DRA（K8s 1.34+），实现拓扑感知分配（网络端口与 GPU/Trainium/Inferentia 就近）与 EFA 接口共享 [不确定非 AWS 环境的部署方式]。"
+    },
+    "配置示例": "ResourceClaimTemplate 典型示例（来自官方文档与社区）:\napiVersion: resource.k8s.io/v1\nkind: ResourceClaimTemplate\nmetadata:\n  name: gpu-claim\nspec:\n  spec:\n    devices:\n      requests:\n      - name: gpu\n        deviceClassName: gpu.nvidia.com\n        selectors:\n        - cel:\n            expression: |\n              device.attributes[\"gpu.nvidia.com\"].memory_gb >= 80 &&\n              device.attributes[\"gpu.nvidia.com\"].family == \"h100\"\nPod 通过 spec.resourceClaims 引用模板（每副本生成独立 claim）；共享场景直接创建 ResourceClaim 并在多个 Pod 中引用同一 claim 名；可消耗容量场景可声明部分容量（如 40Gi 中请求 4Gi）[不确定具体字段随版本变化]。",
+    "部署位置与环境": {
+      "裸金属/私有云": "完全支持，主流部署场景（NVIDIA HGX、AMD Instinct、Intel 加速器节点），驱动以 DaemonSet 部署。",
+      "公有云": "EKS（NVIDIA DRA 驱动 + EFA DRA，K8s 1.34+）；GKE Standard（DRA 预览，仅 GPU）；其他云厂商支持状态 [不确定]。",
+      "边缘/轻量发行版": "k3s/RKE2/Talos 等支持 DRA（有 Talos + DRA Beta 实践），但驱动生态以数据中心硬件为主 [不确定边缘生产案例]。",
+      "虚拟机": "DRA 设备注入依赖宿主机设备直通（PCIe passthrough / SR-IOV VF）后在 VM 内呈现的设备 [不确定嵌套虚拟化场景的完整性]。"
+    },
+    "虚拟化兼容性": {
+      "设备注入": "DRA 通过 CDI 将设备直接注入容器，包含 Kata 等沙箱运行时的设备透传路径 [不确定 Kata + DRA 组合的生产成熟度]。",
+      "SR-IOV/直通": "网络类 DRA 驱动可管理 SR-IOV VF 的分配与共享；GPU 直通（vfio）场景可通过 DRA 驱动声明 [不确定驱动覆盖度]。",
+      "热迁移": "DRA 分配在 Pod 生命周期内固定，不支持容器/VM 热迁移；ComputeDomain 生命周期绑定工作负载。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": "[不确定] DRA 无官方基准测试数据：其核心是调度与分配机制而非计算性能；设备分配后容器内性能与直通/原生一致（无虚拟化层）；调度开销（ResourceSlice 过滤、claim 分配、kubelet prepare/unprepare）为毫秒级流程；NVIDIA/AMD/Intel 及 CNCF/GKE/AWS 文档均未公布量化基准 [不确定]。",
+    "扩展性上限": "[不确定] 无官方硬性上限；主要影响因素：ResourceSlice 每池上限 128 项设备、调度器过滤全集群 ResourceSlice 的耗时（DRASchedulerFilterTimeout Alpha 提供超时保护）、etcd 中 ResourceClaim 规模；NVIDIA ComputeDomain（多节点 NVLink）面向 GB200 级系统扩展 [不确定集群规模拐点]。",
+    "每节点密度": "[不确定] 由驱动与硬件决定，DRA 无固定上限：GPU 节点可经分片/共享/可消耗容量（如显存 4Gi 粒度）产生远超物理卡数的可调度单元；MIG 分区数、网络接口数、分区设备粒度均为驱动定义 [不确定]。"
+  },
+  "安全": {
+    "安全特性": {
+      "Admin Access (Beta)": "通过 namespace 标签 resource.k8s.io/admin-access: \"true\" 限制只有具备该 namespace 访问权限的授权用户/软件可创建 ResourceClaim，防止 DRA 驱动授予额外权限导致的提权，并防止用户访问其他 namespace 中正常应用正在使用的设备。",
+      "设备污点与容忍 (Beta, 1.36)": "驱动或管理员可通过 ResourceSlice 或 DeviceTaintRule 标记设备污点（如过热 GPU）；NoSchedule 阻止新分配，NoExecute 驱逐不具匹配容忍度的工作负载。",
+      "RBAC 与审计": "DRA 使用 resource.k8s.io API 组，ResourceClaim 的 allocation 状态持久化于 etcd，可通过标准 RBAC 与审计日志管控，分配过程可审计。",
+      "ComputeDomain 隔离": "NVIDIA ComputeDomain 保证 MNNVL 域内 Pod 间可达、域外安全隔离（在底层编排 IMEX 域/通道原语）。",
+      "平台信任边界": "DRA 驱动以特权 DaemonSet 运行并访问物理设备，属于平台信任组件；CDI 注入的设备对容器可见性与传统设备插件一致 [不确定安全模型差异]。"
+    },
+    "合规与认证": "[不确定] DRA 为 Kubernetes 核心稳定 API，纳入 K8s 一致性认证（conformance）范围；无针对 DRA 的独立硬件安全认证；行业合规（FIPS/PCI DSS/HIPAA）取决于上层发行版与驱动实现；厂商驱动无公开的 DRA 专项安全认证 [不确定]。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": {
+      "分配状态": "kubectl describe resourceclaim 显示节点分配、驱动信息与厂商元数据；ResourceClaim .status.devices（DRAResourceClaimDeviceStatus，Beta）提供设备级状态。",
+      "容量可见性 (Alpha, 1.36)": "ResourcePoolStatusRequest 可查询资源池 totalDevices/allocatedDevices/availableDevices，显著改进硬件短缺类调度失败排障。",
+      "健康诊断 (1.36)": "硬件健康诊断能力（如 NVIDIA DeviceHealthCheck 由 Alpha 走向 GA 的演进）用于检测设备故障并配合设备污点隔离 [不确定具体指标暴露方式]。",
+      "监控集成": "调度器事件与审计日志；GKE 的 DRA GPU 节点不支持托管 DCGM metrics；目前无开箱即用的 Prometheus 指标集 [不确定]。"
+    },
+    "维护与生命周期": "[不确定] 驱动升级：经 Helm/Operator 滚动更新，建议升级前节点排水；NVIDIA MIG 配置变更需手动重启驱动 Pod；设备变化（添加/移除）通过 ResourceSlice 自动更新反映；滚动更新时旧工作负载保留分配（CNCF 指出）可能影响新工作负载的硬件质量；无公开 MTBF/热插拔数据 [不确定]。",
+    "弹性与故障恢复": "[不确定] 设备故障：设备污点/健康诊断（1.36）标记不健康设备以避免新分配，运行中 Pod 由上层应用恢复；ResourceClaim 状态持久化于 etcd，控制面/调度器重启后可恢复分配；控制面依赖 etcd/API Server HA；GPU/网络设备故障恢复依赖驱动实现与上层 checkpoint 机制 [不确定量化恢复时间]。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "软件成本": "DRA 核心与主流驱动免费开源（NVIDIA DRA 驱动 Apache-2.0 并托管于 Kubernetes SIG；AMD/Intel 驱动随其开源 Operator/项目），无额外许可费用。",
+      "硬件收益": "通过 GPU 分片与可消耗容量、多 Pod 共享同一 ResourceClaim、分区设备及精确属性匹配，显著提升硬件利用率、减少过度供给与碎片化（官方与 CNCF 文章均强调此为 DRA 核心价值）[不确定量化节省数据]。",
+      "运维成本": "相比设备插件，减少节点标签与复杂亲和性规则的手工管理（CNCF 指出管理员不再需要复杂亲和规则），降低调度与运维成本 [不确定]。",
+      "云成本": "EKS/GKE 上 DRA 为免费平台功能，但受云平台支持范围限制（GKE 预览、EKS 1.34+），成本差异主要来自硬件利用率提升 [不确定计费差异]。"
+    },
+    "成熟度与社区支持": {
+      "上游": "Kubernetes 官方 GA（1.34）、功能门控锁定（1.35）、持续扩展（1.36），社区共识度高；CNCF 于 2026 年 7 月发文系统阐述 DRA 架构与最佳实践。",
+      "厂商": "NVIDIA（最成熟：驱动托管于 Kubernetes SIG，支持 ComputeDomain/GB200，GPU Operator 集成）; AMD（GPU Operator 集成，v1beta1 文档）; Intel（beta 资源驱动）; AWS（EKS + EFA DRA，2026/05 公告）; Google（GKE Standard 预览）; 网络领域开源 DRANET 驱动出现。",
+      "生态预期": "CNCF 2026 文章展望 cluster autoscaler 将按 DRA 需求动态供给 GPU 节点；设备插件向 DRA 迁移为明确方向；驱动生态从计算加速器扩展至网络及其他硬件类型 [不确定 2026 年底生态里程碑]。"
+    }
+  },
+  "uncertain": [
+    "硬件规格.最低配置.示例 (NVIDIA)",
+    "兼容性.支持的 K8s 版本范围.AMD DRA 驱动",
+    "兼容性.支持的 K8s 版本范围.云厂商",
+    "兼容性.操作系统兼容性.驱动 OS 支持",
+    "兼容性.生态兼容性矩阵.调度器",
+    "兼容性.生态兼容性矩阵.云平台",
+    "兼容性.生态兼容性矩阵.监控集成",
+    "限制与约束.混部兼容性",
+    "限制与约束.性能开销",
+    "配置与部署.配置方式.Intel",
+    "配置与部署.配置方式.网络 (DRANET/EFA)",
+    "配置与部署.配置示例",
+    "配置与部署.部署位置与环境.公有云",
+    "配置与部署.部署位置与环境.边缘/轻量发行版",
+    "配置与部署.部署位置与环境.虚拟机",
+    "配置与部署.虚拟化兼容性.设备注入",
+    "配置与部署.虚拟化兼容性.SR-IOV/直通",
+    "性能特征.基准性能数据",
+    "性能特征.扩展性上限",
+    "性能特征.每节点密度",
+    "安全.安全特性.平台信任边界",
+    "安全.合规与认证",
+    "运维与生命周期.可观测性支持.监控集成",
+    "运维与生命周期.维护与生命周期",
+    "运维与生命周期.弹性与故障恢复",
+    "经济性.总拥有成本 (TCO).硬件收益",
+    "经济性.总拥有成本 (TCO).运维成本",
+    "经济性.总拥有成本 (TCO).云成本",
+    "经济性.成熟度与社区支持.生态预期"
+  ]
+}

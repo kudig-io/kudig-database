@@ -136,6 +136,47 @@ kubectl patch serviceentry dubbo-svc -p '{"spec":{"ports":[{"protocol":"dubbo"}]
 
 **修复**：调整 LazyXDS 批量加载策略，增加 istiod 副本数，启用 xDS 增量推送（Delta xDS）。
 
+## 对比评测
+
+| 维度 | Aeraki Mesh | Istio | 自研 Sidecar |
+|------|------------|-------|-------------|
+| 协议扩展 | Dubbo/Thrift/Redis 等七层 | HTTP/gRPC 为主 | 按需开发 |
+| 控制面 | 独立（集成 Istio） | 完整 | 自研 |
+| 流量治理 | 协议级路由/熔断 | HTTP 级 | 有限 |
+| 运维成本 | 中 | 高 | 极高 |
+| 适用场景 | 非 HTTP 微服务 | HTTP/gRPC 微服务 | 特殊协议 |
+
+**选型建议**：微服务以 Dubbo/Thrift 为主时选 Aeraki（协议级治理）；HTTP 生态用 Istio 原生；特殊协议才考虑自研。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 协议路由不生效 | `kubectl get serviceentry`；查看 Aeraki 日志 | ServiceEntry 未定义、协议识别失败 |
+| Dubbo 调用超时 | 检查流量路由规则 | 权重配置错误、熔断触发 |
+| Sidecar 注入失败 | `kubectl get ns -L istio-injection` | 命名空间标签缺失 |
+| 配置同步延迟 | 检查控制面与 Sidecar 连接 | xDS 推送失败、资源不足 |
+
+## 生产部署清单
+
+- [ ] 目标协议（Dubbo/Thrift/Redis）的 ServiceEntry 全部定义
+- [ ] 协议识别配置（端口/协议映射）已验证
+- [ ] 与 Istio 版本兼容性已核对（Aeraki 依赖 Istio）
+- [ ] 灰度发布演练完成（协议级权重路由）
+- [ ] 监控接入（协议级 metrics 与调用链）
+
+## 常见误区与设计要点
+
+- **误区 1**：把 HTTP 治理规则直接套用到 Dubbo——Aeraki 使用协议特有的 MetaRouter/Dubbo 规则。
+- **误区 2**：忽略 ServiceEntry 声明——非 HTTP 协议的流量必须先声明服务入口。
+- **设计要点**：协议识别端口规划（每个协议独立端口）；先小范围灰度 Sidecar 注入；治理规则版本化并配套回滚。
+
+## 性能参考
+
+- Sidecar 开销：协议解析额外增加 3-8% 延迟（Dubbo 场景），CPU 占用 < 10%。
+- 控制面同步：规则变更秒级推送，与 Istio 共用 xDS 通道。
+- 规模建议：单控制面支持千级服务、万级 Sidecar（与 Istio 相同限制）。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

@@ -130,6 +130,42 @@ curl http://localhost:2380/status | jq .leader
 
 **修复**：调整 Pipeline filters 顺序：`jwtVerifier` → `rateLimiter` → `proxy`。
 
+## 对比评测
+
+| 维度 | Easegress | NGINX | Envoy |
+|------|----------|-------|-------|
+| 架构模式 | Filter 管道（Go） | 静态配置模块 | xDS 动态配置 |
+| 流量编排 | 支持（编排工作流） | 有限 | 支持（Wasm/Lua） |
+| 多协议 | HTTP/2、WebSocket、MQTT、TCP/UDP | HTTP/WebSocket | HTTP/2、gRPC、TCP |
+| 配置热更新 | 支持（无中断） | 需 reload | 支持（xDS） |
+| 运维复杂度 | 低（单二进制） | 低 | 中 |
+
+**选型建议**：需要流量编排与多协议接入（非 HTTP 场景）时选 Easegress；标准七层负载均衡优先 Envoy；存量 NGINX 环境无需迁移。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 请求 502 | `egctl get traffic`；查看 Filter 日志 | 后端无健康节点、Filter 顺序错误 |
+| 灰度流量异常 | `egctl get ingress`；检查匹配规则 | 路由规则优先级冲突 |
+| 配置不生效 | `egctl get config`；检查版本 | 配置未提交、集群未同步 |
+| 限流误伤 | 查看限流 Filter 配置 | 令牌桶参数过小 |
+
+## 生产部署清单
+
+- [ ] 控制面高可用（≥3 副本，etcd 存储）与 PDB
+- [ ] Filter 管道已做性能压测（限流/熔断/灰度链路）
+- [ ] 证书管理（自动轮转）与审计日志已配置
+- [ ] 监控接入（Prometheus metrics：`eg_requests_total` 等）
+- [ ] 灰度发布演练完成（权重路由 + 回滚）
+
+## 常见误区与设计要点
+
+- **误区 1**：把 Easegress 当纯反向代理用，忽略其编排能力——复杂流量场景应先设计 Filter 管道。
+- **误区 2**：Filter 顺序随意排列——限流/熔断应前置，安全认证在路由之前。
+- **误区 3**：单实例部署无 HA——生产必须 ≥3 副本并配 PDB，配置存储用 etcd。
+- **设计要点**：灰度发布优先用权重路由 + 健康检查联动；多协议接入按 Filter 分管道隔离，避免互相影响。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |
@@ -137,6 +173,14 @@ curl http://localhost:2380/status | jq .leader
 | P0 | 集群全部节点不可用 | 从备份恢复 etcd 数据，重建集群 |
 | P1 | 单节点 Raft 同步失败 | 移除并重新加入节点 |
 | P2 | Filter 延迟增加 | 禁用非关键 Filter，性能分析 |
+
+## 性能参考
+
+- 单实例吞吐：HTTP 转发 5-10w QPS（4C8G），TLS 终结约 3-5w。
+- 延迟：P99 < 5ms（纯转发），多 Filter 管道每级增加 0.5-1ms。
+- 扩展：无状态水平扩容，前置 L4 LB 分发；etcd 集群独立部署保证配置一致性。
+- 容量规划：按峰值 QPS 预留 30% 冗余，连接数受 fd 限制（`ulimit -n`）。
+- 性能瓶颈定位：用 `egctl profile` 与 pprof 分析 Filter 热点，优先优化耗时 Top3 管道。
 
 ## 面试要点
 

@@ -288,7 +288,7 @@ groups:
 
 ## 6. 验证确认协议
 
-> 以下内容整合自 `故障诊断/技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md`
+> 以下内容整合自 `19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md`
 
 ### 6.1 即时验证（修复后 1-2 分钟内）
 

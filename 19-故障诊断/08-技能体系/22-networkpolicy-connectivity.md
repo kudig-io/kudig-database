@@ -1,7 +1,7 @@
 ---
 title: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
-description: '- "网络策略"'
-summary: 'NetworkPolicy 是 Kubernetes 中实现零信任网络的核心机制。当 NetworkPolicy 配置错误时，可能导致合法流量被阻断（过度限制）或安全边界失效（策略未生效）。与 Service/DNS 连通性问题不同，NetworkPolicy 问题通常在应用部署或策略变更后出现，'
+description: Kubernetes NetworkPolicy 连通性故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes NetworkPolicy 连通性故障的完整诊断-修复-验证工单处理 Skill
 category: skills
 tags:
 - k8s
@@ -45,9 +45,50 @@ prerequisites:
 - prometheus-basics
 - cilium-basics
 - cni-basics
-skill_id: SKILL-20_NETWORKPOLICY_CONNECTIVITY-001
+skill_id: SKILL-NET-004
 skill_name: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 version: 1.0.0
+severity_range: P0-P2
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+estimated_resolution_time: 10-45min
+risk_level: medium
+agent_execution_mode: L2-semi-auto
+trigger_events:
+- NetworkPolicyViolation
+- CalicoPolicyViolation
+- CiliumPolicyViolation
+trigger_metrics:
+- 'cilium_policy_denied_total'
+- 'calico_policy_denied_packets'
+- 'kube_networkpolicy_*'
+related_skills:
+- SKILL-NET-001
+- SKILL-NET-002
+- SKILL-NET-003
+- SKILL-SEC-002
+fta_refs:
+- 19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md
+knowledge_refs:
+- 19-故障诊断/02-资源排障/08-networkpolicy-troubleshooting.md
+- 19-故障诊断/03-基础设施排障/01-network-connectivity-troubleshooting.md
+cross_refs:
+- type: fta
+  path: 19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md
+  label: NetworkPolicy 故障树分析
+- type: domain
+  path: 19-故障诊断/02-资源排障/08-networkpolicy-troubleshooting.md
+  label: NetworkPolicy 深度排查
+- type: skill
+  path: 19-故障诊断/08-技能体系/05-service-connectivity.md
+  label: SKILL-NET-002 Service 连通性
+authors:
+- name: KUDIG Team
+  role: contributor
 ---
 
 > **生产环境安全提示**
@@ -56,78 +97,6 @@ version: 1.0.0
 
 
 
-
----
-skill_id: "SKILL-NET-004"
-skill_name: "[[networkpolicy|NetworkPolicy]] 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting"
-version: "1.0"
-category: "network"
-severity_range: "P0-P2"
-k8s_versions:
-  - "1.28"
-  - "1.29"
-  - "1.30"
-  - "1.31"
-  - "1.32"
-estimated_resolution_time: "10-45min"
-risk_level: "medium"
-agent_execution_mode: "L2-semi-auto"
-trigger_keywords:
-  - "NetworkPolicy"
-  - "网络策略"
-  - "policy blocking"
-  - "网络不通"
-  - "连接被拒绝"
-  - "connection refused"
-  - "timeout"
-  - "CNI policy"
-  - "calico policy"
-  - "[[cilium|cilium]] policy"
-trigger_events:
-  - "NetworkPolicyViolation"
-  - "CalicoPolicyViolation"
-  - "CiliumPolicyViolation"
-trigger_metrics:
-  - 'cilium_policy_denied_total'
-  - 'calico_policy_denied_packets'
-  - 'kube_networkpolicy_*'
-difficulty: "advanced"
-reading_level: "advanced"
-audience:
-  - SRE
-  - 运维工程师
-  - 技术支持
-estimated_read_time: "15min"
-prerequisites:
-  - "网络"
-  - "kubectl-basics"
-  - "networking-basics"
-related_skills:
-  - "SKILL-NET-001"
-  - "SKILL-NET-002"
-  - "SKILL-NET-003"
-  - "SKILL-SEC-002"
-fta_refs:
-  - "故障诊断/FTA故障树/list/networkpolicy-fta.md"
-knowledge_refs:
-  - "故障诊断/16-networkpolicy-troubleshooting.md"
-  - "故障诊断/25-network-connectivity-troubleshooting.md"
-  - "网络/"
-cross_refs:
-  - type: "fta"
-    path: "../19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md"
-    label: "NetworkPolicy 故障树分析"
-  - type: "domain"
-    path: "../19-故障诊断/16-networkpolicy-troubleshooting.md"
-    label: "NetworkPolicy 深度排查"
-  - type: "[[SKILL|skill]]"
-    path: "../19-故障诊断/topic-skills/05-service-connectivity.md"
-    label: "SKILL-NET-002 Service 连通性"
-authors:
-  - name: KUDIG Team
-    role: contributor
-
-tier: peripheral---
 
 # NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 
@@ -1041,7 +1010,7 @@ kubectl exec -n kube-system <cilium-pod> -- cilium policy get | grep -c "allow"
 
 需要深入了解根因机制时，参考以下资源：
 - NetworkPolicy 原理 → `网络/`
-- CNI 故障排查 → `故障诊断/03-networking-cni-troubleshooting.md`
+- CNI 故障排查 → 19-故障诊断/03-networking-cni-troubleshooting.md`
 - 网络安全架构 → `集群基础/14-security-architecture.md`
 
 ### 10.3 Skill 改进记录

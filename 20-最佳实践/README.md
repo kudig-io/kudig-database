@@ -93,8 +93,8 @@ cross_refs:
   path: ../可观测性/
   label: '可观测性知识域'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # Kubernetes 最佳实践指南
 
 > **适用版本**: Kubernetes v1.25-v1.32 | **最后更新**: 2026-05 | **作者**: 系统生成 | **质量等级**: ⭐⭐⭐⭐⭐ 综合指南

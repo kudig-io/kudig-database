@@ -1,0 +1,133 @@
+{
+  "基本信息": {
+    "名称": "Intel QAT (QuickAssist Technology) 英特尔快速辅助技术",
+    "类别": "加速器",
+    "官方文档链接": "Intel QAT 官方介绍: https://www.intel.com/content/www/us/en/products/docs/accelerator-engines/what-is-intel-qat.html ; Intel QAT 软件文档 (qatlib/QATzip): https://intel.github.io/quickassist/ ; Intel Device Plugins for Kubernetes (qatplugin): https://intel.github.io/intel-device-plugins-for-kubernetes/ 与 https://github.com/intel/intel-device-plugins-for-kubernetes/blob/main/cmd/qat_plugin/README.md ; Intel Device Plugins Operator: https://www.intel.com/content/www/us/en/developer/articles/technical/device-plugins-operator.html ; OperatorHub: https://operatorhub.io/operator/intel-device-plugins-operator ; Red Hat 认证目录 (Intel Device Plugins Operator Certified): https://catalog.redhat.com/software/container-stacks/detail/61e9f2d7b9cdd99018fc5736 ; QAT OpenSSL Engine/Provider: https://github.com/intel/qat_engine ; QATzip: https://github.com/intel/qatzip ; DPDK QAT Crypto PMD: https://doc.dpdk.org/guides/cryptodevs/qat.html ; K8s 官方博客 (QAT 加速 Ingress TLS 终结): https://kubernetes.io/blog/2019/04/24/hardware-accelerated-ssl/tls-termination-in-ingress-controllers-using-kubernetes-device-plugins-and-runtimeclass/ ; Ceph QAT 加速: https://docs.ceph.com/en/latest/radosgw/qat-accel/ ; Intel Envoy TLS 加速文章: https://www.intel.com/content/www/us/en/developer/articles/technical/envoy-tls-acceleration-with-quickassist-technology.html"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "硬件": "任意集成或独立 QAT 加速器的 Intel 平台：第 2-6 代 Xeon Scalable/D 系列集成 QAT（V62x、V4xxx、QAT Gen6）或独立 QAT 板卡（C62x、C4xxx 等）；服务器需支持 VT-d（内核参数 intel_iommu=on）与 SR-IOV（BIOS 开启）以便向容器分配 VF。",
+      "软件": "Linux 内核 5.9+（内嵌 qat_c62x/qat_4xxx 驱动或 Intel 外部驱动 + qatlib 用户态库）；Kubernetes 1.12+（Device Plugin v1beta1 稳定 API 可用，现代版本对齐上游）；x86_64 Linux 节点（QAT 软件栈为 Linux-only）。",
+      "K8s 资源": "节点需 root 权限运行 kubelet 设备插件；使用 DPDK 场景需分配大页内存（hugepages）且 CPU Manager 为 static 模式。"
+    },
+    "推荐配置": {
+      "硬件": "第 4/5/6 代 Xeon Scalable 集成 QAT（V62x/QAT Gen4/Gen6）或 QAT 4xxx 系列板卡（C4xxx），PCIe Gen3/Gen4 槽位；按需配置每 PF 多个 VF（SR-IOV），生产环境建议每节点规划 NUMA 亲和（QAT 与使用它的 Pod 同 NUMA 节点）。",
+      "软件": "内核 6.x+（较新内核提供更完整的 Gen4/Gen6 服务与复位支持）；qatlib + qat_engine（OpenSSL 3.x Provider 方式）/ QATzip / DPDK QAT PMD；部署 Intel Device Plugins Operator + qatplugin（声明式管理 VF 创建与资源上报）。",
+      "集群": "OpenShift 或主流 K8s 发行版（RHEL 8/9/10、Ubuntu、SLES 等）；高吞吐 TLS 场景建议与高性能 Ingress（NGINX/HAProxy/Envoy）结合，配合 Multus/SR-IOV CNI 实现数据面加速。"
+    },
+    "生产级配置": {
+      "大规模场景": "多节点裸金属集群 + 每节点 1-N 个 QAT 设备（集成或板卡），按服务类型拆分 VF（对称加密 sym、非对称加密 asym、压缩 comp、dcc），Gen4 单设备最多 2 种服务组合、Gen6 最多 3 种；与 Intel DSA/IAA/DLB 等其他加速器混部由 Intel Device Plugins Operator 统一编排。",
+      "电信/边缘 NFV": "OpenShift + SR-IOV + DPDK QAT PMD 用于 vRAN/UPF/IPsec 网关（Intel 与 Red Hat 联合方案）；边缘节点可用 Xeon D 集成 QAT。",
+      "云厂商实例": "阿里云等基于 Intel 实例提供 QAT 加速（Intel 发布过阿里云 HAProxy+QAT 性能指南）[不确定云上具体实例类型与开放范围]。"
+    },
+    "功耗基线": "[不确定] Intel 未公布统一的空载/满载功耗基线。独立 QAT 板卡（C62x/QAT 4xxx）功耗约为数十瓦级别 [不确定具体 TDP]；集成式 QAT 功耗计入 CPU 封装 TDP，无需额外功耗预算；相对 CPU 卸载收益而言，板卡功耗占比很小。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "Device Plugin 方式": "Kubernetes Device Plugin 框架 v1beta1 自 K8s 1.12 起稳定可用（Intel 官方演示基于 K8s 1.12）；intel-device-plugins-for-kubernetes 最新版本 v0.36.0 对齐 K8s 1.36，较老版本插件因使用稳定 v1 API 通常可运行于更新集群（CRD 可能略有差异）。",
+      "DRA 方式": "Dynamic Resource Allocation (DRA) 自 K8s 1.27 引入、1.28+ 演进；intel-device-plugins-for-kubernetes 对 QAT 的 DRA 支持状态 [不确定]（官方 README 未明确列出 QAT 的 DRA 支持，GPU 等部分插件已提供 DRA 实验支持）。"
+    },
+    "操作系统兼容性": {
+      "支持": "Linux x86_64：RHEL 8/9/10、Rocky Linux、Ubuntu 22.04/24.04 LTS、Debian、Fedora、SLES、CentOS 系；OpenShift/RKE2 等发行版可用。",
+      "内核要求": "Linux 内核 5.9+（较旧硬件在新内核上需 vfio-pci disable_denylist=1）；不同服务/复位特性对内核版本有最低要求（README 提及 6.0/6.8/6.16 等版本门槛）；驱动为内嵌 qat_c62x/qat_4xxx/qat_420xx 或 Intel 外部驱动 + qatlib。",
+      "不支持": "Windows Server 节点不支持（QAT 驱动与容器生态为 Linux-only）；非 Intel x86 平台（ARM/AMD）无 QAT 硬件。"
+    },
+    "K8s 上游支持阶段": {
+      "Device Plugin": "K8s 上游 GA（v1 稳定 API），QAT 通过通用设备插件框架接入，无独立上游组件。",
+      "Intel 插件": "intel-device-plugins-for-kubernetes 为 Intel 开源社区项目（Apache-2.0），长期维护、版本化发布（对齐每个 K8s minor 版本），生产就绪度高；Intel Device Plugins Operator 通过 OperatorHub 分发且为 Red Hat 认证容器镜像。",
+      "DRA": "K8s 上游 DRA 仍处于演进阶段（Beta），QAT 接入 DRA 属实验性 [不确定]。"
+    },
+    "生态兼容性矩阵": {
+      "Operator": "Intel Device Plugins Operator（Red Hat 认证、OperatorHub 可安装）、intel-qat-initcontainer（自动配置 VF 的 init 容器镜像）、Intel QAT Engine 容器镜像。",
+      "应用生态": "NGINX/HAProxy（通过 qat_engine 异步卸载 RSA/ECDSA 握手）、Envoy（private_key_provider: qat 异步密钥提供）、OpenSSL 3.x Provider、strongSwan/IPsec（DPDK 或内核 bulk crypto）、Ceph RGW（加密 AES-256-CBC + zlib 压缩加速）、DPDK QAT PMD（对称/非对称/压缩）、QATzip（deflate/zstd 压缩）。",
+      "CNI/网络": "无强制 CNI 依赖；DPDK 场景常与 SR-IOV CNI + Multus + SR-IOV Network Device Plugin 配合。",
+      "平台集成": "Red Hat OpenShift（SR-IOV + QAT 用于 NFV/边缘）、VMware NSX Edge（QAT 加速 IPsec VPN bulk crypto）、Ceph、VPP/FD.io [不确定]；监控集成：无官方 QAT Prometheus exporter [不确定]。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "服务组合限制": "Gen4（4xxx）单设备最多支持 2 种服务组合，Gen6 最多 3 种；dcc（数据压缩/解压）服务不允许与其它服务组合；组合由配置的 ServicesEnabled 决定。",
+      "DPDK 资源互斥": "每个 QAT VF 同时只能被一个 DPDK 进程使用；queue-pair 在 Intel CPU 上线程安全但 queue 本身不是，TX/RX 需独立线程。",
+      "软件栈限制": "OpenSSL Engine 接口在 OpenSSL 4.0 中被移除，必须迁移到 Provider；qat_engine 依赖 OpenSSL 异步 (async) 模型，应用需支持异步回调才能获得收益；igb_uio 驱动要求容器具备 SYS_ADMIN 权限。",
+      "内核/驱动兼容": "旧内核（5.9-6.x 区间）对 Gen4/Gen6 设备存在 denylist 问题，需 vfio-pci disable_denylist=1；Intel 旧外部驱动（adf）与 Gen4 硬件不兼容，必须使用内嵌驱动或新 qatlib。",
+      "虚拟化限制": "嵌套虚拟化下无法使用 QAT；VM 热迁移对 VF 直通设备基本不可用。"
+    },
+    "混部兼容性": "[不确定] QAT 与 GPU、DSA、IAA、DLB、FPGA 等其它 Intel 加速器可同节点混部（各占 PCIe 资源），Intel Device Plugins Operator 统一管理各插件；混部时需注意 PCIe 通道、NUMA 亲和与中断开销；与 CPU 密集工作负载混部无直接冲突，卸载后反而释放 CPU。",
+    "性能开销": "[不确定] 无官方统一百分比。用户态 qatlib 路径开销低（绕过内核），但 qat_engine 异步轮询在请求量小/延迟敏感场景收益下降；小报文、小块数据场景卸载收益有限，部分场景（如小尺寸 RSA 验签）软件实现更快；压缩场景需设置足够大的中间缓冲区，否则回退到固定压缩模式导致性能下降。",
+    "固件与驱动依赖": "固件：QAT 固件（如 qat_4xxx.bin）由内核驱动加载，随内核/驱动包分发，无独立固件升级流程 [不确定]；驱动：内嵌 qat_c62x/qat_4xxx/qat_420xx 或外部 qatlib 驱动，需与内核版本匹配；SR-IOV VF 需在 BIOS 启用 VT-d 且主机配置 intel_iommu=on；VF 创建可由 intel-qat-initcontainer 自动完成；节点重启后 VF 配置需重新应用（init 容器幂等处理）。"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Device Plugin（主要）": "通过 qatplugin（DaemonSet）向 kubelet 上报扩展资源，资源名：Gen4 之前为 qat.intel.com/generic，Gen4 及以后为 qat.intel.com/<服务名>（如 qat.intel.com/sym、qat.intel.com/asym、qat.intel.com/comp 等）；Pod 通过 limits 声明资源，容器内获得对应 VF 设备。",
+      "Operator（推荐）": "安装 Intel Device Plugins Operator（Red Hat 认证），通过 CRD 声明式配置 qatplugin 的驱动、每 PF VF 数、分配策略与 ServicesEnabled 服务组合。",
+      "自动初始化": "使用 intel-qat-initcontainer + ConfigMap 在节点上自动创建 SR-IOV VF 并配置服务（ServicesEnabled=<值>）；DPDK 场景还需绑定 vfio-pci、分配大页、CPU Manager static 模式。",
+      "DRA（实验）": "可选使用 K8s DRA 资源声明方式 [不确定 QAT DRA 支持成熟度]；QAT 主要采用传统 Device Plugin 方式。"
+    },
+    "配置示例": "典型部署：kubectl apply -k https://github.com/intel/intel-device-plugins-for-kubernetes/deployments/qat_plugin/base（或通过 OperatorHub 安装 Operator 后创建 DevicePlugin CRD 实例）；Pod 示例：resources.limits: { qat.intel.com/generic: 1 }（Gen4 前）或 { qat.intel.com/sym: 1 }（Gen4+）；init 容器 ConfigMap 示例：QAT_SERVICES: sym,asym / ServicesEnabled=sym。完整示例见 qat_plugin README 与 Intel Device Plugins 文档。",
+    "部署位置与环境": {
+      "裸金属（主要）": "数据中心裸金属 K8s/OpenShift 集群，节点直连 QAT 设备（集成或板卡），生产 TLS 终结/IPsec/压缩场景。",
+      "公有云": "阿里云等提供基于 Intel Xeon 的实例支持 QAT（Intel 发布过阿里云 HAProxy+QAT 性能指南）[不确定各云厂商对 QAT 透传/直通的具体支持范围]；多数公有云普通实例无 QAT 设备。",
+      "边缘": "Xeon D 系列集成 QAT 适合边缘/电信 NFV（OpenShift 边缘、vRAN）；虚拟化环境：VM 内使用需 SR-IOV VF 直通（VFIO）。",
+      "不支持": "无 QAT 硬件的云虚机、Windows 节点、非 Intel 平台。"
+    },
+    "虚拟化兼容性": {
+      "SR-IOV/VFIO": "核心机制：QAT PF 划分 VF，通过 vfio-pci 直通给 Pod/VM（Lenovo 等发布过在 Linux VM 中使用 QAT SR-IOV 的配置指南）；容器无需特权即可使用 vfio 直通设备。",
+      "限制": "嵌套虚拟化不支持；VM 热迁移对 VF 直通设备不可用；每 VF 仅能被单个进程/容器使用；vSphere/NSX 场景 QAT 主要作为 NSX Edge 主机的 IPsec 加速（bare metal 部署）。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "代际吞吐": "QAT 2.0（C62x/V62x，4 代 Xeon）：对称加密/压缩合计最高约 100 Gbps [不确定]；QAT Gen4（4xxx）：约为 QAT 2.0 的 2 倍性能 [不确定]；QAT Gen6（Xeon 6 集成）：较 Gen4 进一步提升 [不确定具体倍数]；ServeTheHome 测试 QAT 1.6（8955 卡）RSA-2048 签名能力约相当于 32-33 个 Broadwell CPU 核，验签约 5.5 核，AES-128-CBC 16KB 约相当于 7 核，Web 托管模拟实测超 23.7 Gbps 吞吐。",
+      "TLS 终结 (Envoy)": "Intel 官方测试（4 代 Xeon 8480+ 预生产平台，RSA-2048）：QAT 卸载后 4 线程吞吐提升 5 倍，四核 CPU 负载下降 30 个百分点（约 76% 下降），峰值约 2,000 次完整握手/秒（每连接全新握手）；NGINX/HAProxy 通过 qat_engine 异步卸载获得类似收益。",
+      "压缩 (QATzip)": "Intel 官方引用企业实测：硬件压缩比纯软件快 9 倍至 137 倍；SQL Server 备份场景提升 2.56 倍、每瓦性能提升 1.64 倍；QATzip 支持 deflate/zstd（zstd 经外部插件），适用于大数据、存储与 API 网关响应压缩。",
+      "IPsec": "QAT 提供 IPsec bulk crypto 卸载（对称加解密+哈希），VMware NSX Edge 等网关在裸金属主机上使用 QAT 加速 IPsec VPN；DPDK QAT PMD 支持线速级卸载 [不确定具体 Gbps 数字]。"
+    },
+    "扩展性上限": "[不确定] 无官方最大节点数声明。集群规模上限与普通 K8s 集群一致（由控制面决定）；单节点能力受 PCIe 槽位数与每 PF VF 数限制（各代际每 PF 可创建 VF 数量不同，通常 16-128 个 [不确定]）；QAT 吞吐随设备数近似线性扩展，瓶颈多为 PCIe 带宽与主机内存带宽。",
+    "每节点密度": "[不确定] 无官方每节点 Pod 数上限。可用资源 = 每节点 QAT 设备数 × 每设备 VF 数；每个 Pod 通常申请 1 个 VF（DPDK 场景），非 DPDK 场景多个容器可共享同一 VF 对应的 qatlib 实例 [不确定共享语义]；高密度部署受 VF 总量与 PCIe 资源约束。"
+  },
+  "安全": {
+    "安全特性": {
+      "算法加速": "对称加密（AES、3DES）、AEAD（AES-GCM）、哈希（SHA 系列）、非对称（RSA、ECC/ECDH、模运算），面向 TLS/IPsec/签名场景硬件卸载；QAT 是加速器而非信任根，不提供 TPM 等效的密钥保护 [不确定]，密钥由上层软件（OpenSSL/应用）管理。",
+      "隔离机制": "SR-IOV VF 提供设备级隔离，Pod 通过 vfio-pci 直通独占 VF；DPDK 推荐 vfio-pci（替代已弃用的 UIO）以提升安全性；固件由驱动加载并校验 [不确定固件签名细节]。",
+      "相关安全能力": "与平台 Secure Boot/TPM 无直接关联；在 OpenShift 上可结合 FIPS 模式使用 [不确定组合细节]。"
+    },
+    "合规与认证": "[不确定] Intel Device Plugins Operator 镜像为 Red Hat 认证（OpenShift Operator 生态）；QAT 加速的 OpenSSL 可配合 FIPS Provider，但 QAT 设备本身无独立 FIPS 140-2/3 认证公开资料 [不确定]；无 K8s 一致性认证相关要求（设备插件不影响一致性认证）。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "[不确定] 无官方 QAT Prometheus exporter。可观测手段：DPDK QAT PMD 统计（cryptodev stats）、内核驱动 /sys/kernel/debug 计数器与日志、qatlib 调试日志；Intel Device Plugins Operator 与 qatplugin 提供健康状态（DaemonSet/CRD 状态）；社区有第三方 QAT 指标采集方案 [不确定]。",
+    "维护与生命周期": "[不确定] 固件随内核驱动加载、无独立升级流程；VF 配置由 intel-qat-initcontainer 在节点启动时幂等应用；节点维护需排水（终止使用 VF 的 Pod 后重启节点，重启后 init 容器自动重建 VF）；无热插拔标准支持 [不确定]；硬件 MTBF 无公开数据 [不确定]；QAT 为无机械部件 PCIe 设备，主要风险为固件/驱动升级兼容性（需内核版本匹配）。",
+    "弹性与故障恢复": "[不确定] QAT 设备故障导致其 VF 不可用，使用中的 Pod 需重新调度（设备插件会从节点资源中移除该设备）；无硬件冗余机制，高可用依赖应用层回退（如 OpenSSL 软件路径）或多节点重调度；数据持久化不适用（无状态加速器）。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件成本": "[不确定] 独立 QAT 板卡成本：C62x 级约 $500-1,500 [不确定]，QAT 4xxx 板卡约 $1,000-2,500 [不确定]；集成式 QAT（Xeon 内置）无额外硬件成本，是主要经济性优势。",
+      "运行成本": "板卡功耗数十瓦级 [不确定]，集成式无额外功耗；软件栈（qatlib/qat_engine/QATzip/设备插件）全部开源免费。",
+      "节省项": "卸载 TLS 握手（RSA/ECDSA）可释放大量 CPU 核（Intel 测试 4 核 CPU 负载降约 76%），降低或替代硬件 TLS 负载均衡器；压缩卸载提升存储/网关吞吐；按每瓦性能提升 1.64x 计，可降低服务器采购与功耗成本。",
+      "适用性判断": "集成 QAT（Xeon 内置）几乎零边际成本，TLS 终结/IPsec/压缩场景普遍值得启用；独立板卡需评估带宽需求与回本周期，高并发 TLS 或大流量压缩场景收益明显。"
+    },
+    "成熟度与社区支持": {
+      "社区活跃度": "Intel 主导并持续投入：intel-device-plugins-for-kubernetes 活跃维护（版本对齐每个 K8s minor 版本，v0.36.0 支持 K8s 1.36）、qat_engine/qatzip/qatlib 均为活跃开源项目；DPDK 社区集成 QAT PMD。",
+      "厂商与生态": "Red Hat（OpenShift 认证 Operator、RHEL 内嵌驱动）、VMware（NSX Edge IPsec）、Ceph、阿里云等云厂商；NGINX/HAProxy/Envoy/strongSwan 等主流代理与安全软件均支持 QAT 卸载，生态成熟度高。",
+      "生命周期": "硬件从 QAT 1.x（DH895x/8920/8955）演进至 2.0（C62x/V62x）、Gen4（4xxx）、Gen6（Xeon 6），Intel 保持前向软件兼容（qatlib 同时支持集成与独立设备）。"
+    }
+  },
+  "uncertain": [
+    "功耗基线",
+    "DRA 支持状态",
+    "QAT Gen4/Gen6 具体性能倍数",
+    "QAT 2.0 最高 100 Gbps 具体数据",
+    "IPsec 具体吞吐数字",
+    "扩展性上限",
+    "每节点密度",
+    "每 PF VF 数量范围",
+    "可观测性支持",
+    "维护与生命周期细节",
+    "弹性与故障恢复细节",
+    "TCO 硬件价格",
+    "云实例 QAT 支持范围",
+    "合规与认证细节",
+    "QAT 密钥保护机制",
+    "混部兼容性细节",
+    "性能开销百分比"
+  ]
+}

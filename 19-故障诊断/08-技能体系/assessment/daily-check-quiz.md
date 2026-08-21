@@ -215,8 +215,8 @@ intent_queries:
 difficulty: intermediate
 target_roles: [sre, ops-engineer]
 related:
-  - 故障诊断/topic-skills/assessment/k8s-fundamentals-quiz.md
-  - 故障诊断/topic-skills/assessment/troubleshooting-lab-exam.md
+  - 19-故障诊断/08-技能体系/assessment/k8s-fundamentals-quiz.md
+  - 19-故障诊断/08-技能体系/assessment/troubleshooting-lab-exam.md
 ---
 ```
 

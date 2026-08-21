@@ -1,0 +1,133 @@
+{
+  "基本信息": {
+    "名称": "Intel DSA (Data Streaming Accelerator) 与 Intel IAA (In-Memory Analytics Accelerator) —— 英特尔数据流加速器与内存分析加速器",
+    "类别": "加速器",
+    "官方文档链接": "Intel DSA 产品页: https://www.intel.com/content/www/us/en/products/details/processors/xeon/features/data-streaming-accelerator.html ; Intel DSA 用户指南: https://cdrdv2-public.intel.com/759709/353216-004-intel-data-streaming-accelerator-user-guide.pdf ; Intel DSA 架构规范: https://cdrdv2.intel.com/v1/dl/getContent/671116 ; Intel IAA 用户指南: https://cdrdv2-public.intel.com/780887/354834_IAA_UserGuide_June23.pdf ; accel-config 工具: https://github.com/intel/idxd-config ; Intel Device Plugins for Kubernetes (DSA 插件): https://github.com/intel/intel-device-plugins-for-kubernetes/blob/main/cmd/dsa_plugin/README.md ; IAA 插件: https://github.com/intel/intel-device-plugins-for-kubernetes/blob/main/cmd/iaa_plugin/README.md ; Intel Device Plugins Operator: https://operatorhub.io/operator/intel-device-plugins-operator ; Intel QPL (Query Processing Library): https://intel.github.io/qpl/documentation/introduction_docs/introduction.html ; DPDK IDXD dmadev 驱动: https://doc.dpdk.org/guides/dmadevs/idxd.html ; SPDK IDXD 驱动: https://spdk.io/doc/idxd.html ; 内核 iaa_crypto 压缩驱动文档: https://docs.kernel.org/driver-api/crypto/iaa/iaa-crypto.html ; StarlingX DSA 集成文档: https://docs.starlingx.io/r/stx.10.0/node_management/kubernetes/data-streaming-accelerator-db88a67c930c.html ; DSA 量化研究 (arXiv): https://arxiv.org/html/2305.02480v5 ; 安全公告 CVE-2024-21823: https://seclists.org/oss-sec/2024/q2/242 ; Intel 官方安全指导 (DSA/IAA 错误报告): https://www.intel.com/content/www/us/en/developer/articles/technical/software-security-guidance/advisory-guidance/intel-dsa-and-intel-iaa-error-reporting.html"
+  },
+  "硬件规格": {
+    "最低配置": {
+      "硬件": "集成 DSA/IAA 的 Intel 平台：第 4 代 Xeon Scalable (Sapphire Rapids) 及以上（第 5 代 Emerald Rapids、Xeon 6 Granite Rapids 均内置；Xeon 6 Sierra Forest E-core 不包含 DSA/IAA [不确定]）；每插槽 1/2/4 个设备（视 SKU 而定），双路系统最多 8 个 DSA 设备；BIOS 需启用 VT-d（Directed I/O）、VMX、中断重映射（较旧 stepping 还需 Opt-Out Illegal MSI Mitigation）。",
+      "软件": "Linux 内核 5.18+（DSA 专用 WQ 自 5.6、共享 WQ 自 5.18；IAA 用户态提交需 ENQCMD/PASID，要求 5.18+；内核压缩驱动 iaa_crypto 需 6.8+）；accel-config (idxd-config) 用户态配置工具；x86_64 Linux（DSA/IAA 硬件加速仅支持 Linux，Windows 不支持）。",
+      "K8s 资源": "Kubernetes 1.12+（Device Plugin v1beta1 稳定 API）；设备插件以 DaemonSet 运行需节点 root 权限；DPDK/vfio 场景需 vfio-pci 驱动并加 disable_denylist=1 参数（PCI ID 0b25 等）。"
+    },
+    "推荐配置": {
+      "硬件": "第 4/5 代 Xeon Scalable 或 Xeon 6 (Granite Rapids)，按负载规划每节点 WQ：数据搬运用 DSA（dedicated/shared WQ），压缩与分析用 IAA；生产环境建议 NUMA 亲和（Pod 与其使用的 WQ/设备同 NUMA 节点），并预留内存带宽。",
+      "软件": "内核 6.x+（提供更完整的 SVM/SWQ/复位支持）；accel-config 配置 engine/group/WQ；应用栈：QPL（IAA 压缩/分析）、DML（DSA 数据搬运库）、SPDK/DPDK dmadev（idxd）；部署 Intel Device Plugins Operator + dsa_plugin/iaa_plugin + intel-idxd-config-initcontainer 自动配置 WQ。",
+      "集群": "OpenShift 或主流 K8s 发行版（RHEL 8.7/9.1+、Ubuntu 22.10+、SLES 15 SP4+、CentOS Stream）；大数据/AI 管道场景结合 Spark/Hadoop/Hive、ClickHouse、RocksDB、Redis 等使用 IAA 压缩，存储/网络场景用 DSA 卸载数据搬运。"
+    },
+    "生产级配置": {
+      "大规模场景": "双路裸金属集群，每节点 2-8 个 DSA/IAA 设备；按业务划分 dedicated（独占）与 shared（共享）WQ，共享 WQ 提高设备利用率；与 QAT/DLB/GPU 等其他加速器混部由 Intel Device Plugins Operator 统一编排。",
+      "大数据/AI 管道": "Spark/Hadoop/ClickHouse/RocksDB 集群 + IAA 压缩卸载（QPL 集成），DSA 用于分布式训练集合通信（libfabric/oneCCL，Intel 报告 BERT 预训练集合通信最多加速 3.3 倍）与存储数据面（SPDK）。",
+      "网络/存储数据面": "DPDK vhost 报文拷贝、SPDK 存储路径卸载 DSA（Intel DPDK 报文拷贝技术指南）；zswap/zram 场景启用 iaa_crypto 卸载内核页压缩。"
+    },
+    "功耗基线": "[不确定] DSA/IAA 集成在 CPU 封装内部，Intel 未公布独立的空载/满载功耗基线；功耗计入 CPU 整体 TDP，启用加速器不产生额外板卡功耗，相对卸载收益功耗开销很小。"
+  },
+  "兼容性": {
+    "支持的 K8s 版本范围": {
+      "Device Plugin 方式": "Kubernetes Device Plugin 框架 v1beta1 自 K8s 1.12 起稳定可用；intel-device-plugins-for-kubernetes 最新版本 v0.36.0 对齐 K8s 1.36，较老版本插件因使用稳定 v1 API 通常可运行于更新集群。",
+      "DRA 方式": "K8s Dynamic Resource Allocation (DRA) 自 1.26/1.27 引入并持续演进；Intel 的 DRA 资源驱动项目 (intel-resource-drivers-for-kubernetes，Beta/非生产) 目前仅覆盖 GPU/Gaudi/QAT，DSA/IAA 尚无 DRA 驱动，仍使用传统 Device Plugin 方式 [不确定后续 DRA 支持计划]。"
+    },
+    "操作系统兼容性": {
+      "支持": "Linux x86_64：RHEL 8.7/9.1+（RHEL 9.4 起对 DSA 提供完整支持 [不确定细节]）、SLES 15 SP4+、Ubuntu 22.10+、CentOS Stream 8/9、Debian/Fedora 系。",
+      "内核要求": "内核 5.18+（DSA DWQ 5.6+、SWQ 5.18+；IAA 用户态需 ENQCMD，官方示例用 5.18+，ClickHouse 指南推荐 6.0+；iaa_crypto 需 6.8+）；驱动为内嵌 idxd 驱动，需 CONFIG_INTEL_IDXD、CONFIG_INTEL_IDXD_SVM、CONFIG_INTEL_IOMMU_SVM，引导参数 intel_iommu=on,sm_on。",
+      "不支持": "Windows Server 节点不支持（软件栈为 Linux-only，QPL 文档明确硬件加速不支持 Windows）；非 Intel x86 平台（AMD/ARM）无此硬件。"
+    },
+    "K8s 上游支持阶段": {
+      "Device Plugin": "K8s 上游 GA（v1 稳定 API），DSA/IAA 通过通用设备插件框架接入，无独立上游组件。",
+      "Intel 插件": "intel-device-plugins-for-kubernetes 为 Intel 开源社区项目（Apache-2.0），长期维护、版本化发布（对齐每个 K8s minor 版本），生产就绪度高；Intel Device Plugins Operator 通过 OperatorHub 分发且为 Red Hat 认证容器镜像。",
+      "DRA": "K8s 上游 DRA 仍处于 Beta 演进阶段；DSA/IAA 未接入 DRA（Intel DRA 资源驱动仅覆盖 GPU/Gaudi/QAT）。"
+    },
+    "生态兼容性矩阵": {
+      "Operator": "Intel Device Plugins Operator（Red Hat 认证、OperatorHub 可安装）、intel-idxd-config-initcontainer（通过 accel-config 自动配置 DSA/IAA 设备与 WQ 的 init 容器镜像）、ProvisioningConfig CRD。",
+      "应用生态": "QPL（deflate 压缩/解压 + scan/extract/select/expand 分析过滤 + CRC-64）、Intel DML（数据搬运库，支持 DSA）、ISA-L、DPDK dmadev (idxd) 与 compressdev、SPDK idxd 加速、内核 iaa_crypto（供 zswap/zram 使用 deflate-iaa）、RocksDB IAA 压缩插件（iaa_plugin-rocksdb）、ClickHouse/Redis 压缩集成、libfabric/oneCCL（MPI 集合通信）、dsa-perf-micros 性能微基准。",
+      "CNI/网络": "无强制 CNI 依赖；DPDK 场景常与 SR-IOV CNI + Multus 配合使用。",
+      "平台集成": "StarlingX（集成 Intel Device Plugins Operator + Node Feature Discovery 管理 DSA）、Red Hat OpenShift [不确定 DSA/IAA 官方支持矩阵细节]、Supermicro/Lenovo 等服务器厂商提供启用指南；监控集成：无官方 Prometheus exporter [不确定]。"
+    }
+  },
+  "限制与约束": {
+    "已知限制": {
+      "无 SR-IOV": "DSA/IAA 不是 SR-IOV 设备、无 VF 概念，资源共享通过 WQ（dedicated/shared）抽象实现；虚拟化场景只能整设备 vfio-pci 直通。",
+      "小数据收益为负": "同步卸载在数据小于约 4-10 KB 时与 CPU memcpy 相当或更慢（提交/完成开销），异步批量约 256 字节起才稳定获益（arXiv 量化研究）。",
+      "吞吐上限": "单 DSA 设备峰值吞吐约 30 GB/s（受 I/O fabric 限制）；访问 CXL 内存时因延迟更高性能下降；多设备大块传输会竞争系统内存带宽并可能压垮 DDIO 缓存分区。",
+      "IAA 压缩率": "IAA deflate 压缩率低于软件高等级 zstd（与 zlib 低等级相当）[不确定具体对比数值]；QPL 的 deflate 历史窗口限制为 4 KB；Huffman-only 模式压缩率更低。",
+      "共享 WQ 前提": "SWQ 在极少量并发线程下吞吐差（arXiv 指出最少线程场景下共享队列不如专用队列）；SWQ 需要内核 5.18+。",
+      "安全漏洞": "CVE-2024-21823：DSA/IAA 硬件逻辑存在不安全的反同步（insecure de-synchronization），本地授权用户可导致拒绝服务，影响部分第 4/5 代 Xeon 处理器，需更新内核（限制非受信直连设备访问）、相关软件库（Intel DSA Transparent Offload Library 等）及微码。",
+      "虚拟化限制": "嵌套虚拟化不支持；VM 热迁移对直通设备基本不可用。"
+    },
+    "混部兼容性": "[不确定] DSA/IAA 与 QAT、DLB、GPU、FPGA 等其他 Intel 加速器可同节点混部（各占 PCIe/IOMMU 资源），Intel Device Plugins Operator 统一管理各插件；混部时需注意 NUMA 亲和、内存带宽与 PCIe 通道；DSA/IAA 通过 WQ 共享，冲突风险低于独占型加速器，与 CPU 密集负载混部无直接冲突。",
+    "性能开销": "[不确定] 无官方统一百分比。用户态提交（ENQCMD）与轮询存在少量软件开销；同步卸载小请求时提交+完成延迟较高；SWQ 配置不当（线程过少）会降低吞吐；QPL/iaa_crypto 提供同步/异步/异步中断模式以权衡延迟与吞吐。",
+    "固件与驱动依赖": "内核 idxd 驱动（DSA/IAA 共用）：DWQ 自 5.6、SWQ 自 5.18；SVM/PASID 需 CONFIG_INTEL_IOMMU_SVM 与 intel_iommu=on,sm_on；iaa_crypto 需 6.8+ 且 IAA WQ 须配置为内核模式（driver_name=crypto）；用户态工具 accel-config/idxd-config；BIOS 需启用 VT-d、VMX、中断重映射；vfio-pci 场景需 disable_denylist=1；固件/微码随平台 BIOS 更新（CVE-2024-21823 修复依赖微码更新）；节点重启后 WQ 配置需重新应用（init 容器幂等处理）。"
+  },
+  "配置与部署": {
+    "配置方式": {
+      "Device Plugin（主要）": "dsa_plugin/iaa_plugin 以 DaemonSet 运行，发现 DSA/IAA 工作队列并上报为节点资源：dsa.intel.com/wq-user-dedicated、dsa.intel.com/wq-user-shared、iaa.intel.com/wq-user-dedicated、iaa.intel.com/wq-user-shared；使用 vfio-pci 驱动时 DSA 另上报 dsa.intel.com/vfio；Pod 通过 limits 声明资源获取对应 WQ。",
+      "Operator（推荐）": "安装 Intel Device Plugins Operator，通过 CRD/ProvisioningConfig 声明式配置 DSA/IAA 的驱动、每设备 WQ 数、dedicated/shared 模式与分配策略。",
+      "自动初始化": "intel-idxd-config-initcontainer 使用 accel-config 按模板（demo/dsa.conf、demo/iaa.conf）在节点启动时自动创建 engine/group/WQ（默认 1 engine / 1 group / 1 user-dedicated WQ），可通过 ConfigMap 自定义或按节点名提供节点级配置。",
+      "DRA（暂不支持）": "[不确定] DSA/IAA 暂无 DRA 资源驱动（Intel DRA 驱动目前仅覆盖 GPU/Gaudi/QAT），仍以传统 Device Plugin 方式接入。"
+    },
+    "配置示例": "部署：kubectl apply -k https://github.com/intel/intel-device-plugins-for-kubernetes/deployments/dsa_plugin?ref=<RELEASE_VERSION>（IAA 同理替换为 deployments/iaa_plugin；自动配置用 overlays/dsa_initcontainer 或 overlays/iaa_initcontainer）；Pod 资源示例：resources.limits: { dsa.intel.com/wq-user-dedicated: 1 }、{ dsa.intel.com/wq-user-shared: 1 } 或 { iaa.intel.com/wq-user-shared: 1 }；accel-config 命令示例：accel-config config-wq --group-id=0 --mode=dedicated --type=user --name=wq-user-dedicated dsa0/wq0.0；完整 JSON 配置模板见 https://github.com/intel/intel-device-plugins-for-kubernetes/blob/main/demo/dsa.conf。",
+    "部署位置与环境": {
+      "裸金属（主要）": "数据中心裸金属 K8s/OpenShift/StarlingX 集群，DSA 用于存储/网络数据面（SPDK、DPDK vhost）与分布式训练集合通信，IAA 用于数据库/大数据/内存压缩（ClickHouse、RocksDB、Spark、zswap）。",
+      "公有云": "[不确定] 无公开的 DSA/IAA 直通实例信息，多数公有云实例不暴露内置加速器；加速器场景目前以自建/裸金属为主。",
+      "边缘": "Xeon 6 SoC 等边缘平台可提供 DSA/IAA [不确定具体型号支持矩阵]；电信/边缘 NFV 场景可与 DPDK 结合。",
+      "不支持": "无此硬件的普通云虚机、Windows 节点、非 Intel 平台；Xeon 6 Sierra Forest (E-core) 不含 DSA/IAA [不确定]。"
+    },
+    "虚拟化兼容性": {
+      "直通机制": "无 SR-IOV；VM 内使用需整设备 vfio-pci 直通（依赖 IOMMU/PASID）；容器内 DPDK 场景同样使用 vfio-pci（需 disable_denylist=1，PCI ID 0b25 等）。",
+      "限制": "嵌套虚拟化不支持；VM 热迁移对直通设备不可用；同一设备直通后主机侧与 VM 侧资源互斥，共享需依赖 WQ 配置与 mdev 演进 [不确定 mdev 支持状态]。"
+    }
+  },
+  "性能特征": {
+    "基准性能数据": {
+      "DSA 数据搬运": "arXiv 量化研究（2305.02480）：DSA 吞吐约为旧版 CBDMA 的 2.1 倍；单设备峰值约 30 GB/s（受 I/O fabric 限制）；同步卸载与 CPU memcpy 相当的分界点约 4-10 KB，异步批量约 256 字节起即可获益；BERT 预训练集合通信最多加速 3.3 倍；DPDK vhost 报文拷贝、SPDK、libfabric/MPI 等场景有公开收益数据。",
+      "IAA 压缩": "LWN 公布的内核 iaa_crypto 补丁微基准（小块数据）：IAA 同步压缩 3,177 ns / 解压 2,235 ns，异步中断模式 6,847 ns / 5,840 ns，软件 deflate 压缩 108,978 ns / 解压 14,485 ns（同步压缩约快 34 倍）；Intel 指南：RocksDB 场景 IAA 吞吐优于软件 zstd、压缩率优于 LZ4；ClickHouse Star Schema Benchmark 测试有性能提升 [不确定具体数字]。",
+      "zswap": "Intel 白皮书：zswap + IAA（iaa_crypto）可降低内核页压缩的 CPU 开销并改善延迟 [不确定具体百分比]。"
+    },
+    "扩展性上限": "[不确定] 无官方最大节点数声明；集群规模上限与普通 K8s 集群一致（由控制面决定）；单节点能力受设备数（每插槽 1/2/4 个、双路最多 8 个）与每设备可配置 WQ/组/引擎数限制；吞吐瓶颈为内存带宽、I/O fabric（单设备约 30 GB/s）与 PCIe 通道。",
+    "每节点密度": "[不确定] 无官方每节点 Pod 数上限。可用资源 = 节点设备数 × 每设备 WQ 数；Pod 通常申请 1 个 WQ，shared WQ 可被多个 Pod 共享而 dedicated WQ 独占；高密度部署受 WQ 配置数量、内存带宽与 NUMA 布局约束。"
+  },
+  "安全": {
+    "安全特性": {
+      "定位": "DSA/IAA 是数据搬运/压缩加速器而非信任根，不提供 TPM 等效的密钥保护；数据加密与密钥管理由上层软件负责。",
+      "隔离机制": "依赖 IOMMU/PASID/SVM 进行 DMA 地址隔离与用户态提交隔离；WQ 由内核 idxd 驱动管理；CVE-2024-21823（硬件逻辑不安全的反同步）可被本地授权用户利用造成拒绝服务，影响部分第 4/5 代 Xeon，需内核、软件库与微码协同更新；Intel 官方发布 DSA/IAA 错误报告（error reporting）安全指导。",
+      "平台安全": "与 Secure Boot/TPM 无直接关联；固件/微码随平台 BIOS 更新管理 [不确定细节]。"
+    },
+    "合规与认证": "[不确定] 无公开的 DSA/IAA 设备独立 FIPS 140-2/3 认证资料；Intel Device Plugins Operator 镜像为 Red Hat 认证；设备插件机制不影响 K8s 一致性认证；安全合规主要依赖平台（CPU/BIOS/微码）认证。"
+  },
+  "运维与生命周期": {
+    "可观测性支持": "[不确定] 无官方 Prometheus exporter。可用手段：accel-config list（设备/WQ 状态与配置查询）、内核性能计数器（CONFIG_INTEL_IDXD_PERFMON + dsa-perf-micros 工具）、dmesg/idxd 驱动日志、QPL 库统计接口、DPDK/SPDK 设备统计；社区有第三方指标采集方案 [不确定]。",
+    "维护与生命周期": "[不确定] WQ 配置在节点重启后由 idxd init 容器幂等重建；固件/微码升级随平台 BIOS/微码更新流程（含 CVE-2024-21823 修复）；节点维护需排水（终止使用 WQ 的 Pod 后重启节点）；无热插拔标准支持；硬件 MTBF 无公开数据；DSA/IAA 为无机械部件片上设备，主要风险为内核/固件版本兼容性（SWQ、SVM 等特性对内核版本有门槛）。",
+    "弹性与故障恢复": "[不确定] 设备故障导致其 WQ 不可用，相关 Pod 需重新调度（设备插件从节点资源中移除该设备）；无硬件冗余机制，高可用依赖应用层回退（QPL/iaa_crypto 均提供 CPU 软件回退路径）与多节点重调度；加速器无状态，无数据持久化问题。"
+  },
+  "经济性": {
+    "总拥有成本 (TCO)": {
+      "硬件成本": "DSA/IAA 集成于 Xeon CPU 封装内，无独立板卡采购成本（对比 QAT 独立板卡方案），是主要经济性优势；硬件成本随 CPU 采购一次性支付。",
+      "运行成本": "无独立功耗项（计入 CPU TDP），不增加散热/机架功耗预算；软件栈（accel-config、QPL、DML、设备插件）全部开源免费。",
+      "节省项": "卸载数据搬运与压缩可释放 CPU 核（zswap+IAA、SPDK/DSA、DPDK 报文拷贝等场景），降低服务器采购数量与功耗；大数据/AI 管道吞吐提升可缩小集群规模 [不确定具体节省比例]；每节点无额外许可成本（部分 SKU 的加速器能力需 Intel On-Demand 许可解锁 [不确定]）。",
+      "适用性判断": "对第 4 代及以上 Xeon 用户几乎零边际成本，数据搬运/压缩密集场景普遍值得启用；需投入 WQ 配置与 NUMA 亲和调优成本，小数据/低并发场景收益有限。"
+    },
+    "成熟度与社区支持": "Intel 主导开源生态且持续投入：accel-config/idxd-config、QPL、DML、intel-device-plugins-for-kubernetes（v0.36.0 对齐 K8s 1.36）均活跃维护；内核社区合入 idxd 驱动（5.6/5.18 分阶段）与 iaa_crypto（6.8+）；DPDK/SPDK 官方集成；厂商支持：Red Hat（RHEL 9.4 完整支持 DSA [不确定]）、StarlingX、Supermicro、Lenovo 等服务器厂商提供启用指南；学术界有量化研究（CMU VLDB 论文、arXiv 2305.02480）；总体生产就绪度：裸金属 Linux 环境成熟，K8s 接入方式为成熟的 Device Plugin 路径，公有云环境支持有限。"
+  },
+  "uncertain": [
+    "功耗基线",
+    "DRA 支持状态",
+    "Sierra Forest 是否包含 DSA/IAA",
+    "IAA 压缩率对比具体数值",
+    "混部兼容性细节",
+    "性能开销百分比",
+    "公有云支持范围",
+    "边缘平台支持矩阵",
+    "RHEL/OpenShift 支持矩阵细节",
+    "可观测性支持",
+    "维护与生命周期细节",
+    "弹性与故障恢复细节",
+    "合规与认证细节",
+    "平台安全细节",
+    "扩展性上限",
+    "每节点密度",
+    "ClickHouse/zswap 具体性能数字",
+    "TCO 节省比例",
+    "Intel On-Demand 许可要求",
+    "mdev 共享设备支持状态"
+  ]
+}

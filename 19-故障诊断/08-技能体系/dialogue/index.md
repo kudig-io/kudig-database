@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Dialogue
 
-> 本页为 `故障诊断/topic-skills/dialogue` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/dialogue` 目录的自动索引。
 
 ## 文档
 

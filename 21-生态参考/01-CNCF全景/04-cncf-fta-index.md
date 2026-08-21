@@ -280,8 +280,8 @@ flowchart TD
 
 ### 9.3 文档存放位置
 
-- FTA 索引文档: `故障诊断/FTA故障树/list/[项目名]-fta.md`
-- 故障排查指南: `故障诊断/高级排障/structural-[分类]/[序号]-[项目名]-troubleshooting.md`
+- FTA 索引文档: `19-故障诊断/06-FTA故障树/list/[项目名]-fta.md`
+- 故障排查指南: `19-故障诊断/04-高级排障/structural-[分类]/[序号]-[项目名]-troubleshooting.md`
 
 ---
 
@@ -290,8 +290,8 @@ flowchart TD
 ### 10.1 故障排查索引
 
 - [Kubernetes 核心故障排查](../故障诊断/高级排障/01-kubernetes-core/)
-- [网络故障排查](../故障诊断/高级排障/03-networking/)
-- [存储故障排查](../故障诊断/高级排障/04-storage/)
+- [网络故障排查](../../19-故障诊断/04-高级排障/structural-03-networking)
+- [存储故障排查](../../19-故障诊断/04-高级排障/structural-04-storage)
 - [工作负载故障排查](../故障诊断/高级排障/02-workloads/)
 
 ### 10.2 FTA 方法论

@@ -107,9 +107,8 @@ cross_refs:
   path: ../系统基础/topic-cheat-sheet/tls-pki.md
   label: '速查卡: tls-pki'
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # 01 - Kubernetes认证授权体系详解
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [kubernetes.io/docs/reference/access-authn-authz](https://kubernetes.io/docs/reference/access-authn-authz/)

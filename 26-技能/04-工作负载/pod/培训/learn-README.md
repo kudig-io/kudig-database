@@ -526,7 +526,7 @@ Day 1 → Day 2 → Day 3 → Day 4 → Week 1 培训
 | `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | kubectl 场景速查卡 |
 | `P1-5-oncall-quick-reference-card.md` | oncall 速查卡 |
 | `故障诊断/` | 故障排查手册 |
-| `故障诊断/topic-skills/assessment/daily-check-quiz.md` | 每日一题 |
+| `19-故障诊断/08-技能体系/assessment/daily-check-quiz.md` | 每日一题 |
 
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: 数字人视频快速参考 (video-scripts)
-description: '| `07-pvc-storage-failure` | PVC 存储 | 12min |'
-summary: '| `07-pvc-storage-failure` | PVC 存储 | 12min |'
+description: '| `08-pvc-storage-failure` | PVC 存储 | 12min |'
+summary: '| `08-pvc-storage-failure` | PVC 存储 | 12min |'
 category: general
 tags:
 - k8s
@@ -84,7 +84,7 @@ python3 scripts/video-generator.py \
 | Topic | 说明 | 时长 |
 |:---|:---|:---:|
 | `03-pod-pending` | Pod Pending | 8min |
-| `07-pvc-storage-failure` | PVC 存储 | 12min |
+| `08-pvc-storage-failure` | PVC 存储 | 12min |
 | `10-image-pull-failure` | 镜像拉取 | 7min |
 | `09-rbac-quota-failure` | RBAC/配额 | 10min |
 

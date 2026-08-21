@@ -1,7 +1,7 @@
 ---
 title: Skill 本地运行 Demo 指南
-description: '# Skill 本地运行 Demo 指南'
-summary: 'topic-skills 定义了面向 AI Agent 的 [[kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[10-平台工程/06-代码分析/deployment-create/README.md|README]].md)）。'
+description: Skill 本地运行 Demo 指南：在本地 Kind 集群中实际运行 Skill 执行闭环的完整操作手册
+summary: Skill 本地运行 Demo 指南：在本地 Kind 集群中实际运行 Skill 执行闭环，验证 08-技能体系 中定义的诊断-修复最佳实践
 category: demo
 tags:
 - k8s
@@ -35,7 +35,7 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 - troubleshooting-methodology
-skill_id: SKILL-19_LOCAL_DEMO_GUIDE-001
+skill_id: SKILL-DEMO-001
 skill_name: Skill 本地运行 Demo 指南
 version: 1.0.0
 k8s_versions:
@@ -53,9 +53,9 @@ k8s_versions:
 
 
 
-# [[SKILL|Skill]] 本地运行 Demo 指南
+# Skill 本地运行 Demo 指南
 
-> **目的**: 在本地 Kind 集群中实际运行 Skill 执行闭环，验证和体验 topic-skills 中定义的诊断-修复最佳实践  
+> **目的**: 在本地 Kind 集群中实际运行 Skill 执行闭环，验证和体验 08-技能体系 中定义的诊断-修复最佳实践  
 > **受众**: 运维工程师、SRE、AI Agent 开发者、希望理解 Skill 系统的贡献者  
 > **耗时**: 环境搭建 ~5 min + 每个场景 ~5 min
 
@@ -63,7 +63,7 @@ k8s_versions:
 
 ## 1. 概述
 
-topic-skills 定义了面向 AI Agent 的 [[kubernetes|Kubernetes]] 故障诊断技能库（详见 README.md](./[[10-平台工程/06-代码分析/deployment-create/README.md|README]].md)）。本 Demo 允许你在本地 Kind 集群中**实际运行**这些 Skill 的完整执行闭环：
+08-技能体系 定义了面向 AI Agent 的 [[kubernetes|Kubernetes]] 故障诊断技能库（详见 [README.md](./README.md)）。本 Demo 允许你在本地 Kind 集群中**实际运行**这些 Skill 的完整执行闭环：
 
 ```
 故障注入 → 症状检测 → 快速分级 → 诊断工作流 → 根因确认 → 修复操作 → 验证确认
@@ -106,7 +106,7 @@ kubectl version --client # kubectl 已安装
 ### Step 1: 创建 Kind 集群
 
 ```bash
-cd 故障诊断/topic-skills/demo
+cd 19-故障诊断/08-技能体系
 bash setup-kind-cluster.sh
 ```
 
@@ -344,7 +344,7 @@ KIND_IMAGE=kindest/node:v1.30.6 bash setup-kind-cluster.sh
 | Skill Schema | [skill-schema.md](./skill-schema.md) | Skill 文档规范模板 |
 | IDE Skill 示例 | [k8s-node-notready/](./skill-set/k8s-node-notready/) | 完整 IDE 格式 Skill |
 | Skills 索引 | [README.md](./README.md) | Skill 库总索引 |
-| FTA 故障树 | [../故障诊断/FTA故障树/](../故障诊断/FTA故障树/) | 故障分析模型 |
+| FTA 故障树 | [../06-FTA故障树/](../06-FTA故障树/) | 故障分析模型 |
 
 
 <!-- risk-assessed -->

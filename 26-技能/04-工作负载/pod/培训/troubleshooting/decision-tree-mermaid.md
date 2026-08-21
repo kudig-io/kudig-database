@@ -92,8 +92,8 @@ k8s_versions:
 - '1.31'
 - '1.32'
 
-tier: peripheral---
-
+tier: peripheral
+---
 # 故障排查决策树 - Mermaid 可视化版
 
 > **章节**: 工单场景 | **难度**: 入门/进阶 | **用途**: 快速诊断
@@ -596,7 +596,7 @@ flowchart TD
 - [../README.md](../README.md) — 讲师完整台词设计
 - [../oncall-qa/oncall-quick-qa.md](../oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../../../../29-%E6%96%87%E6%A1%A3/agent-specs/P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
-- [../../故障诊断/](../../故障诊断/) — 故障排查文档
+- [](../../../../../19-故障诊断) — 故障排查文档
 
 ## See Also
 

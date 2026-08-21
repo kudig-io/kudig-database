@@ -101,6 +101,8 @@ prerequisites:
 
 ### 节点操作系统
 
+- [[17-系统基础/01-Linux/16-k8s-node-os-support-matrix.md|K8s 节点 OS 支持矩阵]]
+- [[17-系统基础/01-Linux/17-k8s-node-os-issues.md|K8s 节点 OS 问题全清单]]
 - [[23-实体/03-运行时/inclavare-containers.md|inclavare containers]]
 - K0s
 - k3s

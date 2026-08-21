@@ -47,8 +47,8 @@ authors:
   role: contributor
 cross_refs:
 - type: skill
-  path: ../故障诊断/topic-skills/07-pvc-storage-failure.md
-  label: '运维技能: 07-pvc-storage-failure'
+  path: ../../19-故障诊断/08-技能体系/08-pvc-storage-failure.md
+  label: '运维技能: 08-pvc-storage-failure'
 ---
 
 > **生产环境安全提示**

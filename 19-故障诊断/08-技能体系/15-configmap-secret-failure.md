@@ -1,7 +1,7 @@
 ---
 title: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
-description: '# ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting'
-summary: 'ConfigMap 和 Secret 是 [[kubernetes|Kubernetes]] 中管理应用配置和敏感数据的核心资源。配置管理问题会导致 Pod 无法启动、应用行为异常、敏感数据泄露风险等问题。'
+description: Kubernetes ConfigMap/Secret 配置管理故障的完整诊断-修复-验证工单处理 Skill
+summary: Kubernetes ConfigMap/Secret 配置管理故障的完整诊断-修复-验证工单处理 Skill
 category: configuration
 tags:
 - k8s
@@ -51,7 +51,7 @@ prerequisites:
 - gitops-basics
 - etcd-basics
 - policy-basics
-skill_id: SKILL-14_CONFIGMAP_SECRET_FAILURE-001
+skill_id: SKILL-CONFIG-001
 skill_name: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 version: 1.0.0
 k8s_versions:
@@ -1393,7 +1393,7 @@ kubectl logs <pod-name> -n <namespace> --tail=20 | grep -i config
 
 | 主题 | 引用路径 | 适用场景 |
 |------|---------|---------|
-| ConfigMap/Secret 深度排查 | `故障诊断/19-configmap-secret-troubleshooting.md` | 超出本 Skill 覆盖的复杂场景 |
+| ConfigMap/Secret 深度排查 | 19-故障诊断/19-configmap-secret-troubleshooting.md` | 超出本 Skill 覆盖的复杂场景 |
 | Kubernetes Secret 加密 | `安全/` | KMS Provider、EncryptionConfiguration 详细配置 |
 | External Secrets Operator | External Secrets 官方文档 | ESO 高级配置和故障排查 |
 | HashiCorp Vault 集成 | Vault 官方文档 + `安全/` | Vault Agent Injector 深度配置 |

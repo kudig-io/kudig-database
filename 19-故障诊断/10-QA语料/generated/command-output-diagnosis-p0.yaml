@@ -2595,7 +2595,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0001
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: high
   command: kubectl auth can-i list persistentvolumes
@@ -2614,7 +2614,7 @@
   - 请检查输出是否符合预期，确认无误后再继续下一步。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   k8s_versions:
   - 1.28.x
@@ -2623,7 +2623,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0002
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: high
   command: kubectl get pvc -A \| grep -v Bound
@@ -2642,7 +2642,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -2652,7 +2652,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0003
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume"
@@ -2673,7 +2673,7 @@
   - 请验证修复效果，确认服务已恢复正常运行。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - describe
@@ -2684,7 +2684,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0004
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver
@@ -2703,7 +2703,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - status
@@ -2714,7 +2714,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0005
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pv \| grep Released
@@ -2735,7 +2735,7 @@
   - 如有任何疑问或输出异常，请随时告知，不要擅自继续操作。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -2745,7 +2745,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0006
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get volumeattachment
@@ -2765,7 +2765,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -2775,7 +2775,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0007
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl delete pvc test-pvc-diag-*
@@ -2796,7 +2796,7 @@
   - 操作完成后请反馈结果，我会评估是否需要进一步处理。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   k8s_versions:
   - 1.28.x
@@ -2805,7 +2805,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0008
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl delete pod test-mount-diag-*
@@ -2825,7 +2825,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   k8s_versions:
@@ -2835,7 +2835,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0009
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get sc
@@ -2856,7 +2856,7 @@
   - 如有任何疑问或输出异常，请随时告知，不要擅自继续。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -2866,7 +2866,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0010
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
@@ -2885,7 +2885,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -2895,7 +2895,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0011
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pods -n kube-system -l app=csi-controller
@@ -2915,7 +2915,7 @@
   - 请检查输出是否符合预期，确认无误后再继续下一步。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - status
@@ -2926,7 +2926,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0012
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl logs <csi-pod> -c csi-provisioner
@@ -2945,7 +2945,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - logs
@@ -2956,7 +2956,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0013
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get csistoragecapacity -A
@@ -2977,7 +2977,7 @@
   - 请验证修复效果，确认服务已恢复正常运行。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -2987,7 +2987,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0014
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName
@@ -3008,7 +3008,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - node
   - status
@@ -3019,7 +3019,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0015
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'
@@ -3040,7 +3040,7 @@
   - 如有任何疑问或输出异常，请随时告知，不要擅自继续操作。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure 2
+  - 08-pvc-storage-failure
   - kubectl
   - node
   - status
@@ -3051,7 +3051,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0016
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl auth can-i list persistentvolumes
@@ -3069,7 +3069,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   k8s_versions:
   - 1.28.x
@@ -3078,7 +3078,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0017
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pvc -A \| grep -v Bound
@@ -3098,7 +3098,7 @@
   - 操作完成后请反馈结果，我会评估是否需要进一步处理。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -3108,7 +3108,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0018
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl describe pod <pod> \| grep -i "FailedMount\|MountVolume"
@@ -3128,7 +3128,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - describe
@@ -3139,7 +3139,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0019
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver
@@ -3159,7 +3159,7 @@
   - 请确认上述命令的输出结果，将结果贴回给我。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - status
@@ -3170,7 +3170,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0020
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pv \| grep Released
@@ -3191,7 +3191,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -3201,7 +3201,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0021
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get volumeattachment
@@ -3223,7 +3223,7 @@
   - 请检查输出是否符合预期，确认无误后再继续下一步。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -3233,7 +3233,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0022
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl delete pvc test-pvc-diag-*
@@ -3254,7 +3254,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   k8s_versions:
   - 1.28.x
@@ -3263,7 +3263,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0023
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl delete pod test-mount-diag-*
@@ -3285,7 +3285,7 @@
   - 请验证修复效果，确认服务已恢复正常运行。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   k8s_versions:
@@ -3295,7 +3295,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0024
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get sc
@@ -3318,7 +3318,7 @@
   - 请确认上述命令的输出结果，如有异常立即反馈。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -3328,7 +3328,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0025
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
@@ -3348,7 +3348,7 @@
   - 如有任何疑问或输出异常，请随时告知，不要擅自继续操作。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -3358,7 +3358,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0026
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get pods -n kube-system -l app=csi-controller
@@ -3377,7 +3377,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - status
@@ -3388,7 +3388,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0027
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl logs <csi-pod> -c csi-provisioner
@@ -3408,7 +3408,7 @@
   - 操作完成后请反馈结果，我会评估是否需要进一步处理。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - pod
   - logs
@@ -3419,7 +3419,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0028
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get csistoragecapacity -A
@@ -3440,7 +3440,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - status
   k8s_versions:
@@ -3450,7 +3450,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0029
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName
@@ -3473,7 +3473,7 @@
   - 请确认上述命令的输出结果，将结果贴回给我。
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - node
   - status
@@ -3484,7 +3484,7 @@
   - 1.31.x
   - 1.32.x
 - io_pair_id: IODIAG-STORAGE-0030
-  skill_ref: 07-pvc-storage-failure
+  skill_ref: 08-pvc-storage-failure
   scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
   severity: medium
   command: kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'
@@ -3505,7 +3505,7 @@
   - '检查卷挂载状态: kubectl get volumeattachment'
   confidence: 0.8
   tags:
-  - 07-pvc-storage-failure
+  - 08-pvc-storage-failure
   - kubectl
   - node
   - status

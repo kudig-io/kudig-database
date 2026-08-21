@@ -51,7 +51,7 @@ authors:
   role: contributor
 cross_refs:
 - type: structural
-  path: ../故障诊断/topic-structural-trouble-shooting/03-networking/08-flannel-troubleshooting.md
+  path: ../../04-高级排障/structural-03-networking/08-flannel-troubleshooting.md
   label: '结构化排障: 08-flannel-troubleshooting'
 - type: index
   path: ../../生态参考/topic-index/flannel-index.md

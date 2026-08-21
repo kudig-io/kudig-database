@@ -142,9 +142,8 @@ aliases:
 - 概述
 - 系统架构
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # Kubernetes 架构全景图 (Architecture Overview)
 
 > **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-05 | **参考**: [Kubernetes Concepts](https://kubernetes.io/docs/concepts/architecture/)

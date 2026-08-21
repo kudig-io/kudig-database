@@ -151,6 +151,47 @@ kubectl scale deploy/coredns -n kube-system --replicas=5
 
 **修复**：在 Pod spec 中设置 `dnsConfig.options: [{name: ndots, value: "2"}]`，或使用完全限定域名（FQDN）加点号结尾。
 
+## 对比评测
+
+| 维度 | CoreDNS | kube-dns | NodeLocal DNSCache |
+|------|---------|----------|-------------------|
+| 架构 | 插件化（Go） | 三容器（dnsmasq 等） | 节点级缓存代理 |
+| 性能 | 高（并发模型优） | 中 | 最高（本地命中） |
+| 可扩展 | 插件丰富（rewrite 等） | 有限 | 依赖上游 |
+| 维护状态 | 官方默认 | 已弃用 | 官方组件 |
+| 适用场景 | 标准集群 | 遗留集群 | 大集群补充 |
+
+**选型建议**：默认 CoreDNS；>500 节点叠加 NodeLocal DNSCache；kube-dns 集群应尽快迁移。
+
+## 故障排查速查
+
+| 症状 | 排查命令 | 常见根因 |
+|------|----------|----------|
+| 解析失败 | `kubectl logs -n kube-system -l k8s-app=kube-dns` | 插件配置错误、上游不可达 |
+| 高延迟 | `kubectl top pods -n kube-system` | 副本不足、cache 命中率低 |
+| 配置不生效 | `kubectl get cm coredns -n kube-system -o yaml` | Corefile 语法错误、未触发重载 |
+| 局部域名失败 | 检查 kubernetes 插件 zones 配置 | cluster.local 域配置缺失 |
+
+## 生产部署清单
+
+- [ ] 副本数 ≥ 2 + PDB；资源限制与 HPA（按 QPS）
+- [ ] Corefile 配置版本化（GitOps），变更走灰度
+- [ ] forward 上游配置多供应商 + health_check
+- [ ] 监控接入（`coredns_dns_requests_total`、`coredns_dns_request_duration_seconds`）
+- [ ] 大集群部署 NodeLocal DNSCache 并验证
+
+## 常见误区与设计要点
+
+- **误区 1**：直接用默认 Corefile 不评估——生产应显式配置 cache/forward/health/prometheus 插件参数。
+- **误区 2**：升级 K8s 不同步升级 CoreDNS——版本矩阵不匹配会导致解析异常。
+- **设计要点**：外部域名转发用 forward 且配多上游；内部自定义域名用 rewrite/hosts 插件；负缓存开启减少上游压力；变更前用 `coredns -dns.port=1053` 本地校验 Corefile。
+
+## 性能参考
+
+- 单副本 QPS：简单 A 记录查询 3-5w QPS（2C2G），含 cache 命中更高。
+- 延迟：本地命中 < 0.5ms，forward 上游 +1-3ms（同地域）。
+- 内存：1-2GB（受 cache 条目与连接数影响），建议 2C4G 起步。
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |

@@ -97,7 +97,7 @@ CKA 官方考纲 7 大领域，以及本知识库对应的复习资料：
 | 工作负载与调度 | 15% | Pod、Deployment、DaemonSet、Job、调度规则 | [fundamentals/02-15](../fundamentals/) |
 | 服务与网络 | 20% | Service、Ingress、NetworkPolicy、CoreDNS、CNI | [domain-03/00-core-k8s-networking](../../网络/K8s网络核心/) |
 | 存储 | 10% | PV、PVC、StorageClass、Volume 模式 | [fundamentals/08-pv-pvc-basics.md](../../../../06-存储/csi-storage/培训/01-pv-pvc-basics.md) |
-| 故障排查 | 30% | 节点问题、Pod 排障、网络排障、组件排障 | [故障诊断](../../故障诊断/) |
+| 故障排查 | 30% | 节点问题、Pod 排障、网络排障、组件排障 | [故障诊断](../../../../../19-故障诊断) |
 
 > 📌 **考试真相**: 故障排查占 30%，是最大头。也是工作中最值钱的技能。
 
@@ -660,7 +660,7 @@ kubectl get nodes
 | 官方课程 | Linux Foundation CKA | 系统学习 + 送 2 次模拟考 |
 | Killer.sh | https://killer.sh/ | 最接近真实考试的模拟环境 |
 | CKA 练习题 | https://github.com/alijahnas/CKA-practice-environment | 免费练习环境 |
-| 本库故障排查 | [故障诊断](../../故障诊断/) | 系统性排障知识 |
+| 本库故障排查 | [故障诊断](../../../../../19-故障诊断) | 系统性排障知识 |
 | K8s 官方文档 | https://kubernetes.io/docs/ | 考试时唯一允许打开的网站 |
 
 ---

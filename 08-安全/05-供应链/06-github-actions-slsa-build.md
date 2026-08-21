@@ -54,7 +54,8 @@ intent_queries:
 - github-actions-slsa-build的使用方法
 - github-actions-slsa-build的最佳实践
 
-tier: peripheral---
+tier: peripheral
+---
 title: GitHub Actions SLSA 构建 (GitHub Actions SLSA Build)
 description: '<!-- chunk: 概述 (Overview)' -->## 概述 (Overview)'
 category: supply-chain-security

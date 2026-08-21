@@ -13,7 +13,7 @@ last_updated: 2026-07
 
 # Reference
 
-> 本页为 `故障诊断/topic-skills/skill-set/k8s-ingress-gateway/reference` 目录的自动索引。
+> 本页为 `19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/reference` 目录的自动索引。
 
 ## 文档
 

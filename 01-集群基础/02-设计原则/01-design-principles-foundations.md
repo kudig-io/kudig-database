@@ -114,9 +114,8 @@ cross_refs:
   path: ../集群基础/
   label: '相关知识域: 集群基础'
 
-tier: peripheral---
-
-
+tier: peripheral
+---
 # 01 - Kubernetes 设计原则与哲学 (Foundations)
 
 <!-- chunk: 现代化演进：从管理 Pod 到管理“意图” -->
