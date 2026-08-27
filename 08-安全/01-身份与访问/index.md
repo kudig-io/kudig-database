@@ -10,7 +10,7 @@ tags:
 - service-account
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 身份与访问 Identity & Access
 
@@ -35,9 +35,9 @@ last_updated: '2026-07-21'
 | [[08-安全/01-身份与访问/03-service-account-token-management.md\|SA Token 管理]] | Token 生命周期与安全 | intermediate |
 | [[08-安全/01-身份与访问/04-oidc-identity-provider-integration.md\|OIDC 集成]] | 企业 IdP 对接 | advanced |
 | [[08-安全/01-身份与访问/05-vault-enterprise-secrets-management.md\|Vault 密钥管理]] | HashiCorp Vault 企业实践 | advanced |
-| [[08-安全/01-身份与访问/07-rbac-matrix-configuration.md\|RBAC 矩阵]] | 最小权限原则实践 | intermediate |
-| [[08-安全/01-身份与访问/11-secret-management-tools.md\|密钥管理工具]] | Vault/ESO/Sealed 对比 | intermediate |
-| [[08-安全/01-身份与访问/99-vault-k8s-secrets-guide.md\|Vault K8s 指南]] | Vault + K8s 完整指南 | advanced |
+| [[08-安全/01-身份与访问/06-rbac-matrix-configuration.md\|RBAC 矩阵]] | 最小权限原则实践 | intermediate |
+| [[08-安全/01-身份与访问/07-secret-management-tools.md\|密钥管理工具]] | Vault/ESO/Sealed 对比 | intermediate |
+| [[08-安全/01-身份与访问/10-vault-k8s-secrets-guide.md\|Vault K8s 指南]] | Vault + K8s 完整指南 | advanced |
 
 ## 密钥管理最佳实践
 

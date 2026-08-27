@@ -10,7 +10,7 @@ tags:
 - threat-detection
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 运行时安全 Runtime Security
 
@@ -33,11 +33,11 @@ last_updated: '2026-07-21'
 | [[08-安全/03-运行时安全/01-falco-cloud-native-security.md\|Falco 云原生安全]] | 规则编写/部署/响应 | advanced |
 | [[08-安全/03-运行时安全/02-sysdig-enterprise-container-security.md\|Sysdig 容器安全]] | 企业级容器安全平台 | advanced |
 | [[08-安全/03-运行时安全/03-aqua-enterprise-container-security.md\|Aqua 容器安全]] | 全生命周期安全防护 | advanced |
-| [[08-安全/03-运行时安全/03-runtime-security-defense.md\|运行时防御]] | 防御架构与策略 | intermediate |
-| [[08-安全/03-运行时安全/15-runtime-security-detection.md\|运行时检测]] | 异常行为检测与响应 | advanced |
-| [[08-安全/03-运行时安全/17-gvisor-container-sandbox.md\|gVisor 沙箱]] | 用户态内核沙箱实践 | advanced |
-| [[08-安全/03-运行时安全/18-security-context-fields-reference.md\|Security Context 字段参考]] | 全字段汇总/PSS 映射/LSM | advanced |
-| [[08-安全/03-运行时安全/99-falco-runtime-security-guide.md\|Falco 指南]] | 生产环境完整指南 | advanced |
+| [[08-安全/03-运行时安全/04-runtime-security-defense.md\|运行时防御]] | 防御架构与策略 | intermediate |
+| [[08-安全/03-运行时安全/05-runtime-security-detection.md\|运行时检测]] | 异常行为检测与响应 | advanced |
+| [[08-安全/03-运行时安全/06-gvisor-container-sandbox.md\|gVisor 沙箱]] | 用户态内核沙箱实践 | advanced |
+| [[08-安全/03-运行时安全/07-security-context-fields-reference.md\|Security Context 字段参考]] | 全字段汇总/PSS 映射/LSM | advanced |
+| [[08-安全/03-运行时安全/08-falco-runtime-security-guide.md\|Falco 指南]] | 生产环境完整指南 | advanced |
 
 ## 运行时安全检查清单
 

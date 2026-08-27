@@ -16,7 +16,7 @@ tags:
 - containerd
 tier: peripheral
 created: '2026-05-23'
-last_updated: 2026-07
+last_updated: '2026-08-25'
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -1759,7 +1759,7 @@ spec:
     SystemdCgroup = true
 ```
 
-### 9.4 [[14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening 2.md|安全加固配置]]
+### 9.4 [[14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md|安全加固配置]]
 
 ```yaml
 # Seccomp 配置

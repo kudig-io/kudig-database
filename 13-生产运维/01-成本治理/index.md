@@ -10,7 +10,7 @@ tags:
 - chargeback
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 成本治理 FinOps
 
@@ -31,9 +31,9 @@ last_updated: '2026-07-21'
 | [[13-生产运维/01-成本治理/01-cost-allocation-chargeback.md\|成本分摊]] | 按团队/项目 Chargeback | intermediate |
 | [[13-生产运维/01-成本治理/02-idle-resource-right-sizing.md\|Right-Sizing]] | 闲置资源识别与调整 | intermediate |
 | [[13-生产运维/01-成本治理/03-spot-instance-strategy.md\|Spot 实例]] | 抢占式实例策略 | advanced |
-| [[13-生产运维/01-成本治理/13-kubernetes-cost-governance.md\|K8s 成本治理]] | 集群级成本管控 | advanced |
-| [[13-生产运维/01-成本治理/14-finops-cost-governance-runbook.md\|FinOps Runbook]] | 成本治理操作手册 | advanced |
-| [[13-生产运维/01-成本治理/99-finops-cost-optimization-guide.md\|FinOps 指南]] | 完整成本优化指南 | advanced |
+| [[13-生产运维/01-成本治理/05-kubernetes-cost-governance.md\|K8s 成本治理]] | 集群级成本管控 | advanced |
+| [[13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md\|FinOps Runbook]] | 成本治理操作手册 | advanced |
+| [[13-生产运维/01-成本治理/07-finops-cost-optimization-guide.md\|FinOps 指南]] | 完整成本优化指南 | advanced |
 
 ## 成本优化工具
 

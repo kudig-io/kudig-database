@@ -10,7 +10,7 @@ tags:
 - managed-disk
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # Azure AKS
 
@@ -30,12 +30,12 @@ last_updated: '2026-07-21'
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [[18-云厂商/04-Azure-AKS/azure-aks-overview.md\|AKS 概览]] | 架构/定价/区域 | beginner |
-| [[18-云厂商/04-Azure-AKS/02-aks-cluster-lifecycle-upgrades.md\|集群升级]] | 生命周期与升级策略 | intermediate |
-| [[18-云厂商/04-Azure-AKS/03-aks-networking-azure-cni.md\|Azure CNI]] | 网络模式与配置 | advanced |
-| [[18-云厂商/04-Azure-AKS/04-aks-storage-managed-disk.md\|存储集成]] | Managed Disk/File CSI | intermediate |
-| [[18-云厂商/04-Azure-AKS/05-aks-identity-workload-identity.md\|Workload Identity]] | 无密钥身份认证 | advanced |
-| [[18-云厂商/04-Azure-AKS/06-aks-troubleshooting-playbook.md\|故障排查]] | AKS 常见问题处理 | advanced |
-| [[18-云厂商/04-Azure-AKS/99-azure-aks-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
+| [[18-云厂商/04-Azure-AKS/01-aks-cluster-lifecycle-upgrades.md\|集群升级]] | 生命周期与升级策略 | intermediate |
+| [[18-云厂商/04-Azure-AKS/02-aks-networking-azure-cni.md\|Azure CNI]] | 网络模式与配置 | advanced |
+| [[18-云厂商/04-Azure-AKS/03-aks-storage-managed-disk.md\|存储集成]] | Managed Disk/File CSI | intermediate |
+| [[18-云厂商/04-Azure-AKS/04-aks-identity-workload-identity.md\|Workload Identity]] | 无密钥身份认证 | advanced |
+| [[18-云厂商/04-Azure-AKS/05-aks-troubleshooting-playbook.md\|故障排查]] | AKS 常见问题处理 | advanced |
+| [[18-云厂商/04-Azure-AKS/06-azure-aks-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

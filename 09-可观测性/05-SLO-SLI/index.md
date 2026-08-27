@@ -10,7 +10,7 @@ tags:
 - sre
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # SLO & SLI 工程实践
 
@@ -32,7 +32,7 @@ last_updated: '2026-07-21'
 | [[09-可观测性/06-SLO-SLI/01-slo-engineering-practice.md\|SLO 工程实践]] | SLO 设计方法论与落地 | intermediate |
 | [[09-可观测性/06-SLO-SLI/02-error-budget-policy.md\|错误预算策略]] | 预算耗尽时的发布冻结机制 | advanced |
 | [[09-可观测性/06-SLO-SLI/03-sli-implementation-guide.md\|SLI 实现指南]] | 从指标到 SLI 的技术实现 | intermediate |
-| [[09-可观测性/06-SLO-SLI/18-slo-sli-system.md\|SLO/SLI 系统]] | 企业级 SLO 平台架构 | advanced |
+| [[09-可观测性/05-SLO-SLI/08-slo-sli-system.md\|SLO/SLI 系统]] | 企业级 SLO 平台架构 | advanced |
 
 ## SLO 设计检查清单
 

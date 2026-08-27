@@ -10,7 +10,7 @@ tags:
 - alert-fatigue
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 告警与 On-Call Alerting
 
@@ -32,9 +32,9 @@ last_updated: '2026-07-21'
 | [[09-可观测性/05-告警/01-alertmanager-deep-configuration.md\|Alertmanager 深度配置]] | 路由/抑制/静默/分组 | advanced |
 | [[09-可观测性/05-告警/02-pagerduty-opsgenie-integration.md\|PagerDuty/OpsGenie 集成]] | On-Call 平台对接 | intermediate |
 | [[09-可观测性/05-告警/03-alert-fatigue-reduction-strategies.md\|告警疲劳治理]] | 降噪/合并/自动化策略 | advanced |
-| [[09-可观测性/05-告警/05-alerting-management.md\|告警管理]] | 告警生命周期管理 | intermediate |
-| [[09-可观测性/05-告警/06-monitoring-alerting-practice.md\|监控告警实践]] | 生产环境告警最佳实践 | intermediate |
-| [[09-可观测性/05-告警/21-monitoring-playbooks.md\|监控 Playbook]] | 告警响应操作手册 | advanced |
+| [[09-可观测性/04-告警/04-alerting-management.md\|告警管理]] | 告警生命周期管理 | intermediate |
+| [[09-可观测性/04-告警/05-monitoring-alerting-practice.md\|监控告警实践]] | 生产环境告警最佳实践 | intermediate |
+| [[09-可观测性/04-告警/07-monitoring-playbooks.md\|监控 Playbook]] | 告警响应操作手册 | advanced |
 
 ## 告警质量检查清单
 

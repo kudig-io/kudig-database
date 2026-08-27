@@ -10,7 +10,7 @@ tags:
 - defense-in-depth
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 网络安全 Network Security
 
@@ -30,11 +30,11 @@ last_updated: '2026-07-21'
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [[08-安全/02-网络安全/02-network-security-policies.md\|NetworkPolicy 实践]] | 网络策略编写与测试 | intermediate |
-| [[08-安全/02-网络安全/07-zero-trust-security-architecture.md\|零信任安全架构]] | 零信任原则与落地 | advanced |
-| [[08-安全/02-网络安全/18-network-defense-depth.md\|网络纵深防御]] | 多层防御体系设计 | advanced |
-| [[08-安全/02-网络安全/19-zero-trust-architecture.md\|零信任架构实现]] | SPIFFE/mTLS/微分段 | advanced |
-| [[08-安全/02-网络安全/21-multicluster-security.md\|多集群安全]] | 跨集群网络策略与信任 | advanced |
+| [[08-安全/02-网络安全/01-network-security-policies.md\|NetworkPolicy 实践]] | 网络策略编写与测试 | intermediate |
+| [[08-安全/02-网络安全/02-zero-trust-security-architecture.md\|零信任安全架构]] | 零信任原则与落地 | advanced |
+| [[08-安全/02-网络安全/03-network-defense-depth.md\|网络纵深防御]] | 多层防御体系设计 | advanced |
+| [[08-安全/02-网络安全/04-zero-trust-architecture.md\|零信任架构实现]] | SPIFFE/mTLS/微分段 | advanced |
+| [[08-安全/02-网络安全/05-multicluster-security.md\|多集群安全]] | 跨集群网络策略与信任 | advanced |
 
 ## NetworkPolicy 最佳实践
 

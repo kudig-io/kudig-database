@@ -707,3 +707,5 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - [2026-07-02] RELEASE_RESTRUCTURE layout=release/{scripts,package/<DATE_TIME>/} packages=2(18-29+18-40) script_default=auto-timestamp safety_guard=added(vault/release/scripts/package protected) AGENT-USAGE.md=written
 
 - [2026-07-02] CORPUS_V2 profile_update=rag-full-profile.yaml(+synthesis/+topic-dictionary) export=3903pages/12.3M_tokens delta=+574pages/+724K_tokens synthesis=10pages topic_dictionary=564pages tier_counts=core:1122/sup:1693/per:1088 index.md=regenerated AGENT-USAGE.md=updated package=release/package/2026-07-02_18-53/
+
+- [2026-08-25] MAINTENANCE_CYCLE broken_wikilinks=109→0(remap=108,manual=1,files_edited=26) readme_sync=18→0 frontmatter_OK(4491) heading_OK(3972) ruff_OK path_sync=scripts→31-脚本 domain_mapping=updated(09/10/22) changelog=updated tools=ruff0.16.4(uv)

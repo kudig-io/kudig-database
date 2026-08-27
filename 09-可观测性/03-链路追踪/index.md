@@ -10,7 +10,7 @@ tags:
 - distributed-tracing
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 分布式链路追踪 Distributed Tracing
 
@@ -32,9 +32,9 @@ last_updated: '2026-07-21'
 | [[09-可观测性/04-链路追踪/01-jaeger-production-deployment.md\|Jaeger 生产部署]] | 架构/存储/采样/运维 | advanced |
 | [[09-可观测性/04-链路追踪/02-grafana-tempo-tracing.md\|Grafana Tempo 追踪]] | 对象存储后端、TraceQL | intermediate |
 | [[09-可观测性/04-链路追踪/03-opentelemetry-collector-patterns.md\|OTel Collector 模式]] | 采集器部署拓扑与管道配置 | advanced |
-| [[09-可观测性/04-链路追踪/03-opentelemetry-distributed-tracing.md\|OTel 分布式追踪]] | SDK 集成、Context 传播 | intermediate |
-| [[09-可观测性/04-链路追踪/04-distributed-tracing.md\|分布式追踪原理]] | Trace/Span/Baggage 核心概念 | beginner |
-| [[09-可观测性/04-链路追踪/99-distributed-tracing-guide.md\|追踪实践指南]] | 生产环境最佳实践汇总 | advanced |
+| [[09-可观测性/03-链路追踪/04-opentelemetry-distributed-tracing.md\|OTel 分布式追踪]] | SDK 集成、Context 传播 | intermediate |
+| [[09-可观测性/03-链路追踪/05-distributed-tracing.md\|分布式追踪原理]] | Trace/Span/Baggage 核心概念 | beginner |
+| [[09-可观测性/03-链路追踪/08-distributed-tracing-guide.md\|追踪实践指南]] | 生产环境最佳实践汇总 | advanced |
 
 ## 采样策略选择
 

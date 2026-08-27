@@ -10,7 +10,7 @@ tags:
 - dataplane-v2
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # Google Cloud GKE
 
@@ -28,12 +28,12 @@ last_updated: '2026-07-21'
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [[18-云厂商/03-Google-GKE/google-cloud-gke-overview.md\|GKE 概览]] | 架构/定价/区域 | beginner |
-| [[18-云厂商/03-Google-GKE/02-gke-autopilot-serverless.md\|Autopilot 模式]] | Serverless K8s 实践 | intermediate |
-| [[18-云厂商/03-Google-GKE/03-gke-networking-dataplane-v2.md\|Dataplane V2]] | eBPF 网络数据平面 | advanced |
-| [[18-云厂商/03-Google-GKE/04-gke-storage-filestore-gcs.md\|存储集成]] | Filestore/GCS CSI | intermediate |
-| [[18-云厂商/03-Google-GKE/05-gke-workload-identity-security.md\|Workload Identity]] | 无密钥身份认证 | advanced |
-| [[18-云厂商/03-Google-GKE/06-gke-troubleshooting-playbook.md\|故障排查]] | GKE 常见问题处理 | advanced |
-| [[18-云厂商/03-Google-GKE/99-gke-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
+| [[18-云厂商/03-Google-GKE/01-gke-autopilot-serverless.md\|Autopilot 模式]] | Serverless K8s 实践 | intermediate |
+| [[18-云厂商/03-Google-GKE/02-gke-networking-dataplane-v2.md\|Dataplane V2]] | eBPF 网络数据平面 | advanced |
+| [[18-云厂商/03-Google-GKE/03-gke-storage-filestore-gcs.md\|存储集成]] | Filestore/GCS CSI | intermediate |
+| [[18-云厂商/03-Google-GKE/04-gke-workload-identity-security.md\|Workload Identity]] | 无密钥身份认证 | advanced |
+| [[18-云厂商/03-Google-GKE/05-gke-troubleshooting-playbook.md\|故障排查]] | GKE 常见问题处理 | advanced |
+| [[18-云厂商/03-Google-GKE/06-gke-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

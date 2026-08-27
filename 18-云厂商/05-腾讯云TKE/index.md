@@ -10,7 +10,7 @@ tags:
 - vpc-cni
 tier: supporting
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 腾讯云 TKE
 
@@ -21,12 +21,12 @@ last_updated: '2026-07-21'
 | 文档 | 主题 | 难度 |
 |------|------|------|
 | [[18-云厂商/05-腾讯云TKE/tencent-tke-overview.md\|TKE 概览]] | 架构/集群类型/定价 | beginner |
-| [[18-云厂商/05-腾讯云TKE/02-tke-networking-vpc-cni.md\|VPC CNI 网络]] | 网络模式与配置 | intermediate |
-| [[18-云厂商/05-腾讯云TKE/03-tke-storage-cbs-cfs.md\|CBS/CFS 存储]] | 块存储/文件存储 CSI | intermediate |
-| [[18-云厂商/05-腾讯云TKE/04-tke-iam-cam-integration.md\|CAM 集成]] | 身份认证与权限 | advanced |
-| [[18-云厂商/05-腾讯云TKE/05-tke-troubleshooting-playbook.md\|故障排查]] | TKE 常见问题处理 | advanced |
-| [[18-云厂商/05-腾讯云TKE/06-tke-production-best-practices.md\|生产最佳实践]] | 集群创建/网络/存储/安全 | advanced |
-| [[18-云厂商/05-腾讯云TKE/99-tencent-tke-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
+| [[18-云厂商/05-腾讯云TKE/01-tke-networking-vpc-cni.md\|VPC CNI 网络]] | 网络模式与配置 | intermediate |
+| [[18-云厂商/05-腾讯云TKE/02-tke-storage-cbs-cfs.md\|CBS/CFS 存储]] | 块存储/文件存储 CSI | intermediate |
+| [[18-云厂商/05-腾讯云TKE/03-tke-iam-cam-integration.md\|CAM 集成]] | 身份认证与权限 | advanced |
+| [[18-云厂商/05-腾讯云TKE/04-tke-troubleshooting-playbook.md\|故障排查]] | TKE 常见问题处理 | advanced |
+| [[18-云厂商/05-腾讯云TKE/05-tke-production-best-practices.md\|生产最佳实践]] | 集群创建/网络/存储/安全 | advanced |
+| [[18-云厂商/05-腾讯云TKE/06-tencent-tke-production-runbook.md\|生产 Runbook]] | 生产运维运行手册 | advanced |
 
 ## Related
 

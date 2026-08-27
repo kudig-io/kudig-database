@@ -11,7 +11,7 @@ tags:
 - ebpf
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 网络基础 Network Fundamentals
 
@@ -36,7 +36,7 @@ last_updated: '2026-07-21'
 | [[05-网络/02-网络基础/04-load-balancing-technologies.md\|负载均衡]] | L4/L7 LB 技术 | intermediate |
 | [[05-网络/02-网络基础/05-network-security-fundamentals.md\|网络安全]] | TLS/防火墙/微分段 | intermediate |
 | [[05-网络/02-网络基础/06-sdn-network-virtualization.md\|SDN 虚拟化]] | Overlay/VXLAN/eBPF | advanced |
-| [[05-网络/02-网络基础/99-cilium-ebpf-network-guide.md\|Cilium eBPF]] | eBPF 网络实践指南 | advanced |
+| [[05-网络/02-网络基础/09-cilium-ebpf-network-guide.md\|Cilium eBPF]] | eBPF 网络实践指南 | advanced |
 
 ## Related
 

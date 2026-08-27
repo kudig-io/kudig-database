@@ -10,7 +10,7 @@ tags:
 - best-practices
 tier: core
 created: '2026-07-23'
-last_updated: '2026-07-23'
+last_updated: '2026-08-27'
 difficulty: intermediate
 audience:
 - 所有工程师
@@ -72,7 +72,7 @@ estimated_read_time: 10min
 
 | 组件 | 覆盖场景 | 高频标记 |
 |:---|:---|:---|
-| [csi-storage/](06-存储/csi-storage/) | CSI 驱动异常、PV/PVC 挂载失败、存储后端、持久存储管理、存储最佳实践 | 🔴 工单TOP |
+| [csi-storage/](06-存储/csi-storage/) | CSI 驱动异常、PV/PVC 挂载失败、存储后端、持久存储管理、应用级备份恢复与灾备演练（Velero Runbook）、存储最佳实践 | 🔴 工单TOP |
 
 ## 五、安全 `安全/`
 
@@ -82,7 +82,7 @@ estimated_read_time: 10min
 | [certificate/](07-安全/certificate/) | 证书过期、轮换失败、CA 链断裂、kubelet 证书 | 🔴 工单TOP |
 | [webhook-admission/](07-安全/webhook-admission/) | Webhook 超时、TLS 错误、失败策略 | |
 | [pod-security/](07-安全/pod-security/) | PSP/SCC/PSA 策略迁移、安全上下文、Pod 安全指南 | |
-| [resource-quota/](07-安全/resource-quota/) | ResourceQuota/LimitRange 配额超限 | |
+| [resource-quota/](07-安全/resource-quota/) | ResourceQuota/LimitRange 配额超限、Terminating 阻塞、多租户隔离诊断 Runbook | |
 
 ## 六、节点 `节点/`
 
@@ -90,7 +90,7 @@ estimated_read_time: 10min
 |:---|:---|:---|
 | [node/](03-节点/node/) | NotReady、MemoryPressure、DiskPressure、kubelet 异常；节点排水维护、NotReady 完整诊断技能 | 🔴 工单TOP |
 | [nodepool/](03-节点/nodepool/) | 节点池扩缩失败、配置漂移 | |
-| [gpu/](03-节点/gpu/) | GPU 调度失败、设备插件异常、驱动兼容、AI/ML 工作负载 | |
+| [gpu/](03-节点/gpu/) | GPU 调度失败、设备插件异常、驱动/CUDA 兼容、MIG/time-slicing、NCCL 多机通信、AI/ML 工作负载 | |
 
 ## 七、可观测性 `可观测性/`
 
@@ -105,8 +105,8 @@ estimated_read_time: 10min
 | [cluster-upgrade/](01-集群运维/cluster-upgrade/) | 集群升级失败、版本兼容、集群配置、最佳实践合集 | 🔵 最佳实践TOP |
 | [cluster-autoscaler/](01-集群运维/cluster-autoscaler/) | 自动扩缩容异常、节点池联动 | |
 | [cloud-provider/](01-集群运维/cloud-provider/) | Cloud Controller 异常、SLB/ECS 联动 | |
-| [gitops-argocd/](01-集群运维/gitops-argocd/) | ArgoCD 同步失败、Application 状态异常、GitOps 流程 | |
-| [helm/](01-集群运维/helm/) | Helm Release 失败、Chart 渲染错误 | 🟢 产品高频 |
+| [helm/](01-集群运维/helm/) | Helm Release 失败、Chart 渲染错误、升级超时、Hook 卡死、回滚失败、资源漂移 | 🟢 产品高频 |
+| [gitops-argocd/](01-集群运维/gitops-argocd/) | ArgoCD 同步失败、Application 状态异常、Git 凭证过期、Repo Server 故障、GitOps 流程 | |
 | [openkruise/](01-集群运维/openkruise/) | OpenKruise 高级工作负载异常 | |
 | [kubeadm/](01-集群运维/kubeadm/) | 集群生命周期、HA 搭建、集群清理 | 🔵 最佳实践TOP |
 | [migration/](01-集群运维/migration/) | 集群/工作负载迁移方案与实战 | |

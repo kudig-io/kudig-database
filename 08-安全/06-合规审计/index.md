@@ -10,7 +10,7 @@ tags:
 - compliance
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 合规审计 Compliance & Audit
 
@@ -32,17 +32,17 @@ last_updated: '2026-07-21'
 |------|------|------|
 | [[08-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md\|审计日志配置]] | Audit Policy/Backend/存储 | advanced |
 | [[08-安全/06-合规审计/02-encryption-at-rest-transit.md\|加密体系]] | 静态/传输加密配置 | advanced |
-| [[08-安全/06-合规审计/04-audit-logging-compliance.md\|审计合规]] | 日志合规与保留策略 | intermediate |
-| [[08-安全/06-合规审计/08-cis-benchmark-compliance-audit.md\|CIS Benchmark]] | kube-bench 扫描与修复 | intermediate |
-| [[08-安全/06-合规审计/08-security-best-practices.md\|安全最佳实践]] | 生产安全实践汇总 | intermediate |
-| [[08-安全/06-合规审计/09-security-hardening-production.md\|安全加固]] | 生产环境加固指南 | advanced |
-| [[08-安全/06-合规审计/10-certificate-management.md\|证书管理]] | cert-manager/TLS 自动化 | intermediate |
-| [[08-安全/06-合规审计/11-kubernetes-security-hardening.md\|K8s 加固]] | 集群安全加固全景 | advanced |
-| [[08-安全/06-合规审计/12-compliance-certification.md\|合规认证]] | 合规认证流程与准备 | intermediate |
-| [[08-安全/06-合规审计/16-compliance-audit-practices.md\|审计实践]] | 合规审计操作实践 | advanced |
-| [[08-安全/06-合规审计/17-comprehensive-security-scanning.md\|安全扫描]] | 镜像/配置/漏洞扫描 | intermediate |
-| [[08-安全/06-合规审计/99-cert-manager-tls-guide.md\|cert-manager 指南]] | TLS 证书自动化指南 | intermediate |
-| [[08-安全/06-合规审计/99-java-security-kubernetes-guide.md\|Java 安全指南]] | Java on K8s 安全实践 | intermediate |
+| [[08-安全/06-合规审计/03-audit-logging-compliance.md\|审计合规]] | 日志合规与保留策略 | intermediate |
+| [[08-安全/06-合规审计/04-cis-benchmark-compliance-audit.md\|CIS Benchmark]] | kube-bench 扫描与修复 | intermediate |
+| [[08-安全/06-合规审计/05-security-best-practices.md\|安全最佳实践]] | 生产安全实践汇总 | intermediate |
+| [[08-安全/06-合规审计/06-security-hardening-production.md\|安全加固]] | 生产环境加固指南 | advanced |
+| [[08-安全/06-合规审计/07-certificate-management.md\|证书管理]] | cert-manager/TLS 自动化 | intermediate |
+| [[08-安全/06-合规审计/08-kubernetes-security-hardening.md\|K8s 加固]] | 集群安全加固全景 | advanced |
+| [[08-安全/06-合规审计/09-compliance-certification.md\|合规认证]] | 合规认证流程与准备 | intermediate |
+| [[08-安全/06-合规审计/10-compliance-audit-practices.md\|审计实践]] | 合规审计操作实践 | advanced |
+| [[08-安全/06-合规审计/11-comprehensive-security-scanning.md\|安全扫描]] | 镜像/配置/漏洞扫描 | intermediate |
+| [[08-安全/06-合规审计/13-cert-manager-tls-guide.md\|cert-manager 指南]] | TLS 证书自动化指南 | intermediate |
+| [[08-安全/06-合规审计/14-java-security-kubernetes-guide.md\|Java 安全指南]] | Java on K8s 安全实践 | intermediate |
 
 ## 合规审计检查清单
 

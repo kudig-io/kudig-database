@@ -10,7 +10,7 @@ tags:
 - admission-control
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 策略治理 Policy & Governance
 
@@ -29,13 +29,13 @@ last_updated: '2026-07-21'
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [[08-安全/04-策略治理/04-kyverno-enterprise-policy-management.md\|Kyverno 企业策略]] | 策略编写/测试/部署 | advanced |
-| [[08-安全/04-策略治理/05-policy-validation-tools.md\|策略验证工具]] | conftest/kube-score/CI 集成 | intermediate |
-| [[08-安全/04-策略治理/06-pod-security-standards.md\|Pod 安全标准]] | PSS/PSA 三级安全模型 | intermediate |
-| [[08-安全/04-策略治理/09-opa-gatekeeper-policy.md\|OPA Gatekeeper]] | ConstraintTemplate/审计 | advanced |
-| [[08-安全/04-策略治理/14-policy-engines-opa-kyverno.md\|策略引擎对比]] | OPA vs Kyverno 选型 | intermediate |
-| [[08-安全/04-策略治理/99-kyverno-policy-guide.md\|Kyverno 指南]] | 完整实践指南 | advanced |
-| [[08-安全/04-策略治理/99-opa-gatekeeper-policy-guide.md\|OPA 指南]] | 完整实践指南 | advanced |
+| [[08-安全/04-策略治理/01-kyverno-enterprise-policy-management.md\|Kyverno 企业策略]] | 策略编写/测试/部署 | advanced |
+| [[08-安全/04-策略治理/02-policy-validation-tools.md\|策略验证工具]] | conftest/kube-score/CI 集成 | intermediate |
+| [[08-安全/04-策略治理/03-pod-security-standards.md\|Pod 安全标准]] | PSS/PSA 三级安全模型 | intermediate |
+| [[08-安全/04-策略治理/04-opa-gatekeeper-policy.md\|OPA Gatekeeper]] | ConstraintTemplate/审计 | advanced |
+| [[08-安全/04-策略治理/05-policy-engines-opa-kyverno.md\|策略引擎对比]] | OPA vs Kyverno 选型 | intermediate |
+| [[08-安全/04-策略治理/08-kyverno-policy-guide.md\|Kyverno 指南]] | 完整实践指南 | advanced |
+| [[08-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md\|OPA 指南]] | 完整实践指南 | advanced |
 
 ## 策略治理检查清单
 

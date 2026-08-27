@@ -14,7 +14,7 @@ tags:
 - cloud-k8s
 tier: peripheral
 created: '2026-07-02'
-last_updated: '2026-07-23'
+last_updated: '2026-08-25'
 ---
 # 其他云厂商 K8s 服务
 
@@ -30,7 +30,7 @@ last_updated: '2026-07-23'
 | [[18-云厂商/08-其他云/oracle-oke-overview.md\|Oracle OKE]] | Oracle Container Engine、HA 控制面、企业节点池 | intermediate |
 | [[18-云厂商/08-其他云/ucloud-uk8s-overview.md\|UCloud UK8S]] | UCloud 容器服务、计费、混合节点池 | intermediate |
 | [[18-云厂商/08-其他云/volcengine-vek-overview.md\|火山引擎 VEK]] | 火山引擎容器服务、字节级调度 | intermediate |
-| [[18-云厂商/08-其他云/02-multi-cluster-management-federation.md\|多集群管理与联邦]] | Cluster API、Karmada、GitOps 多集群 | advanced |
+| [[18-云厂商/08-其他云/01-multi-cluster-management-federation.md\|多集群管理与联邦]] | Cluster API、Karmada、GitOps 多集群 | advanced |
 
 ## 厂商对比
 

@@ -10,7 +10,7 @@ tags:
 - ambient-mesh
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 服务网格 Service Mesh
 
@@ -40,9 +40,9 @@ last_updated: '2026-07-21'
 | [[05-网络/03-服务网格/08-ambient-mesh-l7-policy.md\|Ambient Mesh]] | 无 Sidecar L7 策略 | advanced |
 | [[05-网络/03-服务网格/09-microservice-resilience-patterns.md\|韧性模式]] | 重试/熔断/超时/限流 | intermediate |
 | [[05-网络/03-服务网格/10-api-gateway-service-mesh-integration.md\|网关集成]] | API Gateway + Mesh | advanced |
-| [[05-网络/03-服务网格/99-istio-service-mesh-guide.md\|Istio 指南]] | 完整实践指南 | advanced |
-| [[05-网络/03-服务网格/99-linkerd-service-mesh-guide.md\|Linkerd 指南]] | 完整实践指南 | intermediate |
-| [[05-网络/03-服务网格/99-spring-cloud-kubernetes-service-mesh-guide.md\|Spring Cloud 指南]] | Java 微服务 Mesh | advanced |
+| [[05-网络/03-服务网格/11-istio-service-mesh-guide.md\|Istio 指南]] | 完整实践指南 | advanced |
+| [[05-网络/03-服务网格/12-linkerd-service-mesh-guide.md\|Linkerd 指南]] | 完整实践指南 | intermediate |
+| [[05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide.md\|Spring Cloud 指南]] | Java 微服务 Mesh | advanced |
 
 ## Related
 

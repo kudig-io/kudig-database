@@ -10,7 +10,7 @@ tags:
 - rolling-update
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 升级路径 Upgrade Paths
 
@@ -29,11 +29,11 @@ last_updated: '2026-07-21'
 
 | 文件 | 内容 | 难度 |
 |------|------|------|
-| [[01-集群基础/06-升级路径/06-cluster-configuration-parameters.md\|集群配置参数]] | 升级相关配置参数详解 | intermediate |
-| [[01-集群基础/06-升级路径/07-upgrade-paths-strategy.md\|升级策略]] | 升级路径规划、版本选择 | advanced |
-| [[01-集群基础/06-升级路径/18-upgrade-migration-strategy.md\|升级迁移策略]] | 大规模集群升级、迁移 | advanced |
-| [[01-集群基础/06-升级路径/99-kubernetes-v1.33-upgrade-guide.md\|v1.33 升级指南]] | 最新版本升级实操 | intermediate |
-| [[01-集群基础/03-控制平面/35-cluster-upgrade-runbook.md\|升级 Runbook]] | 完整升级操作手册 | advanced |
+| [[01-集群基础/06-升级路径/01-cluster-configuration-parameters.md\|集群配置参数]] | 升级相关配置参数详解 | intermediate |
+| [[01-集群基础/06-升级路径/02-upgrade-paths-strategy.md\|升级策略]] | 升级路径规划、版本选择 | advanced |
+| [[01-集群基础/06-升级路径/03-upgrade-migration-strategy.md\|升级迁移策略]] | 大规模集群升级、迁移 | advanced |
+| [[01-集群基础/06-升级路径/04-kubernetes-v1.33-upgrade-guide.md\|v1.33 升级指南]] | 最新版本升级实操 | intermediate |
+| [[01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md\|升级 Runbook]] | 完整升级操作手册 | advanced |
 
 ## 升级检查清单
 

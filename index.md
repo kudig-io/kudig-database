@@ -86,6 +86,7 @@ trigger_keywords:
 
 ## 其他顶层目录
 
+- [[39-百炼智能体/index.md|百炼智能体]] — 近期重点：百炼平台 Agentic Ops（智能体定时巡检部署、本地 kind 集群 MCP 接入）
 - [[25-研究/index.md|research]] — 研究资料
 - [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release]] — 发布产物
 - [[27-标签/index.md|tags]] — 标签索引

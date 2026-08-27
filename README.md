@@ -11,7 +11,7 @@ tags:
 - ops
 tier: core
 created: '2026-07-01'
-last_updated: '2026-08-21'
+last_updated: '2026-08-25'
 ---
 
 # KUDIG Database
@@ -111,6 +111,7 @@ KUDIG 的差异化能力在于其结构化排障引擎：
 | FinOps 成本治理 | `13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md` |
 | AI/ML 运维 | `15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md` |
 | 边缘生产运维 | `16-专项技术/01-边缘计算/12-edge-production-runbook.md` |
+| 智能体每日巡检 | `39-百炼智能体/01-每日巡检部署配置.md` |
 
 各域入口级 `99-production-readiness-operations-guide.md` 提供领域就绪指南。
 
@@ -202,14 +203,17 @@ make corpus-validate
 ├── 34-源码分析/                  # 源码分析笔记
 ├── 35-元数据/                    # 元数据、语料配置、taxonomy、schema、journal
 ├── 36-报告/                      # 质量报告与评估（冻结）
-└── 37-归档/                      # Wiki 归档快照（冻结，重建用）
+├── 37-归档/                      # Wiki 归档快照（冻结，重建用）
+├── 38-消化/                      # 知识消化产物（播客等二次创作）
+├── 39-百炼智能体/                # 近期重点：百炼平台 Agentic Ops（智能体定时巡检、本地集群 MCP 接入）
+└── kubernetes-hardware/          # 硬件调研报告与生成脚本（研究产物）
 ```
 
 完整目录映射与命名规范详见 [`35-元数据/metadata/domain-mapping.md`](35-元数据/metadata/domain-mapping.md)。
 
 ### 命名约定
 
-- **一级目录**：`NN-中文简称`（01-37 有序化前缀）
+- **一级目录**：`NN-中文简称`（01-39 有序化前缀）
 - **二级目录**（知识域内）：同样 `NN-` 前缀；英文缩写/工具名保留（如 `GitOps`、`IaC`、`eBPF`）
 - **文件名**：`kebab-case.md`，ASCII 字符
 - **入口文件**：每个域根目录有 `README.md` 或 `index.md`
@@ -227,17 +231,20 @@ make corpus-validate
 本地质量检查：
 
 ```bash
-# Python 脚本 lint
-ruff check scripts/
+# Python 脚本 lint（CI 同步）
+ruff check 31-脚本/maintenance/
+
+# README 与实际目录一致性校验
+python3 31-脚本/readme-sync-check.py
 
 # Frontmatter 完整性验证
-python3 scripts/frontmatter-quality-check.py
+python3 31-脚本/frontmatter-quality-check.py
 
 # Broken wikilink 检查
-bash scripts/check-broken-links.sh
+bash 31-脚本/check-broken-links.sh
 
 # 代码块语法验证
-bash scripts/code-example-validation.sh
+bash 31-脚本/code-example-validation.sh
 ```
 
 ---

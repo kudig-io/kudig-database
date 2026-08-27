@@ -10,8 +10,8 @@ tier: core
 sources:
 - manual
 created: 2026-01-16
-updated: 2026-07-01
-last_updated: 2026-07-01
+updated: 2026-08-25
+last_updated: 2026-08-25
 ---
 
 
@@ -49,8 +49,8 @@ cd kudig-database
 git checkout -b fix/alertmanager-deprecated-fields
 
 # 3. 本地校验（提交前必跑，见第 5 节）
-ruff check scripts/
-python3 scripts/frontmatter-quality-check.py
+ruff check 31-脚本/maintenance/
+python3 31-脚本/readme-sync-check.py
 
 # 4. 提交（遵循 Conventional Commits，见第 4 节）
 git add -A && git commit -m "fix: 替换 Alertmanager 废弃字段"
@@ -76,11 +76,12 @@ git push origin fix/alertmanager-deprecated-fields
 
 提交前确保以下检查通过（CI 会强制执行部分项）：
 
-- [ ] **ruff**：`ruff check scripts/`（Python 脚本 lint，line-length 120）
+- [ ] **ruff**：`ruff check 31-脚本/maintenance/`（Python 脚本 lint，line-length 120）
 - [ ] **frontmatter**：每个 `.md` 必须有可解析的 YAML frontmatter，含 `title`、`category`、`tags`
-- [ ] **wikilinks**：`bash scripts/check-broken-links.sh`（无新增 broken `[[...]]` 链接）
-- [ ] **代码块**：`bash scripts/code-example-validation.sh`（YAML / bash 代码块语法有效）
-- [ ] **构建**：`cd web && npm ci && npm run build`（Astro 站点可构建）
+- [ ] **wikilinks**：`bash 31-脚本/check-broken-links.sh`（无新增 broken `[[...]]` 链接）
+- [ ] **代码块**：`bash 31-脚本/code-example-validation.sh`（YAML / bash 代码块语法有效）
+- [ ] **README 一致性**：`python3 31-脚本/readme-sync-check.py`（目录图与子目录声明与实际一致）
+- [ ] **构建**：`cd 30-站点 && npm ci && npm run build`（Astro 站点可构建）
 
 ## 6. 内容质量标准
 
@@ -109,7 +110,7 @@ sources: ["kubernetes.io/..."] # 推荐，权威来源链接
 
 - 外部链接指向权威源（kubernetes.io、github.com 官方仓库、CNCF 项目站）
 - 内部 wikilink `页面名` 指向必须存在的页面
-- 每个 `_archives/` 与 `_archived-release-notes/` 下的内容不参与链接校验
+- 每个 `37-归档/` 下的内容不参与链接校验
 
 ## 7. PR 审查要点
 

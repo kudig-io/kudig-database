@@ -13,7 +13,7 @@ tags:
 - ebpf
 tier: core
 created: '2026-05-23'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 difficulty: intermediate
 audience:
 - 所有工程师
@@ -28,13 +28,13 @@ estimated_read_time: 10min
 
 | 子目录 | 内容 | 核心话题 |
 |--------|------|----------|
-| [[09-可观测性/01-总览/index.md\|总览/]] | 架构总览 | 三大支柱/可观测性成熟度/架构设计 |
-| [[09-可观测性/02-指标/index.md\|指标/]] | 指标监控 | Prometheus/Grafana/PromQL/自定义指标 |
-| [[09-可观测性/03-日志/index.md\|日志/]] | 日志管理 | Loki/Fluentd/日志规范/结构化日志 |
-| [[09-可观测性/04-链路追踪/index.md\|链路追踪/]] | 分布式追踪 | Jaeger/Tempo/OpenTelemetry/采样策略 |
-| [[09-可观测性/05-告警/index.md\|告警/]] | 告警体系 | Alertmanager/告警规则/告警收敛/On-Call |
-| [[09-可观测性/06-SLO-SLI/index.md\|SLO-SLI/]] | SLO 框架 | SLO/SLI/Error Budget/多窗口告警 |
-| [[09-可观测性/07-工具/index.md\|工具/]] | 工具集 | eBPF/Pixie/OpenTelemetry Collector |
+| [[09-可观测性/00-总览/index.md\|总览/]] | 架构总览 | 三大支柱/可观测性成熟度/架构设计 |
+| [[09-可观测性/01-指标/index.md\|指标/]] | 指标监控 | Prometheus/Grafana/PromQL/自定义指标 |
+| [[09-可观测性/02-日志/index.md\|日志/]] | 日志管理 | Loki/Fluentd/日志规范/结构化日志 |
+| [[09-可观测性/03-链路追踪/index.md\|链路追踪/]] | 分布式追踪 | Jaeger/Tempo/OpenTelemetry/采样策略 |
+| [[09-可观测性/04-告警/index.md\|告警/]] | 告警体系 | Alertmanager/告警规则/告警收敛/On-Call |
+| [[09-可观测性/05-SLO-SLI/index.md\|SLO-SLI/]] | SLO 框架 | SLO/SLI/Error Budget/多窗口告警 |
+| [[09-可观测性/06-工具/index.md\|工具/]] | 工具集 | eBPF/Pixie/OpenTelemetry Collector |
 
 ## 跨域导航
 

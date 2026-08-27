@@ -10,7 +10,7 @@ tags:
 - admission-policy
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 集群治理 Cluster Governance
 
@@ -34,7 +34,7 @@ last_updated: '2026-07-21'
 | [[13-生产运维/02-集群治理/02-label-convention-governance.md\|标签规范]] | 强制标签与注解规范 | intermediate |
 | [[13-生产运维/02-集群治理/03-admission-policy-governance.md\|准入策略]] | Admission Webhook 治理 | advanced |
 | [[13-生产运维/02-集群治理/04-rbac-governance-model.md\|RBAC 治理]] | 权限模型与审计 | advanced |
-| [[13-生产运维/02-集群治理/14-resource-quota-management.md\|资源配额]] | Quota/LimitRange 管理 | intermediate |
+| [[13-生产运维/02-集群治理/06-resource-quota-management.md\|资源配额]] | Quota/LimitRange 管理 | intermediate |
 
 ## Related
 

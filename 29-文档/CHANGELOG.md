@@ -10,8 +10,8 @@ tier: supporting
 sources:
 - git-log
 created: 2026-01-16
-updated: 2026-07-01
-last_updated: 2026-07-01
+updated: 2026-08-25
+last_updated: 2026-08-25
 ---
 
 
@@ -21,6 +21,20 @@ last_updated: 2026-07-01
 本文件记录 KUDIG 云原生运维知识库的 notable 变更。遵循 [Keep a Changelog](https://keepachangelog.com/) 风格，按 git 历史归类。
 
 ## [Unreleased]
+
+### 全量维护（2026-08）
+
+#### 断链清零
+- 重映射 109 个 broken wikilinks：26 个 index.md/导航页在子目录重新编号后仍使用旧编号链接（如 `09-可观测性` 的 `02-指标/` → `01-指标/`、各云厂商域文件号整体前移），按主题名精确重映射到真实文件
+- 修复 1 个 macOS 重复后缀链接（`08-runtime-security-hardening 2.md` → `09-runtime-security-hardening.md`）
+
+#### README / 规范一致性
+- `readme-sync-check` 18 个问题 → 0：同步 `09-可观测性` 子目录编号（`00-总览/` 起）、修复 `22-概念` 2 个连字符文件名链接、`34-源码分析` 代码分析目录链接改指 `index.md`、根 README 目录图补录 `38-消化/` 与 `kubernetes-hardware/`
+- `domain-mapping.md` 同步可观测性/平台工程/概念三个目录的实际二级结构（`00-总览` 编号方案）
+- README / CONTRIBUTING 中旧 `scripts/`、`web/`、`_archives/` 路径统一为 `31-脚本/`、`30-站点/`、`37-归档/`
+
+#### 质量门禁（本地全量复验）
+- frontmatter 完整性（4491 文件）/ 标题层级（3972 文件）/ 断链 / README 一致性 / ruff lint 全部通过
 
 ### 生产级整改（2026-07）
 

@@ -10,7 +10,7 @@ tags:
 - ebpf
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 可观测性工具 Observability Tools
 
@@ -30,14 +30,14 @@ last_updated: '2026-07-21'
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [[09-可观测性/07-工具/02-grafana-enterprise-observability.md\|Grafana 企业可观测]] | Grafana 全栈部署与配置 | advanced |
-| [[09-可观测性/07-工具/05-datadog-enterprise-apm.md\|Datadog APM]] | Datadog APM 企业实践 | advanced |
-| [[09-可观测性/07-工具/05-datadog-enterprise-monitoring.md\|Datadog 监控]] | Datadog 基础设施监控 | intermediate |
-| [[09-可观测性/07-工具/07-zabbix-enterprise-monitoring.md\|Zabbix 监控]] | Zabbix 企业级部署 | intermediate |
-| [[09-可观测性/07-工具/08-new-relic-enterprise-apm.md\|New Relic APM]] | New Relic 全栈可观测 | intermediate |
-| [[09-可观测性/07-工具/26-troubleshooting-tools.md\|排障工具]] | kubectl/istioctl/tcpdump 等 | intermediate |
-| [[09-可观测性/07-工具/27-performance-profiling-tools.md\|性能 Profiling]] | pprof/async-profiler/Pyroscope | advanced |
-| [[09-可观测性/07-工具/30-ebpf-observability.md\|eBPF 可观测]] | Cilium Hubble/Pixie/bpftrace | advanced |
+| [[09-可观测性/06-工具/01-grafana-enterprise-observability.md\|Grafana 企业可观测]] | Grafana 全栈部署与配置 | advanced |
+| [[09-可观测性/06-工具/02-datadog-enterprise-apm.md\|Datadog APM]] | Datadog APM 企业实践 | advanced |
+| [[09-可观测性/06-工具/03-datadog-enterprise-monitoring.md\|Datadog 监控]] | Datadog 基础设施监控 | intermediate |
+| [[09-可观测性/06-工具/04-zabbix-enterprise-monitoring.md\|Zabbix 监控]] | Zabbix 企业级部署 | intermediate |
+| [[09-可观测性/06-工具/05-new-relic-enterprise-apm.md\|New Relic APM]] | New Relic 全栈可观测 | intermediate |
+| [[09-可观测性/06-工具/06-troubleshooting-tools.md\|排障工具]] | kubectl/istioctl/tcpdump 等 | intermediate |
+| [[09-可观测性/06-工具/07-performance-profiling-tools.md\|性能 Profiling]] | pprof/async-profiler/Pyroscope | advanced |
+| [[09-可观测性/06-工具/08-ebpf-observability.md\|eBPF 可观测]] | Cilium Hubble/Pixie/bpftrace | advanced |
 
 ## 选型决策指南
 

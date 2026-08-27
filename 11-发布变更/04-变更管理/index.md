@@ -10,7 +10,7 @@ tags:
 - release-window
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-21'
+last_updated: '2026-08-25'
 ---
 # 变更管理 Change Management
 
@@ -33,7 +33,7 @@ last_updated: '2026-07-21'
 | [[11-发布变更/04-变更管理/02-canary-release-strategy.md\|金丝雀发布]] | 渐进式发布策略 | intermediate |
 | [[11-发布变更/04-变更管理/03-change-rollback-playbook.md\|回滚 Playbook]] | 变更回滚操作手册 | advanced |
 | [[11-发布变更/04-变更管理/04-secret-rotation-cicd.md\|密钥轮换]] | CI/CD 中的密钥轮换 | advanced |
-| [[11-发布变更/04-变更管理/22-change-management-process.md\|变更流程]] | 端到端变更管理流程 | intermediate |
+| [[11-发布变更/04-变更管理/08-change-management-process.md\|变更流程]] | 端到端变更管理流程 | intermediate |
 
 ## 变更管理检查清单
 
