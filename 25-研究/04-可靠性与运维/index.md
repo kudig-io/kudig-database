@@ -17,3 +17,5 @@ created: '2026-07-25'
 - [[25-研究/04-可靠性与运维/kubernetes-finops-practice.md|kubernetes-finops-practice]]
 - [[25-研究/04-可靠性与运维/multi-tenancy-isolation.md|multi-tenancy-isolation]]
 - [[25-研究/04-可靠性与运维/observability-evolution.md|observability-evolution]]
+- [[25-研究/04-可靠性与运维/kubernetes-v1.37-release-research.md|kubernetes-v1.37-release-research]]
+- [[25-研究/04-可靠性与运维/kubernetes-v1.37-quick-qa.md|kubernetes-v1.37-quick-qa]]

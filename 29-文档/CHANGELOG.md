@@ -22,6 +22,12 @@ last_updated: 2026-08-25
 
 ## [Unreleased]
 
+### 内容新增（2026-08）
+
+- 新增《Kubernetes v1.37 发布专题研究》（`25-研究/04-可靠性与运维/`）：v1.37 Garhwal（2026-08-26，67 项增强）全景解读 — 16 Stable / 23 Beta / 27 Alpha 分级梳理，ipvs 废弃时间线（v1.40 默认禁用 / v1.43 移除）、kube-dns 废弃、静态 Pod 禁引用 Secret/ConfigMap、cgroup v1 淘汰、SELinux 挂载 GA 等废弃项影响分析，附 SRE 分阶段行动清单
+- 新增《Kubernetes v1.37 升级实操指南》（`01-集群基础/06-升级路径/05-`）：v1.36→v1.37 升级前五项必查（proxy 模式、静态 Pod 引用、cgroup 版本、kube-dns、SELinux 共卷）、kubeadm 滚动升级流程、默认生效/需显式启用的特性门禁表、回滚预案与常见问题排查
+- 同步收录至 `01-集群基础/06-升级路径/index.md` 与 `25-研究/04-可靠性与运维/index.md`
+
 ### 全量维护（2026-08）
 
 #### 断链清零

@@ -1,0 +1,48 @@
+{
+  "title": "KUDIG GTM 页面 · 视觉世界选择",
+  "question": "抽签指定了「知识线网」。保留它、选择替代方案、或重新抽签。",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "知识线网",
+      "kicker": "THE ROLL",
+      "lineage": "1972 Vignelli 纽约地铁图 / Beck 伦敦地铁图解",
+      "thesis": "21 个知识域即 21 条线路，4,750 篇文档即站点，跨域 Runbook 即换乘枢纽——导航知识本身就是产品演示。",
+      "palette": ["#E31837", "#0039A6", "#00933C", "#FCCC0A", "#FF6319", "#F8F6F0"],
+      "materials": ["粗线条与圆形站点圆点", "高密度 Helvetica 网格", "换乘枢纽双环", "平面饱和线路色"],
+      "viewport": "首屏即线网图本身：产品名作为线网图标题栏，21 条彩色线路汇聚成一张可扫描的图解，主操作按钮在图例旁：进入知识网络。",
+      "risk": "线网图若未编码真实域数据则沦为装饰；图解的排版工艺要求极高，做不好即暴露。"
+    },
+    {
+      "id": "model-pick",
+      "label": "翻牌信息板",
+      "kicker": "IMPECCABLE'S PICK",
+      "lineage": "1950s Solari 车站机械翻牌出发信息板",
+      "thesis": "知识库如大型枢纽车站的出发信息板：每个知识域一行翻牌，文档数实时翻动，状态永远是 ON TIME。",
+      "palette": ["#1A1A1A", "#FFB800", "#E8E4DC", "#C41E1E"],
+      "materials": ["机械翻牌动画", "宽幅等宽字体", "行号与箭头指示", "哑光黑面板质感"],
+      "viewport": "首屏一面墙大的翻牌板：KUDIG DATABASE 为顶行，21 个知识域逐行翻入显示文档数与域状态，主 CTA 为发光的站台号。",
+      "risk": "翻牌板美学正成为开发者工具营销页的常见手法，辨识度随时间衰减；大面积机械动画的性能需控制。"
+    },
+    {
+      "id": "canon",
+      "label": "品类标准",
+      "kicker": "STANDING EXIT",
+      "lineage": "2020s Dev-tool SaaS 营销页",
+      "thesis": "标准开发工具营销页：暗色英雄区 + 渐变高亮 + 功能卡片网格 + 代码片段 + Star CTA。",
+      "palette": ["#0A0A0F", "#1E293B", "#3B82F6", "#F8FAFC"],
+      "materials": ["玻璃拟态卡片", "渐变文字", "代码块截图", "平滑滚动动画"],
+      "viewport": "居中式英雄区：大标题 + 副标题 + 双按钮 + 产品截图，下方三列功能网格与 GitHub 徽章。",
+      "risk": "按设计意图与竞品无法区分——但执行到位则稳定可靠。"
+    }
+  ],
+  "reroll": {
+    "registers": ["safer", "bolder"]
+  },
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "canon": true,
+  "steer": true
+}

@@ -10,7 +10,7 @@ tags:
 - rolling-update
 tier: core
 created: '2026-07-02'
-last_updated: '2026-08-25'
+last_updated: '2026-08-28'
 ---
 # 升级路径 Upgrade Paths
 
@@ -32,7 +32,8 @@ last_updated: '2026-08-25'
 | [[01-集群基础/06-升级路径/01-cluster-configuration-parameters.md\|集群配置参数]] | 升级相关配置参数详解 | intermediate |
 | [[01-集群基础/06-升级路径/02-upgrade-paths-strategy.md\|升级策略]] | 升级路径规划、版本选择 | advanced |
 | [[01-集群基础/06-升级路径/03-upgrade-migration-strategy.md\|升级迁移策略]] | 大规模集群升级、迁移 | advanced |
-| [[01-集群基础/06-升级路径/04-kubernetes-v1.33-upgrade-guide.md\|v1.33 升级指南]] | 最新版本升级实操 | intermediate |
+| [[01-集群基础/06-升级路径/04-kubernetes-v1.33-upgrade-guide.md\|v1.33 升级指南]] | 版本升级实操 | intermediate |
+| [[01-集群基础/06-升级路径/05-kubernetes-v1.37-upgrade-guide.md\|v1.37 升级指南]] | Garhwal 年度大版本升级（ipvs 废弃/静态 Pod 硬约束/SELinux 变更） | advanced |
 | [[01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md\|升级 Runbook]] | 完整升级操作手册 | advanced |
 
 ## 升级检查清单

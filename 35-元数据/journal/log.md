@@ -709,3 +709,5 @@ Tier 4: 部署生态域 (5) / Tier 5: 基础参考域 (4)
 - [2026-07-02] CORPUS_V2 profile_update=rag-full-profile.yaml(+synthesis/+topic-dictionary) export=3903pages/12.3M_tokens delta=+574pages/+724K_tokens synthesis=10pages topic_dictionary=564pages tier_counts=core:1122/sup:1693/per:1088 index.md=regenerated AGENT-USAGE.md=updated package=release/package/2026-07-02_18-53/
 
 - [2026-08-25] MAINTENANCE_CYCLE broken_wikilinks=109→0(remap=108,manual=1,files_edited=26) readme_sync=18→0 frontmatter_OK(4491) heading_OK(3972) ruff_OK path_sync=scripts→31-脚本 domain_mapping=updated(09/10/22) changelog=updated tools=ruff0.16.4(uv)
+
+- [2026-08-28] RESEARCH topic=kubernetes-v1.37-garhwal released=2026-08-26 enhancements=67(stable=16,beta=23,alpha=27) docs_added=2(upgrade-guide@01-集群基础/06-升级路径/05-kubernetes-v1.37-upgrade-guide.md + release-research@25-研究/04-可靠性与运维/kubernetes-v1.37-release-research.md) indexes_updated=2(升级路径+研究MOC) deprecations=ipvs(KEP-5495,v1.40禁用/v1.43移除)+kube-dns+static-pod-api-refs(逃生门移除)+cgroup-v1(KEP-5573)+selinux-mount-ga(KEP-1710) gates=frontmatter_OK+wikilinks=0+readme_sync_OK
