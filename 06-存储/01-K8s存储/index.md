@@ -37,6 +37,8 @@ last_updated: 2026-07
 - [[06-存储/01-K8s存储/19-storage-encryption-at-rest.md|Storage Encryption At Rest]]
 - [[06-存储/01-K8s存储/20-volume-attachment-controller.md|Volume Attachment Controller]]
 - [[06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md|Csi Storage Capacity Tracking]]
+- [[06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md|Storageclass Pvc Pv Interview Notes]]
+- [[06-存储/01-K8s存储/22-k8s-storage-quick-qa.md|K8s Storage Quick Qa]]
 - [[06-存储/01-K8s存储/completion-summary.md|Completion Summary]]
 - [[06-存储/01-K8s存储/quality-check-report.md|Quality Check Report]]
 - [[06-存储/01-K8s存储/03-pvc-expansion-guide.md|02-pvc-expansion-guide]]

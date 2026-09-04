@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-31T20:30:00+08:00",
+  "title": "Design System: KUDIG Database GTM",
+  "extensions": {
+    "colorMeta": {
+      "ground":     { "role": "neutral",  "displayName": "Station Ground",     "canonical": "#0E0E0D", "tonalRamp": ["#0E0E0D", "#141413", "#181817", "#1C1A14"] },
+      "panel":      { "role": "neutral",  "displayName": "Panel Charcoal",     "canonical": "#181817", "tonalRamp": ["#121211", "#161615", "#181817", "#232019"] },
+      "tile":       { "role": "neutral",  "displayName": "Tile Umber",         "canonical": "#1C1A14", "tonalRamp": ["#14120d", "#181610", "#1C1A14", "#232019"] },
+      "amber":      { "role": "primary",  "displayName": "Board Amber",        "canonical": "#F5A81C", "tonalRamp": ["#8a5a00", "#c47f0e", "#F5A81C", "#FFC53D"] },
+      "amber-text": { "role": "primary",  "displayName": "Glyph Amber",        "canonical": "#F7B32B" },
+      "amber-hi":   { "role": "primary",  "displayName": "Highlight Amber",    "canonical": "#FFC53D" },
+      "red":        { "role": "secondary","displayName": "Signal Red",         "canonical": "#E23B1E", "tonalRamp": ["#7a1d0e", "#b32a15", "#E23B1E", "#ff6a4d"] },
+      "cream":      { "role": "neutral",  "displayName": "Laminated Cream",    "canonical": "#E8E4DC", "tonalRamp": ["#E8E4DC", "#fffdf7", "#b9b3a6", "#6b665a"] },
+      "muted":      { "role": "neutral",  "displayName": "Warm Gray",          "canonical": "#8A8578" },
+      "ink":        { "role": "neutral",  "displayName": "Ink",                "canonical": "#191712" }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Station Display", "purpose": "Section headlines, sign heads, timetable phase labels. Oswald 500–700." },
+      "data":    { "displayName": "Measurement Mono", "purpose": "Flip-tile glyphs, counts, statuses, code, nav, ticker. Chivo Mono 400–700." },
+      "body":    { "displayName": "Narrative Sans", "purpose": "Ledes, list copy, footer. Noto Sans SC 400/500/700." }
+    },
+    "shadows": [
+      { "name": "board-bowl",  "value": "inset 0 0 60px rgba(0,0,0,.8), 0 20px 60px rgba(0,0,0,.6)", "purpose": "Hero board frame — machine inset into the wall." },
+      { "name": "card-lift",   "value": "0 14px 34px rgba(0,0,0,.55)", "purpose": "Cream sign cards at rest; 0 22px 44px on hover." },
+      { "name": "plate-soft",  "value": "0 4px 12px rgba(25,23,18,.35)", "purpose": "Stat plates inside the cream panel." },
+      { "name": "cta-glow",    "value": "0 0 22px rgba(245,168,28,.55) pulsing to 0 0 34px rgba(245,168,28,.8)", "purpose": "Primary CTA — the station's luminous sign, 2.6s pulse." },
+      { "name": "tile-bevel",  "value": "inset 0 1px 0 rgba(255,255,255,.06), inset 0 -2px 4px rgba(0,0,0,.6), 0 2px 3px rgba(0,0,0,.55)", "purpose": "Split-flap tile physicality." }
+    ],
+    "motion": [
+      { "name": "flap-in",     "value": "rotateX(88deg)→0 with brightness(2.2)→1, .55s cubic-bezier(.3,.7,.3,1), 6ms per-tile stagger", "purpose": "Board entrance and slot re-flips." },
+      { "name": "idle-flip",   "value": "one slot re-flips every 4200ms, skipped when document.hidden", "purpose": "The board stays alive without distracting." },
+      { "name": "cta-pulse",   "value": "glow 2.6s ease-in-out infinite", "purpose": "Primary CTA luminosity." },
+      { "name": "marquee",     "value": "translateX(0→-50%) 36s linear infinite, pause on hover", "purpose": "Ticker; reduced-motion falls back to single static pass with overflow-x." },
+      { "name": "reveal",      "value": "opacity 0→1 + translateY(28px→0), .7s ease, IntersectionObserver threshold .12", "purpose": "Section entrances; disabled under reduced-motion." }
+    ],
+    "breakpoints": [
+      { "name": "split", "value": "860px" },
+      { "name": "compact-board", "value": "760px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Split-Flap Tile",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Atomic unit of the board: one glyph tile with mid-seam and bevels.",
+      "html": "<span class=\"ds-tile\">1</span><span class=\"ds-tile\">9</span><span class=\"ds-tile ds-tile-gap\">4</span><span class=\"ds-tile\">9</span><span class=\"ds-tile\">1</span>",
+      "css": ".ds-tile{display:inline-flex;align-items:center;justify-content:center;width:52px;height:60px;margin-right:4px;background:linear-gradient(180deg,#232019 0%,#1C1A14 46%,#14120d 54%,#181610 100%);border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -2px 4px rgba(0,0,0,.6),0 2px 3px rgba(0,0,0,.55);color:#F7B32B;font-family:'Chivo Mono',monospace;font-weight:700;font-size:26px;position:relative;text-shadow:0 0 8px rgba(247,179,43,.35)} .ds-tile::after{content:\"\";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:#000;opacity:.85} .ds-tile:hover{color:#FFC53D} .ds-tile-gap{margin-left:26px}"
+    },
+    {
+      "name": "Primary CTA",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The glowing platform sign; main action on hero and closing section.",
+      "html": "<a class=\"ds-btn-primary\" href=\"#\">进入知识库</a>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;background:linear-gradient(180deg,#FFC53D,#F5A81C);color:#191712;font-family:'Chivo Mono',monospace;font-weight:700;letter-spacing:.12em;font-size:17px;text-decoration:none;border-radius:6px;padding:14px 30px;box-shadow:0 0 0 1px #000,0 0 22px rgba(245,168,28,.55),0 6px 18px rgba(0,0,0,.6);animation:ds-glow 2.6s ease-in-out infinite} @keyframes ds-glow{0%,100%{box-shadow:0 0 0 1px #000,0 0 16px rgba(245,168,28,.4),0 6px 18px rgba(0,0,0,.6)}50%{box-shadow:0 0 0 1px #000,0 0 34px rgba(245,168,28,.8),0 6px 18px rgba(0,0,0,.6)}} .ds-btn-primary:hover{filter:brightness(1.08)} .ds-btn-primary:focus-visible{outline:2px solid #E8E4DC;outline-offset:3px}",
+      "note": "8-prop set cannot hold the glow pulse; carried here."
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Outlined amber secondary action (GITHUB, 贡献指南).",
+      "html": "<a class=\"ds-btn-ghost\" href=\"#\">GITHUB ★</a>",
+      "css": ".ds-btn-ghost{display:inline-flex;align-items:center;border:1px solid #F5A81C;color:#F5A81C;background:rgba(0,0,0,.35);font-family:'Chivo Mono',monospace;font-weight:700;letter-spacing:.12em;font-size:14px;text-decoration:none;border-radius:6px;padding:13px 22px} .ds-btn-ghost:hover{background:#F5A81C;color:#191712} .ds-btn-ghost:focus-visible{outline:2px solid #E8E4DC;outline-offset:3px}"
+    },
+    {
+      "name": "Status Chip",
+      "kind": "chip",
+      "refersTo": "",
+      "description": "Timetable status pill: ON TIME / DEPARTED / BOARDING.",
+      "html": "<span class=\"ds-chip\">ON TIME</span> <span class=\"ds-chip ds-dep\">DEPARTED</span> <span class=\"ds-chip ds-brd\">BOARDING</span>",
+      "css": ".ds-chip{display:inline-flex;font-family:'Chivo Mono',monospace;font-size:13px;letter-spacing:.2em;padding:8px 14px;border-radius:4px;border:1px solid #000;color:#F7B32B;background:#221b0e;box-shadow:inset 0 0 12px rgba(245,168,28,.15)} .ds-chip.ds-dep{color:#8A8578;background:#161615;box-shadow:none} .ds-chip.ds-brd{color:#191712;background:#F5A81C;animation:ds-blink 1.6s steps(2) infinite} @keyframes ds-blink{50%{filter:brightness(.75)}}"
+    },
+    {
+      "name": "Transfer Sign Card",
+      "kind": "card",
+      "refersTo": "sign-card",
+      "description": "Laminated station sign routing a scenario to a knowledge line.",
+      "html": "<article class=\"ds-sign\"><div class=\"ds-sign-head\">故障诊断 → 19 号线</div><ul class=\"ds-sign-body\"><li><span class=\"ds-num\">06-FTA故障树</span>16 个顶层故障事件 · 动态概率推理</li></ul></article>",
+      "css": ".ds-sign{background:#E8E4DC;color:#191712;border-radius:10px;border:2px solid #000;box-shadow:0 14px 34px rgba(0,0,0,.55);max-width:300px;transition:transform .25s,box-shadow .25s} .ds-sign:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(0,0,0,.65)} .ds-sign-head{background:linear-gradient(180deg,#FFC53D,#F5A81C);padding:14px 18px;border-bottom:2px solid #000;font-family:Oswald,sans-serif;font-weight:700;font-size:19px;letter-spacing:.04em} .ds-sign-body{list-style:none;padding:18px 20px 22px} .ds-sign-body li{font-size:14px;line-height:1.6;padding:9px 0 9px 22px;border-bottom:1px dashed #b9b3a6;position:relative} .ds-sign-body li::before{content:\"\";position:absolute;left:2px;top:16px;width:8px;height:8px;border-radius:50%;background:#F5A81C;box-shadow:0 0 0 2px rgba(0,0,0,.15)} .ds-num{font-family:'Chivo Mono',monospace;font-size:11px;color:#6b665a;letter-spacing:.1em;display:block}"
+    },
+    {
+      "name": "Stat Plate",
+      "kind": "custom",
+      "refersTo": "stat-plate",
+      "description": "Data readout plate inside the cream For-Agents panel.",
+      "html": "<div class=\"ds-stat\"><b>582</b><span>技能 SKILLS</span></div>",
+      "css": ".ds-stat{background:#fffdf7;border:1px solid #000;border-radius:6px;padding:14px 16px;box-shadow:0 4px 12px rgba(25,23,18,.35)} .ds-stat b{font-family:'Chivo Mono',monospace;font-size:26px;display:block;color:#191712} .ds-stat span{font-size:12px;color:#6b665a;letter-spacing:.08em}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Solari Departure Board",
+    "overview": "The page is a large railway station: the first viewport is one wall-sized mechanical split-flap board in a matte anodized frame, and every section below is station furniture — laminated transfer signs, dual departures panels, an engineering schematic, a timetable. The metaphor is load-bearing: each knowledge domain is a departure line, each document count is real timetable data, and the standing status is ON TIME. Amber is the single working voice on warm near-black; cream is the touchable paper of signage; red exists only where data signals severity. Density is the aesthetic — ~220 tiles fill the first viewport and one slot mechanically re-flips every 4.2 seconds so the board reads as alive.",
+    "keyCharacteristics": [
+      "Split-flap tile as atomic unit: 3px radius, 2px mid-seam, inset bevels, amber mono glyphs",
+      "Data-first hero — timetable rows are the pitch, never a centered hero triad",
+      "One accent (amber), one alert (red), one paper (cream) on warm near-black #0E0E0D",
+      "Monospace reserved for code, data and measurement",
+      "Station vocabulary: 线路 / 换乘 / ON TIME / DEPARTED / BOARDING"
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Amber is the only accent; red appears only where the data itself signals severity, never as decoration.", "section": "colors" },
+      { "name": "The Measurement Voice Rule", "body": "Monospace is for code, data and measurement; narrative text is never set in mono.", "section": "typography" },
+      { "name": "The Machine-In-Wall Rule", "body": "The board is inset into darkness; cards lift softly off it. Shadows always carry blur; nothing is stamped.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do compose any new data surface from split-flap tiles (3px radius, mid-seam, amber mono glyphs).",
+      "Do keep every number real and traceable to the repo — scale is the pitch.",
+      "Do use station vocabulary for states and sections.",
+      "Do theme browser surfaces: amber selection on ink, tile favicon, theme-color #0E0E0D.",
+      "Do ship a full prefers-reduced-motion downgrade."
+    ],
+    "donts": [
+      "Don't put a kicker or eyebrow above a heading — the heading carries its own weight.",
+      "Don't use zero-blur offset shadows — this world is inset and lifting, never stamped.",
+      "Don't introduce a second accent; red is reserved for severity data.",
+      "Don't set narrative text in monospace or use a system display face.",
+      "Don't drift the ground toward blue-black slate or warm cream page fields.",
+      "Don't invent metrics, testimonials or customer logos."
+    ]
+  }
+}

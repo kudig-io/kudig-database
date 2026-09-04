@@ -77,4 +77,6 @@ last_updated: 2026-07
 - [[05-网络/01-K8s网络核心/54-sctp-multicast-kubernetes.md|SCTP 与 Multicast 在 Kubernetes 中的支持]]
 - [[05-网络/01-K8s网络核心/55-cni-plugin-development-guide.md|CNI 插件开发实战指南]]
 - [[05-网络/01-K8s网络核心/56-hostnetwork-hostport-deep-dive.md|hostNetwork 与 hostPort 深度解析]]
+- [[05-网络/01-K8s网络核心/57-kubernetes-service-ingress-interview.md|Kubernetes Service 与 Ingress 网络面经]]
+- [[05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md|K8s 网络快问快答与面试模拟对话]]
 

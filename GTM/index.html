@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUDIG Database — 生产的每一站，都有答案</title>
+<meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库。4,750 篇文档、21 条知识线路、13 家云厂商，人类与 AI Agent 双读。">
+<meta property="og:title" content="KUDIG Database — Go to Market">
+<meta property="og:description" content="Kubernetes 生产运维全域知识库：FTA 故障树、FEBM 证据链、RAG 语料 pipeline。Apache 2.0。">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.png">
+<meta property="og:locale" content="zh_CN">
+<meta name="theme-color" content="#0E0E0D">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%231C1A14'/%3E%3Crect y='30' width='64' height='3' fill='%23000'/%3E%3Ctext x='32' y='46' font-family='monospace' font-size='34' font-weight='700' fill='%23F5A81C' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Chivo+Mono:wght@400;500;700&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0E0E0D;
+  --panel:#181817;
+  --tile:#1C1A14;
+  --tile-hi:#232019;
+  --tile-lo:#14120d;
+  --tile-foot:#181610;
+  --seam:#000000;
+  --amber:#F5A81C;
+  --amber-text:#F7B32B;
+  --amber-hi:#FFC53D;
+  --red:#E23B1E;
+  --cream:#E8E4DC;
+  --muted:#8A8578;
+  --ink:#191712;
+  --frame-edge:#2b2b29;
+  --rivet-hi:#4a4a46;
+  --rivet-lo:#151513;
+  --board-top:#141413;
+  --board-bot:#101010;
+  --ticker-bg:#0a0a09;
+  --row-bg:#121211;
+  --row-border:#2c2c2a;
+  --chip-border:#2c2c2a;
+  --panel-line:#262624;
+  --sign-dash:#b9b3a6;
+  --sign-num:#6b665a;
+  --stat-bg:#fffdf7;
+  --stat-num:#6b665a;
+  --tag-cream:#8a5a00;
+  --code-comment:#6f6a5c;
+  --fta-lit:#2a2113;
+  --fta-line:#4a4436;
+  --ont-bg:#221b0e;
+  --te-p2:#d8c34a;
+  --footer-line:#232322;
+  --glow-amber:rgba(245,168,28,.55);
+  --glow-amber-hi:rgba(245,168,28,.8);
+  --glow-amber-lo:rgba(245,168,28,.4);
+  --glow-red:rgba(226,59,30,.7);
+  --glow-red-lo:rgba(226,59,30,.4);
+  --glow-text:rgba(247,179,43,.35);
+  --wash-amber:rgba(245,168,28,.15);
+  --shadow-ink:rgba(25,23,18,.35);
+  --z-nav:300;
+  --z-skip:400;
+  --font-disp:'Oswald','Noto Sans SC',sans-serif;
+  --font-mono:'Chivo Mono','Noto Sans SC',monospace;
+  --font-cjk:'Noto Sans SC','PingFang SC',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ground);color:var(--cream);font-family:var(--font-cjk);overflow-x:clip}
+html{overflow-x:clip}
+::selection{background:var(--amber);color:var(--ink)}
+a{color:inherit}
+.skip{position:absolute;left:-9999px;top:0;background:var(--amber);color:var(--ink);padding:8px 16px;z-index:var(--z-skip);font-family:var(--font-mono)}
+.skip:focus{left:0}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:var(--z-nav);display:flex;align-items:center;justify-content:space-between;height:56px;padding:0 28px;background:rgba(24,24,23,.92);backdrop-filter:blur(6px);border-bottom:1px solid var(--seam)}
+.wordmark{font-family:var(--font-mono);font-weight:700;letter-spacing:.28em;color:var(--cream);text-decoration:none;font-size:15px}
+.wordmark b{color:var(--amber)}
+nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+nav ul a{font-family:var(--font-mono);font-size:12px;letter-spacing:.18em;color:var(--muted);text-decoration:none;text-transform:uppercase;transition:color .2s;line-height:1}
+nav ul a:hover{color:var(--amber-hi)}
+nav ul a:focus-visible{color:var(--amber-hi);outline:2px solid var(--cream);outline-offset:3px}
+nav .nav-cta{border:1px solid var(--amber);color:var(--amber);padding:6px 12px;border-radius:4px}
+nav .nav-cta:hover{background:var(--amber);color:var(--ink)}
+
+/* ---------- board hero ---------- */
+.hero{min-height:100svh;display:flex;flex-direction:column;padding-top:56px}
+.board-frame{flex:1;margin:18px 22px 0;border:4px solid var(--seam);outline:1px solid var(--frame-edge);border-radius:10px;background:linear-gradient(180deg,var(--board-top) 0%,var(--board-bot) 100%);box-shadow:inset 0 0 60px rgba(0,0,0,.8),0 20px 60px rgba(0,0,0,.6);position:relative;display:flex;flex-direction:column;padding:clamp(16px,3vh,34px) clamp(14px,3vw,40px)}
+.rivet{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 35% 30%,var(--rivet-hi),var(--rivet-lo) 70%);box-shadow:0 1px 2px var(--seam)}
+.rivet.tl{top:10px;left:10px}.rivet.tr{top:10px;right:10px}.rivet.bl{bottom:10px;left:10px}.rivet.br{bottom:10px;right:10px}
+
+.tiles{display:flex;gap:4px;flex-wrap:nowrap}
+.tile{position:relative;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--tile-hi) 0%,var(--tile) 46%,var(--tile-lo) 54%,var(--tile-foot) 100%);border-radius:3px;box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -2px 4px rgba(0,0,0,.6),0 2px 3px rgba(0,0,0,.55);color:var(--amber-text);font-family:var(--font-mono);font-weight:700;text-shadow:0 0 8px var(--glow-text);transform-origin:center;backface-visibility:hidden}
+.tile::after{content:"";position:absolute;left:0;right:0;top:50%;height:2px;margin-top:-1px;background:var(--seam);opacity:.85;box-shadow:0 1px 0 rgba(255,255,255,.05)}
+.tile.blank{color:transparent}
+@keyframes flap{0%{transform:rotateX(88deg);filter:brightness(2.2)}55%{transform:rotateX(-14deg)}80%{transform:rotateX(6deg)}100%{transform:rotateX(0);filter:brightness(1)}}
+.flap{animation:flap .55s cubic-bezier(.3,.7,.3,1) both}
+
+.title-row{perspective:900px;margin-bottom:clamp(14px,2.6vh,28px)}
+.title-row .tile{width:clamp(34px,4.6vw,66px);height:clamp(52px,7.4vh,92px);font-size:clamp(26px,3.6vw,52px);letter-spacing:0}
+.board-tag{font-family:var(--font-mono);font-size:clamp(12px,1.15vw,15px);letter-spacing:.12em;color:var(--muted);margin:0 2px clamp(14px,2.4vh,26px)}
+.board-tag b{color:var(--amber-text);font-weight:500}
+
+.rows{display:flex;flex-direction:column;gap:clamp(7px,1.2vh,14px);perspective:900px;flex:1;justify-content:space-evenly}
+.brow{display:flex;gap:4px;align-items:center}
+.brow .tile{width:clamp(22px,2.75vw,52px);height:clamp(34px,5.6vh,60px);font-size:clamp(13px,1.5vw,26px)}
+.brow .tile.gap{margin-left:clamp(10px,1.3vw,26px)}
+.seg-no .tile,.brow .tile.no{color:var(--amber-hi)}
+.status .tile.red{color:var(--red);text-shadow:0 0 8px var(--glow-red-lo)}
+
+.cta-row{display:flex;justify-content:flex-end;gap:14px;padding-top:clamp(12px,2.2vh,24px)}
+.btn{font-family:var(--font-mono);font-weight:700;letter-spacing:.12em;text-decoration:none;border-radius:6px;display:inline-flex;align-items:center;gap:10px;transition:transform .15s;line-height:1}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:linear-gradient(180deg,var(--amber-hi),var(--amber));color:var(--ink);padding:14px 30px;font-size:17px;box-shadow:0 0 0 1px var(--seam),0 0 22px var(--glow-amber),0 6px 18px rgba(0,0,0,.6);animation:glow 2.6s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 1px var(--seam),0 0 16px var(--glow-amber-lo),0 6px 18px rgba(0,0,0,.6)}50%{box-shadow:0 0 0 1px var(--seam),0 0 34px var(--glow-amber-hi),0 6px 18px rgba(0,0,0,.6)}}
+.btn-primary:hover{filter:brightness(1.08)}
+.btn-ghost{border:1px solid var(--amber);color:var(--amber);padding:13px 22px;font-size:14px;background:rgba(0,0,0,.35)}
+.btn-ghost:hover{background:var(--amber);color:var(--ink)}
+.btn:focus-visible{outline:2px solid var(--cream);outline-offset:3px}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed;animation:none}
+
+/* ---------- ticker ---------- */
+.ticker{margin:14px 22px 16px;border:2px solid var(--seam);border-radius:6px;background:var(--ticker-bg);overflow:hidden;box-shadow:inset 0 2px 8px rgba(0,0,0,.8)}
+.ticker-track{display:inline-flex;white-space:nowrap;padding:9px 0;font-family:var(--font-mono);font-size:13px;letter-spacing:.14em;color:var(--amber-text);animation:marquee 36s linear infinite;will-change:transform}
+.ticker-track .half{display:inline-flex;white-space:nowrap}
+.ticker:hover .ticker-track{animation-play-state:paused}
+.ticker-track .rd{color:var(--red)}
+.ticker-track span{padding:0 28px}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{max-width:1180px;margin:0 auto;padding:clamp(72px,10vw,120px) 24px 0}
+h2{font-family:var(--font-disp);font-weight:700;font-size:clamp(30px,4.6vw,52px);letter-spacing:.02em;line-height:1.15;margin-bottom:14px;overflow-wrap:anywhere;min-width:0}
+.lede{color:var(--muted);max-width:640px;font-size:16px;line-height:1.8;margin-bottom:44px}
+.lede b{color:var(--cream)}
+
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* transfer cards */
+.signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px}
+.sign-card{position:relative;background:var(--cream);color:var(--ink);border-radius:10px;border:2px solid var(--seam);box-shadow:0 14px 34px rgba(0,0,0,.55);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.sign-card:hover{transform:translateY(-6px);box-shadow:0 22px 44px rgba(0,0,0,.65)}
+.sign-head{display:flex;align-items:center;gap:12px;background:linear-gradient(180deg,var(--amber-hi),var(--amber));padding:14px 18px;border-bottom:2px solid var(--seam);font-family:var(--font-disp);font-weight:700;font-size:19px;letter-spacing:.04em;line-height:1}
+.sign-head svg{flex:none;color:var(--ink);stroke:currentColor}
+.sign-head svg rect,.sign-head svg path{fill:none;stroke:currentColor;stroke-width:2}
+.sign-head svg circle{fill:currentColor}
+.sign-body{padding:18px 20px 22px}
+.sign-body li{list-style:none;font-size:14px;line-height:1.6;padding:9px 0 9px 22px;border-bottom:1px dashed var(--sign-dash);position:relative}
+.sign-body li:last-child{border-bottom:none}
+.sign-body li::before{content:"";position:absolute;left:2px;top:16px;width:8px;height:8px;border-radius:50%;background:var(--amber);box-shadow:0 0 0 2px rgba(0,0,0,.15)}
+.sign-body .num{font-family:var(--font-mono);font-size:11px;color:var(--sign-num);letter-spacing:.1em;display:block}
+
+/* dual read */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.panel{border-radius:10px;border:2px solid var(--seam);padding:28px;position:relative;min-width:0}
+.panel-dark{background:var(--panel);box-shadow:inset 0 0 40px rgba(0,0,0,.7)}
+.panel-cream{background:var(--cream);color:var(--ink);box-shadow:0 14px 34px rgba(0,0,0,.5)}
+.panel h3{font-family:var(--font-disp);font-size:22px;letter-spacing:.05em;margin-bottom:6px}
+.panel .tag{font-family:var(--font-mono);font-size:11px;letter-spacing:.24em;color:var(--amber);text-transform:uppercase}
+.panel-cream .tag{color:var(--tag-cream)}
+.panel ul{margin-top:18px}
+.panel-dark li{list-style:none;font-family:var(--font-mono);font-size:14px;color:var(--amber-text);padding:12px 0;border-bottom:1px solid var(--panel-line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.panel-dark li em{font-style:normal;color:var(--muted);font-size:12px}
+.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.stat{background:var(--stat-bg);border:1px solid var(--seam);border-radius:6px;padding:14px 16px;box-shadow:0 4px 12px var(--shadow-ink)}
+.stat b{font-family:var(--font-mono);font-size:26px;display:block;color:var(--ink)}
+.stat span{font-size:12px;color:var(--stat-num);letter-spacing:.08em}
+pre{margin-top:18px;background:var(--ink);color:var(--amber-text);border-radius:6px;border:1px solid var(--seam);padding:16px;font-family:var(--font-mono);font-size:13px;line-height:1.9;overflow-x:auto;max-width:100%}
+pre .c{color:var(--code-comment)}
+
+/* FTA */
+.fta-wrap{background:var(--panel);border:2px solid var(--seam);border-radius:10px;padding:clamp(18px,3vw,40px);box-shadow:inset 0 0 40px rgba(0,0,0,.7)}
+.fta-wrap svg{width:100%;height:auto;display:block}
+.fta-node{cursor:pointer}
+.fta-node rect{fill:var(--tile-lo);stroke:var(--amber);stroke-width:2;transition:fill .2s}
+.fta-node text{fill:var(--amber-text);font-family:var(--font-mono);font-size:15px}
+.fta-node .sub{fill:var(--muted);font-size:11px}
+.fta-node:hover rect,.fta-node.lit rect{fill:var(--fta-lit);stroke:var(--amber-hi)}
+.fta-top rect{fill:var(--fta-lit);stroke:var(--amber-hi);stroke-width:2.5}
+.fta-top text{fill:var(--amber-hi);font-size:17px;font-weight:700}
+.fta-line{stroke:var(--fta-line);stroke-width:2;fill:none}
+.fta-line.lit{stroke:var(--amber-hi)}
+.fta-gate{fill:var(--ticker-bg);stroke:var(--amber);stroke-width:2}
+.fta-gate-t{fill:var(--amber);font-family:var(--font-mono);font-size:12px;letter-spacing:.2em}
+.fta-detail{margin-top:18px;font-family:var(--font-mono);font-size:14px;color:var(--muted);min-height:24px}
+.fta-detail b{color:var(--amber-text)}
+.te-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.te{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--chip-border);border-radius:4px;padding:7px 11px;color:var(--muted);display:inline-flex;align-items:center;gap:8px;background:var(--row-bg);line-height:1}
+.te i{width:8px;height:8px;border-radius:50%;flex:none}
+.te.p0 i{background:var(--red);box-shadow:0 0 8px var(--glow-red)}
+.te.p1 i{background:var(--amber);box-shadow:0 0 8px var(--glow-amber)}
+.te.p2 i{background:var(--te-p2)}
+
+/* gtm timetable */
+.timetable{display:flex;flex-direction:column;gap:12px;perspective:900px}
+.trow{display:grid;grid-template-columns:auto 1fr auto auto;gap:18px;align-items:center;background:var(--row-bg);border:2px solid var(--seam);border-radius:8px;padding:16px 20px;box-shadow:inset 0 0 24px rgba(0,0,0,.6)}
+.trow .ph{font-family:var(--font-mono);color:var(--amber-hi);font-weight:700;letter-spacing:.14em;font-size:14px;line-height:1}
+.trow .what{font-size:15px;min-width:0}
+.trow .what em{font-style:normal;color:var(--muted);font-family:var(--font-mono);font-size:12px;display:block;margin-top:4px;letter-spacing:.08em}
+.trow .st{font-family:var(--font-mono);font-size:13px;letter-spacing:.2em;padding:8px 14px;border-radius:4px;border:1px solid var(--seam);line-height:1}
+.st.dep{color:var(--muted);background:var(--row-bg)}
+.st.ont{color:var(--amber-text);background:var(--ont-bg);box-shadow:inset 0 0 12px var(--wash-amber)}
+.st.brd{color:var(--ink);background:var(--amber);animation:blink 1.6s steps(2) infinite}
+@keyframes blink{50%{filter:brightness(.75)}}
+
+/* close */
+.close{text-align:center;padding-bottom:40px}
+.close h2{font-size:clamp(34px,5.4vw,64px)}
+.close .cta-row{justify-content:center;padding-top:10px}
+footer{margin-top:90px;border-top:1px solid var(--footer-line);padding:34px 24px 44px;text-align:center;font-family:var(--font-mono);font-size:12px;letter-spacing:.16em;color:var(--muted)}
+footer a{color:var(--amber);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+@media(max-width:760px){
+  nav ul li.hide-s{display:none}
+  .board-frame{margin:12px 10px 0;padding:14px 12px}
+  .ticker{margin:10px 10px 12px}
+  .brow .tile{width:clamp(14px,4.4vw,22px);height:26px;font-size:12px}
+  .title-row .tile{width:clamp(20px,6vw,34px);height:40px;font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .ticker{overflow-x:auto}
+  .ticker-track{animation:none}
+  .ticker-track .half[aria-hidden="true"]{display:none}
+}
+</style>
+</head>
+<body>
+<!--
+DIRECTION CONTRACT — seed e7e7f1b0 — split-flap departure board
+THESIS: 知识库即车站出发信息板；首屏整面机械翻牌墙，数据行即论点，拒绝居中英雄三件套。
+OWN-WORLD: 哑光黑 #0E0E0D 铝框板、琥珀 #F5A81C 翻牌字与发光 CTA、cream #E8E4DC 层压卡、警红 #E23B1E；Oswald + Chivo Mono + Noto Sans SC。
+STORY: 访客一眼读到规模（21 线路 / 4,750 篇 / 13 云厂商），相信「永远在运行、永远更新」，按场景换乘，进入知识库或 GitHub。
+FIRST VIEWPORT: 细 nav；翻牌墙占余下视口：标题行 KUDIG DATABASE、8 条真实域数据行、右下发光 CTA 进入知识库 + GITHUB 描边；底部琥珀 ticker。
+FORM: Solari 机械翻牌出发信息板（seed e7e7f1b0），构图基准 .impeccable/mocks/comp-a.png。
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+<a class="skip" href="#main">跳到主要内容</a>
+<nav aria-label="主导航">
+  <a class="wordmark" href="#top">KUDIG<b>-IO</b></a>
+  <ul>
+    <li class="hide-s"><a href="#transfer">换乘</a></li>
+    <li class="hide-s"><a href="#dualread">双读</a></li>
+    <li class="hide-s"><a href="#fta">排障引擎</a></li>
+    <li class="hide-s"><a href="#gtm">GTM</a></li>
+    <li><a class="nav-cta" href="https://github.com/kudig-io/kudig-database" rel="noopener">GitHub ★</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="board-frame">
+    <i class="rivet tl"></i><i class="rivet tr"></i><i class="rivet bl"></i><i class="rivet br"></i>
+    <h1 class="title-row tiles" id="titleRow" aria-label="KUDIG DATABASE"></h1>
+    <p class="board-tag">生产环境的 Kubernetes + AI Infrastructure 运维全域知识库 —— <b>4,750 篇 · 21 条知识线路 · 13 家云厂商</b></p>
+    <div class="rows" id="boardRows" role="list" aria-label="知识线路出发信息"></div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://kudig-io.github.io/kudig-database/">进入知识库</a>
+      <a class="btn btn-ghost" href="https://github.com/kudig-io/kudig-database" rel="noopener">GITHUB ★</a>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack"></div></div>
+</header>
+
+<main id="main">
+<section id="transfer" class="reveal">
+  <h2>按场景进站</h2>
+  <p class="lede">不必读完全库。四条高频线路直达生产现场，每条线路的终点都是<b>可执行的 Runbook</b>，而非概念罗列。</p>
+  <div class="signs">
+    <article class="sign-card">
+      <div class="sign-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M8 21l2-3M16 21l-2-3"/><circle cx="9" cy="13" r="1.4"/><circle cx="15" cy="13" r="1.4"/></svg>故障诊断 → 19 号线</div>
+      <ul class="sign-body">
+        <li><span class="num">06-FTA故障树</span>16 个顶层故障事件 · 动态概率推理</li>
+        <li><span class="num">07-FEBM方法论</span>症状特征向量 → 根因确认证据链</li>
+        <li><span class="num">08-技能体系</span>19+ 张生产诊断技能卡</li>
+      </ul>
+    </article>
+    <article class="sign-card">
+      <div class="sign-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M8 21l2-3M16 21l-2-3"/><circle cx="9" cy="13" r="1.4"/><circle cx="15" cy="13" r="1.4"/></svg>生产运维 → 13 号线</div>
+      <ul class="sign-body">
+        <li><span class="num">RUNBOOK</span>证书 / PKI 生命周期 · 集群升级</li>
+        <li><span class="num">FINOPS</span>成本治理 Runbook</li>
+        <li><span class="num">INCIDENT</span>事件响应模板 · 每日巡检配置</li>
+      </ul>
+    </article>
+    <article class="sign-card">
+      <div class="sign-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M8 21l2-3M16 21l-2-3"/><circle cx="9" cy="13" r="1.4"/><circle cx="15" cy="13" r="1.4"/></svg>AI 基础设施 → 15 号线</div>
+      <ul class="sign-body">
+        <li><span class="num">RUNBOOK</span>AI / ML 运维 Runbook</li>
+        <li><span class="num">RAG</span>语料导出 pipeline · Agent 检索增强</li>
+        <li><span class="num">AGENT</span>百炼智能体每日巡检部署</li>
+      </ul>
+    </article>
+    <article class="sign-card">
+      <div class="sign-head"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="5" y="3" width="14" height="14" rx="3"/><path d="M8 21l2-3M16 21l-2-3"/><circle cx="9" cy="13" r="1.4"/><circle cx="15" cy="13" r="1.4"/></svg>可靠性 → 12 号线</div>
+      <ul class="sign-body">
+        <li><span class="num">DR / BCP</span>灾难恢复与业务连续性 Runbook v2</li>
+        <li><span class="num">GITOPS</span>Fleet GitOps 操作指南</li>
+        <li><span class="num">SRE</span>容量规划 · 高可用实践</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section id="dualread" class="reveal">
+  <h2>人类读手册，Agent 读语料</h2>
+  <p class="lede">同一座知识库，两套消费方式：源文档层供人深度查询兜底，提炼知识层供 <b>AI Agent 优先消费</b>，Token 高效。</p>
+  <div class="split">
+    <div class="panel panel-dark">
+      <span class="tag">For Humans</span>
+      <h3>源文档层 · 21 域</h3>
+      <ul>
+        <li>核心技术域 01-09 <em>集群 / 工作负载 / 网络 / 存储 / 安全…</em></li>
+        <li>平台与工程域 10-12 <em>平台工程 / 发布变更 / 可靠性</em></li>
+        <li>运维场景域 13, 19 <em>生产运维 / 故障诊断 491 篇</em></li>
+        <li>部署与生态域 14-21 <em>含 13 家云厂商 · ACK / Terway / ASM</em></li>
+        <li>每域 99- 生产就绪指南 <em>production-readiness</em></li>
+      </ul>
+    </div>
+    <div class="panel panel-cream">
+      <span class="tag">For Agents</span>
+      <h3>提炼知识层 · RAG 语料</h3>
+      <div class="statgrid">
+        <div class="stat"><b>306</b><span>概念 CONCEPTS</span></div>
+        <div class="stat"><b>407</b><span>实体 ENTITIES</span></div>
+        <div class="stat"><b>582</b><span>技能 SKILLS</span></div>
+        <div class="stat"><b>51</b><span>综合 SYNTHESIS</span></div>
+      </div>
+      <pre><span class="c"># 语料 pipeline（仓库真实命令）</span>
+make corpus-generate-all   <span class="c"># P0+P1+P2 全量 I-O 语料</span>
+make corpus-validate       <span class="c"># 验证覆盖率</span>
+make corpus-stats          <span class="c"># 统计语料规模</span></pre>
+    </div>
+  </div>
+</section>
+
+<section id="fta" class="reveal">
+  <h2>故障树不是文档，是推理骨架</h2>
+  <p class="lede">16 个顶层故障事件、约 300 个底事件、概率矩阵与传播路径。点击中间事件，看一条真实故障树的推理路径。</p>
+  <div class="fta-wrap">
+    <svg viewBox="0 0 920 380" role="img" aria-label="TE-3 Pod 启动失败故障树：OR 门连接调度失败、镜像拉取失败、容器创建失败三个中间事件">
+      <g class="fta-top fta-node" data-te="TE-3">
+        <rect x="330" y="16" width="260" height="70" rx="6"/>
+        <text x="460" y="46" text-anchor="middle">TE-3 · Pod 启动失败</text>
+        <text class="sub" x="460" y="70" text-anchor="middle">P1 · kubernetes-fta-full-analysis-v2</text>
+      </g>
+      <path class="fta-line" d="M460 86 V 140"/>
+      <path class="fta-gate" d="M460 140 q 34 8 34 40 q 0 34 -34 44 q -34 -10 -34 -44 q 0 -32 34 -40 Z"/>
+      <text class="fta-gate-t" x="460" y="192" text-anchor="middle">OR</text>
+      <path class="fta-line" id="ln1" d="M460 224 V 250 H 150 V 284"/>
+      <path class="fta-line" id="ln2" d="M460 224 V 284"/>
+      <path class="fta-line" id="ln3" d="M460 224 V 250 H 770 V 284"/>
+      <g class="fta-node" data-ie="1" tabindex="0" role="button" aria-label="IE-3.1 调度失败">
+        <rect x="40" y="284" width="220" height="64" rx="6"/>
+        <text x="150" y="312" text-anchor="middle">IE-3.1 调度失败</text>
+        <text class="sub" x="150" y="334" text-anchor="middle">insufficient cpu / memory</text>
+      </g>
+      <g class="fta-node" data-ie="2" tabindex="0" role="button" aria-label="IE-3.2 镜像拉取失败">
+        <rect x="350" y="284" width="220" height="64" rx="6"/>
+        <text x="460" y="312" text-anchor="middle">IE-3.2 镜像拉取失败</text>
+        <text class="sub" x="460" y="334" text-anchor="middle">ErrImagePull / 凭证 / 限流</text>
+      </g>
+      <g class="fta-node" data-ie="3" tabindex="0" role="button" aria-label="IE-3.3 容器创建失败">
+        <rect x="660" y="284" width="220" height="64" rx="6"/>
+        <text x="770" y="312" text-anchor="middle">IE-3.3 容器创建失败</text>
+        <text class="sub" x="770" y="334" text-anchor="middle">CreateContainerConfigError</text>
+      </g>
+    </svg>
+    <p class="fta-detail" id="ftaDetail">数据源：<b>19-故障诊断/06-FTA故障树/fta-index.md</b> — 点击中间事件高亮推理路径。</p>
+    <div class="te-strip" id="teStrip" aria-label="16 个顶层故障事件"></div>
+  </div>
+</section>
+
+<section id="gtm" class="reveal">
+  <h2>四班车，开向采纳</h2>
+  <p class="lede">开源即渠道，内容即护城河。GTM 不靠投放，靠<b>每一次生产事故后被检索到的那一次命中</b>。</p>
+  <div class="timetable">
+    <div class="trow"><span class="ph">PHASE 01</span><span class="what">开源发布<em>APACHE 2.0 · GITHUB 公开 · 采纳摩擦为零</em></span><span class="st dep">DEPARTED</span></div>
+    <div class="trow"><span class="ph">PHASE 02</span><span class="what">内容护城河<em>4,750 篇 · 21 域 · 13 云厂商 · K8s v1.25–v1.32+</em></span><span class="st ont">ON TIME</span></div>
+    <div class="trow"><span class="ph">PHASE 03</span><span class="what">Agent 生态<em>RAG 语料 pipeline · 百炼智能体集成 · QA 语料训练评估</em></span><span class="st ont">ON TIME</span></div>
+    <div class="trow"><span class="ph">PHASE 04</span><span class="what">社区扩张<em>贡献者增长 · CNCF 生态对齐 · 云厂商知识共建</em></span><span class="st brd">BOARDING</span></div>
+  </div>
+</section>
+
+<section class="close reveal">
+  <h2>下一站，你的生产环境。</h2>
+  <div class="cta-row">
+    <a class="btn btn-primary" href="https://kudig-io.github.io/kudig-database/">进入知识库</a>
+    <a class="btn btn-ghost" href="https://github.com/kudig-io/kudig-database" rel="noopener">STAR ON GITHUB</a>
+    <a class="btn btn-ghost" href="https://github.com/kudig-io/kudig-database" rel="noopener">贡献指南</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  KUDIG-IO · KUDIG DATABASE — APACHE 2.0 · © 2026 · <a href="https://kudig-io.github.io/kudig-database/">kudig-io.github.io/kudig-database</a>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var LINES = [
+    ["01","集群基础",122],["02","工作负载",52],["03","清单模式",101],["04","应用模式",131],
+    ["05","网络",136],["06","存储",67],["07","数据库中间件",69],["08","安全",79],
+    ["09","可观测性",86],["10","平台工程",234],["11","发布变更",75],["12","可靠性",82],
+    ["13","生产运维",127],["14","容器运行时",61],["15","AI基础设施",176],["16","专项技术",61],
+    ["17","系统基础",646],["18","云厂商",115],["19","故障诊断",491],["20","最佳实践",109],
+    ["21","生态参考",67]
+  ];
+
+  function tile(ch, cls){
+    var s = document.createElement("span");
+    s.className = "tile" + (ch === " " ? " blank" : "") + (cls ? " " + cls : "");
+    s.textContent = ch === " " ? " " : ch;
+    s.setAttribute("aria-hidden", "true");
+    return s;
+  }
+  function tilesInto(el, text, cls){
+    for (var i = 0; i < text.length; i++) el.appendChild(tile(text.charAt(i), cls));
+  }
+  function pad(n, w){ n = String(n); while (n.length < w) n = " " + n; return n; }
+
+  /* title */
+  var title = document.getElementById("titleRow");
+  tilesInto(title, "KUDIG DATABASE");
+
+  /* board rows: 8 visible slots, continuous tile strips like a real board */
+  var rowsEl = document.getElementById("boardRows");
+  var SLOTS = 8;
+  var queuePos = SLOTS; /* next line to rotate in */
+  function padR(s, w){ while (s.length < w) s += " "; return s; }
+  var COMPACT = window.matchMedia("(max-width:760px)");
+  function buildRow(line){
+    var row = document.createElement("div");
+    row.className = "brow";
+    row.setAttribute("role", "listitem");
+    row.setAttribute("aria-label", line[0] + " " + line[1] + " " + line[2] + " docs, on time");
+    function fieldG(text, cls, withGap){
+      for (var i = 0; i < text.length; i++){
+        var t = tile(text.charAt(i), cls);
+        if (withGap && i === 0) t.classList.add("gap");
+        row.appendChild(t);
+      }
+    }
+    fieldG(line[0], "no", false);                          /* 编号 */
+    fieldG(padR(line[1], COMPACT.matches ? 6 : 10), null, true); /* 域名 */
+    if (!COMPACT.matches) fieldG("—", null, true);         /* 分隔 */
+    fieldG(pad(line[2], 3), null, true);                   /* 计数 */
+    if (!COMPACT.matches){ fieldG("DOCS", null, true); fieldG("ON TIME", null, true); }
+    return row;
+  }
+  function fillBoard(){
+    rowsEl.innerHTML = "";
+    for (var i = 0; i < SLOTS; i++) rowsEl.appendChild(buildRow(LINES[i]));
+  }
+  fillBoard();
+  COMPACT.addEventListener("change", fillBoard);
+
+  /* staggered flip-in */
+  if (!REDUCED) {
+    var allTiles = document.querySelectorAll(".hero .tile");
+    allTiles.forEach(function(t, idx){
+      t.style.animationDelay = (idx * 6) + "ms";
+      t.classList.add("flap");
+    });
+  }
+
+  /* periodic mechanical flip: rotate one slot through all 21 lines */
+  if (!REDUCED) {
+    var slot = 0;
+    setInterval(function(){
+      if (document.hidden) return;
+      var line = LINES[queuePos % LINES.length]; queuePos++;
+      var old = rowsEl.children[slot % SLOTS]; slot++;
+      var fresh = buildRow(line);
+      fresh.querySelectorAll(".tile").forEach(function(t, idx){
+        t.style.animationDelay = (idx * 10) + "ms";
+        t.classList.add("flap");
+      });
+      rowsEl.replaceChild(fresh, old);
+    }, 4200);
+  }
+
+  /* ticker */
+  var items =
+    "<span>KUDIG DATABASE — 知识探索 · 智慧连接 · 持续更新</span>" +
+    "<span class='rd'>SYSTEM STATUS: ALL SYSTEMS OPERATIONAL</span>" +
+    "<span>4,750 DOCS · 21 LINES · 13 CLOUDS</span>" +
+    "<span>FTA 16 TOP EVENTS · FEBM EVIDENCE CHAIN</span>" +
+    "<span>LICENSE: APACHE 2.0</span>" +
+    "<span>UPDATED: 2026-08-25</span>";
+  var track = document.getElementById("tickerTrack");
+  track.innerHTML = '<span class="half">' + items + '</span><span class="half" aria-hidden="true">' + items + '</span>';
+
+  /* reveal on scroll */
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+  /* FTA interaction */
+  var DETAIL = {
+    "1": "IE-3.1 调度失败 — 检查 <b>Insufficient cpu/memory</b>、亲和性与拓扑约束 → 19-故障诊断/06-FTA故障树",
+    "2": "IE-3.2 镜像拉取失败 — 检查 <b>ErrImagePull</b>、imagePullSecrets、registry 限流 → 19-故障诊断/06-FTA故障树",
+    "3": "IE-3.3 容器创建失败 — 检查 <b>CreateContainerConfigError</b>、ConfigMap/Secret 缺失 → 19-故障诊断/06-FTA故障树"
+  };
+  var detail = document.getElementById("ftaDetail");
+  document.querySelectorAll(".fta-node[data-ie]").forEach(function(node){
+    function light(){
+      document.querySelectorAll(".fta-node[data-ie]").forEach(function(n){ n.classList.remove("lit"); });
+      document.querySelectorAll(".fta-line").forEach(function(l){ if (l.id) l.classList.remove("lit"); });
+      node.classList.add("lit");
+      var ln = document.getElementById("ln" + node.getAttribute("data-ie"));
+      if (ln) ln.classList.add("lit");
+      detail.innerHTML = DETAIL[node.getAttribute("data-ie")];
+    }
+    node.addEventListener("click", light);
+    node.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " "){ e.preventDefault(); light(); } });
+  });
+
+  /* 16 top events strip */
+  var TES = [
+    ["TE-1","集群完全不可用","p0"],["TE-2","应用服务不可用","p0"],["TE-3","Pod启动失败","p1"],
+    ["TE-4","网络通信异常","p1"],["TE-5","存储访问失败","p1"],["TE-6","资源调度异常","p2"],
+    ["TE-7","安全认证失败","p1"],["TE-8","监控告警异常","p2"],["TE-9","Terway 网络问题","p1"],
+    ["TE-10","ASM 服务网格问题","p1"],["TE-11","ACK-One 多集群异常","p1"],["TE-12","资源配额超限","p2"],
+    ["TE-13","变更管理问题","p1"],["TE-14","容量规划失效","p2"],["TE-15","灾难恢复失败","p0"],
+    ["TE-16","可观测性完整性缺失","p2"]
+  ];
+  var strip = document.getElementById("teStrip");
+  TES.forEach(function(t){
+    var el = document.createElement("span");
+    el.className = "te " + t[2];
+    el.innerHTML = "<i></i>" + t[0] + " " + t[1];
+    strip.appendChild(el);
+  });
+})();
+</script>
+</body>
+</html>

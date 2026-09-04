@@ -1,0 +1,44 @@
+{
+  "title": "KUDIG GTM 页面 · 构图批准",
+  "question": "三张构图方案。选择要推进的构图，或提出修改意见。",
+  "options": [
+    {
+      "id": "comp-a",
+      "label": "全屏翻牌墙",
+      "kicker": "构图 A",
+      "thesis": "首屏即整面翻牌板：标题行 + 21 域数据行 + 右下角站台号 CTA + 底部滚动条。环境承诺最彻底。",
+      "palette": ["#1A1A1A", "#FFB800", "#E8E4DC", "#C41E1E"],
+      "materials": ["机械翻牌", "哑光铝框", "等宽宽字体"],
+      "viewport": "整面墙大的翻牌板占据全部首屏，数据密度最高。",
+      "risk": "首屏无叙事文字，标语靠翻牌标题行承担；下方内容区需另行设计。",
+      "comp": ".impeccable/mocks/comp-a.png"
+    },
+    {
+      "id": "comp-b",
+      "label": "左右分栏",
+      "kicker": "构图 B",
+      "thesis": "左 1/3 叙事栏（大字标语 + 双 CTA + 三行统计），右 2/3 直翻牌板。故事与机制并重。",
+      "palette": ["#1A1A1A", "#FFB800", "#E8E4DC", "#C41E1E"],
+      "materials": ["机械翻牌", "大字黑体标语", "等宽统计行"],
+      "viewport": "左侧叙事 + 右侧翻牌板，中文标语「生产的每一站 都有答案」主导。",
+      "risk": "分栏结构较常规，板的环境感弱于全屏方案。",
+      "comp": ".impeccable/mocks/comp-b.png"
+    },
+    {
+      "id": "comp-c",
+      "label": "横板 + 换乘指南",
+      "kicker": "构图 C",
+      "thesis": "顶部四行横板（产品名 + 三大数字）+ 右侧 CTA 列，下方立即进入「换乘指南」场景卡。证明翻牌世界能治理整页。",
+      "palette": ["#1A1A1A", "#FFB800", "#E8E4DC", "#C41E1E"],
+      "materials": ["机械翻牌", "层压站台牌", "铆钉卡角"],
+      "viewport": "横板英雄区 + 第二屏场景卡（故障诊断→19 号线 / 生产运维→13 号线）。",
+      "risk": "首屏板的信息密度最低，冲击力弱于 A。",
+      "comp": ".impeccable/mocks/comp-c.png"
+    }
+  ],
+  "buildPath": {
+    "value": "comp",
+    "toggle": true
+  },
+  "steer": true
+}

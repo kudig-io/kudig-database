@@ -510,9 +510,14 @@ ClusterIP 是内网 VIP，NodePort 是节点端口，LoadBalancer 是云上入�
 
 ---
 
+## 配套练习
+
+- [[05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md|K8s 网络快问快答与面试模拟对话]]：42 道口述自测题 + 四轮面试官追问模拟脚本。先读本文理论，再到练习文档遮住答案自测。
+
+---
+
 ## 最终面试总结
 
 如果面试官问 Kubernetes Service 和 Ingress 的关系，可以这样收束：
 
 > Service 是 Kubernetes 中面向 Pod 的稳定四层访问抽象。ClusterIP 提供集群内虚拟 IP，NodePort 在每个节点上开放端口，LoadBalancer 借助云厂商暴露外部入口。Service 背后由 EndpointSlice 维护真实 Pod 后端，由 kube-proxy 把规则写入 iptables 或 IPVS，最终由内核完成 DNAT 转发。Ingress 则是七层 HTTP/HTTPS 路由规则，本身不处理流量，必须由 Ingress Controller 执行。Ingress Controller 通常通过 LoadBalancer 或 NodePort 暴露自己，接收外部请求后按域名和路径匹配 Ingress 规则，再转发到后端 Service 对应的 Pod。
-
