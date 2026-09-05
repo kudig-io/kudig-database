@@ -90,3 +90,4 @@ Longhorn 是 SUSE（原 Rancher）开源的 Kubernetes 原生分布式块存储�
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]

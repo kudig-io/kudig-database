@@ -92,3 +92,4 @@ Crossplane 是 CNCF 孵化项目，将 Kubernetes 的控制循环扩展到基础
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/platform-engineering/infrastructure-as-code-for-kubernetes|Kubernetes 基础设施即代码（IaC）]]

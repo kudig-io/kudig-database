@@ -83,3 +83,4 @@ Karpenter 2025 年正式支持 Azure（预览），GCP 兼容层由社区维护�
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

@@ -305,3 +305,19 @@ spec:
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/11-performance-tuning-guide|13 - Kubernetes 性能调优专项指南]]
+- [[01-集群基础/01-架构总览/14-troubleshooting-guide|16 - Kubernetes 故障排查专家级指南]]
+- [[02-工作负载/00-总览/02-kubernetes-multi-tenant-architecture|Kubernetes 多租户与资源隔离生产架构]]
+- [[05-网络/01-K8s网络核心/04b-flannel-ipv6-dual-stack|Flannel IPv6 Dual Stack 支持]]
+- [[10-平台工程/03-治理/02-performance-benchmarking-tuning|性能基准测试与调优 (Performance Benchmarking & Tuning)]]
+- [[10-平台工程/04-开发体验/04-platform-team-topology|平台团队拓扑与运营 (Platform Team Topology and Operations)]]
+- [[14-容器运行时/03-containerd-CRI-O/18-ebpf-runtime-security-falco-tetragon|eBPF 运行时安全：Falco/Tetragon/Tracee 部署与威胁检测]]
+- [[17-系统基础/06-知识字典/networking/service-mesh|服务网格（Service Mesh）]]
+- [[17-系统基础/06-知识字典/networking/cluster-mesh|多集群网络互联（Cluster Mesh）]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts|Kubernetes Core Concepts]]
+- [[22-概念/11-交叉分析/服务网格 × 零信任安全|服务网格 x 零信任安全]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]
+- [[23-实体/07-可观测性/inspektor-gadget|Inspektor Gadget [entities]]]
+- [[23-实体/15-参考与索引/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]
+- [[26-技能/04-工作负载/pod/培训/learn-04-debug-tools-setup|Day 4: 调试工具全家桶安装]]
+- [[26-技能/04-工作负载/pod/方法论/agent/kudig-agent-specs-collection|KUDIG Agent 规范集：工单分类、知识图谱、会话管理与诊断基准]]

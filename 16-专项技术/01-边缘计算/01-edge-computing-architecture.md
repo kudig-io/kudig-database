@@ -1607,3 +1607,7 @@ print(f"推荐配置: {result['recommended_cpu_cores']} 核, "
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[14-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]

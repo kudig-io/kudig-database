@@ -109,3 +109,4 @@ Pod 安全标准定义了以下三个策略级别：
 
 
 <!-- risk-assessed -->
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

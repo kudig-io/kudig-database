@@ -671,6 +671,9 @@ echo "诊断报告已保存到: $REPORT_FILE"
 - 06-monitoring-alerting-system
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[18-云厂商/01-阿里云/专有云-ACK/01-专有云架构概述|阿里云专有云架构概述]]
+- [[18-云厂商/01-阿里云/专有云-ACK/06-阿里云专有云远程顾问指南|阿里云专有云远程顾问指南]]
+- [[18-云厂商/01-阿里云/公有云-ACK/02-ACK集群运维|ACK集群运维]]
 
 ## See Also
 

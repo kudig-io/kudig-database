@@ -236,3 +236,4 @@ trivy image --download-db-only --db-repository registry.example.com/trivy-db
 
 
 <!-- risk-assessed -->
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]]]

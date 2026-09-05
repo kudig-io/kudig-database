@@ -260,3 +260,10 @@ kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/operations/backup-disaster-recovery|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[17-系统基础/06-知识字典/security/role-based-access-control-good-practices|基于角色的访问控制（RBAC）最佳实践]]
+- [[17-系统基础/06-知识字典/security/secrets-management-deep-dive|密钥管理深度指南]]
+- [[17-系统基础/06-知识字典/security/security-for-windows-nodes|Windows 节点安全]]
+- [[17-系统基础/06-知识字典/security/security-checklist|安全清单]]
+- [[22-概念/05-安全/linux-security-modules|Linux Security Modules for Containers]]
+- [[26-技能/07-安全/rbac/audit-rbac-configurations|Audit RBAC Configurations]]

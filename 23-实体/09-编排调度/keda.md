@@ -282,3 +282,8 @@ kubectl get --raw "/apis/external.metrics.k8s.io/v1beta1" | jq .
 
 
 <!-- risk-assessed -->
+- [[02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling|HPA/VPA 自动伸缩配置]]
+- [[04-应用模式/02-行业架构/31-instant-retail|即时零售架构设计 — 阿里云视角]]
+- [[16-专项技术/03-扩展机制/20-serverless-faas-guide|K8s Serverless / FaaS 实践指南]]
+- [[17-系统基础/06-知识字典/workloads/autoscaling-workloads|Autoscaling Workloads]]
+- [[23-实体/15-参考与索引/k8s-workload-management|工作负载管理：Pod 生命周期、调度策略与弹性伸缩]]

@@ -232,3 +232,6 @@ last_updated: '2026-07-21'
 - #reference
 
 <!-- risk-assessed -->
+- [[26-技能/04-工作负载/pod/清单规范/01-pod-specification-complete|03 - Pod 完整规格说明书]]
+- [[26-技能/04-工作负载/pod/清单规范/04-poddisruptionbudget-reference|28 - PodDisruptionBudget YAML 配置参考]]
+- [[26-技能/04-工作负载/pod/清单规范/05-advanced-pod-patterns|35 - 高级 Pod 模式与调度策略 YAML 配置参考]]

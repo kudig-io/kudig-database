@@ -254,3 +254,4 @@ virtctl vm-snapshot restore ubuntu-vm --name snapshot-1
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/platform-engineering/kubevirt-virtual-machines|KubeVirt：在 Kubernetes 上运行虚拟机]]

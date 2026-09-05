@@ -78,3 +78,4 @@ Cloud Native Buildpacks（CNB）是 CNCF 孵化项目，将应用源代码自动
 
 
 <!-- risk-assessed -->
+- [[14-容器运行时/04-镜像构建/02-cloud-native-buildpacks-guide|Cloud Native Buildpacks 生产指南]]

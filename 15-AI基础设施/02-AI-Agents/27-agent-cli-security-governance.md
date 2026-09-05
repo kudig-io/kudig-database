@@ -518,3 +518,7 @@ Agent CLI 安全治理的核心原则：
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]

@@ -72,3 +72,4 @@ KubeVirt 是 Red Hat 开源的 CNCF 孵化项目，在 Kubernetes 上提供虚�
 - [[17-系统基础/06-知识字典/workloads/pod.md|Pod]]
 - [[17-系统基础/06-知识字典/networking/cni.md|CNI]]
 - [[17-系统基础/06-知识字典/fundamentals/kata-containers.md|Kata Containers]]
+- [[17-系统基础/06-知识字典/platform-engineering/kubevirt-virtual-machines|KubeVirt：在 Kubernetes 上运行虚拟机]]

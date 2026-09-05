@@ -505,3 +505,8 @@ gitops-repo/
 ```
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[22-概念/11-交叉分析/apiserver-×-GitOps|apiserver × GitOps]]
+- [[22-概念/11-交叉分析/etcd-×-GitOps|etcd × GitOps]]

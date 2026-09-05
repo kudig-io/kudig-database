@@ -311,3 +311,4 @@ spec:
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+- [[15-AI基础设施/05-K8s-AI基础设施/06-kuberay-distributed-computing|KubeRay 分布式计算平台生产部署]]

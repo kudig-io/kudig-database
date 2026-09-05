@@ -214,3 +214,5 @@ spec:
 - [[17-系统基础/06-知识字典/networking/istio.md|Istio]]
 - [[17-系统基础/06-知识字典/networking/linkerd.md|Linkerd]]
 - [[17-系统基础/06-知识字典/networking/envoy.md|Envoy]]
+- [[05-网络/03-服务网格/04-envoy-proxy-enterprise|Envoy Proxy 企业级服务网格数据平面深度实践]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]

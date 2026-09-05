@@ -204,3 +204,6 @@ sysctl -w net.ipv4.conf.all.arp_announce=2
 - [[17-系统基础/06-知识字典/networking/metallb.md|MetalLB]]
 - [[17-系统基础/06-知识字典/networking/consul.md|Consul]]
 - [[17-系统基础/06-知识字典/networking/k8gb.md|K8GB]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]
+- [[23-实体/15-参考与索引/k8s-cluster-delete|Kubernetes 集群删除操作指南]]
+- [[26-技能/01-集群运维/kubeadm/kubeadm-ha-cluster-setup|kubeadm 高可用集群搭建]]

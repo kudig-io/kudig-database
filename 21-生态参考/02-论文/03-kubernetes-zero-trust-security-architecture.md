@@ -1053,6 +1053,7 @@ K8s 1.33/1.34安全增强:
 
 - 79-polar-research
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[27-标签/06-AI与专项/research|research]]
 
 ## See Also
 

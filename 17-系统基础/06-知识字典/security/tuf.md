@@ -198,3 +198,4 @@ tuf-client download --root root.json <target-name>
 - [[17-系统基础/06-知识字典/security/notary-project.md|Notary Project]]
 - [[17-系统基础/06-知识字典/security/in-toto.md|in-toto]]
 - [[17-系统基础/06-知识字典/security/supply-chain-security.md|供应链安全]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

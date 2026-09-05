@@ -599,3 +599,7 @@ Agent CLI 的最佳实践可归纳为三个层次：
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]

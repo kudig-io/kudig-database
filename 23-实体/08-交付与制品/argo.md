@@ -300,3 +300,4 @@ kubectl argo rollouts abort my-app -n production
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/operations/enterprise-ops-practices|企业级运维最佳实践]]

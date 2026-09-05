@@ -72,3 +72,4 @@ Kepler（Kubernetes Efficient Power Level Exporter）是 CNCF Sandbox 项目，�
 - [[17-系统基础/06-知识字典/observability/prometheus.md|Prometheus]]
 - [[17-系统基础/06-知识字典/observability/opentelemetry.md|OpenTelemetry]]
 - [[17-系统基础/06-知识字典/observability/grafana.md|Grafana]]
+- [[17-系统基础/06-知识字典/operations/greenops-and-carbon-aware-computing|GreenOps 与碳感知计算]]

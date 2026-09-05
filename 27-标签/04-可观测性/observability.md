@@ -217,3 +217,4 @@ L1: 基础监控 → L2: 集中日志 → L3: 分布式追踪 → L4: SLO 驱动
 - [[27-标签/01-核心平台/k8s|k8s]]
 - [[27-标签/05-交付与运维/reliability|reliability]]
 - [[27-标签/03-安全与合规/security|security]]
+- [[22-概念/06-可观测性/prometheus-argocd-monitoring|Prometheus 与 ArgoCD 监控集成]]

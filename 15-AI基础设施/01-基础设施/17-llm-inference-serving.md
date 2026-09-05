@@ -2319,3 +2319,4 @@ response = client.chat.completions.create(
 
 
 <!-- risk-assessed -->
+- [[25-研究/01-AI与边缘/ai-inference-serving-best-practices|AI 推理服务最佳实践研究]]

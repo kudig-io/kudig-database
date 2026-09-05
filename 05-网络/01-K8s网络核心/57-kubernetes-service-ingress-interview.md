@@ -499,14 +499,14 @@ ClusterIP 是内网 VIP，NodePort 是节点端口，LoadBalancer 是云上入�
 本仓库可按以下顺序复习：
 
 - [[05-网络/01-K8s网络核心/00-network-in-nutshell.md|Kubernetes 网络速览]]
-- [[05-网络/01-K8s网络核心/01-network-architecture-overview.md|Kubernetes 网络架构总览]]
-- [[05-网络/01-K8s网络核心/06-service-concepts-types.md|Service 概念与类型]]
-- [[05-网络/01-K8s网络核心/07-service-implementation-details.md|Service 实现细节]]
-- [[05-网络/01-K8s网络核心/09-kube-proxy-modes-performance.md|kube-proxy 模式与性能]]
-- [[05-网络/01-K8s网络核心/11-dns-service-discovery-coredns.md|DNS 与 Service Discovery]]
-- [[05-网络/01-K8s网络核心/19-ingress-fundamentals.md|Ingress 基础]]
-- [[05-网络/01-K8s网络核心/20-ingress-controller-deep-dive.md|Ingress Controller 深入]]
-- [[05-网络/01-K8s网络核心/25-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]]
+- [[05-网络/01-K8s网络核心/02-network-architecture-overview.md|Kubernetes 网络架构总览]]
+- [[05-网络/01-K8s网络核心/07-service-concepts-types.md|Service 概念与类型]]
+- [[05-网络/01-K8s网络核心/08-service-implementation-details.md|Service 实现细节]]
+- [[05-网络/01-K8s网络核心/10-kube-proxy-modes-performance.md|kube-proxy 模式与性能]]
+- [[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 与 Service Discovery]]
+- [[05-网络/01-K8s网络核心/20-ingress-fundamentals.md|Ingress 基础]]
+- [[05-网络/01-K8s网络核心/21-ingress-controller-deep-dive.md|Ingress Controller 深入]]
+- [[05-网络/01-K8s网络核心/26-ingress-monitoring-troubleshooting.md|Ingress 监控与排障]]
 
 ---
 

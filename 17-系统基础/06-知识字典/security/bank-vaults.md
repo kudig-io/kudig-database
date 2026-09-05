@@ -201,3 +201,4 @@ kubectl -n vault rollout restart deployment vault-secrets-webhook
 - [[17-系统基础/06-知识字典/security/vault.md|Vault]]
 - [[17-系统基础/06-知识字典/security/external-secrets.md|External Secrets]]
 - [[17-系统基础/06-知识字典/security/sops.md|SOPS]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

@@ -95,18 +95,19 @@ def main():
 
     # 3. Write report
     report_path = BASE_DIR / "reports" / "rag-chunking-report.md"
-    with open(report_path, 'w', encoding='utf-8') as f:
-        f.write(f"# RAG Chunking 优化报告\n\n")
-        f.write(f"> 生成日期: 2026-05-20\n\n")
-        f.write(f"## Chunking 标记\n\n")
-        f.write(f"- 已添加 chunk 标记: {chunked} 文件\n")
-        f.write(f"- 标记位置: domain-1 ~ domain-12 核心文档\n")
-        f.write(f"- 标记格式: `<!-- chunk: 章节标题 -->`\n\n")
-        f.write(f"## 长文档报告\n\n")
-        f.write(f"共 {len(long_docs)} 篇文档超过 500 行，建议拆分:\n\n")
-        f.write(f"| 行数 | 文件 |\n|---|---|\n")
-        for path, lines in long_docs[:50]:
-            f.write(f"| {lines} | {path} |\n")
+    report = (
+        f"# RAG Chunking 优化报告\n\n"
+        f"> 生成日期: 2026-05-20\n\n"
+        f"## Chunking 标记\n\n"
+        f"- 已添加 chunk 标记: {chunked} 文件\n"
+        f"- 标记位置: domain-1 ~ domain-12 核心文档\n"
+        f"- 标记格式: `<!-- chunk: 章节标题 -->`\n\n"
+        f"## 长文档报告\n\n"
+        f"共 {len(long_docs)} 篇文档超过 500 行，建议拆分:\n\n"
+        f"| 行数 | 文件 |\n|---|---|\n"
+    )
+    report += ''.join(f"| {lines} | {path} |\n" for path, lines in long_docs[:50])
+    report_path.write_text(report, encoding='utf-8')
 
     print(f"\n报告已写入: {report_path}")
 

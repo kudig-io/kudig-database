@@ -93,3 +93,14 @@ Argo 是 CNCF 毕业项目集合，包含 Argo CD（GitOps 持续部署）、Arg
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/operations/enterprise-ops-practices|企业级运维最佳实践]]
+- [[23-实体/15-参考与索引/kudig-ecosystem-guide|KUDIG 开源生态指南与深度研究指南]]
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]
+- [[23-实体/15-参考与索引/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]
+- [[23-实体/15-参考与索引/storage-terms|K8s 存储术语参考]]
+- [[23-实体/15-参考与索引/KUDIG Tag Dictionary|KUDIG Tag Dictionary]]
+- [[23-实体/15-参考与索引/k8s-deployment-create|Kubernetes Deployment 创建操作指南]]
+- [[23-实体/15-参考与索引/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]]
+- [[23-实体/15-参考与索引/platform-engineering-terms|K8s 平台工程术语参考]]
+- [[23-实体/15-参考与索引/version-upgrade-guide|版本升级指南]]
+- [[26-技能/04-工作负载/deployment/deployment-canary-and-bluegreen|金丝雀与蓝绿发布]]

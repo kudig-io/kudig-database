@@ -188,3 +188,11 @@ python3 validators/coverage_checker.py \
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]]
+- [[23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]
+- [[23-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]
+- [[23-实体/15-参考与索引/release-notes-kubernetes|发布说明索引 — Kubernetes]]
+- [[23-实体/15-参考与索引/release-notes-security|发布说明索引 — 安全]]
+- [[23-实体/15-参考与索引/k8s-knowledge-map|Kubernetes Knowledge Map]]
+- [[23-实体/15-参考与索引/k8s-difficulty-index|Kubernetes Difficulty Index]]
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

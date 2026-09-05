@@ -690,3 +690,7 @@ Agent CLI 的 CI/CD 集成是将 AI 编码能力从"个人提效"扩展到"团�
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]

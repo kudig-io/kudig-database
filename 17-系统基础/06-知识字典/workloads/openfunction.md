@@ -73,3 +73,5 @@ OpenFunction 是青云科技开源的 CNCF Sandbox 项目，云原生 FaaS 平�
 - [[17-系统基础/06-知识字典/specialized-workloads/knative.md|Knative]]
 - [[17-系统基础/06-知识字典/specialized-workloads/openfaas.md|OpenFaaS]]
 - [[17-系统基础/06-知识字典/scheduling/keda.md|KEDA]]
+- [[16-专项技术/03-扩展机制/20-serverless-faas-guide|K8s Serverless / FaaS 实践指南]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

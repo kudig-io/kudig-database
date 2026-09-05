@@ -231,3 +231,4 @@ kubectl delete mesh default
 
 
 <!-- risk-assessed -->
+- [[05-网络/03-服务网格/04-envoy-proxy-enterprise|Envoy Proxy 企业级服务网格数据平面深度实践]]

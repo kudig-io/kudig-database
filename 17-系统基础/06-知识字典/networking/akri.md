@@ -200,3 +200,4 @@ kubectl apply -f akri-configuration.yaml
 - [[17-系统基础/06-知识字典/platform-engineering/kubeedge.md|KubeEdge]]
 - [[17-系统基础/06-知识字典/scheduling/hami.md|HAMi]]
 - [[17-系统基础/06-知识字典/specialized-workloads/openyurt.md|OpenYurt]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

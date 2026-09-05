@@ -425,3 +425,23 @@ spec:
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/12-security-architecture|14 - Kubernetes 安全架构深度分析]]
+- [[01-集群基础/01-架构总览/10-cluster-deployment-patterns|12 - Kubernetes 集群部署架构模式指南]]
+- [[01-集群基础/02-设计原则/18-security-design-patterns|17 - 安全设计模式]]
+- [[01-集群基础/02-设计原则/15-service-mesh-architecture|14 - 服务网格与微服务架构设计]]
+- [[01-集群基础/02-设计原则/01-design-principles-foundations|01 - Kubernetes 设计原则与哲学 (Foundations)]]
+- [[04-应用模式/02-行业架构/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计 (应用模式)]]
+- [[05-网络/03-服务网格/06-traefik-mesh-enterprise|Traefik Mesh Enterprise Service Mesh 深度实践]]
+- [[05-网络/03-服务网格/03-consul-connect-enterprise|Consul Connect 企业级服务网格管理]]
+- [[05-网络/03-服务网格/01-istio-enterprise-service-mesh|Istio 企业级服务网格架构与实践]]
+- [[05-网络/03-服务网格/08-ambient-mesh-l7-policy|Istio Ambient Mesh 与 L7 策略深度实践]]
+- [[05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide|Spring Cloud Kubernetes 与服务网格集成指南]]
+- [[05-网络/03-服务网格/04-envoy-proxy-enterprise|Envoy Proxy 企业级服务网格数据平面深度实践]]
+- [[05-网络/04-API网关/07-envoy-gateway-enterprise|07 - Envoy Gateway 企业级实践]]
+- [[08-安全/06-合规审计/07-certificate-management|证书管理与 TLS 配置]]
+- [[10-平台工程/04-开发体验/04-platform-team-topology|平台团队拓扑与运营 (Platform Team Topology and Operations)]]
+- [[17-系统基础/04-K8s事件/15-ecosystem-addon-events|15 - 生态系统与插件事件]]
+- [[17-系统基础/06-知识字典/networking/service-mesh|服务网格（Service Mesh）]]
+- [[17-系统基础/06-知识字典/networking/cluster-mesh|多集群网络互联（Cluster Mesh）]]
+- [[22-概念/11-交叉分析/服务网格 × 零信任安全|服务网格 x 零信任安全]]
+- [[26-技能/04-工作负载/pod/清单规范/05-advanced-pod-patterns|35 - 高级 Pod 模式与调度策略 YAML 配置参考]]

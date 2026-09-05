@@ -391,4 +391,4 @@ Service 是稳定的四层服务入口，Ingress 是七层路由规则，Ingress
 
 - [[05-网络/01-K8s网络核心/57-kubernetes-service-ingress-interview.md|Kubernetes Service 与 Ingress 网络面经（理论体系）]]
 - [[05-网络/01-K8s网络核心/00-network-in-nutshell.md|Kubernetes 网络速览]]
-- [[05-网络/01-K8s网络核心/19-ingress-fundamentals.md|Ingress 基础]]
+- [[05-网络/01-K8s网络核心/20-ingress-fundamentals.md|Ingress 基础]]

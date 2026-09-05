@@ -548,3 +548,4 @@ yunikorn_scheduling_latency_seconds_bucket
 - [[23-实体/09-编排调度/volcano|Volcano批量调度]]
 - [[17-系统基础/06-知识字典/configuration/resource-quota|K8s资源配额与LimitRange]]
 - [[15-AI基础设施/05-K8s-AI基础设施/15-gpu-cost-attribution-multitenant|AI集群多租户隔离]]
+- [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|K8s 上的模型微调基础设施（PEFT/LoRA/DeepSpeed/FSDP）]]

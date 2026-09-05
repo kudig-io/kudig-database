@@ -280,3 +280,6 @@ kubectl exec -n spire-system spire-server-0 -- spire-server token generate -spif
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/02-设计原则/18-security-design-patterns|17 - 安全设计模式]]
+- [[17-系统基础/06-知识字典/networking/cluster-mesh|多集群网络互联（Cluster Mesh）]]
+- [[17-系统基础/06-知识字典/security/spiffe-spire-identity|SPIFFE / SPIRE 与工作负载身份]]

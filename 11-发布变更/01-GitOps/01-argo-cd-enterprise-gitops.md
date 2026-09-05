@@ -1259,6 +1259,8 @@ Repo Server 错误:
 ## Related
 
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[10-平台工程/02-运维/11-cluster-api-deep-dive|Cluster API (CAPI) 深度解析]]
+- [[22-概念/09-平台与发布/01-cluster-api-deep-dive|Cluster API (CAPI) 深度解析]]
 
 ## 相关合成分析
 

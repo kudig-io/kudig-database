@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Fix wiki pages with bad summaries - re-extract from source content"""
 import json, os, re, glob
+from pathlib import Path
 
 VAULT = "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database"
 TODAY = "2026-05-21"
@@ -10,8 +11,7 @@ def read_file(path):
         return f.read()
 
 def write_file(path, content):
-    with open(os.path.join(VAULT, path), 'w', encoding='utf-8') as f:
-        f.write(content)
+    Path(os.path.join(VAULT, path)).write_text(content, encoding='utf-8')
 
 def extract_sections(body):
     sections = {}

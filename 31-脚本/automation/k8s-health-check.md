@@ -336,3 +336,7 @@ echo "========================================"
 - **CI/CD**: 在部署后自动执行健康检查作为部署验证门控
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

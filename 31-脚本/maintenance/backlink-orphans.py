@@ -202,14 +202,13 @@ def add_related_link(target_path: Path, source_rel: str, source_title: str, dry_
 
     link_line = f"- [[{source_rel[:-3]}|{source_title}]]\n"
     if "## Related" in content:
-        section_start = content.find("## Related") + len("## Related")
-        next_header = content.find("\n## ", section_start)
-        if next_header == -1:
-            if not content.endswith("\n"):
-                content += "\n"
-            content += link_line
-        else:
-            content = content[:next_header] + link_line + content[next_header:]
+        # 插到节标题后（保持与 Related 节相邻；旧 wave 逻辑在节后还有附录内容时
+        # 会把链接追加到文件末尾，脱离节外）
+        heading_end = content.find("## Related") + len("## Related")
+        insert_at = heading_end + 1  # 越过标题行换行符
+        if content[insert_at:insert_at + 1] == "\n":
+            insert_at += 1
+        content = content[:insert_at] + link_line + content[insert_at:]
     else:
         if not content.endswith("\n"):
             content += "\n"

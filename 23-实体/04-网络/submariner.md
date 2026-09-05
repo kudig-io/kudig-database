@@ -218,3 +218,4 @@ subctl verify --kubeconfig cluster-a.kubeconfig --to-kubeconfig cluster-b.kubeco
 
 
 <!-- risk-assessed -->
+- [[26-技能/04-工作负载/pod/方法论/agent/kudig-agent-specs-collection|KUDIG Agent 规范集：工单分类、知识图谱、会话管理与诊断基准]]

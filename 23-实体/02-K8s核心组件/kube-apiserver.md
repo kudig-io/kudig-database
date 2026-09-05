@@ -193,3 +193,6 @@ kubectl get mutatingwebhookconfigurations -o jsonpath='{range .items[*]}{.metada
 
 
 <!-- risk-assessed -->
+- [[26-技能/01-集群运维/cluster/01-apiserver-controlplane|控制平面不可用（kube-apiserver）诊断与修复]]
+- [[26-技能/01-集群运维/cluster/02-etcd-troubleshooting|etcd 集群故障诊断与恢复]]
+- [[26-技能/01-集群运维/cluster/03-cluster-cert-upgrade|集群证书过期与版本升级故障诊断]]

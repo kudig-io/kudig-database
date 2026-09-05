@@ -80,3 +80,4 @@ Distribution 是 CNCF 毕业项目，提供 OCI 兼容的容器镜像仓库实�
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/etcd × 高可用模式|etcd × 高可用模式]]

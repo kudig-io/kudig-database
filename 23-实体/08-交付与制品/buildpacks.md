@@ -250,3 +250,4 @@ pack builder create my-builder:latest -b builder.toml
 
 
 <!-- risk-assessed -->
+- [[14-容器运行时/04-镜像构建/02-cloud-native-buildpacks-guide|Cloud Native Buildpacks 生产指南]]

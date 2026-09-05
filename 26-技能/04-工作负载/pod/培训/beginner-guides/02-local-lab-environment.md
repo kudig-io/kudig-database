@@ -639,3 +639,7 @@ newgrp docker
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[26-技能/04-工作负载/pod/培训/beginner-guides/03-end-to-end-project|端到端项目实战——从代码到生产完整流水线]]

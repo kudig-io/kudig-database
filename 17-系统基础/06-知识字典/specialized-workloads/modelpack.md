@@ -78,3 +78,4 @@ ModelPack 是将 AI/ML 模型打包为 OCI 镜像的工具和规范，利用容�
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

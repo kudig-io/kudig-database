@@ -379,3 +379,8 @@ prerequisites:
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[19-故障诊断/04-高级排障/structural-04-storage/02-csi-troubleshooting|CSI 存储驱动深度排查与架构优化指南]]
+- [[19-故障诊断/04-高级排障/structural-04-storage/01-pv-pvc-troubleshooting|PV/PVC 存储深度排查与持久化治理指南]]

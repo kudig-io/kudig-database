@@ -1583,3 +1583,8 @@ Engineering Manager / Director (管理路径)
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[14-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]
+- [[14-容器运行时/03-containerd-CRI-O/17-podman-buildah-rootless|Podman/Buildah 无根容器：构建与运行实践]]

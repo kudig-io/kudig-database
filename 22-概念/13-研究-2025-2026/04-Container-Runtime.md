@@ -99,3 +99,4 @@ OCI 镜像规范和运行时规范在 2025 年进行了重大扩展，正式支�
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

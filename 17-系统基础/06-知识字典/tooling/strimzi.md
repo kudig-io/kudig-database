@@ -94,3 +94,4 @@ Strimzi 是 CNCF 孵化项目，在 Kubernetes 上提供 Apache Kafka 的原生�
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

@@ -532,8 +532,7 @@ def main():
             })
 
     # Save manifest
-    with open(MANIFEST, 'w') as f:
-        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    MANIFEST.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
 
     print(f"\nTotal pages created: {len(created_pages)}")
     print(f"Manifest updated: {MANIFEST}")

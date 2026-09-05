@@ -284,3 +284,4 @@ Spin 应用异常
 - [[23-实体/03-运行时/wasmcloud.md|wasmcloud]] — wasmCloud
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/platform-engineering/webassembly-wasm-workloads|WebAssembly（Wasm）工作负载]]

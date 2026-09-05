@@ -145,3 +145,6 @@ spec:
 
 - [[24-综合/04-安全与合规/container-runtime-image-security.md|容器运行时 × 镜像安全]]
 - [[25-研究/02-网络与安全/zero-trust-k8s-security.md|零信任安全架构]]
+- [[22-概念/09-平台与发布/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]
+- [[22-概念/11-交叉分析/纵深防御 × 供应链安全|纵深防御 x 供应链安全]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

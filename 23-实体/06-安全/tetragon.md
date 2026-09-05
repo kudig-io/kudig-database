@@ -240,3 +240,4 @@ kubectl rollout restart daemonset/tetragon -n kube-system
 - 06-tetragon-runtime-security
 
 <!-- risk-assessed -->
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

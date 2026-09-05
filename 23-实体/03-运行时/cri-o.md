@@ -258,3 +258,4 @@ systemctl stop crio
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]]

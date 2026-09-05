@@ -348,3 +348,7 @@ stargz/nydus (lazy loading):
 - [[14-容器运行时/02-镜像管理/01-harbor-enterprise-image-registry.md|Harbor 企业镜像仓库]]
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[14-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]

@@ -251,3 +251,4 @@ karmadactl deinit
 
 
 <!-- risk-assessed -->
+- [[18-云厂商/07-多云混合/07-huawei-cce-enterprise|华为云 CCE 企业级容器平台深度实践]]

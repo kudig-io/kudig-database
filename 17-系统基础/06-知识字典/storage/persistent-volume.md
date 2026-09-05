@@ -87,3 +87,5 @@ Available → Bound → Released → (Available/Delete)
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|K8s 上的模型微调基础设施（PEFT/LoRA/DeepSpeed/FSDP）]]
+- [[18-云厂商/01-阿里云/专有云-ACK/008-apsara-pangu-storage-troubleshooting|专有云（Apsara Stack）- 盘古存储排障]]

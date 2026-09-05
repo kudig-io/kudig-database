@@ -268,3 +268,4 @@ helm upgrade kepler kepler/kepler -n kepler \
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/operations/greenops-and-carbon-aware-computing|GreenOps 与碳感知计算]]

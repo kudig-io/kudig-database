@@ -861,3 +861,4 @@ dra_pending_resource_claims > 50  # 告警：待分配ResourceClaim积压
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

@@ -252,3 +252,5 @@ kubectl delete function function-sample
 
 
 <!-- risk-assessed -->
+- [[16-专项技术/03-扩展机制/20-serverless-faas-guide|K8s Serverless / FaaS 实践指南]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

@@ -569,3 +569,5 @@ spec:
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/05-K8s-AI基础设施/06-kuberay-distributed-computing|KubeRay 分布式计算平台生产部署]]
+- [[15-AI基础设施/05-K8s-AI基础设施/01-gpu-operator-sharing-patterns|NVIDIA GPU Operator 与 GPU 共享模式生产部署]]

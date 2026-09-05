@@ -323,3 +323,13 @@ kubectl patch cronjob db-backup -p '{"spec":{"successfulJobsHistoryLimit":3,"fai
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+- [[04-应用模式/02-行业架构/30-hrtech-saas|人力资源 SaaS 架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/52-smart-water|智慧水务架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/39-smart-campus|智慧园区架构设计 — 阿里云视角]]
+- [[17-系统基础/04-K8s事件/09-job-cronjob-batch-events|09 - Job 与 CronJob 批处理事件]]
+- [[17-系统基础/06-知识字典/fundamentals/owners-and-dependents|所有者和依赖者]]
+- [[17-系统基础/06-知识字典/specialized-workloads/vector-databases-and-rag-infrastructure|向量数据库与 RAG 基础设施]]
+- [[17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs|Automatic Cleanup for Finished Jobs]]
+- [[19-故障诊断/02-资源排障/10-cronjob-troubleshooting|CronJob 故障排查]]
+- [[19-故障诊断/03-基础设施排障/07-backup-restore-troubleshooting|31 - 备份恢复故障排查 (Backup and Restore Troubleshooting)]]
+- [[26-技能/04-工作负载/job-cronjob/培训/learn-11-job-cronjob|第九课：Job 和 CronJob - 任务调度]]

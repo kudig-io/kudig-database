@@ -253,3 +253,4 @@ kubectl get pods -n production -o json | jq '.items[] | select(.spec.volumes[]?.
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/security/role-based-access-control-good-practices|基于角色的访问控制（RBAC）最佳实践]]

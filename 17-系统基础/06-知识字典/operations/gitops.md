@@ -88,3 +88,5 @@ GitOps 是一种以 Git 仓库作为基础设施和应用配置的唯一真实�
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/apiserver-×-GitOps|apiserver × GitOps]]
+- [[22-概念/11-交叉分析/etcd-×-GitOps|etcd × GitOps]]

@@ -199,6 +199,7 @@ curl -sv https://<your-domain>/api/ping --resolve <your-domain>:443:<ALB-IP>
 - [[23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 - [[23-实体/04-网络/grpc.md|grpc]]
 - [[13-生产运维/05-工单案例/ticket-case-003-slb-backend-group-misconfig|工单案例：SLB 后端组配置错误]]
+- [[18-云厂商/01-阿里云/公有云-ACK/05-阿里云SLB与Ingress|阿里云SLB与Ingress]]
 
 ## See Also
 

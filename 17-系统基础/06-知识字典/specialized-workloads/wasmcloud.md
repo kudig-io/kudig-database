@@ -70,3 +70,5 @@ wasmCloud 是 CNCF Sandbox 项目，提供基于 WebAssembly 的分布式应用�
 - [[17-系统基础/06-知识字典/specialized-workloads/spin.md|Spin]]
 - [[17-系统基础/06-知识字典/fundamentals/wasmedge.md|WasmEdge]]
 - [[17-系统基础/06-知识字典/platform-engineering/dapr.md|Dapr]]
+- [[16-专项技术/02-WebAssembly/04-wasmcloud-platform|wasmCloud 平台]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

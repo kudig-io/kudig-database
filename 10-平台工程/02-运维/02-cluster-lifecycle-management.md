@@ -403,6 +403,8 @@ resource "aws_eks_cluster" "main" {
 - 相关知识域: 故障诊断
 - [[21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[10-平台工程/02-运维/11-cluster-api-deep-dive|Cluster API (CAPI) 深度解析]]
+- [[22-概念/09-平台与发布/01-cluster-api-deep-dive|Cluster API (CAPI) 深度解析]]
 
 ## See Also
 

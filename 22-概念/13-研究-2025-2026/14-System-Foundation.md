@@ -103,3 +103,4 @@ Intel TDX 与 AMD SEV-SNP 已在主流云平台提供 GA 支持。Confidential C
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

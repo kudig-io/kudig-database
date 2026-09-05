@@ -91,3 +91,6 @@ KServe（原 KFServing）是 CNCF 孵化项目，为 Kubernetes 提供标准化�
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/specialized-workloads/ai-infra-specialist|08 - AI/ML基础设施专业词典]]
+- [[23-实体/15-参考与索引/specialized-workloads-terms|K8s 专用工作负载术语参考]]
+- [[23-实体/15-参考与索引/root-terms|K8s Root术语参考]]

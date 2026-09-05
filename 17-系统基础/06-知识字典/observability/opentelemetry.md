@@ -94,3 +94,11 @@ OpenTelemetry（简称 OTel）是 CNCF 孵化项目，提供统一的分布式�
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/13-observability-architecture|15 - Kubernetes 可观测性架构体系]]
+- [[01-集群基础/02-设计原则/17-observability-design-principles|16 - 可观测性设计原则]]
+- [[05-网络/04-API网关/12-api-gateway-observability|12 - API 网关可观测性：指标、日志与链路追踪]]
+- [[17-系统基础/06-知识字典/observability/traces-for-kubernetes-system-components|Kubernetes 系统组件链路追踪]]
+- [[17-系统基础/06-知识字典/observability/opentelemetry-and-distributed-tracing|OpenTelemetry 与分布式链路追踪]]
+- [[22-概念/12-研究/ai-agent-README|AI Agent 工程专题]]
+- [[23-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]
+- [[26-技能/08-可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]]

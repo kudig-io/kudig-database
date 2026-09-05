@@ -423,3 +423,7 @@ related:
 ```
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[19-故障诊断/04-高级排障/structural-symptom-mapping-layer|症状快速映射层 (Symptom-SOP-RootCause Mapping) [topic-structural-trouble-shooting]]]

@@ -580,6 +580,9 @@ echo "Logs collected to: $LOG_DIR"
 - [[23-实体/15-参考与索引/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
 - [[21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[18-云厂商/01-阿里云/专有云-ACK/01-专有云架构概述|阿里云专有云架构概述]]
+- [[18-云厂商/01-阿里云/公有云-ACK/02-ACK集群运维|ACK集群运维]]
+- [[18-云厂商/01-阿里云/公有云-ACK/05-阿里云SLB与Ingress|阿里云SLB与Ingress]]
 
 ## See Also
 

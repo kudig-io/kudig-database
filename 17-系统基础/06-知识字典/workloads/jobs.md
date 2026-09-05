@@ -266,3 +266,4 @@ kubectl patch job <job-name> -n prod -p '{"spec":{"suspend":true}}'
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/04-K8s事件/09-job-cronjob-batch-events|09 - Job 与 CronJob 批处理事件]]

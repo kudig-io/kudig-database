@@ -292,3 +292,4 @@ k0s image import airgap-images.tar
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/multi-cloud/edge-computing-and-k3s|边缘计算与轻量级 Kubernetes]]

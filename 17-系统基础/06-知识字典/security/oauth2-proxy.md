@@ -198,3 +198,4 @@ kubectl rollout restart deploy oauth2-proxy -n oauth2-proxy
 - [[17-系统基础/06-知识字典/security/dex.md|Dex]]
 - [[17-系统基础/06-知识字典/networking/traefik.md|Traefik]]
 - [[17-系统基础/06-知识字典/security/rbac.md|RBAC]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

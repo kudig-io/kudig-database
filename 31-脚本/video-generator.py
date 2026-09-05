@@ -36,6 +36,7 @@ import sys
 import re
 import json
 import argparse
+from pathlib import Path
 import subprocess
 from pathlib import Path
 from datetime import datetime
@@ -241,14 +242,13 @@ def generate_video(platform: str, script_path: str, avatar: str, output_path: st
 
     # 保存元数据
     meta_path = output_path + '.meta.json'
-    with open(meta_path, 'w', encoding='utf-8') as f:
-        json.dump({
-            'script': script_path,
-            'platform': platform,
-            'avatar': avatar,
-            'generated_at': datetime.now().isoformat(),
-            'paragraphs_count': len(script['paragraphs'])
-        }, f, indent=2, ensure_ascii=False)
+    Path(meta_path).write_text(json.dumps({
+        'script': script_path,
+        'platform': platform,
+        'avatar': avatar,
+        'generated_at': datetime.now().isoformat(),
+        'paragraphs_count': len(script['paragraphs'])
+    }, indent=2, ensure_ascii=False), encoding='utf-8')
 
     print(f"  元数据: {meta_path}")
     return True

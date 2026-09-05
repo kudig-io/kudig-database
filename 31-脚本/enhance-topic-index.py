@@ -10,6 +10,7 @@
 
 import os
 import re
+from pathlib import Path
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -266,8 +267,7 @@ def enhance_index_file(filepath: Path, dry_run: bool = False) -> Dict:
         return {"status": "dry_run", "filename": filename}
 
     # 写入文件
-    with open(filepath, 'w', encoding='utf-8') as f:
-        f.write(new_content)
+    Path(filepath).write_text(new_content, encoding='utf-8')
 
     print(f"✅ 增强完成: {filename}")
     return {"status": "success", "filename": filename}

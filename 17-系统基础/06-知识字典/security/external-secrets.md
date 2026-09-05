@@ -240,3 +240,5 @@ kubectl get secret my-secret -n app -o jsonpath='{.data.DB_DSN}' | base64 -d  # 
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/kudig-ecosystem-guide|KUDIG 开源生态指南与深度研究指南]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

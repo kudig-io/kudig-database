@@ -1,0 +1,36 @@
+{
+  "components": [
+    {
+      "name": "kubernetes",
+      "repo": "kubernetes/kubernetes",
+      "keywords": ["kubernetes", "k8s", "apiserver", "kubelet", "kube-proxy", "controller-manager", "scheduler", "etcd"]
+    },
+    {
+      "name": "cilium",
+      "repo": "cilium/cilium",
+      "keywords": ["cilium"]
+    },
+    {
+      "name": "istio",
+      "repo": "istio/istio",
+      "keywords": ["istio", "envoy"]
+    },
+    {
+      "name": "prometheus",
+      "repo": "prometheus/prometheus",
+      "keywords": ["prometheus", "grafana"]
+    },
+    {
+      "name": "argo-cd",
+      "repo": "argoproj/argo-cd",
+      "keywords": ["argocd", "argo-cd", "argo"]
+    },
+    {
+      "name": "terway",
+      "repo": "AliyunContainerService/terway",
+      "keywords": ["terway"]
+    }
+  ],
+  "state": {},
+  "_说明": "state 由 version-watch workflow 维护（记录各组件上次见到的 release tag）；keywords 用于在 23-实体/26-技能 等目录检索受影响页面。"
+}

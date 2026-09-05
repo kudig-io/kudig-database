@@ -181,3 +181,5 @@ last_updated: '2026-07-21'
 - [[27-标签/01-核心平台/operator|operator]]
 - [[27-标签/05-交付与运维/multi-cluster|multi-cluster]]
 - [[27-标签/05-交付与运维/production|production]]
+- [[22-概念/11-交叉分析/apiserver-×-GitOps|apiserver × GitOps]]
+- [[22-概念/11-交叉分析/etcd-×-GitOps|etcd × GitOps]]

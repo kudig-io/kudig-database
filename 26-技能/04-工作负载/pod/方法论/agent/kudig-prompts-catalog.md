@@ -139,3 +139,4 @@ prerequisites:
 
 
 <!-- risk-assessed -->
+- [[26-技能/04-工作负载/pod/培训/training-public-README|K8s 学习与培训体系]]

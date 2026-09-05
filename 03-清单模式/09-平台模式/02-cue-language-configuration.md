@@ -465,3 +465,4 @@ cue trace ./teams/team-backend/      # 追踪约束来源
 - [[10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
 - [[24-综合/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]
 - [[03-清单模式/09-平台模式/index|平台模式索引]]
+- [[14-容器运行时/03-containerd-CRI-O/18-ebpf-runtime-security-falco-tetragon|eBPF 运行时安全：Falco/Tetragon/Tracee 部署与威胁检测]]

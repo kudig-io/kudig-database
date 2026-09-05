@@ -72,3 +72,4 @@ kube-rs 是 Rust 生态的 Kubernetes 客户端和 Operator 开发框架，提�
 - [[17-系统基础/06-知识字典/platform-engineering/operator-framework.md|Operator Framework]]
 - [[17-系统基础/06-知识字典/tooling/kustomize.md|Kustomize]]
 - [[17-系统基础/06-知识字典/fundamentals/youki.md|youki]]
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

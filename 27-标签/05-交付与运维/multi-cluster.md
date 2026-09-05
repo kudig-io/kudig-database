@@ -161,3 +161,4 @@ last_updated: '2026-07-21'
 - [[27-标签/05-交付与运维/reliability|reliability]]
 - [[27-标签/05-交付与运维/production|production]]
 - [[27-标签/03-安全与合规/security|security]]
+- [[26-技能/01-集群运维/cluster-upgrade/最佳实践/scen-README|生产场景导航]]

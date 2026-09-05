@@ -11,6 +11,7 @@
 用法: python3 31-脚本/maintenance/rewrite-prefix-links-20260723.py [--dry-run]
 """
 import os
+import importlib.util
 import posixpath
 import re
 import sys
@@ -18,13 +19,14 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-# 从改名脚本导入映射
-_ns = {}
-with open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                       "rename-prefix-20260723.py"), encoding="utf-8") as f:
-    exec(f.read().split("def run(")[0], _ns)
-ROOT_MAP = _ns["ROOT_MAP"]
-L2_MAP_RAW = _ns["L2_MAP"]
+# 从改名脚本导入映射（该脚本带 __main__ 守卫，导入无副作用）
+_spec = importlib.util.spec_from_file_location(
+    "rename_prefix_20260723",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "rename-prefix-20260723.py"))
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)
+ROOT_MAP = _mod.ROOT_MAP
+L2_MAP_RAW = _mod.L2_MAP
 
 L2_MAP = {}      # (parent_old, child_old) -> child_new
 for parent, pairs in L2_MAP_RAW.items():
@@ -167,8 +169,7 @@ def rewrite_file(new_rel):
     if out != text:
         stats["files"] += 1
         if "--dry-run" not in sys.argv:
-            with open(abspath, "w", encoding="utf-8") as f:
-                f.write(out)
+            Path(abspath).write_text(out, encoding="utf-8")
 
 
 def main():

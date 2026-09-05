@@ -89,3 +89,5 @@ Backstage 是 React + Node.js 应用，通过 Plugin 架构扩展功能。K8s �
 
 
 <!-- risk-assessed -->
+- [[10-平台工程/01-构建/15-backstage-idp-guide|Backstage 内部开发者平台 (IDP) 构建指南]]
+- [[17-系统基础/06-知识字典/platform-engineering/developer-portal-and-platform-metrics|开发者门户与平台工程度量]]

@@ -12,6 +12,7 @@ KUDIG-DATABASE Chunk 元数据增强脚本
 import argparse
 import json
 import os
+from pathlib import Path
 import re
 import sys
 from pathlib import Path
@@ -278,14 +279,13 @@ def main():
     # 写入输出
     output_path = root / args.output
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump({
-            "generated_at": "2026-05-21T23:14:37+08:00",
-            "total_documents": len(results),
-            "content_type_distribution": dict(stats),
-            "quality_distribution": dict(quality_buckets),
-            "documents": results,
-        }, f, ensure_ascii=False, indent=2)
+    Path(output_path).write_text(json.dumps({
+        "generated_at": "2026-05-21T23:14:37+08:00",
+        "total_documents": len(results),
+        "content_type_distribution": dict(stats),
+        "quality_distribution": dict(quality_buckets),
+        "documents": results,
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
 
     print(f"\n✅ 元数据增强完成: {output_path}")
     print(f"   共处理 {len(results)} 篇文档\n")

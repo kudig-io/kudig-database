@@ -5,6 +5,7 @@ Generates structured Chinese wiki pages in entities/ references/ concepts/
 """
 import json, os, re, hashlib, sys
 from datetime import datetime, timezone
+from pathlib import Path
 
 VAULT = "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database"
 TODAY = "2026-05-21"
@@ -632,8 +633,7 @@ def main():
             else:
                 full_out = os.path.join(VAULT, out_path)
                 os.makedirs(os.path.dirname(full_out), exist_ok=True)
-                with open(full_out, 'w', encoding='utf-8') as f:
-                    f.write(wiki_content)
+                Path(full_out).write_text(wiki_content, encoding='utf-8')
                 if action == 'create':
                     stats['created'] += 1
                     out_name = os.path.basename(out_path).replace('.md', '')
@@ -661,8 +661,7 @@ def main():
             print(f"  ERROR on {source_path}: {e}")
 
     # Save manifest
-    with open(manifest_path, 'w') as f:
-        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    Path(manifest_path).write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
 
     # Write log
     log_path = os.path.join(VAULT, 'log.md')

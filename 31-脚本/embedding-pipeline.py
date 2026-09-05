@@ -422,9 +422,9 @@ def build_index(profile_path: Path, incremental: bool = False) -> Path:
 
     # 保存 chunks.jsonl
     chunks_path = cache_dir / "chunks.jsonl"
-    with open(chunks_path, "w", encoding="utf-8") as f:
-        for chunk in all_chunks:
-            f.write(json.dumps(chunk.to_dict(), ensure_ascii=False) + "\n")
+    chunks_path.write_text(
+        ''.join(json.dumps(chunk.to_dict(), ensure_ascii=False) + "\n" for chunk in all_chunks),
+        encoding="utf-8")
     print(f"   💾 chunks.jsonl: {chunks_path}")
 
     # 保存 embeddings.npy

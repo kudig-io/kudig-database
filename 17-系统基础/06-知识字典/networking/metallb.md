@@ -217,3 +217,5 @@ kubectl patch l2advertisement default -n metallb-system -p '{"spec":{"nodeSelect
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/10-cluster-deployment-patterns|12 - Kubernetes 集群部署架构模式指南]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]

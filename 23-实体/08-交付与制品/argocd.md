@@ -232,3 +232,10 @@ argocd app delete my-app --cascade
 - [[19-故障诊断/06-FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 
 <!-- risk-assessed -->
+- [[04-应用模式/02-行业架构/86-solid-state-battery|固态电池架构设计 — 阿里云视角]]
+- [[08-安全/05-供应链/11-compliance-automation-audit|合规自动化与审计 (Compliance Automation and Audit)]]
+- [[08-安全/05-供应链/09-policy-controller-verification|Policy Controller 镜像验证 (Policy Controller Image Verification)]]
+- [[17-系统基础/04-K8s事件/15-ecosystem-addon-events|15 - 生态系统与插件事件]]
+- [[22-概念/06-可观测性/prometheus-argocd-monitoring|Prometheus 与 ArgoCD 监控集成]]
+- [[26-技能/01-集群运维/gitops-argocd/诊断排障/ts-gitops-devops|GitOps/DevOps 排查]]
+- [[26-技能/04-工作负载/pod/培训/beginner-guides/03-end-to-end-project|端到端项目实战——从代码到生产完整流水线]]

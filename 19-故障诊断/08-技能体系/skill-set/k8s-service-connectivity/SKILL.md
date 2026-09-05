@@ -568,3 +568,22 @@ arping -I <iface> <lb-ip>
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/02-AI-Agents/18-agentscope-tool-system|AgentScope 工具系统与 MCP 集成 (AI基础设施)]]
+- [[15-AI基础设施/02-AI-Agents/48-openclaw-skill-mechanism|OpenClaw SKILL.md 机制深度解析 (AI基础设施)]]
+- [[26-技能/02-控制面/scheduler/培训/learn-15-scheduling-basics|第15课：调度与亲和性]]
+- [[26-技能/04-工作负载/daemonset/培训/learn-13-daemonset-basics|第13课：DaemonSet 与节点守护]]
+- [[26-技能/04-工作负载/deployment/培训/learn-03-deployment-basics|第三课：Deployment - 应用部署管理器]]
+- [[26-技能/04-工作负载/hpa-vpa/培训/learn-09-hpa-basics|第九课：HPA - 自动伸缩]]
+- [[26-技能/04-工作负载/job-cronjob/培训/learn-11-job-cronjob|第九课：Job 和 CronJob - 任务调度]]
+- [[26-技能/04-工作负载/pod/培训/learn-06-configmap-secret|第六课：ConfigMap 和 Secret - 配置管理]]
+- [[26-技能/04-工作负载/pod/培训/learn-10-health-check|第八课：健康检查 - Probe 详解]]
+- [[26-技能/04-工作负载/pod/培训/learn-02-pod-basics|第二课：Pod - K8s 的最小调度单元]]
+- [[26-技能/04-工作负载/pod/培训/learn-oncall-quick-qa|工单数字人快速问答 - On-Call 速查]]
+- [[26-技能/04-工作负载/pod/培训/lecturer/lecturer-README|Kubernetes 金牌讲师 - 工单数字人场景]]
+- [[26-技能/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview|Kubernetes Diagnostic Skills Overview]]
+- [[26-技能/04-工作负载/pod/方法论/agent/kudig-agent-specs-collection|KUDIG Agent 规范集：工单分类、知识图谱、会话管理与诊断基准]]
+- [[26-技能/04-工作负载/pod/诊断排障/技能体系-02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]
+- [[26-技能/04-工作负载/pod/诊断排障/技能体系-03-pod-pending|Pod Pending 调度失败诊断与修复]]
+- [[26-技能/04-工作负载/statefulset/培训/learn-14-statefulset-basics|第14课：StatefulSet - 有状态应用管理]]
+- [[26-技能/05-网络/service/培训/learn-04-service-basics|第四课：Service - 让应用可以被访问]]
+- [[26-技能/06-存储/csi-storage/培训/learn-08-pv-pvc-basics|第八课：存储 - PV 和 PVC]]

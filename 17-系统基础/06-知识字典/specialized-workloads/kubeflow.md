@@ -92,3 +92,5 @@ Kubeflow 是 CNCF 孵化项目，为 Kubernetes 上的机器学习工作负载�
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|K8s 上的模型微调基础设施（PEFT/LoRA/DeepSpeed/FSDP）]]
+- [[17-系统基础/06-知识字典/tooling/cli-commands|查看所有 Pod 及其详细信息]]

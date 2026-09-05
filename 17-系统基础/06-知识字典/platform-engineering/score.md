@@ -80,3 +80,8 @@ Score 是 CNCF Sandbox 项目，定义了一个平台无关的工作负载描述
 
 
 <!-- risk-assessed -->
+- [[04-应用模式/02-行业架构/75-affective-computing|情感计算 AI 架构设计 — 阿里云视角]]
+- [[26-技能/03-节点/node/运维操作/kubelet-eviction-mechanism|kubelet 资源驱逐机制]]
+- [[26-技能/04-工作负载/pod/培训/public-one-month/week-1-foundation/day-5-k8s-architecture|Day 5: Kubernetes 架构全貌]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
+- [[26-技能/04-工作负载/pod/方法论/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]

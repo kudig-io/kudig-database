@@ -11,6 +11,7 @@
 import json
 import os
 from pathlib import Path
+from pathlib import Path
 from typing import Dict, List, Optional
 
 # ========== 配置 ==========
@@ -294,16 +295,14 @@ def main():
     index_data = build_vector_index()
 
     # 保存向量索引
-    with open(OUTPUT_VECTOR_INDEX, 'w', encoding='utf-8') as f:
-        json.dump(index_data, f, ensure_ascii=False, indent=2)
+    Path(OUTPUT_VECTOR_INDEX).write_text(json.dumps(index_data, ensure_ascii=False, indent=2), encoding='utf-8')
     print(f"✅ 向量索引已保存: {OUTPUT_VECTOR_INDEX}")
 
     # 构建混合搜索元数据
     print("📦 构建混合搜索元数据...")
     hybrid_meta = build_hybrid_search_metadata()
 
-    with open(OUTPUT_HYBRID_SEARCH, 'w', encoding='utf-8') as f:
-        json.dump(hybrid_meta, f, ensure_ascii=False, indent=2)
+    Path(OUTPUT_HYBRID_SEARCH).write_text(json.dumps(hybrid_meta, ensure_ascii=False, indent=2), encoding='utf-8')
     print(f"✅ 混合搜索元数据已保存: {OUTPUT_HYBRID_SEARCH}")
 
     print(f"\n📊 统计:")

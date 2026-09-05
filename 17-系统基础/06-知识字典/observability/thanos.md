@@ -87,3 +87,5 @@ Thanos 是 CNCF 孵化项目，为 Prometheus 提供高可用、长期存储和�
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/observability/alerting-and-slo-monitoring|告警与 SLO 监控工程]]
+- [[23-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]

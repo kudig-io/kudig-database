@@ -317,3 +317,10 @@ percentageOfNodesToScore: 30
 - [[22-概念/08-可靠性与运维/high-availability-patterns.md|High Availability Patterns]]
 
 <!-- risk-assessed -->
+- [[26-技能/01-集群运维/cluster/04-cluster-autoscaling-sop|集群扩缩容异常诊断与集群级 SOP/Runbook]]
+- [[26-技能/04-工作负载/pod/01-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]
+- [[26-技能/04-工作负载/pod/03-pod-imagepull-container|Pod ImagePullBackOff 与容器创建失败诊断]]
+- [[26-技能/04-工作负载/pod/04-pod-sop-runbook|Pod 异常诊断标准操作流程（SOP/Runbook）]]
+- [[26-技能/04-工作负载/pod/02-pod-pending-scheduling|Pod Pending 与调度失败诊断]]
+- [[26-技能/04-工作负载/pod/reference/pod-exit-codes|容器退出码完整参考与诊断映射]]
+- [[26-技能/04-工作负载/pod/诊断排障/pod-fta-故障树list|Pod 异常故障树分析 (skills)]]

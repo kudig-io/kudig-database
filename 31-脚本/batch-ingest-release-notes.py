@@ -47,8 +47,7 @@ def main():
         added += 1
     
     # Write manifest
-    with open(MANIFEST_PATH, "w") as f:
-        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    MANIFEST_PATH.write_text(json.dumps(manifest, indent=2, ensure_ascii=False))
     
     print(f"Added: {added}")
     print(f"Skipped (already in manifest): {skipped}")

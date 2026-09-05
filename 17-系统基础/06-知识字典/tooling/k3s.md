@@ -90,3 +90,8 @@ Flannel (CNI)、CoreDNS、Traefik (Ingress)、Local Path Provisioner、Klipper (
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/07-edge-computing-kubeedge|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
+- [[17-系统基础/06-知识字典/multi-cloud/edge-computing-and-k3s|边缘计算与轻量级 Kubernetes]]
+- [[19-故障诊断/04-高级排障/10-kind-k3s-single-node-troubleshooting|Kind / K3s 单机集群故障排查]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]
+- [[23-实体/15-参考与索引/multi-cloud-terms|K8s 多云架构术语参考]]

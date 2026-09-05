@@ -337,3 +337,14 @@ kubectl apply -f certificate.yaml
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/05-速查卡/gateway-api|Gateway API]]
+- [[17-系统基础/06-知识字典/networking/gateway-api|Gateway API]]
+- [[17-系统基础/06-知识字典/networking/ingress-controllers|Ingress Controllers]]
+- [[17-系统基础/06-知识字典/networking/cluster-mesh|多集群网络互联（Cluster Mesh）]]
+- [[17-系统基础/06-知识字典/operations/operations-best-practices|01 - Kubernetes 生产环境运维最佳实践字典]]
+- [[17-系统基础/06-知识字典/operations/certificates|Certificates（PKI 证书与要求）]]
+- [[17-系统基础/06-知识字典/platform-engineering/api-priority-and-fairness|API 优先级与公平性（API Priority and Fairness）]]
+- [[17-系统基础/06-知识字典/security/secrets-management-deep-dive|密钥管理深度指南]]
+- [[17-系统基础/06-知识字典/tooling/tool-ecosystem|Kusheet 工具与开源项目 URL 汇总]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/03-service-ingress-troubleshooting|Service 与 Ingress 故障排查指南]]
+- [[26-技能/04-工作负载/pod/培训/inner-training/week-1-ack-acr-lifecycle/day-7-cluster-certificate|Day 7: K8S 集群证书]]

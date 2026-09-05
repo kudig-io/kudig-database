@@ -150,3 +150,4 @@ Pixie (eBPF):
 
 - [[24-综合/05-可观测性/ebpf-observability.md|eBPF × 可观测性]]
 - [[25-研究/04-可靠性与运维/observability-evolution.md|可观测性体系演进]]
+- [[14-容器运行时/03-containerd-CRI-O/18-ebpf-runtime-security-falco-tetragon|eBPF 运行时安全：Falco/Tetragon/Tracee 部署与威胁检测]]

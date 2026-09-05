@@ -86,3 +86,4 @@ Pending Pod → CA 检测 → 请求云厂商创建节点 → 节点加入集群
 
 
 <!-- risk-assessed -->
+- [[26-技能/01-集群运维/cluster/04-cluster-autoscaling-sop|集群扩缩容异常诊断与集群级 SOP/Runbook]]

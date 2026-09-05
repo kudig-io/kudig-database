@@ -1,0 +1,102 @@
+name: Version Watch
+
+# 每周检查监控组件的最新 release；发现新版本即在库内检索受影响页面并自动开 issue，
+# 提醒复核并补 frontmatter verified-upon「截至版本」字段。组件清单与状态：
+# 35-元数据/version-watch.json
+
+on:
+  schedule:
+    - cron: '0 2 * * 1' # UTC 周一 02:00 = 北京时间周一 10:00
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: version-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Detect new component releases
+        id: detect
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json, os, subprocess, urllib.request
+
+          cfg = json.load(open("35-元数据/version-watch.json", encoding="utf-8"))
+          token = os.environ.get("GITHUB_TOKEN", "")
+          state = cfg.get("state", {})
+          sections = []
+
+          for comp in cfg["components"]:
+              repo, name = comp["repo"], comp["name"]
+              headers = {"Accept": "application/vnd.github+json"}
+              if token:
+                  headers["Authorization"] = f"Bearer {token}"
+              req = urllib.request.Request(
+                  f"https://api.github.com/repos/{repo}/releases/latest", headers=headers)
+              try:
+                  with urllib.request.urlopen(req, timeout=30) as resp:
+                      tag = json.load(resp).get("tag_name", "")
+              except Exception as exc:
+                  print(f"::warning::{repo} 获取 release 失败: {exc}")
+                  continue
+              if not tag or state.get(repo) == tag:
+                  continue
+
+              affected = []
+              for kw in comp["keywords"]:
+                  out = subprocess.run(
+                      ["git", "grep", "-l", "-i", kw, "--", "23-实体", "26-技能", "22-概念"],
+                      capture_output=True, text=True)
+                  affected += out.stdout.splitlines()
+              affected = sorted(set(affected))
+              preview = "\n".join(f"- `{p}`" for p in affected[:15])
+              more = f"\n- …等共 {len(affected)} 个页面" if len(affected) > 15 else ""
+              sections.append(
+                  f"## {name} 新版本 `{tag}`（上次记录：`{state.get(repo, '无')}`）\n\n"
+                  f"库内受影响页面 {len(affected)} 个：\n{preview}{more}\n")
+              state[repo] = tag
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"new={'true' if sections else 'false'}\n")
+          if sections:
+              body = (
+                  "以下监控组件发布了新版本。请在复核相关页面后，为修订过的实体/技能页"
+                  "补充 frontmatter `verified-upon` 字段（如 `verified-upon: k8s-1.31`）。\n\n"
+                  + "\n".join(sections))
+              with open("/tmp/version-watch-body.md", "w", encoding="utf-8") as fh:
+                  fh.write(body)
+              cfg["state"] = state
+              with open("35-元数据/version-watch.json", "w", encoding="utf-8") as fh:
+                  json.dump(cfg, fh, ensure_ascii=False, indent=2)
+          PY
+
+      - name: Create follow-up issue
+        if: steps.detect.outputs.new == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --title "组件版本跟进 $(date -u +%F)" \
+            --body-file /tmp/version-watch-body.md
+
+      - name: Commit updated state
+        if: steps.detect.outputs.new == 'true'
+        run: |
+          if ! git diff --quiet 35-元数据/version-watch.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add 35-元数据/version-watch.json
+            git commit -m "chore(version-watch): 更新组件版本状态"
+            git push
+          fi

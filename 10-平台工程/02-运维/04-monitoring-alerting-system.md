@@ -529,6 +529,7 @@ slos:
 - 相关知识域: 专项技术
 - 相关知识域: 故障诊断
 - [[21-生态参考/03-领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]
 
 ## See Also
 

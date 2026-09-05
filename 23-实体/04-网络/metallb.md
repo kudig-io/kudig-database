@@ -230,3 +230,4 @@ kubectl delete ipaddresspool <name> -n metallb-system
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/10-cluster-deployment-patterns|12 - Kubernetes 集群部署架构模式指南]]

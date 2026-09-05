@@ -116,3 +116,4 @@ man 8 etcd
 
 
 <!-- risk-assessed -->
+- [[22-概念/01-核心架构/etcd-operational-reference|etcd Operational Reference]]

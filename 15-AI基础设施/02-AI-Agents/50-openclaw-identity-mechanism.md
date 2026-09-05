@@ -518,3 +518,7 @@ IDENTITY.md 配置验证:
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]

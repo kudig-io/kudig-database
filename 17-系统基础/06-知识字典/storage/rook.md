@@ -89,3 +89,4 @@ Rook 是 CNCF 毕业项目，为 Kubernetes 提供云原生存储编排平台。
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]

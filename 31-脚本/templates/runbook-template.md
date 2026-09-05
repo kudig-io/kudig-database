@@ -213,3 +213,7 @@ kubectl get events -n [NAMESPACE] --field-selector reason=OOMKilling
 | v1.0 | [YYYY-MM-DD] | 初始版本 | [作者] |
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

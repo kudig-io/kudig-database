@@ -225,3 +225,21 @@ curl -s localhost:9901/config_dump | jq '.configs[] | select(.dynamic_active_clu
 
 
 <!-- risk-assessed -->
+- [[03-清单模式/01-YAML参考/10-ingress-ingressclass|10 - Ingress / IngressClass YAML 配置参考]]
+- [[05-网络/03-服务网格/01-istio-enterprise-service-mesh|Istio 企业级服务网格架构与实践]]
+- [[05-网络/03-服务网格/04-envoy-proxy-enterprise|Envoy Proxy 企业级服务网格数据平面深度实践]]
+- [[05-网络/04-API网关/07-envoy-gateway-enterprise|07 - Envoy Gateway 企业级实践]]
+- [[17-系统基础/06-知识字典/networking/ingress-controllers|Ingress Controllers]]
+- [[17-系统基础/06-知识字典/networking/service-mesh|服务网格（Service Mesh）]]
+- [[17-系统基础/06-知识字典/security/spiffe-spire-identity|SPIFFE / SPIRE 与工作负载身份]]
+- [[19-故障诊断/04-高级排障/structural-03-networking/05-service-mesh-istio-troubleshooting|Service Mesh (Istio) 深度排查与性能调优指南]]
+- [[22-概念/08-可靠性与运维/microservice-resilience-patterns|Microservice Resilience Patterns]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]
+- [[23-实体/15-参考与索引/networking-terms|K8s 网络术语参考]]
+- [[23-实体/15-参考与索引/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]
+- [[23-实体/15-参考与索引/tooling-terms|K8s 工具链术语参考]]
+- [[23-实体/15-参考与索引/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]]
+- [[26-技能/04-工作负载/pod/清单规范/01-pod-specification-complete|03 - Pod 完整规格说明书]]
+- [[26-技能/04-工作负载/pod/清单规范/05-advanced-pod-patterns|35 - 高级 Pod 模式与调度策略 YAML 配置参考]]
+- [[26-技能/04-工作负载/pod/诊断排障/技能体系-02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]

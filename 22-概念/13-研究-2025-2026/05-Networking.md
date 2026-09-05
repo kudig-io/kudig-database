@@ -127,3 +127,4 @@ Submariner、Cilium ClusterMesh、Skupper 等方案在 2025 年趋于稳定：
 ## Related
 
 - research/ — tag hub
+- [[27-标签/06-AI与专项/research|research]]

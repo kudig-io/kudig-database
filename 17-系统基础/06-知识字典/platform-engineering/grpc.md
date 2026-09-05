@@ -96,3 +96,14 @@ gRPC 是 Google 开源的高性能远程过程调用（RPC）框架，使用 Pro
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/05-速查卡/gateway-api|Gateway API]]
+- [[17-系统基础/06-知识字典/configuration/liveness-readiness-and-startup-probes|Liveness, Readiness, and Startup Probes]]
+- [[17-系统基础/06-知识字典/networking/gateway-api|Gateway API]]
+- [[17-系统基础/06-知识字典/observability/traces-for-kubernetes-system-components|Kubernetes 系统组件链路追踪]]
+- [[17-系统基础/06-知识字典/platform-engineering/dynamic-resource-allocation-good-practices|动态资源分配（DRA）集群管理员最佳实践]]
+- [[17-系统基础/06-知识字典/storage/node-specific-volume-limits|Node-specific Volume Limits（节点特定卷限制）]]
+- [[22-概念/12-研究/security-tool-evolution|安全工具演进]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]
+- [[23-实体/15-参考与索引/observability-terms|K8s 可观测性术语参考]]
+- [[26-技能/08-可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]]

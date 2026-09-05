@@ -1,10 +1,31 @@
 #!/usr/bin/env python3
 import urllib.request, json, os, time, re, sys
+from urllib.parse import urlparse
+from pathlib import Path
 
 BASE_DIR = "topic-release-notes"
 
+# 加固：请求仅允许 GitHub 域，输出仅允许落在 BASE_DIR 内（对现有常量输入行为不变）
+ALLOWED_HOSTS = {"api.github.com", "raw.githubusercontent.com", "github.com"}
+
+
+def safe_url(url):
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.hostname not in ALLOWED_HOSTS:
+        raise ValueError(f"blocked non-allowlisted URL: {url}")
+    return url
+
+
+def safe_output_path(base, *parts):
+    base_real = os.path.realpath(base)
+    target = os.path.realpath(os.path.join(base_real, *parts))
+    if os.path.commonpath([base_real, target]) != base_real:
+        raise ValueError(f"output path escapes base dir: {target}")
+    return target
+
 
 def fetch_json(url, retries=3):
+    url = safe_url(url)
     for attempt in range(retries):
         req = urllib.request.Request(url, headers={"User-Agent": "curl"})
         try:
@@ -84,9 +105,9 @@ def group_releases(releases):
 
 def download_project(name, repo, category_dir):
     project_dir = (
-        os.path.join(BASE_DIR, category_dir, name)
+        safe_output_path(BASE_DIR, category_dir, name)
         if category_dir
-        else os.path.join(BASE_DIR, name)
+        else safe_output_path(BASE_DIR, name)
     )
     os.makedirs(project_dir, exist_ok=True)
     print(f"[{category_dir or 'kubernetes'}] {name} ({repo})...", flush=True)
@@ -105,11 +126,12 @@ def download_project(name, repo, category_dir):
         html_url = release.get(
             "html_url", f"https://github.com/{repo}/releases/tag/{tag}"
         )
-        outfile = os.path.join(project_dir, f"RELEASE-NOTES-{ver_key}.md")
-        with open(outfile, "w") as f:
-            f.write(f"# {name} v{ver_key} Release Notes\n\n")
-            f.write(f"Source: [{tag}]({html_url})\n\n")
-            f.write(body)
+        outfile = safe_output_path(project_dir, f"RELEASE-NOTES-{ver_key}.md")
+        Path(outfile).write_text(
+            f"# {name} v{ver_key} Release Notes\n\n"
+            f"Source: [{tag}]({html_url})\n\n"
+            f"{body}"
+        )
         count += 1
     print(f"  {count} versions", flush=True)
     return count
@@ -121,14 +143,15 @@ def download_kubernetes_changelogs():
     os.makedirs(project_dir, exist_ok=True)
     count = 0
     for v in versions:
-        url = f"https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-{v}.md"
+        url = safe_url(
+            f"https://raw.githubusercontent.com/kubernetes/kubernetes/master/CHANGELOG/CHANGELOG-{v}.md"
+        )
         req = urllib.request.Request(url, headers={"User-Agent": "curl"})
         try:
             with urllib.request.urlopen(req, timeout=30) as resp:
                 content = resp.read()
-            outfile = os.path.join(project_dir, f"CHANGELOG-{v}.md")
-            with open(outfile, "wb") as f:
-                f.write(content)
+            outfile = safe_output_path(project_dir, f"CHANGELOG-{v}.md")
+            Path(outfile).write_bytes(content)
             count += 1
         except Exception as e:
             print(f"  Failed CHANGELOG-{v}.md: {e}", flush=True)
@@ -217,11 +240,12 @@ def main():
             tag = release["tag_name"]
             body = release.get("body", "") or "(No release notes)"
             html_url = release.get("html_url", "")
-            outfile = os.path.join(k8s_dir, f"RELEASE-NOTES-{ver}.md")
-            with open(outfile, "w") as f:
-                f.write(f"# Kubernetes v{ver} Release Notes\n\n")
-                f.write(f"Source: [{tag}]({html_url})\n\n")
-                f.write(body)
+            outfile = safe_output_path(k8s_dir, f"RELEASE-NOTES-{ver}.md")
+            Path(outfile).write_text(
+                f"# Kubernetes v{ver} Release Notes\n\n"
+                f"Source: [{tag}]({html_url})\n\n"
+                f"{body}"
+            )
             total += 1
     print(f"  Kubernetes pre-GA + v1.0/v1.1 done", flush=True)
 

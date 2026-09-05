@@ -198,3 +198,4 @@ kubectl rollout restart deploy dex -n dex
 - [[17-系统基础/06-知识字典/security/oauth2-proxy.md|oauth2-proxy]]
 - [[17-系统基础/06-知识字典/security/opa.md|OPA]]
 - [[17-系统基础/06-知识字典/security/vault.md|Vault]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

@@ -5,6 +5,7 @@ import json
 import glob
 import os
 import re
+from pathlib import Path
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 RESULTS_DIR = os.path.join(BASE, "results")
@@ -189,8 +190,7 @@ def main():
         lines.append("---")
         lines.append("")
 
-    with open(OUTPUT, "w", encoding="utf-8") as f:
-        f.write("\n".join(lines))
+    Path(OUTPUT).write_text("\n".join(lines), encoding="utf-8")
     print(f"Report generated: {OUTPUT}")
     print(f"Items: {len(items)}")
 

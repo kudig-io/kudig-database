@@ -419,8 +419,7 @@ def generate_fta_script(topic_path, output_path):
         related_docs='参考 domain-12-troubleshooting/'
     )
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(script)
+    Path(output_path).write_text(script, encoding='utf-8')
     return True, output_path
 
 def generate_febm_script(topic_path, output_path):
@@ -455,8 +454,7 @@ def generate_febm_script(topic_path, output_path):
         related_fta='参考 topic-fta/'
     )
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(script)
+    Path(output_path).write_text(script, encoding='utf-8')
     return True, output_path
 
 def generate_skill_script(topic_path, output_path):
@@ -499,8 +497,7 @@ def generate_skill_script(topic_path, output_path):
         related_structural='参考 topic-structural-trouble-shooting/'
     )
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(script)
+    Path(output_path).write_text(script, encoding='utf-8')
     return True, output_path
 
 def find_content(topic, content_type):

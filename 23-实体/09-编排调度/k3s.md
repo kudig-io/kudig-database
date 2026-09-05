@@ -317,3 +317,6 @@ k3s 集群异常
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/07-edge-computing-kubeedge|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
+- [[17-系统基础/06-知识字典/multi-cloud/edge-computing-and-k3s|边缘计算与轻量级 Kubernetes]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

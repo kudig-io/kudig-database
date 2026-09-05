@@ -10,6 +10,7 @@ import os
 import re
 import json
 import hashlib
+from pathlib import Path
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -287,9 +288,8 @@ def load_manifest():
 
 def save_manifest(manifest):
     """Save manifest."""
-    with open(MANIFEST_PATH, "w") as f:
-        json.dump(manifest, f, indent=2, ensure_ascii=False)
-        f.write("\n")
+    Path(MANIFEST_PATH).write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False) + "\n")
 
 
 def main():

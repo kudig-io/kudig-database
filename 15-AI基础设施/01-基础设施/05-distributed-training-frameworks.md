@@ -830,6 +830,7 @@ make
 - 相关知识域: 网络
 - [[17-系统基础/05-速查卡/go.md|速查卡: go]]
 - [[21-生态参考/03-领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[15-AI基础设施/05-K8s-AI基础设施/06-kuberay-distributed-computing|KubeRay 分布式计算平台生产部署]]
 
 ## See Also
 

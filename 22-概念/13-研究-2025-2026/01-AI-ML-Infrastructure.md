@@ -80,3 +80,4 @@ last_updated: 2026-05-24
 ## Related
 
 - research/ — tag hub
+- [[27-标签/06-AI与专项/research|research]]

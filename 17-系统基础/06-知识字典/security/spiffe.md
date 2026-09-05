@@ -198,3 +198,6 @@ kubectl -n spire edit configmap spire-server-config
 - [[17-系统基础/06-知识字典/security/spire.md|SPIRE]]
 - [[17-系统基础/06-知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
 - [[17-系统基础/06-知识字典/operations/cert-manager.md|cert-manager]]
+- [[01-集群基础/02-设计原则/18-security-design-patterns|17 - 安全设计模式]]
+- [[17-系统基础/06-知识字典/networking/cluster-mesh|多集群网络互联（Cluster Mesh）]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

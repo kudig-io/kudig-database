@@ -287,3 +287,12 @@ kubectl get pods -n production --field-selector=status.phase=Pending
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+- [[17-系统基础/06-知识字典/fundamentals/kubernetes-self-healing|Kubernetes Self-Healing（Kubernetes 自愈能力）]]
+- [[17-系统基础/06-知识字典/fundamentals/owners-and-dependents|所有者和依赖者]]
+- [[17-系统基础/06-知识字典/scheduling/api-initiated-eviction|API-initiated Eviction]]
+- [[17-系统基础/06-知识字典/workloads/horizontal-pod-autoscaling|Horizontal Pod Autoscaling]]
+- [[17-系统基础/06-知识字典/workloads/workload-management|Workload Management]]
+- [[19-故障诊断/02-资源排障/03-deployment-comprehensive-troubleshooting|Deployment 全面故障排查]]
+- [[26-技能/04-工作负载/pod/培训/public-one-month/week-1-foundation/day-5-k8s-architecture|Day 5: Kubernetes 架构全貌]]
+- [[26-技能/04-工作负载/pod/培训/public-one-month/week-1-foundation/day-6-k8s-cluster|Day 6: K8s 架构深化 + 集群配置]]
+- [[26-技能/04-工作负载/pod/资源与自动扩缩/字典-horizontal-pod-autoscaling|Horizontal Pod Autoscaling]]

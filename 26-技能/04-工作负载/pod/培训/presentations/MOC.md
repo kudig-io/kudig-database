@@ -122,6 +122,7 @@ prerequisites:
 - [[06-存储/01-K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 - [[21-生态参考/03-领域索引/MOC.md|topic-index MOC]] — Cross-reference
 
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]
 
 ## 主题演讲导航
 

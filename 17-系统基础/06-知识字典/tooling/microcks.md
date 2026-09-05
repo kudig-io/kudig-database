@@ -73,3 +73,4 @@ Microcks 是 CNCF Sandbox 项目，提供 API 的模拟和测试能力，支持 
 - [[17-系统基础/06-知识字典/platform-engineering/grpc.md|gRPC]]
 - [[17-系统基础/06-知识字典/networking/connect-rpc.md|Connect RPC]]
 - [[17-系统基础/06-知识字典/operations/kube-burner.md|kube-burner]]
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

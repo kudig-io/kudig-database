@@ -1052,3 +1052,8 @@ done
 
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[10-平台工程/02-运维/11-cluster-api-deep-dive|Cluster API (CAPI) 深度解析]]
+- [[22-概念/09-平台与发布/01-cluster-api-deep-dive|Cluster API (CAPI) 深度解析]]

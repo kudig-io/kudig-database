@@ -90,3 +90,14 @@ Docker 推动了容器技术的发展，其镜像格式和运行时规范已被 
 
 
 <!-- risk-assessed -->
+- [[22-概念/12-研究/ai-agent-openclaw-workspace|OpenClaw 工作空间配置]]
+- [[23-实体/15-参考与索引/kubernetes-changelog|Kubernetes 变更日志索引]]
+- [[23-实体/15-参考与索引/k8s-design-principles-deep-dive|设计原理：声明式 API、控制器模式与 etcd 共识]]
+- [[23-实体/15-参考与索引/k8s-knowledge-map|Kubernetes Knowledge Map]]
+- [[23-实体/15-参考与索引/k8s-cluster-create|Kubernetes 集群创建操作指南]]
+- [[23-实体/15-参考与索引/k8s-supply-chain-yaml-cheatsheet|供应链安全、YAML 配置清单与速查表]]
+- [[23-实体/15-参考与索引/k8s-difficulty-index|Kubernetes Difficulty Index]]
+- [[26-技能/04-工作负载/daemonset/培训/learn-13-daemonset-basics|第13课：DaemonSet 与节点守护]]
+- [[26-技能/04-工作负载/pod/培训/learn-01-what-is-kubernetes|第一课：Kubernetes 入门]]
+- [[26-技能/04-工作负载/pod/培训/learn-06-configmap-secret|第六课：ConfigMap 和 Secret - 配置管理]]
+- [[26-技能/04-工作负载/pod/培训/learn-02-pod-basics|第二课：Pod - K8s 的最小调度单元]]

@@ -257,3 +257,7 @@ kubectl delete ksvc hello-app
 
 
 <!-- risk-assessed -->
+- [[16-专项技术/03-扩展机制/20-serverless-faas-guide|K8s Serverless / FaaS 实践指南]]
+- [[17-系统基础/04-K8s事件/15-ecosystem-addon-events|15 - 生态系统与插件事件]]
+- [[17-系统基础/06-知识字典/specialized-workloads/ai-infra-specialist|08 - AI/ML基础设施专业词典]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

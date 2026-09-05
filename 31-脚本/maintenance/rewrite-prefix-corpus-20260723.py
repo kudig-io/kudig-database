@@ -11,6 +11,7 @@
 用法: python3 31-脚本/maintenance/rewrite-prefix-corpus-20260723.py [--dry-run]
 """
 import glob
+import importlib.util
 import os
 import re
 import sys
@@ -18,11 +19,12 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(os.path.dirname(HERE))
 
-_ns = {}
-with open(os.path.join(HERE, "rename-prefix-20260723.py"), encoding="utf-8") as f:
-    exec(f.read().split("def run(")[0], _ns)
-ROOT_MAP = _ns["ROOT_MAP"]
-L2_MAP = {(p, o): n for p, pairs in _ns["L2_MAP"].items() for o, n in pairs}
+_spec = importlib.util.spec_from_file_location(
+    "rename_prefix_20260723", os.path.join(HERE, "rename-prefix-20260723.py"))
+_mod = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_mod)  # rename-prefix 带 __main__ 守卫,导入无副作用
+ROOT_MAP = _mod.ROOT_MAP
+L2_MAP = {(p, o): n for p, pairs in _mod.L2_MAP.items() for o, n in pairs}
 
 ROOT_ALT = "|".join(re.escape(k) for k in ROOT_MAP)
 PATH_RE = re.compile(
@@ -69,8 +71,7 @@ def main():
             total_hits += hits
             print(f"  {os.path.relpath(path, ROOT)}: {hits}")
             if not dry:
-                with open(path, "w", encoding="utf-8") as f:
-                    f.write(out)
+                Path(path).write_text(out, encoding="utf-8")
     print(f"files={total_files} rewrites={total_hits}")
 
 

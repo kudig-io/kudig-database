@@ -150,3 +150,4 @@ FEBM 取证 — 问题事件取证方法文档
 
 
 <!-- risk-assessed -->
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

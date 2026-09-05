@@ -92,3 +92,9 @@ KubeEdge 是 CNCF 孵化项目，将 Kubernetes 的能力扩展到边缘计算�
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/01-架构总览/07-edge-computing-kubeedge|09 - 边缘计算集成架构 (KubeEdge/OpenYurt)]]
+- [[01-集群基础/01-架构总览/10-cluster-deployment-patterns|12 - Kubernetes 集群部署架构模式指南]]
+- [[04-应用模式/02-行业架构/29-agritech-iot|农业物联网架构设计 — 阿里云视角]]
+- [[18-云厂商/07-多云混合/07-huawei-cce-enterprise|华为云 CCE 企业级容器平台深度实践]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]
+- [[23-实体/13-云厂商与发行版/k8s-cloud-provider-comparison|云厂商托管 Kubernetes 服务全景对比（13 家）]]

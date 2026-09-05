@@ -297,3 +297,4 @@ Thanos 异常
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/observability/alerting-and-slo-monitoring|告警与 SLO 监控工程]]

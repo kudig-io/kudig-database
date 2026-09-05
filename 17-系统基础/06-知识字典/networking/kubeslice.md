@@ -199,3 +199,4 @@ kubectl -n kubeslice-system rollout restart deploy/kubeslice-worker
 - [[17-系统基础/06-知识字典/networking/submariner.md|Submariner]]
 - [[17-系统基础/06-知识字典/networking/clusternet.md|Clusternet]]
 - [[17-系统基础/06-知识字典/networking/k8gb.md|K8GB]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]

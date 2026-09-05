@@ -111,3 +111,4 @@ lifecycle_changed: 2026-05-24
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

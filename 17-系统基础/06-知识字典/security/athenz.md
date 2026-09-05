@@ -203,3 +203,4 @@ kubectl scale deploy zts -n athenz --replicas=5
 - [[17-系统基础/06-知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
 - [[17-系统基础/06-知识字典/operations/cert-manager.md|cert-manager]]
 - [[17-系统基础/06-知识字典/security/rbac.md|RBAC]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

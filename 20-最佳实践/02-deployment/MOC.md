@@ -144,3 +144,6 @@ prerequisites:
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]
+- [[23-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

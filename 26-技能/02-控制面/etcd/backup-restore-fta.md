@@ -449,3 +449,7 @@ flowchart TD
 - [[21-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[26-技能/04-工作负载/pod/方法论/Symptom Vector Matching Engine|Symptom Vector Matching Engine]]

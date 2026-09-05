@@ -72,3 +72,4 @@ Dapr（Distributed Application Runtime）是 CNCF 孵化项目，为微服务提
 - [[17-系统基础/06-知识字典/platform-engineering/nats.md|NATS]]
 - [[17-系统基础/06-知识字典/networking/istio.md|Istio]]
 - [[17-系统基础/06-知识字典/specialized-workloads/knative.md|Knative]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

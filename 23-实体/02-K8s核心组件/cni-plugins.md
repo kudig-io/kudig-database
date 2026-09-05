@@ -271,3 +271,4 @@ Pod 网络异常
 - [[23-实体/02-K8s核心组件/networkpolicy.md|NetworkPolicy]]
 
 <!-- risk-assessed -->
+- [[17-系统基础/01-Linux/14-windows-containers-k8s|Windows 容器与 K8s 混合集群运维]]

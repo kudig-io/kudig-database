@@ -158,3 +158,4 @@ argocd app create app-config --repo https://git.example.com/config --dest-server
 
 
 <!-- risk-assessed -->
+- [[26-技能/01-集群运维/cluster-upgrade/最佳实践/scen-README|生产场景导航]]

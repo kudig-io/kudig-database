@@ -199,3 +199,6 @@ kubectl patch cm cni-config -n kube-system -p '{"data":{"mtu":"1400"}}'
 - [[17-系统基础/06-知识字典/networking/cilium.md|Cilium Cluster Mesh]]
 - [[17-系统基础/06-知识字典/networking/linkerd.md|Linkerd]]
 - [[17-系统基础/06-知识字典/networking/consul.md|Consul]]
+- [[23-实体/15-参考与索引/cncf-networking|CNCF 网络与服务网格项目全景]]
+- [[26-技能/01-集群运维/cloud-provider/诊断排障/ts-cloud-provider|云服务商集成排查]]
+- [[26-技能/04-工作负载/pod/方法论/agent/kudig-agent-specs-collection|KUDIG Agent 规范集：工单分类、知识图谱、会话管理与诊断基准]]

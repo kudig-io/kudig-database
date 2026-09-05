@@ -71,3 +71,5 @@ Karmada 是 CNCF 孵化项目，提供 Kubernetes 多集群的统一管理和应
 - [[17-系统基础/06-知识字典/networking/submariner.md|Submariner]]
 - [[17-系统基础/06-知识字典/networking/clusternet.md|Clusternet]]
 - [[17-系统基础/06-知识字典/platform-engineering/crossplane.md|Crossplane]]
+- [[18-云厂商/07-多云混合/07-huawei-cce-enterprise|华为云 CCE 企业级容器平台深度实践]]
+- [[22-概念/11-交叉分析/etcd × 高可用模式|etcd × 高可用模式]]

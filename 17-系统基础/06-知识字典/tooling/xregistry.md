@@ -70,3 +70,4 @@ xRegistry 是 CNCF 社区的增强型 OCI 注册表实现，在标准 Distributi
 - [[17-系统基础/06-知识字典/tooling/distribution.md|Distribution]]
 - [[17-系统基础/06-知识字典/tooling/harbor.md|Harbor]]
 - [[17-系统基础/06-知识字典/tooling/zot.md|zot]]
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

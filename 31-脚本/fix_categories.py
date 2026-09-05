@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Fix CNCF category misclassifications and minor issues"""
 import os, re, glob
+from pathlib import Path
 
 VAULT = "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database"
 
@@ -206,8 +207,7 @@ for fpath in glob.glob(os.path.join(VAULT, 'entities', '*.md')):
             content = content.replace(f'tags: [k8s, cncf, {old_tag}, {fname}]',
                                        f'tags: [k8s, cncf, {new_tag}, {fname}]')
         
-        with open(fpath, 'w', encoding='utf-8') as f:
-            f.write(content)
+        Path(fpath).write_text(content, encoding='utf-8')
         fixed += 1
 
 print(f"Fixed {fixed} category classifications")

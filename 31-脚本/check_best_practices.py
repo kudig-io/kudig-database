@@ -266,8 +266,7 @@ class BestPracticeChecker:
     
     def save_report(self, report: Dict[str, Any], output_path: str):
         """保存报告到文件"""
-        with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(report, f, ensure_ascii=False, indent=2)
+        Path(output_path).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
         print(f"报告已保存到: {output_path}")
 
 def main():

@@ -16,6 +16,15 @@ from collections import defaultdict
 BASE_DIR = Path("/Users/allengaller/Documents/GitHub/kudig-io/kudig-database")
 OUTPUT_DIR = BASE_DIR / "故障诊断" / "topic-qa-corpus"
 
+
+def safe_output_path(base, *parts):
+    """加固：输出约束在 base 内防路径穿越（对现有常量输入行为不变）。"""
+    base_real = os.path.realpath(base)
+    target = os.path.realpath(os.path.join(base_real, *parts))
+    if os.path.commonpath([base_real, target]) != base_real:
+        raise ValueError(f"output path escapes base dir: {target}")
+    return Path(target)
+
 # 核心 domain 列表 (优先生成 QA 对)
 CORE_DOMAINS = [
     "集群基础",
@@ -241,14 +250,13 @@ def main():
             qa_pairs.extend(doc_qa)
 
         if qa_pairs:
-            output_file = OUTPUT_DIR / f"{domain_name}-qa.yaml"
-            with open(output_file, 'w', encoding='utf-8') as f:
-                yaml.dump({
-                    "domain": domain_name,
-                    "total_questions": len(qa_pairs),
-                    "generated_at": "2026-05-19",
-                    "qa_pairs": qa_pairs,
-                }, f, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120)
+            output_file = safe_output_path(OUTPUT_DIR, f"{domain_name}-qa.yaml")
+            output_file.write_text(yaml.dump({
+                "domain": domain_name,
+                "total_questions": len(qa_pairs),
+                "generated_at": "2026-05-19",
+                "qa_pairs": qa_pairs,
+            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
             total_qa += len(qa_pairs)
             print(f"  {domain_name}: {len(qa_pairs)} QA pairs")
 
@@ -268,14 +276,13 @@ def main():
             qa_pairs.extend(doc_qa)
 
         if qa_pairs:
-            output_file = OUTPUT_DIR / "topic-fta-qa.yaml"
-            with open(output_file, 'w', encoding='utf-8') as f:
-                yaml.dump({
-                    "domain": "topic-fta",
-                    "total_questions": len(qa_pairs),
-                    "generated_at": "2026-05-19",
-                    "qa_pairs": qa_pairs,
-                }, f, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120)
+            output_file = safe_output_path(OUTPUT_DIR, "topic-fta-qa.yaml")
+            output_file.write_text(yaml.dump({
+                "domain": "topic-fta",
+                "total_questions": len(qa_pairs),
+                "generated_at": "2026-05-19",
+                "qa_pairs": qa_pairs,
+            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
             total_qa += len(qa_pairs)
             print(f"  topic-fta: {len(qa_pairs)} QA pairs")
 
@@ -295,14 +302,13 @@ def main():
             qa_pairs.extend(doc_qa)
 
         if qa_pairs:
-            output_file = OUTPUT_DIR / "topic-skills-qa.yaml"
-            with open(output_file, 'w', encoding='utf-8') as f:
-                yaml.dump({
-                    "domain": "topic-skills",
-                    "total_questions": len(qa_pairs),
-                    "generated_at": "2026-05-19",
-                    "qa_pairs": qa_pairs,
-                }, f, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120)
+            output_file = safe_output_path(OUTPUT_DIR, "topic-skills-qa.yaml")
+            output_file.write_text(yaml.dump({
+                "domain": "topic-skills",
+                "total_questions": len(qa_pairs),
+                "generated_at": "2026-05-19",
+                "qa_pairs": qa_pairs,
+            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
             total_qa += len(qa_pairs)
             print(f"  topic-skills: {len(qa_pairs)} QA pairs")
 
@@ -322,14 +328,13 @@ def main():
             qa_pairs.extend(doc_qa)
 
         if qa_pairs:
-            output_file = OUTPUT_DIR / "topic-application-architecture-qa.yaml"
-            with open(output_file, 'w', encoding='utf-8') as f:
-                yaml.dump({
-                    "domain": "topic-application-architecture",
-                    "total_questions": len(qa_pairs),
-                    "generated_at": "2026-05-19",
-                    "qa_pairs": qa_pairs,
-                }, f, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120)
+            output_file = safe_output_path(OUTPUT_DIR, "topic-application-architecture-qa.yaml")
+            output_file.write_text(yaml.dump({
+                "domain": "topic-application-architecture",
+                "total_questions": len(qa_pairs),
+                "generated_at": "2026-05-19",
+                "qa_pairs": qa_pairs,
+            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
             total_qa += len(qa_pairs)
             print(f"  topic-application-architecture: {len(qa_pairs)} QA pairs")
 
@@ -349,7 +354,7 @@ def main():
             "count": data.get("total_questions", 0),
         })
 
-    with open(OUTPUT_DIR / 'README.md', 'w', encoding='utf-8') as f:
+    with safe_output_path(OUTPUT_DIR, 'README.md').open('w', encoding='utf-8') as f:
         f.write("# Agent QA 对语料库\n\n")
         f.write(f"> **生成日期**: 2026-05-19\n")
         f.write(f"> **QA 对总数**: {total_qa}\n\n")

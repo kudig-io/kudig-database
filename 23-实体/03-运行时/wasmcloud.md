@@ -279,3 +279,5 @@ wasmCloud 组件异常
 - [[23-实体/15-参考与索引/cncf-runtime.md|CNCF 容器运行时与工具链项目全景]] — Cross-reference
 
 <!-- risk-assessed -->
+- [[16-专项技术/02-WebAssembly/04-wasmcloud-platform|wasmCloud 平台]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

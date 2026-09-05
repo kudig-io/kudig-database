@@ -312,3 +312,4 @@ kubectl api-resources | grep example.com
 - [[22-概念/11-交叉分析/CRD × 可观测性.md|CRD × 可观测性]]
 
 <!-- risk-assessed -->
+- [[23-实体/09-编排调度/metal3-io|Metal3]]

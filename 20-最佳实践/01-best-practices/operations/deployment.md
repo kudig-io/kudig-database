@@ -766,3 +766,18 @@ kubectl rollout undo deployment/myapp -n production
 
 
 <!-- risk-assessed -->
+- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping|Symptom-SOP-RootCause Mapping]]
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework|Structural Troubleshooting Framework]]
+- [[22-概念/11-交叉分析/Deployment-×-PVC|Deployment × PVC]]
+- [[22-概念/11-交叉分析/Deployment-×-Service|Deployment × Service]]
+- [[22-概念/11-交叉分析/apiserver-×-Deployment|apiserver × Deployment]]
+- [[22-概念/11-交叉分析/Deployment-×-Ingress|Deployment × Ingress]]
+- [[22-概念/11-交叉分析/etcd-×-Deployment|etcd × Deployment]]
+- [[22-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]
+- [[22-概念/11-交叉分析/Deployment-×-RBAC|Deployment × RBAC]]
+- [[22-概念/11-交叉分析/Deployment-×-NetworkPolicy|Deployment × NetworkPolicy]]
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]
+- [[23-实体/08-交付与制品/porter|Porter (entities)]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[26-技能/04-工作负载/pod/概念原理/Pod生命周期×Secret管理|Pod 生命周期 × Secret 管理]]
+- [[26-技能/04-工作负载/pod/生命周期与事件/02-pod-lifecycle-events|Pod 生命周期事件表]]

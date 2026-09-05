@@ -1,0 +1,39 @@
+name: Release Corpus
+
+# 语料按 tag 发版：git tag corpus-v2026.09 && git push origin corpus-v2026.09
+# 产物（qa-corpus 等 JSONL）挂 Release asset，供百炼智能体等下游按固定版本拉取，
+# 替代此前直接提交进 git 的 32-发布/package 与 37-归档/release-packages 快照。
+
+on:
+  push:
+    tags:
+      - 'corpus-v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Package generated corpus
+        run: |
+          test -d "19-故障诊断/10-QA语料/generated" || {
+            echo "::error::语料目录不存在，请先运行 nightly-corpus 或 corpus-coverage-check 生成"; exit 1; }
+          tar -czf "corpus-${GITHUB_REF_NAME}.tar.gz" "19-故障诊断/10-QA语料/generated"
+          du -h "corpus-${GITHUB_REF_NAME}.tar.gz"
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: '语料发布 ${{ github.ref_name }}'
+          body: |
+            由 tag ${{ github.ref_name }} 触发的语料版本化发布。
+            - `corpus-${{ github.ref_name }}.tar.gz`：19-故障诊断/10-QA语料/generated 全量快照
+            - 下游（百炼智能体知识库等）请按固定版本拉取，勿引用散文件
+          generate_release_notes: true
+          files: |
+            corpus-${{ github.ref_name }}.tar.gz

@@ -2383,3 +2383,4 @@ spec:
 
 
 <!-- risk-assessed -->
+- [[19-故障诊断/04-高级排障/structural-07-resources-scheduling/02-autoscaling-troubleshooting|HPA 与 VPA 自动扩缩容故障排查指南]]

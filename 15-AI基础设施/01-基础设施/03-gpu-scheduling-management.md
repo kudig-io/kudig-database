@@ -1159,6 +1159,8 @@ kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=100
 - 相关知识域: 网络
 - [[17-系统基础/05-速查卡/go.md|速查卡: go]]
 - [[21-生态参考/03-领域索引/ai-gpu-index.md|AI / GPU 基础设施知识图谱索引]]
+- [[15-AI基础设施/05-K8s-AI基础设施/01-gpu-operator-sharing-patterns|NVIDIA GPU Operator 与 GPU 共享模式生产部署]]
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]
 
 ## See Also
 

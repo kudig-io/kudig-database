@@ -1196,6 +1196,7 @@ Agent 的工具调用会包含 `thinking` 字段，便于追踪决策过程：
 ## Related
 
 - 48-openclaw-skill-mechanism
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]
 
 ## See Also
 

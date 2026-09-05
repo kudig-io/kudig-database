@@ -94,3 +94,7 @@ kubelet → CRI → CRI-O → OCI Runtime (runc/crun)
 
 
 <!-- risk-assessed -->
+- [[22-概念/01-核心架构/core-dependency-version-matrix|核心依赖版本矩阵]]
+- [[23-实体/15-参考与索引/k8s-structured-troubleshooting|结构化排障方法论：配置优先、全组件排障指南]]
+- [[23-实体/15-参考与索引/k8s-control-plane-deep-dive|控制平面深度剖析：API Server、Scheduler、KCM 与 CRI/CSI/CNI]]
+- [[26-技能/01-集群运维/kubeadm/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]

@@ -245,3 +245,4 @@ kubectl exec -n spire-server spire-server-0 -- spire-server entry show -spiffeID
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/security/spiffe-spire-identity|SPIFFE / SPIRE 与工作负载身份]]

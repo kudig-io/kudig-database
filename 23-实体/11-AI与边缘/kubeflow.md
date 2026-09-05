@@ -266,3 +266,5 @@ kubectl logs -n kubeflow -l app=kubeflow-pipelines-api-server --tail=50
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|K8s 上的模型微调基础设施（PEFT/LoRA/DeepSpeed/FSDP）]]
+- [[17-系统基础/06-知识字典/tooling/cli-commands|查看所有 Pod 及其详细信息]]

@@ -438,3 +438,4 @@ time kubectl run test-arm --image=alpine:3.19 --restart=Never --rm -it \
 - [[14-容器运行时/03-containerd-CRI-O/02-containerd-production-operations|containerd 生产运维]]
 - [[10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
 - [[17-系统基础/01-Linux/01-linux-system-architecture|Linux 系统架构]]
+- [[17-系统基础/01-Linux/14-windows-containers-k8s|Windows 容器与 K8s 混合集群运维]]

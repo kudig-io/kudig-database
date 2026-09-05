@@ -253,3 +253,4 @@ kubectl delete inferenceservice fraud-detection -n ml-serving
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/specialized-workloads/ai-infra-specialist|08 - AI/ML基础设施专业词典]]

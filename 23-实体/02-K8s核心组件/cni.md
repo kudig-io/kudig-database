@@ -162,3 +162,8 @@ CNI (Container Network Interface) 是一个定义容器网络配置的规范和�
 
 
 <!-- risk-assessed -->
+- [[22-概念/01-核心架构/kubernetes-core-concepts|Kubernetes Core Concepts]]
+- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping|Symptom-SOP-RootCause Mapping]]
+- [[22-概念/08-可靠性与运维/K8s-故障分布与-MTTR-基准|K8s 问题分布与 MTTR 基准]]
+- [[26-技能/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]

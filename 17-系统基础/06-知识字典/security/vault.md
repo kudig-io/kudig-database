@@ -237,3 +237,4 @@ vault write database/roles/my-role default_ttl=2h max_ttl=24h
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]

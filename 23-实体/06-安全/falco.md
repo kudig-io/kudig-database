@@ -245,3 +245,9 @@ kubectl scale daemonset/falco -n falco --replicas=0
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/02-设计原则/18-security-design-patterns|17 - 安全设计模式]]
+- [[04-应用模式/02-行业架构/21-cross-border-ecommerce|跨境电商架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/22-nev-connected-vehicle|新能源车联网架构设计 — 阿里云视角]]
+- [[17-系统基础/01-Linux/15-linux-commands-reference|Linux 命令大全参考]]
+- [[22-概念/11-交叉分析/服务网格 × 零信任安全|服务网格 x 零信任安全]]
+- [[22-概念/12-研究/specialized-k8s-technologies|K8S 专项技术]]

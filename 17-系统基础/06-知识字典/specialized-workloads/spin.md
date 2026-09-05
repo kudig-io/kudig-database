@@ -73,3 +73,4 @@ Spin 是 Fermyon 开源的 WebAssembly 应用开发框架，支持用 Rust/Go/Py
 - [[17-系统基础/06-知识字典/specialized-workloads/spinkube.md|SpinKube]]
 - [[17-系统基础/06-知识字典/fundamentals/wasmedge.md|WasmEdge]]
 - [[17-系统基础/06-知识字典/specialized-workloads/knative.md|Knative]]
+- [[17-系统基础/06-知识字典/platform-engineering/webassembly-wasm-workloads|WebAssembly（Wasm）工作负载]]

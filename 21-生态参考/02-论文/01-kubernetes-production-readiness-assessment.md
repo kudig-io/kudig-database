@@ -583,3 +583,4 @@ trivy               # 镜像安全扫描
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

@@ -239,3 +239,7 @@ linkerd install --crds | kubectl delete -f -
 
 
 <!-- risk-assessed -->
+- [[05-网络/03-服务网格/06-traefik-mesh-enterprise|Traefik Mesh Enterprise Service Mesh 深度实践]]
+- [[05-网络/03-服务网格/12-linkerd-service-mesh-guide|Linkerd 轻量级服务网格实践指南]]
+- [[05-网络/03-服务网格/03-consul-connect-enterprise|Consul Connect 企业级服务网格管理]]
+- [[17-系统基础/06-知识字典/networking/service-mesh|服务网格（Service Mesh）]]

@@ -72,3 +72,4 @@ Volcano 是 CNCF 孵化项目，专为 Kubernetes 上的批处理、AI/ML、HPC 
 - [[17-系统基础/06-知识字典/scheduling/scheduler.md|Scheduler]]
 - [[17-系统基础/06-知识字典/specialized-workloads/kubeflow.md|Kubeflow]]
 - [[17-系统基础/06-知识字典/specialized-workloads/ray.md|Ray]]
+- [[18-云厂商/07-多云混合/07-huawei-cce-enterprise|华为云 CCE 企业级容器平台深度实践]]

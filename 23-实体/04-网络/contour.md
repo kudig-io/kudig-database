@@ -213,3 +213,5 @@ kubectl exec -n projectcontour <envoy-pod> -- curl -s localhost:9001/clusters
 - [[21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
 
 <!-- risk-assessed -->
+- [[03-清单模式/01-YAML参考/10-ingress-ingressclass|10 - Ingress / IngressClass YAML 配置参考]]
+- [[05-网络/03-服务网格/04-envoy-proxy-enterprise|Envoy Proxy 企业级服务网格数据平面深度实践]]

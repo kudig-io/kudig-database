@@ -420,3 +420,5 @@ groups:
 - [[32-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|GPU 调度]]
 - [[02-工作负载/index.md|工作负载]]
 - [[13-生产运维/01-成本治理/index.md|成本治理]]
+- [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|K8s 上的模型微调基础设施（PEFT/LoRA/DeepSpeed/FSDP）]]
+- [[25-研究/01-AI与边缘/ai-inference-serving-best-practices|AI 推理服务最佳实践研究]]

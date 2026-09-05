@@ -306,3 +306,4 @@ CVE-2023-0003 exp:2024-06-30  # 临时忽略，到期后重新评估
 - [[supply-chain-security]] — Software Supply Chain Security
 
 <!-- risk-assessed -->
+- [[02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd|Java CI/CD on Kubernetes: Tekton + ArgoCD 实践指南 [topic-java-kubernetes]]]

@@ -493,9 +493,9 @@ def export_corpus(vault: Path, output_dir: Path, profile: dict, profile_name: st
     # 收集 QA
     qa_pairs = collect_qa_pairs(vault)
     qa_path = qa_dir / 'qa-corpus.jsonl'
-    with open(qa_path, 'w', encoding='utf-8') as f:
-        for pair in qa_pairs:
-            f.write(json.dumps(pair, ensure_ascii=False) + '\n')
+    qa_path.write_text(
+        ''.join(json.dumps(pair, ensure_ascii=False) + '\n' for pair in qa_pairs),
+        encoding='utf-8')
 
     # 补充数据：原始 QA 源文件、意图语料、Agent 规范、分类体系
     qa_raw_count = copy_qa_raw_sources(vault, qa_dir)

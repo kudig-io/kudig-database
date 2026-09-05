@@ -1,0 +1,93 @@
+name: Nightly Corpus Pipeline
+
+# 定时重生成 19-故障诊断 QA 语料并校验覆盖率；有变更才提交回 main。
+# 向量化（embedding-pipeline.py）有意不在 CI 执行：其输出消费端在本机
+# （35-元数据/.vector-cache 为 gitignored 本地缓存），CI 内无下游。
+
+on:
+  schedule:
+    - cron: '30 21 * * *' # UTC 21:30 = 北京时间 05:30
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nightly-corpus
+  cancel-in-progress: false
+
+jobs:
+  generate-validate-commit:
+    runs-on: ubuntu-latest
+    name: Generate I-O Corpus & Validate Coverage
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install pyyaml
+
+      - name: Generate command-output diagnosis corpus
+        run: |
+          cd 31-脚本/corpus-generator
+          python3 generate.py --priority all \
+            --output 19-故障诊断/10-QA语料/generated/
+
+      - name: Validate corpus coverage
+        run: |
+          cd 31-脚本/corpus-generator
+          python3 validators/coverage_checker.py \
+            --skills-dir 19-故障诊断/08-技能体系 \
+            --fta-dir 19-故障诊断/06-FTA故障树/list \
+            --corpus-dir 19-故障诊断/10-QA语料/generated \
+            --output corpus-coverage-report.json
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: corpus-coverage-report
+          path: 31-脚本/corpus-generator/corpus-coverage-report.json
+
+      - name: Check for coverage failures
+        run: |
+          cd 31-脚本/corpus-generator
+          python3 -c "
+          import json, sys
+          with open('corpus-coverage-report.json') as f:
+              report = json.load(f)
+          passed = report['summary']['checks_passed']
+          total = report['summary']['checks_total']
+          print(f'Coverage checks: {passed}/{total} passed')
+          if passed < total:
+              print('Coverage gaps detected:')
+              for rec in report['recommendations']:
+                  print(f'  - {rec}')
+              print('::error::语料覆盖率低于目标，请补齐缺失技能/FTA 分支')
+              sys.exit(1)
+          "
+
+      - name: Collect content-quality metrics
+        run: |
+          python3 31-脚本/maintenance/content-quality-metrics.py \
+            --output 35-元数据/metrics/content-quality-latest.json
+          DATE=$(date -u +%F)
+          cp 35-元数据/metrics/content-quality-latest.json \
+             "35-元数据/metrics/content-quality-$DATE.json"
+
+      - name: Commit regenerated corpus and metrics (only when changed)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "19-故障诊断/10-QA语料/generated" "35-元数据/metrics"
+          if git diff --cached --quiet; then
+            echo "语料与指标均无变更，跳过提交"
+          else
+            git commit -m "chore(corpus): nightly 语料重生成与质量指标更新"
+            git push
+          fi

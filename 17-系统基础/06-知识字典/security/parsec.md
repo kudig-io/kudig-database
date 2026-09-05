@@ -203,3 +203,4 @@ sed -i 's/tpm/pkcs11/' /etc/parsec/config.toml && systemctl restart parsec
 - [[17-系统基础/06-知识字典/security/confidential-containers.md|Confidential Containers]]
 - [[17-系统基础/06-知识字典/security/vault.md|Vault]]
 - [[17-系统基础/06-知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

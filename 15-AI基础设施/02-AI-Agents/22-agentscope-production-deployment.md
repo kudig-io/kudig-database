@@ -1006,6 +1006,7 @@ kubectl get hpa -n agent-system
 ## Related
 
 - 40-agent-harness-production-maturity
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]
 
 ## See Also
 

@@ -128,3 +128,4 @@ Kubernetes 1.35 支持通过 **OpenTelemetry Protocol (OTLP)** 导出链路追�
 
 
 <!-- risk-assessed -->
+- [[22-概念/06-可观测性/prometheus-argocd-monitoring|Prometheus 与 ArgoCD 监控集成]]

@@ -98,3 +98,8 @@ Kyverno 是 CNCF 孵化项目，专为 Kubernetes 设计的策略引擎。与 OP
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/security/policy-as-code|策略即代码（Policy as Code）]]
+- [[17-系统基础/06-知识字典/security/pod-security-policies|Pod 安全策略]]
+- [[22-概念/11-交叉分析/纵深防御 × 供应链安全|纵深防御 x 供应链安全]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]
+- [[26-技能/04-工作负载/pod/安全/字典-pod-security-policies|Pod 安全策略]]

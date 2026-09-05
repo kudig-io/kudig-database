@@ -259,3 +259,6 @@ kubectl rollout undo deployment/payment-service
 
 
 <!-- risk-assessed -->
+- [[04-应用模式/02-行业架构/75-affective-computing|情感计算 AI 架构设计 — 阿里云视角]]
+- [[26-技能/04-工作负载/pod/培训/public-one-month/week-1-foundation/day-5-k8s-architecture|Day 5: Kubernetes 架构全貌]]
+- [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]

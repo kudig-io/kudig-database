@@ -1,4 +1,5 @@
 ---
+title: "备份恢复与灾难恢复诊断"
 skill_id: "SKILL-STORE-002"
 skill_name: "备份恢复与灾难恢复诊断 / Backup & Disaster Recovery Failure Diagnosis & Remediation"
 version: "1.0"

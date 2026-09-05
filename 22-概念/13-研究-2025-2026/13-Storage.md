@@ -136,3 +136,4 @@ VolumeAttributesClass 等新特性正在补齐存储 QoS 短板。
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

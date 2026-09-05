@@ -10,6 +10,7 @@
 import os
 import re
 import sys
+from pathlib import Path
 
 # (old_prefix, new_prefix)
 # 同时覆盖 batch-2（语义合并）+ batch-4（去编号）的路径变更。
@@ -384,8 +385,7 @@ def rewrite_file(path):
     new = WIKILINK_RE.sub(rewrite_wikilink, content)
     new = MDLINK_RE.sub(rewrite_mdlink, new)
     if new != content:
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(new)
+        Path(path).write_text(new, encoding="utf-8")
         return 1
     return 0
 

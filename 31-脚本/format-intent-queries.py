@@ -92,8 +92,7 @@ def process_file(filepath, dry_run=False):
         return False, None  # No changes
 
     if not dry_run:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            f.write(new_fm + rest)
+        Path(filepath).write_text(new_fm + rest, encoding='utf-8')
     return True, None
 
 def main():

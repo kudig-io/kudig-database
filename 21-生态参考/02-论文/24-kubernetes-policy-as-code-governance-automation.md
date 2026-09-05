@@ -2000,3 +2000,4 @@ Level 5：持续优化（AI 辅助 + 多集群统一 + 运行时策略）
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

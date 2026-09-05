@@ -351,3 +351,7 @@ Shim v2 (ttrpc):
 - [[14-容器运行时/03-containerd-CRI-O/10-containerd-configuration-deep-guide.md|containerd 配置深度指南]]
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[14-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]

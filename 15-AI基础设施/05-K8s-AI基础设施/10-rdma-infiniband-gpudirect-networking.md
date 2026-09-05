@@ -498,3 +498,4 @@ reservedMemory:
 - [[23-实体/02-K8s核心组件/networkpolicy|K8s网络策略与CNI]]
 - [[15-AI基础设施/05-K8s-AI基础设施/15-gpu-cost-attribution-multitenant|AI集群多租户隔离]]
 - [[22-概念/08-可靠性与运维/node-lifecycle-management|K8s节点管理与运维]]
+- [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|K8s 上的模型微调基础设施（PEFT/LoRA/DeepSpeed/FSDP）]]

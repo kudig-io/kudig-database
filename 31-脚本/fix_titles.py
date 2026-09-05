@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Final fix: titles and remaining bad summaries for sandbox projects"""
 import os, re, glob
+from pathlib import Path
 
 VAULT = "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database"
 
@@ -9,8 +10,7 @@ def read_file(rel):
         return f.read()
 
 def write_file(rel, content):
-    with open(os.path.join(VAULT, rel), 'w', encoding='utf-8') as f:
-        f.write(content)
+    Path(os.path.join(VAULT, rel)).write_text(content, encoding='utf-8')
 
 def get_title_from_summary(summary, fname):
     """Extract a proper title from the summary text"""

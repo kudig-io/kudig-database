@@ -291,8 +291,7 @@ def main():
     # 确保目录存在
     os.makedirs(os.path.dirname(args.output), exist_ok=True)
 
-    with open(args.output, 'w', encoding='utf-8') as f:
-        f.write(content)
+    Path(args.output).write_text(content, encoding='utf-8')
 
     print(f"✅ Skill 已生成: {args.output}")
     print(f"   名称: {args.name}")

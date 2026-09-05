@@ -878,3 +878,4 @@ roleRef:
 
 
 <!-- risk-assessed -->
+- [[18-云厂商/01-阿里云/公有云-ACK/005-ack-ram-authorization|ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)]]

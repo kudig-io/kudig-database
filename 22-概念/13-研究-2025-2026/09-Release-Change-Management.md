@@ -134,3 +134,4 @@ GitOps 在变更管理中的核心作用：
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

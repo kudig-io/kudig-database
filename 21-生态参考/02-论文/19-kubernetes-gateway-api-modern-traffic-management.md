@@ -1909,3 +1909,4 @@ v1.4 引入的 `infrastructure` 字段正在扩展，计划在未来版本中标
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

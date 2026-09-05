@@ -73,3 +73,4 @@ KitOps 是 Jozu 开源的 CNCF Sandbox 项目，为 AI/ML 模型和数据集提�
 - [[17-系统基础/06-知识字典/specialized-workloads/modelpack.md|ModelPack]]
 - [[17-系统基础/06-知识字典/specialized-workloads/kserve.md|KServe]]
 - [[17-系统基础/06-知识字典/security/notary-project.md|Notary Project]]
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

@@ -214,3 +214,5 @@ kubescape scan --exceptions exceptions.json --format json
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]
+- [[26-技能/04-工作负载/pod/培训/learn-04-debug-tools-setup|Day 4: 调试工具全家桶安装]]

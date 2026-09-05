@@ -240,3 +240,4 @@ kubectl get resourceclaimtemplates -n ml-platform
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/05-K8s-AI基础设施/01-gpu-operator-sharing-patterns|NVIDIA GPU Operator 与 GPU 共享模式生产部署]]

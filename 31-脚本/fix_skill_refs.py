@@ -14,6 +14,7 @@ import re
 import sys
 import json
 from collections import defaultdict
+from pathlib import Path
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SKILL = os.path.join(ROOT, "技能")
@@ -167,8 +168,7 @@ for path in md_files:
         changed_files += 1
         total_fixed += file_fixed
         if APPLY:
-            with open(path, "w", encoding="utf-8") as f:
-                f.write(text)
+            Path(path).write_text(text, encoding="utf-8")
 
 print("=== stats ===")
 for k, v in sorted(stats.items()):

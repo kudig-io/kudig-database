@@ -222,3 +222,4 @@ kubectl cnpg recovery pg-cluster --target-time "2024-01-15 10:30:00" -n database
 
 
 <!-- risk-assessed -->
+- [[07-数据库中间件/01-数据库/02-postgresql-enterprise-database|PostgreSQL 企业级数据库高可用架构]]

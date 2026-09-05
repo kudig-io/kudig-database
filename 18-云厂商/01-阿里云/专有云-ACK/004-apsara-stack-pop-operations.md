@@ -258,3 +258,4 @@ aliyun pop-cli GetQuota --OwnerId 12345
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 
 <!-- risk-assessed -->
+- [[18-云厂商/01-阿里云/专有云-ACK/06-阿里云专有云远程顾问指南|阿里云专有云远程顾问指南]]

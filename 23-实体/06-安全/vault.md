@@ -258,3 +258,4 @@ vault operator unseal <key-3>
 - [[22-概念/11-交叉分析/Secret 管理 × 存储模型.md|Secret 管理 × 存储模型]]
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]

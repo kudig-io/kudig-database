@@ -87,3 +87,4 @@ kubeadm init → 生成证书 → 启动 etcd → 启动 API Server →
 
 
 <!-- risk-assessed -->
+- [[26-技能/01-集群运维/cluster/03-cluster-cert-upgrade|集群证书过期与版本升级故障诊断]]

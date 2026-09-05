@@ -2,6 +2,7 @@
 """Ingest CNCF landscape docs into Obsidian entity pages."""
 import os, json, re, hashlib, glob
 from datetime import datetime
+from pathlib import Path
 
 BASE = "/Users/allengaller/Documents/GitHub/kudig-io/kudig-database"
 SRC = os.path.join(BASE, "docs/domain-34-cncf-landscape")
@@ -10,6 +11,15 @@ CONCEPTS = os.path.join(BASE, "concepts")
 REFS = os.path.join(BASE, "references")
 MANIFEST = os.path.join(BASE, ".manifest.json")
 TODAY = datetime.now().strftime("%Y-%m-%d")
+
+
+def safe_output_path(base, *parts):
+    """加固：输出约束在 base 内防路径穿越（对现有常量输入行为不变）。"""
+    base_real = os.path.realpath(base)
+    target = os.path.realpath(os.path.join(base_real, *parts))
+    if os.path.commonpath([base_real, target]) != base_real:
+        raise ValueError(f"output path escapes base dir: {target}")
+    return target
 
 # Load existing manifest
 manifest_path = MANIFEST
@@ -253,7 +263,7 @@ def main():
                 
                 # Determine entity name
                 entity_name = project_dir.lower().replace(' ', '-')
-                entity_file = os.path.join(ENT, f"{entity_name}.md")
+                entity_file = safe_output_path(ENT, f"{entity_name}.md")
                 rel_entity = os.path.relpath(entity_file, BASE)
                 
                 # Check if exists
@@ -277,8 +287,7 @@ def main():
                                 f'updated: {TODAY}',
                                 existing
                             )
-                        with open(entity_file, 'w', encoding='utf-8') as f:
-                            f.write(existing)
+                        Path(entity_file).write_text(existing, encoding='utf-8')
                         updated += 1
                     processed += 1
                     continue
@@ -286,8 +295,7 @@ def main():
                 # Create new entity page
                 page = make_entity_page(entity_name, maturity, content, rel_src)
                 os.makedirs(os.path.dirname(entity_file), exist_ok=True)
-                with open(entity_file, 'w', encoding='utf-8') as f:
-                    f.write(page)
+                Path(entity_file).write_text(page, encoding='utf-8')
                 
                 # Update manifest
                 manifest[rel_src] = {
@@ -303,8 +311,8 @@ def main():
                 errors.append(f"{rel_src}: {e}")
     
     # Save manifest
-    with open(manifest_path, 'w', encoding='utf-8') as f:
-        json.dump(manifest, f, indent=2, ensure_ascii=False)
+    Path(manifest_path).write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False), encoding='utf-8')
     
     print(f"Processed: {processed}")
     print(f"Created: {created}")

@@ -122,3 +122,4 @@ prerequisites:
 
 
 <!-- risk-assessed -->
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]

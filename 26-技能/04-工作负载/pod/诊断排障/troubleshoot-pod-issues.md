@@ -155,3 +155,4 @@ For Java applications in containers:
 
 
 <!-- risk-assessed -->
+- [[26-技能/04-工作负载/pod/诊断排障/pod-fta-故障树list|Pod 异常故障树分析 (skills)]]

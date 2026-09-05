@@ -340,3 +340,12 @@ Flux 同步失败
 
 
 <!-- risk-assessed -->
+- [[04-应用模式/02-行业架构/22-nev-connected-vehicle|新能源车联网架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/77-fusion-energy-monitoring|可控核聚变监控架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/51-smart-manufacturing-mes|智能制造 MES 架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/61-smart-grid|智慧电网架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/86-solid-state-battery|固态电池架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/15-energy-power-architecture|能源电力 Kubernetes 生产架构设计 (应用模式)]]
+- [[17-系统基础/06-知识字典/operations/backup-disaster-recovery|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[17-系统基础/06-知识字典/platform-engineering/infrastructure-as-code-for-kubernetes|Kubernetes 基础设施即代码（IaC）]]
+- [[22-概念/09-平台与发布/ci-cd-pipeline-patterns|CI/CD Pipeline Patterns]]

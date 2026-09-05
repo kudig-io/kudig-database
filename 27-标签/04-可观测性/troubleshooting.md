@@ -224,3 +224,4 @@ etcdctl endpoint health --cluster
 - [[27-标签/02-网络与存储/networking|networking — 网络排障]]
 - [[27-标签/02-网络与存储/storage|storage — 存储排障]]
 - [[27-标签/03-安全与合规/security|security — 安全排障]]
+- [[26-技能/01-集群运维/cluster-upgrade/最佳实践/scen-README|生产场景导航]]

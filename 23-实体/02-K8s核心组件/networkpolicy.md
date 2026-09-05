@@ -295,3 +295,22 @@ NetworkPolicy 导致连接失败
 
 
 <!-- risk-assessed -->
+- [[04-应用模式/02-行业架构/30-hrtech-saas|人力资源 SaaS 架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/69-6g-core-network|6G 核心网架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/67-brain-computer-interface|脑机接口架构设计 — 阿里云视角]]
+- [[04-应用模式/02-行业架构/13-digital-government-architecture|数字政务 Kubernetes 生产架构设计]]
+- [[04-应用模式/02-行业架构/89-crispr-gene-editing|基因编辑 CRISPR 架构设计 — 阿里云视角]]
+- [[05-网络/06-Terway/05-testing|05 - Terway 测试验证 (Testing & Validation)]]
+- [[09-可观测性/02-日志/07-splunk-enterprise-siem|Splunk企业级日志分析与安全智能平台深度实践]]
+- [[17-系统基础/06-知识字典/networking/network-policies|Network Policies]]
+- [[17-系统基础/06-知识字典/networking/telco-cloud-and-5g-mec|电信云与 5G 多接入边缘计算（MEC）]]
+- [[17-系统基础/06-知识字典/security/application-security-checklist|应用安全清单]]
+- [[19-故障诊断/04-高级排障/09-symptom-sop-mapping|症状 → SOP 映射手册]]
+- [[22-概念/11-交叉分析/apiserver-×-NetworkPolicy|apiserver × NetworkPolicy]]
+- [[22-概念/11-交叉分析/StatefulSet-×-NetworkPolicy|StatefulSet × NetworkPolicy]]
+- [[22-概念/11-交叉分析/Deployment-×-NetworkPolicy|Deployment × NetworkPolicy]]
+- [[22-概念/11-交叉分析/etcd-×-NetworkPolicy|etcd × NetworkPolicy]]
+- [[26-技能/04-工作负载/pod/培训/beginner-guides/03-end-to-end-project|端到端项目实战——从代码到生产完整流水线]]
+- [[26-技能/05-网络/cni/培训/kubernetes-terway-presentation|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [topic-presentations]]]
+- [[26-技能/05-网络/networkpolicy/skill-20-networkpolicy-connectivity|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting (skills)]]
+- [[26-技能/07-安全/resource-quota/培训/learn-07-namespace-resource-quota|第七课：Namespace 与资源隔离]]

@@ -441,3 +441,7 @@ knowledge_refs:
 ```
 
 <!-- risk-assessed -->
+
+## Related
+
+- [[26-技能/03-节点/nodepool/nodepool-fta|NodePool 异常故障树分析 (skills)]]

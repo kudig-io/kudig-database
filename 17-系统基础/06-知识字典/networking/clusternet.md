@@ -202,3 +202,4 @@ kubectl -n clusternet-system get clusters.clusternet.io -o wide
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/etcd × 高可用模式|etcd × 高可用模式]]

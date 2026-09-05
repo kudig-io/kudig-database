@@ -96,3 +96,7 @@ Finalizers 有时会阻止依赖对象的删除，从而导致目标所有者对
 
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/fundamentals/garbage-collection|Garbage Collection（垃圾回收）]]
+- [[17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs|Automatic Cleanup for Finished Jobs]]
+- [[19-故障诊断/04-高级排障/09-symptom-sop-mapping|症状 → SOP 映射手册]]
+- [[22-概念/01-核心架构/declarative-api|Declarative API]]

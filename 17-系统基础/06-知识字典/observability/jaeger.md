@@ -94,3 +94,16 @@ Trace
 
 
 <!-- risk-assessed -->
+- [[01-集群基础/02-设计原则/17-observability-design-principles|16 - 可观测性设计原则]]
+- [[01-集群基础/02-设计原则/15-service-mesh-architecture|14 - 服务网格与微服务架构设计]]
+- [[04-应用模式/02-行业架构/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计 (应用模式)]]
+- [[05-网络/04-API网关/12-api-gateway-observability|12 - API 网关可观测性：指标、日志与链路追踪]]
+- [[10-平台工程/04-开发体验/04-platform-team-topology|平台团队拓扑与运营 (Platform Team Topology and Operations)]]
+- [[16-专项技术/02-WebAssembly/04-wasmcloud-platform|wasmCloud 平台]]
+- [[17-系统基础/06-知识字典/observability/opentelemetry-and-distributed-tracing|OpenTelemetry 与分布式链路追踪]]
+- [[17-系统基础/06-知识字典/operations/enterprise-ops-practices|企业级运维最佳实践]]
+- [[22-概念/11-交叉分析/可观测性支柱 × Prometheus-Grafana|可观测性支柱 × Prometheus-Grafana]]
+- [[23-实体/15-参考与索引/observability-terms|K8s 可观测性术语参考]]
+- [[23-实体/15-参考与索引/tooling-terms|K8s 工具链术语参考]]
+- [[26-技能/04-工作负载/pod/诊断排障/structural-01-pod-troubleshooting|Pod 故障排查与运行机制深度指南 [topic-structural-trouble-shooting]]]
+- [[26-技能/08-可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]]

@@ -382,3 +382,4 @@ kubectl logs -n crossplane-system -l pkg.crossplane.io/provider=provider-aws --t
 - [[21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 <!-- risk-assessed -->
+- [[17-系统基础/06-知识字典/platform-engineering/infrastructure-as-code-for-kubernetes|Kubernetes 基础设施即代码（IaC）]]

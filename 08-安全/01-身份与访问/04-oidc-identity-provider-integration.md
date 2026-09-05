@@ -575,6 +575,7 @@ OIDC 集成检查清单：
 
 - [[08-安全/01-身份与访问/06-rbac-matrix-configuration|RBAC 最佳实践]]
 - [[08-安全/01-身份与访问/03-service-account-token-management|SA Token 管理]]
+- [[18-云厂商/01-阿里云/公有云-ACK/005-ack-ram-authorization|ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)]]
 
 ## See Also
 

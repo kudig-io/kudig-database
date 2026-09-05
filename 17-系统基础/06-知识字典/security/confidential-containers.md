@@ -204,3 +204,4 @@ kubectl logs -n coco-tenant deploy/kbs | grep -i attestation
 - [[17-系统基础/06-知识字典/fundamentals/kata-containers.md|Kata Containers]]
 - [[17-系统基础/06-知识字典/security/vault.md|Vault]]
 - [[17-系统基础/06-知识字典/security/spiffe-spire-identity.md|SPIFFE/SPIRE]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

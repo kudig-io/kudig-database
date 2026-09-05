@@ -342,6 +342,7 @@ domain: platform-engineering
 
 - [[相关文档]]
 ```
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]
 
 ## Related
 

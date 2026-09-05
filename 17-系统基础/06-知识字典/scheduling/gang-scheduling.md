@@ -194,3 +194,4 @@ kubectl describe pod pytorch-worker-0 -n ml-platform | grep -A 10 Events
 
 
 <!-- risk-assessed -->
+- [[15-AI基础设施/05-K8s-AI基础设施/06-kuberay-distributed-computing|KubeRay 分布式计算平台生产部署]]

@@ -307,14 +307,12 @@ def main():
 
     # 同时写入 JSON 便于程序消费
     json_file = output_dir / f"command-output-diagnosis-{args.priority.lower()}.json"
-    with open(json_file, 'w', encoding='utf-8') as f:
-        json.dump(unique_pairs, f, ensure_ascii=False, indent=2)
+    json_file.write_text(json.dumps(unique_pairs, ensure_ascii=False, indent=2), encoding='utf-8')
     print(f"  写入: {json_file}")
 
     # 写入 YAML
     yaml_file = output_dir / f"command-output-diagnosis-{args.priority.lower()}.yaml"
-    with open(yaml_file, 'w', encoding='utf-8') as f:
-        yaml.dump(unique_pairs, f, allow_unicode=True, sort_keys=False)
+    yaml_file.write_text(yaml.dump(unique_pairs, allow_unicode=True, sort_keys=False), encoding='utf-8')
     print(f"  写入: {yaml_file}")
 
 

@@ -1056,6 +1056,7 @@ kubectl exec -n ai-infra redis-master-0 -- redis-cli llen agent_task_queue
 
 - 40-agent-harness-production-maturity
 - 41-react-harness-identification-guide
+- [[22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]
 
 ## See Also
 

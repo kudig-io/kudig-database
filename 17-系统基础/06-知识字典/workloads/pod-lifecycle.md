@@ -122,3 +122,6 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]
+- [[26-技能/04-工作负载/pod/概念原理/Pod生命周期×Secret管理|Pod 生命周期 × Secret 管理]]
+- [[26-技能/04-工作负载/pod/概念原理/Operator模式×Pod生命周期|Operator 模式 × Pod 生命周期]]

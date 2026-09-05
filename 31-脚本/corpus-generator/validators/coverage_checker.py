@@ -323,8 +323,7 @@ class CoverageChecker:
             'details': self.results,
             'recommendations': self._generate_recommendations()
         }
-        with open(output_path, 'w', encoding='utf-8') as f:
-            json.dump(report, f, ensure_ascii=False, indent=2)
+        Path(output_path).write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
         print(f"\n报告已保存: {output_path}")
 
     def _generate_recommendations(self) -> List[str]:

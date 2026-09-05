@@ -136,3 +136,4 @@ The API aggregation layer allows running independent API Servers alongside the m
 
 
 <!-- risk-assessed -->
+- [[26-技能/04-工作负载/pod/概念原理/Operator模式×Pod生命周期|Operator 模式 × Pod 生命周期]]

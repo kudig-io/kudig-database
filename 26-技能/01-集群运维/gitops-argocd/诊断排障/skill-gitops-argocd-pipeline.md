@@ -1,4 +1,5 @@
 ---
+title: "GitOps/ArgoCD 流水线故障诊断与修复"
 skill_id: "SKILL-WORK-005"
 skill_name: "GitOps/ArgoCD 流水线故障诊断与修复 / GitOps & ArgoCD Pipeline Failure Diagnosis & Remediation"
 version: "1.0"

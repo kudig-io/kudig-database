@@ -351,8 +351,7 @@ def main():
                     modified = True
 
                 if modified:
-                    with open(fp, 'w') as f:
-                        f.write(text)
+                    Path(fp).write_text(text)
 
     print(f"扫描文件: {stats['scanned']}")
     print(f"修复 trigger_keywords 去重: {stats['dedup']}")

@@ -496,6 +496,7 @@ apt-get update && apt-get install -y tcpdump strace curl dnsutils
 - [[01-集群基础/05-kubectl/02-kubectl-commands-reference|kubectl 命令参考]]
 - 故障诊断/03-advanced-troubleshooting/
 - [[17-系统基础/05-速查卡/k8s.md|K8s 速查卡]]
+- [[01-集群基础/01-架构总览/14-troubleshooting-guide|16 - Kubernetes 故障排查专家级指南]]
 
 ## See Also
 

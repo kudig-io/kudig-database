@@ -105,3 +105,4 @@ last_updated: 2026-08-25
 ## Related
 
 - [[visibility-public|#visibility/public Hub]] — tag hub
+- [[22-概念/12-研究/kubernetes-version-evolution|Kubernetes 版本演进]]

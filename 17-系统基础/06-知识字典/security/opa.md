@@ -233,3 +233,7 @@ curl -X POST localhost:8181/v1/bundles -d '{"name":"authz"}'
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/纵深防御 × 供应链安全|纵深防御 x 供应链安全]]
+- [[22-概念/12-研究/security-tool-evolution|安全工具演进]]
+- [[23-实体/15-参考与索引/release-notes-security|发布说明索引 — 安全]]
+- [[23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]

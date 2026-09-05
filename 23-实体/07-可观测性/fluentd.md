@@ -353,3 +353,7 @@ curl -s http://fluent-bit:2020/api/v1/metrics | jq '.input.records, .output.reco
 
 
 <!-- risk-assessed -->
+- [[04-应用模式/02-行业架构/18-data-midplatform-architecture|数据中台 Kubernetes 生产架构设计]]
+- [[17-系统基础/06-知识字典/multi-cloud/multi-cloud-operations|10 - 多云混合云运维手册]]
+- [[17-系统基础/06-知识字典/observability/opentelemetry-and-distributed-tracing|OpenTelemetry 与分布式链路追踪]]
+- [[17-系统基础/06-知识字典/workloads/workload-management|Workload Management]]

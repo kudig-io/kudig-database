@@ -210,6 +210,7 @@ kubectl exec <pod-name> -- df -h /data
 - [[17-系统基础/05-速查卡/linux.md|linux]]
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
 - [[13-生产运维/05-工单案例/ticket-case-043-statefulset-pvc-unbound|工单案例：StatefulSet PVC 未绑定]]
+- [[18-云厂商/01-阿里云/公有云-ACK/002-ack-ecs-compute|ACK 关联产品 - ECS 计算资源]]
 
 ## See Also
 

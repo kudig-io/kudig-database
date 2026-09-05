@@ -393,6 +393,23 @@ AI Agent、AI Coding 工具相关知识体系。
 - [[23-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[26-技能/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 
+- [[02-工作负载/04-多语言运行时/05-multicluster-workload-distribution|多集群工作负载分发]]
+- [[02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
+- [[05-网络/01-K8s网络核心/53-network-self-healing-automation|网络自愈自动化]]
+- [[11-发布变更/04-变更管理/06-database-migration-release-strategy|数据库迁移发布策略]]
+- [[12-可靠性/06-SRE实践/12-multi-active-architecture|多活架构设计]]
+- [[14-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]
+- [[18-云厂商/01-阿里云/公有云-ACK/002-ack-ecs-compute|ACK 关联产品 - ECS 计算资源]]
+- [[18-云厂商/01-阿里云/公有云-ACK/006-ack-ros-iac|ACK 关联产品 - ROS 资源编排 (IaC)]]
+- [[18-云厂商/01-阿里云/公有云-ACK/005-ack-ram-authorization|ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)]]
+- [[23-实体/13-云厂商与发行版/008-apsara-stack-sls-logging|专有云 (Apsara Stack) - SLS 日志服务]]
+- [[23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]
+- [[23-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]
+- [[23-实体/15-参考与索引/k8s-design-principles-deep-dive|设计原理：声明式 API、控制器模式与 etcd 共识]]
+- [[23-实体/15-参考与索引/release-notes-kubernetes|发布说明索引 — Kubernetes]]
+- [[23-实体/15-参考与索引/release-notes-security|发布说明索引 — 安全]]
+- [[25-研究/02-网络与安全/ebpf-networking-revolution|eBPF 在 Kubernetes 网络中的革命性应用]]
+- [[26-技能/07-安全/rbac/audit-rbac-configurations|Audit RBAC Configurations]]
 
 ## Assessments
 

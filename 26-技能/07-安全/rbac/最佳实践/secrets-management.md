@@ -660,3 +660,4 @@ roleRef:
 
 
 <!-- risk-assessed -->
+- [[22-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]

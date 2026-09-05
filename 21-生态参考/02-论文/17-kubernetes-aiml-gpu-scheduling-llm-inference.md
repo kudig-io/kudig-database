@@ -1500,3 +1500,4 @@ AI基础设施演进趋势(2026-2027):
 
 
 <!-- risk-assessed -->
+- [[27-标签/06-AI与专项/research|research]]

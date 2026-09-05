@@ -158,3 +158,7 @@ style ESCAL fill:#f59e0b,stroke:#b45309,color:#fff
 ---
 
 *本文档由 `31-脚本/generate-scenarios.py` 于 2026-08-27 自动生成。请修改脚本中的场景数据后重新生成，勿直接编辑本文件。*
+
+## Related
+
+- [[26-技能/01-集群运维/cluster-upgrade/最佳实践/scen-README|生产场景导航]]

@@ -78,3 +78,4 @@ Krkn（原 Kraken）是 Red Hat 开源的混沌工程工具，专注于 Kubernet
 
 
 <!-- risk-assessed -->
+- [[23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]

@@ -177,3 +177,4 @@ FTA 故障树 — 故障树分析文档集合
 
 
 <!-- risk-assessed -->
+- [[31-脚本/templates/onboarding-guide-template|团队入职指南模板]]
