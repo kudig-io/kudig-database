@@ -49,5 +49,20 @@ secrets/
 .zcode/
 .zread/
 
+# 发布产物快照（可再生构建输出，改由 GitHub Releases 承载；见 REPO-AUDIT-2026-09-04.md P0）
+32-发布/package/
+37-归档/release-packages/
+
+# Obsidian 机器本地状态
+.obsidian/workspace.json
+
+# GTM 页面构建产物（源文件 index.html/og.png 入库）
+GTM/dist/
+
+# Agent 工具会话产物
+.impeccable/
+.mimosa/
+.video_agent/
+
 # 大文件排除 — 防止 zip 归档文件入库
 *.zip

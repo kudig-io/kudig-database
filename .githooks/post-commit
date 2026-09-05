@@ -1,0 +1,5 @@
+#!/bin/sh
+# BEGIN Qoder AI tracker
+repo_root="$(git rev-parse --show-toplevel 2>/dev/null || pwd -W 2>/dev/null || pwd)"
+"/Users/allengaller/.local/bin/qodercli" commit --hook --workspace "$repo_root" 2>/dev/null || true
+# END Qoder AI tracker
