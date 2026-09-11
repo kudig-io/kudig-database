@@ -43,3 +43,21 @@ corpus-clean: ## 清理生成的语料文件
 	rm -f $(CORPUS_OUTPUT)/command-output-diagnosis-*.yaml
 	rm -f $(CORPUS_OUTPUT)/coverage-report-*.json
 
+# =============================================================================
+# GTM Landing Page
+# =============================================================================
+
+GTM_DIR := GTM
+GTM_SYNC := 31-脚本/maintenance/gtm-sync-stats.py
+
+.PHONY: gtm-sync gtm-check
+
+gtm-sync: ## 按仓库真实计数刷新 GTM 页面并同步到 dist/
+	python3 $(GTM_SYNC)
+	mkdir -p $(GTM_DIR)/dist
+	cp $(GTM_DIR)/index.html $(GTM_DIR)/dist/index.html
+	cp $(GTM_DIR)/og.jpg $(GTM_DIR)/dist/og.jpg
+
+gtm-check: ## 校验 GTM 页面数据是否为最新（CI/nightly 用）
+	python3 $(GTM_SYNC) --check
+

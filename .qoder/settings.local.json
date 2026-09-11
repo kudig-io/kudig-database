@@ -4,7 +4,9 @@
       "Bash(ls /Users/allengaller/Documents/GitHub/kudig-io/kudig-database/release/ 2>/dev/null || echo \"release/ is empty or doesn't exist\")",
       "Bash(ls -la /Users/allengaller/Documents/GitHub/kudig-io/kudig-database/ | head -40)",
       "WebFetch(*)",
-      "Bash(ls -d /Users/allengaller/Documents/GitHub/kudig-io/kudig-database/01-*/ 2>/dev/null | head -5)"
+      "Bash(ls -d /Users/allengaller/Documents/GitHub/kudig-io/kudig-database/01-*/ 2>/dev/null | head -5)",
+      "Bash(find . -type f \\\\\\( -name \"*.md\" -o -name \"*.py\" \\\\\\) -not -path \"./.git/*\" | grep -iE \"qa|interview|面试\" | head -50)",
+      "Bash(for d in 0*-*/ 1*-*/ 2[0-3]-*/; do n=$\\(find \"$d\" -name \"*.md\" -type f | wc -l | tr -d ' '\\); echo \"$n $d\"; done | sort -rn | head -60)"
     ]
   }
 }

@@ -17,7 +17,7 @@ audience:
 - SRE
 - 平台工程师
 - 云原生面试准备者
-estimated_read_time: 20min
+estimated_read_time: 18min
 intent_queries:
 - Kubernetes 网络快问快答
 - K8s Service Ingress 口述自测
@@ -37,55 +37,6 @@ prerequisites:
 # K8s 网络快问快答与面试模拟对话
 
 理论体系见 [[05-网络/01-K8s网络核心/57-kubernetes-service-ingress-interview.md|Kubernetes Service 与 Ingress 网络面经]]。建议先读理论，再用本文口述自测；两者配合使用，先理解再刷题。
-
-## 本篇导览与学习路径
-
-| 部分 | 题号 | 定位 |
-|------|------|------|
-| 快问快答 | 1-42 | 基础概念与排障口述题，一题 60 秒 |
-| 进阶：数据面与 conntrack | 43-44 | 原理追问，答到关键词即可 |
-| 高级课题 | 45-56 | 12 大主题全覆盖，每题带"深挖"回语料 |
-| 面试模拟对话 | 四场景 | 追问链串联，1-2 分钟/回合 |
-
-学习循环：理论 → 口述自测 → 错题沿"深挖"回语料 → 模拟对话串场 → 检查清单收口。
-
-```mermaid
-flowchart LR
-    A["理论面经（57 号）"] --> B["快问快答 1-42"]
-    B --> C["进阶 43-44<br/>数据面与 conntrack"]
-    C --> D["高级课题 45-56<br/>12 大主题"]
-    D --> E["面试模拟对话"]
-    E -->|"答不上"| F["沿深挖链接回语料精读"]
-    F --> B
-    E -->|"通关"| G["自练检查清单"]
-```
-
-```mermaid
-mindmap
-  root((K8s 网络))
-    Service 与 Ingress
-      ClusterIP·NodePort·LoadBalancer
-      externalTrafficPolicy
-      404 与 503 排障
-    数据面
-      kube-proxy iptables 与 IPVS
-      conntrack 表满与竞态
-    CNI
-      Flannel VXLAN 与 host-gw
-      Terway ENIIP
-      Cilium eBPF
-    DNS
-      ndots 查询放大
-      NodeLocal DNSCache
-    安全与策略
-      NetworkPolicy
-      Gateway API
-      mTLS 与 Egress
-    规模与演进
-      多集群互联
-      IPv6 双栈
-      性能调优
-```
 
 ---
 
@@ -342,8 +293,6 @@ Pod → veth → root netns
 
 思考题：为什么"IPVS 快"主要在大集群才体现？——几十个 Service 的小集群两种模式几乎无感。
 
-深挖：[[05-网络/01-K8s网络核心/10-kube-proxy-modes-performance.md|Kube-proxy 实现模式与性能优化]]
-
 ### 44. conntrack 表满（`nf_conntrack: table full, dropping packet`）时丢的是什么包，为什么表现为新建连接失败但已有连接正常？UDP 服务（如 CoreDNS）高并发下的 conntrack 竞态发生在哪一步，常见的两种缓解手段是什么？
 
 **表满丢什么包**：
@@ -358,29 +307,12 @@ Pod → veth → root netns
 - 竞态位置：在节点 conntrack 处理**同五元组的应答包与下一个请求包**时。第一个应答到达会把流表项从 UNREPLIED 迁移到 REPLIED 并刷新超时；此时下一个同五元组的新请求（或第二个应答）几乎同时到达，两个包的处理与表项状态迁移发生交错，不幸时序下后到的包不再匹配表项期望的方向状态，被判为 **INVALID**，随后被 netfilter 里 drop INVALID 的规则丢弃。
 - 表现：客户端 resolver 收不到应答又不能立刻判定失败，只能等完整超时——musl 并行查询策略总超时约 5s，这就是经典的"DNS 5 秒延迟"。
 
-```mermaid
-sequenceDiagram
-    participant C as musl 客户端
-    participant K as 节点 conntrack
-    participant D as CoreDNS
-    C->>K: UDP A 查询（源端口 P）
-    C->>K: UDP AAAA 查询（同一源端口 P）
-    K->>D: DNAT 后转发
-    D-->>K: A 应答（UNREPLIED 迁移到 REPLIED）
-    D-->>K: AAAA 应答（几乎同时到达）
-    Note over K: 同五元组状态迁移交错<br/>被判为 INVALID
-    K-->>C: 丢弃 INVALID 包
-    Note over C: resolver 等满完整超时<br/>musl 总超时约 5s
-```
-
 **两种常见缓解手段**：
 
 1. 改客户端解析行为，避免五元组复用：`/etc/resolv.conf` 加 `single-request-reopen`（A/AAAA 串行发送且每次重开 socket，换新源端口 = 新五元组），或 `single-request` / `use-vc`（强制 TCP）。注意 musl **不读这些选项**，Alpine 镜像需换 glibc 或走下一条。
 2. NodeLocal DNSCache：每节点起缓存 DaemonSet（挂 dummy 网卡 169.254.20.10），Pod 直连本机缓存，命中不出节点，大幅减少经过 kube-proxy DNAT + conntrack 的短命 UDP 流。
 
 **边界提醒**：调大 `nf_conntrack_max` 只能缓解表满，解决不了竞态；raw 表 `--notrack` 让 DNS 流量绕过 conntrack 更彻底，但会连带绕过 DNAT、必须直指 DNS endpoint，一般不推荐。另外 kube-proxy 对 UDP endpoint 摘除会主动删 conntrack 表项，那是另一个"陈旧 DNAT 指向已死 CoreDNS Pod"的问题，不要与这个竞态混淆。
-
-深挖：[[05-网络/01-K8s网络核心/29-coredns-troubleshooting-optimization.md|CoreDNS 故障排查与性能优化]]、[[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS 调优]]
 
 ---
 
@@ -417,16 +349,6 @@ sequenceDiagram
 | IPIP | 20 | 1480 | 三层可达 |
 | VXLAN | 50 | 1450 | 三层可达 |
 | WireGuard | 80 | 1420 | 加密需求 |
-
-```mermaid
-flowchart LR
-    subgraph VX["VXLAN 后端 · 封装 50B · MTU 1450"]
-        A1["Pod"] --> B1["cni0"] --> C1["flannel.1<br/>VTEP + FDB 表"] --> D1["外层封装<br/>Eth + IP + UDP 8472 + VNI"] --> E1["对端解封装"]
-    end
-    subgraph HG["host-gw 后端 · 零封装 · MTU 1500"]
-        A2["Pod"] --> B2["cni0"] --> C2["宿主机路由表<br/>直达对端节点网关"] --> E2["对端 cni0"]
-    end
-```
 
 **Directrouting**：同一子网走 host-gw 纯路由，跨子网自动回落 VXLAN，兼顾性能与跨网段能力。选型：性能敏感且同二层选 host-gw；云环境跨网段选 VXLAN；要加密选 WireGuard；UDP 后端是用户态转发，性能最差，仅作兜底。
 
@@ -465,16 +387,6 @@ StatefulSet 可用 `k8s.aliyun.com/pod-ip-fixed` 固定 Pod IP；GC 机制回收
 - **canary 优先级**：header（含 value/正则 pattern）→ cookie → weight 按比例。
 - **rewrite**：`rewrite-target` 配 `$1`/`$2` 正则捕获组实现路径重写。
 
-```mermaid
-flowchart TD
-    A["Ingress 返回异常"] --> B{"错误码?"}
-    B -->|"404"| C["路由层：Host 头 / path / pathType<br/>规则未被 Controller 生效"]
-    B -->|"413"| D["proxy-body-size 默认 1m"]
-    B -->|"504"| E["proxy-read / send-timeout 默认 60s"]
-    B -->|"间歇 502"| F["upstream keepalive 竞态<br/>后端先关连接，nginx 复用死连接"]
-    B -->|"503"| G["后端层：EndpointSlice 为空?<br/>selector 不匹配 / Pod 未 Ready"]
-```
-
 **生产基线**：Controller ≥3 副本跨 AZ 反亲和、配 HPA 与 PDB；`worker-processes: auto`、`max-worker-connections: 65535`、`upstream-keepalive-connections: 500`；TLS 1.2+ 证书走 cert-manager 自动续期；关闭 `allow-snippet-annotations` 防 annotation 注入；监控 `config_last_reload_successful`、`ssl_expire_time_seconds`、5xx 率、P99 延迟。
 
 深挖：[[05-网络/01-K8s网络核心/27-ingress-production-best-practices.md|Ingress 生产最佳实践]]
@@ -501,9 +413,9 @@ flowchart TD
 
 深挖：[[05-网络/01-K8s网络核心/17-networkpolicy-deep-practice.md|NetworkPolicy 深度实践指南]]
 
-### 51. Gateway API 针对 Ingress 的哪三个痛点重新设计？四个核心角色分别归属谁？GAMMA 解决了什么？
+### 51. Gateway API 针对Ingress 的哪三个痛点重新设计？四个核心角色分别归属谁？GAMMA 解决了什么？
 
-**三个痛点**：① 能力扩展靠注解碎片化，各家 Controller 一套 annotation；② 只表达七层，TCP/UDP 四层没有标准资源，要靠注解或 Controller 自定义配置绕行；③ 没有角色分工，平台配置和业务配置混在同一个对象里。
+**三个痛点**：① 能力扩展靠注解碎片化，各家 Controller 一套 annotation；② 只表达七层，四层要绕 TLSRoute 之外的注解；③ 没有角色分工，平台配置和业务配置混在同一个对象里。
 
 **角色分工**：
 
@@ -514,22 +426,11 @@ flowchart TD
 | HTTPRoute | 命名空间 | 开发者 | Host/Path/Header 路由 |
 | ReferenceGrant | 命名空间 | 被引用资源所有者 | 显式授权跨 ns 引用 |
 
-```mermaid
-flowchart LR
-    GC["GatewayClass<br/>集群级 · 基础设施管理员<br/>controllerName"]
-    GW["Gateway<br/>命名空间级 · 平台管理员<br/>listeners / TLS / allowedRoutes"]
-    HR["HTTPRoute<br/>命名空间级 · 开发者<br/>Host / Path / Header 路由"]
-    SVC["后端 Service"]
-    RG["ReferenceGrant<br/>命名空间级 · 资源所有者"]
-    GC --> GW --> HR --> SVC
-    RG -.->|"授权跨 ns 引用"| HR
-```
-
 跨命名空间引用**默认拒绝**，由被引用方写 ReferenceGrant 放行——把"谁能引用我"的决定权交还给资源所有者。
 
 **GAMMA**（v1.1 起）：HTTPRoute 的 parentRef 可以指向 **Service** 而非 Gateway，把同一套路由语义带进服务网格的东西向流量，实现南北向与东西向一份 API。
 
-深挖：[[05-网络/01-K8s网络核心/37-gateway-api-overview.md|Gateway API 配置]]
+深挖：[[05-网络/01-K8s网络核心/37-gateway-api-overview.md|Gateway API配置]]
 
 ### 52. Cilium 的 eBPF 数据面在哪些层替代了 iptables/kube-proxy？换来什么收益，付出什么代价？
 
@@ -572,16 +473,6 @@ flowchart LR
 | NAT Gateway | VPC 级 | 固定公网出口 |
 | 网格 Egress | URL/Header（L7） | 出站审计合规 |
 
-```mermaid
-flowchart LR
-    P["Pod"] --> S["Sidecar / 网格 Egress<br/>L7 审计：出了什么内容"]
-    S --> NP{"NetworkPolicy<br/>能不能出"}
-    NP -->|"拒绝"| X["丢包"]
-    NP -->|"允许"| GW["Egress Gateway / SNAT<br/>从哪个 IP 出"]
-    GW --> NAT["云 NAT Gateway<br/>VPC 级固定出口"]
-    NAT --> NET(("互联网"))
-```
-
 **口诀**：固定出口 IP → NAT Gateway/EIP 或 mesh Egress Gateway；要 L7 审计 → 网格；要遏制失陷面 → NetworkPolicy。各层**可叠加**：Policy 决定"能不能出"，Gateway 决定"从哪个 IP 出"，网格决定"出的是否合规"。
 
 深挖：[[05-网络/01-K8s网络核心/30-egress-traffic-management.md|Egress 流量管理]]
@@ -613,45 +504,9 @@ flowchart LR
 
 **跨节点 IPv6 不通排查顺序**：forwarding 是否开启 → CNI backend 是否支持 IPv6 → ip6tables FORWARD 链是否放行。 Pod 无 IPv6 查 CNI/sysctl/cluster-cidr，Service 无 IPv6 查 ipFamilyPolicy/service-range，AAAA 失败查 CoreDNS 与 Service ipFamilies。
 
-```mermaid
-flowchart TD
-    A["双栈异常"] --> B{"Pod 拿不到 IPv6？"}
-    B -->|"是"| B1["CNI 双栈配置<br/>节点 sysctl 三件套<br/>cluster-cidr"]
-    B -->|"否"| C{"Service 没有 IPv6？"}
-    C -->|"是"| C1["ipFamilyPolicy 策略<br/>service-cluster-ip-range"]
-    C -->|"否"| D{"跨节点不通？"}
-    D -->|"是"| D1["ipv6 forwarding<br/>CNI backend 支持<br/>ip6tables FORWARD 链"]
-    D -->|"否"| E{"AAAA 解析失败？"}
-    E -->|"是"| E1["CoreDNS 配置<br/>Service ipFamilies"]
-    E -->|"否"| F["回到应用层<br/>应用是否真用 IPv6 套接字"]
-```
-
 **性能调优基线**：conntrack `nf_conntrack_max` 1048576 起，kube-proxy `maxPerCore: 65536, min: 524288`，利用率 >80% 告警；MTU 按封装对齐（VXLAN 1450 / WireGuard 1420），开 `tcp_mtu_probing=1`；内核 `somaxconn`/backlog 65536、`ip_local_port_range 1024-65535` 防端口耗尽（`ss -s` 观察）；压测用 iperf3（带宽）、mtr（时延丢包）、`ethtool -S`（队列丢包）。
 
 深挖：[[05-网络/01-K8s网络核心/50-ipv6-dual-stack-production.md|IPv6 双栈生产实践]]、[[05-网络/01-K8s网络核心/36-network-performance-tuning.md|网络性能调优]]
-
----
-
-## 速答速记表（43-56 一句话版）
-
-复习用：遮住正文，只看"一句话答案"列口述展开，再对照"记忆钩子"自检；答不顺就沿题号回正文重读。
-
-| 题号 | 一句话答案 | 记忆钩子 |
-|------|-----------|---------|
-| 43 | DNAT 发生在客户端所在节点的 nat PREROUTING（本机进程走 OUTPUT）；iptables 规则 O(Service×Endpoint) 线性遍历，IPVS 哈希 O(1) + 增量更新 | DNAT 在入口节点，折半优化仍线性 |
-| 44 | 表满丢的是"要新建表项的包"（插入增长、查找不增长）；UDP 竞态是同五元组 REPLIED 状态迁移交错被判 INVALID；缓解 single-request-reopen + NodeLocal DNSCache | 查表不涨表，插入才涨表 |
-| 45 | VXLAN 封装 50B/MTU 1450，host-gw 零封装但要求同二层；Directrouting 同子网走路由、跨子网回隧道 | 50 字节对 0 字节 |
-| 46 | Terway 的 Pod IP 是真实 VPC IP（免封装、安全组直绑）；容量 =（ENI 数−1）×辅助 IP 数 | 真 IP 免封装 |
-| 47 | Cluster 均匀但 SNAT 丢源 IP，Local 保源 IP 但无本地端点会丢包（配 healthCheckNodePort）；sessionAffinity 不是应用会话方案 | 鱼与熊掌 |
-| 48 | 413 体积、504 超时、间歇 502 keepalive 竞态；404 找路由、503 找后端 | 五码五病 |
-| 49 | ndots:5 最多放大 6 次查询，外部域名末尾加点可省；NodeLocal 一箭双雕（绕 conntrack + 降 CoreDNS 压力） | 少一个点省五次查 |
-| 50 | NetworkPolicy 是白名单叠加模型；AND 同元素、OR 分元素；DNS UDP+TCP 53 最易漏 | 默认拒，先放 DNS |
-| 51 | Class/Gateway/Route/ReferenceGrant 四角色分工，跨 ns 引用默认拒；GAMMA 把路由能力带进东西向 | 谁的路由谁做主 |
-| 52 | eBPF 在 tc/XDP/socket 三层用哈希 O(1) 替代线性规则；代价是内核版本要求与工具链门槛 | 哈希换遍历 |
-| 53 | 只要加密用 WireGuard（2-5% CPU），要 L7 身份用 mTLS（5-15%）；迁移 PERMISSIVE → 观测 → STRICT | 先双收再 STRICT |
-| 54 | Policy 管"能不能出"、Gateway 管"从哪个 IP 出"、网格管"出的是否合规"，三层可叠加 | 三层三问 |
-| 55 | 第一坑是 CIDR 重叠（建集群先规划网段）；MCS ServiceExport → clusterset.local；跨公网必须加密 | 网段先规划，导出再互通 |
-| 56 | 双栈三策略 PreferDualStack 最稳；跨节点不通先查 forwarding；conntrack 利用率 >80% 告警 | sysctl 三件套 |
 
 ---
 
@@ -794,7 +649,7 @@ flowchart TD
 - [[05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现与 CoreDNS 调优]]
 - [[05-网络/01-K8s网络核心/14-coredns-architecture-principles.md|CoreDNS 架构与核心原理]]
 - [[05-网络/01-K8s网络核心/17-networkpolicy-deep-practice.md|NetworkPolicy 深度实践指南]]
-- [[05-网络/01-K8s网络核心/37-gateway-api-overview.md|Gateway API 配置]]
+- [[05-网络/01-K8s网络核心/37-gateway-api-overview.md|Gateway API配置]]
 - [[05-网络/01-K8s网络核心/19-network-encryption-mtls.md|网络加密与 mTLS]]
 - [[05-网络/01-K8s网络核心/30-egress-traffic-management.md|Egress 流量管理]]
 - [[05-网络/01-K8s网络核心/34-multi-cluster-networking.md|多集群网络互联]]

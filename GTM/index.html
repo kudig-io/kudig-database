@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KUDIG Database — 生产的每一站，都有答案</title>
-<meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库。4,750 篇文档、21 条知识线路、13 家云厂商，人类与 AI Agent 双读。">
+<meta name="description" content="面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库。4,445 篇文档、21 条知识线路、13 家云厂商，人类与 AI Agent 双读。">
 <meta property="og:title" content="KUDIG Database — Go to Market">
 <meta property="og:description" content="Kubernetes 生产运维全域知识库：FTA 故障树、FEBM 证据链、RAG 语料 pipeline。Apache 2.0。">
 <meta property="og:type" content="website">
-<meta property="og:image" content="og.png">
+<meta property="og:image" content="og.jpg">
 <meta property="og:locale" content="zh_CN">
 <meta name="theme-color" content="#0E0E0D">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%231C1A14'/%3E%3Crect y='30' width='64' height='3' fill='%23000'/%3E%3Ctext x='32' y='46' font-family='monospace' font-size='34' font-weight='700' fill='%23F5A81C' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
@@ -232,13 +232,14 @@ footer a:hover{text-decoration:underline}
   .ticker-track .half[aria-hidden="true"]{display:none}
 }
 </style>
+<noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
 </head>
 <body>
 <!--
 DIRECTION CONTRACT — seed e7e7f1b0 — split-flap departure board
 THESIS: 知识库即车站出发信息板；首屏整面机械翻牌墙，数据行即论点，拒绝居中英雄三件套。
 OWN-WORLD: 哑光黑 #0E0E0D 铝框板、琥珀 #F5A81C 翻牌字与发光 CTA、cream #E8E4DC 层压卡、警红 #E23B1E；Oswald + Chivo Mono + Noto Sans SC。
-STORY: 访客一眼读到规模（21 线路 / 4,750 篇 / 13 云厂商），相信「永远在运行、永远更新」，按场景换乘，进入知识库或 GitHub。
+STORY: 访客一眼读到规模（21 线路 / 4,445 篇 / 13 云厂商），相信「永远在运行、永远更新」，按场景换乘，进入知识库或 GitHub。
 FIRST VIEWPORT: 细 nav；翻牌墙占余下视口：标题行 KUDIG DATABASE、8 条真实域数据行、右下发光 CTA 进入知识库 + GITHUB 描边；底部琥珀 ticker。
 FORM: Solari 机械翻牌出发信息板（seed e7e7f1b0），构图基准 .impeccable/mocks/comp-a.png。
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
@@ -258,9 +259,10 @@ FINISH: unreviewed and undocumented is unfinished; this build ends with the fini
 <header class="hero" id="top">
   <div class="board-frame">
     <i class="rivet tl"></i><i class="rivet tr"></i><i class="rivet bl"></i><i class="rivet br"></i>
-    <h1 class="title-row tiles" id="titleRow" aria-label="KUDIG DATABASE"></h1>
-    <p class="board-tag">生产环境的 Kubernetes + AI Infrastructure 运维全域知识库 —— <b>4,750 篇 · 21 条知识线路 · 13 家云厂商</b></p>
+    <h1 class="title-row tiles" id="titleRow" aria-label="KUDIG DATABASE"><noscript>KUDIG DATABASE</noscript></h1>
+    <p class="board-tag">生产环境的 Kubernetes + AI Infrastructure 运维全域知识库 —— <b>4,445 篇 · 21 条知识线路 · 13 家云厂商</b></p>
     <div class="rows" id="boardRows" role="list" aria-label="知识线路出发信息"></div>
+    <noscript><p class="board-tag">21 条知识线路：01 集群基础 · 02 工作负载 · 03 清单模式 · 04 应用模式 · 05 网络 · 06 存储 · 07 数据库中间件 · 08 安全 · 09 可观测性 · 10 平台工程 · 11 发布变更 · 12 可靠性 · 13 生产运维 · 14 容器运行时 · 15 AI基础设施 · 16 专项技术 · 17 系统基础 · 18 云厂商 · 19 故障诊断 · 20 最佳实践 · 21 生态参考</p></noscript>
     <div class="cta-row">
       <a class="btn btn-primary" href="https://kudig-io.github.io/kudig-database/">进入知识库</a>
       <a class="btn btn-ghost" href="https://github.com/kudig-io/kudig-database" rel="noopener">GITHUB ★</a>
@@ -383,7 +385,7 @@ make corpus-stats          <span class="c"># 统计语料规模</span></pre>
   <p class="lede">开源即渠道，内容即护城河。GTM 不靠投放，靠<b>每一次生产事故后被检索到的那一次命中</b>。</p>
   <div class="timetable">
     <div class="trow"><span class="ph">PHASE 01</span><span class="what">开源发布<em>APACHE 2.0 · GITHUB 公开 · 采纳摩擦为零</em></span><span class="st dep">DEPARTED</span></div>
-    <div class="trow"><span class="ph">PHASE 02</span><span class="what">内容护城河<em>4,750 篇 · 21 域 · 13 云厂商 · K8s v1.25–v1.32+</em></span><span class="st ont">ON TIME</span></div>
+    <div class="trow"><span class="ph">PHASE 02</span><span class="what">内容护城河<em>4,445 篇 · 21 域 · 13 云厂商 · K8s v1.25–v1.32+</em></span><span class="st ont">ON TIME</span></div>
     <div class="trow"><span class="ph">PHASE 03</span><span class="what">Agent 生态<em>RAG 语料 pipeline · 百炼智能体集成 · QA 语料训练评估</em></span><span class="st ont">ON TIME</span></div>
     <div class="trow"><span class="ph">PHASE 04</span><span class="what">社区扩张<em>贡献者增长 · CNCF 生态对齐 · 云厂商知识共建</em></span><span class="st brd">BOARDING</span></div>
   </div>
@@ -409,8 +411,8 @@ make corpus-stats          <span class="c"># 统计语料规模</span></pre>
   var REDUCED = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   var LINES = [
-    ["01","集群基础",122],["02","工作负载",52],["03","清单模式",101],["04","应用模式",131],
-    ["05","网络",136],["06","存储",67],["07","数据库中间件",69],["08","安全",79],
+    ["01","集群基础",123],["02","工作负载",54],["03","清单模式",101],["04","应用模式",131],
+    ["05","网络",140],["06","存储",72],["07","数据库中间件",69],["08","安全",79],
     ["09","可观测性",86],["10","平台工程",234],["11","发布变更",75],["12","可靠性",82],
     ["13","生产运维",127],["14","容器运行时",61],["15","AI基础设施",176],["16","专项技术",61],
     ["17","系统基础",646],["18","云厂商",115],["19","故障诊断",491],["20","最佳实践",109],
@@ -494,10 +496,10 @@ make corpus-stats          <span class="c"># 统计语料规模</span></pre>
   var items =
     "<span>KUDIG DATABASE — 知识探索 · 智慧连接 · 持续更新</span>" +
     "<span class='rd'>SYSTEM STATUS: ALL SYSTEMS OPERATIONAL</span>" +
-    "<span>4,750 DOCS · 21 LINES · 13 CLOUDS</span>" +
+    "<span>4,445 DOCS · 21 LINES · 13 CLOUDS</span>" +
     "<span>FTA 16 TOP EVENTS · FEBM EVIDENCE CHAIN</span>" +
     "<span>LICENSE: APACHE 2.0</span>" +
-    "<span>UPDATED: 2026-08-25</span>";
+    "<span>UPDATED: 2026-09-05</span>";
   var track = document.getElementById("tickerTrack");
   track.innerHTML = '<span class="half">' + items + '</span><span class="half" aria-hidden="true">' + items + '</span>';
 

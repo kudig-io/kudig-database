@@ -80,14 +80,17 @@ jobs:
           cp 35-元数据/metrics/content-quality-latest.json \
              "35-元数据/metrics/content-quality-$DATE.json"
 
+      - name: Sync GTM landing page stats
+        run: make gtm-sync
+
       - name: Commit regenerated corpus and metrics (only when changed)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "19-故障诊断/10-QA语料/generated" "35-元数据/metrics"
+          git add "19-故障诊断/10-QA语料/generated" "35-元数据/metrics" GTM/index.html
           if git diff --cached --quiet; then
             echo "语料与指标均无变更，跳过提交"
           else
-            git commit -m "chore(corpus): nightly 语料重生成与质量指标更新"
+            git commit -m "chore(corpus): nightly 语料重生成与质量指标更新（含 GTM 页面数字同步）"
             git push
           fi

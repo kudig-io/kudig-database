@@ -21,7 +21,7 @@ static HTML/CSS/JS — GTM 页面为自包含静态页面，存放于根目录 `
 
 KUDIG Database 是面向生产环境的 Kubernetes + AI Infrastructure 运维全域知识库：
 - 既是人类可读的运维手册，也是 AI Agent 的 RAG 语料来源（双读架构）
-- ~4,750 篇活跃知识文档，21 个核心技术域 + 4 层 wiki 提炼知识（概念/实体/综合/技能）
+- ~4,445 篇活跃知识文档（数字由 `make gtm-sync` 按仓库实际计数维护），21 个核心技术域 + 4 层 wiki 提炼知识（概念/实体/综合/技能）
 - 附带 RAG 语料导出 pipeline，可直接供 AI Agent 检索增强
 - GTM 页面是该知识库面向外部世界的旗舰营销页面，同时承担获客、策略展示、社区招募三重职能
 
@@ -46,7 +46,7 @@ KUDIG Database 是面向生产环境的 Kubernetes + AI Infrastructure 运维全
 
 - GTM 页面必须为纯静态，无 JS 框架、无构建步骤
 - 页面语言：中文为主（仓库全中文），关键英文术语保留
-- 内容必须基于仓库真实数据（4,750 篇、21 域、13 云厂商等），不可虚构用户评价、客户案例或未承诺的功能
+- 内容必须基于仓库真实数据（4,445 篇、21 域、13 云厂商等，以 `31-脚本/maintenance/gtm-sync-stats.py` 统计为准），不可虚构用户评价、客户案例或未承诺的功能
 
 ## Brand Commitments
 
@@ -58,7 +58,7 @@ KUDIG Database 是面向生产环境的 Kubernetes + AI Infrastructure 运维全
 
 - README.md：完整项目概览、核心统计表、知识架构图、生产就绪入口表
 - 30-站点/：Astro 站点（既有视觉参考）
-- 仓库本身即产品：4,750 篇文档、故障诊断域 491 篇、系统基础域 646 篇
+- 仓库本身即产品：4,445 篇文档、故障诊断域 491 篇、系统基础域 646 篇
 - CI badges：Deploy to GitHub Pages、Quality Check
 - 无：付费客户案例、用户评价、benchmark 数据（不可虚构）
 
@@ -66,6 +66,6 @@ KUDIG Database 是面向生产环境的 Kubernetes + AI Infrastructure 运维全
 
 1. 双读架构是核心叙事：人类手册 + AI Agent 语料，一页之内必须让两者都可见
 2. 结构化排障引擎是差异化证明：FTA/FEBM 必须被演示而非仅声称
-3. 规模即证据：4,750 篇 / 21 域 / 13 云厂商的数字本身就是说服力
+3. 规模即证据：4,445 篇 / 21 域 / 13 云厂商的数字本身就是说服力
 4. 开源即渠道：Apache 2.0 + GitHub 生态是采纳摩擦为零的路径
 5. 生产就绪导向：所有入口指向可执行的 Runbook，非概念罗列
