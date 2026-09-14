@@ -3,34 +3,64 @@
     {
       "name": "kubernetes",
       "repo": "kubernetes/kubernetes",
-      "keywords": ["kubernetes", "k8s", "apiserver", "kubelet", "kube-proxy", "controller-manager", "scheduler", "etcd"]
+      "keywords": [
+        "kubernetes",
+        "k8s",
+        "apiserver",
+        "kubelet",
+        "kube-proxy",
+        "controller-manager",
+        "scheduler",
+        "etcd"
+      ]
     },
     {
       "name": "cilium",
       "repo": "cilium/cilium",
-      "keywords": ["cilium"]
+      "keywords": [
+        "cilium"
+      ]
     },
     {
       "name": "istio",
       "repo": "istio/istio",
-      "keywords": ["istio", "envoy"]
+      "keywords": [
+        "istio",
+        "envoy"
+      ]
     },
     {
       "name": "prometheus",
       "repo": "prometheus/prometheus",
-      "keywords": ["prometheus", "grafana"]
+      "keywords": [
+        "prometheus",
+        "grafana"
+      ]
     },
     {
       "name": "argo-cd",
       "repo": "argoproj/argo-cd",
-      "keywords": ["argocd", "argo-cd", "argo"]
+      "keywords": [
+        "argocd",
+        "argo-cd",
+        "argo"
+      ]
     },
     {
       "name": "terway",
       "repo": "AliyunContainerService/terway",
-      "keywords": ["terway"]
+      "keywords": [
+        "terway"
+      ]
     }
   ],
-  "state": {},
+  "state": {
+    "kubernetes/kubernetes": "v1.37.0",
+    "cilium/cilium": "v1.20.1",
+    "istio/istio": "1.31.0",
+    "prometheus/prometheus": "v3.14.0",
+    "argoproj/argo-cd": "v3.5.2",
+    "AliyunContainerService/terway": "v1.17.6"
+  },
   "_说明": "state 由 version-watch workflow 维护（记录各组件上次见到的 release tag）；keywords 用于在 23-实体/26-技能 等目录检索受影响页面。"
 }
