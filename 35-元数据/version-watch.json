@@ -56,10 +56,10 @@
   ],
   "state": {
     "kubernetes/kubernetes": "v1.37.0",
-    "cilium/cilium": "v1.20.1",
+    "cilium/cilium": "v1.20.2",
     "istio/istio": "1.31.0",
     "prometheus/prometheus": "v3.14.0",
-    "argoproj/argo-cd": "v3.5.2",
+    "argoproj/argo-cd": "v3.5.3",
     "AliyunContainerService/terway": "v1.17.6"
   },
   "_说明": "state 由 version-watch workflow 维护（记录各组件上次见到的 release tag）；keywords 用于在 23-实体/26-技能 等目录检索受影响页面。"
