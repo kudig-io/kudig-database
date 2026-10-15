@@ -191,7 +191,7 @@ kubectl uncordon <node-name>
 - [[23-实体/02-K8s核心组件/container-runtime.md|Container Runtime]]
 - [[22-概念/07-调度与资源/resource-management.md|Resource Management]]
 - [[26-技能/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[26-技能/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[26-技能/03-节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
 

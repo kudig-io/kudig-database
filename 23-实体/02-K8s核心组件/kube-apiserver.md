@@ -189,7 +189,7 @@ kubectl get mutatingwebhookconfigurations -o jsonpath='{range .items[*]}{.metada
 - [[etcd|etcd]]
 - [[22-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
 - [[operator-pattern|Operator Pattern]]
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 
 
 <!-- risk-assessed -->

@@ -608,14 +608,152 @@ confidence: 0.90
 tags: [ingress, nginx, controller, pending, gateway]
 ```
 
+## Domain: GPU
+
+```yaml
+io_pair_id: IODIAG-GPU-0001
+skill_ref: SKILL-15
+scenario: GPU Pod 调度 Pending - 设备插件未注册
+severity: high
+command: kubectl describe node gpu-node-01
+output_pattern: |
+  Capacity:
+    nvidia.com/gpu: 0
+  Allocatable:
+    nvidia.com/gpu: 0
+diagnosis:
+  - GPU 节点未上报 nvidia.com/gpu 资源，设备插件未注册或已崩溃
+  - GPU Pod 因资源不满足处于 Pending
+  - 需排查 nvidia-device-plugin Pod 与驱动状态
+action:
+  - kubectl get pods -n gpu-operator -o wide
+  - kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=50
+  - ssh gpu-node-01 'nvidia-smi'
+  - kubectl get node gpu-node-01 -o jsonpath='{.status.capacity}' | grep -c gpu
+confidence: 0.90
+tags: [gpu, nvidia, device-plugin, pending, scheduling]
+```
+
+```yaml
+io_pair_id: IODIAG-GPU-0002
+skill_ref: SKILL-15
+scenario: GPU 利用率异常 - DCGM 指标缺失
+severity: medium
+command: kubectl get --raw /api/v1/nodes/gpu-node-01/proxy/metrics | grep DCGM_FI_DEV_GPU_UTIL
+output_pattern: |
+  (空输出，无任何 DCGM_FI_DEV_GPU_UTIL 指标行)
+diagnosis:
+  - dcgm-exporter 未运行或指标端口未暴露
+  - GPU 监控链路断裂，无法观测利用率/显存/温度
+  - GPU 实际状态未知，可能存在空跑或显存泄漏
+action:
+  - kubectl get pods -A | grep dcgm-exporter
+  - kubectl logs -n monitoring -l app=dcgm-exporter --tail=30
+  - kubectl get servicemonitor -n monitoring | grep dcgm
+  - ssh gpu-node-01 'nvidia-smi' 验证驱动层是否可见
+confidence: 0.85
+tags: [gpu, dcgm, metrics, observability, utilization]
+```
+
+## Domain: HELM
+
+```yaml
+io_pair_id: IODIAG-HELM-0001
+skill_ref: SKILL-16
+scenario: Helm Release 升级卡死 - 锁未释放
+severity: high
+command: helm upgrade myapp ./chart -n production
+output_pattern: |
+  UPGRADE FAILED: another operation (install/upgrade/rollback) is in progress
+diagnosis:
+  - 上一次 Helm 操作异常中断，release 锁未释放
+  - Helm 3 的 secret 后端仍持有 pending-upgrade 状态
+  - 需回滚或清除挂起的 revision 后重试
+action:
+  - helm history myapp -n production
+  - helm rollback myapp <上一个稳定revision> -n production
+  - kubectl get secret -n production -l owner=helm,name=myapp | grep pending
+  - helm upgrade myapp ./chart -n production --retry
+confidence: 0.90
+tags: [helm, upgrade, lock, pending-upgrade, release]
+```
+
+```yaml
+io_pair_id: IODIAG-HELM-0002
+skill_ref: SKILL-16
+scenario: Helm 安装失败 - 镜像仓库凭据缺失
+severity: medium
+command: helm install myapp ./chart -n production
+output_pattern: |
+  Error: INSTALLATION FAILED: create secret: Pull "registry.example.com/myapp:1.2.3" denied
+diagnosis:
+  - 目标命名空间缺少 registry 的 imagePullSecrets
+  - Helm 创建的 Pod 无法拉取私有镜像
+  - 需要在 chart values 或 ServiceAccount 上配置拉取凭据
+action:
+  - kubectl get secret -n production | grep regcred
+  - kubectl create secret docker-registry regcred --docker-server=registry.example.com --docker-username=$USER --docker-password=$PASS -n production
+  - helm upgrade myapp ./chart -n production --set imagePullSecrets[0].name=regcred
+confidence: 0.90
+tags: [helm, imagepullsecret, registry, install-failed]
+```
+
+## Domain: WEBHOOK
+
+```yaml
+io_pair_id: IODIAG-WEBHOOK-0001
+skill_ref: SKILL-17
+scenario: Pod 创建被 ValidatingWebhook 阻塞
+severity: high
+command: kubectl apply -f deployment.yaml -n production
+output_pattern: |
+  Error from server (InternalError): error when creating "deployment.yaml":
+  Internal error occurred: failed calling webhook "validate.policy.svc":
+  connection refused
+diagnosis:
+  - 准入控制器（如 Gatekeeper/Kyverno）服务不可达
+  - webhook 配置仍指向已下线/崩溃的策略服务
+  - 该 API 版本的所有写操作被阻塞，影响面大
+action:
+  - kubectl get validatingwebhookconfigurations
+  - kubectl get pods -n gatekeeper-system
+  - kubectl logs -n gatekeeper-system -l gatekeeper.sh/system=yes --tail=50
+  - 临时缓解：给 webhook 配置加 failurePolicy: Ignore 或删除失效配置（需评审）
+confidence: 0.90
+tags: [webhook, admission, gatekeeper, kyverno, blocked]
+```
+
+```yaml
+io_pair_id: IODIAG-WEBHOOK-0002
+skill_ref: SKILL-17
+scenario: MutatingWebhook 证书过期导致注入失败
+severity: medium
+command: kubectl get pods -n production
+output_pattern: |
+  NAME                     READY   STATUS             RESTARTS   AGE
+  myapp-xxx                0/1     CreateContainerError 0        3m
+  (events 显示: failed to call webhook: x509: certificate has expired)
+diagnosis:
+  - 自签的 webhook CA/服务证书过期，mutating webhook 注入 sidecar 失败
+  - 常见于 cert-manager 未接管 webhook 证书的组件
+  - 需轮换证书并确认自动续期机制
+action:
+  - kubectl get secret -n my-ns webhook-cert -o jsonpath='{.data}' | head
+  - openssl x509 -in <(kubectl get secret webhook-cert -n my-ns -o jsonpath='{.data.tls\.crt}' | base64 -d) -noout -dates
+  - 用 cert-manager 签发新证书或手动轮换
+  - kubectl rollout restart deployment -n my-ns webhook-server
+confidence: 0.85
+tags: [webhook, certificate, x509, mutating, cert-manager]
+```
+
 ## 统计
 
 | 指标 | 数值 |
 |------|------|
-| 手工种子 I-O 对总数 | 22 |
-| 覆盖 Domain | 10 |
-| 覆盖 Severity | critical: 5, high: 13, medium: 4 |
-| 关联 Skills | 9 个 |
+| 手工种子 I-O 对总数 | 28 |
+| 覆盖 Domain | 13 |
+| 覆盖 Severity | critical: 5, high: 16, medium: 7 |
+| 关联 Skills | 11 个 |
 
 
 <!-- risk-assessed -->

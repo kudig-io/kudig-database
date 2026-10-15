@@ -126,7 +126,7 @@ For zero-downtime updates: set `maxUnavailable: 0` with `maxSurge: 1`.
 - [[02-工作负载/01-核心工作负载/10-workload-controllers-overview.md|工作负载控制器详解]] — Cross-reference
 - [[02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|Pod 生命周期事件表]] — Cross-reference
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[22-概念/11-交叉分析/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
 - [[22-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
 - [[22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference

@@ -118,7 +118,7 @@ API Server → etcd（静态加密）→ kubelet 内存 → 节点 tmpfs → 容
 
 - [[22-概念/11-交叉分析/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]]
 - [[37-归档/consolidation/consolidation-2026-05-21.md|consolidation-2026-05-21]]
 
 

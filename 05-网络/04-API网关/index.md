@@ -7,7 +7,7 @@ tags:
 - index
 tier: supporting
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: '2026-10-14'
 ---
 
 
@@ -32,4 +32,5 @@ last_updated: 2026-07
 - [[05-网络/04-API网关/13-api-gateway-performance-benchmarks.md|Api Gateway Performance Benchmarks]]
 - [[05-网络/04-API网关/14-api-gateway-production-operations.md|Api Gateway Production Operations]]
 - [[05-网络/04-API网关/15-envoy-gateway-enterprise-guide.md|Envoy Gateway Enterprise Guide]]
+- [[05-网络/04-API网关/16-gateway-api-implementation-comparison.md|Gateway Api Implementation Comparison]]
 

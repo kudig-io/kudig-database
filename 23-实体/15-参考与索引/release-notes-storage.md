@@ -15,7 +15,7 @@ tags:
 - rag
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -49,8 +49,8 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| Longhorn | 19 | v1.11 | v1.7 | 云原生块存储 |
-| Rook | 29 | v1.19 | v1.4 | Ceph 存储编排 |
+| Longhorn | 19 | v1.13 | v1.7 | 云原生块存储 |
+| Rook | 29 | v1.21 | v1.4 | Ceph 存储编排 |
 | Velero | 28 | v1.18 | v1.18 | 备份与灾难恢复 |
 
 ---
@@ -60,7 +60,7 @@ prerequisites:
 ### Longhorn
 
 - **实体页面**: [[longhorn|Longhorn]]
-- **最新版本**: v1.11
+- **最新版本**: v1.13
 - **发布说明目录**: `生态参考/_archived-release-notes/storage/longhorn/`
 - **版本覆盖**: v0.1 → v1.11（19 个版本）
 - **Breaking Changes 提醒**:
@@ -70,7 +70,7 @@ prerequisites:
 ### Rook
 
 - **实体页面**: [[rook|Rook]]
-- **最新版本**: v1.19
+- **最新版本**: v1.21
 - **发布说明目录**: `生态参考/_archived-release-notes/storage/rook/`
 - **版本覆盖**: v0.1 → v1.19（29 个版本）
 - **Breaking Changes 提醒**:
@@ -80,7 +80,7 @@ prerequisites:
 ### Velero
 
 - **实体页面**: Velero
-- **最新版本**: v1.18
+- **最新版本**: v1.18（v1.18.4）
 - **发布说明目录**: `生态参考/_archived-release-notes/storage/velero/`
 - **版本覆盖**: v0.1 → v1.18（28 个版本）
 - **Breaking Changes 提醒**:

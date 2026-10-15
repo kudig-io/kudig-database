@@ -120,11 +120,11 @@ prerequisites:
 - [[pod-lifecycle]] — Pod Lifecycle
 - [[22-概念/01-核心架构/declarative-api.md|declarative-api]] — Declarative API
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]]
+- [[22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]]
 - [[23-实体/15-参考与索引/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]]
 
 - [[17-系统基础/05-速查卡/k8s.md|k8s]]
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 - [[23-实体/15-参考与索引/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
 
 

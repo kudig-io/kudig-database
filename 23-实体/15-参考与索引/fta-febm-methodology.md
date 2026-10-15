@@ -217,7 +217,7 @@ fault_trees:
 
 ## Related
 
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Structural Troubleshooting Framework
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]] — Structural Troubleshooting Framework
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Production Troubleshooting Playbook
 
 - [[README]]

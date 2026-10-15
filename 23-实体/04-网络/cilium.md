@@ -292,7 +292,7 @@ spec:
 - [[22-概念/11-交叉分析/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[22-概念/12-研究/service-mesh-evolution.md|服务网格演进]] — Cross-reference
 - [[22-概念/03-网络/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]] — Cross-reference
 - [[22-概念/03-网络/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]] — Cross-reference
 - [[26-技能/05-网络/networkpolicy/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
 - [[26-技能/05-网络/networkpolicy/networkpolicy-fta.md|NetworkPolicy 异常故障树分析]] — Cross-reference

@@ -16,7 +16,7 @@ tags:
 - rbac
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -81,7 +81,8 @@ prerequisites:
 | v1.33 | 379 KB | 持续演进 |
 | v1.34 | 378 KB | 持续演进 |
 | v1.35 | 273 KB | 持续演进 |
-| v1.36 | 146 KB | 最新版本 |
+| v1.36 | 146 KB | 持续演进 |
+| v1.37 | 待归档 | 最新版本（Garhwal，2026-08-26 发布，最新 patch v1.37.1） |
 
 ## RELEASE-NOTES 索引
 

@@ -56,4 +56,6 @@ last_updated: 2026-07
 - [[15-AI基础设施/01-基础设施/37-agent-sandbox-security.md|Agent Sandbox Security]]
 - [[15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md|Ai Ml Ops Runbook]]
 - [[15-AI基础设施/01-基础设施/39-kubeflow-ai-platform-guide.md|Kubeflow Ai Platform Guide]]
+- [[15-AI基础设施/01-基础设施/40-kuberay-production-guide.md|KubeRay 生产实践指南]]
+- [[15-AI基础设施/01-基础设施/42-gpu-sharing-partitioning-guide.md|GPU 共享与切分技术全解]]
 

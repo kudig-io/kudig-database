@@ -256,7 +256,7 @@ spec:
 - [[23-实体/15-参考与索引/k8s-structured-troubleshooting.md|结构化排障方法论：配置优先、全组件排障指南]] — Cross-reference
 - [[23-实体/15-参考与索引/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[22-概念/01-核心架构/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
 - [[22-概念/12-研究/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
 - [[22-概念/03-网络/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference

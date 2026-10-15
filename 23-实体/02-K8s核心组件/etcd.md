@@ -252,7 +252,7 @@ groups:
 - [[22-概念/08-可靠性与运维/high-availability-patterns.md|High Availability Patterns]]
 - [[26-技能/02-控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
 - [[23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
-- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]]
+- [[22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]]
 
 - etcd 深度解析
 - 19-etcd-operations
@@ -305,7 +305,7 @@ groups:
 - [[22-概念/11-交叉分析/etcd × 高可用模式.md|etcd × 高可用模式]] — Cross-reference
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]] — Cross-reference
 - [[22-概念/08-可靠性与运维/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[22-概念/11-交叉分析/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
 - [[22-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
 - [[22-概念/05-安全/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Cross-reference
@@ -318,7 +318,7 @@ groups:
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
 - [[22-概念/01-核心架构/eventual-consistency.md|Eventual Consistency in Kubernetes]] — Cross-reference
 - [[22-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Cross-reference
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]] — Cross-reference
 - [[22-概念/03-网络/tcp-udp-protocol-stack.md|TCP/UDP Protocol Stack]] — Cross-reference
 - [[26-技能/04-工作负载/pod/培训/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
 - [[26-技能/02-控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference

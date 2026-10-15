@@ -16,7 +16,7 @@ tags:
 - webhook
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -49,15 +49,17 @@ prerequisites:
 
 | 范围 | 文件类型 | 数量 | 说明 |
 |------|----------|------|------|
-| v1.2 → v1.36 | CHANGELOG | 35 | 正式变更日志 |
+| v1.2 → v1.37 | CHANGELOG | 36 | 正式变更日志 |
 | v0.19 → v1.1 | RELEASE-NOTES | 20 | 早期发布说明 |
 
 ---
 
 ## 最新版本
 
-- **最新版本**: v1.1 (RELEASE-NOTES) / v1.36 (CHANGELOG)
+- **最新版本**: v1.37 (Garhwal，2026-08-26 发布，最新 patch v1.37.1)
 - **发布说明目录**: `生态参考/_archived-release-notes/kubernetes/`
+- **v1.37 升级实操**: [[01-集群基础/06-升级路径/05-kubernetes-v1.37-upgrade-guide.md|Kubernetes v1.37 升级实操指南]]
+- **v1.37 深度研究**: [[25-研究/04-可靠性与运维/kubernetes-v1.37-release-research.md|Kubernetes v1.37 Release 深度研究]]
 
 ---
 
@@ -67,7 +69,8 @@ prerequisites:
 
 | 版本 | 关键 Breaking Changes |
 |------|----------------------|
-| v1.36 | 最新版本，持续关注弃用 API 移除 |
+| v1.37 | ipvs 模式废弃、静态 Pod 禁止 API 引用、SELinux 挂载变更、metrics.k8s.io GA |
+| v1.36 | 持续关注弃用 API 移除 |
 | v1.35 | API 弃用和移除策略更新 |
 | v1.34 | 安全上下文默认值变更 |
 | v1.32 | Pod 安全准入控制器默认策略收紧 |
@@ -89,7 +92,7 @@ prerequisites:
 | 规模优化 | v1.16 → v1.20 | Topology Manager、Server-Side Apply |
 | 安全加固 | v1.21 → v1.25 | PSP 移除、SeccompDefault、Pod 安全准入 |
 | 云原生深化 | v1.26 → v1.30 | 冻结旧 API、Sidecar 容器、用户命名空间 |
-| 最新迭代 | v1.31 → v1.36 | 持续性能优化和安全增强 |
+| 最新迭代 | v1.31 → v1.37 | 持续性能优化和安全增强 |
 
 ---
 

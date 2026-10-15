@@ -14,7 +14,7 @@ tags:
 - helm
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -50,9 +50,9 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| Argo CD | 40 | v3.3 | v2.4 | GitOps 持续交付 |
-| Flux | 51 | v2.8 | v2.5 | GitOps 工具集 |
-| Tekton | 80 | v1.11 | v1.11 | 云原生 CI/CD 引擎 |
+| Argo CD | 40 | v3.5 | v3.5.4 | GitOps 持续交付 |
+| Flux | 51 | v2.9 | v2.5 | GitOps 工具集 |
+| Tekton | 80 | v1.17 | v1.11 | 云原生 CI/CD 引擎 |
 
 ---
 
@@ -60,17 +60,18 @@ prerequisites:
 
 ### Argo CD
 
-- **最新版本**: v3.3
+- **最新版本**: v3.5（v3.5.5，2026-10-12）
 - **发布说明目录**: `生态参考/_archived-release-notes/cicd-gitops/argo-cd/`
 - **版本覆盖**: v0.1 → v3.3（40 个版本）
 - **Breaking Changes 提醒**:
+  - v3.5.4（2026-10-06 协调安全发布，**必须升级**）: 修复 4 个 CRITICAL（Kustomize remote ref / Helm config home 在 repo-server 执行命令、Jsonnet 任意文件读取、PreDelete/PostDelete Hook 绕过 AppProject）+ 2 HIGH + 2 MODERATE；伴随破坏性变更——Kustomize 渲染 Helm 不再使用 `helmGlobals.configHome`、超 4 MiB 的 OCI manifest 被拒绝
   - v2.4: ApplicationSet 控制器合并与 API 变更
-- **升级要点**: v2.x 引入 ApplicationSet 和多集群支持增强
+- **升级要点**: 详见 [[23-实体/08-交付与制品/argocd.md|ArgoCD 实体页]] 版本与安全通告章节
 
 ### Flux
 
 - **实体页面**: [[flux|Flux]]
-- **最新版本**: v2.8
+- **最新版本**: v2.9（v2.9.6）
 - **发布说明目录**: `生态参考/_archived-release-notes/cicd-gitops/flux/`
 - **版本覆盖**: v0.1 → v2.8（51 个版本）
 - **Breaking Changes 提醒**:
@@ -80,7 +81,7 @@ prerequisites:
 
 ### Tekton
 
-- **最新版本**: v1.11
+- **最新版本**: v1.17（v1.17.0）
 - **发布说明目录**: `生态参考/_archived-release-notes/cicd-gitops/tekton/`
 - **版本覆盖**: v0.1 → v1.11（80 个版本）
 - **Breaking Changes 提醒**:
@@ -94,6 +95,7 @@ prerequisites:
 
 | 版本 | 项目 | 变更摘要 |
 |------|------|----------|
+| v3.5.4 | Argo CD | 协调安全发布（8 个漏洞修复）+ Kustomize/Helm 渲染行为变更 |
 | v2.4 | Argo CD | ApplicationSet 控制器合并 |
 | v2.5 | Flux | Source API 和 Kustomization 控制器变更 |
 | v1.11 | Tekton | Task/Pipeline API 字段变更 |

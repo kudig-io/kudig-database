@@ -33,7 +33,7 @@ prerequisites:
 - prometheus-basics
 - etcd-basics
 relationships:
-- target: '[[22-概念/01-核心架构/etcd Operational Reference.md]]'
+- target: '[[22-概念/01-核心架构/etcd-operational-reference.md]]'
   type: uses
 - target: '[[26-技能/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md]]'
   type: uses
@@ -122,7 +122,7 @@ status: reviewed
 
 - FTA Methodology and Core Principles.md|FTA 方法论与核心原则]]
 - [[29-文档/indexes/INDEX.md|Index]]|Kubernetes FTA Top Events Index]].md|Kubernetes FTA 顶事件索引]]
-- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]].md|etcd 运维参考]]
+- [[22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]].md|etcd 运维参考]]
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|生产排障手册]]
 
 > *This page synthesizes patterns across multiple sources and domains.* ^[inferred]

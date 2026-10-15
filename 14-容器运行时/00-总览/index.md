@@ -11,3 +11,4 @@ created: '2026-07-25'
 ## 文档
 
 - [[14-容器运行时/00-总览/01-production-readiness-operations-guide.md|99-production-readiness-operations-guide]]
+- [[14-容器运行时/00-总览/02-immutable-container-os-comparison.md|02-immutable-container-os-comparison]]

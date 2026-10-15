@@ -78,7 +78,7 @@ cross_refs:
 # 03 - CNI 网络插件故障排查 (CNI Network Plugin Troubleshooting)
 difficulty: "advanced"
 related_docs:
-  - path: "../05-网络/01-K8s网络核心/02-cni-architecture-fundamentals.md"
+  - path: "../05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md"
     type: "depth"
     desc: "CNI 架构与核心原理"
   - path: "../19-故障诊断/06-FTA故障树/list/dns-fta.md"

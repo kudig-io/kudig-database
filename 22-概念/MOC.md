@@ -97,7 +97,7 @@ status: reviewed
 - K8s 问题分布与 MTTR 基准 — 问题统计
 - [[23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Fault Distribution and MTTR.md|K8s 问题分布 (EN)]] — 英文版
 - [[17-系统基础/06-知识字典/operations/production-troubleshooting-playbook.md|生产故障排查手册]] — 综合排查
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|结构化故障排查框架]] — 方法论
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|结构化故障排查框架]] — 方法论
 
 ---
 

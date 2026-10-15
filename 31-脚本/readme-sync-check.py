@@ -47,7 +47,8 @@ def check_root_readme(problems):
     for d in sorted(actual - TREE_EXEMPT):
         if not covered(d):
             problems.append(f"[根README] 实际存在但目录图未列出: {d}/")
-    for d in sorted(declared - actual):
+    # TREE_EXEMPT 目录被 .gitignore 忽略，检出环境（含 CI）中不存在属预期
+    for d in sorted(declared - actual - TREE_EXEMPT):
         problems.append(f"[根README] 目录图列出但实际不存在: {d}/")
 
 
@@ -69,6 +70,9 @@ def check_domain_readmes(problems):
             for m in WIKI.finditer(masked):
                 target = re.split(r'[|#]', m.group(1).replace('\\|', '|'))[0].strip()
                 if not target or target.startswith('http'):
+                    continue
+                # 指向 .gitignore 目录（如 33-源码/README.md）的链接按本地资料处理
+                if target.split('/', 1)[0] in TREE_EXEMPT:
                     continue
                 # 只强校验带路径的链接（含 / 的），纯 stem 链接由 quality.yml 校验
                 if '/' not in target:

@@ -150,7 +150,7 @@ For Java applications in containers:
 - [[22-概念/07-调度与资源/resource-management.md|Resource Management]]
 - [[26-技能/04-工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 - [[26-技能/08-可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 
 

@@ -68,6 +68,7 @@ authors:
 
 - [[15-AI基础设施/05-K8s-AI基础设施/07-training-operators-volcano-mpi|Volcano 批调度器]] — Gang Scheduling、队列管理、公平共享策略与分布式训练任务编排
 - [[15-AI基础设施/05-K8s-AI基础设施/06-kuberay-distributed-computing|KubeRay 分布式训练]] — KubeRay Operator、RayJob/RayCluster CRD、Ray Train 与 GPU 集群弹性训练
+- [[15-AI基础设施/05-K8s-AI基础设施/22-kueue-vs-volcano-batch-scheduling.md|Kueue vs Volcano 批调度深度对比]] — 两大批调度器架构与能力矩阵、ClusterQueue/cohort 与 vcjob/podgroup 完整配置、选型决策树
 - [[15-AI基础设施/05-K8s-AI基础设施/11-finetuning-peft-lora-deepspeed|微调基础设施]] — LoRA/QLoRA 微调管道、数据集管理、训练任务模板与模型评估流水线
 
 ## 数据与存储

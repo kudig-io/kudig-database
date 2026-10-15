@@ -126,7 +126,7 @@ KUDIG covers Kubernetes v1.25 through v1.32, including:
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]]
+- [[22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]]
 - [[23-实体/15-参考与索引/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
 
 

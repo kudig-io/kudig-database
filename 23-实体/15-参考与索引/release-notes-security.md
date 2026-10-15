@@ -16,7 +16,7 @@ tags:
 - agent
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -51,11 +51,11 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| cert-manager | 37 | v1.20 | v1.5 | TLS 证书自动化管理 |
-| Falco | 43 | v0.43 | v0.43 | 运行时威胁检测 |
-| Gatekeeper | 24 | v3.22 | v3.22 | 准入策略控制 |
-| OPA | 86 | v1.15 | v1.8 | 通用策略引擎 |
-| Trivy | 28 | v0.69 | v0.23 | 容器安全扫描 |
+| cert-manager | 37 | v1.21 | v1.5 | TLS 证书自动化管理 |
+| Falco | 43 | v0.45 | v0.43 | 运行时威胁检测 |
+| Gatekeeper | 24 | v3.23 | v3.22 | 准入策略控制 |
+| OPA | 86 | v1.21 | v1.8 | 通用策略引擎 |
+| Trivy | 28 | v0.75 | v0.23 | 容器安全扫描 |
 
 ---
 
@@ -64,7 +64,7 @@ prerequisites:
 ### cert-manager
 
 - **实体页面**: [[cert-manager|cert-manager]]
-- **最新版本**: v1.20
+- **最新版本**: v1.21（v1.21.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/security/cert-manager/`
 - **版本覆盖**: v0.1 → v1.20（37 个版本）
 - **Breaking Changes 提醒**:
@@ -74,7 +74,7 @@ prerequisites:
 ### Falco
 
 - **实体页面**: [[falco|Falco]]
-- **最新版本**: v0.43
+- **最新版本**: v0.45
 - **发布说明目录**: `生态参考/_archived-release-notes/security/falco/`
 - **版本覆盖**: v0.1 → v0.43（43 个版本）
 - **Breaking Changes 提醒**:
@@ -84,7 +84,7 @@ prerequisites:
 ### Gatekeeper
 
 - **实体页面**: Gatekeeper
-- **最新版本**: v3.22
+- **最新版本**: v3.23（v3.23.1）
 - **发布说明目录**: `生态参考/_archived-release-notes/security/gatekeeper/`
 - **版本覆盖**: v0.1 → v3.22（24 个版本）
 - **Breaking Changes 提醒**:
@@ -94,7 +94,7 @@ prerequisites:
 ### OPA
 
 - **实体页面**: [[opa|OPA]]
-- **最新版本**: v1.15
+- **最新版本**: v1.21（v1.21.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/security/opa/`
 - **版本覆盖**: v0.1 → v1.15（86 个版本）
 - **Breaking Changes 提醒**:
@@ -104,7 +104,7 @@ prerequisites:
 ### Trivy
 
 - **实体页面**: [[23-实体/06-安全/trivy.md|Trivy]]
-- **最新版本**: v0.69
+- **最新版本**: v0.75
 - **发布说明目录**: `生态参考/_archived-release-notes/security/trivy/`
 - **版本覆盖**: v0.1 → v0.69（28 个版本）
 - **Breaking Changes 提醒**:

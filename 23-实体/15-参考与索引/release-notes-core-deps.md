@@ -14,7 +14,7 @@ tags:
 - runc
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -48,11 +48,11 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| containerd | 13 | v2.2 | v1.3 | 容器运行时 |
+| containerd | 13 | v2.4 | v1.3 | 容器运行时 |
 | CoreDNS | 16 | v1.14 | v1.13 | 集群 DNS 服务 |
-| CRI-O | 32 | v1.35 | — | OCI 容器运行时 |
-| etcd | 15 | v3.6 | v3.6 | 分布式键值存储 |
-| runc | 7 | v1.4 | — | OCI 运行时规范实现 |
+| CRI-O | 32 | v1.37 | — | OCI 容器运行时 |
+| etcd | 15 | v3.7 | v3.6 | 分布式键值存储 |
+| runc | 7 | v1.5 | — | OCI 运行时规范实现 |
 
 ---
 
@@ -61,7 +61,7 @@ prerequisites:
 ### containerd
 
 - **实体页面**: [[containerd|containerd]]
-- **最新版本**: v2.2
+- **最新版本**: v2.4（v2.4.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/core-deps/containerd/`
 - **版本覆盖**: v0.1 → v2.2（13 个版本）
 - **Breaking Changes 提醒**:
@@ -72,7 +72,7 @@ prerequisites:
 ### CoreDNS
 
 - **实体页面**: [[coredns|CoreDNS]]
-- **最新版本**: v1.14
+- **最新版本**: v1.14（v1.14.7）
 - **发布说明目录**: `生态参考/_archived-release-notes/core-deps/coredns/`
 - **版本覆盖**: v0.1 → v1.14（16 个版本）
 - **Breaking Changes 提醒**:
@@ -82,15 +82,15 @@ prerequisites:
 ### CRI-O
 
 - **实体页面**: [[cri-o|CRI-O]]
-- **最新版本**: v1.35
+- **最新版本**: v1.37（v1.37.2，与 K8s 1.37 对齐）
 - **发布说明目录**: `生态参考/_archived-release-notes/core-deps/cri-o/`
 - **版本覆盖**: v0.1 → v1.35（32 个版本）
-- **升级要点**: 版本号与 Kubernetes 版本对齐（v1.35 → K8s 1.35）
+- **升级要点**: 版本号与 Kubernetes 版本对齐（v1.37 → K8s 1.37）
 
 ### etcd
 
 - **实体页面**: [[etcd|etcd]]
-- **最新版本**: v3.6
+- **最新版本**: v3.7（v3.7.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/core-deps/etcd/`
 - **版本覆盖**: v0.1 → v3.6（15 个版本）
 - **Breaking Changes 提醒**:
@@ -99,7 +99,7 @@ prerequisites:
 
 ### runc
 
-- **最新版本**: v1.4
+- **最新版本**: v1.5（v1.5.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/core-deps/runc/`
 - **版本覆盖**: v0.1 → v1.4（7 个版本）
 - **升级要点**: OCI 运行时规范参考实现，安全修复优先

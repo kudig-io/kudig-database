@@ -78,7 +78,7 @@ When receiving your first troubleshooting ticket:
 1. **Read the full ticket**: Understand symptom, impact, timeline
 2. **Classify severity**: P0 (service down), P1 (degraded), P2 (minor)
 3. **Gather context**: Cluster ID, namespace, affected resources, recent changes
-4. **Map to FTA**: Use the [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]] to identify diagnostic path
+4. **Map to FTA**: Use the [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]] to identify diagnostic path
 5. **Start diagnosis**: Follow the ranked diagnostic steps from the matching skill card
 6. **Communicate**: Update ticket with findings every 15 minutes for P0/P1
 
@@ -163,7 +163,7 @@ spec:
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 - [[19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[26-技能/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]].md|Kubernetes Diagnostic Skills Overview]]
 - [[26-技能/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 

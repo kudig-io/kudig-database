@@ -16,7 +16,7 @@ tags:
 - gateway
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -53,12 +53,12 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| Calico | 35 | v3.31 | v3.27 | 网络策略与 CNI |
-| Cilium | 24 | v1.19 | v1.3 | eBPF 网络与安全 |
+| Calico | 35 | v3.33 | v3.27 | 网络策略与 CNI |
+| Cilium | 24 | v1.20 | v1.3 | eBPF 网络与安全 |
 | CNI Plugins | 14 | v1.9 | v1.0 | 标准 CNI 插件集 |
-| Envoy | 38 | v1.37 | — | 边缘与服务代理 |
-| Istio | 38 | v1.29 | — | 服务网格平台 |
-| Linkerd | 8 | v18.9 | — | 轻量服务网格 |
+| Envoy | 38 | v1.40 | — | 边缘与服务代理 |
+| Istio | 38 | v1.31 | — | 服务网格平台 |
+| Linkerd | 8 | edge-26.10 | — | 轻量服务网格 |
 
 ---
 
@@ -66,7 +66,7 @@ prerequisites:
 
 ### Calico
 
-- **最新版本**: v3.31
+- **最新版本**: v3.33
 - **发布说明目录**: `生态参考/_archived-release-notes/networking/calico/`
 - **版本覆盖**: v0.1 → v3.31（35 个版本）
 - **Breaking Changes 提醒**:
@@ -76,7 +76,7 @@ prerequisites:
 ### Cilium
 
 - **实体页面**: [[cilium|Cilium]]
-- **最新版本**: v1.19
+- **最新版本**: v1.20（v1.20.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/networking/cilium/`
 - **版本覆盖**: v0.1 → v1.19（24 个版本）
 - **Breaking Changes 提醒**:
@@ -86,7 +86,7 @@ prerequisites:
 ### CNI Plugins
 
 - **实体页面**: [[23-实体/02-K8s核心组件/cni-plugins.md|CNI Plugins]]
-- **最新版本**: v1.9
+- **最新版本**: v1.9（v1.9.1）
 - **发布说明目录**: `生态参考/_archived-release-notes/networking/cni-plugins/`
 - **版本覆盖**: v0.1 → v1.9（14 个版本）
 - **Breaking Changes 提醒**:
@@ -96,7 +96,7 @@ prerequisites:
 ### Envoy
 
 - **实体页面**: [[envoy|Envoy]]
-- **最新版本**: v1.37
+- **最新版本**: v1.40
 - **发布说明目录**: `生态参考/_archived-release-notes/networking/envoy/`
 - **版本覆盖**: v0.1 → v1.37（38 个版本）
 - **升级要点**: 持续优化 xDS API 和 WASM 扩展能力
@@ -104,7 +104,7 @@ prerequisites:
 ### Istio
 
 - **实体页面**: [[istio|Istio]]
-- **最新版本**: v1.29
+- **最新版本**: v1.31（1.31.1）
 - **发布说明目录**: `生态参考/_archived-release-notes/networking/istio/`
 - **版本覆盖**: v0.1 → v1.29（38 个版本）
 - **升级要点**: Ambient Mesh 模式逐步成熟，sidecar-less 架构演进
@@ -112,7 +112,7 @@ prerequisites:
 ### Linkerd
 
 - **实体页面**: [[linkerd|Linkerd]]
-- **最新版本**: v18.9
+- **最新版本**: edge-26.10（edge 渠道）
 - **发布说明目录**: `生态参考/_archived-release-notes/networking/linkerd/`
 - **版本覆盖**: v0.1 → v18.9（8 个版本）
 - **升级要点**: 轻量级服务网格，专注 mTLS 和流量管理

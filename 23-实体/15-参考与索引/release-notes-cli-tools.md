@@ -16,7 +16,7 @@ tags:
 - operator
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -51,11 +51,11 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| [[helm]] | 42 | v4.1 | v4.1 | Kubernetes 包管理器 |
-| Kind | 32 | v0.31 | v0.31 | 本地 K8s 集群工具 |
-| Kops | 32 | v1.35 | v1.31 | 集群生命周期管理 |
-| Kustomize | 7 | v3.3 | — | 配置定制工具 |
-| Minikube | 74 | v1.38 | v1.37 | 本地开发环境 |
+| [[helm]] | 42 | v4.3 | v4.1 | Kubernetes 包管理器 |
+| Kind | 32 | v0.33 | v0.31 | 本地 K8s 集群工具 |
+| Kops | 32 | v1.36 | v1.31 | 集群生命周期管理 |
+| Kustomize | 7 | v5.8 | — | 配置定制工具 |
+| Minikube | 74 | v1.39 | v1.37 | 本地开发环境 |
 
 ---
 
@@ -64,7 +64,7 @@ prerequisites:
 ### Helm
 
 - **实体页面**: [[helm|Helm]]
-- **最新版本**: v4.1
+- **最新版本**: v4.3
 - **发布说明目录**: `生态参考/_archived-release-notes/cli-tools/helm/`
 - **版本覆盖**: v0.1 → v4.1（42 个版本）
 - **Breaking Changes 提醒**:
@@ -74,7 +74,7 @@ prerequisites:
 
 ### Kind
 
-- **最新版本**: v0.31
+- **最新版本**: v0.33
 - **发布说明目录**: `生态参考/_archived-release-notes/cli-tools/kind/`
 - **版本覆盖**: v0.0 → v0.31（32 个版本）
 - **Breaking Changes 提醒**:
@@ -83,7 +83,7 @@ prerequisites:
 
 ### Kops
 
-- **最新版本**: v1.35
+- **最新版本**: v1.36（v1.36.2）
 - **发布说明目录**: `生态参考/_archived-release-notes/cli-tools/kops/`
 - **版本覆盖**: v0.1 → v1.35（32 个版本）
 - **Breaking Changes 提醒**:
@@ -92,14 +92,14 @@ prerequisites:
 
 ### Kustomize
 
-- **最新版本**: v3.3
+- **最新版本**: v5.8（v5.8.3）
 - **发布说明目录**: `生态参考/_archived-release-notes/cli-tools/kustomize/`
 - **版本覆盖**: v0.1 → v3.3（7 个版本）
-- **升级要点**: 已内置到 kubectl，独立版本更新较少
+- **升级要点**: 已内置到 kubectl，独立版本更新较少；v5.x 为当前主线
 
 ### Minikube
 
-- **最新版本**: v1.38
+- **最新版本**: v1.39
 - **发布说明目录**: `生态参考/_archived-release-notes/cli-tools/minikube/`
 - **版本覆盖**: v0.1 → v1.38（74 个版本）
 - **Breaking Changes 提醒**:

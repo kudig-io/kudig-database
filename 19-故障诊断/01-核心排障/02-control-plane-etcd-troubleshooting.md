@@ -83,7 +83,7 @@ related_docs:
   - path: "../01-集群基础/03-控制平面/11-etcd-deep-dive.md"
     type: "depth"
     desc: "etcd 深度解析"
-  - path: "../06-FTA故障树/list/backup-restore-fta.md"  # H3: 重复路径段 ../19-故障诊断/ 修复
+  - path: "../19-故障诊断/06-FTA故障树/list/backup-restore-fta.md"
     type: "fta"
     desc: "备份恢复故障树"
 ---

@@ -22,4 +22,5 @@ last_updated: 2026-07
 - [[07-数据库中间件/06-数据流/03-flink-on-kubernetes.md|Flink On Kubernetes]]
 - [[07-数据库中间件/06-数据流/04-debezium-cdc-kubernetes.md|Debezium Cdc Kubernetes]]
 - [[07-数据库中间件/06-数据流/05-schema-registry-patterns.md|Schema Registry Patterns]]
+- [[07-数据库中间件/06-数据流/07-lakehouse-on-kubernetes.md|Lakehouse On Kubernetes]]
 

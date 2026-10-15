@@ -60,7 +60,7 @@ last_updated: '2026-09-09'
 | QA 语料 | **15,094 对** I-O 语料（全量导出快照口径）+ 每日 nightly 再生 |
 | 源码分析 | **5 个项目** 120 篇（Kubernetes / etcd / CNI / flannel / terway） |
 | 云厂商覆盖 | 阿里云 / AWS / GCP / Azure / 腾讯云 / 华为云 + 多云混合专章 |
-| 版本覆盖 | Kubernetes v1.25 ~ v1.32+，含 ACK / Terway / ASM 扩展 |
+| 版本覆盖 | Kubernetes v1.25 ~ v1.37（含 v1.37 升级指南与深度研究），含 ACK / Terway / ASM 扩展 |
 | 站点 | Astro 5 + Tailwind + Pagefind + Shiki + Mermaid + D3 知识图谱（本地构建） |
 | License | Apache 2.0 |
 
@@ -122,18 +122,18 @@ last_updated: '2026-09-09'
 | [01-集群基础](01-集群基础/README.md) | 123 | 架构总览、控制平面、证书 PKI、kubectl、升级路径、性能调优 |
 | [02-工作负载](02-工作负载/README.md) | 54 | Deployment/StatefulSet 核心负载、Java/Node.js/多语言运行时上 K8s |
 | [03-清单模式](03-清单模式/README.md) | 101 | YAML 参考、Kustomize/Helm/Operator/GitOps/安全/韧性/AI-ML 模式 |
-| [04-应用模式](04-应用模式/README.md) | 131 | 应用子模式、行业架构、生产模式 |
-| [05-网络](05-网络/README.md) | 140 | Service/Ingress、网络基础、服务网格、API 网关、eBPF、Terway |
+| [04-应用模式](04-应用模式/README.md) | 133 | 应用子模式、行业架构、生产模式 |
+| [05-网络](05-网络/README.md) | 141 | Service/Ingress、网络基础、服务网格、API 网关、eBPF、Terway |
 | [06-存储](06-存储/README.md) | 72 | PV/PVC/SC、CSI、分布式存储、有状态应用、云存储对比、AI 存储 |
-| [07-数据库中间件](07-数据库中间件/README.md) | 69 | 数据库、缓存、消息队列、时序库、搜索引擎、Operator 管理 |
-| [08-安全](08-安全/README.md) | 79 | 身份访问、网络安全、运行时安全、策略治理、供应链、零信任 |
+| [07-数据库中间件](07-数据库中间件/README.md) | 70 | 数据库、缓存、消息队列、时序库、搜索引擎、Operator 管理、数据湖仓 |
+| [08-安全](08-安全/README.md) | 80 | 身份访问、网络安全、运行时安全、策略治理、供应链、零信任、机密计算 |
 | [09-可观测性](09-可观测性/README.md) | 86 | 指标、日志、链路追踪、告警、SLO/SLI、工具链 |
 | [10-平台工程](10-平台工程/README.md) | 234 | 构建、运维、治理、开发体验、内部开发者平台、代码分析 |
 | [11-发布变更](11-发布变更/README.md) | 75 | GitOps、IaC、渐进式交付、变更管理、部署与迁移方案 |
 | [12-可靠性](12-可靠性/README.md) | 82 | 备份/灾难恢复、容量规划、混沌工程、事后复盘、SRE 实践 |
 | [13-生产运维](13-生产运维/README.md) | 127 | 成本治理、集群治理、事件响应、工单案例、运维手册与剧本 |
-| [14-容器运行时](14-容器运行时/README.md) | 61 | Docker、镜像管理/构建、containerd/CRI-O、沙箱运行时 |
-| [15-AI基础设施](15-AI基础设施/README.md) | 176 | GPU 基础设施、AI Agents、Agent 运行时、K8s AI 栈 |
+| [14-容器运行时](14-容器运行时/README.md) | 65 | Docker、镜像管理/构建/分发加速、containerd/CRI-O、沙箱运行时、不可变 OS |
+| [15-AI基础设施](15-AI基础设施/README.md) | 179 | GPU 基础设施、AI Agents、Agent 运行时、K8s AI 栈、KubeRay、批调度 |
 | [16-专项技术](16-专项技术/README.md) | 61 | 边缘计算、WebAssembly、扩展机制、无服务器、多租户 |
 | [17-系统基础](17-系统基础/README.md) | 646 | Linux、硬件、网络基础、K8s 事件、速查卡、知识字典 |
 | [18-云厂商](18-云厂商/README.md) | 115 | ACK / EKS / GKE / AKS / TKE / CCE、多云混合、阿里云云原生 |

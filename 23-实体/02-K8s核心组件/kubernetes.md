@@ -16,7 +16,7 @@ tags:
 - cilium
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10-14
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -52,7 +52,8 @@ prerequisites:
 
 # [[kubernetes|Kubernetes]] (CNCF Graduated)
 
-> **CNCF 状态**: Graduated | **类别**: Observability | **主要语言**: Go
+> **CNCF 状态**: Graduated | **类别**: Orchestration | **主要语言**: Go
+> **当前版本**: v1.37（Garhwal，2026-08-26 发布，最新 patch v1.37.1，2026-10 核对）| 升级指南：[[01-集群基础/06-升级路径/05-kubernetes-v1.37-upgrade-guide.md|v1.37 升级实操]] | 深度研究：[[25-研究/04-可靠性与运维/kubernetes-v1.37-release-research.md|v1.37 Release 研究]]
 
 ## 概述
 
@@ -238,7 +239,7 @@ description: '## 项目概述'
 - [[22-概念/08-可靠性与运维/kubeadm-cluster-operations.md|kubeadm 集群运维全景]] — Cross-reference
 - [[22-概念/11-交叉分析/etcd × 高可用模式.md|etcd × 高可用模式]] — Cross-reference
 - [[22-概念/08-可靠性与运维/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]] — Cross-reference
 - [[22-概念/11-交叉分析/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
 - [[22-概念/11-交叉分析/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
 - [[22-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
@@ -252,7 +253,7 @@ description: '## 项目概述'
 - [[22-概念/12-研究/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
 - [[22-概念/05-安全/multi-tenancy-isolation.md|Multi-Tenancy Isolation]] — Cross-reference
 - [[22-概念/12-研究/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
-- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]] — Cross-reference
+- [[22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]] — Cross-reference
 - [[22-概念/12-研究/ai-agent-openclaw-workspace.md|OpenClaw 工作空间配置]] — Cross-reference
 - [[22-概念/12-研究/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
 - [[22-概念/03-网络/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference

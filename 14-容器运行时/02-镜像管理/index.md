@@ -30,6 +30,8 @@ last_updated: 2026-07
 - [[14-容器运行时/02-镜像管理/06-gitlab-container-registry-enterprise.md|Gitlab Container Registry Enterprise]]
 - [[14-容器运行时/02-镜像管理/07-amazon-ecr-enterprise.md|Amazon Ecr Enterprise]]
 - [[14-容器运行时/02-镜像管理/08-harbor-enterprise-guide.md|Harbor Enterprise Guide]]
+- [[14-容器运行时/02-镜像管理/09-image-distribution-acceleration.md|Image Distribution Acceleration]]
+- [[14-容器运行时/02-镜像管理/10-oci-image-spec-artifacts.md|Oci Image Spec Artifacts]]
 
 
 

@@ -15,7 +15,7 @@ tags:
 - gateway
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: 2026-10
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -52,11 +52,11 @@ prerequisites:
 
 | 项目 | 文件数 | 最新版本 | 最近 Breaking Changes | 说明 |
 |------|--------|----------|----------------------|------|
-| Prometheus | 87 | v3.11 | v3.7 | 监控与告警引擎 |
-| Grafana | 71 | v12.4 | — | 可视化仪表盘 |
+| Prometheus | 87 | v3.15 | v3.7 | 监控与告警引擎 |
+| Grafana | 71 | v13.2 | — | 可视化仪表盘 |
 | Loki | 29 | v3.7 | v3.2 | 日志聚合系统 |
-| Thanos | 41 | v0.41 | v0.41 | Prometheus 高可用扩展 |
-| OpenTelemetry Collector | 146 | v0.149 | v0.149 | 统一遥测数据收集 |
+| Thanos | 41 | v0.42 | v0.41 | Prometheus 高可用扩展 |
+| OpenTelemetry Collector | 146 | v0.163 | v0.149 | 统一遥测数据收集 |
 
 ---
 
@@ -65,7 +65,7 @@ prerequisites:
 ### Prometheus
 
 - **实体页面**: [[prometheus|Prometheus]]
-- **最新版本**: v3.11
+- **最新版本**: v3.15（v3.15.0）
 - **发布说明目录**: `生态参考/_archived-release-notes/observability/prometheus/`
 - **版本覆盖**: v0.11 → v3.11（87 个版本）
 - **Breaking Changes 提醒**:
@@ -75,7 +75,7 @@ prerequisites:
 ### Grafana
 
 - **实体页面**: Grafana
-- **最新版本**: v12.4
+- **最新版本**: v13.2（v13.2.4）
 - **发布说明目录**: `生态参考/_archived-release-notes/observability/grafana/`
 - **版本覆盖**: v0.1 → v12.4（71 个版本）
 - **升级要点**: v10+ 引入 Scenes 框架，v11+ 默认启用新仪表盘引擎
@@ -83,7 +83,7 @@ prerequisites:
 ### Loki
 
 - **实体页面**: Loki
-- **最新版本**: v3.7
+- **最新版本**: v3.7（v3.7.8）
 - **发布说明目录**: `生态参考/_archived-release-notes/observability/loki/`
 - **版本覆盖**: v0.1 → v3.7（29 个版本）
 - **Breaking Changes 提醒**:
@@ -93,7 +93,7 @@ prerequisites:
 ### Thanos
 
 - **实体页面**: [[thanos|Thanos]]
-- **最新版本**: v0.41
+- **最新版本**: v0.42（v0.42.4）
 - **发布说明目录**: `生态参考/_archived-release-notes/observability/thanos/`
 - **版本覆盖**: v0.1 → v0.41（41 个版本）
 - **Breaking Changes 提醒**:
@@ -103,7 +103,7 @@ prerequisites:
 ### OpenTelemetry Collector
 
 - **实体页面**: [[opentelemetry|OpenTelemetry Collector]]
-- **最新版本**: v0.149
+- **最新版本**: v0.163
 - **发布说明目录**: `生态参考/_archived-release-notes/observability/opentelemetry-collector/`
 - **版本覆盖**: v0.1 → v0.149（146 个版本）
 - **Breaking Changes 提醒**:

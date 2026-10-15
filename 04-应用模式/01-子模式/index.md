@@ -35,6 +35,8 @@ last_updated: '2026-07-21'
 | [[04-应用模式/01-子模式/03-saga-distributed-transaction.md\|Saga 事务]] | 分布式事务编排与协调 | advanced |
 | [[04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md\|Sidecar 模式]] | 边车/大使模式实践 | intermediate |
 | [[04-应用模式/01-子模式/05-chaos-resilience-patterns.md\|混沌韧性]] | 韧性设计模式 | advanced |
+| [[04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md\|KubeVela/OAM 交付]] | OAM 应用交付模型与 KubeVela 多集群编排 | advanced |
+| [[04-应用模式/01-子模式/07-event-driven-knative-eventing.md\|Knative Eventing]] | 事件驱动架构与 CloudEvents/Serverless 事件路由 | advanced |
 
 ## Related
 

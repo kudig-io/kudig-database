@@ -37,7 +37,7 @@ last_updated: 2026-05-23
 - [ ] 存储模型：PV、PVC、StorageClass、CSI
 
 **推荐学习**：
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 - `集群基础/01-architecture-overview/`
 - `集群基础/05-kubectl/`
 

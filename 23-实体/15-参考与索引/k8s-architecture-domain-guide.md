@@ -191,7 +191,7 @@ kubectl api-resources --verbs=list --namespaced -o name | xargs -n1 kubectl get 
 - [[22-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
 - [[22-概念/06-可观测性/observability-pillars.md|Observability Pillars]]
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 
 - 01-plane-architecture-overview
 - [[10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md|01-pki-architecture]]

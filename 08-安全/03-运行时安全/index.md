@@ -10,7 +10,7 @@ tags:
 - threat-detection
 tier: core
 created: '2026-07-02'
-last_updated: '2026-08-25'
+last_updated: '2026-10-14'
 ---
 # 运行时安全 Runtime Security
 
@@ -38,6 +38,7 @@ last_updated: '2026-08-25'
 | [[08-安全/03-运行时安全/06-gvisor-container-sandbox.md\|gVisor 沙箱]] | 用户态内核沙箱实践 | advanced |
 | [[08-安全/03-运行时安全/07-security-context-fields-reference.md\|Security Context 字段参考]] | 全字段汇总/PSS 映射/LSM | advanced |
 | [[08-安全/03-运行时安全/08-falco-runtime-security-guide.md\|Falco 指南]] | 生产环境完整指南 | advanced |
+| [[08-安全/03-运行时安全/09-confidential-computing-coco.md\|机密计算与 CoCo]] | TEE 硬件对比/CoCo 部署/远程证明 | expert |
 
 ## 运行时安全检查清单
 

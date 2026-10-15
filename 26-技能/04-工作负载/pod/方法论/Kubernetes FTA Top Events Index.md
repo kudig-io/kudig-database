@@ -203,7 +203,7 @@ bottom_event:
 - [[26-技能/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[26-技能/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
 - [[26-技能/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[22-概念/01-核心架构/etcd Operational Reference.md|etcd Operational Reference]]
+- [[22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]]
 - [[37-归档/troubleshooting-diagnostics/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
 - [[29-文档/indexes/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference
 - [[29-文档/indexes/COMMAND-DOC-MAP.md|KUDIG 命令 → 文档映射]] — Cross-reference

@@ -20,9 +20,9 @@ last_updated: 2026-07
 ## 文档
 
 - [[22-概念/08-可靠性与运维/01-node-maintenance-cordon-drain-shutdown.md|节点维护 (Cordon/Drain/Shutdown/Swap) Runbook]]
-- [[22-概念/08-可靠性与运维/K8s 故障分布与 MTTR 基准.md|K8s 故障分布与 MTTR 基准]]
-- [[22-概念/08-可靠性与运维/Structural Troubleshooting Framework.md|Structural Troubleshooting Framework]]
-- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[22-概念/08-可靠性与运维/K8s-故障分布与-MTTR-基准.md|K8s 故障分布与 MTTR 基准]]
+- [[22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]]
+- [[22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[22-概念/08-可靠性与运维/capacity-planning-cost-optimization.md|capacity-planning-cost-optimization]]
 - [[22-概念/08-可靠性与运维/chaos-drill-integration.md|chaos-drill-integration]]
 - [[22-概念/08-可靠性与运维/chaos-engineering-observability.md|chaos-engineering-observability]]

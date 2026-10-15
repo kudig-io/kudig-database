@@ -15,7 +15,8 @@ tags:
 - agent
 tier: core
 created: '2026-05-23'
-last_updated: 2026-05
+last_updated: '2026-10-14'
+verified-upon: argocd-3.5.5
 difficulty: intermediate
 reading_level: intermediate
 audience:
@@ -102,6 +103,50 @@ Generates multiple Applications from a single template using generators:
 - **Git Generator**: Discover environments from Git directory structure
 - **Cluster Generator**: Auto-generate from registered clusters
 - **Matrix/Combine**: Cross-product of multiple generators
+
+## 版本与安全通告（2026-10）
+
+**最新稳定版：v3.5.5**（v3.5 系列）；v3.6 处于 RC 阶段。
+
+### v3.5.4 协调安全发布（2026-10-06，必须升级）
+
+一次修复 8 个安全漏洞，其中 4 个 CRITICAL 全部指向 repo-server 的渲染逃逸与权限绕过：
+
+| 等级 | 漏洞 | 说明 |
+|------|------|------|
+| CRITICAL | [GHSA-9v9p-x54c-58gc](https://github.com/argoproj/argo-cd/security/advisories/GHSA-9v9p-x54c-58gc) | Kustomize remote ref 可在 repo-server 执行命令 |
+| CRITICAL | [GHSA-fw5c-w8rc-j7fx](https://github.com/argoproj/argo-cd/security/advisories/GHSA-fw5c-w8rc-j7fx) | Kustomize Helm config home 可在 repo-server 执行命令 |
+| CRITICAL | [GHSA-m3vr-7329-44ww](https://github.com/argoproj/argo-cd/security/advisories/GHSA-m3vr-7329-44ww) | Jsonnet import 可读取 repo-server 任意文件 |
+| CRITICAL | [GHSA-fmxq-cgp8-87wp](https://github.com/argoproj/argo-cd/security/advisories/GHSA-fmxq-cgp8-87wp) / CVE-2026-77459 | PreDelete/PostDelete Hook 绕过 AppProject 限制 |
+| HIGH | [GHSA-4439-h7jw-5cjj](https://github.com/argoproj/argo-cd/security/advisories/GHSA-4439-h7jw-5cjj) / CVE-2025-61560 | 并发请求绕过登录失败限速 |
+| HIGH | [GHSA-j6cw-g6p4-7hch](https://github.com/argoproj/argo-cd/security/advisories/GHSA-j6cw-g6p4-7hch) / CVE-2026-55797 | SSH Git 仓库代理 URL 命令注入 |
+| MODERATE | [GHSA-g3ff-q88g-chrj](https://github.com/argoproj/argo-cd/security/advisories/GHSA-g3ff-q88g-chrj) | applications-in-any-namespace 下扩展代理 RBAC 忽略命名空间 |
+| MODERATE | [GHSA-w996-f2wq-x9c6](https://github.com/argoproj/argo-cd/security/advisories/GHSA-w996-f2wq-x9c6) | 超大 OCI manifest 耗尽 repo-server 内存 |
+
+**伴随的破坏性变更（升级前必读）：**
+
+- Kustomize 构建渲染 Helm chart 时不再使用 `helmGlobals.configHome`；依赖从该目录注册的 Helm 插件的构建会失败
+- 超过 4 MiB 的 OCI manifest 被拒绝
+
+### v3.5.5（2026-10-12）
+
+后续 bug fix：hydrator notes push 对 `cannot lock ref` 错误增加重试、repo-server 健康检查超时导致 CrashLoopBackOff 的修复等。
+
+### 升级动作建议
+
+```bash
+# 🟡 中风险：修改集群状态
+# 升级到 v3.5.5（含全部安全修复）
+kubectl create namespace argocd 2>/dev/null || true
+kubectl apply -n argocd --server-side --force-conflicts \
+  -f https://raw.githubusercontent.com/argoproj/argo-cd/v3.5.5/manifests/install.yaml
+
+# 🟢 低风险：升级后验证
+kubectl get pods -n argocd -w
+argocd version
+```
+
+> 跨 minor 版本升级（如 3.4 → 3.5）务必先读官方 [Upgrading 指南](https://argo-cd.readthedocs.io/en/stable/operator-manual/upgrading/overview/)。
 
 ## Comparison with [[flux|Flux]]
 

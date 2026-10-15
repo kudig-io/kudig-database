@@ -138,7 +138,7 @@ def download_project(name, repo, category_dir):
 
 
 def download_kubernetes_changelogs():
-    versions = [f"1.{i}" for i in range(2, 37)]
+    versions = [f"1.{i}" for i in range(2, 38)]
     project_dir = os.path.join(BASE_DIR, "kubernetes")
     os.makedirs(project_dir, exist_ok=True)
     count = 0

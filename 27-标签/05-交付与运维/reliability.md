@@ -116,7 +116,7 @@ last_updated: '2026-07-21'
 - [[22-概念/08-可靠性与运维/chaos-engineering-observability|混沌工程可观测性]]
 - [[22-概念/08-可靠性与运维/chaos-engineering-platforms|混沌工程平台]]
 - [[22-概念/08-可靠性与运维/incident-management-patterns|事件管理模式]]
-- [[22-概念/08-可靠性与运维/K8s 故障分布与 MTTR 基准|K8s 故障分布与 MTTR 基准]]
+- [[22-概念/08-可靠性与运维/K8s-故障分布与-MTTR-基准|K8s 故障分布与 MTTR 基准]]
 - [[22-概念/08-可靠性与运维/velero-disaster-recovery|Velero 灾难恢复]]
 - [[22-概念/13-研究-2025-2026/10-Reliability-Engineering|可靠性工程深度研究]]
 

@@ -192,7 +192,7 @@ kubectl get --raw='/metrics' | grep apiserver_watch_events
 - [[23-实体/02-K8s核心组件/kube-scheduler.md|kube-scheduler]]
 - [[23-实体/02-K8s核心组件/kubelet.md|kubelet]]
 - [[35-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]]
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 
 - Kubernetes 架构全景图
 - [[23-实体/07-可观测性/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference

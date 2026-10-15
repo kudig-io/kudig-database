@@ -74,7 +74,7 @@ Kubernetes 的声明式模型（"我期望的状态是 X"）依赖 etcd 的强�
 
 - [[17-系统基础/06-知识字典/fundamentals/kubernetes.md|Kubernetes]]
 - [[17-系统基础/06-知识字典/fundamentals/etcd.md|etcd]]
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]]
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 - [[22-概念/01-核心架构/controller-pattern.md|Controller Pattern (Reconciliation Loop)]]
 - [[22-概念/10-最佳实践/bp-infrastructure.md|最佳实践：Infrastructure]]
 - [[37-归档/troubleshooting-diagnostics/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]

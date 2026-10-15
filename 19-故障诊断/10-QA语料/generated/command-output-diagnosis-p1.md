@@ -1,9 +1,7 @@
 ---
 title: 命令输出诊断语料 — P1 优先级
 description: 从 Skills 和 FTA 自动提取的命令输出→诊断 I-O 对，P1 优先级
-summary: 从 Skills 和 FTA 自动提取的命令输出→诊断 I-O 对，P1 优先级
 category: agent-corpus
-source: fta-skills  # M3: 来源标注（由 08-技能体系 Skills 与 06-FTA故障树 FTA 自动提取生成）
 tags:
 - k8s
 - troubleshooting
@@ -12,9 +10,7 @@ tags:
 - agent
 - corpus
 - priority-p1
-tier: supporting
-created: '2026-05-23'
-last_updated: '2026-05-21'
+last_updated: '2026-10-14'
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -23,24 +19,17 @@ audience:
 - 运维工程师
 ---
 
-> **生产环境安全提示**
->
-> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
-
-
-
-
 # 命令输出诊断语料 — P1 优先级
 
-> **生成时间**: 2026-05-21T23:50:09.822786
-> **I-O 对总数**: 469
+> **生成时间**: 2026-10-14T18:48:19.555310
+> **I-O 对总数**: 511
 > **优先级**: P1
 > **生成方式**: 自动提取 + 人工种子
 > **用途**: Agent 接收命令输出后，直接匹配诊断结论
 
 ---
 
-## Domain: CERT (9 条)
+## Domain: CERT (15 条)
 
 ### IODIAG-CERT-0001 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 
@@ -153,6 +142,181 @@ io_pair_id: IODIAG-CERT-0005
 skill_ref: 06-certificate-expiry
 scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0006 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0006
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0007 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0007
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl exec 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0008 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0008
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0009 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0009
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl label/annotate 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0010 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0010
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0011 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0011
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
+command: kubectl delete namespace
+output_pattern: '# 执行: kubectl delete namespace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete namespace 检查相关状态
+confidence: 0.8
+tags:
+- 06-certificate-expiry
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CERT-0012 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+
+```yaml
+io_pair_id: IODIAG-CERT-0012
+skill_ref: 06-certificate-expiry
+scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+severity: medium
 command: kubectl get --raw /healthz
 output_pattern: '# 执行: kubectl get --raw /healthz
 
@@ -172,10 +336,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-CERT-0006 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+### IODIAG-CERT-0013 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-CERT-0006
+io_pair_id: IODIAG-CERT-0013
 skill_ref: 06-certificate-expiry
 scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 severity: medium
@@ -198,10 +362,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-CERT-0007 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+### IODIAG-CERT-0014 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-CERT-0007
+io_pair_id: IODIAG-CERT-0014
 skill_ref: 06-certificate-expiry
 scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 severity: medium
@@ -223,10 +387,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-CERT-0008 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
+### IODIAG-CERT-0015 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-CERT-0008
+io_pair_id: IODIAG-CERT-0015
 skill_ref: 06-certificate-expiry
 scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
 severity: medium
@@ -251,38 +415,13 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-CERT-0009 — 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
-
-```yaml
-io_pair_id: IODIAG-CERT-0009
-skill_ref: 06-certificate-expiry
-scenario: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis
-severity: medium
-command: kubectl 不可用
-output_pattern: '# 执行: kubectl 不可用
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl 不可用 检查相关状态
-confidence: 0.8
-tags:
-- 06-certificate-expiry
-- kubectl
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
 ## Domain: CONFIG (15 条)
 
-### IODIAG-CONFIG-0001 — ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshootingompt 模板|Troubleshooting]]
+### IODIAG-CONFIG-0001 — ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0001
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl describe pod POD -n NS
@@ -292,7 +431,7 @@ diagnosis:
 - 执行 kubectl describe pod POD -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 - pod
 - describe
@@ -308,7 +447,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0002
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl get pods -n NS
@@ -319,7 +458,7 @@ diagnosis:
 - 执行 kubectl get pods -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 - pod
 - status
@@ -335,7 +474,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0003
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl exec POD -n NS -- env | grep KEY
@@ -346,7 +485,7 @@ diagnosis:
 - 执行 kubectl exec POD -n NS -- env | grep KEY 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -360,7 +499,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0004
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl exec POD -n NS -- cat /path/to/config
@@ -371,7 +510,7 @@ diagnosis:
 - 执行 kubectl exec POD -n NS -- cat /path/to/config 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -385,7 +524,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0005
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl exec POD -- cat /path/subpath-file
@@ -396,7 +535,7 @@ diagnosis:
 - 执行 kubectl exec POD -- cat /path/subpath-file 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -410,7 +549,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0006
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl apply/edit
@@ -421,7 +560,7 @@ diagnosis:
 - 执行 kubectl apply/edit 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -435,7 +574,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0007
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl get externalsecret -n NS
@@ -446,7 +585,7 @@ diagnosis:
 - 执行 kubectl get externalsecret -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 - status
 k8s_versions:
@@ -461,7 +600,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0008
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl describe externalsecret
@@ -472,7 +611,7 @@ diagnosis:
 - 执行 kubectl describe externalsecret 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 - describe
 k8s_versions:
@@ -487,7 +626,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0009
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl logs kube-apiserver-xxx -n kube-system
@@ -498,7 +637,7 @@ diagnosis:
 - 执行 kubectl logs kube-apiserver-xxx -n kube-system 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 - logs
 k8s_versions:
@@ -513,7 +652,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0010
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
 command: kubectl create/apply
@@ -524,7 +663,7 @@ diagnosis:
 - 执行 kubectl create/apply 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -538,21 +677,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0011
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl get pods -n <namespace> -l <selector>
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
-  <pod-name>         0/1     <status>           <restarts>    <age>'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pods -n <namespace> -l <selector> 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
-- pod
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -565,20 +702,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0012
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl get externalsecret -A
-output_pattern: '# 执行: kubectl get externalsecret -A
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get externalsecret -A 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -591,20 +727,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0013
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl get events -A --field-selector reason=FailedMount
-output_pattern: '# 执行: kubectl get events -A --field-selector reason=FailedMount
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events -A --field-selector reason=FailedMount 检查相关状态
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -617,22 +752,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0014
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl get pods -n <namespace> -o jsonpath='{.items[*].status.containerStatuses[?(@.name=="vault-agent")].ready}'
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
-  <pod-name>         0/1     <status>           <restarts>    <age>'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pods -n <namespace> -o jsonpath='{.items[*].status.containerStatuses[?(@.name=="vault-agent")].ready}'
-  检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
-- pod
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -645,20 +777,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CONFIG-0015
-skill_ref: 14-configmap-secret-failure
+skill_ref: 15-configmap-secret-failure
 scenario: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting
 severity: medium
-command: kubectl get cm -A -o json | jq '.items[].data | length'
-output_pattern: '# 执行: kubectl get cm -A -o json | jq ''.items[].data | length''
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get cm -A -o json | jq '.items[].data | length' 检查相关状态
+- 执行 kubectl rollout undo/restart 检查相关状态
 confidence: 0.8
 tags:
-- 14-configmap-secret-failure
+- 15-configmap-secret-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -667,13 +798,13 @@ k8s_versions:
 - 1.32.x
 ```
 
-## Domain: CP (13 条)
+## Domain: CP (15 条)
 
-### IODIAG-CP-0001 — [[etcd|etcd]]cd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation|etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation]]
+### IODIAG-CP-0001 — etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-CP-0001
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl auth can-i list nodes
@@ -684,7 +815,7 @@ diagnosis:
 - 执行 kubectl auth can-i list nodes 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 - node
 k8s_versions:
@@ -699,7 +830,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0002
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get nodes --request-timeout=10s
@@ -710,7 +841,7 @@ diagnosis:
 - 执行 kubectl get nodes --request-timeout=10s 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 - node
 - status
@@ -726,7 +857,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0003
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl logs -n kube-system kube-scheduler-*
@@ -737,7 +868,7 @@ diagnosis:
 - 执行 kubectl logs -n kube-system kube-scheduler-* 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 - logs
 k8s_versions:
@@ -752,7 +883,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0004
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl apply
@@ -763,7 +894,7 @@ diagnosis:
 - 执行 kubectl apply 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -777,7 +908,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0005
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl create
@@ -788,7 +919,7 @@ diagnosis:
 - 执行 kubectl create 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -802,7 +933,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0006
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n kube-system -l tier=control-plane
@@ -813,7 +944,7 @@ diagnosis:
 - 执行 kubectl get pods -n kube-system -l tier=control-plane 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 - pod
 - status
@@ -829,7 +960,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0007
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get events
@@ -840,7 +971,7 @@ diagnosis:
 - 执行 kubectl get events 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
 - status
 k8s_versions:
@@ -855,20 +986,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0008
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get --raw /readyz?verbose
-output_pattern: '# 执行: kubectl get --raw /readyz?verbose
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get --raw /readyz?verbose 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -881,20 +1011,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0009
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get --raw /livez?verbose
-output_pattern: '# 执行: kubectl get --raw /livez?verbose
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get --raw /livez?verbose 检查相关状态
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -907,19 +1036,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0010
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
-command: etcdctl alarm list
-output_pattern: '# 执行: etcdctl alarm list
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
   <typical output lines...>'
 diagnosis:
-- 执行 etcdctl alarm list 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
-- etcdctl
+- 12-control-plane-failure
+- kubectl
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -932,19 +1061,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0011
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
-command: etcdctl alarm disarm
-output_pattern: '# 执行: etcdctl alarm disarm
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
   <typical output lines...>'
 diagnosis:
-- 执行 etcdctl alarm disarm 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
-- etcdctl
+- 12-control-plane-failure
+- kubectl
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -957,19 +1086,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0012
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
-command: etcdctl endpoint status
-output_pattern: '# 执行: etcdctl endpoint status
+command: kubectl get --raw /readyz?verbose
+output_pattern: '# 执行: kubectl get --raw /readyz?verbose
 
   <typical output lines...>'
 diagnosis:
-- 执行 etcdctl endpoint status 检查相关状态
+- 执行 kubectl get --raw /readyz?verbose 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
-- etcdctl
+- 12-control-plane-failure
+- kubectl
+- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -982,18 +1112,69 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-CP-0013
-skill_ref: 11-control-plane-failure
+skill_ref: 12-control-plane-failure
 scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
 severity: medium
-command: etcdctl snapshot save
-output_pattern: '# 执行: etcdctl snapshot save
+command: kubectl get --raw /livez?verbose
+output_pattern: '# 执行: kubectl get --raw /livez?verbose
 
   <typical output lines...>'
 diagnosis:
-- 执行 etcdctl snapshot save 检查相关状态
+- 执行 kubectl get --raw /livez?verbose 检查相关状态
 confidence: 0.8
 tags:
-- 11-control-plane-failure
+- 12-control-plane-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CP-0014 — etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-CP-0014
+skill_ref: 12-control-plane-failure
+scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
+severity: medium
+command: etcdctl alarm list
+output_pattern: '# 执行: etcdctl alarm list
+
+  <typical output lines...>'
+diagnosis:
+- 执行 etcdctl alarm list 检查相关状态
+confidence: 0.8
+tags:
+- 12-control-plane-failure
+- etcdctl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-CP-0015 — etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-CP-0015
+skill_ref: 12-control-plane-failure
+scenario: etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation
+severity: medium
+command: etcdctl alarm disarm
+output_pattern: '# 执行: etcdctl alarm disarm
+
+  <typical output lines...>'
+diagnosis:
+- 执行 etcdctl alarm disarm 检查相关状态
+confidence: 0.8
+tags:
+- 12-control-plane-failure
 - etcdctl
 k8s_versions:
 - 1.28.x
@@ -1299,6 +1480,57 @@ io_pair_id: IODIAG-DNS-0012
 skill_ref: 04-dns-resolution-failure
 scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 severity: medium
+command: kubectl delete pod --force
+output_pattern: '# 执行: kubectl delete pod --force
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete pod --force 检查相关状态
+confidence: 0.8
+tags:
+- 04-dns-resolution-failure
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-DNS-0013 — DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-DNS-0013
+skill_ref: 04-dns-resolution-failure
+scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 04-dns-resolution-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-DNS-0014 — DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-DNS-0014
+skill_ref: 04-dns-resolution-failure
+scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
+severity: medium
 command: kubectl -n kube-system get cm coredns -o yaml
 output_pattern: '# 执行: kubectl -n kube-system get cm coredns -o yaml
 
@@ -1318,59 +1550,6 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-DNS-0013 — DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-DNS-0013
-skill_ref: 04-dns-resolution-failure
-scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
-severity: medium
-command: kubectl top pods -n kube-system -l k8s-app=kube-dns
-output_pattern: '# 执行: kubectl top pods -n kube-system -l k8s-app=kube-dns
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl top pods -n kube-system -l k8s-app=kube-dns 检查相关状态
-confidence: 0.8
-tags:
-- 04-dns-resolution-failure
-- kubectl
-- pod
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-DNS-0014 — DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-DNS-0014
-skill_ref: 04-dns-resolution-failure
-scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
-severity: medium
-command: kubectl logs <app-pod> | grep -c "resolve|NXDOMAIN|no such host"
-output_pattern: '<timestamp>  <level>  <message>
-
-  ...'
-diagnosis:
-- 执行 kubectl logs <app-pod> | grep -c "resolve|NXDOMAIN|no such host" 检查相关状态
-confidence: 0.8
-tags:
-- 04-dns-resolution-failure
-- kubectl
-- pod
-- logs
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
 ### IODIAG-DNS-0015 — DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 
 ```yaml
@@ -1378,18 +1557,16 @@ io_pair_id: IODIAG-DNS-0015
 skill_ref: 04-dns-resolution-failure
 scenario: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get configmap coredns -n kube-system -o jsonpath='{.metadata.resourceVersion}'
-output_pattern: '# 执行: kubectl get configmap coredns -n kube-system -o jsonpath=''{.metadata.resourceVersion}''
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get configmap coredns -n kube-system -o jsonpath='{.metadata.resourceVersion}'
-  检查相关状态
+- 执行 kubectl rollout undo/restart 检查相关状态
 confidence: 0.8
 tags:
 - 04-dns-resolution-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -1423,8 +1600,8 @@ io_pair_id: IODIAG-DNS-0017
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -iE "parse
-  error|syntax error"
+command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 \| grep -iE "parse
+  error\|syntax error"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: DNS 异常故障树分析'
@@ -1442,7 +1619,7 @@ io_pair_id: IODIAG-DNS-0018
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 | grep -i "plugin/forward"
+command: kubectl logs -n kube-system -l k8s-app=kube-dns --tail=100 \| grep -i "plugin/forward"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: DNS 异常故障树分析'
@@ -1460,7 +1637,7 @@ io_pair_id: IODIAG-DNS-0019
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' | grep
+command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' \| grep
   -B2 -A5 "stub"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -1481,7 +1658,7 @@ scenario: DNS 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns
   -o jsonpath='{.items[0].metadata.name}') -- wget -qO- http://localhost:9153/metrics
-  | grep coredns_cache
+  \| grep coredns_cache
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: DNS 异常故障树分析'
@@ -1499,7 +1676,7 @@ io_pair_id: IODIAG-DNS-0021
 fta_ref: dns-fta
 scenario: DNS 异常故障树分析
 severity: high
-command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' | grep
+command: kubectl get cm coredns -n kube-system -o jsonpath='{.data.Corefile}' \| grep
   -A10 "hosts"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -1560,7 +1737,7 @@ scenario: DNS 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns
   -o jsonpath='{.items[0].metadata.name}') -- wget -qO- http://localhost:9153/metrics
-  | grep coredns_dns_request_count_total
+  \| grep coredns_dns_request_count_total
 output_pattern: "flowchart TD\n  TE[顶事件: DNS 解析异常]\n  OR0{{OR}}\n  TE --> OR0\n\n\
   \  OR0 --> CORE[CoreDNS 异常]\n  OR0 --> UP[上游解析异常]\n  OR0 --> NET[网络策略/连通性异常]\n \
   \ OR0 --> CFG[配置与缓存异常]\n  OR0 --> RES[资源与容量异常]\n\n  CORE_OR{{OR}}\n  CORE --> CORE_OR\n\
@@ -1602,7 +1779,7 @@ scenario: DNS 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system -it $(kubectl get pods -n kube-system -l k8s-app=kube-dns
   -o jsonpath='{.items[0].metadata.name}') -- wget -qO- http://localhost:9153/metrics
-  | grep coredns_dns_request_duration_seconds
+  \| grep coredns_dns_request_duration_seconds
 output_pattern: "flowchart TD\n  TE[顶事件: DNS 解析异常]\n  OR0{{OR}}\n  TE --> OR0\n\n\
   \  OR0 --> CORE[CoreDNS 异常]\n  OR0 --> UP[上游解析异常]\n  OR0 --> NET[网络策略/连通性异常]\n \
   \ OR0 --> CFG[配置与缓存异常]\n  OR0 --> RES[资源与容量异常]\n\n  CORE_OR{{OR}}\n  CORE --> CORE_OR\n\
@@ -1704,13 +1881,13 @@ tags:
 - critical
 ```
 
-## Domain: GENERAL (30 条)
+## Domain: GENERAL (36 条)
 
 ### IODIAG-GENERAL-0001 — 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0001
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl proxy
@@ -1721,7 +1898,7 @@ diagnosis:
 - 执行 kubectl proxy 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -1735,7 +1912,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0002
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl auth can-i list nodes
@@ -1746,7 +1923,7 @@ diagnosis:
 - 执行 kubectl auth can-i list nodes 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 - node
 k8s_versions:
@@ -1761,7 +1938,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0003
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl top pods
@@ -1772,7 +1949,7 @@ diagnosis:
 - 执行 kubectl top pods 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 - pod
 k8s_versions:
@@ -1787,7 +1964,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0004
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl describe node <node>
@@ -1797,7 +1974,7 @@ diagnosis:
 - 执行 kubectl describe node <node> 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 - node
 - describe
@@ -1813,7 +1990,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0005
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl describe pod
@@ -1823,7 +2000,7 @@ diagnosis:
 - 执行 kubectl describe pod 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 - pod
 - describe
@@ -1839,7 +2016,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0006
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl describe hpa
@@ -1850,7 +2027,7 @@ diagnosis:
 - 执行 kubectl describe hpa 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 - describe
 k8s_versions:
@@ -1865,20 +2042,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0007
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
-command: kubectl get events
-output_pattern: '# 执行: kubectl get events
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -1891,18 +2067,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0008
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
-command: kubectl top
-output_pattern: '# 执行: kubectl top
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl top 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -1916,18 +2092,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0009
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
-command: kubectl debug
-output_pattern: '# 执行: kubectl debug
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl debug 检查相关状态
+- 执行 kubectl rollout undo/restart 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -1941,7 +2117,83 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0010
-skill_ref: 17-performance-bottleneck
+skill_ref: 18-performance-bottleneck
+scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+severity: medium
+command: kubectl get events
+output_pattern: '# 执行: kubectl get events
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get events 检查相关状态
+confidence: 0.8
+tags:
+- 18-performance-bottleneck
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0011 — 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0011
+skill_ref: 18-performance-bottleneck
+scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+severity: medium
+command: kubectl top
+output_pattern: '# 执行: kubectl top
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl top 检查相关状态
+confidence: 0.8
+tags:
+- 18-performance-bottleneck
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0012 — 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0012
+skill_ref: 18-performance-bottleneck
+scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+severity: medium
+command: kubectl debug
+output_pattern: '# 执行: kubectl debug
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl debug 检查相关状态
+confidence: 0.8
+tags:
+- 18-performance-bottleneck
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0013 — 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0013
+skill_ref: 18-performance-bottleneck
 scenario: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning
 severity: medium
 command: kubectl get --raw /metrics
@@ -1952,87 +2204,9 @@ diagnosis:
 - 执行 kubectl get --raw /metrics 检查相关状态
 confidence: 0.8
 tags:
-- 17-performance-bottleneck
+- 18-performance-bottleneck
 - kubectl
 - status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-GENERAL-0011 — Skill 本地运行 Demo 指南
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0011
-skill_ref: 19-skill-local-demo-guide
-scenario: Skill 本地运行 Demo 指南
-severity: medium
-command: kubectl cordon <worker-node>
-output_pattern: '# 执行: kubectl cordon <worker-node>
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl cordon <worker-node> 检查相关状态
-confidence: 0.8
-tags:
-- 19-skill-local-demo-guide
-- kubectl
-- node
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-GENERAL-0012 — Skill 本地运行 Demo 指南
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0012
-skill_ref: 19-skill-local-demo-guide
-scenario: Skill 本地运行 Demo 指南
-severity: medium
-command: kubectl get nodes
-output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
-
-  <node-name>    NotReady   <roles>          <age>   <version>'
-diagnosis:
-- 执行 kubectl get nodes 检查相关状态
-confidence: 0.8
-tags:
-- 19-skill-local-demo-guide
-- kubectl
-- node
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-GENERAL-0013 — Skill 本地运行 Demo 指南
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0013
-skill_ref: 19-skill-local-demo-guide
-scenario: Skill 本地运行 Demo 指南
-severity: medium
-command: kubectl uncordon
-output_pattern: '# 执行: kubectl uncordon
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl uncordon 检查相关状态
-confidence: 0.8
-tags:
-- 19-skill-local-demo-guide
-- kubectl
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2045,20 +2219,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0014
-skill_ref: 19-skill-local-demo-guide
+skill_ref: 21-skill-local-demo-guide
 scenario: Skill 本地运行 Demo 指南
 severity: medium
-command: kubectl logs --previous
-output_pattern: '<timestamp>  <level>  <message>
+command: kubectl cordon <worker-node>
+output_pattern: '# 执行: kubectl cordon <worker-node>
 
-  ...'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl logs --previous 检查相关状态
+- 执行 kubectl cordon <worker-node> 检查相关状态
 confidence: 0.8
 tags:
-- 19-skill-local-demo-guide
+- 21-skill-local-demo-guide
 - kubectl
-- logs
+- node
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2071,7 +2245,85 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0015
-skill_ref: 19-skill-local-demo-guide
+skill_ref: 21-skill-local-demo-guide
+scenario: Skill 本地运行 Demo 指南
+severity: medium
+command: kubectl get nodes
+output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
+
+  <node-name>    NotReady   <roles>          <age>   <version>'
+diagnosis:
+- 执行 kubectl get nodes 检查相关状态
+confidence: 0.8
+tags:
+- 21-skill-local-demo-guide
+- kubectl
+- node
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0016 — Skill 本地运行 Demo 指南
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0016
+skill_ref: 21-skill-local-demo-guide
+scenario: Skill 本地运行 Demo 指南
+severity: medium
+command: kubectl uncordon
+output_pattern: '# 执行: kubectl uncordon
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl uncordon 检查相关状态
+confidence: 0.8
+tags:
+- 21-skill-local-demo-guide
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0017 — Skill 本地运行 Demo 指南
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0017
+skill_ref: 21-skill-local-demo-guide
+scenario: Skill 本地运行 Demo 指南
+severity: medium
+command: kubectl logs --previous
+output_pattern: '<timestamp>  <level>  <message>
+
+  ...'
+diagnosis:
+- 执行 kubectl logs --previous 检查相关状态
+confidence: 0.8
+tags:
+- 21-skill-local-demo-guide
+- kubectl
+- logs
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0018 — Skill 本地运行 Demo 指南
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0018
+skill_ref: 21-skill-local-demo-guide
 scenario: Skill 本地运行 Demo 指南
 severity: medium
 command: kubectl get endpoints
@@ -2082,7 +2334,7 @@ diagnosis:
 - 执行 kubectl get endpoints 检查相关状态
 confidence: 0.8
 tags:
-- 19-skill-local-demo-guide
+- 21-skill-local-demo-guide
 - kubectl
 - status
 k8s_versions:
@@ -2093,98 +2345,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-GENERAL-0016 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0016
-skill_ref: 21-statefulset-failure
-scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-severity: medium
-command: 'kubectl get statefulset <name> -n <namespace>
-
-  # 关注: DESIRED, CURRENT, READY 列'
-output_pattern: '# 执行: kubectl get statefulset <name> -n <namespace>
-
-  # 关注: DESIRED, CURRENT, READY 列
-
-  <typical output lines...>'
-diagnosis:
-- '执行 kubectl get statefulset <name> -n <namespace>
-
-  # 关注: DESIRED, CURRENT, READY 列 检查相关状态'
-confidence: 0.8
-tags:
-- 21-statefulset-failure
-- kubectl
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-GENERAL-0017 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0017
-skill_ref: 21-statefulset-failure
-scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-severity: medium
-command: "kubectl get pods -n <namespace> -l <statefulset-selector> -o json | \\\n\
-  \  jq -r '.items[].metadata.name' | sort -V"
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- "执行 kubectl get pods -n <namespace> -l <statefulset-selector> -o json | \\\n  jq\
-  \ -r '.items[].metadata.name' | sort -V 检查相关状态"
-confidence: 0.8
-tags:
-- 21-statefulset-failure
-- kubectl
-- pod
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-GENERAL-0018 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0018
-skill_ref: 21-statefulset-failure
-scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
-severity: medium
-command: kubectl get pvc -n <namespace> -l <statefulset-selector>
-output_pattern: '# 执行: kubectl get pvc -n <namespace> -l <statefulset-selector>
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get pvc -n <namespace> -l <statefulset-selector> 检查相关状态
-confidence: 0.8
-tags:
-- 21-statefulset-failure
-- kubectl
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
 ### IODIAG-GENERAL-0019 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0019
-skill_ref: 21-statefulset-failure
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -l app=<name>
@@ -2195,23 +2360,23 @@ diagnosis:
 - 执行 kubectl get pods -l app=<name> 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
+- 23-statefulset-failure
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-GENERAL-0020 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0020
-skill_ref: 21-statefulset-failure
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pvc -n <ns>
@@ -2222,22 +2387,22 @@ diagnosis:
 - 执行 kubectl get pvc -n <ns> 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
+- 23-statefulset-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-GENERAL-0021 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0021
-skill_ref: 21-statefulset-failure
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl rollout status sts/<name>
@@ -2248,21 +2413,21 @@ diagnosis:
 - 执行 kubectl rollout status sts/<name> 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
+- 23-statefulset-failure
 - kubectl
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-GENERAL-0022 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0022
-skill_ref: 21-statefulset-failure
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get endpoints <svc>
@@ -2273,22 +2438,22 @@ diagnosis:
 - 执行 kubectl get endpoints <svc> 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
+- 23-statefulset-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-GENERAL-0023 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0023
-skill_ref: 21-statefulset-failure
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get events
@@ -2299,22 +2464,148 @@ diagnosis:
 - 执行 kubectl get events 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
+- 23-statefulset-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-GENERAL-0024 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-GENERAL-0024
-skill_ref: 21-statefulset-failure
+skill_ref: 23-statefulset-failure
+scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl exec 检查相关状态
+confidence: 0.8
+tags:
+- 23-statefulset-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0025 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0025
+skill_ref: 23-statefulset-failure
+scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl delete pod --force
+output_pattern: '# 执行: kubectl delete pod --force
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete pod --force 检查相关状态
+confidence: 0.8
+tags:
+- 23-statefulset-failure
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0026 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0026
+skill_ref: 23-statefulset-failure
+scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 23-statefulset-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0027 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0027
+skill_ref: 23-statefulset-failure
+scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 23-statefulset-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0028 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0028
+skill_ref: 23-statefulset-failure
+scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 23-statefulset-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0029 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0029
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods
@@ -2325,23 +2616,23 @@ diagnosis:
 - 执行 kubectl get pods 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
+- 23-statefulset-failure
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-GENERAL-0025 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
+### IODIAG-GENERAL-0030 — StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-GENERAL-0025
-skill_ref: 21-statefulset-failure
+io_pair_id: IODIAG-GENERAL-0030
+skill_ref: 23-statefulset-failure
 scenario: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl rollout status
@@ -2352,32 +2643,7 @@ diagnosis:
 - 执行 kubectl rollout status 检查相关状态
 confidence: 0.8
 tags:
-- 21-statefulset-failure
-- kubectl
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-GENERAL-0026 — Helm Chart 部署与回滚故障诊断
-
-```yaml
-io_pair_id: IODIAG-GENERAL-0026
-skill_ref: 26-helm-chart-failure
-scenario: Helm Chart 部署与回滚故障诊断
-severity: medium
-command: kubectl ...
-output_pattern: '# 执行: kubectl ...
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl ... 检查相关状态
-confidence: 0.8
-tags:
-- 26-helm-chart-failure
+- 23-statefulset-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -2387,10 +2653,62 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-GENERAL-0027 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+### IODIAG-GENERAL-0031 — Helm Chart 部署与回滚故障诊断
 
 ```yaml
-io_pair_id: IODIAG-GENERAL-0027
+io_pair_id: IODIAG-GENERAL-0031
+skill_ref: 28-helm-chart-failure
+scenario: Helm Chart 部署与回滚故障诊断
+severity: medium
+command: kubectl describe pod -l app.kubernetes.io/instance=<release>
+output_pattern: "Events:\n  Type     Reason        Age   From     Message\n  Warning\
+  \  <reason>      <age>  <from>   <message>"
+diagnosis:
+- 执行 kubectl describe pod -l app.kubernetes.io/instance=<release> 检查相关状态
+confidence: 0.8
+tags:
+- 28-helm-chart-failure
+- kubectl
+- pod
+- describe
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0032 — Helm Chart 部署与回滚故障诊断
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0032
+skill_ref: 28-helm-chart-failure
+scenario: Helm Chart 部署与回滚故障诊断
+severity: medium
+command: kubectl describe resourcequota -n <ns>
+output_pattern: '# 执行: kubectl describe resourcequota -n <ns>
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl describe resourcequota -n <ns> 检查相关状态
+confidence: 0.8
+tags:
+- 28-helm-chart-failure
+- kubectl
+- describe
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-GENERAL-0033 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+
+```yaml
+io_pair_id: IODIAG-GENERAL-0033
 skill_ref: README
 scenario: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 severity: medium
@@ -2414,10 +2732,10 @@ k8s_versions:
 - '1.32'
 ```
 
-### IODIAG-GENERAL-0028 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+### IODIAG-GENERAL-0034 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 
 ```yaml
-io_pair_id: IODIAG-GENERAL-0028
+io_pair_id: IODIAG-GENERAL-0034
 skill_ref: README
 scenario: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 severity: medium
@@ -2439,10 +2757,10 @@ k8s_versions:
 - '1.32'
 ```
 
-### IODIAG-GENERAL-0029 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+### IODIAG-GENERAL-0035 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 
 ```yaml
-io_pair_id: IODIAG-GENERAL-0029
+io_pair_id: IODIAG-GENERAL-0035
 skill_ref: README
 scenario: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 severity: medium
@@ -2465,10 +2783,10 @@ k8s_versions:
 - '1.32'
 ```
 
-### IODIAG-GENERAL-0030 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
+### IODIAG-GENERAL-0036 — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 
 ```yaml
-io_pair_id: IODIAG-GENERAL-0030
+io_pair_id: IODIAG-GENERAL-0036
 skill_ref: README
 scenario: topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 severity: medium
@@ -2490,13 +2808,132 @@ k8s_versions:
 - '1.32'
 ```
 
-## Domain: IMAGE (10 条)
+## Domain: GPU (2 条)
+
+### IODIAG-GPU-0001 — GPU Pod 调度 Pending - 设备插件未注册
+
+```yaml
+io_pair_id: IODIAG-GPU-0001
+skill_ref: SKILL-15
+scenario: GPU Pod 调度 Pending - 设备插件未注册
+severity: high
+command: kubectl describe node gpu-node-01
+output_pattern: "Capacity:\n  nvidia.com/gpu: 0\nAllocatable:\n  nvidia.com/gpu: 0\n"
+diagnosis:
+- GPU 节点未上报 nvidia.com/gpu 资源，设备插件未注册或已崩溃
+- GPU Pod 因资源不满足处于 Pending
+- 需排查 nvidia-device-plugin Pod 与驱动状态
+action:
+- kubectl get pods -n gpu-operator -o wide
+- kubectl logs -n gpu-operator -l app=nvidia-device-plugin-daemonset --tail=50
+- ssh gpu-node-01 'nvidia-smi'
+- kubectl get node gpu-node-01 -o jsonpath='{.status.capacity}' | grep -c gpu
+confidence: 0.9
+tags:
+- gpu
+- nvidia
+- device-plugin
+- pending
+- scheduling
+```
+
+### IODIAG-GPU-0002 — GPU 利用率异常 - DCGM 指标缺失
+
+```yaml
+io_pair_id: IODIAG-GPU-0002
+skill_ref: SKILL-15
+scenario: GPU 利用率异常 - DCGM 指标缺失
+severity: medium
+command: kubectl get --raw /api/v1/nodes/gpu-node-01/proxy/metrics | grep DCGM_FI_DEV_GPU_UTIL
+output_pattern: '(空输出，无任何 DCGM_FI_DEV_GPU_UTIL 指标行)
+
+  '
+diagnosis:
+- dcgm-exporter 未运行或指标端口未暴露
+- GPU 监控链路断裂，无法观测利用率/显存/温度
+- GPU 实际状态未知，可能存在空跑或显存泄漏
+action:
+- kubectl get pods -A | grep dcgm-exporter
+- kubectl logs -n monitoring -l app=dcgm-exporter --tail=30
+- kubectl get servicemonitor -n monitoring | grep dcgm
+- ssh gpu-node-01 'nvidia-smi' 验证驱动层是否可见
+confidence: 0.85
+tags:
+- gpu
+- dcgm
+- metrics
+- observability
+- utilization
+```
+
+## Domain: HELM (2 条)
+
+### IODIAG-HELM-0001 — Helm Release 升级卡死 - 锁未释放
+
+```yaml
+io_pair_id: IODIAG-HELM-0001
+skill_ref: SKILL-16
+scenario: Helm Release 升级卡死 - 锁未释放
+severity: high
+command: helm upgrade myapp ./chart -n production
+output_pattern: 'UPGRADE FAILED: another operation (install/upgrade/rollback) is in
+  progress
+
+  '
+diagnosis:
+- 上一次 Helm 操作异常中断，release 锁未释放
+- Helm 3 的 secret 后端仍持有 pending-upgrade 状态
+- 需回滚或清除挂起的 revision 后重试
+action:
+- helm history myapp -n production
+- helm rollback myapp <上一个稳定revision> -n production
+- kubectl get secret -n production -l owner=helm,name=myapp | grep pending
+- helm upgrade myapp ./chart -n production --retry
+confidence: 0.9
+tags:
+- helm
+- upgrade
+- lock
+- pending-upgrade
+- release
+```
+
+### IODIAG-HELM-0002 — Helm 安装失败 - 镜像仓库凭据缺失
+
+```yaml
+io_pair_id: IODIAG-HELM-0002
+skill_ref: SKILL-16
+scenario: Helm 安装失败 - 镜像仓库凭据缺失
+severity: medium
+command: helm install myapp ./chart -n production
+output_pattern: 'Error: INSTALLATION FAILED: create secret: Pull "registry.example.com/myapp:1.2.3"
+  denied
+
+  '
+diagnosis:
+- 目标命名空间缺少 registry 的 imagePullSecrets
+- Helm 创建的 Pod 无法拉取私有镜像
+- 需要在 chart values 或 ServiceAccount 上配置拉取凭据
+action:
+- kubectl get secret -n production | grep regcred
+- kubectl create secret docker-registry regcred --docker-server=registry.example.com
+  --docker-username=$USER --docker-password=$PASS -n production
+- helm upgrade myapp ./chart -n production --set imagePullSecrets[0].name=regcred
+confidence: 0.9
+tags:
+- helm
+- imagepullsecret
+- registry
+- install-failed
+```
+
+## Domain: IMAGE (13 条)
 
 ### IODIAG-IMAGE-0001 — 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0001
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
 command: kubectl debug node/
@@ -2507,7 +2944,7 @@ diagnosis:
 - 执行 kubectl debug node/ 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
 - node
 k8s_versions:
@@ -2522,7 +2959,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0002
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
 command: kubectl get pods -n NS
@@ -2533,7 +2970,7 @@ diagnosis:
 - 执行 kubectl get pods -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
 - pod
 - status
@@ -2549,7 +2986,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0003
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
 command: kubectl describe pod POD -n NS
@@ -2559,7 +2996,7 @@ diagnosis:
 - 执行 kubectl describe pod POD -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
 - pod
 - describe
@@ -2575,7 +3012,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0004
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
 command: kubectl get pod POD -n NS
@@ -2586,7 +3023,7 @@ diagnosis:
 - 执行 kubectl get pod POD -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
 - pod
 - status
@@ -2602,21 +3039,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0005
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
-command: kubectl get pods -n <namespace> -l <selector>
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
-  <pod-name>         0/1     <status>           <restarts>    <age>'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pods -n <namespace> -l <selector> 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
-- pod
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2629,18 +3064,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0006
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
-command: kubectl exec
-output_pattern: '# 执行: kubectl exec
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl exec 检查相关状态
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -2654,20 +3089,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0007
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
-command: kubectl get events --field-selector reason=Failed --all-namespaces
-output_pattern: '# 执行: kubectl get events --field-selector reason=Failed --all-namespaces
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events --field-selector reason=Failed --all-namespaces 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2680,19 +3114,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0008
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
-command: kubectl get constraints,cpol --all-namespaces
-output_pattern: '# 执行: kubectl get constraints,cpol --all-namespaces
+command: kubectl get pods -n <namespace> -l <selector>
+output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
 
-  <typical output lines...>'
+  <pod-name>         0/1     <status>           <restarts>    <age>'
 diagnosis:
-- 执行 kubectl get constraints,cpol --all-namespaces 检查相关状态
+- 执行 kubectl get pods -n <namespace> -l <selector> 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
+- pod
 - status
 k8s_versions:
 - 1.28.x
@@ -2706,20 +3141,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0009
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
-command: kubectl debug node/<name>
-output_pattern: '# 执行: kubectl debug node/<name>
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl debug node/<name> 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
-- node
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2732,7 +3166,85 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-IMAGE-0010
-skill_ref: 10-image-pull-failure
+skill_ref: 11-image-pull-failure
+scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+severity: medium
+command: kubectl get events --field-selector reason=Failed --all-namespaces
+output_pattern: '# 执行: kubectl get events --field-selector reason=Failed --all-namespaces
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get events --field-selector reason=Failed --all-namespaces 检查相关状态
+confidence: 0.8
+tags:
+- 11-image-pull-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-IMAGE-0011 — 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-IMAGE-0011
+skill_ref: 11-image-pull-failure
+scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+severity: medium
+command: kubectl get constraints,cpol --all-namespaces
+output_pattern: '# 执行: kubectl get constraints,cpol --all-namespaces
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get constraints,cpol --all-namespaces 检查相关状态
+confidence: 0.8
+tags:
+- 11-image-pull-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-IMAGE-0012 — 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-IMAGE-0012
+skill_ref: 11-image-pull-failure
+scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+severity: medium
+command: kubectl debug node/<name>
+output_pattern: '# 执行: kubectl debug node/<name>
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl debug node/<name> 检查相关状态
+confidence: 0.8
+tags:
+- 11-image-pull-failure
+- kubectl
+- node
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-IMAGE-0013 — 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-IMAGE-0013
+skill_ref: 11-image-pull-failure
 scenario: 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting
 severity: medium
 command: kubectl get events --field-selector
@@ -2743,7 +3255,7 @@ diagnosis:
 - 执行 kubectl get events --field-selector 检查相关状态
 confidence: 0.8
 tags:
-- 10-image-pull-failure
+- 11-image-pull-failure
 - kubectl
 - status
 k8s_versions:
@@ -2760,7 +3272,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0001
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
@@ -2772,7 +3284,7 @@ diagnosis:
 - 执行 kubectl auth can-i list ingresses 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -2786,7 +3298,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0002
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
@@ -2798,7 +3310,7 @@ diagnosis:
 - 执行 kubectl get pods -n ingress-nginx -l app.kubernetes.io/component=controller 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
 - pod
 - status
@@ -2814,7 +3326,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0003
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
@@ -2826,7 +3338,7 @@ diagnosis:
 - 执行 kubectl get gateway -A 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
 - status
 k8s_versions:
@@ -2841,7 +3353,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0004
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
@@ -2853,7 +3365,7 @@ diagnosis:
 - 执行 kubectl get httproute NAME -o yaml 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
 - status
 k8s_versions:
@@ -2868,22 +3380,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0005
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl get pods -n ingress-nginx
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
-  <pod-name>         0/1     <status>           <restarts>    <age>'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pods -n ingress-nginx 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
-- pod
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2896,21 +3406,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0006
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl describe ingress
-output_pattern: '# 执行: kubectl describe ingress
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl describe ingress 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
-- describe
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2923,21 +3432,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0007
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl get gateway
-output_pattern: '# 执行: kubectl get gateway
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get gateway 检查相关状态
+- 执行 kubectl label/annotate 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2950,21 +3458,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0008
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl get httproute
-output_pattern: '# 执行: kubectl get httproute
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get httproute 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -2977,21 +3484,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0009
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl get grpcroute
-output_pattern: '# 执行: kubectl get grpcroute
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get grpcroute 检查相关状态
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -3004,21 +3510,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0010
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl get ingressclass
-output_pattern: '# 执行: kubectl get ingressclass
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get ingressclass 检查相关状态
+- 执行 kubectl rollout undo/restart 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -3031,19 +3536,74 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0011
-skill_ref: 13-ingress-gateway-failure
+skill_ref: 14-ingress-gateway-failure
 scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
   & Remediation
 severity: medium
-command: kubectl get httproute -o yaml
-output_pattern: '# 执行: kubectl get httproute -o yaml
+command: kubectl get pods -n ingress-nginx
+output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+
+  <pod-name>         0/1     <status>           <restarts>    <age>'
+diagnosis:
+- 执行 kubectl get pods -n ingress-nginx 检查相关状态
+confidence: 0.8
+tags:
+- 14-ingress-gateway-failure
+- kubectl
+- pod
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-INGRESS-0012 — Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-INGRESS-0012
+skill_ref: 14-ingress-gateway-failure
+scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
+  & Remediation
+severity: medium
+command: kubectl describe ingress
+output_pattern: '# 执行: kubectl describe ingress
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get httproute -o yaml 检查相关状态
+- 执行 kubectl describe ingress 检查相关状态
 confidence: 0.8
 tags:
-- 13-ingress-gateway-failure
+- 14-ingress-gateway-failure
+- kubectl
+- describe
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-INGRESS-0013 — Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-INGRESS-0013
+skill_ref: 14-ingress-gateway-failure
+scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
+  & Remediation
+severity: medium
+command: kubectl get gateway
+output_pattern: '# 执行: kubectl get gateway
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get gateway 检查相关状态
+confidence: 0.8
+tags:
+- 14-ingress-gateway-failure
 - kubectl
 - status
 k8s_versions:
@@ -3054,76 +3614,58 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-INGRESS-0012 — Gateway API 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-INGRESS-0012
-fta_ref: gateway-api-fta
-scenario: Gateway API 异常故障树分析
-severity: high
-command: kubectl get gateway ${GW_NAME} -n ${GW_NS} 2>&1
-output_pattern: <typical output for this fault>
-diagnosis:
-- 'FTA 叶节点: Gateway API 异常故障树分析'
-confidence: 0.82
-tags:
-- ingress
-- fta
-- leaf-node
-```
-
-### IODIAG-INGRESS-0013 — Gateway API 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-INGRESS-0013
-fta_ref: gateway-api-fta
-scenario: Gateway API 异常故障树分析
-severity: high
-command: kubectl get svc ${SVC_NAME} -n ${NAMESPACE} 2>&1
-output_pattern: <typical output for this fault>
-diagnosis:
-- 'FTA 叶节点: Gateway API 异常故障树分析'
-confidence: 0.82
-tags:
-- ingress
-- fta
-- leaf-node
-```
-
-### IODIAG-INGRESS-0014 — Gateway API 异常故障树分析
+### IODIAG-INGRESS-0014 — Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0014
-fta_ref: gateway-api-fta
-scenario: Gateway API 异常故障树分析
-severity: high
-command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o jsonpath='{.status.parents[*].conditions}'
-output_pattern: <typical output for this fault>
+skill_ref: 14-ingress-gateway-failure
+scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
+  & Remediation
+severity: medium
+command: kubectl get httproute
+output_pattern: '# 执行: kubectl get httproute
+
+  <typical output lines...>'
 diagnosis:
-- 'FTA 叶节点: Gateway API 异常故障树分析'
-confidence: 0.82
+- 执行 kubectl get httproute 检查相关状态
+confidence: 0.8
 tags:
-- ingress
-- fta
-- leaf-node
+- 14-ingress-gateway-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-INGRESS-0015 — Gateway API 异常故障树分析
+### IODIAG-INGRESS-0015 — Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-INGRESS-0015
-fta_ref: gateway-api-fta
-scenario: Gateway API 异常故障树分析
-severity: high
-command: kubectl describe httproute ${ROUTE_NAME} -n ${NAMESPACE}
-output_pattern: <typical output for this fault>
+skill_ref: 14-ingress-gateway-failure
+scenario: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis
+  & Remediation
+severity: medium
+command: kubectl get grpcroute
+output_pattern: '# 执行: kubectl get grpcroute
+
+  <typical output lines...>'
 diagnosis:
-- 'FTA 叶节点: Gateway API 异常故障树分析'
-confidence: 0.82
+- 执行 kubectl get grpcroute 检查相关状态
+confidence: 0.8
 tags:
-- ingress
-- fta
-- leaf-node
+- 14-ingress-gateway-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-INGRESS-0016 — Gateway API 异常故障树分析
@@ -3151,8 +3693,8 @@ io_pair_id: IODIAG-INGRESS-0017
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data}' | grep
-  -E '(tls.crt|tls.key)'
+command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data}' \| grep
+  -E '(tls.crt\|tls.key)'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3171,7 +3713,7 @@ fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data.tls\\.crt}'
-  | base64 -d | openssl x509 -noout -subject -ext subjectAltName
+  \| base64 -d \| openssl x509 -noout -subject -ext subjectAltName
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3190,7 +3732,7 @@ fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data.tls\\.crt}'
-  | base64 -d | openssl x509 -noout -dates
+  \| base64 -d \| openssl x509 -noout -dates
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3209,7 +3751,7 @@ fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${GW_NS} -o jsonpath='{.data.tls\\.crt}'
-  | base64 -d | openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt
+  \| base64 -d \| openssl verify -CAfile /etc/ssl/certs/ca-certificates.crt
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Gateway API 异常故障树分析'
@@ -3460,7 +4002,7 @@ io_pair_id: IODIAG-INGRESS-0030
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml | grep -A5 'timeouts:'
+command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml \| grep -A5 'timeouts:'
 output_pattern: "flowchart TD\n  TE[顶事件: Gateway API 访问异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CTRL[Gateway Controller 异常]\n  OR0 --> ROUTE[路由配置错误]\n  OR0 -->\
   \ TLS[TLS 证书异常]\n  OR0 --> SVC[后端 Service 异常]\n  OR0 --> POLICY[策略冲突]\n\n  %% Gateway\
@@ -3512,7 +4054,7 @@ io_pair_id: IODIAG-INGRESS-0031
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml | grep -A10
+command: kubectl get httproute ${ROUTE_NAME} -n ${NAMESPACE} -o yaml \| grep -A10
   'retry:'
 output_pattern: "flowchart TD\n  TE[顶事件: Gateway API 访问异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CTRL[Gateway Controller 异常]\n  OR0 --> ROUTE[路由配置错误]\n  OR0 -->\
@@ -3565,8 +4107,8 @@ io_pair_id: IODIAG-INGRESS-0032
 fta_ref: gateway-api-fta
 scenario: Gateway API 异常故障树分析
 severity: high
-command: kubectl logs -n ${GW_NS} -l app=${CONTROLLER_LABEL} --tail=100 | grep -i
-  'access|audit'
+command: kubectl logs -n ${GW_NS} -l app=${CONTROLLER_LABEL} --tail=100 \| grep -i
+  'access\|audit'
 output_pattern: "flowchart TD\n  TE[顶事件: Gateway API 访问异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CTRL[Gateway Controller 异常]\n  OR0 --> ROUTE[路由配置错误]\n  OR0 -->\
   \ TLS[TLS 证书异常]\n  OR0 --> SVC[后端 Service 异常]\n  OR0 --> POLICY[策略冲突]\n\n  %% Gateway\
@@ -3728,7 +4270,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100
-  | grep -iE "reload.*fail|error.*config"
+  \| grep -iE "reload.*fail\|error.*config"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3855,7 +4397,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o jsonpath='{.data.tls\.crt}'
-  | base64 -d | openssl x509 -noout -dates
+  \| base64 -d \| openssl x509 -noout -dates
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3874,7 +4416,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o jsonpath='{.data.tls\.crt}'
-  | base64 -d | openssl x509 -noout -issuer
+  \| base64 -d \| openssl x509 -noout -issuer
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3893,7 +4435,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o jsonpath='{.data.tls\.crt}'
-  | base64 -d | openssl x509 -noout -text | grep DNS
+  \| base64 -d \| openssl x509 -noout -text \| grep DNS
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -3911,7 +4453,7 @@ io_pair_id: IODIAG-INGRESS-0047
 fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
-command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o name 2>/dev/null ||
+command: kubectl get secret ${TLS_SECRET} -n ${NAMESPACE} -o name 2>/dev/null \|\|
   echo "NOT_FOUND"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -4004,7 +4546,7 @@ fta_ref: ingress-fta
 scenario: Ingress 异常故障树分析
 severity: high
 command: kubectl logs -n ${INGRESS_NS} -l app.kubernetes.io/name=ingress-nginx --tail=100
-  | grep "${SERVICE_NAME}" | grep -oE "upstream_response_time=[0-9.]+"
+  \| grep "${SERVICE_NAME}" \| grep -oE "upstream_response_time=[0-9.]+"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Ingress 异常故障树分析'
@@ -4111,85 +4653,6 @@ io_pair_id: IODIAG-NET-0001
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
-command: kubectl get svc <service> -n <namespace> -o wide
-output_pattern: '# 执行: kubectl get svc <service> -n <namespace> -o wide
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get svc <service> -n <namespace> -o wide 检查相关状态
-confidence: 0.8
-tags:
-- 05-service-connectivity
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-NET-0002 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-
-```yaml
-io_pair_id: IODIAG-NET-0002
-skill_ref: 05-service-connectivity
-scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-severity: medium
-command: kubectl get endpoints <service> -n <namespace>
-output_pattern: '# 执行: kubectl get endpoints <service> -n <namespace>
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get endpoints <service> -n <namespace> 检查相关状态
-confidence: 0.8
-tags:
-- 05-service-connectivity
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-NET-0003 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-
-```yaml
-io_pair_id: IODIAG-NET-0003
-skill_ref: 05-service-connectivity
-scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-severity: medium
-command: kubectl get pods -n <namespace> -l <selector-from-svc> -o wide
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods -n <namespace> -l <selector-from-svc> -o wide 检查相关状态
-confidence: 0.8
-tags:
-- 05-service-connectivity
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-NET-0004 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-
-```yaml
-io_pair_id: IODIAG-NET-0004
-skill_ref: 05-service-connectivity
-scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-severity: medium
 command: kubectl exec
 output_pattern: '# 执行: kubectl exec
 
@@ -4208,10 +4671,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0005 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0002 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0005
+io_pair_id: IODIAG-NET-0002
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4237,10 +4700,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0006 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0003 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0006
+io_pair_id: IODIAG-NET-0003
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4264,10 +4727,36 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0007 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0004 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0007
+io_pair_id: IODIAG-NET-0004
+skill_ref: 05-service-connectivity
+scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+severity: medium
+command: kubectl get endpoints <service> -n <namespace>
+output_pattern: '# 执行: kubectl get endpoints <service> -n <namespace>
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get endpoints <service> -n <namespace> 检查相关状态
+confidence: 0.8
+tags:
+- 05-service-connectivity
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0005 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+
+```yaml
+io_pair_id: IODIAG-NET-0005
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4293,10 +4782,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0008 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0006 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0008
+io_pair_id: IODIAG-NET-0006
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4319,10 +4808,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0009 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0007 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0009
+io_pair_id: IODIAG-NET-0007
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4345,10 +4834,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0010 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0008 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0010
+io_pair_id: IODIAG-NET-0008
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4371,10 +4860,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0011 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0009 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
-io_pair_id: IODIAG-NET-0011
+io_pair_id: IODIAG-NET-0009
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4397,10 +4886,135 @@ k8s_versions:
 - 1.32.x
 ```
 
+### IODIAG-NET-0010 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+
+```yaml
+io_pair_id: IODIAG-NET-0010
+skill_ref: 05-service-connectivity
+scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 05-service-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0011 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+
+```yaml
+io_pair_id: IODIAG-NET-0011
+skill_ref: 05-service-connectivity
+scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 05-service-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
 ### IODIAG-NET-0012 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 
 ```yaml
 io_pair_id: IODIAG-NET-0012
+skill_ref: 05-service-connectivity
+scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 05-service-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0013 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+
+```yaml
+io_pair_id: IODIAG-NET-0013
+skill_ref: 05-service-connectivity
+scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 05-service-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0014 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+
+```yaml
+io_pair_id: IODIAG-NET-0014
+skill_ref: 05-service-connectivity
+scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+severity: medium
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl label/annotate 检查相关状态
+confidence: 0.8
+tags:
+- 05-service-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0015 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+
+```yaml
+io_pair_id: IODIAG-NET-0015
 skill_ref: 05-service-connectivity
 scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
 severity: medium
@@ -4423,68 +5037,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NET-0013 — Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
+### IODIAG-NET-0016 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 
 ```yaml
-io_pair_id: IODIAG-NET-0013
-skill_ref: 05-service-connectivity
-scenario: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis
-severity: medium
-command: kubectl get svc
-output_pattern: '# 执行: kubectl get svc
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get svc 检查相关状态
-confidence: 0.8
-tags:
-- 05-service-connectivity
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-NET-0014 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
-
-```yaml
-io_pair_id: IODIAG-NET-0014
-skill_ref: 20-networkpolicy-connectivity
-scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
-severity: medium
-command: "kubectl get pods -n calico-system -o wide 2>/dev/null || \\\n  kubectl get\
-  \ pods -n kube-system -l k8s-app=cilium -o wide 2>/dev/null || \\\n  echo \"CNI\
-  \ status check needed\""
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- "执行 kubectl get pods -n calico-system -o wide 2>/dev/null || \\\n  kubectl get pods\
-  \ -n kube-system -l k8s-app=cilium -o wide 2>/dev/null || \\\n  echo \"CNI status\
-  \ check needed\" 检查相关状态"
-confidence: 0.8
-tags:
-- 20-networkpolicy-connectivity
-- kubectl
-- pod
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-NET-0015 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
-
-```yaml
-io_pair_id: IODIAG-NET-0015
-skill_ref: 20-networkpolicy-connectivity
+io_pair_id: IODIAG-NET-0016
+skill_ref: 22-networkpolicy-connectivity
 scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 severity: medium
 command: kubectl exec
@@ -4495,21 +5052,146 @@ diagnosis:
 - 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 20-networkpolicy-connectivity
+- 22-networkpolicy-connectivity
 - kubectl
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-NET-0016 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+### IODIAG-NET-0017 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 
 ```yaml
-io_pair_id: IODIAG-NET-0016
-skill_ref: 20-networkpolicy-connectivity
+io_pair_id: IODIAG-NET-0017
+skill_ref: 22-networkpolicy-connectivity
+scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 22-networkpolicy-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0018 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-NET-0018
+skill_ref: 22-networkpolicy-connectivity
+scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 22-networkpolicy-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0019 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-NET-0019
+skill_ref: 22-networkpolicy-connectivity
+scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 22-networkpolicy-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0020 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-NET-0020
+skill_ref: 22-networkpolicy-connectivity
+scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+severity: medium
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl label/annotate 检查相关状态
+confidence: 0.8
+tags:
+- 22-networkpolicy-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0021 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-NET-0021
+skill_ref: 22-networkpolicy-connectivity
+scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 22-networkpolicy-connectivity
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NET-0022 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+
+```yaml
+io_pair_id: IODIAG-NET-0022
+skill_ref: 22-networkpolicy-connectivity
 scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 severity: medium
 command: kubectl get adminnetworkpolicy
@@ -4520,22 +5202,22 @@ diagnosis:
 - 执行 kubectl get adminnetworkpolicy 检查相关状态
 confidence: 0.8
 tags:
-- 20-networkpolicy-connectivity
+- 22-networkpolicy-connectivity
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-NET-0017 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
+### IODIAG-NET-0023 — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 
 ```yaml
-io_pair_id: IODIAG-NET-0017
-skill_ref: 20-networkpolicy-connectivity
+io_pair_id: IODIAG-NET-0023
+skill_ref: 22-networkpolicy-connectivity
 scenario: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 severity: medium
 command: kubectl get pods -n kube-system | grep terway
@@ -4546,238 +5228,16 @@ diagnosis:
 - 执行 kubectl get pods -n kube-system | grep terway 检查相关状态
 confidence: 0.8
 tags:
-- 20-networkpolicy-connectivity
+- 22-networkpolicy-connectivity
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-NET-0018 — Service 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-NET-0018
-fta_ref: service-fta
-scenario: Service 异常故障树分析
-severity: high
-command: kubectl run dns-test --rm -i --restart=Never --image=busybox -- nslookup
-  ${SERVICE_NAME}.${NAMESPACE}.svc.cluster.local
-output_pattern: <typical output for this fault>
-diagnosis:
-- 'FTA 叶节点: Service 异常故障树分析'
-confidence: 0.82
-tags:
-- net
-- fta
-- leaf-node
-```
-
-### IODIAG-NET-0019 — Service 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-NET-0019
-fta_ref: service-fta
-scenario: Service 异常故障树分析
-severity: high
-command: kubectl get svc ${SERVICE_NAME} -n ${NAMESPACE} -o jsonpath='{.status.loadBalancer.ingress[*].ip}'
-output_pattern: "flowchart TD\n  TE[顶事件: Service 访问异常]\n  OR0{{OR}}\n  TE --> OR0\n\
-  \n  OR0 --> EP[Endpoint/EndpointSlice 异常]\n  OR0 --> KP[kube-proxy 异常]\n  OR0 -->\
-  \ NET[网络策略/连通性异常]\n  OR0 --> DNS[DNS 解析异常]\n  OR0 --> LB[云 LB 依赖异常]\n\n  EP_OR{{OR}}\n\
-  \  EP --> EP_OR\n  EP_OR --> EP1[无可用 Endpoint]\n  EP_OR --> EP2[EndpointSlice 不同步]\n\
-  \  EP_OR --> EP3[Endpoint 地址错误]\n\n  EP1_OR{{OR}}\n  EP1 --> EP1_OR\n  EP1_OR -->\
-  \ EP1A[Pod 不健康/NotReady]\n  EP1_OR --> EP1B[Selector 不匹配]\n  EP1_OR --> EP1C[Endpoint\
-  \ 全失效连锁]\n\n  AND_EP_FAIL{{AND}}\n  EP1C --> AND_EP_FAIL\n  AND_EP_FAIL --> EP1C1[所有\
-  \ Pod 健康检查失败]\n  AND_EP_FAIL --> EP1C2[健康检查配置过于严格]\n\n  EP1A_OR{{OR}}\n  EP1A -->\
-  \ EP1A_OR\n  EP1A_OR --> EP1A1[探针失败]\n  EP1A_OR --> EP1A2[Pod CrashLoop]\n  EP1A_OR\
-  \ --> EP1A3[容器未启动完成]\n\n  KP_OR{{OR}}\n  KP --> KP_OR\n  KP_OR --> KP1[iptables/ipvs\
-  \ 规则异常]\n  KP_OR --> KP2[kube-proxy 进程异常]\n  KP_OR --> KP3[规则同步延迟]\n\n  KP1_OR{{OR}}\n\
-  \  KP1 --> KP1_OR\n  KP1_OR --> KP1A[规则丢失/不完整]\n  KP1_OR --> KP1B[规则冲突/重复]\n  KP1_OR\
-  \ --> KP1C[conntrack 表满]\n\n  KP2_OR{{OR}}\n  KP2 --> KP2_OR\n  KP2_OR --> KP2A[进程崩溃/重启]\n\
-  \  KP2_OR --> KP2B[配置错误]\n  KP2_OR --> KP2C[API Server 不可达]\n\n  NET_OR{{OR}}\n\
-  \  NET --> NET_OR\n  NET_OR --> NET1[NetworkPolicy 拦截]\n  NET_OR --> NET2[跨节点网络不通]\n\
-  \  NET_OR --> NET3[跨区访问失败连锁]\n\n  NET1_OR{{OR}}\n  NET1 --> NET1_OR\n  NET1_OR -->\
-  \ NET1A[Ingress 策略阻断]\n  NET1_OR --> NET1B[Egress 策略阻断]\n\n  AND_TOPO{{AND}}\n \
-  \ NET3 --> AND_TOPO\n  AND_TOPO --> NET3A[跨节点/跨区网络延迟高]\n  AND_TOPO --> NET3B[拓扑感知路由配置错误]\n\
-  \n  DNS_OR{{OR}}\n  DNS --> DNS_OR\n  DNS_OR --> DNS1[CoreDNS 异常]\n  DNS_OR -->\
-  \ DNS2[解析配置错误]\n  DNS_OR --> DNS3[Service 名称解析失败]\n\n  DNS2_OR{{OR}}\n  DNS2 -->\
-  \ DNS2_OR\n  DNS2_OR --> DNS2A[search domain 配置错误]\n  DNS2_OR --> DNS2B[ndots 设置不当]\n\
-  \  DNS2_OR --> DNS2C[resolv.conf 异常]\n\n  LB_OR{{OR}}\n  LB --> LB_OR\n  LB_OR -->\
-  \ LB1[负载均衡器健康检查失败]\n  LB_OR --> LB2[监听/端口配置错误]\n  LB_OR --> LB3[后端实例未注册]\n  LB_OR\
-  \ --> LB4[安全组/防火墙拦截]\n\n  LB1_OR{{OR}}\n  LB1 --> LB1_OR\n  LB1_OR --> LB1A[健康检查路径错误]\n\
-  \  LB1_OR --> LB1B[健康检查超时设置过短]\n  LB1_OR --> LB1C[后端服务启动慢]"
-diagnosis:
-- 'FTA 叶节点: Service 异常故障树分析'
-confidence: 0.82
-tags:
-- net
-- fta
-- leaf-node
-```
-
-### IODIAG-NET-0020 — Service 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-NET-0020
-fta_ref: service-fta
-scenario: Service 异常故障树分析
-severity: high
-command: kubectl get svc ${SERVICE_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.ports[*]}'
-output_pattern: "flowchart TD\n  TE[顶事件: Service 访问异常]\n  OR0{{OR}}\n  TE --> OR0\n\
-  \n  OR0 --> EP[Endpoint/EndpointSlice 异常]\n  OR0 --> KP[kube-proxy 异常]\n  OR0 -->\
-  \ NET[网络策略/连通性异常]\n  OR0 --> DNS[DNS 解析异常]\n  OR0 --> LB[云 LB 依赖异常]\n\n  EP_OR{{OR}}\n\
-  \  EP --> EP_OR\n  EP_OR --> EP1[无可用 Endpoint]\n  EP_OR --> EP2[EndpointSlice 不同步]\n\
-  \  EP_OR --> EP3[Endpoint 地址错误]\n\n  EP1_OR{{OR}}\n  EP1 --> EP1_OR\n  EP1_OR -->\
-  \ EP1A[Pod 不健康/NotReady]\n  EP1_OR --> EP1B[Selector 不匹配]\n  EP1_OR --> EP1C[Endpoint\
-  \ 全失效连锁]\n\n  AND_EP_FAIL{{AND}}\n  EP1C --> AND_EP_FAIL\n  AND_EP_FAIL --> EP1C1[所有\
-  \ Pod 健康检查失败]\n  AND_EP_FAIL --> EP1C2[健康检查配置过于严格]\n\n  EP1A_OR{{OR}}\n  EP1A -->\
-  \ EP1A_OR\n  EP1A_OR --> EP1A1[探针失败]\n  EP1A_OR --> EP1A2[Pod CrashLoop]\n  EP1A_OR\
-  \ --> EP1A3[容器未启动完成]\n\n  KP_OR{{OR}}\n  KP --> KP_OR\n  KP_OR --> KP1[iptables/ipvs\
-  \ 规则异常]\n  KP_OR --> KP2[kube-proxy 进程异常]\n  KP_OR --> KP3[规则同步延迟]\n\n  KP1_OR{{OR}}\n\
-  \  KP1 --> KP1_OR\n  KP1_OR --> KP1A[规则丢失/不完整]\n  KP1_OR --> KP1B[规则冲突/重复]\n  KP1_OR\
-  \ --> KP1C[conntrack 表满]\n\n  KP2_OR{{OR}}\n  KP2 --> KP2_OR\n  KP2_OR --> KP2A[进程崩溃/重启]\n\
-  \  KP2_OR --> KP2B[配置错误]\n  KP2_OR --> KP2C[API Server 不可达]\n\n  NET_OR{{OR}}\n\
-  \  NET --> NET_OR\n  NET_OR --> NET1[NetworkPolicy 拦截]\n  NET_OR --> NET2[跨节点网络不通]\n\
-  \  NET_OR --> NET3[跨区访问失败连锁]\n\n  NET1_OR{{OR}}\n  NET1 --> NET1_OR\n  NET1_OR -->\
-  \ NET1A[Ingress 策略阻断]\n  NET1_OR --> NET1B[Egress 策略阻断]\n\n  AND_TOPO{{AND}}\n \
-  \ NET3 --> AND_TOPO\n  AND_TOPO --> NET3A[跨节点/跨区网络延迟高]\n  AND_TOPO --> NET3B[拓扑感知路由配置错误]\n\
-  \n  DNS_OR{{OR}}\n  DNS --> DNS_OR\n  DNS_OR --> DNS1[CoreDNS 异常]\n  DNS_OR -->\
-  \ DNS2[解析配置错误]\n  DNS_OR --> DNS3[Service 名称解析失败]\n\n  DNS2_OR{{OR}}\n  DNS2 -->\
-  \ DNS2_OR\n  DNS2_OR --> DNS2A[search domain 配置错误]\n  DNS2_OR --> DNS2B[ndots 设置不当]\n\
-  \  DNS2_OR --> DNS2C[resolv.conf 异常]\n\n  LB_OR{{OR}}\n  LB --> LB_OR\n  LB_OR -->\
-  \ LB1[负载均衡器健康检查失败]\n  LB_OR --> LB2[监听/端口配置错误]\n  LB_OR --> LB3[后端实例未注册]\n  LB_OR\
-  \ --> LB4[安全组/防火墙拦截]\n\n  LB1_OR{{OR}}\n  LB1 --> LB1_OR\n  LB1_OR --> LB1A[健康检查路径错误]\n\
-  \  LB1_OR --> LB1B[健康检查超时设置过短]\n  LB1_OR --> LB1C[后端服务启动慢]"
-diagnosis:
-- 'FTA 叶节点: Service 异常故障树分析'
-confidence: 0.82
-tags:
-- net
-- fta
-- leaf-node
-```
-
-### IODIAG-NET-0021 — Service 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-NET-0021
-fta_ref: service-fta
-scenario: Service 异常故障树分析
-severity: high
-command: kubectl get endpoints ${SERVICE_NAME} -n ${NAMESPACE} -o jsonpath='{.subsets[*].addresses}'
-output_pattern: "flowchart TD\n  TE[顶事件: Service 访问异常]\n  OR0{{OR}}\n  TE --> OR0\n\
-  \n  OR0 --> EP[Endpoint/EndpointSlice 异常]\n  OR0 --> KP[kube-proxy 异常]\n  OR0 -->\
-  \ NET[网络策略/连通性异常]\n  OR0 --> DNS[DNS 解析异常]\n  OR0 --> LB[云 LB 依赖异常]\n\n  EP_OR{{OR}}\n\
-  \  EP --> EP_OR\n  EP_OR --> EP1[无可用 Endpoint]\n  EP_OR --> EP2[EndpointSlice 不同步]\n\
-  \  EP_OR --> EP3[Endpoint 地址错误]\n\n  EP1_OR{{OR}}\n  EP1 --> EP1_OR\n  EP1_OR -->\
-  \ EP1A[Pod 不健康/NotReady]\n  EP1_OR --> EP1B[Selector 不匹配]\n  EP1_OR --> EP1C[Endpoint\
-  \ 全失效连锁]\n\n  AND_EP_FAIL{{AND}}\n  EP1C --> AND_EP_FAIL\n  AND_EP_FAIL --> EP1C1[所有\
-  \ Pod 健康检查失败]\n  AND_EP_FAIL --> EP1C2[健康检查配置过于严格]\n\n  EP1A_OR{{OR}}\n  EP1A -->\
-  \ EP1A_OR\n  EP1A_OR --> EP1A1[探针失败]\n  EP1A_OR --> EP1A2[Pod CrashLoop]\n  EP1A_OR\
-  \ --> EP1A3[容器未启动完成]\n\n  KP_OR{{OR}}\n  KP --> KP_OR\n  KP_OR --> KP1[iptables/ipvs\
-  \ 规则异常]\n  KP_OR --> KP2[kube-proxy 进程异常]\n  KP_OR --> KP3[规则同步延迟]\n\n  KP1_OR{{OR}}\n\
-  \  KP1 --> KP1_OR\n  KP1_OR --> KP1A[规则丢失/不完整]\n  KP1_OR --> KP1B[规则冲突/重复]\n  KP1_OR\
-  \ --> KP1C[conntrack 表满]\n\n  KP2_OR{{OR}}\n  KP2 --> KP2_OR\n  KP2_OR --> KP2A[进程崩溃/重启]\n\
-  \  KP2_OR --> KP2B[配置错误]\n  KP2_OR --> KP2C[API Server 不可达]\n\n  NET_OR{{OR}}\n\
-  \  NET --> NET_OR\n  NET_OR --> NET1[NetworkPolicy 拦截]\n  NET_OR --> NET2[跨节点网络不通]\n\
-  \  NET_OR --> NET3[跨区访问失败连锁]\n\n  NET1_OR{{OR}}\n  NET1 --> NET1_OR\n  NET1_OR -->\
-  \ NET1A[Ingress 策略阻断]\n  NET1_OR --> NET1B[Egress 策略阻断]\n\n  AND_TOPO{{AND}}\n \
-  \ NET3 --> AND_TOPO\n  AND_TOPO --> NET3A[跨节点/跨区网络延迟高]\n  AND_TOPO --> NET3B[拓扑感知路由配置错误]\n\
-  \n  DNS_OR{{OR}}\n  DNS --> DNS_OR\n  DNS_OR --> DNS1[CoreDNS 异常]\n  DNS_OR -->\
-  \ DNS2[解析配置错误]\n  DNS_OR --> DNS3[Service 名称解析失败]\n\n  DNS2_OR{{OR}}\n  DNS2 -->\
-  \ DNS2_OR\n  DNS2_OR --> DNS2A[search domain 配置错误]\n  DNS2_OR --> DNS2B[ndots 设置不当]\n\
-  \  DNS2_OR --> DNS2C[resolv.conf 异常]\n\n  LB_OR{{OR}}\n  LB --> LB_OR\n  LB_OR -->\
-  \ LB1[负载均衡器健康检查失败]\n  LB_OR --> LB2[监听/端口配置错误]\n  LB_OR --> LB3[后端实例未注册]\n  LB_OR\
-  \ --> LB4[安全组/防火墙拦截]\n\n  LB1_OR{{OR}}\n  LB1 --> LB1_OR\n  LB1_OR --> LB1A[健康检查路径错误]\n\
-  \  LB1_OR --> LB1B[健康检查超时设置过短]\n  LB1_OR --> LB1C[后端服务启动慢]"
-diagnosis:
-- 'FTA 叶节点: Service 异常故障树分析'
-confidence: 0.82
-tags:
-- net
-- fta
-- leaf-node
-```
-
-### IODIAG-NET-0022 — Service 异常故障树分析
-
-```yaml
-io_pair_id: IODIAG-NET-0022
-fta_ref: service-fta
-scenario: Service 异常故障树分析
-severity: high
-command: kubectl get svc ${SERVICE_NAME} -n ${NAMESPACE} -o jsonpath='{.spec.externalTrafficPolicy}'
-output_pattern: "flowchart TD\n  TE[顶事件: Service 访问异常]\n  OR0{{OR}}\n  TE --> OR0\n\
-  \n  OR0 --> EP[Endpoint/EndpointSlice 异常]\n  OR0 --> KP[kube-proxy 异常]\n  OR0 -->\
-  \ NET[网络策略/连通性异常]\n  OR0 --> DNS[DNS 解析异常]\n  OR0 --> LB[云 LB 依赖异常]\n\n  EP_OR{{OR}}\n\
-  \  EP --> EP_OR\n  EP_OR --> EP1[无可用 Endpoint]\n  EP_OR --> EP2[EndpointSlice 不同步]\n\
-  \  EP_OR --> EP3[Endpoint 地址错误]\n\n  EP1_OR{{OR}}\n  EP1 --> EP1_OR\n  EP1_OR -->\
-  \ EP1A[Pod 不健康/NotReady]\n  EP1_OR --> EP1B[Selector 不匹配]\n  EP1_OR --> EP1C[Endpoint\
-  \ 全失效连锁]\n\n  AND_EP_FAIL{{AND}}\n  EP1C --> AND_EP_FAIL\n  AND_EP_FAIL --> EP1C1[所有\
-  \ Pod 健康检查失败]\n  AND_EP_FAIL --> EP1C2[健康检查配置过于严格]\n\n  EP1A_OR{{OR}}\n  EP1A -->\
-  \ EP1A_OR\n  EP1A_OR --> EP1A1[探针失败]\n  EP1A_OR --> EP1A2[Pod CrashLoop]\n  EP1A_OR\
-  \ --> EP1A3[容器未启动完成]\n\n  KP_OR{{OR}}\n  KP --> KP_OR\n  KP_OR --> KP1[iptables/ipvs\
-  \ 规则异常]\n  KP_OR --> KP2[kube-proxy 进程异常]\n  KP_OR --> KP3[规则同步延迟]\n\n  KP1_OR{{OR}}\n\
-  \  KP1 --> KP1_OR\n  KP1_OR --> KP1A[规则丢失/不完整]\n  KP1_OR --> KP1B[规则冲突/重复]\n  KP1_OR\
-  \ --> KP1C[conntrack 表满]\n\n  KP2_OR{{OR}}\n  KP2 --> KP2_OR\n  KP2_OR --> KP2A[进程崩溃/重启]\n\
-  \  KP2_OR --> KP2B[配置错误]\n  KP2_OR --> KP2C[API Server 不可达]\n\n  NET_OR{{OR}}\n\
-  \  NET --> NET_OR\n  NET_OR --> NET1[NetworkPolicy 拦截]\n  NET_OR --> NET2[跨节点网络不通]\n\
-  \  NET_OR --> NET3[跨区访问失败连锁]\n\n  NET1_OR{{OR}}\n  NET1 --> NET1_OR\n  NET1_OR -->\
-  \ NET1A[Ingress 策略阻断]\n  NET1_OR --> NET1B[Egress 策略阻断]\n\n  AND_TOPO{{AND}}\n \
-  \ NET3 --> AND_TOPO\n  AND_TOPO --> NET3A[跨节点/跨区网络延迟高]\n  AND_TOPO --> NET3B[拓扑感知路由配置错误]\n\
-  \n  DNS_OR{{OR}}\n  DNS --> DNS_OR\n  DNS_OR --> DNS1[CoreDNS 异常]\n  DNS_OR -->\
-  \ DNS2[解析配置错误]\n  DNS_OR --> DNS3[Service 名称解析失败]\n\n  DNS2_OR{{OR}}\n  DNS2 -->\
-  \ DNS2_OR\n  DNS2_OR --> DNS2A[search domain 配置错误]\n  DNS2_OR --> DNS2B[ndots 设置不当]\n\
-  \  DNS2_OR --> DNS2C[resolv.conf 异常]\n\n  LB_OR{{OR}}\n  LB --> LB_OR\n  LB_OR -->\
-  \ LB1[负载均衡器健康检查失败]\n  LB_OR --> LB2[监听/端口配置错误]\n  LB_OR --> LB3[后端实例未注册]\n  LB_OR\
-  \ --> LB4[安全组/防火墙拦截]\n\n  LB1_OR{{OR}}\n  LB1 --> LB1_OR\n  LB1_OR --> LB1A[健康检查路径错误]\n\
-  \  LB1_OR --> LB1B[健康检查超时设置过短]\n  LB1_OR --> LB1C[后端服务启动慢]"
-diagnosis:
-- 'FTA 叶节点: Service 异常故障树分析'
-confidence: 0.82
-tags:
-- net
-- fta
-- leaf-node
-```
-
-### IODIAG-NET-0023 — calico FTA 树：Calico CNI 故障诊断
-
-```yaml
-io_pair_id: IODIAG-NET-0023
-fta_ref: calico-fta
-scenario: calico FTA 树：Calico CNI 故障诊断
-severity: high
-command: kubectl exec <calico-node-pod> -- calico-node node-status
-output_pattern: '# 1. 检查 Felix 状态
-
-  kubectl exec -n kube-system <calico-node-pod> -- calico-node status
-
-  # 2. 查看 Bird 会话状态
-
-  kubectl exec -n kube-system <calico-node-pod> -- birdcl show protocols
-
-  # 3. 检查 Felix 与 Typha 的连接
-
-  kubectl exec -n kube-system <calico-node-pod> -- netstat -tlnp | grep 5473
-
-  # 4. 如需要，启用 Felix 的详细日志
-
-  kubectl exec -n kube-system <calico-node-pod> -- sed -i ''s/LOG_LEVEL=info/LOG_LEVEL=debug/''
-  /etc/calico/confd/config-node.env
-
-  kubectl exec -n kube-system <calico-node-pod> -- kill -HUP 1  # 重新加载配置'
-diagnosis:
-- 'FTA 叶节点: calico FTA 树：Calico CNI 故障诊断'
-confidence: 0.82
-tags:
-- net
-- fta
-- leaf-node
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-NET-0024 — calico FTA 树：Calico CNI 故障诊断
@@ -4978,7 +5438,7 @@ io_pair_id: IODIAG-NET-0033
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get pods -n kube-system -l k8s-app=calico-node -o name || kubectl
+command: kubectl get pods -n kube-system -l k8s-app=calico-node -o name \|\| kubectl
   get pods -n kube-system -l k8s-app=cilium -o name
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -4998,7 +5458,7 @@ fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
 command: kubectl get configmap -n kube-system calico-config -o jsonpath='{.data.cni_network_config}'
-  2>/dev/null || kubectl get configmap -n kube-system cilium-config -o yaml
+  2>/dev/null \|\| kubectl get configmap -n kube-system cilium-config -o yaml
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5034,8 +5494,8 @@ io_pair_id: IODIAG-NET-0036
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 | grep -i
-  'policy|error'
+command: kubectl logs -n kube-system -l k8s-app=calico-node --tail=100 \| grep -i
+  'policy\|error'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5053,7 +5513,7 @@ io_pair_id: IODIAG-NET-0037
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -A --no-headers | wc -l
+command: kubectl get networkpolicy -A --no-headers \| wc -l
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5071,7 +5531,7 @@ io_pair_id: IODIAG-NET-0038
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -n ${NAMESPACE} -o name | wc -l
+command: kubectl get networkpolicy -n ${NAMESPACE} -o name \| wc -l
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5108,7 +5568,7 @@ io_pair_id: IODIAG-NET-0040
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -n ${NAMESPACE} -o yaml | grep -A5 'ingress:|egress:'
+command: kubectl get networkpolicy -n ${NAMESPACE} -o yaml \| grep -A5 'ingress:\|egress:'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: NetworkPolicy 异常故障树分析'
@@ -5275,7 +5735,7 @@ fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
 command: kubectl get pods -n kube-system -l component=kube-apiserver -o jsonpath='{.items[*].spec.containers[*].command}'
-  | grep -o 'audit-log-path=[^ ]*'
+  \| grep -o 'audit-log-path=[^ ]*'
 output_pattern: "flowchart TD\n  TE[顶事件: NetworkPolicy 异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CFG[策略配置错误]\n  OR0 --> CNI[CNI 实现异常]\n  OR0 --> NS[命名空间隔离异常]\n\
   \  OR0 --> DNS[DNS 访问被阻断]\n  OR0 --> AUDIT[审计/回滚缺失]\n\n  %% 策略配置错误分支 - 扩展到3-4层\n\
@@ -5413,7 +5873,7 @@ io_pair_id: IODIAG-NET-0052
 fta_ref: networkpolicy-fta
 scenario: NetworkPolicy 异常故障树分析
 severity: high
-command: kubectl rollout history -n ${NAMESPACE} 2>/dev/null || echo "NetworkPolicy
+command: kubectl rollout history -n ${NAMESPACE} 2>/dev/null \|\| echo "NetworkPolicy
   不支持原生 rollout"
 output_pattern: "flowchart TD\n  TE[顶事件: NetworkPolicy 异常]\n  OR0{{OR}}\n  TE -->\
   \ OR0\n\n  OR0 --> CFG[策略配置错误]\n  OR0 --> CNI[CNI 实现异常]\n  OR0 --> NS[命名空间隔离异常]\n\
@@ -5461,8 +5921,8 @@ fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox
-  -o json | jq '[.items[] | select(.message | test("ENI|bindquota|AttachNetworkInterface"))]
-  | length'
+  -o json \| jq '[.items[] \| select(.message \| test("ENI\|bindquota\|AttachNetworkInterface"))]
+  \| length'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5480,8 +5940,8 @@ io_pair_id: IODIAG-NET-0054
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "bindquota
-  exceeded|no available ENI slot"
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "bindquota
+  exceeded\|no available ENI slot"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5499,8 +5959,8 @@ io_pair_id: IODIAG-NET-0055
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "AttachNetworkInterface
-  failed|bindENI failed"
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "AttachNetworkInterface
+  failed\|bindENI failed"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5538,7 +5998,7 @@ fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector reason=FailedCreatePodSandBox
-  -o json | jq '[.items[] | select(.message | test("IP|pool|address"))] | length'
+  -o json \| jq '[.items[] \| select(.message \| test("IP\|pool\|address"))] \| length'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5556,8 +6016,8 @@ io_pair_id: IODIAG-NET-0058
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "no available
-  IP|IP pool exhausted"
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "no available
+  IP\|IP pool exhausted"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5576,7 +6036,7 @@ fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
 command: kubectl exec -n kube-system $(kubectl get pods -n kube-system -l app=terway
-  -o jsonpath='{.items[0].metadata.name}') -- terway-cli show | grep -c "allocated"
+  -o jsonpath='{.items[0].metadata.name}') -- terway-cli show \| grep -c "allocated"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5594,7 +6054,7 @@ io_pair_id: IODIAG-NET-0060
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "IP not released|stale
+command: kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "IP not released\|stale
   IP"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5613,7 +6073,7 @@ io_pair_id: IODIAG-NET-0061
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "IP conflict|duplicate
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "IP conflict\|duplicate
   IP"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5632,8 +6092,8 @@ io_pair_id: IODIAG-NET-0062
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E "FailedCreatePodSandBox|cni
-  plugin|terway"
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E "FailedCreatePodSandBox\|cni
+  plugin\|terway"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5651,7 +6111,7 @@ io_pair_id: IODIAG-NET-0063
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "invalid CNI|error
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "invalid CNI\|error
   loading CNI"
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5670,7 +6130,7 @@ io_pair_id: IODIAG-NET-0064
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: 'kubectl get pods -n kube-system -l app=terway -o json | jq ''.items[] |
+command: 'kubectl get pods -n kube-system -l app=terway -o json \| jq ''.items[] \|
   {name: .metadata.name, ready: .status.containerStatuses[0].ready, restarts: .status.containerStatuses[0].restartCount}'''
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -5689,8 +6149,8 @@ io_pair_id: IODIAG-NET-0065
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "failed to
-  add route|iptables error"
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "failed to
+  add route\|iptables error"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5708,8 +6168,8 @@ io_pair_id: IODIAG-NET-0066
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl get node ${NODE_NAME} -o json | jq '.status.conditions[] | select(.type=="NetworkUnavailable")
-  | .status'
+command: kubectl get node ${NODE_NAME} -o json \| jq '.status.conditions[] \| select(.type=="NetworkUnavailable")
+  \| .status'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5745,8 +6205,8 @@ io_pair_id: IODIAG-NET-0068
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=30 2>&1 | grep -E "connection
-  refused|connection timed out|no route"
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=30 2>&1 \| grep -E "connection
+  refused\|connection timed out\|no route"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Terway 异常故障树分析'
@@ -5764,7 +6224,7 @@ io_pair_id: IODIAG-NET-0069
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep -E "Throttling|ServiceUnavailable|connection
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep -E "Throttling\|ServiceUnavailable\|connection
   refused"
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_terway_fta\", \"next_step\": \"event_terway_abnormal\" },\n\
@@ -6135,14 +6595,13 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[17-系统基础/05-速查卡/k8s.md|k8s]] 版本兼容\"\
-  ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
-  \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
-  step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
-  \ 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"commands\"\
-  : [\n          { \"id\": \"check_daemon_status\", \"description\": \"检查 Terway DaemonSet\
-  \ 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway -o json | jq '.items[]\
-  \ | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
+  \ \"确认 CNI 版本与 K8s 版本兼容\"], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\
+  \n    },\n    {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\"\
+  , \"step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或\
+  \ CNI 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"\
+  commands\": [\n          { \"id\": \"check_daemon_status\", \"description\": \"\
+  检查 Terway DaemonSet 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway\
+  \ -o json | jq '.items[] | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
   \ restarts: .status.containerStatuses[0].restartCount, state: .status.containerStatuses[0].state}'\"\
   , \"timeout\": \"10s\" },\n          { \"id\": \"check_daemon_logs\", \"description\"\
   : \"检查 Terway 守护进程日志\", \"exec\": \"kubectl logs -n kube-system -l app=terway --tail=30\
@@ -6443,8 +6902,8 @@ io_pair_id: IODIAG-NET-0070
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=100 | grep -E "Throttling|rate
-  limit|429"
+command: kubectl logs -n kube-system -l app=terway --tail=100 \| grep -E "Throttling\|rate
+  limit\|429"
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_terway_fta\", \"next_step\": \"event_terway_abnormal\" },\n\
   \    { \"name\": \"顶事件: Terway异常\", \"action\": \"event\", \"step\": \"event_terway_abnormal\"\
@@ -6814,14 +7273,13 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[17-系统基础/05-速查卡/k8s.md|k8s]] 版本兼容\"\
-  ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
-  \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
-  step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
-  \ 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"commands\"\
-  : [\n          { \"id\": \"check_daemon_status\", \"description\": \"检查 Terway DaemonSet\
-  \ 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway -o json | jq '.items[]\
-  \ | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
+  \ \"确认 CNI 版本与 K8s 版本兼容\"], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\
+  \n    },\n    {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\"\
+  , \"step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或\
+  \ CNI 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"\
+  commands\": [\n          { \"id\": \"check_daemon_status\", \"description\": \"\
+  检查 Terway DaemonSet 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway\
+  \ -o json | jq '.items[] | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
   \ restarts: .status.containerStatuses[0].restartCount, state: .status.containerStatuses[0].state}'\"\
   , \"timeout\": \"10s\" },\n          { \"id\": \"check_daemon_logs\", \"description\"\
   : \"检查 Terway 守护进程日志\", \"exec\": \"kubectl logs -n kube-system -l app=terway --tail=30\
@@ -7492,14 +7950,13 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[17-系统基础/05-速查卡/k8s.md|k8s]] 版本兼容\"\
-  ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
-  \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
-  step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
-  \ 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"commands\"\
-  : [\n          { \"id\": \"check_daemon_status\", \"description\": \"检查 Terway DaemonSet\
-  \ 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway -o json | jq '.items[]\
-  \ | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
+  \ \"确认 CNI 版本与 K8s 版本兼容\"], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\
+  \n    },\n    {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\"\
+  , \"step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或\
+  \ CNI 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"\
+  commands\": [\n          { \"id\": \"check_daemon_status\", \"description\": \"\
+  检查 Terway DaemonSet 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway\
+  \ -o json | jq '.items[] | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
   \ restarts: .status.containerStatuses[0].restartCount, state: .status.containerStatuses[0].state}'\"\
   , \"timeout\": \"10s\" },\n          { \"id\": \"check_daemon_logs\", \"description\"\
   : \"检查 Terway 守护进程日志\", \"exec\": \"kubectl logs -n kube-system -l app=terway --tail=30\
@@ -7800,7 +8257,7 @@ io_pair_id: IODIAG-NET-0072
 fta_ref: terway-fta
 scenario: Terway 异常故障树分析
 severity: high
-command: kubectl logs -n kube-system -l app=terway --tail=50 | grep "connection refused"
+command: kubectl logs -n kube-system -l app=terway --tail=50 \| grep "connection refused"
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_terway_fta\", \"next_step\": \"event_terway_abnormal\" },\n\
   \    { \"name\": \"顶事件: Terway异常\", \"action\": \"event\", \"step\": \"event_terway_abnormal\"\
@@ -8170,14 +8627,13 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   detection\": { \"events\": [\"FailedCreatePodSandBox\"], \"metrics\": [], \"logs\"\
   : [\"invalid CNI configuration\", \"error loading CNI config\"] },\n        \"remediation\"\
   : { \"manual_steps\": [\"检查 /etc/cni/net.d/ 配置文件\", \"验证 Terway ConfigMap 配置\",\
-  \ \"确认 CNI 版本与 [[17-系统基础/05-速查卡/k8s.md|k8s]] 版本兼容\"\
-  ], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\n    },\n  \
-  \  {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\", \"\
-  step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或 CNI\
-  \ 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"commands\"\
-  : [\n          { \"id\": \"check_daemon_status\", \"description\": \"检查 Terway DaemonSet\
-  \ 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway -o json | jq '.items[]\
-  \ | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
+  \ \"确认 CNI 版本与 K8s 版本兼容\"], \"auto_actions\": [] } },\n      \"next_step\": \"gate_root_or\"\
+  \n    },\n    {\n      \"name\": \"底事件: CNI 二进制/守护进程异常\", \"action\": \"bottom_event\"\
+  , \"step\": \"evt_cni_daemon\",\n      \"description\": \"Terway Daemon Pod 崩溃或\
+  \ CNI 二进制文件损坏\",\n      \"cmd\": {\n        \"type\": \"parallel\",\n        \"\
+  commands\": [\n          { \"id\": \"check_daemon_status\", \"description\": \"\
+  检查 Terway DaemonSet 状态\", \"exec\": \"kubectl get pods -n kube-system -l app=terway\
+  \ -o json | jq '.items[] | {name: .metadata.name, node: .spec.nodeName, ready: .status.containerStatuses[0].ready,\
   \ restarts: .status.containerStatuses[0].restartCount, state: .status.containerStatuses[0].state}'\"\
   , \"timeout\": \"10s\" },\n          { \"id\": \"check_daemon_logs\", \"description\"\
   : \"检查 Terway 守护进程日志\", \"exec\": \"kubectl logs -n kube-system -l app=terway --tail=30\
@@ -8698,6 +9154,32 @@ io_pair_id: IODIAG-NODE-0009
 skill_ref: 01-node-notready
 scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 severity: medium
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl exec 检查相关状态
+confidence: 0.8
+tags:
+- 01-node-notready
+- kubectl
+- node
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NODE-0010 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-NODE-0010
+skill_ref: 01-node-notready
+scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+severity: medium
 command: kubectl cordon
 output_pattern: '# 执行: kubectl cordon
 
@@ -8717,10 +9199,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NODE-0010 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+### IODIAG-NODE-0011 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-NODE-0010
+io_pair_id: IODIAG-NODE-0011
 skill_ref: 01-node-notready
 scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 severity: medium
@@ -8744,10 +9226,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NODE-0011 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+### IODIAG-NODE-0012 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-NODE-0011
+io_pair_id: IODIAG-NODE-0012
 skill_ref: 01-node-notready
 scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 severity: medium
@@ -8771,10 +9253,36 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NODE-0012 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+### IODIAG-NODE-0013 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-NODE-0012
+io_pair_id: IODIAG-NODE-0013
+skill_ref: 01-node-notready
+scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 01-node-notready
+- kubectl
+- node
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NODE-0014 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-NODE-0014
 skill_ref: 01-node-notready
 scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 severity: medium
@@ -8797,10 +9305,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NODE-0013 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
+### IODIAG-NODE-0015 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-NODE-0013
+io_pair_id: IODIAG-NODE-0015
 skill_ref: 01-node-notready
 scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
 severity: medium
@@ -8824,157 +9332,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-NODE-0014 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-NODE-0014
-skill_ref: 01-node-notready
-scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
-severity: medium
-command: kubectl get pods --field-selector spec.nodeName=<node-name>
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods --field-selector spec.nodeName=<node-name> 检查相关状态
-confidence: 0.8
-tags:
-- 01-node-notready
-- kubectl
-- node
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-NODE-0015 — 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-NODE-0015
-skill_ref: 01-node-notready
-scenario: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation
-severity: medium
-command: kubectl debug node/
-output_pattern: '# 执行: kubectl debug node/
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl debug node/ 检查相关状态
-confidence: 0.8
-tags:
-- 01-node-notready
-- kubectl
-- node
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
 ### IODIAG-NODE-0016 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-NODE-0016
-skill_ref: 19-node-resource-pressure
-scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-severity: medium
-command: "kubectl get nodes -o json | jq -r '\n  .items[] |\n  select(.status.conditions[]?.status\
-  \ == \"True\" and\n         (.status.conditions[]?.type | test(\"Pressure\"))) |\n\
-  \  .metadata.name'"
-output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
-
-  <node-name>    NotReady   <roles>          <age>   <version>'
-diagnosis:
-- "执行 kubectl get nodes -o json | jq -r '\n  .items[] |\n  select(.status.conditions[]?.status\
-  \ == \"True\" and\n         (.status.conditions[]?.type | test(\"Pressure\"))) |\n\
-  \  .metadata.name' 检查相关状态"
-confidence: 0.8
-tags:
-- 19-node-resource-pressure
-- kubectl
-- node
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-NODE-0017 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-NODE-0017
-skill_ref: 19-node-resource-pressure
-scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-severity: medium
-command: "kubectl get pods -A --field-selector=status.phase=Failed | grep Evicted\
-  \ | \\\n  awk '{print $1}' | sort | uniq -c | sort -rn"
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- "执行 kubectl get pods -A --field-selector=status.phase=Failed | grep Evicted | \\\
-  \n  awk '{print $1}' | sort | uniq -c | sort -rn 检查相关状态"
-confidence: 0.8
-tags:
-- 19-node-resource-pressure
-- kubectl
-- node
-- pod
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-NODE-0018 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-NODE-0018
-skill_ref: 19-node-resource-pressure
-scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-severity: medium
-command: "kubectl get pods -A --field-selector spec.nodeName=<node-name> \\\n  -o\
-  \ custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name | \\\n  grep\
-  \ -v kube-system | wc -l"
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- "执行 kubectl get pods -A --field-selector spec.nodeName=<node-name> \\\n  -o custom-columns=NAMESPACE:.metadata.namespace,NAME:.metadata.name\
-  \ | \\\n  grep -v kube-system | wc -l 检查相关状态"
-confidence: 0.8
-tags:
-- 19-node-resource-pressure
-- kubectl
-- node
-- pod
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-NODE-0019 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-NODE-0019
-skill_ref: 19-node-resource-pressure
+skill_ref: 20-node-resource-pressure
 scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 severity: medium
 command: kubectl get nodes
@@ -8985,23 +9347,23 @@ diagnosis:
 - 执行 kubectl get nodes 检查相关状态
 confidence: 0.8
 tags:
-- 19-node-resource-pressure
+- 20-node-resource-pressure
 - kubectl
 - node
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-NODE-0020 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+### IODIAG-NODE-0017 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-NODE-0020
-skill_ref: 19-node-resource-pressure
+io_pair_id: IODIAG-NODE-0017
+skill_ref: 20-node-resource-pressure
 scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -A | grep Evicted
@@ -9012,24 +9374,24 @@ diagnosis:
 - 执行 kubectl get pods -A | grep Evicted 检查相关状态
 confidence: 0.8
 tags:
-- 19-node-resource-pressure
+- 20-node-resource-pressure
 - kubectl
 - node
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-NODE-0021 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+### IODIAG-NODE-0018 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-NODE-0021
-skill_ref: 19-node-resource-pressure
+io_pair_id: IODIAG-NODE-0018
+skill_ref: 20-node-resource-pressure
 scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
 severity: medium
 command: kubectl get events --field-selector reason=OOMKilled
@@ -9040,25 +9402,103 @@ diagnosis:
 - 执行 kubectl get events --field-selector reason=OOMKilled 检查相关状态
 confidence: 0.8
 tags:
-- 19-node-resource-pressure
+- 20-node-resource-pressure
 - kubectl
 - node
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-## Domain: OBS (11 条)
+### IODIAG-NODE-0019 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-NODE-0019
+skill_ref: 20-node-resource-pressure
+scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 20-node-resource-pressure
+- kubectl
+- node
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NODE-0020 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-NODE-0020
+skill_ref: 20-node-resource-pressure
+scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+severity: medium
+command: kubectl cordon
+output_pattern: '# 执行: kubectl cordon
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl cordon 检查相关状态
+confidence: 0.8
+tags:
+- 20-node-resource-pressure
+- kubectl
+- node
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-NODE-0021 — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-NODE-0021
+skill_ref: 20-node-resource-pressure
+scenario: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
+severity: medium
+command: kubectl drain
+output_pattern: '# 执行: kubectl drain
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl drain 检查相关状态
+confidence: 0.8
+tags:
+- 20-node-resource-pressure
+- kubectl
+- node
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+## Domain: OBS (24 条)
 
 ### IODIAG-OBS-0001 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-OBS-0001
-skill_ref: 15-monitoring-alerting-failure
+skill_ref: 16-monitoring-alerting-failure
 scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 severity: medium
 command: kubectl auth can-i list servicemonitors -n monitoring
@@ -9069,7 +9509,7 @@ diagnosis:
 - 执行 kubectl auth can-i list servicemonitors -n monitoring 检查相关状态
 confidence: 0.8
 tags:
-- 15-monitoring-alerting-failure
+- 16-monitoring-alerting-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -9083,7 +9523,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-OBS-0002
-skill_ref: 15-monitoring-alerting-failure
+skill_ref: 16-monitoring-alerting-failure
 scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n monitoring
@@ -9094,7 +9534,7 @@ diagnosis:
 - 执行 kubectl get pods -n monitoring 检查相关状态
 confidence: 0.8
 tags:
-- 15-monitoring-alerting-failure
+- 16-monitoring-alerting-failure
 - kubectl
 - pod
 - status
@@ -9110,7 +9550,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-OBS-0003
-skill_ref: 15-monitoring-alerting-failure
+skill_ref: 16-monitoring-alerting-failure
 scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 severity: medium
 command: kubectl get servicemonitor -A
@@ -9121,7 +9561,7 @@ diagnosis:
 - 执行 kubectl get servicemonitor -A 检查相关状态
 confidence: 0.8
 tags:
-- 15-monitoring-alerting-failure
+- 16-monitoring-alerting-failure
 - kubectl
 - status
 k8s_versions:
@@ -9136,20 +9576,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-OBS-0004
-skill_ref: 15-monitoring-alerting-failure
+skill_ref: 16-monitoring-alerting-failure
 scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 severity: medium
-command: kubectl get servicemonitor
-output_pattern: '# 执行: kubectl get servicemonitor
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get servicemonitor 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 15-monitoring-alerting-failure
+- 16-monitoring-alerting-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -9162,20 +9601,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-OBS-0005
-skill_ref: 15-monitoring-alerting-failure
+skill_ref: 16-monitoring-alerting-failure
 scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 severity: medium
-command: kubectl get prometheusrule
-output_pattern: '# 执行: kubectl get prometheusrule
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get prometheusrule 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 15-monitoring-alerting-failure
+- 16-monitoring-alerting-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -9188,7 +9626,184 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-OBS-0006
-skill_ref: 15-monitoring-alerting-failure
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl label/annotate 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0007 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0007
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0008 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0008
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0009 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0009
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl scale --replicas=0
+output_pattern: '# 执行: kubectl scale --replicas=0
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl scale --replicas=0 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0010 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0010
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0011 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0011
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl get servicemonitor
+output_pattern: '# 执行: kubectl get servicemonitor
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get servicemonitor 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0012 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0012
+skill_ref: 16-monitoring-alerting-failure
+scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+severity: medium
+command: kubectl get prometheusrule
+output_pattern: '# 执行: kubectl get prometheusrule
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get prometheusrule 检查相关状态
+confidence: 0.8
+tags:
+- 16-monitoring-alerting-failure
+- kubectl
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0013 — 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0013
+skill_ref: 16-monitoring-alerting-failure
 scenario: 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation
 severity: medium
 command: kubectl get alertmanagerconfig
@@ -9199,7 +9814,7 @@ diagnosis:
 - 执行 kubectl get alertmanagerconfig 检查相关状态
 confidence: 0.8
 tags:
-- 15-monitoring-alerting-failure
+- 16-monitoring-alerting-failure
 - kubectl
 - status
 k8s_versions:
@@ -9210,11 +9825,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-OBS-0007 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+### IODIAG-OBS-0014 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-OBS-0007
-skill_ref: 16-logging-pipeline-failure
+io_pair_id: IODIAG-OBS-0014
+skill_ref: 17-logging-pipeline-failure
 scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n logging
@@ -9225,7 +9840,7 @@ diagnosis:
 - 执行 kubectl get pods -n logging 检查相关状态
 confidence: 0.8
 tags:
-- 16-logging-pipeline-failure
+- 17-logging-pipeline-failure
 - kubectl
 - pod
 - status
@@ -9237,11 +9852,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-OBS-0008 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+### IODIAG-OBS-0015 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-OBS-0008
-skill_ref: 16-logging-pipeline-failure
+io_pair_id: IODIAG-OBS-0015
+skill_ref: 17-logging-pipeline-failure
 scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 severity: medium
 command: kubectl get events
@@ -9252,7 +9867,7 @@ diagnosis:
 - 执行 kubectl get events 检查相关状态
 confidence: 0.8
 tags:
-- 16-logging-pipeline-failure
+- 17-logging-pipeline-failure
 - kubectl
 - status
 k8s_versions:
@@ -9263,11 +9878,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-OBS-0009 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+### IODIAG-OBS-0016 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-OBS-0009
-skill_ref: 16-logging-pipeline-failure
+io_pair_id: IODIAG-OBS-0016
+skill_ref: 17-logging-pipeline-failure
 scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 severity: medium
 command: kubectl exec -n logging AGENT_POD -- df -h /var/log/fluentd-buffers
@@ -9278,7 +9893,7 @@ diagnosis:
 - 执行 kubectl exec -n logging AGENT_POD -- df -h /var/log/fluentd-buffers 检查相关状态
 confidence: 0.8
 tags:
-- 16-logging-pipeline-failure
+- 17-logging-pipeline-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -9288,11 +9903,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-OBS-0010 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+### IODIAG-OBS-0017 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-OBS-0010
-skill_ref: 16-logging-pipeline-failure
+io_pair_id: IODIAG-OBS-0017
+skill_ref: 17-logging-pipeline-failure
 scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 severity: medium
 command: kubectl top pods -n logging
@@ -9303,7 +9918,7 @@ diagnosis:
 - 执行 kubectl top pods -n logging 检查相关状态
 confidence: 0.8
 tags:
-- 16-logging-pipeline-failure
+- 17-logging-pipeline-failure
 - kubectl
 - pod
 k8s_versions:
@@ -9314,11 +9929,161 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-OBS-0011 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+### IODIAG-OBS-0018 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-OBS-0011
-skill_ref: 16-logging-pipeline-failure
+io_pair_id: IODIAG-OBS-0018
+skill_ref: 17-logging-pipeline-failure
+scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+severity: medium
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl exec 检查相关状态
+confidence: 0.8
+tags:
+- 17-logging-pipeline-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0019 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0019
+skill_ref: 17-logging-pipeline-failure
+scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 17-logging-pipeline-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0020 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0020
+skill_ref: 17-logging-pipeline-failure
+scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 17-logging-pipeline-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0021 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0021
+skill_ref: 17-logging-pipeline-failure
+scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 17-logging-pipeline-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0022 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0022
+skill_ref: 17-logging-pipeline-failure
+scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 17-logging-pipeline-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0023 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0023
+skill_ref: 17-logging-pipeline-failure
+scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+severity: medium
+command: kubectl delete --all
+output_pattern: '# 执行: kubectl delete --all
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete --all 检查相关状态
+confidence: 0.8
+tags:
+- 17-logging-pipeline-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-OBS-0024 — 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-OBS-0024
+skill_ref: 17-logging-pipeline-failure
 scenario: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation
 severity: medium
 command: kubectl get --raw /api/v1/nodes/<node>/proxy/logs/
@@ -9329,7 +10094,7 @@ diagnosis:
 - 执行 kubectl get --raw /api/v1/nodes/<node>/proxy/logs/ 检查相关状态
 confidence: 0.8
 tags:
-- 16-logging-pipeline-failure
+- 17-logging-pipeline-failure
 - kubectl
 - node
 - status
@@ -9342,7 +10107,7 @@ k8s_versions:
 - 1.32.x
 ```
 
-## Domain: POD (81 条)
+## Domain: POD (89 条)
 
 ### IODIAG-POD-0001 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
 
@@ -9561,6 +10326,136 @@ io_pair_id: IODIAG-POD-0009
 skill_ref: 02-pod-crashloop-oomkilled
 scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
 severity: medium
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl exec 检查相关状态
+confidence: 0.8
+tags:
+- 02-pod-crashloop-oomkilled
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0010 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0010
+skill_ref: 02-pod-crashloop-oomkilled
+scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 02-pod-crashloop-oomkilled
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0011 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0011
+skill_ref: 02-pod-crashloop-oomkilled
+scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 02-pod-crashloop-oomkilled
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0012 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0012
+skill_ref: 02-pod-crashloop-oomkilled
+scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 02-pod-crashloop-oomkilled
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0013 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0013
+skill_ref: 02-pod-crashloop-oomkilled
+scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 02-pod-crashloop-oomkilled
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0014 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0014
+skill_ref: 02-pod-crashloop-oomkilled
+scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
+severity: medium
 command: kubectl get endpoints <service> -n <ns>
 output_pattern: '# 执行: kubectl get endpoints <service> -n <ns>
 
@@ -9581,10 +10476,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0010 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
+### IODIAG-POD-0015 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0010
+io_pair_id: IODIAG-POD-0015
 skill_ref: 02-pod-crashloop-oomkilled
 scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
 severity: medium
@@ -9607,262 +10502,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0011 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0011
-skill_ref: 02-pod-crashloop-oomkilled
-scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
-severity: medium
-command: kubectl debug --custom
-output_pattern: '# 执行: kubectl debug --custom
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl debug --custom 检查相关状态
-confidence: 0.8
-tags:
-- 02-pod-crashloop-oomkilled
-- kubectl
-- pod
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0012 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0012
-skill_ref: 02-pod-crashloop-oomkilled
-scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
-severity: medium
-command: kubectl get pod -o wide
-output_pattern: '# 执行: kubectl get pod -o wide
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get pod -o wide 检查相关状态
-confidence: 0.8
-tags:
-- 02-pod-crashloop-oomkilled
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0013 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0013
-skill_ref: 02-pod-crashloop-oomkilled
-scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
-severity: medium
-command: kubectl top pod --containers
-output_pattern: '# 执行: kubectl top pod --containers
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl top pod --containers 检查相关状态
-confidence: 0.8
-tags:
-- 02-pod-crashloop-oomkilled
-- kubectl
-- pod
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0014 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0014
-skill_ref: 02-pod-crashloop-oomkilled
-scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
-severity: medium
-command: kubectl events
-output_pattern: '# 执行: kubectl events
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl events 检查相关状态
-confidence: 0.8
-tags:
-- 02-pod-crashloop-oomkilled
-- kubectl
-- pod
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0015 — Pod CrashLoopBackOff & OOMKilled 诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0015
-skill_ref: 02-pod-crashloop-oomkilled
-scenario: Pod CrashLoopBackOff & OOMKilled 诊断与修复
-severity: medium
-command: kubectl get cm kubelet-config -n kube-system -o jsonpath='{.data.kubelet}'
-  | grep SidecarContainers
-output_pattern: '# 执行: kubectl get cm kubelet-config -n kube-system -o jsonpath=''{.data.kubelet}''
-  | grep SidecarContainers
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get cm kubelet-config -n kube-system -o jsonpath='{.data.kubelet}' |
-  grep SidecarContainers 检查相关状态
-confidence: 0.8
-tags:
-- 02-pod-crashloop-oomkilled
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
 ### IODIAG-POD-0016 — Pod Pending 调度失败诊断与修复
 
 ```yaml
 io_pair_id: IODIAG-POD-0016
-skill_ref: 03-pod-pending
-scenario: Pod Pending 调度失败诊断与修复
-severity: medium
-command: kubectl get pods -n <namespace> --field-selector status.phase=Pending --no-headers
-  | wc -l
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods -n <namespace> --field-selector status.phase=Pending --no-headers
-  | wc -l 检查相关状态
-confidence: 0.8
-tags:
-- 03-pod-pending
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0017 — Pod Pending 调度失败诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0017
-skill_ref: 03-pod-pending
-scenario: Pod Pending 调度失败诊断与修复
-severity: medium
-command: kubectl get pods -n <namespace> --field-selector status.phase=Pending -o
-  custom-columns=NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].name,KIND:.metadata.ownerReferences[0].kind
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods -n <namespace> --field-selector status.phase=Pending -o custom-columns=NAME:.metadata.name,OWNER:.metadata.ownerReferences[0].name,KIND:.metadata.ownerReferences[0].kind
-  检查相关状态
-confidence: 0.8
-tags:
-- 03-pod-pending
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0018 — Pod Pending 调度失败诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0018
-skill_ref: 03-pod-pending
-scenario: Pod Pending 调度失败诊断与修复
-severity: medium
-command: kubectl top nodes --no-headers 2>/dev/null || echo "metrics-server not available,
-  skip"
-output_pattern: '# 执行: kubectl top nodes --no-headers 2>/dev/null || echo "metrics-server
-  not available, skip"
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl top nodes --no-headers 2>/dev/null || echo "metrics-server not available,
-  skip" 检查相关状态
-confidence: 0.8
-tags:
-- 03-pod-pending
-- kubectl
-- node
-- pod
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0019 — Pod Pending 调度失败诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0019
-skill_ref: 03-pod-pending
-scenario: Pod Pending 调度失败诊断与修复
-severity: medium
-command: kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-headers
-  | wc -l
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods --all-namespaces --field-selector status.phase=Pending --no-headers
-  | wc -l 检查相关状态
-confidence: 0.8
-tags:
-- 03-pod-pending
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-POD-0020 — Pod Pending 调度失败诊断与修复
-
-```yaml
-io_pair_id: IODIAG-POD-0020
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -9885,10 +10528,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0021 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0017 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0021
+io_pair_id: IODIAG-POD-0017
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -9912,10 +10555,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0022 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0018 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0022
+io_pair_id: IODIAG-POD-0018
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -9939,10 +10582,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0023 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0019 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0023
+io_pair_id: IODIAG-POD-0019
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -9967,10 +10610,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0024 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0020 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0024
+io_pair_id: IODIAG-POD-0020
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -9993,10 +10636,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0025 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0021 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0025
+io_pair_id: IODIAG-POD-0021
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -10019,10 +10662,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0026 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0022 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0026
+io_pair_id: IODIAG-POD-0022
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -10046,10 +10689,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0027 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0023 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0027
+io_pair_id: IODIAG-POD-0023
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -10073,10 +10716,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0028 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0024 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0028
+io_pair_id: IODIAG-POD-0024
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -10100,10 +10743,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0029 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0025 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0029
+io_pair_id: IODIAG-POD-0025
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -10127,10 +10770,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-POD-0030 — Pod Pending 调度失败诊断与修复
+### IODIAG-POD-0026 — Pod Pending 调度失败诊断与修复
 
 ```yaml
-io_pair_id: IODIAG-POD-0030
+io_pair_id: IODIAG-POD-0026
 skill_ref: 03-pod-pending
 scenario: Pod Pending 调度失败诊断与修复
 severity: medium
@@ -10154,6 +10797,113 @@ k8s_versions:
 - 1.32.x
 ```
 
+### IODIAG-POD-0027 — Pod Pending 调度失败诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0027
+skill_ref: 03-pod-pending
+scenario: Pod Pending 调度失败诊断与修复
+severity: medium
+command: kubectl get nodes
+output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
+
+  <node-name>    NotReady   <roles>          <age>   <version>'
+diagnosis:
+- 执行 kubectl get nodes 检查相关状态
+confidence: 0.8
+tags:
+- 03-pod-pending
+- kubectl
+- node
+- pod
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0028 — Pod Pending 调度失败诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0028
+skill_ref: 03-pod-pending
+scenario: Pod Pending 调度失败诊断与修复
+severity: medium
+command: kubectl get events
+output_pattern: '# 执行: kubectl get events
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl get events 检查相关状态
+confidence: 0.8
+tags:
+- 03-pod-pending
+- kubectl
+- pod
+- status
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0029 — Pod Pending 调度失败诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0029
+skill_ref: 03-pod-pending
+scenario: Pod Pending 调度失败诊断与修复
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 03-pod-pending
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-POD-0030 — Pod Pending 调度失败诊断与修复
+
+```yaml
+io_pair_id: IODIAG-POD-0030
+skill_ref: 03-pod-pending
+scenario: Pod Pending 调度失败诊断与修复
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 03-pod-pending
+- kubectl
+- pod
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
 ### IODIAG-POD-0031 — Pod 异常故障树分析
 
 ```yaml
@@ -10161,7 +10911,7 @@ io_pair_id: IODIAG-POD-0031
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json | jq '.spec.containers[0].livenessProbe
+command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json \| jq '.spec.containers[0].livenessProbe
   // .spec.containers[0].readinessProbe'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10180,8 +10930,8 @@ io_pair_id: IODIAG-POD-0032
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'Liveness probe
-  failed|Readiness probe failed'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'Liveness probe
+  failed\|Readiness probe failed'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10199,7 +10949,7 @@ io_pair_id: IODIAG-POD-0033
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'Startup probe failed'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'Startup probe failed'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10253,7 +11003,7 @@ io_pair_id: IODIAG-POD-0036
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'FailedCreatePodSandBox|NetworkNotReady'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'FailedCreatePodSandBox\|NetworkNotReady'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10289,7 +11039,7 @@ io_pair_id: IODIAG-POD-0038
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'cni plugin|failed
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'cni plugin\|failed
   to set up sandbox'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10308,7 +11058,7 @@ io_pair_id: IODIAG-POD-0039
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get networkpolicy -n ${NAMESPACE} -o json | jq '.items[].spec'
+command: kubectl get networkpolicy -n ${NAMESPACE} -o json \| jq '.items[].spec'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10362,8 +11112,7 @@ io_pair_id: IODIAG-POD-0042
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pods -n kube-system -l [[17-系统基础/05-速查卡/k8s.md|k8s]]-app=kube-proxy
-  -o wide
+command: kubectl get pods -n kube-system -l k8s-app=kube-proxy -o wide
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10399,7 +11148,7 @@ io_pair_id: IODIAG-POD-0044
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'FailedMount|FailedAttachVolume'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'FailedMount\|FailedAttachVolume'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10417,8 +11166,8 @@ io_pair_id: IODIAG-POD-0045
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pvc -n ${NAMESPACE} -o json | jq '.items[] | select(.status.phase!="Bound")
-  | .metadata.name'
+command: kubectl get pvc -n ${NAMESPACE} -o json \| jq '.items[] \| select(.status.phase!="Bound")
+  \| .metadata.name'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10454,7 +11203,7 @@ io_pair_id: IODIAG-POD-0047
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'mount failed|permission
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'mount failed\|permission
   denied'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10473,8 +11222,8 @@ io_pair_id: IODIAG-POD-0048
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'slow
-  disk|I/O timeout'
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'slow
+  disk\|I/O timeout'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10492,8 +11241,8 @@ io_pair_id: IODIAG-POD-0049
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'read-only
-  file system|filesystem corruption'
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'read-only
+  file system\|filesystem corruption'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10511,7 +11260,7 @@ io_pair_id: IODIAG-POD-0050
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'Multi-Attach error'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'Multi-Attach error'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10529,7 +11278,7 @@ io_pair_id: IODIAG-POD-0051
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'Evicted|OOMKilling'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'Evicted\|OOMKilling'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10547,7 +11296,7 @@ io_pair_id: IODIAG-POD-0052
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json | jq '.spec.containers[0].resources'
+command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json \| jq '.spec.containers[0].resources'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10583,7 +11332,7 @@ io_pair_id: IODIAG-POD-0054
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json | jq '.status.reason'
+command: kubectl get pod ${POD_NAME} -n ${NAMESPACE} -o json \| jq '.status.reason'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10619,7 +11368,7 @@ io_pair_id: IODIAG-POD-0056
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'forbidden|denied|violates'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'forbidden\|denied\|violates'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10656,7 +11405,7 @@ io_pair_id: IODIAG-POD-0058
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'violates PodSecurity|admission
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'violates PodSecurity\|admission
   webhook denied'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10675,7 +11424,7 @@ io_pair_id: IODIAG-POD-0059
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'image policy denied'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'image policy denied'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10693,7 +11442,7 @@ io_pair_id: IODIAG-POD-0060
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'webhook timeout|webhook
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'webhook timeout\|webhook
   connection refused'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10712,8 +11461,8 @@ io_pair_id: IODIAG-POD-0061
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get node ${NODE_NAME} -o json | jq '.status.conditions[] | select(.type=="Ready")
-  | .status'
+command: kubectl get node ${NODE_NAME} -o json \| jq '.status.conditions[] \| select(.type=="Ready")
+  \| .status'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10731,7 +11480,7 @@ io_pair_id: IODIAG-POD-0062
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get nodes | grep NotReady
+command: kubectl get nodes \| grep NotReady
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10858,7 +11607,7 @@ fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector involvedObject.name=${POD_NAME},reason=Killing
-  -o json | jq '.items | length'
+  -o json \| jq '.items \| length'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10876,7 +11625,7 @@ io_pair_id: IODIAG-POD-0070
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'Container killed
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'Container killed
   with signal SIGKILL'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10896,7 +11645,7 @@ fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
 command: kubectl get events -n ${NAMESPACE} --field-selector involvedObject.name=${POD_NAME},reason=Killing
-  -o json | jq -r '.items[].message'
+  -o json \| jq -r '.items[].message'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10914,7 +11663,7 @@ io_pair_id: IODIAG-POD-0072
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl get deployment <deployment-name> -n ${NAMESPACE} -o json | jq '.spec.strategy'
+command: kubectl get deployment <deployment-name> -n ${NAMESPACE} -o json \| jq '.spec.strategy'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10932,7 +11681,7 @@ io_pair_id: IODIAG-POD-0073
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'FailedPreStopHook'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'FailedPreStopHook'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10950,7 +11699,7 @@ io_pair_id: IODIAG-POD-0074
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep -E 'CreateContainerConfigError|FailedMount.*configmap|FailedMount.*secret'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep -E 'CreateContainerConfigError\|FailedMount.*configmap\|FailedMount.*secret'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -10968,7 +11717,7 @@ io_pair_id: IODIAG-POD-0075
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'configmap.*not
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'configmap.*not
   found'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -10987,7 +11736,7 @@ io_pair_id: IODIAG-POD-0076
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'secret.*not found'
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'secret.*not found'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -11005,7 +11754,7 @@ io_pair_id: IODIAG-POD-0077
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep "couldn't find key"
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep "couldn't find key"
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -11023,7 +11772,7 @@ io_pair_id: IODIAG-POD-0078
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} | grep 'serviceaccount.*not
+command: kubectl describe pod ${POD_NAME} -n ${NAMESPACE} \| grep 'serviceaccount.*not
   found'
 output_pattern: <typical output for this fault>
 diagnosis:
@@ -11042,8 +11791,8 @@ io_pair_id: IODIAG-POD-0079
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'connection
-  refused|TLS handshake error|no route to host'
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'connection
+  refused\|TLS handshake error\|no route to host'
 output_pattern: <typical output for this fault>
 diagnosis:
 - 'FTA 叶节点: Pod 异常故障树分析'
@@ -11061,7 +11810,7 @@ io_pair_id: IODIAG-POD-0080
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep -E 'x509:|certificate|clock
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep -E 'x509:\|certificate\|clock
   skew'
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_pod_fta\", \"next_step\": \"event_pod_abnormal\" },\n    { \"\
@@ -12510,7 +13259,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   '${SA_NAME:-default}'\\\" and .namespace==\\\"'${NAMESPACE}'\\\") | {name: .metadata.name,\
   \ roleRef: .roleRef}'\", \"timeout\": \"15s\" },\n          { \"id\": \"check_forbidden_logs\"\
   , \"description\": \"检查 forbidden 日志\", \"exec\": \"kubectl logs ${POD_NAME} -n\
-  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\|cannot\\\|denied' || echo\
+  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\\|cannot\\\\|denied' || echo\
   \ 'NO_FORBIDDEN_LOGS'\", \"timeout\": \"15s\" }\n        ]\n      },\n      \"match\"\
   : {\n        \"rules\": [\n          { \"if\": { \"source\": \"check_forbidden_logs.stdout\"\
   , \"type\": \"regex\", \"pattern\": \"forbidden|User cannot|is forbidden\" }, \"\
@@ -13306,7 +14055,7 @@ io_pair_id: IODIAG-POD-0081
 fta_ref: pod-fta
 scenario: Pod 异常故障树分析
 severity: high
-command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 | grep 'certificate
+command: kubectl logs ${POD_NAME} -n ${NAMESPACE} --tail=50 2>&1 \| grep 'certificate
   signed by unknown authority'
 output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\": \"start\"\
   , \"step\": \"start_pod_fta\", \"next_step\": \"event_pod_abnormal\" },\n    { \"\
@@ -14755,7 +15504,7 @@ output_pattern: "{\n  \"flow_steps\": [\n    { \"name\": \"开始\", \"action\":
   '${SA_NAME:-default}'\\\" and .namespace==\\\"'${NAMESPACE}'\\\") | {name: .metadata.name,\
   \ roleRef: .roleRef}'\", \"timeout\": \"15s\" },\n          { \"id\": \"check_forbidden_logs\"\
   , \"description\": \"检查 forbidden 日志\", \"exec\": \"kubectl logs ${POD_NAME} -n\
-  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\|cannot\\\|denied' || echo\
+  \ ${NAMESPACE} --tail=30 2>&1 | grep -i 'forbidden\\\\|cannot\\\\|denied' || echo\
   \ 'NO_FORBIDDEN_LOGS'\", \"timeout\": \"15s\" }\n        ]\n      },\n      \"match\"\
   : {\n        \"rules\": [\n          { \"if\": { \"source\": \"check_forbidden_logs.stdout\"\
   , \"type\": \"regex\", \"pattern\": \"forbidden|User cannot|is forbidden\" }, \"\
@@ -15544,13 +16293,185 @@ tags:
 - leaf-node
 ```
 
+### IODIAG-POD-0082 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0082
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl apply
+output_pattern: "flowchart TD\n  TE[顶事件: Pod 创建失败 / 创建后无法通过 Service 访问]\n  OR0{{OR}}\n\
+  \  TE --> OR0\n\n  OR0 --> API[API Server / Admission 阶段异常]\n  OR0 --> SCHED[Scheduler\
+  \ 阶段异常]\n  OR0 --> KUBELET[kubelet 阶段异常]\n  OR0 --> CRI[容器运行时阶段异常]\n  OR0 --> CNI_NET[CNI\
+  \ 网络阶段异常]\n  OR0 --> CSI_VOL[CSI 存储阶段异常]\n  OR0 --> KCM[Controller Manager 阶段异常]\n\
+  \  OR0 --> KP[kube-proxy 阶段异常]\n\n  %% API Server / Admission 分支\n  API_OR{{OR}}\n\
+  \  API --> API_OR\n  API_OR --> API1[认证/鉴权失败]\n  API_OR --> API2[Admission Webhook\
+  \ 拒绝]\n  API_OR --> API3[ResourceQuota / LimitRange 超限]\n  API_OR --> API4[Schema\
+  \ 校验失败]\n  API_OR --> API5[etcd 写入失败]\n\n  API2_AND{{AND}}\n  API2 --> API2_AND\n\
+  \  API2_AND --> API2A[Webhook 不可用]\n  API2_AND --> API2B[failurePolicy=Fail]\n\n\
+  \  %% Scheduler 分支\n  SCHED_OR{{OR}}\n  SCHED --> SCHED_OR\n  SCHED_OR --> SCHED1[Scheduler\
+  \ 未运行]\n  SCHED_OR --> SCHED2[资源不足]\n  SCHED_OR --> SCHED3[污点/亲和性冲突]\n  SCHED_OR\
+  \ --> SCHED4[Topology 约束不满足]\n  SCHED_OR --> SCHED5[自定义调度器异常]\n\n  %% kubelet 分支\n\
+  \  KUBELET_OR{{OR}}\n  KUBELET --> KUBELET_OR\n  KUBELET_OR --> KLT1[kubelet 未运行]\n\
+  \  KUBELET_OR --> KLT2[kubelet 证书过期]\n  KUBELET_OR --> KLT3[节点资源压力触发驱逐]\n  KUBELET_OR\
+  \ --> KLT4[API Server 不可达]\n  KUBELET_OR --> KLT5[PLEG 不健康]\n\n  %% 容器运行时分支\n  CRI_OR{{OR}}\n\
+  \  CRI --> CRI_OR\n  CRI_OR --> CRI1[containerd 未运行]\n  CRI_OR --> CRI2[镜像拉取失败]\n\
+  \  CRI_OR --> CRI3[sandbox 创建失败]\n  CRI_OR --> CRI4[磁盘/inode 不足]\n  CRI_OR --> CRI5[shim\
+  \ 进程泄漏]\n\n  CRI2_OR{{OR}}\n  CRI2 --> CRI2_OR\n  CRI2_OR --> CRI2A[镜像不存在]\n  CRI2_OR\
+  \ --> CRI2B[仓库认证失败]\n  CRI2_OR --> CRI2C[网络不可达]\n  CRI2_OR --> CRI2D[仓库限流]\n\n \
+  \ %% CNI 网络分支\n  CNI_NET_OR{{OR}}\n  CNI_NET --> CNI_NET_OR\n  CNI_NET_OR --> CNI1[CNI\
+  \ 插件未运行]\n  CNI_NET_OR --> CNI2[IPAM 地址耗尽]\n  CNI_NET_OR --> CNI3[节点路由缺失]\n  CNI_NET_OR\
+  \ --> CNI4[NetworkPolicy 误拦截]\n  CNI_NET_OR --> CNI5[pause 容器网络命名空间创建失败]\n\n  %%\
+  \ CSI 存储分支\n  CSI_VOL_OR{{OR}}\n  CSI_VOL --> CSI_VOL_OR\n  CSI_VOL_OR --> CSI1[CSI\
+  \ driver 未注册]\n  CSI_VOL_OR --> CSI2[VolumeAttachment 失败]\n  CSI_VOL_OR --> CSI3[存储后端不可达]\n\
+  \  CSI_VOL_OR --> CSI4[挂载权限/SELinux 问题]\n\n  %% Controller Manager 分支\n  KCM_OR{{OR}}\n\
+  \  KCM --> KCM_OR\n  KCM_OR --> KCM1[KCM 未运行]\n  KCM_OR --> KCM2[EndpointSlice 未更新]\n\
+  \  KCM_OR --> KCM3[Pod 未通过 readinessProbe]\n\n  %% kube-proxy 分支\n  KP_OR{{OR}}\n\
+  \  KP --> KP_OR\n  KP_OR --> KP1[kube-proxy 未运行]\n  KP_OR --> KP2[转发规则未生成]\n  KP_OR\
+  \ --> KP3[EndpointSlice 未同步]\n  KP_OR --> KP4[conntrack 表满]\n  KP_OR --> KP5[网络策略/安全组阻断]"
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0083 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0083
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl get events --field-selector involvedObject.name=<pod>
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0084 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0084
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl get events --field-selector reason=FailedScheduling
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0085 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0085
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl describe node <node>
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0086 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0086
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl get pods -n kube-system -l k8s-app=<cni>
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0087 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0087
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl get csidrivers
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0088 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0088
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl describe pvc <pvc>
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
+### IODIAG-POD-0089 — Pod 创建端到端异常故障树分析 (skills)
+
+```yaml
+io_pair_id: IODIAG-POD-0089
+fta_ref: pod-creation-end-to-end-fta
+scenario: Pod 创建端到端异常故障树分析 (skills)
+severity: high
+command: kubectl get endpointslices -l kubernetes.io/service-name=<svc>
+output_pattern: <typical output for this fault>
+diagnosis:
+- 'FTA 叶节点: Pod 创建端到端异常故障树分析 (skills)'
+confidence: 0.82
+tags:
+- pod
+- fta
+- leaf-node
+```
+
 ## Domain: SCALE (15 条)
 
 ### IODIAG-SCALE-0001 — HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0001
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get hpa -A
@@ -15561,7 +16482,7 @@ diagnosis:
 - 执行 kubectl get hpa -A 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - status
 k8s_versions:
@@ -15576,7 +16497,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0002
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get hpa -A -o wide
@@ -15587,7 +16508,7 @@ diagnosis:
 - 执行 kubectl get hpa -A -o wide 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - status
 k8s_versions:
@@ -15602,7 +16523,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0003
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl describe hpa <name>
@@ -15613,7 +16534,7 @@ diagnosis:
 - 执行 kubectl describe hpa <name> 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - describe
 k8s_versions:
@@ -15628,7 +16549,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0004
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl describe vpa <name>
@@ -15639,7 +16560,7 @@ diagnosis:
 - 执行 kubectl describe vpa <name> 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - describe
 k8s_versions:
@@ -15654,7 +16575,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0005
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get vpa <name> -o yaml
@@ -15665,7 +16586,7 @@ diagnosis:
 - 执行 kubectl get vpa <name> -o yaml 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - status
 k8s_versions:
@@ -15680,11 +16601,11 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0006
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep
-  -i "could not"
+command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=100 | grep -i
+  "could not"
 output_pattern: '<timestamp>  <level>  <message>
 
   ...'
@@ -15693,7 +16614,7 @@ diagnosis:
   not" 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - logs
 k8s_versions:
@@ -15708,7 +16629,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0007
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get nodes
@@ -15719,7 +16640,7 @@ diagnosis:
 - 执行 kubectl get nodes 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - node
 - status
@@ -15735,7 +16656,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0008
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods
@@ -15746,7 +16667,7 @@ diagnosis:
 - 执行 kubectl get pods 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - pod
 - status
@@ -15762,11 +16683,11 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0009
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 | grep
-  "cannot be removed"
+command: kubectl logs -n kube-system deploy/cluster-autoscaler --tail=200 | grep "cannot
+  be removed"
 output_pattern: '<timestamp>  <level>  <message>
 
   ...'
@@ -15775,7 +16696,7 @@ diagnosis:
   be removed" 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - logs
 k8s_versions:
@@ -15790,7 +16711,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0010
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get scaledobject -A
@@ -15801,7 +16722,7 @@ diagnosis:
 - 执行 kubectl get scaledobject -A 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - status
 k8s_versions:
@@ -15816,7 +16737,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0011
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n kube-system -l k8s-app=metrics-server
@@ -15827,7 +16748,7 @@ diagnosis:
 - 执行 kubectl get pods -n kube-system -l k8s-app=metrics-server 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - pod
 - status
@@ -15843,7 +16764,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0012
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/
@@ -15854,7 +16775,7 @@ diagnosis:
 - 执行 kubectl get --raw /apis/custom.metrics.k8s.io/v1beta1/ 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - status
 k8s_versions:
@@ -15869,7 +16790,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0013
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
 command: kubectl top pods
@@ -15880,7 +16801,7 @@ diagnosis:
 - 执行 kubectl top pods 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
 - pod
 k8s_versions:
@@ -15895,21 +16816,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0014
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get pods -A --field-selector=status.phase=Pending | wc -l
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
-  <pod-name>         0/1     <status>           <restarts>    <age>'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pods -A --field-selector=status.phase=Pending | wc -l 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
-- pod
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -15922,20 +16841,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SCALE-0015
-skill_ref: 12-autoscaling-failure
+skill_ref: 13-autoscaling-failure
 scenario: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get vpa -o jsonpath='{.items[*].status.recommendation}'
-output_pattern: '# 执行: kubectl get vpa -o jsonpath=''{.items[*].status.recommendation}''
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get vpa -o jsonpath='{.items[*].status.recommendation}' 检查相关状态
+- 执行 kubectl rollout undo/restart 检查相关状态
 confidence: 0.8
 tags:
-- 12-autoscaling-failure
+- 13-autoscaling-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -15944,13 +16862,13 @@ k8s_versions:
 - 1.32.x
 ```
 
-## Domain: SEC (38 条)
+## Domain: SEC (45 条)
 
 ### IODIAG-SEC-0001 — RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 
 ```yaml
 io_pair_id: IODIAG-SEC-0001
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
 command: kubectl auth can-i list clusterroles
@@ -15961,7 +16879,7 @@ diagnosis:
 - 执行 kubectl auth can-i list clusterroles 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -15975,7 +16893,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0002
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
 command: kubectl describe pod
@@ -15985,7 +16903,7 @@ diagnosis:
 - 执行 kubectl describe pod 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 - pod
 - describe
@@ -16001,7 +16919,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0003
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
 command: kubectl auth can-i
@@ -16012,7 +16930,7 @@ diagnosis:
 - 执行 kubectl auth can-i 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16026,7 +16944,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0004
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
 command: kubectl auth can-i create pods --as=system:serviceaccount:ns:sa
@@ -16037,7 +16955,7 @@ diagnosis:
 - 执行 kubectl auth can-i create pods --as=system:serviceaccount:ns:sa 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 - pod
 k8s_versions:
@@ -16052,20 +16970,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0005
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl get events --field-selector reason=FailedCreate
-output_pattern: '# 执行: kubectl get events --field-selector reason=FailedCreate
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events --field-selector reason=FailedCreate 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16078,20 +16995,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0006
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl get constraints -o jsonpath='{.items[*].status.totalViolations}'
-output_pattern: '# 执行: kubectl get constraints -o jsonpath=''{.items[*].status.totalViolations}''
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get constraints -o jsonpath='{.items[*].status.totalViolations}' 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16104,20 +17020,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0007
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl get rolebinding -A --sort-by=.metadata.creationTimestamp
-output_pattern: '# 执行: kubectl get rolebinding -A --sort-by=.metadata.creationTimestamp
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get rolebinding -A --sort-by=.metadata.creationTimestamp 检查相关状态
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16130,18 +17045,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0008
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl auth can-i --list
-output_pattern: '# 执行: kubectl auth can-i --list
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl auth can-i --list 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16155,18 +17070,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0009
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl auth whoami
-output_pattern: '# 执行: kubectl auth whoami
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl auth whoami 检查相关状态
+- 执行 kubectl label/annotate 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16180,19 +17095,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0010
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl create token
-output_pattern: '# 执行: kubectl create token
+command: kubectl get events --field-selector reason=FailedCreate
+output_pattern: '# 执行: kubectl get events --field-selector reason=FailedCreate
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl create token 检查相关状态
+- 执行 kubectl get events --field-selector reason=FailedCreate 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
+- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16205,18 +17121,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0011
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl get constraints
-output_pattern: '# 执行: kubectl get constraints
+command: kubectl get constraints -o jsonpath='{.items[*].status.totalViolations}'
+output_pattern: '# 执行: kubectl get constraints -o jsonpath=''{.items[*].status.totalViolations}''
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get constraints 检查相关状态
+- 执行 kubectl get constraints -o jsonpath='{.items[*].status.totalViolations}' 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 - status
 k8s_versions:
@@ -16231,18 +17147,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0012
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl get clusterpolicy
-output_pattern: '# 执行: kubectl get clusterpolicy
+command: kubectl get rolebinding -A --sort-by=.metadata.creationTimestamp
+output_pattern: '# 执行: kubectl get rolebinding -A --sort-by=.metadata.creationTimestamp
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get clusterpolicy 检查相关状态
+- 执行 kubectl get rolebinding -A --sort-by=.metadata.creationTimestamp 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 - status
 k8s_versions:
@@ -16257,18 +17173,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0013
-skill_ref: 09-rbac-quota-failure
+skill_ref: 10-rbac-quota-failure
 scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl api-resources
-output_pattern: '# 执行: kubectl api-resources
+command: kubectl auth can-i --list
+output_pattern: '# 执行: kubectl auth can-i --list
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl api-resources 检查相关状态
+- 执行 kubectl auth can-i --list 检查相关状态
 confidence: 0.8
 tags:
-- 09-rbac-quota-failure
+- 10-rbac-quota-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16278,22 +17194,22 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-SEC-0014 — 安全事件应急响应 / Security Incident Response
+### IODIAG-SEC-0014 — RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 
 ```yaml
 io_pair_id: IODIAG-SEC-0014
-skill_ref: 18-security-incident-response
-scenario: 安全事件应急响应 / Security Incident Response
+skill_ref: 10-rbac-quota-failure
+scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl auth can-i list secrets
-output_pattern: '# 执行: kubectl auth can-i list secrets
+command: kubectl auth whoami
+output_pattern: '# 执行: kubectl auth whoami
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl auth can-i list secrets 检查相关状态
+- 执行 kubectl auth whoami 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 10-rbac-quota-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16303,24 +17219,23 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-SEC-0015 — 安全事件应急响应 / Security Incident Response
+### IODIAG-SEC-0015 — RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 
 ```yaml
 io_pair_id: IODIAG-SEC-0015
-skill_ref: 18-security-incident-response
-scenario: 安全事件应急响应 / Security Incident Response
+skill_ref: 10-rbac-quota-failure
+scenario: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting
 severity: medium
-command: kubectl logs -n falco deploy/falco
-output_pattern: '<timestamp>  <level>  <message>
+command: kubectl create token
+output_pattern: '# 执行: kubectl create token
 
-  ...'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl logs -n falco deploy/falco 检查相关状态
+- 执行 kubectl create token 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 10-rbac-quota-failure
 - kubectl
-- logs
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16333,21 +17248,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0016
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl exec POD -- find / -type f -executable -newer /proc/1/exe -not -path
-  "/proc/*" -not -path "/sys/*" 2>/dev/null
-output_pattern: '# 执行: kubectl exec POD -- find / -type f -executable -newer /proc/1/exe
-  -not -path "/proc/*" -not -path "/sys/*" 2>/dev/null
+command: kubectl auth can-i list secrets
+output_pattern: '# 执行: kubectl auth can-i list secrets
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl exec POD -- find / -type f -executable -newer /proc/1/exe -not -path
-  "/proc/*" -not -path "/sys/*" 2>/dev/null 检查相关状态
+- 执行 kubectl auth can-i list secrets 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16361,18 +17273,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0017
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl logs POD
+command: kubectl logs -n falco deploy/falco
 output_pattern: '<timestamp>  <level>  <message>
 
   ...'
 diagnosis:
-- 执行 kubectl logs POD 检查相关状态
+- 执行 kubectl logs -n falco deploy/falco 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
 - logs
 k8s_versions:
@@ -16387,22 +17299,22 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0018
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get events -A --field-selector reason=FailedCreate | grep -i security
-output_pattern: '# 执行: kubectl get events -A --field-selector reason=FailedCreate
-  | grep -i security
+command: kubectl exec POD -- find / -type f -executable -newer /proc/1/exe -not -path
+  "/proc/*" -not -path "/sys/*" 2>/dev/null
+output_pattern: '# 执行: kubectl exec POD -- find / -type f -executable -newer /proc/1/exe
+  -not -path "/proc/*" -not -path "/sys/*" 2>/dev/null
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events -A --field-selector reason=FailedCreate | grep -i security
-  检查相关状态
+- 执行 kubectl exec POD -- find / -type f -executable -newer /proc/1/exe -not -path
+  "/proc/*" -not -path "/sys/*" 2>/dev/null 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16415,20 +17327,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0019
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get --raw /metrics | grep audit
-output_pattern: '# 执行: kubectl get --raw /metrics | grep audit
+command: kubectl logs POD
+output_pattern: '<timestamp>  <level>  <message>
 
-  <typical output lines...>'
+  ...'
 diagnosis:
-- 执行 kubectl get --raw /metrics | grep audit 检查相关状态
+- 执行 kubectl logs POD 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
-- status
+- logs
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16441,18 +17353,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0020
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get events -A --field-selector reason=FailedCreate
+command: kubectl get events -A --field-selector reason=FailedCreate | grep -i security
 output_pattern: '# 执行: kubectl get events -A --field-selector reason=FailedCreate
+  | grep -i security
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get events -A --field-selector reason=FailedCreate 检查相关状态
+- 执行 kubectl get events -A --field-selector reason=FailedCreate | grep -i security
+  检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
 - status
 k8s_versions:
@@ -16467,18 +17381,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0021
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl auth can-i --list
-output_pattern: '# 执行: kubectl auth can-i --list
+command: kubectl cordon
+output_pattern: '# 执行: kubectl cordon
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl auth can-i --list 检查相关状态
+- 执行 kubectl cordon 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16492,18 +17406,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0022
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl debug
-output_pattern: '# 执行: kubectl debug
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl debug 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16517,20 +17431,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0023
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get --raw /api/v1/...
-output_pattern: '# 执行: kubectl get --raw /api/v1/...
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get --raw /api/v1/... 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16543,20 +17456,20 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0024
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get psp
-output_pattern: '# 执行: kubectl get psp
+command: kubectl delete pod --force
+output_pattern: '# 执行: kubectl delete pod --force
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get psp 检查相关状态
+- 执行 kubectl delete pod --force 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
-- status
+- pod
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16569,20 +17482,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0025
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl get validatingadmissionpolicy
-output_pattern: '# 执行: kubectl get validatingadmissionpolicy
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get validatingadmissionpolicy 检查相关状态
+- 执行 kubectl label/annotate 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -16595,18 +17507,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-SEC-0026
-skill_ref: 18-security-incident-response
+skill_ref: 19-security-incident-response
 scenario: 安全事件应急响应 / Security Incident Response
 severity: medium
-command: kubectl exec
-output_pattern: '# 执行: kubectl exec
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl exec 检查相关状态
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 18-security-incident-response
+- 19-security-incident-response
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -16616,11 +17528,111 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-SEC-0027 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0027 — 安全事件应急响应 / Security Incident Response
 
 ```yaml
 io_pair_id: IODIAG-SEC-0027
-skill_ref: 24-namespace-quota-limitrange
+skill_ref: 19-security-incident-response
+scenario: 安全事件应急响应 / Security Incident Response
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 19-security-incident-response
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0028 — 安全事件应急响应 / Security Incident Response
+
+```yaml
+io_pair_id: IODIAG-SEC-0028
+skill_ref: 19-security-incident-response
+scenario: 安全事件应急响应 / Security Incident Response
+severity: medium
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl rollout undo/restart 检查相关状态
+confidence: 0.8
+tags:
+- 19-security-incident-response
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0029 — 安全事件应急响应 / Security Incident Response
+
+```yaml
+io_pair_id: IODIAG-SEC-0029
+skill_ref: 19-security-incident-response
+scenario: 安全事件应急响应 / Security Incident Response
+severity: medium
+command: kubectl delete namespace
+output_pattern: '# 执行: kubectl delete namespace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete namespace 检查相关状态
+confidence: 0.8
+tags:
+- 19-security-incident-response
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0030 — 安全事件应急响应 / Security Incident Response
+
+```yaml
+io_pair_id: IODIAG-SEC-0030
+skill_ref: 19-security-incident-response
+scenario: 安全事件应急响应 / Security Incident Response
+severity: medium
+command: kubectl drain
+output_pattern: '# 执行: kubectl drain
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl drain 检查相关状态
+confidence: 0.8
+tags:
+- 19-security-incident-response
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0031 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-SEC-0031
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16631,23 +17643,23 @@ diagnosis:
 - 执行 kubectl describe pod 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - pod
 - describe
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0028 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0032 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0028
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0032
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16659,22 +17671,22 @@ diagnosis:
 - 执行 kubectl get events --field-selector reason=FailedCreate 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0029 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0033 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0029
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0033
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16686,22 +17698,22 @@ diagnosis:
 - 执行 kubectl get namespace <ns> 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0030 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0034 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0030
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0034
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16713,22 +17725,22 @@ diagnosis:
 - 执行 kubectl get resourcequota -n <ns> 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0031 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0035 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0031
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0035
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16740,23 +17752,23 @@ diagnosis:
 - 执行 kubectl get pod -o jsonpath='{.spec.containers[0].resources}' 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0032 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0036 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0032
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0036
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16768,22 +17780,22 @@ diagnosis:
 - 执行 kubectl describe limitrange 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - describe
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0033 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0037 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0033
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0037
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16795,23 +17807,23 @@ diagnosis:
 - 执行 kubectl get pod -o jsonpath='{.spec.containers[*].resources}' 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0034 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0038 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0034
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0038
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16823,22 +17835,48 @@ diagnosis:
 - 执行 kubectl describe limitrange -n <ns> 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - describe
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0035 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0039 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0035
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0039
+skill_ref: 26-namespace-quota-limitrange
+scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
+  Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 26-namespace-quota-limitrange
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0040 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-SEC-0040
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16850,22 +17888,22 @@ diagnosis:
 - 执行 kubectl delete pod quota-test-minimal -n <namespace> 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - pod
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0036 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0041 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0036
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0041
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16877,22 +17915,100 @@ diagnosis:
 - 执行 kubectl delete pod quota-test-defaults -n <namespace> 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - pod
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0037 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+### IODIAG-SEC-0042 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-SEC-0037
-skill_ref: 24-namespace-quota-limitrange
+io_pair_id: IODIAG-SEC-0042
+skill_ref: 26-namespace-quota-limitrange
+scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
+  Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 26-namespace-quota-limitrange
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0043 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-SEC-0043
+skill_ref: 26-namespace-quota-limitrange
+scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
+  Diagnosis & Remediation
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 26-namespace-quota-limitrange
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0044 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-SEC-0044
+skill_ref: 26-namespace-quota-limitrange
+scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
+  Diagnosis & Remediation
+severity: medium
+command: kubectl delete namespace
+output_pattern: '# 执行: kubectl delete namespace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete namespace 检查相关状态
+confidence: 0.8
+tags:
+- 26-namespace-quota-limitrange
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-SEC-0045 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-SEC-0045
+skill_ref: 26-namespace-quota-limitrange
 scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
   Diagnosis & Remediation
 severity: medium
@@ -16904,45 +18020,18 @@ diagnosis:
 - 执行 kubectl get resourcequota 检查相关状态
 confidence: 0.8
 tags:
-- 24-namespace-quota-limitrange
+- 26-namespace-quota-limitrange
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-SEC-0038 — Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-SEC-0038
-skill_ref: 24-namespace-quota-limitrange
-scenario: Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure
-  Diagnosis & Remediation
-severity: medium
-command: kubectl describe node
-output_pattern: "Conditions:\n  Type             Status  Reason\n  <condition>   \
-  \   True    <reason>"
-diagnosis:
-- 执行 kubectl describe node 检查相关状态
-confidence: 0.8
-tags:
-- 24-namespace-quota-limitrange
-- kubectl
-- node
-- describe
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-## Domain: STORAGE (30 条)
+## Domain: STORAGE (15 条)
 
 ### IODIAG-STORAGE-0001 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
@@ -17107,6 +18196,31 @@ io_pair_id: IODIAG-STORAGE-0007
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 08-pvc-storage-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-STORAGE-0008 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+
+```yaml
+io_pair_id: IODIAG-STORAGE-0008
+skill_ref: 08-pvc-storage-failure
+scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+severity: medium
 command: kubectl delete pvc test-pvc-diag-*
 output_pattern: '# 执行: kubectl delete pvc test-pvc-diag-*
 
@@ -17125,10 +18239,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0008 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+### IODIAG-STORAGE-0009 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0008
+io_pair_id: IODIAG-STORAGE-0009
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
@@ -17151,10 +18265,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0009 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+### IODIAG-STORAGE-0010 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0009
+io_pair_id: IODIAG-STORAGE-0010
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
@@ -17164,32 +18278,6 @@ output_pattern: '# 执行: kubectl get sc
   <typical output lines...>'
 diagnosis:
 - 执行 kubectl get sc 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0010 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0010
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
-output_pattern: '# 执行: kubectl get pvc <name> -o jsonpath=''{.spec.storageClassName}''
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}' 检查相关状态
 confidence: 0.8
 tags:
 - 08-pvc-storage-failure
@@ -17210,374 +18298,6 @@ io_pair_id: IODIAG-STORAGE-0011
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
-command: kubectl get pods -n kube-system -l app=csi-controller
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods -n kube-system -l app=csi-controller 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0012 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0012
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl logs <csi-pod> -c csi-provisioner
-output_pattern: '<timestamp>  <level>  <message>
-
-  ...'
-diagnosis:
-- 执行 kubectl logs <csi-pod> -c csi-provisioner 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- pod
-- logs
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0013 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0013
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get csistoragecapacity -A
-output_pattern: '# 执行: kubectl get csistoragecapacity -A
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get csistoragecapacity -A 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0014 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0014
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName
-output_pattern: '# 执行: kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get volumeattachment -o custom-columns=NAME:.metadata.name,PV:.spec.source.persistentVolumeName,NODE:.spec.nodeName
-  检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- node
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0015 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0015
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'
-output_pattern: '# 执行: kubectl get csinodes <node> -o jsonpath=''{.spec.drivers[*].allocatable}''
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}' 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- node
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0016 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0016
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl auth can-i list persistentvolumes
-output_pattern: '# 执行: kubectl auth can-i list persistentvolumes
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl auth can-i list persistentvolumes 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0017 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0017
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get pvc -A | grep -v Bound
-output_pattern: '# 执行: kubectl get pvc -A | grep -v Bound
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get pvc -A | grep -v Bound 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0018 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0018
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl describe pod <pod> | grep -i "FailedMount|MountVolume"
-output_pattern: "Events:\n  Type     Reason        Age   From     Message\n  Warning\
-  \  <reason>      <age>  <from>   <message>"
-diagnosis:
-- 执行 kubectl describe pod <pod> | grep -i "FailedMount|MountVolume" 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- pod
-- describe
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0019 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0019
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
-
-  <pod-name>         0/1     <status>           <restarts>    <age>'
-diagnosis:
-- 执行 kubectl get pods -n kube-system -l app.kubernetes.io/component=csi-driver 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- pod
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0020 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0020
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get pv | grep Released
-output_pattern: '# 执行: kubectl get pv | grep Released
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get pv | grep Released 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0021 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0021
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get volumeattachment
-output_pattern: '# 执行: kubectl get volumeattachment
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get volumeattachment 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0022 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0022
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl delete pvc test-pvc-diag-*
-output_pattern: '# 执行: kubectl delete pvc test-pvc-diag-*
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl delete pvc test-pvc-diag-* 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0023 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0023
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl delete pod test-mount-diag-*
-output_pattern: '# 执行: kubectl delete pod test-mount-diag-*
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl delete pod test-mount-diag-* 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- pod
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0024 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0024
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
-command: kubectl get sc
-output_pattern: '# 执行: kubectl get sc
-
-  <typical output lines...>'
-diagnosis:
-- 执行 kubectl get sc 检查相关状态
-confidence: 0.8
-tags:
-- 08-pvc-storage-failure
-- kubectl
-- status
-k8s_versions:
-- 1.28.x
-- 1.29.x
-- 1.30.x
-- 1.31.x
-- 1.32.x
-```
-
-### IODIAG-STORAGE-0025 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-
-```yaml
-io_pair_id: IODIAG-STORAGE-0025
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
-severity: medium
 command: kubectl get pvc <name> -o jsonpath='{.spec.storageClassName}'
 output_pattern: '# 执行: kubectl get pvc <name> -o jsonpath=''{.spec.storageClassName}''
 
@@ -17597,10 +18317,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0026 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+### IODIAG-STORAGE-0012 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0026
+io_pair_id: IODIAG-STORAGE-0012
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
@@ -17624,10 +18344,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0027 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+### IODIAG-STORAGE-0013 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0027
+io_pair_id: IODIAG-STORAGE-0013
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
@@ -17651,10 +18371,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0028 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+### IODIAG-STORAGE-0014 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0028
+io_pair_id: IODIAG-STORAGE-0014
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
@@ -17677,10 +18397,10 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0029 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+### IODIAG-STORAGE-0015 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0029
+io_pair_id: IODIAG-STORAGE-0015
 skill_ref: 08-pvc-storage-failure
 scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
 severity: medium
@@ -17705,22 +18425,24 @@ k8s_versions:
 - 1.32.x
 ```
 
-### IODIAG-STORAGE-0030 — PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+## Domain: UPGRADE (15 条)
+
+### IODIAG-UPGRADE-0001 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-STORAGE-0030
-skill_ref: 08-pvc-storage-failure
-scenario: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation
+io_pair_id: IODIAG-UPGRADE-0001
+skill_ref: 27-cluster-upgrade-migration
+scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
-command: kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}'
-output_pattern: '# 执行: kubectl get csinodes <node> -o jsonpath=''{.spec.drivers[*].allocatable}''
+command: kubectl get nodes
+output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
 
-  <typical output lines...>'
+  <node-name>    NotReady   <roles>          <age>   <version>'
 diagnosis:
-- 执行 kubectl get csinodes <node> -o jsonpath='{.spec.drivers[*].allocatable}' 检查相关状态
+- 执行 kubectl get nodes 检查相关状态
 confidence: 0.8
 tags:
-- 08-pvc-storage-failure
+- 27-cluster-upgrade-migration
 - kubectl
 - node
 - status
@@ -17732,40 +18454,11 @@ k8s_versions:
 - 1.32.x
 ```
 
-## Domain: UPGRADE (11 条)
-
-### IODIAG-UPGRADE-0001 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-UPGRADE-0001
-skill_ref: 25-cluster-upgrade-migration
-scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
-severity: medium
-command: kubectl get nodes
-output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
-
-  <node-name>    NotReady   <roles>          <age>   <version>'
-diagnosis:
-- 执行 kubectl get nodes 检查相关状态
-confidence: 0.8
-tags:
-- 25-cluster-upgrade-migration
-- kubectl
-- node
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
 ### IODIAG-UPGRADE-0002 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-UPGRADE-0002
-skill_ref: 25-cluster-upgrade-migration
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl apply
@@ -17776,21 +18469,21 @@ diagnosis:
 - 执行 kubectl apply 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-UPGRADE-0003 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-UPGRADE-0003
-skill_ref: 25-cluster-upgrade-migration
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n kube-system
@@ -17801,23 +18494,98 @@ diagnosis:
 - 执行 kubectl get pods -n kube-system 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-UPGRADE-0004 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-UPGRADE-0004
-skill_ref: 25-cluster-upgrade-migration
+skill_ref: 27-cluster-upgrade-migration
+scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+severity: medium
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl exec 检查相关状态
+confidence: 0.8
+tags:
+- 27-cluster-upgrade-migration
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-UPGRADE-0005 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-UPGRADE-0005
+skill_ref: 27-cluster-upgrade-migration
+scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 27-cluster-upgrade-migration
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-UPGRADE-0006 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-UPGRADE-0006
+skill_ref: 27-cluster-upgrade-migration
+scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 27-cluster-upgrade-migration
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-UPGRADE-0007 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-UPGRADE-0007
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl delete deployment api-compat-test
@@ -17828,21 +18596,46 @@ diagnosis:
 - 执行 kubectl delete deployment api-compat-test 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0005 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0008 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0005
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0008
+skill_ref: 27-cluster-upgrade-migration
+scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+severity: medium
+command: kubectl drain
+output_pattern: '# 执行: kubectl drain
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl drain 检查相关状态
+confidence: 0.8
+tags:
+- 27-cluster-upgrade-migration
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-UPGRADE-0009 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-UPGRADE-0009
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl drain <node> --ignore-daemonsets
@@ -17853,22 +18646,22 @@ diagnosis:
 - 执行 kubectl drain <node> --ignore-daemonsets 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - node
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0006 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0010 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0006
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0010
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get node <node>
@@ -17879,23 +18672,23 @@ diagnosis:
 - 执行 kubectl get node <node> 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - node
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0007 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0011 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0007
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0011
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl uncordon <node>
@@ -17906,22 +18699,22 @@ diagnosis:
 - 执行 kubectl uncordon <node> 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - node
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0008 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0012 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0008
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0012
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods --all-namespaces
@@ -17932,23 +18725,23 @@ diagnosis:
 - 执行 kubectl get pods --all-namespaces 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0009 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0013 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0009
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0013
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n kube-system -l k8s-app=calico-node
@@ -17959,24 +18752,24 @@ diagnosis:
 - 执行 kubectl get pods -n kube-system -l k8s-app=calico-node 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - node
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0010 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0014 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0010
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0014
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get componentstatuses
@@ -17987,22 +18780,22 @@ diagnosis:
 - 执行 kubectl get componentstatuses 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-UPGRADE-0011 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
+### IODIAG-UPGRADE-0015 — 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-UPGRADE-0011
-skill_ref: 25-cluster-upgrade-migration
+io_pair_id: IODIAG-UPGRADE-0015
+skill_ref: 27-cluster-upgrade-migration
 scenario: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation
 severity: medium
 command: etcdctl endpoint health
@@ -18011,23 +18804,92 @@ diagnosis:
 - 执行 etcdctl endpoint health 检查相关状态
 confidence: 0.8
 tags:
-- 25-cluster-upgrade-migration
+- 27-cluster-upgrade-migration
 - etcdctl
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-## Domain: WORK (33 条)
+## Domain: WEBHOOK (2 条)
+
+### IODIAG-WEBHOOK-0001 — Pod 创建被 ValidatingWebhook 阻塞
+
+```yaml
+io_pair_id: IODIAG-WEBHOOK-0001
+skill_ref: SKILL-17
+scenario: Pod 创建被 ValidatingWebhook 阻塞
+severity: high
+command: kubectl apply -f deployment.yaml -n production
+output_pattern: 'Error from server (InternalError): error when creating "deployment.yaml":
+
+  Internal error occurred: failed calling webhook "validate.policy.svc":
+
+  connection refused
+
+  '
+diagnosis:
+- 准入控制器（如 Gatekeeper/Kyverno）服务不可达
+- webhook 配置仍指向已下线/崩溃的策略服务
+- 该 API 版本的所有写操作被阻塞，影响面大
+action:
+- kubectl get validatingwebhookconfigurations
+- kubectl get pods -n gatekeeper-system
+- kubectl logs -n gatekeeper-system -l gatekeeper.sh/system=yes --tail=50
+- 临时缓解：给 webhook 配置加 failurePolicy: Ignore 或删除失效配置（需评审）
+confidence: 0.9
+tags:
+- webhook
+- admission
+- gatekeeper
+- kyverno
+- blocked
+```
+
+### IODIAG-WEBHOOK-0002 — MutatingWebhook 证书过期导致注入失败
+
+```yaml
+io_pair_id: IODIAG-WEBHOOK-0002
+skill_ref: SKILL-17
+scenario: MutatingWebhook 证书过期导致注入失败
+severity: medium
+command: kubectl get pods -n production
+output_pattern: 'NAME                     READY   STATUS             RESTARTS   AGE
+
+  myapp-xxx                0/1     CreateContainerError 0        3m
+
+  (events 显示: failed to call webhook: x509: certificate has expired)
+
+  '
+diagnosis:
+- 自签的 webhook CA/服务证书过期，mutating webhook 注入 sidecar 失败
+- 常见于 cert-manager 未接管 webhook 证书的组件
+- 需轮换证书并确认自动续期机制
+action:
+- kubectl get secret -n my-ns webhook-cert -o jsonpath='{.data}' | head
+- openssl x509 -in <(kubectl get secret webhook-cert -n my-ns -o jsonpath='{.data.tls\.crt}'
+  | base64 -d) -noout -dates
+- 用 cert-manager 签发新证书或手动轮换
+- kubectl rollout restart deployment -n my-ns webhook-server
+confidence: 0.85
+tags:
+- webhook
+- certificate
+- x509
+- mutating
+- cert-manager
+```
+
+## Domain: WORK (35 条)
 
 ### IODIAG-WORK-0001 — Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 
 ```yaml
 io_pair_id: IODIAG-WORK-0001
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl rollout undo
@@ -18038,7 +18900,7 @@ diagnosis:
 - 执行 kubectl rollout undo 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -18052,7 +18914,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0002
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get deploy NAME -n NS -o jsonpath='{.status.conditions[?(@.type=="Progressing")]}'
@@ -18064,7 +18926,7 @@ diagnosis:
   检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - status
 k8s_versions:
@@ -18079,7 +18941,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0003
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl rollout pause
@@ -18090,7 +18952,7 @@ diagnosis:
 - 执行 kubectl rollout pause 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -18104,7 +18966,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0004
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get pods -n NS -l app=NAME --sort-by=.status.startTime
@@ -18115,7 +18977,7 @@ diagnosis:
 - 执行 kubectl get pods -n NS -l app=NAME --sort-by=.status.startTime 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - pod
 - status
@@ -18131,7 +18993,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0005
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get rs -n NS -l app=NAME --sort-by=.metadata.creationTimestamp
@@ -18142,7 +19004,7 @@ diagnosis:
 - 执行 kubectl get rs -n NS -l app=NAME --sort-by=.metadata.creationTimestamp 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - status
 k8s_versions:
@@ -18157,7 +19019,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0006
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get deploy NAME -n NS -o jsonpath='{.status.conditions[?(@.type=="Progressing")].reason}'
@@ -18169,7 +19031,7 @@ diagnosis:
   检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - status
 k8s_versions:
@@ -18184,7 +19046,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0007
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl rollout history deploy/NAME -n NS
@@ -18195,7 +19057,7 @@ diagnosis:
 - 执行 kubectl rollout history deploy/NAME -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -18209,7 +19071,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0008
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get pods -n NS -l app=NAME -o wide --sort-by=.metadata.name
@@ -18220,7 +19082,7 @@ diagnosis:
 - 执行 kubectl get pods -n NS -l app=NAME -o wide --sort-by=.metadata.name 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - pod
 - status
@@ -18236,7 +19098,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0009
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get pods -n NS -l app=NAME -o wide
@@ -18247,7 +19109,7 @@ diagnosis:
 - 执行 kubectl get pods -n NS -l app=NAME -o wide 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - pod
 - status
@@ -18263,7 +19125,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0010
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get rs -n NS -l app=NAME -o wide
@@ -18274,7 +19136,7 @@ diagnosis:
 - 执行 kubectl get rs -n NS -l app=NAME -o wide 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - status
 k8s_versions:
@@ -18289,7 +19151,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0011
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
 command: kubectl get deploy NAME -n NS
@@ -18300,7 +19162,7 @@ diagnosis:
 - 执行 kubectl get deploy NAME -n NS 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 - status
 k8s_versions:
@@ -18315,18 +19177,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0012
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
-command: kubectl rollout status
-output_pattern: '# 执行: kubectl rollout status
+command: kubectl exec
+output_pattern: '# 执行: kubectl exec
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl rollout status 检查相关状态
+- 执行 kubectl exec 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -18340,21 +19202,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0013
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
-command: kubectl get pods -n NS -l app=NAME
-output_pattern: 'NAME                    READY   STATUS             RESTARTS      AGE
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
 
-  <pod-name>         0/1     <status>           <restarts>    <age>'
+  <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pods -n NS -l app=NAME 检查相关状态
+- 执行 kubectl edit/patch 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
-- pod
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -18367,18 +19227,18 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0014
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
-command: kubectl rollout history
-output_pattern: '# 执行: kubectl rollout history
+command: kubectl rollout undo/restart
+output_pattern: '# 执行: kubectl rollout undo/restart
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl rollout history 检查相关状态
+- 执行 kubectl rollout undo/restart 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
 k8s_versions:
 - 1.28.x
@@ -18392,20 +19252,19 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0015
-skill_ref: 08-deployment-rollout-failure
+skill_ref: 09-deployment-rollout-failure
 scenario: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis
 severity: medium
-command: kubectl get pdb -n NS
-output_pattern: '# 执行: kubectl get pdb -n NS
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
 
   <typical output lines...>'
 diagnosis:
-- 执行 kubectl get pdb -n NS 检查相关状态
+- 执行 kubectl apply/create/replace 检查相关状态
 confidence: 0.8
 tags:
-- 08-deployment-rollout-failure
+- 09-deployment-rollout-failure
 - kubectl
-- status
 k8s_versions:
 - 1.28.x
 - 1.29.x
@@ -18418,71 +19277,7 @@ k8s_versions:
 
 ```yaml
 io_pair_id: IODIAG-WORK-0016
-skill_ref: 22-daemonset-failure
-scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
-severity: medium
-command: 'kubectl get daemonset <name> -n <namespace>
-
-  # 关注: DESIRED, CURRENT, READY, UP-TO-DATE, AVAILABLE'
-output_pattern: '# 执行: kubectl get daemonset <name> -n <namespace>
-
-  # 关注: DESIRED, CURRENT, READY, UP-TO-DATE, AVAILABLE
-
-  <typical output lines...>'
-diagnosis:
-- '执行 kubectl get daemonset <name> -n <namespace>
-
-  # 关注: DESIRED, CURRENT, READY, UP-TO-DATE, AVAILABLE 检查相关状态'
-confidence: 0.8
-tags:
-- 22-daemonset-failure
-- kubectl
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-WORK-0017 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-WORK-0017
-skill_ref: 22-daemonset-failure
-scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
-severity: medium
-command: 'kubectl get nodes <missing-node> -o wide
-
-  kubectl describe node <missing-node> | grep -A 10 "Taints:"'
-output_pattern: 'NAME       STATUS     ROLES           AGE   VERSION
-
-  <node-name>    NotReady   <roles>          <age>   <version>'
-diagnosis:
-- '执行 kubectl get nodes <missing-node> -o wide
-
-  kubectl describe node <missing-node> | grep -A 10 "Taints:" 检查相关状态'
-confidence: 0.8
-tags:
-- 22-daemonset-failure
-- kubectl
-- node
-- status
-- describe
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-WORK-0018 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-WORK-0018
-skill_ref: 22-daemonset-failure
+skill_ref: 24-daemonset-failure
 scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n <ns> -l <selector> -o wide
@@ -18493,23 +19288,23 @@ diagnosis:
 - 执行 kubectl get pods -n <ns> -l <selector> -o wide 检查相关状态
 confidence: 0.8
 tags:
-- 22-daemonset-failure
+- 24-daemonset-failure
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0019 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+### IODIAG-WORK-0017 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0019
-skill_ref: 22-daemonset-failure
+io_pair_id: IODIAG-WORK-0017
+skill_ref: 24-daemonset-failure
 scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods -n <ns> -l <selector>
@@ -18520,23 +19315,23 @@ diagnosis:
 - 执行 kubectl get pods -n <ns> -l <selector> 检查相关状态
 confidence: 0.8
 tags:
-- 22-daemonset-failure
+- 24-daemonset-failure
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0020 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+### IODIAG-WORK-0018 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0020
-skill_ref: 22-daemonset-failure
+io_pair_id: IODIAG-WORK-0018
+skill_ref: 24-daemonset-failure
 scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl rollout status ds/<name>
@@ -18547,21 +19342,21 @@ diagnosis:
 - 执行 kubectl rollout status ds/<name> 检查相关状态
 confidence: 0.8
 tags:
-- 22-daemonset-failure
+- 24-daemonset-failure
 - kubectl
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0021 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+### IODIAG-WORK-0019 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0021
-skill_ref: 22-daemonset-failure
+io_pair_id: IODIAG-WORK-0019
+skill_ref: 24-daemonset-failure
 scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get ds -n <ns>
@@ -18572,22 +19367,22 @@ diagnosis:
 - 执行 kubectl get ds -n <ns> 检查相关状态
 confidence: 0.8
 tags:
-- 22-daemonset-failure
+- 24-daemonset-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0022 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+### IODIAG-WORK-0020 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0022
-skill_ref: 22-daemonset-failure
+io_pair_id: IODIAG-WORK-0020
+skill_ref: 24-daemonset-failure
 scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get events --field-selector reason=Evicted
@@ -18598,93 +19393,97 @@ diagnosis:
 - 执行 kubectl get events --field-selector reason=Evicted 检查相关状态
 confidence: 0.8
 tags:
-- 22-daemonset-failure
+- 24-daemonset-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0023 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0021 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0023
-skill_ref: 23-job-cronjob-failure
-scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+io_pair_id: IODIAG-WORK-0021
+skill_ref: 24-daemonset-failure
+scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
 severity: medium
-command: 'kubectl get jobs -n <namespace> | wc -l
-
-  kubectl get jobs -n <namespace> --sort-by=.metadata.creationTimestamp | head -5'
-output_pattern: '# 执行: kubectl get jobs -n <namespace> | wc -l
-
-  kubectl get jobs -n <namespace> --sort-by=.metadata.creationTimestamp | head -5
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
 
   <typical output lines...>'
 diagnosis:
-- '执行 kubectl get jobs -n <namespace> | wc -l
-
-  kubectl get jobs -n <namespace> --sort-by=.metadata.creationTimestamp | head -5
-  检查相关状态'
+- 执行 kubectl delete 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 24-daemonset-failure
 - kubectl
-- status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-WORK-0022 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-WORK-0022
+skill_ref: 24-daemonset-failure
+scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 24-daemonset-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-WORK-0023 — DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-WORK-0023
+skill_ref: 24-daemonset-failure
+scenario: DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation
+severity: medium
+command: kubectl label/annotate
+output_pattern: '# 执行: kubectl label/annotate
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl label/annotate 检查相关状态
+confidence: 0.8
+tags:
+- 24-daemonset-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-WORK-0024 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-WORK-0024
-skill_ref: 23-job-cronjob-failure
-scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
-severity: medium
-command: 'kubectl get cronjob <name> -n <namespace> -o jsonpath=''{.spec.schedule}''
-
-  kubectl get cronjob <name> -n <namespace> -o jsonpath=''{.status.lastScheduleTime}''
-
-  date -u'
-output_pattern: '# 执行: kubectl get cronjob <name> -n <namespace> -o jsonpath=''{.spec.schedule}''
-
-  kubectl get cronjob <name> -n <namespace> -o jsonpath=''{.status.lastScheduleTime}''
-
-  date -u
-
-  <typical output lines...>'
-diagnosis:
-- '执行 kubectl get cronjob <name> -n <namespace> -o jsonpath=''{.spec.schedule}''
-
-  kubectl get cronjob <name> -n <namespace> -o jsonpath=''{.status.lastScheduleTime}''
-
-  date -u 检查相关状态'
-confidence: 0.8
-tags:
-- 23-job-cronjob-failure
-- kubectl
-- status
-k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
-```
-
-### IODIAG-WORK-0025 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
-
-```yaml
-io_pair_id: IODIAG-WORK-0025
-skill_ref: 23-job-cronjob-failure
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get job
@@ -18695,22 +19494,22 @@ diagnosis:
 - 执行 kubectl get job 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0026 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0025 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0026
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0025
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get jobs -l managed-by-cronjob
@@ -18721,22 +19520,22 @@ diagnosis:
 - 执行 kubectl get jobs -l managed-by-cronjob 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0027 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0026 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0027
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0026
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get pods --selector=job-name
@@ -18747,23 +19546,23 @@ diagnosis:
 - 执行 kubectl get pods --selector=job-name 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - pod
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0028 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0027 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0028
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0027
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get jobs
@@ -18774,22 +19573,22 @@ diagnosis:
 - 执行 kubectl get jobs 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0029 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0028 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0029
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0028
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl describe cronjob
@@ -18800,22 +19599,22 @@ diagnosis:
 - 执行 kubectl describe cronjob 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - describe
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0030 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0029 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0030
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0029
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get jobs | wc -l
@@ -18826,22 +19625,22 @@ diagnosis:
 - 执行 kubectl get jobs | wc -l 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0031 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0030 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0031
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0030
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl describe job
@@ -18852,22 +19651,97 @@ diagnosis:
 - 执行 kubectl describe job 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - describe
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-WORK-0031 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-WORK-0031
+skill_ref: 25-job-cronjob-failure
+scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+severity: medium
+command: kubectl apply/create/replace
+output_pattern: '# 执行: kubectl apply/create/replace
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl apply/create/replace 检查相关状态
+confidence: 0.8
+tags:
+- 25-job-cronjob-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ### IODIAG-WORK-0032 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
 io_pair_id: IODIAG-WORK-0032
-skill_ref: 23-job-cronjob-failure
+skill_ref: 25-job-cronjob-failure
+scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+severity: medium
+command: kubectl edit/patch
+output_pattern: '# 执行: kubectl edit/patch
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl edit/patch 检查相关状态
+confidence: 0.8
+tags:
+- 25-job-cronjob-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-WORK-0033 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-WORK-0033
+skill_ref: 25-job-cronjob-failure
+scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+severity: medium
+command: kubectl delete
+output_pattern: '# 执行: kubectl delete
+
+  <typical output lines...>'
+diagnosis:
+- 执行 kubectl delete 检查相关状态
+confidence: 0.8
+tags:
+- 25-job-cronjob-failure
+- kubectl
+k8s_versions:
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
+```
+
+### IODIAG-WORK-0034 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+
+```yaml
+io_pair_id: IODIAG-WORK-0034
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get cronjob <name> -n <namespace> -o jsonpath='{.spec.schedule}'
@@ -18878,22 +19752,22 @@ diagnosis:
 - 执行 kubectl get cronjob <name> -n <namespace> -o jsonpath='{.spec.schedule}' 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
-### IODIAG-WORK-0033 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
+### IODIAG-WORK-0035 — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 
 ```yaml
-io_pair_id: IODIAG-WORK-0033
-skill_ref: 23-job-cronjob-failure
+io_pair_id: IODIAG-WORK-0035
+skill_ref: 25-job-cronjob-failure
 scenario: Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation
 severity: medium
 command: kubectl get jobs -n <namespace> | wc -l
@@ -18904,15 +19778,15 @@ diagnosis:
 - 执行 kubectl get jobs -n <namespace> | wc -l 检查相关状态
 confidence: 0.8
 tags:
-- 23-job-cronjob-failure
+- 25-job-cronjob-failure
 - kubectl
 - status
 k8s_versions:
-- '1.28'
-- '1.29'
-- '1.30'
-- '1.31'
-- '1.32'
+- 1.28.x
+- 1.29.x
+- 1.30.x
+- 1.31.x
+- 1.32.x
 ```
 
 ---
@@ -18921,13 +19795,10 @@ k8s_versions:
 
 | 指标 | 数值 |
 |------|------|
-| 总 I-O 对数 | 469 |
+| 总 I-O 对数 | 511 |
 | severity=critical | 2 |
-| severity=high | 158 |
-| severity=medium | 309 |
+| severity=high | 159 |
+| severity=medium | 350 |
 
 ---
-*本文件由 scripts/corpus-generator/generate.py 自动生成*
-
-
-<!-- risk-assessed -->
+*本文件由 31-脚本/corpus-generator/generate.py 自动生成*

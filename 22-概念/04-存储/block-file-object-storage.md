@@ -216,7 +216,7 @@ spec:
 
 ## Related
 
-- [[22-概念/01-核心架构/Kubernetes Core Concepts.md|Kubernetes Core Concepts]] — Kubernetes Core Concepts
+- [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]] — Kubernetes Core Concepts
 - [[22-概念/12-研究/storage-tool-evolution.md|storage-tool-evolution]] — 存储工具演进
 - [[22-概念/15-运行时与系统/overlayfs-storage.md|overlayfs-storage]] — OverlayFS Storage
 - [[22-概念/15-运行时与系统/linux-sysctl-tuning.md|linux-sysctl-tuning]] — Linux Sysctl Tuning for Kubernetes
