@@ -986,6 +986,8 @@ etcdctl user grant-role user role        # 授权
 
 ## Related
 
+- [[22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md|etcd 深挖：quorum/写路径/MVCC 维护/Lease 两层/恢复实务]]
+
 - [[etcd]]
 
 - API Server 深度解析

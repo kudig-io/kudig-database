@@ -45,6 +45,7 @@ last_updated: 2026-07
 - [[01-集群基础/03-控制平面/21-container-runtime-deep-dive.md|Container Runtime Deep Dive]]
 - [[01-集群基础/03-控制平面/22-container-storage-deep-dive.md|Container Storage Deep Dive]]
 - [[01-集群基础/03-控制平面/23-container-network-deep-dive.md|Container Network Deep Dive]]
+- [[01-集群基础/03-控制平面/24-metrics-server-deep-dive.md|Metrics Server Deep Dive]]
 - [[01-集群基础/03-控制平面/25-production-deployment-best-practices.md|Production Deployment Best Practices]]
 - [[01-集群基础/03-控制平面/26-multi-cloud-hybrid-deployment.md|Multi Cloud Hybrid Deployment]]
 - [[01-集群基础/03-控制平面/27-gitops-automation-operations.md|Gitops Automation Operations]]
@@ -59,6 +60,8 @@ last_updated: 2026-07
 - [[01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook.md|Certificate Pki Lifecycle Runbook]]
 - [[01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md|Cluster Upgrade Runbook]]
 - [[01-集群基础/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|Node Maintenance Cordon Drain Shutdown]]
+- [[01-集群基础/03-控制平面/41-multi-tenancy-architecture.md|Multi Tenancy Architecture]]
+- [[01-集群基础/03-控制平面/42-cluster-extension-and-governance-deep-dive.md|Cluster Extension and Governance Deep Dive]]
 - [[01-集群基础/03-控制平面/final-completion-check.md|Final Completion Check]]
 - [[01-集群基础/03-控制平面/quality-report.md|Quality Report]]
 

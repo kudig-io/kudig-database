@@ -949,6 +949,7 @@ wait
 ## Related
 
 - [[21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md|etcd 深挖：quorum/写路径/MVCC 维护/Lease 两层/恢复实务]]
 
 
 <!-- risk-assessed -->

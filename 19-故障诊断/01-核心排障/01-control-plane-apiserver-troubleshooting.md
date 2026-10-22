@@ -604,6 +604,7 @@ groups:
 
 ## See Also
 
+- [[22-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|apiserver-latency-triage-deep-dive]] — "apiserver 变慢"分支的深度定界：etcd 三件证据、按段指标定界、审计时间戳归因
 - [[19-故障诊断/05-JVM调优/03-jvm-gc-container-tuning-guide.md|99-jvm-gc-container-tuning-guide]]
 - [[19-故障诊断/SUMMARY.md|SUMMARY]]
 - [[19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting.md|02-control-plane-etcd-troubleshooting]]

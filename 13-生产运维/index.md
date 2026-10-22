@@ -7,7 +7,7 @@ tags:
 - index
 tier: supporting
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: 2026-10
 ---
 
 
@@ -30,6 +30,7 @@ last_updated: 2026-07
 - 生产运维/ticket-cases/
 - [[13-生产运维/00-总览/index.md|00-总览]]
 - [[13-生产运维/07-运维手册/index.md|07-运维手册]]
+- [[13-生产运维/09-TAM服务方法论/index.md|09-TAM服务方法论]]
 
 ## 文档
 
@@ -45,4 +46,5 @@ last_updated: 2026-07
 - [[13-生产运维/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
 - [[13-生产运维/03-事件响应/escalation-playbook.md|Escalation Playbook]]
 - [[13-生产运维/05-工单案例/ticket-routing-rules.md|Ticket Routing Rules]]
+- [[13-生产运维/09-TAM服务方法论/01-tam-banking-large-project-methodology.md|TAM Banking Large Project Methodology]]
 

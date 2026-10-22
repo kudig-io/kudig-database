@@ -1,7 +1,7 @@
 ---
 title: 专有云 Apsara Stack
-description: 阿里云专有云（Apsara Stack）深度运维知识索引 — 天基/ASO、升级补丁、合规加固、盘古存储、故障手册
-summary: 阿里云专有云（Apsara Stack）目录索引，覆盖飞天底座组件、ESS/SLS/POP、天基/ASO 运维、升级补丁、合规加固（等保/国密）、盘古存储排障与专属故障手册。
+description: 阿里云专有云（Apsara Stack）深度运维知识索引 — 天基/ASO、升级补丁、合规加固、盘古存储、BMCP 裸金属智算纳管、故障手册
+summary: 阿里云专有云（Apsara Stack）目录索引，覆盖飞天底座组件、ESS/SLS/POP、天基/ASO 运维、升级补丁、合规加固（等保/国密）、盘古存储排障、BMCP 裸金属算力平台纳管 ACK 容器智算集群与专属故障手册。
 category: index
 tags:
 - index
@@ -10,7 +10,7 @@ tags:
 - private-cloud
 tier: core
 created: '2026-07-02'
-last_updated: '2026-07-23'
+last_updated: '2026-10-20'
 ---
 
 > **生产环境安全提示**
@@ -33,6 +33,7 @@ last_updated: '2026-07-23'
 | 006 | [[18-云厂商/01-阿里云/专有云-ACK/006-apsara-upgrade-patch-management.md|升级与补丁管理]] | ACK 版本升级、飞天底座补丁、滚动策略、前置检查、回滚预案 |
 | 007 | [[18-云厂商/01-阿里云/专有云-ACK/007-apsara-compliance-hardening.md|合规加固（等保/国密）]] | 等保四级、国密 SM2/SM4、KMS、审计、金融级 NetworkPolicy/RBAC |
 | 008 | [[18-云厂商/01-阿里云/专有云-ACK/008-apsara-pangu-storage-troubleshooting.md|盘古存储排障]] | PVC Pending、IO 延迟、快照/扩容失败、盘古集群健康检查 |
+| 009 | [[18-云厂商/01-阿里云/专有云-ACK/009-bmcp-ack-onboarding-faq.md\|BMCP 纳管 ACK 智算集群]] | 裸金属算力平台纳管 ACK 容器智算集群：RAM 双授权、镜像白名单、数据盘格式化红线、扩缩容/回收站、EVPC/RDMA、KGPU、诊断速查与面试快问快答 |
 | 01 | [[18-云厂商/01-阿里云/专有云-ACK/01-apsara-stack-troubleshooting-runbook.md|专有云故障手册]] | 组件异常→K8s症状→排查命令→升级路径 可执行 runbook |
 
 ## 概览

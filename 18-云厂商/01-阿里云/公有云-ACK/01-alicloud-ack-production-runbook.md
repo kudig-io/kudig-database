@@ -316,6 +316,7 @@ kubectl top pods -A --containers | sort -k4 -nr | head -n 20
 - [[18-云厂商/01-阿里云/公有云-ACK/003-ack-slb-nlb-alb.md|ACK SLB/NLB/ALB]]
 - [[18-云厂商/01-阿里云/公有云-ACK/007-ack-ebs-storage.md|ACK EBS 存储]]
 - [[18-云厂商/01-阿里云/公有云-ACK/service-ack-practical-guide.md|ACK 实战指南]]
+- [[18-云厂商/01-阿里云/公有云-ACK/08-ack-cluster-lifecycle-create-upgrade.md|ACK 集群生命周期：新建与升级]]
 
 ### 跨域参考
 

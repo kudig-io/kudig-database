@@ -8,7 +8,7 @@ tags:
 - mermaid
 tier: supporting
 created: '2026-07-11'
-last_updated: 2026-07
+last_updated: 2026-10-22
 ---
 
 # 多集群架构模式：Hub-Spoke / Federation / Mesh
@@ -96,7 +96,7 @@ graph TB
   - **Istio Multi-Primary / Primary-Remote**：多控制面或单控制面 + 多数据面，共享 root CA。
   - **Cilium Cluster Mesh**：基于 eBPF，节点级共享服务发现，跨集群 Pod-to-Pod 直连。
   - **Linkerd Multicluster**：轻量 gateway 模型。
-- **关键能力**：跨集群 Service `.global` DNS、Locality-weighted LB（优先本集群）、故障切换（集群降级）、统一身份（SPIFFE / mTLS）、透明跨集群调用。
+- **关键能力**：跨集群服务发现（标准化的 MCS API 尚在 v1alpha1，见深挖笔记；Istio 旧版 `.global` DNS 后缀 1.8 起已废弃，改为同名合并）、Locality-weighted LB（优先本集群）、故障切换（集群降级）、统一身份（SPIFFE / mTLS）、透明跨集群调用。
 - **劣势**：网络打通复杂（需 Pod CIDR 不冲突 + 跨集群网络可达）、控制面一致性要求高、调试链路长。
 - **适用场景**：微服务跨集群互联、容灾切换（流量自动迁移）、Regulatory 分区（数据本地化但服务共享）、混合云统一服务网络。
 
@@ -107,6 +107,23 @@ graph TB
 1. **Hub-Spoke 管理面** + **Federation 调度面** + **Service Mesh 数据面**，分别解决治理、调度、通信。
 2. 工程实践：Anthos / Azure Arc 提供 Hub-Spoke；Karmada 提供 Federation；Istio/Cilium 提供 Mesh。
 3. **多集群 Ingress / Gateway API**（Multi-cluster Gateway）实现 N/S 流量按权重分配到不同集群。
+
+## 工业界实例：阿里云 ACK One 的模式定位
+
+**ACK One（分布式云容器平台）不是单一模式，而是三层组合**——理解它是对三种模式"叠加策略"的最佳印证：
+
+| 层 | 模式 | ACK One 实现 | 开源底座 |
+|---|---|---|---|
+| 管理面（集群纳管） | Hub-Spoke | Fleet 主控实例（托管 Hub）+ 关联集群（Spoke） | Open Cluster Management（`ManagedCluster`/`Work`） |
+| 调度面（应用分发） | Federation | `PropagationPolicy`/`OverridePolicy`/`ResourceBinding`（副本权重、动态资源感知、重调度、故障迁移） | Karmada（事件流可见 `karmada-scheduler`/`karmada-descheduler`；策略 CRD API 组为 `policy.one.alibabacloud.com`） |
+| 数据面（跨集群流量） | Mesh 的云产品化变体 | 多集群网关（MSE Ingress/ALB，N/S）+ 多集群 Service（E/W）+ ASM（Istio） | MSE / ALB / ASM |
+| 持续交付 | — | Fleet 内托管 ArgoCD + RAM SSO | Argo CD |
+
+一句话：**ACK One = 托管版 "OCM + Karmada + ArgoCD" + 阿里云托管网关补数据面**。它不做 Cilium ClusterMesh 式的集群间 Pod 直连（不要求 Pod CIDR 全局规划），而是用云产品层网关抽象承接跨集群流量。
+
+深度剖析（Fleet 架构、分发事件链路、ADOPTION 接管、同城双活/两地三中心、与自建对比）：[[18-云厂商/01-阿里云/分布式云-ACKOne/01-ack-one-multi-cluster-architecture.md|ACK One 多集群架构深度剖析]]
+
+判断型深挖（故障域三问 / MCS API 标准化现状 / E-W 四路线与 CIDR 重叠 / 单大集群 vs 多集群 / 容灾切流与 RTO，配套面试卡 Q109–Q114）：[[22-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive.md|多集群架构模式深挖]]
 
 ## 选型决策树
 

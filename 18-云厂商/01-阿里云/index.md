@@ -1,16 +1,17 @@
 ---
 title: 阿里云
-description: 阿里云目录索引 — 公有云 ACK 与专有云 Apsara Stack 双轨导航
-summary: 阿里云目录索引，覆盖专有云运维主干、公有云 ACK 与专有云 Apsara Stack 两条知识轨。
+description: 阿里云目录索引 — 公有云 ACK、专有云 Apsara Stack 与分布式云 ACK One 三轨导航
+summary: 阿里云目录索引，覆盖专有云运维主干、公有云 ACK、分布式云 ACK One（多集群/混合云）三条知识轨。
 category: index
 tags:
 - index
 - alibaba-cloud
 - ack
+- ack-one
 - apsara-stack
 tier: supporting
 created: '2026-07-02'
-last_updated: '2026-08-25'
+last_updated: '2026-10-15'
 ---
 
 > **生产环境安全提示**
@@ -19,9 +20,9 @@ last_updated: '2026-08-25'
 
 # 阿里云
 
-> 阿里云容器服务 ACK 的两条知识轨：**专有云（Apsara Stack）运维主干** 与 **公有云 ACK 托管服务**。
+> 阿里云容器服务的三条知识轨：**专有云（Apsara Stack）运维主干**、**公有云 ACK 托管服务** 与 **分布式云 ACK One（多集群/混合云）**。
 
-阿里云文档按交付形态分为两轨。远程顾问/SRE 场景以专有云运维主干为重点；通用云原生团队以公有云 ACK 为主。
+阿里云文档按交付形态分为三轨。远程顾问/SRE 场景以专有云运维主干为重点；通用云原生团队以公有云 ACK 为主；多集群、混合云与容灾治理走分布式云 ACK One。
 
 ## 知识轨速览
 
@@ -29,6 +30,7 @@ last_updated: '2026-08-25'
 |--------|----------|------|----------|
 | **专有云 Apsara Stack** | 客户数据中心本地化部署 | [[18-云厂商/01-阿里云/专有云-Apsara/index.md\|专有云-Apsara/]] | 政企/金融/运营商 SRE、远程顾问 |
 | **公有云 ACK** | 阿里云托管 Kubernetes | [[18-云厂商/01-阿里云/公有云-ACK/index.md\|公有云-ACK/]] | 通用云原生团队、平台工程师 |
+| **分布式云 ACK One** | 多集群/混合云/容灾管理平台 | [[18-云厂商/01-阿里云/分布式云-ACKOne/index.md\|分布式云-ACKOne/]] | 平台架构师、多集群治理团队 |
 
 ## 专有云运维主干（根文档）
 
@@ -49,6 +51,7 @@ last_updated: '2026-08-25'
 
 - [[18-云厂商/01-阿里云/专有云-Apsara/index.md|专有云-Apsara/]] — 专有云（Apsara Stack）深度运维：天基/ASO 流程、升级补丁、合规加固（等保/国密）、盘古存储排障、ESS/SLS/POP、专属故障手册
 - [[18-云厂商/01-阿里云/公有云-ACK/index.md|公有云-ACK/]] — 公有云 ACK：ECS 计算、SLB/NLB/ALB、VPC 网络、RAM 授权、ROS IaC、EBS 存储、生产 Runbook
+- [[18-云厂商/01-阿里云/分布式云-ACKOne/index.md|分布式云-ACKOne/]] — 分布式云容器平台 ACK One：Fleet 多集群舰队（OCM+Karmada+ArgoCD）、注册集群混合云、多集群网关/Service、同城双活与两地三中心
 - [[18-云厂商/01-阿里云/公共云/index.md|公共云/]] — 公共云整体架构与方案：产品选型、架构方案、面试准备
 - [[39-百炼智能体/index.md|百炼智能体/]] — 百炼平台 Agentic Ops：智能体定时巡检部署、本地 kind 集群 MCP 接入（根级一级域）
 

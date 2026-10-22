@@ -122,3 +122,5 @@ kubectl logs -n kube-system kube-controller-manager-<node> | grep -i "heartbeat\
 
 
 <!-- risk-assessed -->
+
+- [[22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md|etcd 深挖：quorum/写路径/MVCC 维护/Lease 两层/恢复实务]]

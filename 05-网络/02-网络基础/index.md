@@ -37,6 +37,7 @@ last_updated: '2026-08-25'
 | [[05-网络/02-网络基础/05-network-security-fundamentals.md\|网络安全]] | TLS/防火墙/微分段 | intermediate |
 | [[05-网络/02-网络基础/06-sdn-network-virtualization.md\|SDN 虚拟化]] | Overlay/VXLAN/eBPF | advanced |
 | [[05-网络/02-网络基础/09-cilium-ebpf-network-guide.md\|Cilium eBPF]] | eBPF 网络实践指南 | advanced |
+| [[05-网络/02-网络基础/10-dpu-smartnic-offload.md\|DPU 卸载]] | DPU/SmartNIC 网络卸载 | advanced |
 
 ## Related
 

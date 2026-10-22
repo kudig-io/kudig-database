@@ -10,7 +10,7 @@ tags:
 - chargeback
 tier: core
 created: '2026-07-02'
-last_updated: '2026-08-25'
+last_updated: '2026-10-15'
 ---
 # 成本治理 FinOps
 
@@ -34,6 +34,7 @@ last_updated: '2026-08-25'
 | [[13-生产运维/01-成本治理/05-kubernetes-cost-governance.md\|K8s 成本治理]] | 集群级成本管控 | advanced |
 | [[13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md\|FinOps Runbook]] | 成本治理操作手册 | advanced |
 | [[13-生产运维/01-成本治理/07-finops-cost-optimization-guide.md\|FinOps 指南]] | 完整成本优化指南 | advanced |
+| [[13-生产运维/01-成本治理/08-greenops-sustainability-compute.md\|GreenOps 算力运营]] | 可持续算力/Kepler 能耗归因/碳感知调度 | advanced |
 
 ## 成本优化工具
 

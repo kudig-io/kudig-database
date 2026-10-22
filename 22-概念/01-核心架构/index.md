@@ -1,6 +1,6 @@
 ---
 title: 核心架构 Concepts
-summary: Kubernetes 核心架构与机制概念索引——架构总览、声明式 API、控制器模式、垃圾回收、字段所有权。
+summary: Kubernetes 核心架构与机制概念索引——架构总览、声明式 API、控制器模式、垃圾回收、字段所有权、finalizer 删除生命周期。
 category: index
 tags:
 - index
@@ -9,7 +9,7 @@ tags:
 - control-plane
 tier: supporting
 created: '2026-07-24'
-last_updated: 2026-07
+last_updated: 2026-10
 ---
 
 # 核心架构 Concepts
@@ -20,6 +20,7 @@ last_updated: 2026-07
 
 - [[22-概念/01-核心架构/02-garbage-collection-owner-reference.md|垃圾回收与 ownerReference 级联删除机制]]
 - [[22-概念/01-核心架构/03-server-side-apply-field-ownership.md|Server-Side Apply 与字段所有权]]
+- [[22-概念/01-核心架构/04-finalizer-deletion-lifecycle.md|Finalizer 与删除生命周期]]
 - [[22-概念/01-核心架构/01-operator-sdk-go-helm-ansible-types.md|Operator SDK 三种类型 (Go/Helm/Ansible)]]
 - [[22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 - [[22-概念/01-核心架构/cloud-provider-k8s-integration.md|cloud-provider-k8s-integration]]

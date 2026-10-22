@@ -7,7 +7,7 @@ tags:
 - index
 tier: supporting
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: '2026-10-15'
 ---
 
 
@@ -29,5 +29,6 @@ last_updated: 2026-07
 - [[16-专项技术/01-边缘计算/11-edge-use-cases.md|Edge Use Cases]]
 - [[16-专项技术/01-边缘计算/12-edge-production-runbook.md|Edge Production Runbook]]
 - [[16-专项技术/01-边缘计算/15-kubernetes-developer-toolchain-guide.md|Kubernetes Developer Toolchain Guide]]
+- [[16-专项技术/01-边缘计算/16-edge-device-access-superedge-akri.md|Edge Device Access Superedge Akri]]
 - [[16-专项技术/01-边缘计算/03-edge-computing-production-deployment.md|03-edge-computing-production-deployment]]
 

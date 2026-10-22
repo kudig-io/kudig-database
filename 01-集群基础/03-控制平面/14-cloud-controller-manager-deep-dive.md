@@ -2261,6 +2261,7 @@ grep -E "node|Node|service|Service|loadbalancer|LoadBalancer|route|Route" <ccm-l
 ## Related
 
 - [[21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[01-集群基础/03-控制平面/43-dual-cloud-controller-coexistence-deep-dive.md|双 CCM 分域共治深度剖析（SOFA CCM × ACK CCM）]]
 
 
 <!-- risk-assessed -->

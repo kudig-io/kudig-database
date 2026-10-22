@@ -371,6 +371,7 @@ spec:
 ## 相关概念
 
 - [[capacity-planning-cost-optimization|容量规划与成本优化]]
+- [[22-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive.md|多集群架构模式深挖（容灾切流三段/RTO 公式）]]
 - 多集群管理
 - 服务网格
 - GitOps

@@ -694,6 +694,10 @@ kubectl logs -n kube-system -l app=cluster-autoscaler --tail=100 | grep -i "scal
 7. **定时伸缩**：有明显峰谷的业务配置定时伸缩规则
 8. **节点池隔离**：不同 SLA 等级的服务放在不同节点池
 
+## 相关文档
+
+- [[18-云厂商/01-阿里云/公有云-ACK/08-ack-cluster-lifecycle-create-upgrade.md|ACK 集群生命周期：新建与升级]] — 节点池滚动升级在"控制面先升、节点池后升"两阶段模型中的位置、drain 排障与单向门机理
+
 ---
 
 *本文档描述 ACK 节点池管理与弹性伸缩策略。具体参数以阿里云官方文档为准。*

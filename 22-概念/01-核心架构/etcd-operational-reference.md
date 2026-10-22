@@ -171,6 +171,7 @@ etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ �
 
 ## Related
 
+- [[22-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|apiserver-latency-triage-deep-dive]] — apiserver 延迟定界与 etcd 第一嫌疑人排查法（fsync/db size/Leader 三件证据的延迟视角展开）
 - [[22-概念/01-核心架构/kubernetes-architecture-overview.md|kubernetes-architecture-overview]] — Kubernetes Architecture Overview
 - [[22-概念/08-可靠性与运维/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
 - [[etcd]] — etcd
@@ -198,5 +199,7 @@ etcdctl snapshot restore /path/to/backup.db --data-dir=/var/lib/etcd  # ⚠️ �
 - [[37-归档/release-notes/core-deps/etcd/RELEASE-NOTES-3.6.md|RELEASE-NOTES-3.6]]
 - [[37-归档/release-notes/core-deps/etcd/RELEASE-NOTES-2.3.md|RELEASE-NOTES-2.3]]
 - [[37-归档/release-notes/core-deps/etcd/RELEASE-NOTES-3.2.md|RELEASE-NOTES-3.2]]
+
+- [[22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md|etcd 深挖：quorum/写路径/MVCC 维护/Lease 两层/恢复实务]]
 
 <!-- risk-assessed -->

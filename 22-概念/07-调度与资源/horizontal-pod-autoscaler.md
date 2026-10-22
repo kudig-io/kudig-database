@@ -214,6 +214,7 @@ spec:
 
 ## 相关概念
 
+- [[hpa-vpa-autoscaling-deep-dive]] — HPA/VPA 弹性伸缩深挖（四层金字塔、防抖三参数、CFS 限流互骗、VPA updateMode 全谱、HPA×VPA 分维度共存、决策树）
 - [[autoscaling-strategies]] — Kubernetes 自动伸缩策略总览
 - [[resource-management]] — Pod 资源管理机制
 - [[deployment-controller-architecture]] — Deployment 控制器架构

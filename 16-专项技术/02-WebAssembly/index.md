@@ -7,7 +7,7 @@ tags:
 - index
 tier: supporting
 created: '2026-07-02'
-last_updated: 2026-07
+last_updated: '2026-10-15'
 ---
 
 
@@ -28,4 +28,5 @@ last_updated: 2026-07
 - [[16-专项技术/02-WebAssembly/09-wasm-serverless.md|Wasm Serverless]]
 - [[16-专项技术/02-WebAssembly/10-wasm-security-sandbox.md|Wasm Security Sandbox]]
 - [[16-专项技术/02-WebAssembly/12-wasmedge-cloud-native-guide.md|Wasmedge Cloud Native Guide]]
+- [[16-专项技术/02-WebAssembly/13-wasm-cloud-native-runtime-deep-dive.md|Wasm Cloud Native Runtime Deep Dive]]
 

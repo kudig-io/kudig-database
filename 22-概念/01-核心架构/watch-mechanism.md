@@ -261,7 +261,10 @@ kubectl get --raw='/metrics' | grep workqueue_depth
 - [[22-概念/01-核心架构/kubernetes-architecture-overview.md|Kubernetes Architecture Overview]]
 - [[etcd|etcd]]
 - [[23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
+- [[22-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|apiserver-latency-triage-deep-dive]] — watch 链路在延迟故障中的角色（etcd 慢伪装成控制器失灵）与读路径 resourceVersion 语义
 
 - log.md|log]]
+
+- [[22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md|etcd 深挖：quorum/写路径/MVCC 维护/Lease 两层/恢复实务]]
 
 <!-- risk-assessed -->

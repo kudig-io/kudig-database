@@ -347,6 +347,7 @@ spec:
 ## Related
 
 - [[05-网络/01-K8s网络核心/34-multi-cluster-networking.md|多集群网络]]
+- [[22-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive.md|多集群架构模式深挖（判断层：故障域/MCS API/E-W 路线）]]
 - [[05-网络/01-K8s网络核心/33-multi-cluster-federation.md|多集群联邦]]
 - [[05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md|CNI 架构基础]]
 - [[05-网络/01-K8s网络核心/52-dns-advanced-external-integration.md|DNS 高级与外部集成]]

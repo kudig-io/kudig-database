@@ -239,6 +239,8 @@ groups:
 - [ ] 了解生产最佳实践
 
 ## Related
+
+- [[22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md|etcd 深挖：quorum/写路径/MVCC 维护/Lease 两层/恢复实务]]
 - [[22-概念/11-交叉分析/etcd × Operator 模式.md|etcd × Operator 模式]] — 综合
 - [[22-概念/11-交叉分析/etcd × 可观测性.md|etcd × 可观测性]] — 综合
 

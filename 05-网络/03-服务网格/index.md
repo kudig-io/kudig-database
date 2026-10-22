@@ -43,6 +43,7 @@ last_updated: '2026-08-25'
 | [[05-网络/03-服务网格/11-istio-service-mesh-guide.md\|Istio 指南]] | 完整实践指南 | advanced |
 | [[05-网络/03-服务网格/12-linkerd-service-mesh-guide.md\|Linkerd 指南]] | 完整实践指南 | intermediate |
 | [[05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide.md\|Spring Cloud 指南]] | Java 微服务 Mesh | advanced |
+| [[05-网络/03-服务网格/14-cilium-mesh-multi-cluster-networking.md\|Cilium Mesh 多集群]] | ClusterMesh/Global Service | advanced |
 
 ## Related
 

@@ -103,6 +103,7 @@ estimated_read_time: 20min
 ## Related
 
 - [[01-overview|大规模集群总览与规模基线（拆分决策）]]
+- [[22-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive.md|多集群架构模式深挖（故障域/MCS API/拆集群判断/RTO）]]
 - [[04-network|网络最佳实践（多集群网络）]]
 - [[15-slo-chaos-engineering|SLO 与混沌工程（容灾演练）]]
 - [[20-最佳实践/07-scenarios/multi-cluster|多集群场景]]
