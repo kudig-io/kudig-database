@@ -10,7 +10,7 @@ tags:
 - agent
 - corpus
 - priority-p0
-last_updated: '2026-10-24'
+last_updated: '2026-10-25'
 difficulty: advanced
 reading_level: advanced
 audience:
@@ -21,7 +21,7 @@ audience:
 
 # 命令输出诊断语料 — P0 优先级
 
-> **生成时间**: 2026-10-24T23:29:52.744816
+> **生成时间**: 2026-10-25T23:24:36.489408
 > **I-O 对总数**: 511
 > **优先级**: P0
 > **生成方式**: 自动提取 + 人工种子
