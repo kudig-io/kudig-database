@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-27",
+  "pages_scanned": 4386,
+  "orphans": 1487,
+  "orphan_rate": 0.339,
+  "avg_inbound": 8.68,
+  "broken_wikilinks": 0,
+  "verified_upon": {
+    "checked": 912,
+    "missing": 911,
+    "coverage": 0.0011
+  }
+}
