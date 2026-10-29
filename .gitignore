@@ -1,5 +1,4 @@
 # Web UI（已拆分为独立 repo，见 kudig-webui）
-30-站点/
 site/
 
 # macOS
@@ -14,11 +13,11 @@ __pycache__/
 # 视频生成产物
 video-output/
 
-# RAG 向量化 Pipeline 本地缓存（由 31-脚本/embedding-pipeline.py 生成，含 >100MB 大文件）
-35-元数据/corpus-config/profiles/.vector-cache/
+# RAG 向量化 Pipeline 本地缓存（由 code/scripts/embedding-pipeline.py 生成，含 >100MB 大文件）
+maintaining/02-元数据/corpus-config/profiles/.vector-cache/
 
-# 33-源码/（内含 Kubernetes/terway 等 vendor 源码树，按领域分目录组织，不入库；见 33-源码/README.md）
-33-源码/
+# 上游源码检出（体积大、可重建；清单见 maintaining/02-元数据/repos.yaml，新环境执行 make repo-sync）
+code/repo/
 
 # 密钥与环境变量（禁止入库）
 .env
@@ -50,14 +49,14 @@ secrets/
 .zread/
 
 # 发布产物快照（可再生构建输出，改由 GitHub Releases 承载；见 REPO-AUDIT-2026-09-04.md P0）
-32-发布/package/
-37-归档/release-packages/
+maintaining/03-发布/package/
+wiki/31-归档/release-packages/
 
 # Obsidian 机器本地状态
 .obsidian/workspace.json
 
 # GTM 页面构建产物（源文件 index.html/og.png 入库）
-GTM/dist/
+code/GTM/dist/
 
 # Agent 工具会话产物
 .impeccable/

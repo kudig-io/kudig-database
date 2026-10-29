@@ -1,0 +1,609 @@
+---
+title: Kubernetes (CNCF Graduated)
+description: '## 概述'
+summary: 'description: ''## 项目概述'''
+category: entities
+tags:
+- k8s
+- cncf
+- observability
+- kubernetes
+- etcd
+- scheduler
+- prometheus
+- grafana
+- istio
+- cilium
+tier: core
+created: '2026-05-23'
+last_updated: 2026-10-14
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 15min
+intent_queries:
+- Kubernetes (CNCF Graduated) 是什么
+- 如何 Kubernetes (CNCF Graduated)
+trigger_keywords:
+- Kubernetes
+- CNCF
+- Graduated
+prerequisites:
+- kubectl-basics
+- service-mesh-basics
+- prometheus-basics
+- monitoring-basics
+- gitops-basics
+- ebpf-basics
+- cilium-basics
+- etcd-basics
+- kafka-basics
+- redis-basics
+- gpu-scheduling-basics
+- observability-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+
+
+# [[kubernetes|Kubernetes]] (CNCF Graduated)
+
+> **CNCF 状态**: Graduated | **类别**: Orchestration | **主要语言**: Go
+> **当前版本**: v1.37（Garhwal，2026-08-26 发布，最新 patch v1.37.1，2026-10 核对）| 升级指南：[[wiki/01-集群基础/06-升级路径/05-kubernetes-v1.37-upgrade-guide.md|v1.37 升级实操]] | 深度研究：[[wiki/25-研究/04-可靠性与运维/kubernetes-v1.37-release-research.md|v1.37 Release 研究]]
+
+## 概述
+
+description: '## 项目概述'
+
+## 核心能力
+
+- **容器编排**: 自动化容器的部署、扩展和运维
+- **服务发现**: 内置 DNS 和负载均衡
+- **自动恢复**: 自动重启失败容器、替换节点
+- **滚动更新**: 零停机部署和回滚
+- **配置管理**: ConfigMap 和 Secret 管理
+- **存储编排**: 自动挂载存储系统
+
+## K8s 集成
+
+该项目作为云原生生态系统的一部分，与 Kubernetes 深度集成。通过 CRD、Operator 模式或原生 API 与 K8s 控制平面交互，支持在 [[wiki/22-概念/01-核心架构/kubernetes-architecture-overview.md|Kubernetes 架构]] 中无缝运行。^[inferred]
+
+## 生产部署要点
+
+- 使用高可用控制平面（3+ 节点）
+- 配置资源限制（requests/limits）
+- 启用 RBAC 和 Pod Security Standards
+- 定期备份 etcd 数据
+- 使用节点亲和性和反亲和性
+- 合理配置 API Server 限流参数
+
+## 架构定位
+
+在 CNCF 生态中，kubernetes 属于 **Observability** 类别，为云原生应用提供关键基础设施能力。^[inferred]
+
+## 参考链接
+
+- [[etcd]]
+- [[wiki/23-实体/07-可观测性/prometheus-grafana.md|prometheus-grafana]]
+- [[istio]]
+- [[containerd]]
+- [[wiki/23-实体/08-交付与制品/argocd.md|argocd]]
+
+## Related
+
+- [[wiki/23-实体/15-参考与索引/cncf-orchestration.md|cncf-orchestration]] — CNCF 编排与应用管理项目全景
+- [[prometheus]] — Prometheus
+- [[interlink]] — InterLink
+- [[wiki/23-实体/15-参考与索引/kubernetes-changelog.md|kubernetes-changelog]] — Kubernetes 变更日志索引
+- [[etcd]] — etcd
+
+- [[wiki/02-工作负载/02-Java-on-K8s/05-java-cicd-tekton-argocd.md|06-java-cicd-tekton-argocd]]
+- ovn-kubernetes
+- 99-spring-cloud-kubernetes-service-mesh-guide
+- 08-kubernetes-network-policies-security-micro-segmentation
+- 19-kubernetes-gateway-api-modern-traffic-management
+- 18-kubernetes-ebpf-cilium-deep-practice
+- 13-kubernetes-multi-tenancy-security-isolation-resource-quota
+- 16-kubernetes-edge-computing-kubeedge-practice
+- 09-kubernetes-service-mesh-istio-integration
+- 20-kubernetes-supply-chain-security-sbom-slsa-sigstore
+- 12-kubernetes-scheduler-deep-optimization-custom-scheduling
+- 23-kubernetes-opentelemetry-native-observability
+- 02-kubernetes-large-scale-performance-optimization
+- 03-kubernetes-zero-trust-security-architecture
+- 11-kubernetes-api-server-deep-optimization-extension
+- 05-kubernetes-gitops-complete-practice-guide
+- 15-kubernetes-chaos-engineering-fault-injection-testing
+- 22-kubernetes-webassembly-wasm-workloads
+- 10-kubernetes-automation-sre-practices
+- 17-kubernetes-aiml-gpu-scheduling-llm-inference
+- 01-kubernetes-production-readiness-assessment
+- 26-kubernetes-vcluster-virtual-cluster-multi-tenancy
+- 06-kubernetes-cost-governance-finops-practice
+- 21-kubernetes-platform-engineering-internal-developer-platform
+- 14-kubernetes-event-driven-architecture-asynchronous-processing
+- 24-kubernetes-policy-as-code-governance-automation
+- 07-kubernetes-csi-storage-deep-practice
+- 04-kubernetes-multi-cloud-hybrid-deployment
+- 99-kubernetes-v1.33-observability-guide
+- 99-java-observability-kubernetes-guide
+- 99-kubernetes-v1.33-platform-ops-guide
+- 99-kubernetes-deployment-patterns-architecture
+- 99-kubernetes-multi-tenant-architecture
+- [[wiki/01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- 13-kubernetes-cost-governance
+- 99-kubernetes-v1.33-workloads-guide
+- 99-spring-boot-kubernetes-guide
+- 99-kubernetes-v1.33-design-principles-evolution
+- 99-kubernetes-developer-toolchain-guide
+- 09-job-cronjob-batch-events
+- 11-storage-volume-events
+- 12-autoscaling-events
+- 03-image-pull-events
+- 15-ecosystem-addon-events
+- 08-statefulset-daemonset-events
+- [[wiki/17-系统基础/README.md|Domain-33: Kubernetes Events 全域事件大全]]
+- 02-pod-container-lifecycle-events
+- 00-open-source-projects-index
+- 04-probe-health-check-events
+- 13-security-admission-rbac-events
+- 05-scheduling-preemption-events
+- 01-event-system-architecture
+- 07-deployment-replicaset-events
+- 06-node-lifecycle-condition-events
+- domain-33-kubernetes-events MOC
+- 14-namespace-resource-gc-events
+- 10-service-networking-events
+- 07-kubernetes-backup-restore-deep-dive
+- 07-redis-kubernetes-operator
+- 08-kafka-kubernetes-strimzi
+- 04-database-middleware-kubernetes
+- 11-kubernetes-source-code-architecture
+- 99-kubernetes-core-components-v1.29-v1.33-update
+- 99-kubernetes-v1.25-v1.33-feature-comparison-table
+- 99-kubernetes-version-lifecycle-support-policy
+- 99-kubernetes-v1.33-deprecation-migration-guide
+- 99-kubernetes-core-features-mermaid-diagrams
+- 99-kubernetes-v1.33-practical-cookbook
+- 99-kubernetes-v1.29-v1.33-features-guide
+- 99-kubernetes-api-version-matrix
+- 99-kubernetes-v1.33-ecosystem-compatibility-matrix
+- 99-kubernetes-v1.33-quick-reference-card
+- 99-kubernetes-v1.33-upgrade-guide
+- 99-kubernetes-v1.33-production-best-practices
+- Kubernetes 架构全景图
+- 99-kubernetes-v1.29-v1.33-complete-feature-gates-reference
+- 13-kubernetes-operations-fundamentals
+- 11-kubernetes-security-hardening
+- 99-java-security-kubernetes-guide
+- 05-ibm-cloud-kubernetes-service-enterprise
+- 02-kubernetes-gateway-api-deep-dive
+- [[wiki/02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes.md|05-quarkus-native-kubernetes]]
+- [[wiki/02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|02-spring-boot-kubernetes-production]]
+- [[wiki/02-工作负载/02-Java-on-K8s/06-java-observability-kubernetes.md|07-java-observability-kubernetes]]
+- [[wiki/02-工作负载/02-Java-on-K8s/02-jvm-gc-container-tuning.md|03-jvm-gc-container-tuning]]
+- [[wiki/02-工作负载/02-Java-on-K8s/03-java-operator-sdk-development.md|04-java-operator-sdk-development]]
+- [[wiki/02-工作负载/README.md|Java on Kubernetes 综合实践指南]]
+- domain-java-kubernetes MOC
+- 16-kubernetes-hardware-troubleshooting
+- [[wiki/19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis-v2.md|kubernetes-fta-full-analysis-v2]]
+- [[wiki/19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis.md|kubernetes-fta-full-analysis]]
+- vscode-kubernetes-tools
+- Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
+- Wiki Lint Report — 2026-05-21 — Cross-reference
+- [[wiki/23-实体/15-参考与索引/KUDIG Cheat Sheet Index.md|KUDIG Cheat Sheet Index]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/specialized-workloads-terms.md|K8s 专用工作负载术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/linux-sysctl-reference.md|Linux Sysctl Reference for Kubernetes]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/networking-terms.md|K8s 网络术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-design-principles-deep-dive.md|设计原理：声明式 API、控制器模式与 etcd 共识]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/kubernetes-port-reference.md|Kubernetes Port Reference]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-glossary-index.md|K8s 术语表索引]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/fundamentals-terms.md|K8s 基础概念术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-architecture-fundamentals.md|K8s 架构基础与核心组件原理]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/root-terms.md|K8s Root术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/scheduling-terms.md|K8s 调度术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/kudig-contribution-guide.md|贡献指南、项目概览与版本发布说明]] — Cross-reference
+- [[maintaining/03-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|发布说明阅读指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-advanced-ecosystem.md|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/storage-terms.md|K8s 存储术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/observability-terms.md|K8s 可观测性术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/kubectl Scenario Quick Reference.md|kubectl Scenario Quick Reference]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/kubectl-quick-reference.md|Kubectl Quick Reference]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-deployment-create.md|Kubernetes Deployment 创建操作指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-cluster-delete.md|Kubernetes 集群删除操作指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Specification]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-cluster-create.md|Kubernetes 集群创建操作指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/configuration-terms.md|K8s 配置管理术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-ai-infra-domain-guide.md|AI Infrastructure on Kubernetes Domain Guide]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/tooling-terms.md|K8s 工具链术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-cluster-cert.md|Kubernetes 集群证书管理操作指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-node-create.md|Kubernetes 节点管理操作指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/platform-engineering-terms.md|K8s 平台工程术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/multi-cloud-terms.md|K8s 多云架构术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/kudig-man-pages-index.md|KUDIG Man Pages Index]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/version-upgrade-guide.md|版本升级指南]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/k8s-networking-domain-guide.md|Kubernetes Networking Domain Guide]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/operations-terms.md|K8s 运维运营术语参考]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/kubernetes-api-versions-reference.md|Kubernetes API Versions Reference]] — Cross-reference
+- [[wiki/22-概念/08-可靠性与运维/kubeadm-cluster-operations.md|kubeadm 集群运维全景]] — Cross-reference
+- [[wiki/22-概念/11-交叉分析/etcd × 高可用模式.md|etcd × 高可用模式]] — Cross-reference
+- [[wiki/22-概念/08-可靠性与运维/k8s-mttr-benchmark.md|K8s 问题分布与 MTTR 基准]] — Cross-reference
+- [[wiki/22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]] — Cross-reference
+- [[wiki/22-概念/11-交叉分析/声明式 API × 控制器模式.md|声明式 API × 控制器模式]] — Cross-reference
+- [[wiki/22-概念/11-交叉分析/eBPF × 运行时安全.md|eBPF x 运行时安全]] — Cross-reference
+- [[wiki/22-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/22-概念/05-安全/kubernetes-pki-certificate-system.md|Kubernetes PKI 证书体系]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/bp-infrastructure.md|最佳实践：Infrastructure]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/bp-observability.md|最佳实践：Observability]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/bp-operations.md|最佳实践：Operations]] — Cross-reference
+- [[wiki/22-概念/01-核心架构/declarative-api.md|Declarative API]] — Cross-reference
+- [[wiki/22-概念/01-核心架构/core-dependency-version-matrix.md|核心依赖版本矩阵]] — Cross-reference
+- [[wiki/22-概念/12-研究/kubernetes-version-evolution.md|Kubernetes 版本演进]] — Cross-reference
+- [[wiki/22-概念/05-安全/multi-tenancy-isolation.md|Multi-Tenancy Isolation]] — Cross-reference
+- [[wiki/22-概念/12-研究/cli-tools-evolution.md|CLI 工具演进]] — Cross-reference
+- [[wiki/22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]] — Cross-reference
+- [[wiki/22-概念/12-研究/ai-agent-openclaw-workspace.md|OpenClaw 工作空间配置]] — Cross-reference
+- [[wiki/22-概念/12-研究/ai-agent-README.md|AI Agent 工程专题]] — Cross-reference
+- [[wiki/22-概念/03-网络/cni-networking-model.md|CNI 网络模型与插件对比]] — Cross-reference
+- [[wiki/22-概念/15-运行时与系统/linux-sysctl-tuning.md|Linux Sysctl Tuning for Kubernetes]] — Cross-reference
+- [[wiki/22-概念/12-研究/storage-tool-evolution.md|存储工具演进]] — Cross-reference
+- [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/bp-README.md|Kubernetes 最佳实践指南]] — Cross-reference
+- [[wiki/22-概念/01-核心架构/eventual-consistency.md|Eventual Consistency in Kubernetes]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]] — Cross-reference
+- [[wiki/22-概念/08-可靠性与运维/node-lifecycle-management.md|节点生命周期管理]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/production-operations-best-practices.md|Production Operations Best Practices]] — Cross-reference
+- [[wiki/22-概念/10-最佳实践/bp-security.md|最佳实践：Security]] — Cross-reference
+- [[wiki/22-概念/12-研究/observability-stack-evolution.md|可观测性栈演进]] — Cross-reference
+- [[wiki/22-概念/12-研究/security-tool-evolution.md|安全工具演进]] — Cross-reference
+- [[wiki/22-概念/01-核心架构/watch-mechanism.md|Watch Mechanism (List-Watch)]] — Cross-reference
+- [[wiki/22-概念/12-研究/gitops-tool-evolution.md|GitOps 工具演进]] — Cross-reference
+- [[wiki/22-概念/05-安全/linux-security-modules.md|Linux Security Modules for Containers]] — Cross-reference
+- [[skills/05-网络/ingress/培训/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-01-day-one-checklist.md|Day 1: 新人首日检查清单]] — Cross-reference
+- [[skills/06-存储/csi-storage/最佳实践/k8s-storage-configuration-guide.md|Kubernetes 存储配置最佳实践]] — Cross-reference
+- [[skills/04-工作负载/hpa-vpa/最佳实践/k8s-scaling-guide.md|Kubernetes 扩缩容最佳实践]] — Cross-reference
+- [[skills/02-控制面/etcd/最佳实践/k8s-disaster-recovery-guide.md|Kubernetes 灾难恢复最佳实践]] — Cross-reference
+- [[skills/03-节点/gpu/诊断排障/ts-ai-ml-workloads.md|AI/ML 工作负载排查]] — Cross-reference
+- [[skills/05-网络/dns/dns-fta.md|DNS 异常故障树分析]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
+- [[skills/03-节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
+- [[skills/07-安全/certificate/kubelet-certificate-rotation.md|kubelet 证书轮换机制]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-README.md|新人上手快速路径（Quick Start）]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
+- [[skills/05-网络/networkpolicy/最佳实践/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]] — Cross-reference
+- [[skills/03-节点/node/诊断排障/ts-node-components.md|节点组件故障排查]] — Cross-reference
+- [[skills/04-工作负载/daemonset/培训/learn-13-daemonset-basics.md|第13课：DaemonSet 与节点守护]] — Cross-reference
+- [[skills/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|kubeadm 集群创建生命周期]] — Cross-reference
+- [[skills/08-可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]] — Cross-reference
+- [[skills/05-网络/networkpolicy/skill-20-networkpolicy-connectivity.md|NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/测验/assessment-troubleshooting-lab-exam.md|Troubleshooting Lab Exam]] — Cross-reference
+- [[skills/08-可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]] — Cross-reference
+- [[skills/04-工作负载/deployment/deployment-canary-and-bluegreen.md|金丝雀与蓝绿发布]] — Cross-reference
+- [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-USAGE-GUIDE.md|Usage Guide]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-01-what-is-kubernetes.md|第一课：Kubernetes 入门]] — Cross-reference
+- [[skills/07-安全/rbac/诊断排障/ts-security-auth.md|安全认证故障排查]] — Cross-reference
+- [[skills/01-集群运维/cluster-upgrade/reference/skill-reference-version-matrix.md|Version Matrix]] — Cross-reference
+- [[skills/02-控制面/crd-operator/运维操作/develop-crd-operator.md|Develop CRD Operator]] — Cross-reference
+- [[skills/04-工作负载/job-cronjob/skill-23-job-cronjob-failure.md|Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation]] — Cross-reference
+- [[skills/03-节点/node/运维操作/node-drain-and-maintenance.md|节点驱逐与维护]] — Cross-reference
+- [[skills/08-可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide.md|Kubernetes 分布式追踪最佳实践]] — Cross-reference
+- [[skills/04-工作负载/statefulset/skill-21-statefulset-failure.md|StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]] — Cross-reference
+- [[skills/01-集群运维/kubeadm/kubeadm-cluster-deletion.md|kubeadm 集群删除操作]] — Cross-reference
+- [[skills/01-集群运维/kubeadm/kubeadm-ha-cluster-setup.md|kubeadm 高可用集群搭建]] — Cross-reference
+- [[skills/04-工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|Kubernetes 部署策略最佳实践]] — Cross-reference
+- [[skills/01-集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|Kubernetes 集群配置最佳实践]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|Diagnostic Workflow]] — Cross-reference
+- [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
+- [[skills/02-控制面/apiserver/诊断排障/ts-control-plane.md|控制平面故障排查]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/skill-reference-remediation-playbook.md|Remediation Playbook]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-lecturer-persona.md|K8S 讲师角色设定与场景规范]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
+- [[skills/02-控制面/scheduler/培训/learn-15-scheduling-basics.md|第15课：调度与亲和性]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/测验/assessment-daily-check-quiz.md|Daily Check Quiz]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/skill-reference-root-cause-catalog.md|Root Cause Catalog]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-root.md|Kubernetes 培训：Root]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
+- [[skills/04-工作负载/deployment/deployment-workload-selection.md|工作负载控制器选型]] — Cross-reference
+- [[skills/05-网络/cni/最佳实践/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]] — Cross-reference
+- [[skills/08-可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-02-pod-basics.md|第二课：Pod - K8s 的最小调度单元]] — Cross-reference
+- [[skills/05-网络/service/培训/learn-04-service-basics.md|第四课：Service - 让应用可以被访问]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
+- [[skills/01-集群运维/gitops-argocd/诊断排障/ts-gitops-devops.md|GitOps/DevOps 排查]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-04-debug-tools-setup.md|Day 4: 调试工具全家桶安装]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-02-first-ticket-guide.md|Day 2: 第一个工单处理指南]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-oncall-quick-qa.md|工单数字人快速问答 - On-Call 速查]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/skill-MOC.md|topic-skills MOC]] — Cross-reference
+- [[skills/04-工作负载/pod/方法论/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
+- [[skills/04-工作负载/pod/培训/learn-12-common-problems.md|第十课：常见问题排查]] — Cross-reference
+- [[skills/03-节点/skill-19-node-resource-pressure.md|节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation]] — Cross-reference
+- [[skills/06-存储/csi-storage/诊断排障/ts-storage.md|存储故障排查]] — Cross-reference
+- [[skills/01-集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维故障排查]] — Cross-reference
+- [[skills/03-节点/node/skill-notready/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/cncf-cicd.md|CNCF CI/CD 与发布管理项目全景]] — Cross-reference
+- [[wiki/23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]] — Cross-reference
+- [[wiki/23-实体/07-可观测性/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
+- [[wiki/23-实体/09-编排调度/metal3-io.md|Metal3]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/core-deps-changelog.md|核心依赖变更日志索引]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/cncf-edge-ai.md|CNCF 边缘计算与 AI/ML 项目全景]] — Cross-reference
+- [[wiki/23-实体/02-K8s核心组件/container-runtime.md|Container Runtime]] — Cross-reference
+- [[wiki/23-实体/09-编排调度/clusterpedia.md|Clusterpedia]] — Cross-reference
+- [[wiki/23-实体/15-参考与索引/cncf-observability.md|CNCF 可观测性项目全景]] — Cross-reference
+- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[wiki/21-生态参考/03-领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[wiki/21-生态参考/03-领域索引/helm-index.md|Helm 全局索引]]
+- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/21-生态参考/03-领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- CHANGELOG-1.2
+- CHANGELOG-1.3
+
+
+<!-- risk-assessed -->
+- [[wiki/01-集群基础/01-架构总览/04-source-code-structure|04 - Kubernetes 源码结构深度解析]]
+- [[wiki/01-集群基础/01-架构总览/20-kubernetes-v1.29-v1.33-features-guide|Kubernetes v1.29 - v1.33 版本特性深度指南]]
+- [[wiki/01-集群基础/01-架构总览/18-kubernetes-v1.25-v1.33-feature-comparison-table|Kubernetes v1.25 - v1.33 特性对比总表]]
+- [[wiki/01-集群基础/01-架构总览/13-observability-architecture|15 - Kubernetes 可观测性架构体系]]
+- [[wiki/01-集群基础/01-架构总览/12-security-architecture|14 - Kubernetes 安全架构深度分析]]
+- [[wiki/01-集群基础/01-架构总览/11-performance-tuning-guide|13 - Kubernetes 性能调优专项指南]]
+- [[wiki/01-集群基础/01-架构总览/14-troubleshooting-guide|16 - Kubernetes 故障排查专家级指南]]
+- [[wiki/01-集群基础/01-架构总览/10-cluster-deployment-patterns|12 - Kubernetes 集群部署架构模式指南]]
+- [[wiki/01-集群基础/01-架构总览/16-kubernetes-core-components-v1.29-v1.33-update|Kubernetes 核心组件 v1.29 - v1.33 新特性速查]]
+- [[wiki/01-集群基础/01-架构总览/02-core-components-deep-dive|Kubernetes 核心组件深度剖析]]
+- [[wiki/01-集群基础/02-设计原则/17-observability-design-principles|16 - 可观测性设计原则]]
+- [[wiki/01-集群基础/02-设计原则/03-declarative-api-pattern|02 - 声明式 API 与面向终态设计 (Declarative API)]]
+- [[wiki/01-集群基础/02-设计原则/18-security-design-patterns|17 - 安全设计模式]]
+- [[wiki/01-集群基础/02-设计原则/05-watch-list-mechanism|04 - List-Watch 机制深度解析 (List-Watch)]]
+- [[wiki/01-集群基础/02-设计原则/01-design-principles-foundations|01 - Kubernetes 设计原则与哲学 (Foundations)]]
+- [[wiki/01-集群基础/03-控制平面/11-etcd-deep-dive|etcd 深度解析]]
+- [[wiki/01-集群基础/03-控制平面/24-metrics-server-deep-dive|metrics-server 深度解析 (metrics-server Deep Dive)]]
+- [[wiki/01-集群基础/03-控制平面/20-kube-scheduler-deep-dive|Kubernetes Scheduler 深度解析 (Kube-Scheduler Deep Dive)]]
+- [[wiki/01-集群基础/03-控制平面/02-plane-components-interaction|控制平面组件交互详解 (Control Plane Components Interaction Deep Dive)]]
+- [[wiki/01-集群基础/03-控制平面/35-kubeadm-cluster-lifecycle|32 - kubeadm 集群生命周期管理 (Cluster Lifecycle with kubeadm)]]
+- [[wiki/01-集群基础/03-控制平面/16-kube-proxy-deep-dive|kube-proxy 深度解析 (kube-proxy Deep Dive)]]
+- [[wiki/01-集群基础/03-控制平面/13-kube-controller-manager-deep-dive|kube-controller-manager 深度解析]]
+- [[wiki/01-集群基础/03-控制平面/12-apiserver-deep-dive|kube-apiserver 深度解析]]
+- [[wiki/01-集群基础/06-升级路径/01-cluster-configuration-parameters|06 - 集群配置参数完全参考]]
+- [[wiki/02-工作负载/00-总览/02-kubernetes-multi-tenant-architecture|Kubernetes 多租户与资源隔离生产架构]]
+- [[wiki/02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling|HPA/VPA 自动伸缩配置]]
+- [[wiki/02-工作负载/01-核心工作负载/18-node-management-operations|27 - 节点与节点池管理 (Node & NodePool Management)]]
+- [[wiki/02-工作负载/01-核心工作负载/README-old|Domain-4: Kubernetes工作负载]]
+- [[wiki/02-工作负载/01-核心工作负载/24-kubernetes-v1.33-workloads-guide|Kubernetes v1.29-v1.33 工作负载管理新特性指南]]
+- [[wiki/02-工作负载/01-核心工作负载/14-sidecar-containers-patterns|Sidecar 容器模式]]
+- [[wiki/02-工作负载/01-核心工作负载/23-resource-management|16 - 资源管理表]]
+- [[wiki/03-清单模式/01-YAML参考/32-lease-event-node|32 - Lease / Event / Node YAML 配置参考]]
+- [[wiki/03-清单模式/01-YAML参考/10-ingress-ingressclass|10 - Ingress / IngressClass YAML 配置参考]]
+- [[wiki/03-清单模式/01-YAML参考/34-component-configuration|34. Kubernetes 组件配置（Component Configuration）]]
+- [[wiki/03-清单模式/01-YAML参考/12-gateway-api-advanced-routes|12 - Gateway API 高级路由 YAML 配置参考]]
+- [[wiki/03-清单模式/01-YAML参考/09-endpoints-endpointslice|09 - Endpoints / EndpointSlice YAML 配置参考]]
+- [[wiki/04-应用模式/02-行业架构/45-smart-port-shipping|智慧港口与航运架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/36-carbon-esg-management|碳资产管理与 ESG 架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture|云原生 DevOps 平台 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/04-im-rtc-architecture|实时通信 (IM / RTC) Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/84-national-park|国家公园架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/83-cultural-digitization|文化数字化架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/94-smart-prison|智慧监狱架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud|量子计算云平台架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/38-supply-chain-finance|供应链金融架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/91-urban-air-mobility|低空经济（eVTOL/UAM）架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce|跨境电商架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/69-6g-core-network|6G 核心网架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/71-smart-tax|智慧税务架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/02-mini-program-architecture|小程序平台 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/53-new-retail-dtc|新零售 DTC 架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/03-cms-architecture|内容管理系统 (CMS) Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/85-hydrogen-energy|氢能源架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture|数据中台 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/16-video-shortform-architecture|音视频与短视频平台 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/41-beauty-ecommerce|美妆电商架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/01-ecommerce-architecture|电商系统 Kubernetes 生产架构设计 (应用模式)]]
+- [[wiki/04-应用模式/02-行业架构/55-crossborder-dtc|跨境电商独立站架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/27-hospitality-tourism|酒店旅游架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/87-flexible-manufacturing|柔性制造架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/34-sportstech|体育科技架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/28-proptech|房地产科技架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/59-industrial-internet-platform|工业互联网平台架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse|社交游戏与元宇宙社交架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/31-instant-retail|即时零售架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/33-crossborder-warehouse|跨境电商海外仓架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/05-online-education-architecture|在线教育平台 Kubernetes 生产架构设计 (应用模式)]]
+- [[wiki/04-应用模式/02-行业架构/70-ecny-cbdc|数字人民币架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/62-distributed-energy|分布式能源架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/75-affective-computing|情感计算 AI 架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/50-unmanned-retail|无人零售与智能货柜架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring|可控核聚变监控架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/79-polar-research|极地科考架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/73-smart-firefighting|智慧消防架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture|微服务治理与 Service Mesh Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture|智慧医疗 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/96-carbon-capture|碳捕集利用与封存（CCUS）架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/78-deep-sea-exploration|深海探测架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture|智慧物流与供应链 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/58-web3-gamefi|Web3 GameFi 架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/76-synthetic-biology|合成生物学架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture|SaaS 多租户平台 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/11-smart-retail-architecture|智慧零售与新零售 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/81-smart-customs|智慧海关架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/24-insurtech|保险科技架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/90-neuromorphic-computing|类脑计算架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/46-satellite-internet|卫星互联网架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/52-smart-water|智慧水务架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/82-legaltech|司法科技架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/15-energy-power-architecture|能源电力 Kubernetes 生产架构设计 (应用模式)]]
+- [[wiki/04-应用模式/02-行业架构/37-pet-economy|宠物经济架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/49-livestream-ecommerce|直播电商架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/66-space-internet|太空互联网架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/06-fintech-architecture|金融科技 (FinTech) Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/88-nanomaterials|纳米材料架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/39-smart-campus|智慧园区架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/13-digital-government-architecture|数字政务 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/48-vocational-edtech|职业教育培训架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/72-digital-twin-city|数字孪生城市架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/32-smart-restaurant|智慧餐饮架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/89-crispr-gene-editing|基因编辑 CRISPR 架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/56-smart-elderly-care|智慧养老架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/44-martech-adtech|数字营销与广告科技架构设计 — 阿里云视角]]
+- [[wiki/04-应用模式/02-行业架构/95-industrial-metaverse|工业元宇宙架构设计 — 阿里云视角]]
+- [[wiki/05-网络/01-K8s网络核心/11-service-advanced-features|Service 高级特性与应用案例 (Service Advanced Features)]]
+- [[wiki/05-网络/01-K8s网络核心/29-coredns-troubleshooting-optimization|56 - CoreDNS 故障排查与性能优化 (Troubleshooting & Optimization)]]
+- [[wiki/05-网络/01-K8s网络核心/16-coredns-plugins-reference|55 - CoreDNS 插件完整参考 (Plugins Reference)]]
+- [[wiki/05-网络/01-K8s网络核心/23-ingress-tls-certificate|130 - Ingress TLS 与证书管理]]
+- [[wiki/05-网络/01-K8s网络核心/13-dns-service-discovery|33 - 服务发现与 DNS 配置 (Service Discovery & DNS)]]
+- [[wiki/05-网络/01-K8s网络核心/28-cni-troubleshooting-optimization|144 - CNI 故障排查与优化 (CNI Troubleshooting & Optimization)]]
+- [[wiki/05-网络/01-K8s网络核心/01-network-architecture-overview-faq|FAQ 文档]]
+- [[wiki/05-网络/01-K8s网络核心/26-ingress-monitoring-troubleshooting|133 - Ingress 监控与故障排查]]
+- [[wiki/05-网络/01-K8s网络核心/04b-flannel-ipv6-dual-stack|Flannel IPv6 Dual Stack 支持]]
+- [[wiki/05-网络/03-服务网格/06-traefik-mesh-enterprise|Traefik Mesh Enterprise Service Mesh 深度实践]]
+- [[wiki/05-网络/03-服务网格/03-consul-connect-enterprise|Consul Connect 企业级服务网格管理]]
+- [[wiki/05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide|Spring Cloud Kubernetes 与服务网格集成指南]]
+- [[wiki/05-网络/04-API网关/13-api-gateway-performance-benchmarks|13 - API 网关性能基准测试与调优]]
+- [[wiki/05-网络/04-API网关/12-api-gateway-observability|12 - API 网关可观测性：指标、日志与链路追踪]]
+- [[wiki/05-网络/04-API网关/07-envoy-gateway-enterprise|07 - Envoy Gateway 企业级实践]]
+- [[wiki/05-网络/04-API网关/09-nginx-ingress-migration-guide|09 - 传统 Ingress 控制器向云原生 API 网关迁移]]
+- [[wiki/05-网络/06-Terway/06-performance|06 - Terway 性能调优 (Performance Tuning)]]
+- [[wiki/08-安全/05-供应链/11-compliance-automation-audit|合规自动化与审计 (Compliance Automation and Audit)]]
+- [[wiki/08-安全/05-供应链/09-policy-controller-verification|Policy Controller 镜像验证 (Policy Controller Image Verification)]]
+- [[wiki/08-安全/06-合规审计/10-compliance-audit-practices|Kubernetes 合规与审计]]
+- [[wiki/08-安全/06-合规审计/07-certificate-management|证书管理与 TLS 配置]]
+- [[wiki/08-安全/06-合规审计/11-comprehensive-security-scanning|17 - 安全扫描与漏洞检测工具]]
+- [[wiki/09-可观测性/00-总览/15-kubernetes-v1.33-observability-guide|Kubernetes v1.29-v1.33 可观测性新特性指南]]
+- [[wiki/10-平台工程/01-构建/15-backstage-idp-guide|Backstage 内部开发者平台 (IDP) 构建指南]]
+- [[wiki/10-平台工程/02-运维/19-kubernetes-v1.33-platform-ops-guide|Kubernetes v1.29-v1.33 平台运维新特性指南]]
+- [[wiki/10-平台工程/02-运维/09-backup-recovery-strategy|Kubernetes 备份与恢复概述 (Backup & Recovery Overview)]]
+- [[wiki/11-发布变更/01-GitOps/12-gitops-pipeline-practices|10-GitOps流水线实践]]
+- [[wiki/15-AI基础设施/01-基础设施/29-alibaba-cloud-integration|15 - 阿里云特定集成表]]
+- [[wiki/15-AI基础设施/02-AI-Agents/15-agent-corpus-gap-analysis|Agent 语料库差距分析：kudig-database 作为 K8s 运维 Agent 语料还缺什么？ [02-ai-agents]]]
+- [[wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SOUL|KuDig Doctor — 角色人格与绝对红线 (02-ai-agents)]]
+- [[wiki/17-系统基础/02-硬件/16-kubernetes-hardware-troubleshooting|Kubernetes 运维硬件故障排查专题]]
+- [[wiki/17-系统基础/04-K8s事件/09-job-cronjob-batch-events|09 - Job 与 CronJob 批处理事件]]
+- [[wiki/17-系统基础/04-K8s事件/11-storage-volume-events|11 - 存储与卷事件]]
+- [[wiki/17-系统基础/04-K8s事件/12-autoscaling-events|12 - 自动扩缩容事件 (HPA / VPA / Cluster Autoscaler)]]
+- [[wiki/17-系统基础/04-K8s事件/03-image-pull-events|03 - 镜像拉取事件]]
+- [[wiki/17-系统基础/04-K8s事件/15-ecosystem-addon-events|15 - 生态系统与插件事件]]
+- [[wiki/17-系统基础/04-K8s事件/08-statefulset-daemonset-events|08 - StatefulSet 与 DaemonSet 控制器事件]]
+- [[wiki/17-系统基础/04-K8s事件/02-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
+- [[wiki/17-系统基础/04-K8s事件/05-scheduling-preemption-events|05 - 调度与抢占事件]]
+- [[wiki/17-系统基础/04-K8s事件/01-event-system-architecture|01 - Kubernetes 事件系统架构与 API 参考]]
+- [[wiki/17-系统基础/04-K8s事件/06-node-lifecycle-condition-events|06 - 节点生命周期与状态事件]]
+- [[wiki/17-系统基础/04-K8s事件/14-namespace-resource-gc-events|14 - Namespace、资源管理与垃圾回收事件]]
+- [[wiki/17-系统基础/04-K8s事件/10-service-networking-events|10 - Service 与网络事件]]
+- [[wiki/17-系统基础/05-速查卡/gateway-api|Gateway API]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/recommended-labels|推荐标签]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/kubernetes-object-management|Kubernetes 对象管理]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/namespaces|命名空间]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/nodes|Nodes（节点）]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/communication-between-nodes-and-the-control-plane|Communication between Nodes and the Control Plane（节点与控制平面之间的通信）]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/the-kubectl-command-line-tool|kubectl 命令行工具]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/garbage-collection|Garbage Collection（垃圾回收）]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/kubernetes-self-healing|Kubernetes Self-Healing（Kubernetes 自愈能力）]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/kubernetes-concepts-reference|Kubernetes Concepts Reference]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/objects-in-kubernetes|Kubernetes 中的对象]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/cloud-controller-manager|Cloud Controller Manager（云控制器管理器）]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/storage-versions|存储版本]]
+- [[wiki/17-系统基础/06-知识字典/multi-cloud/edge-computing-and-k3s|边缘计算与轻量级 Kubernetes]]
+- [[wiki/17-系统基础/06-知识字典/multi-cloud/multi-cloud-operations|10 - 多云混合云运维手册]]
+- [[wiki/17-系统基础/06-知识字典/networking/network-policies|Network Policies]]
+- [[wiki/17-系统基础/06-知识字典/networking/gateway-api|Gateway API]]
+- [[wiki/17-系统基础/06-知识字典/networking/ingress-controllers|Ingress Controllers]]
+- [[wiki/17-系统基础/06-知识字典/networking/dns-for-services-and-pods|DNS for Services and Pods]]
+- [[wiki/17-系统基础/06-知识字典/networking/telco-cloud-and-5g-mec|电信云与 5G 多接入边缘计算（MEC）]]
+- [[wiki/17-系统基础/06-知识字典/networking/cluster-mesh|多集群网络互联（Cluster Mesh）]]
+- [[wiki/17-系统基础/06-知识字典/observability/log-aggregation-with-loki|日志聚合与 Loki]]
+- [[wiki/17-系统基础/06-知识字典/observability/metrics-for-kubernetes-system-components|Kubernetes 系统组件指标]]
+- [[wiki/17-系统基础/06-知识字典/observability/traces-for-kubernetes-system-components|Kubernetes 系统组件链路追踪]]
+- [[wiki/17-系统基础/06-知识字典/observability/alerting-and-slo-monitoring|告警与 SLO 监控工程]]
+- [[wiki/17-系统基础/06-知识字典/observability/opentelemetry-and-distributed-tracing|OpenTelemetry 与分布式链路追踪]]
+- [[wiki/17-系统基础/06-知识字典/operations/operations-best-practices|01 - Kubernetes 生产环境运维最佳实践字典]]
+- [[wiki/17-系统基础/06-知识字典/operations/failure-patterns-analysis|02 - Kubernetes 故障模式与根因分析字典]]
+- [[wiki/17-系统基础/06-知识字典/operations/capacity-planning-forecasting|13 - 容量规划与资源预测]]
+- [[wiki/17-系统基础/06-知识字典/operations/certificates|Certificates（PKI 证书与要求）]]
+- [[wiki/17-系统基础/06-知识字典/operations/backup-disaster-recovery|备份与灾难恢复（Backup & Disaster Recovery）]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/kubernetes-api-aggregation-layer|Kubernetes API 聚合层]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/developer-portal-and-platform-metrics|开发者门户与平台工程度量]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/webassembly-wasm-workloads|WebAssembly（Wasm）工作负载]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/proxies-in-kubernetes|Kubernetes 中的代理]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/compatibility-version-for-control-plane|Kubernetes 控制平面组件的兼容版本]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/api-priority-and-fairness|API 优先级与公平性（API Priority and Fairness）]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/infrastructure-as-code-for-kubernetes|Kubernetes 基础设施即代码（IaC）]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/kubevirt-virtual-machines|KubeVirt：在 Kubernetes 上运行虚拟机]]
+- [[wiki/17-系统基础/06-知识字典/scheduling/node-declared-features|Node Declared Features]]
+- [[wiki/17-系统基础/06-知识字典/scheduling/assigning-pods-to-nodes|Assigning Pods to Nodes]]
+- [[wiki/17-系统基础/06-知识字典/scheduling/pod-scheduling-readiness|Pod Scheduling Readiness]]
+- [[wiki/17-系统基础/06-知识字典/scheduling/pod-priority-and-preemption|Pod Priority and Preemption]]
+- [[wiki/17-系统基础/06-知识字典/scheduling/api-initiated-eviction|API-initiated Eviction]]
+- [[wiki/17-系统基础/06-知识字典/security/policy-as-code|策略即代码（Policy as Code）]]
+- [[wiki/17-系统基础/06-知识字典/security/service-accounts|服务账号]]
+- [[wiki/17-系统基础/06-知识字典/security/role-based-access-control-good-practices|基于角色的访问控制（RBAC）最佳实践]]
+- [[wiki/17-系统基础/06-知识字典/security/kubernetes-api-server-bypass-risks|Kubernetes API Server 绕过风险]]
+- [[wiki/17-系统基础/06-知识字典/security/secrets-management-deep-dive|密钥管理深度指南]]
+- [[wiki/17-系统基础/06-知识字典/security/security-checklist|安全清单]]
+- [[wiki/17-系统基础/06-知识字典/security/spiffe-spire-identity|SPIFFE / SPIRE 与工作负载身份]]
+- [[wiki/17-系统基础/06-知识字典/specialized-workloads/windows-containers-in-kubernetes|Windows 容器在 Kubernetes 中的支持]]
+- [[wiki/17-系统基础/06-知识字典/specialized-workloads/guide-for-running-windows-containers-in-kubernetes|在 Kubernetes 中运行 Windows 容器指南]]
+- [[wiki/17-系统基础/06-知识字典/specialized-workloads/ai-infra-specialist|08 - AI/ML基础设施专业词典]]
+- [[wiki/17-系统基础/06-知识字典/specialized-workloads/vector-databases-and-rag-infrastructure|向量数据库与 RAG 基础设施]]
+- [[wiki/17-系统基础/06-知识字典/storage/storage-capacity|Storage Capacity（存储容量）]]
+- [[wiki/17-系统基础/06-知识字典/storage/dynamic-volume-provisioning|Dynamic Volume Provisioning（动态卷供给）]]
+- [[wiki/17-系统基础/06-知识字典/storage/volumes|Volumes（卷）]]
+- [[wiki/17-系统基础/06-知识字典/storage/node-specific-volume-limits|Node-specific Volume Limits（节点特定卷限制）]]
+- [[wiki/17-系统基础/06-知识字典/storage/volume-attributes-classes|Volume Attributes Classes（卷属性类）]]
+- [[wiki/17-系统基础/06-知识字典/storage/volume-health-monitoring|Volume Health Monitoring（卷健康监控）]]
+- [[wiki/17-系统基础/06-知识字典/tooling/tool-ecosystem|Kusheet 工具与开源项目 URL 汇总]]
+- [[wiki/17-系统基础/06-知识字典/tooling/cli-commands|查看所有 Pod 及其详细信息]]
+- [[wiki/17-系统基础/06-知识字典/workloads/managing-workloads|Managing Workloads]]
+- [[wiki/17-系统基础/06-知识字典/workloads/workload-management|Workload Management]]
+- [[wiki/18-云厂商/01-阿里云/专有云-ACK/01-专有云架构概述|阿里云专有云架构概述]]
+- [[wiki/18-云厂商/07-多云混合/07-huawei-cce-enterprise|华为云 CCE 企业级容器平台深度实践]]
+- [[wiki/19-故障诊断/01-核心排障/02-control-plane-etcd-troubleshooting|etcd 故障排查]]
+- [[wiki/19-故障诊断/02-资源排障/05-certificate-troubleshooting|证书故障排查]]
+- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/19-故障诊断/04-高级排障/10-kind-k3s-single-node-troubleshooting|Kind / K3s 单机集群故障排查]]
+- [[wiki/19-故障诊断/08-技能体系/26-namespace-quota-limitrange|Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation]]
+- [[wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow|诊断工作流 / Diagnostic Workflow]]
+- [[wiki/22-概念/01-核心架构/kubernetes-core-concepts|Kubernetes Core Concepts]]
+- [[wiki/22-概念/01-核心架构/etcd-operational-reference|etcd Operational Reference]]
+- [[wiki/22-概念/08-可靠性与运维/K8s-故障分布与-MTTR-基准|K8s 问题分布与 MTTR 基准]]
+- [[wiki/22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework|Structural Troubleshooting Framework]]
+- [[wiki/23-实体/02-K8s核心组件/kube-controller-manager|kube-controller-manager]]
+- [[wiki/23-实体/02-K8s核心组件/cloud-controller-manager|cloud-controller-manager]]
+- [[wiki/23-实体/08-交付与制品/porter|Porter (entities)]]
+- [[wiki/23-实体/15-参考与索引/cncf-infrastructure|CNCF 基础设施与混沌工程项目全景]]
+- [[wiki/23-实体/15-参考与索引/cncf-security|CNCF 安全与合规项目全景]]
+- [[skills/01-集群运维/cluster-upgrade/最佳实践/bp-README|Kubernetes 最佳实践指南 (skills)]]
+- [[skills/01-集群运维/cluster-upgrade/最佳实践/scen-README|生产场景导航]]
+- [[skills/04-工作负载/deployment/deployment-rolling-update|Deployment 滚动更新策略]]
+- [[skills/04-工作负载/pod/培训/learn-10-health-check|第八课：健康检查 - Probe 详解]]
+- [[skills/04-工作负载/pod/培训/learn-03-oncall-handoff|Day 3: 值班交接 SOP]]
+- [[skills/04-工作负载/pod/培训/training-public-README|K8s 学习与培训体系]]
+- [[skills/04-工作负载/pod/培训/inner-training/week-1-ack-acr-lifecycle/day-7-cluster-certificate|Day 7: K8S 集群证书]]
+- [[skills/04-工作负载/pod/培训/lecturer/lecturer-README|Kubernetes 金牌讲师 - 工单数字人场景]]
+- [[skills/04-工作负载/pod/培训/public-one-month/week-1-foundation/day-5-k8s-architecture|Day 5: Kubernetes 架构全貌]]
+- [[skills/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index|Kubernetes FTA Top Events Index]]
+- [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles|FTA Methodology and Core Principles]]
+- [[skills/04-工作负载/pod/清单规范/04-poddisruptionbudget-reference|28 - PodDisruptionBudget YAML 配置参考]]
+- [[skills/04-工作负载/pod/清单规范/05-advanced-pod-patterns|35 - 高级 Pod 模式与调度策略 YAML 配置参考]]
+- [[skills/04-工作负载/pod/生命周期与事件/01-pod-container-lifecycle-events|02 - Pod 与容器生命周期事件]]
+- [[skills/04-工作负载/pod/诊断排障/技能体系-02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]
+- [[skills/04-工作负载/pod/诊断排障/01-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
+- [[skills/04-工作负载/pod/诊断排障/技能体系-03-pod-pending|Pod Pending 调度失败诊断与修复]]
+- [[skills/04-工作负载/pod/调度/assigning-pods-to-nodes|Assigning Pods to Nodes]]
+- [[skills/04-工作负载/pod/调度/pod-scheduling-readiness|Pod Scheduling Readiness]]
+- [[skills/04-工作负载/pod/调度/pod-priority-and-preemption|Pod Priority and Preemption]]
+- [[skills/04-工作负载/pod/调度/字典-pod-overhead|Pod Overhead]]
+- [[skills/04-工作负载/pod/配置与字典/dns-for-services-and-pods|DNS for Services and Pods]]
+- [[skills/05-网络/cni/培训/kubernetes-terway-presentation|Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [topic-presentations]]]
+- [[skills/05-网络/service/培训/kubernetes-service-presentation|Kubernetes Service 全栈进阶培训 (从入门到专家) [topic-presentations]]]
+- [[skills/07-安全/resource-quota/培训/learn-07-namespace-resource-quota|第七课：Namespace 与资源隔离]]

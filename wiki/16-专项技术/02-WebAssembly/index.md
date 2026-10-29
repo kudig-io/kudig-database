@@ -1,0 +1,32 @@
+---
+title: Webassembly
+description: Webassembly 目录索引
+summary: Webassembly 目录索引
+category: index
+tags:
+- index
+tier: supporting
+created: '2026-07-02'
+last_updated: '2026-10-15'
+---
+
+
+# Webassembly
+
+> 本页为 `专项技术/02-webassembly` 目录的自动索引。
+
+## 文档
+
+- [[wiki/16-专项技术/02-WebAssembly/01-wasm-fundamentals-cloud-native.md|Wasm Fundamentals Cloud Native]]
+- [[wiki/16-专项技术/02-WebAssembly/02-containerd-wasm-shim.md|Containerd Wasm Shim]]
+- [[wiki/16-专项技术/02-WebAssembly/03-spinkube-framework.md|Spinkube Framework]]
+- [[wiki/16-专项技术/02-WebAssembly/04-wasmcloud-platform.md|Wasmcloud Platform]]
+- [[wiki/16-专项技术/02-WebAssembly/05-wasmedge-runtime.md|Wasmedge Runtime]]
+- [[wiki/16-专项技术/02-WebAssembly/06-wasm-component-model.md|Wasm Component Model]]
+- [[wiki/16-专项技术/02-WebAssembly/07-wasm-plugin-system.md|Wasm Plugin System]]
+- [[wiki/16-专项技术/02-WebAssembly/08-wasm-ai-inference.md|Wasm Ai Inference]]
+- [[wiki/16-专项技术/02-WebAssembly/09-wasm-serverless.md|Wasm Serverless]]
+- [[wiki/16-专项技术/02-WebAssembly/10-wasm-security-sandbox.md|Wasm Security Sandbox]]
+- [[wiki/16-专项技术/02-WebAssembly/12-wasmedge-cloud-native-guide.md|Wasmedge Cloud Native Guide]]
+- [[wiki/16-专项技术/02-WebAssembly/13-wasm-cloud-native-runtime-deep-dive.md|Wasm Cloud Native Runtime Deep Dive]]
+

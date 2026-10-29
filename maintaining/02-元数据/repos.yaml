@@ -1,0 +1,433 @@
+# =============================================================================
+# 上游源码检出清单（vendored source checkouts）
+# =============================================================================
+# code/repo/ 下的第三方源码树体积大、可重建，不进入本仓库（见 .gitignore），
+# 只在此登记版本事实。新环境重建 / 升级命令：
+#
+#   make repo-sync            # 克隆清单中缺失的源码树
+#   make repo-status          # 查看各源码树 ref / HEAD / 体积
+#   make repo-update          # 已有源码树按清单 ref 更新
+#   make repo-update-latest   # 解析上游最新稳定发布 → 写回清单 → 更新源码树
+#
+# 直连 github.com 不通时的两种代理方式（任选其一）：
+#   1) 本地 HTTP 代理（如 Clash 7897）：export HTTPS_PROXY=http://127.0.0.1:7897
+#   2) git 镜像前缀：python3 code/scripts/maintenance/repo-sync.py sync --proxy https://gh-proxy.com
+#      （也可 export KUDIG_GIT_PROXY=https://gh-proxy.com）
+#
+# 字段：
+#   name         目录名，检出位置为 <root>/<name>
+#   url          上游仓库原始地址（代理由 --proxy 叠加，不写进清单）
+#   ref          锁定的 tag / 分支 / commit
+#   track        latest-release：按 GitHub Releases 最新稳定版解析 ref
+#                latest-tag：仓库只打 tag、不发 Release 时，取最大稳定 semver tag
+#                （留空表示锁定分支/SHA，不自动跟随上游）
+#   depth        浅克隆深度，0 表示完整历史
+#   updated      本清单该条目的最后核对日期
+#   description  用途与对应知识域，便于判断是否还需要保留
+# =============================================================================
+
+version: 1
+root: code/repo
+
+defaults:
+  depth: 1
+
+repos:
+  # --- 控制面 / 运行时 ---
+  - name: kubernetes
+    url: https://github.com/kubernetes/kubernetes.git
+    ref: v1.37.1
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: Kubernetes 上游发布源码树（浅克隆，含 vendor）；对照 wiki/28-源码分析 与 wiki/10-平台工程/06-代码分析
+
+  - name: etcd
+    url: https://github.com/etcd-io/etcd.git
+    ref: v3.7.3
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 控制面数据存储（Raft、MVCC、Watch、compact）；对照 wiki/01-集群基础 与 wiki/28-源码分析/analysis/etcd
+
+  - name: containerd
+    url: https://github.com/containerd/containerd.git
+    ref: v2.4.2
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 容器运行时（CRI、snapshotter、runc/ctr）；对照 wiki/14-容器运行时
+
+  - name: cri-o
+    url: https://github.com/cri-o/cri-o.git
+    ref: v1.37.2
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 轻量 CRI 运行时（OCI、Pod 生命周期、CRI 接口实现）；对照 wiki/14-容器运行时 与代码分析运行时篇
+
+  - name: coredns
+    url: https://github.com/coredns/coredns.git
+    ref: v1.15.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 集群 DNS（Corefile、插件链、缓存与转发）；对照 wiki/05-网络
+
+  # --- 网络 / CNI / 服务网格 ---
+  - name: cilium
+    url: https://github.com/cilium/cilium.git
+    ref: v1.20.4
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: eBPF CNI 与网络可观测（datapath、NetworkPolicy、Hubble）；对照 wiki/05-网络 与 wiki/09-可观测性
+
+  - name: calico
+    url: https://github.com/projectcalico/calico.git
+    ref: v3.33.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: BGP/eBPF CNI 与网络策略（Felix、Typha、IPAM）；对照 wiki/05-网络 与代码分析网络篇
+
+  - name: flannel
+    url: https://github.com/flannel-io/flannel.git
+    ref: v0.28.10
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 常见 Overlay CNI 实现（VXLAN/host-gw、subnet manager）；对照 wiki/28-源码分析/analysis/flannel
+
+  - name: cni-plugins
+    url: https://github.com/containernetworking/plugins.git
+    ref: v1.9.1
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: CNI 规范基础插件（bridge/host-local/ipam/portmap 等）；对照 wiki/28-源码分析/analysis/cni
+
+  - name: terway
+    url: https://github.com/AliyunContainerService/terway.git
+    ref: v1.8.19
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 阿里云 ENI/独占网卡 CNI；对照 wiki/18-云厂商 与 wiki/28-源码分析/analysis/terway
+
+  - name: istio
+    url: https://github.com/istio/istio.git
+    ref: 1.31.3
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 服务网格（pilot、xDS、Sidecar/Ambient）；对照 wiki/05-网络 服务网格章节
+
+  - name: ingress-nginx
+    url: https://github.com/kubernetes/ingress-nginx.git
+    ref: controller-v1.15.1
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: Ingress 控制器参考实现（nginx 模板、reload、注解扩展）；对照 wiki/05-网络 Ingress 章节
+
+  # --- 可观测性 / 发布 / 平台 ---
+  - name: prometheus
+    url: https://github.com/prometheus/prometheus.git
+    ref: v3.15.1
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 指标采集与 TSDB（PromQL、scrape、remote-write）；对照 wiki/09-可观测性
+
+  - name: metrics-server
+    url: https://github.com/kubernetes-sigs/metrics-server.git
+    ref: v0.9.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 资源指标聚合（Metrics API、HPA 数据源）；对照 wiki/02-工作负载 与 wiki/09-可观测性
+
+  - name: grafana
+    url: https://github.com/grafana/grafana.git
+    ref: v13.2.4
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 可视化与统一告警（数据源、面板、告警规则）；对照 wiki/09-可观测性
+
+  - name: opentelemetry-collector
+    url: https://github.com/open-telemetry/opentelemetry-collector.git
+    ref: v0.164.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: OTel Collector 核心（receiver/processor/exporter 管线）；对照 wiki/09-可观测性 三信号统一
+
+  - name: argo-cd
+    url: https://github.com/argoproj/argo-cd.git
+    ref: v3.5.6
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: GitOps 持续交付（ApplicationSet、sync 引擎、RBAC）；对照 wiki/11-发布变更
+
+  - name: tekton
+    url: https://github.com/tektoncd/pipeline.git
+    ref: v1.17.1
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: K8s 原生 CI/CD 流水线（TaskRun、PipelineRun、控制器）；对照 wiki/11-发布变更
+
+  - name: helm
+    url: https://github.com/helm/helm.git
+    ref: v4.3.1
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 包管理与发布编排（chart、模板渲染、release 存储）；对照 wiki/10-平台工程
+
+  - name: harbor
+    url: https://github.com/goharbor/harbor.git
+    ref: v2.15.4
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 企业镜像仓库（复制、漏洞扫描、RBAC、OCI artifact）；对照 wiki/10-平台工程 与 wiki/08-安全
+
+  # --- 存储 ---
+  - name: alibaba-cloud-csi-driver
+    url: https://github.com/kubernetes-sigs/alibaba-cloud-csi-driver.git
+    ref: alibaba-cloud-csi-driver-1.37.3
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 阿里云 CSI 存储驱动（云盘/NAS/OSS 挂载）；对照 wiki/06-存储 与 wiki/28-源码分析/alibaba-cloud-csi-driver-1.36.1
+
+  # --- 阿里云 ACK：控制面 / 网络 / 节点 ---
+  - name: cloud-provider-alibaba-cloud
+    url: https://github.com/kubernetes/cloud-provider-alibaba-cloud.git
+    ref: v2.15.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 阿里云 Cloud Controller Manager（SLB/VPC 路由、节点生命周期）；对照 wiki/18-云厂商/01-阿里云 与 wiki/22-概念/01-核心架构/cloud-provider-k8s-integration
+
+  - name: ack-kms-plugin
+    url: https://github.com/AliyunContainerService/ack-kms-plugin.git
+    ref: master
+    depth: 1
+    updated: 2026-10-27
+    description: KMS Provider，为 apiserver Secret 静态加密提供信封加密；对照 wiki/08-安全（仓库未打 tag，跟踪 master）
+
+  - name: ack-secret-manager
+    url: https://github.com/AliyunContainerService/ack-secret-manager.git
+    ref: v0.6.7
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: 从 KMS/外部密钥库同步 Secret 到集群；对照 wiki/08-安全 密钥管理
+
+  - name: secrets-store-csi-provider-alibaba-cloud
+    url: https://github.com/AliyunContainerService/secrets-store-csi-driver-provider-alibaba-cloud.git
+    ref: main
+    depth: 1
+    updated: 2026-10-27
+    description: Secrets Store CSI Driver 的阿里云 Provider（KMS 密钥挂载）；对照 wiki/08-安全（仓库未打 tag，跟踪 main）
+
+  - name: ack-ram-authenticator
+    url: https://github.com/AliyunContainerService/ack-ram-authenticator.git
+    ref: v1.0.2
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: 以 RAM 凭证通过 Webhook 认证 kube-apiserver 请求；对照 wiki/08-安全 身份认证
+
+  - name: ack-image-builder
+    url: https://github.com/AliyunContainerService/ack-image-builder.git
+    ref: master
+    depth: 1
+    updated: 2026-10-27
+    description: ACK 自定义节点镜像构建（节点池镜像基线）；对照 wiki/03-节点（仓库未打 tag，跟踪 master）
+
+  - name: node-problem-detector-ack
+    url: https://github.com/AliyunContainerService/node-problem-detector.git
+    ref: v0.6.3
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: 阿里云维护的节点问题检测器（NPD 分支，版本较旧）；对照 wiki/19-故障诊断 节点健康
+
+  - name: alibaba-cloud-metrics-adapter
+    url: https://github.com/AliyunContainerService/alibaba-cloud-metrics-adapter.git
+    ref: master
+    depth: 1
+    updated: 2026-10-27
+    description: 阿里云监控指标接入 HPA 的 custom metrics adapter；对照 wiki/02-工作负载 弹性伸缩（仅有 alpha tag，跟踪 master）
+
+  - name: kube-eventer
+    url: https://github.com/AliyunContainerService/kube-eventer.git
+    ref: 1.2.14
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: 集群事件采集转发（SLS/ES/webhook）；对照 wiki/09-可观测性 事件链路
+
+  - name: velero-plugin
+    url: https://github.com/AliyunContainerService/velero-plugin.git
+    ref: v1.0.0
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: Velero 阿里云插件（OSS 备份存储、云盘快照）；对照 wiki/12-可靠性 备份恢复
+
+  - name: ackdistro
+    url: https://github.com/AliyunContainerService/ackdistro.git
+    ref: main
+    depth: 1
+    updated: 2026-10-27
+    description: ACK Distro 发行版（IDC/边缘离线部署与升级）；对照 wiki/18-云厂商/01-阿里云/专有云-ACK（tag 停留在 K8s 1.22，跟踪 main）
+
+  - name: karpenter-provider-alibabacloud
+    url: https://github.com/AliyunContainerService/karpenter-provider-alibabacloud.git
+    ref: v0.2.5
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: Karpenter 的阿里云 ECS NodePool 供应器；对照 wiki/03-节点 自动扩缩容
+
+  - name: terway-qos
+    url: https://github.com/AliyunContainerService/terway-qos.git
+    ref: main
+    depth: 1
+    updated: 2026-10-27
+    description: Terway eBPF 带宽/QoS 管理；对照 wiki/05-网络 与 wiki/28-源码分析/analysis/terway（仓库未打 tag，跟踪 main）
+
+  - name: alibabacloud-erdma-controller
+    url: https://github.com/AliyunContainerService/alibabacloud-erdma-controller.git
+    ref: v0.2.12
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: ERDMA/RDMA 网卡设备与拓扑控制器（AI 高性能网络）；对照 wiki/15-AI基础设施
+
+  - name: alibabacloud-ack-connector
+    url: https://github.com/AliyunContainerService/alibabacloud-ack-connector.git
+    ref: v1.14.1
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: ACK One 注册集群连接器（集群接入与反向代理）；对照 wiki/18-云厂商/01-阿里云/分布式云-ACKOne
+
+  - name: alibabacloud-3FS
+    url: https://github.com/AliyunContainerService/alibabacloud-3FS.git
+    ref: main
+    depth: 1
+    updated: 2026-10-27
+    description: 3FS 在 ACK 上的部署与集成（AI 训练数据高速存储）；对照 wiki/15-AI基础设施 与 wiki/06-存储（仓库未打 tag，跟踪 main）
+
+  - name: sgx-device-plugin
+    url: https://github.com/AliyunContainerService/sgx-device-plugin.git
+    ref: v1.0.0
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: SGX 机密计算设备插件（Enclave 资源调度）；对照 wiki/08-安全 机密计算
+
+  - name: image-syncer
+    url: https://github.com/AliyunContainerService/image-syncer.git
+    ref: v1.5.5
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: 镜像同步工具（ACR 多地域/离线交付）；对照 wiki/11-发布变更 与 wiki/18-云厂商 ACR
+
+  - name: alibabacloud-provider-for-cluster-api
+    url: https://github.com/AliyunContainerService/alibabacloud-provider-for-Cluster-API.git
+    ref: master
+    depth: 1
+    updated: 2026-10-27
+    description: Cluster API 的阿里云基础设施 Provider；对照 wiki/10-平台工程 集群生命周期（仅有 beta tag，跟踪 master）
+
+  # --- 阿里云 ACK：AI / 工作负载生态 ---
+  - name: kruise
+    url: https://github.com/openkruise/kruise.git
+    ref: v1.9.2
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: OpenKruise 工作负载（CloneSet/Advanced StatefulSet/SidecarSet）；对照 wiki/02-工作负载
+
+  - name: koordinator
+    url: https://github.com/koordinator-sh/koordinator.git
+    ref: v1.8.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 混部与 QoS 调度（Colocation、CPU Suppress、NUMA 亲和）；对照 wiki/02-工作负载 与 wiki/15-AI基础设施
+
+  - name: arena
+    url: https://github.com/kubeflow/arena.git
+    ref: v0.15.5
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: Arena AI 作业平台（训练/推理提交、GPU 共享与配额）；对照 wiki/15-AI基础设施
+
+  - name: fluid
+    url: https://github.com/fluid-cloudnative/fluid.git
+    ref: v1.0.8
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: 数据集编排与分布式缓存（JindoFS/ThinRuntime）；对照 wiki/15-AI基础设施
+
+  - name: gpushare-scheduler-extender
+    url: https://github.com/AliyunContainerService/gpushare-scheduler-extender.git
+    ref: v0.2.0
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: GPU 显存共享调度扩展（ACK 旧版 GPU 共享方案）；对照 wiki/15-AI基础设施
+
+  - name: gpushare-device-plugin
+    url: https://github.com/AliyunContainerService/gpushare-device-plugin.git
+    ref: v0.3.0
+    track: latest-tag
+    depth: 1
+    updated: 2026-10-27
+    description: GPU 显存共享设备插件（ACK 旧版 GPU 共享方案）；对照 wiki/15-AI基础设施
+
+  # --- 多集群管理（OCM）---
+  - name: ocm
+    url: https://github.com/open-cluster-management-io/ocm.git
+    ref: v1.4.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: Open Cluster Management 主仓库（cluster-manager/klusterlet 控制器与部署清单）；对照 wiki/18-云厂商/01-阿里云/分布式云-ACKOne/03-ack-one-ocm-selection-rationale 与 wiki/22-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive
+
+  - name: ocm-api
+    url: https://github.com/open-cluster-management-io/api.git
+    ref: v1.4.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: OCM API 类型与 CRD（ManagedCluster、Placement、ManifestWork、ManagedClusterAddOn）；对照 OCM 架构文档
+
+  - name: ocm-addon-framework
+    url: https://github.com/open-cluster-management-io/addon-framework.git
+    ref: v1.4.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: OCM Addon 框架（addon 注册、ManifestWork 下发与生命周期）；对照 OCM 架构文档
+
+  - name: ocm-clusteradm
+    url: https://github.com/open-cluster-management-io/clusteradm.git
+    ref: v1.4.0
+    track: latest-release
+    depth: 1
+    updated: 2026-10-27
+    description: OCM CLI（clusteradm init/join、hub 与 klusterlet 引导）；对照 wiki/18-云厂商/01-阿里云/分布式云-ACKOne/03-ack-one-ocm-selection-rationale

@@ -2,7 +2,7 @@ name: Version Watch
 
 # 每周检查监控组件的最新 release；发现新版本即在库内检索受影响页面并自动开 issue，
 # 提醒复核并补 frontmatter verified-upon「截至版本」字段。组件清单与状态：
-# 35-元数据/version-watch.json
+# maintaining/02-元数据/version-watch.json
 
 on:
   schedule:
@@ -30,33 +30,60 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
-          import json, os, subprocess, urllib.request
+          import json, os, re, subprocess, urllib.request
 
-          cfg = json.load(open("35-元数据/version-watch.json", encoding="utf-8"))
+          cfg = json.load(open("maintaining/02-元数据/version-watch.json", encoding="utf-8"))
           token = os.environ.get("GITHUB_TOKEN", "")
           state = cfg.get("state", {})
           sections = []
+
+          def latest_release(repo, headers):
+              req = urllib.request.Request(
+                  f"https://api.github.com/repos/{repo}/releases/latest", headers=headers)
+              with urllib.request.urlopen(req, timeout=30) as resp:
+                  return (json.load(resp) or {}).get("tag_name", "")
+
+          def latest_tag(repo):
+              proc = subprocess.run(
+                  ["git", "ls-remote", "--tags", "--refs", f"https://github.com/{repo}.git"],
+                  capture_output=True, text=True)
+              if proc.returncode != 0:
+                  raise RuntimeError((proc.stderr or "").strip()[:120])
+              tags = [line.split("refs/tags/", 1)[1] for line in proc.stdout.splitlines()
+                      if "refs/tags/" in line]
+              stable = []
+              for tag in tags:
+                  match = re.search(r"(\d+)\.(\d+)\.(\d+)$", tag)
+                  if match and not re.search(r"(alpha|beta|rc|pre|snapshot|dev|nightly)", tag, re.I):
+                      stable.append((tuple(int(x) for x in match.groups()), tag))
+              return max(stable)[1] if stable else ""
 
           for comp in cfg["components"]:
               repo, name = comp["repo"], comp["name"]
               headers = {"Accept": "application/vnd.github+json"}
               if token:
                   headers["Authorization"] = f"Bearer {token}"
-              req = urllib.request.Request(
-                  f"https://api.github.com/repos/{repo}/releases/latest", headers=headers)
+              track = comp.get("track", "release")
+              tag, error = "", ""
               try:
-                  with urllib.request.urlopen(req, timeout=30) as resp:
-                      tag = json.load(resp).get("tag_name", "")
+                  tag = latest_tag(repo) if track == "tag" else latest_release(repo, headers)
               except Exception as exc:
-                  print(f"::warning::{repo} 获取 release 失败: {exc}")
+                  error = exc
+              if not tag and track != "tag":
+                  try:
+                      tag = latest_tag(repo)
+                  except Exception as exc:
+                      error = error or exc
+              if not tag:
+                  print(f"::warning::{repo} 获取版本失败: {error}")
                   continue
-              if not tag or state.get(repo) == tag:
+              if state.get(repo) == tag:
                   continue
 
               affected = []
               for kw in comp["keywords"]:
                   out = subprocess.run(
-                      ["git", "grep", "-l", "-i", kw, "--", "23-实体", "26-技能", "22-概念"],
+                      ["git", "grep", "-l", "-i", kw, "--", "wiki", "skills"],
                       capture_output=True, text=True)
                   affected += out.stdout.splitlines()
               affected = sorted(set(affected))
@@ -77,7 +104,7 @@ jobs:
               with open("/tmp/version-watch-body.md", "w", encoding="utf-8") as fh:
                   fh.write(body)
               cfg["state"] = state
-              with open("35-元数据/version-watch.json", "w", encoding="utf-8") as fh:
+              with open("maintaining/02-元数据/version-watch.json", "w", encoding="utf-8") as fh:
                   json.dump(cfg, fh, ensure_ascii=False, indent=2)
           PY
 
@@ -93,10 +120,10 @@ jobs:
       - name: Commit updated state
         if: steps.detect.outputs.new == 'true'
         run: |
-          if ! git diff --quiet 35-元数据/version-watch.json; then
+          if ! git diff --quiet maintaining/02-元数据/version-watch.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add 35-元数据/version-watch.json
+            git add maintaining/02-元数据/version-watch.json
             git commit -m "chore(version-watch): 更新组件版本状态"
             git push
           fi

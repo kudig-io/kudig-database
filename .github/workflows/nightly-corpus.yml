@@ -2,7 +2,7 @@ name: Nightly Corpus Pipeline
 
 # 定时重生成 19-故障诊断 QA 语料并校验覆盖率；有变更才提交回 main。
 # 向量化（embedding-pipeline.py）有意不在 CI 执行：其输出消费端在本机
-# （35-元数据/.vector-cache 为 gitignored 本地缓存），CI 内无下游。
+# （maintaining/02-元数据/.vector-cache 为 gitignored 本地缓存），CI 内无下游。
 
 on:
   schedule:
@@ -34,17 +34,17 @@ jobs:
 
       - name: Generate command-output diagnosis corpus
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 generate.py --priority all \
-            --output 19-故障诊断/10-QA语料/generated/
+            --output wiki/19-故障诊断/10-QA语料/generated/
 
       - name: Validate corpus coverage
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 validators/coverage_checker.py \
-            --skills-dir 19-故障诊断/08-技能体系 \
-            --fta-dir 19-故障诊断/06-FTA故障树/list \
-            --corpus-dir 19-故障诊断/10-QA语料/generated \
+            --skills-dir wiki/19-故障诊断/08-技能体系 \
+            --fta-dir wiki/19-故障诊断/06-FTA故障树/list \
+            --corpus-dir wiki/19-故障诊断/10-QA语料/generated \
             --output corpus-coverage-report.json
 
       - name: Upload coverage report
@@ -52,11 +52,11 @@ jobs:
         if: always()
         with:
           name: corpus-coverage-report
-          path: 31-脚本/corpus-generator/corpus-coverage-report.json
+          path: code/scripts/corpus-generator/corpus-coverage-report.json
 
       - name: Check for coverage failures
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 -c "
           import json, sys
           with open('corpus-coverage-report.json') as f:
@@ -74,11 +74,11 @@ jobs:
 
       - name: Collect content-quality metrics
         run: |
-          python3 31-脚本/maintenance/content-quality-metrics.py \
-            --output 35-元数据/metrics/content-quality-latest.json
+          python3 code/scripts/maintenance/content-quality-metrics.py \
+            --output maintaining/02-元数据/metrics/content-quality-latest.json
           DATE=$(date -u +%F)
-          cp 35-元数据/metrics/content-quality-latest.json \
-             "35-元数据/metrics/content-quality-$DATE.json"
+          cp maintaining/02-元数据/metrics/content-quality-latest.json \
+             "maintaining/02-元数据/metrics/content-quality-$DATE.json"
 
       - name: Sync GTM landing page stats
         run: make gtm-sync
@@ -87,7 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "19-故障诊断/10-QA语料/generated" "35-元数据/metrics" GTM/index.html
+          git add "wiki/19-故障诊断/10-QA语料/generated" "maintaining/02-元数据/metrics" code/GTM/index.html
           if git diff --cached --quiet; then
             echo "语料与指标均无变更，跳过提交"
           else

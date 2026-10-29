@@ -1,0 +1,228 @@
+---
+title: helm
+description: Helm 包管理标签枢纽 — 涵盖 Helm Charts 管理、高级运维、Hooks、值模式、库 Chart、OCI Registry 等全部 Helm 领域知识
+category: tag-index
+tags:
+- helm
+- charts
+- package-management
+- templating
+tier: core
+difficulty: intermediate
+domain: release-management
+created: '2026-07-11'
+last_updated: '2026-07-21'
+---
+
+# helm Tag Hub
+
+> Helm 相关页面 — Helm Charts 管理、高级运维、Hooks、值模式、库 Chart 等。
+
+## 核心定义
+
+**Helm** 是 Kubernetes 的包管理器，通过 Chart（模板化 YAML + 默认值 + 依赖管理）实现应用的可重复部署、版本管理和配置参数化。Helm 3 移除了 Tiller，直接通过 kubeconfig 与 API Server 交互。
+
+### Helm 核心概念
+
+| 概念 | 描述 |
+|------|------|
+| Chart | 模板化 K8s 资源包（templates/ + values.yaml + Chart.yaml） |
+| Release | Chart 的一次部署实例 |
+| Repository | Chart 的远程存储（OCI / HTTP） |
+| Values | 参数化配置，覆盖默认值 |
+| Hooks | 生命周期钩子（pre-install, post-upgrade 等） |
+
+
+## Helm 清单模式 (Helm Manifest Patterns)
+
+- [[wiki/03-清单模式/03-Helm值模式/01-helm-values-best-practices|Helm Values 最佳实践]]
+- [[wiki/03-清单模式/03-Helm值模式/02-helm-hooks-lifecycle|Helm Hooks 生命周期]]
+- [[wiki/03-清单模式/03-Helm值模式/03-helm-library-charts-reuse|Helm Library Charts 复用]]
+- [[wiki/03-清单模式/01-YAML参考/36-ecosystem-kustomize-helm-argocd|Kustomize/Helm/ArgoCD 生态]]
+- [[wiki/03-清单模式/02-Kustomize模式/03-kustomize-remote-build-gitops|Kustomize 远程构建 GitOps]]
+
+## 扩展机制 (Extension Mechanisms)
+
+- [[wiki/16-专项技术/03-扩展机制/05-package-management-tools|包管理工具]]
+- [[wiki/16-专项技术/03-扩展机制/06-helm-charts-management|Helm Charts 管理]]
+- [[wiki/16-专项技术/03-扩展机制/07-helm-advanced-operations|Helm 高级运维]]
+
+## GitOps 与 Helm (GitOps & Helm)
+
+- [[wiki/11-发布变更/01-GitOps/19-helm-production-guide|Helm 生产指南]]
+- [[wiki/11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops|ArgoCD 企业级 GitOps]]
+- [[wiki/11-发布变更/01-GitOps/20-tekton-cicd-guide|Tekton CI/CD 指南]]
+
+## 概念 (Concepts)
+
+- [[wiki/22-概念/09-平台与发布/helm-argocd-gitops|Helm ArgoCD GitOps]]
+- [[wiki/22-概念/12-研究/cli-tools-evolution|CLI 工具演进]]
+- [[wiki/22-概念/12-研究/gitops-tool-evolution|GitOps 工具演进]]
+- [[wiki/22-概念/10-最佳实践/bp-common-best-practices|通用最佳实践]]
+
+## 故障诊断 (Troubleshooting)
+
+- [[wiki/19-故障诊断/04-高级排障/02-helm-chart-troubleshooting|Helm Chart 排障]]
+- [[wiki/19-故障诊断/04-高级排障/structural-08-cluster-operations/03-helm-troubleshooting|Helm 结构化排障]]
+- [[wiki/19-故障诊断/06-FTA故障树/list/helm-fta|Helm 故障树分析]]
+- [[wiki/19-故障诊断/08-技能体系/28-helm-chart-failure|Helm Chart 故障]]
+- [[skills/01-集群运维/helm/helm-fta|Helm FTA]]
+
+## 集群基础 (Cluster Fundamentals)
+
+- [[wiki/01-集群基础/03-控制平面/34-kubectl-complete-reference|kubectl 完整参考]]
+- [[wiki/01-集群基础/01-架构总览/23-kubernetes-v1.33-practical-cookbook|K8s v1.33 实用手册]]
+- [[wiki/01-集群基础/02-设计原则/12-extensibility-design-patterns|扩展性设计模式]]
+
+## 安全 (Security)
+
+- [[wiki/08-安全/04-策略治理/08-kyverno-policy-guide|Kyverno 策略指南]]
+- [[wiki/08-安全/05-供应链/02-supply-chain-maturity-model|供应链成熟度模型]]
+- [[wiki/08-安全/01-身份与访问/07-secret-management-tools|密钥管理工具]]
+
+## 存储 (Storage)
+
+- [[wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning|StorageClass 动态供给]]
+- [[wiki/06-存储/01-K8s存储/15-cloud-native-storage|云原生存储]]
+- [[wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi|CSI 迁移]]
+
+## 网络与可观测性 (Networking & Observability)
+
+- [[wiki/05-网络/04-API网关/14-api-gateway-production-operations|API 网关生产运营]]
+- [[wiki/05-网络/03-服务网格/11-istio-service-mesh-guide|Istio Service Mesh 指南]]
+- [[wiki/09-可观测性/02-指标/13-prometheus-enterprise-guide|Prometheus 企业级指南]]
+- [[wiki/09-可观测性/01-总览/06-chaos-engineering|混沌工程]]
+
+## 平台工程 (Platform Engineering)
+
+- [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概览]]
+- [[wiki/10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
+- [[wiki/10-平台工程/02-运维/05-gitops-configuration-management|GitOps 配置管理]]
+- [[wiki/10-平台工程/01-构建/10-crd-operator-development|CRD/Operator 开发]]
+
+## 技能 (Skills)
+
+- [[wiki/20-最佳实践/01-best-practices/common-best-practices|通用最佳实践]]
+- [[wiki/20-最佳实践/02-deployment/02-single-node-deployment|单节点部署]]
+- [[wiki/20-最佳实践/02-deployment/04-production-environment-deployment|生产环境部署]]
+- [[skills/01-集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|集群运维排障]]
+- [[skills/04-工作负载/pod/培训/learn-04-debug-tools-setup.md|调试工具配置]]
+
+## 容器运行时 (Container Runtime)
+
+- [[wiki/14-容器运行时/02-镜像管理/01-harbor-enterprise-image-registry|Harbor 企业级镜像仓库]]
+- [[wiki/14-容器运行时/02-镜像管理/08-harbor-enterprise-guide|Harbor 企业级指南]]
+
+## 数据库中间件 (Database Middleware)
+
+- [[wiki/07-数据库中间件/01-数据库/07-redis-kubernetes-operator|Redis K8s Operator]]
+- [[wiki/07-数据库中间件/01-数据库/08-kafka-kubernetes-strimzi|Kafka Strimzi]]
+- [[wiki/07-数据库中间件/01-数据库/19-cloudnativepg-enterprise-guide|CloudNativePG 企业级指南]]
+- [[wiki/07-数据库中间件/03-消息队列/03-message-queue-comparison|消息队列对比]]
+
+## 知识字典 (Knowledge Dictionary)
+
+- [[wiki/17-系统基础/06-知识字典/tooling/helm|Helm]]
+- [[wiki/17-系统基础/06-知识字典/tooling/kustomize|Kustomize]]
+- [[wiki/17-系统基础/06-知识字典/tooling/werf|Werf]]
+- [[wiki/17-系统基础/06-知识字典/configuration/helm-values|Helm Values]]
+- [[wiki/17-系统基础/06-知识字典/operations/installing-addons|安装 Addons]]
+- [[wiki/17-系统基础/06-知识字典/operations/change-management-release|变更管理发布]]
+- [[wiki/17-系统基础/05-速查卡/helm|Helm 速查卡]]
+
+## 实体 (Entities)
+
+- [[wiki/23-实体/08-交付与制品/helm|Helm]]
+- [[wiki/23-实体/08-交付与制品/harbor|Harbor]]
+- [[wiki/23-实体/08-交付与制品/argocd|ArgoCD]]
+- [[wiki/23-实体/08-交付与制品/flux|Flux]]
+- [[wiki/23-实体/08-交付与制品/crossplane|Crossplane]]
+- [[wiki/23-实体/08-交付与制品/cdk8s|CDK8s]]
+- [[wiki/23-实体/08-交付与制品/werf|Werf]]
+- [[wiki/23-实体/10-平台与开发工具/operator-framework|Operator Framework]]
+- [[wiki/23-实体/15-参考与索引/release-notes-cli-tools|Release Notes: CLI Tools]]
+- [[wiki/23-实体/15-参考与索引/KUDIG Cheat Sheet Index|KUDIG Cheat Sheet Index]]
+
+## 发布说明 (Release Notes)
+
+- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.20|Helm 3.20 Release Notes]]
+- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-4.0|Helm 4.0 Release Notes]]
+- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-4.1|Helm 4.1 Release Notes]]
+
+## 综合 (Synthesis)
+
+- [[wiki/24-综合/02-交付与GitOps/helm-gitops|Helm GitOps]]
+
+## 生态参考 (Ecosystem)
+
+- [[wiki/21-生态参考/03-领域索引/helm-index|Helm 索引]]
+- [[wiki/21-生态参考/02-论文/05-kubernetes-gitops-complete-practice-guide|GitOps 完整实践指南]]
+- [[wiki/21-生态参考/02-论文/21-kubernetes-platform-engineering-internal-developer-platform|平台工程与内部开发者平台]]
+
+## Helm 技术全景
+
+### Helm 核心概念
+
+| 概念 | 说明 |
+|---|---|
+| Chart | 应用打包格式 |
+| Release | Chart 的一次部署实例 |
+| Repository | Chart 存储仓库 |
+| Values | 配置参数化 |
+
+### Helm 常用命令
+
+```bash
+# 🟢 搜索 Chart
+helm search repo <keyword>
+# 🟡 安装/升级
+helm upgrade --install <release> <chart> -f values.yaml
+# 🟢 查看历史
+helm history <release>
+# 🔴 回滚
+helm rollback <release> <revision>
+```
+
+## 面试要点
+
+1. **Q：Helm 的核心价值？**
+   A：包管理、参数化配置、版本管理、依赖管理、回滚能力。
+
+2. **Q：Helm 2 vs Helm 3 的区别？**
+   A：Helm 3 移除 Tiller、原生 K8s API、支持 CRD、更安全。
+
+3. **Q：如何设计高质量的 Chart？**
+   A：参数化配置、完善文档、合理默认值、依赖管理、测试覆盖。
+
+## Related Tags
+
+- [[wiki/26-标签/05-交付与运维/gitops|gitops]]
+- [[wiki/26-标签/01-核心平台/operator|operator]]
+- [[wiki/26-标签/05-交付与运维/production|production]]
+- [[wiki/26-标签/01-核心平台/k8s|k8s]]
+- [[wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture|云原生 DevOps 平台 Kubernetes 生产架构设计]]
+- [[wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture|SaaS 多租户平台 Kubernetes 生产架构设计]]
+- [[wiki/05-网络/03-服务网格/03-consul-connect-enterprise|Consul Connect 企业级服务网格管理]]
+- [[wiki/08-安全/05-供应链/11-compliance-automation-audit|合规自动化与审计 (Compliance Automation and Audit)]]
+- [[wiki/08-安全/05-供应链/09-policy-controller-verification|Policy Controller 镜像验证 (Policy Controller Image Verification)]]
+- [[wiki/08-安全/06-合规审计/07-certificate-management|证书管理与 TLS 配置]]
+- [[wiki/15-AI基础设施/02-AI-Agents/30-agent-harness-engineering|Agent Harness 工程：从模型包装到生产级 Agent 系统设计 (AI基础设施)]]
+- [[wiki/15-AI基础设施/02-AI-Agents/47-openclaw-tools-mechanism|OpenClaw TOOLS.md 机制深度解析 (AI基础设施)]]
+- [[wiki/15-AI基础设施/02-AI-Agents/37-agent-harness-multi-agent|Agent Harness 多 Agent 编排 (AI基础设施)]]
+- [[wiki/15-AI基础设施/02-AI-Agents/44-openclaw-soul-mechanism|OpenClaw SOUL.md 机制深度解析 (AI基础设施)]]
+- [[wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SOUL|KuDig Doctor — 角色人格与绝对红线 (02-ai-agents)]]
+- [[wiki/16-专项技术/02-WebAssembly/04-wasmcloud-platform|wasmCloud 平台]]
+- [[wiki/17-系统基础/01-Linux/15-linux-commands-reference|Linux 命令大全参考]]
+- [[wiki/17-系统基础/04-K8s事件/11-storage-volume-events|11 - 存储与卷事件]]
+- [[wiki/17-系统基础/06-知识字典/fundamentals/recommended-labels|推荐标签]]
+- [[wiki/17-系统基础/06-知识字典/platform-engineering/infrastructure-as-code-for-kubernetes|Kubernetes 基础设施即代码（IaC）]]
+- [[wiki/19-故障诊断/01-核心排障/00-open-source-projects-index-from-domain-12|Domain-12 故障排查 — 开源项目索引]]
+- [[wiki/19-故障诊断/04-高级排障/07-event-driven-architecture-troubleshooting|事件驱动架构故障排查]]
+- [[wiki/23-实体/08-交付与制品/porter|Porter (entities)]]
+- [[wiki/23-实体/15-参考与索引/k8s-advanced-ecosystem|硬件知识体系、CNCF 全景生态与 eBPF 平台工程]]
+- [[wiki/23-实体/15-参考与索引/k8s-cluster-create|Kubernetes 集群创建操作指南]]
+- [[wiki/23-实体/15-参考与索引/k8s-platform-extensions|平台运维与扩展生态：Helm、CI/CD、Operator 开发与服务网格]]
+- [[skills/01-集群运维/gitops-argocd/诊断排障/ts-gitops-devops|GitOps/DevOps 排查]]
+- [[skills/04-工作负载/pod/培训/beginner-guides/03-end-to-end-project|端到端项目实战——从代码到生产完整流水线]]
+- [[skills/08-可观测性/monitoring/最佳实践/k8s-monitoring-guide|Kubernetes 监控最佳实践]]
+- [[skills/08-可观测性/monitoring/最佳实践/k8s-distributed-tracing-guide|Kubernetes 分布式追踪最佳实践]]

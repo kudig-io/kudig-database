@@ -3,10 +3,10 @@
 # Command-Output Diagnosis Corpus Targets
 # =============================================================================
 
-CORPUS_DIR := 31-脚本/corpus-generator
-CORPUS_OUTPUT := 19-故障诊断/10-QA语料/generated
-SKILLS_DIR := 19-故障诊断/08-技能体系
-FTA_DIR := 19-故障诊断/06-FTA故障树/list
+CORPUS_DIR := code/scripts/corpus-generator
+CORPUS_OUTPUT := wiki/19-故障诊断/10-QA语料/generated
+SKILLS_DIR := wiki/19-故障诊断/08-技能体系
+FTA_DIR := wiki/19-故障诊断/06-FTA故障树/list
 
 .PHONY: corpus-generate corpus-generate-all corpus-validate corpus-stats corpus-clean
 
@@ -47,8 +47,8 @@ corpus-clean: ## 清理生成的语料文件
 # GTM Landing Page
 # =============================================================================
 
-GTM_DIR := GTM
-GTM_SYNC := 31-脚本/maintenance/gtm-sync-stats.py
+GTM_DIR := code/GTM
+GTM_SYNC := code/scripts/maintenance/gtm-sync-stats.py
 
 .PHONY: gtm-sync gtm-check
 
@@ -60,4 +60,25 @@ gtm-sync: ## 按仓库真实计数刷新 GTM 页面并同步到 dist/
 
 gtm-check: ## 校验 GTM 页面数据是否为最新（CI/nightly 用）
 	python3 $(GTM_SYNC) --check
+
+# =============================================================================
+# 上游源码检出（code/repo/ 不入库，按清单重建）
+# 清单：maintaining/02-元数据/repos.yaml
+# =============================================================================
+
+REPO_SYNC := code/scripts/maintenance/repo-sync.py
+
+.PHONY: repo-sync repo-status repo-update repo-update-latest
+
+repo-sync: ## 克隆清单中缺失的上游源码树到 code/repo/
+	python3 $(REPO_SYNC) sync
+
+repo-status: ## 查看 code/repo/ 各源码树的 ref / HEAD / 体积 / 本地改动
+	python3 $(REPO_SYNC) status
+
+repo-update: ## 已有源码树按清单 ref 重新检出
+	python3 $(REPO_SYNC) sync --update
+
+repo-update-latest: ## 解析上游最新稳定版本（Release/tag）、写回清单并刷新源码树
+	python3 $(REPO_SYNC) sync --latest --update --write
 

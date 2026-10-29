@@ -1,0 +1,107 @@
+---
+title: Prometheus
+description: Prometheus 目录索引
+summary: Prometheus 目录索引
+category: index
+tags:
+- index
+tier: supporting
+created: '2026-07-02'
+last_updated: 2026-07
+---
+
+
+# Prometheus
+
+> 本页为 `生态参考/_archived-release-notes/observability/prometheus` 目录的自动索引。
+
+## 文档
+
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.11.md|Release Notes 0.11]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.12.md|Release Notes 0.12]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.13.md|Release Notes 0.13]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.14.md|Release Notes 0.14]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.15.md|Release Notes 0.15]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.16.md|Release Notes 0.16]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.17.md|Release Notes 0.17]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.18.md|Release Notes 0.18]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.19.md|Release Notes 0.19]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-0.20.md|Release Notes 0.20]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.0.md|Release Notes 1.0]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.1.md|Release Notes 1.1]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.2.md|Release Notes 1.2]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.3.md|Release Notes 1.3]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.4.md|Release Notes 1.4]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.5.md|Release Notes 1.5]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.6.md|Release Notes 1.6]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.7.md|Release Notes 1.7]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-1.8.md|Release Notes 1.8]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.0.md|Release Notes 2.0]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.1.md|Release Notes 2.1]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.10.md|Release Notes 2.10]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.11.md|Release Notes 2.11]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.12.md|Release Notes 2.12]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.13.md|Release Notes 2.13]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.14.md|Release Notes 2.14]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.15.md|Release Notes 2.15]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.16.md|Release Notes 2.16]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.17.md|Release Notes 2.17]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.18.md|Release Notes 2.18]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.19.md|Release Notes 2.19]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.2.md|Release Notes 2.2]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.20.md|Release Notes 2.20]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.21.md|Release Notes 2.21]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.22.md|Release Notes 2.22]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.23.md|Release Notes 2.23]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.24.md|Release Notes 2.24]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.25.md|Release Notes 2.25]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.26.md|Release Notes 2.26]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.27.md|Release Notes 2.27]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.28.md|Release Notes 2.28]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.29.md|Release Notes 2.29]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.3.md|Release Notes 2.3]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.30.md|Release Notes 2.30]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.31.md|Release Notes 2.31]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.32.md|Release Notes 2.32]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.33.md|Release Notes 2.33]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.34.md|Release Notes 2.34]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.35.md|Release Notes 2.35]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.36.md|Release Notes 2.36]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.37.md|Release Notes 2.37]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.38.md|Release Notes 2.38]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.39.md|Release Notes 2.39]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.4.md|Release Notes 2.4]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.40.md|Release Notes 2.40]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.41.md|Release Notes 2.41]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.42.md|Release Notes 2.42]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.43.md|Release Notes 2.43]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.44.md|Release Notes 2.44]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.45.md|Release Notes 2.45]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.46.md|Release Notes 2.46]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.47.md|Release Notes 2.47]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.48.md|Release Notes 2.48]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.49.md|Release Notes 2.49]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.5.md|Release Notes 2.5]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.50.md|Release Notes 2.50]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.51.md|Release Notes 2.51]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.52.md|Release Notes 2.52]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.53.md|Release Notes 2.53]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.54.md|Release Notes 2.54]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.55.md|Release Notes 2.55]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.6.md|Release Notes 2.6]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.7.md|Release Notes 2.7]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.8.md|Release Notes 2.8]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-2.9.md|Release Notes 2.9]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.0.md|Release Notes 3.0]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.1.md|Release Notes 3.1]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.10.md|Release Notes 3.10]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.11.md|Release Notes 3.11]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.2.md|Release Notes 3.2]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.3.md|Release Notes 3.3]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.4.md|Release Notes 3.4]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.5.md|Release Notes 3.5]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.6.md|Release Notes 3.6]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.7.md|Release Notes 3.7]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.8.md|Release Notes 3.8]]
+- [[wiki/31-归档/release-notes/observability/prometheus/RELEASE-NOTES-3.9.md|Release Notes 3.9]]
+

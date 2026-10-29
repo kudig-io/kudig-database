@@ -3,17 +3,17 @@ name: Corpus Coverage Check
 on:
   push:
     paths:
-      - '19-故障诊断/08-技能体系/**'
-      - '19-故障诊断/06-FTA故障树/**'
-      - '19-故障诊断/10-QA语料/seed/**'
-      - '31-脚本/corpus-generator/**'
+      - 'wiki/19-故障诊断/08-技能体系/**'
+      - 'wiki/19-故障诊断/06-FTA故障树/**'
+      - 'wiki/19-故障诊断/10-QA语料/seed/**'
+      - 'code/scripts/corpus-generator/**'
       - '.github/workflows/corpus-coverage-check.yml'
   pull_request:
     paths:
-      - '19-故障诊断/08-技能体系/**'
-      - '19-故障诊断/06-FTA故障树/**'
-      - '19-故障诊断/10-QA语料/seed/**'
-      - '31-脚本/corpus-generator/**'
+      - 'wiki/19-故障诊断/08-技能体系/**'
+      - 'wiki/19-故障诊断/06-FTA故障树/**'
+      - 'wiki/19-故障诊断/10-QA语料/seed/**'
+      - 'code/scripts/corpus-generator/**'
   workflow_dispatch:
 
 jobs:
@@ -36,17 +36,17 @@ jobs:
 
       - name: Generate command-output diagnosis corpus
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 generate.py --priority all \
-            --output 19-故障诊断/10-QA语料/generated/
+            --output wiki/19-故障诊断/10-QA语料/generated/
 
       - name: Validate corpus coverage
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 validators/coverage_checker.py \
-            --skills-dir 19-故障诊断/08-技能体系 \
-            --fta-dir 19-故障诊断/06-FTA故障树/list \
-            --corpus-dir 19-故障诊断/10-QA语料/generated \
+            --skills-dir wiki/19-故障诊断/08-技能体系 \
+            --fta-dir wiki/19-故障诊断/06-FTA故障树/list \
+            --corpus-dir wiki/19-故障诊断/10-QA语料/generated \
             --output corpus-coverage-report.json
 
       - name: Upload coverage report
@@ -54,11 +54,11 @@ jobs:
         if: always()
         with:
           name: corpus-coverage-report
-          path: 31-脚本/corpus-generator/corpus-coverage-report.json
+          path: code/scripts/corpus-generator/corpus-coverage-report.json
 
       - name: Check for coverage failures
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 -c "
           import json, sys
           with open('corpus-coverage-report.json') as f:
@@ -76,7 +76,7 @@ jobs:
 
       - name: Report corpus stats
         run: |
-          cd 31-脚本/corpus-generator
+          cd code/scripts/corpus-generator
           python3 -c "
           import json
           with open('corpus-coverage-report.json') as f:

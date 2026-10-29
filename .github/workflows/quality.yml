@@ -3,31 +3,31 @@ name: Quality Gate
 on:
   pull_request:
     paths:
-      - '01-集群基础/**'
-      - '02-工作负载/**'
-      - '05-网络/**'
-      - '06-存储/**'
-      - '08-安全/**'
-      - '09-可观测性/**'
-      - '10-平台工程/**'
-      - '11-发布变更/**'
-      - '12-可靠性/**'
-      - '19-故障诊断/**'
-      - '13-生产运维/**'
-      - '18-云厂商/**'
-      - '14-容器运行时/**'
-      - '15-AI基础设施/**'
-      - '16-专项技术/**'
-      - '07-数据库中间件/**'
-      - '17-系统基础/**'
-      - '03-清单模式/**'
-      - '21-生态参考/**'
-      - '04-应用模式/**'
-      - '22-概念/**'
-      - '23-实体/**'
-      - '26-技能/**'
-      - '29-文档/**'
-      - '31-脚本/**'
+      - 'wiki/01-集群基础/**'
+      - 'wiki/02-工作负载/**'
+      - 'wiki/05-网络/**'
+      - 'wiki/06-存储/**'
+      - 'wiki/08-安全/**'
+      - 'wiki/09-可观测性/**'
+      - 'wiki/10-平台工程/**'
+      - 'wiki/11-发布变更/**'
+      - 'wiki/12-可靠性/**'
+      - 'wiki/19-故障诊断/**'
+      - 'wiki/13-生产运维/**'
+      - 'wiki/18-云厂商/**'
+      - 'wiki/14-容器运行时/**'
+      - 'wiki/15-AI基础设施/**'
+      - 'wiki/16-专项技术/**'
+      - 'wiki/07-数据库中间件/**'
+      - 'wiki/17-系统基础/**'
+      - 'wiki/03-清单模式/**'
+      - 'wiki/21-生态参考/**'
+      - 'wiki/04-应用模式/**'
+      - 'wiki/22-概念/**'
+      - 'wiki/23-实体/**'
+      - 'skills/**'
+      - 'maintaining/01-文档/**'
+      - 'code/scripts/**'
       - '.github/workflows/quality.yml'
   push:
     branches: [main]
@@ -35,7 +35,7 @@ on:
 
 jobs:
   lint:
-    name: Ruff Lint (31-脚本/)
+    name: Ruff Lint (code/scripts/)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +44,7 @@ jobs:
           python-version: '3.11'
       - run: pip install "ruff==0.16.4"
       - name: Ruff check
-        run: ruff check 31-脚本/maintenance/
+        run: ruff check code/scripts/maintenance/
 
   readme-sync:
     name: README Sync Check
@@ -55,7 +55,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: README 与实际目录一致性校验
-        run: python3 31-脚本/readme-sync-check.py
+        run: python3 code/scripts/readme-sync-check.py
 
   gtm-sync:
     name: GTM Page Stats Check
@@ -82,14 +82,17 @@ jobs:
           python3 - <<'PY'
           import sys, pathlib, yaml
           ROOT = pathlib.Path('.')
-          EXCL = {'node_modules','.venv','.git','__pycache__','30-站点','32-发布','33-源码','37-归档','36-报告','35-元数据','28-资产'}
-          CONTENT = {'22-概念', '23-实体', '26-技能', '24-综合', '29-文档', '20-最佳实践', '25-研究'}
-          DOMAINS = {'01-集群基础','02-工作负载','05-网络','06-存储','08-安全','09-可观测性','10-平台工程','11-发布变更','12-可靠性','19-故障诊断','13-生产运维','18-云厂商','14-容器运行时','15-AI基础设施','16-专项技术','07-数据库中间件','17-系统基础','03-清单模式','21-生态参考','04-应用模式'}
+          EXCL = {'node_modules','.venv','.git','__pycache__','03-发布','31-归档','04-报告','02-元数据','27-资产'}
+          CONTENT = {'wiki/22-概念', 'wiki/23-实体', 'skills', 'wiki/24-综合', 'maintaining/01-文档', 'wiki/20-最佳实践', 'wiki/25-研究'}
+          DOMAINS = {'wiki/01-集群基础','wiki/02-工作负载','wiki/05-网络','wiki/06-存储','wiki/08-安全','wiki/09-可观测性','wiki/10-平台工程','wiki/11-发布变更','wiki/12-可靠性','wiki/19-故障诊断','wiki/13-生产运维','wiki/18-云厂商','wiki/14-容器运行时','wiki/15-AI基础设施','wiki/16-专项技术','wiki/07-数据库中间件','wiki/17-系统基础','wiki/03-清单模式','wiki/21-生态参考','wiki/04-应用模式'}
+          def in_roots(p, roots):
+              s = p.as_posix()
+              return any(s.startswith(r + '/') for r in roots)
           errors, warns, checked = [], [], 0
           for p in sorted(ROOT.rglob('*.md')):
               if any(x in p.parts for x in EXCL):
                   continue
-              if not (p.parts[0] in DOMAINS or p.parts[0] in CONTENT):
+              if not (in_roots(p, DOMAINS) or in_roots(p, CONTENT)):
                   continue
               txt = p.read_text(encoding='utf-8')
               if not txt.startswith('---'):
@@ -137,14 +140,17 @@ jobs:
           python3 - <<'PY'
           import pathlib, re
           ROOT = pathlib.Path('.')
-          EXCL = {'node_modules','.venv','.git','__pycache__','30-站点','32-发布','33-源码'}
-          SCAN_EXCL = EXCL | {'37-归档','36-报告','35-元数据','28-资产','31-脚本'}
-          CONTENT = {'22-概念', '23-实体', '26-技能', '24-综合', '29-文档', '20-最佳实践', '25-研究', '27-标签'}
-          DOMAINS = {'01-集群基础','02-工作负载','05-网络','06-存储','08-安全','09-可观测性','10-平台工程','11-发布变更','12-可靠性','19-故障诊断','13-生产运维','18-云厂商','14-容器运行时','15-AI基础设施','16-专项技术','07-数据库中间件','17-系统基础','03-清单模式','21-生态参考','04-应用模式'}
+          EXCL = {'node_modules','.venv','.git','__pycache__','03-发布'}
+          SCAN_EXCL = EXCL | {'31-归档','04-报告','02-元数据','27-资产','scripts'}
+          CONTENT = {'wiki/22-概念', 'wiki/23-实体', 'skills', 'wiki/24-综合', 'maintaining/01-文档', 'wiki/20-最佳实践', 'wiki/25-研究', 'wiki/26-标签'}
+          DOMAINS = {'wiki/01-集群基础','wiki/02-工作负载','wiki/05-网络','wiki/06-存储','wiki/08-安全','wiki/09-可观测性','wiki/10-平台工程','wiki/11-发布变更','wiki/12-可靠性','wiki/19-故障诊断','wiki/13-生产运维','wiki/18-云厂商','wiki/14-容器运行时','wiki/15-AI基础设施','wiki/16-专项技术','wiki/07-数据库中间件','wiki/17-系统基础','wiki/03-清单模式','wiki/21-生态参考','wiki/04-应用模式'}
+          def in_roots(p, roots):
+              s = p.as_posix()
+              return any(s.startswith(r + '/') for r in roots)
           WL = re.compile(r'\[\[([^\]|#]+)(?:[#|][^\]]*)?\]\]')
           def is_content(p):
-              return p.parts[0] in DOMAINS or p.parts[0] in CONTENT
-          # 链接目标索引收录全库（含 35-元数据/31-脚本/36-报告/37-归档，链接可指向冻结目录）
+              return in_roots(p, DOMAINS) or in_roots(p, CONTENT)
+          # 链接目标索引收录全库（含 maintaining/02-元数据、code/scripts、maintaining/04-报告、wiki/31-归档；链接可指向冻结目录）
           names = set()
           for p in ROOT.rglob('*.md'):
               if any(x in p.parts for x in EXCL) or p.parts[0].startswith('.'):
@@ -179,7 +185,7 @@ jobs:
               print(f"  ... and {len(broken)-40} more")
           # 2026-07-27 断链清零后启用强制门禁：任何新增断链都会使 CI 失败。
           if broken:
-              print("::error::存在 broken wikilinks，请修复后重新提交（参考 31-脚本/maintenance/ 下的修复脚本）")
+              print("::error::存在 broken wikilinks，请修复后重新提交（参考 code/scripts/maintenance/ 下的修复脚本）")
               import sys; sys.exit(1)
           print("wikilinks OK")
           PY
@@ -197,28 +203,31 @@ jobs:
           python3 - <<'PY'
           import pathlib, sys
           ROOT = pathlib.Path('.')
-          EXCL = {'node_modules','.venv','.git','__pycache__','30-站点','32-发布','33-源码','37-归档','36-报告','35-元数据','28-资产','31-脚本'}
-          CONTENT = {'22-概念', '23-实体', '26-技能', '24-综合', '29-文档', '20-最佳实践', '25-研究'}
-          DOMAINS = {'01-集群基础','02-工作负载','05-网络','06-存储','08-安全','09-可观测性','10-平台工程','11-发布变更','12-可靠性','19-故障诊断','13-生产运维','18-云厂商','14-容器运行时','15-AI基础设施','16-专项技术','07-数据库中间件','17-系统基础','03-清单模式','21-生态参考','04-应用模式'}
+          EXCL = {'node_modules','.venv','.git','__pycache__','03-发布','31-归档','04-报告','02-元数据','27-资产','scripts'}
+          CONTENT = {'wiki/22-概念', 'wiki/23-实体', 'skills', 'wiki/24-综合', 'maintaining/01-文档', 'wiki/20-最佳实践', 'wiki/25-研究'}
+          DOMAINS = {'wiki/01-集群基础','wiki/02-工作负载','wiki/05-网络','wiki/06-存储','wiki/08-安全','wiki/09-可观测性','wiki/10-平台工程','wiki/11-发布变更','wiki/12-可靠性','wiki/19-故障诊断','wiki/13-生产运维','wiki/18-云厂商','wiki/14-容器运行时','wiki/15-AI基础设施','wiki/16-专项技术','wiki/07-数据库中间件','wiki/17-系统基础','wiki/03-清单模式','wiki/21-生态参考','wiki/04-应用模式'}
+          def in_roots(p, roots):
+              s = p.as_posix()
+              return any(s.startswith(r + '/') for r in roots)
           # 入口/索引文档允许大量一级标题（如合集快照、SUMMARY），不计入检查
           ENTRY = {'README.md', 'MOC.md', 'index.md', 'SUMMARY.md', 'fta-index.md', 'fta-methodology-and-agentic-practices.md'}
           # 已知历史问题文件（2026-08-13 登记 N7，待专项修复后移出；硬失败仅拦截新增异常）
           KNOWN = {
-              '05-网络/05-eBPF/10-ebpf-security-applications.md',
-              '17-系统基础/06-知识字典/operations/failure-patterns-analysis.md',
-              '17-系统基础/06-知识字典/operations/incident-management-runbooks.md',
-              '17-系统基础/06-知识字典/operations/performance-tuning-expert.md',
-              '21-生态参考/02-论文/24-kubernetes-policy-as-code-governance-automation.md',
-              '26-技能/04-工作负载/pod/培训/learn-inner-training.md',
-              '26-技能/04-工作负载/pod/培训/learn-public-training.md',
-              '26-技能/04-工作负载/pod/培训/public-one-month/week-4-enterprise/day-25-production-best-practices.md',
+              'wiki/05-网络/05-eBPF/10-ebpf-security-applications.md',
+              'wiki/17-系统基础/06-知识字典/operations/failure-patterns-analysis.md',
+              'wiki/17-系统基础/06-知识字典/operations/incident-management-runbooks.md',
+              'wiki/17-系统基础/06-知识字典/operations/performance-tuning-expert.md',
+              'wiki/21-生态参考/02-论文/24-kubernetes-policy-as-code-governance-automation.md',
+              'skills/04-工作负载/pod/培训/learn-inner-training.md',
+              'skills/04-工作负载/pod/培训/learn-public-training.md',
+              'skills/04-工作负载/pod/培训/public-one-month/week-4-enterprise/day-25-production-best-practices.md',
           }
           MAX_H1 = 20  # 内容文档一级标题阈值（正常 1-3 个；>20 说明标题层级损坏）
           bad, checked = [], 0
           for p in sorted(ROOT.rglob('*.md')):
               if any(x in p.parts for x in EXCL) or p.parts[0].startswith('.'):
                   continue
-              if not (p.parts[0] in DOMAINS or p.parts[0] in CONTENT):
+              if not (in_roots(p, DOMAINS) or in_roots(p, CONTENT)):
                   continue
               if p.name in ENTRY:
                   continue

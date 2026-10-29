@@ -1,0 +1,396 @@
+{
+  "components": [
+    {
+      "name": "kubernetes",
+      "repo": "kubernetes/kubernetes",
+      "keywords": [
+        "kubernetes",
+        "k8s",
+        "apiserver",
+        "kubelet",
+        "kube-proxy",
+        "controller-manager",
+        "scheduler",
+        "etcd"
+      ]
+    },
+    {
+      "name": "etcd",
+      "repo": "etcd-io/etcd",
+      "keywords": [
+        "etcd"
+      ]
+    },
+    {
+      "name": "containerd",
+      "repo": "containerd/containerd",
+      "keywords": [
+        "containerd",
+        "cri"
+      ]
+    },
+    {
+      "name": "cri-o",
+      "repo": "cri-o/cri-o",
+      "keywords": [
+        "cri-o",
+        "crio",
+        "cri-o runtime"
+      ]
+    },
+    {
+      "name": "coredns",
+      "repo": "coredns/coredns",
+      "keywords": [
+        "coredns"
+      ]
+    },
+    {
+      "name": "cilium",
+      "repo": "cilium/cilium",
+      "keywords": [
+        "cilium"
+      ]
+    },
+    {
+      "name": "calico",
+      "repo": "projectcalico/calico",
+      "keywords": [
+        "calico",
+        "tigera",
+        "felix"
+      ]
+    },
+    {
+      "name": "flannel",
+      "repo": "flannel-io/flannel",
+      "keywords": [
+        "flannel"
+      ]
+    },
+    {
+      "name": "cni-plugins",
+      "repo": "containernetworking/plugins",
+      "keywords": [
+        "cni-plugins",
+        "cni 插件"
+      ]
+    },
+    {
+      "name": "terway",
+      "repo": "AliyunContainerService/terway",
+      "keywords": [
+        "terway"
+      ]
+    },
+    {
+      "name": "istio",
+      "repo": "istio/istio",
+      "keywords": [
+        "istio",
+        "envoy"
+      ]
+    },
+    {
+      "name": "ingress-nginx",
+      "repo": "kubernetes/ingress-nginx",
+      "keywords": [
+        "ingress-nginx",
+        "ingress nginx"
+      ]
+    },
+    {
+      "name": "prometheus",
+      "repo": "prometheus/prometheus",
+      "keywords": [
+        "prometheus",
+        "grafana"
+      ]
+    },
+    {
+      "name": "metrics-server",
+      "repo": "kubernetes-sigs/metrics-server",
+      "keywords": [
+        "metrics-server"
+      ]
+    },
+    {
+      "name": "grafana",
+      "repo": "grafana/grafana",
+      "keywords": [
+        "grafana",
+        "grafana dashboard"
+      ]
+    },
+    {
+      "name": "opentelemetry-collector",
+      "repo": "open-telemetry/opentelemetry-collector",
+      "keywords": [
+        "opentelemetry",
+        "otel collector"
+      ]
+    },
+    {
+      "name": "argo-cd",
+      "repo": "argoproj/argo-cd",
+      "keywords": [
+        "argocd",
+        "argo-cd",
+        "argo"
+      ]
+    },
+    {
+      "name": "tekton",
+      "repo": "tektoncd/pipeline",
+      "keywords": [
+        "tekton",
+        "pipelinerun",
+        "taskrun"
+      ]
+    },
+    {
+      "name": "helm",
+      "repo": "helm/helm",
+      "keywords": [
+        "helm"
+      ]
+    },
+    {
+      "name": "harbor",
+      "repo": "goharbor/harbor",
+      "keywords": [
+        "harbor",
+        "image registry 镜像仓库"
+      ]
+    },
+    {
+      "name": "alibaba-cloud-csi-driver",
+      "repo": "kubernetes-sigs/alibaba-cloud-csi-driver",
+      "keywords": [
+        "alibaba-cloud-csi",
+        "csi-driver"
+      ]
+    },
+    {
+      "name": "cloud-provider-alibaba-cloud",
+      "repo": "kubernetes/cloud-provider-alibaba-cloud",
+      "keywords": [
+        "cloud-controller-manager",
+        "cloud-provider-alibaba-cloud",
+        "slb"
+      ]
+    },
+    {
+      "name": "ack-secret-manager",
+      "repo": "AliyunContainerService/ack-secret-manager",
+      "track": "tag",
+      "keywords": [
+        "ack-secret-manager"
+      ]
+    },
+    {
+      "name": "ack-ram-authenticator",
+      "repo": "AliyunContainerService/ack-ram-authenticator",
+      "track": "tag",
+      "keywords": [
+        "ram-authenticator",
+        "ack-ram"
+      ]
+    },
+    {
+      "name": "node-problem-detector-ack",
+      "repo": "AliyunContainerService/node-problem-detector",
+      "track": "tag",
+      "keywords": [
+        "node-problem-detector",
+        "npd"
+      ]
+    },
+    {
+      "name": "kube-eventer",
+      "repo": "AliyunContainerService/kube-eventer",
+      "track": "tag",
+      "keywords": [
+        "kube-eventer"
+      ]
+    },
+    {
+      "name": "velero-plugin",
+      "repo": "AliyunContainerService/velero-plugin",
+      "track": "tag",
+      "keywords": [
+        "velero"
+      ]
+    },
+    {
+      "name": "karpenter-provider-alibabacloud",
+      "repo": "AliyunContainerService/karpenter-provider-alibabacloud",
+      "track": "tag",
+      "keywords": [
+        "karpenter"
+      ]
+    },
+    {
+      "name": "alibabacloud-erdma-controller",
+      "repo": "AliyunContainerService/alibabacloud-erdma-controller",
+      "track": "tag",
+      "keywords": [
+        "erdma",
+        "rdma"
+      ]
+    },
+    {
+      "name": "alibabacloud-ack-connector",
+      "repo": "AliyunContainerService/alibabacloud-ack-connector",
+      "track": "tag",
+      "keywords": [
+        "ack one",
+        "注册集群"
+      ]
+    },
+    {
+      "name": "sgx-device-plugin",
+      "repo": "AliyunContainerService/sgx-device-plugin",
+      "track": "tag",
+      "keywords": [
+        "sgx",
+        "机密计算"
+      ]
+    },
+    {
+      "name": "image-syncer",
+      "repo": "AliyunContainerService/image-syncer",
+      "track": "tag",
+      "keywords": [
+        "image-syncer"
+      ]
+    },
+    {
+      "name": "kruise",
+      "repo": "openkruise/kruise",
+      "keywords": [
+        "kruise",
+        "cloneset"
+      ]
+    },
+    {
+      "name": "koordinator",
+      "repo": "koordinator-sh/koordinator",
+      "keywords": [
+        "koordinator",
+        "混部"
+      ]
+    },
+    {
+      "name": "arena",
+      "repo": "kubeflow/arena",
+      "keywords": [
+        "arena"
+      ]
+    },
+    {
+      "name": "fluid",
+      "repo": "fluid-cloudnative/fluid",
+      "keywords": [
+        "fluid"
+      ]
+    },
+    {
+      "name": "gpushare-scheduler-extender",
+      "repo": "AliyunContainerService/gpushare-scheduler-extender",
+      "track": "tag",
+      "keywords": [
+        "gpushare",
+        "gpu 共享"
+      ]
+    },
+    {
+      "name": "gpushare-device-plugin",
+      "repo": "AliyunContainerService/gpushare-device-plugin",
+      "track": "tag",
+      "keywords": [
+        "gpushare",
+        "gpu 共享"
+      ]
+    },
+    {
+      "name": "ocm",
+      "repo": "open-cluster-management-io/ocm",
+      "keywords": [
+        "open cluster management",
+        "clusteradm",
+        "klusterlet"
+      ]
+    },
+    {
+      "name": "ocm-api",
+      "repo": "open-cluster-management-io/api",
+      "keywords": [
+        "managedcluster",
+        "manifestwork",
+        "placementdecision"
+      ]
+    },
+    {
+      "name": "ocm-addon-framework",
+      "repo": "open-cluster-management-io/addon-framework",
+      "keywords": [
+        "managedclusteraddon",
+        "addon-framework"
+      ]
+    },
+    {
+      "name": "ocm-clusteradm",
+      "repo": "open-cluster-management-io/clusteradm",
+      "keywords": [
+        "clusteradm",
+        "klusterlet"
+      ]
+    }
+  ],
+  "state": {
+    "kubernetes/kubernetes": "v1.37.1",
+    "etcd-io/etcd": "v3.7.3",
+    "containerd/containerd": "v2.4.2",
+    "cri-o/cri-o": "v1.37.2",
+    "coredns/coredns": "v1.15.0",
+    "cilium/cilium": "v1.20.4",
+    "projectcalico/calico": "v3.33.0",
+    "flannel-io/flannel": "v0.28.10",
+    "containernetworking/plugins": "v1.9.1",
+    "AliyunContainerService/terway": "v1.8.19",
+    "istio/istio": "1.31.3",
+    "kubernetes/ingress-nginx": "controller-v1.15.1",
+    "prometheus/prometheus": "v3.15.1",
+    "kubernetes-sigs/metrics-server": "v0.9.0",
+    "grafana/grafana": "v13.2.4",
+    "open-telemetry/opentelemetry-collector": "v0.164.0",
+    "argoproj/argo-cd": "v3.5.6",
+    "tektoncd/pipeline": "v1.17.1",
+    "helm/helm": "v4.3.1",
+    "goharbor/harbor": "v2.15.4",
+    "kubernetes-sigs/alibaba-cloud-csi-driver": "alibaba-cloud-csi-driver-1.37.3",
+    "kubernetes/cloud-provider-alibaba-cloud": "v2.15.0",
+    "AliyunContainerService/ack-secret-manager": "v0.6.7",
+    "AliyunContainerService/ack-ram-authenticator": "v1.0.2",
+    "AliyunContainerService/node-problem-detector": "v0.6.3",
+    "AliyunContainerService/kube-eventer": "1.2.14",
+    "AliyunContainerService/velero-plugin": "v1.0.0",
+    "AliyunContainerService/karpenter-provider-alibabacloud": "v0.2.5",
+    "AliyunContainerService/alibabacloud-erdma-controller": "v0.2.12",
+    "AliyunContainerService/alibabacloud-ack-connector": "v1.14.1",
+    "AliyunContainerService/sgx-device-plugin": "v1.0.0",
+    "AliyunContainerService/image-syncer": "v1.5.5",
+    "openkruise/kruise": "v1.9.2",
+    "koordinator-sh/koordinator": "v1.8.0",
+    "kubeflow/arena": "v0.15.5",
+    "fluid-cloudnative/fluid": "v1.0.8",
+    "AliyunContainerService/gpushare-scheduler-extender": "v0.2.0",
+    "AliyunContainerService/gpushare-device-plugin": "v0.3.0",
+    "open-cluster-management-io/ocm": "v1.4.0",
+    "open-cluster-management-io/api": "v1.4.0",
+    "open-cluster-management-io/addon-framework": "v1.4.0",
+    "open-cluster-management-io/clusteradm": "v1.4.0"
+  },
+  "_说明": "state 由 version-watch workflow 维护（记录各组件上次见到的版本 tag）；track 为 tag 的组件改用 git ls-remote 取最大稳定 semver tag（适配只打 tag、不发 GitHub Release 的仓库）；锁定分支的仓库（如 ackdistro、alibabacloud-3FS）没有版本线，不纳入本监控；keywords 用于在 wiki、skills 中检索受影响页面。"
+}
