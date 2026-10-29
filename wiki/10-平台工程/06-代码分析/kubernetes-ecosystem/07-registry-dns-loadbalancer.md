@@ -49,7 +49,7 @@ authors:
 
 # 镜像仓库、DNS 与负载均衡集成源码分析
 
-> **源码基线**：`code/repo/coredns/` + `code/repo/cloud-provider-alibaba-cloud/`（行号实测）；Harbor 与 ingress-nginx 源码已入库（`code/repo/{harbor,ingress-nginx}/`，版本对照，锁定版本见 [[maintaining/02-元数据/repos.yaml|上游源码清单]]）
+> **源码基线**：`code/repo/coredns/` + `code/repo/cloud-provider-alibaba-cloud/`（行号实测）；Harbor 与 ingress-nginx 源码已入库（`code/repo/{harbor,ingress-nginx}/`，版本对照，锁定版本见 上游源码清单 `maintaining/02-元数据/repos.yaml`）
 > 本篇属 [[wiki/10-平台工程/06-代码分析/kubernetes-ecosystem/README.md|kubernetes-ecosystem 生态集成系列]]。
 
 ## 一、Harbor：镜像供应链的上游

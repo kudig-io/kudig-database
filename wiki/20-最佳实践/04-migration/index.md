@@ -31,5 +31,6 @@ last_updated: 2026-07
 - [[wiki/20-最佳实践/04-migration/08-validation-cutover-decommission.md|Validation Cutover Decommission]]
 - [[wiki/20-最佳实践/04-migration/09-migration-toolchain.md|Migration Toolchain]]
 - [[wiki/20-最佳实践/04-migration/10-real-world-case-study.md|Real World Case Study]]
+- [[wiki/20-最佳实践/04-migration/11-alicloud-migration-framework.md|Alicloud Migration Framework]]
 - [[wiki/20-最佳实践/04-migration/MOC.md|Moc]]
 

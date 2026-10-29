@@ -50,7 +50,7 @@ authors:
 
 # CNI 网络插件集成源码分析
 
-> **源码基线**：`code/repo/{cni-plugins,flannel,terway,cilium}/`（行号实测）+ `code/repo/calico/`（版本对照，锁定版本见 [[maintaining/02-元数据/repos.yaml|上游源码清单]]）
+> **源码基线**：`code/repo/{cni-plugins,flannel,terway,cilium}/`（行号实测）+ `code/repo/calico/`（版本对照，锁定版本见 上游源码清单 `maintaining/02-元数据/repos.yaml`）
 > 本篇属 [[wiki/10-平台工程/06-代码分析/kubernetes-ecosystem/README.md|kubernetes-ecosystem 生态集成系列]]。
 
 ## 一、CNI 的调用位置：运行时而非 kubelet

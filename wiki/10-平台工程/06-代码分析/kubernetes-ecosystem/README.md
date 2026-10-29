@@ -49,7 +49,7 @@ authors:
 # kubernetes-ecosystem 生态集成源码分析系列
 
 > 姊妹系列：[[wiki/10-平台工程/06-代码分析/kubernetes-core/README.md|kubernetes-core（K8s 本体源码剖析，01~09 篇）]]
-> 源码基线：`code/repo/` 各域本地源码树（行号实测；当前锁定版本见 [[maintaining/02-元数据/repos.yaml|上游源码清单]]）；无本地源码的组件从 **K8s 侧集成点源码** + 机制级分析切入，均在各篇头部声明。
+> 源码基线：`code/repo/` 各域本地源码树（行号实测；当前锁定版本见 上游源码清单 `maintaining/02-元数据/repos.yaml`）；无本地源码的组件从 **K8s 侧集成点源码** + 机制级分析切入，均在各篇头部声明。
 
 ## 一条主线：K8s 用「契约」而非「代码」集成生态
 
@@ -87,7 +87,7 @@ K8s 本体不实现运行时、网络、存储、网关——它定义扩展点�
 
 - 概念与运维层：[[wiki/01-集群基础/README.md|01-集群基础]] · [[wiki/05-网络/README.md|05-网络]] · [[wiki/06-存储/README.md|06-存储]] · [[wiki/09-可观测性/README.md|09-可观测性]] · [[wiki/14-容器运行时/README.md|14-容器运行时]]
 - 生态选型对比：[[wiki/21-生态参考/README.md|21-生态参考]]（CNCF 全景、版本矩阵）
-- 源码树清单：[[maintaining/02-元数据/repos.yaml|上游源码清单]]（本地已入库/待补充组件）
+- 源码树清单：上游源码清单 `maintaining/02-元数据/repos.yaml`（本地已入库/待补充组件）
 
 ## Related
 

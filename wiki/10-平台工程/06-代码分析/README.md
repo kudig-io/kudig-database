@@ -60,7 +60,7 @@ prerequisites:
 | kubernetes-core | Kubernetes 核心组件源码深度剖析（基于 kubernetes-1.36.2 真实源码树，行号实测，含 kubelet/kube-proxy） | 10 |
 | kubernetes-ecosystem | 生态上下游组件集成点源码分析（CRI/CNI/CSI/网格/可观测/CI-CD/仓库-DNS-LB） | 8 |
 
-> kubernetes-core 系列导航见 [[wiki/10-平台工程/06-代码分析/kubernetes-core/README.md|kubernetes-core 源码解析系列总览]]，生态集成系列见 [[wiki/10-平台工程/06-代码分析/kubernetes-ecosystem/README.md|kubernetes-ecosystem 系列总览]]，源码树位于 [[maintaining/02-元数据/repos.yaml|上游源码清单]]。
+> kubernetes-core 系列导航见 [[wiki/10-平台工程/06-代码分析/kubernetes-core/README.md|kubernetes-core 源码解析系列总览]]，生态集成系列见 [[wiki/10-平台工程/06-代码分析/kubernetes-ecosystem/README.md|kubernetes-ecosystem 系列总览]]，源码树位于 上游源码清单 `maintaining/02-元数据/repos.yaml`。
 >
 > 注：各篇“源码基线”中的行号基于写作时锁定的版本（如 kubernetes-1.36.2）；`code/repo/` 当前锁定版本以清单为准，版本升级后行号可能偏移。
 

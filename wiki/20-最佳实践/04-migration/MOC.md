@@ -60,7 +60,7 @@ prerequisites:
 | 维度 | 说明 |
 |---|---|
 | **专题** | topic-migration |
-| **文档数量** | 10 篇 |
+| **文档数量** | 11 篇 |
 | **难度分布** | 入门 0 / 进阶 0 / 高级 0 / 专家 0 |
 
 ---
@@ -79,6 +79,7 @@ prerequisites:
 | 8 | [[wiki/11-发布变更/07-迁移方案/08-validation-cutover-decommission.md|08 - 验收、切换与旧集群退役]] |  | migration, upgrade |  |
 | 9 | [[wiki/11-发布变更/07-迁移方案/09-migration-toolchain.md|09 - 迁移工具链参考]] |  | migration, upgrade |  |
 | 10 | [[wiki/11-发布变更/07-迁移方案/10-real-world-case-study.md|10 - 生产迁移实战案例]] |  | migration, upgrade, tutorial |  |
+| 11 | [[wiki/20-最佳实践/04-migration/11-alicloud-migration-framework.md|11 - 阿里云迁云框架与 Landing Zone：ACK/ACR/ACS 定位与迁移路径]] | 中级 | migration, alibaba-cloud, landing-zone | 12min |
 
 ---
 
@@ -86,7 +87,7 @@ prerequisites:
 
 | 指标 | 数值 |
 |---|---|
-| 文档总数 | 10 |
+| 文档总数 | 11 |
 
 ---
 

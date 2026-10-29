@@ -23,7 +23,7 @@ created: '2026-08-05'
 
 ## 跨域导航
 
-- [[maintaining/02-元数据/repos.yaml\|上游源码清单]]
+- 上游源码清单 `maintaining/02-元数据/repos.yaml`
 - [[wiki/28-源码分析/index.md\|源码分析索引]]
 - [[wiki/10-平台工程/06-代码分析/index.md\|代码分析系列]]
 

@@ -50,7 +50,7 @@ authors:
 # kubernetes-core 源码解析系列总览
 
 > **源码基线**：`code/repo/kubernetes/`（完整源码树）+ `code/repo/etcd/`
-> 系列内所有函数行号均在上述源码树中**实测验证**，可直接跳转复核。源码目录约定见 [[maintaining/02-元数据/repos.yaml|上游源码清单]]。
+> 系列内所有函数行号均在上述源码树中**实测验证**，可直接跳转复核。源码目录约定见 上游源码清单 `maintaining/02-元数据/repos.yaml`。
 
 ## 定位
 
@@ -93,7 +93,7 @@ authors:
 
 ## 相关文档
 
-- [[maintaining/02-元数据/repos.yaml|上游源码清单]]（源码 ↔ 领域文档双向映射）
+- 上游源码清单 `maintaining/02-元数据/repos.yaml`（源码 ↔ 领域文档双向映射）
 - [[wiki/01-集群基础/01-架构总览/04-source-code-structure.md|源码结构导读]]（概念层）
 - [[wiki/01-集群基础/02-设计原则/10-source-code-walkthrough.md|源码阅读指南]]（方法论）
 - [[wiki/10-平台工程/06-代码分析/README.md|集群操作函数库]]（操作层）

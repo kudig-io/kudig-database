@@ -47,7 +47,7 @@ authors:
 
 # 容器运行时与 CRI 集成源码分析
 
-> **源码基线**：`code/repo/kubernetes/staging/src/k8s.io/{cri-api,cri-client}/`（K8s 侧）+ `code/repo/containerd/`（运行时侧），两侧行号均实测；CRI-O 侧源码已入库（`code/repo/cri-o/`），按锁定版本对照，见 [[maintaining/02-元数据/repos.yaml|上游源码清单]]）
+> **源码基线**：`code/repo/kubernetes/staging/src/k8s.io/{cri-api,cri-client}/`（K8s 侧）+ `code/repo/containerd/`（运行时侧），两侧行号均实测；CRI-O 侧源码已入库（`code/repo/cri-o/`），按锁定版本对照，见 上游源码清单 `maintaining/02-元数据/repos.yaml`）
 > 本篇属 [[wiki/10-平台工程/06-代码分析/kubernetes-ecosystem/README.md|kubernetes-ecosystem 生态集成系列]]。
 
 ## 一、CRI：kubelet 与运行时的唯一契约
