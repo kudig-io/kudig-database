@@ -10,7 +10,7 @@ tags:
 - private-cloud
 tier: core
 created: '2026-07-02'
-last_updated: '2026-10-20'
+last_updated: '2026-11-06'
 ---
 
 > **生产环境安全提示**
@@ -34,6 +34,7 @@ last_updated: '2026-10-20'
 | 007 | [[wiki/18-云厂商/01-阿里云/专有云-ACK/007-apsara-compliance-hardening.md|合规加固（等保/国密）]] | 等保四级、国密 SM2/SM4、KMS、审计、金融级 NetworkPolicy/RBAC |
 | 008 | [[wiki/18-云厂商/01-阿里云/专有云-ACK/008-apsara-pangu-storage-troubleshooting.md|盘古存储排障]] | PVC Pending、IO 延迟、快照/扩容失败、盘古集群健康检查 |
 | 009 | [[wiki/18-云厂商/01-阿里云/专有云-ACK/009-bmcp-ack-onboarding-faq.md\|BMCP 纳管 ACK 智算集群]] | 裸金属算力平台纳管 ACK 容器智算集群：RAM 双授权、镜像白名单、数据盘格式化红线、扩缩容/回收站、EVPC/RDMA、KGPU、诊断速查与面试快问快答 |
+| 010 | [[wiki/18-云厂商/01-阿里云/专有云-ACK/010-bmcp-managed-ack-deep-dive.md\|BMCP 纳管机制深挖]] | 纳管机制与生产运维深挖：三层控制台职责矩阵、数据盘征用机制、生命周期状态机、纳管失败 FTA 树、KGPU×HAMi×DRA 生态对照、VPC/RDMA 两面网络模型、与公云 ACK 差异对照、变更预案模板 |
 | 01 | [[wiki/18-云厂商/01-阿里云/专有云-ACK/01-apsara-stack-troubleshooting-runbook.md|专有云故障手册]] | 组件异常→K8s症状→排查命令→升级路径 可执行 runbook |
 
 ## 概览

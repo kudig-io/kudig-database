@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUDIG Console — 云原生知识体系工作台（全库）</title>
+<meta name="description" content="KUDIG Database 全库工作台：4,815 页、86 个知识域、2,277 张 Mermaid 图的七层结构与原文阅读，离线可用。">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23FFFFFF'/%3E%3Crect x='5' y='5' width='10' height='10' fill='%230D0D0D'/%3E%3Crect x='17' y='5' width='10' height='10' fill='%231E40AF'/%3E%3Crect x='5' y='17' width='22' height='3' fill='%230D0D0D'/%3E%3Crect x='5' y='23' width='14' height='3' fill='%23B86E0A'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="./assets/console.css">
+<script src="./vendor/mermaid.min.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main" style="position:absolute;left:-9999px">跳到工作区</a>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <div><b>KUDIG Console</b><span id="brand-sub">全库</span></div>
+  </div>
+  <nav class="views" aria-label="视图">
+    <a href="#overview" data-view="overview" aria-current="page"><span class="lg">总览</span><span class="sm">总览</span><b>1</b></a>
+    <a href="#structure" data-view="structure"><span class="lg">结构图</span><span class="sm">结构</span><b>2</b></a>
+    <a href="#diagrams" data-view="diagrams"><span class="lg">图表库</span><span class="sm">图表</span><b>3</b></a>
+    <a href="#read" data-view="read"><span class="lg">阅读</span><span class="sm">阅读</span><b>4</b></a>
+  </nav>
+  <div class="top-right">
+    <span class="sync" id="sync" aria-live="polite"><b>—</b></span>
+    <div class="search" role="search">
+      <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/><path d="m11 11 3.2 3.2" stroke="currentColor" stroke-width="1.6"/></svg>
+      <input id="search" type="search" placeholder="搜索 4,815 页 / 86 个域…" aria-label="搜索（按 / 或 ⌘K）" autocomplete="off">
+      <kbd>/</kbd>
+    </div>
+    <button class="top-btn" id="top-search-btn" aria-label="打开搜索">⌕</button>
+    <button class="top-btn menubtn" id="menu-btn" aria-label="打开菜单" aria-expanded="false">≡</button>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="side" id="side" aria-label="全库导航">
+    <h2>分区 / 域 <em id="side-count"></em></h2>
+    <div class="pfilter">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/></svg>
+      <input id="side-search" placeholder="过滤域" aria-label="过滤域" autocomplete="off">
+    </div>
+    <div id="side-body"></div>
+  </aside>
+  <main id="main">
+    <div class="loading" role="status">载入全库语料…</div>
+  </main>
+</div>
+
+<div class="palette" id="palette" role="dialog" aria-modal="true" aria-label="命令面板" aria-hidden="true">
+  <div class="pal-box">
+    <div class="pal-input">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="#0D0D0D" stroke-width="1.6"/><path d="m11 11 3.2 3.2" stroke="#0D0D0D" stroke-width="1.6"/></svg>
+      <input id="pal-input" placeholder="标题、路径、域…" aria-label="命令面板输入" autocomplete="off">
+      <kbd>esc</kbd>
+    </div>
+    <ul class="pal-list" id="pal-list" role="listbox" aria-label="结果"></ul>
+    <div class="pal-foot"><span>↑↓ 选择</span><span>↵ 打开</span><span>⌘K / 打开</span></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./assets/console.js"></script>
+</body>
+</html>

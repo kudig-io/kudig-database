@@ -94,10 +94,11 @@ last_updated: '2026-09-09'
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────┐
-│ 顶层四分区 —— wiki / skills / code / maintaining                         │
+│ 顶层五分区 —— wiki / skills / console / code / maintaining               │
 │                                                                          │
 │   wiki/        语料正文：31 个编号知识域（编号段 01-31，连续）           │
 │   skills/      Agent 技能卡：总览 + 8 个技能域（编号 00-08）             │
+│   console/     全库工作台：4,815 页 · 86 域 · 2,277 张 Mermaid 图        │
 │   code/        可执行资产：scripts / kubernetes-hardware / GTM 落地页    │
 │   maintaining/ 维护资产：01-文档 / 02-元数据 / 03-发布 / 04-报告         │
 ├──────────────────────────────────────────────────────────────────────────┤
@@ -245,6 +246,17 @@ make corpus-stats            # 语料规模统计
 make corpus-clean            # 清理生成产物
 ```
 
+### 打开全库知识体系工作台
+
+```bash
+make console-serve     # http://127.0.0.1:8766/ —— 全库 4,815 页、86 域、2,277 张 Mermaid 图
+make console-check     # CI：校验 console/data 与 console/content 未与仓库漂移
+```
+
+工作台把四个分区收进一个离线界面：**总览**（分区 / 域 × 七层覆盖的分层谱）、**结构图**（S0–S7 结构带、库图、层级谱）、**图表库**（按类型与域筛选，就地渲染）、**阅读**（逐字原文，Mermaid 图原位渲染）。详见 [`console/README.md`](console/README.md)。
+
+结构视图原型（M1）：`http://127.0.0.1:8766/prototype/`——拆解树 / 一致性热力 / 对比矩阵，每格可回溯到原文行；见 [`console/prototype/README.md`](console/prototype/README.md)。
+
 ### Agent 拉取语料
 
 ```bash
@@ -342,6 +354,15 @@ gh release download corpus-v2026.09 --repo kudig-io/kudig-database
 │   ├── 07-安全/                   # RBAC、准入、运行时安全
 │   └── 08-可观测性/               # 指标/日志/追踪排障
 │
+├── console/                       # 全库工作台（4,815 页 · 86 域 · 2,277 张 Mermaid 图）
+│   ├── index.html                 # 单页工作台：总览 / 结构图 / 图表库 / 阅读
+│   ├── assets/                    # console.css（抽样册令牌 + 结构图语法）+ console.js
+│   ├── spec/                      # 设计方案（PRD / 数据契约 / 可视化规范 / 路线图）
+│   ├── prototype/                 # M1 结构视图原型（拆解树 / 热力 / 矩阵 + 锚点门禁）
+│   ├── vendor/mermaid.min.js      # 离线 Mermaid 引擎（Apache-2.0）
+│   ├── data/                      # 派生物：index / domains / graph/*（make console-sync）
+│   └── content/                   # 派生物：每页正文切片（按需加载）
+│
 ├── code/                          # 可执行资产
 │   ├── scripts/                   # 维护/质量/语料脚本（约百个）+ automation 巡检剧本
 │   ├── kubernetes-hardware/       # K8s 硬件调研报告与生成脚本（研究产物）
@@ -360,7 +381,7 @@ gh release download corpus-v2026.09 --repo kudig-io/kudig-database
 
 ### 命名约定
 
-- **顶层四分区**：`wiki/`（语料正文）、`skills/`（Agent 技能）、`code/`（可执行资产）、`maintaining/`（维护资产）
+- **顶层五分区**：`wiki/`（语料正文）、`skills/`（Agent 技能）、`console/`（知识体系工作台）、`code/`（可执行资产）、`maintaining/`（维护资产）
 - **知识域目录**：`wiki/NN-中文简称`，01-31 连续编号；跨分区引用一律写全路径 `wiki/NN-.../...`
 - **分区内二级目录**：各自分区内从 01 连续编号（`maintaining/01-04`），`skills/` 以 `00-总览` 起始；`code/` 使用英文语义名（`scripts`、`kubernetes-hardware`、`GTM`、`repo`）
 - **域内子目录**：同样 `NN-` 前缀；英文专名保留（如 `GitOps`、`eBPF`、`FEBM方法论`）

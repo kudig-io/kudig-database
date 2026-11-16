@@ -1,0 +1,578 @@
+{
+  "schema": "kudig-console-entities/1",
+  "version": "2026.11.1",
+  "note": "受控实体词表。group 决定谁可以和谁放进同一张对比矩阵；aliases 只写语料里真实出现过的写法（小写、按词边界匹配）。pageHints 给出该实体最可能的旗舰页（正则，按顺序取第一个命中）。",
+  "groups": {
+    "database": {
+      "name": "数据库",
+      "members": [
+        "mysql",
+        "postgresql",
+        "tidb",
+        "mongodb"
+      ]
+    },
+    "cache": {
+      "name": "缓存",
+      "members": [
+        "redis",
+        "memcached"
+      ]
+    },
+    "messaging": {
+      "name": "消息队列",
+      "members": [
+        "kafka",
+        "pulsar",
+        "rocketmq",
+        "rabbitmq",
+        "nats"
+      ]
+    },
+    "search": {
+      "name": "搜索与湖仓",
+      "members": [
+        "elasticsearch",
+        "opensearch",
+        "clickhouse"
+      ]
+    },
+    "cni": {
+      "name": "容器网络插件",
+      "members": [
+        "cilium",
+        "calico",
+        "flannel",
+        "terway"
+      ]
+    },
+    "mesh": {
+      "name": "服务网格",
+      "members": [
+        "istio",
+        "linkerd"
+      ]
+    },
+    "gateway": {
+      "name": "网关与入口",
+      "members": [
+        "nginx",
+        "envoy",
+        "higress",
+        "apisix",
+        "kong"
+      ]
+    },
+    "observability": {
+      "name": "可观测性",
+      "members": [
+        "prometheus",
+        "grafana",
+        "loki",
+        "jaeger",
+        "thanos"
+      ]
+    },
+    "gitops": {
+      "name": "GitOps 与 CI",
+      "members": [
+        "argocd",
+        "tekton",
+        "jenkins"
+      ]
+    },
+    "storage": {
+      "name": "分布式存储",
+      "members": [
+        "ceph",
+        "rook",
+        "openebs",
+        "longhorn",
+        "juicefs"
+      ]
+    },
+    "autoscaling": {
+      "name": "弹性伸缩",
+      "members": [
+        "hpa",
+        "vpa",
+        "keda",
+        "cluster-autoscaler"
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "mysql",
+      "name": "MySQL",
+      "group": "database",
+      "aliases": [
+        "mysql",
+        "innodb cluster",
+        "pxc",
+        "percona xtradb"
+      ],
+      "pageHints": [
+        "17-mysql-kubernetes-production-guide",
+        "14-mysql-group-replication-topology",
+        "01-mysql-enterprise-database"
+      ]
+    },
+    {
+      "id": "postgresql",
+      "name": "PostgreSQL",
+      "group": "database",
+      "aliases": [
+        "postgresql",
+        "postgres",
+        "cloudnativepg",
+        "patroni",
+        "pgbouncer"
+      ],
+      "pageHints": [
+        "16-postgresql-kubernetes-production-guide",
+        "19-cloudnativepg-enterprise-guide",
+        "02-postgresql-enterprise-database"
+      ]
+    },
+    {
+      "id": "tidb",
+      "name": "TiDB",
+      "group": "database",
+      "aliases": [
+        "tidb",
+        "tikv",
+        "tiflash"
+      ],
+      "pageHints": [
+        "12-tidb-kubernetes-production",
+        "03-distributed-database-enterprise"
+      ]
+    },
+    {
+      "id": "mongodb",
+      "name": "MongoDB",
+      "group": "database",
+      "aliases": [
+        "mongodb",
+        "mongo"
+      ],
+      "pageHints": [
+        "18-mongodb-kubernetes-production-guide",
+        "05-mongodb-enterprise-database"
+      ]
+    },
+    {
+      "id": "redis",
+      "name": "Redis",
+      "group": "cache",
+      "aliases": [
+        "redis",
+        "sentinel"
+      ],
+      "pageHints": [
+        "15-redis-kubernetes-production-guide",
+        "06-redis-enterprise-cache",
+        "01-redis-cluster-sentinel-topology"
+      ]
+    },
+    {
+      "id": "memcached",
+      "name": "Memcached",
+      "group": "cache",
+      "aliases": [
+        "memcached"
+      ],
+      "pageHints": [
+        "02-memcached-distributed-caching"
+      ]
+    },
+    {
+      "id": "kafka",
+      "name": "Kafka",
+      "group": "messaging",
+      "aliases": [
+        "kafka",
+        "strimzi"
+      ],
+      "pageHints": [
+        "06-kafka-kubernetes-production-guide",
+        "07-kafka-strimzi-production-guide",
+        "08-kafka-kubernetes-strimzi"
+      ]
+    },
+    {
+      "id": "pulsar",
+      "name": "Pulsar",
+      "group": "messaging",
+      "aliases": [
+        "pulsar"
+      ],
+      "pageHints": [
+        "02-pulsar-architecture"
+      ]
+    },
+    {
+      "id": "rocketmq",
+      "name": "RocketMQ",
+      "group": "messaging",
+      "aliases": [
+        "rocketmq"
+      ],
+      "pageHints": [
+        "04-rocketmq-on-kubernetes"
+      ]
+    },
+    {
+      "id": "rabbitmq",
+      "name": "RabbitMQ",
+      "group": "messaging",
+      "aliases": [
+        "rabbitmq"
+      ],
+      "pageHints": [
+        "05-rabbitmq-on-kubernetes"
+      ]
+    },
+    {
+      "id": "nats",
+      "name": "NATS",
+      "group": "messaging",
+      "aliases": [
+        "nats"
+      ],
+      "pageHints": [
+        "01-nats-deep-dive"
+      ]
+    },
+    {
+      "id": "elasticsearch",
+      "name": "Elasticsearch",
+      "group": "search",
+      "aliases": [
+        "elasticsearch",
+        "opensearch"
+      ],
+      "pageHints": [
+        "02-elasticsearch-opensearch-production-operations",
+        "01-elasticsearch-opensearch-k8s"
+      ]
+    },
+    {
+      "id": "clickhouse",
+      "name": "ClickHouse",
+      "group": "search",
+      "aliases": [
+        "clickhouse"
+      ],
+      "pageHints": [
+        "11-clickhouse-kubernetes-production",
+        "04-olap-starrocks-doris-pinot"
+      ]
+    },
+    {
+      "id": "cilium",
+      "name": "Cilium",
+      "group": "cni",
+      "aliases": [
+        "cilium"
+      ],
+      "pageHints": [
+        "03-cilium-cni-architecture",
+        "09-cilium-ebpf-network-guide"
+      ]
+    },
+    {
+      "id": "calico",
+      "name": "Calico",
+      "group": "cni",
+      "aliases": [
+        "calico"
+      ],
+      "pageHints": [
+        "calico",
+        "calico-cni",
+        "calico-fta"
+      ],
+      "note": "语料里只有 FTA 树，没有成节的产品页；矩阵中该行显示「无成节内容」"
+    },
+    {
+      "id": "flannel",
+      "name": "Flannel",
+      "group": "cni",
+      "aliases": [
+        "flannel"
+      ],
+      "pageHints": [
+        "04a-flannel-wireguard-backend",
+        "flannel-fta"
+      ]
+    },
+    {
+      "id": "terway",
+      "name": "Terway",
+      "group": "cni",
+      "aliases": [
+        "terway"
+      ],
+      "pageHints": [
+        "terway-advanced-guide",
+        "terway-fta"
+      ]
+    },
+    {
+      "id": "istio",
+      "name": "Istio",
+      "group": "mesh",
+      "aliases": [
+        "istio",
+        "envoy"
+      ],
+      "pageHints": [
+        "service-mesh-istio-fta"
+      ]
+    },
+    {
+      "id": "linkerd",
+      "name": "Linkerd",
+      "group": "mesh",
+      "aliases": [
+        "linkerd"
+      ],
+      "pageHints": [
+        "linkerd"
+      ]
+    },
+    {
+      "id": "nginx",
+      "name": "NGINX",
+      "group": "gateway",
+      "aliases": [
+        "nginx"
+      ],
+      "pageHints": [
+        "nginx-ingress-fta"
+      ]
+    },
+    {
+      "id": "higress",
+      "name": "Higress",
+      "group": "gateway",
+      "aliases": [
+        "higress"
+      ],
+      "pageHints": [
+        "higress-fta"
+      ]
+    },
+    {
+      "id": "apisix",
+      "name": "APISIX",
+      "group": "gateway",
+      "aliases": [
+        "apisix"
+      ],
+      "pageHints": [
+        "apisix"
+      ]
+    },
+    {
+      "id": "kong",
+      "name": "Kong",
+      "group": "gateway",
+      "aliases": [
+        "kong"
+      ],
+      "pageHints": [
+        "kong"
+      ]
+    },
+    {
+      "id": "prometheus",
+      "name": "Prometheus",
+      "group": "observability",
+      "aliases": [
+        "prometheus"
+      ],
+      "pageHints": [
+        "01-prometheus-tsdb-deep-dive"
+      ]
+    },
+    {
+      "id": "grafana",
+      "name": "Grafana",
+      "group": "observability",
+      "aliases": [
+        "grafana"
+      ],
+      "pageHints": [
+        "grafana"
+      ]
+    },
+    {
+      "id": "loki",
+      "name": "Loki",
+      "group": "observability",
+      "aliases": [
+        "loki"
+      ],
+      "pageHints": [
+        "loki"
+      ]
+    },
+    {
+      "id": "jaeger",
+      "name": "Jaeger",
+      "group": "observability",
+      "aliases": [
+        "jaeger",
+        "tempo"
+      ],
+      "pageHints": [
+        "jaeger"
+      ]
+    },
+    {
+      "id": "thanos",
+      "name": "Thanos",
+      "group": "observability",
+      "aliases": [
+        "thanos"
+      ],
+      "pageHints": [
+        "04-thanos-long-term-metrics-storage"
+      ]
+    },
+    {
+      "id": "argocd",
+      "name": "Argo CD",
+      "group": "gitops",
+      "aliases": [
+        "argocd",
+        "argo cd"
+      ],
+      "pageHints": [
+        "gitops-argocd-fta"
+      ]
+    },
+    {
+      "id": "tekton",
+      "name": "Tekton",
+      "group": "gitops",
+      "aliases": [
+        "tekton"
+      ],
+      "pageHints": [
+        "tekton"
+      ]
+    },
+    {
+      "id": "jenkins",
+      "name": "Jenkins",
+      "group": "gitops",
+      "aliases": [
+        "jenkins"
+      ],
+      "pageHints": [
+        "jenkins"
+      ]
+    },
+    {
+      "id": "ceph",
+      "name": "Ceph",
+      "group": "storage",
+      "aliases": [
+        "ceph",
+        "rook"
+      ],
+      "pageHints": [
+        "ceph"
+      ]
+    },
+    {
+      "id": "openebs",
+      "name": "OpenEBS",
+      "group": "storage",
+      "aliases": [
+        "openebs"
+      ],
+      "pageHints": [
+        "04-openebs-production"
+      ]
+    },
+    {
+      "id": "longhorn",
+      "name": "Longhorn",
+      "group": "storage",
+      "aliases": [
+        "longhorn"
+      ],
+      "pageHints": [
+        "longhorn"
+      ]
+    },
+    {
+      "id": "juicefs",
+      "name": "JuiceFS",
+      "group": "storage",
+      "aliases": [
+        "juicefs"
+      ],
+      "pageHints": [
+        "05-juicefs-distributed-filesystem"
+      ]
+    },
+    {
+      "id": "hpa",
+      "name": "HPA",
+      "group": "autoscaling",
+      "aliases": [
+        "hpa"
+      ],
+      "pageHints": [
+        "autoscaling-hpa-vpa-keda",
+        "hpa",
+        "hpa-fta"
+      ]
+    },
+    {
+      "id": "vpa",
+      "name": "VPA",
+      "group": "autoscaling",
+      "aliases": [
+        "vpa"
+      ],
+      "pageHints": [
+        "autoscaling-hpa-vpa-keda",
+        "vpa",
+        "vpa-fta"
+      ]
+    },
+    {
+      "id": "keda",
+      "name": "KEDA",
+      "group": "autoscaling",
+      "aliases": [
+        "keda"
+      ],
+      "pageHints": [
+        "keda"
+      ]
+    },
+    {
+      "id": "cluster-autoscaler",
+      "name": "Cluster Autoscaler",
+      "group": "autoscaling",
+      "aliases": [
+        "cluster autoscaler",
+        "cluster-autoscaler"
+      ],
+      "pageHints": [
+        "cluster-autoscaler",
+        "autoscaling-hpa-vpa-keda",
+        "cluster-autoscaler-fta"
+      ],
+      "note": "语料里只有 FTA 树，没有成节的产品页；矩阵中该行显示「无成节内容」"
+    }
+  ]
+}

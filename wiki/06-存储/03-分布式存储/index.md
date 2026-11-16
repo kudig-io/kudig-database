@@ -23,4 +23,5 @@ last_updated: 2026-07
 - [[wiki/06-存储/03-分布式存储/04-openebs-production.md|Openebs Production]]
 - [[wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md|Juicefs Distributed Filesystem]]
 - [[wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md|Nfs Csi Production Guide]]
+- [[wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md|Ceph 深度拆解：CRUSH 故障域、四维水位与稳定性保障]]
 

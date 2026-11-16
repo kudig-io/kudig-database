@@ -18,7 +18,7 @@ sources:
 - 阿里云专有云 V3.20.0 裸金属算力平台（BMCP）用户指南（20260423）
 - 阿里云专有云 V3.20.0 裸金属算力平台（BMCP）产品介绍（20260423）
 created: 2026-10-20
-last_updated: 2026-10-20
+last_updated: 2026-11-06
 relationships:
 - target: '[[wiki/18-云厂商/01-阿里云/专有云-ACK/alicloud-apsara-ack-overview.md]]'
   type: related_to
@@ -360,6 +360,8 @@ kubectl get po test-pod   # KGPU 验证 Pod，详见 §8.2
 
 ## 11. 面试快问快答
 
+> 本节六张卡已迁入主沉淀文件 Q128–Q133（maintaining/04-报告/k8s-高级面试快问快答-沉淀.md），深挖追问卡 Q134–Q138 见 [[wiki/18-云厂商/01-阿里云/专有云-ACK/010-bmcp-managed-ack-deep-dive.md|010 深挖笔记]] §12。本节保留作 FAQ 层自洽阅读。
+
 **Q1：专有云里 ACK 怎么纳管裸金属算力？**
 
 - **一句话**：在 BMCP（裸金属算力平台）控制台创建容器-智算算力集群，裸金属实例注册后作为 BMCP Worker 节点纳管进 ACK。
@@ -406,6 +408,7 @@ kubectl get po test-pod   # KGPU 验证 Pod，详见 §8.2
 
 ## 相关文档
 
+- [[wiki/18-云厂商/01-阿里云/专有云-ACK/010-bmcp-managed-ack-deep-dive.md|BMCP 纳管机制与生产运维深挖（机制层：数据盘征用/状态机/FTA 树/KGPU 生态对照）]]
 - [[wiki/18-云厂商/01-阿里云/专有云-ACK/alicloud-apsara-ack-overview.md|专有版 ACK 概述]]
 - [[wiki/18-云厂商/01-阿里云/专有云-ACK/01-apsara-stack-troubleshooting-runbook.md|专有云故障手册]]
 - [[wiki/18-云厂商/01-阿里云/专有云-ACK/005-apsara-tianji-aso-operations.md|天基/ASO 运维流程]]

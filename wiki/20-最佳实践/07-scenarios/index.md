@@ -40,6 +40,7 @@ last_updated: 2026-07
 - [[wiki/20-最佳实践/07-scenarios/security-hardening.md|Security Hardening]]
 - [[wiki/20-最佳实践/07-scenarios/security-incident.md|Security Incident]]
 - [[wiki/20-最佳实践/07-scenarios/storage-issues.md|Storage Issues]]
+- [[wiki/20-最佳实践/07-scenarios/technical-claim-verification.md|厂商技术声明的可信度分层与事实核查方法]]
 - [[wiki/20-最佳实践/07-scenarios/troubleshooting.md|Troubleshooting]]
 - [[wiki/20-最佳实践/07-scenarios/upgrade-migration.md|Upgrade Migration]]
 

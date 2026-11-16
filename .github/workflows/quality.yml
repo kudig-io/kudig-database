@@ -28,6 +28,7 @@ on:
       - 'skills/**'
       - 'maintaining/01-文档/**'
       - 'code/scripts/**'
+      - 'console/**'
       - '.github/workflows/quality.yml'
   push:
     branches: [main]
@@ -67,6 +68,17 @@ jobs:
           python-version: '3.11'
       - name: GTM 落地页数字与仓库实际计数一致性校验
         run: make gtm-check
+
+  console-sync:
+    name: Console Corpus Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Console 派生物（console/data/ + console/content/）与仓库一致性校验
+        run: make console-check
 
   frontmatter:
     name: Frontmatter Integrity

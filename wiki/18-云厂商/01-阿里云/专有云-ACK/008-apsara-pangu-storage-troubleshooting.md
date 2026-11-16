@@ -316,11 +316,11 @@ PVC/存储异常
 
 ## 相关文档
 
-- [[wiki/18-云厂商/01-阿里云/04-阿里云存储集成.md|04 阿里云存储集成]]
-- [[wiki/18-云厂商/01-阿里云/apsara-stack-components.md|Apsara Stack 组件索引]]
-- [[wiki/18-云厂商/01-阿里云/专有云-Apsara/005-apsara-tianji-aso-operations.md|253 天基/ASO 运维]]
-- [[wiki/18-云厂商/01-阿里云/专有云-Apsara/006-apsara-upgrade-patch-management.md|254 升级与补丁管理]]
-- [[wiki/18-云厂商/01-阿里云/专有云-Apsara/01-apsara-stack-troubleshooting-runbook.md|99 专有云故障手册]]
+- [[wiki/18-云厂商/01-阿里云/公有云-ACK/04-阿里云存储集成|阿里云存储集成（OSS/NAS/云盘 CSI）]]
+- [[wiki/18-云厂商/01-阿里云/公有云-ACK/09-alicloud-storage-deep-dive|阿里云存储产品深度拆解（OSS 删除链路与水位排查）]]
+- [[wiki/18-云厂商/01-阿里云/专有云-ACK/apsara-stack-components|Apsara Stack 组件索引]]
+- [[wiki/18-云厂商/01-阿里云/专有云-ACK/01-apsara-stack-troubleshooting-runbook|专有云故障手册]]
+- [[wiki/20-最佳实践/07-scenarios/technical-claim-verification|厂商技术声明的可信度分层]]
 
 ## Related
 

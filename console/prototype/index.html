@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KUDIG Console · 结构视图原型</title>
+<meta name="description" content="结构视图原型：拆解树、一致性热力、对比矩阵，全部可回溯到原文行号。">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" href="./prototype.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <div><b>KUDIG Console</b><span>PROTOTYPE</span></div>
+  </div>
+  <nav class="views" aria-label="结构视图">
+    <a href="#/" data-view="tree" aria-current="page">拆解树</a>
+    <a href="#/" data-view="heat">一致性热力</a>
+    <a href="#/" data-view="matrix">对比矩阵</a>
+  </nav>
+  <div class="right">
+    <span class="badge">原型 · 未接入主界面</span>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="side" aria-label="域导航">
+    <div class="parts" id="part-switch" role="group" aria-label="分区"></div>
+    <h2><span id="side-title">域</span><em id="side-count"></em></h2>
+    <div class="filter">
+      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.6"/></svg>
+      <input id="side-filter" placeholder="过滤域" aria-label="过滤域" autocomplete="off">
+    </div>
+    <nav id="side-list"></nav>
+  </aside>
+
+  <main id="main">
+    <div class="crumbs"><span>原型</span></div>
+    <h1>载入结构数据…</h1>
+    <div class="sub">读取 console/data/graph/blocks.json</div>
+  </main>
+</div>
+
+<aside class="drawer" id="drawer" data-open="false" aria-hidden="true" role="dialog" aria-labelledby="drawer-title">
+  <header><h3 id="drawer-title">证据</h3><button id="drawer-close">Esc</button></header>
+  <div class="body" id="drawer-body"></div>
+</aside>
+
+<div class="reader" id="reader" data-open="false" aria-hidden="true" role="dialog" aria-labelledby="reader-title">
+  <header><h3 id="reader-title">原文</h3><button id="reader-close" style="margin-left:auto;border:1px solid var(--rule);background:var(--vellum);cursor:pointer;padding:4px 10px">返回结构视图</button></header>
+  <div class="scroll" id="reader-body"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="./prototype.js"></script>
+</body>
+</html>

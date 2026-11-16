@@ -31,6 +31,7 @@ last_updated: 2026-07
 - [[wiki/22-概念/04-存储/storage-model.md|storage-model]]
 - [[wiki/22-概念/04-存储/storage-performance-optimization.md|storage-performance-optimization]]
 - [[wiki/22-概念/04-存储/storageclass.md|storageclass]]
+- [[wiki/22-概念/04-存储/tapdisk-virtual-disk-backend.md|tapdisk：XenServer/XCP-ng 用户态虚拟磁盘后端]]
 
 ## Related
 

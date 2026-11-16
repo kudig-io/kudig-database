@@ -62,8 +62,12 @@ authors:
 
 # Rook-Ceph Kubernetes 生产部署与运维
 
-> **适用版本**: Kubernetes v1.28 - v1.32 | **Rook**: v1.13+ | **Ceph**: Reef (18.x) / Quincy (17.x) | **最后更新**: 2026-06
+> **适用版本**: Kubernetes v1.28 - v1.32 | **Rook**: v1.13+ | **Ceph**: Squid (19.2) / Tentacle (20.2) | **最后更新**: 2026-11
 > **文档定位**: 聚焦 Rook-Ceph 在阿里云/专有云裸金属或 ECS 集群上的生产部署与运维。ACK 托管集群推荐使用阿里云云盘/NAS/OSS CSI；Rook-Ceph 更适合专有云自建存储池、边缘节点或需要统一 Ceph 接口的场景。
+
+> ⚠️ **版本提示（2026-11 核对）**：Ceph 官方活跃版本为 **Umbrella (21.2) / Tentacle (20.2) / Squid (19.2)**；**Reef (18.2) 与 Quincy (17.2) 已归档**，不再接收补齐。新集群请选活跃版本线。原文档中的 Reef/Quincy 口径已更新，存量集群升级路径见 [[wiki/06-存储/03-分布式存储/07-ceph-deep-dive|Ceph 深度拆解]]。
+
+> 📖 **延伸阅读**：本文是"怎么装、怎么操作"的部署手册；**架构原理、四维水位、稳定性分级、慢盘治理、故障演练**等深度内容见 [[wiki/06-存储/03-分布式存储/07-ceph-deep-dive|Ceph 分布式存储深度拆解]]。
 
 <!-- chunk: 目录 -->
 ## 目录
@@ -517,12 +521,34 @@ groups:
           summary: "Ceph OSD 下线"
 
       - alert: CephOSDUtilizationHigh
-        expr: ceph_osd_utilization > 0.85
+        # 注意：Ceph 导出的是 ceph_osd_stat_bytes_used / ceph_osd_stat_bytes（无 ceph_osd_utilization 指标）
+        expr: |
+          (
+            ceph_osd_stat_bytes_used
+              / on(cluster, ceph_daemon) group_left(hostname) ceph_osd_stat_bytes
+          ) > 0.85
         for: 30m
         labels:
           severity: warning
         annotations:
-          summary: "Ceph OSD 使用率超过 85%"
+          summary: "Ceph OSD 使用率超过 85%（接近 backfillfull 0.85 / full 0.95）"
+
+      - alert: CephOSDNearFull
+        # 官方推荐做法：直接消费健康检查项，而不是自己算比例
+        expr: ceph_health_detail{name="OSD_NEARFULL"} == 1
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "OSD 达到 NEARFULL 阈值（默认 0.75）"
+
+      - alert: CephOSDFull
+        expr: ceph_health_detail{name="OSD_FULL"} > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "OSD 达到 FULL 阈值（默认 0.95），写入被阻塞"
 
       - alert: CephPGDegraded
         expr: ceph_pg_degraded > 0
@@ -604,7 +630,7 @@ aliyun ecs DescribeDisks --RegionId cn-hangzhou \
 
 - [[wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery|10 - 存储备份与灾难恢复]]
 - [[wiki/06-存储/README|Storage Domain 存储领域知识库]]
-- [[wiki/18-云厂商/01-阿里云/apsara-stack-components|专有云组件索引]]
+- [[wiki/18-云厂商/01-阿里云/专有云-ACK/apsara-stack-components|专有云组件索引]]
 
 ## See Also
 
@@ -650,13 +676,20 @@ spec:
 
 ### 关键指标
 
-| 指标 | 含义 | 告警阈值 |
-|:---|:---|:---:|
-| `ceph_health_status` | 集群健康状态 | > 0 异常 |
-| `ceph_osd_up` | OSD 是否在线 | == 0 异常 |
-| `ceph_osd_utilization` | OSD 使用率 | > 80% 警告 |
-| `ceph_pool_percent_used` | Pool 使用率 | > 80% 警告 |
-| `ceph_pg_active_clean` | PG 状态 | 小于总 PG 数 |
+> 指标名以 Ceph mgr prometheus 模块导出为准。**`ceph_osd_utilization`、`ceph_pool_percent_used`、`ceph_pg_active_clean` 均不是 Ceph 真实导出的指标名**，直接使用会导致告警永远不触发（静默失效）。
+
+| 指标 | 含义 | 建议阈值 |
+|:---|:---|:---|
+| `ceph_health_status` | 集群健康状态：0=OK / 1=WARN / 2=ERR | `==1` 警告 15m、`==2` 严重 |
+| `ceph_health_detail{name="..."}` | 具体健康检查项 | 按项告警（推荐做法） |
+| `ceph_osd_up` | OSD 是否在线 | `==0` 且比例 ≥10% 严重 |
+| `ceph_osd_stat_bytes_used` / `ceph_osd_stat_bytes` | OSD 已用 / 总量 | 相除 > 85% |
+| `ceph_pg_total`、`ceph_pg_active`、`ceph_pg_clean` | PG 总数 / active / clean | `total-active > 0` 即 Inactive |
+| `ceph_osd_numpg` | 单 OSD 上的 PG 数 | 偏离均值 > 30% 即失衡 |
+| `ceph_pool_metadata` + `ceph_pool_stored_raw` | Pool 维度元数据与用量 | 按 Pool 配额比 |
+| `ceph_osd_apply_latency_ms` / `ceph_osd_commit_latency_ms` | OSD 应用/提交延迟 | 持续 > 50ms 需排查慢盘 |
+
+完整的官方告警规则集（含建议直接导入的 `localrules.yaml`）与阈值的深入解释见 [[wiki/06-存储/03-分布式存储/07-ceph-deep-dive|Ceph 深度拆解]]。
 
 ---
 

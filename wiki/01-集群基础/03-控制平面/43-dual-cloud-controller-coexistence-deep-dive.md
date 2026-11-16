@@ -251,6 +251,7 @@ flowchart TB
 - [[wiki/17-系统基础/06-知识字典/networking/loadbalancer.md|LoadBalancer 知识字典]]
 - [[wiki/13-生产运维/05-工单案例/ticket-case-003-slb-backend-group-misconfig.md|SLB 后端组配置工单案例]]
 - [[wiki/01-集群基础/03-控制平面/26-multi-cloud-hybrid-deployment.md|多云混合部署]]
+- [[wiki/18-云厂商/01-阿里云/专有云-ACK/010-bmcp-managed-ack-deep-dive.md|BMCP 纳管机制深挖——SOFA 侧「BMCP 节点接入器」的裸金属纳管链路对应物]]
 - [[wiki/18-云厂商/01-阿里云/分布式云-ACKOne/01-ack-one-multi-cluster-architecture.md|ACK One 多集群架构]]
 - [[wiki/27-资产/architecture-diagrams/architecture-multi-cluster.md|多集群架构模式]]
 

@@ -8,7 +8,7 @@ web
 
 ## Stack
 
-static HTML/CSS/JS — GTM 页面为自包含静态页面，存放于根目录 `code/GTM/`，无构建依赖，浏览器直接打开即可运行。不集成到独立仓库 kudig-webui 的 Astro 站点。
+static HTML/CSS/JS — 两个自包含静态前端，均无构建依赖：`code/GTM/`（对外落地页，浏览器直接打开即可运行）与 `console/`（全库知识体系工作台：4,815 页 / 86 域 / 2,277 张 Mermaid 图，数据与正文切片由 `make console-sync` 生成、`make console-serve` 本地起服务，含随仓库分发的本地 Mermaid 引擎）。均不集成到独立仓库 kudig-webui 的 Astro 站点。
 
 ## Users
 
@@ -44,7 +44,9 @@ KUDIG Database 是面向生产环境的 Kubernetes + AI Infrastructure 运维全
 
 ## Capabilities and Constraints
 
-- GTM 页面必须为纯静态，无 JS 框架、无构建步骤
+- 两个前端必须为纯静态，无 JS 框架、无构建步骤
+- `console/` 的所有数字必须由 `code/scripts/maintenance/console-corpus.py` 从仓库生成，界面不手写计数；CI 以 `make console-check` 阻断漂移
+- 工作台离线可用：不请求任何 CDN（字体走系统栈，Mermaid 用 `console/vendor/` 本地引擎）
 - 页面语言：中文为主（仓库全中文），关键英文术语保留
 - 内容必须基于仓库真实数据（4,445 篇、21 域、13 云厂商等，以 `code/scripts/maintenance/gtm-sync-stats.py` 统计为准），不可虚构用户评价、客户案例或未承诺的功能
 

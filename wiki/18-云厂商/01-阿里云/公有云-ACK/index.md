@@ -33,6 +33,7 @@ last_updated: 2026-07
 - [[wiki/18-云厂商/01-阿里云/公有云-ACK/05-阿里云SLB与Ingress.md|阿里云 SLB 与 Ingress]]
 
 ### 存储
+- [[wiki/18-云厂商/01-阿里云/公有云-ACK/09-alicloud-storage-deep-dive.md|阿里云存储产品深度拆解（OSS/EBS/NAS 水位与稳定性）]]
 - [[wiki/18-云厂商/01-阿里云/公有云-ACK/04-阿里云存储集成.md|阿里云存储集成]]
 - [[wiki/18-云厂商/01-阿里云/公有云-ACK/007-ack-ebs-storage.md|Ack Ebs Storage]]
 

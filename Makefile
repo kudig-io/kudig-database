@@ -62,6 +62,30 @@ gtm-check: ## 校验 GTM 页面数据是否为最新（CI/nightly 用）
 	python3 $(GTM_SYNC) --check
 
 # =============================================================================
+# Console 工作台（console/ 全库知识体系工作台）
+# =============================================================================
+
+CONSOLE_DIR := console
+CONSOLE_SYNC := code/scripts/maintenance/console-corpus.py
+
+.PHONY: console-sync console-check console-open console-serve prototype-verify
+
+console-sync: ## 从 wiki / skills / maintaining / code 重建 console/data/ 与 console/content/
+	python3 $(CONSOLE_SYNC)
+
+console-check: ## 校验工作台派生物是否与仓库一致（CI 用）
+	python3 $(CONSOLE_SYNC) --check
+
+prototype-verify: ## 原型门禁：矩阵锚点必须落在源文件对应行的标题上
+	python3 $(CONSOLE_DIR)/prototype/verify-anchors.py
+
+console-open: ## 直接打开 index.html（file:// 会被浏览器拦截 fetch，建议用 console-serve）
+	open $(CONSOLE_DIR)/index.html
+
+console-serve: ## 本地起服务（8766 端口；/prototype/ 结构视图 + /__src/ 只读原文桥）
+	python3 $(CONSOLE_DIR)/prototype/serve.py
+
+# =============================================================================
 # 上游源码检出（code/repo/ 不入库，按清单重建）
 # 清单：maintaining/02-元数据/repos.yaml
 # =============================================================================
