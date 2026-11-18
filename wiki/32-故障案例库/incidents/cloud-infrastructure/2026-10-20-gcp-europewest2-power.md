@@ -1,0 +1,108 @@
+---
+id: INC-20261020-GCP-LONDON
+title: Google Cloud europe-west2（伦敦）供电事件致 b 可用区中断约 8 小时，Revolut/劳埃德/汇丰/英国法院系统连带停摆
+company: Google Cloud
+company_type: cloud-native
+domain: cloud-infrastructure
+date: 2026-10-20
+duration_minutes: 480
+severity: SEV-1
+impact_scope: single-region
+root_cause_category: hardware-facility
+root_cause_tags: [power-event, europe-west2, london, banking-impact, single-zone, public-sector-impact]
+status: draft
+last_updated: 2026-10-25
+sources:
+  - https://www.itpro.com/infrastructure/the-google-cloud-outage-explained-what-happened-who-was-affected-and-what-can-we-learn-from-the-incident
+  - https://deployflow.co/blog/is-google-cloud-down-gcp-outage/
+  - https://www.tmtpost.com/8175309.html
+---
+
+# GCP 伦敦区域供电事件（2026-10-20）：一个可用区的电力故障如何冻结英国银行业的半个上午
+
+> 本案例为 **draft**：Google 承诺发布完整复盘但截至收录时（事发后 3 天内）尚未发布，根因细节以官方后续报告为准时更新。
+
+## 摘要
+
+2026 年 10 月 20 日 **06:08 UTC**（伦敦 07:08）起，Google Cloud **europe-west2（伦敦）区域发生"供电事件（power event）"**，定位于 **europe-west2-b 可用区**，7 个服务确认受影响：Cloud Run、App Engine、GKE、Cloud Filestore、NetApp Volumes、BigQuery Data Transfer Service、Managed Service for Apache Kafka；11:36 UTC Google 宣布电力事件已缓解。受波及的都是英国社会运转的关键节点：数字银行 **Revolut** 客户无法刷卡、取款、转账（路透社信源确认与本次 GCP 事件相关），**Lloyds、Halifax、Bank of Scotland、HSBC** 客户无法登录 App，DPD、Royal Mail、Screwfix、Rightmove 等普遍受损。Revolut 声明资金与数据全程安全。Google 承诺完成内部调查后发布完整分析。这是 2026 年"云区域故障 → 国家级行业停摆"链条的最新样本，也是 GCP **两年内第二起欧洲区域电力事件**（前一起为 2024-10-24 europe-west3-c 供电 + 制冷故障 12h39m，见库内案例）。
+
+## 影响评估（CRE 视角）
+
+- **影响面**：europe-west2-b 单可用区为震中，但业务影响面覆盖英国银行（支付/登录/ATM）、司法（远程庭审）、物流（DPD/Royal Mail）、房产平台
+- **功能维度**：支付、登录、转账、ATM 取款、庭审视频——全部属于"核心用户旅程"级中断
+- **影响时长**：约 8 小时（缓解口径），大部分客户 18:00 前恢复，长尾至更晚
+- **次生影响**：英国监管与媒体再度聚焦"对少数云商的国家级依赖"；各行业云集中度辩论升温
+- **对外沟通评估**：一般——及时声明"资金安全"与恢复承诺，但 RCA 未出，"供电事件"表述过简
+- **定级依据**：单 zone 电力事件穿透银行业与司法系统、8 小时级核心旅程中断，社会面影响显著，定为 SEV-1
+
+## 时间线（UTC）
+
+| 时间 (UTC) | 事件 | 证据 |
+|---|---|---|
+| 10-20 06:08 | Google 报告 europe-west2 多服务错误与间歇性网络故障，定位于 europe-west2-b | E1/E3 |
+| ~07:00 | Revolut Downdetector 飙升（峰值近 1,500），确认服务中断；Lloyds 约 500 条登录报告 | E3 |
+| 10:34 | Google 仍无恢复预估与 workaround | E3 |
+| 11:36 | Google 宣布定位为 europe-west2-b 供电事件、已缓解，预计 30 分钟内部分恢复 | E1/E3 |
+| 午后–18:00 前后 | 服务分批恢复，大部分客户恢复，少量长尾 | E1 |
+
+**关键时间指标**：TTD ≈ 06:08 状态页 / TTM = 11:36 供电缓解（约 5.5h）/ TTR ≈ 480 分钟（主要影响窗口，第三方口径）
+
+## 技术细节与根因分析（SRE 视角）
+
+### 背景架构
+
+europe-west2 为伦敦三可用区区域；b 区承载大量金融与公共部门工作负载。供电链路：市电 → 现场配电 → UPS → 发电机。"供电事件"的官方细节未出，可能形态参考 AWS us-east-1 热失控（INC-20260507）与 Azure West US 变压器（INC-20260207）：电力/设施层单点失效，保护性动作波及 zone 级容量。
+
+### 因素三分
+
+- **触发因素（Trigger）**：供电事件（官方初步口径，细节待 RCA）
+- **根本原因（Root Cause）**：待 Google 完整报告
+- **扩大因素（Aggravating Factors）**：
+  1. 金融负载的可用区/区域分布选择集中，单 zone 事件即穿透为多银行客户旅程中断
+  2. 远程法院等公共服务对单一云区域无降级路径
+  3. 恢复顺序不透明：银行无法向自己的客户给出恢复 ETA
+- **减轻因素**：Revolut 声明资金与数据全程安全；zonal 设计避免了全区域中断
+
+### 5 Whys
+
+```
+现象：伦敦区域事件致英国银行业与司法系统中断约 8 小时
+Why1 → 关键服务承载于 europe-west2-b，该 zone 供电中断
+Why2 → 供电事件（细节待官方 RCA）
+Why3 → 待官方披露
+Why4 → 待官方披露
+Why5 → 待官方披露
+        （系统性原因暂记：社会关键负载的云区域集中度 > 单 zone 可靠性上限）
+```
+
+## 解决过程
+
+供电缓解后服务分阶段恢复；Google 表态将发布完整分析。
+
+## 经验教训
+
+1. 当承载金融/公共部门负载时，**单 zone 事件即是社会事件**——架构评审必须按"单 zone 8 小时不可用"推演客户旅程。
+2. 当云故障穿透到银行柜台时，**银行需要云商的恢复 ETA 作为自己对客承诺的输入**——跨组织的恢复沟通链路应预演。
+
+## 预防与改进措施
+
+- **预防（Prevent）**：待官方 RCA；参考本库 power/facility 类案例整改清单
+- **减小爆炸半径（Contain）**：金融/公共服务负载跨 zone/跨 region 多活
+- **快速检测（Detect）**：供电/设施层事件秒级同步给客户事件管理（建议）
+- **快速恢复（Recover）**：跨区切换演练（金融级 RTO 对齐）
+
+## SRE / CRE / FDE / SA 视角速览
+
+| 视角 | 本案例核心结论 |
+|---|---|
+| SRE | 设施层事故的客户代价由负载分布决定：同样的供电事件，分布决定它是内部事故还是国家新闻 |
+| CRE | "资金安全"是第一优先级声明——金融客户的安全叙事先于可用性叙事 |
+| FDE | 银行侧需要独立的第三方可用性监控，以在云端定界完成前对客沟通 |
+| SA（客情危机） | 英国监管关注"云集中度"，行业级信任议题；Google 在英公共部门与金融客情承压 |
+| SA（技术危机） | 社会关键负载上云的最低门槛：跨 zone + 跨 region 双维冗余，且切换经实战演练 |
+
+## 参考资料
+
+1. [The Google Cloud outage explained（IT PRO，含受影响机构清单）](https://www.itpro.com/infrastructure/the-google-cloud-outage-explained-what-happened-who-was-affected-and-what-can-we-learn-from-the-incident) — E3
+2. [Is Google Cloud Down? The GCP Outage That Froze Revolut Cards（DeployFlow，含逐分钟时间线与 7 服务清单）](https://deployflow.co/blog/is-google-cloud-down-gcp-outage/) — E3
+3. [Edge AI Daily 早报：谷歌云伦敦区宕机，英国银行业跟着停摆（钛媒体）](https://www.tmtpost.com/8175309.html) — E3

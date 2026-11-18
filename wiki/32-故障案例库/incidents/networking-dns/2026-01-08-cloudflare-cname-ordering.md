@@ -1,0 +1,107 @@
+---
+id: INC-20260108-CLOUDFLARE-1111
+title: Cloudflare 1.1.1.1 内存优化变更改变 CNAME 记录顺序，部分 DNS 客户端解析失败约 2 小时
+company: Cloudflare
+company_type: cloud-native
+domain: networking-dns
+date: 2026-01-08
+duration_minutes: 115
+severity: SEV-2
+impact_scope: global
+root_cause_category: software-bug
+root_cause_tags: [dns, cname-ordering, hyrums-law, glibc, getaddrinfo, rfc-ambiguity, cache-optimization]
+status: published
+last_updated: 2026-10-23
+sources:
+  - https://blog.cloudflare.com/cname-a-record-order-dns-standards
+  - https://www.infoq.com/news/2026/02/cname-rfc-cloudflare-outage/
+---
+
+# Cloudflare 1.1.1.1 CNAME 顺序事件（2026-01-08）：一个"无害"的内存优化与 40 年协议歧义
+
+## 摘要
+
+2026 年 1 月 8 日，Cloudflare 公共 DNS 解析器 **1.1.1.1** 的一次**内存优化更新**意外改变了 DNS 响应中 CNAME 记录的排列顺序（CNAME 从"答案列表最前"变为"最后"），导致部分依赖顺序的客户端解析失败：glibc 的 `getaddrinfo`、三类 Cisco 以太网交换机的 DNSC 进程（部分配置 1.1.1.1 的交换机进入**重启循环**）。2025-12-02 代码引入、2026-01-07 23:48 全球发布、01-08 17:40 推至 90% 服务器、18:19 宣布事件、18:27 回滚、19:55 回滚完成。官方复盘罕见地把矛头指向 **RFC 本身的歧义**，并起草 IETF Internet-Draft 澄清 CNAME 排序语义。这是 Hyrum 定律与 Postel 定律的双重教科书案例。
+
+## 影响评估（CRE 视角）
+
+- **影响面**：全球 1.1.1.1 用户中的"部分客户端实现"——按实现而非按地域划分的影响面
+- **功能维度**：域名解析失败（依赖 glibc getaddrinfo 的系统服务）、交换机重启循环（网络设备级次生灾害）
+- **影响时长**：约 2 小时（17:40 广泛推送 → 19:55 回滚完成）
+- **次生影响**：Cisco 发布服务文档；DNS RFC 40 年歧义被重新打开并推动标准化
+- **对外沟通评估**：优秀——官方长文复盘含时间线、代码 diff、受影响实现清单、RFC 分析、标准推进计划
+- **定级依据**：全球公共基础设施 + 网络设备重启循环，但为部分客户端且快速回滚，定为 SEV-2
+
+## 时间线（UTC）
+
+| 时间 (UTC) | 事件 | 证据 |
+|---|---|---|
+| 2025-12-02 | 记录重排序变更引入 1.1.1.1 代码库 | E1 |
+| 2025-12-10 | 变更发布到测试环境 | E1 |
+| 01-07 23:48 | 含变更的全球发布开始 | E1 |
+| 01-08 17:40 | 发布推至 90% 服务器，解析失败开始出现 | E1 |
+| 01-08 18:19 | 事件宣布 | E1 |
+| 01-08 18:27 | 回滚开始 | E1 |
+| 01-08 19:55 | 回滚完成，影响结束 | E1 |
+
+**关键时间指标**：TTD ≈ 分钟级（18:19 宣布）/ TTM = 8 分钟（宣布→回滚）/ TTR = 115 分钟（广泛推送→回滚完成）
+
+## 技术细节与根因分析（SRE 视角）
+
+### 背景架构
+
+1.1.1.1 对 CNAME 链的缓存部分命中时会"补全"响应：原实现新建列表、先插 CNAME 链、再追加新记录；优化后为省内存分配直接**把 CNAME 追加到既有答案列表尾部**——CNAME 出现在最终 A 记录之后。多数实现无视顺序，但 glibc `getaddrinfo` 按顺序迭代并期望先遇 CNAME；Cisco 三款交换机的 DNSC 进程直接重启循环。
+
+### 因素三分
+
+- **触发因素（Trigger）**：缓存部分命中路径上的记录顺序改变
+- **根本原因（Root Cause）**：内存优化改变了响应的可观测行为，而 RFC 1034/1035 对 CNAME 在响应中的顺序语义存在 40 年歧义——"合法"的变更撞上了依赖未文档化行为的生态
+- **扩大因素（Aggravating Factors）**：
+  1. 影响按"客户端实现"分布，测试环境无法覆盖全生态实现（glibc、Cisco 固件）
+  2. 交换机重启循环把应用层 DNS 问题升级为网络设备可用性问题
+  3. 发布到 90% 才触发可观测的失败，灰度信号弱
+- **减轻因素**：变更可整体回滚且回滚路径通畅（8 分钟）
+
+### 5 Whys
+
+```
+现象：部分客户端解析失败、部分交换机重启循环
+Why1 → 响应中 CNAME 排在最终答案之后
+Why2 → 缓存优化把 CNAME 追加到答案列表尾部
+Why3 → 优化未考虑"记录顺序"是可观测行为
+Why4 → RFC 未明确顺序语义，代码评审无规范可依
+Why5 → 互联网协议生态依赖"未文档化行为的既成事实"
+        （系统性原因：标准化滞后于实现生态的隐性契约）
+```
+
+## 解决过程
+
+回滚完成即恢复；事后推动 IETF 标准澄清 CNAME 排序，与 Cisco 协调披露。
+
+## 经验教训
+
+1. 当优化涉及"语义上无序"的数据结构时，必须**先验证其在野实现的顺序敏感性**——协议说顺序无关，生态未必。
+2. 当 RFC 存在歧义时，**长期存在的实现行为就是事实标准**；变更它需要的证据强度高于变更文档化行为。
+3. 当灰度发布到 90% 才暴露问题时，说明**灰度指标选错了维度**——应按"客户端实现分布"而非"服务器比例"灰度。
+
+## 预防与改进措施
+
+- **预防（Prevent）**：推动 RFC 澄清（官方，IETF Draft）；协议歧义项登记册
+- **减小爆炸半径（Contain）**：按客户端实现指纹的差异化灰度（建议）
+- **快速检测（Detect）**：分客户端实现的解析成功率监控
+- **快速恢复（Recover）**：一键回滚（本次验证有效）
+
+## SRE / CRE / FDE / SA 视角速览
+
+| 视角 | 本案例核心结论 |
+|---|---|
+| SRE | Hyrum 定律的全球化版本：对公共协议服务的任何可观测行为变更都是 API 变更 |
+| CRE | 影响面按"实现"而非"地域"分布，客户沟通需给出受影响实现清单（glibc 版本、Cisco 型号） |
+| FDE | 分客户端实现的解析成功率是最直接的分段信号；本次官方复盘质量即证据工程范本 |
+| SA（客情危机） | 交换机重启循环把 DNS 故障升级为网络基础设施事件，网络团队成为新的利益相关方 |
+| SA（技术危机） | 选型含"未文档化行为依赖"的组件时，评估其在野实现的隐性契约暴露面 |
+
+## 参考资料
+
+1. [What came first: the CNAME or the A record?（Cloudflare 官方复盘）](https://blog.cloudflare.com/cname-a-record-order-dns-standards) — E1
+2. [How CNAME Ordering in RFC Specs Caused Cloudflare 1.1.1.1 Outage（InfoQ）](https://www.infoq.com/news/2026/02/cname-rfc-cloudflare-outage/) — E3

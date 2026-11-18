@@ -1,0 +1,108 @@
+---
+id: INC-20260930-AZURE-GATEWAY
+title: Azure 平台触发的网关控制面更新在 OS 维护窗口恢复，请求量压垮区域网关管理服务，30 区域网关/混合连接服务中断 5 小时 45 分
+company: Microsoft Azure
+company_type: cloud-native
+domain: cloud-infrastructure
+date: 2026-09-30
+duration_minutes: 345
+severity: SEV-1
+impact_scope: multi-region
+root_cause_category: change-management
+root_cause_tags: [rolling-update, control-plane-overload, gateway-manager, os-servicing, multi-region, expressroute, vpn-gateway]
+status: published
+last_updated: 2026-10-23
+sources:
+  - https://azure.status.microsoft/en-us/status/history/
+  - https://www.neoteo.com/en/microsoft-explains-azures-sept-30-oct-1-2026-connectivity-disruption
+  - https://finance.biggo.com/news/d9307983-5b75-4692-bb05-adbebd020274
+---
+
+# Azure 30 区域网关事故（2026-09-30）：一次"恢复中的更新"引发的全球混合连接中断
+
+## 摘要
+
+2026 年 9 月 30 日 20:30 UTC 至 10 月 1 日 02:15 UTC，Azure 发生 2026 年影响面最广的事故：一个**平台触发的网关管理服务（gateway manager）更新在多区域恢复执行**，请求量超出区域网关控制面服务的处理能力，导致 **30 个区域**的 ExpressRoute Gateway、VPN Gateway、Virtual WAN、Bastion、Firewall、Application Gateway、WAF、Azure VMware Solution 等网关与混合连接服务出现降级或中断，持续 **5 小时 45 分**。雪上加霜的是，该更新恢复恰好与**跨区域的 OS 维护（servicing）**同时发生，两股变更流量叠加。微软处置：暂停更新、分阶段应用配置变更恢复控制面、回滚引入性能回归的变更。这是"变更恢复即变更"的经典事故——暂停后的更新在无人预期的时间窗批量苏醒。
+
+## 影响评估（CRE 视角）
+
+- **影响面**：30 个区域（初始通告 18 区域，后续扩展至 30，含 Australia Central 2、Australia Southeast 等）；受影响服务为 ExpressRoute/VPN/Virtual WAN/Bastion/Firewall/App Gateway/WAF/AVS——**企业混合连接的"接驳件"全系列**
+- **功能维度**：网关管理操作失败 + 数据面连接降级/中断；影响按客户与资源差异很大
+- **影响时长**：5h45m（各区域因滚动触发时间不同而异）
+- **次生影响**：与 29 日 Sweden Central AI 事故前后脚（40 小时内两起），全球媒体与 CIO 圈层震动；企业混合云客户（ExpressRoute 专线用户）首次成为 Azure 大规模事故的直接主角
+- **对外沟通评估**：良好——状态历史含完整 RCA 叙事（"What went wrong and why"）、整改项与时间表（2026-10 至 2027-06）
+- **定级依据**：30 区域、企业级核心网络服务、控制面回归，定为 SEV-1
+
+## 时间线（UTC）
+
+| 时间 (UTC) | 事件 | 证据 |
+|---|---|---|
+| 09-30 20:30 | 事件开始：多区域网关客户遭遇连接降级/中断 | E1 |
+| 09-30 晚间 | 确认为平台触发的网关更新恢复执行 + OS 维护叠加，控制面过载 | E1 |
+| 10-01 01:36 | 恢复开始推进 | E1 |
+| 10-01 02:15 | 最后一批客户影响缓解 | E1 |
+| 后续 | 微软公布整改：暂停更新分阶段恢复、回滚性能回归变更；改进 OS 更新恢复行为（2026-10）、强化 ExpressRoute 健康检查（2027-03）、控制面扩容（2027-03）、限流与负载剥离（2027-06） | E1 |
+
+**关键时间指标**：TTD ≈ 状态页通报 / TTM ≈ 暂停更新 + 分阶段配置 / TTR = 5h45m
+
+## 技术细节与根因分析（SRE 视角）
+
+### 背景架构
+
+Azure 网关服务（ExpressRoute/VPN/Firewall 等）由**区域网关控制面**管理配置与状态。平台触发的更新（如 gateway manager 性能/行为变更）按区域滚动下发；OS servicing 是另一套独立的平台维护流。两套变更系统互不感知。
+
+### 因素三分
+
+- **触发因素（Trigger）**：平台触发的网关更新在暂停后**跨多区域同时恢复执行**，请求量激增
+- **根本原因（Root Cause）**：更新恢复未遵循分阶段滚动（staged rollout），瞬时打满区域网关控制面；叠加同时进行的 OS 维护流量；引入的性能回归变更未能被回滚防线拦截
+- **扩大因素（Aggravating Factors）**：
+  1. 30 区域滚动触发 → 影响面随时间扩散，初始 18 区域清单持续扩大
+  2. 控制面过载期间无法成功扩容（平台自身问题阻止了弹性）
+  3. 网关是混合连接咽喉：控制面卡住 = 专线/VPN 用户数据面连带受损
+- **减轻因素**：微软暂停更新并以分阶段配置变更止血；回滚回归变更
+
+### 5 Whys
+
+```
+现象：30 区域网关服务中断 5h45m
+Why1 → 区域网关控制面无法可靠处理管理操作
+Why2 → 更新恢复产生超出控制面处理能力的请求量（+ OS 维护叠加）
+Why3 → 暂停的更新跨多区域同时恢复，未走分阶段滚动
+Why4 → "更新恢复"路径缺少与首次发布同等严格的灰度/限速门禁
+Why5 → 变更系统将"恢复"视为安全操作而非变更本身
+        （系统性原因：变更管理覆盖发布与回滚，却漏了"暂停-恢复"这个第三路径）
+```
+
+## 解决过程
+
+暂停更新 → 分阶段应用配置变更恢复控制面 → 回滚引入性能回归的变更。官方整改时间表：OS 更新恢复行为改进（2026-10）、ExpressRoute 网关健康检查强化（2027-03）、控制面扩容（2027-03）、限流与负载剥离（2027-06）。
+
+## 经验教训
+
+1. 当变更系统支持"暂停/恢复"时，**恢复路径必须与首次发布走同等门禁**——恢复不是安全态，是延迟触发的变更。
+2. 当两套独立变更流（功能更新 + OS servicing）可能叠加时，必须**有全局变更日历/冲突仲裁**，否则"无关维护"会变成事故扩大器。
+3. 当控制面过载时，**控制面自身的弹性扩容能力必须独立于被保护对象**——本案控制面扩容失败的教训与 AWS 2022 控制面教训同构。
+4. 当受影响清单会随时间扩大时，**初始通告必须声明"清单可能扩大"**，降低二次沟通损耗（18→30 区域的披露演化即反例）。
+
+## 预防与改进措施
+
+- **预防（Prevent）**：暂停更新的恢复强制分阶段滚动（官方，2026-10）；变更冲突仲裁（建议）
+- **减小爆炸半径（Contain）**：控制面按区域/单元隔离；更新按波次下发
+- **快速检测（Detect）**：控制面请求量突增 + 管理操作失败率联合告警
+- **快速恢复（Recover）**：一键暂停更新 + 回滚性能回归变更；控制面扩容独立预案（官方，2027-03）
+
+## SRE / CRE / FDE / SA 视角速览
+
+| 视角 | 本案例核心结论 |
+|---|---|
+| SRE | 变更管理三角：发布、回滚、暂停-恢复，三条路径同等级管控；否则"恢复"就是延迟爆炸的变更 |
+| CRE | 混合连接客户（ExpressRoute 专线）对中断的容忍度远低于互联网流量客户——此类事故的 SLA 与赔偿敏感度最高 |
+| FDE | 影响清单 18→30 区域的演化证明：早期遥测定界系统性偏窄，滚动变更事故的定界必须预留扩大声明 |
+| SA（客情危机） | 40 小时内两起重大事故（AI + 网关），CIO 层级的多云/混合架构重估被直接触发 |
+| SA（技术危机） | 企业混合架构的隐性假设"控制面永远可用"被击穿：本地逃生通道（VPN 备份链路、多云出口）的设计权重应上调 |
+
+## 参考资料
+
+1. [Azure status history（官方，含完整 RCA 与整改时间表）](https://azure.status.microsoft/en-us/status/history/) — E1
+2. [Azure outage: Microsoft's account of Oct. 1, 2026（NeoTeo 转述）](https://www.neoteo.com/en/microsoft-explains-azures-sept-30-oct-1-2026-connectivity-disruption) — E3
+3. [Azure Hit by Major Network Outage Affecting 19 Regions（BigGo Finance 初期报道）](https://finance.biggo.com/news/d9307983-5b75-4692-bb05-adbebd020274) — E3

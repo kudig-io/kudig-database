@@ -1,0 +1,74 @@
+# 故障分级标准与分类体系
+
+本文档是全库元数据的**唯一权威枚举来源**。`build-index.py` 与评审流程依据本文档校验字段合法性。
+
+## 1. 严重等级（severity）
+
+以**客户感知影响**为主要定级依据（CRE 原则），参考业界通行 SEV 分级：
+
+| 等级 | 定义 | 判定参考 |
+|---|---|---|
+| `SEV-1` | 灾难级：核心服务全局性中断或大范围数据丢失 | 全球/全网性不可用；影响多数客户的核心功能；数据永久丢失；社会面影响 |
+| `SEV-2` | 严重：核心功能大范围受损或单区域完全中断 | 单一大区域中断；核心功能（写入/支付/登录）大范围降级 |
+| `SEV-3` | 中等：部分功能降级，有可用的绕行方案 | 非核心功能受损；小比例用户受影响；性能显著劣化 |
+| `SEV-4` | 轻微：局部、短暂或几乎无客户感知 | 冗余吸收了故障；仅内部可见 |
+
+定级规则：满足更高等级任一判定条件即取更高等级；跨级存疑时在案例正文"定级依据"中说明。
+
+## 2. 技术领域分类（domain，即目录名）
+
+| 目录 | 领域 | 涵盖范围 |
+|---|---|---|
+| `cloud-infrastructure` | 云基础设施 | IaaS 层：计算/存储/内部网络/控制面（AWS、Azure、GCP、阿里云等） |
+| `cdn-edge` | CDN 与边缘接入 | CDN、边缘计算、WAF 边缘执行、自建接入层/负载均衡（Cloudflare、Fastly、Akamai、自建 SLB） |
+| `networking-dns` | 网络 / DNS / BGP | 域名解析、BGP 路由、骨干网、电信网络、DDoS 引发的网络事件 |
+| `database-storage` | 数据库与存储 | 关系型/NoSQL 数据库、复制与容灾、数据丢失事件 |
+| `container-orchestration` | 容器编排与服务发现 | Kubernetes、服务网格、Consul/etcd 等协调系统 |
+| `ai-ml-services` | AI / ML 服务 | 模型服务、推理平台、AI 产品的可用性事件 |
+| `security-services` | 安全产品可用性 | 安全产品自身缺陷引发的大规模可用性事件 |
+| `saas-platforms` | SaaS 与互联网平台 | 协作、CRM、在线旅行/文档等平台级故障（Atlassian、Salesforce、语雀、Slack） |
+| `messaging-streaming` | 消息与流处理 | Kafka/队列/流处理平台故障（Kinesis、Kafka） |
+| `observability` | 可观测性平台 | 监控/日志/追踪平台自身故障（Datadog） |
+| `identity-access` | 身份与访问控制 | 认证/授权/密钥/配额系统故障（Google 认证、阿里云 AK 服务） |
+| `business-operations` | 商务运营 | 合同终止、政策封禁、定价决策、合规制裁、域名/资产过期、计费基础设施故障等**非技术原因或商务系统故障**导致的业务中断或生态危机（Parler×AWS、Marketo 域名过期、Reddit API 定价、GitHub 制裁封禁、Twitter API 封杀、Google Cloud 账单故障） |
+| `sa-architecture` | SA 架构与客情 | 解决方案架构决策失误导致的故障（选型/容量/高可用设计/供应商依赖治理），以及客情危机（信任/沟通/补偿）典型案例（Clerk×Cloud Run、Unity 收费危机、Clerk 数据库事件） |
+| `public-services` | 公共服务与政企 | 政府、国企与公共服务机构运营的全民刚需数字服务与基础设施：交通购票（12306）、运营商基础通信（广东电信）、防疫健康码（粤康码）、空域安全系统（FAA NOTAM）、国家统计填报（ABS 普查）、医疗系统（NHS WannaCry） |
+
+> 归类原则：按**故障发生的技术层面**归类，而非按公司行业。例：OpenAI 2024-12 故障根源在 Kubernetes 控制面，但作为 AI 服务可用性事件归入 `ai-ml-services`，并以 `root_cause_tags` 标注 `kubernetes` 供跨域检索。
+
+## 3. 根因分类（root_cause_category，单选主根因）
+
+| 枚举值 | 名称 | 典型形态 |
+|---|---|---|
+| `change-management` | 变更管理 | 部署/配置/规则变更引发，缺灰度缺回滚 |
+| `config-error` | 配置错误 | 错误配置本身即问题主体（含自动化配置系统缺陷） |
+| `software-bug` | 软件缺陷 | 代码 bug、内存越界、资源泄漏、逻辑错误 |
+| `capacity-overload` | 容量与过载 | 突发流量、重试风暴、级联过载、资源耗尽 |
+| `operational-safeguard` | 操作防护缺失 | 高危人工操作缺少防护/确认/限幅（不写"人为失误"） |
+| `network-routing` | 网络与路由 | BGP 撤销、骨干网故障、网络分区 |
+| `dependency-failure` | 依赖故障 | 第三方/内部依赖故障级联，循环依赖 |
+| `security-attack` | 安全攻击 | DDoS、入侵等外部攻击导致的可用性事件 |
+| `hardware-facility` | 硬件与设施 | 硬件故障、电力、制冷、光缆 |
+| `data-integrity` | 数据完整性 | 数据丢失、损坏、备份失效 |
+| `commercial` | 商务与合同 | 合同终止、政策封禁、定价决策、合规制裁（Parler、Reddit、Unity） |
+| `architecture-decision` | 架构决策 | 架构选型/容量/高可用设计决策失误，含对供应商冗余承诺的过度信任（Clerk 单区域部署） |
+
+> 一个故障通常涉及多类因素：`root_cause_category` 记录**根本原因**所属类；触发与扩大因素用 `root_cause_tags` 表达。
+
+## 4. 常用标签参考（root_cause_tags，开放集）
+
+`regex-backtracking` `bgp-withdrawal` `dns-failure` `split-brain` `retry-storm` `thundering-herd`
+`canary-missing` `rollback-failure` `kill-switch` `circular-dependency` `control-plane-overload`
+`kubernetes` `consul` `mysql` `ddos` `botnet` `kernel-driver` `backup-failure` `failover-automation`
+`status-page-dependency` `break-glass` `cell-architecture` `blast-radius`
+
+标签自由扩展，但需全小写连字符；新标签在案例中首次使用即自动进入索引统计。
+
+## 5. 公司类型（company_type）
+
+| 枚举值 | 说明 |
+|---|---|
+| `cloud-native` | 云与基础设施服务商（AWS、Cloudflare、Fastly、HashiCorp 生态等） |
+| `ai-native` | AI 原生公司（OpenAI、Anthropic 等） |
+| `internet` | 互联网/消费与企业软件公司（Meta、GitHub、Roblox 等） |
+| `public-sector` | 政府/国企/公共服务机构（中国铁路、中国电信、广东省政务服务数据管理局、FAA、澳大利亚统计局、NHS） |
