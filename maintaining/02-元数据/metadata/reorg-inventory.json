@@ -1,0 +1,4453 @@
+{
+ "generated_at": "2026-11-18",
+ "scope": "wiki/ (排除 31-归档) + skills/",
+ "files_scanned": 4521,
+ "duplicate_basenames": {
+  "signal": "duplicate_basenames",
+  "content_groups": 373,
+  "content_files": 852,
+  "structural_groups": 3,
+  "groups": {
+   "SKILL.md": {
+    "count": 18,
+    "cross_dir": true,
+    "paths": [
+     "wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-autoscaling/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-config-secret/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-control-plane/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-deployment-rollout/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-dns-failure/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-image-pull/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-logging-pipeline/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-performance/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-rbac-quota/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-security-incident/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/SKILL.md"
+    ]
+   },
+   "DIALOGUE.md": {
+    "count": 17,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-autoscaling/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-config-secret/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-control-plane/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-deployment-rollout/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-image-pull/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-performance/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-security-incident/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md"
+    ]
+   },
+   "remediation-playbook.md": {
+    "count": 16,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-dns-failure/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/reference/remediation-playbook.md"
+    ]
+   },
+   "01-production-readiness-operations-guide.md": {
+    "count": 11,
+    "cross_dir": true,
+    "paths": [
+     "wiki/06-存储/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/08-安全/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/10-平台工程/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/12-可靠性/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/13-生产运维/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/14-容器运行时/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/15-AI基础设施/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/16-专项技术/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/17-系统基础/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/18-云厂商/00-总览/01-production-readiness-operations-guide.md",
+     "wiki/21-生态参考/00-总览/01-production-readiness-operations-guide.md"
+    ]
+   },
+   "01-overview.md": {
+    "count": 7,
+    "cross_dir": true,
+    "paths": [
+     "wiki/10-平台工程/06-代码分析/cluster-create/01-overview.md",
+     "wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md",
+     "wiki/10-平台工程/06-代码分析/deployment-create/01-overview.md",
+     "wiki/10-平台工程/06-代码分析/functions-cluster-delete/01-overview.md",
+     "wiki/10-平台工程/06-代码分析/functions-deployment-create/01-overview.md",
+     "wiki/10-平台工程/06-代码分析/node-create/01-overview.md",
+     "wiki/20-最佳实践/09-large-scale-production/01-overview.md"
+    ]
+   },
+   "checkpoint.md": {
+    "count": 7,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/inner-training/week-1-ack-acr-lifecycle/checkpoint.md",
+     "skills/04-工作负载/pod/培训/inner-training/week-2-security-monitoring/checkpoint.md",
+     "skills/04-工作负载/pod/培训/inner-training/week-4-network-storage/checkpoint.md",
+     "skills/04-工作负载/pod/培训/public-one-month/week-1-foundation/checkpoint.md",
+     "skills/04-工作负载/pod/培训/public-one-month/week-2-core-tech/checkpoint.md",
+     "skills/04-工作负载/pod/培训/public-one-month/week-3-operations/checkpoint.md",
+     "skills/04-工作负载/pod/培训/public-one-month/week-4-enterprise/checkpoint.md"
+    ]
+   },
+   "02-production-readiness-operations-guide.md": {
+    "count": 6,
+    "cross_dir": true,
+    "paths": [
+     "wiki/03-清单模式/00-总览/02-production-readiness-operations-guide.md",
+     "wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md",
+     "wiki/05-网络/00-总览/02-production-readiness-operations-guide.md",
+     "wiki/07-数据库中间件/00-总览/02-production-readiness-operations-guide.md",
+     "wiki/11-发布变更/00-总览/02-production-readiness-operations-guide.md",
+     "wiki/19-故障诊断/00-总览/02-production-readiness-operations-guide.md"
+    ]
+   },
+   "multi-cluster.md": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/multi-cluster.md",
+     "wiki/20-最佳实践/07-scenarios/multi-cluster.md",
+     "wiki/26-标签/05-交付与运维/multi-cluster.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/multi-cluster.md"
+    ]
+   },
+   "troubleshooting.md": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/troubleshooting.md",
+     "wiki/20-最佳实践/07-scenarios/troubleshooting.md",
+     "wiki/26-标签/04-可观测性/troubleshooting.md",
+     "skills/04-工作负载/pod/最佳实践/troubleshooting.md"
+    ]
+   },
+   "helm.md": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/helm.md",
+     "wiki/17-系统基础/06-知识字典/tooling/helm.md",
+     "wiki/23-实体/08-交付与制品/helm.md",
+     "wiki/26-标签/05-交付与运维/helm.md"
+    ]
+   },
+   "deployment.md": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/deployment.md",
+     "wiki/20-最佳实践/01-best-practices/operations/deployment.md",
+     "wiki/20-最佳实践/06-operations/deployment.md",
+     "wiki/23-实体/02-K8s核心组件/deployment.md"
+    ]
+   },
+   "ai-infra-ops.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/ai-infra-ops.md",
+     "wiki/20-最佳实践/07-scenarios/ai-infra-ops.md",
+     "skills/03-节点/gpu/最佳实践/ai-infra-ops.md"
+    ]
+   },
+   "app-deployment.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/app-deployment.md",
+     "wiki/20-最佳实践/07-scenarios/app-deployment.md",
+     "skills/04-工作负载/deployment/最佳实践/app-deployment.md"
+    ]
+   },
+   "backup-restore.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/backup-restore.md",
+     "wiki/20-最佳实践/07-scenarios/backup-restore.md",
+     "skills/02-控制面/etcd/最佳实践/backup-restore.md"
+    ]
+   },
+   "capacity-planning.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/capacity-planning.md",
+     "wiki/20-最佳实践/07-scenarios/capacity-planning.md",
+     "skills/04-工作负载/hpa-vpa/最佳实践/capacity-planning.md"
+    ]
+   },
+   "cluster-deployment.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/cluster-deployment.md",
+     "wiki/20-最佳实践/07-scenarios/cluster-deployment.md",
+     "skills/01-集群运维/cluster-deployment/cluster-deployment.md"
+    ]
+   },
+   "compliance-audit.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/compliance-audit.md",
+     "wiki/20-最佳实践/07-scenarios/compliance-audit.md",
+     "skills/07-安全/rbac/最佳实践/compliance-audit.md"
+    ]
+   },
+   "cost-optimization.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/cost-optimization.md",
+     "wiki/20-最佳实践/07-scenarios/cost-optimization.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/cost-optimization.md"
+    ]
+   },
+   "daily-ops.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/daily-ops.md",
+     "wiki/20-最佳实践/07-scenarios/daily-ops.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/daily-ops.md"
+    ]
+   },
+   "edge-ops.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/edge-ops.md",
+     "wiki/20-最佳实践/07-scenarios/edge-ops.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/edge-ops.md"
+    ]
+   },
+   "gitops-workflow.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/gitops-workflow.md",
+     "wiki/20-最佳实践/07-scenarios/gitops-workflow.md",
+     "skills/01-集群运维/gitops-argocd/最佳实践/gitops-workflow.md"
+    ]
+   },
+   "mesh-ops.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/mesh-ops.md",
+     "wiki/20-最佳实践/07-scenarios/mesh-ops.md",
+     "skills/05-网络/service-mesh/最佳实践/mesh-ops.md"
+    ]
+   },
+   "monitoring-alerting.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/monitoring-alerting.md",
+     "wiki/20-最佳实践/07-scenarios/monitoring-alerting.md",
+     "skills/08-可观测性/monitoring/最佳实践/monitoring-alerting.md"
+    ]
+   },
+   "network-diagnosis.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/network-diagnosis.md",
+     "wiki/20-最佳实践/07-scenarios/network-diagnosis.md",
+     "skills/05-网络/service/最佳实践/network-diagnosis.md"
+    ]
+   },
+   "performance-tuning.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/performance-tuning.md",
+     "wiki/20-最佳实践/07-scenarios/performance-tuning.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/performance-tuning.md"
+    ]
+   },
+   "security-hardening.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/security-hardening.md",
+     "wiki/20-最佳实践/07-scenarios/security-hardening.md",
+     "skills/07-安全/rbac/最佳实践/security-hardening.md"
+    ]
+   },
+   "security-incident.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/security-incident.md",
+     "wiki/20-最佳实践/07-scenarios/security-incident.md",
+     "skills/07-安全/rbac/最佳实践/security-incident.md"
+    ]
+   },
+   "storage-issues.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/storage-issues.md",
+     "wiki/20-最佳实践/07-scenarios/storage-issues.md",
+     "skills/06-存储/csi-storage/最佳实践/storage-issues.md"
+    ]
+   },
+   "upgrade-migration.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/13-生产运维/08-运维场景剧本/upgrade-migration.md",
+     "wiki/20-最佳实践/07-scenarios/upgrade-migration.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/upgrade-migration.md"
+    ]
+   },
+   "docker.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/docker.md",
+     "wiki/17-系统基础/06-知识字典/fundamentals/docker.md",
+     "wiki/23-实体/03-运行时/docker.md"
+    ]
+   },
+   "gitops.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/gitops.md",
+     "wiki/17-系统基础/06-知识字典/operations/gitops.md",
+     "wiki/26-标签/05-交付与运维/gitops.md"
+    ]
+   },
+   "downward-api.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/downward-api.md",
+     "wiki/17-系统基础/06-知识字典/workloads/downward-api.md",
+     "wiki/22-概念/02-工作负载/downward-api.md"
+    ]
+   },
+   "container-runtime.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/container-runtime.md",
+     "wiki/22-概念/15-运行时与系统/container-runtime.md",
+     "wiki/23-实体/02-K8s核心组件/container-runtime.md"
+    ]
+   },
+   "containerd.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/containerd.md",
+     "wiki/23-实体/03-运行时/containerd.md",
+     "wiki/26-标签/01-核心平台/containerd.md"
+    ]
+   },
+   "kube-scheduler.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-scheduler.md",
+     "wiki/22-概念/07-调度与资源/kube-scheduler.md",
+     "wiki/23-实体/02-K8s核心组件/kube-scheduler.md"
+    ]
+   },
+   "kubernetes.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kubernetes.md",
+     "wiki/22-概念/01-核心架构/kubernetes.md",
+     "wiki/23-实体/02-K8s核心组件/kubernetes.md"
+    ]
+   },
+   "supply-chain-security.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/supply-chain-security.md",
+     "wiki/22-概念/05-安全/supply-chain-security.md",
+     "wiki/25-研究/02-网络与安全/supply-chain-security.md"
+    ]
+   },
+   "statefulset.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/statefulset.md",
+     "wiki/22-概念/02-工作负载/statefulset.md",
+     "wiki/23-实体/02-K8s核心组件/statefulset.md"
+    ]
+   },
+   "nodepool-fta.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/nodepool-fta.md",
+     "skills/03-节点/node/reference/nodepool-fta.md",
+     "skills/03-节点/nodepool/nodepool-fta.md"
+    ]
+   },
+   "SKILL-DEEP-DIVE.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md"
+    ]
+   },
+   "networking.md": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/infrastructure/networking.md",
+     "wiki/20-最佳实践/03-infrastructure/networking.md",
+     "wiki/26-标签/02-网络与存储/networking.md"
+    ]
+   },
+   "03-production-readiness-operations-guide.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/01-集群基础/00-总览/03-production-readiness-operations-guide.md",
+     "wiki/02-工作负载/00-总览/03-production-readiness-operations-guide.md"
+    ]
+   },
+   "progressive-delivery-patterns.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md",
+     "wiki/25-研究/03-平台与交付/progressive-delivery-patterns.md"
+    ]
+   },
+   "terway-index.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/06-Terway/terway-index.md",
+     "wiki/21-生态参考/03-领域索引/terway-index.md"
+    ]
+   },
+   "00-open-source-projects-index.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/08-安全/00-总览/00-open-source-projects-index.md",
+     "wiki/09-可观测性/00-总览/00-open-source-projects-index.md"
+    ]
+   },
+   "gateway-api.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/gateway-api.md",
+     "wiki/17-系统基础/06-知识字典/networking/gateway-api.md"
+    ]
+   },
+   "k8s.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/k8s.md",
+     "wiki/26-标签/01-核心平台/k8s.md"
+    ]
+   },
+   "promql.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/promql.md",
+     "wiki/17-系统基础/06-知识字典/observability/promql.md"
+    ]
+   },
+   "kcl.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/kcl.md",
+     "wiki/23-实体/08-交付与制品/kcl.md"
+    ]
+   },
+   "resource-management-for-pods-and-containers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/resource-management-for-pods-and-containers.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/resource-management-for-pods-and-containers.md"
+    ]
+   },
+   "resource-quota.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/resource-quota.md",
+     "wiki/17-系统基础/06-知识字典/scheduling/resource-quota.md"
+    ]
+   },
+   "schemahero.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/schemahero.md",
+     "wiki/23-实体/12-数据与消息/schemahero.md"
+    ]
+   },
+   "secrets.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/secrets.md",
+     "wiki/22-概念/05-安全/secrets.md"
+    ]
+   },
+   "server-side-apply.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/server-side-apply.md",
+     "wiki/17-系统基础/06-知识字典/platform-engineering/server-side-apply.md"
+    ]
+   },
+   "bpfman.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/bpfman.md",
+     "wiki/23-实体/10-平台与开发工具/bpfman.md"
+    ]
+   },
+   "cloud-controller-manager.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/cloud-controller-manager.md",
+     "wiki/23-实体/02-K8s核心组件/cloud-controller-manager.md"
+    ]
+   },
+   "container2wasm.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/container2wasm.md",
+     "wiki/23-实体/03-运行时/container2wasm.md"
+    ]
+   },
+   "cri-o.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/cri-o.md",
+     "wiki/23-实体/03-运行时/cri-o.md"
+    ]
+   },
+   "etcd.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/etcd.md",
+     "wiki/23-实体/02-K8s核心组件/etcd.md"
+    ]
+   },
+   "flatcar.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/flatcar.md",
+     "wiki/23-实体/03-运行时/flatcar.md"
+    ]
+   },
+   "hyperlight.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/hyperlight.md",
+     "wiki/23-实体/03-运行时/hyperlight.md"
+    ]
+   },
+   "kairos.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kairos.md",
+     "wiki/23-实体/03-运行时/kairos.md"
+    ]
+   },
+   "kuasar.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kuasar.md",
+     "wiki/23-实体/03-运行时/kuasar.md"
+    ]
+   },
+   "kube-apiserver.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-apiserver.md",
+     "wiki/23-实体/02-K8s核心组件/kube-apiserver.md"
+    ]
+   },
+   "kube-controller-manager.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-controller-manager.md",
+     "wiki/23-实体/02-K8s核心组件/kube-controller-manager.md"
+    ]
+   },
+   "kube-proxy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-proxy.md",
+     "wiki/23-实体/02-K8s核心组件/kube-proxy.md"
+    ]
+   },
+   "kubelet.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kubelet.md",
+     "wiki/23-实体/02-K8s核心组件/kubelet.md"
+    ]
+   },
+   "urunc.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/urunc.md",
+     "wiki/23-实体/03-运行时/urunc.md"
+    ]
+   },
+   "virtual-kubelet.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/virtual-kubelet.md",
+     "wiki/23-实体/02-K8s核心组件/virtual-kubelet.md"
+    ]
+   },
+   "wasmedge.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/wasmedge.md",
+     "wiki/23-实体/03-运行时/wasmedge.md"
+    ]
+   },
+   "youki.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/youki.md",
+     "wiki/23-实体/03-运行时/youki.md"
+    ]
+   },
+   "aeraki-mesh.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/aeraki-mesh.md",
+     "wiki/23-实体/04-网络/aeraki-mesh.md"
+    ]
+   },
+   "akri.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/akri.md",
+     "wiki/23-实体/11-AI与边缘/akri.md"
+    ]
+   },
+   "antrea.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/antrea.md",
+     "wiki/23-实体/04-网络/antrea.md"
+    ]
+   },
+   "bfe.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/bfe.md",
+     "wiki/23-实体/04-网络/bfe.md"
+    ]
+   },
+   "cilium.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/cilium.md",
+     "wiki/23-实体/04-网络/cilium.md"
+    ]
+   },
+   "clusternet.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/clusternet.md",
+     "wiki/23-实体/09-编排调度/clusternet.md"
+    ]
+   },
+   "cni.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/cni.md",
+     "wiki/23-实体/02-K8s核心组件/cni.md"
+    ]
+   },
+   "connect-rpc.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/connect-rpc.md",
+     "wiki/23-实体/04-网络/connect-rpc.md"
+    ]
+   },
+   "contour.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/contour.md",
+     "wiki/23-实体/04-网络/contour.md"
+    ]
+   },
+   "coredns.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/coredns.md",
+     "wiki/23-实体/02-K8s核心组件/coredns.md"
+    ]
+   },
+   "dns-for-services-and-pods.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/dns-for-services-and-pods.md",
+     "skills/04-工作负载/pod/配置与字典/dns-for-services-and-pods.md"
+    ]
+   },
+   "easegress.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/easegress.md",
+     "wiki/23-实体/04-网络/easegress.md"
+    ]
+   },
+   "envoy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/envoy.md",
+     "wiki/23-实体/04-网络/envoy.md"
+    ]
+   },
+   "headless-service.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/headless-service.md",
+     "wiki/22-概念/03-网络/headless-service.md"
+    ]
+   },
+   "ingress-controller.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/ingress-controller.md",
+     "wiki/22-概念/03-网络/ingress-controller.md"
+    ]
+   },
+   "ingress.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/ingress.md",
+     "wiki/22-概念/03-网络/ingress.md"
+    ]
+   },
+   "interlink.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/interlink.md",
+     "wiki/23-实体/09-编排调度/interlink.md"
+    ]
+   },
+   "istio.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/istio.md",
+     "wiki/23-实体/04-网络/istio.md"
+    ]
+   },
+   "k8gb.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/k8gb.md",
+     "wiki/23-实体/04-网络/k8gb.md"
+    ]
+   },
+   "kgateway.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kgateway.md",
+     "wiki/23-实体/04-网络/kgateway.md"
+    ]
+   },
+   "kmesh.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kmesh.md",
+     "wiki/23-实体/04-网络/kmesh.md"
+    ]
+   },
+   "kuadrant.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kuadrant.md",
+     "wiki/23-实体/04-网络/kuadrant.md"
+    ]
+   },
+   "kube-ovn.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kube-ovn.md",
+     "wiki/23-实体/04-网络/kube-ovn.md"
+    ]
+   },
+   "kube-vip.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kube-vip.md",
+     "wiki/23-实体/04-网络/kube-vip.md"
+    ]
+   },
+   "kubeslice.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kubeslice.md",
+     "wiki/23-实体/04-网络/kubeslice.md"
+    ]
+   },
+   "kuma.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/kuma.md",
+     "wiki/23-实体/04-网络/kuma.md"
+    ]
+   },
+   "linkerd.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/linkerd.md",
+     "wiki/23-实体/04-网络/linkerd.md"
+    ]
+   },
+   "loxilb.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/loxilb.md",
+     "wiki/23-实体/04-网络/loxilb.md"
+    ]
+   },
+   "metallb.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/metallb.md",
+     "wiki/23-实体/04-网络/metallb.md"
+    ]
+   },
+   "network-policy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/network-policy.md",
+     "wiki/22-概念/03-网络/network-policy.md"
+    ]
+   },
+   "network-service-mesh.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/network-service-mesh.md",
+     "wiki/23-实体/04-网络/network-service-mesh.md"
+    ]
+   },
+   "networkpolicy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/networkpolicy.md",
+     "wiki/23-实体/02-K8s核心组件/networkpolicy.md"
+    ]
+   },
+   "ovn-kubernetes.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/ovn-kubernetes.md",
+     "wiki/23-实体/04-网络/ovn-kubernetes.md"
+    ]
+   },
+   "sermant.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/sermant.md",
+     "wiki/23-实体/04-网络/sermant.md"
+    ]
+   },
+   "service.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/service.md",
+     "wiki/22-概念/03-网络/service.md"
+    ]
+   },
+   "spiderpool.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/spiderpool.md",
+     "wiki/23-实体/04-网络/spiderpool.md"
+    ]
+   },
+   "submariner.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/submariner.md",
+     "wiki/23-实体/04-网络/submariner.md"
+    ]
+   },
+   "drasi.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/drasi.md",
+     "wiki/23-实体/12-数据与消息/drasi.md"
+    ]
+   },
+   "fluentd.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/fluentd.md",
+     "wiki/23-实体/07-可观测性/fluentd.md"
+    ]
+   },
+   "jaeger.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/jaeger.md",
+     "wiki/23-实体/07-可观测性/jaeger.md"
+    ]
+   },
+   "kepler.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/kepler.md",
+     "wiki/23-实体/07-可观测性/kepler.md"
+    ]
+   },
+   "logging-operator.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/logging-operator.md",
+     "wiki/23-实体/07-可观测性/logging-operator.md"
+    ]
+   },
+   "logging.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/logging.md",
+     "wiki/20-最佳实践/05-observability/logging.md"
+    ]
+   },
+   "metrics-server.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/metrics-server.md",
+     "wiki/22-概念/06-可观测性/metrics-server.md"
+    ]
+   },
+   "observability.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/observability.md",
+     "wiki/26-标签/04-可观测性/observability.md"
+    ]
+   },
+   "opencost.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/opencost.md",
+     "wiki/23-实体/07-可观测性/opencost.md"
+    ]
+   },
+   "opengemini.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/opengemini.md",
+     "wiki/23-实体/12-数据与消息/opengemini.md"
+    ]
+   },
+   "opentelemetry.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/opentelemetry.md",
+     "wiki/23-实体/07-可观测性/opentelemetry.md"
+    ]
+   },
+   "perses.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/perses.md",
+     "wiki/23-实体/07-可观测性/perses.md"
+    ]
+   },
+   "pixie.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/pixie.md",
+     "wiki/23-实体/07-可观测性/pixie.md"
+    ]
+   },
+   "prometheus.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/prometheus.md",
+     "wiki/23-实体/07-可观测性/prometheus.md"
+    ]
+   },
+   "thanos.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/observability/thanos.md",
+     "wiki/23-实体/07-可观测性/thanos.md"
+    ]
+   },
+   "argo.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/argo.md",
+     "wiki/23-实体/08-交付与制品/argo.md"
+    ]
+   },
+   "cert-manager.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/cert-manager.md",
+     "wiki/23-实体/06-安全/cert-manager.md"
+    ]
+   },
+   "chaos-mesh.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/chaos-mesh.md",
+     "wiki/23-实体/14-可靠性与混沌/chaos-mesh.md"
+    ]
+   },
+   "chaosblade.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/chaosblade.md",
+     "wiki/23-实体/14-可靠性与混沌/chaosblade.md"
+    ]
+   },
+   "cloud-custodian.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/cloud-custodian.md",
+     "wiki/23-实体/06-安全/cloud-custodian.md"
+    ]
+   },
+   "flux.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/flux.md",
+     "wiki/23-实体/08-交付与制品/flux.md"
+    ]
+   },
+   "holmesgpt.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/holmesgpt.md",
+     "wiki/23-实体/07-可观测性/holmesgpt.md"
+    ]
+   },
+   "k8sgpt.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/k8sgpt.md",
+     "wiki/23-实体/07-可观测性/k8sgpt.md"
+    ]
+   },
+   "k8up.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/k8up.md",
+     "wiki/23-实体/05-存储/k8up.md"
+    ]
+   },
+   "konveyor.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/konveyor.md",
+     "wiki/23-实体/10-平台与开发工具/konveyor.md"
+    ]
+   },
+   "krkn.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/krkn.md",
+     "wiki/23-实体/14-可靠性与混沌/krkn.md"
+    ]
+   },
+   "kube-burner.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/kube-burner.md",
+     "wiki/23-实体/14-可靠性与混沌/kube-burner.md"
+    ]
+   },
+   "kubean.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/kubean.md",
+     "wiki/23-实体/09-编排调度/kubean.md"
+    ]
+   },
+   "kuberhealthy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/kuberhealthy.md",
+     "wiki/23-实体/07-可观测性/kuberhealthy.md"
+    ]
+   },
+   "kured.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/kured.md",
+     "wiki/23-实体/09-编排调度/kured.md"
+    ]
+   },
+   "litmus.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/litmus.md",
+     "wiki/23-实体/14-可靠性与混沌/litmus.md"
+    ]
+   },
+   "meshery.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/meshery.md",
+     "wiki/23-实体/04-网络/meshery.md"
+    ]
+   },
+   "pipecd.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/pipecd.md",
+     "wiki/23-实体/08-交付与制品/pipecd.md"
+    ]
+   },
+   "tinkerbell.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/operations/tinkerbell.md",
+     "wiki/23-实体/09-编排调度/tinkerbell.md"
+    ]
+   },
+   "armada.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/armada.md",
+     "wiki/23-实体/09-编排调度/armada.md"
+    ]
+   },
+   "backstage.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/backstage.md",
+     "wiki/23-实体/10-平台与开发工具/backstage.md"
+    ]
+   },
+   "cadence.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/cadence.md",
+     "wiki/23-实体/09-编排调度/cadence.md"
+    ]
+   },
+   "cloudevents.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/cloudevents.md",
+     "wiki/23-实体/12-数据与消息/cloudevents.md"
+    ]
+   },
+   "cozystack.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/cozystack.md",
+     "wiki/23-实体/10-平台与开发工具/cozystack.md"
+    ]
+   },
+   "crossplane.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/crossplane.md",
+     "wiki/23-实体/08-交付与制品/crossplane.md"
+    ]
+   },
+   "dapr.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/dapr.md",
+     "wiki/23-实体/10-平台与开发工具/dapr.md"
+    ]
+   },
+   "grpc.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/grpc.md",
+     "wiki/23-实体/04-网络/grpc.md"
+    ]
+   },
+   "karmada.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/karmada.md",
+     "wiki/23-实体/09-编排调度/karmada.md"
+    ]
+   },
+   "kcp.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/kcp.md",
+     "wiki/23-实体/09-编排调度/kcp.md"
+    ]
+   },
+   "kubeedge.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/kubeedge.md",
+     "wiki/23-实体/11-AI与边缘/kubeedge.md"
+    ]
+   },
+   "kubestellar.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/kubestellar.md",
+     "wiki/23-实体/09-编排调度/kubestellar.md"
+    ]
+   },
+   "kubevela.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/kubevela.md",
+     "wiki/23-实体/10-平台与开发工具/kubevela.md"
+    ]
+   },
+   "kusionstack.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/kusionstack.md",
+     "wiki/23-实体/08-交付与制品/kusionstack.md"
+    ]
+   },
+   "nats.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/nats.md",
+     "wiki/23-实体/12-数据与消息/nats.md"
+    ]
+   },
+   "open-cluster-management.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/open-cluster-management.md",
+     "wiki/23-实体/09-编排调度/open-cluster-management.md"
+    ]
+   },
+   "openchoreo.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/openchoreo.md",
+     "wiki/23-实体/10-平台与开发工具/openchoreo.md"
+    ]
+   },
+   "openfeature.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/openfeature.md",
+     "wiki/23-实体/10-平台与开发工具/openfeature.md"
+    ]
+   },
+   "opengitops.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/opengitops.md",
+     "wiki/23-实体/08-交付与制品/opengitops.md"
+    ]
+   },
+   "operator-framework.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/operator-framework.md",
+     "wiki/23-实体/10-平台与开发工具/operator-framework.md"
+    ]
+   },
+   "operator-pattern.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/operator-pattern.md",
+     "wiki/22-概念/01-核心架构/operator-pattern.md"
+    ]
+   },
+   "score.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/score.md",
+     "wiki/23-实体/10-平台与开发工具/score.md"
+    ]
+   },
+   "assigning-pods-to-nodes.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/assigning-pods-to-nodes.md",
+     "skills/04-工作负载/pod/调度/assigning-pods-to-nodes.md"
+    ]
+   },
+   "dynamic-resource-allocation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md",
+     "wiki/22-概念/07-调度与资源/dynamic-resource-allocation.md"
+    ]
+   },
+   "gang-scheduling.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/gang-scheduling.md",
+     "wiki/22-概念/07-调度与资源/gang-scheduling.md"
+    ]
+   },
+   "hami.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/hami.md",
+     "wiki/23-实体/11-AI与边缘/hami.md"
+    ]
+   },
+   "kaito.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/kaito.md",
+     "wiki/23-实体/11-AI与边缘/kaito.md"
+    ]
+   },
+   "keda.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/keda.md",
+     "wiki/23-实体/09-编排调度/keda.md"
+    ]
+   },
+   "koordinator.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/koordinator.md",
+     "wiki/23-实体/09-编排调度/koordinator.md"
+    ]
+   },
+   "kubefleet.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/kubefleet.md",
+     "wiki/23-实体/09-编排调度/kubefleet.md"
+    ]
+   },
+   "pod-overhead.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-overhead.md",
+     "wiki/22-概念/07-调度与资源/pod-overhead.md"
+    ]
+   },
+   "pod-priority-and-preemption.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-priority-and-preemption.md",
+     "skills/04-工作负载/pod/调度/pod-priority-and-preemption.md"
+    ]
+   },
+   "pod-scheduling-readiness.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-scheduling-readiness.md",
+     "skills/04-工作负载/pod/调度/pod-scheduling-readiness.md"
+    ]
+   },
+   "pod-topology-spread-constraints.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-topology-spread-constraints.md",
+     "skills/04-工作负载/pod/调度/pod-topology-spread-constraints.md"
+    ]
+   },
+   "volcano.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/volcano.md",
+     "wiki/23-实体/09-编排调度/volcano.md"
+    ]
+   },
+   "athenz.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/athenz.md",
+     "wiki/23-实体/06-安全/athenz.md"
+    ]
+   },
+   "bank-vaults.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/bank-vaults.md",
+     "wiki/23-实体/06-安全/bank-vaults.md"
+    ]
+   },
+   "capsule.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/capsule.md",
+     "wiki/23-实体/09-编排调度/capsule.md"
+    ]
+   },
+   "cartography.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/cartography.md",
+     "wiki/23-实体/06-安全/cartography.md"
+    ]
+   },
+   "cedar.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/cedar.md",
+     "wiki/23-实体/06-安全/cedar.md"
+    ]
+   },
+   "confidential-containers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/confidential-containers.md",
+     "wiki/23-实体/03-运行时/confidential-containers.md"
+    ]
+   },
+   "containerssh.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/containerssh.md",
+     "wiki/23-实体/06-安全/containerssh.md"
+    ]
+   },
+   "dex.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/dex.md",
+     "wiki/23-实体/06-安全/dex.md"
+    ]
+   },
+   "external-secrets.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/external-secrets.md",
+     "wiki/23-实体/06-安全/external-secrets.md"
+    ]
+   },
+   "falco.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/falco.md",
+     "wiki/23-实体/06-安全/falco.md"
+    ]
+   },
+   "in-toto.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/in-toto.md",
+     "wiki/23-实体/06-安全/in-toto.md"
+    ]
+   },
+   "keycloak.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/keycloak.md",
+     "wiki/23-实体/06-安全/keycloak.md"
+    ]
+   },
+   "keylime.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/keylime.md",
+     "wiki/23-实体/06-安全/keylime.md"
+    ]
+   },
+   "kubearmor.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/kubearmor.md",
+     "wiki/23-实体/06-安全/kubearmor.md"
+    ]
+   },
+   "kubescape.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/kubescape.md",
+     "wiki/23-实体/06-安全/kubescape.md"
+    ]
+   },
+   "kubewarden.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/kubewarden.md",
+     "wiki/23-实体/06-安全/kubewarden.md"
+    ]
+   },
+   "kyverno.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/kyverno.md",
+     "wiki/23-实体/06-安全/kyverno.md"
+    ]
+   },
+   "notary-project.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/notary-project.md",
+     "wiki/23-实体/06-安全/notary-project.md"
+    ]
+   },
+   "oauth2-proxy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/oauth2-proxy.md",
+     "wiki/23-实体/06-安全/oauth2-proxy.md"
+    ]
+   },
+   "opa.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/opa.md",
+     "wiki/23-实体/06-安全/opa.md"
+    ]
+   },
+   "open-policy-containers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/open-policy-containers.md",
+     "wiki/23-实体/06-安全/open-policy-containers.md"
+    ]
+   },
+   "openfga.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/openfga.md",
+     "wiki/23-实体/06-安全/openfga.md"
+    ]
+   },
+   "paralus.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/paralus.md",
+     "wiki/23-实体/06-安全/paralus.md"
+    ]
+   },
+   "parsec.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/parsec.md",
+     "wiki/23-实体/06-安全/parsec.md"
+    ]
+   },
+   "pod-security-policy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/pod-security-policy.md",
+     "wiki/22-概念/05-安全/pod-security-policy.md"
+    ]
+   },
+   "ratify.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/ratify.md",
+     "wiki/23-实体/06-安全/ratify.md"
+    ]
+   },
+   "sops.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/sops.md",
+     "wiki/23-实体/06-安全/sops.md"
+    ]
+   },
+   "spiffe.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/spiffe.md",
+     "wiki/23-实体/06-安全/spiffe.md"
+    ]
+   },
+   "spire.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/spire.md",
+     "wiki/23-实体/06-安全/spire.md"
+    ]
+   },
+   "tokenetes.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/tokenetes.md",
+     "wiki/23-实体/06-安全/tokenetes.md"
+    ]
+   },
+   "trivy.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/trivy.md",
+     "wiki/23-实体/06-安全/trivy.md"
+    ]
+   },
+   "tuf.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/tuf.md",
+     "wiki/23-实体/06-安全/tuf.md"
+    ]
+   },
+   "vault.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/vault.md",
+     "wiki/23-实体/06-安全/vault.md"
+    ]
+   },
+   "kitops.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/kitops.md",
+     "wiki/23-实体/08-交付与制品/kitops.md"
+    ]
+   },
+   "knative.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/knative.md",
+     "wiki/23-实体/09-编排调度/knative.md"
+    ]
+   },
+   "kserve.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/kserve.md",
+     "wiki/23-实体/11-AI与边缘/kserve.md"
+    ]
+   },
+   "kubeflow.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/kubeflow.md",
+     "wiki/23-实体/11-AI与边缘/kubeflow.md"
+    ]
+   },
+   "kubevirt.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/kubevirt.md",
+     "wiki/23-实体/03-运行时/kubevirt.md"
+    ]
+   },
+   "modelpack.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/modelpack.md",
+     "wiki/23-实体/08-交付与制品/modelpack.md"
+    ]
+   },
+   "openyurt.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/openyurt.md",
+     "wiki/23-实体/11-AI与边缘/openyurt.md"
+    ]
+   },
+   "spin.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/spin.md",
+     "wiki/23-实体/03-运行时/spin.md"
+    ]
+   },
+   "spinkube.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/spinkube.md",
+     "wiki/23-实体/03-运行时/spinkube.md"
+    ]
+   },
+   "wasmcloud.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/specialized-workloads/wasmcloud.md",
+     "wiki/23-实体/03-运行时/wasmcloud.md"
+    ]
+   },
+   "cloudnativepg.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/cloudnativepg.md",
+     "wiki/23-实体/12-数据与消息/cloudnativepg.md"
+    ]
+   },
+   "composefs.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/composefs.md",
+     "wiki/23-实体/03-运行时/composefs.md"
+    ]
+   },
+   "cubefs.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/cubefs.md",
+     "wiki/23-实体/05-存储/cubefs.md"
+    ]
+   },
+   "fluid.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/fluid.md",
+     "wiki/23-实体/05-存储/fluid.md"
+    ]
+   },
+   "hwameistor.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/hwameistor.md",
+     "wiki/23-实体/05-存储/hwameistor.md"
+    ]
+   },
+   "longhorn.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/longhorn.md",
+     "wiki/23-实体/05-存储/longhorn.md"
+    ]
+   },
+   "openebs.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/openebs.md",
+     "wiki/23-实体/05-存储/openebs.md"
+    ]
+   },
+   "oxia.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/oxia.md",
+     "wiki/23-实体/12-数据与消息/oxia.md"
+    ]
+   },
+   "persistent-volume-claim.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/persistent-volume-claim.md",
+     "wiki/22-概念/04-存储/persistent-volume-claim.md"
+    ]
+   },
+   "piraeus-datastore.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/piraeus-datastore.md",
+     "wiki/23-实体/05-存储/piraeus-datastore.md"
+    ]
+   },
+   "rook.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/rook.md",
+     "wiki/23-实体/05-存储/rook.md"
+    ]
+   },
+   "tikv.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/tikv.md",
+     "wiki/23-实体/12-数据与消息/tikv.md"
+    ]
+   },
+   "vineyard.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/vineyard.md",
+     "wiki/23-实体/05-存储/vineyard.md"
+    ]
+   },
+   "vitess.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/storage/vitess.md",
+     "wiki/23-实体/12-数据与消息/vitess.md"
+    ]
+   },
+   "artifact-hub.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/artifact-hub.md",
+     "wiki/23-实体/08-交付与制品/artifact-hub.md"
+    ]
+   },
+   "atlantis.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/atlantis.md",
+     "wiki/23-实体/08-交付与制品/atlantis.md"
+    ]
+   },
+   "bootc.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/bootc.md",
+     "wiki/23-实体/03-运行时/bootc.md"
+    ]
+   },
+   "buildpacks.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/buildpacks.md",
+     "wiki/23-实体/08-交付与制品/buildpacks.md"
+    ]
+   },
+   "carvel.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/carvel.md",
+     "wiki/23-实体/08-交付与制品/carvel.md"
+    ]
+   },
+   "cdk8s.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/cdk8s.md",
+     "wiki/23-实体/08-交付与制品/cdk8s.md"
+    ]
+   },
+   "copa.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/copa.md",
+     "wiki/23-实体/06-安全/copa.md"
+    ]
+   },
+   "devfile.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/devfile.md",
+     "wiki/23-实体/10-平台与开发工具/devfile.md"
+    ]
+   },
+   "devspace.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/devspace.md",
+     "wiki/23-实体/10-平台与开发工具/devspace.md"
+    ]
+   },
+   "distribution.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/distribution.md",
+     "wiki/23-实体/08-交付与制品/distribution.md"
+    ]
+   },
+   "dragonfly.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/dragonfly.md",
+     "wiki/23-实体/08-交付与制品/dragonfly.md"
+    ]
+   },
+   "eraser.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/eraser.md",
+     "wiki/23-实体/06-安全/eraser.md"
+    ]
+   },
+   "harbor.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/harbor.md",
+     "wiki/23-实体/08-交付与制品/harbor.md"
+    ]
+   },
+   "headlamp.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/headlamp.md",
+     "wiki/23-实体/10-平台与开发工具/headlamp.md"
+    ]
+   },
+   "k0s.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/k0s.md",
+     "wiki/23-实体/09-编排调度/k0s.md"
+    ]
+   },
+   "k3s.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/k3s.md",
+     "wiki/23-实体/09-编排调度/k3s.md"
+    ]
+   },
+   "ko.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/ko.md",
+     "wiki/23-实体/08-交付与制品/ko.md"
+    ]
+   },
+   "kpt.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/kpt.md",
+     "wiki/23-实体/08-交付与制品/kpt.md"
+    ]
+   },
+   "kube-rs.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/kube-rs.md",
+     "wiki/23-实体/10-平台与开发工具/kube-rs.md"
+    ]
+   },
+   "lima.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/lima.md",
+     "wiki/23-实体/03-运行时/lima.md"
+    ]
+   },
+   "microcks.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/microcks.md",
+     "wiki/23-实体/10-平台与开发工具/microcks.md"
+    ]
+   },
+   "opentofu.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/opentofu.md",
+     "wiki/23-实体/08-交付与制品/opentofu.md"
+    ]
+   },
+   "podman-desktop.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/podman-desktop.md",
+     "wiki/23-实体/03-运行时/podman-desktop.md"
+    ]
+   },
+   "shipwright.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/shipwright.md",
+     "wiki/23-实体/08-交付与制品/shipwright.md"
+    ]
+   },
+   "slimtoolkit.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/slimtoolkit.md",
+     "wiki/23-实体/03-运行时/slimtoolkit.md"
+    ]
+   },
+   "stacker.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/stacker.md",
+     "wiki/23-实体/03-运行时/stacker.md"
+    ]
+   },
+   "strimzi.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/strimzi.md",
+     "wiki/23-实体/12-数据与消息/strimzi.md"
+    ]
+   },
+   "telepresence.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/telepresence.md",
+     "wiki/23-实体/10-平台与开发工具/telepresence.md"
+    ]
+   },
+   "werf.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/werf.md",
+     "wiki/23-实体/08-交付与制品/werf.md"
+    ]
+   },
+   "xregistry.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/xregistry.md",
+     "wiki/23-实体/12-数据与消息/xregistry.md"
+    ]
+   },
+   "zot.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/zot.md",
+     "wiki/23-实体/08-交付与制品/zot.md"
+    ]
+   },
+   "advanced-pod-configuration.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md",
+     "skills/04-工作负载/pod/配置与字典/advanced-pod-configuration.md"
+    ]
+   },
+   "cronjob.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/cronjob.md",
+     "wiki/22-概念/02-工作负载/cronjob.md"
+    ]
+   },
+   "daemonset.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/daemonset.md",
+     "wiki/22-概念/02-工作负载/daemonset.md"
+    ]
+   },
+   "deployments.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/deployments.md",
+     "wiki/22-概念/02-工作负载/deployments.md"
+    ]
+   },
+   "ephemeral-containers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/ephemeral-containers.md",
+     "wiki/22-概念/02-工作负载/ephemeral-containers.md"
+    ]
+   },
+   "init-containers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/init-containers.md",
+     "wiki/22-概念/02-工作负载/init-containers.md"
+    ]
+   },
+   "openfunction.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/openfunction.md",
+     "wiki/23-实体/09-编排调度/openfunction.md"
+    ]
+   },
+   "openkruise.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/openkruise.md",
+     "wiki/23-实体/09-编排调度/openkruise.md"
+    ]
+   },
+   "pod-group-policies.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-group-policies.md",
+     "skills/04-工作负载/pod/配置与字典/pod-group-policies.md"
+    ]
+   },
+   "pod-hostname.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-hostname.md",
+     "skills/04-工作负载/pod/配置与字典/pod-hostname.md"
+    ]
+   },
+   "pod-lifecycle.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-lifecycle.md",
+     "wiki/22-概念/02-工作负载/pod-lifecycle.md"
+    ]
+   },
+   "pod-quality-of-service-classes.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-quality-of-service-classes.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/pod-quality-of-service-classes.md"
+    ]
+   },
+   "pods.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pods.md",
+     "wiki/22-概念/02-工作负载/pods.md"
+    ]
+   },
+   "replicaset.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/replicaset.md",
+     "wiki/22-概念/02-工作负载/replicaset.md"
+    ]
+   },
+   "serverless-workflow.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/serverless-workflow.md",
+     "wiki/23-实体/09-编排调度/serverless-workflow.md"
+    ]
+   },
+   "sidecar-containers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/sidecar-containers.md",
+     "wiki/22-概念/02-工作负载/sidecar-containers.md"
+    ]
+   },
+   "slimfaas.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/slimfaas.md",
+     "wiki/23-实体/09-编排调度/slimfaas.md"
+    ]
+   },
+   "vertical-pod-autoscaling.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/vertical-pod-autoscaling.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/vertical-pod-autoscaling.md"
+    ]
+   },
+   "workload-api.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/workload-api.md",
+     "wiki/22-概念/02-工作负载/workload-api.md"
+    ]
+   },
+   "alicloud-apsara-ack-overview.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/专有云-ACK/alicloud-apsara-ack-overview.md",
+     "wiki/23-实体/13-云厂商与发行版/alicloud-apsara-ack-overview.md"
+    ]
+   },
+   "02-dns-troubleshooting.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/03-基础设施排障/02-dns-troubleshooting.md",
+     "wiki/19-故障诊断/04-高级排障/structural-03-networking/02-dns-troubleshooting.md"
+    ]
+   },
+   "02-etcd-troubleshooting.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/04-高级排障/structural-01-control-plane/02-etcd-troubleshooting.md",
+     "skills/01-集群运维/cluster/02-etcd-troubleshooting.md"
+    ]
+   },
+   "reliability.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/glossary/reliability.md",
+     "wiki/26-标签/05-交付与运维/reliability.md"
+    ]
+   },
+   "apiserver-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/apiserver-fta.md",
+     "skills/02-控制面/apiserver/apiserver-fta.md"
+    ]
+   },
+   "backup-restore-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md",
+     "skills/02-控制面/etcd/backup-restore-fta.md"
+    ]
+   },
+   "calico-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/calico-fta.md",
+     "skills/05-网络/cni/calico-fta.md"
+    ]
+   },
+   "certificate-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/certificate-fta.md",
+     "skills/07-安全/certificate/certificate-fta.md"
+    ]
+   },
+   "cilium-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/cilium-fta.md",
+     "skills/05-网络/cni/cilium-fta.md"
+    ]
+   },
+   "cloud-provider-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/cloud-provider-fta.md",
+     "skills/01-集群运维/cloud-provider/cloud-provider-fta.md"
+    ]
+   },
+   "cluster-autoscaler-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/cluster-autoscaler-fta.md",
+     "skills/01-集群运维/cluster-autoscaler/cluster-autoscaler-fta.md"
+    ]
+   },
+   "cluster-upgrade-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md",
+     "skills/01-集群运维/cluster-upgrade/cluster-upgrade-fta.md"
+    ]
+   },
+   "controller-manager-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/controller-manager-fta.md",
+     "skills/02-控制面/controller-manager/controller-manager-fta.md"
+    ]
+   },
+   "crd-operator-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/crd-operator-fta.md",
+     "skills/02-控制面/crd-operator/crd-operator-fta.md"
+    ]
+   },
+   "csi-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/csi-fta.md",
+     "skills/06-存储/csi-storage/csi-fta.md"
+    ]
+   },
+   "daemonset-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/daemonset-fta.md",
+     "skills/04-工作负载/daemonset/daemonset-fta.md"
+    ]
+   },
+   "deployment-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/deployment-fta.md",
+     "skills/04-工作负载/deployment/deployment-fta.md"
+    ]
+   },
+   "dns-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/dns-fta.md",
+     "skills/05-网络/dns/dns-fta.md"
+    ]
+   },
+   "etcd-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/etcd-fta.md",
+     "skills/02-控制面/etcd/etcd-fta.md"
+    ]
+   },
+   "flannel-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/flannel-fta.md",
+     "skills/05-网络/cni/flannel-fta.md"
+    ]
+   },
+   "gateway-api-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/gateway-api-fta.md",
+     "skills/05-网络/gateway-api/gateway-api-fta.md"
+    ]
+   },
+   "gitops-argocd-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/gitops-argocd-fta.md",
+     "skills/01-集群运维/gitops-argocd/gitops-argocd-fta.md"
+    ]
+   },
+   "gpu-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/gpu-fta.md",
+     "skills/03-节点/gpu/gpu-fta.md"
+    ]
+   },
+   "helm-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/helm-fta.md",
+     "skills/01-集群运维/helm/helm-fta.md"
+    ]
+   },
+   "higress-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/higress-fta.md",
+     "skills/05-网络/ingress/higress-fta.md"
+    ]
+   },
+   "hpa-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/hpa-fta.md",
+     "skills/04-工作负载/hpa-vpa/hpa-fta.md"
+    ]
+   },
+   "ingress-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/ingress-fta.md",
+     "skills/05-网络/ingress/ingress-fta.md"
+    ]
+   },
+   "job-cronjob-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/job-cronjob-fta.md",
+     "skills/04-工作负载/job-cronjob/job-cronjob-fta.md"
+    ]
+   },
+   "kubeadm-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/kubeadm-fta.md",
+     "skills/01-集群运维/kubeadm-fta.md"
+    ]
+   },
+   "monitoring-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/monitoring-fta.md",
+     "skills/08-可观测性/monitoring/monitoring-fta.md"
+    ]
+   },
+   "networkpolicy-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md",
+     "skills/05-网络/networkpolicy/networkpolicy-fta.md"
+    ]
+   },
+   "nginx-ingress-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/nginx-ingress-fta.md",
+     "skills/05-网络/ingress/nginx-ingress-fta.md"
+    ]
+   },
+   "node-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/node-fta.md",
+     "skills/03-节点/node-fta.md"
+    ]
+   },
+   "openkruise-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/openkruise-fta.md",
+     "skills/01-集群运维/openkruise/openkruise-fta.md"
+    ]
+   },
+   "pdb-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/pdb-fta.md",
+     "skills/04-工作负载/hpa-vpa/pdb-fta.md"
+    ]
+   },
+   "pod-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md",
+     "skills/04-工作负载/pod/pod-fta.md"
+    ]
+   },
+   "psp-scc-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/psp-scc-fta.md",
+     "skills/07-安全/pod-security/psp-scc-fta.md"
+    ]
+   },
+   "rbac-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/rbac-fta.md",
+     "skills/07-安全/rbac/rbac-fta.md"
+    ]
+   },
+   "resource-quota-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/resource-quota-fta.md",
+     "skills/07-安全/resource-quota/resource-quota-fta.md"
+    ]
+   },
+   "scheduler-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/scheduler-fta.md",
+     "skills/02-控制面/scheduler/scheduler-fta.md"
+    ]
+   },
+   "service-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/service-fta.md",
+     "skills/05-网络/service/service-fta.md"
+    ]
+   },
+   "service-mesh-istio-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/service-mesh-istio-fta.md",
+     "skills/05-网络/service-mesh/service-mesh-istio-fta.md"
+    ]
+   },
+   "statefulset-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/statefulset-fta.md",
+     "skills/04-工作负载/statefulset/statefulset-fta.md"
+    ]
+   },
+   "terway-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/terway-fta.md",
+     "skills/05-网络/cni/terway-fta.md"
+    ]
+   },
+   "vpa-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/vpa-fta.md",
+     "skills/04-工作负载/hpa-vpa/vpa-fta.md"
+    ]
+   },
+   "webhook-admission-fta.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/webhook-admission-fta.md",
+     "skills/07-安全/webhook-admission/webhook-admission-fta.md"
+    ]
+   },
+   "common-best-practices.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/common-best-practices.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/common-best-practices.md"
+    ]
+   },
+   "secrets-management.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/security/secrets-management.md",
+     "wiki/20-最佳实践/08-security/secrets-management.md"
+    ]
+   },
+   "storage.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/03-infrastructure/storage.md",
+     "wiki/26-标签/02-网络与存储/storage.md"
+    ]
+   },
+   "01-production-operations-excellence-checklist.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/06-operations/01-production-operations-excellence-checklist.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/01-production-operations-excellence-checklist.md"
+    ]
+   },
+   "csi-drivers.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/04-存储/csi-drivers.md",
+     "wiki/23-实体/02-K8s核心组件/csi-drivers.md"
+    ]
+   },
+   "k8s-security-compliance.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/05-安全/k8s-security-compliance.md",
+     "wiki/23-实体/15-参考与索引/k8s-security-compliance.md"
+    ]
+   },
+   "multi-tenancy-isolation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/05-安全/multi-tenancy-isolation.md",
+     "wiki/25-研究/04-可靠性与运维/multi-tenancy-isolation.md"
+    ]
+   },
+   "horizontal-pod-autoscaler.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/07-调度与资源/horizontal-pod-autoscaler.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/horizontal-pod-autoscaler.md"
+    ]
+   },
+   "velero-disaster-recovery.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/08-可靠性与运维/velero-disaster-recovery.md",
+     "wiki/24-综合/06-可靠性与成本/velero-disaster-recovery.md"
+    ]
+   },
+   "platform-engineering-idp.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/09-平台与发布/platform-engineering-idp.md",
+     "wiki/25-研究/03-平台与交付/platform-engineering-idp.md"
+    ]
+   },
+   "bp-MOC.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/10-最佳实践/bp-MOC.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-MOC.md"
+    ]
+   },
+   "bp-README.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/10-最佳实践/bp-README.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-README.md"
+    ]
+   },
+   "service-mesh-evolution.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/12-研究/service-mesh-evolution.md",
+     "wiki/25-研究/02-网络与安全/service-mesh-evolution.md"
+    ]
+   },
+   "kudig-prompts-catalog.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/23-实体/15-参考与索引/kudig-prompts-catalog.md",
+     "skills/04-工作负载/pod/方法论/agent/kudig-prompts-catalog.md"
+    ]
+   },
+   "ebpf-observability.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/24-综合/05-可观测性/ebpf-observability.md",
+     "wiki/25-研究/02-网络与安全/ebpf-observability.md"
+    ]
+   },
+   "kubernetes-architecture-fundamentals-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-architecture-fundamentals-presentation.md",
+     "skills/02-控制面/apiserver/培训/kubernetes-architecture-fundamentals-presentation.md"
+    ]
+   },
+   "kubernetes-coredns-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-coredns-presentation.md",
+     "skills/05-网络/dns/培训/kubernetes-coredns-presentation.md"
+    ]
+   },
+   "kubernetes-ingress-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-ingress-presentation.md",
+     "skills/05-网络/ingress/培训/kubernetes-ingress-presentation.md"
+    ]
+   },
+   "kubernetes-observability-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-observability-presentation.md",
+     "skills/08-可观测性/monitoring/培训/kubernetes-observability-presentation.md"
+    ]
+   },
+   "kubernetes-scheduling-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-scheduling-presentation.md",
+     "skills/02-控制面/scheduler/培训/kubernetes-scheduling-presentation.md"
+    ]
+   },
+   "kubernetes-security-rbac-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-security-rbac-presentation.md",
+     "skills/07-安全/rbac/培训/kubernetes-security-rbac-presentation.md"
+    ]
+   },
+   "kubernetes-service-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-service-presentation.md",
+     "skills/05-网络/service/培训/kubernetes-service-presentation.md"
+    ]
+   },
+   "kubernetes-storage-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-storage-presentation.md",
+     "skills/06-存储/csi-storage/培训/kubernetes-storage-presentation.md"
+    ]
+   },
+   "kubernetes-terway-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-terway-presentation.md",
+     "skills/05-网络/cni/培训/kubernetes-terway-presentation.md"
+    ]
+   },
+   "kubernetes-troubleshooting-methodology-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md",
+     "skills/04-工作负载/pod/培训/presentations/kubernetes-troubleshooting-methodology-presentation.md"
+    ]
+   },
+   "kubernetes-workload-presentation.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/kubernetes-workload-presentation.md",
+     "skills/04-工作负载/pod/培训/presentations/kubernetes-workload-presentation.md"
+    ]
+   },
+   "presentation-template.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/27-资产/presentations/presentation-template.md",
+     "skills/04-工作负载/pod/培训/presentations/presentation-template.md"
+    ]
+   },
+   "01-scheduling-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/02-控制面/scheduler/培训/01-scheduling-basics.md",
+     "skills/02-控制面/scheduler/培训/lecturer/01-scheduling-basics.md"
+    ]
+   },
+   "01-daemonset-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/daemonset/培训/01-daemonset-basics.md",
+     "skills/04-工作负载/daemonset/培训/lecturer/01-daemonset-basics.md"
+    ]
+   },
+   "01-deployment-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/deployment/培训/01-deployment-basics.md",
+     "skills/04-工作负载/deployment/培训/lecturer/01-deployment-basics.md"
+    ]
+   },
+   "01-hpa-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/hpa-vpa/培训/01-hpa-basics.md",
+     "skills/04-工作负载/hpa-vpa/培训/lecturer/01-hpa-basics.md"
+    ]
+   },
+   "01-job-cronjob.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/job-cronjob/培训/01-job-cronjob.md",
+     "skills/04-工作负载/job-cronjob/培训/lecturer/01-job-cronjob.md"
+    ]
+   },
+   "customizing_pod_templates.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/customizing_pod_templates.md",
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/customizing_pod_templates.md"
+    ]
+   },
+   "port_forward_to_pods.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/port_forward_to_pods.md",
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/port_forward_to_pods.md"
+    ]
+   },
+   "05-health-check.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/05-health-check.md",
+     "skills/04-工作负载/pod/培训/lecturer/05-health-check.md"
+    ]
+   },
+   "knowledge-map.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/inner-training/resources/knowledge-map.md",
+     "skills/04-工作负载/pod/培训/public-one-month/resources/knowledge-map.md"
+    ]
+   },
+   "decision-tree-mermaid.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/lecturer/decision-tree-mermaid.md",
+     "skills/04-工作负载/pod/培训/troubleshooting/decision-tree-mermaid.md"
+    ]
+   },
+   "oncall-quick-qa.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/lecturer/oncall-quick-qa.md",
+     "skills/04-工作负载/pod/培训/oncall-qa/oncall-quick-qa.md"
+    ]
+   },
+   "01-statefulset-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/statefulset/培训/01-statefulset-basics.md",
+     "skills/04-工作负载/statefulset/培训/lecturer/01-statefulset-basics.md"
+    ]
+   },
+   "01-ingress-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/05-网络/ingress/培训/01-ingress-basics.md",
+     "skills/05-网络/ingress/培训/lecturer/01-ingress-basics.md"
+    ]
+   },
+   "01-service-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/05-网络/service/培训/01-service-basics.md",
+     "skills/05-网络/service/培训/lecturer/01-service-basics.md"
+    ]
+   },
+   "01-pv-pvc-basics.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/06-存储/csi-storage/培训/01-pv-pvc-basics.md",
+     "skills/06-存储/csi-storage/培训/lecturer/01-pv-pvc-basics.md"
+    ]
+   },
+   "01-namespace-resource-quota.md": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/07-安全/resource-quota/培训/01-namespace-resource-quota.md",
+     "skills/07-安全/resource-quota/培训/lecturer/01-namespace-resource-quota.md"
+    ]
+   }
+  }
+ },
+ "identical_content": {
+  "signal": "identical_content",
+  "content_groups": 0,
+  "content_files": 0,
+  "structural_groups": 2,
+  "groups": {}
+ },
+ "title_collisions": {
+  "signal": "title_collisions",
+  "content_groups": 160,
+  "content_files": 375,
+  "structural_groups": 17,
+  "groups": {
+   "reference": {
+    "count": 18,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-autoscaling/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-certificate-expiry/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-config-secret/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-control-plane/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-deployment-rollout/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-dns-failure/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-image-pull/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-ingress-gateway/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-logging-pipeline/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-monitoring-alerting/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-performance/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-rbac-quota/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-security-incident/reference/index.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/reference/index.md",
+     "wiki/26-标签/07-参考与最佳实践/reference.md"
+    ]
+   },
+   "observability": {
+    "count": 6,
+    "cross_dir": true,
+    "paths": [
+     "wiki/09-可观测性/README.md",
+     "wiki/20-最佳实践/01-best-practices/observability/index.md",
+     "wiki/20-最佳实践/05-observability/index.md",
+     "wiki/26-标签/04-可观测性/observability.md",
+     "skills/08-可观测性/monitoring/最佳实践/obs-index-alt.md",
+     "skills/08-可观测性/monitoring/最佳实践/obs-index.md"
+    ]
+   },
+   "deployment": {
+    "count": 5,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/deployment.md",
+     "wiki/20-最佳实践/02-deployment/index.md",
+     "wiki/20-最佳实践/06-operations/deployment.md",
+     "wiki/23-实体/02-K8s核心组件/deployment.md",
+     "skills/01-集群运维/cluster-deployment/index.md"
+    ]
+   },
+   "security": {
+    "count": 5,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/security/index.md",
+     "wiki/20-最佳实践/08-security/index.md",
+     "wiki/26-标签/03-安全与合规/security.md",
+     "skills/07-安全/rbac/最佳实践/sec-index-alt.md",
+     "skills/07-安全/rbac/最佳实践/sec-index.md"
+    ]
+   },
+   "statefulset pod 启动失败：pvc 未绑定": {
+    "count": 4,
+    "cross_dir": false,
+    "paths": [
+     "wiki/13-生产运维/05-工单案例/ticket-case-028-statefulset-pvc-unbound.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-033-statefulset-pvc-unbound.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-038-statefulset-pvc-unbound.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-043-statefulset-pvc-unbound.md"
+    ]
+   },
+   "docker": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/14-容器运行时/01-Docker/index.md",
+     "wiki/17-系统基础/05-速查卡/docker.md",
+     "wiki/17-系统基础/06-知识字典/fundamentals/docker.md",
+     "wiki/23-实体/03-运行时/docker.md"
+    ]
+   },
+   "pod 安全策略": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/pod-security-policies.md",
+     "wiki/17-系统基础/06-知识字典/security/pod-security-policy.md",
+     "skills/04-工作负载/pod/安全/字典-pod-security-policies.md",
+     "skills/04-工作负载/pod/安全/字典-pod-security-policy.md"
+    ]
+   },
+   "networking": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/04-高级排障/structural-03-networking/index.md",
+     "wiki/26-标签/02-网络与存储/networking.md",
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-03-networking-index.md",
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-04-networking-index.md"
+    ]
+   },
+   "best practices": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/index.md",
+     "wiki/20-最佳实践/index.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-index-alt.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-index.md"
+    ]
+   },
+   "infrastructure": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/infrastructure/index.md",
+     "wiki/20-最佳实践/03-infrastructure/index.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/infra-index-alt.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/infra-index.md"
+    ]
+   },
+   "operations": {
+    "count": 4,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/operations/index.md",
+     "wiki/20-最佳实践/06-operations/index.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/ops-index-alt.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/ops-index.md"
+    ]
+   },
+   "k8s 网络快问快答与面试模拟对话": {
+    "count": 3,
+    "cross_dir": false,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md",
+     "wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md",
+     "wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md"
+    ]
+   },
+   "k8s 存储高级快问快答（12 题）": {
+    "count": 3,
+    "cross_dir": false,
+    "paths": [
+     "wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md",
+     "wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md",
+     "wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md"
+    ]
+   },
+   "gitops": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/11-发布变更/01-GitOps/index.md",
+     "wiki/17-系统基础/06-知识字典/operations/gitops.md",
+     "wiki/26-标签/05-交付与运维/gitops.md"
+    ]
+   },
+   "ingress 控制器 pod 异常导致业务访问 404/502": {
+    "count": 3,
+    "cross_dir": false,
+    "paths": [
+     "wiki/13-生产运维/05-工单案例/ticket-case-011-ingress-controller-pod-404-502.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-036-ingress-controller-pod-exception.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-046-ingress-controller-404-502.md"
+    ]
+   },
+   "ingress 控制器 pod 异常导致 404/502": {
+    "count": 3,
+    "cross_dir": false,
+    "paths": [
+     "wiki/13-生产运维/05-工单案例/ticket-case-026-ingress-controller-pod-502.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-031-ingress-controller-oom-502-404.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md"
+    ]
+   },
+   "pod overhead": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-overhead.md",
+     "wiki/22-概念/07-调度与资源/pod-overhead.md",
+     "skills/04-工作负载/pod/调度/字典-pod-overhead.md"
+    ]
+   },
+   "pod lifecycle (concepts)": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-lifecycle.md",
+     "wiki/22-概念/02-工作负载/pod-lifecycle.md",
+     "skills/04-工作负载/pod/概念原理/字典-pod-lifecycle.md"
+    ]
+   },
+   "pods": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pods.md",
+     "wiki/22-概念/02-工作负载/pods.md",
+     "skills/04-工作负载/pod/概念原理/字典-pods.md"
+    ]
+   },
+   "storage": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/04-高级排障/structural-04-storage/index.md",
+     "wiki/26-标签/02-网络与存储/storage.md",
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-07-storage-index.md"
+    ]
+   },
+   "pod crashloopbackoff & oomkilled 诊断与修复": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md",
+     "skills/04-工作负载/pod/01-pod-crashloop-oomkilled.md",
+     "skills/04-工作负载/pod/诊断排障/技能体系-02-pod-crashloop-oomkilled.md"
+    ]
+   },
+   "scenarios": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/skills-run/scenarios/index.md",
+     "wiki/20-最佳实践/07-scenarios/index.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/scen-index.md"
+    ]
+   },
+   "kubernetes 通用最佳实践参考 (best-practices)": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/common-best-practices-2.md",
+     "wiki/20-最佳实践/01-best-practices/common-best-practices.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/common-best-practices.md"
+    ]
+   },
+   "research": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/23-实体/01-research/index.md",
+     "wiki/25-研究/index.md",
+     "wiki/26-标签/06-AI与专项/research.md"
+    ]
+   },
+   "troubleshooting": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "wiki/26-标签/04-可观测性/troubleshooting.md",
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-09-troubleshooting-index.md",
+     "skills/04-工作负载/pod/培训/troubleshooting/index.md"
+    ]
+   },
+   "第二课：pod - k8s 的最小调度单元 [fundamentals]": {
+    "count": 3,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/03-pod-basics.md",
+     "skills/04-工作负载/pod/培训/lecturer/02-pod-basics.md",
+     "skills/04-工作负载/pod/培训/lecturer-02-pod-basics.md"
+    ]
+   },
+   "kubectl": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/01-集群基础/05-kubectl/index.md",
+     "wiki/17-系统基础/06-知识字典/tooling/kubectl.md"
+    ]
+   },
+   "terway 产品概览": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/42-terway-product-overview.md",
+     "wiki/23-实体/04-网络/03-terway-product-overview.md"
+    ]
+   },
+   "terway 架构深度解析": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/43-terway-architecture-deep-dive.md",
+     "wiki/23-实体/04-网络/04-terway-architecture-deep-dive.md"
+    ]
+   },
+   "terway 使用指南": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/44-terway-usage-guide.md",
+     "wiki/23-实体/04-网络/05-terway-usage-guide.md"
+    ]
+   },
+   "terway crd 资源操作": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/45-terway-crd-operations.md",
+     "wiki/23-实体/04-网络/06-terway-crd-operations.md"
+    ]
+   },
+   "terway 运维手册": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/46-terway-operations-manual.md",
+     "wiki/23-实体/04-网络/07-terway-operations-manual.md"
+    ]
+   },
+   "terway 测试验证": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/47-terway-testing-validation.md",
+     "wiki/23-实体/04-网络/08-terway-testing-validation.md"
+    ]
+   },
+   "terway 性能调优": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/48-terway-performance-tuning.md",
+     "wiki/23-实体/04-网络/09-terway-performance-tuning.md"
+    ]
+   },
+   "terway 故障排查": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/01-K8s网络核心/49-terway-troubleshooting-fta.md",
+     "wiki/23-实体/04-网络/10-terway-troubleshooting-fta.md"
+    ]
+   },
+   "terway 全项目资源索引": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/05-网络/06-Terway/terway-index.md",
+     "wiki/21-生态参考/03-领域索引/terway-index.md"
+    ]
+   },
+   "security & compliance open source projects index": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/08-安全/00-总览/00-open-source-projects-index.md",
+     "wiki/09-可观测性/00-总览/00-open-source-projects-index.md"
+    ]
+   },
+   "kubernetes 多集群 fleet gitops 运维指南": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md",
+     "wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md"
+    ]
+   },
+   "kubernetes 灾难恢复与业务连续性 runbook": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1.md",
+     "wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md"
+    ]
+   },
+   "节点磁盘压力 diskpressure 导致 pod 被驱逐": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/13-生产运维/05-工单案例/ticket-case-035-node-diskpressure-eviction.md",
+     "wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md"
+    ]
+   },
+   "容器运行时安全加固指南": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md",
+     "wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md"
+    ]
+   },
+   "container runtime": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/14-容器运行时/README.md",
+     "wiki/22-概念/15-运行时与系统/container-runtime.md"
+    ]
+   },
+   "k8s 运维诊断技能库 (02-ai-agents)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/SKILL.md"
+    ]
+   },
+   "02 - pod 与容器生命周期事件": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/04-K8s事件/02-pod-container-lifecycle-events.md",
+     "skills/04-工作负载/pod/生命周期与事件/01-pod-container-lifecycle-events.md"
+    ]
+   },
+   "gateway api": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/05-速查卡/gateway-api.md",
+     "wiki/17-系统基础/06-知识字典/networking/gateway-api.md"
+    ]
+   },
+   "限制范围": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/limit-range.md",
+     "wiki/17-系统基础/06-知识字典/scheduling/limitrange.md"
+    ]
+   },
+   "resource management for pods and containers": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/resource-management-for-pods-and-containers.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/resource-management-for-pods-and-containers.md"
+    ]
+   },
+   "资源配额": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/resource-quota.md",
+     "wiki/17-系统基础/06-知识字典/scheduling/resource-quota.md"
+    ]
+   },
+   "secrets": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/configuration/secrets.md",
+     "wiki/22-概念/05-安全/secrets.md"
+    ]
+   },
+   "containerd": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/containerd.md",
+     "wiki/26-标签/01-核心平台/containerd.md"
+    ]
+   },
+   "控制器管理器": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/controller-manager.md",
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-controller-manager.md"
+    ]
+   },
+   "kube-proxy": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-proxy.md",
+     "wiki/23-实体/02-K8s核心组件/kube-proxy.md"
+    ]
+   },
+   "调度器": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kube-scheduler.md",
+     "wiki/17-系统基础/06-知识字典/scheduling/scheduler.md"
+    ]
+   },
+   "kubelet": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kubelet.md",
+     "wiki/23-实体/02-K8s核心组件/kubelet.md"
+    ]
+   },
+   "kubernetes": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/kubernetes.md",
+     "wiki/22-概念/01-核心架构/kubernetes.md"
+    ]
+   },
+   "命名空间": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/fundamentals/namespace.md",
+     "wiki/17-系统基础/06-知识字典/fundamentals/namespaces.md"
+    ]
+   },
+   "dns for services and pods": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/dns-for-services-and-pods.md",
+     "skills/04-工作负载/pod/配置与字典/dns-for-services-and-pods.md"
+    ]
+   },
+   "端点": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/endpoint.md",
+     "wiki/17-系统基础/06-知识字典/networking/endpoints.md"
+    ]
+   },
+   "ingress": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/ingress.md",
+     "wiki/22-概念/03-网络/ingress.md"
+    ]
+   },
+   "网络策略": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/network-policy.md",
+     "wiki/17-系统基础/06-知识字典/networking/networkpolicy.md"
+    ]
+   },
+   "service": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/networking/service.md",
+     "wiki/22-概念/03-网络/service.md"
+    ]
+   },
+   "operator pattern (crd + controller)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/platform-engineering/operator-pattern.md",
+     "wiki/22-概念/01-核心架构/operator-pattern.md"
+    ]
+   },
+   "assigning pods to nodes": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/assigning-pods-to-nodes.md",
+     "skills/04-工作负载/pod/调度/assigning-pods-to-nodes.md"
+    ]
+   },
+   "dynamic resource allocation": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/dynamic-resource-allocation.md",
+     "wiki/22-概念/07-调度与资源/dynamic-resource-allocation.md"
+    ]
+   },
+   "gang scheduling": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/gang-scheduling.md",
+     "wiki/22-概念/07-调度与资源/gang-scheduling.md"
+    ]
+   },
+   "pod priority and preemption": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-priority-and-preemption.md",
+     "skills/04-工作负载/pod/调度/pod-priority-and-preemption.md"
+    ]
+   },
+   "pod scheduling readiness": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-scheduling-readiness.md",
+     "skills/04-工作负载/pod/调度/pod-scheduling-readiness.md"
+    ]
+   },
+   "pod topology spread constraints": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/scheduling/pod-topology-spread-constraints.md",
+     "skills/04-工作负载/pod/调度/pod-topology-spread-constraints.md"
+    ]
+   },
+   "pod 安全标准": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/pod-security-standards.md",
+     "skills/04-工作负载/pod/安全/字典-pod-security-standards.md"
+    ]
+   },
+   "服务账号": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/service-account.md",
+     "wiki/17-系统基础/06-知识字典/security/service-accounts.md"
+    ]
+   },
+   "software supply chain security": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/supply-chain-security.md",
+     "wiki/22-概念/05-安全/supply-chain-security.md"
+    ]
+   },
+   "trivy": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/trivy.md",
+     "wiki/23-实体/06-安全/trivy.md"
+    ]
+   },
+   "hashicorp vault": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/security/vault.md",
+     "wiki/23-实体/06-安全/vault.md"
+    ]
+   },
+   "cloud native buildpacks": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/buildpacks.md",
+     "wiki/23-实体/08-交付与制品/buildpacks.md"
+    ]
+   },
+   "helm": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/tooling/helm.md",
+     "wiki/26-标签/05-交付与运维/helm.md"
+    ]
+   },
+   "advanced pod configuration": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md",
+     "skills/04-工作负载/pod/配置与字典/advanced-pod-configuration.md"
+    ]
+   },
+   "cronjob": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/cronjob.md",
+     "wiki/22-概念/02-工作负载/cronjob.md"
+    ]
+   },
+   "daemonset": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/daemonset.md",
+     "wiki/22-概念/02-工作负载/daemonset.md"
+    ]
+   },
+   "deployments": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/deployments.md",
+     "wiki/22-概念/02-工作负载/deployments.md"
+    ]
+   },
+   "downward api": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/downward-api.md",
+     "wiki/22-概念/02-工作负载/downward-api.md"
+    ]
+   },
+   "ephemeral containers": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/ephemeral-containers.md",
+     "wiki/22-概念/02-工作负载/ephemeral-containers.md"
+    ]
+   },
+   "horizontal pod autoscaling": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/horizontal-pod-autoscaling.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/字典-horizontal-pod-autoscaling.md"
+    ]
+   },
+   "init containers": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/init-containers.md",
+     "wiki/22-概念/02-工作负载/init-containers.md"
+    ]
+   },
+   "pod group policies": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-group-policies.md",
+     "skills/04-工作负载/pod/配置与字典/pod-group-policies.md"
+    ]
+   },
+   "pod hostname": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-hostname.md",
+     "skills/04-工作负载/pod/配置与字典/pod-hostname.md"
+    ]
+   },
+   "pod quality of service classes": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/pod-quality-of-service-classes.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/pod-quality-of-service-classes.md"
+    ]
+   },
+   "replicaset": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/replicaset.md",
+     "wiki/22-概念/02-工作负载/replicaset.md"
+    ]
+   },
+   "sidecar containers": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/sidecar-containers.md",
+     "wiki/22-概念/02-工作负载/sidecar-containers.md"
+    ]
+   },
+   "vertical pod autoscaling": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/vertical-pod-autoscaling.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/vertical-pod-autoscaling.md"
+    ]
+   },
+   "workload api": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/17-系统基础/06-知识字典/workloads/workload-api.md",
+     "wiki/22-概念/02-工作负载/workload-api.md"
+    ]
+   },
+   "ack 关联产品 - ecs 计算资源": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/公有云-ACK/002-ack-ecs-compute.md",
+     "wiki/23-实体/13-云厂商与发行版/001-ack-ecs-compute.md"
+    ]
+   },
+   "ack 关联产品 - 负载均衡 (slb/nlb/alb)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/公有云-ACK/003-ack-slb-nlb-alb.md",
+     "wiki/23-实体/13-云厂商与发行版/002-ack-slb-nlb-alb.md"
+    ]
+   },
+   "ack 关联产品 - vpc 网络": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/公有云-ACK/004-ack-vpc-network.md",
+     "wiki/23-实体/13-云厂商与发行版/003-ack-vpc-network.md"
+    ]
+   },
+   "ack 关联产品 - ram 权限与授权 (ram & rrsa)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/公有云-ACK/005-ack-ram-authorization.md",
+     "wiki/23-实体/13-云厂商与发行版/004-ack-ram-authorization.md"
+    ]
+   },
+   "ack 关联产品 - ros 资源编排 (iac)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/公有云-ACK/006-ack-ros-iac.md",
+     "wiki/23-实体/13-云厂商与发行版/005-ack-ros-iac.md"
+    ]
+   },
+   "ack 关联产品 - ebs 云盘存储 (elastic block storage)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/01-阿里云/公有云-ACK/007-ack-ebs-storage.md",
+     "wiki/23-实体/13-云厂商与发行版/006-ack-ebs-storage.md"
+    ]
+   },
+   "eks 身份认证 — irsa 与 pod identity": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/18-云厂商/02-AWS-EKS/04-eks-iam-irsa-pod-identity.md",
+     "skills/04-工作负载/pod/云厂商/01-eks-iam-irsa-pod-identity.md"
+    ]
+   },
+   "pod pending 状态深度诊断": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md",
+     "skills/04-工作负载/pod/诊断排障/01-pod-pending-diagnosis.md"
+    ]
+   },
+   "节点组件故障排查": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/04-高级排障/01-node-component-troubleshooting.md",
+     "skills/03-节点/node/03-node-component-troubleshooting.md"
+    ]
+   },
+   "workloads": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/04-高级排障/structural-05-workloads/index.md",
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-10-workloads-index.md"
+    ]
+   },
+   "备份/恢复异常故障树分析": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md",
+     "skills/02-控制面/etcd/backup-restore-fta.md"
+    ]
+   },
+   "nodepool 异常故障树分析": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/06-FTA故障树/list/nodepool-fta.md",
+     "skills/03-节点/node/reference/nodepool-fta.md"
+    ]
+   },
+   "pod pending 调度失败诊断与修复": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/03-pod-pending.md",
+     "skills/04-工作负载/pod/诊断排障/技能体系-03-pod-pending.md"
+    ]
+   },
+   "node notready 远程顾问对话脚本": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/DIALOGUE.md",
+     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md"
+    ]
+   },
+   "命令输出解读语料 — agent 诊断推理核心数据 [故障诊断]": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/19-故障诊断/10-QA语料/command-output-diagnosis.md",
+     "wiki/19-故障诊断/10-QA语料/command-output-diagnosis.with_actions.md"
+    ]
+   },
+   "命令输出诊断语料 — p0 优先级": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p0.md",
+     "wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p0.with_actions.md"
+    ]
+   },
+   "命令输出诊断语料 — p1 优先级": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p1.md",
+     "wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p1.with_actions.md"
+    ]
+   },
+   "命令输出诊断语料 — p2 优先级": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p2.md",
+     "wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p2.with_actions.md"
+    ]
+   },
+   "p0 核心场景手工种子 i-o 对": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/19-故障诊断/10-QA语料/seed/p0-core-scenarios.md",
+     "wiki/19-故障诊断/10-QA语料/seed/p0-core-scenarios.with_actions.md"
+    ]
+   },
+   "kubernetes 最佳实践指南 (best-practices)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/README.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-README-alt.md"
+    ]
+   },
+   "kubernetes 网络配置最佳实践 [infrastructure]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/infrastructure/networking.md",
+     "wiki/20-最佳实践/03-infrastructure/networking.md"
+    ]
+   },
+   "kubernetes 部署策略最佳实践 [operations]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/operations/deployment.md",
+     "skills/04-工作负载/deployment/最佳实践/deployment-alt.md"
+    ]
+   },
+   "kubernetes 密钥管理最佳实践 [security]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/01-best-practices/security/secrets-management.md",
+     "skills/07-安全/rbac/最佳实践/secrets-management-alt.md"
+    ]
+   },
+   "kubernetes production best practices — operations excellence checklist": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/06-operations/01-production-operations-excellence-checklist.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/01-production-operations-excellence-checklist.md"
+    ]
+   },
+   "topic-scenarios moc": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/MOC.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/scen-MOC.md"
+    ]
+   },
+   "生产场景导航": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/README.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/scen-README.md"
+    ]
+   },
+   "场景: ai 基础设施运维": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/ai-infra-ops.md",
+     "skills/03-节点/gpu/最佳实践/ai-infra-ops.md"
+    ]
+   },
+   "场景: 应用部署": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/app-deployment.md",
+     "skills/04-工作负载/deployment/最佳实践/app-deployment.md"
+    ]
+   },
+   "场景: 备份恢复": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/backup-restore.md",
+     "skills/02-控制面/etcd/最佳实践/backup-restore.md"
+    ]
+   },
+   "场景: 容量规划": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/capacity-planning.md",
+     "skills/04-工作负载/hpa-vpa/最佳实践/capacity-planning.md"
+    ]
+   },
+   "场景: 集群部署": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/cluster-deployment.md",
+     "skills/01-集群运维/cluster-deployment/cluster-deployment.md"
+    ]
+   },
+   "场景: 合规审计": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/compliance-audit.md",
+     "skills/07-安全/rbac/最佳实践/compliance-audit.md"
+    ]
+   },
+   "场景: 成本优化": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/cost-optimization.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/cost-optimization.md"
+    ]
+   },
+   "场景: 日常运维": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/daily-ops.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/daily-ops.md"
+    ]
+   },
+   "场景: 边缘计算运维": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/edge-ops.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/edge-ops.md"
+    ]
+   },
+   "场景: gitops 工作流": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/gitops-workflow.md",
+     "skills/01-集群运维/gitops-argocd/最佳实践/gitops-workflow.md"
+    ]
+   },
+   "场景: service mesh 运维": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/mesh-ops.md",
+     "skills/05-网络/service-mesh/最佳实践/mesh-ops.md"
+    ]
+   },
+   "场景: 监控告警": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/monitoring-alerting.md",
+     "skills/08-可观测性/monitoring/最佳实践/monitoring-alerting.md"
+    ]
+   },
+   "场景: 多集群管理": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/multi-cluster.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/multi-cluster.md"
+    ]
+   },
+   "场景: 网络诊断": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/network-diagnosis.md",
+     "skills/05-网络/service/最佳实践/network-diagnosis.md"
+    ]
+   },
+   "场景: 性能调优": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/performance-tuning.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/performance-tuning.md"
+    ]
+   },
+   "场景: 安全加固": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/security-hardening.md",
+     "skills/07-安全/rbac/最佳实践/security-hardening.md"
+    ]
+   },
+   "场景: 安全事件响应": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/security-incident.md",
+     "skills/07-安全/rbac/最佳实践/security-incident.md"
+    ]
+   },
+   "场景: 存储问题排查": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/storage-issues.md",
+     "skills/06-存储/csi-storage/最佳实践/storage-issues.md"
+    ]
+   },
+   "场景: 故障排查": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/troubleshooting.md",
+     "skills/04-工作负载/pod/最佳实践/troubleshooting.md"
+    ]
+   },
+   "场景: 升级迁移": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/07-scenarios/upgrade-migration.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/upgrade-migration.md"
+    ]
+   },
+   "topic-best-practices moc (skills)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/MOC.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-MOC.md"
+    ]
+   },
+   "kubernetes 最佳实践指南 (skills)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/20-最佳实践/README.md",
+     "skills/01-集群运维/cluster-upgrade/最佳实践/bp-README.md"
+    ]
+   },
+   "cncf incubating projects": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/21-生态参考/01-CNCF全景/incubating/01-cncf-incubating-projects.md",
+     "wiki/21-生态参考/01-CNCF全景/incubating/index.md"
+    ]
+   },
+   "cncf sandbox projects": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/21-生态参考/01-CNCF全景/sandbox/01-cncf-sandbox-projects.md",
+     "wiki/21-生态参考/01-CNCF全景/sandbox/index.md"
+    ]
+   },
+   "papers": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/21-生态参考/02-论文/index.md",
+     "wiki/26-标签/07-参考与最佳实践/papers.md"
+    ]
+   },
+   "statefulset": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/02-工作负载/statefulset.md",
+     "wiki/23-实体/02-K8s核心组件/statefulset.md"
+    ]
+   },
+   "networkpolicy": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/03-网络/network-policy.md",
+     "wiki/23-实体/02-K8s核心组件/networkpolicy.md"
+    ]
+   },
+   "horizontal pod autoscaler": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/07-调度与资源/horizontal-pod-autoscaler.md",
+     "skills/04-工作负载/pod/资源与自动扩缩/horizontal-pod-autoscaler.md"
+    ]
+   },
+   "kube-scheduler": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/22-概念/07-调度与资源/kube-scheduler.md",
+     "wiki/23-实体/02-K8s核心组件/kube-scheduler.md"
+    ]
+   },
+   "k8s 问题分布与 mttr 基准": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "wiki/22-概念/08-可靠性与运维/K8s-故障分布与-MTTR-基准.md",
+     "wiki/22-概念/08-可靠性与运维/k8s-mttr-benchmark.md"
+    ]
+   },
+   "kudig prompt 模板集：故障排查、架构评审、配置生成与学习路径": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "wiki/23-实体/15-参考与索引/kudig-prompts-catalog.md",
+     "skills/04-工作负载/pod/方法论/agent/kudig-prompts-catalog.md"
+    ]
+   },
+   "第三课：deployment - 应用部署管理器 [fundamentals]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/deployment/培训/01-deployment-basics.md",
+     "skills/04-工作负载/deployment/培训/lecturer/01-deployment-basics.md"
+    ]
+   },
+   "pod 异常故障树分析 (skills)": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/pod-fta.md",
+     "skills/04-工作负载/pod/诊断排障/pod-fta-故障树list.md"
+    ]
+   },
+   "customizing pods": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/customizing_pod_templates.md",
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/customizing_pod_templates.md"
+    ]
+   },
+   "port forward": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/port_forward_to_pods.md",
+     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/port_forward_to_pods.md"
+    ]
+   },
+   "第一课：kubernetes 入门 [fundamentals]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/02-what-is-kubernetes.md",
+     "skills/04-工作负载/pod/培训/lecturer/01-what-is-kubernetes.md"
+    ]
+   },
+   "day 19: pod 容器组基础": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/inner-day-19-pod-basics.md",
+     "skills/04-工作负载/pod/培训/inner-training/week-3-node-workload/day-19-pod-basics.md"
+    ]
+   },
+   "week 2 security monitoring": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/inner-training/week-2-security-monitoring/index.md",
+     "skills/07-安全/rbac/培训/week2-security-monitoring-index.md"
+    ]
+   },
+   "week 3 node workload": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/inner-training/week-3-node-workload/index.md",
+     "skills/04-工作负载/pod/培训/week3-node-workload-index.md"
+    ]
+   },
+   "week 4 network storage": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/inner-training/week-4-network-storage/index.md",
+     "skills/04-工作负载/pod/培训/week4-network-storage-index.md"
+    ]
+   },
+   "故障排查决策树 - mermaid 可视化版 [troubleshooting]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/lecturer/decision-tree-mermaid.md",
+     "skills/04-工作负载/pod/培训/troubleshooting/decision-tree-mermaid.md"
+    ]
+   },
+   "configuration": {
+    "count": 2,
+    "cross_dir": false,
+    "paths": [
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-05-configuration-index.md",
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-06-configuration-index.md"
+    ]
+   },
+   "oncall qa": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/lecturer/lecturer-11-oncall-qa-index.md",
+     "skills/04-工作负载/pod/培训/oncall-qa/index.md"
+    ]
+   },
+   "工单数字人快速问答 - on-call 速查 [oncall-qa]": {
+    "count": 2,
+    "cross_dir": true,
+    "paths": [
+     "skills/04-工作负载/pod/培训/lecturer/oncall-quick-qa.md",
+     "skills/04-工作负载/pod/培训/oncall-qa/oncall-quick-qa.md"
+    ]
+   }
+  }
+ }
+}

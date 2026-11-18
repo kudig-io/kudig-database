@@ -30,6 +30,7 @@ last_updated: 2026-07
 - [[code/scripts/templates/fta-template.md|Fta Template]]
 - [[code/scripts/templates/moc-template.md|Moc Template]]
 - [[code/scripts/templates/presentation-template.md|Presentation Template]]
+- [[code/scripts/templates/production-readiness-template.md|Production Readiness Template]]
 - [[code/scripts/templates/skill-template.md|Skill Template]]
 - [[code/scripts/templates/runbook-template.md|Runbook Template]]
 - [[code/scripts/templates/slo-template.md|SLO Template]]

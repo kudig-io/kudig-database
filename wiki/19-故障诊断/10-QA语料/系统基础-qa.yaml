@@ -2083,18 +2083,18 @@ qa_pairs:
   source: wiki/17-系统基础/05-速查卡/linux.md
 - type: concept
   question: 在 Kubernetes 网络配置最佳实践 [infrastructure] 中, 概述 是什么?
-  answer: 参见 wiki/17-系统基础/05-速查卡/networking.md 的「概述」章节。
-  source: wiki/17-系统基础/05-速查卡/networking.md
+  answer: 参见 wiki/20-最佳实践/01-best-practices/infrastructure/networking.md 的「概述」章节。
+  source: wiki/20-最佳实践/01-best-practices/infrastructure/networking.md
   section: 概述
 - type: concept
   question: 在 Kubernetes 网络配置最佳实践 [infrastructure] 中, 问题描述 是什么?
-  answer: 参见 wiki/17-系统基础/05-速查卡/networking.md 的「问题描述」章节。
-  source: wiki/17-系统基础/05-速查卡/networking.md
+  answer: 参见 wiki/20-最佳实践/01-best-practices/infrastructure/networking.md 的「问题描述」章节。
+  source: wiki/20-最佳实践/01-best-practices/infrastructure/networking.md
   section: 问题描述
 - type: comparison
   question: Kubernetes 网络配置最佳实践 [infrastructure] 中有哪些技术对比?
-  answer: 参见 wiki/17-系统基础/05-速查卡/networking.md 中的对比分析。
-  source: wiki/17-系统基础/05-速查卡/networking.md
+  answer: 参见 wiki/20-最佳实践/01-best-practices/infrastructure/networking.md 中的对比分析。
+  source: wiki/20-最佳实践/01-best-practices/infrastructure/networking.md
 - type: concept
   question: 在 perf/bpftrace 速查卡 中, 概述 是什么?
   answer: 参见 wiki/17-系统基础/05-速查卡/perf-bpftrace-cheat-sheet.md 的「概述」章节。

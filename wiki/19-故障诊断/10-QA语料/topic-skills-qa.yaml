@@ -2014,42 +2014,42 @@ qa_pairs:
   section: 文档
 - type: concept
   question: 在 node notready Remediation Playbook 中, 目录 是什么?
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 的「目录」章节。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「目录」章节。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
   section: 目录
 - type: concept
   question: 在 node notready Remediation Playbook 中, 风险级别说明 是什么?
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 的「风险级别说明」章节。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
   section: 风险级别说明
 - type: concept
   question: 在 node notready Remediation Playbook 中, 修复操作 是什么?
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 的「修复操作」章节。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「修复操作」章节。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
   section: 修复操作
 - type: operation
   question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl get node <node-name> -o jsonpath=''{.spec.unschedulab?'
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 中的操作步骤。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
   command: kubectl get node <node-name> -o jsonpath='{.spec.unschedulable}'
 - type: operation
   question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl uncordon <node-name>?'
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 中的操作步骤。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
   command: kubectl uncordon <node-name>
 - type: operation
   question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl get node <node-name>?'
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 中的操作步骤。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
   command: kubectl get node <node-name>
 - type: troubleshooting
   question: 如何排查 node notready Remediation Playbook 相关的故障?
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 的故障排查章节。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的故障排查章节。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
 - type: comparison
   question: node notready Remediation Playbook 中有哪些技术对比?
-  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md 中的对比分析。
-  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md
+  answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的对比分析。
+  source: wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
 - type: concept
   question: 在 根因分类 / Root Cause Catalog 中, 目录 是什么?
   answer: 参见 wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md 的「目录」章节。

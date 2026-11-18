@@ -2803,417 +2803,417 @@ qa_pairs:
   section: 文档
 - type: concept
   question: 在 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   section: 概述
 - type: concept
   question: 在 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   section: 函数签名
 - type: concept
   question: 在 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   section: 源码位置
 - type: concept
   question: 在 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   section: 参数说明
 - type: concept
   question: 在 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 中, 返回值 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 的「返回值」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 的「返回值」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   section: 返回值
 - type: operation
   question: '如何执行与 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 相关的操作: kubeadm certs check-expiration?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   command: kubeadm certs check-expiration
 - type: operation
   question: '如何执行与 Kubernetes 集群 PKI 架构总览 (topic-code-analysis) 相关的操作: tar czf k8s-pki-backup.tar.gz /etc/kubernetes/pki/?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/01-pki-architecture.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/01-pki-architecture.md
   command: tar czf k8s-pki-backup.tar.gz /etc/kubernetes/pki/
 - type: concept
   question: 在 CA 证书生成源码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/02-ca-generation.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/02-ca-generation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/02-ca-generation.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/02-ca-generation.md
   section: 函数签名
 - type: concept
   question: 在 CA 证书生成源码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/02-ca-generation.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/02-ca-generation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/02-ca-generation.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/02-ca-generation.md
   section: 源码位置
 - type: concept
   question: 在 CA 证书生成源码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/02-ca-generation.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/02-ca-generation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/02-ca-generation.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/02-ca-generation.md
   section: 参数说明
 - type: concept
   question: 在 API Server 证书生成源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md
   section: 概述
 - type: concept
   question: 在 API Server 证书生成源码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md
   section: 函数签名
 - type: concept
   question: 在 API Server 证书生成源码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md
   section: 源码位置
 - type: concept
   question: 在 API Server 证书生成源码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md
   section: 参数说明
 - type: concept
   question: 在 API Server 证书生成源码分析 (topic-code-analysis) 中, 返回值 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md 的「返回值」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md 的「返回值」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md
   section: 返回值
 - type: operation
   question: '如何执行与 API Server 证书生成源码分析 (topic-code-analysis) 相关的操作: kubeadm certs renew apiserver --config=kubeadm-config.yaml?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/03-apiserver-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/03-apiserver-cert.md
   command: kubeadm certs renew apiserver --config=kubeadm-config.yaml
 - type: concept
   question: 在 etcd 证书体系源码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md
   section: 函数签名
 - type: concept
   question: 在 etcd 证书体系源码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md
   section: 源码位置
 - type: concept
   question: 在 etcd 证书体系源码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md
   section: 参数说明
 - type: comparison
   question: etcd 证书体系源码分析 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/04-etcd-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/04-etcd-cert.md
 - type: concept
   question: 在 kubelet 证书与 CSR 机制源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md
   section: 概述
 - type: concept
   question: 在 kubelet 证书与 CSR 机制源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md
   section: 源码路径
 - type: concept
   question: 在 kubelet 证书与 CSR 机制源码分析 (topic-code-analysis) 中, kubelet 证书类型 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md 的「kubelet 证书类型」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md 的「kubelet 证书类型」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md
   section: kubelet 证书类型
 - type: concept
   question: 在 kubelet 证书与 CSR 机制源码分析 (topic-code-analysis) 中, kubelet 双证书管理器架构 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md 的「kubelet 双证书管理器架构」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md 的「kubelet 双证书管理器架构」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md
   section: kubelet 双证书管理器架构
 - type: concept
   question: 在 kubelet 证书与 CSR 机制源码分析 (topic-code-analysis) 中, 引导证书机制（Bootstrap） 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md 的「引导证书机制（Bootstrap）」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/05-kubelet-cert.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md 的「引导证书机制（Bootstrap）」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/05-kubelet-cert.md
   section: 引导证书机制（Bootstrap）
 - type: concept
   question: 在 证书轮换机制源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md
   section: 概述
 - type: concept
   question: 在 证书轮换机制源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md
   section: 源码路径
 - type: concept
   question: 在 证书轮换机制源码分析 (topic-code-analysis) 中, kubeadm 证书轮换 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md 的「kubeadm 证书轮换」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md 的「kubeadm 证书轮换」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md
   section: kubeadm 证书轮换
 - type: operation
   question: '如何执行与 证书轮换机制源码分析 (topic-code-analysis) 相关的操作: $ kubeadm certs check-expiration?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/06-cert-rotation.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/06-cert-rotation.md
   command: $ kubeadm certs check-expiration
 - type: concept
   question: 在 ServiceAccount 密钥对源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
   section: 概述
 - type: concept
   question: 在 ServiceAccount 密钥对源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
   section: 源码路径
 - type: concept
   question: 在 ServiceAccount 密钥对源码分析 (topic-code-analysis) 中, SA 密钥对与 TLS 证书的区别 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 的「SA 密钥对与 TLS 证书的区别」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 的「SA 密钥对与 TLS 证书的区别」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
   section: SA 密钥对与 TLS 证书的区别
 - type: concept
   question: 在 ServiceAccount 密钥对源码分析 (topic-code-analysis) 中, SA 密钥生成 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 的「SA 密钥生成」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 的「SA 密钥生成」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
   section: SA 密钥生成
 - type: operation
   question: '如何执行与 ServiceAccount 密钥对源码分析 (topic-code-analysis) 相关的操作: -----BEGIN RSA PRIVATE KEY-----?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
   command: '-----BEGIN RSA PRIVATE KEY-----'
 - type: operation
   question: '如何执行与 ServiceAccount 密钥对源码分析 (topic-code-analysis) 相关的操作: ps aux | grep kube-apiserver | grep service-account-key-file?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
   command: ps aux | grep kube-apiserver | grep service-account-key-file
 - type: comparison
   question: ServiceAccount 密钥对源码分析 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/07-service-account-keys.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/07-service-account-keys.md
 - type: concept
   question: 在 证书身份到 RBAC 的映射关系 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md
   section: 函数签名
 - type: concept
   question: 在 证书身份到 RBAC 的映射关系 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md
   section: 源码位置
 - type: concept
   question: 在 证书身份到 RBAC 的映射关系 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md
   section: 参数说明
 - type: best_practice
   question: 关于 证书身份到 RBAC 的映射关系 (topic-code-analysis), 有什么最佳实践?
   answer: <component-name>.<namespace>.svc            │
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/08-rbac-mapping.md
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/08-rbac-mapping.md
 - type: concept
   question: 在 kubeadm join 证书分发流程 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md
   section: 概述
 - type: concept
   question: 在 kubeadm join 证书分发流程 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md
   section: 源码路径
 - type: concept
   question: 在 kubeadm join 证书分发流程 (topic-code-analysis) 中, join 流程总览 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md 的「join 流程总览」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md 的「join 流程总览」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md
   section: join 流程总览
 - type: concept
   question: 在 kubeadm join 证书分发流程 (topic-code-analysis) 中, 阶段详解 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md 的「阶段详解」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md 的「阶段详解」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md
   section: 阶段详解
 - type: operation
   question: '如何执行与 kubeadm join 证书分发流程 (topic-code-analysis) 相关的操作: kubeadm token create --print-join-command?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md
   command: kubeadm token create --print-join-command
 - type: comparison
   question: kubeadm join 证书分发流程 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/09-join-cert-flow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/09-join-cert-flow.md
 - type: concept
   question: 在 Front Proxy 聚合层证书工作流 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md
   section: 概述
 - type: concept
   question: 在 Front Proxy 聚合层证书工作流 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md
   section: 源码路径
 - type: concept
   question: 在 Front Proxy 聚合层证书工作流 (topic-code-analysis) 中, 架构与信任模型 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md 的「架构与信任模型」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md 的「架构与信任模型」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md
   section: 架构与信任模型
 - type: concept
   question: 在 Front Proxy 聚合层证书工作流 (topic-code-analysis) 中, 证书角色详解 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md 的「证书角色详解」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md 的「证书角色详解」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md
   section: 证书角色详解
 - type: operation
   question: '如何执行与 Front Proxy 聚合层证书工作流 (topic-code-analysis) 相关的操作: --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-cli?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md
   command: --proxy-client-cert-file=/etc/kubernetes/pki/front-proxy-client.crt
 - type: operation
   question: '如何执行与 Front Proxy 聚合层证书工作流 (topic-code-analysis) 相关的操作: --requestheader-client-ca-file=/etc/kubernetes/pki/front-pro?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/10-front-proxy-workflow.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/10-front-proxy-workflow.md
   command: --requestheader-client-ca-file=/etc/kubernetes/pki/front-proxy-ca.crt
 - type: concept
   question: 在 API Server 证书相关启动参数汇总 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md
   section: 函数签名
 - type: concept
   question: 在 API Server 证书相关启动参数汇总 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md
   section: 源码位置
 - type: concept
   question: 在 API Server 证书相关启动参数汇总 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md
   section: 参数说明
 - type: operation
   question: '如何执行与 API Server 证书相关启动参数汇总 (topic-code-analysis) 相关的操作: echo "=== API Server Certificate Flags ==="?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md
   command: echo "=== API Server Certificate Flags ==="
 - type: operation
   question: '如何执行与 API Server 证书相关启动参数汇总 (topic-code-analysis) 相关的操作: ./check-apiserver-certs.sh?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/11-apiserver-cert-flags.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/11-apiserver-cert-flags.md
   command: ./check-apiserver-certs.sh
 - type: concept
   question: 在 kubeconfig 中的证书嵌入逻辑 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md
   section: 函数签名
 - type: concept
   question: 在 kubeconfig 中的证书嵌入逻辑 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md
   section: 源码位置
 - type: concept
   question: 在 kubeconfig 中的证书嵌入逻辑 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md
   section: 参数说明
 - type: operation
   question: '如何执行与 kubeconfig 中的证书嵌入逻辑 (topic-code-analysis) 相关的操作: --kubeconfig=/etc/kubernetes/controller-manager.conf?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md
   command: --kubeconfig=/etc/kubernetes/controller-manager.conf
 - type: comparison
   question: kubeconfig 中的证书嵌入逻辑 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/12-kubeconfig-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/12-kubeconfig-certs.md
 - type: concept
   question: 在 kubeadm 配置对证书生成的影响 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/13-cert-config.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/13-cert-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md
   section: 函数签名
 - type: concept
   question: 在 kubeadm 配置对证书生成的影响 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/13-cert-config.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/13-cert-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md
   section: 源码位置
 - type: concept
   question: 在 kubeadm 配置对证书生成的影响 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/13-cert-config.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/13-cert-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md
   section: 参数说明
 - type: concept
   question: 在 Admission Webhook 证书体系 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md
   section: 概述
 - type: concept
   question: 在 Admission Webhook 证书体系 (topic-code-analysis) 中, 架构对比：集群证书 vs Webhook 证书 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md 的「架构对比：集群证书 vs Webhook 证书」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md 的「架构对比：集群证书 vs Webhook 证书」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md
   section: 架构对比：集群证书 vs Webhook 证书
 - type: concept
   question: 在 Admission Webhook 证书体系 (topic-code-analysis) 中, Webhook 配置的证书字段 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md 的「Webhook 配置的证书字段」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md 的「Webhook 配置的证书字段」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md
   section: Webhook 配置的证书字段
 - type: concept
   question: 在 Admission Webhook 证书体系 (topic-code-analysis) 中, API Server 对 Webhook 证书的验证逻辑 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md 的「API Server 对 Webhook 证书的验证逻辑」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md 的「API Server 对 Webhook 证书的验证逻辑」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md
   section: API Server 对 Webhook 证书的验证逻辑
 - type: comparison
   question: Admission Webhook 证书体系 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/14-admission-webhook-certs.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/14-admission-webhook-certs.md
 - type: concept
   question: 在 证书格式与编码详解 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md
   section: 概述
 - type: concept
   question: 在 证书格式与编码详解 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md
   section: 函数签名
 - type: concept
   question: 在 证书格式与编码详解 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md
   section: 源码位置
 - type: concept
   question: 在 证书格式与编码详解 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md
   section: 参数说明
 - type: concept
   question: 在 证书格式与编码详解 (topic-code-analysis) 中, 返回值 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md 的「返回值」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/15-cert-format-encoding.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md 的「返回值」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/15-cert-format-encoding.md
   section: 返回值
 - type: concept
   question: 在 OpenSSL 证书操作速查手册 (topic-code-analysis) 中, 查看证书信息 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md 的「查看证书信息」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md 的「查看证书信息」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md
   section: 查看证书信息
 - type: concept
   question: 在 OpenSSL 证书操作速查手册 (topic-code-analysis) 中, 验证证书关系 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md 的「验证证书关系」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md 的「验证证书关系」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md
   section: 验证证书关系
 - type: operation
   question: '如何执行与 OpenSSL 证书操作速查手册 (topic-code-analysis) 相关的操作: openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md
   command: openssl x509 -in /etc/kubernetes/pki/ca.crt -noout -text
 - type: operation
   question: '如何执行与 OpenSSL 证书操作速查手册 (topic-code-analysis) 相关的操作: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout
     -e?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md
   command: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -ext subjectAltName
 - type: operation
   question: '如何执行与 OpenSSL 证书操作速查手册 (topic-code-analysis) 相关的操作: for cert in /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/et?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md
   command: for cert in /etc/kubernetes/pki/*.crt /etc/kubernetes/pki/etcd/*.crt; do
 - type: comparison
   question: OpenSSL 证书操作速查手册 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/16-openssl-cookbook.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/16-openssl-cookbook.md
 - type: concept
   question: 在 Kubernetes PKI 安全最佳实践 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/17-pki-security-best-practices.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/17-pki-security-best-practices.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md
   section: 概述
 - type: concept
   question: 在 Kubernetes PKI 安全最佳实践 (topic-code-analysis) 中, 私钥保护 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/17-pki-security-best-practices.md 的「私钥保护」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/17-pki-security-best-practices.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md 的「私钥保护」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md
   section: 私钥保护
 - type: operation
   question: '如何执行与 Kubernetes PKI 安全最佳实践 (topic-code-analysis) 相关的操作: ls -la /etc/kubernetes/pki/?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-cert/17-pki-security-best-practices.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-cert/17-pki-security-best-practices.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md
   command: ls -la /etc/kubernetes/pki/
 - type: concept
   question: 在 Cluster Cert 中, 概览 是什么?
@@ -3246,291 +3246,291 @@ qa_pairs:
   source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/01-overview.md
 - type: concept
   question: 在 kubeadm reset 源码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md
   section: 函数签名
 - type: concept
   question: 在 kubeadm reset 源码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md
   section: 源码位置
 - type: concept
   question: 在 kubeadm reset 源码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md
   section: 参数说明
 - type: operation
   question: '如何执行与 kubeadm reset 源码分析 (topic-code-analysis) 相关的操作: kubeadm reset  # ⚠️ 清理节点所有 K8s 配置?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/02-reset.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/02-reset.md
   command: 'kubeadm reset  # ⚠️ 清理节点所有 K8s 配置'
 - type: concept
   question: 在 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md
   section: 概述
 - type: concept
   question: 在 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md
   section: 函数签名
 - type: concept
   question: 在 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md
   section: 源码位置
 - type: concept
   question: 在 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md
   section: 参数说明
 - type: concept
   question: 在 节点删除流程 — kubectl delete node 源码分析 (topic-code-analysis) 中, 返回值 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md 的「返回值」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/03-delete-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md 的「返回值」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/03-delete-node.md
   section: 返回值
 - type: concept
   question: 在 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   section: 概述
 - type: concept
   question: 在 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   section: 源码路径
 - type: concept
   question: 在 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 中, 清理流程总览 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 的「清理流程总览」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 的「清理流程总览」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   section: 清理流程总览
 - type: concept
   question: 在 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 中, 停止 kubelet 服务 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 的「停止 kubelet 服务」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 的「停止 kubelet 服务」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   section: 停止 kubelet 服务
 - type: concept
   question: 在 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 中, 卸载 kubelet 挂载点 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 的「卸载 kubelet 挂载点」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 的「卸载 kubelet 挂载点」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   section: 卸载 kubelet 挂载点
 - type: operation
   question: '如何执行与 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 相关的操作: kubeadm reset --config=reset.yaml  # ⚠️ 清理节点所有
     K8s 配置?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   command: 'kubeadm reset --config=reset.yaml  # ⚠️ 清理节点所有 K8s 配置'
 - type: operation
   question: '如何执行与 节点清理机制 — cleanup-node 源码分析 (topic-code-analysis) 相关的操作: iptables -F && iptables -t nat -F && iptables -t
     mangle -F &?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/04-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/04-cleanup.md
   command: iptables -F && iptables -t nat -F && iptables -t mangle -F && iptables -X
 - type: concept
   question: 在 etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
   section: 概述
 - type: concept
   question: 在 etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
   section: 源码路径
 - type: concept
   question: 在 etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 中, 流程总览 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 的「流程总览」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 的「流程总览」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
   section: 流程总览
 - type: concept
   question: 在 etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 中, etcd 类型检测 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 的「etcd 类型检测」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 的「etcd 类型检测」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
   section: etcd 类型检测
 - type: concept
   question: 在 etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 中, etcd 数据目录获取 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 的「etcd 数据目录获取」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 的「etcd 数据目录获取」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
   section: etcd 数据目录获取
 - type: troubleshooting
   question: 如何排查 etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
 - type: comparison
   question: etcd 数据清理与成员移除 — 源码分析 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/05-etcd-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/05-etcd-cleanup.md
 - type: concept
   question: 在 强制删除与异常场景处理 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md
   section: 概述
 - type: concept
   question: 在 强制删除与异常场景处理 (topic-code-analysis) 中, --force 标志 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md 的「--force 标志」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md 的「--force 标志」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md
   section: --force 标志
 - type: concept
   question: 在 强制删除与异常场景处理 (topic-code-analysis) 中, 错误处理策略 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md 的「错误处理策略」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md 的「错误处理策略」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md
   section: 错误处理策略
 - type: operation
   question: '如何执行与 强制删除与异常场景处理 (topic-code-analysis) 相关的操作: kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md
   command: 'kubeadm reset -f  # ⚠️ 清理节点所有 K8s 配置'
 - type: operation
   question: '如何执行与 强制删除与异常场景处理 (topic-code-analysis) 相关的操作: kubeadm reset --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 ?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md
   command: 'kubeadm reset --skip-phases=remove-etcd-member  # ⚠️ 清理节点所有 K8s 配置'
 - type: troubleshooting
   question: 如何排查 强制删除与异常场景处理 (topic-code-analysis) 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/06-force-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/06-force-delete.md
 - type: concept
   question: 在 HA 集群删除注意事项 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/07-ha-delete.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/07-ha-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/07-ha-delete.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/07-ha-delete.md
   section: 概述
 - type: concept
   question: 在 HA 集群删除注意事项 (topic-code-analysis) 中, HA 架构回顾 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/07-ha-delete.md 的「HA 架构回顾」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/07-ha-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/07-ha-delete.md 的「HA 架构回顾」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/07-ha-delete.md
   section: HA 架构回顾
 - type: concept
   question: 在 HA 集群删除注意事项 (topic-code-analysis) 中, etcd 仲裁维护 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/07-ha-delete.md 的「etcd 仲裁维护」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/07-ha-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/07-ha-delete.md 的「etcd 仲裁维护」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/07-ha-delete.md
   section: etcd 仲裁维护
 - type: concept
   question: 在 云厂商集群删除方案对比 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md
   section: 概述
 - type: concept
   question: 在 云厂商集群删除方案对比 (topic-code-analysis) 中, 删除方式对比 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md 的「删除方式对比」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md 的「删除方式对比」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md
   section: 删除方式对比
 - type: concept
   question: 在 云厂商集群删除方案对比 (topic-code-analysis) 中, kubeadm 删除流程（对比基准） 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md 的「kubeadm 删除流程（对比基准）」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md 的「kubeadm 删除流程（对比基准）」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md
   section: kubeadm 删除流程（对比基准）
 - type: concept
   question: 在 云厂商集群删除方案对比 (topic-code-analysis) 中, EKS 集群删除 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md 的「EKS 集群删除」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md 的「EKS 集群删除」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md
   section: EKS 集群删除
 - type: operation
   question: '如何执行与 云厂商集群删除方案对比 (topic-code-analysis) 相关的操作: eksctl delete cluster --name my-cluster --region us-west-2?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md
   command: eksctl delete cluster --name my-cluster --region us-west-2
 - type: comparison
   question: 云厂商集群删除方案对比 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/08-cloud-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/08-cloud-delete.md
 - type: concept
   question: 在 reset 子命令与 Phase 操作速查 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md
   section: 函数签名
 - type: concept
   question: 在 reset 子命令与 Phase 操作速查 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md
   section: 源码位置
 - type: concept
   question: 在 reset 子命令与 Phase 操作速查 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md
   section: 参数说明
 - type: operation
   question: '如何执行与 reset 子命令与 Phase 操作速查 (topic-code-analysis) 相关的操作: kubeadm reset --config=reset-config.yaml  # ⚠️ 清理节点所有
     K8s 配置?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md
   command: 'kubeadm reset --config=reset-config.yaml  # ⚠️ 清理节点所有 K8s 配置'
 - type: operation
   question: '如何执行与 reset 子命令与 Phase 操作速查 (topic-code-analysis) 相关的操作: kubeadm reset phase preflight  # ⚠️ 清理节点所有 K8s 配置?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md
   command: 'kubeadm reset phase preflight  # ⚠️ 清理节点所有 K8s 配置'
 - type: comparison
   question: reset 子命令与 Phase 操作速查 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/09-reset-phase-commands.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/09-reset-phase-commands.md
 - type: concept
   question: 在 删除时的安全清理 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md
   section: 函数签名
 - type: concept
   question: 在 删除时的安全清理 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md
   section: 源码位置
 - type: concept
   question: 在 删除时的安全清理 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md
   section: 参数说明
 - type: operation
   question: '如何执行与 删除时的安全清理 (topic-code-analysis) 相关的操作: rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md
   command: 'rm -rf /var/lib/etcd  # ⚠️ 删除系统/数据文件'
 - type: comparison
   question: 删除时的安全清理 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/10-security-delete.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md
 - type: concept
   question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md
   section: 概述
 - type: concept
   question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis) 中, 源码中的设计决策 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md 的「源码中的设计决策」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md 的「源码中的设计决策」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md
   section: 源码中的设计决策
 - type: concept
   question: 在 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis) 中, CNI 配置清理 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md 的「CNI 配置清理」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md 的「CNI 配置清理」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md
   section: CNI 配置清理
 - type: operation
   question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis) 相关的操作: ls /etc/cni/net.d/?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md
   command: ls /etc/cni/net.d/
 - type: operation
   question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis) 相关的操作: rm -rf /etc/cni/net.d/*  # ⚠️ 删除系统/数据文件?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md
   command: 'rm -rf /etc/cni/net.d/*  # ⚠️ 删除系统/数据文件'
 - type: operation
   question: '如何执行与 网络清理详解 — CNI / iptables / ipvs / 路由 (topic-code-analysis) 相关的操作: rm -rf /etc/cni/net.d/10-flannel.conflist  #
     ⚠️ 删除系统/数据文件?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/11-network-cleanup.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/11-network-cleanup.md
   command: 'rm -rf /etc/cni/net.d/10-flannel.conflist  # ⚠️ 删除系统/数据文件'
 - type: concept
   question: 在 集群删除故障排查手册 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/12-troubleshooting.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/12-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/12-troubleshooting.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/12-troubleshooting.md
   section: 概述
 - type: concept
   question: 在 集群删除故障排查手册 (topic-code-analysis) 中, kubeadm reset 常见错误 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/12-troubleshooting.md 的「kubeadm reset 常见错误」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/12-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/12-troubleshooting.md 的「kubeadm reset 常见错误」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/12-troubleshooting.md
   section: kubeadm reset 常见错误
 - type: troubleshooting
   question: 如何排查 集群删除故障排查手册 (topic-code-analysis) 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/12-troubleshooting.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-cluster-delete/12-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/12-troubleshooting.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/12-troubleshooting.md
 - type: concept
   question: 在 Cluster Delete 中, 概览 是什么?
   answer: 参见 wiki/10-平台工程/06-代码分析/functions-cluster-delete/index.md 的「概览」章节。
@@ -3566,112 +3566,112 @@ qa_pairs:
   source: wiki/10-平台工程/06-代码分析/functions-deployment-create/01-overview.md
 - type: concept
   question: 在 Deployment 控制器入口源码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/02-deployment-controller.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/02-deployment-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/02-deployment-controller.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/02-deployment-controller.md
   section: 函数签名
 - type: concept
   question: 在 Deployment 控制器入口源码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/02-deployment-controller.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/02-deployment-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/02-deployment-controller.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/02-deployment-controller.md
   section: 源码位置
 - type: concept
   question: 在 Deployment 控制器入口源码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/02-deployment-controller.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/02-deployment-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/02-deployment-controller.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/02-deployment-controller.md
   section: 参数说明
 - type: concept
   question: 在 ReplicaSet 控制器源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md
   section: 概述
 - type: concept
   question: 在 ReplicaSet 控制器源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md
   section: 源码路径
 - type: concept
   question: 在 ReplicaSet 控制器源码分析 (topic-code-analysis) 中, ReplicaSet 控制器架构 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md 的「ReplicaSet 控制器架构」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md 的「ReplicaSet 控制器架构」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md
   section: ReplicaSet 控制器架构
 - type: concept
   question: 在 ReplicaSet 控制器源码分析 (topic-code-analysis) 中, syncReplicaSet — 核心同步函数 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md 的「syncReplicaSet — 核心同步函数」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md 的「syncReplicaSet — 核心同步函数」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md
   section: syncReplicaSet — 核心同步函数
 - type: concept
   question: 在 ReplicaSet 控制器源码分析 (topic-code-analysis) 中, 期望状态对齐 — manageReplicas 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md 的「期望状态对齐 — manageReplicas」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/03-replicaset-controller.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md 的「期望状态对齐 — manageReplicas」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/03-replicaset-controller.md
   section: 期望状态对齐 — manageReplicas
 - type: concept
   question: 在 滚动更新源码分析 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md
   section: 概述
 - type: concept
   question: 在 滚动更新源码分析 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md
   section: 源码路径
 - type: concept
   question: 在 滚动更新源码分析 (topic-code-analysis) 中, 滚动更新策略配置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md 的「滚动更新策略配置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md 的「滚动更新策略配置」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md
   section: 滚动更新策略配置
 - type: concept
   question: 在 滚动更新源码分析 (topic-code-analysis) 中, rolloutRolling — 滚动更新入口 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md 的「rolloutRolling — 滚动更新入口」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md 的「rolloutRolling — 滚动更新入口」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md
   section: rolloutRolling — 滚动更新入口
 - type: concept
   question: 在 滚动更新源码分析 (topic-code-analysis) 中, reconcileNewReplicaSet — 扩容新 RS 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md 的「reconcileNewReplicaSet — 扩容新 RS」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/04-rolling-update.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md 的「reconcileNewReplicaSet — 扩容新 RS」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/04-rolling-update.md
   section: reconcileNewReplicaSet — 扩容新 RS
 - type: concept
   question: 在 Deployment Status 计算逻辑 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md
   section: 概述
 - type: concept
   question: 在 Deployment Status 计算逻辑 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md
   section: 函数签名
 - type: concept
   question: 在 Deployment Status 计算逻辑 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md
   section: 源码位置
 - type: concept
   question: 在 Deployment Status 计算逻辑 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md
   section: 参数说明
 - type: concept
   question: 在 Deployment Status 计算逻辑 (topic-code-analysis) 中, 返回值 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md 的「返回值」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md 的「返回值」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md
   section: 返回值
 - type: comparison
   question: Deployment Status 计算逻辑 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/05-deployment-status.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/05-deployment-status.md
 - type: concept
   question: 在 版本历史与回滚机制 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/06-revision-history.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/06-revision-history.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/06-revision-history.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/06-revision-history.md
   section: 函数签名
 - type: concept
   question: 在 版本历史与回滚机制 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/06-revision-history.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/06-revision-history.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/06-revision-history.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/06-revision-history.md
   section: 源码位置
 - type: concept
   question: 在 版本历史与回滚机制 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-deployment-create/06-revision-history.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-deployment-create/06-revision-history.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/deployment-create/06-revision-history.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/deployment-create/06-revision-history.md
   section: 参数说明
 - type: concept
   question: 在 Deployment Create 中, 概览 是什么?
@@ -3685,312 +3685,312 @@ qa_pairs:
   section: 文档
 - type: concept
   question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis) 中, 函数签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md 的「函数签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md 的「函数签名」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md
   section: 函数签名
 - type: concept
   question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md
   section: 源码位置
 - type: concept
   question: 在 Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md
   section: 参数说明
 - type: troubleshooting
   question: 如何排查 Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis) 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md
 - type: comparison
   question: Kubernetes 集群删除逻辑 — 基于官方代码分析 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/01-overview.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/cluster-delete/01-overview.md
 - type: concept
   question: 在 节点注册流程 — TLS Bootstrap 源码分析 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/02-registration.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/02-registration.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/02-registration.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/02-registration.md
   section: 概述
 - type: concept
   question: 在 节点注册流程 — TLS Bootstrap 源码分析 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/02-registration.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/02-registration.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/02-registration.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/02-registration.md
   section: 源码路径
 - type: concept
   question: 在 节点注册流程 — TLS Bootstrap 源码分析 中, 节点注册完整流程 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/02-registration.md 的「节点注册完整流程」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/02-registration.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/02-registration.md 的「节点注册完整流程」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/02-registration.md
   section: 节点注册完整流程
 - type: concept
   question: 在 节点状态与健康检查 — Node Conditions 源码分析 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/03-condition.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/03-condition.md
   section: 概述
 - type: concept
   question: 在 节点状态与健康检查 — Node Conditions 源码分析 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/03-condition.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/03-condition.md
   section: 源码路径
 - type: concept
   question: 在 节点状态与健康检查 — Node Conditions 源码分析 中, 节点状态（Conditions） 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md 的「节点状态（Conditions）」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/03-condition.md 的「节点状态（Conditions）」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/03-condition.md
   section: 节点状态（Conditions）
 - type: troubleshooting
   question: 如何排查 节点状态与健康检查 — Node Conditions 源码分析 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/03-condition.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/03-condition.md
 - type: comparison
   question: 节点状态与健康检查 — Node Conditions 源码分析 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/03-condition.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/03-condition.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/03-condition.md
 - type: concept
   question: 在 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中, 函数/流程签名 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md 的「函数/流程签名」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/04-drain.md 的「函数/流程签名」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/04-drain.md
   section: 函数/流程签名
 - type: concept
   question: 在 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中, 源码位置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md 的「源码位置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/04-drain.md 的「源码位置」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/04-drain.md
   section: 源码位置
 - type: concept
   question: 在 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中, 参数说明 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md 的「参数说明」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/04-drain.md 的「参数说明」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/04-drain.md
   section: 参数说明
 - type: comparison
   question: 节点驱逐与维护 (kubectl drain/cordon/uncordon) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/04-drain.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/04-drain.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/04-drain.md
 - type: concept
   question: 在 节点升级 — kubeadm upgrade node 源码分析 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/05-upgrade.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/05-upgrade.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/05-upgrade.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/05-upgrade.md
   section: 概述
 - type: concept
   question: 在 节点升级 — kubeadm upgrade node 源码分析 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/05-upgrade.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/05-upgrade.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/05-upgrade.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/05-upgrade.md
   section: 源码路径
 - type: concept
   question: 在 节点升级 — kubeadm upgrade node 源码分析 中, 节点升级概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/05-upgrade.md 的「节点升级概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/05-upgrade.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/05-upgrade.md 的「节点升级概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/05-upgrade.md
   section: 节点升级概述
 - type: concept
   question: 在 节点证书轮换 — kubelet 证书自动续期源码分析 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/06-certificate.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/06-certificate.md
   section: 概述
 - type: concept
   question: 在 节点证书轮换 — kubelet 证书自动续期源码分析 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/06-certificate.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/06-certificate.md
   section: 源码路径
 - type: concept
   question: 在 节点证书轮换 — kubelet 证书自动续期源码分析 中, kubelet 证书管理架构 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md 的「kubelet 证书管理架构」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/06-certificate.md 的「kubelet 证书管理架构」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/06-certificate.md
   section: kubelet 证书管理架构
 - type: operation
   question: '如何执行与 节点证书轮换 — kubelet 证书自动续期源码分析 相关的操作: /var/lib/kubelet/pki/?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/06-certificate.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/node-create/06-certificate.md
   command: /var/lib/kubelet/pki/
 - type: comparison
   question: 节点证书轮换 — kubelet 证书自动续期源码分析 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/06-certificate.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/06-certificate.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/06-certificate.md
 - type: concept
   question: 在 节点弹性伸缩 — Cluster Autoscaler 源码分析 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md
   section: 概述
 - type: concept
   question: 在 节点弹性伸缩 — Cluster Autoscaler 源码分析 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md
   section: 源码路径
 - type: concept
   question: 在 节点弹性伸缩 — Cluster Autoscaler 源码分析 中, Cluster Autoscaler 工作原理 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md 的「Cluster Autoscaler 工作原理」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md 的「Cluster Autoscaler 工作原理」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md
   section: Cluster Autoscaler 工作原理
 - type: troubleshooting
   question: 如何排查 节点弹性伸缩 — Cluster Autoscaler 源码分析 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/07-autoscaling.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/07-autoscaling.md
 - type: concept
   question: 在 节点故障排查手册 (topic-code-analysis) 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md
   section: 概述
 - type: concept
   question: 在 节点故障排查手册 (topic-code-analysis) 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md
   section: 源码路径
 - type: concept
   question: 在 节点故障排查手册 (topic-code-analysis) 中, 节点 NotReady 排查 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md 的「节点 NotReady 排查」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md 的「节点 NotReady 排查」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md
   section: 节点 NotReady 排查
 - type: troubleshooting
   question: 如何排查 节点故障排查手册 (topic-code-analysis) 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md
 - type: comparison
   question: 节点故障排查手册 (topic-code-analysis) 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/08-troubleshooting.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/08-troubleshooting.md
 - type: concept
   question: 在 节点网络：CNI 配置详解 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md
   section: 概述
 - type: concept
   question: 在 节点网络：CNI 配置详解 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md
   section: 源码路径
 - type: concept
   question: 在 节点网络：CNI 配置详解 中, CNI 架构 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md 的「CNI 架构」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md 的「CNI 架构」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md
   section: CNI 架构
 - type: troubleshooting
   question: 如何排查 节点网络：CNI 配置详解 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/09-cni-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/09-cni-node.md
 - type: concept
   question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md
   section: 概述
 - type: concept
   question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md
   section: 源码路径
 - type: concept
   question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, kubelet 配置文件详解 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md 的「kubelet 配置文件详解」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md 的「kubelet 配置文件详解」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md
   section: kubelet 配置文件详解
 - type: concept
   question: 在 kubelet 进阶配置 — cgroup / 资源管理 / 日志 中, cgroup Driver 配置 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md 的「cgroup Driver 配置」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md 的「cgroup Driver 配置」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md
   section: cgroup Driver 配置
 - type: comparison
   question: kubelet 进阶配置 — cgroup / 资源管理 / 日志 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/10-kubelet-config.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md
 - type: concept
   question: 在 节点资源压力与 Eviction — 源码分析 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/11-eviction.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/11-eviction.md
   section: 概述
 - type: concept
   question: 在 节点资源压力与 Eviction — 源码分析 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/11-eviction.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/11-eviction.md
   section: 源码路径
 - type: concept
   question: 在 节点资源压力与 Eviction — 源码分析 中, kubelet Eviction 机制 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md 的「kubelet Eviction 机制」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/11-eviction.md 的「kubelet Eviction 机制」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/11-eviction.md
   section: kubelet Eviction 机制
 - type: troubleshooting
   question: 如何排查 节点资源压力与 Eviction — 源码分析 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/11-eviction.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/11-eviction.md
 - type: comparison
   question: 节点资源压力与 Eviction — 源码分析 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/11-eviction.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/11-eviction.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/11-eviction.md
 - type: concept
   question: 在 节点监控 — metrics-server / node-exporter / kubelet metrics 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md
   section: 概述
 - type: concept
   question: 在 节点监控 — metrics-server / node-exporter / kubelet metrics 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md
   section: 源码路径
 - type: concept
   question: 在 节点监控 — metrics-server / node-exporter / kubelet metrics 中, kubelet Metrics 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md 的「kubelet Metrics」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md 的「kubelet Metrics」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md
   section: kubelet Metrics
 - type: troubleshooting
   question: 如何排查 节点监控 — metrics-server / node-exporter / kubelet metrics 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/12-monitoring.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/12-monitoring.md
 - type: concept
   question: 在 节点安全 — Node Authorization / NodeRestriction / Pod Security 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
   section: 概述
 - type: concept
   question: 在 节点安全 — Node Authorization / NodeRestriction / Pod Security 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
   section: 源码路径
 - type: concept
   question: 在 节点安全 — Node Authorization / NodeRestriction / Pod Security 中, Node Authorization 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 的「Node Authorization」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 的「Node Authorization」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
   section: Node Authorization
 - type: operation
   question: '如何执行与 节点安全 — Node Authorization / NodeRestriction / Pod Security 相关的操作: --authorization-mode=Node,RBAC?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
   command: --authorization-mode=Node,RBAC
 - type: operation
   question: '如何执行与 节点安全 — Node Authorization / NodeRestriction / Pod Security 相关的操作: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
   command: openssl x509 -in /var/lib/kubelet/pki/kubelet-client-current.pem -noout -subject
 - type: operation
   question: '如何执行与 节点安全 — Node Authorization / NodeRestriction / Pod Security 相关的操作: --enable-admission-plugins=NodeRestriction?'
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 中的操作步骤。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 中的操作步骤。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
   command: --enable-admission-plugins=NodeRestriction
 - type: comparison
   question: 节点安全 — Node Authorization / NodeRestriction / Pod Security 中有哪些技术对比?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md 中的对比分析。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/13-security.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/13-security.md 中的对比分析。
+  source: wiki/10-平台工程/06-代码分析/node-create/13-security.md
 - type: concept
   question: 在 14 - 节点存储 中, 节点存储类型 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/14-storage-node.md 的「节点存储类型」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/14-storage-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md 的「节点存储类型」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md
   section: 节点存储类型
 - type: concept
   question: 在 14 - 节点存储 中, Local PV 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/14-storage-node.md 的「Local PV」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/14-storage-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md 的「Local PV」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md
   section: Local PV
 - type: troubleshooting
   question: 如何排查 14 - 节点存储 相关的故障?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/14-storage-node.md 的故障排查章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/14-storage-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md 的故障排查章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md
 - type: concept
   question: 在 云厂商节点集成 — AWS / GCP / Azure 中, 概述 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/15-cloud-node.md 的「概述」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/15-cloud-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/15-cloud-node.md 的「概述」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/15-cloud-node.md
   section: 概述
 - type: concept
   question: 在 云厂商节点集成 — AWS / GCP / Azure 中, 源码路径 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/15-cloud-node.md 的「源码路径」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/15-cloud-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/15-cloud-node.md 的「源码路径」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/15-cloud-node.md
   section: 源码路径
 - type: concept
   question: 在 云厂商节点集成 — AWS / GCP / Azure 中, 云厂商节点元数据 是什么?
-  answer: 参见 wiki/10-平台工程/06-代码分析/functions-node-create/15-cloud-node.md 的「云厂商节点元数据」章节。
-  source: wiki/10-平台工程/06-代码分析/functions-node-create/15-cloud-node.md
+  answer: 参见 wiki/10-平台工程/06-代码分析/node-create/15-cloud-node.md 的「云厂商节点元数据」章节。
+  source: wiki/10-平台工程/06-代码分析/node-create/15-cloud-node.md
   section: 云厂商节点元数据
 - type: concept
   question: 在 Node Create 中, 概览 是什么?
