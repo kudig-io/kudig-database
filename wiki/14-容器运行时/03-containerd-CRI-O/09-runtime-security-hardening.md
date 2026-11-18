@@ -332,6 +332,34 @@ spec:
               -----END PUBLIC KEY-----
 EOF
 ```
+### 4.8 禁止特权容器（Kyverno 策略）
+
+``` bash
+# 🟡 中风险：会修改集群/资源状态，执行前请确认目标、影响范围与授权
+# 使用 Kyverno 策略强制禁止 privileged
+kubectl apply -f - <<EOF
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: disallow-privileged
+spec:
+  validationFailureAction: Enforce
+  rules:
+  - name: privileged-containers
+    match:
+      any:
+      - resources:
+          kinds: [Pod]
+    validate:
+      message: "生产环境禁止特权容器"
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              allowPrivilegeEscalation: "false"
+              privileged: "false"
+EOF
+```
 ---
 
 ## 5. 关键检查点与验证命令

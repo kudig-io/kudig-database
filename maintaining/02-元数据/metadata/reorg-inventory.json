@@ -1,11 +1,11 @@
 {
  "generated_at": "2026-11-18",
  "scope": "wiki/ (排除 31-归档) + skills/",
- "files_scanned": 4471,
+ "files_scanned": 4588,
  "duplicate_basenames": {
   "signal": "duplicate_basenames",
   "content_groups": 370,
-  "content_files": 825,
+  "content_files": 824,
   "structural_groups": 3,
   "groups": {
    "SKILL.md": {
@@ -33,7 +33,7 @@
     ]
    },
    "DIALOGUE.md": {
-    "count": 17,
+    "count": 16,
     "cross_dir": true,
     "paths": [
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-autoscaling/DIALOGUE.md",
@@ -49,7 +49,6 @@
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/DIALOGUE.md",
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-performance/DIALOGUE.md",
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md",
-     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md",
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md",
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-security-incident/DIALOGUE.md",
      "wiki/19-故障诊断/08-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md"
@@ -3064,8 +3063,8 @@
  },
  "title_collisions": {
   "signal": "title_collisions",
-  "content_groups": 104,
-  "content_files": 254,
+  "content_groups": 95,
+  "content_files": 234,
   "structural_groups": 17,
   "groups": {
    "reference": {
@@ -3176,24 +3175,6 @@
      "skills/01-集群运维/cluster-upgrade/最佳实践/ops-index.md"
     ]
    },
-   "k8s 网络快问快答与面试模拟对话": {
-    "count": 3,
-    "cross_dir": false,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md",
-     "wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md",
-     "wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md"
-    ]
-   },
-   "k8s 存储高级快问快答（12 题）": {
-    "count": 3,
-    "cross_dir": false,
-    "paths": [
-     "wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md",
-     "wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md",
-     "wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md"
-    ]
-   },
    "gitops": {
     "count": 3,
     "cross_dir": true,
@@ -3290,44 +3271,12 @@
      "wiki/09-可观测性/00-总览/00-open-source-projects-index.md"
     ]
    },
-   "kubernetes 多集群 fleet gitops 运维指南": {
-    "count": 2,
-    "cross_dir": false,
-    "paths": [
-     "wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md",
-     "wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md"
-    ]
-   },
-   "kubernetes 灾难恢复与业务连续性 runbook": {
-    "count": 2,
-    "cross_dir": false,
-    "paths": [
-     "wiki/12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1.md",
-     "wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md"
-    ]
-   },
-   "容器运行时安全加固指南": {
-    "count": 2,
-    "cross_dir": false,
-    "paths": [
-     "wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md",
-     "wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md"
-    ]
-   },
    "container runtime": {
     "count": 2,
     "cross_dir": true,
     "paths": [
      "wiki/14-容器运行时/README.md",
      "wiki/22-概念/15-运行时与系统/container-runtime.md"
-    ]
-   },
-   "k8s 运维诊断技能库 (02-ai-agents)": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md",
-     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/SKILL.md"
     ]
    },
    "gateway api": {
@@ -3762,14 +3711,6 @@
      "skills/03-节点/node/reference/nodepool-fta.md"
     ]
    },
-   "node notready 远程顾问对话脚本": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/DIALOGUE.md",
-     "wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md"
-    ]
-   },
    "kubernetes 最佳实践指南 (best-practices)": {
     "count": 2,
     "cross_dir": true,
@@ -3882,28 +3823,12 @@
      "skills/04-工作负载/pod/方法论/agent/kudig-prompts-catalog.md"
     ]
    },
-   "pod 异常故障树分析 (skills)": {
+   "<公司> <一句话故障标题>": {
     "count": 2,
-    "cross_dir": true,
+    "cross_dir": false,
     "paths": [
-     "skills/04-工作负载/pod/pod-fta.md",
-     "skills/04-工作负载/pod/诊断排障/pod-fta-故障树list.md"
-    ]
-   },
-   "customizing pods": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/customizing_pod_templates.md",
-     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/customizing_pod_templates.md"
-    ]
-   },
-   "port forward": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/port_forward_to_pods.md",
-     "skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/port_forward_to_pods.md"
+     "wiki/32-故障案例库/templates/incident-report.md",
+     "wiki/32-故障案例库/templates/quick-entry.md"
     ]
    },
    "week 2 security monitoring": {

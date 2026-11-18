@@ -48,7 +48,7 @@ last_updated: '2026-07-21'
 ## GitOps 多集群 (GitOps Multi-Cluster)
 
 - [[wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
-- [[wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
+- [[wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide|Fleet GitOps 运营指南]]
 - [[wiki/03-清单模式/05-GitOps模式/02-argocd-applicationset-multi-cluster|ArgoCD ApplicationSet 多集群]]
 
 ## 网络 (Networking)

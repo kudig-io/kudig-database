@@ -465,30 +465,30 @@ qa_pairs:
   source: wiki/06-存储/01-K8s存储/22-k8s-storage-quick-qa.md
 - type: concept
   question: 在 K8s 存储高级快问快答（12 题） 中, 话题覆盖清单 是什么?
-  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md 的「话题覆盖清单」章节。
-  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的「话题覆盖清单」章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
   section: 话题覆盖清单
 - type: troubleshooting
   question: 如何排查 K8s 存储高级快问快答（12 题） 相关的故障?
-  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md 的故障排查章节。
-  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
 - type: comparison
   question: K8s 存储高级快问快答（12 题） 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md 中的对比分析。
-  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
 - type: concept
   question: 在 K8s 存储高级快问快答（12 题） 中, 话题覆盖清单 是什么?
-  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md 的「话题覆盖清单」章节。
-  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的「话题覆盖清单」章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
   section: 话题覆盖清单
 - type: troubleshooting
   question: 如何排查 K8s 存储高级快问快答（12 题） 相关的故障?
-  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md 的故障排查章节。
-  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
 - type: comparison
   question: K8s 存储高级快问快答（12 题） 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md 中的对比分析。
-  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
 - type: concept
   question: 在 K8s 存储高级快问快答（12 题） 中, 话题覆盖清单 是什么?
   answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的「话题覆盖清单」章节。

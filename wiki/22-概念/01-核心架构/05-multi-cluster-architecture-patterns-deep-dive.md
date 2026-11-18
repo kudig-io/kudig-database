@@ -225,5 +225,5 @@ flowchart TD
 - [[wiki/22-概念/08-可靠性与运维/cost-optimization-multi-cluster.md|多集群成本优化]]
 - [[wiki/22-概念/06-可观测性/multi-cluster-observability-federation.md|多集群可观测联邦]]
 - [[wiki/20-最佳实践/09-large-scale-production/10-multi-cluster.md|多集群与联邦管理最佳实践]]
-- [[wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md|Fleet GitOps 运维指南]]
+- [[wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md|Fleet GitOps 运维指南]]
 - 沉淀卡：`maintaining/04-报告/k8s-高级面试快问快答-沉淀.md` Q109–Q114（多集群专项）

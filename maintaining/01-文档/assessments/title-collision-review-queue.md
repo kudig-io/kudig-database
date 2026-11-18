@@ -10,17 +10,17 @@ last_updated: '2026-11-18'
 # 同题异版人工评审单（P1-④）
 
 > 由 `review-title-collisions.py` 生成，数据源 `reorg-inventory.json`。
-> 分类：索引/标签/跨层撞题签认 **94** 组（**✅ 已整批签认**）；真同题异版 **58** 组（**48 组已裁决执行，余 10 组待裁决**）；terway 三向专项 **8** 项。
+> 分类：索引/标签/跨层撞题签认 **94** 组（**✅ 已整批签认**）；真同题异版 **58** 组（**✅ 已全部裁决执行**）；terway 三向专项 **8** 项。
 > 裁决填法：在「你的裁决」列填 `按建议` / `保留副本来路径` / `保留全部（同场景不同实例）` / `需看全文 diff`。
 > 「提示」列：相似度 <30% 时建议先确认是否为同场景不同实例（如不同工单号），低相似合并需谨慎。
 > 相似度口径：行级 Jaccard（保守，跨结构重排的两版会显著偏低）；「差异摘要」以双方独有章节为准更可靠。
-> **裁决执行状态（2026-11-18）**：A ✅ 已执行；B1+B2/B4 ✅ 落桩 37 份；B3a ✅ 工单 12 篇标题加（工单 NNN）；B3b ✅ 培训 7 篇加受众限定词；B3① ✅ 语料 5 组以 `.with_actions` 为主场落桩（共落桩 42 份）；**C ✅ 94 组整批签认**；余 **B3② 10 组见 D 节待裁决**（title_collisions 160 → 104，QA 悬空 0）。
+> **裁决执行状态（2026-11-18）**：A ✅ 已执行；B1+B2/B4 ✅ 落桩 37 份；B3a ✅ 工单 12 篇标题加（工单 NNN）；B3b ✅ 培训 7 篇加受众限定词；B3① ✅ 语料 5 组以 `.with_actions` 为主场落桩（共落桩 42 份）；**C ✅ 94 组整批签认**；**B3② ✅ 10 组已执行**（标题消歧 4 组、回填后落桩 3 组、副本/重复件落桩 3 组；title_collisions 160 → 95，QA 悬空 0）。
 
 ## A. terway 三向专项（F3，plan S-1）
 
 > plan 主场 = `05-网络/06-Terway/`；本表用于确认各主题的择优方向与 23-实体侧压卡。
 > **✅ 已裁决并执行（2026-11-18）**：全部按主场；18 个独有节回填主场（01-product 4 节、07-fta 4 节、其余 6 主题各 1-2 节），锚节编号顺延；`01-K8s网络核心/42-49` 旧版 8 篇落桩，`网络-qa` source 同步改写（726 条，悬空 0）。下表为裁决时快照，源侧行数现为桩。
-> **待裁决**：仅 B3② 10 组（见 D 节）；B/C 已执行或签认。23-实体侧 8 张卡按 plan S-1「压成 1 张速览卡」仍为待办。
+> **✅ B/C/B3② 已全部裁决执行**；23-实体侧 8 张卡按 plan S-1「压成 1 张速览卡」仍为待办。
 
 | 主题 | 05/01 系列 (行) | 05/06 主场 (行) | 23/04 (行) | 05/01 vs 主场 相似度 | 差异摘要 | 你的裁决 |
 |---|---:|---:|---:|---:|---|---|
@@ -33,31 +33,31 @@ last_updated: '2026-11-18'
 | 性能调优 | 3 | 748 | 111 | 0% | 主场独有 47 节: 1. 网络模式性能对比, 1.1 吞吐量与延迟基准, 1.2 模式选型决策矩阵… | |
 | 故障排查 | 3 | 926 | 127 | 0% | 主场独有 62 节: 1. FTA 故障树全景, 10. AND 门组合问题, 10.1 IP 完全耗尽 (vSwitch 空 + IP 泄漏)… | |
 
-## B. 真同题异版（58 组：48 组已裁决执行，余 10 组待裁决）
+## B. 真同题异版（58 组：✅ 全部已裁决执行）
 
 | # | 标题 | 成员（主场**加粗**） | 主场建议(规则) | 相似度 vs 主场 | 行数(主/副) | 差异摘要 | 提示 | 你的裁决 |
 |---:|---|---|---|---:|---|---|---|---|
 | 1 | statefulset pod 启动失败：pvc 未绑定 | **wiki/13-生产运维/05-工单案例/ticket-case-028-statefulset-pvc-unbound.md**<br>wiki/13-生产运维/05-工单案例/ticket-case-033-statefulset-pvc-unbound.md<br>wiki/13-生产运维/05-工单案例/ticket-case-038-statefulset-pvc-unbound.md<br>wiki/13-生产运维/05-工单案例/ticket-case-043-statefulset-pvc-unbound.md | R-SHORT | 14%, 12%, 11% | 270/270/227/200 | 章节结构一致，差异在正文措辞/数据 | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·标题消歧（工单 028/033/038/043）|
 | 2 | pod 安全策略 | wiki/17-系统基础/06-知识字典/security/pod-security-policies.md<br>**wiki/17-系统基础/06-知识字典/security/pod-security-policy.md**<br>skills/04-工作负载/pod/安全/字典-pod-security-policies.md<br>skills/04-工作负载/pod/安全/字典-pod-security-policy.md | R-WIKI | 14%, 6%, 26% | 197/199/57/59 | 副本独有 7 节: PSP 准入评估链路（v1.21-，已弃用）, 使用场景, 替代方案…；主场独有 6 节: PSP 校验字段全景与决策流, PSP 的功能（已弃用）, PSP 的历史… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·落桩（主场 `wiki/17-系统基础/06-知识字典/security/pod-security-policy.md`）|
-| 3 | k8s 网络快问快答与面试模拟对话 | wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md<br>wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md<br>**wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md** | R-SHORT | 40%, 75% | 768/361/623 | 主场独有 19 节: 43. 发往 ClusterIP 的数据包，在 iptables 模式下究竟在哪台机器的哪个链上被 DNAT 成 Pod IP？kube-proxy 的规则数量与 Service/Endpoint 数量是什么关系，为什么大规模集群有性能问题而 IPVS 能缓解？, 44. conntrack 表满（`nf_conntrack: table full, dropping packet`）时丢的是什么包，为什么表现为新建连接失败但已有连接正常？UDP 服务（如 CoreDNS）高并发下的 conntrack 竞态发生在哪一步，常见的两种缓解手段是什么？, 45. Flannel 的 VXLAN 与 host-gw 后端转发路径有什么本质区别？封装开销各是多少？Directrouting 混合模式解决了什么？… |  | ⏳ 待裁决（见 D 节）|
-| 4 | k8s 存储高级快问快答（12 题） | **wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md**<br>wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md<br>wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md | R-SHORT | 79%, 56% | 196/235/318 | 章节结构一致，差异在正文措辞/数据 |  | ⏳ 待裁决（见 D 节）|
+| 3 | k8s 网络快问快答与面试模拟对话 | wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md<br>wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md<br>**wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md** | R-SHORT | 40%, 75% | 768/361/623 | 主场独有 19 节: 43. 发往 ClusterIP 的数据包，在 iptables 模式下究竟在哪台机器的哪个链上被 DNAT 成 Pod IP？kube-proxy 的规则数量与 Service/Endpoint 数量是什么关系，为什么大规模集群有性能问题而 IPVS 能缓解？, 44. conntrack 表满（`nf_conntrack: table full, dropping packet`）时丢的是什么包，为什么表现为新建连接失败但已有连接正常？UDP 服务（如 CoreDNS）高并发下的 conntrack 竞态发生在哪一步，常见的两种缓解手段是什么？, 45. Flannel 的 VXLAN 与 host-gw 后端转发路径有什么本质区别？封装开销各是多少？Directrouting 混合模式解决了什么？… |  | ✅ 已执行·落桩（副本 2/3 → 主场）|
+| 4 | k8s 存储高级快问快答（12 题） | **wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md**<br>wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md<br>wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md | R-SHORT | 79%, 56% | 196/235/318 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（主场改 `23-k8s-storage-advanced-quick-qa 4.md`）|
 | 5 | ingress 控制器 pod 异常导致业务访问 404/502 | wiki/13-生产运维/05-工单案例/ticket-case-011-ingress-controller-pod-404-502.md<br>wiki/13-生产运维/05-工单案例/ticket-case-036-ingress-controller-pod-exception.md<br>**wiki/13-生产运维/05-工单案例/ticket-case-046-ingress-controller-404-502.md** | R-SHORT | 12%, 13% | 259/187/210 | 章节结构一致，差异在正文措辞/数据 | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·标题消歧（工单 011/036/046）|
 | 6 | ingress 控制器 pod 异常导致 404/502 | wiki/13-生产运维/05-工单案例/ticket-case-026-ingress-controller-pod-502.md<br>wiki/13-生产运维/05-工单案例/ticket-case-031-ingress-controller-oom-502-404.md<br>**wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md** | R-SHORT | 12%, 14% | 215/226/226 | 章节结构一致，差异在正文措辞/数据 | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·标题消歧（工单 026/031/041）|
 | 7 | pod crashloopbackoff & oomkilled 诊断与修复 | **wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md**<br>skills/04-工作负载/pod/01-pod-crashloop-oomkilled.md<br>skills/04-工作负载/pod/诊断排障/技能体系-02-pod-crashloop-oomkilled.md | R-WIKI | 3%, 100% | 1537/538/1537 | 副本独有 22 节: 10.2 生产案例, 10.3 混沌工程验证, 10.4 监控告警配置…；主场独有 33 节: 10.2 深度知识引用, 10.3 关键知识点备忘, 10.4 Skill 改进记录… |  | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md`）|
 | 8 | kubernetes 通用最佳实践参考 (best-practices) | wiki/20-最佳实践/01-best-practices/common-best-practices-2.md<br>**wiki/20-最佳实践/01-best-practices/common-best-practices.md**<br>skills/01-集群运维/cluster-upgrade/最佳实践/common-best-practices.md | R-WIKI | 97%, 94% | 745/745/745 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（主场 `wiki/20-最佳实践/01-best-practices/common-best-practices.md`）|
 | 9 | 第二课：pod - k8s 的最小调度单元 [fundamentals] | skills/04-工作负载/pod/培训/03-pod-basics.md<br>**skills/04-工作负载/pod/培训/lecturer/02-pod-basics.md**<br>skills/04-工作负载/pod/培训/lecturer-02-pod-basics.md | R-TRAIN | 98%, 99% | 438/438/438 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·标题消歧（培训受众/场景）|
-| 10 | kubernetes 多集群 fleet gitops 运维指南 | **wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md**<br>wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md | R-SHORT | 9% | 997/472 | 副本独有 10 节: 1.1 Fleet GitOps 分层架构, 2.1 基础设施前提, 2.2 必备工具…；主场独有 34 节: 1.1 适用场景, 1.2 适用范围, 1.3 不适用场景… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ⏳ 待裁决（见 D 节）|
-| 11 | kubernetes 灾难恢复与业务连续性 runbook | **wiki/12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1.md**<br>wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md | R-SHORT | 4% | 597/294 | 副本独有 13 节: 1.1 DR 架构模式选型, 2.1 备份基础设施, 2.2 必备工具…；主场独有 16 节: 2.1 信息清单（必须提前维护）, 2.2 工具与权限, 2.3 备份就绪检查（每日自动巡检）… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ⏳ 待裁决（见 D 节）|
+| 10 | kubernetes 多集群 fleet gitops 运维指南 | **wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md**<br>wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md | R-SHORT | 9% | 997/472 | 副本独有 10 节: 1.1 Fleet GitOps 分层架构, 2.1 基础设施前提, 2.2 必备工具…；主场独有 34 节: 1.1 适用场景, 1.2 适用范围, 1.3 不适用场景… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·回填 1.4/3.3.6/3.7.4 后落桩（主场 `10-fleet-gitops-operations-guide.md`）|
+| 11 | kubernetes 灾难恢复与业务连续性 runbook | **wiki/12-可靠性/02-灾难恢复/13-disaster-recovery-bc-runbook-v1.md**<br>wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md | R-SHORT | 4% | 597/294 | 副本独有 13 节: 1.1 DR 架构模式选型, 2.1 备份基础设施, 2.2 必备工具…；主场独有 16 节: 2.1 信息清单（必须提前维护）, 2.2 工具与权限, 2.3 备份就绪检查（每日自动巡检）… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·标题消歧（v1 / v2）|
 | 12 | 节点磁盘压力 diskpressure 导致 pod 被驱逐 | **wiki/13-生产运维/05-工单案例/ticket-case-035-node-diskpressure-eviction.md**<br>wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md | R-SHORT | 16% | 239/226 | 副本独有 1 节: 风险与影响评估 | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·标题消歧（工单 035/040）|
-| 13 | 容器运行时安全加固指南 | wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md<br>**wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md** | R-SHORT | 19% | 362/304 | 副本独有 10 节: 3. 核心概念/架构, 4.1 启用默认 seccomp Profile, 4.2 AppArmor 配置（Ubuntu/Debian）…；主场独有 15 节: 3. 核心概念与架构, 3.1 运行时安全分层, 3.2 关键原则… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ⏳ 待裁决（见 D 节）|
-| 14 | k8s 运维诊断技能库 (02-ai-agents) | **wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md**<br>wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/SKILL.md | R-SHORT | 95% | 386/393 | 副本独有 1 节: 相关概念 |  | ⏳ 待裁决（见 D 节）|
+| 13 | 容器运行时安全加固指南 | wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md<br>**wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md** | R-SHORT | 19% | 362/304 | 副本独有 10 节: 3. 核心概念/架构, 4.1 启用默认 seccomp Profile, 4.2 AppArmor 配置（Ubuntu/Debian）…；主场独有 15 节: 3. 核心概念与架构, 3.1 运行时安全分层, 3.2 关键原则… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·回填 4.8 特权容器策略后落桩（主场 `09-runtime-security-hardening.md`）|
+| 14 | k8s 运维诊断技能库 (02-ai-agents) | **wiki/15-AI基础设施/02-AI-Agents/openclaw-workspace/SKILL.md**<br>wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/SKILL.md | R-SHORT | 95% | 386/393 | 副本独有 1 节: 相关概念 |  | ✅ 已执行·标题消歧（OpenClaw 工作区 / PVC 存储技能）|
 | 15 | 02 - pod 与容器生命周期事件 | **wiki/17-系统基础/04-K8s事件/02-pod-container-lifecycle-events.md**<br>skills/04-工作负载/pod/生命周期与事件/01-pod-container-lifecycle-events.md | R-WIKI | 99% | 2523/2523 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（主场 `wiki/17-系统基础/04-K8s事件/02-pod-container-lifecycle-events.md`）|
 | 16 | eks 身份认证 — irsa 与 pod identity | **wiki/18-云厂商/02-AWS-EKS/04-eks-iam-irsa-pod-identity.md**<br>skills/04-工作负载/pod/云厂商/01-eks-iam-irsa-pod-identity.md | R-WIKI | 98% | 428/428 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（主场 `wiki/18-云厂商/02-AWS-EKS/04-eks-iam-irsa-pod-identity.md`）|
 | 17 | pod pending 状态深度诊断 | **wiki/19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md**<br>skills/04-工作负载/pod/诊断排障/01-pod-pending-diagnosis.md | R-WIKI | 99% | 1808/1808 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md`）|
 | 18 | 节点组件故障排查 | **wiki/19-故障诊断/04-高级排障/01-node-component-troubleshooting.md**<br>skills/03-节点/node/03-node-component-troubleshooting.md | R-WIKI | 4% | 803/501 | 副本独有 38 节: 1. 概述, 2. 症状识别, 3. kubelet 故障排查…；主场独有 27 节: 1. 概述与诊断框架, 1.1 节点组件概述, 1.2 常见问题现象分类… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/04-高级排障/01-node-component-troubleshooting.md`）|
 | 19 | 备份/恢复异常故障树分析 | **wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md**<br>skills/02-控制面/etcd/backup-restore-fta.md | R-WIKI | 6% | 779/405 | 副本独有 27 节: 1. 概述, 10. 知识进化, 2. 症状识别…；主场独有 9 节: Agent 友好性, FTA 评审检查表, JSON 工作流（含与/或门控件）… | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md`）|
 | 20 | pod pending 调度失败诊断与修复 | **wiki/19-故障诊断/08-技能体系/03-pod-pending.md**<br>skills/04-工作负载/pod/诊断排障/技能体系-03-pod-pending.md | R-WIKI | 100% | 1566/1566 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/08-技能体系/03-pod-pending.md`）|
-| 21 | node notready 远程顾问对话脚本 | wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/DIALOGUE.md<br>**wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md** | R-SHORT | 94% | 624/604 | 章节结构一致，差异在正文措辞/数据 |  | ⏳ 待裁决（见 D 节）|
+| 21 | node notready 远程顾问对话脚本 | wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/DIALOGUE.md<br>**wiki/19-故障诊断/08-技能体系/skill-set/k8s-pvc-storage/DIALOGUE.md** | R-SHORT | 94% | 624/604 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·落桩（pvc 副本为误放重复件，主场 node-notready）|
 | 22 | 命令输出解读语料 — agent 诊断推理核心数据 [故障诊断] | **wiki/19-故障诊断/10-QA语料/command-output-diagnosis.md**<br>wiki/19-故障诊断/10-QA语料/command-output-diagnosis.with_actions.md | R-SHORT | 17% | 488/673 | 副本独有 3 节: 4.1 Service 无法访问, 4.2 CoreDNS 解析失败, 4.3 Ingress 502 Bad Gateway；主场独有 3 节: 4.1 [[service|Service]] 无法访问, 4.2 [[coredns|CoreDNS]] 解析失败, 4.3 [[ingress|Ingress]] 502 Bad Gateway | ⚠️ 低相似(<30%)：先确认是否同场景不同实例 | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/10-QA语料/command-output-diagnosis.with_actions.md`，与建议方向相反）|
 | 23 | 命令输出诊断语料 — p0 优先级 | **wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p0.md**<br>wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p0.with_actions.md | R-SHORT | 78% | 19785/21891 | 副本独有 62 节: Domain: CERT (9 条), Domain: CP (13 条), Domain: GENERAL (30 条)…；主场独有 107 节: Domain: CERT (15 条), Domain: CP (15 条), Domain: GENERAL (36 条)… |  | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p0.with_actions.md`，与建议方向相反）|
 | 24 | 命令输出诊断语料 — p1 优先级 | **wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p1.md**<br>wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p1.with_actions.md | R-SHORT | 78% | 19785/21891 | 副本独有 62 节: Domain: CERT (9 条), Domain: CP (13 条), Domain: GENERAL (30 条)…；主场独有 107 节: Domain: CERT (15 条), Domain: CP (15 条), Domain: GENERAL (36 条)… |  | ✅ 已执行·落桩（主场 `wiki/19-故障诊断/10-QA语料/generated/command-output-diagnosis-p1.with_actions.md`，与建议方向相反）|
@@ -88,9 +88,9 @@ last_updated: '2026-11-18'
 | 49 | 场景: 故障排查 | **wiki/20-最佳实践/07-scenarios/troubleshooting.md**<br>skills/04-工作负载/pod/最佳实践/troubleshooting.md | R-WIKI | 65% | 131/91 | 主场独有 4 节: 案例1：DNS 解析间歇性失败导致服务抖动, 案例2：节点 NotReady 但 Pod 仍在运行, 生产案例… |  | ✅ 已执行·落桩（主场 `wiki/20-最佳实践/07-scenarios/troubleshooting.md`）|
 | 50 | 场景: 升级迁移 | **wiki/20-最佳实践/07-scenarios/upgrade-migration.md**<br>skills/01-集群运维/cluster-upgrade/最佳实践/upgrade-migration.md | R-WIKI | 65% | 130/90 | 主场独有 4 节: 案例1：K8s 版本升级后 API 废弃导致服务中断, 案例2：跨集群迁移时 PV 数据丢失, 生产案例… |  | ✅ 已执行·落桩（主场 `wiki/20-最佳实践/07-scenarios/upgrade-migration.md`）|
 | 51 | 第三课：deployment - 应用部署管理器 [fundamentals] | skills/04-工作负载/deployment/培训/01-deployment-basics.md<br>**skills/04-工作负载/deployment/培训/lecturer/01-deployment-basics.md** | R-TRAIN | 98% | 433/433 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·标题消歧（培训受众/场景）|
-| 52 | pod 异常故障树分析 (skills) | **skills/04-工作负载/pod/pod-fta.md**<br>skills/04-工作负载/pod/诊断排障/pod-fta-故障树list.md | R-SHORT | 35% | 102/151 | 副本独有 5 节: 告警规则, 案例1: 资源不足导致大规模 Pending, 案例2: 镜像拉取失败导致 CrashLoopBackOff…；主场独有 3 节: 升级决策点, 案例 1: Pod CrashLoopBackOff——配置错误导致启动失败, 案例 2: Pod Pending——资源请求超出节点可分配量 |  | ⏳ 待裁决（见 D 节）|
-| 53 | customizing pods | **skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/customizing_pod_templates.md**<br>skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/customizing_pod_templates.md | R-SHORT | 97% | 359/359 | 章节结构一致，差异在正文措辞/数据 |  | ⏳ 待裁决（见 D 节）|
-| 54 | port forward | **skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/port_forward_to_pods.md**<br>skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/port_forward_to_pods.md | R-SHORT | 90% | 70/84 | 副本独有 1 节: Pod in a Service |  | ⏳ 待裁决（见 D 节）|
+| 52 | pod 异常故障树分析 (skills) | **skills/04-工作负载/pod/pod-fta.md**<br>skills/04-工作负载/pod/诊断排障/pod-fta-故障树list.md | R-SHORT | 35% | 102/151 | 副本独有 5 节: 告警规则, 案例1: 资源不足导致大规模 Pending, 案例2: 镜像拉取失败导致 CrashLoopBackOff…；主场独有 3 节: 升级决策点, 案例 1: Pod CrashLoopBackOff——配置错误导致启动失败, 案例 2: Pod Pending——资源请求超出节点可分配量 |  | ✅ 已执行·回填案例/告警/预防后落桩（主场 `pod/pod-fta.md`）|
+| 53 | customizing pods | **skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/customizing_pod_templates.md**<br>skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/customizing_pod_templates.md | R-SHORT | 97% | 359/359 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·标题消歧（kubectl 1.18 / 1.20）|
+| 54 | port forward | **skills/04-工作负载/pod/上游源码/kubectl-docs/1.18/port_forward_to_pods.md**<br>skills/04-工作负载/pod/上游源码/kubectl-docs/1.20/port_forward_to_pods.md | R-SHORT | 90% | 70/84 | 副本独有 1 节: Pod in a Service |  | ✅ 已执行·标题消歧（kubectl 1.18 / 1.20）|
 | 55 | 第一课：kubernetes 入门 [fundamentals] | skills/04-工作负载/pod/培训/02-what-is-kubernetes.md<br>**skills/04-工作负载/pod/培训/lecturer/01-what-is-kubernetes.md** | R-TRAIN | 98% | 360/360 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·标题消歧（培训受众/场景）|
 | 56 | day 19: pod 容器组基础 | skills/04-工作负载/pod/培训/inner-day-19-pod-basics.md<br>**skills/04-工作负载/pod/培训/inner-training/week-3-node-workload/day-19-pod-basics.md** | R-TRAIN | 99% | 572/572 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·标题消歧（培训受众/场景）|
 | 57 | 故障排查决策树 - mermaid 可视化版 [troubleshooting] | **skills/04-工作负载/pod/培训/lecturer/decision-tree-mermaid.md**<br>skills/04-工作负载/pod/培训/troubleshooting/decision-tree-mermaid.md | R-SHORT | 100% | 572/572 | 章节结构一致，差异在正文措辞/数据 |  | ✅ 已执行·标题消歧（培训受众/场景）|
@@ -198,9 +198,11 @@ last_updated: '2026-11-18'
 | 93 | 资源配额 | wiki/17-系统基础/06-知识字典/configuration/resource-quota.md（45 行）<br>wiki/17-系统基础/06-知识字典/scheduling/resource-quota.md（70 行） | |
 | 94 | 限制范围 | wiki/17-系统基础/06-知识字典/configuration/limit-range.md（45 行）<br>wiki/17-系统基础/06-知识字典/scheduling/limitrange.md（76 行） | |
 
-## D. B3② 真同题异版细摘要（10 组，待裁决）
+## D. B3② 真同题异版细摘要（10 组，✅ 已全部执行）
 
 > 四类建议：**甲**=直接落桩（结构子集/副本无独有内容）｜**乙**=回填独有节后落桩（A 批同模式）｜**丙**=保留+标题消歧（不同实体或版本对）｜**丁**=需看全文 diff。
+> **✅ 执行结果（2026-11-18）**：甲 1 组直接落桩；乙 3 组回填独有内容后落桩；丙 5 组标题消歧（其中 node notready DIALOGUE 经核为误放重复件——正文 95.5% 相同、pvc 侧唯一独有内容为交叉分析链接——改按落桩处理，主场 node-notready）；丁 1 组（存储快问快答）改以 `4.md` 为主场并落桩 2/3。
+> 另：重新生成 inventory 后发现 1 组新增撞名——`wiki/32-故障案例库/templates/` 的 `incident-report.md` 与 `quick-entry.md` 共用占位标题 `<公司> <一句话故障标题>`，属模板合理共存，暂不处理。
 
 | # | 组 | 主场 / 副本（行·相似度） | 关键差异 | 建议 |
 |---:|---|---|---|---|

@@ -2170,7 +2170,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ 把"Karmada 做了故障迁移"等同"业务已恢复"（流量没切就是空转）；❌ 不谈数据层就承诺多活 RPO=0；❌ 异地机房当同城双活用（延迟决定复制模式）；❌ 演练过一次就当容灾达标。
 
-**下一问**｜多集群 GitOps 怎么防漂移？ArgoCD ApplicationSet 多集群生成器与 Hub 单点怎么解？（→ 底料 `wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md`，呼应 Q110 的 Hub 对账风险）
+**下一问**｜多集群 GitOps 怎么防漂移？ArgoCD ApplicationSet 多集群生成器与 Hub 单点怎么解？（→ 底料 `wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md`，呼应 Q110 的 Hub 对账风险）
 
 ---
 

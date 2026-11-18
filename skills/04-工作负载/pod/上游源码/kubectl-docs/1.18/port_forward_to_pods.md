@@ -1,5 +1,5 @@
 ---
-title: Port Forward
+title: Port Forward（kubectl 1.18）
 category: reference
 tags:
 - reference

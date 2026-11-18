@@ -34,7 +34,7 @@ last_updated: 2026-07
 - [[wiki/11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts Progressive Delivery]]
 - [[wiki/11-发布变更/01-GitOps/12-gitops-pipeline-practices.md|Gitops Pipeline Practices]]
 - [[wiki/11-发布变更/01-GitOps/13-flagger-automated-canary.md|Flagger Automated Canary]]
-- [[wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md|Fleet Gitops Operations Guide]]
+- [[wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md|Fleet Gitops Operations Guide]]
 - [[wiki/11-发布变更/01-GitOps/17-argo-cd-gitops-guide.md|Argo Cd Gitops Guide]]
 - [[wiki/11-发布变更/01-GitOps/18-flux-gitops-guide.md|Flux Gitops Guide]]
 - [[wiki/11-发布变更/01-GitOps/19-helm-production-guide.md|Helm Production Guide]]

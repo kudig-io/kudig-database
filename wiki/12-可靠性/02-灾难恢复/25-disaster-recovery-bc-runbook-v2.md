@@ -1,5 +1,5 @@
 ---
-title: Kubernetes 灾难恢复与业务连续性 Runbook
+title: Kubernetes 灾难恢复与业务连续性 Runbook（v2）
 description: 覆盖 RTO/RPO 定义、etcd 仲裁丢失恢复、Velero 集群级还原、可用区/区域故障转移、DR 演练节奏与 BC Runbook 模板的生产级手册
 summary: 覆盖 RTO/RPO 定义、etcd 仲裁丢失恢复、Velero 集群级还原、可用区/区域故障转移、DR 演练节奏与 BC Runbook 模板的生产级手册
 category: reliability-engineering

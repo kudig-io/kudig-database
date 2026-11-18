@@ -1,5 +1,5 @@
 ---
-title: Customizing Pods
+title: Customizing Pods（kubectl 1.18）
 category: reference
 tags:
 - reference

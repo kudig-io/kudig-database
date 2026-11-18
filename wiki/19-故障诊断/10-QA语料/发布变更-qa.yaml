@@ -417,18 +417,18 @@ qa_pairs:
   source: wiki/11-发布变更/01-GitOps/13-flagger-automated-canary.md
 - type: concept
   question: 在 Kubernetes 多集群 Fleet GitOps 运维指南 中, 适用场景与范围 是什么?
-  answer: 参见 wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md 的「适用场景与范围」章节。
-  source: wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md
+  answer: 参见 wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md 的「适用场景与范围」章节。
+  source: wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md
   section: 适用场景与范围
 - type: concept
   question: 在 Kubernetes 多集群 Fleet GitOps 运维指南 中, 前置条件与工具 是什么?
-  answer: 参见 wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md 的「前置条件与工具」章节。
-  source: wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md
+  answer: 参见 wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md 的「前置条件与工具」章节。
+  source: wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md
   section: 前置条件与工具
 - type: comparison
   question: Kubernetes 多集群 Fleet GitOps 运维指南 中有哪些技术对比?
-  answer: 参见 wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md 中的对比分析。
-  source: wiki/11-发布变更/01-GitOps/14-fleet-gitops-operations-guide.md
+  answer: 参见 wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md 中的对比分析。
+  source: wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md
 - type: concept
   question: 在 Helm 生产模式 中, 概述 是什么?
   answer: 参见 wiki/11-发布变更/01-GitOps/15-helm-production-patterns.md 的「概述」章节。

@@ -96,6 +96,44 @@ base_confidence: 0.7
 
 **修复**: 🟡 降低 Pod memory request 或扩容节点
 
+### 案例 3: 资源不足导致大规模 Pending
+
+**时间线**:
+- 09:00 业务团队批量提交 200 个 Pod（各请求 4C8G）
+- 09:01 集群可分配资源耗尽，150 个 Pod Pending
+- 09:05 告警触发，运维介入
+- 09:15 确认 Cluster Autoscaler 未触发（节点池达到上限）
+- 09:20 临时调高节点池上限，新节点加入后 Pod 调度成功
+
+**根因链**:
+```
+批量提交 → 资源耗尽 → FailedScheduling(Insufficient cpu/memory)
+→ CA未扩容(节点池max限制) → Pod持续Pending
+```
+
+**修复**:
+```bash
+# 🟢 查看调度失败原因
+kubectl get events -n ${NS} --field-selector reason=FailedScheduling --sort-by='.lastTimestamp' | tail -20
+# 🟡 调整节点池上限
+kubectl patch nodepool ${POOL} -p '{"spec":{"maxSize":50}}'
+```
+
+### 案例 4: 镜像拉取失败导致 CrashLoopBackOff
+
+**现象**: Pod 状态 ImagePullBackOff，`describe` 显示 `rpc error: code = Unknown desc = Error response from daemon: unauthorized`
+
+**根因**: 私有镜像仓库 Secret 过期，imagePullSecrets 引用的 token 已失效
+
+**修复**:
+```bash
+# 🟡 更新 imagePullSecret
+kubectl create secret docker-registry regcred --docker-server=${REGISTRY} --docker-username=${USER} --docker-password=${TOKEN} -n ${NS} --dry-run=client -o yaml | kubectl apply -f -
+# 🟢 验证
+kubectl delete pod ${POD} -n ${NS}  # 触发重建
+kubectl get pod ${POD} -n ${NS} -w
+```
+
 ## 升级决策点
 
 | 级别 | 条件 | 动作 |
@@ -103,6 +141,40 @@ base_confidence: 0.7
 | P0 | 核心服务 Pod 全部不可用 | 立即回滚 + 检查配置 |
 | P1 | 部分 Pod 异常 | 检查日志和事件 |
 | P2 | Pod 重启偶发 | 优化探针配置 |
+
+## 预防与监控
+
+### 告警规则
+
+```yaml
+groups:
+- name: pod-alerts
+  rules:
+  - alert: PodPendingTooLong
+    expr: kube_pod_status_phase{phase="Pending"} == 1
+    for: 10m
+    labels:
+      severity: warning
+  - alert: PodCrashLooping
+    expr: rate(kube_pod_container_status_restarts_total[15m]) > 0
+    for: 5m
+    labels:
+      severity: critical
+  - alert: PodNotReady
+    expr: kube_pod_status_ready{condition="true"} == 0
+    for: 15m
+    labels:
+      severity: warning
+```
+
+### 预防措施
+
+| 措施 | 说明 | 优先级 |
+|------|------|--------|
+| 资源配置合理性审查 | requests 不超过节点可分配量的 80% | P0 |
+| 镜像拉取失败重试 | 配置 imagePullPolicy + 镜像缓存 | P0 |
+| PDB 保护 | 避免维护时全部 Pod 被驱逐 | P1 |
+| 节点池自动扩容 | CA 配置合理的 scale-up 触发条件 | P1 |
 
 ## 面试要点
 
@@ -114,6 +186,15 @@ base_confidence: 0.7
 
 3. **Q: 如何设计健康的探针配置？**
    A: livenessProbe: 检测死锁，失败重启容器；readinessProbe: 检测就绪，失败从 Service 移除；startupProbe: 保护慢启动应用。建议: initialDelaySeconds 充足、periodSeconds 不要太短、failureThreshold 3-5。
+
+4. **Q: Pod Pending 的常见原因和排查步骤？**
+   A: 资源不足(Insufficient cpu/memory) → 节点污点(taint) → 亲和性不匹配 → PVC未绑定 → 调度器异常。用 `kubectl describe pod` 查看 Events
+
+5. **Q: CrashLoopBackOff 的排查思路？**
+   A: `kubectl logs --previous` 查看上次崩溃日志 → 检查 livenessProbe 配置 → 验证资源限制(OOMKilled) → 检查依赖服务可达性
+
+6. **Q: 如何避免滚动更新时的服务中断？**
+   A: 配置合理的 maxUnavailable/maxSurge → readinessProbe 确保新 Pod 就绪后再终止旧 Pod → preStop hook 优雅关闭 → PDB 保证最小可用数
 
 ## 相关链接
 

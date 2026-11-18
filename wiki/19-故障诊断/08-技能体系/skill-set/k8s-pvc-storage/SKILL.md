@@ -1,5 +1,5 @@
 ---
-title: K8S 运维诊断技能库 (02-ai-agents)
+title: K8S 运维诊断技能库 (02-ai-agents)（PVC 存储技能）
 description: 'title: K8S 运维诊断技能库'
 summary: 'title: K8S 运维诊断技能库'
 category: general

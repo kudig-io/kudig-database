@@ -1168,23 +1168,23 @@ qa_pairs:
   source: wiki/14-容器运行时/03-containerd-CRI-O/07-rootless-containers-guide.md
 - type: concept
   question: 在 容器运行时安全加固指南 中, 适用场景与范围 是什么?
-  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md 的「适用场景与范围」章节。
-  source: wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md
+  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md 的「适用场景与范围」章节。
+  source: wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md
   section: 适用场景与范围
 - type: concept
   question: 在 容器运行时安全加固指南 中, 前置条件与工具 是什么?
-  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md 的「前置条件与工具」章节。
-  source: wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md
+  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md 的「前置条件与工具」章节。
+  source: wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md
   section: 前置条件与工具
 - type: concept
   question: 在 容器运行时安全加固指南 中, 核心概念/架构 是什么?
-  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md 的「核心概念/架构」章节。
-  source: wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md
+  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md 的「核心概念/架构」章节。
+  source: wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md
   section: 核心概念/架构
 - type: concept
   question: 在 容器运行时安全加固指南 中, 标准操作流程 是什么?
-  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md 的「标准操作流程」章节。
-  source: wiki/14-容器运行时/03-containerd-CRI-O/08-runtime-security-hardening-2.md
+  answer: 参见 wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md 的「标准操作流程」章节。
+  source: wiki/14-容器运行时/03-containerd-CRI-O/09-runtime-security-hardening.md
   section: 标准操作流程
 - type: concept
   question: 在 容器运行时安全加固指南 中, 适用场景与范围 是什么?

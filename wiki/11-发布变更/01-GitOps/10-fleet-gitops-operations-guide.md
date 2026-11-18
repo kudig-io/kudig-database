@@ -103,6 +103,17 @@ authors:
 - 集群升级与节点变更，请参考 [[wiki/01-集群基础/00-总览/03-production-readiness-operations-guide.md|集群基础域生产就绪运维指南]]；
 - 跨集群网络与 Service Mesh，请参考 [[wiki/05-网络/00-总览/02-production-readiness-operations-guide.md|网络流量域生产就绪运维指南]]。
 
+### 1.4 Fleet GitOps 分层架构
+
+典型的 Fleet GitOps 架构分为四层：
+
+- **配置层**：Git 仓库保存应用声明、环境覆盖、策略与模板。仓库结构应清晰区分全局配置、环境配置与租户配置。
+- **分发层**：Argo CD ApplicationSet 根据集群元数据（标签、区域、环境）生成 Application，并下发到各集群。
+- **调度/治理层**：Karmada 负责跨集群应用调度，OCM 负责集群注册、策略下发与批量运维，Cluster API 负责集群生命周期。
+- **观测层**：Prometheus + Thanos/Mimir 聚合多集群指标，Loki/Vector 聚合日志，Jaeger/Tempo 聚合链路。
+
+四层之间通过声明式 API 解耦，使得每一层可以独立演进。例如，新增一个集群只需在 OCM 注册并打上标签，ApplicationSet 会自动为其生成应用；删除集群则只需移除注册，GitOps 会自动清理相关 Application。
+
 ---
 
 ## 2. 前置条件与工具
@@ -434,6 +445,35 @@ spec:
 | `matrix` | 两个生成器的笛卡尔积 | 目录 × 集群 × 版本等多维组合 | 组合爆炸时需拆分 ApplicationSet |
 | `scmProvider` | GitHub/GitLab 组织/仓库 | 多仓库多租户场景 | 需要 SCM token 与 API 限流控制 |
 
+#### 3.3.6 推荐 Git 仓库结构
+
+```
+fleet-gitops/
+├── apps/
+│   ├── payment/
+│   │   ├── base/
+│   │   └── overlays/
+│   │       ├── dev/
+│   │       ├── staging/
+│   │       └── production/
+│   └── order/
+├── platform/
+│   ├── monitoring/
+│   ├── ingress/
+│   └── cert-manager/
+├── policies/
+│   ├── kyverno/
+│   └── opa-gatekeeper/
+├── clusters/
+│   ├── beijing-prod/
+│   └── shanghai-prod/
+└── applicationsets/
+    ├── platform-base.yaml
+    └── apps-matrix.yaml
+```
+
+该结构将应用、平台组件、策略与集群配置分离，便于权限控制与审计。环境覆盖放在应用目录内，集群特定配置放在 `clusters/` 目录。
+
 ### 3.4 Step 4 — 跨集群 Secret 同步
 
 Secret 不应直接存入 Git。推荐通过 External Secrets Operator 从集中式 Secret 后端同步到各集群。
@@ -642,6 +682,19 @@ done
 - **多集群资源大盘**: 按 `cluster`、`region`、`environment` 聚合的 CPU/Memory/磁盘/网络；
 - **发布门控大盘**: 各 wave 当前版本、批次进度、金丝雀分析结果；
 - **Secret 同步大盘**: ExternalSecret 同步成功率、SecretStore 可用性、刷新延迟。
+
+#### 3.7.4 全局指标聚合与分级告警
+
+Fleet 可观测性不仅是要看到每个集群的状态，更要能横向比较、快速定位异常集群与异常应用。由于集群数量多、分布广，单一集群的告警很容易被淹没，需要建立分级告警机制：集群级告警由本地值班处理，跨集群或平台级告警由平台 SRE 处理。
+
+每个集群部署 Prometheus，通过 Remote Write 或 Thanos Sidecar 将指标发送到全局 Thanos Query/Mimir。必须统一指标标签，至少包含 `cluster`、`region`、`environment`、`team`，标签不一致会导致全局查询结果缺失或重复。
+
+```promql
+# Thanos Query 查询示例
+sum by (cluster) (rate(container_cpu_usage_seconds_total{namespace="production"}[5m]))
+```
+
+对于边缘或网络受限集群，可先在本地聚合后再上传，减少跨地域带宽消耗。日志与链路同理：在集群侧部署 Fluent Bit/Vector 做过滤与压缩，只将 ERROR 级别与关键业务日志、采样后的链路数据上传到中心 Loki/Tempo。
 
 ### 3.8 Step 8 — 大规模 Fleet 性能优化与分片
 

@@ -323,4 +323,4 @@ percentageOfNodesToScore: 30
 - [[skills/04-工作负载/pod/04-pod-sop-runbook|Pod 异常诊断标准操作流程（SOP/Runbook）]]
 - [[skills/04-工作负载/pod/02-pod-pending-scheduling|Pod Pending 与调度失败诊断]]
 - [[skills/04-工作负载/pod/reference/pod-exit-codes|容器退出码完整参考与诊断映射]]
-- [[skills/04-工作负载/pod/诊断排障/pod-fta-故障树list|Pod 异常故障树分析 (skills)]]
+- [[skills/04-工作负载/pod/pod-fta|Pod 异常故障树分析 (skills)]]

@@ -1406,50 +1406,50 @@ qa_pairs:
   source: wiki/05-网络/01-K8s网络核心/57-kubernetes-service-ingress-interview.md
 - type: concept
   question: 在 K8s 网络快问快答与面试模拟对话 中, K8s 网络快问快答 是什么?
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md 的「K8s 网络快问快答」章节。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 的「K8s 网络快问快答」章节。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
   section: K8s 网络快问快答
 - type: operation
   question: '如何执行与 K8s 网络快问快答与面试模拟对话 相关的操作: kubectl describe ingress <name>?'
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md 中的操作步骤。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 中的操作步骤。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
   command: kubectl describe ingress <name>
 - type: operation
   question: '如何执行与 K8s 网络快问快答与面试模拟对话 相关的操作: kubectl get endpointslice -l kubernetes.io/service-name=<svc?'
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md 中的操作步骤。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 中的操作步骤。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
   command: kubectl get endpointslice -l kubernetes.io/service-name=<svc>
 - type: comparison
   question: K8s 网络快问快答与面试模拟对话 中有哪些技术对比?
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md 中的对比分析。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 2.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 中的对比分析。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
 - type: concept
   question: 在 K8s 网络快问快答与面试模拟对话 中, K8s 网络快问快答 是什么?
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md 的「K8s 网络快问快答」章节。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 的「K8s 网络快问快答」章节。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
   section: K8s 网络快问快答
 - type: operation
   question: '如何执行与 K8s 网络快问快答与面试模拟对话 相关的操作: kubectl describe ingress <name>?'
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md 中的操作步骤。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 中的操作步骤。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
   command: kubectl describe ingress <name>
 - type: operation
   question: '如何执行与 K8s 网络快问快答与面试模拟对话 相关的操作: kubectl get endpointslice -l kubernetes.io/service-name=<svc?'
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md 中的操作步骤。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 中的操作步骤。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
   command: kubectl get endpointslice -l kubernetes.io/service-name=<svc>
 - type: best_practice
   question: 关于 K8s 网络快问快答与面试模拟对话, 有什么最佳实践?
   answer: 外部域名一律写**末尾带点**的 FQDN。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
 - type: troubleshooting
   question: 如何排查 K8s 网络快问快答与面试模拟对话 相关的故障?
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md 的故障排查章节。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 的故障排查章节。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
 - type: comparison
   question: K8s 网络快问快答与面试模拟对话 中有哪些技术对比?
-  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md 中的对比分析。
-  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa 3.md
+  answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 中的对比分析。
+  source: wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md
 - type: concept
   question: 在 K8s 网络快问快答与面试模拟对话 中, 本篇导览与学习路径 是什么?
   answer: 参见 wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md 的「本篇导览与学习路径」章节。

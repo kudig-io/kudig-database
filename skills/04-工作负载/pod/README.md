@@ -119,7 +119,6 @@ prerequisites:
 | [诊断排障/troubleshoot-pod-issues.md](诊断排障/troubleshoot-pod-issues.md) | Pod 问题排查（上游文档） |
 | [诊断排障/structural-01-pod-troubleshooting.md](诊断排障/structural-01-pod-troubleshooting.md) | 结构化 Pod 排障流程 |
 | [诊断排障/MULTI-002-Pod-CrashLoop-镜像拉取失败并发.md](诊断排障/MULTI-002-Pod-CrashLoop-镜像拉取失败并发.md) | 多故障并发场景 |
-| [诊断排障/pod-fta-故障树list.md](诊断排障/pod-fta-故障树list.md) | FTA 故障树清单 |
 | [诊断排障/video-script-pod-crashloop.md](诊断排障/video-script-pod-crashloop.md) | CrashLoop 教学视频脚本 |
 | [诊断排障/技能体系-02-pod-crashloop-oomkilled.md](诊断排障/技能体系-02-pod-crashloop-oomkilled.md) | 技能体系原始篇：CrashLoop/OOMKilled |
 | [诊断排障/技能体系-03-pod-pending.md](诊断排障/技能体系-03-pod-pending.md) | 技能体系原始篇：Pending |
@@ -283,7 +282,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 | TE-3 Pod 启动失败 | IE-3.2 镜像拉取失败 | BE-3.5~3.7 | 03 |
 | TE-3 Pod 启动失败 | IE-3.3 容器创建失败 | BE-3.8~3.10 | 03 |
 
-完整故障树见 [pod-fta.md](pod-fta.md) 与 [诊断排障/pod-fta-故障树list.md](诊断排障/pod-fta-故障树list.md)。
+完整故障树见 [pod-fta.md](pod-fta.md)。
 
 ---
 

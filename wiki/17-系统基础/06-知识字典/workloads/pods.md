@@ -312,7 +312,7 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 - [[skills/04-工作负载/pod/诊断排障/技能体系-02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]
 - [[skills/04-工作负载/pod/诊断排障/01-pod-pending-diagnosis|Pod Pending 状态深度诊断]]
 - [[skills/04-工作负载/pod/诊断排障/技能体系-03-pod-pending|Pod Pending 调度失败诊断与修复]]
-- [[skills/04-工作负载/pod/诊断排障/pod-fta-故障树list|Pod 异常故障树分析 (skills)]]
+- [[skills/04-工作负载/pod/pod-fta|Pod 异常故障树分析 (skills)]]
 - [[skills/04-工作负载/pod/诊断排障/02-pod-comprehensive-troubleshooting|Pod 全面故障排查]]
 - [[skills/04-工作负载/pod/调度/assigning-pods-to-nodes|Assigning Pods to Nodes]]
 - [[skills/04-工作负载/pod/资源与自动扩缩/resource-management-for-pods-and-containers|Resource Management for Pods and Containers]]

@@ -1,5 +1,5 @@
 ---
-title: K8S 运维诊断技能库 (02-ai-agents)
+title: K8S 运维诊断技能库 (02-ai-agents)（OpenClaw 工作区）
 description: 'title: K8S 运维诊断技能库'
 summary: 'title: K8S 运维诊断技能库'
 category: general
