@@ -11,7 +11,7 @@ tags:
 - ecosystem
 tier: core
 created: '2026-05-23'
-last_updated: '2026-07-21'
+last_updated: '2026-11-18'
 difficulty: intermediate
 audience:
 - 所有工程师
@@ -28,6 +28,7 @@ estimated_read_time: 5min
 | [[wiki/21-生态参考/01-CNCF全景/index.md\|CNCF全景/]] | CNCF 项目 | 毕业/孵化/沙箱项目参考、成熟度评估 |
 | [[wiki/21-生态参考/02-论文/index.md\|论文/]] | 学术论文 | Raft/Borg/Omega/Kubernetes 设计论文 |
 | [[wiki/21-生态参考/03-领域索引/index.md\|领域索引/]] | 技术索引 | 各技术领域的全局索引与知识图谱 |
+| [[wiki/21-生态参考/04-开源项目/index.md\|开源项目/]] | 非 CNCF 开源项目 | Rocky Linux 等发行版与基础设施项目参考 |
 
 ## 生态组件源码级分析
 

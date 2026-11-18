@@ -28,8 +28,10 @@ last_updated: 2026-07
 - 生态参考/topic-index/
 - 生态参考/topic-release-notes/
 - [[wiki/21-生态参考/00-总览/index.md|00-总览]]
+- [[wiki/21-生态参考/04-开源项目/index.md|04-开源项目]]
 
 ## 文档
 
 - [[wiki/21-生态参考/00-总览/01-production-readiness-operations-guide.md|Production Readiness Operations Guide]]
+- [[wiki/21-生态参考/04-开源项目/rocky-linux.md|Rocky Linux]]
 

@@ -1,5 +1,5 @@
 domain: 生态参考
-total_questions: 286
+total_questions: 296
 generated_at: '2026-11-18'
 qa_pairs:
 - type: concept
@@ -1378,3 +1378,50 @@ qa_pairs:
   answer: 参见 wiki/21-生态参考/index.md 的「文档」章节。
   source: wiki/21-生态参考/index.md
   section: 文档
+- type: concept
+  question: 在 04-开源项目 中, 文档 是什么?
+  answer: 参见 wiki/21-生态参考/04-开源项目/index.md 的「文档」章节。
+  source: wiki/21-生态参考/04-开源项目/index.md
+  section: 文档
+- type: concept
+  question: 在 Rocky Linux 中, 概述 是什么?
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 的「概述」章节。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+  section: 概述
+- type: concept
+  question: 在 Rocky Linux 中, 核心特性 是什么?
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 的「核心特性」章节。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+  section: 核心特性
+- type: concept
+  question: 在 Rocky Linux 中, 版本与生命周期 是什么?
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 的「版本与生命周期」章节。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+  section: 版本与生命周期
+- type: concept
+  question: 在 Rocky Linux 中, 与相关发行版的关系 是什么?
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 的「与相关发行版的关系」章节。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+  section: 与相关发行版的关系
+- type: concept
+  question: 在 Rocky Linux 中, Kubernetes 中的应用 是什么?
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 的「Kubernetes 中的应用」章节。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+  section: Kubernetes 中的应用
+- type: operation
+  question: '如何执行与 Rocky Linux 相关的操作: cat /etc/os-release && cat /etc/rocky-release?'
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 中的操作步骤。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+  command: cat /etc/os-release && cat /etc/rocky-release
+- type: comparison
+  question: Rocky Linux 中有哪些技术对比?
+  answer: 参见 wiki/21-生态参考/04-开源项目/rocky-linux.md 中的对比分析。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+- type: procedure
+  question: CentOS 7/8 停更后如何迁移到 Rocky Linux?
+  answer: EL8 系可用社区工具 migrate2rocky 原地转换；跨大版本（7→8/9）无官方原地升级路径，按「运维操作」与「故障排查」章节走全新安装 + 配置/应用清单迁移。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
+- type: comparison
+  question: Rocky Linux 和 AlmaLinux 应该怎么选?
+  answer: 两者同为 RHEL 下游重建、功能无差异；按治理偏好（RESF vs AlmaLinux 基金会）、原地升级工具（AlmaLinux 有 ELevate）与 ISV 认证覆盖做选择，详见「对比」章节。
+  source: wiki/21-生态参考/04-开源项目/rocky-linux.md
