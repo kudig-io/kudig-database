@@ -1401,7 +1401,91 @@ kubectl describe podeni <name> -n <ns>           # 查看 PodENI 事件
 
 ---
 
-## 11. 交叉引用
+## 11. NetworkAttachmentDefinition (Multus)
+
+#### 创建多网卡配置
+
+```yaml
+# 🟡 中风险：创建 NetworkAttachmentDefinition
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: terway-secondary
+  namespace: default
+spec:
+  config: |
+    {
+      "cniVersion": "0.3.1",
+      "name": "terway-secondary",
+      "type": "terway",
+      "eniType": "Secondary",
+      "vSwitch": "vsw-bp1234567890abcdef",
+      "securityGroup": "sg-bp1234567890abcdef",
+      "ipam": {
+        "type": "terway-ipam"
+      }
+    }
+```
+
+#### Pod 多网卡配置
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-nic-pod
+  annotations:
+    # 指定附加网卡
+    k8s.v1.cni.cncf.io/networks: terway-secondary
+spec:
+  containers:
+    - name: app
+      image: nicolaka/netshoot
+      command: ["sleep", "infinity"]
+```
+
+#### 验证多网卡
+
+```bash
+# 🟢 低风险：查看 Pod 网卡
+kubectl exec -it multi-nic-pod -- ip addr
+
+# 预期输出:
+# 1: lo: <LOOPBACK,UP> ...
+# 2: eth0: <BROADCAST,MULTICAST,UP> ...  # 主网卡
+# 3: net1: <BROADCAST,MULTICAST,UP> ...  # 附加网卡
+```
+
+## 12. CRD 故障排查
+
+#### PodENI 卡在 Pending
+
+```bash
+# 🟢 低风险：检查 PodENI 事件
+kubectl describe podeni <pod-name> -n <namespace>
+
+# 🟢 低风险：检查 Terway 日志
+kubectl logs -n kube-system -l app=terway-eniip --tail=50 | grep -i "pending\|allocate"
+
+# 常见原因:
+# 1. ENI 配额不足 → 扩容配额
+# 2. vSwitch IP 耗尽 → 扩容 vSwitch
+# 3. Terway Pod 异常 → 重启 Terway
+```
+
+#### PodENI 状态异常
+
+```bash
+# 🟢 低风险：检查 ENI 实际状态
+ENI_ID=$(kubectl get podeni <pod-name> -n <namespace> -o jsonpath='{.spec.eniId}')
+aliyun ecs DescribeNetworkInterfaces --NetworkInterfaceId.1 $ENI_ID
+
+# 🟡 中风险：强制重建 PodENI
+kubectl delete podeni <pod-name> -n <namespace>
+kubectl delete pod <pod-name> -n <namespace>
+```
+
+## 13. 交叉引用
 
 | 文档 | 说明 |
 |:---|:---|

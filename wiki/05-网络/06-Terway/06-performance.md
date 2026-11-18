@@ -739,7 +739,19 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 ```
 ---
 
-## 11. 交叉引用
+## 11. 调优检查清单
+
+| 序号 | 检查项 | 命令 | 优化建议 |
+|-----|--------|------|----------|
+| 1 | 内核参数 | `sysctl -a` | 按上文调优 |
+| 2 | ENI 队列数 | `ethtool -l eth0` | 设置为 CPU 核数 |
+| 3 | 中断亲和性 | `cat /proc/interrupts` | 均匀分布 |
+| 4 | IP 池大小 | 检查 eni-config | 根据 Pod 密度调整 |
+| 5 | IPVlan 模式 | 检查 eni-config | 内核支持则启用 |
+| 6 | eBPF 加速 | 检查 eni-config | 启用 eBPF |
+| 7 | MTU 设置 | `ip link show` | 1500 或 9000 (Jumbo) |
+
+## 12. 交叉引用
 
 ### 11.1 本专题内文档
 

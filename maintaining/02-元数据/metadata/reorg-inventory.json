@@ -1,7 +1,7 @@
 {
  "generated_at": "2026-11-18",
  "scope": "wiki/ (排除 31-归档) + skills/",
- "files_scanned": 4521,
+ "files_scanned": 4513,
  "duplicate_basenames": {
   "signal": "duplicate_basenames",
   "content_groups": 373,
@@ -3109,8 +3109,8 @@
  },
  "title_collisions": {
   "signal": "title_collisions",
-  "content_groups": 160,
-  "content_files": 375,
+  "content_groups": 152,
+  "content_files": 359,
   "structural_groups": 17,
   "groups": {
    "reference": {
@@ -3382,70 +3382,6 @@
     "paths": [
      "wiki/01-集群基础/05-kubectl/index.md",
      "wiki/17-系统基础/06-知识字典/tooling/kubectl.md"
-    ]
-   },
-   "terway 产品概览": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/42-terway-product-overview.md",
-     "wiki/23-实体/04-网络/03-terway-product-overview.md"
-    ]
-   },
-   "terway 架构深度解析": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/43-terway-architecture-deep-dive.md",
-     "wiki/23-实体/04-网络/04-terway-architecture-deep-dive.md"
-    ]
-   },
-   "terway 使用指南": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/44-terway-usage-guide.md",
-     "wiki/23-实体/04-网络/05-terway-usage-guide.md"
-    ]
-   },
-   "terway crd 资源操作": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/45-terway-crd-operations.md",
-     "wiki/23-实体/04-网络/06-terway-crd-operations.md"
-    ]
-   },
-   "terway 运维手册": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/46-terway-operations-manual.md",
-     "wiki/23-实体/04-网络/07-terway-operations-manual.md"
-    ]
-   },
-   "terway 测试验证": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/47-terway-testing-validation.md",
-     "wiki/23-实体/04-网络/08-terway-testing-validation.md"
-    ]
-   },
-   "terway 性能调优": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/48-terway-performance-tuning.md",
-     "wiki/23-实体/04-网络/09-terway-performance-tuning.md"
-    ]
-   },
-   "terway 故障排查": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/01-K8s网络核心/49-terway-troubleshooting-fta.md",
-     "wiki/23-实体/04-网络/10-terway-troubleshooting-fta.md"
     ]
    },
    "terway 全项目资源索引": {

@@ -968,7 +968,27 @@ BoltDB 是一个轻量级嵌入式 Key-Value 数据库, Terway 使用它存储�
 
 ---
 
-## 9. 交叉引用
+## 9. 架构验证命令
+
+```bash
+# 🟢 低风险：检查 Terway 组件状态
+kubectl get pods -n kube-system -l app=terway-eniip -o wide
+kubectl get pods -n kube-system -l app=terway-controlplane
+
+# 🟢 低风险：检查节点网络配置
+kubectl get nodes -o custom-columns=NAME:.metadata.name,CIDR:.spec.podCIDR
+
+# 🟢 低风险：检查 ENI 配置
+kubectl get cm -n kube-system eni-config -o yaml
+
+# 🟢 低风险：检查节点 ENI 使用情况
+kubectl get podeni -A -o wide | grep <node-name>
+
+# 🟢 低风险：检查 Terway 指标
+curl -s http://localhost:19090/metrics | grep terway
+```
+
+## 10. 交叉引用
 
 ### 9.1 本主题内引用
 

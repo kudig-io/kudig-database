@@ -1466,7 +1466,61 @@ kubectl get ipinstances -A -o json | jq -r '
 
 ---
 
-## 9. 交叉引用
+## 9. 日志管理
+
+#### 日志位置
+
+```bash
+# Terway DaemonSet 日志
+kubectl logs -n kube-system -l app=terway-eniip -f
+
+# 节点上的 Terway 日志
+journalctl -u terway -f
+
+# CNI 插件日志
+cat /var/log/terway/cni.log
+
+# Terway Controller 日志
+kubectl logs -n kube-system -l app=terway-controlplane -f
+```
+
+#### 日志级别调整
+
+```bash
+# 🟡 中风险：临时调整日志级别
+kubectl set env ds/terway-eniip -n kube-system LOG_LEVEL=debug
+
+# 恢复默认级别
+kubectl set env ds/terway-eniip -n kube-system LOG_LEVEL=info
+```
+
+## 10. 备份与恢复
+
+#### 备份 Terway 配置
+
+```bash
+# 🟢 低风险：备份 Terway 配置
+kubectl get cm -n kube-system eni-config -o yaml > terway-config-backup-$(date +%Y%m%d).yaml
+kubectl get ds -n kube-system terway-eniip -o yaml > terway-ds-backup-$(date +%Y%m%d).yaml
+kubectl get deploy -n kube-system terway-controlplane -o yaml > terway-controller-backup-$(date +%Y%m%d).yaml
+```
+
+#### 恢复 Terway 配置
+
+```bash
+# 🔴 高风险：恢复 Terway 配置
+# 1. 应用备份配置
+kubectl apply -f terway-config-backup-20260711.yaml
+
+# 2. 重启 Terway
+kubectl rollout restart ds/terway-eniip -n kube-system
+kubectl rollout restart deploy/terway-controlplane -n kube-system
+
+# 3. 验证
+kubectl get pods -n kube-system -l app=terway-eniip
+```
+
+## 11. 交叉引用
 
 ### 本专题内
 

@@ -1207,7 +1207,20 @@ chmod +x terway-e2e-test.sh
 
 ---
 
-## 11. 交叉引用
+## 11. 验证检查清单
+
+| 序号 | 检查项 | 验证命令 | 通过标准 |
+|-----|--------|---------|----------|
+| 1 | Pod IP 分配 | `kubectl get pods -o wide` | 所有 Pod 有 IP |
+| 2 | DNS 解析 | `nslookup kubernetes.default` | 解析成功 |
+| 3 | 集群内连通 | `ping <pod-ip>` | 0% 丢包 |
+| 4 | 外部连通 | `ping 8.8.8.8` | 0% 丢包 |
+| 5 | Service 访问 | `curl http://<svc-ip>` | HTTP 200 |
+| 6 | NetworkPolicy | 策略测试脚本 | 按预期允许/拒绝 |
+| 7 | 带宽 | `iperf3 -c <ip>` | > 1Gbps |
+| 8 | 延迟 | `ping -c 100 <ip>` | < 1ms (同 AZ) |
+
+## 12. 交叉引用
 
 ### 本专题内文档
 

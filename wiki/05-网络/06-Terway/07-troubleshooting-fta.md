@@ -839,6 +839,129 @@ auto_heal_actions:
 | Terway 架构 | [02-architecture.md](02-architecture.md) | 架构与模式说明 |
 | Terway 性能调优 | [06-performance.md](06-performance.md) | 性能优化参考 |
 
+## 19. 日志分析
+
+### Terway 日志位置
+
+```bash
+# Terway 主日志
+kubectl logs -n kube-system -l app=terway-eniip -f
+
+# 节点上的 Terway 日志
+journalctl -u terway -f
+
+# CNI 插件日志
+cat /var/log/terway/cni.log
+```
+
+### 关键日志模式
+
+```bash
+# 搜索 IP 分配错误
+kubectl logs -n kube-system -l app=terway-eniip | grep -i "allocate\|assign"
+
+# 搜索 ENI 操作错误
+kubectl logs -n kube-system -l app=terway-eniip | grep -i "eni\|network interface"
+
+# 搜索 API 调用错误
+kubectl logs -n kube-system -l app=terway-eniip | grep -i "openapi\|ecs.aliyuncs"
+```
+
+## 20. 网络连通性测试
+
+### 测试脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：Terway 网络连通性测试脚本
+set -euo pipefail
+
+NAMESPACE=${1:-default}
+POD_NAME=${2:-test-pod}
+
+echo "=== Terway 网络连通性测试 ==="
+
+# 1. 创建测试 Pod
+echo "[1] 创建测试 Pod..."
+kubectl run $POD_NAME --image=nicolaka/netshoot -n $NAMESPACE --rm -it --restart=Never -- bash <<'EOF'
+echo "--- Pod 网络信息 ---"
+ip addr
+ip route
+
+echo "--- DNS 测试 ---"
+nslookup kubernetes.default
+nslookup www.aliyun.com
+
+echo "--- 连通性测试 ---"
+ping -c 3 kubernetes.default.svc.cluster.local
+ping -c 3 8.8.8.8
+
+echo "--- Service 测试 ---"
+curl -s -o /dev/null -w "%{http_code}" https://kubernetes.default.svc.cluster.local/healthz
+
+echo "--- 带宽测试 ---"
+# iperf3 -c <target>
+EOF
+
+echo "=== 测试完成 ==="
+```
+
+## 21. 紧急恢复
+
+### Terway 完全重启
+
+```bash
+# 🔴 高风险：Terway 完全重启（可能导致短暂网络中断）
+# 1. 备份配置
+kubectl get cm -n kube-system eni-config -o yaml > /tmp/eni-config-backup.yaml
+
+# 2. 删除所有 Terway Pod
+kubectl delete pods -n kube-system -l app=terway-eniip
+
+# 3. 等待重建
+kubectl wait --for=condition=Ready pod -n kube-system -l app=terway-eniip --timeout=300s
+
+# 4. 验证
+kubectl get pods -n kube-system -l app=terway-eniip
+```
+
+### 单节点网络修复
+
+```bash
+# 🟡 中风险：单节点 Terway 修复
+NODE_NAME=<node-name>
+
+# 1. 驱逐节点上的 Pod
+kubectl drain $NODE_NAME --ignore-daemonsets --delete-emptydir-data
+
+# 2. 重启节点上的 Terway
+kubectl delete pod -n kube-system -l app=terway-eniip --field-selector spec.nodeName=$NODE_NAME
+
+# 3. 等待 Terway 就绪
+kubectl wait --for=condition=Ready pod -n kube-system -l app=terway-eniip --field-selector spec.nodeName=$NODE_NAME --timeout=120s
+
+# 4. 恢复调度
+kubectl uncordon $NODE_NAME
+```
+
+## 22. 快速诊断脚本
+
+```bash
+#!/bin/bash
+# 🟢 低风险：Terway 快速诊断
+
+echo "=== Terway Pod 状态 ==="
+kubectl get pods -n kube-system -l app=terway-eniip -o wide
+
+echo -e "\n=== ENI 使用情况 ==="
+kubectl get podeni -A --no-headers | wc -l
+
+echo -e "\n=== 最近日志 ==="
+kubectl logs -n kube-system -l app=terway-eniip --tail=20
+
+echo -e "\n=== 诊断完成 ==="
+```
+
 ## Related
 
 - [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]

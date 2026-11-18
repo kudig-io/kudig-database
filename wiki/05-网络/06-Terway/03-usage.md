@@ -1083,7 +1083,96 @@ kubectl exec -n default test-pod-cluster1 -- ping <pod-ip-in-cluster2>
 
 ---
 
-## 13. 交叉引用
+## 13. 多网卡配置 (Multus)
+
+```yaml
+# 创建 NetworkAttachmentDefinition
+apiVersion: k8s.cni.cncf.io/v1
+kind: NetworkAttachmentDefinition
+metadata:
+  name: terway-secondary
+  namespace: default
+spec:
+  config: |
+    {
+      "cniVersion": "0.3.1",
+      "name": "terway-secondary",
+      "type": "terway",
+      "eniType": "Secondary",
+      "vSwitch": "vsw-bp1234567890abcdef",
+      "securityGroup": "sg-bp1234567890abcdef"
+    }
+---
+# Pod 使用多网卡
+apiVersion: v1
+kind: Pod
+metadata:
+  name: multi-nic-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: terway-secondary
+spec:
+  containers:
+    - name: app
+      image: nicolaka/netshoot
+      command: ["sleep", "infinity"]
+```
+
+```bash
+# 🟢 低风险：验证多网卡
+kubectl exec -it multi-nic-pod -- ip addr
+# 应看到 eth0 (主网卡) 和 net1 (附加网卡)
+```
+
+## 14. Service 集成
+
+#### ClusterIP Service
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+```
+
+#### LoadBalancer Service (SLB)
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-lb
+  annotations:
+    # 指定 SLB 规格
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+    # 使用内网 SLB
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: intranet
+    # 指定 vSwitch
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-vswitch-id: vsw-bp1234567890abcdef
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+    - port: 80
+      targetPort: 80
+```
+
+```bash
+# 🟢 低风险：查看 Service 外部 IP
+kubectl get svc nginx-lb -o wide
+
+# 🟢 低风险：测试访问
+curl http://<EXTERNAL-IP>
+```
+
+## 15. 交叉引用
 
 ### 13.1 本专题其他文档
 
