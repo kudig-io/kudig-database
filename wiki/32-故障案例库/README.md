@@ -1,4 +1,27 @@
-# kuba-database · 全网故障数据库
+---
+title: 故障案例库（kuba-database）
+description: 全网公开重大故障事件的结构化复盘案例库 —— SRE / CRE / FDE / SA 四视角
+summary: 收录 1980-2026 年 112 起云原生、AI 原生与互联网生产事故，按 14 个技术领域组织，带结构化元数据与四视角复盘，是故障演练、架构评审与 RAG 检索的真实案例语料
+category: domain
+tags:
+- incidents
+- postmortem
+- outage
+- reliability
+- rca
+- sre
+tier: core
+created: '2026-04-05'
+last_updated: '2026-10-25'
+difficulty: intermediate
+audience:
+- SRE
+- 平台团队
+- 架构师
+estimated_read_time: 20min
+---
+
+# 故障案例库（kuba-database） · 全网故障数据库
 
 > 收录云原生、AI 原生及互联网公司公开的生产环境重大故障事件，基于 **SRE / CRE / FDE / SA 四视角**进行结构化复盘，构建可检索、可统计、可演进的故障知识库。
 
@@ -43,7 +66,7 @@
 ## 目录结构
 
 ```
-kuba/
+32-故障案例库/
 ├── README.md                  # 本文档
 ├── CONTRIBUTING.md            # 贡献指南：命名规范、录入流程、版本控制、内容红线
 ├── INDEX.md                   # 总索引 + 统计概览（由 tools/build-index.py 自动生成，勿手改）

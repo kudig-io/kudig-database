@@ -44,7 +44,7 @@ trigger_keywords:
 - [[wiki/23-实体/index.md|entities]] — 组件实体、CNCF 工具、云产品、术语词典
 - [[skills/index.md|skills]] — 诊断排障、最佳实践、培训体系、FTA 方法
 
-## 源文档层 (20 个知识域)
+## 源文档层 (21 个知识域)
 
 - [[wiki/01-集群基础/index.md|集群基础]]
 - [[wiki/02-工作负载/index.md|工作负载与应用]]
@@ -66,6 +66,7 @@ trigger_keywords:
 - [[wiki/03-清单模式/index.md|清单与模式]]
 - [[wiki/21-生态参考/index.md|生态参考]]
 - [[wiki/04-应用模式/index.md|应用模式]]
+- [[wiki/32-故障案例库/README.md|故障案例库]]
 
 ## 工程与元数据
 
