@@ -1,0 +1,151 @@
+---
+title: Arthas (entities)
+description: '## 概述'
+summary: 'Arthas 是阿里巴巴开源的 Java 在线诊断工具，无需重启即可对运行中的 JVM 做反编译、耗时追踪、线程与内存分析。'
+category: entities
+tags:
+- k8s
+- java
+- jvm
+- arthas
+- diagnostics
+- troubleshooting
+- alibaba
+tier: peripheral
+created: '2026-11-17'
+last_updated: 2026-11
+difficulty: intermediate
+reading_level: intermediate
+audience:
+- 所有工程师
+estimated_read_time: 8min
+intent_queries:
+- Arthas 是什么
+- Arthas 常用命令与排查方法
+- 如何在 Kubernetes 容器里用 Arthas 诊断 Java 应用
+- Java CPU 飙高如何用 Arthas 定位
+trigger_keywords:
+- Arthas
+- arthas-boot
+- java 诊断
+- 线上排障
+- trace
+- watch
+prerequisites:
+- kubectl-basics
+- java-basics
+- jvm-basics
+- linux-basics
+---
+
+> **生产环境安全提示**
+>
+> 本文档包含可直接执行的运维命令。执行前请确认：当前目标集群与 Namespace 是否正确；是否具备足够的 RBAC 权限；是否已在非生产环境验证。命令风险等级标注：🔴 高风险（可能造成数据丢失或服务中断）、🟡 中风险（会修改集群状态，但通常可回滚）、🟢 低风险/只读（信息收集，无副作用）。
+
+# Arthas
+
+> **项目**: 阿里巴巴开源 | **类别**: JVM 在线诊断工具 | **主要语言**: Java
+
+## 概述
+
+Arthas（阿萨斯）由阿里巴巴于 2018 年开源，是 Java 领域使用最广的**在线诊断工具**：通过 JVM Attach 机制动态挂载到目标进程，利用字节码增强（ASM）在**不重启、不改代码**的前提下观察方法入参返回、统计调用耗时、反编译运行中类、排查线程与内存问题。它补齐了 JDK 自带工具（jstack/jmap/jcmd）"要么信息割裂、要么需要停机/快照"的短板，典型使用场景包括：线上 CPU 飙高定位、慢接口耗时分解、异常偶发不复现抓取、内存泄漏初筛、线上类版本校验。Arthas 与应用同 JVM 运行，命令即时生效、即时失效，适合在生产环境以受控方式短时使用。
+
+## 核心能力
+
+- **方法级观测**: `trace` 展示调用树各方法耗时（定位慢在哪一行）；`watch` 观察入参/返回值/异常；`monitor` 统计调用成功率与 RT 分布；`stack` 查看调用来源
+- **线程分析**: `dashboard` 总览线程/内存/GC；`thread -n 3` 找最忙线程；`thread -b` 检测死锁；线程栈打印与 jstack 同源
+- **类与反编译**: `jad` 反编译运行中的类（确认线上真实字节码）；`sc`/`sm` 搜索类与方法、查看类加载来源（排查 jar 冲突）
+- **内存与堆**: `memory` 各内存区占用；`heapdump` 导出堆（🔴 高风险，会触发 Full GC 级停顿）；`vmmap`/`jvm` 查看内存映射
+- **动态修改**: `logger` 在线调日志级别；`redefine`/`retransform` 热替换类字节码（🔴 高风险）；`ognl`/`vmtool` 直接执行表达式、抓取运行时对象
+- **会话能力**: `tt`（时间隧道）录制调用现场回放；HTTP API 与 Arthas Tunnel 支持远程多人共享排查会话
+
+## 架构
+
+```text
+arthas-boot.jar ──(选择 PID)──> VirtualMachine.attach ──> 目标 JVM
+                                                        │
+                                              Arthas Agent (常驻)
+                                                        │ 字节码增强
+        用户终端 (CLI / Web Console / HTTP API) <── Agent 监听端口
+```
+
+- **arthas-boot**: 启动器，下载并引导匹配版本的 Agent 到目标 JVM，支持列出本机全部 Java 进程
+- **Agent**: 挂载后常驻 JVM；`exit`/`quit` 仅断开终端连接（Agent 保留，可再次 attach），`stop` 才会完全卸载 Agent 并恢复字节码
+- **执行引擎**: 命令在目标 JVM 内执行，`trace`/`watch` 通过在方法入口/出口织入探针实现，探针本身有开销（可用 `-n` 限制采样次数）
+
+## Kubernetes 部署
+
+容器内 Java 应用的诊断流程（与宿主机差异在于：Arthas 必须与目标 JVM **同 PID Namespace**）：
+
+```bash
+# 🟢 进入应用容器并启动 Arthas（只读观察，🟢/🟡 视命令而定）
+kubectl exec -it deploy/order-service -c order -- sh
+curl -O https://arthas.aliyun.com/arthas-boot.jar
+java -jar arthas-boot.jar        # 选择目标 PID（容器内通常为 1 或唯一 java 进程）
+
+# 🟢 使用临时容器对只读根文件系统的 Pod 做诊断（不进业务容器）
+kubectl debug -it deploy/order-service --image=eclipse-temurin:17-jre --target=order -- jcmd 1 Thread.print
+```
+
+要点：
+
+- 业务容器若为 distroless/无 shell，用 `kubectl debug --target`（Ephemeral Container，同 PID Namespace）或在镜像中保留 JRE
+- Arthas 下载依赖外网，生产建议将 `arthas-boot.jar` 打入镜像或放内网制品库
+- 诊断账号与业务同权限即可，**不需要**给 root；Arthas 无内置鉴权，端口暴露会等于"拿到 JVM 控制权"——禁止 NodePort/公网暴露 Arthas 端口
+- 使用结束务必 `stop` 卸载 Agent，避免字节码增强残留与连接句柄泄漏
+
+## 常用排查配方
+
+| 症状 | Arthas 配方 | 风险 |
+|---|---|---|
+| CPU 飙高 | `dashboard` → `thread -n 3` → `trace 类 方法 -n 5` 看耗时分布 | 🟢 |
+| 接口偶发超时 | `trace 类 方法` + `watch 类 方法 '{params,returnObj,throwExp}' -x 2` | 🟢 |
+| 疑似死锁 | `thread -b` | 🟢 |
+| GC 频繁/内存涨 | `memory` → `jvm` → `heapdump /tmp/h.hprof`（导出后 off-heap 分析） | 🔴 heapdump |
+| 线上类版本不对 | `jad 类全名` / `sc -d 类全名` 看 ClassLoader 与字节码 | 🟢 |
+| 日志级别不对 | `logger --name your.logger --level debug`（重启失效） | 🟡 |
+| 需要改逻辑应急 | `redefine /tmp/X.class`（确认字节码与加载器完全一致） | 🔴 |
+
+```bash
+# 🟢 示例：观察某方法的返回值与耗时（限 10 次采样）
+watch com.example.OrderService getOrder '{params,returnObj,throwExp}' -x 2 -n 10
+```
+
+## 故障排查（工具本身）
+
+- **attach 失败**: JDK 版本与 `arthas-boot` 不匹配、容器内无 JDK attach 权限（需 jdk.attach 模块，JRE 精简镜像常缺）、或 PID 选择错误
+- **trace/watch 无输出**: 类全名/方法签名拼写错误（用 `sc -d` 先确认）；方法被内联或未加载——换调用入口类
+- **探针导致性能抖动**: 生产 trace 大流量方法务必加 `-n` 次数限制与条件表达式，避免长时间全量织入
+- **redefine 失败**: 新字节码与原类字段/方法签名不一致，或 ClassLoader 不同——Arthas 会校验并拒绝，切勿强改
+- **忘记 stop**: Agent 常驻会保留增强字节码与监听端口，例行排查后 `stop` 收尾
+
+## 生产最佳实践
+
+- 以"短时、带 `-n` 限次、只读优先"为原则：trace/watch 现场用完即走，redefine/heapdump 走变更流程
+- 长期性能画像交给 **JFR/Continuous Profiling**（见 Related），Arthas 负责"当下这一单"的定点排查
+- 为诊断场景准备带 JRE+Arthas 的调试镜像或 Ephemeral Container 方案，避免生产容器带编译工具链
+- 团队沉淀常用 `trace`/`watch` 命令清单与类名速查，oncall 时直接复用
+- 禁止将 Arthas 端口映射为集群外可达；排查会话通过 Tunnel 集中管控并留痕
+
+## 对比
+
+| 维度 | Arthas | JDK 自带 (jstack/jmap/jcmd) | JFR + jcmd | VisualVM/JConsole |
+|---|---|---|---|---|
+| 使用方式 | Attach 即时，交互式 | 单次快照命令 | 低开销持续记录 | GUI 远程连接 |
+| 方法级耗时/入参 | trace/watch 直接给 | 不支持 | 需 JFR 事件+解析 | 不支持 |
+| 反编译线上类 | jad 内置 | 需 javap（看字节码） | 不支持 | 不支持 |
+| 热修改能力 | redefine/logger | 无 | 无 | 无 |
+| 开销 | 探针有采样开销 | 快照瞬间停顿 | 极低（长期可开） | 中 |
+| 容器内可用性 | 需同 PID NS + attach | 需 JDK 工具 | 需 JDK | 需端口/转发 |
+
+## 参考链接
+
+- 官方文档：https://arthas.aliyun.com/
+- GitHub：https://github.com/alibaba/arthas
+
+## Related
+
+- [[wiki/19-故障诊断/05-JVM调优/01-jdk-flight-recorder-k8s.md|JDK Flight Recorder 在 K8s 中的使用]]
+- [[wiki/19-故障诊断/05-JVM调优/03-jvm-gc-container-tuning-guide.md|JVM GC 容器调优指南]]
+- [[wiki/13-生产运维/05-工单案例/ticket-case-002-java-oom-essd-iohang.md|工单案例: Java OOM]]
+- [[wiki/23-实体/10-平台与开发工具/index.md|平台与开发工具实体索引]]

@@ -10,6 +10,7 @@ created: '2026-07-25'
 
 ## 文档
 
+- [[wiki/23-实体/10-平台与开发工具/arthas.md|arthas]]
 - [[wiki/23-实体/10-平台与开发工具/backstage.md|backstage]]
 - [[wiki/23-实体/10-平台与开发工具/bpfman.md|bpfman]]
 - [[wiki/23-实体/10-平台与开发工具/cozystack.md|cozystack]]
@@ -26,5 +27,6 @@ created: '2026-07-25'
 - [[wiki/23-实体/10-平台与开发工具/operator-framework.md|operator-framework]]
 - [[wiki/23-实体/10-平台与开发工具/runme-notebooks.md|runme-notebooks]]
 - [[wiki/23-实体/10-平台与开发工具/score.md|score]]
+- [[wiki/23-实体/10-平台与开发工具/spring-cloud-alibaba.md|spring-cloud-alibaba]]
 - [[wiki/23-实体/10-平台与开发工具/telepresence.md|telepresence]]
 - [[wiki/23-实体/10-平台与开发工具/vscode-kubernetes-tools.md|vscode-kubernetes-tools]]

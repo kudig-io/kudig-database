@@ -1,699 +1,1383 @@
 domain: 存储
-total_questions: 147
-generated_at: '2026-05-19'
+total_questions: 291
+generated_at: '2026-11-18'
 qa_pairs:
 - type: concept
+  question: 在 Storage & Data 生产就绪运维指南 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/00-总览/01-production-readiness-operations-guide.md 的「目录」章节。
+  source: wiki/06-存储/00-总览/01-production-readiness-operations-guide.md
+  section: 目录
+- type: concept
+  question: 在 Storage & Data 生产就绪运维指南 中, 生产环境检查清单 是什么?
+  answer: 参见 wiki/06-存储/00-总览/01-production-readiness-operations-guide.md 的「生产环境检查清单」章节。
+  source: wiki/06-存储/00-总览/01-production-readiness-operations-guide.md
+  section: 生产环境检查清单
+- type: concept
+  question: 在 Storage & Data 生产就绪运维指南 中, 关键风险与缓解措施 是什么?
+  answer: 参见 wiki/06-存储/00-总览/01-production-readiness-operations-guide.md 的「关键风险与缓解措施」章节。
+  source: wiki/06-存储/00-总览/01-production-readiness-operations-guide.md
+  section: 关键风险与缓解措施
+- type: troubleshooting
+  question: 如何排查 Storage & Data 生产就绪运维指南 相关的故障?
+  answer: 参见 wiki/06-存储/00-总览/01-production-readiness-operations-guide.md 的故障排查章节。
+  source: wiki/06-存储/00-总览/01-production-readiness-operations-guide.md
+- type: comparison
+  question: Storage & Data 生产就绪运维指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/00-总览/01-production-readiness-operations-guide.md 中的对比分析。
+  source: wiki/06-存储/00-总览/01-production-readiness-operations-guide.md
+- type: concept
+  question: 在 00-总览 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/00-总览/index.md 的「文档」章节。
+  source: wiki/06-存储/00-总览/index.md
+  section: 文档
+- type: concept
   question: 在 存储架构概览与核心组件 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md
+  answer: 参见 wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md
   section: 目录
 - type: concept
   question: 在 存储架构概览与核心组件 中, 存储架构概览 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md 的「存储架构概览」章节。
-  source: wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md
+  answer: 参见 wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md 的「存储架构概览」章节。
+  source: wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md
   section: 存储架构概览
 - type: concept
   question: 在 存储架构概览与核心组件 中, PV/PVC/StorageClass 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md 的「PV/PVC/StorageClass」章节。
-  source: wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md
+  answer: 参见 wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md 的「PV/PVC/StorageClass」章节。
+  source: wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md
   section: PV/PVC/StorageClass
-- type: troubleshooting
-  question: 如何排查 存储架构概览与核心组件 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md
 - type: comparison
   question: 存储架构概览与核心组件 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/01-storage-architecture-overview.md
+  answer: 参见 wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md
 - type: concept
   question: 在 PV/PVC 核心概念与企业级实践 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md
+  answer: 参见 wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md
   section: 目录
 - type: concept
   question: 在 PV/PVC 核心概念与企业级实践 中, PV 存储架构分层模型 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md 的「PV 存储架构分层模型」章节。
-  source: wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md
+  answer: 参见 wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md 的「PV 存储架构分层模型」章节。
+  source: wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md
   section: PV 存储架构分层模型
 - type: concept
   question: 在 PV/PVC 核心概念与企业级实践 中, PV 核心规格字段详解 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md 的「PV 核心规格字段详解」章节。
-  source: wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md
+  answer: 参见 wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md 的「PV 核心规格字段详解」章节。
+  source: wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md
   section: PV 核心规格字段详解
 - type: concept
   question: 在 PV/PVC 核心概念与企业级实践 中, PV 生命周期状态机 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md 的「PV 生命周期状态机」章节。
-  source: wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md
+  answer: 参见 wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md 的「PV 生命周期状态机」章节。
+  source: wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md
   section: PV 生命周期状态机
-- type: operation
-  question: '如何执行与 PV/PVC 核心概念与企业级实践 相关的操作: kubectl get pvc <name> -o jsonpath=''{.metadata.annotations}''?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md
-  command: kubectl get pvc <name> -o jsonpath='{.metadata.annotations}'
+- type: concept
+  question: 在 PVC 扩容指南 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md 的「概述」章节。
+  source: wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md
+  section: 概述
+- type: concept
+  question: 在 PVC 扩容指南 中, 扩容前提条件 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md 的「扩容前提条件」章节。
+  source: wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md
+  section: 扩容前提条件
+- type: concept
+  question: 在 PVC 扩容指南 中, 在线扩容 vs 离线扩容 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md 的「在线扩容 vs 离线扩容」章节。
+  source: wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md
+  section: 在线扩容 vs 离线扩容
 - type: troubleshooting
-  question: 如何排查 PV/PVC 核心概念与企业级实践 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/02-pv-architecture-fundamentals.md
+  question: 如何排查 PVC 扩容指南 相关的故障?
+  answer: 参见 wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md
+- type: comparison
+  question: PVC 扩容指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/03-pvc-expansion-guide.md
 - type: concept
   question: 在 03 - PVC使用模式与最佳实践 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md
+  answer: 参见 wiki/06-存储/01-K8s存储/04-pvc-patterns-practices.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/04-pvc-patterns-practices.md
   section: 目录
 - type: concept
   question: 在 03 - PVC使用模式与最佳实践 中, PVC 设计架构 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md 的「PVC 设计架构」章节。
-  source: wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md
+  answer: 参见 wiki/06-存储/01-K8s存储/04-pvc-patterns-practices.md 的「PVC 设计架构」章节。
+  source: wiki/06-存储/01-K8s存储/04-pvc-patterns-practices.md
   section: PVC 设计架构
 - type: concept
   question: 在 03 - PVC使用模式与最佳实践 中, PVC 规格字段详解 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md 的「PVC 规格字段详解」章节。
-  source: wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md
+  answer: 参见 wiki/06-存储/01-K8s存储/04-pvc-patterns-practices.md 的「PVC 规格字段详解」章节。
+  source: wiki/06-存储/01-K8s存储/04-pvc-patterns-practices.md
   section: PVC 规格字段详解
-- type: troubleshooting
-  question: 如何排查 03 - PVC使用模式与最佳实践 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/03-pvc-patterns-practices.md
 - type: concept
   question: 在 StorageClass 动态供给与多租户管理 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md
   section: 目录
 - type: concept
   question: 在 StorageClass 动态供给与多租户管理 中, 动态供给工作流程 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 的「动态供给工作流程」章节。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md 的「动态供给工作流程」章节。
+  source: wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md
   section: 动态供给工作流程
 - type: concept
   question: 在 StorageClass 动态供给与多租户管理 中, StorageClass 规格字段详解 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 的「StorageClass 规格字段详解」章节。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md 的「StorageClass 规格字段详解」章节。
+  source: wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md
   section: StorageClass 规格字段详解
 - type: concept
   question: 在 StorageClass 动态供给与多租户管理 中, VolumeBindingMode 深度解析 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 的「VolumeBindingMode 深度解析」章节。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md 的「VolumeBindingMode 深度解析」章节。
+  source: wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md
   section: VolumeBindingMode 深度解析
-- type: operation
-  question: '如何执行与 StorageClass 动态供给与多租户管理 相关的操作: kubectl patch sc fast-ssd -p ''{"parameters":{"performanceLev?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
-  command: kubectl patch sc fast-ssd -p '{"parameters":{"performanceLevel":"PL3"}}'
-- type: troubleshooting
-  question: 如何排查 StorageClass 动态供给与多租户管理 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
 - type: comparison
   question: StorageClass 动态供给与多租户管理 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/04-storageclass-dynamic-provisioning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md
 - type: concept
   question: 在 05 - CSI驱动集成与运维管理 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md
+  answer: 参见 wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md
   section: 目录
 - type: concept
   question: 在 05 - CSI驱动集成与运维管理 中, CSI 架构概览 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md 的「CSI 架构概览」章节。
-  source: wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md
+  answer: 参见 wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md 的「CSI 架构概览」章节。
+  source: wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md
   section: CSI 架构概览
 - type: concept
   question: 在 05 - CSI驱动集成与运维管理 中, CSI 组件职责 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md 的「CSI 组件职责」章节。
-  source: wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md
+  answer: 参见 wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md 的「CSI 组件职责」章节。
+  source: wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md
   section: CSI 组件职责
 - type: concept
   question: 在 05 - CSI驱动集成与运维管理 中, CSI 服务接口规范 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md 的「CSI 服务接口规范」章节。
-  source: wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md
+  answer: 参见 wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md 的「CSI 服务接口规范」章节。
+  source: wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md
   section: CSI 服务接口规范
 - type: troubleshooting
   question: 如何排查 05 - CSI驱动集成与运维管理 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md
+  answer: 参见 wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md
 - type: comparison
   question: 05 - CSI驱动集成与运维管理 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/05-csi-drivers-integration.md
+  answer: 参见 wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/06-csi-drivers-integration.md
 - type: concept
   question: 在 06 - 存储基础概念详解 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md
+  answer: 参见 wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md
   section: 目录
 - type: concept
   question: 在 06 - 存储基础概念详解 中, PV/PVC/StorageClass 三者关系全景图 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md 的「PV/PVC/StorageClass 三者关系全景图」章节。
-  source: wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md
+  answer: 参见 wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md 的「PV/PVC/StorageClass 三者关系全景图」章节。
+  source: wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md
   section: PV/PVC/StorageClass 三者关系全景图
 - type: troubleshooting
   question: 如何排查 06 - 存储基础概念详解 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md
+  answer: 参见 wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md
 - type: comparison
   question: 06 - 存储基础概念详解 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/06-storage-fundamental-concepts.md
+  answer: 参见 wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/07-storage-fundamental-concepts.md
 - type: concept
   question: 在 07 - 存储日常运维操作手册 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md
+  answer: 参见 wiki/06-存储/01-K8s存储/08-storage-daily-operations.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/08-storage-daily-operations.md
   section: 目录
 - type: concept
   question: 在 07 - 存储日常运维操作手册 中, 存储资源查看与监控 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md 的「存储资源查看与监控」章节。
-  source: wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md
+  answer: 参见 wiki/06-存储/01-K8s存储/08-storage-daily-operations.md 的「存储资源查看与监控」章节。
+  source: wiki/06-存储/01-K8s存储/08-storage-daily-operations.md
   section: 存储资源查看与监控
 - type: concept
   question: 在 07 - 存储日常运维操作手册 中, PVC创建与管理 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md 的「PVC创建与管理」章节。
-  source: wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md
+  answer: 参见 wiki/06-存储/01-K8s存储/08-storage-daily-operations.md 的「PVC创建与管理」章节。
+  source: wiki/06-存储/01-K8s存储/08-storage-daily-operations.md
   section: PVC创建与管理
-- type: operation
-  question: '如何执行与 07 - 存储日常运维操作手册 相关的操作: kubectl get storageclass?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md
-  command: kubectl get storageclass
-- type: operation
-  question: '如何执行与 07 - 存储日常运维操作手册 相关的操作: kubectl get pvc -A -o custom-columns=NS:.metadata.namespace,?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md
-  command: kubectl get pvc -A -o custom-columns=NS:.metadata.namespace,NAME:.metadata.name,USAGE:.status.capaci
 - type: troubleshooting
   question: 如何排查 07 - 存储日常运维操作手册 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/07-storage-daily-operations.md
+  answer: 参见 wiki/06-存储/01-K8s存储/08-storage-daily-operations.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/08-storage-daily-operations.md
 - type: concept
   question: 在 08 - 存储性能调优与优化策略 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
   section: 目录
 - type: concept
   question: 在 08 - 存储性能调优与优化策略 中, StorageClass 性能配置 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 的「StorageClass 性能配置」章节。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 的「StorageClass 性能配置」章节。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
   section: StorageClass 性能配置
 - type: concept
   question: 在 08 - 存储性能调优与优化策略 中, 本地存储配置 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 的「本地存储配置」章节。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 的「本地存储配置」章节。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
   section: 本地存储配置
 - type: concept
   question: 在 08 - 存储性能调优与优化策略 中, CSI 驱动性能优化 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 的「CSI 驱动性能优化」章节。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 的「CSI 驱动性能优化」章节。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
   section: CSI 驱动性能优化
 - type: concept
   question: 在 08 - 存储性能调优与优化策略 中, 文件系统优化 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 的「文件系统优化」章节。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 的「文件系统优化」章节。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
   section: 文件系统优化
 - type: troubleshooting
   question: 如何排查 08 - 存储性能调优与优化策略 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
 - type: comparison
   question: 08 - 存储性能调优与优化策略 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/08-storage-performance-tuning.md
+  answer: 参见 wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/09-storage-performance-tuning.md
 - type: concept
   question: 在 09 - PV/PVC故障排查与解决方案 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md
   section: 目录
 - type: concept
   question: 在 09 - PV/PVC故障排查与解决方案 中, 状态详解 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 的「状态详解」章节。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md 的「状态详解」章节。
+  source: wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md
   section: 状态详解
-- type: operation
-  question: '如何执行与 09 - PV/PVC故障排查与解决方案 相关的操作: set -e?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
-  command: set -e
-- type: operation
-  question: '如何执行与 09 - PV/PVC故障排查与解决方案 相关的操作: POD_NAME=$1?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
-  command: POD_NAME=$1
-- type: operation
-  question: '如何执行与 09 - PV/PVC故障排查与解决方案 相关的操作: PVC_NAME=$1?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
-  command: PVC_NAME=$1
 - type: troubleshooting
   question: 如何排查 09 - PV/PVC故障排查与解决方案 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md
 - type: comparison
   question: 09 - PV/PVC故障排查与解决方案 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/09-pv-pvc-troubleshooting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/10-pv-pvc-troubleshooting.md
 - type: concept
   question: 在 10 - 存储备份与灾难恢复 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md
   section: 目录
 - type: concept
   question: 在 10 - 存储备份与灾难恢复 中, 备份策略架构 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md 的「备份策略架构」章节。
-  source: wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md 的「备份策略架构」章节。
+  source: wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md
   section: 备份策略架构
 - type: concept
   question: 在 10 - 存储备份与灾难恢复 中, RPO/RTO 指标定义 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md 的「RPO/RTO 指标定义」章节。
-  source: wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md 的「RPO/RTO 指标定义」章节。
+  source: wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md
   section: RPO/RTO 指标定义
 - type: concept
   question: 在 10 - 存储备份与灾难恢复 中, Velero 企业备份方案 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md 的「Velero 企业备份方案」章节。
-  source: wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md 的「Velero 企业备份方案」章节。
+  source: wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md
   section: Velero 企业备份方案
 - type: operation
   question: '如何执行与 10 - 存储备份与灾难恢复 相关的操作: wget https://github.com/vmware-tanzu/velero/releases/downloa?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md 中的操作步骤。
+  source: wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md
   command: wget https://github.com/vmware-tanzu/velero/releases/download/v1.13.0/velero-v1.13.0-linux-amd64.tar
 - type: troubleshooting
   question: 如何排查 10 - 存储备份与灾难恢复 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/10-storage-backup-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/11-storage-backup-disaster-recovery.md
 - type: concept
   question: 在 11 - 存储高级特性与优化策略 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/11-storage-advanced-features.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/11-storage-advanced-features.md
+  answer: 参见 wiki/06-存储/01-K8s存储/12-storage-advanced-features.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/12-storage-advanced-features.md
   section: 目录
 - type: concept
   question: 在 11 - 存储高级特性与优化策略 中, 存储快照与克隆 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/11-storage-advanced-features.md 的「存储快照与克隆」章节。
-  source: wiki/06-存储/01-k8s-storage/11-storage-advanced-features.md
+  answer: 参见 wiki/06-存储/01-K8s存储/12-storage-advanced-features.md 的「存储快照与克隆」章节。
+  source: wiki/06-存储/01-K8s存储/12-storage-advanced-features.md
   section: 存储快照与克隆
 - type: troubleshooting
   question: 如何排查 11 - 存储高级特性与优化策略 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/11-storage-advanced-features.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/11-storage-advanced-features.md
+  answer: 参见 wiki/06-存储/01-K8s存储/12-storage-advanced-features.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/12-storage-advanced-features.md
 - type: concept
   question: 在 12 - 存储监控告警与性能调优 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/13-storage-monitoring-alerting.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/13-storage-monitoring-alerting.md
   section: 目录
 - type: concept
   question: 在 12 - 存储监控告警与性能调优 中, 存储监控指标体系 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md 的「存储监控指标体系」章节。
-  source: wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/13-storage-monitoring-alerting.md 的「存储监控指标体系」章节。
+  source: wiki/06-存储/01-K8s存储/13-storage-monitoring-alerting.md
   section: 存储监控指标体系
 - type: concept
   question: 在 12 - 存储监控告警与性能调优 中, Prometheus监控配置 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md 的「Prometheus监控配置」章节。
-  source: wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md
+  answer: 参见 wiki/06-存储/01-K8s存储/13-storage-monitoring-alerting.md 的「Prometheus监控配置」章节。
+  source: wiki/06-存储/01-K8s存储/13-storage-monitoring-alerting.md
   section: Prometheus监控配置
-- type: troubleshooting
-  question: 如何排查 12 - 存储监控告警与性能调优 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/12-storage-monitoring-alerting.md
 - type: concept
   question: 在 13 - 存储安全与合规管理 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md
+  answer: 参见 wiki/06-存储/01-K8s存储/14-storage-security-compliance.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/14-storage-security-compliance.md
   section: 目录
 - type: concept
   question: 在 13 - 存储安全与合规管理 中, 存储加密策略 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md 的「存储加密策略」章节。
-  source: wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md
+  answer: 参见 wiki/06-存储/01-K8s存储/14-storage-security-compliance.md 的「存储加密策略」章节。
+  source: wiki/06-存储/01-K8s存储/14-storage-security-compliance.md
   section: 存储加密策略
-- type: operation
-  question: '如何执行与 13 - 存储安全与合规管理 相关的操作: validate_encryption_status() {?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md
-  command: validate_encryption_status() {
 - type: best_practice
   question: 关于 13 - 存储安全与合规管理, 有什么最佳实践?
   answer: '- 确保所有生产环境PVC使用加密StorageClass'
-  source: wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md
-- type: troubleshooting
-  question: 如何排查 13 - 存储安全与合规管理 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/13-storage-security-compliance.md
+  source: wiki/06-存储/01-K8s存储/14-storage-security-compliance.md
 - type: concept
   question: 在 14 - 云原生存储与多云策略 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md
+  answer: 参见 wiki/06-存储/01-K8s存储/15-cloud-native-storage.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/15-cloud-native-storage.md
   section: 目录
 - type: concept
   question: 在 14 - 云原生存储与多云策略 中, 多云存储架构设计 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md 的「多云存储架构设计」章节。
-  source: wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md
+  answer: 参见 wiki/06-存储/01-K8s存储/15-cloud-native-storage.md 的「多云存储架构设计」章节。
+  source: wiki/06-存储/01-K8s存储/15-cloud-native-storage.md
   section: 多云存储架构设计
 - type: concept
   question: 在 14 - 云原生存储与多云策略 中, 混合云存储策略 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md 的「混合云存储策略」章节。
-  source: wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md
+  answer: 参见 wiki/06-存储/01-K8s存储/15-cloud-native-storage.md 的「混合云存储策略」章节。
+  source: wiki/06-存储/01-K8s存储/15-cloud-native-storage.md
   section: 混合云存储策略
-- type: troubleshooting
-  question: 如何排查 14 - 云原生存储与多云策略 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md
 - type: comparison
   question: 14 - 云原生存储与多云策略 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/14-cloud-native-storage.md
+  answer: 参见 wiki/06-存储/01-K8s存储/15-cloud-native-storage.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/15-cloud-native-storage.md
 - type: concept
   question: 在 15 - 存储灾备与迁移策略 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/16-storage-disaster-recovery.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/16-storage-disaster-recovery.md
   section: 目录
 - type: concept
   question: 在 15 - 存储灾备与迁移策略 中, 灾备架构设计 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md 的「灾备架构设计」章节。
-  source: wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/16-storage-disaster-recovery.md 的「灾备架构设计」章节。
+  source: wiki/06-存储/01-K8s存储/16-storage-disaster-recovery.md
   section: 灾备架构设计
 - type: concept
   question: 在 15 - 存储灾备与迁移策略 中, 数据备份策略 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md 的「数据备份策略」章节。
-  source: wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md
+  answer: 参见 wiki/06-存储/01-K8s存储/16-storage-disaster-recovery.md 的「数据备份策略」章节。
+  source: wiki/06-存储/01-K8s存储/16-storage-disaster-recovery.md
   section: 数据备份策略
-- type: operation
-  question: '如何执行与 15 - 存储灾备与迁移策略 相关的操作: execute_backup() {?'
-  answer: 参见 wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md 中的操作步骤。
-  source: wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md
-  command: execute_backup() {
-- type: troubleshooting
-  question: 如何排查 15 - 存储灾备与迁移策略 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/15-storage-disaster-recovery.md
 - type: concept
   question: 在 16 - CSI 迁移：从 In-Tree 存储插件到 CSI 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/16-csi-migration-in-tree-to-csi.md 的「目录」章节。
-  source: wiki/06-存储/01-k8s-storage/16-csi-migration-in-tree-to-csi.md
+  answer: 参见 wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md
   section: 目录
 - type: concept
   question: 在 16 - CSI 迁移：从 In-Tree 存储插件到 CSI 中, 迁移背景与必要性 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/16-csi-migration-in-tree-to-csi.md 的「迁移背景与必要性」章节。
-  source: wiki/06-存储/01-k8s-storage/16-csi-migration-in-tree-to-csi.md
+  answer: 参见 wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md 的「迁移背景与必要性」章节。
+  source: wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md
   section: 迁移背景与必要性
 - type: troubleshooting
   question: 如何排查 16 - CSI 迁移：从 In-Tree 存储插件到 CSI 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/16-csi-migration-in-tree-to-csi.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/16-csi-migration-in-tree-to-csi.md
+  answer: 参见 wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/17-csi-migration-in-tree-to-csi.md
+- type: concept
+  question: 在 VolumeSnapshot 定时快照策略 中, 架构概览 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/18-volume-snapshot-scheduling.md 的「架构概览」章节。
+  source: wiki/06-存储/01-K8s存储/18-volume-snapshot-scheduling.md
+  section: 架构概览
+- type: concept
+  question: 在 VolumeSnapshot 定时快照策略 中, 环境准备 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/18-volume-snapshot-scheduling.md 的「环境准备」章节。
+  source: wiki/06-存储/01-K8s存储/18-volume-snapshot-scheduling.md
+  section: 环境准备
+- type: concept
+  question: 在 存储加密与密钥管理 中, 架构概览 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/19-storage-encryption-at-rest.md 的「架构概览」章节。
+  source: wiki/06-存储/01-K8s存储/19-storage-encryption-at-rest.md
+  section: 架构概览
+- type: concept
+  question: 在 存储加密与密钥管理 中, KMS Provider 集成 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/19-storage-encryption-at-rest.md 的「KMS Provider 集成」章节。
+  source: wiki/06-存储/01-K8s存储/19-storage-encryption-at-rest.md
+  section: KMS Provider 集成
+- type: comparison
+  question: 存储加密与密钥管理 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/19-storage-encryption-at-rest.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/19-storage-encryption-at-rest.md
+- type: concept
+  question: 在 VolumeAttachment 与 Attach/Detach 控制器 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md
+  section: 目录
+- type: concept
+  question: 在 VolumeAttachment 与 Attach/Detach 控制器 中, 概述：attach 与 mount 的本质区别 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md 的「概述：attach 与 mount 的本质区别」章节。
+  source: wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md
+  section: 概述：attach 与 mount 的本质区别
+- type: concept
+  question: 在 VolumeAttachment 与 Attach/Detach 控制器 中, VolumeAttachment 对象模型 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md 的「VolumeAttachment 对象模型」章节。
+  source: wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md
+  section: VolumeAttachment 对象模型
+- type: comparison
+  question: VolumeAttachment 与 Attach/Detach 控制器 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/20-volume-attachment-controller.md
+- type: concept
+  question: 在 CSIStorageCapacity 与存储容量感知调度 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md 的「目录」章节。
+  source: wiki/06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md
+  section: 目录
+- type: concept
+  question: 在 CSIStorageCapacity 与存储容量感知调度 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md 的「概述」章节。
+  source: wiki/06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md
+  section: 概述
+- type: concept
+  question: 在 CSIStorageCapacity 与存储容量感知调度 中, 问题背景：为什么需要容量感知调度 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md 的「问题背景：为什么需要容量感知调度」章节。
+  source: wiki/06-存储/01-K8s存储/21-csi-storage-capacity-tracking.md
+  section: 问题背景：为什么需要容量感知调度
+- type: concept
+  question: 在 Kubernetes StorageClass、PVC、PV 联动机制面经 中, 一句话回答 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md 的「一句话回答」章节。
+  source: wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md
+  section: 一句话回答
+- type: concept
+  question: 在 Kubernetes StorageClass、PVC、PV 联动机制面经 中, 三个核心对象分别负责什么 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md 的「三个核心对象分别负责什么」章节。
+  source: wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md
+  section: 三个核心对象分别负责什么
+- type: concept
+  question: 在 Kubernetes StorageClass、PVC、PV 联动机制面经 中, 创建 StorageClass 后会发生什么 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md 的「创建 StorageClass 后会发生什么」章节。
+  source: wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md
+  section: 创建 StorageClass 后会发生什么
+- type: concept
+  question: 在 Kubernetes StorageClass、PVC、PV 联动机制面经 中, 动态供给的准确顺序 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md 的「动态供给的准确顺序」章节。
+  source: wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md
+  section: 动态供给的准确顺序
+- type: concept
+  question: 在 Kubernetes StorageClass、PVC、PV 联动机制面经 中, 动态供给的工作原理 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md 的「动态供给的工作原理」章节。
+  source: wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md
+  section: 动态供给的工作原理
+- type: comparison
+  question: Kubernetes StorageClass、PVC、PV 联动机制面经 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md
+- type: concept
+  question: 在 K8s 存储快问快答（61 题） 中, 基础概念 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/22-k8s-storage-quick-qa.md 的「基础概念」章节。
+  source: wiki/06-存储/01-K8s存储/22-k8s-storage-quick-qa.md
+  section: 基础概念
+- type: comparison
+  question: K8s 存储快问快答（61 题） 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/22-k8s-storage-quick-qa.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/22-k8s-storage-quick-qa.md
+- type: concept
+  question: 在 K8s 存储高级快问快答（12 题） 中, 话题覆盖清单 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md 的「话题覆盖清单」章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md
+  section: 话题覆盖清单
+- type: troubleshooting
+  question: 如何排查 K8s 存储高级快问快答（12 题） 相关的故障?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md
+- type: comparison
+  question: K8s 存储高级快问快答（12 题） 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 2.md
+- type: concept
+  question: 在 K8s 存储高级快问快答（12 题） 中, 话题覆盖清单 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md 的「话题覆盖清单」章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md
+  section: 话题覆盖清单
+- type: troubleshooting
+  question: 如何排查 K8s 存储高级快问快答（12 题） 相关的故障?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md
+- type: comparison
+  question: K8s 存储高级快问快答（12 题） 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 3.md
+- type: concept
+  question: 在 K8s 存储高级快问快答（12 题） 中, 话题覆盖清单 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的「话题覆盖清单」章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
+  section: 话题覆盖清单
+- type: troubleshooting
+  question: 如何排查 K8s 存储高级快问快答（12 题） 相关的故障?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
+- type: comparison
+  question: K8s 存储高级快问快答（12 题） 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa 4.md
+- type: concept
+  question: 在 K8s 存储高级快问快答（15 题） 中, 话题覆盖清单 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md 的「话题覆盖清单」章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md
+  section: 话题覆盖清单
+- type: troubleshooting
+  question: 如何排查 K8s 存储高级快问快答（15 题） 相关的故障?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md
+- type: comparison
+  question: K8s 存储高级快问快答（15 题） 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md
 - type: concept
   question: 在 Domain-6 存储知识库查漏补缺完成报告 中, 任务概述 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/completion-summary.md 的「任务概述」章节。
-  source: wiki/06-存储/01-k8s-storage/completion-summary.md
+  answer: 参见 wiki/06-存储/01-K8s存储/completion-summary.md 的「任务概述」章节。
+  source: wiki/06-存储/01-K8s存储/completion-summary.md
   section: 任务概述
 - type: concept
   question: 在 Domain-6 存储知识库查漏补缺完成报告 中, 完成情况总览 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/completion-summary.md 的「完成情况总览」章节。
-  source: wiki/06-存储/01-k8s-storage/completion-summary.md
+  answer: 参见 wiki/06-存储/01-K8s存储/completion-summary.md 的「完成情况总览」章节。
+  source: wiki/06-存储/01-K8s存储/completion-summary.md
   section: 完成情况总览
 - type: concept
   question: 在 Domain-6 存储知识库查漏补缺完成报告 中, 具体成果统计 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/completion-summary.md 的「具体成果统计」章节。
-  source: wiki/06-存储/01-k8s-storage/completion-summary.md
+  answer: 参见 wiki/06-存储/01-K8s存储/completion-summary.md 的「具体成果统计」章节。
+  source: wiki/06-存储/01-K8s存储/completion-summary.md
   section: 具体成果统计
-- type: troubleshooting
-  question: 如何排查 Domain-6 存储知识库查漏补缺完成报告 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/completion-summary.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/completion-summary.md
 - type: comparison
   question: Domain-6 存储知识库查漏补缺完成报告 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/01-k8s-storage/completion-summary.md 中的对比分析。
-  source: wiki/06-存储/01-k8s-storage/completion-summary.md
+  answer: 参见 wiki/06-存储/01-K8s存储/completion-summary.md 中的对比分析。
+  source: wiki/06-存储/01-K8s存储/completion-summary.md
+- type: concept
+  question: 在 K8S Storage 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/01-K8s存储/index.md 的「文档」章节。
+  source: wiki/06-存储/01-K8s存储/index.md
+  section: 文档
+- type: troubleshooting
+  question: 如何排查 K8S Storage 相关的故障?
+  answer: 参见 wiki/06-存储/01-K8s存储/index.md 的故障排查章节。
+  source: wiki/06-存储/01-K8s存储/index.md
 - type: concept
   question: 在 Domain-6 存储知识库质量检查报告 中, 基本信息 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/quality-check-report.md 的「基本信息」章节。
-  source: wiki/06-存储/01-k8s-storage/quality-check-report.md
+  answer: 参见 wiki/06-存储/01-K8s存储/quality-check-report.md 的「基本信息」章节。
+  source: wiki/06-存储/01-K8s存储/quality-check-report.md
   section: 基本信息
 - type: concept
   question: 在 Domain-6 存储知识库质量检查报告 中, ✅ 完成情况概览 是什么?
-  answer: 参见 wiki/06-存储/01-k8s-storage/quality-check-report.md 的「✅ 完成情况概览」章节。
-  source: wiki/06-存储/01-k8s-storage/quality-check-report.md
+  answer: 参见 wiki/06-存储/01-K8s存储/quality-check-report.md 的「✅ 完成情况概览」章节。
+  source: wiki/06-存储/01-K8s存储/quality-check-report.md
   section: ✅ 完成情况概览
-- type: troubleshooting
-  question: 如何排查 Domain-6 存储知识库质量检查报告 相关的故障?
-  answer: 参见 wiki/06-存储/01-k8s-storage/quality-check-report.md 的故障排查章节。
-  source: wiki/06-存储/01-k8s-storage/quality-check-report.md
 - type: concept
   question: 在 01 - 存储技术概述 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md 的「目录」章节。
-  source: wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md
+  answer: 参见 wiki/06-存储/02-存储基础/01-storage-technologies-overview.md 的「目录」章节。
+  source: wiki/06-存储/02-存储基础/01-storage-technologies-overview.md
   section: 目录
 - type: concept
   question: 在 01 - 存储技术概述 中, 存储技术分类 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md 的「存储技术分类」章节。
-  source: wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md
+  answer: 参见 wiki/06-存储/02-存储基础/01-storage-technologies-overview.md 的「存储技术分类」章节。
+  source: wiki/06-存储/02-存储基础/01-storage-technologies-overview.md
   section: 存储技术分类
 - type: operation
   question: '如何执行与 01 - 存储技术概述 相关的操作: fio --name=test --rw=randread --bs=4k --numjobs=4 \?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md
+  answer: 参见 wiki/06-存储/02-存储基础/01-storage-technologies-overview.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/01-storage-technologies-overview.md
   command: fio --name=test --rw=randread --bs=4k --numjobs=4 \
 - type: operation
   question: '如何执行与 01 - 存储技术概述 相关的操作: STORAGE_HEALTH_CHECK() {?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md
+  answer: 参见 wiki/06-存储/02-存储基础/01-storage-technologies-overview.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/01-storage-technologies-overview.md
   command: STORAGE_HEALTH_CHECK() {
 - type: comparison
   question: 01 - 存储技术概述 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md 中的对比分析。
-  source: wiki/06-存储/02-storage-fundamentals/01-storage-technologies-overview.md
+  answer: 参见 wiki/06-存储/02-存储基础/01-storage-technologies-overview.md 中的对比分析。
+  source: wiki/06-存储/02-存储基础/01-storage-technologies-overview.md
 - type: concept
-  question: 在 02 - 块存储、文件存储、对象存储 中, See Also 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md 的「See Also」章节。
-  source: wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md
-  section: See Also
+  question: 在 02 - 块存储、文件存储、对象存储 中, 块存储特点 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 的「块存储特点」章节。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
+  section: 块存储特点
+- type: concept
+  question: 在 02 - 块存储、文件存储、对象存储 中, 块存储协议 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 的「块存储协议」章节。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
+  section: 块存储协议
+- type: concept
+  question: 在 02 - 块存储、文件存储、对象存储 中, iSCSI 配置 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 的「iSCSI 配置」章节。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
+  section: iSCSI 配置
+- type: concept
+  question: 在 02 - 块存储、文件存储、对象存储 中, 块存储场景 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 的「块存储场景」章节。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
+  section: 块存储场景
+- type: concept
+  question: 在 02 - 块存储、文件存储、对象存储 中, 企业级块存储最佳实践 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 的「企业级块存储最佳实践」章节。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
+  section: 企业级块存储最佳实践
 - type: operation
   question: '如何执行与 02 - 块存储、文件存储、对象存储 相关的操作: targetcli?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
   command: targetcli
-- type: operation
-  question: '如何执行与 02 - 块存储、文件存储、对象存储 相关的操作: cat > /etc/multipath.conf << EOF?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md
-  command: cat > /etc/multipath.conf << EOF
-- type: operation
-  question: '如何执行与 02 - 块存储、文件存储、对象存储 相关的操作: cat > /usr/local/bin/block-storage-monitor.sh << ''EOF''?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md
-  command: cat > /usr/local/bin/block-storage-monitor.sh << 'EOF'
 - type: comparison
   question: 02 - 块存储、文件存储、对象存储 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md 中的对比分析。
-  source: wiki/06-存储/02-storage-fundamentals/02-block-file-object-storage.md
+  answer: 参见 wiki/06-存储/02-存储基础/02-block-file-object-storage.md 中的对比分析。
+  source: wiki/06-存储/02-存储基础/02-block-file-object-storage.md
 - type: concept
   question: 在 03 - RAID 与存储冗余 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md 的「目录」章节。
-  source: wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md
+  answer: 参见 wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md 的「目录」章节。
+  source: wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md
   section: 目录
 - type: concept
   question: 在 03 - RAID 与存储冗余 中, RAID 概述 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md 的「RAID 概述」章节。
-  source: wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md
+  answer: 参见 wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md 的「RAID 概述」章节。
+  source: wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md
   section: RAID 概述
 - type: operation
   question: '如何执行与 03 - RAID 与存储冗余 相关的操作: mdadm --create /dev/md0 --level=1 \?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md
+  answer: 参见 wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md
   command: mdadm --create /dev/md0 --level=1 \
 - type: operation
   question: '如何执行与 03 - RAID 与存储冗余 相关的操作: mkfs.xfs /dev/md0?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md
+  answer: 参见 wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md
   command: mkfs.xfs /dev/md0
 - type: operation
   question: '如何执行与 03 - RAID 与存储冗余 相关的操作: parted /dev/sdb mklabel gpt?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md
+  answer: 参见 wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md
   command: parted /dev/sdb mklabel gpt
 - type: comparison
   question: 03 - RAID 与存储冗余 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md 中的对比分析。
-  source: wiki/06-存储/02-storage-fundamentals/03-raid-storage-redundancy.md
+  answer: 参见 wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md 中的对比分析。
+  source: wiki/06-存储/02-存储基础/03-raid-storage-redundancy.md
 - type: concept
-  question: 在 04 - 分布式存储系统 中, See Also 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md 的「See Also」章节。
-  source: wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md
-  section: See Also
+  question: 在 04 - 分布式存储系统 中, 核心特性 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 的「核心特性」章节。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
+  section: 核心特性
+- type: concept
+  question: 在 04 - 分布式存储系统 中, 数据保护策略 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 的「数据保护策略」章节。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
+  section: 数据保护策略
+- type: concept
+  question: 在 04 - 分布式存储系统 中, 企业级分布式存储架构 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 的「企业级分布式存储架构」章节。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
+  section: 企业级分布式存储架构
+- type: concept
+  question: 在 04 - 分布式存储系统 中, 架构组件 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 的「架构组件」章节。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
+  section: 架构组件
+- type: concept
+  question: 在 04 - 分布式存储系统 中, Ceph 部署 (cephadm) 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 的「Ceph 部署 (cephadm)」章节。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
+  section: Ceph 部署 (cephadm)
 - type: operation
   question: '如何执行与 04 - 分布式存储系统 相关的操作: cephadm bootstrap --mon-ip 192.168.1.10?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
   command: cephadm bootstrap --mon-ip 192.168.1.10
 - type: operation
   question: '如何执行与 04 - 分布式存储系统 相关的操作: cat > /etc/ceph/ceph.conf << EOF?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
   command: cat > /etc/ceph/ceph.conf << EOF
 - type: comparison
   question: 04 - 分布式存储系统 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md 中的对比分析。
-  source: wiki/06-存储/02-storage-fundamentals/04-distributed-storage-systems.md
+  answer: 参见 wiki/06-存储/02-存储基础/04-distributed-storage-systems.md 中的对比分析。
+  source: wiki/06-存储/02-存储基础/04-distributed-storage-systems.md
 - type: concept
-  question: 在 05 - 企业级存储管理与运维实践 中, See Also 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md 的「See Also」章节。
-  source: wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md
-  section: See Also
-- type: operation
-  question: '如何执行与 05 - 企业级存储管理与运维实践 相关的操作: cat > /usr/local/bin/daily-storage-check.sh << ''EOF''?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md
-  command: cat > /usr/local/bin/daily-storage-check.sh << 'EOF'
-- type: operation
-  question: '如何执行与 05 - 企业级存储管理与运维实践 相关的操作: cat > /usr/local/bin/weekly-storage-maintenance.sh << ''EOF''?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md
-  command: cat > /usr/local/bin/weekly-storage-maintenance.sh << 'EOF'
+  question: 在 05 - 企业级存储管理与运维实践 中, 企业级存储运维框架 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/05-storage-management-operations.md 的「企业级存储运维框架」章节。
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
+  section: 企业级存储运维框架
+- type: concept
+  question: 在 05 - 企业级存储管理与运维实践 中, 运维职责分工 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/05-storage-management-operations.md 的「运维职责分工」章节。
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
+  section: 运维职责分工
+- type: concept
+  question: 在 05 - 企业级存储管理与运维实践 中, 存储系统巡检清单 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/05-storage-management-operations.md 的「存储系统巡检清单」章节。
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
+  section: 存储系统巡检清单
+- type: concept
+  question: 在 05 - 企业级存储管理与运维实践 中, 每日巡检项目 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/05-storage-management-operations.md 的「每日巡检项目」章节。
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
+  section: 每日巡检项目
+- type: concept
+  question: 在 05 - 企业级存储管理与运维实践 中, 每周运维任务 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/05-storage-management-operations.md 的「每周运维任务」章节。
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
+  section: 每周运维任务
 - type: best_practice
   question: 关于 05 - 企业级存储管理与运维实践, 有什么最佳实践?
   answer: '" | tee -a $security_report'
-  source: wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
 - type: troubleshooting
   question: 如何排查 05 - 企业级存储管理与运维实践 相关的故障?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md 的故障排查章节。
-  source: wiki/06-存储/02-storage-fundamentals/05-storage-management-operations.md
+  answer: 参见 wiki/06-存储/02-存储基础/05-storage-management-operations.md 的故障排查章节。
+  source: wiki/06-存储/02-存储基础/05-storage-management-operations.md
 - type: concept
-  question: 在 06 - 存储性能与 IOPS 中, See Also 是什么?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md 的「See Also」章节。
-  source: wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md
-  section: See Also
+  question: 在 06 - 存储性能与 IOPS 中, 核心指标 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 的「核心指标」章节。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
+  section: 核心指标
+- type: concept
+  question: 在 06 - 存储性能与 IOPS 中, 指标关系 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 的「指标关系」章节。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
+  section: 指标关系
+- type: concept
+  question: 在 06 - 存储性能与 IOPS 中, I/O 模式 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 的「I/O 模式」章节。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
+  section: I/O 模式
+- type: concept
+  question: 在 06 - 存储性能与 IOPS 中, 企业级性能基准参考 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 的「企业级性能基准参考」章节。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
+  section: 企业级性能基准参考
+- type: concept
+  question: 在 06 - 存储性能与 IOPS 中, 不同存储介质性能对比 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 的「不同存储介质性能对比」章节。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
+  section: 不同存储介质性能对比
 - type: operation
   question: '如何执行与 06 - 存储性能与 IOPS 相关的操作: fio --name=randread \?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
   command: fio --name=randread \
 - type: operation
   question: '如何执行与 06 - 存储性能与 IOPS 相关的操作: dd if=/dev/zero of=/test/file bs=1M count=1024 oflag=direct?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
   command: dd if=/dev/zero of=/test/file bs=1M count=1024 oflag=direct
 - type: operation
   question: '如何执行与 06 - 存储性能与 IOPS 相关的操作: cat > /usr/local/bin/storage-benchmark.sh << ''EOF''?'
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md 中的操作步骤。
-  source: wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 中的操作步骤。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
   command: cat > /usr/local/bin/storage-benchmark.sh << 'EOF'
 - type: comparison
   question: 06 - 存储性能与 IOPS 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md 中的对比分析。
-  source: wiki/06-存储/02-storage-fundamentals/06-storage-performance-iops.md
+  answer: 参见 wiki/06-存储/02-存储基础/06-storage-performance-iops.md 中的对比分析。
+  source: wiki/06-存储/02-存储基础/06-storage-performance-iops.md
 - type: concept
-  question: 在 Domain-16 存储基础 — 开源项目索引 中, 目录 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-16.md 的「目录」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-16.md
+  question: 在 Storage Fundamentals 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/02-存储基础/index.md 的「文档」章节。
+  source: wiki/06-存储/02-存储基础/index.md
+  section: 文档
+- type: concept
+  question: 在 Velero 阿里云专有云备份恢复实战 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md 的「目录」章节。
+  source: wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md
   section: 目录
 - type: concept
-  question: 在 Domain-16 存储基础 — 开源项目索引 中, 核心项目总览 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-16.md 的「核心项目总览」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-16.md
-  section: 核心项目总览
+  question: 在 Velero 阿里云专有云备份恢复实战 中, 架构与组件 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md 的「架构与组件」章节。
+  source: wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md
+  section: 架构与组件
 - type: concept
-  question: 在 Domain-16 存储基础 — 开源项目索引 中, Rook (CNCF Graduated) 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-16.md 的「Rook (CNCF Graduated)」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-16.md
-  section: Rook (CNCF Graduated)
+  question: 在 Velero 阿里云专有云备份恢复实战 中, 前置条件 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md 的「前置条件」章节。
+  source: wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md
+  section: 前置条件
 - type: concept
-  question: 在 Domain-6 存储 — 开源项目索引 中, 核心存储项目 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md 的「核心存储项目」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md
-  section: 核心存储项目
+  question: 在 Velero 阿里云专有云备份恢复实战 中, 安装 Velero 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md 的「安装 Velero」章节。
+  source: wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md
+  section: 安装 Velero
+- type: best_practice
+  question: 关于 Velero 阿里云专有云备份恢复实战, 有什么最佳实践?
+  answer: '- 将 7 天内的备份保留在标准存储，超过 7 天的自动转低频访问；'
+  source: wiki/06-存储/03-分布式存储/01-velero-backup-recovery.md
 - type: concept
-  question: 在 Domain-6 存储 — 开源项目索引 中, Rook — 云原生存储编排 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md 的「Rook — 云原生存储编排」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md
-  section: Rook — 云原生存储编排
+  question: 在 Rook-Ceph Kubernetes 生产部署与运维 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/02-rook-ceph-production.md 的「目录」章节。
+  source: wiki/06-存储/03-分布式存储/02-rook-ceph-production.md
+  section: 目录
 - type: concept
-  question: 在 Domain-6 存储 — 开源项目索引 中, Longhorn — 分布式块存储 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md 的「Longhorn — 分布式块存储」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md
-  section: Longhorn — 分布式块存储
+  question: 在 Rook-Ceph Kubernetes 生产部署与运维 中, 架构概述 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/02-rook-ceph-production.md 的「架构概述」章节。
+  source: wiki/06-存储/03-分布式存储/02-rook-ceph-production.md
+  section: 架构概述
 - type: concept
-  question: 在 Domain-6 存储 — 开源项目索引 中, CubeFS — 分布式文件/对象存储 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md 的「CubeFS — 分布式文件/对象存储」章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md
-  section: CubeFS — 分布式文件/对象存储
+  question: 在 Rook-Ceph Kubernetes 生产部署与运维 中, 前置条件与资源规划 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/02-rook-ceph-production.md 的「前置条件与资源规划」章节。
+  source: wiki/06-存储/03-分布式存储/02-rook-ceph-production.md
+  section: 前置条件与资源规划
+- type: operation
+  question: '如何执行与 Rook-Ceph Kubernetes 生产部署与运维 相关的操作: modprobe rbd?'
+  answer: 参见 wiki/06-存储/03-分布式存储/02-rook-ceph-production.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/02-rook-ceph-production.md
+  command: modprobe rbd
+- type: operation
+  question: '如何执行与 Rook-Ceph Kubernetes 生产部署与运维 相关的操作: lsblk -f?'
+  answer: 参见 wiki/06-存储/03-分布式存储/02-rook-ceph-production.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/02-rook-ceph-production.md
+  command: lsblk -f
+- type: operation
+  question: '如何执行与 Rook-Ceph Kubernetes 生产部署与运维 相关的操作: git clone --single-branch --branch v1.13.2 https://github.co?'
+  answer: 参见 wiki/06-存储/03-分布式存储/02-rook-ceph-production.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/02-rook-ceph-production.md
+  command: git clone --single-branch --branch v1.13.2 https://github.com/rook/rook.git
+- type: concept
+  question: 在 Longhorn Kubernetes 生产部署与运维 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/03-longhorn-production.md 的「目录」章节。
+  source: wiki/06-存储/03-分布式存储/03-longhorn-production.md
+  section: 目录
+- type: concept
+  question: 在 Longhorn Kubernetes 生产部署与运维 中, 架构概述 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/03-longhorn-production.md 的「架构概述」章节。
+  source: wiki/06-存储/03-分布式存储/03-longhorn-production.md
+  section: 架构概述
+- type: concept
+  question: 在 Longhorn Kubernetes 生产部署与运维 中, 前置条件 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/03-longhorn-production.md 的「前置条件」章节。
+  source: wiki/06-存储/03-分布式存储/03-longhorn-production.md
+  section: 前置条件
+- type: concept
+  question: 在 OpenEBS 生产部署与运维指南 中, 架构概览 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/04-openebs-production.md 的「架构概览」章节。
+  source: wiki/06-存储/03-分布式存储/04-openebs-production.md
+  section: 架构概览
+- type: concept
+  question: 在 OpenEBS 生产部署与运维指南 中, 环境准备 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/04-openebs-production.md 的「环境准备」章节。
+  source: wiki/06-存储/03-分布式存储/04-openebs-production.md
+  section: 环境准备
+- type: operation
+  question: '如何执行与 OpenEBS 生产部署与运维指南 相关的操作: sudo modprobe nvme_tcp?'
+  answer: 参见 wiki/06-存储/03-分布式存储/04-openebs-production.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/04-openebs-production.md
+  command: sudo modprobe nvme_tcp
+- type: comparison
+  question: OpenEBS 生产部署与运维指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/03-分布式存储/04-openebs-production.md 中的对比分析。
+  source: wiki/06-存储/03-分布式存储/04-openebs-production.md
+- type: concept
+  question: 在 JuiceFS on Kubernetes 生产部署指南 中, 架构概览 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md 的「架构概览」章节。
+  source: wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md
+  section: 架构概览
+- type: concept
+  question: 在 JuiceFS on Kubernetes 生产部署指南 中, 环境准备 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md 的「环境准备」章节。
+  source: wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md
+  section: 环境准备
+- type: comparison
+  question: JuiceFS on Kubernetes 生产部署指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md 中的对比分析。
+  source: wiki/06-存储/03-分布式存储/05-juicefs-distributed-filesystem.md
+- type: concept
+  question: 在 NFS CSI 生产部署指南 中, 架构概览 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md 的「架构概览」章节。
+  source: wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md
+  section: 架构概览
+- type: concept
+  question: 在 NFS CSI 生产部署指南 中, NFS CSI Driver 安装 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md 的「NFS CSI Driver 安装」章节。
+  source: wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md
+  section: NFS CSI Driver 安装
+- type: comparison
+  question: NFS CSI 生产部署指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md 中的对比分析。
+  source: wiki/06-存储/03-分布式存储/06-nfs-csi-production-guide.md
+- type: concept
+  question: 在 Ceph 分布式存储深度拆解：CRUSH 故障域、四维水位与稳定性保障 中, 一句话理解 Ceph 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md 的「一句话理解 Ceph」章节。
+  source: wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md
+  section: 一句话理解 Ceph
+- type: concept
+  question: 在 Ceph 分布式存储深度拆解：CRUSH 故障域、四维水位与稳定性保障 中, 架构拆解 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md 的「架构拆解」章节。
+  source: wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md
+  section: 架构拆解
+- type: operation
+  question: '如何执行与 Ceph 分布式存储深度拆解：CRUSH 故障域、四维水位与稳定性保障 相关的操作: ceph osd tree?'
+  answer: 参见 wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md
+  command: ceph osd tree
+- type: operation
+  question: '如何执行与 Ceph 分布式存储深度拆解：CRUSH 故障域、四维水位与稳定性保障 相关的操作: ceph df?'
+  answer: 参见 wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md
+  command: ceph df
+- type: operation
+  question: '如何执行与 Ceph 分布式存储深度拆解：CRUSH 故障域、四维水位与稳定性保障 相关的操作: ceph osd pool set-quota <pool> max_bytes $((5*1024*1024*1024?'
+  answer: 参见 wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md 中的操作步骤。
+  source: wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md
+  command: 'ceph osd pool set-quota <pool> max_bytes $((5*1024*1024*1024*1024))   # 5 TiB'
+- type: comparison
+  question: Ceph 分布式存储深度拆解：CRUSH 故障域、四维水位与稳定性保障 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md 中的对比分析。
+  source: wiki/06-存储/03-分布式存储/07-ceph-deep-dive.md
+- type: concept
+  question: 在 Distributed Storage 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/03-分布式存储/index.md 的「文档」章节。
+  source: wiki/06-存储/03-分布式存储/index.md
+  section: 文档
+- type: concept
+  question: 在 有状态应用 Kubernetes 存储模式 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md 的「目录」章节。
+  source: wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md
+  section: 目录
+- type: concept
+  question: 在 有状态应用 Kubernetes 存储模式 中, 存储选型总览 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md 的「存储选型总览」章节。
+  source: wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md
+  section: 存储选型总览
+- type: concept
+  question: 在 有状态应用 Kubernetes 存储模式 中, StatefulSet + Headless Service 模式 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md 的「StatefulSet + Headless Service 模式」章节。
+  source: wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md
+  section: StatefulSet + Headless Service 模式
+- type: concept
+  question: 在 有状态应用 Kubernetes 存储模式 中, 本地盘 vs 网络存储 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md 的「本地盘 vs 网络存储」章节。
+  source: wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md
+  section: 本地盘 vs 网络存储
+- type: comparison
+  question: 有状态应用 Kubernetes 存储模式 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md 中的对比分析。
+  source: wiki/06-存储/04-有状态应用存储/01-stateful-app-storage-patterns.md
+- type: concept
+  question: 在 MySQL StatefulSet 生产部署指南 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md 的「目录」章节。
+  source: wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md
+  section: 目录
+- type: concept
+  question: 在 MySQL StatefulSet 生产部署指南 中, 架构选型 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md 的「架构选型」章节。
+  source: wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md
+  section: 架构选型
+- type: concept
+  question: 在 MySQL StatefulSet 生产部署指南 中, StatefulSet + Headless Service 部署 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md 的「StatefulSet + Headless Service 部署」章节。
+  source: wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md
+  section: StatefulSet + Headless Service 部署
+- type: best_practice
+  question: 关于 MySQL StatefulSet 生产部署指南, 有什么最佳实践?
+  answer: '- 设置 `expire_logs_days` 自动清理 binlog。'
+  source: wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md
 - type: troubleshooting
-  question: 如何排查 Domain-6 存储 — 开源项目索引 相关的故障?
-  answer: 参见 wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md 的故障排查章节。
-  source: wiki/06-存储/98-merged-indexes/00-open-source-projects-index-from-domain-6.md
+  question: 如何排查 MySQL StatefulSet 生产部署指南 相关的故障?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md 的故障排查章节。
+  source: wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md
+- type: comparison
+  question: MySQL StatefulSet 生产部署指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md 中的对比分析。
+  source: wiki/06-存储/04-有状态应用存储/02-mysql-statefulset-production.md
 - type: concept
-  question: 在 domain-16-storage-fundamentals MOC 中, 领域概述 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md 的「领域概述」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md
-  section: 领域概述
+  question: 在 PostgreSQL StatefulSet + Patroni 高可用生产部署 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md 的「目录」章节。
+  source: wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md
+  section: 目录
 - type: concept
-  question: 在 domain-16-storage-fundamentals MOC 中, 文档清单 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md 的「文档清单」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md
-  section: 文档清单
-- type: concept
-  question: 在 domain-16-storage-fundamentals MOC 中, 知识图谱 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md 的「知识图谱」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md
-  section: 知识图谱
-- type: concept
-  question: 在 domain-16-storage-fundamentals MOC 中, 关联入口 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md 的「关联入口」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md
-  section: 关联入口
+  question: 在 PostgreSQL StatefulSet + Patroni 高可用生产部署 中, 架构概述 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md 的「架构概述」章节。
+  source: wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md
+  section: 架构概述
+- type: best_practice
+  question: 关于 PostgreSQL StatefulSet + Patroni 高可用生产部署, 有什么最佳实践?
+  answer: '- 使用更高性能的云盘类型，如 ESSD PL3。'
+  source: wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md
 - type: troubleshooting
-  question: 如何排查 domain-16-storage-fundamentals MOC 相关的故障?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md 的故障排查章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-16.md
+  question: 如何排查 PostgreSQL StatefulSet + Patroni 高可用生产部署 相关的故障?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md 的故障排查章节。
+  source: wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md
+- type: comparison
+  question: PostgreSQL StatefulSet + Patroni 高可用生产部署 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md 中的对比分析。
+  source: wiki/06-存储/04-有状态应用存储/03-postgresql-statefulset-production.md
 - type: concept
-  question: 在 domain-6-storage MOC 中, 领域概述 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md 的「领域概述」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md
-  section: 领域概述
+  question: 在 Kafka StatefulSet 生产部署指南 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md 的「目录」章节。
+  source: wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md
+  section: 目录
 - type: concept
-  question: 在 domain-6-storage MOC 中, 文档清单 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md 的「文档清单」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md
-  section: 文档清单
+  question: 在 Kafka StatefulSet 生产部署指南 中, 架构选型 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md 的「架构选型」章节。
+  source: wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md
+  section: 架构选型
 - type: concept
-  question: 在 domain-6-storage MOC 中, 知识图谱 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md 的「知识图谱」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md
-  section: 知识图谱
-- type: concept
-  question: 在 domain-6-storage MOC 中, 关联入口 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md 的「关联入口」章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md
-  section: 关联入口
+  question: 在 Kafka StatefulSet 生产部署指南 中, KRaft 模式 StatefulSet 部署 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md 的「KRaft 模式 StatefulSet 部署」章节。
+  source: wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md
+  section: KRaft 模式 StatefulSet 部署
+- type: best_practice
+  question: 关于 Kafka StatefulSet 生产部署指南, 有什么最佳实践?
+  answer: '- 使用本地 SSD 或 ESSD PL3。'
+  source: wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md
 - type: troubleshooting
-  question: 如何排查 domain-6-storage MOC 相关的故障?
-  answer: 参见 wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md 的故障排查章节。
-  source: wiki/06-存储/98-merged-indexes/MOC-from-domain-6.md
+  question: 如何排查 Kafka StatefulSet 生产部署指南 相关的故障?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md 的故障排查章节。
+  source: wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md
+- type: comparison
+  question: Kafka StatefulSet 生产部署指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md 中的对比分析。
+  source: wiki/06-存储/04-有状态应用存储/04-kafka-statefulset-production.md
 - type: concept
-  question: '在 Domain-16: 存储基础 中, 概述 是什么?'
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-16.md 的「概述」章节。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-16.md
+  question: 在 Redis Cluster on K8s 生产部署指南 中, 目录 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md 的「目录」章节。
+  source: wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md
+  section: 目录
+- type: concept
+  question: 在 Redis Cluster on K8s 生产部署指南 中, 架构选型 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md 的「架构选型」章节。
+  source: wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md
+  section: 架构选型
+- type: concept
+  question: 在 Redis Cluster on K8s 生产部署指南 中, StatefulSet 部署 Redis Cluster 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md 的「StatefulSet 部署 Redis Cluster」章节。
+  source: wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md
+  section: StatefulSet 部署 Redis Cluster
+- type: best_practice
+  question: 关于 Redis Cluster on K8s 生产部署指南, 有什么最佳实践?
+  answer: '- 设置合理的 `maxmemory` 和 `maxmemory-policy`。'
+  source: wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md
+- type: troubleshooting
+  question: 如何排查 Redis Cluster on K8s 生产部署指南 相关的故障?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md 的故障排查章节。
+  source: wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md
+- type: comparison
+  question: Redis Cluster on K8s 生产部署指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md 中的对比分析。
+  source: wiki/06-存储/04-有状态应用存储/05-redis-cluster-statefulset.md
+- type: concept
+  question: 在 Stateful App Storage 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/04-有状态应用存储/index.md 的「文档」章节。
+  source: wiki/06-存储/04-有状态应用存储/index.md
+  section: 文档
+- type: concept
+  question: 在 Storage Area Network (SAN) 中, 存储网络架构概述 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/01-san-nas-architecture.md 的「存储网络架构概述」章节。
+  source: wiki/06-存储/05-存储网络/01-san-nas-architecture.md
+  section: 存储网络架构概述
+- type: concept
+  question: 在 Storage Area Network (SAN) 中, iSCSI 协议 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/01-san-nas-architecture.md 的「iSCSI 协议」章节。
+  source: wiki/06-存储/05-存储网络/01-san-nas-architecture.md
+  section: iSCSI 协议
+- type: operation
+  question: '如何执行与 Storage Area Network (SAN) 相关的操作: apt-get install open-iscsi  # Debian/Ubuntu?'
+  answer: 参见 wiki/06-存储/05-存储网络/01-san-nas-architecture.md 中的操作步骤。
+  source: wiki/06-存储/05-存储网络/01-san-nas-architecture.md
+  command: 'apt-get install open-iscsi  # Debian/Ubuntu'
+- type: operation
+  question: '如何执行与 Storage Area Network (SAN) 相关的操作: cat /sys/class/fc_host/host*/port_name?'
+  answer: 参见 wiki/06-存储/05-存储网络/01-san-nas-architecture.md 中的操作步骤。
+  source: wiki/06-存储/05-存储网络/01-san-nas-architecture.md
+  command: cat /sys/class/fc_host/host*/port_name
+- type: comparison
+  question: Storage Area Network (SAN) 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/05-存储网络/01-san-nas-architecture.md 中的对比分析。
+  source: wiki/06-存储/05-存储网络/01-san-nas-architecture.md
+- type: concept
+  question: 在 Kubernetes CSI Driver Architecture & Implementation 中, CSI 架构 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/02-csi-driver-architecture.md 的「CSI 架构」章节。
+  source: wiki/06-存储/05-存储网络/02-csi-driver-architecture.md
+  section: CSI 架构
+- type: concept
+  question: 在 Kubernetes CSI Driver Architecture & Implementation 中, 卷生命周期 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/02-csi-driver-architecture.md 的「卷生命周期」章节。
+  source: wiki/06-存储/05-存储网络/02-csi-driver-architecture.md
+  section: 卷生命周期
+- type: concept
+  question: 在 Kubernetes CSI Driver Architecture & Implementation 中, StorageClass 配置 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/02-csi-driver-architecture.md 的「StorageClass 配置」章节。
+  source: wiki/06-存储/05-存储网络/02-csi-driver-architecture.md
+  section: StorageClass 配置
+- type: concept
+  question: 在 Kubernetes CSI Driver Architecture & Implementation 中, 卷快照与克隆 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/02-csi-driver-architecture.md 的「卷快照与克隆」章节。
+  source: wiki/06-存储/05-存储网络/02-csi-driver-architecture.md
+  section: 卷快照与克隆
+- type: concept
+  question: 在 Kubernetes CSI Driver Architecture & Implementation 中, 在线扩容 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/02-csi-driver-architecture.md 的「在线扩容」章节。
+  source: wiki/06-存储/05-存储网络/02-csi-driver-architecture.md
+  section: 在线扩容
+- type: comparison
+  question: Kubernetes CSI Driver Architecture & Implementation 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/05-存储网络/02-csi-driver-architecture.md 中的对比分析。
+  source: wiki/06-存储/05-存储网络/02-csi-driver-architecture.md
+- type: concept
+  question: 在 Kubernetes Storage Networking — iSCSI, NFS, Ceph, and CSI Network Paths 中, 存储网络架构 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md 的「存储网络架构」章节。
+  source: wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md
+  section: 存储网络架构
+- type: concept
+  question: 在 Kubernetes Storage Networking — iSCSI, NFS, Ceph, and CSI Network Paths 中, 存储协议对比 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md 的「存储协议对比」章节。
+  source: wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md
+  section: 存储协议对比
+- type: concept
+  question: 在 Kubernetes Storage Networking — iSCSI, NFS, Ceph, and CSI Network Paths 中, NFS 存储网络 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md 的「NFS 存储网络」章节。
+  source: wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md
+  section: NFS 存储网络
+- type: operation
+  question: '如何执行与 Kubernetes Storage Networking — iSCSI, NFS, Ceph, and CSI Network Paths 相关的操作: fs.nfs.nlm_tcpport = 0?'
+  answer: 参见 wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md 中的操作步骤。
+  source: wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md
+  command: fs.nfs.nlm_tcpport = 0
+- type: comparison
+  question: Kubernetes Storage Networking — iSCSI, NFS, Ceph, and CSI Network Paths 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md 中的对比分析。
+  source: wiki/06-存储/05-存储网络/03-storage-network-protocols-performance.md
+- type: concept
+  question: 在 存储网络索引 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/index.md 的「文档」章节。
+  source: wiki/06-存储/05-存储网络/index.md
+  section: 文档
+- type: concept
+  question: 在 存储网络索引 中, 核心知识 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/index.md 的「核心知识」章节。
+  source: wiki/06-存储/05-存储网络/index.md
+  section: 核心知识
+- type: concept
+  question: 在 存储网络索引 中, Related 是什么?
+  answer: 参见 wiki/06-存储/05-存储网络/index.md 的「Related」章节。
+  source: wiki/06-存储/05-存储网络/index.md
+  section: Related
+- type: comparison
+  question: 存储网络索引 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/05-存储网络/index.md 中的对比分析。
+  source: wiki/06-存储/05-存储网络/index.md
+- type: concept
+  question: 在 Cloud Storage Comparison 中, 云存储产品全景 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/01-cloud-storage-comparison.md 的「云存储产品全景」章节。
+  source: wiki/06-存储/06-云存储对比/01-cloud-storage-comparison.md
+  section: 云存储产品全景
+- type: concept
+  question: 在 Cloud Storage Comparison 中, K8s CSI 集成 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/01-cloud-storage-comparison.md 的「K8s CSI 集成」章节。
+  source: wiki/06-存储/06-云存储对比/01-cloud-storage-comparison.md
+  section: K8s CSI 集成
+- type: comparison
+  question: Cloud Storage Comparison 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/06-云存储对比/01-cloud-storage-comparison.md 中的对比分析。
+  source: wiki/06-存储/06-云存储对比/01-cloud-storage-comparison.md
+- type: concept
+  question: 在 Kubernetes StorageClass and Dynamic Provisioning Deep Dive 中, 存储供给模型 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/02-storage-class-dynamic-provisioning.md 的「存储供给模型」章节。
+  source: wiki/06-存储/06-云存储对比/02-storage-class-dynamic-provisioning.md
+  section: 存储供给模型
+- type: concept
+  question: 在 Kubernetes StorageClass and Dynamic Provisioning Deep Dive 中, StorageClass 配置 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/02-storage-class-dynamic-provisioning.md 的「StorageClass 配置」章节。
+  source: wiki/06-存储/06-云存储对比/02-storage-class-dynamic-provisioning.md
+  section: StorageClass 配置
+- type: comparison
+  question: Kubernetes StorageClass and Dynamic Provisioning Deep Dive 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/06-云存储对比/02-storage-class-dynamic-provisioning.md 中的对比分析。
+  source: wiki/06-存储/06-云存储对比/02-storage-class-dynamic-provisioning.md
+- type: concept
+  question: 在 云存储对比索引 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/index.md 的「文档」章节。
+  source: wiki/06-存储/06-云存储对比/index.md
+  section: 文档
+- type: concept
+  question: 在 云存储对比索引 中, 对比维度 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/index.md 的「对比维度」章节。
+  source: wiki/06-存储/06-云存储对比/index.md
+  section: 对比维度
+- type: concept
+  question: 在 云存储对比索引 中, Related 是什么?
+  answer: 参见 wiki/06-存储/06-云存储对比/index.md 的「Related」章节。
+  source: wiki/06-存储/06-云存储对比/index.md
+  section: Related
+- type: comparison
+  question: 云存储对比索引 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/06-云存储对比/index.md 中的对比分析。
+  source: wiki/06-存储/06-云存储对比/index.md
+- type: concept
+  question: 在 MinIO 对象存储 for AI/ML 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md
   section: 概述
 - type: concept
-  question: '在 Domain-16: 存储基础 中, 文档目录 是什么?'
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-16.md 的「文档目录」章节。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-16.md
-  section: 文档目录
-- type: concept
-  question: '在 Domain-16: 存储基础 中, 存储技术分类图 是什么?'
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-16.md 的「存储技术分类图」章节。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-16.md
-  section: 存储技术分类图
-- type: concept
-  question: '在 Domain-16: 存储基础 中, 学习路径建议 是什么?'
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-16.md 的「学习路径建议」章节。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-16.md
-  section: 学习路径建议
+  question: 在 MinIO 对象存储 for AI/ML 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md
+  section: 架构与核心概念
+- type: operation
+  question: '如何执行与 MinIO 对象存储 for AI/ML 相关的操作: helm repo add minio https://operator.min.io/?'
+  answer: 参见 wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md 中的操作步骤。
+  source: wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md
+  command: helm repo add minio https://operator.min.io/
+- type: operation
+  question: '如何执行与 MinIO 对象存储 for AI/ML 相关的操作: kubectl get tenant ai-training-storage -n ai-platform -o yam?'
+  answer: 参见 wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md 中的操作步骤。
+  source: wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md
+  command: kubectl get tenant ai-training-storage -n ai-platform -o yaml | grep -A5 "storageClass"
 - type: comparison
-  question: 'Domain-16: 存储基础 中有哪些技术对比?'
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-16.md 中的对比分析。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-16.md
+  question: MinIO 对象存储 for AI/ML 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/01-minio-object-storage-ai.md
 - type: concept
-  question: 在 Storage Domain 存储领域知识库 中, 文档目录 是什么?
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-6.md 的「文档目录」章节。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-6.md
-  section: 文档目录
-- type: troubleshooting
-  question: 如何排查 Storage Domain 存储领域知识库 相关的故障?
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-6.md 的故障排查章节。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-6.md
+  question: 在 AI 高性能存储：WekaFS/Lustre/BeeGFS/Alluxio 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/02-high-perf-ai-storage-weka-lustre.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/02-high-perf-ai-storage-weka-lustre.md
+  section: 概述
+- type: concept
+  question: 在 AI 高性能存储：WekaFS/Lustre/BeeGFS/Alluxio 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/02-high-perf-ai-storage-weka-lustre.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/02-high-perf-ai-storage-weka-lustre.md
+  section: 架构与核心概念
+- type: concept
+  question: 在 云厂商 CSI 驱动对比：AWS/Azure/GCP/Alibaba 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md
+  section: 概述
+- type: concept
+  question: 在 云厂商 CSI 驱动对比：AWS/Azure/GCP/Alibaba 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md
+  section: 架构与核心概念
+- type: concept
+  question: 在 云厂商 CSI 驱动对比：AWS/Azure/GCP/Alibaba 中, 生产部署 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md 的「生产部署」章节。
+  source: wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md
+  section: 生产部署
 - type: comparison
-  question: Storage Domain 存储领域知识库 中有哪些技术对比?
-  answer: 参见 wiki/06-存储/98-merged-indexes/README-from-domain-6.md 中的对比分析。
-  source: wiki/06-存储/98-merged-indexes/README-from-domain-6.md
+  question: 云厂商 CSI 驱动对比：AWS/Azure/GCP/Alibaba 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/03-cloud-csi-drivers-aws-azure-gcp.md
+- type: concept
+  question: 在 数据分层与生命周期管理 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md
+  section: 概述
+- type: concept
+  question: 在 数据分层与生命周期管理 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md
+  section: 架构与核心概念
+- type: comparison
+  question: 数据分层与生命周期管理 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/04-data-tiering-ilm-archival.md
+- type: concept
+  question: 在 CSI 拓扑感知调度 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/05-csi-topology-awareness.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/05-csi-topology-awareness.md
+  section: 概述
+- type: concept
+  question: 在 CSI 拓扑感知调度 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/05-csi-topology-awareness.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/05-csi-topology-awareness.md
+  section: 架构与核心概念
+- type: comparison
+  question: CSI 拓扑感知调度 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/05-csi-topology-awareness.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/05-csi-topology-awareness.md
+- type: concept
+  question: 在 K8s 节点文件系统对比：ext4/XFS/ZFS/Btrfs 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md
+  section: 概述
+- type: concept
+  question: 在 K8s 节点文件系统对比：ext4/XFS/ZFS/Btrfs 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md
+  section: 架构与核心概念
+- type: operation
+  question: '如何执行与 K8s 节点文件系统对比：ext4/XFS/ZFS/Btrfs 相关的操作: DISK=/dev/nvme1n1?'
+  answer: 参见 wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md 中的操作步骤。
+  source: wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md
+  command: DISK=/dev/nvme1n1
+- type: operation
+  question: '如何执行与 K8s 节点文件系统对比：ext4/XFS/ZFS/Btrfs 相关的操作: zpool create k8s-data \?'
+  answer: 参见 wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md 中的操作步骤。
+  source: wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md
+  command: zpool create k8s-data \
+- type: comparison
+  question: K8s 节点文件系统对比：ext4/XFS/ZFS/Btrfs 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/06-filesystem-comparison-ext4-xfs-zfs.md
+- type: concept
+  question: 在 存储性能基准测试方法论 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md
+  section: 概述
+- type: concept
+  question: 在 存储性能基准测试方法论 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md
+  section: 架构与核心概念
+- type: comparison
+  question: 存储性能基准测试方法论 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/07-storage-benchmarking-methodology.md
+- type: concept
+  question: 在 存储多租户隔离 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md
+  section: 概述
+- type: concept
+  question: 在 存储多租户隔离 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md
+  section: 架构与核心概念
+- type: concept
+  question: 在 存储多租户隔离 中, 生产部署 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md 的「生产部署」章节。
+  source: wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md
+  section: 生产部署
+- type: comparison
+  question: 存储多租户隔离 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/08-storage-multitenant-isolation.md
+- type: concept
+  question: 在 Velero 生产深度指南 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md
+  section: 概述
+- type: concept
+  question: 在 Velero 生产深度指南 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md
+  section: 架构与核心概念
+- type: operation
+  question: '如何执行与 Velero 生产深度指南 相关的操作: helm repo add vmware-tanzu https://vmware-tanzu.github.io/he?'
+  answer: 参见 wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md 中的操作步骤。
+  source: wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md
+  command: helm repo add vmware-tanzu https://vmware-tanzu.github.io/helm-charts
+- type: comparison
+  question: Velero 生产深度指南 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/09-velero-production-deep-dive.md
+- type: concept
+  question: 在 存储混沌工程 中, 概述 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/10-storage-chaos-engineering.md 的「概述」章节。
+  source: wiki/06-存储/07-AI存储与高级/10-storage-chaos-engineering.md
+  section: 概述
+- type: concept
+  question: 在 存储混沌工程 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/10-storage-chaos-engineering.md 的「架构与核心概念」章节。
+  source: wiki/06-存储/07-AI存储与高级/10-storage-chaos-engineering.md
+  section: 架构与核心概念
+- type: comparison
+  question: 存储混沌工程 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/10-storage-chaos-engineering.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/10-storage-chaos-engineering.md
+- type: concept
+  question: 在 AI 存储与高级存储 中, 文章目录 是什么?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/index.md 的「文章目录」章节。
+  source: wiki/06-存储/07-AI存储与高级/index.md
+  section: 文章目录
+- type: comparison
+  question: AI 存储与高级存储 中有哪些技术对比?
+  answer: 参见 wiki/06-存储/07-AI存储与高级/index.md 中的对比分析。
+  source: wiki/06-存储/07-AI存储与高级/index.md
+- type: concept
+  question: 在 Domain 04 Storage Data 中, 概览 是什么?
+  answer: 参见 wiki/06-存储/index.md 的「概览」章节。
+  source: wiki/06-存储/index.md
+  section: 概览
+- type: concept
+  question: 在 Domain 04 Storage Data 中, 子目录 是什么?
+  answer: 参见 wiki/06-存储/index.md 的「子目录」章节。
+  source: wiki/06-存储/index.md
+  section: 子目录
+- type: concept
+  question: 在 Domain 04 Storage Data 中, 文档 是什么?
+  answer: 参见 wiki/06-存储/index.md 的「文档」章节。
+  source: wiki/06-存储/index.md
+  section: 文档

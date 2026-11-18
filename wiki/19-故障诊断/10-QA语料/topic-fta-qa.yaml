@@ -1,6 +1,6 @@
 domain: topic-fta
-total_questions: 83
-generated_at: '2026-05-19'
+total_questions: 88
+generated_at: '2026-11-18'
 qa_pairs:
 - type: fault_tree
   question: 当出现「API Server 不可用/性能劣化]」时, 可能的根因是什么?
@@ -365,3 +365,23 @@ qa_pairs:
     "next_step": "gate_root_or" },」时, 可能的根因是什么?'
   answer: 参见 wiki/19-故障诊断/06-FTA故障树/list/webhook-admission-fta.md 的故障树分析。
   source: wiki/19-故障诊断/06-FTA故障树/list/webhook-admission-fta.md
+- type: fault_tree
+  question: 当出现「CNI 异常导致 Pod 网络创建失败/通信异常]」时, 可能的根因是什么?
+  answer: 参见 wiki/19-故障诊断/06-FTA故障树/list/cni-fta.md 的故障树分析。
+  source: wiki/19-故障诊断/06-FTA故障树/list/cni-fta.md
+- type: fault_tree
+  question: 当出现「containerd 异常导致 Pod 启动失败/运行时卡死]」时, 可能的根因是什么?
+  answer: 参见 wiki/19-故障诊断/06-FTA故障树/list/containerd-fta.md 的故障树分析。
+  source: wiki/19-故障诊断/06-FTA故障树/list/containerd-fta.md
+- type: fault_tree
+  question: 当出现「Service 访问异常 / kube-proxy 异常]」时, 可能的根因是什么?
+  answer: 参见 wiki/19-故障诊断/06-FTA故障树/list/kube-proxy-fta.md 的故障树分析。
+  source: wiki/19-故障诊断/06-FTA故障树/list/kube-proxy-fta.md
+- type: fault_tree
+  question: 当出现「kubelet 异常导致节点 NotReady/Pod 生命周期异常]」时, 可能的根因是什么?
+  answer: 参见 wiki/19-故障诊断/06-FTA故障树/list/kubelet-fta.md 的故障树分析。
+  source: wiki/19-故障诊断/06-FTA故障树/list/kubelet-fta.md
+- type: fault_tree
+  question: 当出现「Pod 创建失败 / 创建后无法通过 Service 访问]」时, 可能的根因是什么?
+  answer: 参见 wiki/19-故障诊断/06-FTA故障树/list/pod-creation-end-to-end-fta.md 的故障树分析。
+  source: wiki/19-故障诊断/06-FTA故障树/list/pod-creation-end-to-end-fta.md

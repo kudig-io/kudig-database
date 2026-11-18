@@ -1,31 +1,43 @@
 #!/usr/bin/env python3
 """
-Agent QA 对语料生成脚本
+Agent QA 对语料生成脚本（适配 2026-07 目录重组后的布局）
 从现有 domain/topic 文档自动生成 question-answer 对,
 用于 RAG 评测、Agent fine-tuning、和检索质量验证。
 
 输出格式: 每个 domain 一个 YAML 文件, 包含 QA pairs
+输出目录: wiki/19-故障诊断/10-QA语料/
+
+与旧版的差异:
+- 路径基于脚本位置解析（ROOT），不再硬编码绝对路径
+- domain 目录按当前布局解析（如 网络 -> wiki/05-网络）
+- FTA / 技能 / 应用架构源目录指向现行路径
+- 写入前与已有输出合并: source 仍存在的条目原样保留
+  （含手工补充/修复的条目），source 已悬空的条目删除，
+  新生成且未重复的条目追加
+- --output-dir 可指定输出目录试运行，默认写入真实语料目录
+
+用法:
+  python3 code/scripts/generate-qa-corpus.py                    # 合并写入真实语料目录
+  python3 code/scripts/generate-qa-corpus.py --output-dir /tmp/qa-test   # 试运行
 """
 
+import argparse
 import os
 import re
 import yaml
+from datetime import date
 from pathlib import Path
-from collections import defaultdict
 
-BASE_DIR = Path("/Users/allengaller/Documents/GitHub/kudig-io/kudig-database")
-OUTPUT_DIR = BASE_DIR / "故障诊断" / "topic-qa-corpus"
+ROOT = Path(__file__).resolve().parents[2]
+WIKI_DIR = ROOT / "wiki"
+DEFAULT_OUTPUT_DIR = WIKI_DIR / "19-故障诊断" / "10-QA语料"
 
+# FTA 故障树 / 技能体系 / 应用架构（行业架构）三个专用源目录（现行布局）
+FTA_LIST_DIR = WIKI_DIR / "19-故障诊断" / "06-FTA故障树" / "list"
+TOPIC_SKILLS_DIR = WIKI_DIR / "19-故障诊断" / "08-技能体系"
+APP_ARCH_DIR = WIKI_DIR / "04-应用模式" / "02-行业架构"
 
-def safe_output_path(base, *parts):
-    """加固：输出约束在 base 内防路径穿越（对现有常量输入行为不变）。"""
-    base_real = os.path.realpath(base)
-    target = os.path.realpath(os.path.join(base_real, *parts))
-    if os.path.commonpath([base_real, target]) != base_real:
-        raise ValueError(f"output path escapes base dir: {target}")
-    return Path(target)
-
-# 核心 domain 列表 (优先生成 QA 对)
+# 核心 domain 列表 (优先生成 QA 对)，实际目录按 wiki/NN-<name> 解析
 CORE_DOMAINS = [
     "集群基础",
     "工作负载",
@@ -50,7 +62,25 @@ CORE_DOMAINS = [
 ]
 
 # 排除目录
-EXCLUDE_DIRS = {'.git', '.venv', '.ruff_cache', 'site', 'node_modules', '.obsidian', '.zread', '.claude', '.codebuddy', '.comate', '.github'}
+EXCLUDE_DIRS = {'.git', '.venv', '.ruff_cache', 'site', 'node_modules', '.obsidian', '.zread', '.claude', '.codebuddy', '.comate', '.github', '__pycache__'}
+
+
+def resolve_domain_dir(name: str):
+    """把 domain 名解析为现行目录，如 网络 -> wiki/05-网络。"""
+    if not WIKI_DIR.is_dir():
+        return None
+    candidates = [d for d in sorted(WIKI_DIR.iterdir())
+                  if d.is_dir() and (d.name == name or d.name.endswith("-" + name))]
+    return candidates[0] if candidates else None
+
+
+def safe_output_path(base, *parts):
+    """加固：输出约束在 base 内防路径穿越（对现有常量输入行为不变）。"""
+    base_real = os.path.realpath(base)
+    target = os.path.realpath(os.path.join(base_real, *parts))
+    if os.path.commonpath([base_real, target]) != base_real:
+        raise ValueError(f"output path escapes base dir: {target}")
+    return Path(target)
 
 
 def parse_frontmatter(content: str) -> tuple:
@@ -68,6 +98,15 @@ def parse_frontmatter(content: str) -> tuple:
         return fm, body
     except yaml.YAMLError:
         return {}, content
+
+
+def split_readme_frontmatter(text: str) -> tuple:
+    """拆出 README 已有的 frontmatter 原文（保留手工元数据）。"""
+    if text.startswith('---\n'):
+        m = re.search(r'\n---\s*\n', text[4:])
+        if m:
+            return text[:m.end() + 4]
+    return ""
 
 
 def extract_sections(body: str) -> list:
@@ -115,11 +154,8 @@ def generate_qa_from_doc(filepath: Path, fm: dict, body: str) -> list:
     """从单个文档生成 QA 对"""
     qa_pairs = []
     title = fm.get('title', filepath.stem)
-    category = fm.get('category', '')
-    tags = fm.get('tags', [])
 
     sections = extract_sections(body)
-    concepts = extract_key_concepts(body)
     code_blocks = extract_code_blocks(body)
 
     # 1. 概念类 QA (从标题和 H2 章节)
@@ -134,8 +170,8 @@ def generate_qa_from_doc(filepath: Path, fm: dict, body: str) -> list:
                     qa_pairs.append({
                         "type": "concept",
                         "question": f"在 {title} 中, {clean_title} 是什么?",
-                        "answer": f"参见 {filepath.relative_to(BASE_DIR)} 的「{clean_title}」章节。",
-                        "source": str(filepath.relative_to(BASE_DIR)),
+                        "answer": f"参见 {filepath.relative_to(ROOT)} 的「{clean_title}」章节。",
+                        "source": str(filepath.relative_to(ROOT)),
                         "section": clean_title,
                     })
 
@@ -154,8 +190,8 @@ def generate_qa_from_doc(filepath: Path, fm: dict, body: str) -> list:
                 qa_pairs.append({
                     "type": "operation",
                     "question": f"如何执行与 {title} 相关的操作: {first_cmd[:60]}?",
-                    "answer": f"参见 {filepath.relative_to(BASE_DIR)} 中的操作步骤。",
-                    "source": str(filepath.relative_to(BASE_DIR)),
+                    "answer": f"参见 {filepath.relative_to(ROOT)} 中的操作步骤。",
+                    "source": str(filepath.relative_to(ROOT)),
                     "command": first_cmd[:100],
                 })
 
@@ -171,7 +207,7 @@ def generate_qa_from_doc(filepath: Path, fm: dict, body: str) -> list:
                 "type": "best_practice",
                 "question": f"关于 {title}, 有什么最佳实践?",
                 "answer": advice[:300],
-                "source": str(filepath.relative_to(BASE_DIR)),
+                "source": str(filepath.relative_to(ROOT)),
             })
 
     # 4. 故障排查类 QA (从 troubleshooting 相关内容)
@@ -179,8 +215,8 @@ def generate_qa_from_doc(filepath: Path, fm: dict, body: str) -> list:
         qa_pairs.append({
             "type": "troubleshooting",
             "question": f"如何排查 {title} 相关的故障?",
-            "answer": f"参见 {filepath.relative_to(BASE_DIR)} 的故障排查章节。",
-            "source": str(filepath.relative_to(BASE_DIR)),
+            "answer": f"参见 {filepath.relative_to(ROOT)} 的故障排查章节。",
+            "source": str(filepath.relative_to(ROOT)),
         })
 
     # 5. 对比类 QA (从包含"对比"、"区别"、"vs"的内容)
@@ -188,8 +224,8 @@ def generate_qa_from_doc(filepath: Path, fm: dict, body: str) -> list:
         qa_pairs.append({
             "type": "comparison",
             "question": f"{title} 中有哪些技术对比?",
-            "answer": f"参见 {filepath.relative_to(BASE_DIR)} 中的对比分析。",
-            "source": str(filepath.relative_to(BASE_DIR)),
+            "answer": f"参见 {filepath.relative_to(ROOT)} 中的对比分析。",
+            "source": str(filepath.relative_to(ROOT)),
         })
 
     return qa_pairs[:10]  # 每个文档最多 10 个 QA
@@ -209,8 +245,8 @@ def generate_fta_qa(filepath: Path, fm: dict, body: str) -> list:
             qa_pairs.append({
                 "type": "fault_tree",
                 "question": f"当出现「{event.strip()}」时, 可能的根因是什么?",
-                "answer": f"参见 {filepath.relative_to(BASE_DIR)} 的故障树分析。",
-                "source": str(filepath.relative_to(BASE_DIR)),
+                "answer": f"参见 {filepath.relative_to(ROOT)} 的故障树分析。",
+                "source": str(filepath.relative_to(ROOT)),
             })
 
     # 提取诊断步骤
@@ -219,159 +255,178 @@ def generate_fta_qa(filepath: Path, fm: dict, body: str) -> list:
         qa_pairs.append({
             "type": "diagnosis",
             "question": f"如何诊断 {title} 相关问题?",
-            "answer": f"参见 {filepath.relative_to(BASE_DIR)} 的诊断步骤。",
-            "source": str(filepath.relative_to(BASE_DIR)),
+            "answer": f"参见 {filepath.relative_to(ROOT)} 的诊断步骤。",
+            "source": str(filepath.relative_to(ROOT)),
         })
 
     return qa_pairs
 
 
+def iter_doc_files(root: Path, output_dir: Path):
+    """按目录约定遍历文档，跳过 README、排除目录与 QA 输出目录自身。"""
+    for md_file in sorted(root.rglob('*.md')):
+        if md_file.name == 'README.md':
+            continue
+        if EXCLUDE_DIRS & set(md_file.parts):
+            continue
+        if output_dir in md_file.parents:
+            continue
+        yield md_file
+
+
+def entry_key(entry: dict) -> tuple:
+    return (entry.get('type'), entry.get('question'), entry.get('source'))
+
+
+def merge_pairs(existing: list, generated: list) -> list:
+    """保留 source 仍存在的既有条目（含手工条目），追加未重复的新条目。"""
+    kept = [e for e in existing
+            if isinstance(e, dict) and e.get('source') and (ROOT / e['source']).exists()]
+    seen = {entry_key(e) for e in kept}
+    for g in generated:
+        key = entry_key(g)
+        if key not in seen:
+            seen.add(key)
+            kept.append(g)
+    return kept
+
+
+def load_existing(path: Path) -> list:
+    if not path.exists():
+        return []
+    try:
+        data = yaml.safe_load(path.read_text(encoding='utf-8')) or {}
+    except yaml.YAMLError:
+        return []
+    pairs = data.get('qa_pairs')
+    return pairs if isinstance(pairs, list) else []
+
+
+def write_qa_file(path: Path, domain: str, pairs: list):
+    path.write_text(yaml.dump({
+        "domain": domain,
+        "total_questions": len(pairs),
+        "generated_at": date.today().isoformat(),
+        "qa_pairs": pairs,
+    }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
+
+
 def main():
-    OUTPUT_DIR.mkdir(exist_ok=True)
+    parser = argparse.ArgumentParser(description='生成/合并 Agent QA 对语料')
+    parser.add_argument('--output-dir', default=str(DEFAULT_OUTPUT_DIR),
+                        help=f'输出目录（默认 {DEFAULT_OUTPUT_DIR.relative_to(ROOT)}），用于试运行')
+    args = parser.parse_args()
+
+    output_dir = Path(args.output_dir).resolve()
+    output_dir.mkdir(parents=True, exist_ok=True)
     total_qa = 0
+    skipped_domains = []
 
     # 处理核心 domain
     for domain_name in CORE_DOMAINS:
-        domain_dir = BASE_DIR / domain_name
-        if not domain_dir.exists():
+        domain_dir = resolve_domain_dir(domain_name)
+        if domain_dir is None or not domain_dir.exists():
+            skipped_domains.append(domain_name)
             continue
 
-        qa_pairs = []
-        for md_file in sorted(domain_dir.rglob('*.md')):
-            if md_file.name == 'README.md':
-                continue
+        generated = []
+        for md_file in iter_doc_files(domain_dir, output_dir):
             try:
                 content = md_file.read_text(encoding='utf-8')
             except Exception:
                 continue
-
             fm, body = parse_frontmatter(content)
-            doc_qa = generate_qa_from_doc(md_file, fm, body)
-            qa_pairs.extend(doc_qa)
+            generated.extend(generate_qa_from_doc(md_file, fm, body))
 
-        if qa_pairs:
-            output_file = safe_output_path(OUTPUT_DIR, f"{domain_name}-qa.yaml")
-            output_file.write_text(yaml.dump({
-                "domain": domain_name,
-                "total_questions": len(qa_pairs),
-                "generated_at": "2026-05-19",
-                "qa_pairs": qa_pairs,
-            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
-            total_qa += len(qa_pairs)
-            print(f"  {domain_name}: {len(qa_pairs)} QA pairs")
+        if not generated and not (output_dir / f"{domain_name}-qa.yaml").exists():
+            continue
+
+        output_file = safe_output_path(output_dir, f"{domain_name}-qa.yaml")
+        pairs = merge_pairs(load_existing(output_file), generated)
+        write_qa_file(output_file, domain_name, pairs)
+        total_qa += len(pairs)
+        print(f"  {domain_name}: {len(pairs)} QA pairs")
 
     # 处理 FTA 故障树
-    fta_dir = BASE_DIR / '故障诊断' / 'topic-fta' / 'list'
-    if fta_dir.exists():
-        qa_pairs = []
-        for md_file in sorted(fta_dir.glob('*.md')):
-            if md_file.name == 'README.md':
-                continue
+    if FTA_LIST_DIR.exists():
+        generated = []
+        for md_file in iter_doc_files(FTA_LIST_DIR, output_dir):
             try:
                 content = md_file.read_text(encoding='utf-8')
             except Exception:
                 continue
             fm, body = parse_frontmatter(content)
-            doc_qa = generate_fta_qa(md_file, fm, body)
-            qa_pairs.extend(doc_qa)
+            generated.extend(generate_fta_qa(md_file, fm, body))
 
-        if qa_pairs:
-            output_file = safe_output_path(OUTPUT_DIR, "topic-fta-qa.yaml")
-            output_file.write_text(yaml.dump({
-                "domain": "topic-fta",
-                "total_questions": len(qa_pairs),
-                "generated_at": "2026-05-19",
-                "qa_pairs": qa_pairs,
-            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
-            total_qa += len(qa_pairs)
-            print(f"  topic-fta: {len(qa_pairs)} QA pairs")
+        output_file = safe_output_path(output_dir, "topic-fta-qa.yaml")
+        pairs = merge_pairs(load_existing(output_file), generated)
+        write_qa_file(output_file, "topic-fta", pairs)
+        total_qa += len(pairs)
+        print(f"  topic-fta: {len(pairs)} QA pairs")
 
     # 处理 topic-skills
-    skills_dir = BASE_DIR / '故障诊断' / 'topic-skills'
-    if skills_dir.exists():
-        qa_pairs = []
-        for md_file in sorted(skills_dir.glob('*.md')):
-            if md_file.name == 'README.md':
-                continue
+    if TOPIC_SKILLS_DIR.exists():
+        generated = []
+        for md_file in iter_doc_files(TOPIC_SKILLS_DIR, output_dir):
             try:
                 content = md_file.read_text(encoding='utf-8')
             except Exception:
                 continue
             fm, body = parse_frontmatter(content)
-            doc_qa = generate_qa_from_doc(md_file, fm, body)
-            qa_pairs.extend(doc_qa)
+            generated.extend(generate_qa_from_doc(md_file, fm, body))
 
-        if qa_pairs:
-            output_file = safe_output_path(OUTPUT_DIR, "topic-skills-qa.yaml")
-            output_file.write_text(yaml.dump({
-                "domain": "topic-skills",
-                "total_questions": len(qa_pairs),
-                "generated_at": "2026-05-19",
-                "qa_pairs": qa_pairs,
-            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
-            total_qa += len(qa_pairs)
-            print(f"  topic-skills: {len(qa_pairs)} QA pairs")
+        output_file = safe_output_path(output_dir, "topic-skills-qa.yaml")
+        pairs = merge_pairs(load_existing(output_file), generated)
+        write_qa_file(output_file, "topic-skills", pairs)
+        total_qa += len(pairs)
+        print(f"  topic-skills: {len(pairs)} QA pairs")
 
-    # 处理 application-architecture
-    app_dir = BASE_DIR / '应用模式' / 'topic-application-architecture'
-    if app_dir.exists():
-        qa_pairs = []
-        for md_file in sorted(app_dir.glob('*.md')):
-            if md_file.name == 'README.md':
-                continue
+    # 处理 application-architecture（现行目录 04-应用模式/02-行业架构）
+    if APP_ARCH_DIR.exists():
+        generated = []
+        for md_file in iter_doc_files(APP_ARCH_DIR, output_dir):
             try:
                 content = md_file.read_text(encoding='utf-8')
             except Exception:
                 continue
             fm, body = parse_frontmatter(content)
-            doc_qa = generate_qa_from_doc(md_file, fm, body)
-            qa_pairs.extend(doc_qa)
+            generated.extend(generate_qa_from_doc(md_file, fm, body))
 
-        if qa_pairs:
-            output_file = safe_output_path(OUTPUT_DIR, "topic-application-architecture-qa.yaml")
-            output_file.write_text(yaml.dump({
-                "domain": "topic-application-architecture",
-                "total_questions": len(qa_pairs),
-                "generated_at": "2026-05-19",
-                "qa_pairs": qa_pairs,
-            }, allow_unicode=True, default_flow_style=False, sort_keys=False, width=120), encoding='utf-8')
-            total_qa += len(qa_pairs)
-            print(f"  topic-application-architecture: {len(qa_pairs)} QA pairs")
+        output_file = safe_output_path(output_dir, "topic-application-architecture-qa.yaml")
+        pairs = merge_pairs(load_existing(output_file), generated)
+        write_qa_file(output_file, "topic-application-architecture", pairs)
+        total_qa += len(pairs)
+        print(f"  topic-application-architecture: {len(pairs)} QA pairs")
 
-    # 生成索引
-    index = {
-        "description": "KUDIG-DATABASE Agent QA 对语料库索引",
-        "generated_at": "2026-05-19",
-        "total_qa_pairs": total_qa,
-        "files": [],
-    }
-    for f in sorted(OUTPUT_DIR.glob('*-qa.yaml')):
+    # 生成索引 README（保留已有 frontmatter）
+    readme_path = output_dir / 'README.md'
+    frontmatter = ""
+    if readme_path.exists():
+        frontmatter = split_readme_frontmatter(readme_path.read_text(encoding='utf-8'))
+
+    lines = ["# Agent QA 对语料库", "",
+             f"> **生成日期**: {date.today().isoformat()}",
+             f"> **QA 对总数**: {total_qa}", "",
+             "## 用途", "",
+             "- RAG 检索质量评测",
+             "- Agent fine-tuning 数据",
+             "- 检索相关性验证", "",
+             "## 文件索引", "",
+             "| 文件 | 领域 | QA 数量 |",
+             "|------|------|--------|"]
+    for f in sorted(output_dir.glob('*-qa.yaml')):
         with open(f, 'r', encoding='utf-8') as fh:
             data = yaml.safe_load(fh)
-        index["files"].append({
-            "file": f.name,
-            "domain": data.get("domain", ""),
-            "count": data.get("total_questions", 0),
-        })
-
-    with safe_output_path(OUTPUT_DIR, 'README.md').open('w', encoding='utf-8') as f:
-        f.write("# Agent QA 对语料库\n\n")
-        f.write(f"> **生成日期**: 2026-05-19\n")
-        f.write(f"> **QA 对总数**: {total_qa}\n\n")
-        f.write("## 用途\n\n")
-        f.write("- RAG 检索质量评测\n")
-        f.write("- Agent fine-tuning 数据\n")
-        f.write("- 检索相关性验证\n\n")
-        f.write("## 文件索引\n\n")
-        f.write("| 文件 | 领域 | QA 数量 |\n")
-        f.write("|------|------|--------|\n")
-        for item in index["files"]:
-            f.write(f"| {item['file']} | {item['domain']} | {item['count']} |\n")
+        lines.append(f"| {f.name} | {data.get('domain', '')} | {data.get('total_questions', 0)} |")
+    with safe_output_path(output_dir, 'README.md').open('w', encoding='utf-8') as f:
+        f.write(frontmatter + "\n".join(lines) + "\n")
 
     print(f"\n{'='*60}")
     print(f"QA 对语料生成完成:")
     print(f"  总 QA 对: {total_qa}")
-    print(f"  输出目录: {OUTPUT_DIR}")
+    print(f"  输出目录: {output_dir}")
+    if skipped_domains:
+        print(f"  未解析到的 domain: {', '.join(skipped_domains)}")
 
 
 if __name__ == '__main__':
