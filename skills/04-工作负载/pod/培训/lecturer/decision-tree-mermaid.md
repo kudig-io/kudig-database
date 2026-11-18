@@ -1,5 +1,5 @@
 ---
-title: 故障排查决策树 - Mermaid 可视化版 [troubleshooting]
+title: 故障排查决策树 - Mermaid 可视化版 [troubleshooting]（讲师版）
 description: 'title: 故障排查决策树 - Mermaid 可视化版'
 summary: 'title: 故障排查决策树 - Mermaid 可视化版'
 category: learning

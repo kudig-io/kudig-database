@@ -1,5 +1,5 @@
 ---
-title: 第三课：Deployment - 应用部署管理器 [fundamentals]
+title: 第三课：Deployment - 应用部署管理器 [fundamentals]（讲师版）
 description: 'title: 第三课：Deployment - 应用部署管理器'
 summary: 'title: 第三课：Deployment - 应用部署管理器'
 category: learning

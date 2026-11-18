@@ -1,5 +1,5 @@
 ---
-title: 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
+title: 节点磁盘压力 DiskPressure 导致 Pod 被驱逐（工单 035）
 description: 专有云 ACK 工作节点因 /var/log/pods 与容器日志膨胀触发 DiskPressure，kubelet 驱逐业务 Pod，造成服务降级的工单闭环样本。
 summary: 专有云 ACK 工作节点因 /var/log/pods 与容器日志膨胀触发 DiskPressure，kubelet 驱逐业务 Pod，造成服务降级的工单闭环样本。
 category: production-operations

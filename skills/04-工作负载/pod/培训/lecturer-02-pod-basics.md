@@ -1,5 +1,5 @@
 ---
-title: 第二课：Pod - K8s 的最小调度单元 [fundamentals]
+title: 第二课：Pod - K8s 的最小调度单元 [fundamentals]（讲师版·平铺）
 description: 'title: 第二课：Pod - K8s 的最小调度单元'
 summary: 'title: 第二课：Pod - K8s 的最小调度单元'
 category: learning

@@ -1,5 +1,5 @@
 ---
-title: Ingress 控制器 Pod 异常导致 404/502
+title: Ingress 控制器 Pod 异常导致 404/502（工单 026）
 description: 专有云 ACK 集群 Ingress-Nginx 控制器因内存限制过小而 OOM，导致外部流量出现大量 404/502 的工单闭环样本。
 summary: 专有云 ACK 集群 Ingress-Nginx 控制器因内存限制过小而 OOM，导致外部流量出现大量 404/502 的工单闭环样本。
 category: 生产运维/ticket-case

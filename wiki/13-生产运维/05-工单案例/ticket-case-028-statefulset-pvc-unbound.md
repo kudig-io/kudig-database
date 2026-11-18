@@ -1,5 +1,5 @@
 ---
-title: StatefulSet Pod 启动失败：PVC 未绑定
+title: StatefulSet Pod 启动失败：PVC 未绑定（工单 028）
 description: 专有云 ACK 集群 Kafka StatefulSet 因 volumeClaimTemplate 指定了不存在的 StorageClass
   导致 PVC 长时间 Pending 的工单闭环样本。
 summary: 专有云 ACK 集群 Kafka StatefulSet 因 volumeClaimTemplate 指定了不存在的 StorageClass 导致

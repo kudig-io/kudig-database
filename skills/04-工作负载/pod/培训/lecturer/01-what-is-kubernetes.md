@@ -1,5 +1,5 @@
 ---
-title: 第一课：Kubernetes 入门 [fundamentals]
+title: 第一课：Kubernetes 入门 [fundamentals]（讲师版）
 description: 'description: • 如果你有 100 台服务器，容器该部署到哪台？'
 summary: 'description: • 如果你有 100 台服务器，容器该部署到哪台？'
 category: learning

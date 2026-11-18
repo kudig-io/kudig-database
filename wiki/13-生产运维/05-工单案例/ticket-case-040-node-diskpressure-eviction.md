@@ -1,5 +1,5 @@
 ---
-title: 节点磁盘压力 DiskPressure 导致 Pod 被驱逐
+title: 节点磁盘压力 DiskPressure 导致 Pod 被驱逐（工单 040）
 description: 专有云 ACK 集群节点因容器日志与镜像层占满磁盘触发 DiskPressure，kubelet 大量驱逐业务 Pod，含诊断、修复与验证。
 summary: 专有云 ACK 集群节点因容器日志与镜像层占满磁盘触发 DiskPressure，kubelet 大量驱逐业务 Pod，含诊断、修复与验证。
 category: 生产运维/ticket-case

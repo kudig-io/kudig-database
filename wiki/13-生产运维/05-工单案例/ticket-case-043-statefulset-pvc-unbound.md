@@ -1,5 +1,5 @@
 ---
-title: StatefulSet Pod 启动失败：PVC 未绑定
+title: StatefulSet Pod 启动失败：PVC 未绑定（工单 043）
 description: 专有云 ACK 集群因 StorageClass 扩容失败导致 StatefulSet Pod 的 PVC 未绑定、Pod 无法启动的工单闭环样本。
 summary: 专有云 ACK 集群因 StorageClass 扩容失败导致 StatefulSet Pod 的 PVC 未绑定、Pod 无法启动的工单闭环样本。
 category: 生产运维/ticket-case

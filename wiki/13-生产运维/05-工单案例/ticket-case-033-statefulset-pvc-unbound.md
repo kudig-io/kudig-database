@@ -1,5 +1,5 @@
 ---
-title: StatefulSet Pod 启动失败：PVC 未绑定
+title: StatefulSet Pod 启动失败：PVC 未绑定（工单 033）
 description: 专有云 ACK 有状态 MySQL 集群因 StorageClass 可用区拓扑限制导致 PVC 无法动态供给，Pod 长期 Pending
   的工单闭环样本。
 summary: 专有云 ACK 有状态 MySQL 集群因 StorageClass 可用区拓扑限制导致 PVC 无法动态供给，Pod 长期 Pending 的工单闭环样本。

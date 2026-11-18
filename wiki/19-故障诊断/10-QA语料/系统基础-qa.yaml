@@ -2083,18 +2083,18 @@ qa_pairs:
   source: wiki/17-系统基础/05-速查卡/linux.md
 - type: concept
   question: 在 Kubernetes 网络配置最佳实践 [infrastructure] 中, 概述 是什么?
-  answer: 参见 wiki/20-最佳实践/01-best-practices/infrastructure/networking.md 的「概述」章节。
-  source: wiki/20-最佳实践/01-best-practices/infrastructure/networking.md
+  answer: 参见 wiki/20-最佳实践/03-infrastructure/networking.md 的「概述」章节。
+  source: wiki/20-最佳实践/03-infrastructure/networking.md
   section: 概述
 - type: concept
   question: 在 Kubernetes 网络配置最佳实践 [infrastructure] 中, 问题描述 是什么?
-  answer: 参见 wiki/20-最佳实践/01-best-practices/infrastructure/networking.md 的「问题描述」章节。
-  source: wiki/20-最佳实践/01-best-practices/infrastructure/networking.md
+  answer: 参见 wiki/20-最佳实践/03-infrastructure/networking.md 的「问题描述」章节。
+  source: wiki/20-最佳实践/03-infrastructure/networking.md
   section: 问题描述
 - type: comparison
   question: Kubernetes 网络配置最佳实践 [infrastructure] 中有哪些技术对比?
-  answer: 参见 wiki/20-最佳实践/01-best-practices/infrastructure/networking.md 中的对比分析。
-  source: wiki/20-最佳实践/01-best-practices/infrastructure/networking.md
+  answer: 参见 wiki/20-最佳实践/03-infrastructure/networking.md 中的对比分析。
+  source: wiki/20-最佳实践/03-infrastructure/networking.md
 - type: concept
   question: 在 perf/bpftrace 速查卡 中, 概述 是什么?
   answer: 参见 wiki/17-系统基础/05-速查卡/perf-bpftrace-cheat-sheet.md 的「概述」章节。
@@ -10591,33 +10591,33 @@ qa_pairs:
   section: 关键机制或特性
 - type: concept
   question: 在 Pod 安全策略 中, 概述 是什么?
-  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policies.md 的「概述」章节。
-  source: wiki/17-系统基础/06-知识字典/security/pod-security-policies.md
+  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 的「概述」章节。
+  source: wiki/17-系统基础/06-知识字典/security/pod-security-policy.md
   section: 概述
 - type: concept
   question: 在 Pod 安全策略 中, 核心概念/原理 是什么?
-  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policies.md 的「核心概念/原理」章节。
-  source: wiki/17-系统基础/06-知识字典/security/pod-security-policies.md
+  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 的「核心概念/原理」章节。
+  source: wiki/17-系统基础/06-知识字典/security/pod-security-policy.md
   section: 核心概念/原理
 - type: concept
   question: 在 Pod 安全策略 中, 关键机制或特性 是什么?
-  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policies.md 的「关键机制或特性」章节。
-  source: wiki/17-系统基础/06-知识字典/security/pod-security-policies.md
+  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 的「关键机制或特性」章节。
+  source: wiki/17-系统基础/06-知识字典/security/pod-security-policy.md
   section: 关键机制或特性
 - type: operation
   question: '如何执行与 Pod 安全策略 相关的操作: kubectl get psp -o json | jq -r ''.items[].metadata.name''?'
-  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policies.md 中的操作步骤。
-  source: wiki/17-系统基础/06-知识字典/security/pod-security-policies.md
+  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 中的操作步骤。
+  source: wiki/17-系统基础/06-知识字典/security/pod-security-policy.md
   command: kubectl get psp -o json | jq -r '.items[].metadata.name'
 - type: operation
   question: '如何执行与 Pod 安全策略 相关的操作: kubectl get psp -o name | xargs kubectl delete?'
-  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policies.md 中的操作步骤。
-  source: wiki/17-系统基础/06-知识字典/security/pod-security-policies.md
+  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 中的操作步骤。
+  source: wiki/17-系统基础/06-知识字典/security/pod-security-policy.md
   command: kubectl get psp -o name | xargs kubectl delete
 - type: comparison
   question: Pod 安全策略 中有哪些技术对比?
-  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policies.md 中的对比分析。
-  source: wiki/17-系统基础/06-知识字典/security/pod-security-policies.md
+  answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 中的对比分析。
+  source: wiki/17-系统基础/06-知识字典/security/pod-security-policy.md
 - type: concept
   question: 在 Pod 安全策略 中, 概述 是什么?
   answer: 参见 wiki/17-系统基础/06-知识字典/security/pod-security-policy.md 的「概述」章节。

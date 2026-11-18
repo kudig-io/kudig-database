@@ -1,5 +1,5 @@
 ---
-title: Ingress 控制器 Pod 异常导致 404/502
+title: Ingress 控制器 Pod 异常导致 404/502（工单 041）
 description: 专有云 ACK 集群因 ingress-nginx 控制器配置重载失败导致部分域名返回 502/404 的工单闭环样本。
 summary: 专有云 ACK 集群因 ingress-nginx 控制器配置重载失败导致部分域名返回 502/404 的工单闭环样本。
 category: 生产运维/ticket-case

@@ -1,5 +1,5 @@
 ---
-title: Ingress 控制器 Pod 异常导致业务访问 404/502
+title: Ingress 控制器 Pod 异常导致业务访问 404/502（工单 036）
 description: 专有云 ACK 集群 Nginx Ingress Controller Pod 重启后进入 CrashLoopBackOff，导致外部流量
   404/502，含诊断、修复与验证。
 summary: 专有云 ACK 集群 Nginx Ingress Controller Pod 重启后进入 CrashLoopBackOff，导致外部流量 404/502，含诊断、修复与验证。

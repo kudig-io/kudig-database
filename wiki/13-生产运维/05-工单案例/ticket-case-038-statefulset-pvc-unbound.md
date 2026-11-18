@@ -1,5 +1,5 @@
 ---
-title: StatefulSet Pod 启动失败：PVC 未绑定
+title: StatefulSet Pod 启动失败：PVC 未绑定（工单 038）
 description: 专有云 ACK 集群 MySQL 主从 StatefulSet 新副本启动失败，根因为 StorageClass 未正确配置 allowVolumeExpansion
   且后端 NAS 挂载点已满，含诊断、修复与验证。
 summary: 专有云 ACK 集群 MySQL 主从 StatefulSet 新副本启动失败，根因为 StorageClass 未正确配置 allowVolumeExpansion

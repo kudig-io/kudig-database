@@ -1,5 +1,5 @@
 ---
-title: 工单数字人快速问答 - On-Call 速查 [oncall-qa]
+title: 工单数字人快速问答 - On-Call 速查 [oncall-qa]（讲师版）
 description: 'description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。'
 summary: 'description: 用户来提问时，直接给出快速答案+排查命令+下一步指引。'
 category: learning
