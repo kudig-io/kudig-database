@@ -14,16 +14,16 @@ This builder writes:
   console/data/graph/coverage.json   domain × layer matrix + per-layer gap lists
                                      (gap list capped at 200).
   console/data/graph/structure.json  partitions, tiers, categories, hubs, orphans.
-  console/content/index.json         one entry per page: verbatim body split into
-                                     segments so a page loads exactly what it draws:
+  console/content/<page-id>.json     the segments of one page: verbatim body split
+                                     into small files a reader fetches per page:
                                        ["t", text]           paragraph
                                        ["c", lang, text]     fenced code
                                        ["m", id, kind, v]    Mermaid block by id
                                        ["d", …]              Mermaid block that fails
                                                              to parse, kept verbatim
-  console/content/<page-id>.json     the segments of one page (86 shard files map
-                                     page → index entry, so a reader fetches one
-                                     small file per page).
+                                     (no monolithic console/content/index.json: it
+                                     was a debug-only duplicate that nothing loads
+                                     at runtime — dropped from the repo 2026-11-24).
 
 Excluded, stated once: `code/repo/` (upstream vendor checkouts, rebuilt by
 `make repo-sync`), `31-归档`, `03-发布`, `04-报告`, `27-资产`, dot-directories.
@@ -411,7 +411,7 @@ def build_blocks(page: dict, lines: list[str], dims: list[dict]) -> dict:
         "h3": len(h3),
     }
 
-def build() -> dict[Path, str]:
+def build() -> tuple[dict[Path, str], dict]:
     validation = json.loads(VALIDATION.read_text(encoding="utf-8")) if VALIDATION.exists() else {}
     dims, dim_version = load_dimensions()
     entities, groups = load_entities()
@@ -511,7 +511,6 @@ def build() -> dict[Path, str]:
         DATA / "graph" / "diagram.json": canonical_json(build_diagram(pages, blocks)),
         DATA / "graph" / "coverage.json": canonical_json(build_coverage(pages)),
         DATA / "graph" / "structure.json": canonical_json(build_structure(pages, domains, blocks)),
-        CONTENT / "index.json": canonical_json(content),
         DATA / "graph" / "entities.json": canonical_json(
             build_entities(entities, groups, blocks_by_page)
         ),
@@ -521,7 +520,7 @@ def build() -> dict[Path, str]:
             "pages": blocks_by_page,
         }),
     }
-    return outputs
+    return outputs, content
 
 
 def canonical_json(payload: object) -> str:
@@ -635,21 +634,20 @@ def build_structure(pages: list[dict], domains: dict, blocks: list[dict]) -> dic
     }
 
 
-def build_outputs() -> dict[Path, str]:
-    """Return file → serialised text (strings stay as the builder produced them)."""
-    return {path: dump_json(path, text) if not isinstance(text, str) else text
-            for path, text in build().items()}
+def build_outputs() -> tuple[dict[Path, str], dict]:
+    """Return (file → serialised text, page → segments). Strings stay as built."""
+    raw, content = build()
+    return ({path: dump_json(path, text) if not isinstance(text, str) else text
+             for path, text in raw.items()}, content)
 
 
-def split_content(outputs: dict[Path, str]) -> dict[Path, str]:
-    """The content index maps page → segments; each page also gets its own file.
+def split_content(outputs: dict[Path, str], content: dict) -> dict[Path, str]:
+    """Each page gets its own segment shard file (no monolithic index).
 
     Segment shape: ["t", text] · ["c", lang, code] · ["m", diagramId, kind, 0] ·
     ["d", diagramId, kind, verdict, source]  (unrenderable Mermaid kept verbatim).
     """
-    index = json.loads(outputs[CONTENT / "index.json"])
-    assert isinstance(index, dict), "content index must be a page → segments map"
-    for page_id, segs in index.items():
+    for page_id, segs in content.items():
         outputs[CONTENT / f"{page_id}.json"] = canonical_json(segs)
     return outputs
 
@@ -660,7 +658,8 @@ def main() -> int:
     parser.add_argument("--summary", action="store_true", help="print derived totals only")
     args = parser.parse_args()
 
-    outputs = split_content(build_outputs())
+    outputs, content = build_outputs()
+    outputs = split_content(outputs, content)
     structure = json.loads(outputs[DATA / "graph" / "structure.json"])
     summary = (f"pages={structure['pages']} domains={structure['domains']} diagrams={structure['diagrams']} "
                f"ok={structure['diagramsOk']} tables={structure['tables']} links={structure['links']}")

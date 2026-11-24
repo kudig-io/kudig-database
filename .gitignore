@@ -65,3 +65,6 @@ code/GTM/dist/
 
 # 大文件排除 — 防止 zip 归档文件入库
 *.zip
+
+# console 调试索引——运行时不加载，2026-11-24 起停止入库
+console/content/index.json
