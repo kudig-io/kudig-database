@@ -19,6 +19,7 @@ import argparse
 import hashlib
 import json
 import re
+import sys
 from collections import defaultdict
 from pathlib import Path
 
@@ -102,6 +103,8 @@ def summarize(name: str, groups: dict) -> dict:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true", help="只打印摘要，不写文件")
+    ap.add_argument("--gate", action="store_true",
+                    help="P4 防回归门禁：与库内基线比对三信号，任一上升 exit 1（只读）")
     args = ap.parse_args()
 
     docs = iter_docs()
@@ -124,9 +127,27 @@ def main():
         print(f"  {k}: {s['content_groups']} content groups / {s['content_files']} files "
               f"(+{s['structural_groups']} structural groups)")
 
-    if not args.check:
+    if not (args.check or args.gate):
         OUTPUT.write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
         print(f"wrote: {OUTPUT.relative_to(ROOT)}")
+
+    if args.gate:
+        baseline = json.loads(OUTPUT.read_text(encoding="utf-8"))
+        regressions, tightened = [], []
+        for k in ("duplicate_basenames", "identical_content", "title_collisions"):
+            now = result[k]["content_groups"]
+            base = baseline[k]["content_groups"]
+            if now > base:
+                regressions.append(f"{k}: {base} -> {now}")
+            elif now < base:
+                tightened.append(f"{k}: {base} -> {now}")
+        if regressions:
+            print("重复信号回归（超过库内基线，需先人工评审/落桩）: " + "; ".join(regressions))
+            print("::error::reorg gate FAILED")
+            sys.exit(1)
+        if tightened:
+            print("基线已收紧，无参运行可刷新 reorg-inventory.json: " + "; ".join(tightened))
+        print(f"reorg gate OK（基线 generated_at={baseline.get('generated_at')}）")
 
 
 if __name__ == "__main__":

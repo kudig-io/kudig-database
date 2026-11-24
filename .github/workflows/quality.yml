@@ -27,6 +27,7 @@ on:
       - 'wiki/23-实体/**'
       - 'skills/**'
       - 'maintaining/01-文档/**'
+      - 'maintaining/02-元数据/**'
       - 'code/scripts/**'
       - 'console/**'
       - '.github/workflows/quality.yml'
@@ -79,6 +80,20 @@ jobs:
           python-version: '3.11'
       - name: Console 派生物（console/data/ + console/content/）与仓库一致性校验
         run: make console-check
+
+  reorg-gate:
+    name: Reorg Regression Gate (P4)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: 重排三信号防回归（同名/全同/同题异版超基线即失败）
+        run: python3 code/scripts/maintenance/reorg-inventory.py --gate
+      - name: 生产就绪指南骨架校验（fails>0 即失败）
+        run: python3 code/scripts/maintenance/check-production-readiness.py
+      # domain-mapping.md 与实际目录一致性校验：P2 一键迁移完成后才强制（届时在此追加）
 
   frontmatter:
     name: Frontmatter Integrity
