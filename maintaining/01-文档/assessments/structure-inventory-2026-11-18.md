@@ -11,7 +11,7 @@ tags:
 - corpus
 tier: supporting
 created: '2026-11-18'
-last_updated: '2026-11-18'
+last_updated: '2026-11-24'
 ---
 
 # 重排 P0 盘点报告
@@ -80,4 +80,6 @@ last_updated: '2026-11-18'
 - [ ] nightly 冻结 —— **推迟至 P2 执行窗口前**（当前无在途迁移，不需提前停更）
 - [ ] 判重规则评审（F2 草案：正文全同按体裁定主场）——P1 启动条件
 
-**下一步 P1**：① ~~按 F2 规则批量处理 161 组全同副本~~ **已完成（2026-11-18）**：`apply-identical-dedup.py` 落桩 190 份、改写 51 处 QA 引用；复核后追加规则 R-MAIN（主题域>提炼层，含 18-云厂商>23-实体/13）、R-FUNC（非 functions-* 优先）、R-TRAIN（培训嵌套>平铺）；复盘 `identical_content` **161 → 0**，QA 悬空 0、指向桩的 source 0，`console-check` 通过。② ~~production-readiness 模板生成器（S-2）~~ **已完成（2026-11-18，形态调整）**：全文生成不可行（正文深度域特异），落地为规范模板 + `check-production-readiness.py` 骨架校验/编号规范化，20/20 指南通过、`--check` 可作 CI 门禁。③ ~~死桩清理（59 个）~~ **已完成（2026-11-18）**：删除前校验（模式匹配 59/59、目标不存在、零入链）后 `git rm`，`console-check` 通过；④ F3/F1 人工队列评审——**分批执行中**：评审单 `title-collision-review-queue.md`（`review-title-collisions.py` 生成，A/B/C/D 四节）；**A 批已执行**（terway 三向：18 节回填 + 旧版 42-49 落桩）；**B 批已裁决执行（2026-11-18）**：B1+B2/B4 按主场落桩 37 份、B3a 工单 12 篇标题加（工单 NNN）、B3b 培训 7 篇加受众限定词、B3① 语料 5 组以 `.with_actions` 为主场落桩；**C 批 94 组整批签认**；title_collisions **160 → 104**（QA 悬空 0）；**余 D 节 B3② 10 组**（细摘要与甲/乙/丙/丁分类建议已出，待裁决）；23-实体侧 8 卡按 S-1「压成 1 张速览卡」仍待办。
+**下一步 P1**：① ~~按 F2 规则批量处理 161 组全同副本~~ **已完成（2026-11-18）**：`apply-identical-dedup.py` 落桩 190 份、改写 51 处 QA 引用；复核后追加规则 R-MAIN（主题域>提炼层，含 18-云厂商>23-实体/13）、R-FUNC（非 functions-* 优先）、R-TRAIN（培训嵌套>平铺）；复盘 `identical_content` **161 → 0**，QA 悬空 0、指向桩的 source 0，`console-check` 通过。② ~~production-readiness 模板生成器（S-2）~~ **已完成（2026-11-18，形态调整）**：全文生成不可行（正文深度域特异），落地为规范模板 + `check-production-readiness.py` 骨架校验/编号规范化，20/20 指南通过、`--check` 可作 CI 门禁。③ ~~死桩清理（59 个）~~ **已完成（2026-11-18）**：删除前校验（模式匹配 59/59、目标不存在、零入链）后 `git rm`，`console-check` 通过；④ F3/F1 人工队列评审——**分批执行中**：评审单 `title-collision-review-queue.md`（`review-title-collisions.py` 生成，A/B/C/D 四节）；**A 批已执行**（terway 三向：18 节回填 + 旧版 42-49 落桩）；**B 批已裁决执行（2026-11-18）**：B1+B2/B4 按主场落桩 37 份、B3a 工单 12 篇标题加（工单 NNN）、B3b 培训 7 篇加受众限定词、B3① 语料 5 组以 `.with_actions` 为主场落桩；**C 批 94 组整批签认**；title_collisions **160 → 104**（QA 悬空 0）；**D 节 B3② 10 组**已执行（2026-11-19，f6068ba8ed：标题消歧 4 组、回填后落桩 3 组、副本落桩 3 组，title_collisions **104 → 95**，QA 悬空 0）；**23-实体侧 8 卡已按 S-1 压成 1 张速览卡（2026-11-24，763f10084e）**、**terway-index 21 副本已落桩（2026-11-24，50e452598e，主场 05/06 为严格超集无回填）**，title_collisions **95 → 94**（剩余全部为 C 批签认组，terway 人工队列清零）。
+
+**11-18 → 11-24 期间结构事件与基线推进**：kuba 故障案例库以 subtree 方式并入为 `wiki/32-故障案例库`（2026-11-18，4730e7400d）；P1~B3② 各批落桩文件（含 STUB 标记）陆续退出重复信号扫描；T1 删 7 张被压实体卡——扫描计数相应由 4,711 消长至 4,581；本文档 11-18 写就时的 HEAD 经 11-19（f6068ba8ed）推进至 11-24（50e452598e）。**当前快照（2026-11-24）**：duplicate_basenames 369 组 / identical_content 0 组 / title_collisions 94 组（= C 批 94 签认，无未裁决项）；production-readiness 20/20 通过。S-1/F3 人工队列至此**全部收口**，P4 门禁与 P2 一键迁移（见方案）待执行。
