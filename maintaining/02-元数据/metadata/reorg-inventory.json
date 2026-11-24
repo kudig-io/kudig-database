@@ -1,11 +1,11 @@
 {
  "generated_at": "2026-11-18",
  "scope": "wiki/ (排除 31-归档) + skills/",
- "files_scanned": 4581,
+ "files_scanned": 4580,
  "duplicate_basenames": {
   "signal": "duplicate_basenames",
-  "content_groups": 370,
-  "content_files": 824,
+  "content_groups": 369,
+  "content_files": 822,
   "structural_groups": 3,
   "groups": {
    "SKILL.md": {
@@ -282,14 +282,6 @@
     "paths": [
      "wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md",
      "wiki/25-研究/03-平台与交付/progressive-delivery-patterns.md"
-    ]
-   },
-   "terway-index.md": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/06-Terway/terway-index.md",
-     "wiki/21-生态参考/03-领域索引/terway-index.md"
     ]
    },
    "00-open-source-projects-index.md": {
@@ -3063,8 +3055,8 @@
  },
  "title_collisions": {
   "signal": "title_collisions",
-  "content_groups": 95,
-  "content_files": 234,
+  "content_groups": 94,
+  "content_files": 232,
   "structural_groups": 17,
   "groups": {
    "reference": {
@@ -3253,14 +3245,6 @@
     "paths": [
      "wiki/01-集群基础/05-kubectl/index.md",
      "wiki/17-系统基础/06-知识字典/tooling/kubectl.md"
-    ]
-   },
-   "terway 全项目资源索引": {
-    "count": 2,
-    "cross_dir": true,
-    "paths": [
-     "wiki/05-网络/06-Terway/terway-index.md",
-     "wiki/21-生态参考/03-领域索引/terway-index.md"
     ]
    },
    "security & compliance open source projects index": {

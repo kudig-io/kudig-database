@@ -1347,22 +1347,22 @@ qa_pairs:
   source: wiki/21-生态参考/03-领域索引/storage-index.md
 - type: concept
   question: 在 Terway 全项目资源索引 中, 资源总览 是什么?
-  answer: 参见 wiki/21-生态参考/03-领域索引/terway-index.md 的「资源总览」章节。
-  source: wiki/21-生态参考/03-领域索引/terway-index.md
+  answer: 参见 wiki/05-网络/06-Terway/terway-index.md 的「资源总览」章节。
+  source: wiki/05-网络/06-Terway/terway-index.md
   section: 资源总览
 - type: concept
   question: 在 Terway 全项目资源索引 中, 按角色推荐路径 是什么?
-  answer: 参见 wiki/21-生态参考/03-领域索引/terway-index.md 的「按角色推荐路径」章节。
-  source: wiki/21-生态参考/03-领域索引/terway-index.md
+  answer: 参见 wiki/05-网络/06-Terway/terway-index.md 的「按角色推荐路径」章节。
+  source: wiki/05-网络/06-Terway/terway-index.md
   section: 按角色推荐路径
 - type: troubleshooting
   question: 如何排查 Terway 全项目资源索引 相关的故障?
-  answer: 参见 wiki/21-生态参考/03-领域索引/terway-index.md 的故障排查章节。
-  source: wiki/21-生态参考/03-领域索引/terway-index.md
+  answer: 参见 wiki/05-网络/06-Terway/terway-index.md 的故障排查章节。
+  source: wiki/05-网络/06-Terway/terway-index.md
 - type: comparison
   question: Terway 全项目资源索引 中有哪些技术对比?
-  answer: 参见 wiki/21-生态参考/03-领域索引/terway-index.md 中的对比分析。
-  source: wiki/21-生态参考/03-领域索引/terway-index.md
+  answer: 参见 wiki/05-网络/06-Terway/terway-index.md 中的对比分析。
+  source: wiki/05-网络/06-Terway/terway-index.md
 - type: concept
   question: 在 Domain 19 Landscape References 中, 概览 是什么?
   answer: 参见 wiki/21-生态参考/index.md 的「概览」章节。
