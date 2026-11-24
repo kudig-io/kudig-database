@@ -26,6 +26,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[3]
 SCAN_ROOTS = [ROOT / "wiki", ROOT / "skills"]
 EXCLUDE_PARTS = {"31-归档", ".git", "node_modules", "__pycache__"}
+# 模板目录：frontmatter title 为占位符（如「<公司> <一句话故障标题>」），
+# 属模板语义而非真实同题，不进重复信号（评审单 B 节豁免，2026-11-24）
+TEMPLATE_PREFIXES = ("wiki/32-故障案例库/templates/",)
 STRUCTURAL_NAMES = {"readme.md", "index.md", "moc.md", "summary.md", "changelog.md", "license.md"}
 OUTPUT = ROOT / "maintaining" / "02-元数据" / "metadata" / "reorg-inventory.json"
 
@@ -50,6 +53,8 @@ def iter_docs() -> list[dict]:
         for p in sorted(base.rglob("*.md")):
             if EXCLUDE_PARTS & set(p.parts):
                 continue
+            if p.relative_to(ROOT).as_posix().startswith(TEMPLATE_PREFIXES):
+                continue  # 模板占位标题不进重复信号
             try:
                 text = p.read_text(encoding="utf-8", errors="replace")
             except OSError:

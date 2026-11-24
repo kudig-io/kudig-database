@@ -202,7 +202,7 @@ last_updated: '2026-11-18'
 
 > 四类建议：**甲**=直接落桩（结构子集/副本无独有内容）｜**乙**=回填独有节后落桩（A 批同模式）｜**丙**=保留+标题消歧（不同实体或版本对）｜**丁**=需看全文 diff。
 > **✅ 执行结果（2026-11-18）**：甲 1 组直接落桩；乙 3 组回填独有内容后落桩；丙 5 组标题消歧（其中 node notready DIALOGUE 经核为误放重复件——正文 95.5% 相同、pvc 侧唯一独有内容为交叉分析链接——改按落桩处理，主场 node-notready）；丁 1 组（存储快问快答）改以 `4.md` 为主场并落桩 2/3。
-> 另：重新生成 inventory 后发现 1 组新增撞名——`wiki/32-故障案例库/templates/` 的 `incident-report.md` 与 `quick-entry.md` 共用占位标题 `<公司> <一句话故障标题>`，属模板合理共存，暂不处理。
+> 另：`wiki/32-故障案例库/templates/` 的 `incident-report.md` 与 `quick-entry.md` 曾因共用占位标题 `<公司> <一句话故障标题>` 被记 1 组真同题。2026-11-24 按方案 b 落地豁免：reorg-inventory.py 跳过 `templates/` 目录（占位标题为模板语义，非真实同题；已核实 new-incident.sh 仅 sed id/company/domain/date/last_updated 四行、build-index.py 仅扫 incidents/，均不依赖模板 title），title_collisions 94→93，基线 JSON 已刷新，--gate 绿。
 
 | # | 组 | 主场 / 副本（行·相似度） | 关键差异 | 建议 |
 |---:|---|---|---|---|

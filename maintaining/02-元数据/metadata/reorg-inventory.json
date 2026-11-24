@@ -1,7 +1,7 @@
 {
  "generated_at": "2026-11-18",
  "scope": "wiki/ (排除 31-归档) + skills/",
- "files_scanned": 4580,
+ "files_scanned": 4578,
  "duplicate_basenames": {
   "signal": "duplicate_basenames",
   "content_groups": 369,
@@ -3055,8 +3055,8 @@
  },
  "title_collisions": {
   "signal": "title_collisions",
-  "content_groups": 94,
-  "content_files": 232,
+  "content_groups": 93,
+  "content_files": 230,
   "structural_groups": 17,
   "groups": {
    "reference": {
@@ -3805,14 +3805,6 @@
     "paths": [
      "wiki/23-实体/15-参考与索引/kudig-prompts-catalog.md",
      "skills/04-工作负载/pod/方法论/agent/kudig-prompts-catalog.md"
-    ]
-   },
-   "<公司> <一句话故障标题>": {
-    "count": 2,
-    "cross_dir": false,
-    "paths": [
-     "wiki/32-故障案例库/templates/incident-report.md",
-     "wiki/32-故障案例库/templates/quick-entry.md"
     ]
    },
    "week 2 security monitoring": {
