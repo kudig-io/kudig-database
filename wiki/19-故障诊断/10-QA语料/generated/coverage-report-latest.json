@@ -1,9 +1,13 @@
 {
   "summary": {
-    "total_io_pairs": 7458,
-    "all_passed": false,
+    "total_io_pairs": 875,
+    "all_passed": true,
     "checks_passed": 3,
-    "checks_total": 5
+    "checks_total": 3,
+    "advisory_failed": [
+      "severity_balance",
+      "command_diversity"
+    ]
   },
   "details": {
     "skill_coverage": {
@@ -25,48 +29,48 @@
       "gaps": []
     },
     "severity_balance": {
-      "total": 7458,
+      "total": 875,
       "distribution": {
-        "medium": "64.5%",
-        "high": "34.1%",
-        "critical": "1.3%",
-        "low": "0.2%"
+        "medium": "63.2%",
+        "high": "34.5%",
+        "critical": "1.6%",
+        "low": "0.7%"
       },
       "counts": {
-        "medium": 4807,
-        "high": 2545,
-        "critical": 94,
-        "low": 12
+        "medium": 553,
+        "high": 302,
+        "critical": 14,
+        "low": 6
       },
-      "max_deviation": "44.5%",
+      "max_deviation": "43.2%",
       "passed": false
     },
     "command_diversity": {
-      "total_commands": 7458,
-      "unique_commands": 723,
-      "ratio": 0.09694288012872083,
+      "total_commands": 875,
+      "unique_commands": 613,
+      "ratio": 0.7005714285714286,
       "target": 0.9,
       "passed": false,
       "top_duplicates": [
         {
-          "command": "kubectl exec",
-          "count": 135
+          "command": "kubectl get pods -n <name> -l <name>",
+          "count": 13
+        },
+        {
+          "command": "kubectl get resourcequota -n <ns>",
+          "count": 9
         },
         {
           "command": "kubectl get nodes",
-          "count": 101
+          "count": 8
         },
         {
-          "command": "kubectl edit/patch",
-          "count": 100
+          "command": "kubectl get csr",
+          "count": 6
         },
         {
-          "command": "kubectl delete",
-          "count": 95
-        },
-        {
-          "command": "kubectl apply/create/replace",
-          "count": 95
+          "command": "kubectl exec",
+          "count": 6
         }
       ]
     },
