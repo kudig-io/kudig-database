@@ -223,7 +223,7 @@ eBPF 程序未生效
 
 - [[opentofu]] — OpenTofu
 - [[cartography]] — Cartography
-- [[wiki/23-实体/04-网络/09-terway-performance-tuning]] — Terway 性能调优
+- [[wiki/05-网络/06-Terway/06-performance.md|Terway 性能调优]]
 - [[volcano]] — Volcano
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

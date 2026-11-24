@@ -369,7 +369,7 @@ gRPC 调用失败
 
 ## Related
 
-- [[09-terway-performance-tuning]] — Terway 性能调优
+- [[wiki/05-网络/06-Terway/06-performance.md|Terway 性能调优]]
 - [[volcano]] — Volcano
 - [[bpfman]] — bpfman
 - [[in-toto]] — in-toto

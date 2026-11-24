@@ -242,7 +242,7 @@ kubectl apply -f ovn-setup.yaml
 
 ## Related
 
-- [[06-terway-crd-operations]] — Terway CRD 资源操作
+- [[wiki/05-网络/06-Terway/03b-crd-operations.md|Terway CRD 资源操作]]
 - [[sops]] — SOPS (Secrets OPerationS)
 - [[wiki/23-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
 - [[cni]] — CNI (Container Network Interface)

@@ -1,7 +1,7 @@
 {
  "generated_at": "2026-11-18",
  "scope": "wiki/ (排除 31-归档) + skills/",
- "files_scanned": 4588,
+ "files_scanned": 4581,
  "duplicate_basenames": {
   "signal": "duplicate_basenames",
   "content_groups": 370,

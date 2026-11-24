@@ -251,7 +251,7 @@ Telepresence 让本地开发环境连接远程 K8s 集群。
 
 ## Related
 
-- [[wiki/23-实体/04-网络/04-terway-architecture-deep-dive]] — Terway 架构深度解析
+- [[wiki/05-网络/06-Terway/02-architecture.md|Terway 架构深度解析]]
 - [[wiki/23-实体/15-参考与索引/cncf-cicd.md|cncf-cicd]] — CNCF CI/CD 与发布管理项目全景
 - [[aeraki-mesh]] — Aeraki Mesh
 - [[network-service-mesh]] — Network Service Mesh (NSM)
