@@ -153,7 +153,7 @@ kubectl rollout undo deployment/nginx --to-revision=2
 - [[skills/04-工作负载/deployment/deployment-canary-and-bluegreen.md|[[skills/04-工作负载/deployment/deployment-canary-and-bluegreen|金丝雀与蓝绿发布]]]]
 - [[skills/04-工作负载/deployment/deployment-workload-selection.md|[[skills/04-工作负载/deployment/deployment-workload-selection|工作负载控制器选型]]]]
 - [[deployment|Deployment]]
-- [[wiki/22-概念/01-核心架构/controller-pattern.md|控制器模式]]
+- [[wiki/20-概念/01-核心架构/controller-pattern.md|控制器模式]]
 
 ## 生产案例
 
@@ -197,10 +197,10 @@ kubectl rollout undo deployment/nginx --to-revision=2
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/k8s-workloads-domain-guide.md|k8s-workloads-domain-guide]] — [[kubernetes|Kubernetes]]es Workloads Domain Guide|Kubernetes Workloads Domain Guide]]
+- [[wiki/22-实体/15-参考与索引/k8s-workloads-domain-guide.md|k8s-workloads-domain-guide]] — [[kubernetes|Kubernetes]]es Workloads Domain Guide|Kubernetes Workloads Domain Guide]]
 - [[deployment]] — Deployment
 
-- [[wiki/22-概念/01-核心架构/controller-pattern.md|controller-pattern]]
+- [[wiki/20-概念/01-核心架构/controller-pattern.md|controller-pattern]]
 ```
 
 <!-- risk-assessed -->

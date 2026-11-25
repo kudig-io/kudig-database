@@ -141,7 +141,7 @@ FEBM: 解决"怎么判断"的问题 (方法)
 ### 必读文档
 
 1. **结构化故障排查框架**
-   - 文件: `../../故障诊断/[[wiki/06-存储/README.md|[[KUDIG Database]]]].md`
+   - 文件: `../../故障诊断/[[wiki/06-存储与数据/README.md|[[KUDIG Database]]]].md`
    - 重点: 排障框架总览
 
 2. **FTA 核心原理**
@@ -570,11 +570,11 @@ echo "========== 排查完毕 =========="
 
 ## 延伸阅读
 
-- [结构化故障排查框架](../../../../../../wiki/19-故障诊断/04-高级排障/index.md)
-- [FTA 核心原理](../../../../../../wiki/19-故障诊断/06-FTA故障树/04-fta-core-principles.md)
-- [FEBM 理论基础](../../../../../../wiki/19-故障诊断/07-FEBM方法论/01-febm-theory-foundations.md)
+- [结构化故障排查框架](../../../../../../wiki/17-故障诊断/04-高级排障/index.md)
+- [FTA 核心原理](../../../../../../wiki/17-故障诊断/06-FTA故障树/04-fta-core-principles.md)
+- [FEBM 理论基础](../../../../../../wiki/17-故障诊断/07-FEBM方法论/01-febm-theory-foundations.md)
 - [Pod Pending 诊断](../../../诊断排障/01-pod-pending-diagnosis.md)
-- [Node NotReady 诊断](../../../../../../wiki/19-故障诊断/01-核心排障/06-node-notready-diagnosis.md)
+- [Node NotReady 诊断](../../../../../../wiki/17-故障诊断/01-核心排障/06-node-notready-diagnosis.md)
 - [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
 
 ```

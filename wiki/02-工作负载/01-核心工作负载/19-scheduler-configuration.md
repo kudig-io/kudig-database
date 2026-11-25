@@ -82,7 +82,7 @@ related_docs:
 
 # 28 - 调度器配置与优化
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/scheduling-eviction](https://kubernetes.io/docs/concepts/scheduling-eviction/)
 
 <!-- chunk: 调度流程 -->
 ## 调度流程
@@ -584,8 +584,8 @@ kubectl get configmap -n kube-system kube-scheduler -o yaml
 - Scheduler 深度解析
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[wiki/17-系统基础/05-速查卡/k8s.md|速查卡: k8s]]
-- [[wiki/21-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[wiki/01-集群基础与系统/12-速查卡/k8s.md|速查卡: k8s]]
+- [[wiki/19-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 

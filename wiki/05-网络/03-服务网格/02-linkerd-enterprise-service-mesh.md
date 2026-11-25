@@ -1348,7 +1348,7 @@ spec:
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 
 <!-- risk-assessed -->

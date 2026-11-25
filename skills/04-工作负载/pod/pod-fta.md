@@ -205,7 +205,7 @@ groups:
 ## Related
 
 - [[kube-scheduler]] — kube-scheduler
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

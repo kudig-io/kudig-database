@@ -87,7 +87,7 @@ E. 创建新的 Deployment
 - [[skills/04-工作负载/pod/培训/测验/assessment-troubleshooting-lab-exam.md|assessment-troubleshooting-lab-exam]] — Troubleshootingbleshooting Lab Exam]]
 - [[skills/05-网络/networkpolicy/skill-20-networkpolicy-connectivity.md|skill-20-networkpolicy-connectivity]] — NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting
 - [[deployment]] — Deployment
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 

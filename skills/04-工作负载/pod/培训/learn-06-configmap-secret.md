@@ -383,7 +383,7 @@ kubectl describe secret <name>
 
 **关联文档**:
 - [../06-configuration/06-namespace-resource-quota.md](../../../07-安全/resource-quota/培训/lecturer/01-namespace-resource-quota.md) — 命名空间与资源配额
-- [../../故障诊断/topic-skills/14-configmap-secret-failure.md](../../../../wiki/19-故障诊断/08-技能体系/15-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/14-configmap-secret-failure.md](../../../../skills/09-技能体系/15-configmap-secret-failure.md) — 配置管理问题 [[SKILL|Skill]]
 - [../../安全/](../../安全/) — K8s 安全文档
 
 ## Related
@@ -392,7 +392,7 @@ kubectl describe secret <name>
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[docker]] — Docker
 - [[deployment]] — Deployment
-- [[wiki/23-实体/06-安全/vault.md|vault]] — HashiCorp Vault
+- [[wiki/22-实体/06-安全/vault.md|vault]] — HashiCorp Vault
 
 
 <!-- risk-assessed -->

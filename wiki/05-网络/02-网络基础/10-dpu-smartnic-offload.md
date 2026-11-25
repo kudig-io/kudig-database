@@ -376,7 +376,7 @@ sudo bfb-install --rshim rshim0 --bfb <BlueField-X.bfb>
 - Oracle OCI "Zealot: SmartNIC 卓越运营" 论文（USENIX ATC 2022）：<https://www.usenix.org/conference/atc22/presentation/firestone>
 - AMD Pensando DPU：<https://www.amd.com/en/products/accelerators/pensando.html>
 - Intel IPU：<https://www.intel.com/content/www/us/en/products/details/network-io/ipu.html>
-- 相关内部文档：[[wiki/05-网络/02-网络基础/07-cni-plugin-comparison-selection.md|CNI 插件对比选型]]、[[wiki/05-网络/02-网络基础/06-sdn-network-virtualization.md|SDN 网络虚拟化]]、[[wiki/23-实体/04-网络/cilium.md|Cilium]]、[[wiki/23-实体/07-可观测性/prometheus.md|Prometheus]]
+- 相关内部文档：[[wiki/05-网络/02-网络基础/07-cni-plugin-comparison-selection.md|CNI 插件对比选型]]、[[wiki/05-网络/02-网络基础/06-sdn-network-virtualization.md|SDN 网络虚拟化]]、[[wiki/22-实体/04-网络/cilium.md|Cilium]]、[[wiki/22-实体/07-可观测性/prometheus.md|Prometheus]]
 
 ---
 

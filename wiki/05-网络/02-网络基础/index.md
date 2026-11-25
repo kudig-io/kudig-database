@@ -43,4 +43,4 @@ last_updated: '2026-08-25'
 
 - [[wiki/05-网络/05-eBPF/index.md|eBPF 网络]]
 - [[wiki/05-网络/03-服务网格/index.md|Service Mesh]]
-- [[wiki/08-安全/02-网络安全/index.md|网络安全]]
+- [[wiki/07-安全/02-网络安全/index.md|网络安全]]

@@ -444,7 +444,7 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[wiki/05-网络/README.md|[[wiki/31-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
+- [[wiki/05-网络/README.md|[[wiki/99-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -465,7 +465,7 @@ kubectl rollout restart ds/kube-flannel-ds -n kube-flannel
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/flannel-index.md|Flannel 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

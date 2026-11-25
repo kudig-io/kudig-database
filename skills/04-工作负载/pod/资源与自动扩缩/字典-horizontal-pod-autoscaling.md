@@ -47,7 +47,7 @@ prerequisites:
 # Horizontal Pod Autoscaling
 
 ## 概述
-HorizontalPodAutoscaler（HPA）是 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 的 API 资源和控制器，可根据观察到的指标（如 CPU 利用率、内存利用率或自定义指标）自动调整工作负载（Deployment、[[statefulset|StatefulSet]] 等）的副本数量。
+HorizontalPodAutoscaler（HPA）是 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 的 API 资源和控制器，可根据观察到的指标（如 CPU 利用率、内存利用率或自定义指标）自动调整工作负载（Deployment、[[statefulset|StatefulSet]] 等）的副本数量。
 
 ## 核心概念/原理
 - **控制循环**：HPA 控制器在 kube-controller-manager 中以固定周期运行（默认 15 秒），查询指标并调整目标副本数。
@@ -261,8 +261,8 @@ kubectl top nodes
 ## 交叉引用
 
 - [VPA 垂直自动扩缩](vertical-pod-autoscaling.md)
-- [自动扩缩容概览](../../../../wiki/17-系统基础/06-知识字典/workloads/autoscaling-workloads.md)
-- [HPA 故障树分析 (FTA)](../../../../wiki/19-故障诊断/06-FTA故障树/list/hpa-fta.md)
+- [自动扩缩容概览](../../../../wiki/21-知识字典/workloads/autoscaling-workloads.md)
+- [HPA 故障树分析 (FTA)](../../../../wiki/17-故障诊断/06-FTA故障树/list/hpa-fta.md)
 - [工作负载监控与告警](../../../../wiki/02-工作负载/01-核心工作负载/06-workload-monitoring-alerting.md)
 - [Deployments](./deployments.md)
 
@@ -271,9 +271,9 @@ kubectl top nodes
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[wiki/17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[wiki/17-系统基础/06-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[wiki/21-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[wiki/21-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[wiki/21-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
 

@@ -195,7 +195,7 @@ flowchart TD
 ## 相关链接
 
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
+- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/17-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 
 ## Related
 
@@ -203,9 +203,9 @@ flowchart TD
 - [[skills/04-工作负载/pod/方法论/skill-README.md|skill-README]] — topic-skills — 工单智能体 Kubernetes 诊断 Skill 库
 - [[etcd-fta]] — etcd 异常故障树分析
 - [[helm]] — Helm
-- [[wiki/23-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
+- [[wiki/22-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/gitops-argocd-fta.md|GitOps(ArgoCD) 异常故障树分析]]
 - [[skills/04-工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 - [[skills/04-工作负载/pod/方法论/skill-MOC.md|topic-skills MOC]] — Cross-reference
 

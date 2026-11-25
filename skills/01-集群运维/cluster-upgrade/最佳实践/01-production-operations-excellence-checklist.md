@@ -16,4 +16,4 @@ difficulty: intermediate
 domain: skills
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/06-operations/01-production-operations-excellence-checklist.md|Kubernetes Production Best Practices — Operations Excellence Checklist]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/06-operations/01-production-operations-excellence-checklist.md|Kubernetes Production Best Practices — Operations Excellence Checklist]]（本页为重排去重桩，正文见主场）

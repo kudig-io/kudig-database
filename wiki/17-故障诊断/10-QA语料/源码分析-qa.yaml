@@ -1,0 +1,2698 @@
+domain: 源码分析
+total_questions: 524
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei 中, 什么是 CSI：存储标准化的基石 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+    的「什么是 CSI：存储标准化的基石」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+  section: 什么是 CSI：存储标准化的基石
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei 中, 核心价值：五大存储服务的统一接入 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+    的「核心价值：五大存储服务的统一接入」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+  section: 核心价值：五大存储服务的统一接入
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei 中, 技术栈全景：从依赖版本看工程成熟度 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+    的「技术栈全景：从依赖版本看工程成熟度」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+  section: 技术栈全景：从依赖版本看工程成熟度
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei 中, 架构总览：三层架构模型 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+    的「架构总览：三层架构模型」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/1-xiang-mu-gai-lan-a-li-yun-csi-qu-dong-he-xin-jie-zhi-yu-ding-wei.md
+  section: 架构总览：三层架构模型
+- type: concept
+  question: 在 2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu 中, 编译前提：Go 工具链与环境要求 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md 的「编译前提：Go
+    工具链与环境要求」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md
+  section: 编译前提：Go 工具链与环境要求
+- type: concept
+  question: 在 2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu 中, 本地编译：从源码到二进制 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md 的「本地编译：从源码到二进制」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md
+  section: 本地编译：从源码到二进制
+- type: operation
+  question: '如何执行与 2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu 相关的操作: cd alibaba-cloud-csi-driver-1.36.1?'
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md 中的操作步骤。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md
+  command: cd alibaba-cloud-csi-driver-1.36.1
+- type: operation
+  question: '如何执行与 2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu 相关的操作: VERSION="v1.36.1"?'
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md 中的操作步骤。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md
+  command: VERSION="v1.36.1"
+- type: operation
+  question: '如何执行与 2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu 相关的操作: ./csi-driver --help?'
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md 中的操作步骤。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md
+  command: ./csi-driver --help
+- type: comparison
+  question: 2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md 中的对比分析。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/2-kuai-su-kai-shi-bian-yi-gou-jian-yu-rong-qi-hua-bu-shu.md
+- type: concept
+  question: 在 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 中, Go Modules 与 Vendor：双重锁定范式 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    的「Go Modules 与 Vendor：双重锁定范式」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+  section: Go Modules 与 Vendor：双重锁定范式
+- type: concept
+  question: 在 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 中, vendor/modules.txt 清单解析 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    的「vendor/modules.txt 清单解析」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+  section: vendor/modules.txt 清单解析
+- type: concept
+  question: 在 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 中, explicit; go 1.18                                           ←
+    导入标记 + Go 版本要求 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    的「explicit; go 1.18                                           ← 导入标记 + Go 版本要求」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+  section: explicit; go 1.18                                           ← 导入标记 + Go 版本要求
+- type: operation
+  question: '如何执行与 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 相关的操作: git clone <repo-url> alibaba-cloud-csi-driver?'
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    中的操作步骤。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+  command: git clone <repo-url> alibaba-cloud-csi-driver
+- type: operation
+  question: '如何执行与 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 相关的操作: GOFLAGS=-mod=mod go get github.com/example/newlib@v1.2.0?'
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    中的操作步骤。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+  command: GOFLAGS=-mod=mod go get github.com/example/newlib@v1.2.0
+- type: operation
+  question: '如何执行与 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 相关的操作: GOFLAGS=-mod=mod go get k8s.io/client-go@v0.33.0?'
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    中的操作步骤。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+  command: GOFLAGS=-mod=mod go get k8s.io/client-go@v0.33.0
+- type: comparison
+  question: 3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+    中的对比分析。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/3-kai-fa-huan-jing-da-jian-yu-yi-lai-guan-li-go-modules-vendor.md
+- type: concept
+  question: 在 4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi 中, 架构设计哲学：关注点分离与插件化 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md
+    的「架构设计哲学：关注点分离与插件化」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md
+  section: 架构设计哲学：关注点分离与插件化
+- type: concept
+  question: 在 4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi 中, 分层架构模型：四层纵深 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md
+    的「分层架构模型：四层纵深」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md
+  section: 分层架构模型：四层纵深
+- type: comparison
+  question: 4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md
+    中的对比分析。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/4-xiang-mu-zheng-ti-jia-gou-zong-lan-yu-he-xin-zu-jian-guan-xi.md
+- type: concept
+  question: 在 5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu 中, CSI 规范的核心设计：三组服务的职责切分 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md
+    的「CSI 规范的核心设计：三组服务的职责切分」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md
+  section: CSI 规范的核心设计：三组服务的职责切分
+- type: concept
+  question: 在 5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu 中, gRPC 服务注册机制：ServiceDesc 与接口校验 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md
+    的「gRPC 服务注册机制：ServiceDesc 与接口校验」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md
+  section: gRPC 服务注册机制：ServiceDesc 与接口校验
+- type: concept
+  question: 在 5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu 中, Identity 服务：驱动身份与能力广播 是什么?
+  answer: 参见 wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md
+    的「Identity 服务：驱动身份与能力广播」章节。
+  source: wiki/26-源码分析/alibaba-cloud-csi-driver-1.36.1/5-csi-jie-kou-gui-fan-xiang-jie-identity-controller-node-san-zu-fu-wu.md
+  section: Identity 服务：驱动身份与能力广播
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi 中, 为什么需要 CNI？ 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md 的「为什么需要 CNI？」章节。
+  source: wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md
+  section: 为什么需要 CNI？
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi 中, CNI 的核心设计哲学 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md 的「CNI 的核心设计哲学」章节。
+  source: wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md
+  section: CNI 的核心设计哲学
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi 中, 整体架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md 的「整体架构概览」章节。
+  source: wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md
+  section: 整体架构概览
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi 中, 仓库结构一览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md 的「仓库结构一览」章节。
+  source: wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md
+  section: 仓库结构一览
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi 中, 规范的五大支柱 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md 的「规范的五大支柱」章节。
+  source: wiki/26-源码分析/analysis/cni/1-xiang-mu-gai-shu-cni-shi-shi-yao-ji-qi-he-xin-jie-zhi.md
+  section: 规范的五大支柱
+- type: concept
+  question: 在 10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou 中, 架构定位：libcni 在 CNI 生态中的角色 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md 的「架构定位：libcni 在 CNI
+    生态中的角色」章节。
+  source: wiki/26-源码分析/analysis/cni/10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md
+  section: 架构定位：libcni 在 CNI 生态中的角色
+- type: concept
+  question: 在 10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou 中, 核心数据模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md 的「核心数据模型」章节。
+  source: wiki/26-源码分析/analysis/cni/10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md
+  section: 核心数据模型
+- type: comparison
+  question: 10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/10-libcni-ku-yun-xing-shi-ji-cheng-de-wan-zheng-api-jie-kou.md
+- type: concept
+  question: 在 11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go 中, 核心数据结构：PluginConfig 与 NetworkConfigList 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md 的「核心数据结构：PluginConfig 与 NetworkConfigList」章节。
+  source: wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md
+  section: 核心数据结构：PluginConfig 与 NetworkConfigList
+- type: concept
+  question: 在 11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go 中, 错误类型体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md 的「错误类型体系」章节。
+  source: wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md
+  section: 错误类型体系
+- type: concept
+  question: 在 11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go 中, 整体架构：三层加载模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md 的「整体架构：三层加载模型」章节。
+  source: wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md
+  section: 整体架构：三层加载模型
+- type: concept
+  question: 在 11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go 中, 字节层解析：从 JSON 到结构体 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md 的「字节层解析：从 JSON 到结构体」章节。
+  source: wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md
+  section: 字节层解析：从 JSON 到结构体
+- type: comparison
+  question: 11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/11-wang-luo-pei-zhi-jia-zai-yu-jie-xi-conf-go.md
+- type: concept
+  question: 在 12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li 中, 架构总览：分层设计与职责分离 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md 的「架构总览：分层设计与职责分离」章节。
+  source: wiki/26-源码分析/analysis/cni/12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md
+  section: 架构总览：分层设计与职责分离
+- type: concept
+  question: 在 12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li 中, 插件查找机制：FindInPath 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md 的「插件查找机制：FindInPath」章节。
+  source: wiki/26-源码分析/analysis/cni/12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md
+  section: 插件查找机制：FindInPath
+- type: comparison
+  question: 12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/12-cha-jian-zhi-xing-yin-qing-cha-zhao-diao-yong-yu-jie-guo-chu-li.md
+- type: concept
+  question: 在 13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian 中, 架构总览：从 `main()` 到你的回调 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md 的「架构总览：从 `main()` 到你的回调」章节。
+  source: wiki/26-源码分析/analysis/cni/13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md
+  section: 架构总览：从 `main()` 到你的回调
+- type: concept
+  question: 在 13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian 中, 核心类型：插件与框架之间的数据契约 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md 的「核心类型：插件与框架之间的数据契约」章节。
+  source: wiki/26-源码分析/analysis/cni/13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md
+  section: 核心类型：插件与框架之间的数据契约
+- type: comparison
+  question: 13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/13-skel-gu-jia-bao-gou-jian-cni-cha-jian-de-qi-dian.md
+- type: concept
+  question: 在 14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan 中, 全局架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md 的「全局架构概览」章节。
+  source: wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md
+  section: 全局架构概览
+- type: concept
+  question: 在 14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan 中, 核心接口：types.Result 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md 的「核心接口：types.Result」章节。
+  source: wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md
+  section: 核心接口：types.Result
+- type: concept
+  question: 在 14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan 中, 三个版本族的类型定义 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md 的「三个版本族的类型定义」章节。
+  source: wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md
+  section: 三个版本族的类型定义
+- type: comparison
+  question: 14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/14-lei-xing-xi-tong-duo-ban-ben-lei-xing-ding-yi-yu-zi-dong-zhuan-huan.md
+- type: concept
+  question: 在 15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi 中, 架构总览：版本协商的三层模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md 的「架构总览：版本协商的三层模型」章节。
+  source: wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md
+  section: 架构总览：版本协商的三层模型
+- type: concept
+  question: 在 15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi 中, VERSION 命令：插件能力探测协议 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md 的「VERSION 命令：插件能力探测协议」章节。
+  source: wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md
+  section: VERSION 命令：插件能力探测协议
+- type: concept
+  question: 在 15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi 中, 版本选择：从配置中确定协商版本 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md 的「版本选择：从配置中确定协商版本」章节。
+  source: wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md
+  section: 版本选择：从配置中确定协商版本
+- type: best_practice
+  question: 关于 15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi, 有什么最佳实践?
+  answer: '**插件开发者**：始终使用 `version.PluginSupports(...)` 显式声明插件支持的版本列表，而非使用 `version.All`。这确保了当新版本规范引入不兼容变更时，插件不会被错误地匹配到不支持的新版本。在
+    `skel.PluginMainFuncs` 中传入准确的 `versionInfo` 参数是完成这一声明的标准方式。'
+  source: wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md
+- type: comparison
+  question: 15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/15-ban-ben-xie-shang-yu-jian-rong-xing-xiao-yan-ji-zhi.md
+- type: concept
+  question: 在 16-wang-luo-ming-ming-kong-jian-namespace-guan-li 中, 概念架构：命名空间在 CNI 中的三层角色 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md 的「概念架构：命名空间在 CNI 中的三层角色」章节。
+  source: wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md
+  section: 概念架构：命名空间在 CNI 中的三层角色
+- type: concept
+  question: 在 16-wang-luo-ming-ming-kong-jian-namespace-guan-li 中, CNI_NETNS：协议层的命名空间传递机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md 的「CNI_NETNS：协议层的命名空间传递机制」章节。
+  source: wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md
+  section: CNI_NETNS：协议层的命名空间传递机制
+- type: operation
+  question: '如何执行与 16-wang-luo-ming-ming-kong-jian-namespace-guan-li 相关的操作: contid=$(printf ''%x%x%x%x'' $RANDOM $RANDOM $RANDOM
+    $RANDOM)?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md
+  command: contid=$(printf '%x%x%x%x' $RANDOM $RANDOM $RANDOM $RANDOM)
+- type: comparison
+  question: 16-wang-luo-ming-ming-kong-jian-namespace-guan-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/16-wang-luo-ming-ming-kong-jian-namespace-guan-li.md
+- type: concept
+  question: 在 17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong 中, 核心数据结构：cachedInfo 与 NetworkAttachment 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md 的「核心数据结构：cachedInfo
+    与 NetworkAttachment」章节。
+  source: wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md
+  section: 核心数据结构：cachedInfo 与 NetworkAttachment
+- type: concept
+  question: 在 17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong 中, 文件系统布局与命名规则 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md 的「文件系统布局与命名规则」章节。
+  source: wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md
+  section: 文件系统布局与命名规则
+- type: concept
+  question: 在 17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong 中, Result 持久化：写入流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md 的「Result 持久化：写入流程」章节。
+  source: wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md
+  section: Result 持久化：写入流程
+- type: concept
+  question: 在 17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong 中, Result 读取：版本兼容与向后兼容策略 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md 的「Result 读取：版本兼容与向后兼容策略」章节。
+  source: wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md
+  section: Result 读取：版本兼容与向后兼容策略
+- type: concept
+  question: 在 17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong 中, Config 读取：重建 RuntimeConf 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md 的「Config 读取：重建 RuntimeConf」章节。
+  source: wiki/26-源码分析/analysis/cni/17-huan-cun-ji-zhi-result-chi-jiu-hua-yu-attachment-zhui-zong.md
+  section: Config 读取：重建 RuntimeConf
+- type: concept
+  question: 在 18-cong-ling-kai-fa-ge-cni-cha-jian 中, 理解插件开发模型：一个插件的职责边界 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 的「理解插件开发模型：一个插件的职责边界」章节。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  section: 理解插件开发模型：一个插件的职责边界
+- type: concept
+  question: 在 18-cong-ling-kai-fa-ge-cni-cha-jian 中, 插件执行流程全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 的「插件执行流程全景」章节。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  section: 插件执行流程全景
+- type: concept
+  question: 在 18-cong-ling-kai-fa-ge-cni-cha-jian 中, CmdArgs：插件获取输入的唯一入口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 的「CmdArgs：插件获取输入的唯一入口」章节。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  section: CmdArgs：插件获取输入的唯一入口
+- type: concept
+  question: 在 18-cong-ling-kai-fa-ge-cni-cha-jian 中, 第一步：创建项目结构与模块初始化 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 的「第一步：创建项目结构与模块初始化」章节。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  section: 第一步：创建项目结构与模块初始化
+- type: concept
+  question: 在 18-cong-ling-kai-fa-ge-cni-cha-jian 中, 第二步：定义网络配置结构体 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 的「第二步：定义网络配置结构体」章节。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  section: 第二步：定义网络配置结构体
+- type: operation
+  question: '如何执行与 18-cong-ling-kai-fa-ge-cni-cha-jian 相关的操作: mkdir mynet && cd mynet?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  command: mkdir mynet && cd mynet
+- type: operation
+  question: '如何执行与 18-cong-ling-kai-fa-ge-cni-cha-jian 相关的操作: go build -o mynet .?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+  command: go build -o mynet .
+- type: comparison
+  question: 18-cong-ling-kai-fa-ge-cni-cha-jian 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/18-cong-ling-kai-fa-ge-cni-cha-jian.md
+- type: concept
+  question: 在 19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao 中, 整体架构：双轨调试体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md 的「整体架构：双轨调试体系」章节。
+  source: wiki/26-源码分析/analysis/cni/19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md
+  section: 整体架构：双轨调试体系
+- type: concept
+  question: 在 19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao 中, Debug 插件源码深度解析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md 的「Debug 插件源码深度解析」章节。
+  source: wiki/26-源码分析/analysis/cni/19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md
+  section: Debug 插件源码深度解析
+- type: comparison
+  question: 19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/19-debug-cha-jian-yuan-ma-jie-xi-yu-ce-shi-ji-qiao.md
+- type: concept
+  question: 在 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 中, 前置条件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 的「前置条件」章节。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  section: 前置条件
+- type: concept
+  question: 在 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 中, 整体流程概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 的「整体流程概览」章节。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  section: 整体流程概览
+- type: concept
+  question: 在 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 中, 第一步：获取并编译 CNI 仓库 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 的「第一步：获取并编译
+    CNI 仓库」章节。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  section: 第一步：获取并编译 CNI 仓库
+- type: concept
+  question: 在 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 中, 第二步：获取并编译参考插件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 的「第二步：获取并编译参考插件」章节。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  section: 第二步：获取并编译参考插件
+- type: concept
+  question: 在 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 中, 第三步：创建网络配置文件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 的「第三步：创建网络配置文件」章节。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  section: 第三步：创建网络配置文件
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 相关的操作: git clone https://github.com/containernetworking/cni.git?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  command: git clone https://github.com/containernetworking/cni.git
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 相关的操作: go install ./cnitool?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  command: go install ./cnitool
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi 相关的操作: cnitool --help?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/2-kuai-su-shang-shou-huan-jing-da-jian-yu-yun-xing-di-ge-cni-pei-zhi.md
+  command: cnitool --help
+- type: concept
+  question: 在 20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng 中, 委托调用与链式执行的架构差异 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md 的「委托调用与链式执行的架构差异」章节。
+  source: wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md
+  section: 委托调用与链式执行的架构差异
+- type: concept
+  question: 在 20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng 中, 委托调用的五项操作函数 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md 的「委托调用的五项操作函数」章节。
+  source: wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md
+  section: 委托调用的五项操作函数
+- type: concept
+  question: 在 20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng 中, 环境变量继承机制：DelegateArgs 的设计哲学 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md 的「环境变量继承机制：DelegateArgs
+    的设计哲学」章节。
+  source: wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md
+  section: 环境变量继承机制：DelegateArgs 的设计哲学
+- type: comparison
+  question: 20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/20-cha-jian-wei-tuo-diao-yong-ipam-ji-qi-ta-wei-tuo-cha-jian-ji-cheng.md
+- type: concept
+  question: 在 21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng 中, 项目工程结构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md 的「项目工程结构概览」章节。
+  source: wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md
+  section: 项目工程结构概览
+- type: concept
+  question: 在 21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng 中, 构建系统 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md 的「构建系统」章节。
+  source: wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md
+  section: 构建系统
+- type: operation
+  question: '如何执行与 21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng 相关的操作: go build ./...?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md
+  command: go build ./...
+- type: operation
+  question: '如何执行与 21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng 相关的操作: ./test.sh?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md
+  command: ./test.sh
+- type: operation
+  question: '如何执行与 21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng 相关的操作: make lint?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/21-xiang-mu-gou-jian-ce-shi-yu-ci-liu-cheng.md
+  command: make lint
+- type: concept
+  question: 在 22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan 中, 贡献流程全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md 的「贡献流程全景」章节。
+  source: wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md
+  section: 贡献流程全景
+- type: concept
+  question: 在 22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan 中, 法律前提：开发者来源证书（DCO） 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md 的「法律前提：开发者来源证书（DCO）」章节。
+  source: wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md
+  section: 法律前提：开发者来源证书（DCO）
+- type: concept
+  question: 在 22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan 中, 沟通渠道与社区参与 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md 的「沟通渠道与社区参与」章节。
+  source: wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md
+  section: 沟通渠道与社区参与
+- type: concept
+  question: 在 22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan 中, 开发工作流详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md 的「开发工作流详解」章节。
+  source: wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md
+  section: 开发工作流详解
+- type: operation
+  question: '如何执行与 22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan 相关的操作: git clone https://github.com/<your-username>/cni.git?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/22-wei-cni-xiang-mu-gong-xian-dai-ma-de-liu-cheng-yu-gui-fan.md
+  command: git clone https://github.com/<your-username>/cni.git
+- type: concept
+  question: 在 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 中, cnitool 是什么 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 的「cnitool 是什么」章节。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  section: cnitool 是什么
+- type: concept
+  question: 在 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 中, 安装 cnitool 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 的「安装 cnitool」章节。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  section: 安装 cnitool
+- type: concept
+  question: 在 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 中, 环境变量详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 的「环境变量详解」章节。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  section: 环境变量详解
+- type: concept
+  question: 在 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 中, 命令详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 的「命令详解」章节。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  section: 命令详解
+- type: operation
+  question: '如何执行与 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 相关的操作: go install github.com/containernetworking/cni/cnitool@latest?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  command: go install github.com/containernetworking/cni/cnitool@latest
+- type: operation
+  question: '如何执行与 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 相关的操作: cnitool --help?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  command: cnitool --help
+- type: operation
+  question: '如何执行与 3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo 相关的操作: cnitool <command> <network-name>
+    <netns-path> [flags]?'
+  answer: 参见 wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/cni/3-shi-yong-cnitool-ming-ling-xing-gong-ju-guan-li-rong-qi-wang-luo.md
+  command: cnitool <command> <network-name> <netns-path> [flags]
+- type: concept
+  question: 在 4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan 中, 规范版本与库版本：两个独立的版本号体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md 的「规范版本与库版本：两个独立的版本号体系」章节。
+  source: wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md
+  section: 规范版本与库版本：两个独立的版本号体系
+- type: concept
+  question: 在 4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan 中, 规范演进时间线与核心变更概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md 的「规范演进时间线与核心变更概览」章节。
+  source: wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md
+  section: 规范演进时间线与核心变更概览
+- type: concept
+  question: 在 4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan 中, 各版本核心变更详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md 的「各版本核心变更详解」章节。
+  source: wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md
+  section: 各版本核心变更详解
+- type: comparison
+  question: 4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/4-cni-gui-fan-yan-jin-li-shi-yu-ban-ben-chai-yi-lan.md
+- type: concept
+  question: 在 5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie 中, 配置架构全景：两层结构模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie.md 的「配置架构全景：两层结构模型」章节。
+  source: wiki/26-源码分析/analysis/cni/5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie.md
+  section: 配置架构全景：两层结构模型
+- type: concept
+  question: 在 5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie 中, 网络配置顶层字段详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie.md 的「网络配置顶层字段详解」章节。
+  source: wiki/26-源码分析/analysis/cni/5-cni-gui-fan-quan-jing-wang-luo-pei-zhi-ge-shi-xiang-jie.md
+  section: 网络配置顶层字段详解
+- type: concept
+  question: 在 6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo 中, 协议通信模型：环境变量 + stdin/stdout 二进制调用 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md 的「协议通信模型：环境变量 + stdin/stdout
+    二进制调用」章节。
+  source: wiki/26-源码分析/analysis/cni/6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md
+  section: 协议通信模型：环境变量 + stdin/stdout 二进制调用
+- type: concept
+  question: 在 6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo 中, ADD：创建网络附着 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md 的「ADD：创建网络附着」章节。
+  source: wiki/26-源码分析/analysis/cni/6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md
+  section: ADD：创建网络附着
+- type: concept
+  question: 在 6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo 中, DEL：移除网络附着 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md 的「DEL：移除网络附着」章节。
+  source: wiki/26-源码分析/analysis/cni/6-zhi-xing-xie-yi-add-del-check-gc-status-wu-da-cao-zuo.md
+  section: DEL：移除网络附着
+- type: concept
+  question: 在 7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi 中, 两种编排机制的定位 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi.md 的「两种编排机制的定位」章节。
+  source: wiki/26-源码分析/analysis/cni/7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi.md
+  section: 两种编排机制的定位
+- type: concept
+  question: 在 7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi 中, 链式执行：从配置列表到有序调用 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi.md 的「链式执行：从配置列表到有序调用」章节。
+  source: wiki/26-源码分析/analysis/cni/7-cha-jian-lian-shi-zhi-xing-yu-wei-tuo-delegation-ji-zhi.md
+  section: 链式执行：从配置列表到有序调用
+- type: concept
+  question: 在 8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan 中, Result 接口：版本无关的抽象契约 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md 的「Result 接口：版本无关的抽象契约」章节。
+  source: wiki/26-源码分析/analysis/cni/8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md
+  section: Result 接口：版本无关的抽象契约
+- type: concept
+  question: 在 8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan 中, 三代 Result 类型：结构演进对比 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md 的「三代 Result 类型：结构演进对比」章节。
+  source: wiki/26-源码分析/analysis/cni/8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md
+  section: 三代 Result 类型：结构演进对比
+- type: comparison
+  question: 8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/8-jie-guo-lei-xing-result-types-yu-ban-ben-jian-rong-zhuan-huan.md
+- type: concept
+  question: 在 9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian 中, 三种扩展机制的全景定位 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md 的「三种扩展机制的全景定位」章节。
+  source: wiki/26-源码分析/analysis/cni/9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md
+  section: 三种扩展机制的全景定位
+- type: concept
+  question: 在 9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian 中, Capabilities：结构化的动态参数注入 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/cni/9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md 的「Capabilities：结构化的动态参数注入」章节。
+  source: wiki/26-源码分析/analysis/cni/9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md
+  section: Capabilities：结构化的动态参数注入
+- type: comparison
+  question: 9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/cni/9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/cni/9-kuo-zhan-yue-ding-capabilities-args-yu-cni_args-de-zui-jia-shi-jian.md
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao 中, etcd 的本质：分布式一致性键值存储 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md 的「etcd 的本质：分布式一致性键值存储」章节。
+  source: wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md
+  section: etcd 的本质：分布式一致性键值存储
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao 中, 四大设计哲学 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md 的「四大设计哲学」章节。
+  source: wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md
+  section: 四大设计哲学
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao 中, 核心架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md 的「核心架构概览」章节。
+  source: wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md
+  section: 核心架构概览
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao 中, 六大 gRPC 服务 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md 的「六大 gRPC 服务」章节。
+  source: wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md
+  section: 六大 gRPC 服务
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao 中, 多模块工程结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md 的「多模块工程结构」章节。
+  source: wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md
+  section: 多模块工程结构
+- type: comparison
+  question: 1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/1-xiang-mu-gai-shu-etcd-shi-shi-yao-yi-ji-wei-shi-yao-zhong-yao.md
+- type: concept
+  question: 在 10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi 中, 核心数据模型：Member 的双重属性 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md 的「核心数据模型：Member 的双重属性」章节。
+  source: wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md
+  section: 核心数据模型：Member 的双重属性
+- type: concept
+  question: 在 10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi 中, RaftCluster：成员状态的内存权威 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md 的「RaftCluster：成员状态的内存权威」章节。
+  source: wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md
+  section: RaftCluster：成员状态的内存权威
+- type: concept
+  question: 在 10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi 中, gRPC API 层：成员操作的对外契约 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md 的「gRPC API 层：成员操作的对外契约」章节。
+  source: wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md
+  section: gRPC API 层：成员操作的对外契约
+- type: concept
+  question: 在 10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi 中, 配置变更的完整生命周期 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md 的「配置变更的完整生命周期」章节。
+  source: wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md
+  section: 配置变更的完整生命周期
+- type: concept
+  question: 在 10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi 中, 安全守卫：严格重配置检查 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md 的「安全守卫：严格重配置检查」章节。
+  source: wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md
+  section: 安全守卫：严格重配置检查
+- type: operation
+  question: '如何执行与 10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi 相关的操作: etcdctl member list?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/10-ji-qun-cheng-yuan-guan-li-yu-dong-tai-zhong-pei-zhi.md
+  command: etcdctl member list
+- type: concept
+  question: 在 11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu 中, 全局架构：双层存储设计 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md 的「全局架构：双层存储设计」章节。
+  source: wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md
+  section: 全局架构：双层存储设计
+- type: concept
+  question: 在 11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu 中, Revision：时间线的原子刻度 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md 的「Revision：时间线的原子刻度」章节。
+  source: wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md
+  section: Revision：时间线的原子刻度
+- type: concept
+  question: 在 11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu 中, KeyIndex 与 Generation：键的生命周期管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md 的「KeyIndex 与 Generation：键的生命周期管理」章节。
+  source: wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md
+  section: KeyIndex 与 Generation：键的生命周期管理
+- type: concept
+  question: 在 11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu 中, treeIndex：B-Tree 并发索引 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md 的「treeIndex：B-Tree 并发索引」章节。
+  source: wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md
+  section: treeIndex：B-Tree 并发索引
+- type: comparison
+  question: 11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/11-mvcc-cun-chu-mo-xing-revision-keyindex-yu-shi-wu-shi-tu.md
+- type: concept
+  question: 在 12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu 中, 物理布局：分段文件与命名规则 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md 的「物理布局：分段文件与命名规则」章节。
+  source: wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md
+  section: 物理布局：分段文件与命名规则
+- type: concept
+  question: 在 12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu 中, 记录格式：五类 Record 与 CRC 校验链 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md 的「记录格式：五类 Record 与 CRC 校验链」章节。
+  source: wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md
+  section: 记录格式：五类 Record 与 CRC 校验链
+- type: concept
+  question: 在 12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu 中, WAL 核心数据结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md 的「WAL 核心数据结构」章节。
+  source: wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md
+  section: WAL 核心数据结构
+- type: concept
+  question: 在 12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu 中, 写入路径：Save、SaveSnapshot 与文件切割 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md 的「写入路径：Save、SaveSnapshot 与文件切割」章节。
+  source: wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md
+  section: 写入路径：Save、SaveSnapshot 与文件切割
+- type: concept
+  question: 在 12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu 中, 读取路径：Open 与 ReadAll 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md 的「读取路径：Open 与 ReadAll」章节。
+  source: wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md
+  section: 读取路径：Open 与 ReadAll
+- type: comparison
+  question: 12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/12-wal-yu-xie-ri-zhi-chi-jiu-hua-yu-beng-kui-hui-fu.md
+- type: concept
+  question: 在 13-backend-chou-xiang-yu-boltdb-ji-cheng 中, 架构总览：从接口到实现的三层分离 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md 的「架构总览：从接口到实现的三层分离」章节。
+  source: wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md
+  section: 架构总览：从接口到实现的三层分离
+- type: concept
+  question: 在 13-backend-chou-xiang-yu-boltdb-ji-cheng 中, Backend 接口：生命周期与事务工厂 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md 的「Backend 接口：生命周期与事务工厂」章节。
+  source: wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md
+  section: Backend 接口：生命周期与事务工厂
+- type: concept
+  question: 在 13-backend-chou-xiang-yu-boltdb-ji-cheng 中, 配置体系：BackendConfig 与平台差异 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md 的「配置体系：BackendConfig 与平台差异」章节。
+  source: wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md
+  section: 配置体系：BackendConfig 与平台差异
+- type: concept
+  question: 在 13-backend-chou-xiang-yu-boltdb-ji-cheng 中, 事务模型：双层缓冲的批量提交机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md 的「事务模型：双层缓冲的批量提交机制」章节。
+  source: wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md
+  section: 事务模型：双层缓冲的批量提交机制
+- type: comparison
+  question: 13-backend-chou-xiang-yu-boltdb-ji-cheng 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/13-backend-chou-xiang-yu-boltdb-ji-cheng.md
+- type: concept
+  question: 在 14-compaction-yu-schema-ban-ben-qian-yi 中, Compaction 机制全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/14-compaction-yu-schema-ban-ben-qian-yi.md 的「Compaction 机制全景」章节。
+  source: wiki/26-源码分析/analysis/etcd/14-compaction-yu-schema-ban-ben-qian-yi.md
+  section: Compaction 机制全景
+- type: operation
+  question: '如何执行与 14-compaction-yu-schema-ban-ben-qian-yi 相关的操作: etcdutl migrate --data-dir /var/lib/etcd --target-version
+    3.?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/14-compaction-yu-schema-ban-ben-qian-yi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/14-compaction-yu-schema-ban-ben-qian-yi.md
+  command: etcdutl migrate --data-dir /var/lib/etcd --target-version 3.6
+- type: concept
+  question: 在 15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai 中, 模块目录结构与职责划分 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md 的「模块目录结构与职责划分」章节。
+  source: wiki/26-源码分析/analysis/etcd/15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md
+  section: 模块目录结构与职责划分
+- type: concept
+  question: 在 15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai 中, 六大 gRPC 服务全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md 的「六大 gRPC 服务全景」章节。
+  source: wiki/26-源码分析/analysis/etcd/15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md
+  section: 六大 gRPC 服务全景
+- type: comparison
+  question: 15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/15-grpc-api-ding-yi-yu-protocol-buffers-qi-yue-api-mo-kuai.md
+- type: concept
+  question: 在 16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng 中, 客户端整体架构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md 的「客户端整体架构」章节。
+  source: wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md
+  section: 客户端整体架构
+- type: concept
+  question: 在 16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng 中, 客户端创建流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md 的「客户端创建流程」章节。
+  source: wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md
+  section: 客户端创建流程
+- type: concept
+  question: 在 16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng 中, 连接配置详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md 的「连接配置详解」章节。
+  source: wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md
+  section: 连接配置详解
+- type: concept
+  question: 在 16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng 中, 端点解析与负载均衡 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md 的「端点解析与负载均衡」章节。
+  source: wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md
+  section: 端点解析与负载均衡
+- type: concept
+  question: 在 16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng 中, 拨号与连接建立 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md 的「拨号与连接建立」章节。
+  source: wiki/26-源码分析/analysis/etcd/16-go-ke-hu-duan-ku-client-v3-lian-jie-guan-li-zhong-shi-yu-fu-zai-jun-heng.md
+  section: 拨号与连接建立
+- type: concept
+  question: 在 17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng 中, 协议层：gRPC Watch API 的双向流契约
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md
+    的「协议层：gRPC Watch API 的双向流契约」章节。
+  source: wiki/26-源码分析/analysis/etcd/17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md
+  section: 协议层：gRPC Watch API 的双向流契约
+- type: concept
+  question: 在 17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng 中, 服务端核心：watchableStore
+    与事件分发 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md
+    的「服务端核心：watchableStore 与事件分发」章节。
+  source: wiki/26-源码分析/analysis/etcd/17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md
+  section: 服务端核心：watchableStore 与事件分发
+- type: comparison
+  question: 17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/17-watch-ji-zhi-shi-jian-tui-song-huan-cun-ceng-cache-mo-kuai-yu-zhi-xing-bao-zheng.md
+- type: concept
+  question: 在 2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian 中, 前置条件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md 的「前置条件」章节。
+  source: wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md
+  section: 前置条件
+- type: concept
+  question: 在 2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian 中, 第一步：从源码构建 etcd 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md 的「第一步：从源码构建 etcd」章节。
+  source: wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md
+  section: 第一步：从源码构建 etcd
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian 相关的操作: ./scripts/build.sh?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md
+  command: ./scripts/build.sh
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian 相关的操作: $ ls -la bin/?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md
+  command: $ ls -la bin/
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian 相关的操作: ./bin/etcd --config-file etcd.conf.yml?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/2-kuai-su-shang-shou-gou-jian-yun-xing-yu-ben-di-ji-qun-da-jian.md
+  command: ./bin/etcd --config-file etcd.conf.yml
+- type: concept
+  question: 在 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 中, 为什么需要多模块？ 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 的「为什么需要多模块？」章节。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+  section: 为什么需要多模块？
+- type: concept
+  question: 在 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 中, 模块全景：12 个模块的定位与职责 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 的「模块全景：12 个模块的定位与职责」章节。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+  section: 模块全景：12 个模块的定位与职责
+- type: concept
+  question: 在 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 中, 依赖层次图：谁依赖谁？ 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 的「依赖层次图：谁依赖谁？」章节。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+  section: 依赖层次图：谁依赖谁？
+- type: concept
+  question: 在 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 中, Go Workspace：统一多模块开发的粘合剂 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 的「Go Workspace：统一多模块开发的粘合剂」章节。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+  section: Go Workspace：统一多模块开发的粘合剂
+- type: operation
+  question: '如何执行与 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 相关的操作: make update-go-workspace?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+  command: make update-go-workspace
+- type: operation
+  question: '如何执行与 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 相关的操作: function load_workspace_relative_modules_for_bom()
+    {?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+  command: function load_workspace_relative_modules_for_bom() {
+- type: comparison
+  question: 3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/3-duo-mo-kuai-gong-cheng-jie-gou-yu-go-workspace-xiang-jie.md
+- type: concept
+  question: 在 4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng 中, 前置条件：了解 etcd 的学习资源 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md 的「前置条件：了解 etcd 的学习资源」章节。
+  source: wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md
+  section: 前置条件：了解 etcd 的学习资源
+- type: concept
+  question: 在 4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng 中, 开发环境搭建 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md 的「开发环境搭建」章节。
+  source: wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md
+  section: 开发环境搭建
+- type: concept
+  question: 在 4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng 中, 构建体系详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md 的「构建体系详解」章节。
+  source: wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md
+  section: 构建体系详解
+- type: operation
+  question: '如何执行与 4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng 相关的操作: git clone https://github.com/etcd-io/etcd.git?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md
+  command: git clone https://github.com/etcd-io/etcd.git
+- type: operation
+  question: '如何执行与 4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng 相关的操作: GO_BUILD_FLAGS="-buildmode=pie" make build?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md
+  command: GO_BUILD_FLAGS="-buildmode=pie" make build
+- type: comparison
+  question: 4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/4-kai-fa-huan-jing-da-jian-yu-gong-xian-liu-cheng.md
+- type: concept
+  question: 在 5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan 中, 工具定位与架构对比 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md 的「工具定位与架构对比」章节。
+  source: wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md
+  section: 工具定位与架构对比
+- type: concept
+  question: 在 5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan 中, etcdctl：在线客户端详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md 的「etcdctl：在线客户端详解」章节。
+  source: wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md
+  section: etcdctl：在线客户端详解
+- type: operation
+  question: '如何执行与 5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan 相关的操作: etcdctl get foo?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md
+  command: etcdctl get foo
+- type: operation
+  question: '如何执行与 5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan 相关的操作: etcdctl put foo bar?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md
+  command: etcdctl put foo bar
+- type: operation
+  question: '如何执行与 5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan 相关的操作: etcdctl del foo?'
+  answer: 参见 wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md
+  command: etcdctl del foo
+- type: comparison
+  question: 5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/5-ming-ling-xing-gong-ju-etcdctl-yu-etcdutl-shi-yong-zhi-nan.md
+- type: concept
+  question: 在 6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji 中, 分层总览：一张全景图 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md 的「分层总览：一张全景图」章节。
+  source: wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md
+  section: 分层总览：一张全景图
+- type: concept
+  question: 在 6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji 中, 第1层：CLI 与启动编排 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md 的「第1层：CLI
+    与启动编排」章节。
+  source: wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md
+  section: 第1层：CLI 与启动编排
+- type: concept
+  question: 在 6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji 中, 第2层：嵌入层 (embed) 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md 的「第2层：嵌入层
+    (embed)」章节。
+  source: wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md
+  section: 第2层：嵌入层 (embed)
+- type: concept
+  question: 在 6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji 中, 第3层：核心服务层 (EtcdServer) 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md 的「第3层：核心服务层
+    (EtcdServer)」章节。
+  source: wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md
+  section: 第3层：核心服务层 (EtcdServer)
+- type: concept
+  question: 在 6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji 中, 第4层：API 与 RPC 层 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md 的「第4层：API
+    与 RPC 层」章节。
+  source: wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md
+  section: 第4层：API 与 RPC 层
+- type: comparison
+  question: 6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/6-zheng-ti-jia-gou-cong-qian-ru-ceng-dao-cun-chu-ceng-de-fen-ceng-she-ji.md
+- type: concept
+  question: 在 7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd 中, 全局视角：启动流程总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md 的「全局视角：启动流程总览」章节。
+  source: wiki/26-源码分析/analysis/etcd/7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md
+  section: 全局视角：启动流程总览
+- type: concept
+  question: 在 7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd 中, 第一阶段：入口壳与命令分发 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md 的「第一阶段：入口壳与命令分发」章节。
+  source: wiki/26-源码分析/analysis/etcd/7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md
+  section: 第一阶段：入口壳与命令分发
+- type: concept
+  question: 在 7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd 中, 第二阶段：配置构建与校验 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md 的「第二阶段：配置构建与校验」章节。
+  source: wiki/26-源码分析/analysis/etcd/7-fu-wu-qi-qi-dong-lian-lu-cong-main-go-dao-embed-startetcd.md
+  section: 第二阶段：配置构建与校验
+- type: concept
+  question: 在 8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du 中, EtcdServer 结构体全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md
+    的「EtcdServer 结构体全景」章节。
+  source: wiki/26-源码分析/analysis/etcd/8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md
+  section: EtcdServer 结构体全景
+- type: concept
+  question: 在 8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du 中, 提案提交：从 gRPC 请求到 Raft 共识
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md
+    的「提案提交：从 gRPC 请求到 Raft 共识」章节。
+  source: wiki/26-源码分析/analysis/etcd/8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md
+  section: 提案提交：从 gRPC 请求到 Raft 共识
+- type: comparison
+  question: 8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/8-etcdserver-he-xin-shi-xian-ti-an-ti-jiao-apply-xun-huan-yu-xian-xing-zhi-xing-du.md
+- type: concept
+  question: 在 9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan 中, 架构总览：从 raft 库到 EtcdServer 的分层桥接
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md 的「架构总览：从
+    raft 库到 EtcdServer 的分层桥接」章节。
+  source: wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md
+  section: 架构总览：从 raft 库到 EtcdServer 的分层桥接
+- type: concept
+  question: 在 9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan 中, raftNode 核心结构：字段与 Channel 语义
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md 的「raftNode
+    核心结构：字段与 Channel 语义」章节。
+  source: wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md
+  section: raftNode 核心结构：字段与 Channel 语义
+- type: concept
+  question: 在 9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan 中, Ready 处理循环：Raft 协议引擎的节拍器 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md 的「Ready
+    处理循环：Raft 协议引擎的节拍器」章节。
+  source: wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md
+  section: Ready 处理循环：Raft 协议引擎的节拍器
+- type: comparison
+  question: 9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/etcd/9-raft-gong-shi-suan-fa-ji-cheng-raftnode-gua-pei-ceng-yu-xiao-xi-liu-zhuan.md
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei 中, Flannel 解决的核心问题 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md 的「Flannel
+    解决的核心问题」章节。
+  source: wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md
+  section: Flannel 解决的核心问题
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei 中, 整体架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md 的「整体架构概览」章节。
+  source: wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md
+  section: 整体架构概览
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei 中, 四大核心子系统 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md 的「四大核心子系统」章节。
+  source: wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md
+  section: 四大核心子系统
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei 中, 后端方案对比 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md 的「后端方案对比」章节。
+  source: wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md
+  section: 后端方案对比
+- type: concept
+  question: 在 1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei 中, 项目结构地图 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md 的「项目结构地图」章节。
+  source: wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md
+  section: 项目结构地图
+- type: comparison
+  question: 1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/1-xiang-mu-gai-shu-flannel-wang-luo-jia-gou-de-he-xin-jie-zhi-yu-ding-wei.md
+- type: concept
+  question: 在 10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi 中, 架构定位与设计动机 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md 的「架构定位与设计动机」章节。
+  source: wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md
+  section: 架构定位与设计动机
+- type: concept
+  question: 在 10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi 中, 生命周期与四个命令钩子 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md 的「生命周期与四个命令钩子」章节。
+  source: wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md
+  section: 生命周期与四个命令钩子
+- type: concept
+  question: 在 10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi 中, 命令执行引擎：runCmd 的实现细节 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md 的「命令执行引擎：runCmd
+    的实现细节」章节。
+  source: wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md
+  section: 命令执行引擎：runCmd 的实现细节
+- type: concept
+  question: 在 10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi 中, BackendData 跨节点数据管道 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md 的「BackendData
+    跨节点数据管道」章节。
+  source: wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md
+  section: BackendData 跨节点数据管道
+- type: concept
+  question: 在 10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi 中, 实战示例解析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md 的「实战示例解析」章节。
+  source: wiki/26-源码分析/analysis/flannel/10-extension-hou-duan-zi-ding-yi-hou-duan-de-yuan-xing-kai-fa-ji-zhi.md
+  section: 实战示例解析
+- type: concept
+  question: 在 11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi 中, 核心类型体系：三层抽象的契约设计 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md 的「核心类型体系：三层抽象的契约设计」章节。
+  source: wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md
+  section: 核心类型体系：三层抽象的契约设计
+- type: concept
+  question: 在 11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi 中, 全局注册表与 Register 函数 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md 的「全局注册表与 Register
+    函数」章节。
+  source: wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md
+  section: 全局注册表与 Register 函数
+- type: concept
+  question: 在 11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi 中, init() 注册：各后端的自我声明 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md 的「init() 注册：各后端的自我声明」章节。
+  source: wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md
+  section: init() 注册：各后端的自我声明
+- type: concept
+  question: 在 11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi 中, 空白导入：触发 init() 链的入口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md 的「空白导入：触发
+    init() 链的入口」章节。
+  source: wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md
+  section: 空白导入：触发 init() 链的入口
+- type: concept
+  question: 在 11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi 中, 延迟实例化与生命周期管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md 的「延迟实例化与生命周期管理」章节。
+  source: wiki/26-源码分析/analysis/flannel/11-hou-duan-zhu-ce-ji-zhi-init-yu-gou-zao-han-shu-ying-she-mo-shi.md
+  section: 延迟实例化与生命周期管理
+- type: concept
+  question: 在 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 中, 架构总览：双层抽象与数据流 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 的「架构总览：双层抽象与数据流」章节。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+  section: 架构总览：双层抽象与数据流
+- type: concept
+  question: 在 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 中, etcd 数据模型：键空间布局与子网编码 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 的「etcd 数据模型：键空间布局与子网编码」章节。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+  section: etcd 数据模型：键空间布局与子网编码
+- type: concept
+  question: 在 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 中, 启动与初始化：从命令行到 etcd 连接 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 的「启动与初始化：从命令行到 etcd 连接」章节。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+  section: 启动与初始化：从命令行到 etcd 连接
+- type: concept
+  question: 在 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 中, 子网分配算法：竞争检测与随机选择 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 的「子网分配算法：竞争检测与随机选择」章节。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+  section: 子网分配算法：竞争检测与随机选择
+- type: operation
+  question: '如何执行与 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 相关的操作: export ETCDCTL_API=3?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+  command: export ETCDCTL_API=3
+- type: operation
+  question: '如何执行与 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 相关的操作: etcdctl get /coreos.com/network/subnets --prefix
+    --keys-only?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+  command: etcdctl get /coreos.com/network/subnets --prefix --keys-only
+- type: comparison
+  question: 12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/12-etcd-zi-wang-guan-li-qi-du-li-bu-shu-mo-shi.md
+- type: concept
+  question: 在 13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li 中, 整体架构：从 etcd 独立模式到 Kubernetes 原生模式 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md 的「整体架构：从
+    etcd 独立模式到 Kubernetes 原生模式」章节。
+  source: wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md
+  section: 整体架构：从 etcd 独立模式到 Kubernetes 原生模式
+- type: concept
+  question: 在 13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li 中, Manager 接口：两种后端的统一抽象 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md 的「Manager
+    接口：两种后端的统一抽象」章节。
+  source: wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md
+  section: Manager 接口：两种后端的统一抽象
+- type: concept
+  question: 在 13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li 中, 初始化流程：从命令行参数到就绪状态 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md 的「初始化流程：从命令行参数到就绪状态」章节。
+  source: wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md
+  section: 初始化流程：从命令行参数到就绪状态
+- type: concept
+  question: 在 13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li 中, Node Informer：事件驱动的变更感知 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md 的「Node
+    Informer：事件驱动的变更感知」章节。
+  source: wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md
+  section: Node Informer：事件驱动的变更感知
+- type: comparison
+  question: 13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/13-kubernetes-zi-wang-guan-li-qi-ji-yu-api-de-sheng-ming-shi-guan-li.md
+- type: concept
+  question: 在 14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting 中, 数据模型：租约的核心结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md 的「数据模型：租约的核心结构」章节。
+  source: wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md
+  section: 数据模型：租约的核心结构
+- type: concept
+  question: 在 14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting 中, Manager 接口：生命周期操作的统一契约 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md 的「Manager
+    接口：生命周期操作的统一契约」章节。
+  source: wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md
+  section: Manager 接口：生命周期操作的统一契约
+- type: concept
+  question: 在 14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting 中, 租约获取：AcquireLease 的双重策略 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md 的「租约获取：AcquireLease
+    的双重策略」章节。
+  source: wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md
+  section: 租约获取：AcquireLease 的双重策略
+- type: comparison
+  question: 14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/14-zi-wang-zu-yue-sheng-ming-zhou-qi-huo-qu-xu-yue-yu-shi-jian-jian-ting.md
+- type: concept
+  question: 在 15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li 中, 整体架构：TrafficManager 接口与 IPTablesManager 实现 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md 的「整体架构：TrafficManager
+    接口与 IPTablesManager 实现」章节。
+  source: wiki/26-源码分析/analysis/flannel/15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md
+  section: 整体架构：TrafficManager 接口与 IPTablesManager 实现
+- type: concept
+  question: 在 15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li 中, MASQUERADE 规则体系：NAT 地址伪装 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md 的「MASQUERADE 规则体系：NAT
+    地址伪装」章节。
+  source: wiki/26-源码分析/analysis/flannel/15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md
+  section: MASQUERADE 规则体系：NAT 地址伪装
+- type: comparison
+  question: 15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/15-iptables-mo-shi-masquerade-yu-forward-gui-ze-guan-li.md
+- type: concept
+  question: 在 16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing 中, 架构总览：TrafficManager 接口的双实现 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md 的「架构总览：TrafficManager
+    接口的双实现」章节。
+  source: wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md
+  section: 架构总览：TrafficManager 接口的双实现
+- type: concept
+  question: 在 16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing 中, NFTablesManager 结构与初始化 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md 的「NFTablesManager 结构与初始化」章节。
+  source: wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md
+  section: NFTablesManager 结构与初始化
+- type: concept
+  question: 在 16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing 中, FORWARD 规则：转发链的声明式管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md 的「FORWARD 规则：转发链的声明式管理」章节。
+  source: wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md
+  section: FORWARD 规则：转发链的声明式管理
+- type: concept
+  question: 在 16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing 中, MASQUERADE 规则：NAT 的精确语义 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md 的「MASQUERADE 规则：NAT
+    的精确语义」章节。
+  source: wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md
+  section: MASQUERADE 规则：NAT 的精确语义
+- type: concept
+  question: 在 16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing 中, fully-random 检测机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md 的「fully-random 检测机制」章节。
+  source: wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md
+  section: fully-random 检测机制
+- type: comparison
+  question: 16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/16-nftables-mo-shi-shi-yan-xing-xia-dai-gui-ze-yin-qing.md
+- type: concept
+  question: 在 17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang 中, 配置加载的全局流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+    的「配置加载的全局流程」章节。
+  source: wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+  section: 配置加载的全局流程
+- type: concept
+  question: 在 17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang 中, JSON 网络配置：网络拓扑的定义核心
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+    的「JSON 网络配置：网络拓扑的定义核心」章节。
+  source: wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+  section: JSON 网络配置：网络拓扑的定义核心
+- type: operation
+  question: '如何执行与 17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang 相关的操作: FLANNEL_NETWORK=10.42.0.0/16           #
+    来自 JSON 配置的 Network?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+    中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+  command: 'FLANNEL_NETWORK=10.42.0.0/16           # 来自 JSON 配置的 Network'
+- type: comparison
+  question: 17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/17-wang-luo-pei-zhi-xiang-jie-json-pei-zhi-ming-ling-xing-can-shu-yu-huan-jing-bian-liang.md
+- type: concept
+  question: 在 18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi 中, 核心概念：三种 IP 协议族的判定模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md 的「核心概念：三种 IP
+    协议族的判定模型」章节。
+  source: wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md
+  section: 核心概念：三种 IP 协议族的判定模型
+- type: concept
+  question: 在 18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi 中, 配置体系：双栈参数的声明式定义 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md 的「配置体系：双栈参数的声明式定义」章节。
+  source: wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md
+  section: 配置体系：双栈参数的声明式定义
+- type: concept
+  question: 在 18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi 中, IP 类型系统：IPv4 与 IPv6 的类型级隔离 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md 的「IP 类型系统：IPv4
+    与 IPv6 的类型级隔离」章节。
+  source: wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md
+  section: IP 类型系统：IPv4 与 IPv6 的类型级隔离
+- type: operation
+  question: '如何执行与 18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi 相关的操作: FLANNEL_NETWORK=10.42.0.0/16?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md
+  command: FLANNEL_NETWORK=10.42.0.0/16
+- type: comparison
+  question: 18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/18-shuang-zhan-yu-chun-ipv6-mo-shi-duo-xie-yi-wang-luo-zhi-chi.md
+- type: concept
+  question: 在 19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach 中, 核心数据结构：ExternalInterface 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md 的「核心数据结构：ExternalInterface」章节。
+  source: wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md
+  section: 核心数据结构：ExternalInterface
+- type: concept
+  question: 在 19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach 中, 决策流程全景图 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md 的「决策流程全景图」章节。
+  source: wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md
+  section: 决策流程全景图
+- type: concept
+  question: 在 19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach 中, Phase 1：`--iface` 精确指定 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md 的「Phase
+    1：`--iface` 精确指定」章节。
+  source: wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md
+  section: Phase 1：`--iface` 精确指定
+- type: concept
+  question: 在 19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach 中, Phase 2：`--iface-regex` 模式匹配 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md 的「Phase
+    2：`--iface-regex` 模式匹配」章节。
+  source: wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md
+  section: Phase 2：`--iface-regex` 模式匹配
+- type: comparison
+  question: 19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/19-wang-luo-jie-kou-xuan-ze-ce-lue-iface-iface-regex-yu-iface-can-reach.md
+- type: concept
+  question: 在 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 中, 前置条件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 的「前置条件」章节。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  section: 前置条件
+- type: concept
+  question: 在 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 中, 部署架构总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 的「部署架构总览」章节。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  section: 部署架构总览
+- type: concept
+  question: 在 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 中, 方式一：使用 kubectl 一键部署（推荐入门） 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 的「方式一：使用 kubectl
+    一键部署（推荐入门）」章节。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  section: 方式一：使用 kubectl 一键部署（推荐入门）
+- type: concept
+  question: 在 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 中, 方式二：使用 Helm Chart 部署 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 的「方式二：使用 Helm
+    Chart 部署」章节。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  section: 方式二：使用 Helm Chart 部署
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 相关的操作: kubectl apply -f https://github.com/flannel-io/flannel/relea?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  command: kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 相关的操作: wget https://github.com/flannel-io/flannel/releases/latest/d?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  command: wget https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 相关的操作: kubectl create ns kube-flannel?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+  command: kubectl create ns kube-flannel
+- type: troubleshooting
+  question: 如何排查 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 相关的故障?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 的故障排查章节。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+- type: comparison
+  question: 2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/2-kuai-su-shang-shou-zai-kubernetes-ji-qun-zhong-bu-shu-flannel.md
+- type: concept
+  question: 在 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 中, 架构总览：双组件职责划分 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 的「架构总览：双组件职责划分」章节。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+  section: 架构总览：双组件职责划分
+- type: concept
+  question: 在 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 中, 部署机制：Init Container 链式安装 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 的「部署机制：Init Container
+    链式安装」章节。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+  section: 部署机制：Init Container 链式安装
+- type: concept
+  question: 在 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 中, CNI 配置文件详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 的「CNI 配置文件详解」章节。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+  section: CNI 配置文件详解
+- type: concept
+  question: 在 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 中, subnet.env：控制平面与数据平面的文件接口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 的「subnet.env：控制平面与数据平面的文件接口」章节。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+  section: subnet.env：控制平面与数据平面的文件接口
+- type: concept
+  question: 在 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 中, 完整的 Pod 创建流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 的「完整的 Pod 创建流程」章节。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+  section: 完整的 Pod 创建流程
+- type: operation
+  question: '如何执行与 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 相关的操作: FLANNEL_NETWORK=10.244.0.0/16          #
+    整个 Flannel 网络的 CIDR?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+  command: 'FLANNEL_NETWORK=10.244.0.0/16          # 整个 Flannel 网络的 CIDR'
+- type: troubleshooting
+  question: 如何排查 20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi 相关的故障?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md 的故障排查章节。
+  source: wiki/26-源码分析/analysis/flannel/20-cni-ji-cheng-yu-kubernetes-cni-cha-jian-de-xie-zuo-fang-shi.md
+- type: concept
+  question: 在 21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi 中, 整体架构：四阶段生命周期模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi.md 的「整体架构：四阶段生命周期模型」章节。
+  source: wiki/26-源码分析/analysis/flannel/21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi.md
+  section: 整体架构：四阶段生命周期模型
+- type: concept
+  question: 在 21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi 中, 健康检查端点：healthz 服务器 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi.md 的「健康检查端点：healthz 服务器」章节。
+  source: wiki/26-源码分析/analysis/flannel/21-jian-kang-jian-cha-yu-you-ya-guan-bi-ji-zhi.md
+  section: 健康检查端点：healthz 服务器
+- type: concept
+  question: 在 22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia 中, 测试体系总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md 的「测试体系总览」章节。
+  source: wiki/26-源码分析/analysis/flannel/22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md
+  section: 测试体系总览
+- type: concept
+  question: 在 22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia 中, 单元测试：纯函数与数据结构验证 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md 的「单元测试：纯函数与数据结构验证」章节。
+  source: wiki/26-源码分析/analysis/flannel/22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md
+  section: 单元测试：纯函数与数据结构验证
+- type: comparison
+  question: 22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/22-dan-yuan-ce-shi-yu-duan-dao-duan-ce-shi-kuang-jia.md
+- type: concept
+  question: 在 23-github-actions-ci-cd-liu-shui-xian-jie-xi 中, 整体架构：流水线分类与触发拓扑 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/23-github-actions-ci-cd-liu-shui-xian-jie-xi.md 的「整体架构：流水线分类与触发拓扑」章节。
+  source: wiki/26-源码分析/analysis/flannel/23-github-actions-ci-cd-liu-shui-xian-jie-xi.md
+  section: 整体架构：流水线分类与触发拓扑
+- type: concept
+  question: 在 23-github-actions-ci-cd-liu-shui-xian-jie-xi 中, PR 门禁：构建验证与代码质量 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/23-github-actions-ci-cd-liu-shui-xian-jie-xi.md 的「PR 门禁：构建验证与代码质量」章节。
+  source: wiki/26-源码分析/analysis/flannel/23-github-actions-ci-cd-liu-shui-xian-jie-xi.md
+  section: PR 门禁：构建验证与代码质量
+- type: concept
+  question: 在 24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan 中, 架构定位：云路由委托模式 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md 的「架构定位：云路由委托模式」章节。
+  source: wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md
+  section: 架构定位：云路由委托模式
+- type: concept
+  question: 在 24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan 中, 专用后端能力对比 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md 的「专用后端能力对比」章节。
+  source: wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md
+  section: 专用后端能力对比
+- type: concept
+  question: 在 24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan 中, TencentCloud VPC 后端：深度实现剖析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md 的「TencentCloud
+    VPC 后端：深度实现剖析」章节。
+  source: wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md
+  section: TencentCloud VPC 后端：深度实现剖析
+- type: comparison
+  question: 24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/24-yun-ping-tai-ji-cheng-tencentcloud-vpc-deng-zhuan-yong-hou-duan.md
+- type: concept
+  question: 在 25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan 中, 日志体系：从 klog 到生产级日志采集 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md 的「日志体系：从
+    klog 到生产级日志采集」章节。
+  source: wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md
+  section: 日志体系：从 klog 到生产级日志采集
+- type: operation
+  question: '如何执行与 25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan 相关的操作: kubectl logs -n kube-flannel
+    <POD_ID> -c kube-flannel | grep?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md
+  command: kubectl logs -n kube-flannel <POD_ID> -c kube-flannel | grep "Using interface"
+- type: operation
+  question: '如何执行与 25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan 相关的操作: ip link show flannel.1?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md
+  command: ip link show flannel.1
+- type: operation
+  question: '如何执行与 25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan 相关的操作: /usr/sbin/ethtool -K flannel.1
+    tx-checksum-ip-generic off?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md
+  command: /usr/sbin/ethtool -K flannel.1 tx-checksum-ip-generic off
+- type: troubleshooting
+  question: 如何排查 25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan 相关的故障?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md 的故障排查章节。
+  source: wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md
+- type: comparison
+  question: 25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/25-gu-zhang-pai-cha-zhi-nan-ri-zhi-lian-tong-xing-yu-xing-neng-zhen-duan.md
+- type: concept
+  question: 在 26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian 中, 发布触发机制与版本号管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md 的「发布触发机制与版本号管理」章节。
+  source: wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md
+  section: 发布触发机制与版本号管理
+- type: concept
+  question: 在 26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian 中, 多架构镜像构建：Dockerfile 与交叉编译策略 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md 的「多架构镜像构建：Dockerfile 与交叉编译策略」章节。
+  source: wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md
+  section: 多架构镜像构建：Dockerfile 与交叉编译策略
+- type: concept
+  question: 在 26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian 中, Release 工作流：四阶段并行流水线 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md 的「Release 工作流：四阶段并行流水线」章节。
+  source: wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md
+  section: Release 工作流：四阶段并行流水线
+- type: operation
+  question: '如何执行与 26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian 相关的操作: make buildx-create-builder?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md
+  command: make buildx-create-builder
+- type: operation
+  question: '如何执行与 26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian 相关的操作: make release TAG=v0.28.4-custom?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md
+  command: make release TAG=v0.28.4-custom
+- type: comparison
+  question: 26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/26-fa-bu-liu-cheng-yu-duo-jia-gou-jing-xiang-gou-jian.md
+- type: concept
+  question: 在 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 中, 前置条件：工具链与依赖总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 的「前置条件：工具链与依赖总览」章节。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  section: 前置条件：工具链与依赖总览
+- type: concept
+  question: 在 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 中, 快速开始：Docker 内构建（推荐方式） 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 的「快速开始：Docker 内构建（推荐方式）」章节。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  section: 快速开始：Docker 内构建（推荐方式）
+- type: concept
+  question: 在 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 中, 原生构建：不使用 Docker 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 的「原生构建：不使用 Docker」章节。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  section: 原生构建：不使用 Docker
+- type: concept
+  question: 在 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 中, 版本注入机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 的「版本注入机制」章节。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  section: 版本注入机制
+- type: operation
+  question: '如何执行与 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 相关的操作: mkdir -p $(go env GOPATH)/src/github.com/flannel-io?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  command: mkdir -p $(go env GOPATH)/src/github.com/flannel-io
+- type: operation
+  question: '如何执行与 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 相关的操作: cd $GOPATH/src/github.com/flannel-io/flannel?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  command: cd $GOPATH/src/github.com/flannel-io/flannel
+- type: operation
+  question: '如何执行与 3-gou-jian-yu-kai-fa-huan-jing-pei-zhi 相关的操作: ARCH=arm64 make image?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/3-gou-jian-yu-kai-fa-huan-jing-pei-zhi.md
+  command: ARCH=arm64 make image
+- type: concept
+  question: 在 4-shi-yong-helm-chart-zi-ding-yi-bu-shu 中, Chart 总体结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md 的「Chart 总体结构」章节。
+  source: wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md
+  section: Chart 总体结构
+- type: concept
+  question: 在 4-shi-yong-helm-chart-zi-ding-yi-bu-shu 中, 快速安装 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md 的「快速安装」章节。
+  source: wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md
+  section: 快速安装
+- type: operation
+  question: '如何执行与 4-shi-yong-helm-chart-zi-ding-yi-bu-shu 相关的操作: git clone https://github.com/flannel-io/flannel.git?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md
+  command: git clone https://github.com/flannel-io/flannel.git
+- type: operation
+  question: '如何执行与 4-shi-yong-helm-chart-zi-ding-yi-bu-shu 相关的操作: kubectl get pods -n kube-flannel -o wide?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md
+  command: kubectl get pods -n kube-flannel -o wide
+- type: operation
+  question: '如何执行与 4-shi-yong-helm-chart-zi-ding-yi-bu-shu 相关的操作: helm install flannel oci://ghcr.io/flannel-io/charts/flannel?'
+  answer: 参见 wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md
+  command: helm install flannel oci://ghcr.io/flannel-io/charts/flannel \
+- type: comparison
+  question: 4-shi-yong-helm-chart-zi-ding-yi-bu-shu 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/4-shi-yong-helm-chart-zi-ding-yi-bu-shu.md
+- type: concept
+  question: 在 5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng 中, 全局启动序列概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md 的「全局启动序列概览」章节。
+  source: wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md
+  section: 全局启动序列概览
+- type: concept
+  question: 在 5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng 中, 阶段一：命令行解析与全局初始化 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md 的「阶段一：命令行解析与全局初始化」章节。
+  source: wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md
+  section: 阶段一：命令行解析与全局初始化
+- type: concept
+  question: 在 5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng 中, 阶段二：子网管理器的创建 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md 的「阶段二：子网管理器的创建」章节。
+  source: wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md
+  section: 阶段二：子网管理器的创建
+- type: concept
+  question: 在 5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng 中, 阶段三：信号处理与健康检查 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md 的「阶段三：信号处理与健康检查」章节。
+  source: wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md
+  section: 阶段三：信号处理与健康检查
+- type: concept
+  question: 在 5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng 中, 阶段四：网络配置获取 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md 的「阶段四：网络配置获取」章节。
+  source: wiki/26-源码分析/analysis/flannel/5-zheng-ti-jia-gou-cong-main-go-dao-ge-zi-xi-tong-de-qi-dong-liu-cheng.md
+  section: 阶段四：网络配置获取
+- type: concept
+  question: 在 6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you 中, 设计演进：从 L2/L3 Miss 到全静态预注入 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md 的「设计演进：从 L2/L3 Miss
+    到全静态预注入」章节。
+  source: wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md
+  section: 设计演进：从 L2/L3 Miss 到全静态预注入
+- type: concept
+  question: 在 6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you 中, 整体架构与启动流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md 的「整体架构与启动流程」章节。
+  source: wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md
+  section: 整体架构与启动流程
+- type: concept
+  question: 在 6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you 中, 配置解析：VXLANConfig 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md 的「配置解析：VXLANConfig」章节。
+  source: wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md
+  section: 配置解析：VXLANConfig
+- type: concept
+  question: 在 6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you 中, VXLAN 设备创建与生命周期 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md 的「VXLAN 设备创建与生命周期」章节。
+  source: wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md
+  section: VXLAN 设备创建与生命周期
+- type: concept
+  question: 在 6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you 中, 设备地址配置与 /32 策略 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md 的「设备地址配置与 /32 策略」章节。
+  source: wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md
+  section: 设备地址配置与 /32 策略
+- type: comparison
+  question: 6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/6-vxlan-hou-duan-nei-he-tai-feng-zhuang-yu-zhi-lian-lu-you.md
+- type: concept
+  question: 在 7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you 中, 设计哲学：零封装的极致性能 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md 的「设计哲学：零封装的极致性能」章节。
+  source: wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md
+  section: 设计哲学：零封装的极致性能
+- type: concept
+  question: 在 7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you 中, 架构总览：极简组件关系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md 的「架构总览：极简组件关系」章节。
+  source: wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md
+  section: 架构总览：极简组件关系
+- type: concept
+  question: 在 7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you 中, 注册机制：init() 与构造函数 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md 的「注册机制：init()
+    与构造函数」章节。
+  source: wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md
+  section: 注册机制：init() 与构造函数
+- type: concept
+  question: 在 7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you 中, 构造函数 New()：NAT 检查是唯一的守门人 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md 的「构造函数 New()：NAT
+    检查是唯一的守门人」章节。
+  source: wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md
+  section: 构造函数 New()：NAT 检查是唯一的守门人
+- type: comparison
+  question: 7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/7-host-gw-hou-duan-ji-yu-er-ceng-zhi-lian-de-gao-xing-neng-lu-you.md
+- type: concept
+  question: 在 8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi 中, 架构全景与源文件职责 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md 的「架构全景与源文件职责」章节。
+  source: wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md
+  section: 架构全景与源文件职责
+- type: concept
+  question: 在 8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi 中, 后端注册与初始化 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md 的「后端注册与初始化」章节。
+  source: wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md
+  section: 后端注册与初始化
+- type: concept
+  question: 在 8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi 中, RegisterNetwork：设备创建与租约获取 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md 的「RegisterNetwork：设备创建与租约获取」章节。
+  source: wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md
+  section: RegisterNetwork：设备创建与租约获取
+- type: concept
+  question: 在 8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi 中, 四种运行模式详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md 的「四种运行模式详解」章节。
+  source: wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md
+  section: 四种运行模式详解
+- type: concept
+  question: 在 8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi 中, 设备抽象层：wgDevice 与密钥管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md 的「设备抽象层：wgDevice
+    与密钥管理」章节。
+  source: wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md
+  section: 设备抽象层：wgDevice 与密钥管理
+- type: comparison
+  question: 8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/8-wireguard-hou-duan-jia-mi-sui-dao-yu-shuang-zhan-zhi-chi.md
+- type: concept
+  question: 在 9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an 中, 三后端定位与特性对比 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md 的「三后端定位与特性对比」章节。
+  source: wiki/26-源码分析/analysis/flannel/9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md
+  section: 三后端定位与特性对比
+- type: concept
+  question: 在 9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an 中, UDP 后端：用户态 TUN-UDP 代理架构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md 的「UDP
+    后端：用户态 TUN-UDP 代理架构」章节。
+  source: wiki/26-源码分析/analysis/flannel/9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md
+  section: UDP 后端：用户态 TUN-UDP 代理架构
+- type: comparison
+  question: 9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/flannel/9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/flannel/9-udp-ipip-yu-ipsec-hou-duan-te-shu-chang-jing-de-feng-zhuang-fang-an.md
+- type: concept
+  question: 在 1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing 中, 技术栈与构建体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md 的「技术栈与构建体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md
+  section: 技术栈与构建体系
+- type: concept
+  question: 在 1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing 中, 整体架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md 的「整体架构概览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md
+  section: 整体架构概览
+- type: concept
+  question: 在 1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing 中, 核心组件一览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md 的「核心组件一览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md
+  section: 核心组件一览
+- type: concept
+  question: 在 1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing 中, 源码目录结构解析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md 的「源码目录结构解析」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md
+  section: 源码目录结构解析
+- type: concept
+  question: 在 1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing 中, Staging 仓库机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md 的「Staging 仓库机制」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md
+  section: Staging 仓库机制
+- type: comparison
+  question: 1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/1-xiang-mu-zong-lan-kubernetes-yuan-ma-quan-jing.md
+- type: concept
+  question: 在 10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi 中, 调度器启动入口与组件初始化 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md 的「调度器启动入口与组件初始化」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md
+  section: 调度器启动入口与组件初始化
+- type: concept
+  question: 在 10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi 中, Scheduler 结构体与核心依赖 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md 的「Scheduler 结构体与核心依赖」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md
+  section: Scheduler 结构体与核心依赖
+- type: concept
+  question: 在 10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi 中, 调度主循环：从队列到绑定 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md 的「调度主循环：从队列到绑定」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md
+  section: 调度主循环：从队列到绑定
+- type: concept
+  question: 在 10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi 中, 调度算法核心：过滤与打分 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md 的「调度算法核心：过滤与打分」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md
+  section: 调度算法核心：过滤与打分
+- type: concept
+  question: 在 10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi 中, 调度框架接口体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md 的「调度框架接口体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/10-diao-du-qi-jia-gou-yu-diao-du-kuang-jia-cha-jian-ji-zhi.md
+  section: 调度框架接口体系
+- type: concept
+  question: 在 11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables 中, 总体架构：启动流程与模式选择 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md 的「总体架构：启动流程与模式选择」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md
+  section: 总体架构：启动流程与模式选择
+- type: concept
+  question: 在 11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables 中, Provider 接口：统一的代理抽象 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md 的「Provider 接口：统一的代理抽象」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md
+  section: Provider 接口：统一的代理抽象
+- type: concept
+  question: 在 11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables 中, 同步引擎：BoundedFrequencyRunner 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md 的「同步引擎：BoundedFrequencyRunner」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md
+  section: 同步引擎：BoundedFrequencyRunner
+- type: concept
+  question: 在 11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables 中, iptables 模式 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md 的「iptables 模式」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md
+  section: iptables 模式
+- type: comparison
+  question: 11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/11-kube-proxy-wang-luo-dai-li-mo-shi-iptables-ipvs-nftables.md
+- type: concept
+  question: 在 12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis 中, 架构全景：双层类型体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md 的「架构全景：双层类型体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md
+  section: 架构全景：双层类型体系
+- type: concept
+  question: 在 12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis 中, API 组目录结构与组成要素 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md 的「API 组目录结构与组成要素」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md
+  section: API 组目录结构与组成要素
+- type: concept
+  question: 在 12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis 中, 类型定义范式 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md 的「类型定义范式」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/12-api-zi-yuan-ding-yi-yu-lei-xing-xi-tong-pkg-apis.md
+  section: 类型定义范式
+- type: concept
+  question: 在 13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry 中, 架构总览：三层分离模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md 的「架构总览：三层分离模型」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md
+  section: 架构总览：三层分离模型
+- type: concept
+  question: 在 13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry 中, 目录结构与资源分组 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md 的「目录结构与资源分组」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md
+  section: 目录结构与资源分组
+- type: concept
+  question: 在 13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry 中, 策略层（Strategy）：REST 操作的业务规则引擎 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md 的「策略层（Strategy）：REST
+    操作的业务规则引擎」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md
+  section: 策略层（Strategy）：REST 操作的业务规则引擎
+- type: comparison
+  question: 13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/13-api-zhu-ce-biao-yu-cun-chu-chou-xiang-pkg-registry.md
+- type: concept
+  question: 在 14-openapi-gui-fan-yu-api-fa-xian-ji-zhi 中, 整体架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md 的「整体架构概览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md
+  section: 整体架构概览
+- type: concept
+  question: 在 14-openapi-gui-fan-yu-api-fa-xian-ji-zhi 中, API 发现机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md 的「API 发现机制」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md
+  section: API 发现机制
+- type: comparison
+  question: 14-openapi-gui-fan-yu-api-fa-xian-ji-zhi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/14-openapi-gui-fan-yu-api-fa-xian-ji-zhi.md
+- type: concept
+  question: 在 15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng 中, 调度框架整体架构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng.md 的「调度框架整体架构」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng.md
+  section: 调度框架整体架构
+- type: concept
+  question: 在 15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng 中, 扩展点全览与执行时序 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng.md 的「扩展点全览与执行时序」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/15-diao-du-kuang-jia-jie-kou-yu-kuo-zhan-dian-filter-score-bind-deng.md
+  section: 扩展点全览与执行时序
+- type: concept
+  question: 在 16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng 中, 内置插件全景：注册表与默认配置
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md
+    的「内置插件全景：注册表与默认配置」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md
+  section: 内置插件全景：注册表与默认配置
+- type: concept
+  question: 在 16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng 中, 节点亲和性插件（NodeAffinity）
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md
+    的「节点亲和性插件（NodeAffinity）」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md
+  section: 节点亲和性插件（NodeAffinity）
+- type: comparison
+  question: 16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/16-diao-du-qi-nei-zhi-cha-jian-xiang-jie-jie-dian-qin-he-xing-wu-dian-rong-ren-tuo-bu-fen-bu-deng.md
+- type: concept
+  question: 在 17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li 中, API 资源模型：resource.k8s.io 的类型体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md 的「API 资源模型：resource.k8s.io
+    的类型体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md
+  section: API 资源模型：resource.k8s.io 的类型体系
+- type: concept
+  question: 在 17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li 中, 调度器集成：DynamicResources 插件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md 的「调度器集成：DynamicResources
+    插件」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md
+  section: 调度器集成：DynamicResources 插件
+- type: comparison
+  question: 17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/17-dong-tai-zi-yuan-fen-pei-dra-yu-she-bei-guan-li.md
+- type: concept
+  question: 在 18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng 中, 卷插件接口继承体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md 的「卷插件接口继承体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md
+  section: 卷插件接口继承体系
+- type: concept
+  question: 在 18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng 中, 插件注册与发现机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md 的「插件注册与发现机制」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md
+  section: 插件注册与发现机制
+- type: comparison
+  question: 18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/18-cun-chu-juan-cha-jian-ti-xi-yu-csi-ji-cheng.md
+- type: concept
+  question: 在 19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi 中, 整体架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md 的「整体架构概览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md
+  section: 整体架构概览
+- type: concept
+  question: 在 19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi 中, VolumeManager 接口定义与生命周期 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md 的「VolumeManager 接口定义与生命周期」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md
+  section: VolumeManager 接口定义与生命周期
+- type: concept
+  question: 在 19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi 中, 双缓存模型：DSW 与 ASW 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md 的「双缓存模型：DSW 与 ASW」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md
+  section: 双缓存模型：DSW 与 ASW
+- type: comparison
+  question: 19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/19-juan-guan-li-qi-yu-gua-zai-sheng-ming-zhou-qi.md
+- type: concept
+  question: 在 2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes 中, 前置条件与环境准备 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md 的「前置条件与环境准备」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md
+  section: 前置条件与环境准备
+- type: concept
+  question: 在 2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes 中, 两种构建路径：本地构建 vs Docker 化构建 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md 的「两种构建路径：本地构建 vs Docker
+    化构建」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md
+  section: 两种构建路径：本地构建 vs Docker 化构建
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes 相关的操作: hack/install-etcd.sh?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md
+  command: hack/install-etcd.sh
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes 相关的操作: git clone https://github.com/kubernetes/kubernetes?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md
+  command: git clone https://github.com/kubernetes/kubernetes
+- type: operation
+  question: '如何执行与 2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes 相关的操作: make quick-release?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md
+  command: make quick-release
+- type: comparison
+  question: 2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/2-kuai-su-shang-shou-cong-yuan-ma-gou-jian-kubernetes.md
+- type: concept
+  question: 在 20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi 中, 授权模式全景与链式组装 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi.md 的「授权模式全景与链式组装」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi.md
+  section: 授权模式全景与链式组装
+- type: concept
+  question: 在 20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi 中, RBAC 授权器：规则匹配的核心引擎 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi.md 的「RBAC
+    授权器：规则匹配的核心引擎」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/20-ren-zheng-yu-shou-quan-ji-zhi-rbac-node-authorizer-zhun-ru-kong-zhi.md
+  section: RBAC 授权器：规则匹配的核心引擎
+- type: concept
+  question: 在 21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa 中, 架构总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md 的「架构总览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md
+  section: 架构总览
+- type: concept
+  question: 在 21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa 中, 两种令牌体系：Legacy 与 Projected 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md 的「两种令牌体系：Legacy 与 Projected」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md
+  section: 两种令牌体系：Legacy 与 Projected
+- type: concept
+  question: 在 21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa 中, JWT 令牌生成器 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md 的「JWT 令牌生成器」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md
+  section: JWT 令牌生成器
+- type: concept
+  question: 在 21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa 中, JWT Claims 结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md 的「JWT Claims 结构」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md
+  section: JWT Claims 结构
+- type: concept
+  question: 在 21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa 中, TokenRequest API 端点 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md 的「TokenRequest API 端点」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md
+  section: TokenRequest API 端点
+- type: comparison
+  question: 21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/21-fu-wu-zhang-hu-ling-pai-guan-li-yu-jwt-qian-fa.md
+- type: concept
+  question: 在 22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan 中, 程序入口：从 main() 到命令构建 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md 的「程序入口：从 main() 到命令构建」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md
+  section: 程序入口：从 main() 到命令构建
+- type: concept
+  question: 在 22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan 中, 命令树构建：Cobra 框架与命令分组 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md 的「命令树构建：Cobra 框架与命令分组」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md
+  section: 命令树构建：Cobra 框架与命令分组
+- type: concept
+  question: 在 22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan 中, KubectlOptions：命令行为的配置入口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md 的「KubectlOptions：命令行为的配置入口」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md
+  section: KubectlOptions：命令行为的配置入口
+- type: concept
+  question: 在 22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan 中, Factory 模式：命令与 Kubernetes API 的桥梁 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md 的「Factory 模式：命令与 Kubernetes
+    API 的桥梁」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md
+  section: Factory 模式：命令与 Kubernetes API 的桥梁
+- type: concept
+  question: 在 22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan 中, 子命令的统一构造模式 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md 的「子命令的统一构造模式」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md
+  section: 子命令的统一构造模式
+- type: troubleshooting
+  question: 如何排查 22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan 相关的故障?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md 的故障排查章节。
+  source: wiki/26-源码分析/analysis/kubernetes/22-kubectl-ming-ling-xing-jia-gou-yu-cha-jian-kuo-zhan.md
+- type: concept
+  question: 在 23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li 中, 整体命令架构与入口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md 的「整体命令架构与入口」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md
+  section: 整体命令架构与入口
+- type: concept
+  question: 在 23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li 中, 可组合阶段化工作流引擎 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md 的「可组合阶段化工作流引擎」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md
+  section: 可组合阶段化工作流引擎
+- type: concept
+  question: 在 23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li 中, kubeadm init 工作流深度解析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md 的「kubeadm init 工作流深度解析」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md
+  section: kubeadm init 工作流深度解析
+- type: concept
+  question: 在 23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li 中, kubeadm join 工作流深度解析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md 的「kubeadm join 工作流深度解析」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md
+  section: kubeadm join 工作流深度解析
+- type: concept
+  question: 在 23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li 中, PKI 证书体系与信任链 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md 的「PKI 证书体系与信任链」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/23-kubeadm-ji-qun-yin-dao-yu-zheng-shu-guan-li.md
+  section: PKI 证书体系与信任链
+- type: concept
+  question: 在 24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi 中, 测试金字塔：Kubernetes 的分层测试模型
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+    的「测试金字塔：Kubernetes 的分层测试模型」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+  section: 测试金字塔：Kubernetes 的分层测试模型
+- type: concept
+  question: 在 24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi 中, 单元测试：快速反馈的第一道防线 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+    的「单元测试：快速反馈的第一道防线」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+  section: 单元测试：快速反馈的第一道防线
+- type: operation
+  question: '如何执行与 24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi 相关的操作: grep -vE \?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+    中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+  command: grep -vE \
+- type: comparison
+  question: 24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/24-ce-shi-ce-lue-zong-lan-dan-yuan-ce-shi-ji-cheng-ce-shi-yu-duan-dao-duan-ce-shi.md
+- type: concept
+  question: 在 25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi 中, 整体架构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md 的「整体架构概览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md
+  section: 整体架构概览
+- type: concept
+  question: 在 25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi 中, 入口机制与生命周期 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md 的「入口机制与生命周期」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md
+  section: 入口机制与生命周期
+- type: concept
+  question: 在 25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi 中, Framework 核心结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md 的「Framework 核心结构」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/25-duan-dao-duan-ce-shi-kuang-jia-yu-ce-shi-tao-jian-zu-zhi.md
+  section: Framework 核心结构
+- type: concept
+  question: 在 26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi 中, 整体架构与运行模式 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md 的「整体架构与运行模式」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md
+  section: 整体架构与运行模式
+- type: concept
+  question: 在 26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi 中, 测试分类与覆盖范围 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md 的「测试分类与覆盖范围」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md
+  section: 测试分类与覆盖范围
+- type: operation
+  question: '如何执行与 26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi 相关的操作: ./ginkgo [ginkgo-flags] ./e2e_node.test
+    -- \?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md
+  command: ./ginkgo [ginkgo-flags] ./e2e_node.test -- \
+- type: operation
+  question: '如何执行与 26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi 相关的操作: make test-e2e-node?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md
+  command: make test-e2e-node
+- type: operation
+  question: '如何执行与 26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi 相关的操作: REMOTE=true make test-e2e-node?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md
+  command: REMOTE=true make test-e2e-node
+- type: comparison
+  question: 26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/26-jie-dian-ji-bie-ce-shi-e2e_node-yu-xing-neng-ji-zhun-ce-shi.md
+- type: concept
+  question: 在 27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li 中, 设计动机与核心原则 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md 的「设计动机与核心原则」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md
+  section: 设计动机与核心原则
+- type: concept
+  question: 在 27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li 中, 整体架构全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md 的「整体架构全景」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md
+  section: 整体架构全景
+- type: concept
+  question: 在 27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li 中, Go Workspace 多模块协作 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md 的「Go Workspace 多模块协作」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/27-staging-cang-ku-ji-zhi-yu-duo-mo-kuai-yi-lai-guan-li.md
+  section: Go Workspace 多模块协作
+- type: concept
+  question: 在 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 中, 系统架构总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 的「系统架构总览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+  section: 系统架构总览
+- type: concept
+  question: 在 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 中, 特性生命周期阶段 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 的「特性生命周期阶段」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+  section: 特性生命周期阶段
+- type: concept
+  question: 在 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 中, 版本化特性规范（VersionedSpecs） 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 的「版本化特性规范（VersionedSpecs）」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+  section: 版本化特性规范（VersionedSpecs）
+- type: concept
+  question: 在 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 中, 核心注册机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 的「核心注册机制」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+  section: 核心注册机制
+- type: operation
+  question: '如何执行与 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 相关的操作: kube-apiserver --feature-gates=DynamicResourceAllocation=tru?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+  command: kube-apiserver --feature-gates=DynamicResourceAllocation=true,APIResponseCompression=false
+- type: operation
+  question: '如何执行与 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 相关的操作: go run cmd/genfeaturegates/genfeaturegates.go
+    -output=featur?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+  command: go run cmd/genfeaturegates/genfeaturegates.go -output=feature_list.md
+- type: comparison
+  question: 28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/28-te-xing-men-kong-xi-tong-yu-gong-neng-sheng-ming-zhou-qi-guan-li.md
+- type: concept
+  question: 在 29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi 中, 架构总览：三层调用链 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md 的「架构总览：三层调用链」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md
+  section: 架构总览：三层调用链
+- type: concept
+  question: 在 29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi 中, Makefile 目标体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md 的「Makefile 目标体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md
+  section: Makefile 目标体系
+- type: concept
+  question: 在 29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi 中, hack/lib/ 函数库深度解析 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md 的「hack/lib/ 函数库深度解析」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md
+  section: hack/lib/ 函数库深度解析
+- type: operation
+  question: '如何执行与 29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi 相关的操作: make all WHAT="${KUBE_SERVER_TARGETS[*]}" KUBE_BUILD_PLATFOR?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md
+  command: make all WHAT="${KUBE_SERVER_TARGETS[*]}" KUBE_BUILD_PLATFORMS="${KUBE_SERVER_PLATFORMS[*]}"
+- type: comparison
+  question: 29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/29-hack-jiao-ben-yu-makefile-gou-jian-ti-xi.md
+- type: concept
+  question: 在 3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi 中, 顶层目录全景图 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md 的「顶层目录全景图」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md
+  section: 顶层目录全景图
+- type: concept
+  question: 在 3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi 中, 顶层目录功能速查 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md 的「顶层目录功能速查」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md
+  section: 顶层目录功能速查
+- type: concept
+  question: 在 3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi 中, cmd/：程序入口层 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md 的「cmd/：程序入口层」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md
+  section: cmd/：程序入口层
+- type: concept
+  question: 在 3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi 中, pkg/：核心实现层 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md 的「pkg/：核心实现层」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/3-xiang-mu-mu-lu-jie-gou-yu-dai-ma-zu-zhi.md
+  section: pkg/：核心实现层
+- type: concept
+  question: 在 4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha 中, 工作流架构总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md 的「工作流架构总览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md
+  section: 工作流架构总览
+- type: concept
+  question: 在 4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha 中, 构建体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md 的「构建体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md
+  section: 构建体系
+- type: operation
+  question: '如何执行与 4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha 相关的操作: make WHAT=cmd/kube-apiserver?'
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md
+  command: make WHAT=cmd/kube-apiserver
+- type: comparison
+  question: 4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/4-kai-fa-gong-zuo-liu-gou-jian-ce-shi-yu-dai-ma-jian-cha.md
+- type: concept
+  question: 在 5-gong-xian-zhi-nan-yu-she-qu-gui-fan 中, 贡献前置条件：法律与许可 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/5-gong-xian-zhi-nan-yu-she-qu-gui-fan.md 的「贡献前置条件：法律与许可」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/5-gong-xian-zhi-nan-yu-she-qu-gui-fan.md
+  section: 贡献前置条件：法律与许可
+- type: concept
+  question: 在 5-gong-xian-zhi-nan-yu-she-qu-gui-fan 中, 行为准则 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/5-gong-xian-zhi-nan-yu-she-qu-gui-fan.md 的「行为准则」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/5-gong-xian-zhi-nan-yu-she-qu-gui-fan.md
+  section: 行为准则
+- type: concept
+  question: 在 6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi 中, 控制平面架构全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md 的「控制平面架构全景」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md
+  section: 控制平面架构全景
+- type: concept
+  question: 在 6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi 中, 三大核心组件详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md 的「三大核心组件详解」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md
+  section: 三大核心组件详解
+- type: comparison
+  question: 6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/6-kong-zhi-ping-mian-zu-jian-zong-lan-yu-xie-zuo-guan-xi.md
+- type: concept
+  question: 在 7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu 中, 入口点：命令构建与启动主流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md 的「入口点：命令构建与启动主流程」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md
+  section: 入口点：命令构建与启动主流程
+- type: concept
+  question: 在 7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu 中, 配置构建：从选项到可运行状态 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md 的「配置构建：从选项到可运行状态」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md
+  section: 配置构建：从选项到可运行状态
+- type: concept
+  question: 在 7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu 中, 三层委托链：服务器组合架构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md 的「三层委托链：服务器组合架构」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/7-api-server-qi-dong-liu-cheng-yu-qing-qiu-chu-li-lian-lu.md
+  section: 三层委托链：服务器组合架构
+- type: concept
+  question: 在 8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu 中, 架构总览：Kubelet 的分层协作模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+    的「架构总览：Kubelet 的分层协作模型」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+  section: 架构总览：Kubelet 的分层协作模型
+- type: concept
+  question: 在 8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu 中, 配置源与主同步循环 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+    的「配置源与主同步循环」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+  section: 配置源与主同步循环
+- type: concept
+  question: 在 8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu 中, Pod 生命周期事件生成器（PLEG） 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+    的「Pod 生命周期事件生成器（PLEG）」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+  section: Pod 生命周期事件生成器（PLEG）
+- type: comparison
+  question: 8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/8-kubelet-pod-sheng-ming-zhou-qi-guan-li-yu-rong-qi-yun-xing-shi-jiao-hu.md
+- type: concept
+  question: 在 9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi 中, 整体架构总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md 的「整体架构总览」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md
+  section: 整体架构总览
+- type: concept
+  question: 在 9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi 中, 启动流程与命令行构造 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md 的「启动流程与命令行构造」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md
+  section: 启动流程与命令行构造
+- type: concept
+  question: 在 9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi 中, 领导者选举与高可用机制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md 的「领导者选举与高可用机制」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md
+  section: 领导者选举与高可用机制
+- type: concept
+  question: 在 9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi 中, 控制器描述符体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md 的「控制器描述符体系」章节。
+  source: wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md
+  section: 控制器描述符体系
+- type: comparison
+  question: 9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/kubernetes/9-kong-zhi-qi-guan-li-qi-yu-nei-zhi-kong-zhi-qi-ti-xi.md
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi 中, 核心设计哲学 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md 的「核心设计哲学」章节。
+  source: wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md
+  section: 核心设计哲学
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi 中, 架构全景 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md 的「架构全景」章节。
+  source: wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md
+  section: 架构全景
+- type: concept
+  question: 在 1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi 中, 三大核心组件 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md 的「三大核心组件」章节。
+  source: wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md
+  section: 三大核心组件
+- type: best_practice
+  question: 关于 1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi, 有什么最佳实践?
+  answer: '- **Terway Daemon** 以 DaemonSet 形式运行，确保每个节点上有一个实例'
+  source: wiki/26-源码分析/analysis/terway/1-xiang-mu-gai-lan-terway-cni-cha-jian-de-he-xin-ding-wei-yu-jie-zhi.md
+- type: concept
+  question: 在 10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou 中, 架构动机：从节点自治到中心化协同 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+    的「架构动机：从节点自治到中心化协同」章节。
+  source: wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+  section: 架构动机：从节点自治到中心化协同
+- type: concept
+  question: 在 10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou 中, 整体架构：三层协作模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+    的「整体架构：三层协作模型」章节。
+  source: wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+  section: 整体架构：三层协作模型
+- type: concept
+  question: 在 10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou 中, CRD 数据模型：IPAM 的共享状态基础
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+    的「CRD 数据模型：IPAM 的共享状态基础」章节。
+  source: wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+  section: CRD 数据模型：IPAM 的共享状态基础
+- type: concept
+  question: 在 10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou 中, 控制平面控制器体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+    的「控制平面控制器体系」章节。
+  source: wiki/26-源码分析/analysis/terway/10-zhong-xin-hua-ipam-kong-zhi-ping-mian-yu-jie-dian-xie-tong-de-ip-fen-pei-jia-gou.md
+  section: 控制平面控制器体系
+- type: concept
+  question: 在 11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue 中, 架构定位：Prefix 模式与传统 IPAM 的本质差异 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md 的「架构定位：Prefix
+    模式与传统 IPAM 的本质差异」章节。
+  source: wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md
+  section: 架构定位：Prefix 模式与传统 IPAM 的本质差异
+- type: concept
+  question: 在 11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue 中, 端到端数据流：从配置到 Pod 获取 IP 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md 的「端到端数据流：从配置到
+    Pod 获取 IP」章节。
+  source: wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md
+  section: 端到端数据流：从配置到 Pod 获取 IP
+- type: concept
+  question: 在 11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue 中, 控制平面前缀管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md 的「控制平面前缀管理」章节。
+  source: wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md
+  section: 控制平面前缀管理
+- type: comparison
+  question: 11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/11-ip-prefix-mo-shi-ji-yu-zi-wang-qian-zhui-de-da-gui-mo-ip-fen-pei-ce-lue.md
+- type: concept
+  question: 在 12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi 中, 整体架构：三层资源调度的协作关系
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi.md
+    的「整体架构：三层资源调度的协作关系」章节。
+  source: wiki/26-源码分析/analysis/terway/12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi.md
+  section: 整体架构：三层资源调度的协作关系
+- type: concept
+  question: 在 12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi 中, DevicePlugin：向调度器暴露节点网络容量
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi.md
+    的「DevicePlugin：向调度器暴露节点网络容量」章节。
+  source: wiki/26-源码分析/analysis/terway/12-kong-xian-ip-hui-shou-yu-zi-yuan-diao-du-deviceplugin-yu-jie-dian-rong-liang-gan-zhi.md
+  section: DevicePlugin：向调度器暴露节点网络容量
+- type: concept
+  question: 在 13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface 中, CRD 总览与分类 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+    的「CRD 总览与分类」章节。
+  source: wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+  section: CRD 总览与分类
+- type: concept
+  question: 在 13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface 中, CRD 注册与版本管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+    的「CRD 注册与版本管理」章节。
+  source: wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+  section: CRD 注册与版本管理
+- type: concept
+  question: 在 13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface 中, PodENI：Pod 网络分配记录 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+    的「PodENI：Pod 网络分配记录」章节。
+  source: wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+  section: PodENI：Pod 网络分配记录
+- type: comparison
+  question: 13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/13-zi-ding-yi-zi-yuan-ding-yi-crd-podeni-podnetworking-node-networkinterface.md
+- type: concept
+  question: 在 14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi 中, 控制器注册与启动框架
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+    的「控制器注册与启动框架」章节。
+  source: wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+  section: 控制器注册与启动框架
+- type: concept
+  question: 在 14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi 中, 七大控制器总览
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+    的「七大控制器总览」章节。
+  source: wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+  section: 七大控制器总览
+- type: concept
+  question: 在 14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi 中, ENI 控制器：NetworkInterface
+    CR 的状态机引擎 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+    的「ENI 控制器：NetworkInterface CR 的状态机引擎」章节。
+  source: wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+  section: ENI 控制器：NetworkInterface CR 的状态机引擎
+- type: comparison
+  question: 14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/14-kong-zhi-ping-mian-kong-zhi-qi-xiang-jie-eni-kong-zhi-qi-multi-ip-kong-zhi-qi-yu-pod-kong-zhi-qi.md
+- type: concept
+  question: 在 15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji 中, 架构总览：双 Webhook 协作模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md 的「架构总览：双
+    Webhook 协作模型」章节。
+  source: wiki/26-源码分析/analysis/terway/15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md
+  section: 架构总览：双 Webhook 协作模型
+- type: concept
+  question: 在 15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji 中, Mutating Webhook：Pod 变更逻辑 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md 的「Mutating
+    Webhook：Pod 变更逻辑」章节。
+  source: wiki/26-源码分析/analysis/terway/15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md
+  section: Mutating Webhook：Pod 变更逻辑
+- type: comparison
+  question: 15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/15-webhook-ji-zhi-pod-bian-geng-zhun-ru-kong-zhi-yu-xiao-yan-luo-ji.md
+- type: concept
+  question: 在 16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an 中, 架构总览：双引擎策略容器 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md 的「架构总览：双引擎策略容器」章节。
+  source: wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md
+  section: 架构总览：双引擎策略容器
+- type: concept
+  question: 在 16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an 中, 配置体系：从 Helm Values 到节点能力 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md 的「配置体系：从 Helm
+    Values 到节点能力」章节。
+  source: wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md
+  section: 配置体系：从 Helm Values 到节点能力
+- type: operation
+  question: '如何执行与 16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an 相关的操作: cleanup_felix() {?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md
+  command: cleanup_felix() {
+- type: comparison
+  question: 16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/16-networkpolicy-shi-xian-felix-calico-yu-cilium-ji-cheng-fang-an.md
+- type: concept
+  question: 在 17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi 中, 核心概念与架构总览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md 的「核心概念与架构总览」章节。
+  source: wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md
+  section: 核心概念与架构总览
+- type: concept
+  question: 在 17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi 中, CRD 类型体系 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md 的「CRD
+    类型体系」章节。
+  source: wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md
+  section: CRD 类型体系
+- type: concept
+  question: 在 17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi 中, 控制平面工作流程 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md 的「控制平面工作流程」章节。
+  source: wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md
+  section: 控制平面工作流程
+- type: comparison
+  question: 17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/17-an-quan-zu-yu-trunk-mo-shi-pod-wei-du-de-an-quan-zu-yu-vswitch-pei-zhi.md
+- type: concept
+  question: 在 18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li 中, 架构概览：从声明到落地的全链路 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li.md
+    的「架构概览：从声明到落地的全链路」章节。
+  source: wiki/26-源码分析/analysis/terway/18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li.md
+  section: 架构概览：从声明到落地的全链路
+- type: concept
+  question: 在 18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li 中, CRD 定义与核心数据结构 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li.md
+    的「CRD 定义与核心数据结构」章节。
+  source: wiki/26-源码分析/analysis/terway/18-duo-wang-qia-multi-network-pod-duo-wang-luo-ping-mian-pei-zhi-yu-lu-you-guan-li.md
+  section: CRD 定义与核心数据结构
+- type: concept
+  question: 在 19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi 中, 协议栈配置模型与入口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md 的「协议栈配置模型与入口」章节。
+  source: wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md
+  section: 协议栈配置模型与入口
+- type: concept
+  question: 在 19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi 中, Daemon 启动链中的协议栈协商 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md 的「Daemon 启动链中的协议栈协商」章节。
+  source: wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md
+  section: Daemon 启动链中的协议栈协商
+- type: concept
+  question: 在 19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi 中, 类型系统中的双协议栈抽象 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md 的「类型系统中的双协议栈抽象」章节。
+  source: wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md
+  section: 类型系统中的双协议栈抽象
+- type: concept
+  question: 在 19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi 中, ENI 资源管理中的 IPv6 地址分配 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md 的「ENI 资源管理中的 IPv6 地址分配」章节。
+  source: wiki/26-源码分析/analysis/terway/19-ipv6-shuang-zhan-zhi-chi-yu-ip-xie-yi-zhan-pei-zhi.md
+  section: ENI 资源管理中的 IPv6 地址分配
+- type: concept
+  question: 在 2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway 中, 环境准备 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md 的「环境准备」章节。
+  source: wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md
+  section: 环境准备
+- type: concept
+  question: 在 2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway 中, 项目结构概览 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md 的「项目结构概览」章节。
+  source: wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md
+  section: 项目结构概览
+- type: concept
+  question: 在 2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway 中, 构建 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md 的「构建」章节。
+  source: wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md
+  section: 构建
+- type: operation
+  question: '如何执行与 2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway 相关的操作: git clone https://github.com/AliyunContainerService/terway.g?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md
+  command: git clone https://github.com/AliyunContainerService/terway.git
+- type: operation
+  question: '如何执行与 2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway 相关的操作: make REGISTRY=ghcr.io/myorg build-terway?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md
+  command: make REGISTRY=ghcr.io/myorg build-terway
+- type: operation
+  question: '如何执行与 2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway 相关的操作: make manifests generate?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/2-kuai-su-kai-shi-gou-jian-ce-shi-yu-yun-xing-terway.md
+  command: make manifests generate
+- type: concept
+  question: 在 3-kai-fa-gui-fan-yu-gong-xian-zhi-nan 中, 开发环境准备 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md 的「开发环境准备」章节。
+  source: wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md
+  section: 开发环境准备
+- type: concept
+  question: 在 3-kai-fa-gui-fan-yu-gong-xian-zhi-nan 中, 代码组织与模块职责 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md 的「代码组织与模块职责」章节。
+  source: wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md
+  section: 代码组织与模块职责
+- type: concept
+  question: 在 3-kai-fa-gui-fan-yu-gong-xian-zhi-nan 中, 代码生成与 CRD 管理 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md 的「代码生成与 CRD 管理」章节。
+  source: wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md
+  section: 代码生成与 CRD 管理
+- type: operation
+  question: '如何执行与 3-kai-fa-gui-fan-yu-gong-xian-zhi-nan 相关的操作: make test-quick?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md
+  command: make test-quick
+- type: operation
+  question: '如何执行与 3-kai-fa-gui-fan-yu-gong-xian-zhi-nan 相关的操作: bash hack/verify-codegen.sh?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md
+  command: bash hack/verify-codegen.sh
+- type: operation
+  question: '如何执行与 3-kai-fa-gui-fan-yu-gong-xian-zhi-nan 相关的操作: make lint          # 检查所有问题?'
+  answer: 参见 wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md 中的操作步骤。
+  source: wiki/26-源码分析/analysis/terway/3-kai-fa-gui-fan-yu-gong-xian-zhi-nan.md
+  command: 'make lint          # 检查所有问题'
+- type: concept
+  question: 在 4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi 中, 组件全景：三大进程的定位与职责 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+    的「组件全景：三大进程的定位与职责」章节。
+  source: wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+  section: 组件全景：三大进程的定位与职责
+- type: concept
+  question: 在 4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi 中, 进程拓扑与通信模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+    的「进程拓扑与通信模型」章节。
+  source: wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+  section: 进程拓扑与通信模型
+- type: concept
+  question: 在 4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi 中, CNI Binary：kubelet 的网络代理
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+    的「CNI Binary：kubelet 的网络代理」章节。
+  source: wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+  section: CNI Binary：kubelet 的网络代理
+- type: comparison
+  question: 4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/4-zheng-ti-jia-gou-she-ji-daemon-cni-binary-yu-kong-zhi-ping-mian-de-xie-zuo-ji-zhi.md
+- type: concept
+  question: 在 5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi 中, 传输层架构：Unix Domain Socket 与安全模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi.md 的「传输层架构：Unix Domain
+    Socket 与安全模型」章节。
+  source: wiki/26-源码分析/analysis/terway/5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi.md
+  section: 传输层架构：Unix Domain Socket 与安全模型
+- type: concept
+  question: 在 5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi 中, TerwayBackend 服务：CNI 生命周期核心接口 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi.md 的「TerwayBackend
+    服务：CNI 生命周期核心接口」章节。
+  source: wiki/26-源码分析/analysis/terway/5-grpc-tong-xin-xie-yi-daemon-yu-cni-binary-de-jie-kou-ding-yi.md
+  section: TerwayBackend 服务：CNI 生命周期核心接口
+- type: concept
+  question: 在 6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi 中, 模式全景：从 Daemon Mode 到 DataPath 的映射 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md 的「模式全景：从 Daemon
+    Mode 到 DataPath 的映射」章节。
+  source: wiki/26-源码分析/analysis/terway/6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md
+  section: 模式全景：从 Daemon Mode 到 DataPath 的映射
+- type: concept
+  question: 在 6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi 中, VPC 路由模式（VPCRoute） 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md 的「VPC 路由模式（VPCRoute）」章节。
+  source: wiki/26-源码分析/analysis/terway/6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md
+  section: VPC 路由模式（VPCRoute）
+- type: comparison
+  question: 6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/6-wang-luo-mo-shi-quan-jie-xi-vpc-eni-eni-duo-ip-yu-trunk-mo-shi.md
+- type: concept
+  question: 在 7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian 中, 整体架构：两层驱动模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md 的「整体架构：两层驱动模型」章节。
+  source: wiki/26-源码分析/analysis/terway/7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md
+  section: 整体架构：两层驱动模型
+- type: concept
+  question: 在 7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian 中, 底层驱动详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md 的「底层驱动详解」章节。
+  source: wiki/26-源码分析/analysis/terway/7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md
+  section: 底层驱动详解
+- type: comparison
+  question: 7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md 中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/7-shu-ju-lu-jing-qu-dong-ceng-veth-ipvlan-vlan-nic-yu-vf-qu-dong-shi-xian.md
+- type: concept
+  question: 在 8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li 中, 核心抽象：Linux
+    策略路由原语 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+    的「核心抽象：Linux 策略路由原语」章节。
+  source: wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+  section: 核心抽象：Linux 策略路由原语
+- type: concept
+  question: 在 8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li 中, 策略路由优先级体系
+    是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+    的「策略路由优先级体系」章节。
+  source: wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+  section: 策略路由优先级体系
+- type: concept
+  question: 在 8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li 中, 数据路径选择：getDatePath
+    分发逻辑 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+    的「数据路径选择：getDatePath 分发逻辑」章节。
+  source: wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+  section: 数据路径选择：getDatePath 分发逻辑
+- type: concept
+  question: 在 8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li 中, PolicyRoute（Veth
+    策略路由）模式详解 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+    的「PolicyRoute（Veth 策略路由）模式详解」章节。
+  source: wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+  section: PolicyRoute（Veth 策略路由）模式详解
+- type: comparison
+  question: 8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/8-ce-lue-lu-you-yu-wang-luo-lian-tong-xing-pod-jian-pod-yu-jie-dian-kua-jie-dian-tong-xin-yuan-li.md
+- type: concept
+  question: 在 9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi 中, 架构总览：三层资源管理模型 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+    的「架构总览：三层资源管理模型」章节。
+  source: wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+  section: 架构总览：三层资源管理模型
+- type: concept
+  question: 在 9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi 中, 核心数据模型：IP 生命周期状态机 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+    的「核心数据模型：IP 生命周期状态机」章节。
+  source: wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+  section: 核心数据模型：IP 生命周期状态机
+- type: concept
+  question: 在 9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi 中, Manager 层：全局调度与水位控制 是什么?
+  answer: 参见 wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+    的「Manager 层：全局调度与水位控制」章节。
+  source: wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+  section: Manager 层：全局调度与水位控制
+- type: comparison
+  question: 9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi 中有哪些技术对比?
+  answer: 参见 wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+    中的对比分析。
+  source: wiki/26-源码分析/analysis/terway/9-eni-zi-yuan-guan-li-qi-ip-chi-hua-shui-wei-kong-zhi-yu-zi-yuan-hui-shou-ji-zhi.md
+- type: concept
+  question: 在 源码分析 Code Analysis 索引 中, 子目录 是什么?
+  answer: 参见 wiki/26-源码分析/index.md 的「子目录」章节。
+  source: wiki/26-源码分析/index.md
+  section: 子目录
+- type: concept
+  question: 在 源码分析 Code Analysis 索引 中, 文档 是什么?
+  answer: 参见 wiki/26-源码分析/index.md 的「文档」章节。
+  source: wiki/26-源码分析/index.md
+  section: 文档
+- type: concept
+  question: 在 源码分析 Code Analysis 索引 中, 跨域导航 是什么?
+  answer: 参见 wiki/26-源码分析/index.md 的「跨域导航」章节。
+  source: wiki/26-源码分析/index.md
+  section: 跨域导航

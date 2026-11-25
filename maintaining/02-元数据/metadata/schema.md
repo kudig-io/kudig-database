@@ -29,10 +29,10 @@ estimated_read_time: 10min
 
 | Category | 目录 | 内容说明 | 典型示例 |
 |---|---|---|---|
-| **Entities** | `wiki/23-实体/` | 工具、产品、公司、人物 | Docker, Prometheus, CNCF |
-| **Concepts** | `wiki/22-概念/` | 概念、模式、技术、方法 | Pod 生命周期, Raft 共识 |
-| **Syntheses** | `wiki/24-综合/` | 跨域综合、对比分析、趋势 | 多云对比, 可观测性全景 |
-| **Sources** | `wiki/25-研究/` | 研究性笔记、调研报告 | Service Mesh 演进研究 |
+| **Entities** | `wiki/22-实体/` | 工具、产品、公司、人物 | Docker, Prometheus, CNCF |
+| **Concepts** | `wiki/20-概念/` | 概念、模式、技术、方法 | Pod 生命周期, Raft 共识 |
+| **Syntheses** | `wiki/23-综合与研究/` | 跨域综合、对比分析、趋势 | 多云对比, 可观测性全景 |
+| **Sources** | `wiki/23-综合与研究/研究/` | 研究性笔记、调研报告 | Service Mesh 演进研究 |
 | **Skills** | `skills/` | Agent Skill 定义、能力模块 | K8s 排障技能 |
 | **References** | 各域内 | 参考文档、速查表、配置模板 | YAML 参考, kubectl 速查 |
 | **Index** | 各目录 | 索引页、导航入口 | index.md, README.md |
@@ -53,7 +53,7 @@ estimated_read_time: 10min
 |------|------|
 | 解析机制 | Obsidian 按**文件名**解析 wikilink，非 frontmatter title |
 | 标准格式 | `[[路径/文件名\|显示文本]]` |
-| 跨域引用 | `[[NN-中文域/README]]` 链接到域入口，如 `[[wiki/19-故障诊断/README]]` |
+| 跨域引用 | `[[NN-中文域/README]]` 链接到域入口，如 `[[wiki/17-故障诊断/README]]` |
 | 章节引用 | `[[文件名#章节名\|显示文本]]` |
 | 完整性 | 每个提及的实体/概念应有对应页面（或在 "missing pages" 列表中） |
 | 批量修复 | 批量创建页面后运行 lint/fix 流程自动修复 wikilink 格式 |

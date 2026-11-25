@@ -321,10 +321,10 @@ kubectl patch cronjob my-cronjob -n production -p '{"spec":{"suspend":true}}'
 ### 相关域
 
 - [[wiki/05-网络/README.md|网络]]
-- [[wiki/08-安全/README.md|安全]]
-- [[wiki/09-可观测性/README.md|可观测性]]
-- [[wiki/10-平台工程/README.md|平台工程]]
-- [[wiki/12-可靠性/README.md|可靠性]]
+- [[wiki/07-安全/README.md|安全]]
+- [[wiki/08-可观测性/README.md|可观测性]]
+- [[wiki/12-平台工程/README.md|平台工程]]
+- [[wiki/10-可靠性/README.md|可靠性]]
 
 ---
 

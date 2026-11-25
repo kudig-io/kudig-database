@@ -565,7 +565,7 @@ kubectl delete cronjob <name>
 
 **关联文档**:
 - [../09-troubleshooting/09-health-check.md](../../../pod/培训/lecturer/05-health-check.md) — 健康检查
-- [../../故障诊断/topic-skills/11-job-cronjob-failure.md](../../../../../wiki/19-故障诊断/08-技能体系/25-job-cronjob-failure.md) — Job/CronJob 问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/11-job-cronjob-failure.md](../../../../../skills/09-技能体系/25-job-cronjob-failure.md) — Job/CronJob 问题 [[SKILL|Skill]]
 - [../../工作负载/](../../工作负载/) — 工作负载文档
 
 <!-- risk-assessed -->

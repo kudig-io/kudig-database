@@ -272,7 +272,7 @@ spec:
 
 spec:
   tolerations:
-  - key: "node.[[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/unreachable"
+  - key: "node.[[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/unreachable"
     operator: "Exists"
     effect: "NoExecute"
     tolerationSeconds: 300

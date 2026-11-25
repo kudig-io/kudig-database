@@ -1,7 +1,7 @@
 ---
 title: 'Day 1: ACK/ACR 管控 SR'
 description: '- 服务架构'
-summary: '作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。'
+summary: '作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。'
 category: learning
 tags:
 - k8s
@@ -90,7 +90,7 @@ related_topics:
 
 ## 概述
 
-作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。理解 ACK/ACR 的整体架构是后续所有运维工作的基础——只有了解系统是如何构建的，才能在出现问题时快速定位和解决。
+作为内部培训的第一天，本课程将系统性地介绍阿里云容器服务 ACK（Alibaba Cloud [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]]）和容器镜像服务 ACR（Alibaba Cloud Container Registry）的服务架构、产品形态和管控层组件。理解 ACK/ACR 的整体架构是后续所有运维工作的基础——只有了解系统是如何构建的，才能在出现问题时快速定位和解决。
 
 本课程还将介绍内部 SR（Service Request，服务请求）的处理流程，这是日常工作中最频繁接触的任务类型。理解 SR 的分类、优先级和常见场景，能帮助你在接到用户请求时快速判断处理方向。
 
@@ -477,7 +477,7 @@ kubectl get pods -n kube-system
 - [Kubernetes 架构概述](https://kubernetes.io/docs/concepts/architecture/)
 - [文件: `../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md`](../../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 - [文件: `../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md`](../../../云厂商/04-alicloud-ack/service-ack-practical-guide.md)
-- [文件: `../../../集群基础/01-kubernetes-architecture-overview.md`](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
+- [文件: `../../../集群基础/01-kubernetes-architecture-overview.md`](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
 
 ---
 

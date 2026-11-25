@@ -139,6 +139,6 @@ graph LR
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 - [[maintaining/02-元数据/metadata/taxonomy.md|Tag Taxonomy]] — 标签分类体系
 - [[maintaining/02-元数据/metadata/domain-mapping.md|Domain 映射]] — 目录结构

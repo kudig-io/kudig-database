@@ -1,9 +1,9 @@
 ---
 title: KUDIG 命令 → 文档映射
-description: '| `kubectl logs` | 查看容器日志 | [[wiki/19-故障诊断/README.md|README]]
-  | [[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |'
-summary: '| `kubectl logs` | 查看容器日志 | [[wiki/19-故障诊断/README.md|README]]
-  | [[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |'
+description: '| `kubectl logs` | 查看容器日志 | [[wiki/17-故障诊断/README.md|README]]
+  | [[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |'
+summary: '| `kubectl logs` | 查看容器日志 | [[wiki/17-故障诊断/README.md|README]]
+  | [[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |'
 category: general
 tags:
 - k8s
@@ -57,7 +57,7 @@ relationships:
   type: related_to
 - target: "[[skills/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]"
   type: related_to
-- target: "[[wiki/22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]"
+- target: "[[wiki/20-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]"
   type: related_to
 difficulty: intermediate
 reading_level: intermediate
@@ -89,53 +89,53 @@ tier: peripheral
 
 | 命令 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `kubectl get pods` | 查看 Pod 状态 | [[wiki/02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |
-| `kubectl describe pod` | Pod 详情和事件 | [[wiki/02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |
-| `kubectl logs` | 查看容器日志 | [[wiki/19-故障诊断/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |
+| `kubectl get pods` | 查看 Pod 状态 | [[wiki/02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |
+| `kubectl describe pod` | Pod 详情和事件 | [[wiki/02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | [[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |
+| `kubectl logs` | 查看容器日志 | [[wiki/17-故障诊断/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|pod fta]] |
 | `kubectl exec` | 进入容器 | [[wiki/02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|11 pod lifecycle events]] | - |
-| `kubectl get events` | 查看集群事件 | [[wiki/17-系统基础/README.md|README]] | - |
-| `kubectl get nodes` | 节点状态 | [[wiki/19-故障诊断/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/node-fta.md|node fta]] |
-| `kubectl describe node` | 节点详情 | [[wiki/19-故障诊断/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/node-fta.md|node fta]] |
-| `kubectl rollout status` | 滚动更新状态 | 工作负载/02-deployment-production-patterns | [[wiki/19-故障诊断/06-FTA故障树/list/deployment-fta.md|deployment fta]] |
-| `kubectl rollout undo` | 回滚 | 集群基础/18-upgrade-migration-strategy | [[wiki/19-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md|cluster upgrade fta]] |
+| `kubectl get events` | 查看集群事件 | [[wiki/01-集群基础与系统/README.md|README]] | - |
+| `kubectl get nodes` | 节点状态 | [[wiki/17-故障诊断/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/node-fta.md|node fta]] |
+| `kubectl describe node` | 节点详情 | [[wiki/17-故障诊断/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/node-fta.md|node fta]] |
+| `kubectl rollout status` | 滚动更新状态 | 工作负载/02-deployment-production-patterns | [[wiki/17-故障诊断/06-FTA故障树/list/deployment-fta.md|deployment fta]] |
+| `kubectl rollout undo` | 回滚 | 集群基础/18-upgrade-migration-strategy | [[wiki/17-故障诊断/06-FTA故障树/list/cluster-upgrade-fta.md|cluster upgrade fta]] |
 | `kubectl apply -f` | 应用配置 | [[wiki/03-清单模式/README.md|README]] | - |
 | `kubectl delete` | 删除资源 | [[wiki/03-清单模式/README.md|README]] | - |
-| `kubectl port-forward` | 端口转发 | [[wiki/05-网络/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/service-fta.md|service fta]] |
-| `kubectl scale` | 扩缩容 | 工作负载/02-deployment-production-patterns | [[wiki/19-故障诊断/06-FTA故障树/list/hpa-fta.md|hpa fta]] |
-| `kubectl top nodes` | 节点资源使用 | [[wiki/09-可观测性/README.md|README]] | - |
-| `kubectl top pods` | Pod 资源使用 | [[wiki/09-可观测性/README.md|README]] | - |
-| `kubectl auth can-i` | 权限检查 | [[wiki/08-安全/README.md|README]] | - |
-| `kubectl get pv/pvc` | 存储状态 | [[wiki/06-存储/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/csi-fta.md|csi fta]] |
-| `kubectl get ingress` | Ingress 状态 | [[wiki/05-网络/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/ingress-fta.md|ingress fta]] |
-| `kubectl get svc` | Service 状态 | [[wiki/05-网络/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/service-fta.md|service fta]] |
-| `kubectl get configmap/secret` | 配置和密钥 | [[wiki/08-安全/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/rbac-fta.md|rbac fta]] |
+| `kubectl port-forward` | 端口转发 | [[wiki/05-网络/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/service-fta.md|service fta]] |
+| `kubectl scale` | 扩缩容 | 工作负载/02-deployment-production-patterns | [[wiki/17-故障诊断/06-FTA故障树/list/hpa-fta.md|hpa fta]] |
+| `kubectl top nodes` | 节点资源使用 | [[wiki/08-可观测性/README.md|README]] | - |
+| `kubectl top pods` | Pod 资源使用 | [[wiki/08-可观测性/README.md|README]] | - |
+| `kubectl auth can-i` | 权限检查 | [[wiki/07-安全/README.md|README]] | - |
+| `kubectl get pv/pvc` | 存储状态 | [[wiki/06-存储与数据/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/csi-fta.md|csi fta]] |
+| `kubectl get ingress` | Ingress 状态 | [[wiki/05-网络/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/ingress-fta.md|ingress fta]] |
+| `kubectl get svc` | Service 状态 | [[wiki/05-网络/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/service-fta.md|service fta]] |
+| `kubectl get configmap/secret` | 配置和密钥 | [[wiki/07-安全/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/rbac-fta.md|rbac fta]] |
 
 ## etcdctl 命令映射
 
 | 命令 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `etcdctl member list` | 成员列表 | 集群基础/11-etcd-deep-dive | [[wiki/19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd fta]] |
-| `etcdctl endpoint health` | 健康检查 | 集群基础/11-etcd-deep-dive | [[wiki/19-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd fta]] |
-| `etcdctl snapshot save` | 备份 | [[wiki/12-可靠性/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|backup restore fta]] |
-| `etcdctl snapshot restore` | 恢复 | [[wiki/12-可靠性/README.md|README]] | [[wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|backup restore fta]] |
+| `etcdctl member list` | 成员列表 | 集群基础/11-etcd-deep-dive | [[wiki/17-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd fta]] |
+| `etcdctl endpoint health` | 健康检查 | 集群基础/11-etcd-deep-dive | [[wiki/17-故障诊断/06-FTA故障树/list/etcd-fta.md|etcd fta]] |
+| `etcdctl snapshot save` | 备份 | [[wiki/10-可靠性/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/backup-restore-fta.md|backup restore fta]] |
+| `etcdctl snapshot restore` | 恢复 | [[wiki/10-可靠性/README.md|README]] | [[wiki/17-故障诊断/06-FTA故障树/list/backup-restore-fta.md|backup restore fta]] |
 
 ## 监控命令映射
 
 | 命令 | 用途 | 参考文档 |
 |---|---|---|
-| `promtool check rules` | PromQL 规则检查 | [[wiki/09-可观测性/README.md|README]] |
-| `promtool check config` | Prometheus 配置检查 | [[wiki/09-可观测性/README.md|README]] |
-| `amtool check-config` | Alertmanager 配置检查 | [[wiki/09-可观测性/README.md|README]] |
+| `promtool check rules` | PromQL 规则检查 | [[wiki/08-可观测性/README.md|README]] |
+| `promtool check config` | Prometheus 配置检查 | [[wiki/08-可观测性/README.md|README]] |
+| `amtool check-config` | Alertmanager 配置检查 | [[wiki/08-可观测性/README.md|README]] |
 
 ## Helm 命令映射
 
 | 命令 | 用途 | 参考文档 | FTA |
 |---|---|---|---|
-| `helm install` | 安装 Chart | [[wiki/17-系统基础/05-速查卡/helm.md|helm]] | [[wiki/19-故障诊断/06-FTA故障树/list/helm-fta.md|helm fta]] |
-| `helm upgrade` | 升级 Chart | [[wiki/17-系统基础/05-速查卡/helm.md|helm]] | [[wiki/19-故障诊断/06-FTA故障树/list/helm-fta.md|helm fta]] |
-| `helm rollback` | 回滚 | [[wiki/17-系统基础/05-速查卡/helm.md|helm]] | [[wiki/19-故障诊断/06-FTA故障树/list/helm-fta.md|helm fta]] |
-| `helm list` | 列出 Release | [[wiki/17-系统基础/05-速查卡/helm.md|helm]] | - |
-| `helm template` | 渲染模板 | [[wiki/17-系统基础/05-速查卡/helm.md|helm]] | - |
+| `helm install` | 安装 Chart | [[wiki/01-集群基础与系统/12-速查卡/helm.md|helm]] | [[wiki/17-故障诊断/06-FTA故障树/list/helm-fta.md|helm fta]] |
+| `helm upgrade` | 升级 Chart | [[wiki/01-集群基础与系统/12-速查卡/helm.md|helm]] | [[wiki/17-故障诊断/06-FTA故障树/list/helm-fta.md|helm fta]] |
+| `helm rollback` | 回滚 | [[wiki/01-集群基础与系统/12-速查卡/helm.md|helm]] | [[wiki/17-故障诊断/06-FTA故障树/list/helm-fta.md|helm fta]] |
+| `helm list` | 列出 Release | [[wiki/01-集群基础与系统/12-速查卡/helm.md|helm]] | - |
+| `helm template` | 渲染模板 | [[wiki/01-集群基础与系统/12-速查卡/helm.md|helm]] | - |
 
 ---
 
@@ -147,7 +147,7 @@ tier: peripheral
 
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[wiki/22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[wiki/20-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 
 
 <!-- risk-assessed -->

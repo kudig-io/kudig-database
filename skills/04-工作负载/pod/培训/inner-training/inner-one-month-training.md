@@ -1,7 +1,7 @@
 ---
 title: ACK/ACR/K8S 内部培训大纲
 description: '- "K8s运维培训"'
-summary: '本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。'
+summary: '本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。'
 category: learning
 tags:
 - k8s
@@ -92,7 +92,7 @@ tags: [training, inner-training, ack, acr, k8s, month-1, k8s-1.28-1.33]
 
 ## 概述
 
-本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
+本培训大纲为内部运维工程师和技术支持人员设计，覆盖 ACK（阿里云容器服务）、ACR（阿里云容器镜像服务）和 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 三大技术栈，通过 28 天的系统性学习，从基础概念到生产运维，逐步建立完整的云原生运维能力。
 
 培训采用"每日主题学习 + 实操练习"的模式，每天 4-5 小时的学习时间，包含理论阅读（1.5-2h）、实践操作（2-2.5h）和费曼复述（0.5h）三个环节。每周结束有一个自测检验（checkpoint.md）和一个实践项目，确保学习效果可量化验证。
 

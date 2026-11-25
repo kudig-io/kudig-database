@@ -214,8 +214,8 @@ prerequisites:
 ## Related
 
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
-- [[wiki/23-实体/02-K8s核心组件/container-runtime.md|container-runtime]] — Container Runtime
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/container-runtime.md|container-runtime]] — Container Runtime
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

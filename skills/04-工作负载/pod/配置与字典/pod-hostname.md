@@ -245,18 +245,18 @@ echo -n "myhost.mysub.mynamespace.svc.cluster.local" | wc -c
 ```
 ## 交叉引用
 
-- [[wiki/17-系统基础/06-知识字典/workloads/statefulsets.md|StatefulSets]]](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/workloads/statefulsets.md) — 自动管理稳定网络标识的首选方案
-- [Pods](../../../../wiki/22-概念/02-工作负载/pods.md) — Pod 基础概念和 metadata.name
+- [[wiki/21-知识字典/workloads/statefulsets.md|StatefulSets]]](../../../../wiki/21-知识字典/workloads/statefulsets.md) — 自动管理稳定网络标识的首选方案
+- [Pods](../../../../wiki/20-概念/02-工作负载/pods.md) — Pod 基础概念和 metadata.name
 - [Downward API](downward-api.md) — 在容器内获取 Pod 元数据的其他方式
 
 ## 参考链接
-- https://[[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-hostname/
+- https://[[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-hostname/
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[wiki/17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[wiki/17-系统基础/06-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[wiki/21-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[wiki/21-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[wiki/21-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 ```
 

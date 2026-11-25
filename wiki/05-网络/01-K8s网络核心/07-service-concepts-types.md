@@ -2707,12 +2707,12 @@ roleRef:
 
 ## Related
 
-- [[wiki/17-系统基础/05-速查卡/k8s.md|K8s 速查卡]]
+- [[wiki/01-集群基础与系统/12-速查卡/k8s.md|K8s 速查卡]]
 - 相关知识域: 集群基础
 - 相关知识域: 网络
 - 相关知识域: 可观测性
-- [[wiki/17-系统基础/05-速查卡/networking.md|速查卡: networking]]
-- [[wiki/21-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[wiki/01-集群基础与系统/12-速查卡/networking.md|速查卡: networking]]
+- [[wiki/19-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ## See Also
 

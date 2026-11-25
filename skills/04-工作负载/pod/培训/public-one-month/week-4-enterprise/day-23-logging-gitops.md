@@ -56,7 +56,7 @@ difficulty: intermediate
 intent_queries:
   - ELK 企业日志架构
   - [[argocd|ArgoCD]] GitOps 实践
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Kustomize
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Kustomize
   - 多环境配置管理
 trigger_keywords:
   - ELK
@@ -820,8 +820,8 @@ filebeat:
 - [GitOps 原则](https://opengitops.dev/)
 - [Kustomize 官方文档](https://kustomize.io/)
 - [ELK on Kubernetes](https://www.elastic.co/guide/en/cloud-on-k8s/current/index.html)
-- [文件: `../../可观测性/01-elk-stack-enterprise-logging.md`](../../../../../../wiki/09-可观测性/03-日志/01-elk-stack-enterprise-logging.md)
-- [文件: `../../发布变更/01-argo-cd-enterprise-gitops.md`](../../../../../../wiki/11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md)
+- [文件: `../../可观测性/01-elk-stack-enterprise-logging.md`](../../../../../../wiki/08-可观测性/03-日志/01-elk-stack-enterprise-logging.md)
+- [文件: `../../发布变更/01-argo-cd-enterprise-gitops.md`](../../../../../../wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md)
 
 ```
 

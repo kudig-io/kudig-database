@@ -695,7 +695,7 @@ storm_handling:
 **关联文档**:
 - [P0-1: 工单分类体系与意图识别语料库](P0-1-ticket-classification-intent-recognition.md)
 - [P0-3: 会话上下文管理机制](P0-3-session-context-management.md)
-- [故障诊断/[[wiki/06-存储/README.md|README]].md](../故障诊断/topic-skills/README.md)
+- [故障诊断/[[wiki/06-存储与数据/README.md|README]].md](../故障诊断/topic-skills/README.md)
 - [可观测性/](../可观测性/) — 监控告警详细文档
 
 <!-- risk-assessed -->

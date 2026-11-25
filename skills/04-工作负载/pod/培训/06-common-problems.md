@@ -586,7 +586,7 @@ kubectl top pods -n <namespace>
 
 **关联文档**:
 - [](../../../../wiki/19-故障诊断) — 故障排查文档
-- [08-技能体系/](../../../../wiki/19-故障诊断/08-技能体系) — 18 个 GA Skill
+- [08-技能体系/](../../../../wiki/17-故障诊断/08-技能体系) — 18 个 GA Skill
 - [../01-introduction/01-what-is-kubernetes.md](02-what-is-kubernetes.md) — K8s 概念入门
 
 ## See Also

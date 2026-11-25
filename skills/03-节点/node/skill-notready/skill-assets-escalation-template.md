@@ -134,7 +134,7 @@ prerequisites:
 ## Related
 
 - troubleshooting.md|k8s-structured-troubleshooting]] — 结构化排障方法论：配置优先、全组件排障指南
-- [[kudig-prompts-catalog]] — [[wiki/23-实体/15-参考与索引/kudig-prompts-catalog.md|KUDIG Prompts Catalog]]
+- [[kudig-prompts-catalog]] — [[wiki/22-实体/15-参考与索引/kudig-prompts-catalog.md|KUDIG Prompts Catalog]]
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|[[FTA Methodology and Core Principles|FTA Methodology and Core Principles]]]] — FTA Methodology and Core Principles
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

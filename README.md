@@ -127,27 +127,27 @@ last_updated: '2026-09-09'
 
 | 域 | 篇数 | 覆盖内容 |
 |----|-----:|----------|
-| [01-集群基础](wiki/01-集群基础/README.md) | 123 | 架构总览、控制平面、证书 PKI、kubectl、升级路径、性能调优 |
+| [01-集群基础](wiki/01-集群基础与系统/README.md) | 123 | 架构总览、控制平面、证书 PKI、kubectl、升级路径、性能调优 |
 | [02-工作负载](wiki/02-工作负载/README.md) | 54 | Deployment/StatefulSet 核心负载、Java/Node.js/多语言运行时上 K8s |
 | [03-清单模式](wiki/03-清单模式/README.md) | 101 | YAML 参考、Kustomize/Helm/Operator/GitOps/安全/韧性/AI-ML 模式 |
 | [04-应用模式](wiki/04-应用模式/README.md) | 133 | 应用子模式、行业架构、生产模式 |
 | [05-网络](wiki/05-网络/README.md) | 143 | Service/Ingress、网络基础、服务网格、API 网关、eBPF、多集群网络、Terway |
-| [06-存储](wiki/06-存储/README.md) | 72 | PV/PVC/SC、CSI、分布式存储、有状态应用、云存储对比、AI 存储 |
-| [07-数据库中间件](wiki/07-数据库中间件/README.md) | 70 | 数据库、缓存、消息队列、时序库、搜索引擎、Operator 管理、数据湖仓 |
-| [08-安全](wiki/08-安全/README.md) | 80 | 身份访问、网络安全、运行时安全、策略治理、供应链、零信任、机密计算 |
-| [09-可观测性](wiki/09-可观测性/README.md) | 86 | 指标、日志、链路追踪、告警、SLO/SLI、工具链 |
-| [10-平台工程](wiki/10-平台工程/README.md) | 234 | 构建、运维、治理、开发体验、内部开发者平台、代码分析 |
-| [11-发布变更](wiki/11-发布变更/README.md) | 75 | GitOps、IaC、渐进式交付、变更管理、部署与迁移方案 |
-| [12-可靠性](wiki/12-可靠性/README.md) | 82 | 备份/灾难恢复、容量规划、混沌工程、事后复盘、SRE 实践 |
-| [13-生产运维](wiki/13-生产运维/README.md) | 128 | 成本治理、GreenOps、集群治理、事件响应、工单案例、运维手册与剧本 |
-| [14-容器运行时](wiki/14-容器运行时/README.md) | 65 | Docker、镜像管理/构建/分发加速、containerd/CRI-O、沙箱运行时、不可变 OS |
-| [15-AI基础设施](wiki/15-AI基础设施/README.md) | 179 | GPU 基础设施、AI Agents、Agent 运行时、K8s AI 栈、KubeRay、批调度 |
-| [16-专项技术](wiki/16-专项技术/README.md) | 63 | 边缘计算、WebAssembly、扩展机制、无服务器、多租户 |
-| [17-系统基础](wiki/17-系统基础/README.md) | 646 | Linux、硬件、网络基础、K8s 事件、速查卡、知识字典 |
-| [18-云厂商](wiki/18-云厂商/README.md) | 115 | ACK / EKS / GKE / AKS / TKE / CCE、多云混合、阿里云云原生 |
-| [19-故障诊断](wiki/19-故障诊断/README.md) | 491 | 核心排障、FTA 故障树、FEBM 方法论、技能体系、QA 语料 |
-| [20-最佳实践](wiki/20-最佳实践/README.md) | 109 | 部署、基础设施、迁移、观测、运营、安全、大规模生产 |
-| [21-生态参考](wiki/21-生态参考/README.md) | 67 | CNCF 全景、论文、领域索引 |
+| [06-存储](wiki/06-存储与数据/README.md) | 72 | PV/PVC/SC、CSI、分布式存储、有状态应用、云存储对比、AI 存储 |
+| [07-数据库中间件](wiki/06-存储与数据/README.md) | 70 | 数据库、缓存、消息队列、时序库、搜索引擎、Operator 管理、数据湖仓 |
+| [08-安全](wiki/07-安全/README.md) | 80 | 身份访问、网络安全、运行时安全、策略治理、供应链、零信任、机密计算 |
+| [09-可观测性](wiki/08-可观测性/README.md) | 86 | 指标、日志、链路追踪、告警、SLO/SLI、工具链 |
+| [10-平台工程](wiki/12-平台工程/README.md) | 234 | 构建、运维、治理、开发体验、内部开发者平台、代码分析 |
+| [11-发布变更](wiki/09-发布变更/README.md) | 75 | GitOps、IaC、渐进式交付、变更管理、部署与迁移方案 |
+| [12-可靠性](wiki/10-可靠性/README.md) | 82 | 备份/灾难恢复、容量规划、混沌工程、事后复盘、SRE 实践 |
+| [13-生产运维](wiki/11-生产运维/README.md) | 128 | 成本治理、GreenOps、集群治理、事件响应、工单案例、运维手册与剧本 |
+| [14-容器运行时](wiki/13-容器运行时/README.md) | 65 | Docker、镜像管理/构建/分发加速、containerd/CRI-O、沙箱运行时、不可变 OS |
+| [15-AI基础设施](wiki/14-AI基础设施/README.md) | 179 | GPU 基础设施、AI Agents、Agent 运行时、K8s AI 栈、KubeRay、批调度 |
+| [16-专项技术](wiki/15-专项技术/README.md) | 63 | 边缘计算、WebAssembly、扩展机制、无服务器、多租户 |
+| [17-系统基础](wiki/01-集群基础与系统/README.md) | 646 | Linux、硬件、网络基础、K8s 事件、速查卡、知识字典 |
+| [18-云厂商](wiki/16-云厂商/README.md) | 115 | ACK / EKS / GKE / AKS / TKE / CCE、多云混合、阿里云云原生 |
+| [19-故障诊断](wiki/17-故障诊断/README.md) | 491 | 核心排障、FTA 故障树、FEBM 方法论、技能体系、QA 语料 |
+| [20-最佳实践](wiki/18-最佳实践/README.md) | 109 | 部署、基础设施、迁移、观测、运营、安全、大规模生产 |
+| [21-生态参考](wiki/19-生态参考/README.md) | 67 | CNCF 全景、论文、领域索引 |
 | [32-故障案例库](wiki/32-故障案例库/README.md) | 125 | 112 起真实故障案例、SRE/CRE/FDE/SA 四视角复盘、检索与索引工具 |
 
 每域根目录提供 `README.md`（域导航）+ `index.md`（索引）+ `00-总览/`（入门路径）。
@@ -217,7 +217,7 @@ tier 划分、chunk 策略与 embedding 方案见 [`maintaining/02-元数据/cor
 
 ### 近期重点：百炼智能体运维
 
-`wiki/30-百炼智能体/` 落地阿里云百炼平台的 Agentic Ops：[每日巡检部署配置](wiki/30-百炼智能体/01-每日巡检部署配置.md)（智能体定时巡检集群）与[本地集群接入方案](wiki/30-百炼智能体/02-本地集群接入方案.md)（MCP 接入）。配套的通用巡检剧本见 `code/scripts/automation/`（证书到期监控、K8s 健康检查、网络策略审计、资源清理、存储审计、GPU 利用率报告）。
+`wiki/30-百炼智能体/` 落地阿里云百炼平台的 Agentic Ops：[每日巡检部署配置](maintaining/01-文档/百炼智能体/01-每日巡检部署配置.md)（智能体定时巡检集群）与[本地集群接入方案](maintaining/01-文档/百炼智能体/02-本地集群接入方案.md)（MCP 接入）。配套的通用巡检剧本见 `code/scripts/automation/`（证书到期监控、K8s 健康检查、网络策略审计、资源清理、存储审计、GPU 利用率报告）。
 
 ---
 
@@ -273,15 +273,15 @@ gh release download corpus-v2026.09 --repo kudig-io/kudig-database
 
 | 主题 | 文件 |
 |------|------|
-| 证书 / PKI 生命周期 | [`wiki/01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook.md`](wiki/01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook.md) |
-| 集群升级 | [`wiki/01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md`](wiki/01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md) |
-| 灾难恢复与业务连续性 | [`wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md`](wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md) |
-| Fleet GitOps 操作指南 | [`wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md`](wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md) |
-| 事件响应模板 | [`wiki/13-生产运维/03-事件响应/11-incident-response-runbook-template.md`](wiki/13-生产运维/03-事件响应/11-incident-response-runbook-template.md) |
-| FinOps 成本治理 | [`wiki/13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md`](wiki/13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md) |
-| AI/ML 运维 | [`wiki/15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md`](wiki/15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md) |
-| 边缘生产运维 | [`wiki/16-专项技术/01-边缘计算/12-edge-production-runbook.md`](wiki/16-专项技术/01-边缘计算/12-edge-production-runbook.md) |
-| 智能体每日巡检 | [`wiki/30-百炼智能体/01-每日巡检部署配置.md`](wiki/30-百炼智能体/01-每日巡检部署配置.md) |
+| 证书 / PKI 生命周期 | [`wiki/01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook.md`](wiki/01-集群基础与系统/03-控制平面/38-certificate-pki-lifecycle-runbook.md) |
+| 集群升级 | [`wiki/01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md`](wiki/01-集群基础与系统/03-控制平面/39-cluster-upgrade-runbook.md) |
+| 灾难恢复与业务连续性 | [`wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md`](wiki/10-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md) |
+| Fleet GitOps 操作指南 | [`wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md`](wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md) |
+| 事件响应模板 | [`wiki/13-生产运维/03-事件响应/11-incident-response-runbook-template.md`](wiki/11-生产运维/03-事件响应/11-incident-response-runbook-template.md) |
+| FinOps 成本治理 | [`wiki/13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md`](wiki/11-生产运维/01-成本治理/06-finops-cost-governance-runbook.md) |
+| AI/ML 运维 | [`wiki/15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md`](wiki/14-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md) |
+| 边缘生产运维 | [`wiki/16-专项技术/01-边缘计算/12-edge-production-runbook.md`](wiki/15-专项技术/01-边缘计算/12-edge-production-runbook.md) |
+| 智能体每日巡检 | [`wiki/30-百炼智能体/01-每日巡检部署配置.md`](maintaining/01-文档/百炼智能体/01-每日巡检部署配置.md) |
 
 ---
 
@@ -299,7 +299,7 @@ gh release download corpus-v2026.09 --repo kudig-io/kudig-database
 | 调度与资源 | `wiki/02-工作负载/01-核心工作负载/27-kubernetes-scheduling-resource-quick-qa.md` | 21 | requests/limits、QoS/OOM、调度两阶段、污点拓扑、HPA/VPA、LimitRange、容量水位 |
 | 架构与配置安全 | `wiki/01-集群基础/01-架构总览/26-kubernetes-architecture-config-quick-qa.md` | 21 | 控制平面组件、list-watch、创建 Pod 全流程、Secret/RBAC、三阶段准入、CRD |
 
-理论面经姊妹篇：网络 [`57-kubernetes-service-ingress-interview.md`](wiki/05-网络/01-K8s网络核心/57-kubernetes-service-ingress-interview.md)、存储 [`21-storageclass-pvc-pv-interview-notes.md`](wiki/06-存储/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md)（与上述文件同目录）。
+理论面经姊妹篇：网络 [`57-kubernetes-service-ingress-interview.md`](wiki/05-网络/01-K8s网络核心/57-kubernetes-service-ingress-interview.md)、存储 [`21-storageclass-pvc-pv-interview-notes.md`](wiki/06-存储与数据/01-K8s存储/21-storageclass-pvc-pv-interview-notes.md)（与上述文件同目录）。
 
 ---
 
@@ -504,8 +504,8 @@ find wiki/{0[1-9],1[0-9],2[0-9],30}-* skills maintaining/01-文档 maintaining/0
 - [[wiki/02-工作负载/04-多语言运行时/02-python-on-kubernetes-production|Python 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

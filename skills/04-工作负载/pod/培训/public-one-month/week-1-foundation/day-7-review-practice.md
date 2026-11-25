@@ -698,15 +698,15 @@ Week 2 将深入 K8s 核心技术：控制平面组件详解（etcd、API Server
 
 ## 延伸阅读
 
-- [K8s 架构总览](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
-- [kubectl 命令参考](../../../../../../wiki/01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
+- [K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [kubectl 命令参考](../../../../../../wiki/01-集群基础与系统/05-kubectl/02-kubectl-commands-reference.md)
 - [Deployment 生产模式](../../../../../../wiki/02-工作负载/01-核心工作负载/02-deployment-production-patterns.md)
 - [Service 概念与类型](../../../../../../wiki/05-网络/01-K8s网络核心/07-service-concepts-types.md)
-- [K8s 速查手册](../../../../../../wiki/17-系统基础/05-速查卡/k8s.md)
+- [K8s 速查手册](../../../../../../wiki/01-集群基础与系统/12-速查卡/k8s.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

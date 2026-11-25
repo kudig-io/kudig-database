@@ -47,5 +47,5 @@ last_updated: '2026-07-21'
 ## Related
 
 - [[wiki/03-清单模式/index.md|清单模式总索引]]
-- [[wiki/11-发布变更/index.md|发布变更]]
-- [[wiki/10-平台工程/index.md|平台工程]]
+- [[wiki/09-发布变更/index.md|发布变更]]
+- [[wiki/12-平台工程/index.md|平台工程]]

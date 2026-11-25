@@ -428,15 +428,15 @@ Target down 意味着 Prometheus 无法从目标拉取指标。排查步骤：1)
 
 ## 延伸阅读
 
-- [可观测性架构总览](../../../../../../wiki/09-可观测性/01-总览/01-observability-architecture-overview.md)
-- [监控指标系统](../../../../../../wiki/09-可观测性/02-指标/02-monitoring-metrics-system.md)
-- [Prometheus 生产级配置](../../../../../../wiki/09-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
-- [告警管理](../../../../../../wiki/09-可观测性/05-告警/04-alerting-management.md)
-- [SLO/SLI 体系](../../../../../../wiki/09-可观测性/06-SLO-SLI/08-slo-sli-system.md)
+- [可观测性架构总览](../../../../../../wiki/08-可观测性/01-总览/01-observability-architecture-overview.md)
+- [监控指标系统](../../../../../../wiki/08-可观测性/02-指标/02-monitoring-metrics-system.md)
+- [Prometheus 生产级配置](../../../../../../wiki/08-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
+- [告警管理](../../../../../../wiki/08-可观测性/05-告警/04-alerting-management.md)
+- [SLO/SLI 体系](../../../../../../wiki/08-可观测性/06-SLO-SLI/08-slo-sli-system.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

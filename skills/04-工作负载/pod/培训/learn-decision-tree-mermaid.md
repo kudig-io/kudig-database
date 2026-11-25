@@ -541,14 +541,14 @@ flowchart TD
 ---
 
 **关联文档**:
-- [../README.md](../[[wiki/23-实体/15-参考与索引/kudig-metadata-index.md|README]]]].md) — 讲师完整台词设计
+- [../README.md](../[[wiki/22-实体/15-参考与索引/kudig-metadata-index.md|README]]]].md) — 讲师完整台词设计
 - [../oncall-qa/oncall-quick-qa.md](oncall-qa/oncall-quick-qa.md) — On-Call 快速问答
 - [../../P1-4-decision-tree-mermaid-visualization.md](../../../../maintaining/01-文档/agent-specs/P1-4-decision-tree-mermaid-visualization.md) — 完整决策树库
 - [](../../../../wiki/19-故障诊断) — 故障排查文档
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

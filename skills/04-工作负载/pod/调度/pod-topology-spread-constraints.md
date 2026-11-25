@@ -233,16 +233,16 @@ kubectl get nodes -o custom-columns='NAME:.metadata.name,ZONE:.metadata.labels.t
 ## 交叉引用
 
 - [将 Pod 分配给节点](assigning-pods-to-nodes.md) — podAntiAffinity 与拓扑分布约束的对比
-- [调度器性能调优](../../../../wiki/17-系统基础/06-知识字典/scheduling/scheduler-performance-tuning.md) — 拓扑分布约束对调度性能的影响
-- Karpenter 自动扩缩容](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
-- [调度框架](../../../../wiki/17-系统基础/06-知识字典/scheduling/scheduling-framework.md) — PodTopologySpread 插件的扩展点
+- [调度器性能调优](../../../../wiki/21-知识字典/scheduling/scheduler-performance-tuning.md) — 拓扑分布约束对调度性能的影响
+- Karpenter 自动扩缩容](../../../../wiki/21-知识字典/scheduling/karpenter-autoscaling.md) — Karpenter 感知拓扑分布约束进行节点选型
+- [调度框架](../../../../wiki/21-知识字典/scheduling/scheduling-framework.md) — PodTopologySpread 插件的扩展点
 
 ## 参考链接
 
 - [Kubernetes 官方文档 - Pod Topology Spread Constraints](https://kubernetes.io/docs/concepts/scheduling-eviction/topology-spread-constraints/)
 
 ## Related
-- [[wiki/21-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

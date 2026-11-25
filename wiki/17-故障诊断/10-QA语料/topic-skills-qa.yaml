@@ -1,0 +1,2651 @@
+domain: topic-skills
+total_questions: 541
+generated_at: '2026-11-18'
+qa_pairs:
+- type: concept
+  question: 在 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/01-node-notready.md 的「概述」章节。
+  source: skills/09-技能体系/01-node-notready.md
+  section: 概述
+- type: concept
+  question: 在 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/01-node-notready.md 的「症状识别」章节。
+  source: skills/09-技能体系/01-node-notready.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的操作: kubectl get nodes --no-headers | awk ''{print
+    $2}'' | sort | u?'
+  answer: 参见 skills/09-技能体系/01-node-notready.md 中的操作步骤。
+  source: skills/09-技能体系/01-node-notready.md
+  command: kubectl get nodes --no-headers | awk '{print $2}' | sort | uniq -c
+- type: operation
+  question: '如何执行与 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的操作: kubectl get nodes --no-headers | grep
+    "NotReady" | grep -E "?'
+  answer: 参见 skills/09-技能体系/01-node-notready.md 中的操作步骤。
+  source: skills/09-技能体系/01-node-notready.md
+  command: kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master"
+- type: operation
+  question: '如何执行与 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的操作: NODE_NAME="<notready-node>"?'
+  answer: 参见 skills/09-技能体系/01-node-notready.md 中的操作步骤。
+  source: skills/09-技能体系/01-node-notready.md
+  command: NODE_NAME="<notready-node>"
+- type: troubleshooting
+  question: 如何排查 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/01-node-notready.md 的故障排查章节。
+  source: skills/09-技能体系/01-node-notready.md
+- type: comparison
+  question: 节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/01-node-notready.md 中的对比分析。
+  source: skills/09-技能体系/01-node-notready.md
+- type: concept
+  question: 在 Pod CrashLoopBackOff & OOMKilled 诊断与修复 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 的「概述」章节。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+  section: 概述
+- type: concept
+  question: 在 Pod CrashLoopBackOff & OOMKilled 诊断与修复 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 的「症状识别」章节。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的操作: kubectl get pods -n <namespace> -l <label-selector> -o wide?'
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 中的操作步骤。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+  command: kubectl get pods -n <namespace> -l <label-selector> -o wide
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的操作: kubectl get pod <pod> -n <namespace> -o jsonpath=''{.metadata?'
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 中的操作步骤。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+  command: kubectl get pod <pod> -n <namespace> -o jsonpath='{.metadata.ownerReferences[0].kind}/{.metadata.own
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的操作: kubectl get deployment <deployment> -n <namespace> -o jsonpa?'
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 中的操作步骤。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+  command: 'kubectl get deployment <deployment> -n <namespace> -o jsonpath=''Ready: {.status.readyReplicas}/{.sta'
+- type: best_practice
+  question: 关于 Pod CrashLoopBackOff & OOMKilled 诊断与修复, 有什么最佳实践?
+  answer: 1) 临时增大 memory limits 到 `<new-limit>`；2) 安排应用团队修复泄漏点 `<leak-location>`。是否批准？"
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+- type: best_practice
+  question: 关于 Pod CrashLoopBackOff & OOMKilled 诊断与修复, 有什么最佳实践?
+  answer: 新 limit = 当前峰值内存 × 2（根据泄漏速率调整）
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+- type: troubleshooting
+  question: 如何排查 Pod CrashLoopBackOff & OOMKilled 诊断与修复 相关的故障?
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 的故障排查章节。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+- type: comparison
+  question: Pod CrashLoopBackOff & OOMKilled 诊断与修复 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/02-pod-crashloop-oomkilled.md 中的对比分析。
+  source: skills/09-技能体系/02-pod-crashloop-oomkilled.md
+- type: concept
+  question: 在 Pod Pending 调度失败诊断与修复 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 的「概述」章节。
+  source: skills/09-技能体系/03-pod-pending.md
+  section: 概述
+- type: concept
+  question: 在 Pod Pending 调度失败诊断与修复 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 的「症状识别」章节。
+  source: skills/09-技能体系/03-pod-pending.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Pod Pending 调度失败诊断与修复 相关的操作: kubectl get pods -n <namespace> --field-selector status.phas?'
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 中的操作步骤。
+  source: skills/09-技能体系/03-pod-pending.md
+  command: kubectl get pods -n <namespace> --field-selector status.phase=Pending --no-headers | wc -l
+- type: operation
+  question: '如何执行与 Pod Pending 调度失败诊断与修复 相关的操作: kubectl get pods -n <namespace> --field-selector status.phas?'
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 中的操作步骤。
+  source: skills/09-技能体系/03-pod-pending.md
+  command: kubectl get pods -n <namespace> --field-selector status.phase=Pending -o custom-columns=NAME:.metada
+- type: operation
+  question: '如何执行与 Pod Pending 调度失败诊断与修复 相关的操作: kubectl top nodes --no-headers 2>/dev/null || echo "metrics-?'
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 中的操作步骤。
+  source: skills/09-技能体系/03-pod-pending.md
+  command: kubectl top nodes --no-headers 2>/dev/null || echo "metrics-server not available, skip"
+- type: troubleshooting
+  question: 如何排查 Pod Pending 调度失败诊断与修复 相关的故障?
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 的故障排查章节。
+  source: skills/09-技能体系/03-pod-pending.md
+- type: comparison
+  question: Pod Pending 调度失败诊断与修复 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/03-pod-pending.md 中的对比分析。
+  source: skills/09-技能体系/03-pod-pending.md
+- type: concept
+  question: 在 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 的「概述」章节。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+  section: 概述
+- type: concept
+  question: 在 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的操作: kubectl exec -n kube-system deploy/coredns
+    -- nslookup kuber?'
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 中的操作步骤。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+  command: kubectl exec -n kube-system deploy/coredns -- nslookup kubernetes.default.svc.cluster.local 2>/dev/n
+- type: operation
+  question: '如何执行与 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的操作: kubectl get pods -n kube-system -l
+    k8s-app=kube-dns -o wide?'
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 中的操作步骤。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+  command: kubectl get pods -n kube-system -l k8s-app=kube-dns -o wide
+- type: operation
+  question: '如何执行与 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的操作: kubectl run dns-test-default --image=busybox:1.36
+    --rm -it -?'
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 中的操作步骤。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+  command: kubectl run dns-test-default --image=busybox:1.36 --rm -it --restart=Never -n default -- nslookup ku
+- type: best_practice
+  question: 关于 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation, 有什么最佳实践?
+  answer: 每 500-1000 Pod 增加 1 个 CoreDNS 副本
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+- type: best_practice
+  question: 关于 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation, 有什么最佳实践?
+  answer: 生产环境 CoreDNS 副本数 ≥ 2，大规模集群（>100 nodes）建议 3-5 个副本
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+- type: troubleshooting
+  question: 如何排查 DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 的故障排查章节。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+- type: comparison
+  question: DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/04-dns-resolution-failure.md 中的对比分析。
+  source: skills/09-技能体系/04-dns-resolution-failure.md
+- type: concept
+  question: 在 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 的「概述」章节。
+  source: skills/09-技能体系/05-service-connectivity.md
+  section: 概述
+- type: concept
+  question: 在 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 的「症状识别」章节。
+  source: skills/09-技能体系/05-service-connectivity.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的操作: kubectl get svc <service>
+    -n <namespace> -o wide?'
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 中的操作步骤。
+  source: skills/09-技能体系/05-service-connectivity.md
+  command: kubectl get svc <service> -n <namespace> -o wide
+- type: operation
+  question: '如何执行与 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的操作: kubectl get endpoints
+    <service> -n <namespace>?'
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 中的操作步骤。
+  source: skills/09-技能体系/05-service-connectivity.md
+  command: kubectl get endpoints <service> -n <namespace>
+- type: operation
+  question: '如何执行与 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的操作: kubectl get pods -n <namespace>
+    -l <selector-from-svc> -o wi?'
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 中的操作步骤。
+  source: skills/09-技能体系/05-service-connectivity.md
+  command: kubectl get pods -n <namespace> -l <selector-from-svc> -o wide
+- type: troubleshooting
+  question: 如何排查 Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 相关的故障?
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 的故障排查章节。
+  source: skills/09-技能体系/05-service-connectivity.md
+- type: comparison
+  question: Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/05-service-connectivity.md 中的对比分析。
+  source: skills/09-技能体系/05-service-connectivity.md
+- type: concept
+  question: 在 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 的「概述」章节。
+  source: skills/09-技能体系/06-certificate-expiry.md
+  section: 概述
+- type: concept
+  question: 在 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 的「症状识别」章节。
+  source: skills/09-技能体系/06-certificate-expiry.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的操作: kubectl version --short 2>&1?'
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 中的操作步骤。
+  source: skills/09-技能体系/06-certificate-expiry.md
+  command: kubectl version --short 2>&1
+- type: operation
+  question: '如何执行与 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的操作: kubectl get certificates -A 2>/dev/null?'
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 中的操作步骤。
+  source: skills/09-技能体系/06-certificate-expiry.md
+  command: kubectl get certificates -A 2>/dev/null
+- type: operation
+  question: '如何执行与 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的操作: kubectl get certificates -A --no-headers
+    2>/dev/null | grep ?'
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 中的操作步骤。
+  source: skills/09-技能体系/06-certificate-expiry.md
+  command: kubectl get certificates -A --no-headers 2>/dev/null | grep -c "False"
+- type: troubleshooting
+  question: 如何排查 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 相关的故障?
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 的故障排查章节。
+  source: skills/09-技能体系/06-certificate-expiry.md
+- type: comparison
+  question: 证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/06-certificate-expiry.md 中的对比分析。
+  source: skills/09-技能体系/06-certificate-expiry.md
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 的「概述」章节。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  section: 概述
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: echo "=== Non-Bound PVCs
+    ===" && \?'
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的操作步骤。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  command: echo "=== Non-Bound PVCs ===" && \
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A -l ''app.kubernetes.io/component
+    in (csi-?'
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的操作步骤。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  command: kubectl get pods -A -l 'app.kubernetes.io/component in (csi-driver,csi-controller,csi-node)' --no-he
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A --field-selector=status.phase!=Running,s?'
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的操作步骤。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  command: kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded --no-headers | \
+- type: troubleshooting
+  question: 如何排查 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 的故障排查章节。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+- type: comparison
+  question: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的对比分析。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 的「概述」章节。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  section: 概述
+- type: concept
+  question: 在 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  section: 症状识别
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: echo "=== Non-Bound PVCs
+    ===" && \?'
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的操作步骤。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  command: echo "=== Non-Bound PVCs ===" && \
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A -l ''app.kubernetes.io/component
+    in (csi-?'
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的操作步骤。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  command: kubectl get pods -A -l 'app.kubernetes.io/component in (csi-driver,csi-controller,csi-node)' --no-he
+- type: operation
+  question: '如何执行与 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的操作: kubectl get pods -A --field-selector=status.phase!=Running,s?'
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的操作步骤。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+  command: kubectl get pods -A --field-selector=status.phase!=Running,status.phase!=Succeeded --no-headers | \
+- type: troubleshooting
+  question: 如何排查 PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 的故障排查章节。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+- type: comparison
+  question: PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/08-pvc-storage-failure.md 中的对比分析。
+  source: skills/09-技能体系/08-pvc-storage-failure.md
+- type: concept
+  question: 在 topic-skills 全面增强记录 中, 增强概览 是什么?
+  answer: 参见 skills/09-技能体系/ENHANCEMENT-RECORD.md 的「增强概览」章节。
+  source: skills/09-技能体系/ENHANCEMENT-RECORD.md
+  section: 增强概览
+- type: concept
+  question: 在 topic-skills 全面增强记录 中, 增强前后对比 是什么?
+  answer: 参见 skills/09-技能体系/ENHANCEMENT-RECORD.md 的「增强前后对比」章节。
+  source: skills/09-技能体系/ENHANCEMENT-RECORD.md
+  section: 增强前后对比
+- type: concept
+  question: 在 topic-skills 全面增强记录 中, 详细变更记录 是什么?
+  answer: 参见 skills/09-技能体系/ENHANCEMENT-RECORD.md 的「详细变更记录」章节。
+  source: skills/09-技能体系/ENHANCEMENT-RECORD.md
+  section: 详细变更记录
+- type: troubleshooting
+  question: 如何排查 topic-skills 全面增强记录 相关的故障?
+  answer: 参见 skills/09-技能体系/ENHANCEMENT-RECORD.md 的故障排查章节。
+  source: skills/09-技能体系/ENHANCEMENT-RECORD.md
+- type: comparison
+  question: topic-skills 全面增强记录 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/ENHANCEMENT-RECORD.md 中的对比分析。
+  source: skills/09-技能体系/ENHANCEMENT-RECORD.md
+- type: concept
+  question: 在 topic-skills MOC 中, 专题概述 是什么?
+  answer: 参见 skills/09-技能体系/MOC.md 的「专题概述」章节。
+  source: skills/09-技能体系/MOC.md
+  section: 专题概述
+- type: concept
+  question: 在 topic-skills MOC 中, 文档清单 是什么?
+  answer: 参见 skills/09-技能体系/MOC.md 的「文档清单」章节。
+  source: skills/09-技能体系/MOC.md
+  section: 文档清单
+- type: concept
+  question: 在 topic-skills MOC 中, 统计信息 是什么?
+  answer: 参见 skills/09-技能体系/MOC.md 的「统计信息」章节。
+  source: skills/09-技能体系/MOC.md
+  section: 统计信息
+- type: troubleshooting
+  question: 如何排查 topic-skills MOC 相关的故障?
+  answer: 参见 skills/09-技能体系/MOC.md 的故障排查章节。
+  source: skills/09-技能体系/MOC.md
+- type: concept
+  question: 在 Skill Schema (历史参考) 中, 变更说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-schema.md 的「变更说明」章节。
+  source: skills/09-技能体系/skill-schema.md
+  section: 变更说明
+- type: concept
+  question: 在 Skill Schema (历史参考) 中, 快速导航 是什么?
+  answer: 参见 skills/09-技能体系/skill-schema.md 的「快速导航」章节。
+  source: skills/09-技能体系/skill-schema.md
+  section: 快速导航
+- type: concept
+  question: 在 Skill Schema (历史参考) 中, 模板版本历史 是什么?
+  answer: 参见 skills/09-技能体系/skill-schema.md 的「模板版本历史」章节。
+  source: skills/09-技能体系/skill-schema.md
+  section: 模板版本历史
+- type: troubleshooting
+  question: 如何排查 Skill Schema (历史参考) 相关的故障?
+  answer: 参见 skills/09-技能体系/skill-schema.md 的故障排查章节。
+  source: skills/09-技能体系/skill-schema.md
+- type: concept
+  question: 在 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/09-deployment-rollout-failure.md 的「概述」章节。
+  source: skills/09-技能体系/09-deployment-rollout-failure.md
+  section: 概述
+- type: concept
+  question: 在 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/09-deployment-rollout-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/09-deployment-rollout-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 相关的故障?
+  answer: 参见 skills/09-技能体系/09-deployment-rollout-failure.md 的故障排查章节。
+  source: skills/09-技能体系/09-deployment-rollout-failure.md
+- type: comparison
+  question: Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/09-deployment-rollout-failure.md 中的对比分析。
+  source: skills/09-技能体系/09-deployment-rollout-failure.md
+- type: concept
+  question: 在 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/10-rbac-quota-failure.md 的「概述」章节。
+  source: skills/09-技能体系/10-rbac-quota-failure.md
+  section: 概述
+- type: concept
+  question: 在 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/10-rbac-quota-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/10-rbac-quota-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 相关的故障?
+  answer: 参见 skills/09-技能体系/10-rbac-quota-failure.md 的故障排查章节。
+  source: skills/09-技能体系/10-rbac-quota-failure.md
+- type: comparison
+  question: RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/10-rbac-quota-failure.md 中的对比分析。
+  source: skills/09-技能体系/10-rbac-quota-failure.md
+- type: concept
+  question: 在 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/11-image-pull-failure.md 的「概述」章节。
+  source: skills/09-技能体系/11-image-pull-failure.md
+  section: 概述
+- type: concept
+  question: 在 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/11-image-pull-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/11-image-pull-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting 相关的故障?
+  answer: 参见 skills/09-技能体系/11-image-pull-failure.md 的故障排查章节。
+  source: skills/09-技能体系/11-image-pull-failure.md
+- type: concept
+  question: 在 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/12-control-plane-failure.md 的「概述」章节。
+  source: skills/09-技能体系/12-control-plane-failure.md
+  section: 概述
+- type: concept
+  question: 在 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/12-control-plane-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/12-control-plane-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 etcd 与控制平面故障诊断与修复 / etcd & Control Plane Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/12-control-plane-failure.md 的故障排查章节。
+  source: skills/09-技能体系/12-control-plane-failure.md
+- type: concept
+  question: 在 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/13-autoscaling-failure.md 的「概述」章节。
+  source: skills/09-技能体系/13-autoscaling-failure.md
+  section: 概述
+- type: concept
+  question: 在 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/13-autoscaling-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/13-autoscaling-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/13-autoscaling-failure.md 的故障排查章节。
+  source: skills/09-技能体系/13-autoscaling-failure.md
+- type: comparison
+  question: HPA/VPA/Cluster Autoscaler 弹性伸缩故障诊断 / Autoscaling Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/13-autoscaling-failure.md 中的对比分析。
+  source: skills/09-技能体系/13-autoscaling-failure.md
+- type: concept
+  question: 在 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/14-ingress-gateway-failure.md 的「概述」章节。
+  source: skills/09-技能体系/14-ingress-gateway-failure.md
+  section: 概述
+- type: concept
+  question: 在 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/14-ingress-gateway-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/14-ingress-gateway-failure.md
+  section: 症状识别
+- type: best_practice
+  question: 关于 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation, 有什么最佳实践?
+  answer: '`<new>`）。Controller Pod 将重启。是否批准？"'
+  source: skills/09-技能体系/14-ingress-gateway-failure.md
+- type: troubleshooting
+  question: 如何排查 Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/14-ingress-gateway-failure.md 的故障排查章节。
+  source: skills/09-技能体系/14-ingress-gateway-failure.md
+- type: comparison
+  question: Ingress/Gateway 路由故障诊断与修复 / Ingress & Gateway Routing Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/14-ingress-gateway-failure.md 中的对比分析。
+  source: skills/09-技能体系/14-ingress-gateway-failure.md
+- type: concept
+  question: 在 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/15-configmap-secret-failure.md 的「概述」章节。
+  source: skills/09-技能体系/15-configmap-secret-failure.md
+  section: 概述
+- type: concept
+  question: 在 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/15-configmap-secret-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/15-configmap-secret-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 相关的故障?
+  answer: 参见 skills/09-技能体系/15-configmap-secret-failure.md 的故障排查章节。
+  source: skills/09-技能体系/15-configmap-secret-failure.md
+- type: comparison
+  question: ConfigMap/Secret 配置管理故障诊断与修复 / ConfigMap & Secret Configuration Troubleshooting 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/15-configmap-secret-failure.md 中的对比分析。
+  source: skills/09-技能体系/15-configmap-secret-failure.md
+- type: concept
+  question: 在 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/16-monitoring-alerting-failure.md 的「概述」章节。
+  source: skills/09-技能体系/16-monitoring-alerting-failure.md
+  section: 概述
+- type: concept
+  question: 在 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/16-monitoring-alerting-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/16-monitoring-alerting-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 监控告警体系故障诊断与修复 / Monitoring & Alerting System Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/16-monitoring-alerting-failure.md 的故障排查章节。
+  source: skills/09-技能体系/16-monitoring-alerting-failure.md
+- type: concept
+  question: 在 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/17-logging-pipeline-failure.md 的「概述」章节。
+  source: skills/09-技能体系/17-logging-pipeline-failure.md
+  section: 概述
+- type: concept
+  question: 在 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/17-logging-pipeline-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/17-logging-pipeline-failure.md
+  section: 症状识别
+- type: comparison
+  question: 日志收集与管理故障诊断与修复 / Logging Pipeline Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/17-logging-pipeline-failure.md 中的对比分析。
+  source: skills/09-技能体系/17-logging-pipeline-failure.md
+- type: concept
+  question: 在 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/18-performance-bottleneck.md 的「概述」章节。
+  source: skills/09-技能体系/18-performance-bottleneck.md
+  section: 概述
+- type: concept
+  question: 在 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/18-performance-bottleneck.md 的「症状识别」章节。
+  source: skills/09-技能体系/18-performance-bottleneck.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 相关的故障?
+  answer: 参见 skills/09-技能体系/18-performance-bottleneck.md 的故障排查章节。
+  source: skills/09-技能体系/18-performance-bottleneck.md
+- type: comparison
+  question: 性能瓶颈诊断与调优 / Performance Bottleneck Diagnosis & Tuning 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/18-performance-bottleneck.md 中的对比分析。
+  source: skills/09-技能体系/18-performance-bottleneck.md
+- type: concept
+  question: 在 安全事件应急响应 / Security Incident Response 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/19-security-incident-response.md 的「概述」章节。
+  source: skills/09-技能体系/19-security-incident-response.md
+  section: 概述
+- type: concept
+  question: 在 安全事件应急响应 / Security Incident Response 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/19-security-incident-response.md 的「症状识别」章节。
+  source: skills/09-技能体系/19-security-incident-response.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 安全事件应急响应 / Security Incident Response 相关的故障?
+  answer: 参见 skills/09-技能体系/19-security-incident-response.md 的故障排查章节。
+  source: skills/09-技能体系/19-security-incident-response.md
+- type: comparison
+  question: 安全事件应急响应 / Security Incident Response 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/19-security-incident-response.md 中的对比分析。
+  source: skills/09-技能体系/19-security-incident-response.md
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/20-node-resource-pressure.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/20-node-resource-pressure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/20-node-resource-pressure.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/20-node-resource-pressure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/20-node-resource-pressure.md 的「执行流程」章节。
+  source: skills/09-技能体系/20-node-resource-pressure.md
+  section: 执行流程
+- type: concept
+  question: 在 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/20-node-resource-pressure.md 的「症状识别」章节。
+  source: skills/09-技能体系/20-node-resource-pressure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/20-node-resource-pressure.md 的故障排查章节。
+  source: skills/09-技能体系/20-node-resource-pressure.md
+- type: comparison
+  question: 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/20-node-resource-pressure.md 中的对比分析。
+  source: skills/09-技能体系/20-node-resource-pressure.md
+- type: concept
+  question: 在 Skill 本地运行 Demo 指南 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/21-skill-local-demo-guide.md 的「概述」章节。
+  source: skills/09-技能体系/21-skill-local-demo-guide.md
+  section: 概述
+- type: concept
+  question: 在 Skill 本地运行 Demo 指南 中, 前置条件 是什么?
+  answer: 参见 skills/09-技能体系/21-skill-local-demo-guide.md 的「前置条件」章节。
+  source: skills/09-技能体系/21-skill-local-demo-guide.md
+  section: 前置条件
+- type: comparison
+  question: Skill 本地运行 Demo 指南 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/21-skill-local-demo-guide.md 中的对比分析。
+  source: skills/09-技能体系/21-skill-local-demo-guide.md
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/22-networkpolicy-connectivity.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/22-networkpolicy-connectivity.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/22-networkpolicy-connectivity.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/22-networkpolicy-connectivity.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/22-networkpolicy-connectivity.md 的「执行流程」章节。
+  source: skills/09-技能体系/22-networkpolicy-connectivity.md
+  section: 执行流程
+- type: concept
+  question: 在 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/22-networkpolicy-connectivity.md 的「症状识别」章节。
+  source: skills/09-技能体系/22-networkpolicy-connectivity.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 相关的故障?
+  answer: 参见 skills/09-技能体系/22-networkpolicy-connectivity.md 的故障排查章节。
+  source: skills/09-技能体系/22-networkpolicy-connectivity.md
+- type: comparison
+  question: NetworkPolicy 连通性故障诊断 / NetworkPolicy Connectivity Troubleshooting 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/22-networkpolicy-connectivity.md 中的对比分析。
+  source: skills/09-技能体系/22-networkpolicy-connectivity.md
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/23-statefulset-failure.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/23-statefulset-failure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/23-statefulset-failure.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/23-statefulset-failure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/23-statefulset-failure.md 的「执行流程」章节。
+  source: skills/09-技能体系/23-statefulset-failure.md
+  section: 执行流程
+- type: concept
+  question: 在 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/23-statefulset-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/23-statefulset-failure.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/23-statefulset-failure.md 的故障排查章节。
+  source: skills/09-技能体系/23-statefulset-failure.md
+- type: comparison
+  question: StatefulSet 故障诊断与修复 / StatefulSet Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/23-statefulset-failure.md 中的对比分析。
+  source: skills/09-技能体系/23-statefulset-failure.md
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/24-daemonset-failure.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/24-daemonset-failure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/24-daemonset-failure.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/24-daemonset-failure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/24-daemonset-failure.md 的「执行流程」章节。
+  source: skills/09-技能体系/24-daemonset-failure.md
+  section: 执行流程
+- type: concept
+  question: 在 DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/24-daemonset-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/24-daemonset-failure.md
+  section: 症状识别
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/25-job-cronjob-failure.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/25-job-cronjob-failure.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/25-job-cronjob-failure.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/25-job-cronjob-failure.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/25-job-cronjob-failure.md 的「执行流程」章节。
+  source: skills/09-技能体系/25-job-cronjob-failure.md
+  section: 执行流程
+- type: concept
+  question: 在 Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/25-job-cronjob-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/25-job-cronjob-failure.md
+  section: 症状识别
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 何时使用此 Skill
+    是什么?
+  answer: 参见 skills/09-技能体系/26-namespace-quota-limitrange.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/26-namespace-quota-limitrange.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 快速分级（2
+    分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/26-namespace-quota-limitrange.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/26-namespace-quota-limitrange.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/26-namespace-quota-limitrange.md 的「执行流程」章节。
+  source: skills/09-技能体系/26-namespace-quota-limitrange.md
+  section: 执行流程
+- type: concept
+  question: 在 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/26-namespace-quota-limitrange.md 的「症状识别」章节。
+  source: skills/09-技能体系/26-namespace-quota-limitrange.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 Namespace/Quota/LimitRange 故障诊断与修复 / Namespace Quota & LimitRange Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/26-namespace-quota-limitrange.md 的故障排查章节。
+  source: skills/09-技能体系/26-namespace-quota-limitrange.md
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/27-cluster-upgrade-migration.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/27-cluster-upgrade-migration.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/27-cluster-upgrade-migration.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/27-cluster-upgrade-migration.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/27-cluster-upgrade-migration.md 的「执行流程」章节。
+  source: skills/09-技能体系/27-cluster-upgrade-migration.md
+  section: 执行流程
+- type: concept
+  question: 在 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/27-cluster-upgrade-migration.md 的「症状识别」章节。
+  source: skills/09-技能体系/27-cluster-upgrade-migration.md
+  section: 症状识别
+- type: troubleshooting
+  question: 如何排查 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 相关的故障?
+  answer: 参见 skills/09-技能体系/27-cluster-upgrade-migration.md 的故障排查章节。
+  source: skills/09-技能体系/27-cluster-upgrade-migration.md
+- type: comparison
+  question: 集群升级与迁移故障诊断与修复 / Cluster Upgrade & Migration Failure Diagnosis & Remediation 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/27-cluster-upgrade-migration.md 中的对比分析。
+  source: skills/09-技能体系/27-cluster-upgrade-migration.md
+- type: concept
+  question: 在 Helm Chart 部署与回滚故障诊断 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 的「概述」章节。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  section: 概述
+- type: concept
+  question: 在 Helm Chart 部署与回滚故障诊断 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 的「症状识别」章节。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  section: 症状识别
+- type: concept
+  question: 在 Helm Chart 部署与回滚故障诊断 中, 快速检查（< 2 分钟） 是什么?
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 的「快速检查（< 2 分钟）」章节。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  section: 快速检查（< 2 分钟）
+- type: concept
+  question: '在 Helm Chart 部署与回滚故障诊断 中, Phase 1: 信息收集（2-5 分钟） 是什么?'
+  answer: '参见 skills/09-技能体系/28-helm-chart-failure.md 的「Phase 1: 信息收集（2-5 分钟）」章节。'
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  section: 'Phase 1: 信息收集（2-5 分钟）'
+- type: concept
+  question: '在 Helm Chart 部署与回滚故障诊断 中, Phase 2: 根因定位（5-10 分钟） 是什么?'
+  answer: '参见 skills/09-技能体系/28-helm-chart-failure.md 的「Phase 2: 根因定位（5-10 分钟）」章节。'
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  section: 'Phase 2: 根因定位（5-10 分钟）'
+- type: operation
+  question: '如何执行与 Helm Chart 部署与回滚故障诊断 相关的操作: helm list -n <namespace> -a?'
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 中的操作步骤。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  command: helm list -n <namespace> -a
+- type: operation
+  question: '如何执行与 Helm Chart 部署与回滚故障诊断 相关的操作: helm get values <release> -n <ns> -o yaml > current-values.y?'
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 中的操作步骤。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  command: helm get values <release> -n <ns> -o yaml > current-values.yaml
+- type: operation
+  question: '如何执行与 Helm Chart 部署与回滚故障诊断 相关的操作: helm status <release> -n <ns>?'
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 中的操作步骤。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+  command: helm status <release> -n <ns>
+- type: troubleshooting
+  question: 如何排查 Helm Chart 部署与回滚故障诊断 相关的故障?
+  answer: 参见 skills/09-技能体系/28-helm-chart-failure.md 的故障排查章节。
+  source: skills/09-技能体系/28-helm-chart-failure.md
+- type: concept
+  question: 在 topic-skills MOC 中, Related 是什么?
+  answer: 参见 skills/09-技能体系/MOC.md 的「Related」章节。
+  source: skills/09-技能体系/MOC.md
+  section: Related
+- type: concept
+  question: 在 Answer Keys 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/assessment/answer-keys/index.md 的「文档」章节。
+  source: skills/09-技能体系/assessment/answer-keys/index.md
+  section: 文档
+- type: concept
+  question: 在 K8s 基础知识考核 - 答案解析 中, 选择题答案 是什么?
+  answer: 参见 skills/09-技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md 的「选择题答案」章节。
+  source: skills/09-技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md
+  section: 选择题答案
+- type: concept
+  question: 在 K8s 基础知识考核 - 答案解析 中, 简答题答案 是什么?
+  answer: 参见 skills/09-技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md 的「简答题答案」章节。
+  source: skills/09-技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md
+  section: 简答题答案
+- type: troubleshooting
+  question: 如何排查 K8s 基础知识考核 - 答案解析 相关的故障?
+  answer: 参见 skills/09-技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md 的故障排查章节。
+  source: skills/09-技能体系/assessment/answer-keys/k8s-fundamentals-quiz-answers.md
+- type: concept
+  question: 在 每日一题 中, 学习目标 是什么?
+  answer: 参见 skills/09-技能体系/assessment/daily-check-quiz.md 的「学习目标」章节。
+  source: skills/09-技能体系/assessment/daily-check-quiz.md
+  section: 学习目标
+- type: concept
+  question: 在 每日一题 中, 第 1 周题目 是什么?
+  answer: 参见 skills/09-技能体系/assessment/daily-check-quiz.md 的「第 1 周题目」章节。
+  source: skills/09-技能体系/assessment/daily-check-quiz.md
+  section: 第 1 周题目
+- type: troubleshooting
+  question: 如何排查 每日一题 相关的故障?
+  answer: 参见 skills/09-技能体系/assessment/daily-check-quiz.md 的故障排查章节。
+  source: skills/09-技能体系/assessment/daily-check-quiz.md
+- type: concept
+  question: 在 Assessment 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/assessment/index.md 的「子目录」章节。
+  source: skills/09-技能体系/assessment/index.md
+  section: 子目录
+- type: concept
+  question: 在 Assessment 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/assessment/index.md 的「文档」章节。
+  source: skills/09-技能体系/assessment/index.md
+  section: 文档
+- type: troubleshooting
+  question: 如何排查 Assessment 相关的故障?
+  answer: 参见 skills/09-技能体系/assessment/index.md 的故障排查章节。
+  source: skills/09-技能体系/assessment/index.md
+- type: concept
+  question: 在 K8s 基础知识考核 中, 选择题（每题 2 分，共 40 分） 是什么?
+  answer: 参见 skills/09-技能体系/assessment/k8s-fundamentals-quiz.md 的「选择题（每题 2 分，共 40 分）」章节。
+  source: skills/09-技能体系/assessment/k8s-fundamentals-quiz.md
+  section: 选择题（每题 2 分，共 40 分）
+- type: troubleshooting
+  question: 如何排查 K8s 基础知识考核 相关的故障?
+  answer: 参见 skills/09-技能体系/assessment/k8s-fundamentals-quiz.md 的故障排查章节。
+  source: skills/09-技能体系/assessment/k8s-fundamentals-quiz.md
+- type: comparison
+  question: K8s 基础知识考核 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/assessment/k8s-fundamentals-quiz.md 中的对比分析。
+  source: skills/09-技能体系/assessment/k8s-fundamentals-quiz.md
+- type: concept
+  question: 在 故障排查实验考核 中, 考核说明 是什么?
+  answer: 参见 skills/09-技能体系/assessment/troubleshooting-lab-exam.md 的「考核说明」章节。
+  source: skills/09-技能体系/assessment/troubleshooting-lab-exam.md
+  section: 考核说明
+- type: concept
+  question: 在 故障排查实验考核 中, 场景 A：Pod 无法调度（100 分） 是什么?
+  answer: 参见 skills/09-技能体系/assessment/troubleshooting-lab-exam.md 的「场景 A：Pod 无法调度（100 分）」章节。
+  source: skills/09-技能体系/assessment/troubleshooting-lab-exam.md
+  section: 场景 A：Pod 无法调度（100 分）
+- type: troubleshooting
+  question: 如何排查 故障排查实验考核 相关的故障?
+  answer: 参见 skills/09-技能体系/assessment/troubleshooting-lab-exam.md 的故障排查章节。
+  source: skills/09-技能体系/assessment/troubleshooting-lab-exam.md
+- type: comparison
+  question: 故障排查实验考核 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/assessment/troubleshooting-lab-exam.md 中的对比分析。
+  source: skills/09-技能体系/assessment/troubleshooting-lab-exam.md
+- type: concept
+  question: 在 蓝绿部署切换后服务不可用 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-BLUEGREEN-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-BLUEGREEN-001.md
+  section: 对话入口
+- type: concept
+  question: 在 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-CANARY-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-CANARY-001.md
+  section: 对话入口
+- type: comparison
+  question: 金丝雀发布后部分用户报告错误 — 远程顾问对话脚本 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-CANARY-001.md 中的对比分析。
+  source: skills/09-技能体系/dialogue/DIALOGUE-CANARY-001.md
+- type: concept
+  question: 在 StatefulSet Pod 域名解析失败 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-HEADLESS-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-HEADLESS-001.md
+  section: 对话入口
+- type: concept
+  question: 在 HPA 不扩容，流量高峰期服务响应慢 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-HPA-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-HPA-001.md
+  section: 对话入口
+- type: concept
+  question: 在 Ingress 规则不生效 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-INGRESS-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-INGRESS-001.md
+  section: 对话入口
+- type: concept
+  question: 在 Pod 间网络不通，怀疑 NetworkPolicy 阻断 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-NETWORKPOLICY-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-NETWORKPOLICY-001.md
+  section: 对话入口
+- type: concept
+  question: 在 Pod Security Policy 咨询与迁移 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-PSP-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-PSP-001.md
+  section: 对话入口
+- type: concept
+  question: 在 PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-PVC-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-PVC-001.md
+  section: 对话入口
+- type: comparison
+  question: PVC 一直 Pending，Pod 无法启动 — 远程顾问对话脚本 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-PVC-001.md 中的对比分析。
+  source: skills/09-技能体系/dialogue/DIALOGUE-PVC-001.md
+- type: concept
+  question: 在 ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-RBAC-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-RBAC-001.md
+  section: 对话入口
+- type: comparison
+  question: ServiceAccount 权限不足，无法创建 Pod — 远程顾问对话脚本 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-RBAC-001.md 中的对比分析。
+  source: skills/09-技能体系/dialogue/DIALOGUE-RBAC-001.md
+- type: concept
+  question: 在 Pod 一直 Pending，无法调度 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/DIALOGUE-SCHEDULER-001.md 的「对话入口」章节。
+  source: skills/09-技能体系/dialogue/DIALOGUE-SCHEDULER-001.md
+  section: 对话入口
+- type: concept
+  question: 在 Dialogue 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/dialogue/index.md 的「文档」章节。
+  source: skills/09-技能体系/dialogue/index.md
+  section: 文档
+- type: concept
+  question: 在 Topic Skills 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/index.md 的「概览」章节。
+  source: skills/09-技能体系/index.md
+  section: 概览
+- type: concept
+  question: 在 Topic Skills 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/index.md 的「子目录」章节。
+  source: skills/09-技能体系/index.md
+  section: 子目录
+- type: concept
+  question: 在 Topic Skills 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/index.md 的「文档」章节。
+  source: skills/09-技能体系/index.md
+  section: 文档
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 Skill Set 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8s Autoscaling Failure 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/DIALOGUE.md
+  section: 对话入口
+- type: best_practice
+  question: 关于 K8s Autoscaling Failure 远程顾问对话脚本, 有什么最佳实践?
+  answer: 1. 将 HPA/CA 的关键配置纳入 GitOps 管理，避免手动修改
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/DIALOGUE.md
+- type: concept
+  question: 在 K8s Autoscaling Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Autoscaling Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Autoscaling Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Autoscaling Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Autoscaling Failure 诊断与修复 中, 根因概览 (5 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md 的「根因概览 (5 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/SKILL.md
+  section: 根因概览 (5 种)
+- type: concept
+  question: 在 K8S Autoscaling 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Autoscaling 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Autoscaling Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Autoscaling Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Autoscaling Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Autoscaling Failure Remediation Playbook 相关的操作: kubectl get pods -n kube-system -l k8s-app=metrics-server?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md
+  command: kubectl get pods -n kube-system -l k8s-app=metrics-server
+- type: operation
+  question: '如何执行与 Autoscaling Failure Remediation Playbook 相关的操作: kubectl apply -f https://github.com/kubernetes-sigs/metrics-?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md
+  command: kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/componen
+- type: operation
+  question: '如何执行与 Autoscaling Failure Remediation Playbook 相关的操作: kubectl top nodes?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/reference/remediation-playbook.md
+  command: kubectl top nodes
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-autoscaling/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-autoscaling/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 K8S Blue Green 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-blue-green/index.md 的「概览」章节。
+  source: skills/09-技能体系/skill-set/k8s-blue-green/index.md
+  section: 概览
+- type: concept
+  question: 在 K8S Canary 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-canary/index.md 的「概览」章节。
+  source: skills/09-技能体系/skill-set/k8s-canary/index.md
+  section: 概览
+- type: concept
+  question: 在 证书过期问题诊断与修复 — 对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md
+  section: 对话入口
+- type: operation
+  question: '如何执行与 证书过期问题诊断与修复 — 对话脚本 相关的操作: > kubectl version --short 2>&1 || echo "kubectl 执行失败"?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md
+  command: '> kubectl version --short 2>&1 || echo "kubectl 执行失败"'
+- type: operation
+  question: '如何执行与 证书过期问题诊断与修复 — 对话脚本 相关的操作: > kubectl get nodes -o wide 2>&1?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md
+  command: '> kubectl get nodes -o wide 2>&1'
+- type: operation
+  question: '如何执行与 证书过期问题诊断与修复 — 对话脚本 相关的操作: > kubectl cluster-info 2>&1?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/DIALOGUE.md
+  command: '> kubectl cluster-info 2>&1'
+- type: concept
+  question: 在 证书过期问题诊断与修复 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md 的「概述」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md
+  section: 概述
+- type: concept
+  question: 在 证书过期问题诊断与修复 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md 的「症状识别」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md
+  section: 症状识别
+- type: concept
+  question: 在 证书过期问题诊断与修复 中, 快速诊断 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md 的「快速诊断」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md
+  section: 快速诊断
+- type: concept
+  question: 在 证书过期问题诊断与修复 中, 修复动作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md 的「修复动作」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md
+  section: 修复动作
+- type: operation
+  question: '如何执行与 证书过期问题诊断与修复 相关的操作: ./scripts/diagnose-quick.sh?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md
+  command: ./scripts/diagnose-quick.sh
+- type: operation
+  question: '如何执行与 证书过期问题诊断与修复 相关的操作: ./scripts/verify-cert.sh?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/SKILL.md
+  command: ./scripts/verify-cert.sh
+- type: concept
+  question: 在 K8S Certificate Expiry 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Certificate Expiry 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 certificate expiry Remediation Playbook 中, ⚠️ 风险提示 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook.md 的「⚠️ 风险提示」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook.md
+  section: ⚠️ 风险提示
+- type: concept
+  question: 在 certificate expiry Remediation Playbook 中, 修复步骤 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook.md 的「修复步骤」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook.md
+  section: 修复步骤
+- type: best_practice
+  question: 关于 certificate expiry Remediation Playbook, 有什么最佳实践?
+  answer: ① 部署 cert-manager 管理应用层证书；② 监控证书剩余有效期 <30天告警；③ 将证书续期纳入集群升级流程。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/reference/remediation-playbook.md
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-certificate-expiry/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-certificate-expiry/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 ConfigMap与Secret问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 ConfigMap与Secret问题 — 远程顾问对话脚本 中, Round 1 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/DIALOGUE.md 的「Round 1」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/DIALOGUE.md
+  section: Round 1
+- type: comparison
+  question: ConfigMap与Secret问题 — 远程顾问对话脚本 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/DIALOGUE.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/DIALOGUE.md
+- type: concept
+  question: 在 K8s ConfigMap & Secret Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s ConfigMap & Secret Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s ConfigMap & Secret Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s ConfigMap & Secret Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s ConfigMap & Secret Failure 诊断与修复 中, 根因概览 (5 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md 的「根因概览 (5 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md
+  section: 根因概览 (5 种)
+- type: comparison
+  question: K8s ConfigMap & Secret Failure 诊断与修复 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/SKILL.md
+- type: concept
+  question: 在 K8S Config Secret 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Config Secret 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 ConfigMap & Secret Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 ConfigMap & Secret Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 ConfigMap & Secret Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 ConfigMap & Secret Failure Remediation Playbook 相关的操作: kubectl get configmap <name> -n <namespace> -o jsonpath=''{.d?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+  command: kubectl get configmap <name> -n <namespace> -o jsonpath='{.data}'
+- type: operation
+  question: '如何执行与 ConfigMap & Secret Failure Remediation Playbook 相关的操作: kubectl patch configmap <name> -n <namespace> --type=''json''
+    ?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+  command: kubectl patch configmap <name> -n <namespace> --type='json' -p='
+- type: operation
+  question: '如何执行与 ConfigMap & Secret Failure Remediation Playbook 相关的操作: kubectl get configmap <name> -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+  command: kubectl get configmap <name> -n <namespace>
+- type: comparison
+  question: ConfigMap & Secret Failure Remediation Playbook 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/reference/remediation-playbook.md
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-config-secret/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-config-secret/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 控制平面问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 控制平面问题 — 远程顾问对话脚本 中, Round 1 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/DIALOGUE.md 的「Round 1」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/DIALOGUE.md
+  section: Round 1
+- type: concept
+  question: 在 Control Plane Failure 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 的「概述」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  section: 概述
+- type: concept
+  question: 在 Control Plane Failure 中, 快速诊断 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 的「快速诊断」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  section: 快速诊断
+- type: concept
+  question: 在 Control Plane Failure 中, 修复动作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 的「修复动作」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  section: 修复动作
+- type: concept
+  question: 在 Control Plane Failure 中, 验证修复 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 的「验证修复」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  section: 验证修复
+- type: concept
+  question: 在 Control Plane Failure 中, 远程顾问信息收集 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 的「远程顾问信息收集」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  section: 远程顾问信息收集
+- type: operation
+  question: '如何执行与 Control Plane Failure 相关的操作: ./scripts/diagnose-quick.sh <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  command: ./scripts/diagnose-quick.sh <namespace>
+- type: operation
+  question: '如何执行与 Control Plane Failure 相关的操作: ./scripts/verify-control-plane.sh <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/SKILL.md
+  command: ./scripts/verify-control-plane.sh <namespace>
+- type: concept
+  question: 在 K8S Control Plane 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Control Plane 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Control Plane Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Control Plane Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Control Plane Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Control Plane Failure Remediation Playbook 相关的操作: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout
+    -e?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md
+  command: openssl x509 -in /etc/kubernetes/pki/apiserver.crt -noout -enddate
+- type: operation
+  question: '如何执行与 Control Plane Failure Remediation Playbook 相关的操作: kubeadm certs renew all?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md
+  command: kubeadm certs renew all
+- type: operation
+  question: '如何执行与 Control Plane Failure Remediation Playbook 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/reference/remediation-playbook.md
+  command: kubeadm certs check-expiration
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-control-plane/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-control-plane/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 K8s Deployment Rollout Failure - 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/DIALOGUE.md
+  section: 对话入口
+- type: comparison
+  question: K8s Deployment Rollout Failure - 远程顾问对话脚本 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/DIALOGUE.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/DIALOGUE.md
+- type: concept
+  question: 在 K8s Deployment Rollout Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Deployment Rollout Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Deployment Rollout Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Deployment Rollout Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Deployment Rollout Failure 诊断与修复 中, 根因概览 (7 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md 的「根因概览 (7 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md
+  section: 根因概览 (7 种)
+- type: concept
+  question: 在 K8S Deployment Rollout 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Deployment Rollout 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Deployment Rollout Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Deployment Rollout Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Deployment Rollout Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Deployment Rollout Remediation Playbook 相关的操作: kubectl top nodes?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md
+  command: kubectl top nodes
+- type: operation
+  question: '如何执行与 Deployment Rollout Remediation Playbook 相关的操作: kubectl scale deployment/<name> --replicas=2 -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md
+  command: kubectl scale deployment/<name> --replicas=2 -n <namespace>
+- type: operation
+  question: '如何执行与 Deployment Rollout Remediation Playbook 相关的操作: kubectl get deployment <name> -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/reference/remediation-playbook.md
+  command: kubectl get deployment <name> -n <namespace>
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-deployment-rollout/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-deployment-rollout/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 DNS解析问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 DNS解析问题 — 远程顾问对话脚本 中, Round 1：快速定位问题层级 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md 的「Round 1：快速定位问题层级」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md
+  section: Round 1：快速定位问题层级
+- type: operation
+  question: '如何执行与 DNS解析问题 — 远程顾问对话脚本 相关的操作: > kubectl exec -it <pod-name> -n <namespace> -- nslookup kub?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md
+  command: '> kubectl exec -it <pod-name> -n <namespace> -- nslookup kubernetes.default'
+- type: operation
+  question: '如何执行与 DNS解析问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods -n kube-system -l k8s-app=kube-dns?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md
+  command: '> kubectl get pods -n kube-system -l k8s-app=kube-dns'
+- type: operation
+  question: '如何执行与 DNS解析问题 — 远程顾问对话脚本 相关的操作: > kubectl exec -it <pod-name> -n <namespace> -- cat /etc/res?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/DIALOGUE.md
+  command: '> kubectl exec -it <pod-name> -n <namespace> -- cat /etc/resolv.conf'
+- type: concept
+  question: 在 DNS 解析问题诊断与修复 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md 的「概述」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md
+  section: 概述
+- type: concept
+  question: 在 DNS 解析问题诊断与修复 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md 的「症状识别」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md
+  section: 症状识别
+- type: concept
+  question: 在 DNS 解析问题诊断与修复 中, 快速诊断 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md 的「快速诊断」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md
+  section: 快速诊断
+- type: concept
+  question: 在 DNS 解析问题诊断与修复 中, 修复动作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md 的「修复动作」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md
+  section: 修复动作
+- type: operation
+  question: '如何执行与 DNS 解析问题诊断与修复 相关的操作: ./scripts/diagnose-quick.sh <namespace> [pod-name] [test-dom?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md
+  command: ./scripts/diagnose-quick.sh <namespace> [pod-name] [test-domain]
+- type: operation
+  question: '如何执行与 DNS 解析问题诊断与修复 相关的操作: ./scripts/verify-dns.sh <namespace> [pod-name] [test-domain]?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/SKILL.md
+  command: ./scripts/verify-dns.sh <namespace> [pod-name] [test-domain]
+- type: concept
+  question: 在 K8S Dns Failure 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Dns Failure 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 dns failure Remediation Playbook 中, 修复步骤 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/reference/remediation-playbook.md 的「修复步骤」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/reference/remediation-playbook.md
+  section: 修复步骤
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-dns-failure/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-dns-failure/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 K8S Headless Service 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-headless-service/index.md 的「概览」章节。
+  source: skills/09-技能体系/skill-set/k8s-headless-service/index.md
+  section: 概览
+- type: concept
+  question: 在 K8S Hpa 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-hpa/index.md 的「概览」章节。
+  source: skills/09-技能体系/skill-set/k8s-hpa/index.md
+  section: 概览
+- type: concept
+  question: 在 镜像拉取问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md
+  section: 对话入口
+- type: operation
+  question: '如何执行与 镜像拉取问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods --all-namespaces | grep -E "ImagePullBack?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md
+  command: '> kubectl get pods --all-namespaces | grep -E "ImagePullBackOff|ErrImagePull|Pending"'
+- type: operation
+  question: '如何执行与 镜像拉取问题 — 远程顾问对话脚本 相关的操作: > kubectl get events --all-namespaces --field-selector reaso?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md
+  command: '> kubectl get events --all-namespaces --field-selector reason=Failed | grep -i "pull|image|registry"'
+- type: operation
+  question: '如何执行与 镜像拉取问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods --all-namespaces | grep "Init:"?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md
+  command: '> kubectl get pods --all-namespaces | grep "Init:"'
+- type: best_practice
+  question: 关于 镜像拉取问题 — 远程顾问对话脚本, 有什么最佳实践?
+  answer: '> 1. **立即止损**：如果可能，将已有镜像缓存的节点标记为可调度，或临时切换到备用镜像仓库'
+  source: skills/09-技能体系/skill-set/k8s-image-pull/DIALOGUE.md
+- type: concept
+  question: 在 K8s Image Pull Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Image Pull Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Image Pull Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Image Pull Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Image Pull Failure 诊断与修复 中, 根因概览 (6 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md 的「根因概览 (6 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/SKILL.md
+  section: 根因概览 (6 种)
+- type: concept
+  question: 在 K8S Image Pull 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Image Pull 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Image Pull Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Image Pull Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Image Pull Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Image Pull Failure Remediation Playbook 相关的操作: kubectl get pod <pod> -n <ns> -o jsonpath=''{.spec.containers?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md
+  command: kubectl get pod <pod> -n <ns> -o jsonpath='{.spec.containers[*].image}'
+- type: operation
+  question: '如何执行与 Image Pull Failure Remediation Playbook 相关的操作: kubectl set image deployment/<name> <container>=<correct-ima?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md
+  command: kubectl set image deployment/<name> <container>=<correct-image>:<tag> -n <namespace>
+- type: operation
+  question: '如何执行与 Image Pull Failure Remediation Playbook 相关的操作: kubectl get pod <pod> -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/reference/remediation-playbook.md
+  command: kubectl get pod <pod> -n <namespace>
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-image-pull/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-image-pull/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 Ingress网关问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 Ingress网关问题 — 远程顾问对话脚本 中, Round 1 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md 的「Round 1」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md
+  section: Round 1
+- type: troubleshooting
+  question: 如何排查 Ingress网关问题 — 远程顾问对话脚本 相关的故障?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md 的故障排查章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/DIALOGUE.md
+- type: concept
+  question: 在 K8s Ingress Gateway Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Ingress Gateway Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Ingress Gateway Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Ingress Gateway Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Ingress Gateway Failure 诊断与修复 中, 根因概览 (6 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md 的「根因概览 (6 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/SKILL.md
+  section: 根因概览 (6 种)
+- type: concept
+  question: 在 K8S Ingress Gateway 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Ingress Gateway 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Ingress Gateway Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Ingress Gateway Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Ingress Gateway Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Ingress Gateway Failure Remediation Playbook 相关的操作: kubectl get ingress <name> -n <namespace> -o yaml?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md
+  command: kubectl get ingress <name> -n <namespace> -o yaml
+- type: operation
+  question: '如何执行与 Ingress Gateway Failure Remediation Playbook 相关的操作: kubectl patch ingress <name> -n <namespace> --type=''json''
+    -p?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md
+  command: kubectl patch ingress <name> -n <namespace> --type='json' -p='
+- type: operation
+  question: '如何执行与 Ingress Gateway Failure Remediation Playbook 相关的操作: kubectl get ingress <name> -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/reference/remediation-playbook.md
+  command: kubectl get ingress <name> -n <namespace>
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-ingress-gateway/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-ingress-gateway/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 日志流水线问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md
+  section: 对话入口
+- type: operation
+  question: '如何执行与 日志流水线问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods -n logging?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md
+  command: '> kubectl get pods -n logging'
+- type: operation
+  question: '如何执行与 日志流水线问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods -n logging | grep -E "elastic|loki|es-"?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md
+  command: '> kubectl get pods -n logging | grep -E "elastic|loki|es-"'
+- type: operation
+  question: '如何执行与 日志流水线问题 — 远程顾问对话脚本 相关的操作: > kubectl get configmap -n logging | grep -E "fluent|parser|?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md
+  command: '> kubectl get configmap -n logging | grep -E "fluent|parser|config"'
+- type: comparison
+  question: 日志流水线问题 — 远程顾问对话脚本 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/DIALOGUE.md
+- type: concept
+  question: 在 K8s Logging Pipeline Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Logging Pipeline Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Logging Pipeline Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Logging Pipeline Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Logging Pipeline Failure 诊断与修复 中, 根因概览 (5 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md 的「根因概览 (5 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/SKILL.md
+  section: 根因概览 (5 种)
+- type: concept
+  question: 在 K8S Logging Pipeline 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Logging Pipeline 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Logging Pipeline Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Logging Pipeline Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Logging Pipeline Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Logging Pipeline Failure Remediation Playbook 相关的操作: kubectl get configmap -n <logging-namespace> | grep
+    fluent?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md
+  command: kubectl get configmap -n <logging-namespace> | grep fluent
+- type: operation
+  question: '如何执行与 Logging Pipeline Failure Remediation Playbook 相关的操作: kubectl patch configmap fluent-bit-config -n <namespace>
+    --t?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md
+  command: kubectl patch configmap fluent-bit-config -n <namespace> --type='json' -p='
+- type: operation
+  question: '如何执行与 Logging Pipeline Failure Remediation Playbook 相关的操作: kubectl logs -n <namespace> -l app=fluent-bit --tail=20?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/reference/remediation-playbook.md
+  command: kubectl logs -n <namespace> -l app=fluent-bit --tail=20
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-logging-pipeline/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-logging-pipeline/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 监控告警问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md
+  section: 对话入口
+- type: operation
+  question: '如何执行与 监控告警问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods -n monitoring -l app=alertmanager?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md
+  command: '> kubectl get pods -n monitoring -l app=alertmanager'
+- type: operation
+  question: '如何执行与 监控告警问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods -n monitoring?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md
+  command: '> kubectl get pods -n monitoring'
+- type: operation
+  question: '如何执行与 监控告警问题 — 远程顾问对话脚本 相关的操作: > kubectl get pods -n monitoring -l app=prometheus?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/DIALOGUE.md
+  command: '> kubectl get pods -n monitoring -l app=prometheus'
+- type: concept
+  question: 在 K8s Monitoring & Alerting Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Monitoring & Alerting Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Monitoring & Alerting Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Monitoring & Alerting Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Monitoring & Alerting Failure 诊断与修复 中, 根因概览 (6 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md 的「根因概览 (6 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/SKILL.md
+  section: 根因概览 (6 种)
+- type: concept
+  question: 在 K8S Monitoring Alerting 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Monitoring Alerting 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Monitoring & Alerting Failure Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Monitoring & Alerting Failure Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Monitoring & Alerting Failure Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Monitoring & Alerting Failure Remediation Playbook 相关的操作: kubectl get servicemonitor <name> -n <namespace>
+    -o yaml?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md
+  command: kubectl get servicemonitor <name> -n <namespace> -o yaml
+- type: operation
+  question: '如何执行与 Monitoring & Alerting Failure Remediation Playbook 相关的操作: kubectl patch servicemonitor <name> -n <namespace>
+    --type=''j?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md
+  command: kubectl patch servicemonitor <name> -n <namespace> --type='json' -p='
+- type: operation
+  question: '如何执行与 Monitoring & Alerting Failure Remediation Playbook 相关的操作: kubectl port-forward svc/prometheus -n monitoring
+    9090:9090?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/reference/remediation-playbook.md
+  command: kubectl port-forward svc/prometheus -n monitoring 9090:9090
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-monitoring-alerting/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-monitoring-alerting/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 K8S Network Policy 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-network-policy/index.md 的「概览」章节。
+  source: skills/09-技能体系/skill-set/k8s-network-policy/index.md
+  section: 概览
+- type: concept
+  question: 在 Node NotReady 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 Node NotReady 远程顾问对话脚本 中, Round 1：快速确认 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md 的「Round 1：快速确认」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md
+  section: Round 1：快速确认
+- type: concept
+  question: 在 K8s Node NotReady 深度解析 中, 每种根因的「为什么」 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md 的「每种根因的「为什么」」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md
+  section: 每种根因的「为什么」
+- type: concept
+  question: 在 K8s Node NotReady 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Node NotReady 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Node NotReady 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Node NotReady 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Node NotReady 诊断与修复 中, 根因概览 (12 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md 的「根因概览 (12 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/SKILL.md
+  section: 根因概览 (12 种)
+- type: concept
+  question: 在 Skills + FTA 使用指南 — k8s-node-notready & node-fta 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md
+  section: 目录
+- type: concept
+  question: 在 Skills + FTA 使用指南 — k8s-node-notready & node-fta 中, 系统架构概述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md 的「系统架构概述」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md
+  section: 系统架构概述
+- type: concept
+  question: 在 Skills + FTA 使用指南 — k8s-node-notready & node-fta 中, 文件清单与职责 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md 的「文件清单与职责」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/USAGE-GUIDE.md
+  section: 文件清单与职责
+- type: concept
+  question: 在 升级消息模板 / Escalation Message Template 中, 消息模板 / Message Template 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/assets/escalation-template.md 的「消息模板 / Message Template」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/assets/escalation-template.md
+  section: 消息模板 / Message Template
+- type: concept
+  question: 在 升级消息模板 / Escalation Message Template 中, 自动升级条件 / Auto-Escalation Conditions 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/assets/escalation-template.md 的「自动升级条件 / Auto-Escalation Conditions」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/assets/escalation-template.md
+  section: 自动升级条件 / Auto-Escalation Conditions
+- type: concept
+  question: 在 升级消息模板 / Escalation Message Template 中, 交接信息包清单 / Handoff Information Package Checklist 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/assets/escalation-template.md 的「交接信息包清单 / Handoff Information
+    Package Checklist」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/assets/escalation-template.md
+  section: 交接信息包清单 / Handoff Information Package Checklist
+- type: concept
+  question: 在 Assets 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/assets/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/assets/index.md
+  section: 文档
+- type: concept
+  question: 在 K8S Node Notready 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Node Notready 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/index.md
+  section: 文档
+- type: concept
+  question: 在 诊断工作流 / Diagnostic Workflow 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md
+  section: 目录
+- type: concept
+  question: '在 诊断工作流 / Diagnostic Workflow 中, Phase 1: 快速检查（只读，零风险） 是什么?'
+  answer: '参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md 的「Phase 1: 快速检查（只读，零风险）」章节。'
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md
+  section: 'Phase 1: 快速检查（只读，零风险）'
+- type: operation
+  question: '如何执行与 诊断工作流 / Diagnostic Workflow 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md
+  command: kubectl get nodes -o wide
+- type: operation
+  question: '如何执行与 诊断工作流 / Diagnostic Workflow 相关的操作: kubectl describe node <node-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md
+  command: kubectl describe node <node-name>
+- type: operation
+  question: '如何执行与 诊断工作流 / Diagnostic Workflow 相关的操作: kubectl get events --field-selector involvedObject.kind=Node?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md
+  command: kubectl get events --field-selector involvedObject.kind=Node,involvedObject.name=<node-name> \
+- type: comparison
+  question: 诊断工作流 / Diagnostic Workflow 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/diagnostic-workflow.md
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 node notready Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 node notready Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 node notready Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl get node <node-name> -o jsonpath=''{.spec.unschedulab?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  command: kubectl get node <node-name> -o jsonpath='{.spec.unschedulable}'
+- type: operation
+  question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl uncordon <node-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  command: kubectl uncordon <node-name>
+- type: operation
+  question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl get node <node-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  command: kubectl get node <node-name>
+- type: troubleshooting
+  question: 如何排查 node notready Remediation Playbook 相关的故障?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的故障排查章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+- type: comparison
+  question: node notready Remediation Playbook 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+- type: concept
+  question: 在 根因分类 / Root Cause Catalog 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md
+  section: 目录
+- type: concept
+  question: 在 根因分类 / Root Cause Catalog 中, 根因总览表 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md 的「根因总览表」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md
+  section: 根因总览表
+- type: concept
+  question: 在 根因分类 / Root Cause Catalog 中, 详细根因描述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md 的「详细根因描述」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md
+  section: 详细根因描述
+- type: concept
+  question: 在 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md
+  section: 目录
+- type: concept
+  question: 在 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution 中, 版本兼容矩阵 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md 的「版本兼容矩阵」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md
+  section: 版本兼容矩阵
+- type: operation
+  question: '如何执行与 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution 相关的操作: iptables -t nat -L KUBE-SERVICES 2>/dev/null
+    | head -5?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md
+  command: iptables -t nat -L KUBE-SERVICES 2>/dev/null | head -5
+- type: comparison
+  question: 版本兼容矩阵与知识进化 / Version Matrix & Knowledge Evolution 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/reference/version-matrix.md
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 K8s Performance Bottleneck 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 K8s Performance Bottleneck 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Performance Bottleneck 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Performance Bottleneck 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Performance Bottleneck 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Performance Bottleneck 诊断与修复 中, 根因概览 (6 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/SKILL.md 的「根因概览 (6 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/SKILL.md
+  section: 根因概览 (6 种)
+- type: concept
+  question: 在 K8S Performance 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Performance 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Performance Bottleneck Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Performance Bottleneck Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 Performance Bottleneck Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 Performance Bottleneck Remediation Playbook 相关的操作: kubectl top pod <pod> -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md
+  command: kubectl top pod <pod> -n <namespace>
+- type: operation
+  question: '如何执行与 Performance Bottleneck Remediation Playbook 相关的操作: kubectl patch deployment <name> -n <namespace> --type=''json''?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-performance/reference/remediation-playbook.md
+  command: kubectl patch deployment <name> -n <namespace> --type='json' -p='
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-performance/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-performance/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 Pod CrashLoopBackOff 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 Pod CrashLoopBackOff 远程顾问对话脚本 中, Round 1：快速状态确认 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md 的「Round 1：快速状态确认」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md
+  section: Round 1：快速状态确认
+- type: best_practice
+  question: 关于 Pod CrashLoopBackOff 远程顾问对话脚本, 有什么最佳实践?
+  answer: 1) 如果应用支持启动重试，可以增加 `initialDelaySeconds` 和 `failureThreshold` 让 Pod 有更多时间等待依赖恢复；2) 如果业务可以降级，可以临时将该 Deployment 的副本数缩为
+    0，等依赖恢复后再扩容。请告诉我你的选择。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/DIALOGUE.md
+- type: concept
+  question: 在 Pod CrashLoopBackOff / OOMKilled 深度解析 中, Exit Code 的完整根因链 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md 的「Exit Code 的完整根因链」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md
+  section: Exit Code 的完整根因链
+- type: comparison
+  question: Pod CrashLoopBackOff / OOMKilled 深度解析 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL-DEEP-DIVE.md
+- type: concept
+  question: 在 Pod CrashLoopBackOff / OOMKilled 诊断与修复 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 的「概述」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  section: 概述
+- type: concept
+  question: 在 Pod CrashLoopBackOff / OOMKilled 诊断与修复 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 的「症状识别」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  section: 症状识别
+- type: concept
+  question: 在 Pod CrashLoopBackOff / OOMKilled 诊断与修复 中, 快速诊断 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 的「快速诊断」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  section: 快速诊断
+- type: concept
+  question: 在 Pod CrashLoopBackOff / OOMKilled 诊断与修复 中, 深度诊断 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 的「深度诊断」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  section: 深度诊断
+- type: concept
+  question: 在 Pod CrashLoopBackOff / OOMKilled 诊断与修复 中, 修复动作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 的「修复动作」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  section: 修复动作
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff / OOMKilled 诊断与修复 相关的操作: ./scripts/diagnose-quick.sh <namespace> <pod-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  command: ./scripts/diagnose-quick.sh <namespace> <pod-name>
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff / OOMKilled 诊断与修复 相关的操作: ./scripts/diagnose-deep.sh <namespace> <pod-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  command: ./scripts/diagnose-deep.sh <namespace> <pod-name>
+- type: operation
+  question: '如何执行与 Pod CrashLoopBackOff / OOMKilled 诊断与修复 相关的操作: ./scripts/verify-pod.sh <namespace> <pod-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/SKILL.md
+  command: ./scripts/verify-pod.sh <namespace> <pod-name>
+- type: concept
+  question: 在 K8S Pod Crashloop 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Pod Crashloop 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 pod crashloop Remediation Playbook 中, 修复流程图 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/reference/remediation-playbook.md 的「修复流程图」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/reference/remediation-playbook.md
+  section: 修复流程图
+- type: concept
+  question: 在 pod crashloop Remediation Playbook 中, 具体修复步骤 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/reference/remediation-playbook.md 的「具体修复步骤」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/reference/remediation-playbook.md
+  section: 具体修复步骤
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pod-crashloop/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-pod-crashloop/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 Node NotReady 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 Node NotReady 远程顾问对话脚本 中, Round 1：快速确认 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md 的「Round 1：快速确认」章节。
+  source: skills/09-技能体系/skill-set/k8s-node-notready/DIALOGUE.md
+  section: Round 1：快速确认
+- type: concept
+  question: 在 K8S 运维诊断技能库 (02-ai-agents) 中, 技能覆盖范围 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md 的「技能覆盖范围」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md
+  section: 技能覆盖范围
+- type: concept
+  question: 在 K8S 运维诊断技能库 (02-ai-agents) 中, Pod 故障诊断 SOP 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md 的「Pod 故障诊断 SOP」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md
+  section: Pod 故障诊断 SOP
+- type: troubleshooting
+  question: 如何排查 K8S 运维诊断技能库 (02-ai-agents) 相关的故障?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md 的故障排查章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md
+- type: comparison
+  question: K8S 运维诊断技能库 (02-ai-agents) 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/SKILL.md
+- type: concept
+  question: 在 K8S Pvc Storage 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Pvc Storage 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 node notready Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 node notready Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 node notready Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl get node <node-name> -o jsonpath=''{.spec.unschedulab?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  command: kubectl get node <node-name> -o jsonpath='{.spec.unschedulable}'
+- type: operation
+  question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl uncordon <node-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  command: kubectl uncordon <node-name>
+- type: operation
+  question: '如何执行与 node notready Remediation Playbook 相关的操作: kubectl get node <node-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+  command: kubectl get node <node-name>
+- type: troubleshooting
+  question: 如何排查 node notready Remediation Playbook 相关的故障?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 的故障排查章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+- type: comparison
+  question: node notready Remediation Playbook 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/reference/remediation-playbook.md
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-pvc-storage/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-pvc-storage/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 RBAC与配额问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 RBAC与配额问题 — 远程顾问对话脚本 中, Round 1 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md 的「Round 1」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md
+  section: Round 1
+- type: operation
+  question: '如何执行与 RBAC与配额问题 — 远程顾问对话脚本 相关的操作: aliyun ram ListUsers?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/DIALOGUE.md
+  command: aliyun ram ListUsers
+- type: concept
+  question: 在 K8s RBAC & Quota Failure 诊断与修复 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s RBAC & Quota Failure 诊断与修复 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s RBAC & Quota Failure 诊断与修复 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s RBAC & Quota Failure 诊断与修复 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s RBAC & Quota Failure 诊断与修复 中, 根因概览 (6 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md 的「根因概览 (6 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md
+  section: 根因概览 (6 种)
+- type: operation
+  question: '如何执行与 K8s RBAC & Quota Failure 诊断与修复 相关的操作: kubectl delete pods -n tenant-a --field-selector=status.phas?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/SKILL.md
+  command: kubectl delete pods -n tenant-a --field-selector=status.phase=Succeeded
+- type: concept
+  question: 在 K8S Rbac Quota 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Rbac Quota 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 RBAC & Quota Remediation Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 RBAC & Quota Remediation Playbook 中, 风险级别说明 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md 的「风险级别说明」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md
+  section: 风险级别说明
+- type: concept
+  question: 在 RBAC & Quota Remediation Playbook 中, 修复操作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md 的「修复操作」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md
+  section: 修复操作
+- type: operation
+  question: '如何执行与 RBAC & Quota Remediation Playbook 相关的操作: kubectl auth can-i <verb> <resource> --as=system:serviceacco?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md
+  command: kubectl auth can-i <verb> <resource> --as=system:serviceaccount:<ns>:<sa> -n <ns>
+- type: operation
+  question: '如何执行与 RBAC & Quota Remediation Playbook 相关的操作: kubectl patch role <role-name> -n <namespace> --type=''json''
+    ?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/reference/remediation-playbook.md
+  command: kubectl patch role <role-name> -n <namespace> --type='json' -p='
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-rbac-quota/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-rbac-quota/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 K8S Scheduler 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-scheduler/index.md 的「概览」章节。
+  source: skills/09-技能体系/skill-set/k8s-scheduler/index.md
+  section: 概览
+- type: concept
+  question: 在 K8s Security Incident Response 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/DIALOGUE.md
+  section: 对话入口
+- type: concept
+  question: 在 K8s Security Incident Response 诊断与响应 中, 何时使用此 Skill 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md 的「何时使用此 Skill」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md
+  section: 何时使用此 Skill
+- type: concept
+  question: 在 K8s Security Incident Response 诊断与响应 中, 快速分级（2 分钟内完成） 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md 的「快速分级（2 分钟内完成）」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md
+  section: 快速分级（2 分钟内完成）
+- type: concept
+  question: 在 K8s Security Incident Response 诊断与响应 中, 执行流程 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md 的「执行流程」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md
+  section: 执行流程
+- type: concept
+  question: 在 K8s Security Incident Response 诊断与响应 中, 可用脚本 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md 的「可用脚本」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md
+  section: 可用脚本
+- type: concept
+  question: 在 K8s Security Incident Response 诊断与响应 中, 根因概览 (5 种) 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md 的「根因概览 (5 种)」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/SKILL.md
+  section: 根因概览 (5 种)
+- type: concept
+  question: 在 K8S Security Incident 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Security Incident 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 Security Incident Response Playbook 中, 目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 的「目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  section: 目录
+- type: concept
+  question: 在 Security Incident Response Playbook 中, 响应阶段 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 的「响应阶段」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  section: 响应阶段
+- type: concept
+  question: 在 Security Incident Response Playbook 中, 遏制措施 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 的「遏制措施」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  section: 遏制措施
+- type: concept
+  question: 在 Security Incident Response Playbook 中, 验证确认 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 的「验证确认」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  section: 验证确认
+- type: operation
+  question: '如何执行与 Security Incident Response Playbook 相关的操作: kubectl get nodes?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  command: kubectl get nodes
+- type: operation
+  question: '如何执行与 Security Incident Response Playbook 相关的操作: kubectl cordon <infected-node>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  command: kubectl cordon <infected-node>
+- type: operation
+  question: '如何执行与 Security Incident Response Playbook 相关的操作: kubectl uncordon <infected-node>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/reference/remediation-playbook.md
+  command: kubectl uncordon <infected-node>
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-security-incident/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-security-incident/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 服务连通性问题 — 远程顾问对话脚本 中, 对话入口 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md 的「对话入口」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md
+  section: 对话入口
+- type: operation
+  question: '如何执行与 服务连通性问题 — 远程顾问对话脚本 相关的操作: > kubectl get endpoints -n <namespace>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md
+  command: '> kubectl get endpoints -n <namespace>'
+- type: operation
+  question: '如何执行与 服务连通性问题 — 远程顾问对话脚本 相关的操作: > kubectl get svc -n <namespace> | grep -E "NodePort|LoadBal?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md
+  command: '> kubectl get svc -n <namespace> | grep -E "NodePort|LoadBalancer"'
+- type: operation
+  question: '如何执行与 服务连通性问题 — 远程顾问对话脚本 相关的操作: > # 查看 Service 的 LoadBalancer ID（ACK通过注解关联SLB）?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md
+  command: '> # 查看 Service 的 LoadBalancer ID（ACK通过注解关联SLB）'
+- type: best_practice
+  question: 关于 服务连通性问题 — 远程顾问对话脚本, 有什么最佳实践?
+  answer: '> 1. **立即止损**：如果可能，临时将客户端切换到直接访问 Pod IP，或增加健康检查容错时间'
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/DIALOGUE.md
+- type: concept
+  question: 在 [[service|Service]] 连通性问题诊断与修复 中, 概述 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 的「概述」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  section: 概述
+- type: concept
+  question: 在 [[service|Service]] 连通性问题诊断与修复 中, 症状识别 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 的「症状识别」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  section: 症状识别
+- type: concept
+  question: 在 [[service|Service]] 连通性问题诊断与修复 中, 修复动作 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 的「修复动作」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  section: 修复动作
+- type: concept
+  question: 在 [[service|Service]] 连通性问题诊断与修复 中, 验证修复 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 的「验证修复」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  section: 验证修复
+- type: operation
+  question: '如何执行与 [[service|Service]] 连通性问题诊断与修复 相关的操作: ./scripts/verify-service.sh <namespace> <service-name>?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  command: ./scripts/verify-service.sh <namespace> <service-name>
+- type: operation
+  question: '如何执行与 [[service|Service]] 连通性问题诊断与修复 相关的操作: iptables -t nat -L KUBE-SERVICES -n --line-numbers | grep <c?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  command: iptables -t nat -L KUBE-SERVICES -n --line-numbers | grep <cluster-ip>
+- type: operation
+  question: '如何执行与 [[service|Service]] 连通性问题诊断与修复 相关的操作: ipvsadm -Ln?'
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md 中的操作步骤。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/SKILL.md
+  command: ipvsadm -Ln
+- type: concept
+  question: 在 K8S Service Connectivity 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Service Connectivity 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/index.md
+  section: 文档
+- type: concept
+  question: 在 Reference 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/reference/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/reference/index.md
+  section: 文档
+- type: concept
+  question: 在 service connectivity Remediation Playbook 中, 修复步骤 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/reference/remediation-playbook.md 的「修复步骤」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/reference/remediation-playbook.md
+  section: 修复步骤
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-connectivity/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-connectivity/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 Service 无法访问 深度解析 中, 决策树：Service 为什么不可达 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md 的「决策树：Service 为什么不可达」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md
+  section: 决策树：Service 为什么不可达
+- type: comparison
+  question: Service 无法访问 深度解析 中有哪些技术对比?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md 中的对比分析。
+  source: skills/09-技能体系/skill-set/k8s-service-unreachable/SKILL-DEEP-DIVE.md
+- type: concept
+  question: 在 K8S Service Unreachable 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-unreachable/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-unreachable/index.md
+  section: 子目录
+- type: concept
+  question: 在 K8S Service Unreachable 中, 文档 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-unreachable/index.md 的「文档」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-unreachable/index.md
+  section: 文档
+- type: concept
+  question: 在 Scripts 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skill-set/k8s-service-unreachable/scripts/index.md 的「内容」章节。
+  source: skills/09-技能体系/skill-set/k8s-service-unreachable/scripts/index.md
+  section: 内容
+- type: concept
+  question: 在 Skills Run 中, 概览 是什么?
+  answer: 参见 skills/09-技能体系/skills-run/index.md 的「概览」章节。
+  source: skills/09-技能体系/skills-run/index.md
+  section: 概览
+- type: concept
+  question: 在 Skills Run 中, 子目录 是什么?
+  answer: 参见 skills/09-技能体系/skills-run/index.md 的「子目录」章节。
+  source: skills/09-技能体系/skills-run/index.md
+  section: 子目录
+- type: concept
+  question: 在 Scenarios 中, 内容 是什么?
+  answer: 参见 skills/09-技能体系/skills-run/scenarios/index.md 的「内容」章节。
+  source: skills/09-技能体系/skills-run/scenarios/index.md
+  section: 内容

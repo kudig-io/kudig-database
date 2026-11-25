@@ -140,7 +140,7 @@ related_topics:
 | ESSD PL2 | 高性能 | 100,000 | 700 MB/s | 数据库、高 IO |
 | ESSD PL3 | 极致 | 1,000,000 | 4,000 MB/s | 核心数据库 |
 
-**[[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 配置** 包括节点名称模式、标签（Labels）、污点（Taints）和用户数据（User Data）。标签用于调度——Pod 可以通过 nodeSelector 或 nodeAffinity 指定调度到带有特定标签的节点池。污点用于排斥——没有设置对应 Toleration 的 Pod 不会被调度到该节点池。
+**[[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 配置** 包括节点名称模式、标签（Labels）、污点（Taints）和用户数据（User Data）。标签用于调度——Pod 可以通过 nodeSelector 或 nodeAffinity 指定调度到带有特定标签的节点池。污点用于排斥——没有设置对应 Toleration 的 Pod 不会被调度到该节点池。
 
 ### 托管节点池 vs 自管理节点池
 
@@ -821,8 +821,8 @@ resource "alicloud_cs_kubernetes_node_pool" "app_pool" {
 
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 - [ECS 计算资源](001-ack-ecs-compute.md)
-- [集群自动伸缩排障](../../../../../../wiki/19-故障诊断/03-基础设施排障/04-cluster-autoscaler-troubleshooting.md)
-- [K8s 架构与组件](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
+- [集群自动伸缩排障](../../../../../../wiki/17-故障诊断/03-基础设施排障/04-cluster-autoscaler-troubleshooting.md)
+- [K8s 架构与组件](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
 
 
 <!-- risk-assessed -->

@@ -1,0 +1,1489 @@
+domain: 最佳实践
+total_questions: 303
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 Kubernetes 通用最佳实践参考 (best-practices) 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/common-best-practices.md 的「概述」章节。
+  source: wiki/18-最佳实践/01-best-practices/common-best-practices.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 通用最佳实践参考 (best-practices) 中, 通用最佳实践原则 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/common-best-practices.md 的「通用最佳实践原则」章节。
+  source: wiki/18-最佳实践/01-best-practices/common-best-practices.md
+  section: 通用最佳实践原则
+- type: concept
+  question: 在 Best Practices 中, 概览 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/index.md 的「概览」章节。
+  source: wiki/18-最佳实践/01-best-practices/index.md
+  section: 概览
+- type: concept
+  question: 在 Best Practices 中, 子目录 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/index.md 的「子目录」章节。
+  source: wiki/18-最佳实践/01-best-practices/index.md
+  section: 子目录
+- type: concept
+  question: 在 Best Practices 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/01-best-practices/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 部署策略最佳实践 [operations] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/operations/deployment.md 的「概述」章节。
+  source: wiki/18-最佳实践/01-best-practices/operations/deployment.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 部署策略最佳实践 [operations] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/operations/deployment.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/01-best-practices/operations/deployment.md
+  section: 问题描述
+- type: best_practice
+  question: 关于 Kubernetes 部署策略最佳实践 [operations], 有什么最佳实践?
+  answer: Infrastructure]] — Cross-reference
+  source: wiki/18-最佳实践/01-best-practices/operations/deployment.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes 部署策略最佳实践 [operations] 相关的故障?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/operations/deployment.md 的故障排查章节。
+  source: wiki/18-最佳实践/01-best-practices/operations/deployment.md
+- type: comparison
+  question: Kubernetes 部署策略最佳实践 [operations] 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/operations/deployment.md 中的对比分析。
+  source: wiki/18-最佳实践/01-best-practices/operations/deployment.md
+- type: concept
+  question: 在 Operations 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/operations/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/01-best-practices/operations/index.md
+  section: 文档
+- type: concept
+  question: 在 Security 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/security/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/01-best-practices/security/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 密钥管理最佳实践 [security] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/security/secrets-management.md 的「概述」章节。
+  source: wiki/18-最佳实践/01-best-practices/security/secrets-management.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 密钥管理最佳实践 [security] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/01-best-practices/security/secrets-management.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/01-best-practices/security/secrets-management.md
+  section: 问题描述
+- type: concept
+  question: 在 topic-deployment MOC 中, 专题概述 是什么?
+  answer: 参见 wiki/18-最佳实践/02-deployment/MOC.md 的「专题概述」章节。
+  source: wiki/18-最佳实践/02-deployment/MOC.md
+  section: 专题概述
+- type: concept
+  question: 在 topic-deployment MOC 中, 文档清单 是什么?
+  answer: 参见 wiki/18-最佳实践/02-deployment/MOC.md 的「文档清单」章节。
+  source: wiki/18-最佳实践/02-deployment/MOC.md
+  section: 文档清单
+- type: concept
+  question: 在 topic-deployment MOC 中, 统计信息 是什么?
+  answer: 参见 wiki/18-最佳实践/02-deployment/MOC.md 的「统计信息」章节。
+  source: wiki/18-最佳实践/02-deployment/MOC.md
+  section: 统计信息
+- type: concept
+  question: 在 topic-deployment MOC 中, 部署最佳实践导航 是什么?
+  answer: 参见 wiki/18-最佳实践/02-deployment/MOC.md 的「部署最佳实践导航」章节。
+  source: wiki/18-最佳实践/02-deployment/MOC.md
+  section: 部署最佳实践导航
+- type: comparison
+  question: topic-deployment MOC 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/02-deployment/MOC.md 中的对比分析。
+  source: wiki/18-最佳实践/02-deployment/MOC.md
+- type: concept
+  question: 在 Deployment 中, 概览 是什么?
+  answer: 参见 wiki/18-最佳实践/02-deployment/index.md 的「概览」章节。
+  source: wiki/18-最佳实践/02-deployment/index.md
+  section: 概览
+- type: concept
+  question: 在 Deployment 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/02-deployment/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/02-deployment/index.md
+  section: 文档
+- type: concept
+  question: 在 Infrastructure 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/03-infrastructure/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 集群配置最佳实践 [infrastructure] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/kubernetes-cluster.md 的「概述」章节。
+  source: wiki/18-最佳实践/03-infrastructure/kubernetes-cluster.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 集群配置最佳实践 [infrastructure] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/kubernetes-cluster.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/03-infrastructure/kubernetes-cluster.md
+  section: 问题描述
+- type: concept
+  question: 在 Kubernetes 网络配置最佳实践 [infrastructure] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/networking.md 的「概述」章节。
+  source: wiki/18-最佳实践/03-infrastructure/networking.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 网络配置最佳实践 [infrastructure] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/networking.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/03-infrastructure/networking.md
+  section: 问题描述
+- type: comparison
+  question: Kubernetes 网络配置最佳实践 [infrastructure] 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/networking.md 中的对比分析。
+  source: wiki/18-最佳实践/03-infrastructure/networking.md
+- type: concept
+  question: 在 Kubernetes 存储配置最佳实践 [infrastructure] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/storage.md 的「概述」章节。
+  source: wiki/18-最佳实践/03-infrastructure/storage.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 存储配置最佳实践 [infrastructure] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/03-infrastructure/storage.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/03-infrastructure/storage.md
+  section: 问题描述
+- type: concept
+  question: 在 Observability 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/05-observability/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 日志管理最佳实践 [observability] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/logging.md 的「概述」章节。
+  source: wiki/18-最佳实践/05-observability/logging.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 日志管理最佳实践 [observability] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/logging.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/05-observability/logging.md
+  section: 问题描述
+- type: concept
+  question: 在 Kubernetes 监控最佳实践 [observability] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/monitoring.md 的「概述」章节。
+  source: wiki/18-最佳实践/05-observability/monitoring.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 监控最佳实践 [observability] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/monitoring.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/05-observability/monitoring.md
+  section: 问题描述
+- type: concept
+  question: 在 Kubernetes 分布式追踪最佳实践 [observability] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/tracing.md 的「概述」章节。
+  source: wiki/18-最佳实践/05-observability/tracing.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 分布式追踪最佳实践 [observability] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/05-observability/tracing.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/05-observability/tracing.md
+  section: 问题描述
+- type: concept
+  question: 在 Kubernetes Production Best Practices — Operations Excellence Checklist 中, 工作负载最佳实践 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/01-production-operations-excellence-checklist.md 的「工作负载最佳实践」章节。
+  source: wiki/18-最佳实践/06-operations/01-production-operations-excellence-checklist.md
+  section: 工作负载最佳实践
+- type: concept
+  question: 在 Kubernetes Production Best Practices — Operations Excellence Checklist 中, 网络最佳实践 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/01-production-operations-excellence-checklist.md 的「网络最佳实践」章节。
+  source: wiki/18-最佳实践/06-operations/01-production-operations-excellence-checklist.md
+  section: 网络最佳实践
+- type: concept
+  question: 在 Deployment 中, Role 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 的「Role」章节。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+  section: Role
+- type: concept
+  question: 在 Deployment 中, Key Features 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 的「Key Features」章节。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+  section: Key Features
+- type: concept
+  question: 在 Deployment 中, Update Strategy 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 的「Update Strategy」章节。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+  section: Update Strategy
+- type: concept
+  question: 在 Deployment 中, Conditions 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 的「Conditions」章节。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+  section: Conditions
+- type: concept
+  question: 在 Deployment 中, Related 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 的「Related」章节。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+  section: Related
+- type: operation
+  question: '如何执行与 Deployment 相关的操作: kubectl rollout status deploy/<name> -w?'
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 中的操作步骤。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+  command: kubectl rollout status deploy/<name> -w
+- type: best_practice
+  question: 关于 Deployment, 有什么最佳实践?
+  answer: Infrastructure]] — Cross-reference
+  source: wiki/18-最佳实践/06-operations/deployment.md
+- type: troubleshooting
+  question: 如何排查 Deployment 相关的故障?
+  answer: 参见 wiki/18-最佳实践/06-operations/deployment.md 的故障排查章节。
+  source: wiki/18-最佳实践/06-operations/deployment.md
+- type: concept
+  question: 在 Kubernetes 灾难恢复最佳实践 [operations] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/disaster-recovery.md 的「概述」章节。
+  source: wiki/18-最佳实践/06-operations/disaster-recovery.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 灾难恢复最佳实践 [operations] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/disaster-recovery.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/06-operations/disaster-recovery.md
+  section: 问题描述
+- type: concept
+  question: 在 Operations 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/06-operations/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 扩缩容最佳实践 [operations] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/scaling.md 的「概述」章节。
+  source: wiki/18-最佳实践/06-operations/scaling.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 扩缩容最佳实践 [operations] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/06-operations/scaling.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/06-operations/scaling.md
+  section: 问题描述
+- type: concept
+  question: 在 topic-scenarios MOC 中, 专题概述 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/MOC.md 的「专题概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/MOC.md
+  section: 专题概述
+- type: concept
+  question: 在 topic-scenarios MOC 中, 文档清单 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/MOC.md 的「文档清单」章节。
+  source: wiki/18-最佳实践/07-scenarios/MOC.md
+  section: 文档清单
+- type: concept
+  question: 在 topic-scenarios MOC 中, 统计信息 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/MOC.md 的「统计信息」章节。
+  source: wiki/18-最佳实践/07-scenarios/MOC.md
+  section: 统计信息
+- type: concept
+  question: 在 topic-scenarios MOC 中, 场景分类导航 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/MOC.md 的「场景分类导航」章节。
+  source: wiki/18-最佳实践/07-scenarios/MOC.md
+  section: 场景分类导航
+- type: troubleshooting
+  question: 如何排查 topic-scenarios MOC 相关的故障?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/MOC.md 的故障排查章节。
+  source: wiki/18-最佳实践/07-scenarios/MOC.md
+- type: concept
+  question: '在 场景: AI 基础设施运维 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/ai-infra-ops.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/ai-infra-ops.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: AI 基础设施运维 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/ai-infra-ops.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/ai-infra-ops.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: AI 基础设施运维 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/ai-infra-ops.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/ai-infra-ops.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: AI 基础设施运维 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/ai-infra-ops.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/ai-infra-ops.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: AI 基础设施运维 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/ai-infra-ops.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/ai-infra-ops.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: AI 基础设施运维 相关的操作: kubectl drain <gpu-node> --ignore-daemonsets --delete-emptyd?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/ai-infra-ops.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/ai-infra-ops.md
+  command: kubectl drain <gpu-node> --ignore-daemonsets --delete-emptydir-data
+- type: concept
+  question: '在 场景: 应用部署 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/app-deployment.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/app-deployment.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 应用部署 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/app-deployment.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/app-deployment.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 应用部署 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/app-deployment.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/app-deployment.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 应用部署 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/app-deployment.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/app-deployment.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 应用部署 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/app-deployment.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/app-deployment.md
+  section: 操作技能
+- type: comparison
+  question: '场景: 应用部署 中有哪些技术对比?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/app-deployment.md 中的对比分析。
+  source: wiki/18-最佳实践/07-scenarios/app-deployment.md
+- type: concept
+  question: '在 场景: 备份恢复 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/backup-restore.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/backup-restore.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 备份恢复 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/backup-restore.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/backup-restore.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 备份恢复 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/backup-restore.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/backup-restore.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 备份恢复 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/backup-restore.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/backup-restore.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 备份恢复 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/backup-restore.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/backup-restore.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 备份恢复 相关的操作: ETCDCTL_API=3 etcdctl snapshot status backup.db --write-out=?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/backup-restore.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/backup-restore.md
+  command: ETCDCTL_API=3 etcdctl snapshot status backup.db --write-out=table
+- type: concept
+  question: '在 场景: 容量规划 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/capacity-planning.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/capacity-planning.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 容量规划 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/capacity-planning.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/capacity-planning.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 容量规划 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/capacity-planning.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/capacity-planning.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 容量规划 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/capacity-planning.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/capacity-planning.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 容量规划 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/capacity-planning.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/capacity-planning.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 容量规划 相关的操作: kubectl describe nodes | grep -A5 "Allocated resources"?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/capacity-planning.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/capacity-planning.md
+  command: kubectl describe nodes | grep -A5 "Allocated resources"
+- type: concept
+  question: '在 场景: 集群部署 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 集群部署 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 集群部署 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 集群部署 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 集群部署 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 集群部署 相关的操作: kubeadm reset -f?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+  command: kubeadm reset -f
+- type: comparison
+  question: '场景: 集群部署 中有哪些技术对比?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cluster-deployment.md 中的对比分析。
+  source: wiki/18-最佳实践/07-scenarios/cluster-deployment.md
+- type: concept
+  question: '在 场景: 合规审计 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/compliance-audit.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/compliance-audit.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 合规审计 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/compliance-audit.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/compliance-audit.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 合规审计 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/compliance-audit.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/compliance-audit.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 合规审计 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/compliance-audit.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/compliance-audit.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 合规审计 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/compliance-audit.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/compliance-audit.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 合规审计 相关的操作: kubectl get pods -A -o json | jq ''.items[] | select(.spec.co?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/compliance-audit.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/compliance-audit.md
+  command: kubectl get pods -A -o json | jq '.items[] | select(.spec.containers[].securityContext.privileged==t
+- type: concept
+  question: '在 场景: 成本优化 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cost-optimization.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/cost-optimization.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 成本优化 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cost-optimization.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/cost-optimization.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 成本优化 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cost-optimization.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/cost-optimization.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 成本优化 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cost-optimization.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/cost-optimization.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 成本优化 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cost-optimization.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/cost-optimization.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 成本优化 相关的操作: kubectl top pods -A --sort-by=cpu?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/cost-optimization.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/cost-optimization.md
+  command: kubectl top pods -A --sort-by=cpu
+- type: concept
+  question: '在 场景: 日常运维 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/daily-ops.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/daily-ops.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 日常运维 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/daily-ops.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/daily-ops.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 日常运维 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/daily-ops.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/daily-ops.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 日常运维 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/daily-ops.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/daily-ops.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 日常运维 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/daily-ops.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/daily-ops.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 日常运维 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/daily-ops.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/daily-ops.md
+  command: kubeadm certs check-expiration
+- type: concept
+  question: '在 场景: 边缘计算运维 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/edge-ops.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/edge-ops.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 边缘计算运维 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/edge-ops.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/edge-ops.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 边缘计算运维 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/edge-ops.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/edge-ops.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 边缘计算运维 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/edge-ops.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/edge-ops.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 边缘计算运维 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/edge-ops.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/edge-ops.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 边缘计算运维 相关的操作: kubectl edit node <edge-node>  # 添加 edge-autonomy annotation?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/edge-ops.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/edge-ops.md
+  command: 'kubectl edit node <edge-node>  # 添加 edge-autonomy annotation'
+- type: concept
+  question: '在 场景: GitOps 工作流 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: GitOps 工作流 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: GitOps 工作流 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: GitOps 工作流 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: GitOps 工作流 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: GitOps 工作流 相关的操作: argocd app get <app-name>?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+  command: argocd app get <app-name>
+- type: comparison
+  question: '场景: GitOps 工作流 中有哪些技术对比?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/gitops-workflow.md 中的对比分析。
+  source: wiki/18-最佳实践/07-scenarios/gitops-workflow.md
+- type: concept
+  question: 在 Scenarios 中, 概览 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/index.md 的「概览」章节。
+  source: wiki/18-最佳实践/07-scenarios/index.md
+  section: 概览
+- type: concept
+  question: 在 Scenarios 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/index.md
+  section: 文档
+- type: troubleshooting
+  question: 如何排查 Scenarios 相关的故障?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/index.md 的故障排查章节。
+  source: wiki/18-最佳实践/07-scenarios/index.md
+- type: concept
+  question: '在 场景: Service Mesh 运维 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/mesh-ops.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/mesh-ops.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: Service Mesh 运维 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/mesh-ops.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/mesh-ops.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: Service Mesh 运维 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/mesh-ops.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/mesh-ops.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: Service Mesh 运维 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/mesh-ops.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/mesh-ops.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: Service Mesh 运维 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/mesh-ops.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/mesh-ops.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: Service Mesh 运维 相关的操作: kubectl get pods -o json | jq ''.items[].spec.containers[] | ?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/mesh-ops.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/mesh-ops.md
+  command: kubectl get pods -o json | jq '.items[].spec.containers[] | select(.name=="istio-proxy")'
+- type: concept
+  question: '在 场景: 监控告警 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/monitoring-alerting.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/monitoring-alerting.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 监控告警 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/monitoring-alerting.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/monitoring-alerting.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 监控告警 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/monitoring-alerting.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/monitoring-alerting.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 监控告警 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/monitoring-alerting.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/monitoring-alerting.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 监控告警 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/monitoring-alerting.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/monitoring-alerting.md
+  section: 操作技能
+- type: concept
+  question: '在 场景: 多集群管理 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/multi-cluster.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/multi-cluster.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 多集群管理 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/multi-cluster.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/multi-cluster.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 多集群管理 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/multi-cluster.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/multi-cluster.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 多集群管理 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/multi-cluster.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/multi-cluster.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 多集群管理 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/multi-cluster.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/multi-cluster.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 多集群管理 相关的操作: for ctx in cluster-a cluster-b cluster-c; do?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/multi-cluster.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/multi-cluster.md
+  command: for ctx in cluster-a cluster-b cluster-c; do
+- type: concept
+  question: '在 场景: 网络诊断 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/network-diagnosis.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/network-diagnosis.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 网络诊断 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/network-diagnosis.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/network-diagnosis.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 网络诊断 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/network-diagnosis.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/network-diagnosis.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 网络诊断 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/network-diagnosis.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/network-diagnosis.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 网络诊断 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/network-diagnosis.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/network-diagnosis.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 网络诊断 相关的操作: ip link show | grep mtu?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/network-diagnosis.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/network-diagnosis.md
+  command: ip link show | grep mtu
+- type: concept
+  question: '在 场景: 性能调优 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/performance-tuning.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/performance-tuning.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 性能调优 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/performance-tuning.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/performance-tuning.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 性能调优 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/performance-tuning.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/performance-tuning.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 性能调优 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/performance-tuning.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/performance-tuning.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 性能调优 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/performance-tuning.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/performance-tuning.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 性能调优 相关的操作: kubectl get --raw /metrics | grep apiserver_request_duration?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/performance-tuning.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/performance-tuning.md
+  command: kubectl get --raw /metrics | grep apiserver_request_duration_seconds
+- type: concept
+  question: '在 场景: 安全加固 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-hardening.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-hardening.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 安全加固 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-hardening.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-hardening.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 安全加固 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-hardening.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-hardening.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 安全加固 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-hardening.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-hardening.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 安全加固 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-hardening.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-hardening.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 安全加固 相关的操作: kubectl get clusterrolebindings -o wide?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-hardening.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/security-hardening.md
+  command: kubectl get clusterrolebindings -o wide
+- type: concept
+  question: '在 场景: 安全事件响应 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-incident.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-incident.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 安全事件响应 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-incident.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-incident.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 安全事件响应 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-incident.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-incident.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 安全事件响应 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-incident.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-incident.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 安全事件响应 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-incident.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/security-incident.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 安全事件响应 相关的操作: kubectl cordon <node> && kubectl drain <node> --force?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/security-incident.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/security-incident.md
+  command: kubectl cordon <node> && kubectl drain <node> --force
+- type: concept
+  question: '在 场景: 存储问题排查 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/storage-issues.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/storage-issues.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 存储问题排查 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/storage-issues.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/storage-issues.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 存储问题排查 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/storage-issues.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/storage-issues.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 存储问题排查 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/storage-issues.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/storage-issues.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 存储问题排查 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/storage-issues.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/storage-issues.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 存储问题排查 相关的操作: kubectl patch pvc <pvc-name> -p ''{"spec":{"resources":{"requ?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/storage-issues.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/storage-issues.md
+  command: kubectl patch pvc <pvc-name> -p '{"spec":{"resources":{"requests":{"storage":"100Gi"}}}}'
+- type: concept
+  question: 在 厂商技术声明的可信度分层：客户技术交流中的事实核查方法 中, 四层可信度分级 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/technical-claim-verification.md 的「四层可信度分级」章节。
+  source: wiki/18-最佳实践/07-scenarios/technical-claim-verification.md
+  section: 四层可信度分级
+- type: concept
+  question: 在 厂商技术声明的可信度分层：客户技术交流中的事实核查方法 中, 核查流程（每条断言过一遍） 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/technical-claim-verification.md 的「核查流程（每条断言过一遍）」章节。
+  source: wiki/18-最佳实践/07-scenarios/technical-claim-verification.md
+  section: 核查流程（每条断言过一遍）
+- type: concept
+  question: 在 厂商技术声明的可信度分层：客户技术交流中的事实核查方法 中, 边界话术：把"讲不清"变成加分项 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/technical-claim-verification.md 的「边界话术：把"讲不清"变成加分项」章节。
+  source: wiki/18-最佳实践/07-scenarios/technical-claim-verification.md
+  section: 边界话术：把"讲不清"变成加分项
+- type: concept
+  question: 在 厂商技术声明的可信度分层：客户技术交流中的事实核查方法 中, 典型案例：这些错误真的发生过 是什么?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/technical-claim-verification.md 的「典型案例：这些错误真的发生过」章节。
+  source: wiki/18-最佳实践/07-scenarios/technical-claim-verification.md
+  section: 典型案例：这些错误真的发生过
+- type: comparison
+  question: 厂商技术声明的可信度分层：客户技术交流中的事实核查方法 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/07-scenarios/technical-claim-verification.md 中的对比分析。
+  source: wiki/18-最佳实践/07-scenarios/technical-claim-verification.md
+- type: concept
+  question: '在 场景: 故障排查 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 故障排查 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 故障排查 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 故障排查 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 故障排查 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 故障排查 相关的操作: kubectl exec -it <pod> -- nslookup kubernetes.default?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+  command: kubectl exec -it <pod> -- nslookup kubernetes.default
+- type: troubleshooting
+  question: '如何排查 场景: 故障排查 相关的故障?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/troubleshooting.md 的故障排查章节。
+  source: wiki/18-最佳实践/07-scenarios/troubleshooting.md
+- type: concept
+  question: '在 场景: 升级迁移 中, 场景概述 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/upgrade-migration.md 的「场景概述」章节。
+  source: wiki/18-最佳实践/07-scenarios/upgrade-migration.md
+  section: 场景概述
+- type: concept
+  question: '在 场景: 升级迁移 中, 快速决策树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/upgrade-migration.md 的「快速决策树」章节。
+  source: wiki/18-最佳实践/07-scenarios/upgrade-migration.md
+  section: 快速决策树
+- type: concept
+  question: '在 场景: 升级迁移 中, 相关文档 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/upgrade-migration.md 的「相关文档」章节。
+  source: wiki/18-最佳实践/07-scenarios/upgrade-migration.md
+  section: 相关文档
+- type: concept
+  question: '在 场景: 升级迁移 中, FTA 故障树 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/upgrade-migration.md 的「FTA 故障树」章节。
+  source: wiki/18-最佳实践/07-scenarios/upgrade-migration.md
+  section: FTA 故障树
+- type: concept
+  question: '在 场景: 升级迁移 中, 操作技能 是什么?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/upgrade-migration.md 的「操作技能」章节。
+  source: wiki/18-最佳实践/07-scenarios/upgrade-migration.md
+  section: 操作技能
+- type: operation
+  question: '如何执行与 场景: 升级迁移 相关的操作: kubectl get --raw /metrics | grep apiserver_requested_deprec?'
+  answer: 参见 wiki/18-最佳实践/07-scenarios/upgrade-migration.md 中的操作步骤。
+  source: wiki/18-最佳实践/07-scenarios/upgrade-migration.md
+  command: kubectl get --raw /metrics | grep apiserver_requested_deprecated_apis
+- type: concept
+  question: 在 Security 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/08-security/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 网络安全最佳实践 [security] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/network-security.md 的「概述」章节。
+  source: wiki/18-最佳实践/08-security/network-security.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 网络安全最佳实践 [security] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/network-security.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/08-security/network-security.md
+  section: 问题描述
+- type: concept
+  question: 在 Kubernetes Pod安全最佳实践 [security] 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/pod-security.md 的「概述」章节。
+  source: wiki/18-最佳实践/08-security/pod-security.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes Pod安全最佳实践 [security] 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/pod-security.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/08-security/pod-security.md
+  section: 问题描述
+- type: concept
+  question: 在 Kubernetes 密钥管理最佳实践 中, 概述 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/secrets-management.md 的「概述」章节。
+  source: wiki/18-最佳实践/08-security/secrets-management.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 密钥管理最佳实践 中, 问题描述 是什么?
+  answer: 参见 wiki/18-最佳实践/08-security/secrets-management.md 的「问题描述」章节。
+  source: wiki/18-最佳实践/08-security/secrets-management.md
+  section: 问题描述
+- type: concept
+  question: 在 大规模集群总览与规模基线 中, 规模分级与官方上限 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/01-overview.md 的「规模分级与官方上限」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/01-overview.md
+  section: 规模分级与官方上限
+- type: concept
+  question: 在 大规模集群总览与规模基线 中, 大规模集群架构原则 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/01-overview.md 的「大规模集群架构原则」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/01-overview.md
+  section: 大规模集群架构原则
+- type: comparison
+  question: 大规模集群总览与规模基线 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/01-overview.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/01-overview.md
+- type: concept
+  question: 在 集群配置最佳实践 中, 控制面高可用 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/02-cluster-configuration.md 的「控制面高可用」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/02-cluster-configuration.md
+  section: 控制面高可用
+- type: operation
+  question: '如何执行与 集群配置最佳实践 相关的操作: etcdctl --endpoints=https://127.0.0.1:2379 \?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/02-cluster-configuration.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/02-cluster-configuration.md
+  command: etcdctl --endpoints=https://127.0.0.1:2379 \
+- type: concept
+  question: 在 工作负载最佳实践 中, 资源管理：requests 与 limits 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/03-workload.md 的「资源管理：requests 与 limits」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/03-workload.md
+  section: 资源管理：requests 与 limits
+- type: concept
+  question: 在 工作负载最佳实践 中, 弹性伸缩 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/03-workload.md 的「弹性伸缩」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/03-workload.md
+  section: 弹性伸缩
+- type: concept
+  question: 在 网络最佳实践 中, CNI 选型 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/04-network.md 的「CNI 选型」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/04-network.md
+  section: CNI 选型
+- type: concept
+  question: 在 网络最佳实践 中, IP 地址规划（大规模命门） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/04-network.md 的「IP 地址规划（大规模命门）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/04-network.md
+  section: IP 地址规划（大规模命门）
+- type: concept
+  question: 在 网络最佳实践 中, NetworkPolicy 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/04-network.md 的「NetworkPolicy」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/04-network.md
+  section: NetworkPolicy
+- type: comparison
+  question: 网络最佳实践 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/04-network.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/04-network.md
+- type: concept
+  question: 在 存储最佳实践 中, StorageClass 分层设计 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/05-storage.md 的「StorageClass 分层设计」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/05-storage.md
+  section: StorageClass 分层设计
+- type: concept
+  question: 在 存储最佳实践 中, CSI 驱动治理 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/05-storage.md 的「CSI 驱动治理」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/05-storage.md
+  section: CSI 驱动治理
+- type: concept
+  question: 在 存储最佳实践 中, 卷类型选型矩阵 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/05-storage.md 的「卷类型选型矩阵」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/05-storage.md
+  section: 卷类型选型矩阵
+- type: concept
+  question: 在 初始化配置检查项 中, 基础设施规划 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md 的「基础设施规划」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md
+  section: 基础设施规划
+- type: concept
+  question: 在 初始化配置检查项 中, OS 与内核 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md 的「OS 与内核」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md
+  section: OS 与内核
+- type: concept
+  question: 在 初始化配置检查项 中, 容器运行时 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md 的「容器运行时」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md
+  section: 容器运行时
+- type: concept
+  question: 在 初始化配置检查项 中, 集群组件配置 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md 的「集群组件配置」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/06-initialization-checklist.md
+  section: 集群组件配置
+- type: concept
+  question: 在 生产上线前检查项 中, 容量与资源 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md 的「容量与资源」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md
+  section: 容量与资源
+- type: concept
+  question: 在 生产上线前检查项 中, 高可用验证 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md 的「高可用验证」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md
+  section: 高可用验证
+- type: concept
+  question: 在 生产上线前检查项 中, 监控告警闭环 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md 的「监控告警闭环」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md
+  section: 监控告警闭环
+- type: concept
+  question: 在 生产上线前检查项 中, 灾备与数据安全 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md 的「灾备与数据安全」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md
+  section: 灾备与数据安全
+- type: concept
+  question: 在 生产上线前检查项 中, 性能压测 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md 的「性能压测」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md
+  section: 性能压测
+- type: comparison
+  question: 生产上线前检查项 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/07-pre-production-checklist.md
+- type: concept
+  question: 在 护网/攻防演练检查项 中, 暴露面收敛（第一优先级） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md 的「暴露面收敛（第一优先级）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md
+  section: 暴露面收敛（第一优先级）
+- type: concept
+  question: 在 护网/攻防演练检查项 中, 认证与授权（RBAC 收敛） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md 的「认证与授权（RBAC 收敛）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md
+  section: 认证与授权（RBAC 收敛）
+- type: concept
+  question: 在 护网/攻防演练检查项 中, Pod 与运行时安全 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md 的「Pod 与运行时安全」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md
+  section: Pod 与运行时安全
+- type: concept
+  question: 在 护网/攻防演练检查项 中, 镜像与供应链安全 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md 的「镜像与供应链安全」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md
+  section: 镜像与供应链安全
+- type: concept
+  question: 在 护网/攻防演练检查项 中, 网络隔离 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md 的「网络隔离」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md
+  section: 网络隔离
+- type: operation
+  question: '如何执行与 护网/攻防演练检查项 相关的操作: kubectl get clusterrolebindings -o json | \?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/08-security-defense-checklist.md
+  command: kubectl get clusterrolebindings -o json | \
+- type: concept
+  question: 在 可观测性体系最佳实践 中, 监控分层模型 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/09-observability.md 的「监控分层模型」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/09-observability.md
+  section: 监控分层模型
+- type: concept
+  question: 在 可观测性体系最佳实践 中, 控制面黄金指标（大规模必配告警） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/09-observability.md 的「控制面黄金指标（大规模必配告警）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/09-observability.md
+  section: 控制面黄金指标（大规模必配告警）
+- type: concept
+  question: 在 多集群与联邦管理最佳实践 中, 多集群架构模式 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/10-multi-cluster.md 的「多集群架构模式」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/10-multi-cluster.md
+  section: 多集群架构模式
+- type: concept
+  question: 在 多集群与联邦管理最佳实践 中, 管理平面选型 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/10-multi-cluster.md 的「管理平面选型」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/10-multi-cluster.md
+  section: 管理平面选型
+- type: comparison
+  question: 多集群与联邦管理最佳实践 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/10-multi-cluster.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/10-multi-cluster.md
+- type: concept
+  question: 在 弹性伸缩与容量规划深化 中, HPA 指标选择深化 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md 的「HPA 指标选择深化」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md
+  section: HPA 指标选择深化
+- type: concept
+  question: 在 弹性伸缩与容量规划深化 中, VPA 使用模式 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md 的「VPA 使用模式」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md
+  section: VPA 使用模式
+- type: concept
+  question: 在 弹性伸缩与容量规划深化 中, 节点级弹性：Karpenter vs Cluster Autoscaler 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md 的「节点级弹性：Karpenter vs Cluster Autoscaler」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md
+  section: 节点级弹性：Karpenter vs Cluster Autoscaler
+- type: concept
+  question: 在 弹性伸缩与容量规划深化 中, 云配额与扩容速率治理（官方大规模注意事项） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md 的「云配额与扩容速率治理（官方大规模注意事项）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md
+  section: 云配额与扩容速率治理（官方大规模注意事项）
+- type: best_practice
+  question: 关于 弹性伸缩与容量规划深化, 有什么最佳实践?
+  answer: 集群关键 Addon 也可用 VPA Recommender 获取 requests/limits 建议——大集群中 Addon 默认值偏小是常见的 OOM/限流根因
+  source: wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md
+- type: comparison
+  question: 弹性伸缩与容量规划深化 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/11-autoscaling-capacity.md
+- type: concept
+  question: 在 安全加固基线 中, CIS Kubernetes Benchmark 关键项 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/12-security-hardening-baseline.md 的「CIS Kubernetes Benchmark 关键项」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/12-security-hardening-baseline.md
+  section: CIS Kubernetes Benchmark 关键项
+- type: concept
+  question: 在 升级与证书生命周期 Runbook 中, 版本策略 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md 的「版本策略」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md
+  section: 版本策略
+- type: concept
+  question: 在 升级与证书生命周期 Runbook 中, 升级前预检（Pre-flight） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md 的「升级前预检（Pre-flight）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md
+  section: 升级前预检（Pre-flight）
+- type: concept
+  question: 在 升级与证书生命周期 Runbook 中, 升级执行顺序 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md 的「升级执行顺序」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md
+  section: 升级执行顺序
+- type: concept
+  question: 在 升级与证书生命周期 Runbook 中, 节点分批轮换细则 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md 的「节点分批轮换细则」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md
+  section: 节点分批轮换细则
+- type: concept
+  question: 在 升级与证书生命周期 Runbook 中, 回滚策略 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md 的「回滚策略」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md
+  section: 回滚策略
+- type: comparison
+  question: 升级与证书生命周期 Runbook 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/13-upgrade-certificate-runbook.md
+- type: concept
+  question: 在 成本治理 FinOps 中, 成本泄漏点排查清单 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/14-cost-finops.md 的「成本泄漏点排查清单」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/14-cost-finops.md
+  section: 成本泄漏点排查清单
+- type: concept
+  question: 在 成本治理 FinOps 中, Right-sizing（收益最高的动作） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/14-cost-finops.md 的「Right-sizing（收益最高的动作）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/14-cost-finops.md
+  section: Right-sizing（收益最高的动作）
+- type: concept
+  question: 在 成本治理 FinOps 中, 实例与计费模式优化 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/14-cost-finops.md 的「实例与计费模式优化」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/14-cost-finops.md
+  section: 实例与计费模式优化
+- type: concept
+  question: 在 SLO 体系与混沌工程 中, 双层 SLO 体系 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md 的「双层 SLO 体系」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md
+  section: 双层 SLO 体系
+- type: concept
+  question: 在 SLO 体系与混沌工程 中, 错误预算驱动运营 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md 的「错误预算驱动运营」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md
+  section: 错误预算驱动运营
+- type: concept
+  question: 在 SLO 体系与混沌工程 中, 混沌工程演练矩阵 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md 的「混沌工程演练矩阵」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md
+  section: 混沌工程演练矩阵
+- type: comparison
+  question: SLO 体系与混沌工程 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/15-slo-chaos-engineering.md
+- type: concept
+  question: 在 参考语料来源清单 中, Kubernetes 官方文档（权威等级 A） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/16-references.md 的「Kubernetes 官方文档（权威等级 A）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/16-references.md
+  section: Kubernetes 官方文档（权威等级 A）
+- type: concept
+  question: 在 参考语料来源清单 中, 云厂商官方指南（权威等级 A） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/16-references.md 的「云厂商官方指南（权威等级 A）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/16-references.md
+  section: 云厂商官方指南（权威等级 A）
+- type: concept
+  question: 在 参考语料来源清单 中, 安全标准与加固（权威等级 A/B/NA） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/16-references.md 的「安全标准与加固（权威等级 A/B/NA）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/16-references.md
+  section: 安全标准与加固（权威等级 A/B/NA）
+- type: concept
+  question: 在 参考语料来源清单 中, 弹性伸缩与运维实践（社区，权威等级 B/NA，观点性内容已标注） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/16-references.md 的「弹性伸缩与运维实践（社区，权威等级 B/NA，观点性内容已标注）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/16-references.md
+  section: 弹性伸缩与运维实践（社区，权威等级 B/NA，观点性内容已标注）
+- type: concept
+  question: 在 参考语料来源清单 中, GPU/AI 与服务网格（2026-08-03 增补） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/16-references.md 的「GPU/AI 与服务网格（2026-08-03 增补）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/16-references.md
+  section: GPU/AI 与服务网格（2026-08-03 增补）
+- type: comparison
+  question: 参考语料来源清单 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/16-references.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/16-references.md
+- type: concept
+  question: 在 故障处置 Runbook 集 中, etcd 故障 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md 的「etcd 故障」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md
+  section: etcd 故障
+- type: operation
+  question: '如何执行与 故障处置 Runbook 集 相关的操作: etcdctl --endpoints=<ep> alarm list?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md
+  command: etcdctl --endpoints=<ep> alarm list
+- type: operation
+  question: '如何执行与 故障处置 Runbook 集 相关的操作: kubectl get --raw ''/metrics'' | grep apiserver_request_total ?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md
+  command: kubectl get --raw '/metrics' | grep apiserver_request_total | sort -k2 -nr | head
+- type: operation
+  question: '如何执行与 故障处置 Runbook 集 相关的操作: kubeadm certs check-expiration?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md
+  command: kubeadm certs check-expiration
+- type: comparison
+  question: 故障处置 Runbook 集 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/17-incident-playbooks.md
+- type: concept
+  question: 在 灾备恢复 Runbook 中, 恢复场景分级与决策 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md 的「恢复场景分级与决策」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md
+  section: 恢复场景分级与决策
+- type: concept
+  question: 在 灾备恢复 Runbook 中, etcd 快照恢复（自建集群） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md 的「etcd 快照恢复（自建集群）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md
+  section: etcd 快照恢复（自建集群）
+- type: concept
+  question: 在 灾备恢复 Runbook 中, Velero 恢复 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md 的「Velero 恢复」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md
+  section: Velero 恢复
+- type: operation
+  question: '如何执行与 灾备恢复 Runbook 相关的操作: mv /etc/kubernetes/manifests/*.yaml /tmp/manifests-backup/?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md
+  command: mv /etc/kubernetes/manifests/*.yaml /tmp/manifests-backup/
+- type: operation
+  question: '如何执行与 灾备恢复 Runbook 相关的操作: velero backup get?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md
+  command: velero backup get
+- type: comparison
+  question: 灾备恢复 Runbook 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/18-disaster-recovery-runbook.md
+- type: concept
+  question: 在 GPU/AI 负载与批量调度最佳实践 中, GPU 资源分配：DRA vs Device Plugin 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md 的「GPU 资源分配：DRA vs Device Plugin」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md
+  section: GPU 资源分配：DRA vs Device Plugin
+- type: concept
+  question: 在 GPU/AI 负载与批量调度最佳实践 中, 批量调度与队列治理：Kueue 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md 的「批量调度与队列治理：Kueue」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md
+  section: 批量调度与队列治理：Kueue
+- type: concept
+  question: 在 GPU/AI 负载与批量调度最佳实践 中, GPU 共享与利用率治理 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md 的「GPU 共享与利用率治理」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md
+  section: GPU 共享与利用率治理
+- type: concept
+  question: 在 GPU/AI 负载与批量调度最佳实践 中, 大镜像与数据加速 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md 的「大镜像与数据加速」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md
+  section: 大镜像与数据加速
+- type: concept
+  question: 在 GPU/AI 负载与批量调度最佳实践 中, 训练任务容错 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md 的「训练任务容错」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md
+  section: 训练任务容错
+- type: comparison
+  question: GPU/AI 负载与批量调度最佳实践 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/19-gpu-ai-workload.md
+- type: concept
+  question: 在 服务网格与 L7 流量治理最佳实践 中, 引入决策：你真的需要网格吗 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md 的「引入决策：你真的需要网格吗」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md
+  section: 引入决策：你真的需要网格吗
+- type: concept
+  question: 在 服务网格与 L7 流量治理最佳实践 中, 数据面架构选型（这是架构决策，不是工具偏好） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md 的「数据面架构选型（这是架构决策，不是工具偏好）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md
+  section: 数据面架构选型（这是架构决策，不是工具偏好）
+- type: concept
+  question: 在 服务网格与 L7 流量治理最佳实践 中, 大规模网格运维治理 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md 的「大规模网格运维治理」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md
+  section: 大规模网格运维治理
+- type: comparison
+  question: 服务网格与 L7 流量治理最佳实践 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/20-service-mesh-l7.md
+- type: concept
+  question: 在 发布工程与变更管理最佳实践 中, 发布策略选型矩阵 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md 的「发布策略选型矩阵」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md
+  section: 发布策略选型矩阵
+- type: concept
+  question: 在 发布工程与变更管理最佳实践 中, 渐进式交付（金丝雀的工程化） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md 的「渐进式交付（金丝雀的工程化）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md
+  section: 渐进式交付（金丝雀的工程化）
+- type: concept
+  question: 在 发布工程与变更管理最佳实践 中, 变更分类分级与窗口制度 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md 的「变更分类分级与窗口制度」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md
+  section: 变更分类分级与窗口制度
+- type: concept
+  question: 在 发布工程与变更管理最佳实践 中, 配置变更治理 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md 的「配置变更治理」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md
+  section: 配置变更治理
+- type: concept
+  question: 在 发布工程与变更管理最佳实践 中, GitOps 多环境晋级 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md 的「GitOps 多环境晋级」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md
+  section: GitOps 多环境晋级
+- type: comparison
+  question: 发布工程与变更管理最佳实践 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/21-release-engineering.md
+- type: concept
+  question: 在 节点生命周期与 OS 运维最佳实践 中, 节点镜像（Golden Image）管理 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md 的「节点镜像（Golden Image）管理」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md
+  section: 节点镜像（Golden Image）管理
+- type: concept
+  question: 在 节点生命周期与 OS 运维最佳实践 中, 节点供给与分组 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md 的「节点供给与分组」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md
+  section: 节点供给与分组
+- type: concept
+  question: 在 节点生命周期与 OS 运维最佳实践 中, 节点健康检测与自愈 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md 的「节点健康检测与自愈」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md
+  section: 节点健康检测与自愈
+- type: operation
+  question: '如何执行与 节点生命周期与 OS 运维最佳实践 相关的操作: kubectl cordon <node>?'
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md 中的操作步骤。
+  source: wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md
+  command: kubectl cordon <node>
+- type: comparison
+  question: 节点生命周期与 OS 运维最佳实践 中有哪些技术对比?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md 中的对比分析。
+  source: wiki/18-最佳实践/09-large-scale-production/22-node-lifecycle.md
+- type: concept
+  question: 在 Day-2 运营节奏与值班体系 中, 运营日历（例行操作节奏） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/23-operations-cadence.md 的「运营日历（例行操作节奏）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/23-operations-cadence.md
+  section: 运营日历（例行操作节奏）
+- type: concept
+  question: 在 云原生应用开发与交付规范 中, 容器化规范（15-factor 落地版） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/24-cloud-native-app-guide.md 的「容器化规范（15-factor 落地版）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/24-cloud-native-app-guide.md
+  section: 容器化规范（15-factor 落地版）
+- type: concept
+  question: 在 云原生应用开发与交付规范 中, 镜像构建规范 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/24-cloud-native-app-guide.md 的「镜像构建规范」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/24-cloud-native-app-guide.md
+  section: 镜像构建规范
+- type: concept
+  question: 在 云原生应用开发与交付规范 中, 运行时容器适配（事故高发区） 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/24-cloud-native-app-guide.md 的「运行时容器适配（事故高发区）」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/24-cloud-native-app-guide.md
+  section: 运行时容器适配（事故高发区）
+- type: concept
+  question: 在 09-large-scale-production Index 中, 总览 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/index.md 的「总览」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/index.md
+  section: 总览
+- type: concept
+  question: 在 09-large-scale-production Index 中, 四大领域最佳实践 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/index.md 的「四大领域最佳实践」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/index.md
+  section: 四大领域最佳实践
+- type: concept
+  question: 在 09-large-scale-production Index 中, 检查清单 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/index.md 的「检查清单」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/index.md
+  section: 检查清单
+- type: concept
+  question: 在 09-large-scale-production Index 中, 专项深化 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/index.md 的「专项深化」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/index.md
+  section: 专项深化
+- type: concept
+  question: 在 09-large-scale-production Index 中, 场景专项与应急手册 是什么?
+  answer: 参见 wiki/18-最佳实践/09-large-scale-production/index.md 的「场景专项与应急手册」章节。
+  source: wiki/18-最佳实践/09-large-scale-production/index.md
+  section: 场景专项与应急手册
+- type: concept
+  question: 在 topic-best-practices MOC (skills) 中, 专题概述 是什么?
+  answer: 参见 wiki/18-最佳实践/MOC.md 的「专题概述」章节。
+  source: wiki/18-最佳实践/MOC.md
+  section: 专题概述
+- type: concept
+  question: 在 topic-best-practices MOC (skills) 中, 文档清单 是什么?
+  answer: 参见 wiki/18-最佳实践/MOC.md 的「文档清单」章节。
+  source: wiki/18-最佳实践/MOC.md
+  section: 文档清单
+- type: concept
+  question: 在 topic-best-practices MOC (skills) 中, 统计信息 是什么?
+  answer: 参见 wiki/18-最佳实践/MOC.md 的「统计信息」章节。
+  source: wiki/18-最佳实践/MOC.md
+  section: 统计信息
+- type: concept
+  question: 在 topic-best-practices MOC (skills) 中, 使用指南 是什么?
+  answer: 参见 wiki/18-最佳实践/MOC.md 的「使用指南」章节。
+  source: wiki/18-最佳实践/MOC.md
+  section: 使用指南
+- type: troubleshooting
+  question: 如何排查 topic-best-practices MOC (skills) 相关的故障?
+  answer: 参见 wiki/18-最佳实践/MOC.md 的故障排查章节。
+  source: wiki/18-最佳实践/MOC.md
+- type: concept
+  question: 在 Best Practices 中, 概览 是什么?
+  answer: 参见 wiki/18-最佳实践/index.md 的「概览」章节。
+  source: wiki/18-最佳实践/index.md
+  section: 概览
+- type: concept
+  question: 在 Best Practices 中, 子目录 是什么?
+  answer: 参见 wiki/18-最佳实践/index.md 的「子目录」章节。
+  source: wiki/18-最佳实践/index.md
+  section: 子目录
+- type: concept
+  question: 在 Best Practices 中, 文档 是什么?
+  answer: 参见 wiki/18-最佳实践/index.md 的「文档」章节。
+  source: wiki/18-最佳实践/index.md
+  section: 文档

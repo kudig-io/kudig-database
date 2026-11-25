@@ -617,9 +617,9 @@ kubectl delete prometheusrule core-alerts -n monitoring
 
 ## 延伸阅读
 
-- [Prometheus 企业级监控](../../../../../../wiki/09-可观测性/02-指标/01-prometheus-enterprise-monitoring.md)
-- [FTA 故障树分析](../../../../../../wiki/19-故障诊断/06-FTA故障树/04-fta-core-principles.md)
-- [FEBM 取证循证方法](../../../../../../wiki/19-故障诊断/07-FEBM方法论/01-febm-theory-foundations.md)
+- [Prometheus 企业级监控](../../../../../../wiki/08-可观测性/02-指标/01-prometheus-enterprise-monitoring.md)
+- [FTA 故障树分析](../../../../../../wiki/17-故障诊断/06-FTA故障树/04-fta-core-principles.md)
+- [FEBM 取证循证方法](../../../../../../wiki/17-故障诊断/07-FEBM方法论/01-febm-theory-foundations.md)
 - [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
 
 ```

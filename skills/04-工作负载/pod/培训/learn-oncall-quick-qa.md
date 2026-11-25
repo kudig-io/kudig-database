@@ -1289,13 +1289,13 @@ kubectl rollout restart deployment/coredns -n kube-system
 **关联文档**:
 - [../README.md](../README.md) — 讲师完整台词设计
 - [../troubleshooting/decision-tree-mermaid.md](troubleshooting/decision-tree-mermaid.md) — Mermaid 决策树
-- [08-技能体系/](../../../../wiki/19-故障诊断/08-技能体系) — 18 个 GA [[SKILL|Skill]]
+- [08-技能体系/](../../../../wiki/17-故障诊断/08-技能体系) — 18 个 GA [[SKILL|Skill]]
 - [](../../../../wiki/19-故障诊断) — 故障排查文档
 
 ## Related
 
 - [[coredns]] — CoreDNS
-- [[wiki/23-实体/06-安全/vault.md|vault]] — HashiCorp Vault
+- [[wiki/22-实体/06-安全/vault.md|vault]] — HashiCorp Vault
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

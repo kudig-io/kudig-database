@@ -194,7 +194,7 @@ bottom_event:
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
@@ -203,8 +203,8 @@ bottom_event:
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[skills/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[wiki/22-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]]
-- [[wiki/31-归档/troubleshooting-diagnostics/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
+- [[wiki/20-概念/01-核心架构/etcd-operational-reference.md|etcd Operational Reference]]
+- [[wiki/99-归档/troubleshooting-diagnostics/kubernetes-fault-distribution-and-mttr-en.md|Kubernetes Fault Distribution and MTTR]]
 - [[maintaining/01-文档/indexes/ERROR-FTA-MAP.md|KUDIG 错误码 → FTA 映射]] — Cross-reference
 - [[maintaining/01-文档/indexes/COMMAND-DOC-MAP.md|KUDIG 命令 → 文档映射]] — Cross-reference
 - [[maintaining/01-文档/indexes/API-DOC-MAP.md|KUDIG API → 文档映射]] — Cross-reference

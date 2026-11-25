@@ -37,7 +37,7 @@ last_updated: 2026-05-23
 - [ ] 存储模型：PV、PVC、StorageClass、CSI
 
 **推荐学习**：
-- [[wiki/22-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
+- [[wiki/20-概念/01-核心架构/kubernetes-core-concepts.md|Kubernetes Core Concepts]]
 - `集群基础/01-architecture-overview/`
 - `集群基础/05-kubectl/`
 
@@ -99,8 +99,8 @@ kubectl top pod -n <namespace>
 - [ ] HPA和VPA配置
 
 **推荐学习**：
-- [[wiki/19-故障诊断/08-技能体系/09-deployment-rollout-failure.md|08 deployment rollout failure]]
-- [[wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
+- [[skills/09-技能体系/09-deployment-rollout-failure.md|08 deployment rollout failure]]
+- [[skills/09-技能体系/02-pod-crashloop-oomkilled.md|02 pod crashloop oomkilled]]
 - k8s-autoscaling
 
 ### 2.3 存储与配置
@@ -112,7 +112,7 @@ kubectl top pod -n <namespace>
 **推荐学习**：
 - k8s-pvc-storage
 - k8s-config-secret
-- [[wiki/19-故障诊断/08-技能体系/23-statefulset-failure.md|21 statefulset failure]]
+- [[skills/09-技能体系/23-statefulset-failure.md|21 statefulset failure]]
 
 ### 2.4 网络排查
 - [ ] Service连通性诊断
@@ -121,9 +121,9 @@ kubectl top pod -n <namespace>
 - [ ] Ingress和SLB问题诊断
 
 **推荐学习**：
-- [[wiki/19-故障诊断/08-技能体系/05-service-connectivity.md|05 service connectivity]]
+- [[skills/09-技能体系/05-service-connectivity.md|05 service connectivity]]
 - k8s-dns-failure
-- [[wiki/19-故障诊断/08-技能体系/14-ingress-gateway-failure.md|13 ingress gateway failure]]
+- [[skills/09-技能体系/14-ingress-gateway-failure.md|13 ingress gateway failure]]
 
 ### 阶段二评估标准
 > 能够独立完成以下操作即达标：
@@ -145,8 +145,8 @@ kubectl top pod -n <namespace>
 - [ ] etcd备份和恢复
 
 **推荐学习**：
-- [[wiki/19-故障诊断/08-技能体系/12-control-plane-failure.md|11 control plane failure]]
-- [[wiki/19-故障诊断/08-技能体系/06-certificate-expiry.md|06 certificate expiry]]
+- [[skills/09-技能体系/12-control-plane-failure.md|11 control plane failure]]
+- [[skills/09-技能体系/06-certificate-expiry.md|06 certificate expiry]]
 - `集群基础/06-upgrade-paths/`
 
 ### 3.2 安全与合规
@@ -156,8 +156,8 @@ kubectl top pod -n <namespace>
 - [ ] 审计日志配置
 
 **推荐学习**：
-- [[wiki/19-故障诊断/08-技能体系/10-rbac-quota-failure.md|09 rbac quota failure]]
-- [[wiki/19-故障诊断/08-技能体系/19-security-incident-response.md|18 security incident response]]
+- [[skills/09-技能体系/10-rbac-quota-failure.md|09 rbac quota failure]]
+- [[skills/09-技能体系/19-security-incident-response.md|18 security incident response]]
 - `安全/`
 
 ### 3.3 可观测性体系
@@ -167,8 +167,8 @@ kubectl top pod -n <namespace>
 - [ ] 分布式链路追踪
 
 **推荐学习**：
-- [[wiki/19-故障诊断/08-技能体系/16-monitoring-alerting-failure.md|15 monitoring alerting failure]]
-- [[wiki/19-故障诊断/08-技能体系/17-logging-pipeline-failure.md|16 logging pipeline failure]]
+- [[skills/09-技能体系/16-monitoring-alerting-failure.md|15 monitoring alerting failure]]
+- [[skills/09-技能体系/17-logging-pipeline-failure.md|16 logging pipeline failure]]
 - `可观测性/`
 
 ### 3.4 性能优化
@@ -178,7 +178,7 @@ kubectl top pod -n <namespace>
 - [ ] 大规模集群性能考量
 
 **推荐学习**：
-- [[wiki/19-故障诊断/08-技能体系/18-performance-bottleneck.md|17 performance bottleneck]]
+- [[skills/09-技能体系/18-performance-bottleneck.md|17 performance bottleneck]]
 - `集群基础/07-performance-tuning/`
 
 ### 阶段三评估标准
@@ -254,8 +254,8 @@ kubectl top pod -n <namespace>
 - [ ] 升级决策框架
 
 **推荐学习**：
-- `wiki/19-故障诊断/08-技能体系/skill-set/*/SKILL.md`
-- `wiki/19-故障诊断/08-技能体系/skill-set/*/DIALOGUE.md`
+- `skills/09-技能体系/skill-set/*/SKILL.md`
+- `skills/09-技能体系/skill-set/*/DIALOGUE.md`
 
 ### 5.2 工单处理流程
 - [ ] 工单分级（P0/P1/P2）
@@ -285,8 +285,8 @@ kubectl top pod -n <namespace>
 |:---|:---|---:|
 | 概念文档 | `concepts/` | 62 |
 | 最佳实践 | `best-practices/` | 14 |
-| 诊断Skill | `wiki/19-故障诊断/08-技能体系/skill-set/*/` | 17 |
-| 对话脚本 | `wiki/19-故障诊断/08-技能体系/skill-set/*/DIALOGUE.md` | 17 |
+| 诊断Skill | `skills/09-技能体系/skill-set/*/` | 17 |
+| 对话脚本 | `skills/09-技能体系/skill-set/*/DIALOGUE.md` | 17 |
 | 合成分析 | `synthesis/` | 100+ |
 | 案例研究 | `synthesis/case-studies/` | 36 |
 | 阿里云文档 | `云厂商/01-alibaba-cloud/` | 6 |

@@ -274,7 +274,7 @@ kind: Pod
 metadata:
   name: bandwidth-limited-pod
   annotations:
-    [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/ingress-bandwidth: "10M"
+    [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/ingress-bandwidth: "10M"
     kubernetes.io/egress-bandwidth: "10M"
 spec:
   containers:

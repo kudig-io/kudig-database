@@ -360,7 +360,7 @@ curl -s http://localhost:6060/debug/pprof/goroutine?debug=1 | head -50
 
 ## 最佳实践
 
-第一，镜像构建始终采用多阶段构建加 distroless 或 static 基底，最终镜像控制在 20MB 以内，并启用 nonroot 用户运行。第二，运行时默认引入 automaxprocs，CPU 密集型服务谨慎设置硬 limit，延迟敏感服务可考虑只设 request。第三，生命周期管理方面，terminationGracePeriodSeconds 应大于等于 shutdown 超时加上 preStop sleep 的时间，并且务必实现完整的信号处理逻辑。第四，探针配置遵循 liveness 不查依赖、readiness 查依赖的原则，慢启动服务必须加 startupProbe 防止被误杀。第五，pprof 调试端口只绑定 localhost，通过 port-forward 访问，严禁暴露到任何 Service。第六，坚持可重现构建，使用 -trimpath 并固定 base image 的 digest。第七，安全加固方面启用 readOnlyRootFilesystem 和 allowPrivilegeEscalation: false，具体参考 [[wiki/08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]。
+第一，镜像构建始终采用多阶段构建加 distroless 或 static 基底，最终镜像控制在 20MB 以内，并启用 nonroot 用户运行。第二，运行时默认引入 automaxprocs，CPU 密集型服务谨慎设置硬 limit，延迟敏感服务可考虑只设 request。第三，生命周期管理方面，terminationGracePeriodSeconds 应大于等于 shutdown 超时加上 preStop sleep 的时间，并且务必实现完整的信号处理逻辑。第四，探针配置遵循 liveness 不查依赖、readiness 查依赖的原则，慢启动服务必须加 startupProbe 防止被误杀。第五，pprof 调试端口只绑定 localhost，通过 port-forward 访问，严禁暴露到任何 Service。第六，坚持可重现构建，使用 -trimpath 并固定 base image 的 digest。第七，安全加固方面启用 readOnlyRootFilesystem 和 allowPrivilegeEscalation: false，具体参考 [[wiki/07-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]。
 
 ```yaml
 # 🟢 低风险：securityContext 加固（Restricted 级别）
@@ -384,5 +384,5 @@ securityContext:
 - [[wiki/02-工作负载/02-Java-on-K8s/04-quarkus-native-kubernetes.md|Quarkus Native Kubernetes]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production.md|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/02-python-on-kubernetes-production.md|Python 应用 Kubernetes 生产实践]]
-- [[wiki/08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
-- [[wiki/09-可观测性/README|可观测性]]
+- [[wiki/07-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
+- [[wiki/08-可观测性/README|可观测性]]

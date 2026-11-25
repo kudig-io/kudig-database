@@ -196,7 +196,7 @@ flanneld --backend=wireguard \
 
 | 参数 | 环境变量 | 默认值 | 说明 |
 |:-----|:---------|:------:|:-----|
-| `--kube-subnet-mgr` | - | false | 使用 [[wiki/17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 管理子网（推荐） |
+| `--kube-subnet-mgr` | - | false | 使用 [[wiki/21-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]] 管理子网（推荐） |
 | `--kube-api-url` | `FLANNEL_KUBE_API_URL` | - | Kubernetes API Server URL |
 | `--kubeconfig` | `FLANNEL_KUBECONFIG` | ~/.kube/config | kubeconfig 文件路径 |
 | `--kubeconfig-file` | `FLANNEL_KUBECONFIG_FILE` | - | kubeconfig 文件路径（备选） |
@@ -463,7 +463,7 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 ## Obsidian 相关文档
 
 - 网络 KUDIG Database — Global MOC
-- [[wiki/05-网络/README.md|[[wiki/31-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
+- [[wiki/05-网络/README.md|[[wiki/99-归档/domain-indexes/network/README-from-domain-5|Domain 5: Networking 网络]]working]] 网络]]
 - Kubernetes 网络基础 Network in a Nutshell
 - Domain-5 网络 — 开源项目索引
 - FAQ 文档
@@ -486,7 +486,7 @@ flanneld --kube-subnet-mgr --kubeconfig=/path/to/kubeconfig --v=2
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[wiki/21-生态参考/03-领域索引/flannel-index.md|Flannel 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/flannel-index.md|Flannel 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -51,7 +51,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK ARMS [[prometheus|Prometheus]] monitoring configuration
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] PrometheusQuery PromQL queries
   - Grafana dashboard Kubernetes monitoring
   - PrometheusRule alerting rules configuration
   - kube-state-metrics cluster monitoring
@@ -529,10 +529,10 @@ Day 14 将学习集群资源配额与 License 管理。
 
 ## 延伸阅读
 
-- [监控指标系统](../../../../../../wiki/09-可观测性/02-指标/02-monitoring-metrics-system.md)
-- [告警管理](../../../../../../wiki/09-可观测性/05-告警/04-alerting-management.md)
-- [Prometheus 监控](../../../../../../wiki/09-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
-- [可观测性架构总览](../../../../../../wiki/09-可观测性/01-总览/01-observability-architecture-overview.md)
+- [监控指标系统](../../../../../../wiki/08-可观测性/02-指标/02-monitoring-metrics-system.md)
+- [告警管理](../../../../../../wiki/08-可观测性/05-告警/04-alerting-management.md)
+- [Prometheus 监控](../../../../../../wiki/08-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
+- [可观测性架构总览](../../../../../../wiki/08-可观测性/01-总览/01-observability-architecture-overview.md)
 
 ```
 

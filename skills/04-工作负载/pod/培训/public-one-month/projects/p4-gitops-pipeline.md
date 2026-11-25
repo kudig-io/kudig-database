@@ -629,14 +629,14 @@ kubectl delete namespace dev staging prod  # ⚠️ 不可逆：永久删除命�
 
 ## 延伸阅读
 
-- [ArgoCD 企业级 GitOps](../../../../../../wiki/11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md)
+- [ArgoCD 企业级 GitOps](../../../../../../wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md)
 - [Kustomize 基础](https://kubectl.docs.kubernetes.io/guides/introduction/kustomize/)
 - [ArgoCD 官方文档](https://argo-cd.readthedocs.io/)
 - [Sealed Secret](https://github.com/bitnami-labs/sealed-secrets)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

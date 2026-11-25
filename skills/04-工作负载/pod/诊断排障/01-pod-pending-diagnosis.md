@@ -76,4 +76,4 @@ cross_refs:
   label: '运维技能: 03-pod-pending'
 ---
 
-> **内容已并入主场**：[[wiki/19-故障诊断/01-核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/17-故障诊断/01-核心排障/05-pod-pending-diagnosis.md|Pod Pending 状态深度诊断]]（本页为重排去重桩，正文见主场）

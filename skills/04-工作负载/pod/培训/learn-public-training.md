@@ -3202,8 +3202,8 @@ spec:
 
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/23-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
-- [[wiki/22-概念/15-运行时与系统/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
+- [[wiki/22-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
+- [[wiki/20-概念/15-运行时与系统/docker-architecture.md|docker-architecture]] — Docker Architecture and Container Runtime
 - [[pod-lifecycle]] — Pod Lifecycle
 
 ```

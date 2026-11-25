@@ -146,5 +146,5 @@ make console-check     # CI：校验派生物未漂移
 - [[README]]
 - [[maintaining/PRODUCT|Product]]
 - [[maintaining/DESIGN|Design System]]
-- [[wiki/19-故障诊断/README|故障诊断]]
+- [[wiki/17-故障诊断/README|故障诊断]]
 - [[wiki/05-网络/README|网络]]

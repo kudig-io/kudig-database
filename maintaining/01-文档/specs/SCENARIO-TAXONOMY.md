@@ -151,8 +151,8 @@ last_updated: "YYYY-MM-DD"
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[wiki/23-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
 - [[maintaining/01-文档/specs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
 - [[maintaining/01-文档/specs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
 

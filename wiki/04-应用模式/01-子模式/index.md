@@ -42,4 +42,4 @@ last_updated: '2026-07-21'
 
 - [[wiki/04-应用模式/index.md|应用模式总索引]]
 - [[wiki/05-网络/03-服务网格/index.md|Service Mesh]]
-- [[wiki/12-可靠性/index.md|可靠性]]
+- [[wiki/10-可靠性/index.md|可靠性]]

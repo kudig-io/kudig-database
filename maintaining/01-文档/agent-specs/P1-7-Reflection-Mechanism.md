@@ -99,7 +99,7 @@ reflection_triggers:
   # 类型 4: 矛盾结果
   contradictory_result:
     patterns:
-      - "node is Ready but [[wiki/22-概念/02-工作负载/pod-lifecycle.md|pod]] cannot schedule"
+      - "node is Ready but [[wiki/20-概念/02-工作负载/pod-lifecycle.md|pod]] cannot schedule"
       - "service exists but no endpoints"
     action: "深入检查资源关联关系"
 ```

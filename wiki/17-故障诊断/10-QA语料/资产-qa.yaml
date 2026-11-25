@@ -1,0 +1,571 @@
+domain: 资产
+total_questions: 121
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 CNI 数据平面对比 中, 三种数据路径对比图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md 的「三种数据路径对比图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md
+  section: 三种数据路径对比图
+- type: concept
+  question: 在 CNI 数据平面对比 中, 评估维度对比 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md 的「评估维度对比」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md
+  section: 评估维度对比
+- type: concept
+  question: 在 CNI 数据平面对比 中, 详细解释 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md 的「详细解释」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md
+  section: 详细解释
+- type: comparison
+  question: CNI 数据平面对比 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-cni-data-plane.md
+- type: concept
+  question: 在 灾难恢复架构模式 中, 三种模式架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md 的「三种模式架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md
+  section: 三种模式架构图
+- type: concept
+  question: 在 灾难恢复架构模式 中, RTO / RPO / 成本对比 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md 的「RTO / RPO / 成本对比」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md
+  section: RTO / RPO / 成本对比
+- type: concept
+  question: 在 灾难恢复架构模式 中, Active-Passive（主备） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md 的「Active-Passive（主备）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md
+  section: Active-Passive（主备）
+- type: concept
+  question: 在 灾难恢复架构模式 中, Active-Active（双活 / 多活） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md 的「Active-Active（双活 / 多活）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md
+  section: Active-Active（双活 / 多活）
+- type: concept
+  question: 在 灾难恢复架构模式 中, Pilot Light（冷启动 / 引航灯） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md 的「Pilot Light（冷启动 / 引航灯）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md
+  section: Pilot Light（冷启动 / 引航灯）
+- type: comparison
+  question: 灾难恢复架构模式 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-disaster-recovery.md
+- type: concept
+  question: 在 GitOps 部署流程 中, 端到端时序 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md 的「端到端时序」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md
+  section: 端到端时序
+- type: concept
+  question: 在 GitOps 部署流程 中, 核心原则（GitOps 4 准则） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md 的「核心原则（GitOps 4 准则）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md
+  section: 核心原则（GitOps 4 准则）
+- type: concept
+  question: 在 GitOps 部署流程 中, Push vs Pull 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md 的「Push vs Pull」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md
+  section: Push vs Pull
+- type: concept
+  question: 在 GitOps 部署流程 中, 主流工具对比 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md 的「主流工具对比」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md
+  section: 主流工具对比
+- type: concept
+  question: 在 GitOps 部署流程 中, 关键实践 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md 的「关键实践」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md
+  section: 关键实践
+- type: comparison
+  question: GitOps 部署流程 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-gitops-flow.md
+- type: concept
+  question: 在 GPU 共享模型 中, 三种模型对比图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md 的「三种模型对比图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md
+  section: 三种模型对比图
+- type: concept
+  question: 在 GPU 共享模型 中, 维度对比 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md 的「维度对比」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md
+  section: 维度对比
+- type: concept
+  question: 在 GPU 共享模型 中, 各模型详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md 的「各模型详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md
+  section: 各模型详解
+- type: comparison
+  question: GPU 共享模型 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-gpu-sharing.md
+- type: concept
+  question: 在 Kubernetes Control Plane 架构 中, 架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md 的「架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md
+  section: 架构图
+- type: concept
+  question: 在 Kubernetes Control Plane 架构 中, 组件职责 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md 的「组件职责」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md
+  section: 组件职责
+- type: concept
+  question: 在 Kubernetes Control Plane 架构 中, 交互要点 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md 的「交互要点」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md
+  section: 交互要点
+- type: concept
+  question: 在 Kubernetes Control Plane 架构 中, 故障与扩展考量 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md 的「故障与扩展考量」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-control-plane.md
+  section: 故障与扩展考量
+- type: concept
+  question: 在 Kubernetes 网络模型 中, 架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md 的「架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md
+  section: 架构图
+- type: concept
+  question: 在 Kubernetes 网络模型 中, 模型核心约束 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md 的「模型核心约束」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md
+  section: 模型核心约束
+- type: concept
+  question: 在 Kubernetes 网络模型 中, 组件职责 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md 的「组件职责」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md
+  section: 组件职责
+- type: concept
+  question: 在 Kubernetes 网络模型 中, 数据路径示例 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md 的「数据路径示例」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-k8s-network-model.md
+  section: 数据路径示例
+- type: concept
+  question: 在 多集群架构模式 中, 三种模式架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md 的「三种模式架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md
+  section: 三种模式架构图
+- type: concept
+  question: 在 多集群架构模式 中, 模式维度对比 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md 的「模式维度对比」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md
+  section: 模式维度对比
+- type: concept
+  question: 在 多集群架构模式 中, Hub-Spoke 详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md 的「Hub-Spoke 详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md
+  section: Hub-Spoke 详解
+- type: concept
+  question: 在 多集群架构模式 中, Federation 详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md 的「Federation 详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md
+  section: Federation 详解
+- type: concept
+  question: 在 多集群架构模式 中, Service Mesh 多集群详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md 的「Service Mesh 多集群详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md
+  section: Service Mesh 多集群详解
+- type: comparison
+  question: 多集群架构模式 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md
+- type: concept
+  question: 在 可观测性三支柱栈 中, 统一架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-observability-stack.md 的「统一架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-observability-stack.md
+  section: 统一架构图
+- type: concept
+  question: 在 可观测性三支柱栈 中, 三支柱定义与差异 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-observability-stack.md 的「三支柱定义与差异」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-observability-stack.md
+  section: 三支柱定义与差异
+- type: concept
+  question: 在 可观测性三支柱栈 中, OTel Collector 统一枢纽 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-observability-stack.md 的「OTel Collector 统一枢纽」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-observability-stack.md
+  section: OTel Collector 统一枢纽
+- type: concept
+  question: 在 可观测性三支柱栈 中, 关联机制（核心价值） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-observability-stack.md 的「关联机制（核心价值）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-observability-stack.md
+  section: 关联机制（核心价值）
+- type: concept
+  question: 在 可观测性三支柱栈 中, 各支柱实践要点 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-observability-stack.md 的「各支柱实践要点」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-observability-stack.md
+  section: 各支柱实践要点
+- type: comparison
+  question: 可观测性三支柱栈 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-observability-stack.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-observability-stack.md
+- type: concept
+  question: 在 Operator 调谐循环 中, 调谐循环流程图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md 的「调谐循环流程图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md
+  section: 调谐循环流程图
+- type: concept
+  question: 在 Operator 调谐循环 中, 三段式核心思想 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md 的「三段式核心思想」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md
+  section: 三段式核心思想
+- type: concept
+  question: 在 Operator 调谐循环 中, 详细阶段 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md 的「详细阶段」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md
+  section: 详细阶段
+- type: comparison
+  question: Operator 调谐循环 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-operator-reconcile.md
+- type: concept
+  question: 在 平台工程 / 内部开发者平台架构 中, 分层架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-platform-engineering.md 的「分层架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-platform-engineering.md
+  section: 分层架构图
+- type: concept
+  question: 在 平台工程 / 内部开发者平台架构 中, 平台工程核心理念 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-platform-engineering.md 的「平台工程核心理念」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-platform-engineering.md
+  section: 平台工程核心理念
+- type: concept
+  question: 在 平台工程 / 内部开发者平台架构 中, 各层职责 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-platform-engineering.md 的「各层职责」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-platform-engineering.md
+  section: 各层职责
+- type: concept
+  question: 在 Pod 生命周期状态机 中, 完整状态机图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md 的「完整状态机图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md
+  section: 完整状态机图
+- type: concept
+  question: 在 Pod 生命周期状态机 中, Phase 五个值 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md 的「Phase 五个值」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md
+  section: Phase 五个值
+- type: concept
+  question: 在 Pod 生命周期状态机 中, Conditions（细粒度信号） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md 的「Conditions（细粒度信号）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md
+  section: Conditions（细粒度信号）
+- type: concept
+  question: 在 Pod 生命周期状态机 中, Container State（每容器独立） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md 的「Container State（每容器独立）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md
+  section: Container State（每容器独立）
+- type: concept
+  question: 在 Pod 生命周期状态机 中, 三类 Probe 详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md 的「三类 Probe 详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-pod-lifecycle.md
+  section: 三类 Probe 详解
+- type: concept
+  question: 在 Kubernetes RBAC 认证授权流程 中, 请求生命周期 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-rbac-flow.md 的「请求生命周期」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-rbac-flow.md
+  section: 请求生命周期
+- type: concept
+  question: 在 Kubernetes RBAC 认证授权流程 中, 三阶段模型 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-rbac-flow.md 的「三阶段模型」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-rbac-flow.md
+  section: 三阶段模型
+- type: concept
+  question: 在 Service Mesh 架构 中, 双模型对比图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-service-mesh.md 的「双模型对比图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-service-mesh.md
+  section: 双模型对比图
+- type: concept
+  question: 在 Service Mesh 架构 中, Sidecar 模型详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-service-mesh.md 的「Sidecar 模型详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-service-mesh.md
+  section: Sidecar 模型详解
+- type: concept
+  question: 在 Service Mesh 架构 中, Sidecarless 模型详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-service-mesh.md 的「Sidecarless 模型详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-service-mesh.md
+  section: Sidecarless 模型详解
+- type: concept
+  question: 在 Service Mesh 架构 中, 选型矩阵 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-service-mesh.md 的「选型矩阵」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-service-mesh.md
+  section: 选型矩阵
+- type: concept
+  question: 在 Service Mesh 架构 中, 演进趋势 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-service-mesh.md 的「演进趋势」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-service-mesh.md
+  section: 演进趋势
+- type: comparison
+  question: Service Mesh 架构 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-service-mesh.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-service-mesh.md
+- type: concept
+  question: 在 K8s 存储栈架构 中, 挂载时序图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-storage-stack.md 的「挂载时序图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-storage-stack.md
+  section: 挂载时序图
+- type: concept
+  question: 在 K8s 存储栈架构 中, 资源模型 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-storage-stack.md 的「资源模型」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-storage-stack.md
+  section: 资源模型
+- type: concept
+  question: 在 K8s 存储栈架构 中, CSI 三个 gRPC 服务 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-storage-stack.md 的「CSI 三个 gRPC 服务」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-storage-stack.md
+  section: CSI 三个 gRPC 服务
+- type: concept
+  question: 在 K8s 存储栈架构 中, 关键设计点 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-storage-stack.md 的「关键设计点」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-storage-stack.md
+  section: 关键设计点
+- type: concept
+  question: 在 K8s 存储栈架构 中, 后端分类 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-storage-stack.md 的「后端分类」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-storage-stack.md
+  section: 后端分类
+- type: comparison
+  question: K8s 存储栈架构 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-storage-stack.md 中的对比分析。
+  source: wiki/25-资产/architecture-diagrams/architecture-storage-stack.md
+- type: concept
+  question: 在 零信任分层安全模型 中, 分层架构图 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-zero-trust-security.md 的「分层架构图」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-zero-trust-security.md
+  section: 分层架构图
+- type: concept
+  question: 在 零信任分层安全模型 中, 零信任原则（NIST SP 800-207） 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-zero-trust-security.md 的「零信任原则（NIST SP 800-207）」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-zero-trust-security.md
+  section: 零信任原则（NIST SP 800-207）
+- type: concept
+  question: 在 零信任分层安全模型 中, 各层职责详解 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/architecture-zero-trust-security.md 的「各层职责详解」章节。
+  source: wiki/25-资产/architecture-diagrams/architecture-zero-trust-security.md
+  section: 各层职责详解
+- type: concept
+  question: 在 architecture-diagrams 中, 文档 是什么?
+  answer: 参见 wiki/25-资产/architecture-diagrams/index.md 的「文档」章节。
+  source: wiki/25-资产/architecture-diagrams/index.md
+  section: 文档
+- type: concept
+  question: 在 Assets 中, 子目录 是什么?
+  answer: 参见 wiki/25-资产/index.md 的「子目录」章节。
+  source: wiki/25-资产/index.md
+  section: 子目录
+- type: concept
+  question: 在 Assets 中, 架构图（Mermaid） 是什么?
+  answer: 参见 wiki/25-资产/index.md 的「架构图（Mermaid）」章节。
+  source: wiki/25-资产/index.md
+  section: 架构图（Mermaid）
+- type: comparison
+  question: Assets 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/index.md 中的对比分析。
+  source: wiki/25-资产/index.md
+- type: concept
+  question: 在 Presentations 中, 概览 是什么?
+  answer: 参见 wiki/25-资产/presentations/index.md 的「概览」章节。
+  source: wiki/25-资产/presentations/index.md
+  section: 概览
+- type: concept
+  question: 在 Presentations 中, 文档 是什么?
+  answer: 参见 wiki/25-资产/presentations/index.md 的「文档」章节。
+  source: wiki/25-资产/presentations/index.md
+  section: 文档
+- type: troubleshooting
+  question: 如何排查 Presentations 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/index.md 的故障排查章节。
+  source: wiki/25-资产/presentations/index.md
+- type: concept
+  question: 在 Kubernetes 架构与基础概念全栈培训 (assets) 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md
+  section: 演讲概述
+- type: best_practice
+  question: 关于 Kubernetes 架构与基础概念全栈培训 (assets), 有什么最佳实践?
+  answer: 所有生产变更通过 GitOps 流程执行，命令式操作仅用于紧急排障。
+  source: wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes 架构与基础概念全栈培训 (assets) 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md
+- type: comparison
+  question: Kubernetes 架构与基础概念全栈培训 (assets) 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md
+- type: concept
+  question: 在 Kubernetes CoreDNS 全栈进阶培训 (从入门到专家) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-coredns-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-coredns-presentation.md
+  section: 演讲概述
+- type: best_practice
+  question: 关于 Kubernetes CoreDNS 全栈进阶培训 (从入门到专家) [presentations], 有什么最佳实践?
+  answer: 为高频外部域名访问的 Pod 单独配置 `dnsConfig`，降低 ndots 并减少 timeout。
+  source: wiki/25-资产/presentations/kubernetes-coredns-presentation.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes CoreDNS 全栈进阶培训 (从入门到专家) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-coredns-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-coredns-presentation.md
+- type: comparison
+  question: Kubernetes CoreDNS 全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-coredns-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-coredns-presentation.md
+- type: concept
+  question: 在 Kubernetes Ingress 全栈进阶培训 (从入门到专家) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-ingress-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-ingress-presentation.md
+  section: 演讲概述
+- type: best_practice
+  question: 关于 Kubernetes Ingress 全栈进阶培训 (从入门到专家) [presentations], 有什么最佳实践?
+  answer: 'requests: cpu=200m, memory=256Mi; limits: cpu=1, memory=512Mi。实际资源消耗取决于 QPS、TLS 握手频率、规则数量。建议通过监控观察实际使用量后调整。TLS
+    卸载是最消耗 CPU 的操作，如果 QPS > 5000，建议考虑硬件加速或使用外部 TLS 终结。在高并发场景下，Worker 进程数建议设置为 CPU 核心数。'
+  source: wiki/25-资产/presentations/kubernetes-ingress-presentation.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes Ingress 全栈进阶培训 (从入门到专家) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-ingress-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-ingress-presentation.md
+- type: comparison
+  question: Kubernetes Ingress 全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-ingress-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-ingress-presentation.md
+- type: concept
+  question: 在 Kubernetes 可观测性全栈培训 (监控、日志、追踪) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-observability-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-observability-presentation.md
+  section: 演讲概述
+- type: troubleshooting
+  question: 如何排查 Kubernetes 可观测性全栈培训 (监控、日志、追踪) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-observability-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-observability-presentation.md
+- type: comparison
+  question: Kubernetes 可观测性全栈培训 (监控、日志、追踪) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-observability-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-observability-presentation.md
+- type: concept
+  question: 在 Kubernetes 调度与编排策略全栈培训 (assets) 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-scheduling-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-scheduling-presentation.md
+  section: 演讲概述
+- type: best_practice
+  question: 关于 Kubernetes 调度与编排策略全栈培训 (assets), 有什么最佳实践?
+  answer: (1) **requests 设置为 P99 使用量**（确保调度到有足够资源的节点）；(2) **limits 设置为 requests 的 1.5-2 倍**（允许突发流量）；(3) 关键业务使用 Guaranteed
+    QoS（requests == limits）。监控 `resource_request` 和 `resource_usage` 的差距，差距越大说明资源浪费越严重。内存的 l
+  source: wiki/25-资产/presentations/kubernetes-scheduling-presentation.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes 调度与编排策略全栈培训 (assets) 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-scheduling-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-scheduling-presentation.md
+- type: comparison
+  question: Kubernetes 调度与编排策略全栈培训 (assets) 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-scheduling-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-scheduling-presentation.md
+- type: concept
+  question: 在 Kubernetes 安全与 RBAC 权限管理全栈培训 [assets] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md
+  section: 演讲概述
+- type: concept
+  question: 在 Kubernetes 安全与 RBAC 权限管理全栈培训 [assets] 中, 核心概念讲解 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md 的「核心概念讲解」章节。
+  source: wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md
+  section: 核心概念讲解
+- type: best_practice
+  question: 关于 Kubernetes 安全与 RBAC 权限管理全栈培训 [assets], 有什么最佳实践?
+  answer: 先部署 default-deny-all 策略，然后逐步添加白名单规则。
+  source: wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes 安全与 RBAC 权限管理全栈培训 [assets] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md
+- type: comparison
+  question: Kubernetes 安全与 RBAC 权限管理全栈培训 [assets] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md
+- type: concept
+  question: 在 Kubernetes Service 全栈进阶培训 (从入门到专家) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-service-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-service-presentation.md
+  section: 演讲概述
+- type: troubleshooting
+  question: 如何排查 Kubernetes Service 全栈进阶培训 (从入门到专家) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-service-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-service-presentation.md
+- type: comparison
+  question: Kubernetes Service 全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-service-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-service-presentation.md
+- type: concept
+  question: 在 Kubernetes 存储体系全栈进阶培训 (从入门到专家) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-storage-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-storage-presentation.md
+  section: 演讲概述
+- type: best_practice
+  question: 关于 Kubernetes 存储体系全栈进阶培训 (从入门到专家) [presentations], 有什么最佳实践?
+  answer: 所有 StorageClass 统一使用 WaitForFirstConsumer，避免出错。
+  source: wiki/25-资产/presentations/kubernetes-storage-presentation.md
+- type: troubleshooting
+  question: 如何排查 Kubernetes 存储体系全栈进阶培训 (从入门到专家) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-storage-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-storage-presentation.md
+- type: comparison
+  question: Kubernetes 存储体系全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-storage-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-storage-presentation.md
+- type: concept
+  question: 在 Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-terway-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-terway-presentation.md
+  section: 演讲概述
+- type: concept
+  question: 在 Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [presentations] 中, 核心概念讲解 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-terway-presentation.md 的「核心概念讲解」章节。
+  source: wiki/25-资产/presentations/kubernetes-terway-presentation.md
+  section: 核心概念讲解
+- type: troubleshooting
+  question: 如何排查 Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-terway-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-terway-presentation.md
+- type: comparison
+  question: Kubernetes Terway (Aliyun) 全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-terway-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-terway-presentation.md
+- type: concept
+  question: 在 Kubernetes 故障排查方法论全栈培训 (assets) 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md
+  section: 演讲概述
+- type: troubleshooting
+  question: 如何排查 Kubernetes 故障排查方法论全栈培训 (assets) 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md 的故障排查章节。
+  source: wiki/25-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md
+- type: comparison
+  question: Kubernetes 故障排查方法论全栈培训 (assets) 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-troubleshooting-methodology-presentation.md
+- type: concept
+  question: 在 Kubernetes Workload 全栈进阶培训 (从入门到专家) [presentations] 中, 演讲概述 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-workload-presentation.md 的「演讲概述」章节。
+  source: wiki/25-资产/presentations/kubernetes-workload-presentation.md
+  section: 演讲概述
+- type: concept
+  question: 在 Kubernetes Workload 全栈进阶培训 (从入门到专家) [presentations] 中, 核心概念讲解 是什么?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-workload-presentation.md 的「核心概念讲解」章节。
+  source: wiki/25-资产/presentations/kubernetes-workload-presentation.md
+  section: 核心概念讲解
+- type: comparison
+  question: Kubernetes Workload 全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/kubernetes-workload-presentation.md 中的对比分析。
+  source: wiki/25-资产/presentations/kubernetes-workload-presentation.md
+- type: concept
+  question: 在 Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家) [presentations] 中, 演示文稿模板结构（Standard Presentation Structure） 是什么?
+  answer: 参见 wiki/25-资产/presentations/presentation-template.md 的「演示文稿模板结构（Standard Presentation Structure）」章节。
+  source: wiki/25-资产/presentations/presentation-template.md
+  section: 演示文稿模板结构（Standard Presentation Structure）
+- type: concept
+  question: 在 Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家) [presentations] 中, 每个章节的详细要求（Detailed Section Requirements） 是什么?
+  answer: 参见 wiki/25-资产/presentations/presentation-template.md 的「每个章节的详细要求（Detailed Section Requirements）」章节。
+  source: wiki/25-资产/presentations/presentation-template.md
+  section: 每个章节的详细要求（Detailed Section Requirements）
+- type: troubleshooting
+  question: 如何排查 Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家) [presentations] 相关的故障?
+  answer: 参见 wiki/25-资产/presentations/presentation-template.md 的故障排查章节。
+  source: wiki/25-资产/presentations/presentation-template.md
+- type: comparison
+  question: Kubernetes [组件/技术名称] 全栈进阶培训 (从入门到专家) [presentations] 中有哪些技术对比?
+  answer: 参见 wiki/25-资产/presentations/presentation-template.md 中的对比分析。
+  source: wiki/25-资产/presentations/presentation-template.md

@@ -2114,17 +2114,17 @@ kubectl debug <pod> -it --image=nicolaka/netshoot --target=<container> -- \
 - 16-troubleshooting-guide
 - [[hot|hot]]
 - [[log|log]]
-- [[wiki/17-系统基础/05-速查卡/go.md|go]]
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[wiki/01-集群基础与系统/12-速查卡/go.md|go]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 ## See Also
 
-- [[wiki/19-故障诊断/04-高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
-- [[wiki/19-故障诊断/04-高级排障/structural-05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
-- [[wiki/19-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
-- [[wiki/19-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-05-workloads/05-job-cronjob-troubleshooting.md|05-job-cronjob-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-05-workloads/06-configmap-secret-troubleshooting.md|06-configmap-secret-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-05-workloads/02-deployment-troubleshooting.md|02-deployment-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-05-workloads/03-statefulset-troubleshooting.md|03-statefulset-troubleshooting]]
 
 ```
 

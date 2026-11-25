@@ -115,9 +115,9 @@ labels:
 
 ## 相关资源
 
-- [[wiki/22-概念/k8s-production-best-practices.md|[[wiki/22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
-- [[wiki/22-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
-- [[wiki/22-概念/secrets-management.md|[[wiki/08-安全/07-零信任架构/02-secrets-management-deep-dive|Secrets Management]]]]
+- [[wiki/20-概念/k8s-production-best-practices.md|[[wiki/20-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
+- [[wiki/20-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
+- [[wiki/20-概念/secrets-management.md|[[wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive|Secrets Management]]]]
 - [[skills/07-安全/rbac/audit-rbac-configurations.md|Audit RBAC Configurations]]
 
 ## 生产案例
@@ -161,12 +161,12 @@ labels:
 
 ## Related
 
-- [[wiki/23-实体/06-安全/trivy.md|trivy]] — Trivy
+- [[wiki/22-实体/06-安全/trivy.md|trivy]] — Trivy
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/05-安全/secrets-management.md|secrets-management]] — Secrets Management
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[wiki/22-概念/05-安全/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
+- [[wiki/20-概念/05-安全/secrets-management.md|secrets-management]] — Secrets Management
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/05-安全/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
 
 
 <!-- risk-assessed -->
-- [[wiki/22-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]
+- [[wiki/20-概念/11-交叉分析/Deployment × Secret 管理|[[deployment]] × Secret 管理]]

@@ -51,7 +51,7 @@ title: Day 8: 集群RBAC
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - "[[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] RBAC"
+  - "[[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] RBAC"
   - "Role ClusterRole"
   - "RoleBinding"
   - "权限配置"
@@ -584,9 +584,9 @@ cluster-admin 拥有集群的完全控制权，包括删除 Namespace、修改 R
 
 ## 延伸阅读
 
-- [认证授权体系](../../../../../../wiki/08-安全/01-身份与访问/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../../../../../wiki/08-安全/01-身份与访问/06-rbac-matrix-configuration.md)
-- [安全架构总览](../../../../../../wiki/01-集群基础/01-架构总览/12-security-architecture.md)
+- [认证授权体系](../../../../../../wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../../../../../wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md)
+- [安全架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/12-security-architecture.md)
 - [ACK 安全管理](../../云厂商/04-alicloud-ack/270-ack-security.md)
 
 

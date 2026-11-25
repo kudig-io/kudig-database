@@ -52,7 +52,7 @@ title: Day 15: Node 节点基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Node architecture [[kubelet|kubelet]] kube-proxy
   - Node status conditions Ready NotReady
   - Node capacity allocatable resource management
   - Kubernetes node monitoring troubleshooting
@@ -608,10 +608,10 @@ echo "========================================"
 
 ## 延伸阅读
 
-- [K8s 核心组件深入](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
-- [Node NotReady 诊断](../../../../../../wiki/19-故障诊断/01-核心排障/06-node-notready-diagnosis.md)
+- [K8s 核心组件深入](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
+- [Node NotReady 诊断](../../../../../../wiki/17-故障诊断/01-核心排障/06-node-notready-diagnosis.md)
 - [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
-- [OOM 内存诊断](../../../../../../wiki/19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md)
+- [OOM 内存诊断](../../../../../../wiki/17-故障诊断/01-核心排障/07-oom-memory-diagnosis.md)
 
 ```
 

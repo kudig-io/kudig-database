@@ -111,8 +111,8 @@ prerequisites:
 
 ## 相关资源
 
-- [[wiki/22-概念/k8s-production-best-practices.md|[[wiki/22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
-- [[wiki/22-概念/observability-pillars.md|[[wiki/22-概念/06-可观测性/observability-pillars|Observability Pillars]]]]
+- [[wiki/20-概念/k8s-production-best-practices.md|[[wiki/20-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
+- [[wiki/20-概念/observability-pillars.md|[[wiki/20-概念/06-可观测性/observability-pillars|Observability Pillars]]]]
 - [[skills/08-可观测性/monitoring/最佳实践/k8s-monitoring-guide.md|Kubernetes 监控最佳实践]]
 - [[skills/08-可观测性/monitoring/最佳实践/k8s-logging-management-guide.md|Kubernetes 日志管理最佳实践]]
 
@@ -160,8 +160,8 @@ prerequisites:
 - [[jaeger]] — Jaeger
 - [[helm]] — Helm
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/06-可观测性/observability-pillars.md|observability-pillars]] — Observability Pillars
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/06-可观测性/observability-pillars.md|observability-pillars]] — Observability Pillars
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
 
 
 <!-- risk-assessed -->

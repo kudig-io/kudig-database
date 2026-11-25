@@ -132,7 +132,7 @@ kubectl get nodes --no-headers | grep "NotReady" | grep -E "control-plane|master
 ```
 ``` bash
 # 🟢 低风险：只读/信息收集，通常无副作用
-# 查看 NotReady 节点上运行的 [[wiki/22-概念/02-工作负载/pod-lifecycle.md|pod]] 数量和关键 namespace
+# 查看 NotReady 节点上运行的 [[wiki/20-概念/02-工作负载/pod-lifecycle.md|pod]] 数量和关键 namespace
 NODE_NAME="<notready-node>"
 kubectl get pods --all-namespaces --field-selector spec.nodeName=${NODE_NAME} --no-headers | \
   awk '{print $1}' | sort | uniq -c | sort -rn

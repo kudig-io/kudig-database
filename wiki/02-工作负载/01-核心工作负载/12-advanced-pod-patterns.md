@@ -71,7 +71,7 @@ cross_refs:
 
 # 111 - 容器与 Pod 高级运维模式 (Advanced Pod Patterns)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/22-概念/02-工作负载/pod-lifecycle.md|Pod Lifecycle]]](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/20-概念/02-工作负载/pod-lifecycle.md|Pod Lifecycle]]](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 
 <!-- chunk: 1. 探针深度调优 (Probes Tuning) -->
 ## 1. 探针深度调优 (Probes Tuning)
@@ -514,7 +514,7 @@ kubectl get pod <pod-name> -n <ns> -o jsonpath='
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

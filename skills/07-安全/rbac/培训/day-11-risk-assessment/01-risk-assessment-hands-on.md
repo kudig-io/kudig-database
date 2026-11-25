@@ -77,7 +77,7 @@ prerequisites:
 | API Server | 未授权访问、提权 | RBAC + 审计日志 + 认证 |
 | [[etcd|etcd]] | 数据泄露 | TLS + 网络隔离 + 加密 |
 | [[kubelet|Kubelet]] | 容器逃逸 | RBAC + 静态 Pod + PSP |
-| [[wiki/22-概念/15-运行时与系统/container-runtime.md|Container Runtime]] | 权限过大 | 最小化 capabilities |
+| [[wiki/20-概念/15-运行时与系统/container-runtime.md|Container Runtime]] | 权限过大 | 最小化 capabilities |
 | 网络 | 横向移动 | [[networkpolicy\|NetworkPolicy]] + CNI 隔离 |
 
 ---
@@ -454,7 +454,7 @@ estimated_read_time: 50min
 related_domains:
   - 安全
   - 故障诊断
-  - domain-25-[[wiki/17-系统基础/06-知识字典/security/cloud-native-security.md|cloud-native-security]]
+  - domain-25-[[wiki/21-知识字典/security/cloud-native-security.md|cloud-native-security]]
 related_topics:
   - security
   - rbac

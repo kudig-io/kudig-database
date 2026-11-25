@@ -44,7 +44,7 @@ title: Day 19: Pod 容器组基础实操
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod 生命周期
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod 生命周期
   - Pod 探针配置
   - CrashLoopBackOff 排查
   - Pod QoS 等级

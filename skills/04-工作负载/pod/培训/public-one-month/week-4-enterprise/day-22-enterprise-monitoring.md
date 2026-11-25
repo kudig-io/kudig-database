@@ -396,11 +396,11 @@ SLO 不是越高越好。过高的 SLO 意味着几乎不允许出错，这会�
 
 ## 延伸阅读
 
-- [Prometheus 企业级监控](../../../../../../wiki/09-可观测性/02-指标/01-prometheus-enterprise-monitoring.md)
-- [Grafana 企业级可观测性](../../../../../../wiki/09-可观测性/07-工具/01-grafana-enterprise-observability.md)
-- [SLO/SLI 体系](../../../../../../wiki/09-可观测性/06-SLO-SLI/08-slo-sli-system.md)
-- [可观测性架构总览](../../../../../../wiki/09-可观测性/01-总览/01-observability-architecture-overview.md)
-- [Prometheus 监控](../../../../../../wiki/09-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
+- [Prometheus 企业级监控](../../../../../../wiki/08-可观测性/02-指标/01-prometheus-enterprise-monitoring.md)
+- [Grafana 企业级可观测性](../../../../../../wiki/08-可观测性/07-工具/01-grafana-enterprise-observability.md)
+- [SLO/SLI 体系](../../../../../../wiki/08-可观测性/06-SLO-SLI/08-slo-sli-system.md)
+- [可观测性架构总览](../../../../../../wiki/08-可观测性/01-总览/01-observability-architecture-overview.md)
+- [Prometheus 监控](../../../../../../wiki/08-可观测性/02-指标/05-monitoring-metrics-prometheus.md)
 
 
 <!-- risk-assessed -->

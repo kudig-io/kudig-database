@@ -474,10 +474,10 @@ echo "Prometheus running: $(kubectl get pods -n monitoring -l app.kubernetes.io/
 
 - [毕业项目详细指南](../projects/p5-graduation-project.md)
 - [终极自测题](checkpoint.md)
-- [生产架构设计原则](../../../../../../wiki/01-集群基础/02-设计原则/02-production-architecture-design-principles.md)
-- [变更管理流程](../../../../../../wiki/11-发布变更/04-变更管理/08-change-management-process.md)
-- [事故响应处理](../../../../../../wiki/13-生产运维/03-事件响应/10-incident-response-handling.md)
-- [容量规划预测](../../../../../../wiki/12-可靠性/03-容量规划/06-capacity-planning-forecasting.md)
+- [生产架构设计原则](../../../../../../wiki/01-集群基础与系统/02-设计原则/02-production-architecture-design-principles.md)
+- [变更管理流程](../../../../../../wiki/09-发布变更/04-变更管理/08-change-management-process.md)
+- [事故响应处理](../../../../../../wiki/11-生产运维/03-事件响应/10-incident-response-handling.md)
+- [容量规划预测](../../../../../../wiki/10-可靠性/03-容量规划/06-capacity-planning-forecasting.md)
 
 ---
 

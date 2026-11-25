@@ -216,8 +216,8 @@ flowchart TD
 - [[psp-scc-fta]] — PSP/SCC 异常故障树分析
 - [[skills/04-工作负载/pod/方法论/skill-reference-remediation-playbook.md|skill-reference-remediation-playbook]] — Remediation Playbook
 - [[cilium-fta]] — Cilium Fta
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/nodepool-fta.md|NodePool 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/nodepool-fta.md|NodePool 异常故障树分析]]
 
 <!-- risk-assessed -->

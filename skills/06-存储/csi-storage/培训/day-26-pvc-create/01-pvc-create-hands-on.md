@@ -163,7 +163,7 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: standard
-provisioner: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/gce-pd  # 或 aws-ebs / kubernetes.io/azure-disk
+provisioner: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/gce-pd  # 或 aws-ebs / kubernetes.io/azure-disk
 parameters:
   type: pd-standard  # SSD: pd-ssd
   fstype: ext4

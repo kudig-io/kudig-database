@@ -266,7 +266,7 @@ kubectl run dns-test --rm -it --restart=Never --image=busybox:1.36 -- sh -c '
   echo "=== Testing DNS ==="
   nslookup backend-svc
   nslookup backend-svc.<namespace>.svc.cluster.local
-  nslookup [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].default
+  nslookup [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].default
   echo "=== Testing Connectivity ==="
   wget -qO- --timeout=5 http://backend-svc:80/health || echo "Connection failed"
 '

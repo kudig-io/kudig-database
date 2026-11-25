@@ -1,0 +1,2559 @@
+domain: 故障案例库
+total_questions: 515
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 CONTRIBUTING 中, 文件命名规范 是什么?
+  answer: 参见 wiki/32-故障案例库/CONTRIBUTING.md 的「文件命名规范」章节。
+  source: wiki/32-故障案例库/CONTRIBUTING.md
+  section: 文件命名规范
+- type: concept
+  question: 在 CONTRIBUTING 中, 元数据（Frontmatter）规范 是什么?
+  answer: 参见 wiki/32-故障案例库/CONTRIBUTING.md 的「元数据（Frontmatter）规范」章节。
+  source: wiki/32-故障案例库/CONTRIBUTING.md
+  section: 元数据（Frontmatter）规范
+- type: concept
+  question: 在 CONTRIBUTING 中, 录入流程 是什么?
+  answer: 参见 wiki/32-故障案例库/CONTRIBUTING.md 的「录入流程」章节。
+  source: wiki/32-故障案例库/CONTRIBUTING.md
+  section: 录入流程
+- type: concept
+  question: 在 CONTRIBUTING 中, 版本控制与更新机制 是什么?
+  answer: 参见 wiki/32-故障案例库/CONTRIBUTING.md 的「版本控制与更新机制」章节。
+  source: wiki/32-故障案例库/CONTRIBUTING.md
+  section: 版本控制与更新机制
+- type: concept
+  question: 在 CONTRIBUTING 中, 内容红线 是什么?
+  answer: 参见 wiki/32-故障案例库/CONTRIBUTING.md 的「内容红线」章节。
+  source: wiki/32-故障案例库/CONTRIBUTING.md
+  section: 内容红线
+- type: concept
+  question: 在 INDEX 中, 统计概览 是什么?
+  answer: 参见 wiki/32-故障案例库/INDEX.md 的「统计概览」章节。
+  source: wiki/32-故障案例库/INDEX.md
+  section: 统计概览
+- type: concept
+  question: 在 INDEX 中, 全部案例（按日期倒序） 是什么?
+  answer: 参见 wiki/32-故障案例库/INDEX.md 的「全部案例（按日期倒序）」章节。
+  source: wiki/32-故障案例库/INDEX.md
+  section: 全部案例（按日期倒序）
+- type: concept
+  question: 在 INDEX 中, 按技术领域 是什么?
+  answer: 参见 wiki/32-故障案例库/INDEX.md 的「按技术领域」章节。
+  source: wiki/32-故障案例库/INDEX.md
+  section: 按技术领域
+- type: concept
+  question: 在 cre-practices 中, 客户感知影响的度量维度 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/cre-practices.md 的「客户感知影响的度量维度」章节。
+  source: wiki/32-故障案例库/docs/methodology/cre-practices.md
+  section: 客户感知影响的度量维度
+- type: concept
+  question: 在 cre-practices 中, 对外沟通评估 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/cre-practices.md 的「对外沟通评估」章节。
+  source: wiki/32-故障案例库/docs/methodology/cre-practices.md
+  section: 对外沟通评估
+- type: concept
+  question: 在 cre-practices 中, SLO 与错误预算视角 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/cre-practices.md 的「SLO 与错误预算视角」章节。
+  source: wiki/32-故障案例库/docs/methodology/cre-practices.md
+  section: SLO 与错误预算视角
+- type: concept
+  question: 在 cre-practices 中, 客户侧韧性教训（Consumer-side Lessons） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/cre-practices.md 的「客户侧韧性教训（Consumer-side Lessons）」章节。
+  source: wiki/32-故障案例库/docs/methodology/cre-practices.md
+  section: 客户侧韧性教训（Consumer-side Lessons）
+- type: concept
+  question: 在 fde-analysis 中, 证据分级 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/fde-analysis.md 的「证据分级」章节。
+  source: wiki/32-故障案例库/docs/methodology/fde-analysis.md
+  section: 证据分级
+- type: concept
+  question: 在 fde-analysis 中, 时间线重建方法 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/fde-analysis.md 的「时间线重建方法」章节。
+  source: wiki/32-故障案例库/docs/methodology/fde-analysis.md
+  section: 时间线重建方法
+- type: concept
+  question: 在 fde-analysis 中, 可观测性缺口分析 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/fde-analysis.md 的「可观测性缺口分析」章节。
+  source: wiki/32-故障案例库/docs/methodology/fde-analysis.md
+  section: 可观测性缺口分析
+- type: concept
+  question: 在 fde-analysis 中, 数据驱动的量化描述规范 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/fde-analysis.md 的「数据驱动的量化描述规范」章节。
+  source: wiki/32-故障案例库/docs/methodology/fde-analysis.md
+  section: 数据驱动的量化描述规范
+- type: concept
+  question: 在 sa-practices 中, 客情危机（Customer Relationship Crisis） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sa-practices.md 的「客情危机（Customer Relationship Crisis）」章节。
+  source: wiki/32-故障案例库/docs/methodology/sa-practices.md
+  section: 客情危机（Customer Relationship Crisis）
+- type: concept
+  question: 在 sa-practices 中, 技术危机（Technical Crisis） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sa-practices.md 的「技术危机（Technical Crisis）」章节。
+  source: wiki/32-故障案例库/docs/methodology/sa-practices.md
+  section: 技术危机（Technical Crisis）
+- type: concept
+  question: 在 sa-practices 中, SA 视角在案例中的落点 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sa-practices.md 的「SA 视角在案例中的落点」章节。
+  source: wiki/32-故障案例库/docs/methodology/sa-practices.md
+  section: SA 视角在案例中的落点
+- type: concept
+  question: 在 sa-practices 中, 四视角协同 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sa-practices.md 的「四视角协同」章节。
+  source: wiki/32-故障案例库/docs/methodology/sa-practices.md
+  section: 四视角协同
+- type: concept
+  question: 在 sre-postmortem 中, 复盘的目标 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sre-postmortem.md 的「复盘的目标」章节。
+  source: wiki/32-故障案例库/docs/methodology/sre-postmortem.md
+  section: 复盘的目标
+- type: concept
+  question: 在 sre-postmortem 中, 因素三分法 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sre-postmortem.md 的「因素三分法」章节。
+  source: wiki/32-故障案例库/docs/methodology/sre-postmortem.md
+  section: 因素三分法
+- type: concept
+  question: 在 sre-postmortem 中, 5 Whys 分析 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sre-postmortem.md 的「5 Whys 分析」章节。
+  source: wiki/32-故障案例库/docs/methodology/sre-postmortem.md
+  section: 5 Whys 分析
+- type: concept
+  question: 在 sre-postmortem 中, 关键时间指标 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sre-postmortem.md 的「关键时间指标」章节。
+  source: wiki/32-故障案例库/docs/methodology/sre-postmortem.md
+  section: 关键时间指标
+- type: concept
+  question: 在 sre-postmortem 中, 经验教训的书写标准 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/methodology/sre-postmortem.md 的「经验教训的书写标准」章节。
+  source: wiki/32-故障案例库/docs/methodology/sre-postmortem.md
+  section: 经验教训的书写标准
+- type: concept
+  question: 在 severity-and-taxonomy 中, 严重等级（severity） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/severity-and-taxonomy.md 的「严重等级（severity）」章节。
+  source: wiki/32-故障案例库/docs/severity-and-taxonomy.md
+  section: 严重等级（severity）
+- type: concept
+  question: 在 severity-and-taxonomy 中, 技术领域分类（domain，即目录名） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/severity-and-taxonomy.md 的「技术领域分类（domain，即目录名）」章节。
+  source: wiki/32-故障案例库/docs/severity-and-taxonomy.md
+  section: 技术领域分类（domain，即目录名）
+- type: concept
+  question: 在 severity-and-taxonomy 中, 根因分类（root_cause_category，单选主根因） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/severity-and-taxonomy.md 的「根因分类（root_cause_category，单选主根因）」章节。
+  source: wiki/32-故障案例库/docs/severity-and-taxonomy.md
+  section: 根因分类（root_cause_category，单选主根因）
+- type: concept
+  question: 在 severity-and-taxonomy 中, 常用标签参考（root_cause_tags，开放集） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/severity-and-taxonomy.md 的「常用标签参考（root_cause_tags，开放集）」章节。
+  source: wiki/32-故障案例库/docs/severity-and-taxonomy.md
+  section: 常用标签参考（root_cause_tags，开放集）
+- type: concept
+  question: 在 severity-and-taxonomy 中, 公司类型（company_type） 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/severity-and-taxonomy.md 的「公司类型（company_type）」章节。
+  source: wiki/32-故障案例库/docs/severity-and-taxonomy.md
+  section: 公司类型（company_type）
+- type: concept
+  question: 在 sre-cross-case-analysis 中, 全景视察：74 个案例的"大数据" 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/sre-cross-case-analysis.md 的「全景视察：74 个案例的"大数据"」章节。
+  source: wiki/32-故障案例库/docs/sre-cross-case-analysis.md
+  section: 全景视察：74 个案例的"大数据"
+- type: concept
+  question: 在 sre-cross-case-analysis 中, 根因模式：TOP 5 故障模式 是什么?
+  answer: 参见 wiki/32-故障案例库/docs/sre-cross-case-analysis.md 的「根因模式：TOP 5 故障模式」章节。
+  source: wiki/32-故障案例库/docs/sre-cross-case-analysis.md
+  section: 根因模式：TOP 5 故障模式
+- type: comparison
+  question: sre-cross-case-analysis 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/docs/sre-cross-case-analysis.md 中的对比分析。
+  source: wiki/32-故障案例库/docs/sre-cross-case-analysis.md
+- type: concept
+  question: 在 ChatGPT 数据泄露事故（redis-py 竞态导致会话标题与部分支付信息串号，主动全站下线） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md
+  section: 摘要
+- type: concept
+  question: 在 ChatGPT 数据泄露事故（redis-py 竞态导致会话标题与部分支付信息串号，主动全站下线） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 ChatGPT 数据泄露事故（redis-py 竞态导致会话标题与部分支付信息串号，主动全站下线） 中, 时间线（太平洋时间，2023-03-20） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md 的「时间线（太平洋时间，2023-03-20）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md
+  section: 时间线（太平洋时间，2023-03-20）
+- type: concept
+  question: 在 ChatGPT 数据泄露事故（redis-py 竞态导致会话标题与部分支付信息串号，主动全站下线） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: ChatGPT 数据泄露事故（redis-py 竞态导致会话标题与部分支付信息串号，主动全站下线） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2023-03-20-openai-redis-leak.md
+- type: concept
+  question: 在 OpenAI 全平台中断（新遥测服务压垮 Kubernetes 控制面，DNS 缓存延迟暴露） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md
+  section: 摘要
+- type: concept
+  question: 在 OpenAI 全平台中断（新遥测服务压垮 Kubernetes 控制面，DNS 缓存延迟暴露） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 OpenAI 全平台中断（新遥测服务压垮 Kubernetes 控制面，DNS 缓存延迟暴露） 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 OpenAI 全平台中断（新遥测服务压垮 Kubernetes 控制面，DNS 缓存延迟暴露） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2024-12-11-openai-k8s.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 DeepSeek 大规模恶意攻击事件（爆红高峰期遭攻击，限制非 +86 注册，服务间歇中断） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md
+  section: 摘要
+- type: concept
+  question: 在 DeepSeek 大规模恶意攻击事件（爆红高峰期遭攻击，限制非 +86 注册，服务间歇中断） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 DeepSeek 大规模恶意攻击事件（爆红高峰期遭攻击，限制非 +86 注册，服务间歇中断） 中, 时间线（北京时间，2025-01 下旬） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md 的「时间线（北京时间，2025-01 下旬）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md
+  section: 时间线（北京时间，2025-01 下旬）
+- type: concept
+  question: 在 DeepSeek 大规模恶意攻击事件（爆红高峰期遭攻击，限制非 +86 注册，服务间歇中断） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-01-27-deepseek-malicious-attack.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Claude 模型质量劣化事件（三个独立基础设施 bug 叠加，约五周输出质量下降） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md
+  section: 摘要
+- type: concept
+  question: 在 Claude 模型质量劣化事件（三个独立基础设施 bug 叠加，约五周输出质量下降） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Claude 模型质量劣化事件（三个独立基础设施 bug 叠加，约五周输出质量下降） 中, 时间线（2025-08 至 2025-09） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md 的「时间线（2025-08 至 2025-09）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md
+  section: 时间线（2025-08 至 2025-09）
+- type: concept
+  question: 在 Claude 模型质量劣化事件（三个独立基础设施 bug 叠加，约五周输出质量下降） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2025-08-05-anthropic-quality-degradation.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud Vertex AI 安全过滤服务配置变更致 Gemini 模型 429/503 错误 1 小时 58 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud Vertex AI 安全过滤服务配置变更致 Gemini 模型 429/503 错误 1 小时 58 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud Vertex AI 安全过滤服务配置变更致 Gemini 模型 429/503 错误 1 小时 58 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Google Cloud Vertex AI 安全过滤服务配置变更致 Gemini 模型 429/503 错误 1 小时 58 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Google Cloud Vertex AI 安全过滤服务配置变更致 Gemini 模型 429/503 错误 1 小时 58 分 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-02-27-gcp-vertex-safety-filter.md
+- type: concept
+  question: 在 Azure OpenAI GPT-5.2 配置与已部署引擎版本不兼容，模型调用跨区失败持续 20 小时 12 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md
+  section: 摘要
+- type: concept
+  question: 在 Azure OpenAI GPT-5.2 配置与已部署引擎版本不兼容，模型调用跨区失败持续 20 小时 12 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure OpenAI GPT-5.2 配置与已部署引擎版本不兼容，模型调用跨区失败持续 20 小时 12 分 中, 时间线（UTC，部分为社区报告当地时间折算） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md 的「时间线（UTC，部分为社区报告当地时间折算）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md
+  section: 时间线（UTC，部分为社区报告当地时间折算）
+- type: concept
+  question: 在 Azure OpenAI GPT-5.2 配置与已部署引擎版本不兼容，模型调用跨区失败持续 20 小时 12 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-03-09-azure-openai-gpt52-config.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure OpenAI 上游内部工作负载重试风暴压垮路由层，服务降级 7 小时 26 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md
+  section: 摘要
+- type: concept
+  question: 在 Azure OpenAI 上游内部工作负载重试风暴压垮路由层，服务降级 7 小时 26 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure OpenAI 上游内部工作负载重试风暴压垮路由层，服务降级 7 小时 26 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure OpenAI 上游内部工作负载重试风暴压垮路由层，服务降级 7 小时 26 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-05-29-azure-openai-retry-storm.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Gemini 全球服务中断（工具部署元数据数据库索引热点致极端读争用，约 7 小时错误率升高） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Google Gemini 全球服务中断（工具部署元数据数据库索引热点致极端读争用，约 7 小时错误率升高） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Gemini 全球服务中断（工具部署元数据数据库索引热点致极端读争用，约 7 小时错误率升高） 中, 时间线（US/Pacific，2026-06-10） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md 的「时间线（US/Pacific，2026-06-10）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md
+  section: 时间线（US/Pacific，2026-06-10）
+- type: concept
+  question: 在 Google Gemini 全球服务中断（工具部署元数据数据库索引热点致极端读争用，约 7 小时错误率升高） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-06-10-google-gemini-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure East US 基础设施故障 90 分钟，ChatGPT/Claude/Grok/Copilot 同窗口集体不可用 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Azure East US 基础设施故障 90 分钟，ChatGPT/Claude/Grok/Copilot 同窗口集体不可用 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure East US 基础设施故障 90 分钟，ChatGPT/Claude/Grok/Copilot 同窗口集体不可用 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure East US 基础设施故障 90 分钟，ChatGPT/Claude/Grok/Copilot 同窗口集体不可用 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-03-azure-eastus-ai-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure Sweden Central 平台问题致 OpenAI/Foundry/AI 服务间歇失败 5 小时 55 分（PIR 7QL5-Z50） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md
+  section: 摘要
+- type: concept
+  question: 在 Azure Sweden Central 平台问题致 OpenAI/Foundry/AI 服务间歇失败 5 小时 55 分（PIR 7QL5-Z50） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure Sweden Central 平台问题致 OpenAI/Foundry/AI 服务间歇失败 5 小时 55 分（PIR 7QL5-Z50） 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure Sweden Central 平台问题致 OpenAI/Foundry/AI 服务间歇失败 5 小时 55 分（PIR 7QL5-Z50） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/ai-ml-services/2026-09-29-azure-swedencentral-ai.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Marketo 全球服务中断（marketo.com 域名忘记续费而过期，网站/客户控制台/API 全线下线数小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md
+  section: 摘要
+- type: concept
+  question: 在 Marketo 全球服务中断（marketo.com 域名忘记续费而过期，网站/客户控制台/API 全线下线数小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Marketo 全球服务中断（marketo.com 域名忘记续费而过期，网站/客户控制台/API 全线下线数小时） 中, 时间线（太平洋时间，2017-07-25） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md 的「时间线（太平洋时间，2017-07-25）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md
+  section: 时间线（太平洋时间，2017-07-25）
+- type: concept
+  question: 在 Marketo 全球服务中断（marketo.com 域名忘记续费而过期，网站/客户控制台/API 全线下线数小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2017-07-25-marketo-domain-expiry.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 GitHub 按美国制裁要求封禁伊朗等国家开发者（合规误伤 + 公共仓库豁免引发争议，两年后 OFAC 发放许可证解除） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md
+  section: 摘要
+- type: concept
+  question: 在 GitHub 按美国制裁要求封禁伊朗等国家开发者（合规误伤 + 公共仓库豁免引发争议，两年后 OFAC 发放许可证解除） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 GitHub 按美国制裁要求封禁伊朗等国家开发者（合规误伤 + 公共仓库豁免引发争议，两年后 OFAC 发放许可证解除） 中, 时间线（2019，UTC 为主） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md 的「时间线（2019，UTC 为主）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md
+  section: 时间线（2019，UTC 为主）
+- type: concept
+  question: 在 GitHub 按美国制裁要求封禁伊朗等国家开发者（合规误伤 + 公共仓库豁免引发争议，两年后 OFAC 发放许可证解除） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: GitHub 按美国制裁要求封禁伊朗等国家开发者（合规误伤 + 公共仓库豁免引发争议，两年后 OFAC 发放许可证解除） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/business-operations/2019-07-25-github-sanctions-restriction.md
+- type: concept
+  question: 在 Parler 被 AWS 终止服务全面下线（商务合同终止 = 数字生存权终结，全平台失联约 36 天） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md
+  section: 摘要
+- type: concept
+  question: 在 Parler 被 AWS 终止服务全面下线（商务合同终止 = 数字生存权终结，全平台失联约 36 天） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Parler 被 AWS 终止服务全面下线（商务合同终止 = 数字生存权终结，全平台失联约 36 天） 中, 时间线（2021-01） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md 的「时间线（2021-01）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md
+  section: 时间线（2021-01）
+- type: concept
+  question: 在 Parler 被 AWS 终止服务全面下线（商务合同终止 = 数字生存权终结，全平台失联约 36 天） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Parler 被 AWS 终止服务全面下线（商务合同终止 = 数字生存权终结，全平台失联约 36 天） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/business-operations/2021-01-10-parler-aws-termination.md
+- type: concept
+  question: 在 Google Cloud 账单系统故障（GCE 变更引发用量数据错乱，9 天延迟报告 + 重复计费显示，所有客户账务可见性受损） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud 账单系统故障（GCE 变更引发用量数据错乱，9 天延迟报告 + 重复计费显示，所有客户账务可见性受损） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud 账单系统故障（GCE 变更引发用量数据错乱，9 天延迟报告 + 重复计费显示，所有客户账务可见性受损） 中, 时间线（2022，PDT 为主） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md 的「时间线（2022，PDT 为主）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md
+  section: 时间线（2022，PDT 为主）
+- type: concept
+  question: 在 Google Cloud 账单系统故障（GCE 变更引发用量数据错乱，9 天延迟报告 + 重复计费显示，所有客户账务可见性受损） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Google Cloud 账单系统故障（GCE 变更引发用量数据错乱，9 天延迟报告 + 重复计费显示，所有客户账务可见性受损） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/business-operations/2022-07-25-google-cloud-billing-outage.md
+- type: concept
+  question: 在 Twitter 无预警封杀第三方客户端（断流一周后才改协议，Tweetbot/Twitterrific 等 16 年老应用集体死亡） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md
+  section: 摘要
+- type: concept
+  question: 在 Twitter 无预警封杀第三方客户端（断流一周后才改协议，Tweetbot/Twitterrific 等 16 年老应用集体死亡） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Twitter 无预警封杀第三方客户端（断流一周后才改协议，Tweetbot/Twitterrific 等 16 年老应用集体死亡） 中, 时间线（2023，UTC 为主） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md 的「时间线（2023，UTC 为主）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md
+  section: 时间线（2023，UTC 为主）
+- type: concept
+  question: 在 Twitter 无预警封杀第三方客户端（断流一周后才改协议，Tweetbot/Twitterrific 等 16 年老应用集体死亡） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-01-19-twitter-api-crackdown.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Reddit API 收费引爆第三方生态崩溃（定价决策未协商 + 沟通对抗，Apollo 等客户端集体关闭、社区大罢工） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md
+  section: 摘要
+- type: concept
+  question: 在 Reddit API 收费引爆第三方生态崩溃（定价决策未协商 + 沟通对抗，Apollo 等客户端集体关闭、社区大罢工） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Reddit API 收费引爆第三方生态崩溃（定价决策未协商 + 沟通对抗，Apollo 等客户端集体关闭、社区大罢工） 中, 时间线（2023，UTC-7 为主） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md 的「时间线（2023，UTC-7 为主）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md
+  section: 时间线（2023，UTC-7 为主）
+- type: concept
+  question: 在 Reddit API 收费引爆第三方生态崩溃（定价决策未协商 + 沟通对抗，Apollo 等客户端集体关闭、社区大罢工） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2023-04-18-reddit-api-pricing.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud 以违反 ToS 为由无预警暂停 Railway 生产账号，平台全站中断约 8 小时 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud 以违反 ToS 为由无预警暂停 Railway 生产账号，平台全站中断约 8 小时 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud 以违反 ToS 为由无预警暂停 Railway 生产账号，平台全站中断约 8 小时 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Google Cloud 以违反 ToS 为由无预警暂停 Railway 生产账号，平台全站中断约 8 小时 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/business-operations/2026-05-19-railway-gcp-suspension.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare 全球边缘 CPU 耗尽（WAF 正则灾难性回溯） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 全球边缘 CPU 耗尽（WAF 正则灾难性回溯） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 全球边缘 CPU 耗尽（WAF 正则灾难性回溯） 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Cloudflare 全球边缘 CPU 耗尽（WAF 正则灾难性回溯） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2019-07-02-cloudflare-waf-regex.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Fastly 全球服务中断（客户配置触发潜伏软件缺陷） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md
+  section: 摘要
+- type: concept
+  question: 在 Fastly 全球服务中断（客户配置触发潜伏软件缺陷） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Fastly 全球服务中断（客户配置触发潜伏软件缺陷） 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Fastly 全球服务中断（客户配置触发潜伏软件缺陷） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-06-08-fastly-global.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 B 站 713 事故（SLB Lua 代码 weight="0" 触发死循环，CPU 100% 全站不可用） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md
+  section: 摘要
+- type: concept
+  question: 在 B 站 713 事故（SLB Lua 代码 weight="0" 触发死循环，CPU 100% 全站不可用） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 B 站 713 事故（SLB Lua 代码 weight="0" 触发死循环，CPU 100% 全站不可用） 中, 时间线（北京时间，2021-07-13 至 07-14） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md 的「时间线（北京时间，2021-07-13 至 07-14）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md
+  section: 时间线（北京时间，2021-07-13 至 07-14）
+- type: concept
+  question: 在 B 站 713 事故（SLB Lua 代码 weight="0" 触发死循环，CPU 100% 全站不可用） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: B 站 713 事故（SLB Lua 代码 weight="0" 触发死循环，CPU 100% 全站不可用） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2021-07-13-bilibili-slb-outage.md
+- type: concept
+  question: 在 Cloudflare 全球中断（BGP 前缀通告策略变更中 term 重排序致 19 个数据中心离线约 75 分钟，50% 全球流量受损） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 全球中断（BGP 前缀通告策略变更中 term 重排序致 19 个数据中心离线约 75 分钟，50% 全球流量受损） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 全球中断（BGP 前缀通告策略变更中 term 重排序致 19 个数据中心离线约 75 分钟，50% 全球流量受损） 中, 时间线（UTC，2022-06-21） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md 的「时间线（UTC，2022-06-21）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md
+  section: 时间线（UTC，2022-06-21）
+- type: concept
+  question: 在 Cloudflare 全球中断（BGP 前缀通告策略变更中 term 重排序致 19 个数据中心离线约 75 分钟，50% 全球流量受损） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Cloudflare 全球中断（BGP 前缀通告策略变更中 term 重排序致 19 个数据中心离线约 75 分钟，50% 全球流量受损） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2022-06-21-cloudflare-outage.md
+- type: concept
+  question: 在 Cloudflare Zero Trust 中断（Service Token 代码发布覆盖元数据致 121 分钟多服务不可用，WARP/Cache/R2 等受影响） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare Zero Trust 中断（Service Token 代码发布覆盖元数据致 121 分钟多服务不可用，WARP/Cache/R2 等受影响） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare Zero Trust 中断（Service Token 代码发布覆盖元数据致 121 分钟多服务不可用，WARP/Cache/R2 等受影响） 中, 时间线（UTC，2023-01-24） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md 的「时间线（UTC，2023-01-24）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md
+  section: 时间线（UTC，2023-01-24）
+- type: concept
+  question: 在 Cloudflare Zero Trust 中断（Service Token 代码发布覆盖元数据致 121 分钟多服务不可用，WARP/Cache/R2 等受影响） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Cloudflare Zero Trust 中断（Service Token 代码发布覆盖元数据致 121 分钟多服务不可用，WARP/Cache/R2 等受影响） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2023-01-24-cloudflare-zerotrust-outage.md
+- type: concept
+  question: 在 Cloudflare R2 全球中断（密钥轮换中 `--env production` 参数遗漏致 100% 写入失败 67 分钟，R2/Cache Reserve/Stream 等受损） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare R2 全球中断（密钥轮换中 `--env production` 参数遗漏致 100% 写入失败 67 分钟，R2/Cache Reserve/Stream 等受损） 中, 影响评估（CRE 视角）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare R2 全球中断（密钥轮换中 `--env production` 参数遗漏致 100% 写入失败 67 分钟，R2/Cache Reserve/Stream 等受损） 中, 时间线（UTC，2025-03-21）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md 的「时间线（UTC，2025-03-21）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md
+  section: 时间线（UTC，2025-03-21）
+- type: concept
+  question: 在 Cloudflare R2 全球中断（密钥轮换中 `--env production` 参数遗漏致 100% 写入失败 67 分钟，R2/Cache Reserve/Stream 等受损） 中, 技术细节与根因分析（SRE
+    视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-03-21-cloudflare-r2-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure Front Door 全球中断（租户配置变更绕过安全验证部署至全局控制面，AFD 节点失效约 8 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Azure Front Door 全球中断（租户配置变更绕过安全验证部署至全局控制面，AFD 节点失效约 8 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure Front Door 全球中断（租户配置变更绕过安全验证部署至全局控制面，AFD 节点失效约 8 小时） 中, 时间线（UTC，2025-10-29 ~ 10-30） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md 的「时间线（UTC，2025-10-29 ~ 10-30）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md
+  section: 时间线（UTC，2025-10-29 ~ 10-30）
+- type: concept
+  question: 在 Azure Front Door 全球中断（租户配置变更绕过安全验证部署至全局控制面，AFD 节点失效约 8 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-10-29-azure-frontdoor-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare 全球 5xx 中断（Bot Management 配置生成 bug 触发性文件超限引发 Rust panic，约 28% 核心流量受损 5.8 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 全球 5xx 中断（Bot Management 配置生成 bug 触发性文件超限引发 Rust panic，约 28% 核心流量受损 5.8 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 全球 5xx 中断（Bot Management 配置生成 bug 触发性文件超限引发 Rust panic，约 28% 核心流量受损 5.8 小时） 中, 时间线（UTC，2025-11-18）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md 的「时间线（UTC，2025-11-18）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md
+  section: 时间线（UTC，2025-11-18）
+- type: concept
+  question: 在 Cloudflare 全球 5xx 中断（Bot Management 配置生成 bug 触发性文件超限引发 Rust panic，约 28% 核心流量受损 5.8 小时） 中, 技术细节与根因分析（SRE 视角）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-11-18-cloudflare-bot-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare 安全补丁引发中断（React2Shell CVE 缓解措施致 28% 全球流量 500 错误约 25 分钟，FL1 代理规则引擎 nil 崩溃） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 安全补丁引发中断（React2Shell CVE 缓解措施致 28% 全球流量 500 错误约 25 分钟，FL1 代理规则引擎 nil 崩溃） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 安全补丁引发中断（React2Shell CVE 缓解措施致 28% 全球流量 500 错误约 25 分钟，FL1 代理规则引擎 nil 崩溃） 中, 时间线（UTC，2025-12-05） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md 的「时间线（UTC，2025-12-05）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md
+  section: 时间线（UTC，2025-12-05）
+- type: concept
+  question: 在 Cloudflare 安全补丁引发中断（React2Shell CVE 缓解措施致 28% 全球流量 500 错误约 25 分钟，FL1 代理规则引擎 nil 崩溃） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Cloudflare 安全补丁引发中断（React2Shell CVE 缓解措施致 28% 全球流量 500 错误约 25 分钟，FL1 代理规则引擎 nil 崩溃） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2025-12-05-cloudflare-react2shell-outage.md
+- type: concept
+  question: 在 AWS CloudFront 全球中断（VPC Origins 连接管理 fleet 内部约束致配置分发失败，全球 5xx 约 3.5 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS CloudFront 全球中断（VPC Origins 连接管理 fleet 内部约束致配置分发失败，全球 5xx 约 3.5 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS CloudFront 全球中断（VPC Origins 连接管理 fleet 内部约束致配置分发失败，全球 5xx 约 3.5 小时） 中, 时间线（UTC，2026-07-16） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md 的「时间线（UTC，2026-07-16）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md
+  section: 时间线（UTC，2026-07-16）
+- type: concept
+  question: 在 AWS CloudFront 全球中断（VPC Origins 连接管理 fleet 内部约束致配置分发失败，全球 5xx 约 3.5 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cdn-edge/2026-07-16-aws-cloudfront-vpc-origins-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS EC2 首次重大故障（beta 期实例数据丢失，云计算史上第一次信任危机） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS EC2 首次重大故障（beta 期实例数据丢失，云计算史上第一次信任危机） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS EC2 首次重大故障（beta 期实例数据丢失，云计算史上第一次信任危机） 中, 时间线（2007 年） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md 的「时间线（2007 年）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md
+  section: 时间线（2007 年）
+- type: concept
+  question: 在 AWS EC2 首次重大故障（beta 期实例数据丢失，云计算史上第一次信任危机） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2007-09-29-aws-ec2-first-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS S3 首次重大中断（认证请求洪峰致单数据中心不可用约 2 小时，云计算"第一次大考"） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS S3 首次重大中断（认证请求洪峰致单数据中心不可用约 2 小时，云计算"第一次大考"） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS S3 首次重大中断（认证请求洪峰致单数据中心不可用约 2 小时，云计算"第一次大考"） 中, 时间线（太平洋时间，2008-02-15） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md 的「时间线（太平洋时间，2008-02-15）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md
+  section: 时间线（太平洋时间，2008-02-15）
+- type: concept
+  question: 在 AWS S3 首次重大中断（认证请求洪峰致单数据中心不可用约 2 小时，云计算"第一次大考"） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2008-02-15-aws-s3-first-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google App Engine 全平台中断（数据中心维护操作失误致 App Engine 控制面不可用约 2 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Google App Engine 全平台中断（数据中心维护操作失误致 App Engine 控制面不可用约 2 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google App Engine 全平台中断（数据中心维护操作失误致 App Engine 控制面不可用约 2 小时） 中, 时间线（太平洋时间，2010-02-24） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md 的「时间线（太平洋时间，2010-02-24）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md
+  section: 时间线（太平洋时间，2010-02-24）
+- type: concept
+  question: 在 Google App Engine 全平台中断（数据中心维护操作失误致 App Engine 控制面不可用约 2 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2010-02-24-google-appengine-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS EBS re-mirroring 风暴（us-east-1 多日故障，云计算史上第一次大考） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md
+  section: 摘要
+- type: concept
+  question: 在 AWS EBS re-mirroring 风暴（us-east-1 多日故障，云计算史上第一次大考） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS EBS re-mirroring 风暴（us-east-1 多日故障，云计算史上第一次大考） 中, 时间线（太平洋时间，2011-04-21 起） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md 的「时间线（太平洋时间，2011-04-21 起）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md
+  section: 时间线（太平洋时间，2011-04-21 起）
+- type: concept
+  question: 在 AWS EBS re-mirroring 风暴（us-east-1 多日故障，云计算史上第一次大考） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2011-04-21-aws-ebs-remirroring-storm.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure 闰年证书故障（SSL 证书生成逻辑未处理 2 月 29 日，云计算服务瘫痪超 12 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md
+  section: 摘要
+- type: concept
+  question: 在 Azure 闰年证书故障（SSL 证书生成逻辑未处理 2 月 29 日，云计算服务瘫痪超 12 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure 闰年证书故障（SSL 证书生成逻辑未处理 2 月 29 日，云计算服务瘫痪超 12 小时） 中, 时间线（太平洋标准时间，2012-02-28 ~ 02-29） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md 的「时间线（太平洋标准时间，2012-02-28 ~ 02-29）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md
+  section: 时间线（太平洋标准时间，2012-02-28 ~ 02-29）
+- type: concept
+  question: 在 Azure 闰年证书故障（SSL 证书生成逻辑未处理 2 月 29 日，云计算服务瘫痪超 12 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Azure 闰年证书故障（SSL 证书生成逻辑未处理 2 月 29 日，云计算服务瘫痪超 12 小时） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-02-29-azure-leap-year.md
+- type: concept
+  question: 在 AWS us-east-1 EBS 大规模中断（运维数据采集代理 latent bug 导致 EBS 存储服务器大面积故障） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-east-1 EBS 大规模中断（运维数据采集代理 latent bug 导致 EBS 存储服务器大面积故障） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 EBS 大规模中断（运维数据采集代理 latent bug 导致 EBS 存储服务器大面积故障） 中, 时间线（UTC，2012-10-22） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md 的「时间线（UTC，2012-10-22）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md
+  section: 时间线（UTC，2012-10-22）
+- type: concept
+  question: 在 AWS us-east-1 EBS 大规模中断（运维数据采集代理 latent bug 导致 EBS 存储服务器大面积故障） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-10-22-aws-us-east-1-ebs-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS ELB 平安夜故障（维护进程误删生产负载均衡器状态数据） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md
+  section: 摘要
+- type: concept
+  question: 在 AWS ELB 平安夜故障（维护进程误删生产负载均衡器状态数据） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS ELB 平安夜故障（维护进程误删生产负载均衡器状态数据） 中, 时间线（太平洋时间） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md 的「时间线（太平洋时间）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md
+  section: 时间线（太平洋时间）
+- type: concept
+  question: 在 AWS ELB 平安夜故障（维护进程误删生产负载均衡器状态数据） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2012-12-24-aws-elb-state-deletion.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure 全球存储中断（HTTPS 证书过期） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md
+  section: 摘要
+- type: concept
+  question: 在 Azure 全球存储中断（HTTPS 证书过期） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure 全球存储中断（HTTPS 证书过期） 中, 时间线（太平洋时间，2013-02-22 起） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md 的「时间线（太平洋时间，2013-02-22 起）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md
+  section: 时间线（太平洋时间，2013-02-22 起）
+- type: concept
+  question: 在 Azure 全球存储中断（HTTPS 证书过期） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-02-22-azure-ssl-expiry.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google 全服务 5 分钟中断（批量配置更新工具 bug 同时推送错误配置至全部服务，全球互联网短暂消失） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Google 全服务 5 分钟中断（批量配置更新工具 bug 同时推送错误配置至全部服务，全球互联网短暂消失） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google 全服务 5 分钟中断（批量配置更新工具 bug 同时推送错误配置至全部服务，全球互联网短暂消失） 中, 时间线（太平洋时间，2013-08-16） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md 的「时间线（太平洋时间，2013-08-16）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md
+  section: 时间线（太平洋时间，2013-08-16）
+- type: concept
+  question: 在 Google 全服务 5 分钟中断（批量配置更新工具 bug 同时推送错误配置至全部服务，全球互联网短暂消失） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2013-08-16-google-all-services-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure 存储服务全球中断（性能升级操作中的人为错误致存储集群大面积不可用约 11 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Azure 存储服务全球中断（性能升级操作中的人为错误致存储集群大面积不可用约 11 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure 存储服务全球中断（性能升级操作中的人为错误致存储集群大面积不可用约 11 小时） 中, 时间线（UTC，2014-11-18 ~ 11-19） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md 的「时间线（UTC，2014-11-18 ~ 11-19）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md
+  section: 时间线（UTC，2014-11-18 ~ 11-19）
+- type: concept
+  question: 在 Azure 存储服务全球中断（性能升级操作中的人为错误致存储集群大面积不可用约 11 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2014-11-18-azure-storage-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS DynamoDB us-east-1 中断（DNS 解析故障致 DynamoDB 不可用，级联影响多个 AWS 服务） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS DynamoDB us-east-1 中断（DNS 解析故障致 DynamoDB 不可用，级联影响多个 AWS 服务） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS DynamoDB us-east-1 中断（DNS 解析故障致 DynamoDB 不可用，级联影响多个 AWS 服务） 中, 时间线（UTC，2015-09-20） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md 的「时间线（UTC，2015-09-20）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md
+  section: 时间线（UTC，2015-09-20）
+- type: concept
+  question: 在 AWS DynamoDB us-east-1 中断（DNS 解析故障致 DynamoDB 不可用，级联影响多个 AWS 服务） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2015-09-20-aws-dynamodb-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS S3 us-east-1 大规模服务中断（运维命令输入错误） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md
+  section: 摘要
+- type: concept
+  question: 在 AWS S3 us-east-1 大规模服务中断（运维命令输入错误） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS S3 us-east-1 大规模服务中断（运维命令输入错误） 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 AWS S3 us-east-1 大规模服务中断（运维命令输入错误） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2017-02-28-aws-s3-us-east-1.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 第三方机房电源故障（Equinix 断电致 Alexa/Atlassian/Slack/Twilio 等大面积服务中断约 2 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-east-1 第三方机房电源故障（Equinix 断电致 Alexa/Atlassian/Slack/Twilio 等大面积服务中断约 2 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 第三方机房电源故障（Equinix 断电致 Alexa/Atlassian/Slack/Twilio 等大面积服务中断约 2 小时） 中, 时间线（ET，2018-03-02） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md 的「时间线（ET，2018-03-02）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md
+  section: 时间线（ET，2018-03-02）
+- type: concept
+  question: 在 AWS us-east-1 第三方机房电源故障（Equinix 断电致 Alexa/Atlassian/Slack/Twilio 等大面积服务中断约 2 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: AWS us-east-1 第三方机房电源故障（Equinix 断电致 Alexa/Atlassian/Slack/Twilio 等大面积服务中断约 2 小时） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2018-03-02-aws-equinix-power-outage.md
+- type: concept
+  question: 在 阿里云华北 2 可用区 C IO HANG 故障（ECS 服务器磁盘 IO 不响应约 3 小时，内核缺陷导致底层存储链路异常） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md
+  section: 摘要
+- type: concept
+  question: 在 阿里云华北 2 可用区 C IO HANG 故障（ECS 服务器磁盘 IO 不响应约 3 小时，内核缺陷导致底层存储链路异常） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 阿里云华北 2 可用区 C IO HANG 故障（ECS 服务器磁盘 IO 不响应约 3 小时，内核缺陷导致底层存储链路异常） 中, 时间线（UTC+8，2019-03-03） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md 的「时间线（UTC+8，2019-03-03）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md
+  section: 时间线（UTC+8，2019-03-03）
+- type: concept
+  question: 在 阿里云华北 2 可用区 C IO HANG 故障（ECS 服务器磁盘 IO 不响应约 3 小时，内核缺陷导致底层存储链路异常） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-03-03-aliyun-io-hang.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud 多区域网络拥塞（自动化误降网络控制面调度） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud 多区域网络拥塞（自动化误降网络控制面调度） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud 多区域网络拥塞（自动化误降网络控制面调度） 中, 时间线（太平洋时间，2019-06-02） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md 的「时间线（太平洋时间，2019-06-02）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md
+  section: 时间线（太平洋时间，2019-06-02）
+- type: concept
+  question: 在 Google Cloud 多区域网络拥塞（自动化误降网络控制面调度） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2019-06-02-gcp-network-congestion.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 内部网络过载引发多服务中断 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-east-1 内部网络过载引发多服务中断 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 内部网络过载引发多服务中断 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 AWS us-east-1 内部网络过载引发多服务中断 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2021-12-07-aws-us-east-1.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 阿里云香港可用区 C 大规模服务中断（冷机水路气阻+群控死锁，运营十余年最长大故障） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md
+  section: 摘要
+- type: concept
+  question: 在 阿里云香港可用区 C 大规模服务中断（冷机水路气阻+群控死锁，运营十余年最长大故障） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 阿里云香港可用区 C 大规模服务中断（冷机水路气阻+群控死锁，运营十余年最长大故障） 中, 时间线（北京时间，2022-12-18 至 12-19） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md 的「时间线（北京时间，2022-12-18 至 12-19）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md
+  section: 时间线（北京时间，2022-12-18 至 12-19）
+- type: concept
+  question: 在 阿里云香港可用区 C 大规模服务中断（冷机水路气阻+群控死锁，运营十余年最长大故障） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: 阿里云香港可用区 C 大规模服务中断（冷机水路气阻+群控死锁，运营十余年最长大故障） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2022-12-18-aliyun-hongkong-outage.md
+- type: concept
+  question: 在 AWS us-east-1 Lambda 大规模中断（单 cell 容量阈值触发潜在缺陷，STS/Console/EKS 等级联受损近 4 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-east-1 Lambda 大规模中断（单 cell 容量阈值触发潜在缺陷，STS/Console/EKS 等级联受损近 4 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 Lambda 大规模中断（单 cell 容量阈值触发潜在缺陷，STS/Console/EKS 等级联受损近 4 小时） 中, 时间线（PDT，2023-06-13） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md 的「时间线（PDT，2023-06-13）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md
+  section: 时间线（PDT，2023-06-13）
+- type: concept
+  question: 在 AWS us-east-1 Lambda 大规模中断（单 cell 容量阈值触发潜在缺陷，STS/Console/EKS 等级联受损近 4 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: AWS us-east-1 Lambda 大规模中断（单 cell 容量阈值触发潜在缺陷，STS/Console/EKS 等级联受损近 4 小时） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2023-06-13-aws-lambda-outage.md
+- type: concept
+  question: 在 腾讯云 4·8 云 API 服务异常（新版本前向兼容性问题叠加灰度不足，控制台登录与依赖服务中断 87 分钟） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md
+  section: 摘要
+- type: concept
+  question: 在 腾讯云 4·8 云 API 服务异常（新版本前向兼容性问题叠加灰度不足，控制台登录与依赖服务中断 87 分钟） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 腾讯云 4·8 云 API 服务异常（新版本前向兼容性问题叠加灰度不足，控制台登录与依赖服务中断 87 分钟） 中, 时间线（北京时间，2024-04-08） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md 的「时间线（北京时间，2024-04-08）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md
+  section: 时间线（北京时间，2024-04-08）
+- type: concept
+  question: 在 腾讯云 4·8 云 API 服务异常（新版本前向兼容性问题叠加灰度不足，控制台登录与依赖服务中断 87 分钟） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-04-08-tencentcloud-api-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud 误删 UniSuper 私有云事故（GCVE 部署工具参数缺省触发一年期自动删除，1350 亿澳元养老基金停摆一周） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud 误删 UniSuper 私有云事故（GCVE 部署工具参数缺省触发一年期自动删除，1350 亿澳元养老基金停摆一周） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud 误删 UniSuper 私有云事故（GCVE 部署工具参数缺省触发一年期自动删除，1350 亿澳元养老基金停摆一周） 中, 时间线（澳大利亚东部时间，2024-05） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md 的「时间线（澳大利亚东部时间，2024-05）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md
+  section: 时间线（澳大利亚东部时间，2024-05）
+- type: concept
+  question: 在 Google Cloud 误删 UniSuper 私有云事故（GCVE 部署工具参数缺省触发一年期自动删除，1350 亿澳元养老基金停摆一周） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-05-02-gcp-unisuper-deletion.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure 全球服务中断（DDoS 攻击触发防护机制实施错误反向放大攻击效果，Front Door/CDN 间歇不可用约 8 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md
+  section: 摘要
+- type: concept
+  question: 在 Azure 全球服务中断（DDoS 攻击触发防护机制实施错误反向放大攻击效果，Front Door/CDN 间歇不可用约 8 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure 全球服务中断（DDoS 攻击触发防护机制实施错误反向放大攻击效果，Front Door/CDN 间歇不可用约 8 小时） 中, 时间线（UTC，2024-07-30） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md 的「时间线（UTC，2024-07-30）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md
+  section: 时间线（UTC，2024-07-30）
+- type: concept
+  question: 在 Azure 全球服务中断（DDoS 攻击触发防护机制实施错误反向放大攻击效果，Front Door/CDN 间歇不可用约 8 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-07-30-azure-ddos-amplification.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 阿里云新加坡数据中心火灾（锂电池爆炸导致可用区 C 长时间停电，部分服务中断超 30 小时，多日恢复） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md
+  section: 摘要
+- type: concept
+  question: 在 阿里云新加坡数据中心火灾（锂电池爆炸导致可用区 C 长时间停电，部分服务中断超 30 小时，多日恢复） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 阿里云新加坡数据中心火灾（锂电池爆炸导致可用区 C 长时间停电，部分服务中断超 30 小时，多日恢复） 中, 时间线（北京时间，2024-09-10 ~ 09-11） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md 的「时间线（北京时间，2024-09-10 ~ 09-11）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md
+  section: 时间线（北京时间，2024-09-10 ~ 09-11）
+- type: concept
+  question: 在 阿里云新加坡数据中心火灾（锂电池爆炸导致可用区 C 长时间停电，部分服务中断超 30 小时，多日恢复） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2024-09-10-aliyun-singapore-fire.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure East US 2 长达 50 小时的网络中断（区域网络配置变更致存储分区不可用，虚拟机/App Service/数据库等大量服务连续 3 天受损） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Azure East US 2 长达 50 小时的网络中断（区域网络配置变更致存储分区不可用，虚拟机/App Service/数据库等大量服务连续 3 天受损） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure East US 2 长达 50 小时的网络中断（区域网络配置变更致存储分区不可用，虚拟机/App Service/数据库等大量服务连续 3 天受损） 中, 时间线（UTC，2025-01-08 ~ 01-11）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md 的「时间线（UTC，2025-01-08 ~ 01-11）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md
+  section: 时间线（UTC，2025-01-08 ~ 01-11）
+- type: concept
+  question: 在 Azure East US 2 长达 50 小时的网络中断（区域网络配置变更致存储分区不可用，虚拟机/App Service/数据库等大量服务连续 3 天受损） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-01-08-azure-eastus2-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud 全球中断（Service Control 空指针崩溃循环） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud 全球中断（Service Control 空指针崩溃循环） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud 全球中断（Service Control 空指针崩溃循环） 中, 时间线（太平洋时间，2025-06-12） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md 的「时间线（太平洋时间，2025-06-12）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md
+  section: 时间线（太平洋时间，2025-06-12）
+- type: concept
+  question: 在 Google Cloud 全球中断（Service Control 空指针崩溃循环） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-06-12-gcp-service-control-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 大规模级联故障（DynamoDB DNS Enactor 竞态删除端点记录） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-east-1 大规模级联故障（DynamoDB DNS Enactor 竞态删除端点记录） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 大规模级联故障（DynamoDB DNS Enactor 竞态删除端点记录） 中, 时间线（太平洋时间） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md 的「时间线（太平洋时间）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md
+  section: 时间线（太平洋时间）
+- type: concept
+  question: 在 AWS us-east-1 大规模级联故障（DynamoDB DNS Enactor 竞态删除端点记录） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: AWS us-east-1 大规模级联故障（DynamoDB DNS Enactor 竞态删除端点记录） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2025-10-20-aws-dynamodb-dns-cascade.md
+- type: concept
+  question: 在 Azure 存储策略修复误删扩展包匿名读权限，全球 VM/VMSS/AKS 生命周期操作中断，恢复洪峰再击穿托管身份服务 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Azure 存储策略修复误删扩展包匿名读权限，全球 VM/VMSS/AKS 生命周期操作中断，恢复洪峰再击穿托管身份服务 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure 存储策略修复误删扩展包匿名读权限，全球 VM/VMSS/AKS 生命周期操作中断，恢复洪峰再击穿托管身份服务 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure 存储策略修复误删扩展包匿名读权限，全球 VM/VMSS/AKS 生命周期操作中断，恢复洪峰再击穿托管身份服务 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-02-azure-storage-policy-vm-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure West US 现场变压器电气故障致数据中心市电全失，间歇性服务不可用 20 小时 26 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md
+  section: 摘要
+- type: concept
+  question: 在 Azure West US 现场变压器电气故障致数据中心市电全失，间歇性服务不可用 20 小时 26 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure West US 现场变压器电气故障致数据中心市电全失，间歇性服务不可用 20 小时 26 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure West US 现场变压器电气故障致数据中心市电全失，间歇性服务不可用 20 小时 26 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-02-07-azure-westus-transformer-power.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure East US PubSub 网络控制面锁竞争致资源配给失败 11 小时 52 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md
+  section: 摘要
+- type: concept
+  question: 在 Azure East US PubSub 网络控制面锁竞争致资源配给失败 11 小时 52 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure East US PubSub 网络控制面锁竞争致资源配给失败 11 小时 52 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure East US PubSub 网络控制面锁竞争致资源配给失败 11 小时 52 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-04-24-azure-eastus-pubsub-lock.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 热失控故障（单可用区冷却失效致服务器过热断电，EC2/EBS 等 150+ 服务受损） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-east-1 热失控故障（单可用区冷却失效致服务器过热断电，EC2/EBS 等 150+ 服务受损） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-east-1 热失控故障（单可用区冷却失效致服务器过热断电，EC2/EBS 等 150+ 服务受损） 中, 时间线（太平洋时间，2026-05-07 ~ 05-08） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md 的「时间线（太平洋时间，2026-05-07 ~ 05-08）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md
+  section: 时间线（太平洋时间，2026-05-07 ~ 05-08）
+- type: concept
+  question: 在 AWS us-east-1 热失控故障（单可用区冷却失效致服务器过热断电，EC2/EBS 等 150+ 服务受损） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-07-aws-thermal-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 雷暴致 Azure West US 2 多数据中心市电全失，发电机部分失效 + 制冷中断，故障超出 N+1 冗余持续 22 小时 6 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md
+  section: 摘要
+- type: concept
+  question: 在 雷暴致 Azure West US 2 多数据中心市电全失，发电机部分失效 + 制冷中断，故障超出 N+1 冗余持续 22 小时 6 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 雷暴致 Azure West US 2 多数据中心市电全失，发电机部分失效 + 制冷中断，故障超出 N+1 冗余持续 22 小时 6 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 雷暴致 Azure West US 2 多数据中心市电全失，发电机部分失效 + 制冷中断，故障超出 N+1 冗余持续 22 小时 6 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-05-29-azure-westus2-lightning-power.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud VMware Engine 网络控制面配置更新丢弃站点间路由， stretched 集群互联中断 10 小时 40 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud VMware Engine 网络控制面配置更新丢弃站点间路由， stretched 集群互联中断 10 小时 40 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud VMware Engine 网络控制面配置更新丢弃站点间路由， stretched 集群互联中断 10 小时 40 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Google Cloud VMware Engine 网络控制面配置更新丢弃站点间路由， stretched 集群互联中断 10 小时 40 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-14-gcp-vmware-engine-routes.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure West US 区域进出流量中断（维护请求转换软件 bug 移除过多 IP 路由，约 5 小时 19 个下游服务级联） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md
+  section: 摘要
+- type: concept
+  question: 在 Azure West US 区域进出流量中断（维护请求转换软件 bug 移除过多 IP 路由，约 5 小时 19 个下游服务级联） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure West US 区域进出流量中断（维护请求转换软件 bug 移除过多 IP 路由，约 5 小时 19 个下游服务级联） 中, 时间线（UTC，2026-07-23） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md 的「时间线（UTC，2026-07-23）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md
+  section: 时间线（UTC，2026-07-23）
+- type: concept
+  question: 在 Azure West US 区域进出流量中断（维护请求转换软件 bug 移除过多 IP 路由，约 5 小时 19 个下游服务级联） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Azure West US 区域进出流量中断（维护请求转换软件 bug 移除过多 IP 路由，约 5 小时 19 个下游服务级联） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-23-azure-westus-route-removal.md
+- type: concept
+  question: 在 AWS us-west-2 区域网络中断（区域至 Seattle Metro 网络硬件故障，主影响 20 分钟但下游恢复尾达 10 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md
+  section: 摘要
+- type: concept
+  question: 在 AWS us-west-2 区域网络中断（区域至 Seattle Metro 网络硬件故障，主影响 20 分钟但下游恢复尾达 10 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS us-west-2 区域网络中断（区域至 Seattle Metro 网络硬件故障，主影响 20 分钟但下游恢复尾达 10 小时） 中, 时间线（UTC，2026-07-24） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md 的「时间线（UTC，2026-07-24）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md
+  section: 时间线（UTC，2026-07-24）
+- type: concept
+  question: 在 AWS us-west-2 区域网络中断（区域至 Seattle Metro 网络硬件故障，主影响 20 分钟但下游恢复尾达 10 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: AWS us-west-2 区域网络中断（区域至 Seattle Metro 网络硬件故障，主影响 20 分钟但下游恢复尾达 10 小时） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-07-24-aws-uswest2-network-outage.md
+- type: concept
+  question: 在 Google Cloud us-west1 光纤维护后拥塞，计算/容器/存储/IAM 多服务降级 2 小时 22 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud us-west1 光纤维护后拥塞，计算/容器/存储/IAM 多服务降级 2 小时 22 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud us-west1 光纤维护后拥塞，计算/容器/存储/IAM 多服务降级 2 小时 22 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Google Cloud us-west1 光纤维护后拥塞，计算/容器/存储/IAM 多服务降级 2 小时 22 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Google Cloud us-west1 光纤维护后拥塞，计算/容器/存储/IAM 多服务降级 2 小时 22 分 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-08-20-gcp-uswest1-fiber.md
+- type: concept
+  question: 在 Google Cloud us-central1-b 例行网络 fabric 维护触发单集群异常，15 个产品降级 4 小时 8 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud us-central1-b 例行网络 fabric 维护触发单集群异常，15 个产品降级 4 小时 8 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud us-central1-b 例行网络 fabric 维护触发单集群异常，15 个产品降级 4 小时 8 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Google Cloud us-central1-b 例行网络 fabric 维护触发单集群异常，15 个产品降级 4 小时 8 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-01-gcp-uscentral1b-network.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure 平台触发的网关控制面更新在 OS 维护窗口恢复，请求量压垮区域网关管理服务，30 区域网关/混合连接服务中断 5 小时 45 分 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md
+  section: 摘要
+- type: concept
+  question: 在 Azure 平台触发的网关控制面更新在 OS 维护窗口恢复，请求量压垮区域网关管理服务，30 区域网关/混合连接服务中断 5 小时 45 分 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure 平台触发的网关控制面更新在 OS 维护窗口恢复，请求量压垮区域网关管理服务，30 区域网关/混合连接服务中断 5 小时 45 分 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Azure 平台触发的网关控制面更新在 OS 维护窗口恢复，请求量压垮区域网关管理服务，30 区域网关/混合连接服务中断 5 小时 45 分 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-09-30-azure-gateway-multiregion.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Google Cloud europe-west2（伦敦）供电事件致 b 可用区中断约 8 小时，Revolut/劳埃德/汇丰/英国法院系统连带停摆 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md
+  section: 摘要
+- type: concept
+  question: 在 Google Cloud europe-west2（伦敦）供电事件致 b 可用区中断约 8 小时，Revolut/劳埃德/汇丰/英国法院系统连带停摆 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google Cloud europe-west2（伦敦）供电事件致 b 可用区中断约 8 小时，Revolut/劳埃德/汇丰/英国法院系统连带停摆 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Google Cloud europe-west2（伦敦）供电事件致 b 可用区中断约 8 小时，Revolut/劳埃德/汇丰/英国法院系统连带停摆 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/cloud-infrastructure/2026-10-20-gcp-europewest2-power.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Roblox 73 小时全站中断（Consul 流式特性与 BoltDB 性能病理叠加） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md
+  section: 摘要
+- type: concept
+  question: 在 Roblox 73 小时全站中断（Consul 流式特性与 BoltDB 性能病理叠加） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Roblox 73 小时全站中断（Consul 流式特性与 BoltDB 性能病理叠加） 中, 时间线（UTC，日期为主线） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md 的「时间线（UTC，日期为主线）」章节。
+  source: wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md
+  section: 时间线（UTC，日期为主线）
+- type: concept
+  question: 在 Roblox 73 小时全站中断（Consul 流式特性与 BoltDB 性能病理叠加） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/container-orchestration/2021-10-28-roblox-consul.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 GitLab.com 生产数据库目录被误删，五重备份机制全部失效 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md
+  section: 摘要
+- type: concept
+  question: 在 GitLab.com 生产数据库目录被误删，五重备份机制全部失效 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 GitLab.com 生产数据库目录被误删，五重备份机制全部失效 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 GitLab.com 生产数据库目录被误删，五重备份机制全部失效 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2017-01-31-gitlab-data-loss.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 腾讯云"前沿数控"数据丢失事件（磁盘静默错误叠加违规迁移操作） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md
+  section: 摘要
+- type: concept
+  question: 在 腾讯云"前沿数控"数据丢失事件（磁盘静默错误叠加违规迁移操作） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 腾讯云"前沿数控"数据丢失事件（磁盘静默错误叠加违规迁移操作） 中, 时间线（北京时间，2018-07） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md 的「时间线（北京时间，2018-07）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md
+  section: 时间线（北京时间，2018-07）
+- type: concept
+  question: 在 腾讯云"前沿数控"数据丢失事件（磁盘静默错误叠加违规迁移操作） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: 腾讯云"前沿数控"数据丢失事件（磁盘静默错误叠加违规迁移操作） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-07-20-tencentcloud-data-loss.md
+- type: concept
+  question: 在 GitHub 43 秒网络分区引发 MySQL 跨洋脑裂，降级运行 24 小时 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md
+  section: 摘要
+- type: concept
+  question: 在 GitHub 43 秒网络分区引发 MySQL 跨洋脑裂，降级运行 24 小时 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 GitHub 43 秒网络分区引发 MySQL 跨洋脑裂，降级运行 24 小时 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 GitHub 43 秒网络分区引发 MySQL 跨洋脑裂，降级运行 24 小时 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: GitHub 43 秒网络分区引发 MySQL 跨洋脑裂，降级运行 24 小时 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/database-storage/2018-10-21-github-mysql.md
+- type: concept
+  question: 在 Google 全球认证服务中断（配额系统迁移遗留问题致 User ID 服务配额归零，OAuth/登录全球不可用 47 分钟） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Google 全球认证服务中断（配额系统迁移遗留问题致 User ID 服务配额归零，OAuth/登录全球不可用 47 分钟） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Google 全球认证服务中断（配额系统迁移遗留问题致 User ID 服务配额归零，OAuth/登录全球不可用 47 分钟） 中, 时间线（太平洋时间，2020-12-14） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md 的「时间线（太平洋时间，2020-12-14）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md
+  section: 时间线（太平洋时间，2020-12-14）
+- type: concept
+  question: 在 Google 全球认证服务中断（配额系统迁移遗留问题致 User ID 服务配额归零，OAuth/登录全球不可用 47 分钟） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2020-12-14-google-auth-quota-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Azure AD 全球认证中断（认证系统变更致 Microsoft 365 全家桶认证失败约 3 小时，Teams/Outlook/Xbox 等全部中招） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Azure AD 全球认证中断（认证系统变更致 Microsoft 365 全家桶认证失败约 3 小时，Teams/Outlook/Xbox 等全部中招） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Azure AD 全球认证中断（认证系统变更致 Microsoft 365 全家桶认证失败约 3 小时，Teams/Outlook/Xbox 等全部中招） 中, 时间线（UTC，2021-03-15） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md 的「时间线（UTC，2021-03-15）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md
+  section: 时间线（UTC，2021-03-15）
+- type: concept
+  question: 在 Azure AD 全球认证中断（认证系统变更致 Microsoft 365 全家桶认证失败约 3 小时，Teams/Outlook/Xbox 等全部中招） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2021-03-15-azure-ad-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 阿里云全球性服务异常（AK 服务白名单读取异常叠加异常处理缺陷，全线产品管控中断） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md
+  section: 摘要
+- type: concept
+  question: 在 阿里云全球性服务异常（AK 服务白名单读取异常叠加异常处理缺陷，全线产品管控中断） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 阿里云全球性服务异常（AK 服务白名单读取异常叠加异常处理缺陷，全线产品管控中断） 中, 时间线（北京时间，2023-11-12） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md 的「时间线（北京时间，2023-11-12）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md
+  section: 时间线（北京时间，2023-11-12）
+- type: concept
+  question: 在 阿里云全球性服务异常（AK 服务白名单读取异常叠加异常处理缺陷，全线产品管控中断） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2023-11-12-aliyun-ak-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 华为云国际站部分账号异常：控制台登录/资源冻结报告持续约 5 小时，时间上与 IAM 计划升级窗口高度重合 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md
+  section: 摘要
+- type: concept
+  question: 在 华为云国际站部分账号异常：控制台登录/资源冻结报告持续约 5 小时，时间上与 IAM 计划升级窗口高度重合 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 华为云国际站部分账号异常：控制台登录/资源冻结报告持续约 5 小时，时间上与 IAM 计划升级窗口高度重合 中, 时间线（北京时间 7-26，除注明外） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md 的「时间线（北京时间 7-26，除注明外）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md
+  section: 时间线（北京时间 7-26，除注明外）
+- type: concept
+  question: 在 华为云国际站部分账号异常：控制台登录/资源冻结报告持续约 5 小时，时间上与 IAM 计划升级窗口高度重合 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: 华为云国际站部分账号异常：控制台登录/资源冻结报告持续约 5 小时，时间上与 IAM 计划升级窗口高度重合 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/identity-access/2026-07-25-huaweicloud-intl-iam.md
+- type: concept
+  question: 在 AWS Kinesis 线程上限故障（前端 fleet 扩容触发 OS 线程数超限，us-east-1 级联 17 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md
+  section: 摘要
+- type: concept
+  question: 在 AWS Kinesis 线程上限故障（前端 fleet 扩容触发 OS 线程数超限，us-east-1 级联 17 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AWS Kinesis 线程上限故障（前端 fleet 扩容触发 OS 线程数超限，us-east-1 级联 17 小时） 中, 时间线（太平洋时间，2020-11-25） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md 的「时间线（太平洋时间，2020-11-25）」章节。
+  source: wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md
+  section: 时间线（太平洋时间，2020-11-25）
+- type: concept
+  question: 在 AWS Kinesis 线程上限故障（前端 fleet 扩容触发 OS 线程数超限，us-east-1 级联 17 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/messaging-streaming/2020-11-25-aws-kinesis-thread-limit.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 ARPANET 全网崩溃（状态消息污染与垃圾回收算法缺陷） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md
+  section: 摘要
+- type: concept
+  question: 在 ARPANET 全网崩溃（状态消息污染与垃圾回收算法缺陷） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 ARPANET 全网崩溃（状态消息污染与垃圾回收算法缺陷） 中, 时间线（美东时间，1980-10-27） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md 的「时间线（美东时间，1980-10-27）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md
+  section: 时间线（美东时间，1980-10-27）
+- type: concept
+  question: 在 ARPANET 全网崩溃（状态消息污染与垃圾回收算法缺陷） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: ARPANET 全网崩溃（状态消息污染与垃圾回收算法缺陷） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/networking-dns/1980-10-27-arpanet-collapse.md
+- type: concept
+  question: 在 AT&T 长途网络崩溃（交换机恢复逻辑缺陷引发级联重启） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md
+  section: 摘要
+- type: concept
+  question: 在 AT&T 长途网络崩溃（交换机恢复逻辑缺陷引发级联重启） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AT&T 长途网络崩溃（交换机恢复逻辑缺陷引发级联重启） 中, 时间线（美东时间，1990-01-15） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md 的「时间线（美东时间，1990-01-15）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md
+  section: 时间线（美东时间，1990-01-15）
+- type: concept
+  question: 在 AT&T 长途网络崩溃（交换机恢复逻辑缺陷引发级联重启） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1990-01-15-att-network-collapse.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 AS7007 路由泄漏事件（全表解聚合宣告导致互联网大面积瘫痪） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md
+  section: 摘要
+- type: concept
+  question: 在 AS7007 路由泄漏事件（全表解聚合宣告导致互联网大面积瘫痪） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 AS7007 路由泄漏事件（全表解聚合宣告导致互联网大面积瘫痪） 中, 时间线（美东时间，1997-04-25） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md 的「时间线（美东时间，1997-04-25）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md
+  section: 时间线（美东时间，1997-04-25）
+- type: concept
+  question: 在 AS7007 路由泄漏事件（全表解聚合宣告导致互联网大面积瘫痪） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/1997-04-25-as7007-route-leak.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 YouTube 全球 BGP 劫持（巴基斯坦电信黑洞路由泄漏） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md
+  section: 摘要
+- type: concept
+  question: 在 YouTube 全球 BGP 劫持（巴基斯坦电信黑洞路由泄漏） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 YouTube 全球 BGP 劫持（巴基斯坦电信黑洞路由泄漏） 中, 时间线（UTC，2008-02-24） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md 的「时间线（UTC，2008-02-24）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md
+  section: 时间线（UTC，2008-02-24）
+- type: concept
+  question: 在 YouTube 全球 BGP 劫持（巴基斯坦电信黑洞路由泄漏） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2008-02-24-youtube-bgp-hijack.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 支付宝杭州光缆挖断故障（异地多活的成人礼） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md
+  section: 摘要
+- type: concept
+  question: 在 支付宝杭州光缆挖断故障（异地多活的成人礼） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 支付宝杭州光缆挖断故障（异地多活的成人礼） 中, 时间线（北京时间，2015-05-27） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md 的「时间线（北京时间，2015-05-27）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md
+  section: 时间线（北京时间，2015-05-27）
+- type: concept
+  question: 在 支付宝杭州光缆挖断故障（异地多活的成人礼） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2015-05-27-alipay-fiber-cut.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Dyn 托管 DNS 遭 Mirai 僵尸网络 DDoS，美国东海岸大面积断网 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md
+  section: 摘要
+- type: concept
+  question: 在 Dyn 托管 DNS 遭 Mirai 僵尸网络 DDoS，美国东海岸大面积断网 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Dyn 托管 DNS 遭 Mirai 僵尸网络 DDoS，美国东海岸大面积断网 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Dyn 托管 DNS 遭 Mirai 僵尸网络 DDoS，美国东海岸大面积断网 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2016-10-21-dyn-ddos.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare 骨干网中断（骨干网络配置错误导致 27 分钟全球中断，Discord/Shopify 等连带受影响） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 骨干网中断（骨干网络配置错误导致 27 分钟全球中断，Discord/Shopify 等连带受影响） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 骨干网中断（骨干网络配置错误导致 27 分钟全球中断，Discord/Shopify 等连带受影响） 中, 时间线（太平洋时间，2020-07-17） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md 的「时间线（太平洋时间，2020-07-17）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md
+  section: 时间线（太平洋时间，2020-07-17）
+- type: concept
+  question: 在 Cloudflare 骨干网中断（骨干网络配置错误导致 27 分钟全球中断，Discord/Shopify 等连带受影响） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-07-17-cloudflare-backbone-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 CenturyLink/Level 3 全球骨干故障（错误 Flowspec 规则阻断 BGP） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md
+  section: 摘要
+- type: concept
+  question: 在 CenturyLink/Level 3 全球骨干故障（错误 Flowspec 规则阻断 BGP） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 CenturyLink/Level 3 全球骨干故障（错误 Flowspec 规则阻断 BGP） 中, 时间线（UTC，2020-08-30） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md 的「时间线（UTC，2020-08-30）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md
+  section: 时间线（UTC，2020-08-30）
+- type: concept
+  question: 在 CenturyLink/Level 3 全球骨干故障（错误 Flowspec 规则阻断 BGP） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2020-08-30-centurylink-flowspec-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Akamai Edge DNS 全球中断（DNS 软件缺陷致 Steam/PSN/AWS/Reddit/NYT 等全球主流网站瘫痪约 1 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Akamai Edge DNS 全球中断（DNS 软件缺陷致 Steam/PSN/AWS/Reddit/NYT 等全球主流网站瘫痪约 1 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Akamai Edge DNS 全球中断（DNS 软件缺陷致 Steam/PSN/AWS/Reddit/NYT 等全球主流网站瘫痪约 1 小时） 中, 时间线（UTC，2021-07-22） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md 的「时间线（UTC，2021-07-22）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md
+  section: 时间线（UTC，2021-07-22）
+- type: concept
+  question: 在 Akamai Edge DNS 全球中断（DNS 软件缺陷致 Steam/PSN/AWS/Reddit/NYT 等全球主流网站瘫痪约 1 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-07-22-akamai-dns-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Facebook 全球中断（骨干网维护命令撤销全部 BGP 路由） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md
+  section: 摘要
+- type: concept
+  question: 在 Facebook 全球中断（骨干网维护命令撤销全部 BGP 路由） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Facebook 全球中断（骨干网维护命令撤销全部 BGP 路由） 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Facebook 全球中断（骨干网维护命令撤销全部 BGP 路由） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2021-10-04-facebook-bgp.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Rogers 加拿大全国网络瘫痪（变更删除路由过滤器导致核心网内存耗尽） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Rogers 加拿大全国网络瘫痪（变更删除路由过滤器导致核心网内存耗尽） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Rogers 加拿大全国网络瘫痪（变更删除路由过滤器导致核心网内存耗尽） 中, 时间线（东部时间，2022-07-08） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md 的「时间线（东部时间，2022-07-08）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md
+  section: 时间线（东部时间，2022-07-08）
+- type: concept
+  question: 在 Rogers 加拿大全国网络瘫痪（变更删除路由过滤器导致核心网内存耗尽） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2022-07-08-rogers-national-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Microsoft 365 全球中断（WAN 路由器 IP 变更引发全网路由重算） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Microsoft 365 全球中断（WAN 路由器 IP 变更引发全网路由重算） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Microsoft 365 全球中断（WAN 路由器 IP 变更引发全网路由重算） 中, 时间线（UTC，2023-01-25） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md 的「时间线（UTC，2023-01-25）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md
+  section: 时间线（UTC，2023-01-25）
+- type: concept
+  question: 在 Microsoft 365 全球中断（WAN 路由器 IP 变更引发全网路由重算） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Microsoft 365 全球中断（WAN 路由器 IP 变更引发全网路由重算） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/networking-dns/2023-01-25-microsoft-wan-outage.md
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 DNS 解析器全球中断（遗留配置误包含 1.1.1.1 前缀至预发布服务拓扑，BGP 撤消约 62 分钟） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 DNS 解析器全球中断（遗留配置误包含 1.1.1.1 前缀至预发布服务拓扑，BGP 撤消约 62 分钟） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 DNS 解析器全球中断（遗留配置误包含 1.1.1.1 前缀至预发布服务拓扑，BGP 撤消约 62 分钟） 中, 时间线（UTC，2025-07-14） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md 的「时间线（UTC，2025-07-14）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md
+  section: 时间线（UTC，2025-07-14）
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 DNS 解析器全球中断（遗留配置误包含 1.1.1.1 前缀至预发布服务拓扑，BGP 撤消约 62 分钟） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2025-07-14-cloudflare-1111-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 内存优化变更改变 CNAME 记录顺序，部分 DNS 客户端解析失败约 2 小时 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 内存优化变更改变 CNAME 记录顺序，部分 DNS 客户端解析失败约 2 小时 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 内存优化变更改变 CNAME 记录顺序，部分 DNS 客户端解析失败约 2 小时 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Cloudflare 1.1.1.1 内存优化变更改变 CNAME 记录顺序，部分 DNS 客户端解析失败约 2 小时 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-08-cloudflare-cname-ordering.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare 迈阿密路由器自动路由策略配置错误致 BGP 前缀意外泄漏 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare 迈阿密路由器自动路由策略配置错误致 BGP 前缀意外泄漏 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare 迈阿密路由器自动路由策略配置错误致 BGP 前缀意外泄漏 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 Cloudflare 迈阿密路由器自动路由策略配置错误致 BGP 前缀意外泄漏 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-01-22-cloudflare-miami-route-leak.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Cloudflare BYOIP 全球前缀撤回故障（清理子任务 API 参数 bug 致 25% BYOIP 前缀被 BGP 撤回约 6 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Cloudflare BYOIP 全球前缀撤回故障（清理子任务 API 参数 bug 致 25% BYOIP 前缀被 BGP 撤回约 6 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Cloudflare BYOIP 全球前缀撤回故障（清理子任务 API 参数 bug 致 25% BYOIP 前缀被 BGP 撤回约 6 小时） 中, 时间线（UTC，2026-02-20） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md 的「时间线（UTC，2026-02-20）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md
+  section: 时间线（UTC，2026-02-20）
+- type: concept
+  question: 在 Cloudflare BYOIP 全球前缀撤回故障（清理子任务 API 参数 bug 致 25% BYOIP 前缀被 BGP 撤回约 6 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/networking-dns/2026-02-20-cloudflare-byoip-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Datadog 全球性宕机（systemd 自动安全更新触发网络失联，五区域全产品受损 27 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Datadog 全球性宕机（systemd 自动安全更新触发网络失联，五区域全产品受损 27 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Datadog 全球性宕机（systemd 自动安全更新触发网络失联，五区域全产品受损 27 小时） 中, 时间线（UTC，2023-03-08 起） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md 的「时间线（UTC，2023-03-08 起）」章节。
+  source: wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md
+  section: 时间线（UTC，2023-03-08 起）
+- type: concept
+  question: 在 Datadog 全球性宕机（systemd 自动安全更新触发网络失联，五区域全产品受损 27 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/observability/2023-03-08-datadog-global-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 12306 春运购票高峰三天两故障：机房空调故障暂停全网售票（2012-12-26），容量设计不足致全国网络购票瘫痪（后续数年春运反复崩溃） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md
+  section: 摘要
+- type: concept
+  question: 在 12306 春运购票高峰三天两故障：机房空调故障暂停全网售票（2012-12-26），容量设计不足致全国网络购票瘫痪（后续数年春运反复崩溃） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 12306 春运购票高峰三天两故障：机房空调故障暂停全网售票（2012-12-26），容量设计不足致全国网络购票瘫痪（后续数年春运反复崩溃） 中, 时间线（2012-12 至 2013-01，北京时间为主） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md 的「时间线（2012-12 至 2013-01，北京时间为主）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md
+  section: 时间线（2012-12 至 2013-01，北京时间为主）
+- type: concept
+  question: 在 12306 春运购票高峰三天两故障：机房空调故障暂停全网售票（2012-12-26），容量设计不足致全国网络购票瘫痪（后续数年春运反复崩溃） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2012-12-26-china-railway-12306-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 澳洲人口普查 8·9 故障：普查之夜网站崩溃离线 40+ 小时（2016-08-09），DDoS 防护误触发叠加测试盲区，额外成本 3000 万美元 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md
+  section: 摘要
+- type: concept
+  question: 在 澳洲人口普查 8·9 故障：普查之夜网站崩溃离线 40+ 小时（2016-08-09），DDoS 防护误触发叠加测试盲区，额外成本 3000 万美元 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 澳洲人口普查 8·9 故障：普查之夜网站崩溃离线 40+ 小时（2016-08-09），DDoS 防护误触发叠加测试盲区，额外成本 3000 万美元 中, 时间线（2016-08，澳大利亚东部时间） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md 的「时间线（2016-08，澳大利亚东部时间）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md
+  section: 时间线（2016-08，澳大利亚东部时间）
+- type: concept
+  question: 在 澳洲人口普查 8·9 故障：普查之夜网站崩溃离线 40+ 小时（2016-08-09），DDoS 防护误触发叠加测试盲区，额外成本 3000 万美元 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2016-08-09-abs-census-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 NHS WannaCry 5·12 攻击：勒索蠕虫瘫痪英格兰 1/3 医疗机构（2017-05-12），未打补丁的"基础 IT 安全"缺失 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md
+  section: 摘要
+- type: concept
+  question: 在 NHS WannaCry 5·12 攻击：勒索蠕虫瘫痪英格兰 1/3 医疗机构（2017-05-12），未打补丁的"基础 IT 安全"缺失 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 NHS WannaCry 5·12 攻击：勒索蠕虫瘫痪英格兰 1/3 医疗机构（2017-05-12），未打补丁的"基础 IT 安全"缺失 中, 时间线（2017，英国时间） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md 的「时间线（2017，英国时间）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md
+  section: 时间线（2017，英国时间）
+- type: concept
+  question: 在 NHS WannaCry 5·12 攻击：勒索蠕虫瘫痪英格兰 1/3 医疗机构（2017-05-12），未打补丁的"基础 IT 安全"缺失 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: NHS WannaCry 5·12 攻击：勒索蠕虫瘫痪英格兰 1/3 医疗机构（2017-05-12），未打补丁的"基础 IT 安全"缺失 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/public-services/2017-05-12-nhs-wannacry.md
+- type: concept
+  question: 在 粤康码 1·10 故障：早高峰瞬时流量 140 万次/分钟触发系统保护，全省亮码异常约 2 小时（2022-01-10） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md
+  section: 摘要
+- type: concept
+  question: 在 粤康码 1·10 故障：早高峰瞬时流量 140 万次/分钟触发系统保护，全省亮码异常约 2 小时（2022-01-10） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 粤康码 1·10 故障：早高峰瞬时流量 140 万次/分钟触发系统保护，全省亮码异常约 2 小时（2022-01-10） 中, 时间线（2022-01-10，北京时间） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md 的「时间线（2022-01-10，北京时间）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md
+  section: 时间线（2022-01-10，北京时间）
+- type: concept
+  question: 在 粤康码 1·10 故障：早高峰瞬时流量 140 万次/分钟触发系统保护，全省亮码异常约 2 小时（2022-01-10） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2022-01-10-yuekangma-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 FAA NOTAM 1·11 故障：承包商误删文件致全美航班停飞（2023-01-11），9/11 以来首次全国地面停飞 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md
+  section: 摘要
+- type: concept
+  question: 在 FAA NOTAM 1·11 故障：承包商误删文件致全美航班停飞（2023-01-11），9/11 以来首次全国地面停飞 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 FAA NOTAM 1·11 故障：承包商误删文件致全美航班停飞（2023-01-11），9/11 以来首次全国地面停飞 中, 时间线（美东时间，2023-01） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md 的「时间线（美东时间，2023-01）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md
+  section: 时间线（美东时间，2023-01）
+- type: concept
+  question: 在 FAA NOTAM 1·11 故障：承包商误删文件致全美航班停飞（2023-01-11），9/11 以来首次全国地面停飞 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-01-11-faa-notam-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 广东电信 6·8 全网故障：移动语音/短信中断约 5 小时（2023-06-08），高考期间被内部定级"特别重大网络故障"B 级 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md
+  section: 摘要
+- type: concept
+  question: 在 广东电信 6·8 全网故障：移动语音/短信中断约 5 小时（2023-06-08），高考期间被内部定级"特别重大网络故障"B 级 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 广东电信 6·8 全网故障：移动语音/短信中断约 5 小时（2023-06-08），高考期间被内部定级"特别重大网络故障"B 级 中, 时间线（2023-06-08，北京时间为主） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md 的「时间线（2023-06-08，北京时间为主）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md
+  section: 时间线（2023-06-08，北京时间为主）
+- type: concept
+  question: 在 广东电信 6·8 全网故障：移动语音/短信中断约 5 小时（2023-06-08），高考期间被内部定级"特别重大网络故障"B 级 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/public-services/2023-06-08-china-telecom-guangdong-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Unity Runtime Fee 收费政策引爆开发者生态危机（按安装收费决策 + 傲慢沟通，CEO 下台、政策最终取消） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md
+  section: 摘要
+- type: concept
+  question: 在 Unity Runtime Fee 收费政策引爆开发者生态危机（按安装收费决策 + 傲慢沟通，CEO 下台、政策最终取消） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Unity Runtime Fee 收费政策引爆开发者生态危机（按安装收费决策 + 傲慢沟通，CEO 下台、政策最终取消） 中, 时间线（2023-09 至 2024-09） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md 的「时间线（2023-09 至 2024-09）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md
+  section: 时间线（2023-09 至 2024-09）
+- type: concept
+  question: 在 Unity Runtime Fee 收费政策引爆开发者生态危机（按安装收费决策 + 傲慢沟通，CEO 下台、政策最终取消） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2023-09-12-unity-runtime-fee.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Clerk 全服务中断 45 分钟（单区域架构 + 过度信任 Cloud Run 冗余承诺，认证基础设施整体不可用） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Clerk 全服务中断 45 分钟（单区域架构 + 过度信任 Cloud Run 冗余承诺，认证基础设施整体不可用） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Clerk 全服务中断 45 分钟（单区域架构 + 过度信任 Cloud Run 冗余承诺，认证基础设施整体不可用） 中, 时间线（2025-06-26，UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md 的「时间线（2025-06-26，UTC）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md
+  section: 时间线（2025-06-26，UTC）
+- type: concept
+  question: 在 Clerk 全服务中断 45 分钟（单区域架构 + 过度信任 Cloud Run 冗余承诺，认证基础设施整体不可用） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-06-26-clerk-cloudrun-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Clerk 数据库事件（供应商自动升级触发连接池同步回收，惊群效应致间歇性故障 4 天，诊断被监控采样率掩盖） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md
+  section: 摘要
+- type: concept
+  question: 在 Clerk 数据库事件（供应商自动升级触发连接池同步回收，惊群效应致间歇性故障 4 天，诊断被监控采样率掩盖） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Clerk 数据库事件（供应商自动升级触发连接池同步回收，惊群效应致间歇性故障 4 天，诊断被监控采样率掩盖） 中, 时间线（2025，UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md 的「时间线（2025，UTC）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md
+  section: 时间线（2025，UTC）
+- type: concept
+  question: 在 Clerk 数据库事件（供应商自动升级触发连接池同步回收，惊群效应致间歇性故障 4 天，诊断被监控采样率掩盖） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Clerk 数据库事件（供应商自动升级触发连接池同步回收，惊群效应致间歇性故障 4 天，诊断被监控采样率掩盖） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/sa-architecture/2025-09-18-clerk-database-incident.md
+- type: concept
+  question: 在 Gmail 24 小时大中断（存储系统软件 bug 致用户邮箱锁死，Google 应用服务首次重大信任危机） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Gmail 24 小时大中断（存储系统软件 bug 致用户邮箱锁死，Google 应用服务首次重大信任危机） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Gmail 24 小时大中断（存储系统软件 bug 致用户邮箱锁死，Google 应用服务首次重大信任危机） 中, 时间线（太平洋时间，2008-08-15 ~ 08-16） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md 的「时间线（太平洋时间，2008-08-15 ~ 08-16）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md
+  section: 时间线（太平洋时间，2008-08-15 ~ 08-16）
+- type: concept
+  question: 在 Gmail 24 小时大中断（存储系统软件 bug 致用户邮箱锁死，Google 应用服务首次重大信任危机） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2008-08-15-gmail-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Gmail 71 分钟中断（罕见的双重网络故障致 Gmail 双数据中心同时失效，冗余设计失效） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Gmail 71 分钟中断（罕见的双重网络故障致 Gmail 双数据中心同时失效，冗余设计失效） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Gmail 71 分钟中断（罕见的双重网络故障致 Gmail 双数据中心同时失效，冗余设计失效） 中, 时间线（太平洋时间，2014-01-24） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md 的「时间线（太平洋时间，2014-01-24）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md
+  section: 时间线（太平洋时间，2014-01-24）
+- type: concept
+  question: 在 Gmail 71 分钟中断（罕见的双重网络故障致 Gmail 双数据中心同时失效，冗余设计失效） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2014-01-24-gmail-dual-network-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 GitHub 历史上最大规模 DDoS 攻击（中国境内 Baidu 流量被劫持重定向至 GitHub，持续数日） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md
+  section: 摘要
+- type: concept
+  question: 在 GitHub 历史上最大规模 DDoS 攻击（中国境内 Baidu 流量被劫持重定向至 GitHub，持续数日） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 GitHub 历史上最大规模 DDoS 攻击（中国境内 Baidu 流量被劫持重定向至 GitHub，持续数日） 中, 时间线（UTC，2015-03-28 ~ 03-31） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md 的「时间线（UTC，2015-03-28 ~ 03-31）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md
+  section: 时间线（UTC，2015-03-28 ~ 03-31）
+- type: concept
+  question: 在 GitHub 历史上最大规模 DDoS 攻击（中国境内 Baidu 流量被劫持重定向至 GitHub，持续数日） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-03-28-github-ddos-attack.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 携程 5·28 全站瘫痪（运维误删生产服务器执行代码，12 小时全业务中断） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md
+  section: 摘要
+- type: concept
+  question: 在 携程 5·28 全站瘫痪（运维误删生产服务器执行代码，12 小时全业务中断） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 携程 5·28 全站瘫痪（运维误删生产服务器执行代码，12 小时全业务中断） 中, 时间线（北京时间，2015-05-28） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md 的「时间线（北京时间，2015-05-28）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md
+  section: 时间线（北京时间，2015-05-28）
+- type: concept
+  question: 在 携程 5·28 全站瘫痪（运维误删生产服务器执行代码，12 小时全业务中断） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2015-05-28-ctrip-code-deletion.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Facebook 全球大规模中断（服务器配置变更致 Facebook/Instagram/WhatsApp 全家族瘫痪约 14 小时，2019 年社交平台最大故障） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Facebook 全球大规模中断（服务器配置变更致 Facebook/Instagram/WhatsApp 全家族瘫痪约 14 小时，2019 年社交平台最大故障） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Facebook 全球大规模中断（服务器配置变更致 Facebook/Instagram/WhatsApp 全家族瘫痪约 14 小时，2019 年社交平台最大故障） 中, 时间线（美东时间，2019-03-13/14）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md 的「时间线（美东时间，2019-03-13/14）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md
+  section: 时间线（美东时间，2019-03-13/14）
+- type: concept
+  question: 在 Facebook 全球大规模中断（服务器配置变更致 Facebook/Instagram/WhatsApp 全家族瘫痪约 14 小时，2019 年社交平台最大故障） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Facebook 全球大规模中断（服务器配置变更致 Facebook/Instagram/WhatsApp 全家族瘫痪约 14 小时，2019 年社交平台最大故障） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-03-13-facebook-global-outage.md
+- type: concept
+  question: 在 Salesforce 权限脚本事故（数据库脚本误授全量修改权限，紧急全局封锁） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md
+  section: 摘要
+- type: concept
+  question: 在 Salesforce 权限脚本事故（数据库脚本误授全量修改权限，紧急全局封锁） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Salesforce 权限脚本事故（数据库脚本误授全量修改权限，紧急全局封锁） 中, 时间线（太平洋时间，2019-05-17 起） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md 的「时间线（太平洋时间，2019-05-17 起）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md
+  section: 时间线（太平洋时间，2019-05-17 起）
+- type: concept
+  question: 在 Salesforce 权限脚本事故（数据库脚本误授全量修改权限，紧急全局封锁） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2019-05-17-salesforce-permission-incident.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Slack 新年首个工作日全球宕机（流量回升叠加 AWS Transit Gateway 扩容滞后） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Slack 新年首个工作日全球宕机（流量回升叠加 AWS Transit Gateway 扩容滞后） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Slack 新年首个工作日全球宕机（流量回升叠加 AWS Transit Gateway 扩容滞后） 中, 时间线（美东时间，2021-01-04） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md 的「时间线（美东时间，2021-01-04）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md
+  section: 时间线（美东时间，2021-01-04）
+- type: concept
+  question: 在 Slack 新年首个工作日全球宕机（流量回升叠加 AWS Transit Gateway 扩容滞后） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2021-01-04-slack-new-year-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Atlassian 站点误删事故（清理脚本用错 ID 永久删除 883 个客户站点，恢复历时 14 天） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md
+  section: 摘要
+- type: concept
+  question: 在 Atlassian 站点误删事故（清理脚本用错 ID 永久删除 883 个客户站点，恢复历时 14 天） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Atlassian 站点误删事故（清理脚本用错 ID 永久删除 883 个客户站点，恢复历时 14 天） 中, 时间线（UTC，2022-04） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md 的「时间线（UTC，2022-04）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md
+  section: 时间线（UTC，2022-04）
+- type: concept
+  question: 在 Atlassian 站点误删事故（清理脚本用错 ID 永久删除 883 个客户站点，恢复历时 14 天） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2022-04-05-atlassian-site-deletion.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 微信/QQ 大面积功能异常（广州电信机房冷却系统故障致 14 小时多项服务受损，腾讯定性为一级事故并问责高管） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md
+  section: 摘要
+- type: concept
+  question: 在 微信/QQ 大面积功能异常（广州电信机房冷却系统故障致 14 小时多项服务受损，腾讯定性为一级事故并问责高管） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 微信/QQ 大面积功能异常（广州电信机房冷却系统故障致 14 小时多项服务受损，腾讯定性为一级事故并问责高管） 中, 时间线（北京时间，2023-03-29） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md 的「时间线（北京时间，2023-03-29）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md
+  section: 时间线（北京时间，2023-03-29）
+- type: concept
+  question: 在 微信/QQ 大面积功能异常（广州电信机房冷却系统故障致 14 小时多项服务受损，腾讯定性为一级事故并问责高管） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-03-29-tencent-wechat-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 语雀 10·23 长时间宕机（运维升级工具 bug 误下线存储服务器，从备份恢复历时 8 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md
+  section: 摘要
+- type: concept
+  question: 在 语雀 10·23 长时间宕机（运维升级工具 bug 误下线存储服务器，从备份恢复历时 8 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 语雀 10·23 长时间宕机（运维升级工具 bug 误下线存储服务器，从备份恢复历时 8 小时） 中, 时间线（北京时间，2023-10-23） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md 的「时间线（北京时间，2023-10-23）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md
+  section: 时间线（北京时间，2023-10-23）
+- type: concept
+  question: 在 语雀 10·23 长时间宕机（运维升级工具 bug 误下线存储服务器，从备份恢复历时 8 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2023-10-23-yuque-storage-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 Meta 全球大规模中断（Facebook/Instagram/Messenger/Threads 登录与信息流故障约 2 小时，2024 年 Meta 首次全球级故障） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Meta 全球大规模中断（Facebook/Instagram/Messenger/Threads 登录与信息流故障约 2 小时，2024 年 Meta 首次全球级故障） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Meta 全球大规模中断（Facebook/Instagram/Messenger/Threads 登录与信息流故障约 2 小时，2024 年 Meta 首次全球级故障） 中, 时间线（ET，2024-03-05）
+    是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md 的「时间线（ET，2024-03-05）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md
+  section: 时间线（ET，2024-03-05）
+- type: concept
+  question: 在 Meta 全球大规模中断（Facebook/Instagram/Messenger/Threads 登录与信息流故障约 2 小时，2024 年 Meta 首次全球级故障） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: Meta 全球大规模中断（Facebook/Instagram/Messenger/Threads 登录与信息流故障约 2 小时，2024 年 Meta 首次全球级故障） 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2024-03-05-meta-outage.md
+- type: concept
+  question: 在 Zoom 全球服务中断（GoDaddy Registry 误封 zoom.us 域名，DNS 解析失败致网站/会议/App 不可用约 2 小时） 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md
+  section: 摘要
+- type: concept
+  question: 在 Zoom 全球服务中断（GoDaddy Registry 误封 zoom.us 域名，DNS 解析失败致网站/会议/App 不可用约 2 小时） 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 Zoom 全球服务中断（GoDaddy Registry 误封 zoom.us 域名，DNS 解析失败致网站/会议/App 不可用约 2 小时） 中, 时间线（太平洋时间，2025-04-16） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md 的「时间线（太平洋时间，2025-04-16）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md
+  section: 时间线（太平洋时间，2025-04-16）
+- type: concept
+  question: 在 Zoom 全球服务中断（GoDaddy Registry 误封 zoom.us 域名，DNS 解析失败致网站/会议/App 不可用约 2 小时） 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/saas-platforms/2025-04-16-zoom-domain-outage.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 CrowdStrike Falcon 内容更新缺陷致全球约 850 万台 Windows 蓝屏 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md 的「摘要」章节。
+  source: wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md
+  section: 摘要
+- type: concept
+  question: 在 CrowdStrike Falcon 内容更新缺陷致全球约 850 万台 Windows 蓝屏 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 CrowdStrike Falcon 内容更新缺陷致全球约 850 万台 Windows 蓝屏 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 CrowdStrike Falcon 内容更新缺陷致全球约 850 万台 Windows 蓝屏 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: comparison
+  question: CrowdStrike Falcon 内容更新缺陷致全球约 850 万台 Windows 蓝屏 中有哪些技术对比?
+  answer: 参见 wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md 中的对比分析。
+  source: wiki/32-故障案例库/incidents/security-services/2024-07-19-crowdstrike-falcon.md
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/incident-report.md 的「摘要」章节。
+  source: wiki/32-故障案例库/templates/incident-report.md
+  section: 摘要
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 影响评估（CRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/incident-report.md 的「影响评估（CRE 视角）」章节。
+  source: wiki/32-故障案例库/templates/incident-report.md
+  section: 影响评估（CRE 视角）
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 时间线（UTC） 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/incident-report.md 的「时间线（UTC）」章节。
+  source: wiki/32-故障案例库/templates/incident-report.md
+  section: 时间线（UTC）
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 技术细节与根因分析（SRE 视角） 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/incident-report.md 的「技术细节与根因分析（SRE 视角）」章节。
+  source: wiki/32-故障案例库/templates/incident-report.md
+  section: 技术细节与根因分析（SRE 视角）
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 摘要 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/quick-entry.md 的「摘要」章节。
+  source: wiki/32-故障案例库/templates/quick-entry.md
+  section: 摘要
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 已知事实 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/quick-entry.md 的「已知事实」章节。
+  source: wiki/32-故障案例库/templates/quick-entry.md
+  section: 已知事实
+- type: concept
+  question: 在 <公司> <一句话故障标题> 中, 待确认问题 是什么?
+  answer: 参见 wiki/32-故障案例库/templates/quick-entry.md 的「待确认问题」章节。
+  source: wiki/32-故障案例库/templates/quick-entry.md
+  section: 待确认问题

@@ -375,7 +375,7 @@ MySQL - 关系型数据库(本课示例)
 
 **关联文档**:
 - [../02-getting-started/](./02-getting-started/) — 快速入门
-- [../../集群基础/01-kubernetes-architecture-overview.md](../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md) — 架构详解
+- [../../集群基础/01-kubernetes-architecture-overview.md](../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md) — 架构详解
 - [../../系统基础/](../../系统基础/) — Linux 基础
 
 ## See Also

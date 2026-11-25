@@ -23,7 +23,7 @@ EXCLUDE_DIRS = {'.git', '.venv', '.ruff_cache', 'site', 'node_modules',
                 '.obsidian', '.zread', '.claude', '.codebuddy', '.comate',
                 '.github', '.understand-anything', '.qoder', '.mimocode', '.zcode',
                 '27-资产', 'scripts', '03-发布',
-                '28-源码分析', '02-元数据', '04-报告', '31-归档',
+                '28-源码分析', '02-元数据', '04-报告', '31-归档', '99-归档',
                 'code', 'maintaining'}
 
 # 顶层分区与 wiki 域 → 默认标签映射
@@ -34,7 +34,7 @@ DIR_TAGS = {
     "04-应用模式": ["architecture", "application-patterns"],
     "05-网络": ["k8s", "networking", "service"],
     "06-存储": ["k8s", "storage", "pv"],
-    "07-数据库中间件": ["database", "middleware"],
+    "06-存储与数据": ["database", "middleware", "storage"],
     "08-安全": ["k8s", "security", "rbac"],
     "09-可观测性": ["observability", "monitoring", "prometheus"],
     "10-平台工程": ["platform", "idp"],
@@ -44,7 +44,8 @@ DIR_TAGS = {
     "14-容器运行时": ["docker", "container", "containerd"],
     "15-AI基础设施": ["ai", "gpu", "k8s"],
     "16-专项技术": ["ebpf", "edge", "wasm"],
-    "17-系统基础": ["linux", "fundamentals"],
+    "01-集群基础与系统": ["linux", "fundamentals"],
+    "21-知识字典": ["dictionary"],
     "18-云厂商": ["cloud", "multi-cloud"],
     "19-故障诊断": ["k8s", "troubleshooting", "guide"],
     "20-最佳实践": ["best-practice", "k8s"],

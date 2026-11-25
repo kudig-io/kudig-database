@@ -210,10 +210,10 @@ kubectl describe resourcequota -n <namespace> | grep -i priority
 ```
 ## 交叉引用
 
-- [Kubernetes 调度器](../../../../wiki/17-系统基础/06-知识字典/scheduling/kubernetes-scheduler.md) — 调度队列排序受优先级影响
-- [节点压力驱逐](../../../../wiki/17-系统基础/06-知识字典/scheduling/node-pressure-eviction.md) — kubelet 驱逐顺序同样考虑 Pod 优先级
-- [API 发起驱逐](../../../../wiki/17-系统基础/06-知识字典/scheduling/api-initiated-eviction.md) — API 驱逐与调度器抢占的区别
-- [污点与容忍度](../../../../wiki/17-系统基础/06-知识字典/scheduling/taints-and-tolerations.md) — 高优先级 Pod 仍需容忍节点污点
+- [Kubernetes 调度器](../../../../wiki/21-知识字典/scheduling/kubernetes-scheduler.md) — 调度队列排序受优先级影响
+- [节点压力驱逐](../../../../wiki/21-知识字典/scheduling/node-pressure-eviction.md) — kubelet 驱逐顺序同样考虑 Pod 优先级
+- [API 发起驱逐](../../../../wiki/21-知识字典/scheduling/api-initiated-eviction.md) — API 驱逐与调度器抢占的区别
+- [污点与容忍度](../../../../wiki/21-知识字典/scheduling/taints-and-tolerations.md) — 高优先级 Pod 仍需容忍节点污点
 
 ## 参考链接
 
@@ -221,9 +221,9 @@ kubectl describe resourcequota -n <namespace> | grep -i priority
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/scheduling/affinity.md|亲和性]]
-- [[wiki/17-系统基础/06-知识字典/scheduling/anti-affinity.md|反亲和性]]
-- [[wiki/17-系统基础/06-知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+- [[wiki/21-知识字典/scheduling/affinity.md|亲和性]]
+- [[wiki/21-知识字典/scheduling/anti-affinity.md|反亲和性]]
+- [[wiki/21-知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
 
 
 <!-- risk-assessed -->

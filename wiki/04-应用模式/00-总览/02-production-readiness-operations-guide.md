@@ -57,7 +57,7 @@ authors:
 
 本指南聚焦 [[wiki/04-应用模式/README.md|Application Patterns]] 领域中**应用工作负载投产与持续运维**的实操要求，不重复阐述具体行业架构，而是把各垂直场景（[[wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md|电商]]、[[wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md|小程序]]、[[wiki/04-应用模式/02-行业架构/06-fintech-architecture.md|金融科技]]、[[wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md|SaaS 多租户]] 等）共性的生产就绪动作抽象为可执行清单与命令。
 
-区别于[[wiki/13-生产运维/07-运维手册/01-production-sre-daily-ops.md|通用生产巡检手册]]，本文更强调**面向应用架构特性的检查项**：例如有状态服务的 PVC 快照、电商秒杀的 HPA 行为、多租户 SaaS 的网络隔离等。
+区别于[[wiki/11-生产运维/07-运维手册/01-production-sre-daily-ops.md|通用生产巡检手册]]，本文更强调**面向应用架构特性的检查项**：例如有状态服务的 PVC 快照、电商秒杀的 HPA 行为、多租户 SaaS 的网络隔离等。
 
 ---
 
@@ -443,17 +443,17 @@ kubectl top pod <pod> -n <ns>
 
 Application Patterns 位于业务架构与平台能力的交汇点，生产就绪工作必须明确与其他 Domain 的职责边界，避免重复造轮子或遗漏关键点。本域的核心交付物是**面向应用架构的运行手册与检查清单**，而平台能力（网络、安全、可观测性、发布系统）由对应 Domain 负责建设与维护。
 
-例如，当电商大促需要扩容时：本域提供应用级 HPA 配置与容量模型；[[wiki/02-工作负载/README.md|domain-02]] 确认工作负载选型；[[wiki/05-网络/README.md|domain-03]] 处理入口限流与灰度路由；[[wiki/12-可靠性/README.md|domain-09]] 评估全链路 SLO 与降级预案；[[wiki/13-生产运维/README.md|domain-11]] 统一值班响应与变更窗口。
+例如，当电商大促需要扩容时：本域提供应用级 HPA 配置与容量模型；[[wiki/02-工作负载/README.md|domain-02]] 确认工作负载选型；[[wiki/05-网络/README.md|domain-03]] 处理入口限流与灰度路由；[[wiki/10-可靠性/README.md|domain-09]] 评估全链路 SLO 与降级预案；[[wiki/11-生产运维/README.md|domain-11]] 统一值班响应与变更窗口。
 
 | 相关 Domain | 本域职责 | 协作边界 / 引用 |
 |---|---|---|
 | [[wiki/02-工作负载/README.md|工作负载]] | 工作负载类型选型与生命周期策略 | 本域决定**何时使用 StatefulSet/Deployment/Job**，该域提供**工作负载深度配置与运行时最佳实践**。 |
 | [[wiki/05-网络/README.md|网络]] | 服务暴露、灰度路由、入口超时重试 | 本域定义应用级路由与熔断需求，该域提供 Service Mesh、Ingress、Gateway API 实现。 |
-| [[wiki/08-安全/README.md|安全]] | 应用层安全上下文、NetworkPolicy、Secret 管理 | 本域落实 Pod Security、最小权限、密钥注入；该域制定整体零信任与合规框架。 |
-| [[wiki/09-可观测性/README.md|可观测性]] | RED 指标、日志、链路、SLO 定义 | 本域输出业务语义指标与告警规则；该域提供可观测平台、存储与告警路由。 |
-| [[wiki/11-发布变更/README.md|发布变更]] | 应用发布策略、回滚、配置版本化 | 本域执行 Helm/ArgoCD 发布；该域制定 GitOps 规范、变更窗口与审批流。 |
-| [[wiki/12-可靠性/README.md|可靠性]] | 应用级高可用、PDB、多活/灾备模式 | 本域实现 Pod 级与 Namespace 级韧性；该域负责集群级/多集群 DR、混沌工程与 SLO 治理。 |
-| [[wiki/13-生产运维/README.md|生产运维]] | 生产 checklist、值班响应、运行手册 | 本域提供应用专属运行手册；该域统一日常巡检、值班升级与事件管理。 |
+| [[wiki/07-安全/README.md|安全]] | 应用层安全上下文、NetworkPolicy、Secret 管理 | 本域落实 Pod Security、最小权限、密钥注入；该域制定整体零信任与合规框架。 |
+| [[wiki/08-可观测性/README.md|可观测性]] | RED 指标、日志、链路、SLO 定义 | 本域输出业务语义指标与告警规则；该域提供可观测平台、存储与告警路由。 |
+| [[wiki/09-发布变更/README.md|发布变更]] | 应用发布策略、回滚、配置版本化 | 本域执行 Helm/ArgoCD 发布；该域制定 GitOps 规范、变更窗口与审批流。 |
+| [[wiki/10-可靠性/README.md|可靠性]] | 应用级高可用、PDB、多活/灾备模式 | 本域实现 Pod 级与 Namespace 级韧性；该域负责集群级/多集群 DR、混沌工程与 SLO 治理。 |
+| [[wiki/11-生产运维/README.md|生产运维]] | 生产 checklist、值班响应、运行手册 | 本域提供应用专属运行手册；该域统一日常巡检、值班升级与事件管理。 |
 
 ---
 
@@ -483,11 +483,11 @@ Application Patterns 位于业务架构与平台能力的交汇点，生产就�
 
 - [[wiki/02-工作负载/README.md|工作负载]] — 工作负载选型与生命周期
 - [[wiki/05-网络/README.md|网络]] — 服务网格与流量治理
-- [[wiki/08-安全/README.md|安全]] — 安全合规与零信任
-- [[wiki/09-可观测性/README.md|可观测性]] — 可观测性与 SLO 体系
-- [[wiki/11-发布变更/README.md|发布变更]] — GitOps 与发布变更
-- [[wiki/12-可靠性/README.md|可靠性]] — 可靠性工程与灾备
-- [[wiki/13-生产运维/README.md|生产运维]] — 生产运维与值班手册
+- [[wiki/07-安全/README.md|安全]] — 安全合规与零信任
+- [[wiki/08-可观测性/README.md|可观测性]] — 可观测性与 SLO 体系
+- [[wiki/09-发布变更/README.md|发布变更]] — GitOps 与发布变更
+- [[wiki/10-可靠性/README.md|可靠性]] — 可靠性工程与灾备
+- [[wiki/11-生产运维/README.md|生产运维]] — 生产运维与值班手册
 
 ---
 

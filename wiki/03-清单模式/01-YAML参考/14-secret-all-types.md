@@ -1739,7 +1739,7 @@ metadata:
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -96,7 +96,7 @@ CPU/内存 = 顾客排队数量
 • 如果排队人数太少，系统自动关闭多余的窗口
 • 始终保持合理的工作效率
 
-【[[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] 类比】
+【[[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] 类比】
 
 HPA = 水平 Pod 自动伸缩器
 Deployment = 被伸缩的资源

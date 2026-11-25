@@ -219,7 +219,7 @@ prerequisites:
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/kudig-metadata-index.md|README]]]] — FTA 故障树清单索引
+- [[wiki/22-实体/15-参考与索引/kudig-metadata-index.md|README]]]] — FTA 故障树清单索引
 - networking.md|ts-networking]] — 网络故障排查
 - [[flannel-fta]] — Flannel 网络异常故障树分析
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill

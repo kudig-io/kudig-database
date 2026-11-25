@@ -153,10 +153,10 @@ curl -s http://kube-state-metrics:8080/metrics | grep kube_pod_overhead
 ```
 ## 交叉引用
 
-- [Kubernetes 调度器](../../../../wiki/17-系统基础/06-知识字典/scheduling/kubernetes-scheduler.md) — 调度器如何将 overhead 纳入资源计算
+- [Kubernetes 调度器](../../../../wiki/21-知识字典/scheduling/kubernetes-scheduler.md) — 调度器如何将 overhead 纳入资源计算
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA 设备的额外资源开销
-- [节点压力驱逐](../../../../wiki/17-系统基础/06-知识字典/scheduling/node-pressure-eviction.md) — kubelet 驱逐排序如何考虑 overhead
-- Karpenter 自动扩缩容](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/karpenter-autoscaling.md) — 节点容量规划需计入 overhead
+- [节点压力驱逐](../../../../wiki/21-知识字典/scheduling/node-pressure-eviction.md) — kubelet 驱逐排序如何考虑 overhead
+- Karpenter 自动扩缩容](../../../../wiki/21-知识字典/scheduling/karpenter-autoscaling.md) — 节点容量规划需计入 overhead
 
 ## 参考链接
 
@@ -164,9 +164,9 @@ curl -s http://kube-state-metrics:8080/metrics | grep kube_pod_overhead
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/scheduling/affinity.md|亲和性]]
-- [[wiki/17-系统基础/06-知识字典/scheduling/anti-affinity.md|反亲和性]]
-- [[wiki/17-系统基础/06-知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+- [[wiki/21-知识字典/scheduling/affinity.md|亲和性]]
+- [[wiki/21-知识字典/scheduling/anti-affinity.md|反亲和性]]
+- [[wiki/21-知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
 
 
 <!-- risk-assessed -->

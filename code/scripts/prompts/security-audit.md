@@ -194,8 +194,8 @@ spec:
 
 ## 参考文档
 
-- [[wiki/08-安全/CIS-Benchmark|CIS Kubernetes Benchmark]] — 合规标准
-- [[wiki/17-系统基础/06-知识字典/security/pod-security-standards|Pod Security Standards]] — Pod 安全基线
+- [[wiki/07-安全/CIS-Benchmark|CIS Kubernetes Benchmark]] — 合规标准
+- [[wiki/21-知识字典/security/pod-security-standards|Pod Security Standards]] — Pod 安全基线
 - [[code/scripts/automation/network-policy-audit|NetworkPolicy 审计脚本]] — 网络隔离审计
 
 <!-- risk-assessed -->

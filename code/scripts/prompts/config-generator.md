@@ -36,7 +36,7 @@ prerequisites:
 
 # KUDIG 配置生成 Prompt 模板
 
-> 用途: Agent 为用户生成生产级 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] YAML 配置
+> 用途: Agent 为用户生成生产级 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] YAML 配置
 
 ## Prompt
 

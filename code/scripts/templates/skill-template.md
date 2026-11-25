@@ -36,7 +36,7 @@ version: "1.0"                         # 文档版本，语义化版本
 category: "node"                       # 分类枚举: node | pod | network | storage |
                                        #          control-plane | security | workload | scaling
 severity_range: "P0-P2"               # 此 Skill 覆盖的严重性范围
-k8s_versions:                          # 兼容的 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 版本
+k8s_versions:                          # 兼容的 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 版本
   - "1.28"
   - "1.29"
   - "1.30"
@@ -548,6 +548,6 @@ receivers:
 
 ---
 
-> **关联文档**: [故障诊断/topic-skills/skill-schema.md](../../../wiki/19-故障诊断/08-技能体系/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
+> **关联文档**: [故障诊断/topic-skills/skill-schema.md](../../../skills/09-技能体系/skill-schema.md)（原独立 Schema 文件，内容已合并入本模板，Schema 文件保留作为历史参考）
 
 <!-- risk-assessed -->

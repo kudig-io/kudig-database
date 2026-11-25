@@ -174,13 +174,13 @@ flowchart TD
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/cilium-fta.md|cilium-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/cilium-fta.md|cilium-fta]]
 - RELEASE-NOTES-1.9
 - RELEASE-NOTES-0.8
 - RELEASE-NOTES-1.18

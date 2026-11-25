@@ -154,7 +154,7 @@ Learning Loop (probability updates, new pattern discovery)
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA Methodology and Core Principles]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[wiki/22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[wiki/20-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 
 
 <!-- risk-assessed -->

@@ -204,7 +204,7 @@ kubectl auth can-i get services --namespace=kube-system
 1. `P1-5-oncall-quick-reference-card.md` — oncall 速查卡
 2. `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` — kubectl 场景速查
 3. `故障诊断/00-troubleshooting-overview.md` — 故障排查总览
-4. `生产运维/topic-learn/public-training/[[wiki/06-存储/README.md|[[KUDIG Database]]]].md` — Week 1 培训
+4. `生产运维/topic-learn/public-training/[[wiki/06-存储与数据/README.md|[[KUDIG Database]]]].md` — Week 1 培训
 
 ---
 

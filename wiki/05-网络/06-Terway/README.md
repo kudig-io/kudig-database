@@ -118,8 +118,8 @@ prerequisites:
 |:---|:---|
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训（从入门到专家） |
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../../../skills/04-工作负载/pod/培训/inner-training/week-4-network-storage/day-24-terway-cni.md) | Day 24: Terway CNI 入门学习（含实践任务） |
-| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查（634 行） |
-| [故障诊断/FTA故障树/list/terway-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) | Terway 异常 FTA 故障树（含 JSON 工作流，879 行） |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../17-故障诊断/04-高级排障/structural-03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查（634 行） |
+| [故障诊断/FTA故障树/list/terway-fta.md](../../17-故障诊断/06-FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树（含 JSON 工作流，879 行） |
 | [系统基础/topic-cheat-sheet/](../系统基础/速查卡/) | 命令速查卡 (kubectl、网络诊断等) |
 
 ---
@@ -141,25 +141,25 @@ CRD 管理路径: 03-usage → 03b-crd-operations → 网络/37-terway-resources
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/20-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[wiki/23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[wiki/22-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->
@@ -167,8 +167,8 @@ CRD 管理路径: 03-usage → 03b-crd-operations → 网络/37-terway-resources
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

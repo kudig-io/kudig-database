@@ -110,7 +110,7 @@ severity: high
 ## 相关链接
 
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
+- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/17-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 - networking.md|网络故障排查]]
 
 ## Related
@@ -121,9 +121,9 @@ severity: high
 - [[skills/04-工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]] — Agent Orchestration Patterns for FTA
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/service-fta.md|Service 异常故障树分析]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/service-fta.md|Service 异常故障树分析]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
 
 
 <!-- risk-assessed -->

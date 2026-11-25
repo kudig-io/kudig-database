@@ -211,7 +211,7 @@ flowchart TD
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
@@ -219,7 +219,7 @@ flowchart TD
 
 - [[README]]
 - [[nginx-ingress-fta]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/kubeadm-fta.md|kubeadm-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/kubeadm-fta.md|kubeadm-fta]]
 - [[skills/05-网络/ingress/培训/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
 
 

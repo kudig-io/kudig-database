@@ -26,7 +26,7 @@ This builder writes:
                                      at runtime — dropped from the repo 2026-11-24).
 
 Excluded, stated once: `code/repo/` (upstream vendor checkouts, rebuilt by
-`make repo-sync`), `31-归档`, `03-发布`, `04-报告`, `27-资产`, dot-directories.
+`make repo-sync`), `31-归档`/`99-归档`, `03-发布`, `04-报告`, `27-资产`, dot-directories.
 
 Usage:
   python3 code/scripts/maintenance/console-corpus.py            # rebuild everything
@@ -51,12 +51,13 @@ VALIDATION = DATA / "mermaid-validation.json"
 SCHEMA = "kudig-console/3"
 
 PARTITIONS = [
-    ("wiki", "语料正文", "30 个知识域"),
-    ("skills", "Agent 技能卡", "8 个技能域"),
+    ("wiki", "语料正文", "27 个知识域"),
+    ("skills", "Agent 技能卡", "9 个技能域"),
     ("maintaining", "维护资产", "文档 / 元数据 / 发布 / 报告"),
     ("code", "可执行资产", "脚本 / 自动化 / 调研"),
 ]
-SKIP_DIRS = {"31-归档", "03-发布", "04-报告", "27-资产", "node_modules", "__pycache__", ".git", ".impeccable", ".venv"}
+SKIP_DIRS = {"31-归档", "99-归档", "03-发布", "04-报告", "27-资产",
+             "node_modules", "__pycache__", ".git", ".impeccable", ".venv"}
 
 FM = re.compile(r"\A---\n(.*?)\n---\n", re.S)
 FENCE = re.compile(r"^\s*```(.*)$")

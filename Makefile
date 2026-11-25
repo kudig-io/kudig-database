@@ -4,9 +4,9 @@
 # =============================================================================
 
 CORPUS_DIR := code/scripts/corpus-generator
-CORPUS_OUTPUT := wiki/19-故障诊断/10-QA语料/generated
-SKILLS_DIR := wiki/19-故障诊断/08-技能体系
-FTA_DIR := wiki/19-故障诊断/06-FTA故障树/list
+CORPUS_OUTPUT := wiki/17-故障诊断/10-QA语料/generated
+SKILLS_DIR := skills/09-技能体系
+FTA_DIR := wiki/17-故障诊断/06-FTA故障树/list
 
 .PHONY: corpus-generate corpus-generate-all corpus-validate corpus-stats corpus-clean
 

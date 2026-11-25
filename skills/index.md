@@ -72,7 +72,7 @@ estimated_read_time: 10min
 
 | 组件 | 覆盖场景 | 高频标记 |
 |:---|:---|:---|
-| [csi-storage/](wiki/06-存储/csi-storage) | CSI 驱动异常、PV/PVC 挂载失败、存储后端、持久存储管理、应用级备份恢复与灾备演练（Velero Runbook）、存储最佳实践 | 🔴 工单TOP |
+| [csi-storage/](wiki/06-存储与数据/csi-storage) | CSI 驱动异常、PV/PVC 挂载失败、存储后端、持久存储管理、应用级备份恢复与灾备演练（Velero Runbook）、存储最佳实践 | 🔴 工单TOP |
 
 ## 五、安全 `安全/`
 
@@ -160,7 +160,7 @@ kubectl describe pvc <name> -n <ns>
 | 3 | Node NotReady | [节点/node/](03-节点/node)（含 skill-notready/） |
 | 4 | DNS 解析失败 | [网络/dns/](wiki/05-网络/dns) |
 | 5 | Service 不通 | [网络/service/](wiki/05-网络/service) |
-| 6 | PVC 挂载失败 | [存储/csi-storage/](wiki/06-存储/csi-storage) |
+| 6 | PVC 挂载失败 | [存储/csi-storage/](wiki/06-存储与数据/csi-storage) |
 | 7 | 证书过期 | [安全/certificate/](07-安全/certificate) |
 | 8 | CNI/网络插件异常 | [网络/cni/](wiki/05-网络/cni) |
 | 9 | API Server 异常 | [控制面/apiserver/](02-控制面/apiserver) |

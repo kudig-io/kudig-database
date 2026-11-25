@@ -25,7 +25,7 @@ Node NotReady 状态的完整诊断技能包，包含 SKILL.md（Agent 可执行
 
 - [[skills/03-节点/node/README.md|Node 异常诊断技能集]]
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/node-fta.md|Node 故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/node-fta.md|Node 故障树分析]]
 
 ## Related
 
@@ -33,8 +33,8 @@ Node NotReady 状态的完整诊断技能包，包含 SKILL.md（Agent 可执行
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

@@ -70,7 +70,7 @@ estimated_read_time: 240min
 related_domains:
   - 安全
 related_topics:
-  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[wiki/10-平台工程/06-代码分析/cluster-create/16-security.md|16-security]]-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[wiki/12-平台工程/06-代码分析/cluster-create/16-security.md|16-security]]-2
   - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-19-troubleshooting-methodology
   - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-21-platform-ops
 ---
@@ -426,10 +426,10 @@ default ServiceAccount 默认没有任何权限（除了通过自动挂载的 To
 
 ## 延伸阅读
 
-- [认证授权系统](../../../../../../wiki/08-安全/01-身份与访问/01-authentication-authorization-system.md)
-- [RBAC 矩阵配置](../../../../../../wiki/08-安全/01-身份与访问/06-rbac-matrix-configuration.md)
-- [证书管理](../../../../../../wiki/08-安全/06-合规审计/07-certificate-management.md)
-- [Pod 安全标准](../../../../../../wiki/08-安全/04-策略治理/03-pod-security-standards.md)
+- [认证授权系统](../../../../../../wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md)
+- [RBAC 矩阵配置](../../../../../../wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md)
+- [证书管理](../../../../../../wiki/07-安全/06-合规审计/07-certificate-management.md)
+- [Pod 安全标准](../../../../../../wiki/07-安全/04-策略治理/03-pod-security-standards.md)
 
 
 <!-- risk-assessed -->

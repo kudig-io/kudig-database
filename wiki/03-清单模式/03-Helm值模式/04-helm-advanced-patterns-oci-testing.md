@@ -373,4 +373,4 @@ helm secrets upgrade --install my-app ./chart \
 
 - [[wiki/03-清单模式/03-Helm值模式/index.md|Helm 值模式]]
 - [[wiki/03-清单模式/03-Helm值模式/03-helm-library-charts-reuse.md|Library Charts]]
-- [[wiki/11-发布变更/01-GitOps/index.md|GitOps]]
+- [[wiki/09-发布变更/01-GitOps/index.md|GitOps]]

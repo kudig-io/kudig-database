@@ -648,8 +648,8 @@ flowchart TD
 ---
 
 **关联文档**:
-- [08-技能体系/](../../../wiki/19-故障诊断/08-技能体系) — 18 个 GA Skill
-- [04-高级排障/structural-](../../../wiki/19-故障诊断/04-高级排障) — 63 篇问题排查文档
+- [08-技能体系/](../../../wiki/17-故障诊断/08-技能体系) — 18 个 GA Skill
+- [04-高级排障/structural-](../../../wiki/17-故障诊断/04-高级排障) — 63 篇问题排查文档
 - [P0-1: 工单分类体系](P0-1-ticket-classification-intent-recognition.md)
 - [P0-2: 多技能协同协议](P0-2-multi-skill-coordination-protocol.md)
 

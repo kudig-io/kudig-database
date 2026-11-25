@@ -67,7 +67,7 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] | 入门 | tutorial, k8s, training | 5min |
+| 1 | [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] | 入门 | tutorial, k8s, training | 5min |
 | 2 | 第二课：Pod - K8s 的最小调度单元 | 入门 | tutorial, Pod, 容器组 | 5min |
 | 3 | 第三课：Deployment - 应用部署管理器 | 入门 | tutorial, deployment, Deployment | 5min |
 | 4 | 第四课：Service - 让应用可以被访问 | 入门 | tutorial, Service, 服务 | 5min |
@@ -77,7 +77,7 @@ prerequisites:
 | 8 | 第八课：存储 - PV 和 PVC | 入门 | tutorial, k8s, training | 5min |
 | 9 | 第九课：HPA - 自动伸缩 | 入门 | tutorial, k8s, training | 5min |
 | 10 | 10-health-check — 第14课：StatefulSet - 有状态应用管理
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

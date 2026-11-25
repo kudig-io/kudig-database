@@ -572,9 +572,9 @@ spec:
 - 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload ...
 - 09 - 边缘计算工作负载部署模式 (Edge Computing Workload Deployment Patter...
 - 工作负载控制器详解
-- [[wiki/19-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 

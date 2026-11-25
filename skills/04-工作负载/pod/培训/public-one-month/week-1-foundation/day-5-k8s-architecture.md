@@ -491,14 +491,14 @@ Filter 策略包括：PodFitsResources（节点资源充足）、PodFitsHostPort
 
 ## 延伸阅读
 
-- [K8s 架构总览](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
-- [核心组件深入](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../wiki/01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
-- [K8s 速查手册](../../../../../../wiki/17-系统基础/05-速查卡/k8s.md)
+- [K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [核心组件深入](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../../../../../wiki/01-集群基础与系统/05-kubectl/02-kubectl-commands-reference.md)
+- [K8s 速查手册](../../../../../../wiki/01-集群基础与系统/12-速查卡/k8s.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

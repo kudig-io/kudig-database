@@ -170,7 +170,7 @@ prerequisites:
 
 ## 相关链接
 
-- [[wiki/23-实体/15-参考与索引/k8s-knowledge-map.md|K8s 知识图谱]]
+- [[wiki/22-实体/15-参考与索引/k8s-knowledge-map.md|K8s 知识图谱]]
 
 ## 云厂商故障排查指南
 
@@ -216,7 +216,7 @@ kubectl get pv -o wide
 ## Related
 
 - [[skills/04-工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz.md|assessment-k8s-fundamentals-quiz]] — K8S Fundamentals Quiz
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[submariner]] — Submariner
 - [[istio]] — Istio
 - [[linkerd]] — Linkerd

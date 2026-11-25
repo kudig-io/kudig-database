@@ -276,16 +276,16 @@ kubectl get pod <pod-name> -n <namespace> -o yaml
 - [高级 Pod 运维模式](../清单规范/02-advanced-pod-patterns.md)
 - [工作负载概览与架构](../../../../wiki/02-工作负载/01-核心工作负载/01-workload-overview-architecture.md)
 - [Pod 综合故障排查手册](../诊断排障/02-pod-comprehensive-troubleshooting.md)
-- [Pod 故障树分析 (FTA)](../../../../wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md)
+- [Pod 故障树分析 (FTA)](../../../../wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md)
 - [Pod Pending 诊断](../诊断排障/01-pod-pending-diagnosis.md)
-- [OOM 内存诊断](../../../../wiki/19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md)
+- [OOM 内存诊断](../../../../wiki/17-故障诊断/01-核心排障/07-oom-memory-diagnosis.md)
 
 ## 参考链接
 - https://kubernetes.io/docs/concepts/workloads/pods/
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

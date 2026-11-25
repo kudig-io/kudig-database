@@ -54,16 +54,16 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/17-系统基础/06-知识字典/scheduling/toleration.md]]'
+- target: '[[wiki/21-知识字典/scheduling/toleration.md]]'
   type: related_to
-- target: '[[wiki/17-系统基础/06-知识字典/scheduling/taint.md]]'
+- target: '[[wiki/21-知识字典/scheduling/taint.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-037-pod-pending-taint-mismatch.md|Pod Pending：节点 taint 与 toleration 不匹配]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-037-pod-pending-taint-mismatch.md|Pod Pending：节点 taint 与 toleration 不匹配]]（本页为重排去重桩，正文见主场）

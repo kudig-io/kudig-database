@@ -175,8 +175,8 @@ prerequisites:
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)

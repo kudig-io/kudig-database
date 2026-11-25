@@ -221,9 +221,9 @@ kubectl run dnsutils --rm -it --image=registry.k8s.io/e2e-test-images/jessie-dns
 ## 交叉引用
 
 - [Service](service.md) — Service 的 DNS 名称和服务发现
-- [Pod Hostname](../../../../wiki/17-系统基础/06-知识字典/workloads/pod-hostname.md) — Pod 主机名和 FQDN 配置
-- [EndpointSlices](../../../../wiki/17-系统基础/06-知识字典/networking/endpointslices.md) — Headless Service 的 DNS 记录来源
-- [IPv4/IPv6 Dual Stack](../../../../wiki/17-系统基础/06-知识字典/networking/ipv4-ipv6-dual-stack.md) — 双栈环境下的 DNS 记录
+- [Pod Hostname](../../../../wiki/21-知识字典/workloads/pod-hostname.md) — Pod 主机名和 FQDN 配置
+- [EndpointSlices](../../../../wiki/21-知识字典/networking/endpointslices.md) — Headless Service 的 DNS 记录来源
+- [IPv4/IPv6 Dual Stack](../../../../wiki/21-知识字典/networking/ipv4-ipv6-dual-stack.md) — 双栈环境下的 DNS 记录
 
 ## 参考链接
 
@@ -231,7 +231,7 @@ kubectl run dnsutils --rm -it --image=registry.k8s.io/e2e-test-images/jessie-dns
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/dns-index.md|DNS 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/dns-index.md|DNS 知识图谱索引]]
 
 
 <!-- risk-assessed -->

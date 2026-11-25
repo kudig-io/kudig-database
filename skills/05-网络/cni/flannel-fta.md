@@ -454,6 +454,6 @@ kubectl get configmap -n kube-system kube-flannel-cfg -o jsonpath='{.data.net-co
 - [[skills/05-网络/cni/terway-fta.md|Terway CNI 异常诊断]] — 同域技能
 - [[skills/05-网络/cni/calico-fta.md|Calico 网络异常诊断]] — 同域技能
 - [[skills/03-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
-- [[wiki/21-生态参考/03-领域索引/flannel-index.md|Flannel 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/flannel-index.md|Flannel 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

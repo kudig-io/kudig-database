@@ -386,39 +386,39 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 
 ## 延伸阅读
 
-- [etcd 深入](../../../../../../wiki/01-集群基础/03-控制平面/11-etcd-deep-dive.md)
-- [API Server 深入](../../../../../../wiki/01-集群基础/03-控制平面/12-apiserver-deep-dive.md)
-- [Scheduler 深入](../../../../../../wiki/01-集群基础/03-控制平面/20-kube-scheduler-deep-dive.md)
+- [etcd 深入](../../../../../../wiki/01-集群基础与系统/03-控制平面/11-etcd-deep-dive.md)
+- [API Server 深入](../../../../../../wiki/01-集群基础与系统/03-控制平面/12-apiserver-deep-dive.md)
+- [Scheduler 深入](../../../../../../wiki/01-集群基础与系统/03-控制平面/20-kube-scheduler-deep-dive.md)
 - [Deployment 生产模式](../../../../../../wiki/02-工作负载/01-核心工作负载/02-deployment-production-patterns.md)
 - [StatefulSet 高级操作](../../../../../../wiki/02-工作负载/01-核心工作负载/03-statefulset-advanced-operations.md)
 - [网络架构总览](../../../../../../wiki/05-网络/01-K8s网络核心/02-network-architecture-overview.md)
 - [Service 概念与类型](../../../../../../wiki/05-网络/01-K8s网络核心/07-service-concepts-types.md)
 - [Ingress 基础](../../../../../../wiki/05-网络/01-K8s网络核心/20-ingress-fundamentals.md)
-- [存储架构总览](../../../../../../wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md)
-- [StorageClass 动态供给](../../../../../../wiki/06-存储/01-K8s存储/05-storageclass-dynamic-provisioning.md)
+- [存储架构总览](../../../../../../wiki/06-存储与数据/01-K8s存储/01-storage-architecture-overview.md)
+- [StorageClass 动态供给](../../../../../../wiki/06-存储与数据/01-K8s存储/05-storageclass-dynamic-provisioning.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/20-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[wiki/23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[wiki/22-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->
@@ -426,8 +426,8 @@ K8s 的 PersistentVolume Controller 持续监控未绑定的 PVC 和可用的 PV
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

@@ -2727,7 +2727,7 @@ gantt
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - domain-35-ebpf-technology KUDIG Database — Global MOC
-- [[wiki/05-网络/README.md|[[wiki/31-归档/domain-indexes/network/README-from-domain-35|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
+- [[wiki/05-网络/README.md|[[wiki/99-归档/domain-indexes/network/README-from-domain-35|Domain 35: eBPF 技术体系 (eBPF Technology Stack)]]]]
 - Domain-35 eBPF 技术 — 开源项目索引
 - eBPF 架构基础与程序类型 (eBPF Architecture Fundamentals and Program T...
 - [[wiki/05-网络/05-eBPF/02-ebpf-map-types-data-structures.md|02 ebpf map types data structures]]

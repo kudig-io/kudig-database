@@ -44,4 +44,4 @@ authors:
   role: contributor
 ---
 
-> **内容已并入主场**：[[wiki/18-云厂商/02-AWS-EKS/04-eks-iam-irsa-pod-identity.md|EKS 身份认证 — IRSA 与 Pod Identity]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/16-云厂商/02-AWS-EKS/04-eks-iam-irsa-pod-identity.md|EKS 身份认证 — IRSA 与 Pod Identity]]（本页为重排去重桩，正文见主场）

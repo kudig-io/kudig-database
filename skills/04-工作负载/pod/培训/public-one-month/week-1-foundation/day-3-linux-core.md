@@ -613,10 +613,10 @@ namespace 是进程级别的隔离，共享宿主机内核。虚拟机是硬件�
 
 ## 延伸阅读
 
-- [Linux 系统架构](../../../../../../wiki/17-系统基础/01-Linux/01-linux-system-architecture.md)
-- [Linux 进程管理](../../[[wiki/17-系统基础/01-Linux/03-linux-process-management.md|02-linux-process-management]].md)
-- [Linux 容器基础原理](../../../../../../wiki/17-系统基础/01-Linux/09-linux-container-fundamentals.md)
-- [Linux 命令参考](../../../../../../wiki/17-系统基础/01-Linux/15-linux-commands-reference.md)
+- [Linux 系统架构](../../../../../../wiki/01-集群基础与系统/09-Linux/01-linux-system-architecture.md)
+- [Linux 进程管理](../../[[wiki/01-集群基础与系统/09-Linux/03-linux-process-management.md|02-linux-process-management]].md)
+- [Linux 容器基础原理](../../../../../../wiki/01-集群基础与系统/09-Linux/09-linux-container-fundamentals.md)
+- [Linux 命令参考](../../../../../../wiki/01-集群基础与系统/09-Linux/15-linux-commands-reference.md)
 
 ```
 

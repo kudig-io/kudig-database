@@ -39,4 +39,4 @@ prerequisites:
 - policy-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/07-迁移方案/03-application-workload-migration.md|03 - 应用工作负载迁移 [migration]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md|03 - 应用工作负载迁移 [migration]]]（本页为重排去重桩，正文见主场）

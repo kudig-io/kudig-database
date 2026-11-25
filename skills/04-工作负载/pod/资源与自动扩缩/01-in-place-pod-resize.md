@@ -78,4 +78,4 @@ cross_refs:
   label: '速查卡: kubectl-scene-cheatsheet'
 ---
 
-> **内容已并入主场**：[[wiki/01-集群基础/03-控制平面/30-in-place-pod-resize.md|29 - 原地 Pod 资源调整 (In-Place Pod Resize)]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/01-集群基础与系统/03-控制平面/30-in-place-pod-resize.md|29 - 原地 Pod 资源调整 (In-Place Pod Resize)]]（本页为重排去重桩，正文见主场）

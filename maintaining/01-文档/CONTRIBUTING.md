@@ -110,7 +110,7 @@ sources: ["kubernetes.io/..."] # 推荐，权威来源链接
 
 - 外部链接指向权威源（kubernetes.io、github.com 官方仓库、CNCF 项目站）
 - 内部 wikilink `页面名` 指向必须存在的页面
-- 每个 `wiki/31-归档/` 下的内容不参与链接校验
+- 每个 `wiki/99-归档/` 下的内容不参与链接校验
 
 ## 7. PR 审查要点
 

@@ -446,7 +446,7 @@ kubectl delete deployment my-app
 
 **关联文档**:
 - [../03-networking/03-service-basics.md](../../../05-网络/service/培训/lecturer/01-service-basics.md) — Service 基础
-- [../../故障诊断/topic-skills/08-deployment-rollout-failure.md](../../../../wiki/19-故障诊断/08-技能体系/09-deployment-rollout-failure.md) — 滚动更新问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/08-deployment-rollout-failure.md](../../../../skills/09-技能体系/09-deployment-rollout-failure.md) — 滚动更新问题 [[SKILL|Skill]]
 - [../../工作负载/](../../工作负载/) — 工作负载文档
 
 ## See Also

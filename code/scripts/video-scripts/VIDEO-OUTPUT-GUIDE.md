@@ -134,7 +134,7 @@ prerequisites:
 |:---|:---|:---|
 | 动画 | 故障树 Mermaid | 展示 TE→IE→BE 层级关系 |
 | 截图 | kubectl 输出 | 真实命令输出，非模拟 |
-| 界面 | [[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] Dashboard | 监控面板、事件日志 |
+| 界面 | [[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] Dashboard | 监控面板、事件日志 |
 | 图示 | 架构图 | 网络拓扑、组件交互 |
 
 ### 背景音乐

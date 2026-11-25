@@ -41,4 +41,4 @@ prerequisites:
 - backup-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/07-迁移方案/09-migration-toolchain.md|09 - 迁移工具链参考 [migration]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md|09 - 迁移工具链参考 [migration]]]（本页为重排去重桩，正文见主场）

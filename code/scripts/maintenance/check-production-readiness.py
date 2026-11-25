@@ -19,7 +19,9 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-GUIDE_GLOB = "*/00-总览/*production-readiness-operations-guide.md"
+GUIDE_GLOBS = ["*/00-总览/*production-readiness-operations-guide.md",
+               "*/08-生产就绪/*production-readiness-operations-guide.md",
+               "*/08-数据库中间件总览/*production-readiness-operations-guide.md"]
 
 CORE_SECTIONS = [
     "生产环境检查清单",
@@ -137,7 +139,7 @@ def main():
     ap.add_argument("--apply", action="store_true", help="规范化编号")
     args = ap.parse_args()
 
-    guides = sorted(ROOT.glob(f"wiki/{GUIDE_GLOB}"))
+    guides = sorted({g for pat in GUIDE_GLOBS for g in ROOT.glob(f"wiki/{pat}")})
     if not guides:
         print("no guides found"); sys.exit(2)
 

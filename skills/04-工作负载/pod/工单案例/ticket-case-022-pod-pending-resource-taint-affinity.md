@@ -56,16 +56,16 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/17-系统基础/06-知识字典/scheduling/taint.md]]'
+- target: '[[wiki/21-知识字典/scheduling/taint.md]]'
   type: related_to
-- target: '[[wiki/17-系统基础/06-知识字典/scheduling/affinity.md]]'
+- target: '[[wiki/21-知识字典/scheduling/affinity.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-027-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-027-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-022-pod-pending-resource-taint-affinity.md|阿里云专有云 Pod Pending（资源不足 / taint 不匹配 / 亲和性冲突）]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-022-pod-pending-resource-taint-affinity.md|阿里云专有云 Pod Pending（资源不足 / taint 不匹配 / 亲和性冲突）]]（本页为重排去重桩，正文见主场）

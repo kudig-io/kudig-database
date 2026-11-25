@@ -847,11 +847,11 @@ kubectl delete namespace production-app  # ⚠️ 不可逆：永久删除命名
 - [StatefulSet 高级操作](../../../../../../wiki/02-工作负载/01-核心工作负载/03-statefulset-advanced-operations.md)
 - [Service 概念与类型](../../../../../../wiki/05-网络/01-K8s网络核心/07-service-concepts-types.md)
 - [Ingress 基础](../../../../../../wiki/05-网络/01-K8s网络核心/20-ingress-fundamentals.md)
-- [存储架构总览](../../../../../../wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md)
+- [存储架构总览](../../../../../../wiki/06-存储与数据/01-K8s存储/01-storage-architecture-overview.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

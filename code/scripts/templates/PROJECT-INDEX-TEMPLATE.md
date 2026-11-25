@@ -91,7 +91,7 @@ trigger_keywords:
 
 ## 四、版本兼容矩阵
 
-| 组件 | [[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] v1.31 | v1.32 | v1.33 | 备注 |
+| 组件 | [[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] v1.31 | v1.32 | v1.33 | 备注 |
 |:---|:---|:---|:---|:---|
 | Project-A vX.Y | ✅ | ✅ | ✅ | 说明 |
 | Project-B vX.Y | ✅ | ✅ | ✅ | 说明 |

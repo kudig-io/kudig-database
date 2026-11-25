@@ -311,7 +311,7 @@ ss -ant | awk '{print $1}' | sort | uniq -c | sort -rn
 
 ## 明日预告
 
-Day 5 将正式进入 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 架构学习，理解 Master/Node 组件及其交互。
+Day 5 将正式进入 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 架构学习，理解 Master/Node 组件及其交互。
 
 
 <!-- risk-assessed -->

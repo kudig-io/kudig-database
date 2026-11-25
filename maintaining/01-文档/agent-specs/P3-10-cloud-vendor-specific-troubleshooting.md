@@ -49,7 +49,7 @@ prerequisites:
 
 ---
 
-## 1. 阿里云 ACK / ACK (Alibaba Cloud [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]])
+## 1. 阿里云 ACK / ACK (Alibaba Cloud [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]])
 
 ### 1.1 控制平面问题 (CCE 控制台异常)
 

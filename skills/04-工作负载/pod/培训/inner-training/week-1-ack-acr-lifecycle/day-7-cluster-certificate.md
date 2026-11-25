@@ -490,15 +490,15 @@ ACK 托管版的管控面证书轮换是滚动进行的，不会导致服务中�
 
 ## 延伸阅读
 
-- [证书管理详解](../../../../../../wiki/08-安全/06-合规审计/07-certificate-management.md)
-- [安全架构总览](../../../../../../wiki/01-集群基础/01-架构总览/12-security-architecture.md)
-- [证书排障指南](../../../../../../wiki/19-故障诊断/02-资源排障/05-certificate-troubleshooting.md)
+- [证书管理详解](../../../../../../wiki/07-安全/06-合规审计/07-certificate-management.md)
+- [安全架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/12-security-architecture.md)
+- [证书排障指南](../../../../../../wiki/17-故障诊断/02-资源排障/05-certificate-troubleshooting.md)
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/210-ack-cluster-management.md)
 - [kubelet TLS Bootstrap](../../安全/02-kubelet-tls-bootstrap.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 
 <!-- risk-assessed -->

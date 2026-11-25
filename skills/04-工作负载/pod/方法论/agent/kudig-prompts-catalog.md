@@ -127,15 +127,15 @@ prerequisites:
 ## Related
 
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|SKILL]].md|skill-k8s-node-notready-SKILL]] — Skill
-- [[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|pod-fta]] — pod-fta
-- [[wiki/19-故障诊断/06-FTA故障树/list/dns-fta.md|dns-fta]] — dns-fta
+- [[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|pod-fta]] — pod-fta
+- [[wiki/17-故障诊断/06-FTA故障树/list/dns-fta.md|dns-fta]] — dns-fta
 - [[etcd]] — etcd
 - [[apiserver-fta]] — API Server 异常故障树分析
 - observability/07-tools/26-troubleshooting-tools|100 - 故障排查增强工具]] — Cross-reference
-- [[wiki/09-可观测性/01-总览/12-troubleshooting-overview.md|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
+- [[wiki/08-可观测性/01-总览/12-troubleshooting-overview.md|10 - Kubernetes 生产环境故障排查全攻略 (Production Troubleshooting Guide)]] — Cross-reference
 - [[skills/03-节点/node/skill-notready/skill-assets-escalation-template.md|Escalation Template]] — Cross-reference
-- [[wiki/01-集群基础/03-控制平面/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/12-production-troubleshooting.md|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
+- [[wiki/01-集群基础与系统/03-控制平面/06-plane-troubleshooting.md|控制平面故障排查手册 (Control Plane Troubleshooting Handbook)]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/12-production-troubleshooting.md|生产环境故障诊断 (Production Troubleshooting)]] — Cross-reference
 
 
 <!-- risk-assessed -->

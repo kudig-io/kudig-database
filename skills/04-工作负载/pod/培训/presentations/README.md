@@ -128,15 +128,15 @@ tier: peripheral
 
 | # | 文档 | 主题 | 授课时长 | 难度 |
 |:---:|:---|:---|:---:|:---:|
-| 1 | [架构基础](../../../../../wiki/27-资产/presentations/kubernetes-architecture-fundamentals-presentation.md) | K8s 架构概览、核心组件、设计哲学 | 3.5h | ⭐⭐ |
-| 2 | [CoreDNS](../../../../../wiki/27-资产/presentations/kubernetes-coredns-presentation.md) | DNS 服务发现、CoreDNS 配置与调优 | 3h | ⭐⭐⭐ |
-| 3 | [Ingress](../../../../../wiki/27-资产/presentations/kubernetes-ingress-presentation.md) | Ingress 控制器、路由规则、TLS 终止 | 3h | ⭐⭐⭐ |
-| 4 | [可观测性](../../../../../wiki/27-资产/presentations/kubernetes-observability-presentation.md) | 监控、日志、链路追踪三大支柱 | 3.5h | ⭐⭐⭐ |
-| 5 | [调度器](../../../../../wiki/27-资产/presentations/kubernetes-scheduling-presentation.md) | 调度框架、亲和性、拓扑分布约束 | 3h | ⭐⭐⭐⭐ |
-| 6 | [安全与 RBAC](../../../../../wiki/27-资产/presentations/kubernetes-security-rbac-presentation.md) | RBAC 模型、ServiceAccount、安全策略 | 2.5h | ⭐⭐⭐⭐ |
-| 7 | [Service](../../../../../wiki/27-资产/presentations/kubernetes-service-presentation.md) | Service 类型、kube-proxy 模式、流量拓扑 | 3h | ⭐⭐⭐ |
-| 8 | [存储](../../../../../wiki/27-资产/presentations/kubernetes-storage-presentation.md) | PV/PVC、StorageClass、CSI 驱动 | 3.5h | ⭐⭐⭐⭐ |
-| 9 | [Terway 网络](../../../../../wiki/27-资产/presentations/kubernetes-terway-presentation.md) | 阿里云 Terway CNI、VPC 网络模式 | 3h | ⭐⭐⭐⭐ |
+| 1 | [架构基础](../../../../../wiki/25-资产/presentations/kubernetes-architecture-fundamentals-presentation.md) | K8s 架构概览、核心组件、设计哲学 | 3.5h | ⭐⭐ |
+| 2 | [CoreDNS](../../../../../wiki/25-资产/presentations/kubernetes-coredns-presentation.md) | DNS 服务发现、CoreDNS 配置与调优 | 3h | ⭐⭐⭐ |
+| 3 | [Ingress](../../../../../wiki/25-资产/presentations/kubernetes-ingress-presentation.md) | Ingress 控制器、路由规则、TLS 终止 | 3h | ⭐⭐⭐ |
+| 4 | [可观测性](../../../../../wiki/25-资产/presentations/kubernetes-observability-presentation.md) | 监控、日志、链路追踪三大支柱 | 3.5h | ⭐⭐⭐ |
+| 5 | [调度器](../../../../../wiki/25-资产/presentations/kubernetes-scheduling-presentation.md) | 调度框架、亲和性、拓扑分布约束 | 3h | ⭐⭐⭐⭐ |
+| 6 | [安全与 RBAC](../../../../../wiki/25-资产/presentations/kubernetes-security-rbac-presentation.md) | RBAC 模型、ServiceAccount、安全策略 | 2.5h | ⭐⭐⭐⭐ |
+| 7 | [Service](../../../../../wiki/25-资产/presentations/kubernetes-service-presentation.md) | Service 类型、kube-proxy 模式、流量拓扑 | 3h | ⭐⭐⭐ |
+| 8 | [存储](../../../../../wiki/25-资产/presentations/kubernetes-storage-presentation.md) | PV/PVC、StorageClass、CSI 驱动 | 3.5h | ⭐⭐⭐⭐ |
+| 9 | [Terway 网络](../../../../../wiki/25-资产/presentations/kubernetes-terway-presentation.md) | 阿里云 Terway CNI、VPC 网络模式 | 3h | ⭐⭐⭐⭐ |
 | 10 | [故障排查方法论](kubernetes-troubleshooting-methodology-presentation.md) | FTA/FEBM、结构化排障流程 | 3h | ⭐⭐⭐⭐ |
 | 11 | [工作负载](kubernetes-workload-presentation.md) | Deployment/StatefulSet/DaemonSet/Job | 2.5h | ⭐⭐ |
 
@@ -1275,7 +1275,7 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 |:---|:---|
 | [生产运维/topic-learn/](../生产运维/topic-learn/) | 系统化学习计划（Presentation 可作为课程配套） |
 | [系统基础/topic-cheat-sheet/](../系统基础/速查卡/) | 演示中的命令速查 |
-| [06-FTA故障树/](../../../../../wiki/19-故障诊断/06-FTA故障树) | 故障排查方法论 Presentation 的深度参考 |
+| [06-FTA故障树/](../../../../../wiki/17-故障诊断/06-FTA故障树) | 故障排查方法论 Presentation 的深度参考 |
 
 ---
 
@@ -1284,25 +1284,25 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/20-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[wiki/23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[wiki/22-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->
@@ -1310,8 +1310,8 @@ echo "  KUBECONFIG=kubeconfig-student-${STUDENT_ID}.yaml kubectl auth can-i --li
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

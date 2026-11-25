@@ -46,4 +46,4 @@ cross_refs:
   label: GitOps知识域
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/01-best-practices/operations/deployment.md|Kubernetes 部署策略最佳实践 [operations]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/01-best-practices/operations/deployment.md|Kubernetes 部署策略最佳实践 [operations]]]（本页为重排去重桩，正文见主场）

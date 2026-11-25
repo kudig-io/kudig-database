@@ -73,7 +73,7 @@ cross_refs:
 
 # 08 - 多云混合部署工作负载管理策略 (Multi-Cloud Hybrid Deployment Workload Strategy)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Federation](https://github.com/kubernetes-sigs/kubefed)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Federation](https://github.com/kubernetes-sigs/kubefed)
 
 <!-- chunk: 多云架构设计原则 -->
 ## 多云架构设计原则

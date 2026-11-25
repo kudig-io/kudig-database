@@ -30,16 +30,16 @@ trigger_keywords:
 prerequisites:
 - kubectl-basics
 relationships:
-- target: '[[wiki/23-实体/02-K8s核心组件/kubelet.md]]'
+- target: '[[wiki/22-实体/02-K8s核心组件/kubelet.md]]'
   type: uses
-- target: '[[wiki/17-系统基础/06-知识字典/configuration/secrets.md]]'
+- target: '[[wiki/21-知识字典/configuration/secrets.md]]'
   type: uses
-- target: '[[wiki/17-系统基础/05-速查卡/k8s.md]]'
+- target: '[[wiki/01-集群基础与系统/12-速查卡/k8s.md]]'
   type: related_to
-- target: '[[wiki/22-概念/11-交叉分析/Operator 模式 × Pod 生命周期.md]]'
+- target: '[[wiki/20-概念/11-交叉分析/Operator 模式 × Pod 生命周期.md]]'
   type: uses
-- target: '[[wiki/22-概念/11-交叉分析/Pod 生命周期 × 存储模型.md]]'
+- target: '[[wiki/20-概念/11-交叉分析/Pod 生命周期 × 存储模型.md]]'
   type: uses
 ---
 
-> **内容已并入主场**：[[wiki/22-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/20-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]]（本页为重排去重桩，正文见主场）

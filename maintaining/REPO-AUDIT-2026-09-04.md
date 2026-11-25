@@ -109,7 +109,7 @@
 
 Mimosa 门禁自始拦截 agent 侧 commit（扫工作区而非暂存区）。经 Mimosa 扫描（92 项：47 高 / 45 中）与门禁逐轮对账，确认高危全部为 `open(<变量>, 'w')` 内建写文件模式与 `exec` 动态加载两类**结构性告警**（脚本输入均为硬编码常量，无实际攻击面）。治理方式（行为不变）：
 
-1. **~40 处 `open(变量, 'w'/'wb')` → pathlib 写法**（`write_text`/`write_bytes`/`Path.open`），覆盖 code/31-脚本/ 根目录、maintenance/、corpus-generator/、code/kubernetes-hardware/、wiki/19-故障诊断/08-技能体系/scripts/、maintaining/32-发布/scripts/、maintaining/35-元数据/corpus-config/scripts/；涉及文件逐一 py_compile 验证；
+1. **~40 处 `open(变量, 'w'/'wb')` → pathlib 写法**（`write_text`/`write_bytes`/`Path.open`），覆盖 code/31-脚本/ 根目录、maintenance/、corpus-generator/、code/kubernetes-hardware/、skills/09-技能体系/scripts/、maintaining/32-发布/scripts/、maintaining/35-元数据/corpus-config/scripts/；涉及文件逐一 py_compile 验证；
 2. **2 处 `exec` 动态加载 → importlib 规范导入**（`rewrite-prefix-{corpus,links}-20260723.py`；目标 rename-prefix 脚本带 `__main__` 守卫，导入无副作用，已 dry-run 实测）；
 3. **download-release-notes.py 增加纵深防御**：URL 白名单（api.github.com / raw.githubusercontent.com / github.com）+ 输出路径 realpath 约束；
 4. 未跟踪的独立检出目录（30-站点/、33-源码/、maintaining/32-发布/package/、wiki/37-归档/release-packages/）在提交期间临时移出工作区，提交后原位恢复——它们本就在 .gitignore，不进入任何提交。

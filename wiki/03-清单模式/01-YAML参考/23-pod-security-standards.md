@@ -2593,13 +2593,13 @@ spec:
 - 24-admission-webhook-configuration
 - 25-validatingadmissionpolicy
 
-- [[wiki/10-平台工程/06-代码分析/node-create/13-security.md|13-security]]
-- [[wiki/10-平台工程/06-代码分析/cluster-delete/10-security-delete.md|10-security-delete]]
-- [[wiki/10-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md|17-pki-security-best-practices]]
+- [[wiki/12-平台工程/06-代码分析/node-create/13-security.md|13-security]]
+- [[wiki/12-平台工程/06-代码分析/cluster-delete/10-security-delete.md|10-security-delete]]
+- [[wiki/12-平台工程/06-代码分析/cluster-cert/17-pki-security-best-practices.md|17-pki-security-best-practices]]
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

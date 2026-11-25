@@ -1083,8 +1083,8 @@ kubectl logs -n kube-system -l k8s-app=kube-dns --tail=20 | grep -i error
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/dns-index.md|DNS 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/dns-index.md|DNS 知识图谱索引]]
 
 
 <!-- risk-assessed -->

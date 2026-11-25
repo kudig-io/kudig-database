@@ -69,4 +69,4 @@ agent_execution_mode: L2-semi-auto
 fta_path: TE-2 -> IE-2.1 -> BE-2.1/BE-2.3
 ---
 
-> **内容已并入主场**：[[wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[skills/09-技能体系/02-pod-crashloop-oomkilled.md|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]（本页为重排去重桩，正文见主场）

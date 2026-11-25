@@ -113,7 +113,7 @@ kn default  # 切换到 default namespace
   OS="$(uname | tr '[:upper:]' '[:lower:]')"
   ARCH="$(uname -m | sed -e 's/x86_64/amd64/;s/aarch64/arm64/')"
   KREW="krew-${OS}_${ARCH}"
-  curl -fsSLO "https://github.[[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]-sigs/krew/releases/latest/download/${KREW}.tar.gz"
+  curl -fsSLO "https://github.[[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]]-sigs/krew/releases/latest/download/${KREW}.tar.gz"
   tar zxf "${KREW}.tar.gz"
   ./"${KREW}" install krew
 )

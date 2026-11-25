@@ -196,7 +196,7 @@ groups:
 
 ### 8. 相关文档
 
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system|监控告警体系]] — 告警设计参考
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system|监控告警体系]] — 告警设计参考
 - [[code/scripts/templates/runbook-template|Runbook 模板]] — 告警联动 Runbook
 - [Google SRE Workbook — SLO 章节]
 - [服务架构文档链接]

@@ -442,14 +442,14 @@ cat vendor/github.com/grafana/jsonnet-libs/k8s-libsonnet/1.30/main.libsonnet | h
 2. **渐进式部署**：先 staging 后 production，使用 `tk diff` 确认变更
 3. **版本锁定**：`jsonnetfile.lock.json` 锁定依赖版本
 4. **与 [[wiki/03-清单模式/09-平台模式/02-cue-language-configuration|CUE]] 对比选择**：需要强类型选 CUE，需要复杂逻辑选 Jsonnet
-5. **与 [[wiki/24-综合/02-交付与GitOps/helm-gitops|Helm GitOps]] 配合**：Tanka 管理基础设施，Helm 管理应用
+5. **与 [[wiki/23-综合与研究/02-交付与GitOps/helm-gitops|Helm GitOps]] 配合**：Tanka 管理基础设施，Helm 管理应用
 6. **参考 [[wiki/03-清单模式/09-平台模式/index|平台模式索引]] 了解全局**
 
 ## Related
 
 - [[wiki/03-清单模式/09-平台模式/02-cue-language-configuration|CUE 语言配置]]
 - [[wiki/03-清单模式/09-平台模式/01-crossplane-compositions-patterns|Crossplane 组合模式]]
-- [[wiki/24-综合/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]
-- [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
+- [[wiki/23-综合与研究/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]
+- [[wiki/12-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
 - [[wiki/03-清单模式/09-平台模式/index|平台模式索引]]
-- [[wiki/24-综合/02-交付与GitOps/argocd-gitops|ArgoCD GitOps 综合]]
+- [[wiki/23-综合与研究/02-交付与GitOps/argocd-gitops|ArgoCD GitOps 综合]]

@@ -46,11 +46,11 @@ last_updated: '2026-08-25'
 ┌────────────────────────────────────────────────────────────────────────────┐
 │  提炼知识层 (Agent 优先读取，Token 高效)                                    │
 │                                                                            │
-│  wiki/22-概念/    核心概念、架构模式、设计原理    306 篇                          │
-│  wiki/23-实体/    组件实体、CNCF 工具、云产品     407 篇                          │
-│  wiki/24-综合/    跨领域综合分析                  51 篇                           │
+│  wiki/20-概念/    核心概念、架构模式、设计原理    306 篇                          │
+│  wiki/22-实体/    组件实体、CNCF 工具、云产品     407 篇                          │
+│  wiki/23-综合与研究/    跨领域综合分析                  51 篇                           │
 │  skills/    诊断排障、FTA 方法、最佳实践    578 篇                          │
-│  wiki/25-研究/    研究性笔记、调研报告             33 篇                           │
+│  wiki/23-综合与研究/研究/    研究性笔记、调研报告             33 篇                           │
 ├────────────────────────────────────────────────────────────────────────────┤
 │  源文档层 (21 个技术知识域，深度查询兜底)                                    │
 │                                                                            │
@@ -103,15 +103,15 @@ KUDIG 的差异化能力在于其结构化排障引擎：
 
 | Runbook | 位置 |
 |---------|------|
-| 证书 / PKI 生命周期 | `wiki/01-集群基础/03-控制平面/38-certificate-pki-lifecycle-runbook.md` |
-| 集群升级 | `wiki/01-集群基础/03-控制平面/39-cluster-upgrade-runbook.md` |
-| 灾难恢复与业务连续性 | `wiki/12-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md` |
-| Fleet GitOps 操作指南 | `wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md` |
-| 事件响应模板 | `wiki/13-生产运维/03-事件响应/11-incident-response-runbook-template.md` |
-| FinOps 成本治理 | `wiki/13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md` |
-| AI/ML 运维 | `wiki/15-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md` |
-| 边缘生产运维 | `wiki/16-专项技术/01-边缘计算/12-edge-production-runbook.md` |
-| 智能体每日巡检 | `wiki/30-百炼智能体/01-每日巡检部署配置.md` |
+| 证书 / PKI 生命周期 | `wiki/01-集群基础与系统/03-控制平面/38-certificate-pki-lifecycle-runbook.md` |
+| 集群升级 | `wiki/01-集群基础与系统/03-控制平面/39-cluster-upgrade-runbook.md` |
+| 灾难恢复与业务连续性 | `wiki/10-可靠性/02-灾难恢复/25-disaster-recovery-bc-runbook-v2.md` |
+| Fleet GitOps 操作指南 | `wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md` |
+| 事件响应模板 | `wiki/11-生产运维/03-事件响应/11-incident-response-runbook-template.md` |
+| FinOps 成本治理 | `wiki/11-生产运维/01-成本治理/06-finops-cost-governance-runbook.md` |
+| AI/ML 运维 | `wiki/14-AI基础设施/01-基础设施/38-ai-ml-ops-runbook.md` |
+| 边缘生产运维 | `wiki/15-专项技术/01-边缘计算/12-edge-production-runbook.md` |
+| 智能体每日巡检 | `maintaining/01-文档/百炼智能体/01-每日巡检部署配置.md` |
 
 各域入口级 `99-production-readiness-operations-guide.md` 提供领域就绪指南。
 
@@ -123,11 +123,11 @@ KUDIG 的差异化能力在于其结构化排障引擎：
 |--------|------|------|------|
 | 网络（Service/Ingress/CNI/DNS） | `wiki/05-网络/01-K8s网络核心/58-kubernetes-network-quick-qa.md` | 56 题 | 快问快答 + conntrack/数据面进阶 + 12 大高级课题 + 面试模拟对话 |
 | DNS/CoreDNS | `wiki/05-网络/01-K8s网络核心/59-kubernetes-dns-coredns-quick-qa.md` | 19 题 | 解析链路、插件链、ndots/超时竞态、NodeLocal、dnsPolicy、排障与外部 DNS |
-| 存储入门 | `wiki/06-存储/01-K8s存储/22-k8s-storage-quick-qa.md` | 61 题 | PV/PVC/SC 基础速查 |
-| 存储高级 | `wiki/06-存储/01-K8s存储/23-k8s-storage-advanced-quick-qa.md` | 15 题 | CSI 两阶段、快照、拓扑、容灾、加密、删除保护 |
+| 存储入门 | `wiki/06-存储与数据/01-K8s存储/22-k8s-storage-quick-qa.md` | 61 题 | PV/PVC/SC 基础速查 |
+| 存储高级 | `wiki/06-存储与数据/01-K8s存储/23-k8s-storage-advanced-quick-qa.md` | 15 题 | CSI 两阶段、快照、拓扑、容灾、加密、删除保护 |
 | Deployment | `wiki/02-工作负载/01-核心工作负载/26-kubernetes-deployment-quick-qa.md` | 21 题 | 三层模型、滚动更新、探针、终止竞态、发布模式、progressDeadline、排障 |
 | 调度与资源 | `wiki/02-工作负载/01-核心工作负载/27-kubernetes-scheduling-resource-quick-qa.md` | 21 题 | requests/limits、QoS/OOM、调度两阶段、污点拓扑、HPA/VPA、LimitRange、容量水位 |
-| 架构与配置安全 | `wiki/01-集群基础/01-架构总览/26-kubernetes-architecture-config-quick-qa.md` | 21 题 | 控制平面组件、list-watch、创建 Pod 全流程、Secret/RBAC、三阶段准入、CRD |
+| 架构与配置安全 | `wiki/01-集群基础与系统/01-架构总览/26-kubernetes-architecture-config-quick-qa.md` | 21 题 | 控制平面组件、list-watch、创建 Pod 全流程、Secret/RBAC、三阶段准入、CRD |
 
 理论面经姊妹篇：网络 `57-kubernetes-service-ingress-interview.md`、存储 `21-storageclass-pvc-pv-interview-notes.md`（与上述文件同目录）。
 
@@ -141,7 +141,7 @@ KUDIG 从设计之初即为 AI Agent 优化：
 - **RAG 语料导出** — 支持按 profile 分块导出，供向量化 Pipeline 消费
 - **诊断工作流** — 五阶段标准化流程：信息采集 → 根因分析 → 方案生成 → 安全评审 → 输出闭环
 - **FTA 集成** — 故障树可被 Agent 直接遍历推理，支持贝叶斯概率更新
-- **QA 语料** — `wiki/19-故障诊断/10-QA语料/` 下生成的结构化 I-O 语料，用于 Agent 评估
+- **QA 语料** — `wiki/17-故障诊断/10-QA语料/` 下生成的结构化 I-O 语料，用于 Agent 评估
 
 ---
 
@@ -180,7 +180,7 @@ npm run preview
 
 ```bash
 # 直接浏览任意目录下的 .md 文件
-open wiki/01-集群基础/README.md
+open wiki/01-集群基础与系统/README.md
 ```
 
 ### 语料生成（可选）
@@ -202,26 +202,26 @@ make corpus-validate
 
 ```
 .
-├── wiki/01-集群基础/ … wiki/21-生态参考/   # 源文档层：21 个技术域文档（NN-中文目录名）
+├── wiki/01-集群基础与系统/ … wiki/19-生态参考/   # 源文档层：21 个技术域文档（NN-中文目录名）
 │   └── NN-子目录/                 # 域内二级分类（同样 NN- 前缀有序化）
-├── wiki/22-概念/                      # 提炼知识：核心概念、架构模式
-├── wiki/23-实体/                      # 提炼知识：组件实体、CNCF 工具、云产品
-├── wiki/24-综合/                      # 提炼知识：跨领域综合分析
-├── wiki/25-研究/                      # 研究资料、调研报告
+├── wiki/20-概念/                      # 提炼知识：核心概念、架构模式
+├── wiki/22-实体/                      # 提炼知识：组件实体、CNCF 工具、云产品
+├── wiki/23-综合与研究/                      # 提炼知识：跨领域综合分析
+├── wiki/23-综合与研究/研究/                      # 研究资料、调研报告
 ├── skills/                      # 提炼知识：诊断排障技能卡、FTA 方法
-├── wiki/26-标签/                      # 标签索引页
-├── wiki/27-资产/                      # 图片、图表、PDF 附件
+├── wiki/24-标签/                      # 标签索引页
+├── wiki/25-资产/                      # 图片、图表、PDF 附件
 ├── maintaining/01-文档/                      # 项目级说明文档（CHANGELOG、CONTRIBUTING）
 ├── 30-站点/                      # Astro 静态站点项目（.gitignore 忽略）
 ├── code/scripts/                      # 自动化维护脚本（lint、前缀重命名、语料生成）
 ├── maintaining/03-发布/                      # 发布产物（冻结，只增不改）
 ├── 33-源码/                      # vendor 源码树（Kubernetes、terway 等，.gitignore 忽略）
-├── wiki/28-源码分析/                  # 源码分析笔记
+├── wiki/26-源码分析/                  # 源码分析笔记
 ├── maintaining/02-元数据/                    # 元数据、语料配置、taxonomy、schema、journal
 ├── maintaining/04-报告/                      # 质量报告与评估（冻结）
-├── wiki/31-归档/                      # Wiki 归档快照（冻结，重建用）
-├── wiki/29-消化/                      # 知识消化产物（播客等二次创作）
-├── wiki/30-百炼智能体/                # 近期重点：百炼平台 Agentic Ops（智能体定时巡检、本地集群 MCP 接入）
+├── wiki/99-归档/                      # Wiki 归档快照（冻结，重建用）
+├── wiki/23-综合与研究/消化/                      # 知识消化产物（播客等二次创作）
+├── maintaining/01-文档/百炼智能体/                # 近期重点：百炼平台 Agentic Ops（智能体定时巡检、本地集群 MCP 接入）
 └── code/kubernetes-hardware/          # 硬件调研报告与生成脚本（研究产物）
 ```
 
@@ -308,8 +308,8 @@ bash code/scripts/code-example-validation.sh
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

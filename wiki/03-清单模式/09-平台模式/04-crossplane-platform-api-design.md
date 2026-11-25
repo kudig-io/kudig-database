@@ -349,4 +349,4 @@ kubectl get managed -l crossplane.io/claim-name=order-db
 
 - [[wiki/03-清单模式/09-平台模式/index.md|平台模式]]
 - [[wiki/03-清单模式/09-平台模式/01-crossplane-compositions-patterns.md|Crossplane 基础]]
-- [[wiki/10-平台工程/05-内部开发者平台/02-platform-governance-golden-path.md|平台治理]]
+- [[wiki/12-平台工程/05-内部开发者平台/02-platform-governance-golden-path.md|平台治理]]

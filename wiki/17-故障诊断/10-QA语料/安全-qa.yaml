@@ -1,0 +1,1695 @@
+domain: 安全
+total_questions: 344
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 Security & Compliance Open Source Projects Index 中, 身份与访问 是什么?
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 的「身份与访问」章节。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  section: 身份与访问
+- type: concept
+  question: 在 Security & Compliance Open Source Projects Index 中, 运行时安全 是什么?
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 的「运行时安全」章节。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  section: 运行时安全
+- type: concept
+  question: 在 Security & Compliance Open Source Projects Index 中, 策略治理 是什么?
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 的「策略治理」章节。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  section: 策略治理
+- type: concept
+  question: 在 Security & Compliance Open Source Projects Index 中, 供应链安全 是什么?
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 的「供应链安全」章节。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  section: 供应链安全
+- type: concept
+  question: 在 Security & Compliance Open Source Projects Index 中, 原始索引保留 是什么?
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 的「原始索引保留」章节。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  section: 原始索引保留
+- type: operation
+  question: '如何执行与 Security & Compliance Open Source Projects Index 相关的操作: brew install aquasecurity/trivy/trivy?'
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 中的操作步骤。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  command: brew install aquasecurity/trivy/trivy
+- type: operation
+  question: '如何执行与 Security & Compliance Open Source Projects Index 相关的操作: kubectl apply -f https://raw.githubusercontent.com/aquasecur?'
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 中的操作步骤。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  command: kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml
+- type: operation
+  question: '如何执行与 Security & Compliance Open Source Projects Index 相关的操作: helm repo add gatekeeper https://open-policy-agent.github.io?'
+  answer: 参见 wiki/07-安全/00-总览/00-open-source-projects-index.md 中的操作步骤。
+  source: wiki/07-安全/00-总览/00-open-source-projects-index.md
+  command: helm repo add gatekeeper https://open-policy-agent.github.io/gatekeeper/charts
+- type: concept
+  question: 在 安全与合规 生产就绪运维指南 中, 生产环境检查清单 是什么?
+  answer: 参见 wiki/07-安全/00-总览/01-production-readiness-operations-guide.md 的「生产环境检查清单」章节。
+  source: wiki/07-安全/00-总览/01-production-readiness-operations-guide.md
+  section: 生产环境检查清单
+- type: concept
+  question: 在 安全与合规 生产就绪运维指南 中, 关键风险与缓解措施 是什么?
+  answer: 参见 wiki/07-安全/00-总览/01-production-readiness-operations-guide.md 的「关键风险与缓解措施」章节。
+  source: wiki/07-安全/00-总览/01-production-readiness-operations-guide.md
+  section: 关键风险与缓解措施
+- type: concept
+  question: 在 00-总览 中, 文档 是什么?
+  answer: 参见 wiki/07-安全/00-总览/index.md 的「文档」章节。
+  source: wiki/07-安全/00-总览/index.md
+  section: 文档
+- type: concept
+  question: 在 01 - Kubernetes认证授权体系详解 中, 认证授权架构全景 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md 的「认证授权架构全景」章节。
+  source: wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md
+  section: 认证授权架构全景
+- type: concept
+  question: 在 01 - Kubernetes认证授权体系详解 中, 认证机制详解 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md 的「认证机制详解」章节。
+  source: wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md
+  section: 认证机制详解
+- type: concept
+  question: 在 Pod Security Admission 深度配置 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/02-pod-security-admission-deep-dive.md 的「概述」章节。
+  source: wiki/07-安全/01-身份与访问/02-pod-security-admission-deep-dive.md
+  section: 概述
+- type: concept
+  question: 在 Pod Security Admission 深度配置 中, Pod Security Standards 三级模型 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/02-pod-security-admission-deep-dive.md 的「Pod Security Standards 三级模型」章节。
+  source: wiki/07-安全/01-身份与访问/02-pod-security-admission-deep-dive.md
+  section: Pod Security Standards 三级模型
+- type: concept
+  question: 在 Service Account Token 管理 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/03-service-account-token-management.md 的「概述」章节。
+  source: wiki/07-安全/01-身份与访问/03-service-account-token-management.md
+  section: 概述
+- type: concept
+  question: 在 Service Account Token 管理 中, 传统 SA Token 的问题 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/03-service-account-token-management.md 的「传统 SA Token 的问题」章节。
+  source: wiki/07-安全/01-身份与访问/03-service-account-token-management.md
+  section: 传统 SA Token 的问题
+- type: concept
+  question: 在 Service Account Token 管理 中, Bound SA Token（TokenRequest API） 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/03-service-account-token-management.md 的「Bound SA Token（TokenRequest API）」章节。
+  source: wiki/07-安全/01-身份与访问/03-service-account-token-management.md
+  section: Bound SA Token（TokenRequest API）
+- type: concept
+  question: 在 OIDC 身份提供商集成 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/04-oidc-identity-provider-integration.md 的「概述」章节。
+  source: wiki/07-安全/01-身份与访问/04-oidc-identity-provider-integration.md
+  section: 概述
+- type: concept
+  question: 在 OIDC 身份提供商集成 中, OIDC 认证流程 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/04-oidc-identity-provider-integration.md 的「OIDC 认证流程」章节。
+  source: wiki/07-安全/01-身份与访问/04-oidc-identity-provider-integration.md
+  section: OIDC 认证流程
+- type: concept
+  question: 在 OIDC 身份提供商集成 中, Dex 作为 OIDC Provider 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/04-oidc-identity-provider-integration.md 的「Dex 作为 OIDC Provider」章节。
+  source: wiki/07-安全/01-身份与访问/04-oidc-identity-provider-integration.md
+  section: Dex 作为 OIDC Provider
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, Vault 企业级组件架构 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md 的「Vault 企业级组件架构」章节。
+  source: wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md
+  section: Vault 企业级组件架构
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, 企业级部署架构 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md 的「企业级部署架构」章节。
+  source: wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md
+  section: 企业级部署架构
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, LDAP / Active Directory 认证 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md 的「LDAP / Active Directory 认证」章节。
+  source: wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md
+  section: LDAP / Active Directory 认证
+- type: concept
+  question: 在 HashiCorp Vault 企业级密钥管理深度实践 中, Kubernetes 认证 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md 的「Kubernetes 认证」章节。
+  source: wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md
+  section: Kubernetes 认证
+- type: operation
+  question: '如何执行与 HashiCorp Vault 企业级密钥管理深度实践 相关的操作: vault auth enable ldap?'
+  answer: 参见 wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md 中的操作步骤。
+  source: wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md
+  command: vault auth enable ldap
+- type: concept
+  question: 在 07 - RBAC权限矩阵表 中, 内置ClusterRole 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md 的「内置ClusterRole」章节。
+  source: wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md
+  section: 内置ClusterRole
+- type: concept
+  question: 在 07 - RBAC权限矩阵表 中, RBAC API组与资源 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md 的「RBAC API组与资源」章节。
+  source: wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md
+  section: RBAC API组与资源
+- type: concept
+  question: 在 07 - RBAC权限矩阵表 中, Verbs权限说明 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md 的「Verbs权限说明」章节。
+  source: wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md
+  section: Verbs权限说明
+- type: concept
+  question: 在 07 - RBAC权限矩阵表 中, 权限矩阵(核心资源) 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md 的「权限矩阵(核心资源)」章节。
+  source: wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md
+  section: 权限矩阵(核心资源)
+- type: concept
+  question: 在 07 - RBAC权限矩阵表 中, 权限矩阵(扩展资源) 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md 的「权限矩阵(扩展资源)」章节。
+  source: wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md
+  section: 权限矩阵(扩展资源)
+- type: concept
+  question: 在 11 - 密钥与敏感信息管理工具 中, 密钥管理架构全景 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/07-secret-management-tools.md 的「密钥管理架构全景」章节。
+  source: wiki/07-安全/01-身份与访问/07-secret-management-tools.md
+  section: 密钥管理架构全景
+- type: concept
+  question: 在 11 - 密钥与敏感信息管理工具 中, External Secrets Operator 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/07-secret-management-tools.md 的「External Secrets Operator」章节。
+  source: wiki/07-安全/01-身份与访问/07-secret-management-tools.md
+  section: External Secrets Operator
+- type: comparison
+  question: 11 - 密钥与敏感信息管理工具 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/01-身份与访问/07-secret-management-tools.md 中的对比分析。
+  source: wiki/07-安全/01-身份与访问/07-secret-management-tools.md
+- type: concept
+  question: 在 Secrets 管理方案对比 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md 的「概述」章节。
+  source: wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md
+  section: 概述
+- type: concept
+  question: 在 Secrets 管理方案对比 中, 核心概念 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md 的「核心概念」章节。
+  source: wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md
+  section: 核心概念
+- type: operation
+  question: '如何执行与 Secrets 管理方案对比 相关的操作: kubectl get secrets --all-namespaces -o json | kubectl repla?'
+  answer: 参见 wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md 中的操作步骤。
+  source: wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md
+  command: kubectl get secrets --all-namespaces -o json | kubectl replace -f -
+- type: comparison
+  question: Secrets 管理方案对比 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md 中的对比分析。
+  source: wiki/07-安全/01-身份与访问/08-secrets-management-comparison.md
+- type: concept
+  question: 在 密钥轮换自动化 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/09-key-rotation-automation.md 的「概述」章节。
+  source: wiki/07-安全/01-身份与访问/09-key-rotation-automation.md
+  section: 概述
+- type: concept
+  question: 在 密钥轮换自动化 中, 核心概念 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/09-key-rotation-automation.md 的「核心概念」章节。
+  source: wiki/07-安全/01-身份与访问/09-key-rotation-automation.md
+  section: 核心概念
+- type: operation
+  question: '如何执行与 密钥轮换自动化 相关的操作: NEW_KEY=$(head -c 32 /dev/urandom | base64)?'
+  answer: 参见 wiki/07-安全/01-身份与访问/09-key-rotation-automation.md 中的操作步骤。
+  source: wiki/07-安全/01-身份与访问/09-key-rotation-automation.md
+  command: NEW_KEY=$(head -c 32 /dev/urandom | base64)
+- type: comparison
+  question: 密钥轮换自动化 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/01-身份与访问/09-key-rotation-automation.md 中的对比分析。
+  source: wiki/07-安全/01-身份与访问/09-key-rotation-automation.md
+- type: concept
+  question: 在 Vault K8s 密钥管理集成深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Vault K8s 密钥管理集成深度实践 中, 三种集成模式对比 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md 的「三种集成模式对比」章节。
+  source: wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md
+  section: 三种集成模式对比
+- type: concept
+  question: 在 Vault K8s 密钥管理集成深度实践 中, Vault HA 部署 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md 的「Vault HA 部署」章节。
+  source: wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md
+  section: Vault HA 部署
+- type: concept
+  question: 在 Vault K8s 密钥管理集成深度实践 中, Kubernetes 认证配置 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md 的「Kubernetes 认证配置」章节。
+  source: wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md
+  section: Kubernetes 认证配置
+- type: concept
+  question: 在 Vault K8s 密钥管理集成深度实践 中, Vault Agent Injector 密钥注入 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md 的「Vault Agent Injector 密钥注入」章节。
+  source: wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md
+  section: Vault Agent Injector 密钥注入
+- type: comparison
+  question: Vault K8s 密钥管理集成深度实践 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md 中的对比分析。
+  source: wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md
+- type: concept
+  question: 在 Identity & Access Management 中, 认证授权架构 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/index.md 的「认证授权架构」章节。
+  source: wiki/07-安全/01-身份与访问/index.md
+  section: 认证授权架构
+- type: concept
+  question: 在 Identity & Access Management 中, 文档索引 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/index.md 的「文档索引」章节。
+  source: wiki/07-安全/01-身份与访问/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Identity & Access Management 中, 密钥管理最佳实践 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/index.md 的「密钥管理最佳实践」章节。
+  source: wiki/07-安全/01-身份与访问/index.md
+  section: 密钥管理最佳实践
+- type: concept
+  question: 在 Identity & Access Management 中, Related 是什么?
+  answer: 参见 wiki/07-安全/01-身份与访问/index.md 的「Related」章节。
+  source: wiki/07-安全/01-身份与访问/index.md
+  section: Related
+- type: comparison
+  question: Identity & Access Management 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/01-身份与访问/index.md 中的对比分析。
+  source: wiki/07-安全/01-身份与访问/index.md
+- type: concept
+  question: 在 网络安全策略与零信任架构 中, 网络安全架构全景 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/01-network-security-policies.md 的「网络安全架构全景」章节。
+  source: wiki/07-安全/02-网络安全/01-network-security-policies.md
+  section: 网络安全架构全景
+- type: concept
+  question: 在 网络安全策略与零信任架构 中, NetworkPolicy 核心概念 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/01-network-security-policies.md 的「NetworkPolicy 核心概念」章节。
+  source: wiki/07-安全/02-网络安全/01-network-security-policies.md
+  section: NetworkPolicy 核心概念
+- type: concept
+  question: 在 网络安全策略与零信任架构 中, 生产级NetworkPolicy配置 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/01-network-security-policies.md 的「生产级NetworkPolicy配置」章节。
+  source: wiki/07-安全/02-网络安全/01-network-security-policies.md
+  section: 生产级NetworkPolicy配置
+- type: concept
+  question: 在 07-零信任安全架构 中, 身份验证与授权 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md 的「身份验证与授权」章节。
+  source: wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md
+  section: 身份验证与授权
+- type: concept
+  question: 在 07-零信任安全架构 中, 统一身份认证平台 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md 的「统一身份认证平台」章节。
+  source: wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md
+  section: 统一身份认证平台
+- type: concept
+  question: 在 07-零信任安全架构 中, 多因素认证配置 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md 的「多因素认证配置」章节。
+  source: wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md
+  section: 多因素认证配置
+- type: concept
+  question: 在 07-零信任安全架构 中, 动态访问控制 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md 的「动态访问控制」章节。
+  source: wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md
+  section: 动态访问控制
+- type: concept
+  question: 在 07-零信任安全架构 中, OPA Gatekeeper策略 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md 的「OPA Gatekeeper策略」章节。
+  source: wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md
+  section: OPA Gatekeeper策略
+- type: concept
+  question: 在 18 - 网络安全纵深防御体系 中, 网络安全纵深防御架构 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/03-network-defense-depth.md 的「网络安全纵深防御架构」章节。
+  source: wiki/07-安全/02-网络安全/03-network-defense-depth.md
+  section: 网络安全纵深防御架构
+- type: concept
+  question: 在 18 - 网络安全纵深防御体系 中, CNI插件安全配置 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/03-network-defense-depth.md 的「CNI插件安全配置」章节。
+  source: wiki/07-安全/02-网络安全/03-network-defense-depth.md
+  section: CNI插件安全配置
+- type: concept
+  question: 在 19 - 零信任安全架构实施指南 中, 零信任架构核心理念 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/04-zero-trust-architecture.md 的「零信任架构核心理念」章节。
+  source: wiki/07-安全/02-网络安全/04-zero-trust-architecture.md
+  section: 零信任架构核心理念
+- type: concept
+  question: 在 19 - 零信任安全架构实施指南 中, 身份基础设施建设 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/04-zero-trust-architecture.md 的「身份基础设施建设」章节。
+  source: wiki/07-安全/02-网络安全/04-zero-trust-architecture.md
+  section: 身份基础设施建设
+- type: concept
+  question: 在 21 - 多集群安全管理与联邦认证 中, 多集群安全架构设计 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/05-multicluster-security.md 的「多集群安全架构设计」章节。
+  source: wiki/07-安全/02-网络安全/05-multicluster-security.md
+  section: 多集群安全架构设计
+- type: concept
+  question: 在 21 - 多集群安全管理与联邦认证 中, 统一身份认证体系 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/05-multicluster-security.md 的「统一身份认证体系」章节。
+  source: wiki/07-安全/02-网络安全/05-multicluster-security.md
+  section: 统一身份认证体系
+- type: concept
+  question: 在 Kubernetes Network Security — Encryption, Segmentation, and Threat Detection 中, 纵深防御模型 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/06-network-security-encryption-detection.md 的「纵深防御模型」章节。
+  source: wiki/07-安全/02-网络安全/06-network-security-encryption-detection.md
+  section: 纵深防御模型
+- type: concept
+  question: 在 Kubernetes Network Security — Encryption, Segmentation, and Threat Detection 中, 传输加密 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/06-network-security-encryption-detection.md 的「传输加密」章节。
+  source: wiki/07-安全/02-网络安全/06-network-security-encryption-detection.md
+  section: 传输加密
+- type: comparison
+  question: Kubernetes Network Security — Encryption, Segmentation, and Threat Detection 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/02-网络安全/06-network-security-encryption-detection.md 中的对比分析。
+  source: wiki/07-安全/02-网络安全/06-network-security-encryption-detection.md
+- type: concept
+  question: 在 Network Security 中, 网络安全层次 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/index.md 的「网络安全层次」章节。
+  source: wiki/07-安全/02-网络安全/index.md
+  section: 网络安全层次
+- type: concept
+  question: 在 Network Security 中, 文档索引 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/index.md 的「文档索引」章节。
+  source: wiki/07-安全/02-网络安全/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Network Security 中, NetworkPolicy 最佳实践 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/index.md 的「NetworkPolicy 最佳实践」章节。
+  source: wiki/07-安全/02-网络安全/index.md
+  section: NetworkPolicy 最佳实践
+- type: concept
+  question: 在 Network Security 中, Related 是什么?
+  answer: 参见 wiki/07-安全/02-网络安全/index.md 的「Related」章节。
+  source: wiki/07-安全/02-网络安全/index.md
+  section: Related
+- type: concept
+  question: 在 Falco 云原生安全监控深度实践 中, 云原生运行时威胁模型 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md 的「云原生运行时威胁模型」章节。
+  source: wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md
+  section: 云原生运行时威胁模型
+- type: concept
+  question: 在 Falco 云原生安全监控深度实践 中, 1 核心组件架构 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md 的「1 核心组件架构」章节。
+  source: wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md
+  section: 1 核心组件架构
+- type: concept
+  question: 在 Falco 云原生安全监控深度实践 中, 2 数据采集方式对比 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md 的「2 数据采集方式对比」章节。
+  source: wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md
+  section: 2 数据采集方式对比
+- type: concept
+  question: 在 Falco 云原生安全监控深度实践 中, 3 工作原理详解 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md 的「3 工作原理详解」章节。
+  source: wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md
+  section: 3 工作原理详解
+- type: concept
+  question: 在 Falco 云原生安全监控深度实践 中, 1 Helm 生产级部署 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md 的「1 Helm 生产级部署」章节。
+  source: wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md
+  section: 1 Helm 生产级部署
+- type: comparison
+  question: Falco 云原生安全监控深度实践 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/01-falco-cloud-native-security.md
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, 1 Core Component Architecture 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md 的「1 Core Component Architecture」章节。
+  source: wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md
+  section: 1 Core Component Architecture
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, 2 Security Capabilities Matrix 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md 的「2 Security Capabilities Matrix」章节。
+  source: wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md
+  section: 2 Security Capabilities Matrix
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, 1 Sysdig Agent Deployment 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md 的「1 Sysdig Agent Deployment」章节。
+  source: wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md
+  section: 1 Sysdig Agent Deployment
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, 2 Sysdig Secure Configuration 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md 的「2 Sysdig Secure Configuration」章节。
+  source: wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md
+  section: 2 Sysdig Secure Configuration
+- type: concept
+  question: 在 Sysdig企业级容器安全深度实践 中, 1 Runtime Security Policies 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md 的「1 Runtime Security Policies」章节。
+  source: wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md
+  section: 1 Runtime Security Policies
+- type: comparison
+  question: Sysdig企业级容器安全深度实践 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/02-sysdig-enterprise-container-security.md
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, 企业级架构 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md 的「企业级架构」章节。
+  source: wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md
+  section: 企业级架构
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, 部署配置 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md 的「部署配置」章节。
+  source: wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md
+  section: 部署配置
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, Console 部署 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md 的「Console 部署」章节。
+  source: wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md
+  section: Console 部署
+- type: concept
+  question: 在 Aqua Security 企业级容器安全平台深度实践 中, Enforcer DaemonSet 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md 的「Enforcer DaemonSet」章节。
+  source: wiki/07-安全/03-运行时安全/03-aqua-enterprise-container-security.md
+  section: Enforcer DaemonSet
+- type: concept
+  question: 在 03 - 运行时安全防护与威胁检测 中, 运行时安全架构全景 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/04-runtime-security-defense.md 的「运行时安全架构全景」章节。
+  source: wiki/07-安全/03-运行时安全/04-runtime-security-defense.md
+  section: 运行时安全架构全景
+- type: concept
+  question: 在 03 - 运行时安全防护与威胁检测 中, 容器安全上下文配置 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/04-runtime-security-defense.md 的「容器安全上下文配置」章节。
+  source: wiki/07-安全/03-运行时安全/04-runtime-security-defense.md
+  section: 容器安全上下文配置
+- type: concept
+  question: 在 03 - 运行时安全防护与威胁检测 中, Seccomp 配置详解 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/04-runtime-security-defense.md 的「Seccomp 配置详解」章节。
+  source: wiki/07-安全/03-运行时安全/04-runtime-security-defense.md
+  section: Seccomp 配置详解
+- type: concept
+  question: 在 15 - 安全扫描与检测工具 中, 运行时安全检测架构 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/05-runtime-security-detection.md 的「运行时安全检测架构」章节。
+  source: wiki/07-安全/03-运行时安全/05-runtime-security-detection.md
+  section: 运行时安全检测架构
+- type: concept
+  question: 在 15 - 安全扫描与检测工具 中, Falco深度配置与实践 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/05-runtime-security-detection.md 的「Falco深度配置与实践」章节。
+  source: wiki/07-安全/03-运行时安全/05-runtime-security-detection.md
+  section: Falco深度配置与实践
+- type: comparison
+  question: 15 - 安全扫描与检测工具 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/05-runtime-security-detection.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/05-runtime-security-detection.md
+- type: concept
+  question: 在 gVisor 容器沙箱深度解析 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/06-gvisor-container-sandbox.md 的「概述」章节。
+  source: wiki/07-安全/03-运行时安全/06-gvisor-container-sandbox.md
+  section: 概述
+- type: concept
+  question: 在 gVisor 容器沙箱深度解析 中, 架构原理 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/06-gvisor-container-sandbox.md 的「架构原理」章节。
+  source: wiki/07-安全/03-运行时安全/06-gvisor-container-sandbox.md
+  section: 架构原理
+- type: comparison
+  question: gVisor 容器沙箱深度解析 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/06-gvisor-container-sandbox.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/06-gvisor-container-sandbox.md
+- type: concept
+  question: 在 Security Context 字段完整参考 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/07-security-context-fields-reference.md 的「概述」章节。
+  source: wiki/07-安全/03-运行时安全/07-security-context-fields-reference.md
+  section: 概述
+- type: concept
+  question: 在 Security Context 字段完整参考 中, securityContext 层级与覆盖规则 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/07-security-context-fields-reference.md 的「securityContext 层级与覆盖规则」章节。
+  source: wiki/07-安全/03-运行时安全/07-security-context-fields-reference.md
+  section: securityContext 层级与覆盖规则
+- type: comparison
+  question: Security Context 字段完整参考 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/07-security-context-fields-reference.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/07-security-context-fields-reference.md
+- type: concept
+  question: 在 Falco 运行时安全监控深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Falco 运行时安全监控深度实践 中, Falco 核心架构 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md 的「Falco 核心架构」章节。
+  source: wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md
+  section: Falco 核心架构
+- type: concept
+  question: 在 Falco 运行时安全监控深度实践 中, 部署架构 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md 的「部署架构」章节。
+  source: wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md
+  section: 部署架构
+- type: concept
+  question: 在 Falco 运行时安全监控深度实践 中, 自定义安全规则 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md 的「自定义安全规则」章节。
+  source: wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md
+  section: 自定义安全规则
+- type: concept
+  question: 在 Falco 运行时安全监控深度实践 中, Kubernetes 审计日志集成 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md 的「Kubernetes 审计日志集成」章节。
+  source: wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md
+  section: Kubernetes 审计日志集成
+- type: concept
+  question: 在 机密计算与 Confidential Containers 落地指南 中, 目录 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md 的「目录」章节。
+  source: wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md
+  section: 目录
+- type: concept
+  question: 在 机密计算与 Confidential Containers 落地指南 中, 概述与核心概念 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md 的「概述与核心概念」章节。
+  source: wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md
+  section: 概述与核心概念
+- type: operation
+  question: '如何执行与 机密计算与 Confidential Containers 落地指南 相关的操作: uname -r?'
+  answer: 参见 wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md 中的操作步骤。
+  source: wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md
+  command: uname -r
+- type: comparison
+  question: 机密计算与 Confidential Containers 落地指南 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/09-confidential-computing-coco.md
+- type: concept
+  question: 在 Runtime Security 中, 运行时安全工具对比 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/index.md 的「运行时安全工具对比」章节。
+  source: wiki/07-安全/03-运行时安全/index.md
+  section: 运行时安全工具对比
+- type: concept
+  question: 在 Runtime Security 中, 文档索引 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/index.md 的「文档索引」章节。
+  source: wiki/07-安全/03-运行时安全/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Runtime Security 中, 运行时安全检查清单 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/index.md 的「运行时安全检查清单」章节。
+  source: wiki/07-安全/03-运行时安全/index.md
+  section: 运行时安全检查清单
+- type: concept
+  question: 在 Runtime Security 中, Related 是什么?
+  answer: 参见 wiki/07-安全/03-运行时安全/index.md 的「Related」章节。
+  source: wiki/07-安全/03-运行时安全/index.md
+  section: Related
+- type: comparison
+  question: Runtime Security 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/03-运行时安全/index.md 中的对比分析。
+  source: wiki/07-安全/03-运行时安全/index.md
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 核心组件架构 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md 的「核心组件架构」章节。
+  source: wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md
+  section: 核心组件架构
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 企业级部署 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md 的「企业级部署」章节。
+  source: wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md
+  section: 企业级部署
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 验证策略（Validate） 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md 的「验证策略（Validate）」章节。
+  source: wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md
+  section: 验证策略（Validate）
+- type: concept
+  question: 在 Kyverno 企业级策略管理深度实践 中, 变异策略（Mutate） 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md 的「变异策略（Mutate）」章节。
+  source: wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md
+  section: 变异策略（Mutate）
+- type: concept
+  question: 在 05 - 策略校验与准入控制工具 (Policy Validation) 中, 策略引擎对比 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/02-policy-validation-tools.md 的「策略引擎对比」章节。
+  source: wiki/07-安全/04-策略治理/02-policy-validation-tools.md
+  section: 策略引擎对比
+- type: concept
+  question: 在 05 - 策略校验与准入控制工具 (Policy Validation) 中, Kyverno 生产实践 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/02-policy-validation-tools.md 的「Kyverno 生产实践」章节。
+  source: wiki/07-安全/04-策略治理/02-policy-validation-tools.md
+  section: Kyverno 生产实践
+- type: comparison
+  question: 05 - 策略校验与准入控制工具 (Policy Validation) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/02-policy-validation-tools.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/02-policy-validation-tools.md
+- type: concept
+  question: 在 06 - Pod安全标准详解 中, Pod Security Standards (PSS) 级别 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/03-pod-security-standards.md 的「Pod Security Standards (PSS) 级别」章节。
+  source: wiki/07-安全/04-策略治理/03-pod-security-standards.md
+  section: Pod Security Standards (PSS) 级别
+- type: concept
+  question: 在 06 - Pod安全标准详解 中, PSS级别详细对比 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/03-pod-security-standards.md 的「PSS级别详细对比」章节。
+  source: wiki/07-安全/04-策略治理/03-pod-security-standards.md
+  section: PSS级别详细对比
+- type: concept
+  question: 在 06 - Pod安全标准详解 中, PSS执行模式 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/03-pod-security-standards.md 的「PSS执行模式」章节。
+  source: wiki/07-安全/04-策略治理/03-pod-security-standards.md
+  section: PSS执行模式
+- type: concept
+  question: 在 06 - Pod安全标准详解 中, 命名空间标签配置 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/03-pod-security-standards.md 的「命名空间标签配置」章节。
+  source: wiki/07-安全/04-策略治理/03-pod-security-standards.md
+  section: 命名空间标签配置
+- type: concept
+  question: 在 06 - Pod安全标准详解 中, Baseline级别限制 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/03-pod-security-standards.md 的「Baseline级别限制」章节。
+  source: wiki/07-安全/04-策略治理/03-pod-security-standards.md
+  section: Baseline级别限制
+- type: comparison
+  question: 06 - Pod安全标准详解 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/03-pod-security-standards.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/03-pod-security-standards.md
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 中, 核心组件架构 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md 的「核心组件架构」章节。
+  source: wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md
+  section: 核心组件架构
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 中, 工作流程 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md 的「工作流程」章节。
+  source: wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md
+  section: 工作流程
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 中, 高可用部署架构 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md 的「高可用部署架构」章节。
+  source: wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md
+  section: 高可用部署架构
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 中, ConstraintTemplate 定义 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md 的「ConstraintTemplate 定义」章节。
+  source: wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md
+  section: ConstraintTemplate 定义
+- type: comparison
+  question: OPA Gatekeeper 策略即代码深度实践 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/04-opa-gatekeeper-policy.md
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, 策略引擎对比 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md 的「策略引擎对比」章节。
+  source: wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md
+  section: 策略引擎对比
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, 策略引擎选型建议 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md 的「策略引擎选型建议」章节。
+  source: wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md
+  section: 策略引擎选型建议
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, Gatekeeper架构组件 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md 的「Gatekeeper架构组件」章节。
+  source: wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md
+  section: Gatekeeper架构组件
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, Gatekeeper ConstraintTemplate 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md 的「Gatekeeper ConstraintTemplate」章节。
+  source: wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md
+  section: Gatekeeper ConstraintTemplate
+- type: concept
+  question: 在 14 - 策略引擎与合规 中, Gatekeeper Constraint 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md 的「Gatekeeper Constraint」章节。
+  source: wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md
+  section: Gatekeeper Constraint
+- type: comparison
+  question: 14 - 策略引擎与合规 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md
+- type: concept
+  question: 在 Pod Security Standards 迁移 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md 的「概述」章节。
+  source: wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md
+  section: 概述
+- type: concept
+  question: 在 Pod Security Standards 迁移 中, 核心概念 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md 的「核心概念」章节。
+  source: wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md
+  section: 核心概念
+- type: operation
+  question: '如何执行与 Pod Security Standards 迁移 相关的操作: kubectl get pods -A -o json | jq -r ''.items[] | select(?'
+  answer: 参见 wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md 中的操作步骤。
+  source: wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md
+  command: kubectl get pods -A -o json | jq -r '.items[] | select(
+- type: comparison
+  question: Pod Security Standards 迁移 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/06-pod-security-standards-migration.md
+- type: concept
+  question: 在 Policy as Code at Scale — OPA/Gatekeeper and Kyverno Enterprise Patterns 中, 引擎对比 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md 的「引擎对比」章节。
+  source: wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md
+  section: 引擎对比
+- type: concept
+  question: 在 Policy as Code at Scale — OPA/Gatekeeper and Kyverno Enterprise Patterns 中, 策略生命周期 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md 的「策略生命周期」章节。
+  source: wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md
+  section: 策略生命周期
+- type: concept
+  question: 在 Policy as Code at Scale — OPA/Gatekeeper and Kyverno Enterprise Patterns 中, Kyverno 企业策略集 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md 的「Kyverno 企业策略集」章节。
+  source: wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md
+  section: Kyverno 企业策略集
+- type: comparison
+  question: Policy as Code at Scale — OPA/Gatekeeper and Kyverno Enterprise Patterns 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/07-policy-as-code-enterprise-patterns.md
+- type: concept
+  question: 在 Kyverno K8s 原生策略管理实践指南 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Kyverno K8s 原生策略管理实践指南 中, 1 Kyverno 核心架构 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md 的「1 Kyverno 核心架构」章节。
+  source: wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md
+  section: 1 Kyverno 核心架构
+- type: concept
+  question: 在 Kyverno K8s 原生策略管理实践指南 中, 2 策略处理流程 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md 的「2 策略处理流程」章节。
+  source: wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md
+  section: 2 策略处理流程
+- type: concept
+  question: 在 Kyverno K8s 原生策略管理实践指南 中, 1 Helm 生产级部署 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md 的「1 Helm 生产级部署」章节。
+  source: wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md
+  section: 1 Helm 生产级部署
+- type: concept
+  question: 在 Kyverno K8s 原生策略管理实践指南 中, 2 生产级 Values 配置 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md 的「2 生产级 Values 配置」章节。
+  source: wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md
+  section: 2 生产级 Values 配置
+- type: troubleshooting
+  question: 如何排查 Kyverno K8s 原生策略管理实践指南 相关的故障?
+  answer: 参见 wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md 的故障排查章节。
+  source: wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 [04-policy-governance] 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 [04-policy-governance] 中, 核心组件架构 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md 的「核心组件架构」章节。
+  source: wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md
+  section: 核心组件架构
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 [04-policy-governance] 中, 部署配置 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md 的「部署配置」章节。
+  source: wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md
+  section: 部署配置
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 [04-policy-governance] 中, ConstraintTemplate 策略模板 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md 的「ConstraintTemplate 策略模板」章节。
+  source: wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md
+  section: ConstraintTemplate 策略模板
+- type: concept
+  question: 在 OPA Gatekeeper 策略即代码深度实践 [04-policy-governance] 中, Constraint 策略实例 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md 的「Constraint 策略实例」章节。
+  source: wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md
+  section: Constraint 策略实例
+- type: comparison
+  question: OPA Gatekeeper 策略即代码深度实践 [04-policy-governance] 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md
+- type: concept
+  question: 在 Policy & Governance 中, 策略引擎对比 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/index.md 的「策略引擎对比」章节。
+  source: wiki/07-安全/04-策略治理/index.md
+  section: 策略引擎对比
+- type: concept
+  question: 在 Policy & Governance 中, 文档索引 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/index.md 的「文档索引」章节。
+  source: wiki/07-安全/04-策略治理/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Policy & Governance 中, 策略治理检查清单 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/index.md 的「策略治理检查清单」章节。
+  source: wiki/07-安全/04-策略治理/index.md
+  section: 策略治理检查清单
+- type: concept
+  question: 在 Policy & Governance 中, Related 是什么?
+  answer: 参见 wiki/07-安全/04-策略治理/index.md 的「Related」章节。
+  source: wiki/07-安全/04-策略治理/index.md
+  section: Related
+- type: comparison
+  question: Policy & Governance 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/04-策略治理/index.md 中的对比分析。
+  source: wiki/07-安全/04-策略治理/index.md
+- type: concept
+  question: 在 供应链安全概述 (Supply Chain Security Overview) 中, 1 什么是软件供应链 (What is Software Supply Chain) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 的「1 什么是软件供应链 (What is Software Supply Chain)」章节。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  section: 1 什么是软件供应链 (What is Software Supply Chain)
+- type: concept
+  question: 在 供应链安全概述 (Supply Chain Security Overview) 中, 2 供应链攻击的定义与分类 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 的「2 供应链攻击的定义与分类」章节。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  section: 2 供应链攻击的定义与分类
+- type: concept
+  question: 在 供应链安全概述 (Supply Chain Security Overview) 中, 3 供应链安全的重要性 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 的「3 供应链安全的重要性」章节。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  section: 3 供应链安全的重要性
+- type: concept
+  question: 在 供应链安全概述 (Supply Chain Security Overview) 中, 1 SolarWinds 攻击事件 (2020) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 的「1 SolarWinds 攻击事件 (2020)」章节。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  section: 1 SolarWinds 攻击事件 (2020)
+- type: concept
+  question: 在 供应链安全概述 (Supply Chain Security Overview) 中, 事件背景 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 的「事件背景」章节。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  section: 事件背景
+- type: operation
+  question: '如何执行与 供应链安全概述 (Supply Chain Security Overview) 相关的操作: export LOG4J_FORMAT_MSG_NO_LOOKUPS=true?'
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  command: export LOG4J_FORMAT_MSG_NO_LOOKUPS=true
+- type: operation
+  question: '如何执行与 供应链安全概述 (Supply Chain Security Overview) 相关的操作: curl -s https://codecov.io/bash | bash?'
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+  command: curl -s https://codecov.io/bash | bash
+- type: comparison
+  question: 供应链安全概述 (Supply Chain Security Overview) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/01-supply-chain-security-overview.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/01-supply-chain-security-overview.md
+- type: concept
+  question: 在 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 中, 1 模型设计理念 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md 的「1 模型设计理念」章节。
+  source: wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md
+  section: 1 模型设计理念
+- type: concept
+  question: 在 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 中, 2 成熟度模型总览 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md 的「2 成熟度模型总览」章节。
+  source: wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md
+  section: 2 成熟度模型总览
+- type: concept
+  question: 在 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 中, 3 与主要框架的关系 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md 的「3 与主要框架的关系」章节。
+  source: wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md
+  section: 3 与主要框架的关系
+- type: concept
+  question: 在 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 中, 1 Level 1 - 初始级 (Initial) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md 的「1 Level 1 - 初始级 (Initial)」章节。
+  source: wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md
+  section: 1 Level 1 - 初始级 (Initial)
+- type: concept
+  question: 在 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 中, 2 Level 2 - 已管理级 (Managed) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md 的「2 Level 2 - 已管理级 (Managed)」章节。
+  source: wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md
+  section: 2 Level 2 - 已管理级 (Managed)
+- type: comparison
+  question: 供应链安全成熟度模型 (Supply Chain Security Maturity Model) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/02-supply-chain-maturity-model.md
+- type: concept
+  question: 在 SBOM 生成与管理 (SBOM Generation and Management) 中, 1 什么是 SBOM 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/03-sbom-generation-management.md 的「1 什么是 SBOM」章节。
+  source: wiki/07-安全/05-供应链/03-sbom-generation-management.md
+  section: 1 什么是 SBOM
+- type: concept
+  question: 在 SBOM 生成与管理 (SBOM Generation and Management) 中, 2 SBOM 的价值 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/03-sbom-generation-management.md 的「2 SBOM 的价值」章节。
+  source: wiki/07-安全/05-供应链/03-sbom-generation-management.md
+  section: 2 SBOM 的价值
+- type: concept
+  question: 在 SBOM 生成与管理 (SBOM Generation and Management) 中, 3 SBOM 的最小数据要素 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/03-sbom-generation-management.md 的「3 SBOM 的最小数据要素」章节。
+  source: wiki/07-安全/05-供应链/03-sbom-generation-management.md
+  section: 3 SBOM 的最小数据要素
+- type: concept
+  question: 在 SBOM 生成与管理 (SBOM Generation and Management) 中, 4 PURL (Package URL) 规范 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/03-sbom-generation-management.md 的「4 PURL (Package URL) 规范」章节。
+  source: wiki/07-安全/05-供应链/03-sbom-generation-management.md
+  section: 4 PURL (Package URL) 规范
+- type: concept
+  question: 在 SBOM 生成与管理 (SBOM Generation and Management) 中, 1 SPDX vs CycloneDX 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/03-sbom-generation-management.md 的「1 SPDX vs CycloneDX」章节。
+  source: wiki/07-安全/05-供应链/03-sbom-generation-management.md
+  section: 1 SPDX vs CycloneDX
+- type: comparison
+  question: SBOM 生成与管理 (SBOM Generation and Management) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/03-sbom-generation-management.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/03-sbom-generation-management.md
+- type: concept
+  question: 在 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 中, 1 SBOM 与漏洞分析的关系 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 的「1 SBOM 与漏洞分析的关系」章节。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  section: 1 SBOM 与漏洞分析的关系
+- type: concept
+  question: 在 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 中, 2 漏洞匹配原理 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 的「2 漏洞匹配原理」章节。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  section: 2 漏洞匹配原理
+- type: concept
+  question: 在 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 中, 3 漏洞数据库覆盖范围 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 的「3 漏洞数据库覆盖范围」章节。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  section: 3 漏洞数据库覆盖范围
+- type: concept
+  question: 在 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 中, 1 安装与初始化 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 的「1 安装与初始化」章节。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  section: 1 安装与初始化
+- type: concept
+  question: 在 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 中, 2 扫描目标类型 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 的「2 扫描目标类型」章节。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  section: 2 扫描目标类型
+- type: operation
+  question: '如何执行与 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 相关的操作: grype db status?'
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  command: grype db status
+- type: operation
+  question: '如何执行与 SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 相关的操作: curl -sSfL https://raw.githubusercontent.com/anchore/grype/m?'
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+  command: curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | \
+- type: comparison
+  question: SBOM 漏洞分析与治理 (SBOM Vulnerability Analysis and Governance) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/04-sbom-vulnerability-analysis.md
+- type: concept
+  question: 在 SLSA 级别与实施 (SLSA Levels and Implementation) 中, 1 SLSA 设计理念 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/05-slsa-levels-implementation.md 的「1 SLSA 设计理念」章节。
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+  section: 1 SLSA 设计理念
+- type: concept
+  question: 在 SLSA 级别与实施 (SLSA Levels and Implementation) 中, 2 SLSA 防御的威胁 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/05-slsa-levels-implementation.md 的「2 SLSA 防御的威胁」章节。
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+  section: 2 SLSA 防御的威胁
+- type: concept
+  question: 在 SLSA 级别与实施 (SLSA Levels and Implementation) 中, 3 SLSA v1.0 架构 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/05-slsa-levels-implementation.md 的「3 SLSA v1.0 架构」章节。
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+  section: 3 SLSA v1.0 架构
+- type: concept
+  question: 在 SLSA 级别与实施 (SLSA Levels and Implementation) 中, 1 总体概览 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/05-slsa-levels-implementation.md 的「1 总体概览」章节。
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+  section: 1 总体概览
+- type: concept
+  question: 在 SLSA 级别与实施 (SLSA Levels and Implementation) 中, 2 SLSA Build L1 详解 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/05-slsa-levels-implementation.md 的「2 SLSA Build L1 详解」章节。
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+  section: 2 SLSA Build L1 详解
+- type: best_practice
+  question: 关于 SLSA 级别与实施 (SLSA Levels and Implementation), 有什么最佳实践?
+  answer: ─ 使用 -trimpath 去除绝对路径
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+- type: comparison
+  question: SLSA 级别与实施 (SLSA Levels and Implementation) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/05-slsa-levels-implementation.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/05-slsa-levels-implementation.md
+- type: concept
+  question: 在 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 中, 1 SLSA 级别定义 (SLSA Level Definitions) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/06-github-actions-slsa-build.md 的「1 SLSA 级别定义 (SLSA Level Definitions)」章节。
+  source: wiki/07-安全/05-供应链/06-github-actions-slsa-build.md
+  section: 1 SLSA 级别定义 (SLSA Level Definitions)
+- type: concept
+  question: 在 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 中, 2 SLSA 威胁模型 (SLSA Threat Model) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/06-github-actions-slsa-build.md 的「2 SLSA 威胁模型 (SLSA Threat Model)」章节。
+  source: wiki/07-安全/05-供应链/06-github-actions-slsa-build.md
+  section: 2 SLSA 威胁模型 (SLSA Threat Model)
+- type: concept
+  question: 在 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 中, 3 SLSA 来源证明格式 (SLSA Provenance Format) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/06-github-actions-slsa-build.md 的「3 SLSA 来源证明格式 (SLSA Provenance Format)」章节。
+  source: wiki/07-安全/05-供应链/06-github-actions-slsa-build.md
+  section: 3 SLSA 来源证明格式 (SLSA Provenance Format)
+- type: concept
+  question: 在 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 中, 1 项目架构 (Project Architecture) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/06-github-actions-slsa-build.md 的「1 项目架构 (Project Architecture)」章节。
+  source: wiki/07-安全/05-供应链/06-github-actions-slsa-build.md
+  section: 1 项目架构 (Project Architecture)
+- type: concept
+  question: 在 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 中, 2 可复用工作流类型 (Reusable Workflow Types) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/06-github-actions-slsa-build.md 的「2 可复用工作流类型 (Reusable Workflow Types)」章节。
+  source: wiki/07-安全/05-供应链/06-github-actions-slsa-build.md
+  section: 2 可复用工作流类型 (Reusable Workflow Types)
+- type: troubleshooting
+  question: 如何排查 GitHub Actions SLSA 构建 (GitHub Actions SLSA Build) 相关的故障?
+  answer: 参见 wiki/07-安全/05-供应链/06-github-actions-slsa-build.md 的故障排查章节。
+  source: wiki/07-安全/05-供应链/06-github-actions-slsa-build.md
+- type: concept
+  question: 在 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 中, 1 核心组件架构 (Core Component Architecture) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md 的「1 核心组件架构 (Core Component Architecture)」章节。
+  source: wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md
+  section: 1 核心组件架构 (Core Component Architecture)
+- type: concept
+  question: 在 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 中, 2 Sigstore 解决的问题 (Problems Sigstore Solves) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md 的「2 Sigstore 解决的问题 (Problems Sigstore Solves)」章节。
+  source: wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md
+  section: 2 Sigstore 解决的问题 (Problems Sigstore Solves)
+- type: concept
+  question: 在 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 中, 3 Sigstore 公共实例 (Sigstore Public Good Infrastructure)
+    是什么?
+  answer: 参见 wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md 的「3 Sigstore 公共实例 (Sigstore Public Good Infrastructure)」章节。
+  source: wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md
+  section: 3 Sigstore 公共实例 (Sigstore Public Good Infrastructure)
+- type: concept
+  question: 在 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 中, 1 安装方式 (Installation Methods) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md 的「1 安装方式 (Installation Methods)」章节。
+  source: wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md
+  section: 1 安装方式 (Installation Methods)
+- type: concept
+  question: 在 Sigstore 与 Cosign 签名 (Sigstore and Cosign Signing) 中, 2 环境变量配置 (Environment Variable Configuration) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md 的「2 环境变量配置 (Environment Variable Configuration)」章节。
+  source: wiki/07-安全/05-供应链/07-sigstore-cosign-signing.md
+  section: 2 环境变量配置 (Environment Variable Configuration)
+- type: concept
+  question: 在 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 中, 1 Fulcio 系统架构 (Fulcio System Architecture) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 的「1 Fulcio 系统架构 (Fulcio System Architecture)」章节。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  section: 1 Fulcio 系统架构 (Fulcio System Architecture)
+- type: concept
+  question: 在 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 中, 2 Fulcio 证书结构 (Fulcio Certificate Structure) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 的「2 Fulcio 证书结构 (Fulcio Certificate Structure)」章节。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  section: 2 Fulcio 证书结构 (Fulcio Certificate Structure)
+- type: concept
+  question: 在 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 中, 3 Fulcio OID 扩展参考 (Fulcio OID Extension Reference)
+    是什么?
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 的「3 Fulcio OID 扩展参考 (Fulcio OID Extension Reference)」章节。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  section: 3 Fulcio OID 扩展参考 (Fulcio OID Extension Reference)
+- type: concept
+  question: 在 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 中, 1 GitHub Actions OIDC 令牌交换 (GitHub Actions OIDC
+    Token Exchange) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 的「1 GitHub Actions OIDC 令牌交换 (GitHub Actions OIDC Token Exchange)」章节。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  section: 1 GitHub Actions OIDC 令牌交换 (GitHub Actions OIDC Token Exchange)
+- type: concept
+  question: 在 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 中, 2 支持的 OIDC 提供商 (Supported OIDC Providers) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 的「2 支持的 OIDC 提供商 (Supported OIDC Providers)」章节。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  section: 2 支持的 OIDC 提供商 (Supported OIDC Providers)
+- type: operation
+  question: '如何执行与 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 相关的操作: COSIGN_EXPERIMENTAL=1 cosign sign \?'
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  command: COSIGN_EXPERIMENTAL=1 cosign sign \
+- type: operation
+  question: '如何执行与 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 相关的操作: decode_jwt() {?'
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  command: decode_jwt() {
+- type: operation
+  question: '如何执行与 Fulcio 与 Rekor 透明日志 (Fulcio and Rekor Transparency Logs) 相关的操作: rekor-cli get --log-index 12345678?'
+  answer: 参见 wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/08-fulcio-rekor-transparency.md
+  command: rekor-cli get --log-index 12345678
+- type: concept
+  question: 在 Policy Controller 镜像验证 (Policy Controller Image Verification) 中, 1 准入控制流程 (Admission Control Flow) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/09-policy-controller-verification.md 的「1 准入控制流程 (Admission Control Flow)」章节。
+  source: wiki/07-安全/05-供应链/09-policy-controller-verification.md
+  section: 1 准入控制流程 (Admission Control Flow)
+- type: concept
+  question: 在 Policy Controller 镜像验证 (Policy Controller Image Verification) 中, 2 策略决策矩阵 (Policy Decision Matrix) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/09-policy-controller-verification.md 的「2 策略决策矩阵 (Policy Decision Matrix)」章节。
+  source: wiki/07-安全/05-供应链/09-policy-controller-verification.md
+  section: 2 策略决策矩阵 (Policy Decision Matrix)
+- type: concept
+  question: 在 Policy Controller 镜像验证 (Policy Controller Image Verification) 中, 1 安装 Kyverno (Installing Kyverno) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/09-policy-controller-verification.md 的「1 安装 Kyverno (Installing Kyverno)」章节。
+  source: wiki/07-安全/05-供应链/09-policy-controller-verification.md
+  section: 1 安装 Kyverno (Installing Kyverno)
+- type: concept
+  question: 在 Policy Controller 镜像验证 (Policy Controller Image Verification) 中, 2 基础镜像签名验证策略 (Basic Image Signature Verification
+    Policy) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/09-policy-controller-verification.md 的「2 基础镜像签名验证策略 (Basic Image Signature Verification Policy)」章节。
+  source: wiki/07-安全/05-供应链/09-policy-controller-verification.md
+  section: 2 基础镜像签名验证策略 (Basic Image Signature Verification Policy)
+- type: concept
+  question: 在 Policy Controller 镜像验证 (Policy Controller Image Verification) 中, 3 高级镜像验证策略 (Advanced Image Verification Policy)
+    是什么?
+  answer: 参见 wiki/07-安全/05-供应链/09-policy-controller-verification.md 的「3 高级镜像验证策略 (Advanced Image Verification Policy)」章节。
+  source: wiki/07-安全/05-供应链/09-policy-controller-verification.md
+  section: 3 高级镜像验证策略 (Advanced Image Verification Policy)
+- type: troubleshooting
+  question: 如何排查 Policy Controller 镜像验证 (Policy Controller Image Verification) 相关的故障?
+  answer: 参见 wiki/07-安全/05-供应链/09-policy-controller-verification.md 的故障排查章节。
+  source: wiki/07-安全/05-供应链/09-policy-controller-verification.md
+- type: concept
+  question: 在 09-软件物料清单 中, SBOM标准格式 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/10-software-bill-of-materials.md 的「SBOM标准格式」章节。
+  source: wiki/07-安全/05-供应链/10-software-bill-of-materials.md
+  section: SBOM标准格式
+- type: concept
+  question: 在 09-软件物料清单 中, SPDX格式示例 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/10-software-bill-of-materials.md 的「SPDX格式示例」章节。
+  source: wiki/07-安全/05-供应链/10-software-bill-of-materials.md
+  section: SPDX格式示例
+- type: concept
+  question: 在 09-软件物料清单 中, CycloneDX格式示例 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/10-software-bill-of-materials.md 的「CycloneDX格式示例」章节。
+  source: wiki/07-安全/05-供应链/10-software-bill-of-materials.md
+  section: CycloneDX格式示例
+- type: concept
+  question: 在 09-软件物料清单 中, Syft工具配置 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/10-software-bill-of-materials.md 的「Syft工具配置」章节。
+  source: wiki/07-安全/05-供应链/10-software-bill-of-materials.md
+  section: Syft工具配置
+- type: concept
+  question: 在 09-软件物料清单 中, 容器镜像SBOM生成 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/10-software-bill-of-materials.md 的「容器镜像SBOM生成」章节。
+  source: wiki/07-安全/05-供应链/10-software-bill-of-materials.md
+  section: 容器镜像SBOM生成
+- type: concept
+  question: 在 合规自动化与审计 (Compliance Automation and Audit) 中, 1 主要合规框架概览 (Major Compliance Framework Overview) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/11-compliance-automation-audit.md 的「1 主要合规框架概览 (Major Compliance Framework Overview)」章节。
+  source: wiki/07-安全/05-供应链/11-compliance-automation-audit.md
+  section: 1 主要合规框架概览 (Major Compliance Framework Overview)
+- type: concept
+  question: 在 合规自动化与审计 (Compliance Automation and Audit) 中, 2 控制措施映射表 (Control Measures Mapping Table) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/11-compliance-automation-audit.md 的「2 控制措施映射表 (Control Measures Mapping Table)」章节。
+  source: wiki/07-安全/05-供应链/11-compliance-automation-audit.md
+  section: 2 控制措施映射表 (Control Measures Mapping Table)
+- type: concept
+  question: 在 合规自动化与审计 (Compliance Automation and Audit) 中, 1 SOC 2 控制框架实现 (SOC 2 Control Framework Implementation) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/11-compliance-automation-audit.md 的「1 SOC 2 控制框架实现 (SOC 2 Control Framework Implementation)」章节。
+  source: wiki/07-安全/05-供应链/11-compliance-automation-audit.md
+  section: 1 SOC 2 控制框架实现 (SOC 2 Control Framework Implementation)
+- type: concept
+  question: 在 合规自动化与审计 (Compliance Automation and Audit) 中, 2 SOC 2 CC8.1 变更管理自动化 (SOC 2 CC8.1 Change Management Automation)
+    是什么?
+  answer: 参见 wiki/07-安全/05-供应链/11-compliance-automation-audit.md 的「2 SOC 2 CC8.1 变更管理自动化 (SOC 2 CC8.1 Change Management Automation)」章节。
+  source: wiki/07-安全/05-供应链/11-compliance-automation-audit.md
+  section: 2 SOC 2 CC8.1 变更管理自动化 (SOC 2 CC8.1 Change Management Automation)
+- type: concept
+  question: 在 合规自动化与审计 (Compliance Automation and Audit) 中, 1 PCI-DSS 要求 6.3.x 自动化 (PCI-DSS Requirement 6.3.x Automation)
+    是什么?
+  answer: 参见 wiki/07-安全/05-供应链/11-compliance-automation-audit.md 的「1 PCI-DSS 要求 6.3.x 自动化 (PCI-DSS Requirement 6.3.x Automation)」章节。
+  source: wiki/07-安全/05-供应链/11-compliance-automation-audit.md
+  section: 1 PCI-DSS 要求 6.3.x 自动化 (PCI-DSS Requirement 6.3.x Automation)
+- type: comparison
+  question: 合规自动化与审计 (Compliance Automation and Audit) 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/11-compliance-automation-audit.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/11-compliance-automation-audit.md
+- type: concept
+  question: 在 容器镜像安全扫描深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/12-image-security-scanning.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/05-供应链/12-image-security-scanning.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 容器镜像安全扫描深度实践 中, 镜像安全全生命周期架构 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/12-image-security-scanning.md 的「镜像安全全生命周期架构」章节。
+  source: wiki/07-安全/05-供应链/12-image-security-scanning.md
+  section: 镜像安全全生命周期架构
+- type: concept
+  question: 在 容器镜像安全扫描深度实践 中, 技术栈总览 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/12-image-security-scanning.md 的「技术栈总览」章节。
+  source: wiki/07-安全/05-供应链/12-image-security-scanning.md
+  section: 技术栈总览
+- type: concept
+  question: 在 容器镜像安全扫描深度实践 中, Trivy 全面扫描配置 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/12-image-security-scanning.md 的「Trivy 全面扫描配置」章节。
+  source: wiki/07-安全/05-供应链/12-image-security-scanning.md
+  section: Trivy 全面扫描配置
+- type: concept
+  question: 在 容器镜像安全扫描深度实践 中, Trivy Operator (Kubernetes 集成) 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/12-image-security-scanning.md 的「Trivy Operator (Kubernetes 集成)」章节。
+  source: wiki/07-安全/05-供应链/12-image-security-scanning.md
+  section: Trivy Operator (Kubernetes 集成)
+- type: operation
+  question: '如何执行与 容器镜像安全扫描深度实践 相关的操作: IMAGE="registry.company.com/myapp:v1.2.3"?'
+  answer: 参见 wiki/07-安全/05-供应链/12-image-security-scanning.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/12-image-security-scanning.md
+  command: IMAGE="registry.company.com/myapp:v1.2.3"
+- type: concept
+  question: 在 13 - 镜像安全扫描与漏洞管理 中, 镜像安全扫描架构 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/13-image-security-scanning.md 的「镜像安全扫描架构」章节。
+  source: wiki/07-安全/05-供应链/13-image-security-scanning.md
+  section: 镜像安全扫描架构
+- type: concept
+  question: 在 13 - 镜像安全扫描与漏洞管理 中, Trivy深度集成实践 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/13-image-security-scanning.md 的「Trivy深度集成实践」章节。
+  source: wiki/07-安全/05-供应链/13-image-security-scanning.md
+  section: Trivy深度集成实践
+- type: comparison
+  question: 13 - 镜像安全扫描与漏洞管理 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/13-image-security-scanning.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/13-image-security-scanning.md
+- type: concept
+  question: 在 供应链安全运行手册 中, 适用场景与范围 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md 的「适用场景与范围」章节。
+  source: wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md
+  section: 适用场景与范围
+- type: concept
+  question: 在 供应链安全运行手册 中, 前置条件与工具 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md 的「前置条件与工具」章节。
+  source: wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md
+  section: 前置条件与工具
+- type: concept
+  question: 在 供应链安全运行手册 中, 核心概念/架构 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md 的「核心概念/架构」章节。
+  source: wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md
+  section: 核心概念/架构
+- type: concept
+  question: 在 供应链安全运行手册 中, 标准操作流程 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md 的「标准操作流程」章节。
+  source: wiki/07-安全/05-供应链/14-supply-chain-security-runbook.md
+  section: 标准操作流程
+- type: concept
+  question: 在 DevSecOps 流水线自动化 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md 的「概述」章节。
+  source: wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md
+  section: 概述
+- type: concept
+  question: 在 DevSecOps 流水线自动化 中, 核心概念 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md 的「核心概念」章节。
+  source: wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md
+  section: 核心概念
+- type: operation
+  question: '如何执行与 DevSecOps 流水线自动化 相关的操作: syft registry.example.com/app:v1.0 -o spdx-json=sbom.spdx.js?'
+  answer: 参见 wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md
+  command: syft registry.example.com/app:v1.0 -o spdx-json=sbom.spdx.json
+- type: comparison
+  question: DevSecOps 流水线自动化 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/15-devsecops-pipeline-automation.md
+- type: concept
+  question: 在 SLSA 软件供应链安全实践指南 中, 著名供应链攻击 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 的「著名供应链攻击」章节。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+  section: 著名供应链攻击
+- type: concept
+  question: 在 SLSA 软件供应链安全实践指南 中, SLSA 等级要求 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 的「SLSA 等级要求」章节。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+  section: SLSA 等级要求
+- type: concept
+  question: 在 SLSA 软件供应链安全实践指南 中, 1 架构 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 的「1 架构」章节。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+  section: 1 架构
+- type: concept
+  question: 在 SLSA 软件供应链安全实践指南 中, 2 安装 cosign 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 的「2 安装 cosign」章节。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+  section: 2 安装 cosign
+- type: concept
+  question: 在 SLSA 软件供应链安全实践指南 中, 1 安装 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 的「1 安装」章节。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+  section: 1 安装
+- type: operation
+  question: '如何执行与 SLSA 软件供应链安全实践指南 相关的操作: curl -O -L https://github.com/sigstore/cosign/releases/lates?'
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 中的操作步骤。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+  command: curl -O -L https://github.com/sigstore/cosign/releases/latest/download/cosign-linux-amd64
+- type: comparison
+  question: SLSA 软件供应链安全实践指南 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md 中的对比分析。
+  source: wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md
+- type: concept
+  question: 在 Supply Chain 中, 文档 是什么?
+  answer: 参见 wiki/07-安全/05-供应链/index.md 的「文档」章节。
+  source: wiki/07-安全/05-供应链/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 审计日志配置 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md 的「概述」章节。
+  source: wiki/07-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md
+  section: 概述
+- type: concept
+  question: 在 Kubernetes 审计日志配置 中, 审计日志级别 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md 的「审计日志级别」章节。
+  source: wiki/07-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md
+  section: 审计日志级别
+- type: concept
+  question: 在 Kubernetes 审计日志配置 中, Audit Policy 配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md 的「Audit Policy 配置」章节。
+  source: wiki/07-安全/06-合规审计/01-kubernetes-audit-logging-configuration.md
+  section: Audit Policy 配置
+- type: concept
+  question: 在 静态传输加密方案 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/02-encryption-at-rest-transit.md 的「概述」章节。
+  source: wiki/07-安全/06-合规审计/02-encryption-at-rest-transit.md
+  section: 概述
+- type: concept
+  question: 在 静态传输加密方案 中, etcd EncryptionConfiguration 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/02-encryption-at-rest-transit.md 的「etcd EncryptionConfiguration」章节。
+  source: wiki/07-安全/06-合规审计/02-encryption-at-rest-transit.md
+  section: etcd EncryptionConfiguration
+- type: concept
+  question: 在 04 - 审计日志与合规性管理 中, 审计日志架构全景 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/03-audit-logging-compliance.md 的「审计日志架构全景」章节。
+  source: wiki/07-安全/06-合规审计/03-audit-logging-compliance.md
+  section: 审计日志架构全景
+- type: concept
+  question: 在 04 - 审计日志与合规性管理 中, 审计策略配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/03-audit-logging-compliance.md 的「审计策略配置」章节。
+  source: wiki/07-安全/06-合规审计/03-audit-logging-compliance.md
+  section: 审计策略配置
+- type: concept
+  question: 在 04 - 审计日志与合规性管理 中, API Server 审计配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/03-audit-logging-compliance.md 的「API Server 审计配置」章节。
+  source: wiki/07-安全/06-合规审计/03-audit-logging-compliance.md
+  section: API Server 审计配置
+- type: concept
+  question: 在 08-CIS基准合规检查 中, 基准版本对应关系 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md 的「基准版本对应关系」章节。
+  source: wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md
+  section: 基准版本对应关系
+- type: concept
+  question: 在 08-CIS基准合规检查 中, 控制平面检查项 (Master Node) 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md 的「控制平面检查项 (Master Node)」章节。
+  source: wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md
+  section: 控制平面检查项 (Master Node)
+- type: concept
+  question: 在 08-CIS基准合规检查 中, Master节点安全配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md 的「Master节点安全配置」章节。
+  source: wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md
+  section: Master节点安全配置
+- type: concept
+  question: 在 08-CIS基准合规检查 中, 关键检查项示例 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md 的「关键检查项示例」章节。
+  source: wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md
+  section: 关键检查项示例
+- type: concept
+  question: 在 08-CIS基准合规检查 中, 工作节点检查项 (Worker Node) 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md 的「工作节点检查项 (Worker Node)」章节。
+  source: wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md
+  section: 工作节点检查项 (Worker Node)
+- type: operation
+  question: '如何执行与 08-CIS基准合规检查 相关的操作: echo "=== CIS Master Node Checks ==="?'
+  answer: 参见 wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md 中的操作步骤。
+  source: wiki/07-安全/06-合规审计/04-cis-benchmark-compliance-audit.md
+  command: echo "=== CIS Master Node Checks ==="
+- type: concept
+  question: 在 08 - 安全最佳实践表 中, Pod安全标准(Pod Security Standards) 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/05-security-best-practices.md 的「Pod安全标准(Pod Security Standards)」章节。
+  source: wiki/07-安全/06-合规审计/05-security-best-practices.md
+  section: Pod安全标准(Pod Security Standards)
+- type: concept
+  question: 在 08 - 安全最佳实践表 中, Pod安全准入(PSA)配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/05-security-best-practices.md 的「Pod安全准入(PSA)配置」章节。
+  source: wiki/07-安全/06-合规审计/05-security-best-practices.md
+  section: Pod安全准入(PSA)配置
+- type: concept
+  question: 在 08 - 安全最佳实践表 中, RBAC最佳实践 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/05-security-best-practices.md 的「RBAC最佳实践」章节。
+  source: wiki/07-安全/06-合规审计/05-security-best-practices.md
+  section: RBAC最佳实践
+- type: concept
+  question: 在 08 - 安全最佳实践表 中, Secrets管理 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/05-security-best-practices.md 的「Secrets管理」章节。
+  source: wiki/07-安全/06-合规审计/05-security-best-practices.md
+  section: Secrets管理
+- type: concept
+  question: 在 08 - 安全最佳实践表 中, 网络安全 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/05-security-best-practices.md 的「网络安全」章节。
+  source: wiki/07-安全/06-合规审计/05-security-best-practices.md
+  section: 网络安全
+- type: concept
+  question: 在 Kubernetes 安全加固 中, 安全加固层级 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/06-security-hardening-production.md 的「安全加固层级」章节。
+  source: wiki/07-安全/06-合规审计/06-security-hardening-production.md
+  section: 安全加固层级
+- type: concept
+  question: 在 Kubernetes 安全加固 中, API Server 安全加固 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/06-security-hardening-production.md 的「API Server 安全加固」章节。
+  source: wiki/07-安全/06-合规审计/06-security-hardening-production.md
+  section: API Server 安全加固
+- type: concept
+  question: 在 Kubernetes 安全加固 中, etcd 安全加固 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/06-security-hardening-production.md 的「etcd 安全加固」章节。
+  source: wiki/07-安全/06-合规审计/06-security-hardening-production.md
+  section: etcd 安全加固
+- type: concept
+  question: 在 Kubernetes 安全加固 中, kubelet 安全加固 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/06-security-hardening-production.md 的「kubelet 安全加固」章节。
+  source: wiki/07-安全/06-合规审计/06-security-hardening-production.md
+  section: kubelet 安全加固
+- type: concept
+  question: 在 Kubernetes 安全加固 中, Secret 加密配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/06-security-hardening-production.md 的「Secret 加密配置」章节。
+  source: wiki/07-安全/06-合规审计/06-security-hardening-production.md
+  section: Secret 加密配置
+- type: concept
+  question: 在 证书管理与 TLS 配置 中, 概述 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/07-certificate-management.md 的「概述」章节。
+  source: wiki/07-安全/06-合规审计/07-certificate-management.md
+  section: 概述
+- type: concept
+  question: 在 证书管理与 TLS 配置 中, 证书架构 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/07-certificate-management.md 的「证书架构」章节。
+  source: wiki/07-安全/06-合规审计/07-certificate-management.md
+  section: 证书架构
+- type: concept
+  question: 在 证书管理与 TLS 配置 中, 证书类型详解 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/07-certificate-management.md 的「证书类型详解」章节。
+  source: wiki/07-安全/06-合规审计/07-certificate-management.md
+  section: 证书类型详解
+- type: operation
+  question: '如何执行与 证书管理与 TLS 配置 相关的操作: set -e?'
+  answer: 参见 wiki/07-安全/06-合规审计/07-certificate-management.md 中的操作步骤。
+  source: wiki/07-安全/06-合规审计/07-certificate-management.md
+  command: set -e
+- type: concept
+  question: 在 Kubernetes 安全加固深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Kubernetes 安全加固深度实践 中, Kubernetes 多层安全架构 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md 的「Kubernetes 多层安全架构」章节。
+  source: wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md
+  section: Kubernetes 多层安全架构
+- type: concept
+  question: 在 Kubernetes 安全加固深度实践 中, 安全加固检查清单 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md 的「安全加固检查清单」章节。
+  source: wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md
+  section: 安全加固检查清单
+- type: concept
+  question: 在 Kubernetes 安全加固深度实践 中, CIS Kubernetes Benchmark 合规 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md 的「CIS Kubernetes Benchmark 合规」章节。
+  source: wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md
+  section: CIS Kubernetes Benchmark 合规
+- type: concept
+  question: 在 Kubernetes 安全加固深度实践 中, 审计策略配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md 的「审计策略配置」章节。
+  source: wiki/07-安全/06-合规审计/08-kubernetes-security-hardening.md
+  section: 审计策略配置
+- type: concept
+  question: 在 12 - 合规与认证表 中, 合规标准概览 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/09-compliance-certification.md 的「合规标准概览」章节。
+  source: wiki/07-安全/06-合规审计/09-compliance-certification.md
+  section: 合规标准概览
+- type: concept
+  question: 在 12 - 合规与认证表 中, CIS Kubernetes Benchmark 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/09-compliance-certification.md 的「CIS Kubernetes Benchmark」章节。
+  source: wiki/07-安全/06-合规审计/09-compliance-certification.md
+  section: CIS Kubernetes Benchmark
+- type: concept
+  question: 在 12 - 合规与认证表 中, CIS关键检查项 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/09-compliance-certification.md 的「CIS关键检查项」章节。
+  source: wiki/07-安全/06-合规审计/09-compliance-certification.md
+  section: CIS关键检查项
+- type: concept
+  question: 在 12 - 合规与认证表 中, 等保2.0 K8S相关要求 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/09-compliance-certification.md 的「等保2.0 K8S相关要求」章节。
+  source: wiki/07-安全/06-合规审计/09-compliance-certification.md
+  section: 等保2.0 K8S相关要求
+- type: concept
+  question: 在 12 - 合规与认证表 中, PCI-DSS K8S要求 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/09-compliance-certification.md 的「PCI-DSS K8S要求」章节。
+  source: wiki/07-安全/06-合规审计/09-compliance-certification.md
+  section: PCI-DSS K8S要求
+- type: concept
+  question: 在 Kubernetes 合规与审计 中, 合规框架对照 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/10-compliance-audit-practices.md 的「合规框架对照」章节。
+  source: wiki/07-安全/06-合规审计/10-compliance-audit-practices.md
+  section: 合规框架对照
+- type: concept
+  question: 在 Kubernetes 合规与审计 中, 审计日志配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/10-compliance-audit-practices.md 的「审计日志配置」章节。
+  source: wiki/07-安全/06-合规审计/10-compliance-audit-practices.md
+  section: 审计日志配置
+- type: concept
+  question: 在 Kubernetes 合规与审计 中, 审计日志采集 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/10-compliance-audit-practices.md 的「审计日志采集」章节。
+  source: wiki/07-安全/06-合规审计/10-compliance-audit-practices.md
+  section: 审计日志采集
+- type: concept
+  question: 在 Kubernetes 合规与审计 中, 合规检查工具 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/10-compliance-audit-practices.md 的「合规检查工具」章节。
+  source: wiki/07-安全/06-合规审计/10-compliance-audit-practices.md
+  section: 合规检查工具
+- type: concept
+  question: 在 Kubernetes 合规与审计 中, 等保 2.0 检查项 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/10-compliance-audit-practices.md 的「等保 2.0 检查项」章节。
+  source: wiki/07-安全/06-合规审计/10-compliance-audit-practices.md
+  section: 等保 2.0 检查项
+- type: concept
+  question: 在 17 - 安全扫描与漏洞检测工具 中, 安全扫描体系架构 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/11-comprehensive-security-scanning.md 的「安全扫描体系架构」章节。
+  source: wiki/07-安全/06-合规审计/11-comprehensive-security-scanning.md
+  section: 安全扫描体系架构
+- type: concept
+  question: 在 17 - 安全扫描与漏洞检测工具 中, Trivy全能扫描 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/11-comprehensive-security-scanning.md 的「Trivy全能扫描」章节。
+  source: wiki/07-安全/06-合规审计/11-comprehensive-security-scanning.md
+  section: Trivy全能扫描
+- type: comparison
+  question: 17 - 安全扫描与漏洞检测工具 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/06-合规审计/11-comprehensive-security-scanning.md 中的对比分析。
+  source: wiki/07-安全/06-合规审计/11-comprehensive-security-scanning.md
+- type: concept
+  question: 在 Kubernetes Security Hardening Production Checklist 中, 控制平面加固 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/12-security-hardening-production-checklist.md 的「控制平面加固」章节。
+  source: wiki/07-安全/06-合规审计/12-security-hardening-production-checklist.md
+  section: 控制平面加固
+- type: concept
+  question: 在 Kubernetes Security Hardening Production Checklist 中, 节点安全 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/12-security-hardening-production-checklist.md 的「节点安全」章节。
+  source: wiki/07-安全/06-合规审计/12-security-hardening-production-checklist.md
+  section: 节点安全
+- type: concept
+  question: 在 cert-manager 自动证书管理深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 cert-manager 自动证书管理深度实践 中, cert-manager 组件架构 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md 的「cert-manager 组件架构」章节。
+  source: wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md
+  section: cert-manager 组件架构
+- type: concept
+  question: 在 cert-manager 自动证书管理深度实践 中, 安装部署 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md 的「安装部署」章节。
+  source: wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md
+  section: 安装部署
+- type: concept
+  question: 在 cert-manager 自动证书管理深度实践 中, ACME / Let's Encrypt 配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md 的「ACME / Let's Encrypt 配置」章节。
+  source: wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md
+  section: ACME / Let's Encrypt 配置
+- type: concept
+  question: 在 cert-manager 自动证书管理深度实践 中, HTTP-01 挑战 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md 的「HTTP-01 挑战」章节。
+  source: wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md
+  section: HTTP-01 挑战
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, 威胁模型分析 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md 的「威胁模型分析」章节。
+  source: wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md
+  section: 威胁模型分析
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, Java 应用 Kubernetes 安全架构 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md 的「Java 应用 Kubernetes 安全架构」章节。
+  source: wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md
+  section: Java 应用 Kubernetes 安全架构
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, SecurityManager 弃用说明 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md 的「SecurityManager 弃用说明」章节。
+  source: wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md
+  section: SecurityManager 弃用说明
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, SecurityContext 完整配置 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md 的「SecurityContext 完整配置」章节。
+  source: wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md
+  section: SecurityContext 完整配置
+- type: concept
+  question: 在 Java 应用 Kubernetes 安全加固深度实践 中, Pod Security Standards 实施 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md 的「Pod Security Standards 实施」章节。
+  source: wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md
+  section: Pod Security Standards 实施
+- type: concept
+  question: 在 P3 11 Security Incident Sop Compliance Checklist 中, 安全事件响应 SOP 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/P3-11-security-incident-sop-compliance-checklist.md 的「安全事件响应 SOP」章节。
+  source: wiki/07-安全/06-合规审计/P3-11-security-incident-sop-compliance-checklist.md
+  section: 安全事件响应 SOP
+- type: concept
+  question: 在 P3 11 Security Incident Sop Compliance Checklist 中, 密钥轮换自动化方案 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/P3-11-security-incident-sop-compliance-checklist.md 的「密钥轮换自动化方案」章节。
+  source: wiki/07-安全/06-合规审计/P3-11-security-incident-sop-compliance-checklist.md
+  section: 密钥轮换自动化方案
+- type: concept
+  question: 在 Compliance & Audit 中, 合规框架映射 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/index.md 的「合规框架映射」章节。
+  source: wiki/07-安全/06-合规审计/index.md
+  section: 合规框架映射
+- type: concept
+  question: 在 Compliance & Audit 中, 文档索引 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/index.md 的「文档索引」章节。
+  source: wiki/07-安全/06-合规审计/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Compliance & Audit 中, 合规审计检查清单 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/index.md 的「合规审计检查清单」章节。
+  source: wiki/07-安全/06-合规审计/index.md
+  section: 合规审计检查清单
+- type: concept
+  question: 在 Compliance & Audit 中, Related 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/index.md 的「Related」章节。
+  source: wiki/07-安全/06-合规审计/index.md
+  section: Related
+- type: concept
+  question: 在 Compliance & Audit 中, 文档 是什么?
+  answer: 参见 wiki/07-安全/06-合规审计/index.md 的「文档」章节。
+  source: wiki/07-安全/06-合规审计/index.md
+  section: 文档
+- type: concept
+  question: 在 Zero Trust Kubernetes 中, 零信任架构概述 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/01-zero-trust-kubernetes.md 的「零信任架构概述」章节。
+  source: wiki/07-安全/07-零信任架构/01-zero-trust-kubernetes.md
+  section: 零信任架构概述
+- type: concept
+  question: 在 Zero Trust Kubernetes 中, 服务网格 mTLS 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/01-zero-trust-kubernetes.md 的「服务网格 mTLS」章节。
+  source: wiki/07-安全/07-零信任架构/01-zero-trust-kubernetes.md
+  section: 服务网格 mTLS
+- type: concept
+  question: 在 Kubernetes Secrets Management Deep Dive 中, 密钥管理方案对比 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive.md 的「密钥管理方案对比」章节。
+  source: wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive.md
+  section: 密钥管理方案对比
+- type: concept
+  question: 在 Kubernetes Secrets Management Deep Dive 中, External Secrets Operator (ESO) 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive.md 的「External Secrets Operator (ESO)」章节。
+  source: wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive.md
+  section: External Secrets Operator (ESO)
+- type: comparison
+  question: Kubernetes Secrets Management Deep Dive 中有哪些技术对比?
+  answer: 参见 wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive.md 中的对比分析。
+  source: wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive.md
+- type: concept
+  question: 在 Zero Trust Network Architecture — Service Mesh mTLS and Microsegmentation 中, 零信任原则 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/03-zero-trust-network-mtls-microsegmentation.md 的「零信任原则」章节。
+  source: wiki/07-安全/07-零信任架构/03-zero-trust-network-mtls-microsegmentation.md
+  section: 零信任原则
+- type: concept
+  question: 在 Zero Trust Network Architecture — Service Mesh mTLS and Microsegmentation 中, Service Mesh mTLS（Istio） 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/03-zero-trust-network-mtls-microsegmentation.md 的「Service Mesh mTLS（Istio）」章节。
+  source: wiki/07-安全/07-零信任架构/03-zero-trust-network-mtls-microsegmentation.md
+  section: Service Mesh mTLS（Istio）
+- type: concept
+  question: 在 Zero Trust Architecture 中, 核心原则 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/index.md 的「核心原则」章节。
+  source: wiki/07-安全/07-零信任架构/index.md
+  section: 核心原则
+- type: concept
+  question: 在 Zero Trust Architecture 中, 文件索引 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/index.md 的「文件索引」章节。
+  source: wiki/07-安全/07-零信任架构/index.md
+  section: 文件索引
+- type: concept
+  question: 在 Zero Trust Architecture 中, 技术栈 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/index.md 的「技术栈」章节。
+  source: wiki/07-安全/07-零信任架构/index.md
+  section: 技术栈
+- type: concept
+  question: 在 Zero Trust Architecture 中, Related 是什么?
+  answer: 参见 wiki/07-安全/07-零信任架构/index.md 的「Related」章节。
+  source: wiki/07-安全/07-零信任架构/index.md
+  section: Related
+- type: concept
+  question: 在 Domain 05 Security Compliance 中, 概览 是什么?
+  answer: 参见 wiki/07-安全/index.md 的「概览」章节。
+  source: wiki/07-安全/index.md
+  section: 概览
+- type: concept
+  question: 在 Domain 05 Security Compliance 中, 子目录 是什么?
+  answer: 参见 wiki/07-安全/index.md 的「子目录」章节。
+  source: wiki/07-安全/index.md
+  section: 子目录
+- type: concept
+  question: 在 Domain 05 Security Compliance 中, 文档 是什么?
+  answer: 参见 wiki/07-安全/index.md 的「文档」章节。
+  source: wiki/07-安全/index.md
+  section: 文档

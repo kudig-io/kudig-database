@@ -47,7 +47,7 @@ difficulty: intermediate
 intent_queries:
   - ACK cluster lifecycle management full流程
   - aliyun cs cluster creation deletion upgrade
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster VPC vSwitch network planning
   - ACK cluster certificate renewal
   - Cluster upgrade replacement strategy
 trigger_keywords:
@@ -556,8 +556,8 @@ aliyun slb DeleteLoadBalancer --LoadBalancerId <slb-id>
 ## 延伸阅读
 
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
-- K8s 架构总览](../../../../../../01-%E9%9B%86%E7%BE%A4%E5%9F%BA%E7%A1%80/01-%E6%9E%B6%E6%9E%84%E6%80%BB%E8%A7%88/01-kubernetes-architecture-overview.md)
-- [集群生命周期管理](../../../../../../wiki/10-平台工程/02-运维/02-cluster-lifecycle-management.md)
+- K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [集群生命周期管理](../../../../../../wiki/12-平台工程/02-运维/02-cluster-lifecycle-management.md)
 
 
 <!-- risk-assessed -->

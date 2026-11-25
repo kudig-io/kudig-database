@@ -54,17 +54,17 @@ prerequisites:
 
 | # | 文档 | 难度 | 标签 | 估计阅读时间 |
 |---|---|---|---|---|
-| 1 | [[wiki/19-故障诊断/08-技能体系/01-node-notready.md|[[wiki/19-故障诊断/08-技能体系/01-node-notready\|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
-| 2 | [[wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled.md|[[wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
-| 3 | [[wiki/19-故障诊断/08-技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
-| 4 | [[wiki/19-故障诊断/08-技能体系/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
-| 5 | [[wiki/19-故障诊断/08-技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |
-| 6 | [[wiki/19-故障诊断/08-技能体系/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]] |  | skill, daily-ops |  |
-| 7 | [[wiki/19-故障诊断/08-技能体系/08-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]] |  | skill, daily-ops, storage |  |
-| 8 | [[wiki/19-故障诊断/08-技能体系/09-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]] |  | skill, daily-ops, deployment |  |
-| 9 | [[wiki/19-故障诊断/08-技能体系/10-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
-| 10 | [[wiki/19-故障诊断/08-技能体系/11-image-pull-failure.md|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
-| 11 | [[wiki/19-故障诊断/08-技能体系/12-control-plane-failure.md|11-control-plane-failure]]
+| 1 | [[skills/09-技能体系/01-node-notready.md|[[skills/09-技能体系/01-node-notready\|节点 NotReady 诊断与修复 / Node NotReady Diagnosis & Remediation]]iagnosis & Remediation — 数字人播报脚本|Node NotReady]] Diagnosis & Remediation]] |  | [[SKILL|skill]], daily-ops |  |
+| 2 | [[skills/09-技能体系/02-pod-crashloop-oomkilled.md|[[skills/09-技能体系/02-pod-crashloop-oomkilled|Pod CrashLoopBackOff & OOMKilled 诊断与修复]]]] |  | skill, daily-ops |  |
+| 3 | [[skills/09-技能体系/03-pod-pending.md|Pod Pending 调度失败诊断与修复]] |  | skill, daily-ops |  |
+| 4 | [[skills/09-技能体系/04-dns-resolution-failure.md|DNS 解析故障诊断与修复 / DNS Resolution Failure Diagnosis & Remediation]] |  | skill, daily-ops |  |
+| 5 | [[skills/09-技能体系/05-service-connectivity.md|Service 连通性与 Endpoint 异常诊断与修复 / Service Connectivity & Endpoint Diagnosis]] |  | skill, daily-ops |  |
+| 6 | [[skills/09-技能体系/06-certificate-expiry.md|证书过期与 TLS 故障诊断与修复 / Certificate Expiry & TLS Failure Diagnosis]] |  | skill, daily-ops |  |
+| 7 | [[skills/09-技能体系/08-pvc-storage-failure.md|PVC/PV/CSI 存储故障诊断与修复 / PVC/PV/CSI Storage Troubleshooting & Remediation]] |  | skill, daily-ops, storage |  |
+| 8 | [[skills/09-技能体系/09-deployment-rollout-failure.md|Deployment 滚动更新与回滚故障诊断 / Deployment Rollout & Rollback Failure Diagnosis]] |  | skill, daily-ops, deployment |  |
+| 9 | [[skills/09-技能体系/10-rbac-quota-failure.md|RBAC 权限与 ResourceQuota 故障诊断 / RBAC & ResourceQuota Troubleshooting]] |  | skill, daily-ops, rbac |  |
+| 10 | [[skills/09-技能体系/11-image-pull-failure.md|镜像拉取与仓库故障诊断 / Image Pull & Registry Troubleshooting]] |  | skill, daily-ops |  |
+| 11 | [[skills/09-技能体系/12-control-plane-failure.md|11-control-plane-failure]]
 - [[skills/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Pod 故障排查]]
 
 ## 技能体系架构

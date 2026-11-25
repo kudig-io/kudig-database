@@ -213,9 +213,9 @@ flowchart TD
 - [[skills/01-集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
 - [[skills/06-存储/csi-storage/诊断排障/ts-storage.md|ts-storage]] — 存储故障排查
 - [[skills/03-节点/skill-19-node-resource-pressure.md|skill-19-node-resource-pressure]] — 节点资源压力诊断与修复 / Node Resource Pressure Diagnosis & Remediation
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[cert-manager]] — cert-manager
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/certificate-fta.md|证书异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/certificate-fta.md|证书异常故障树分析]]
 
 <!-- risk-assessed -->

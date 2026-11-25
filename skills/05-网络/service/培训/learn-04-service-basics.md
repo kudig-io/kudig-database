@@ -394,19 +394,19 @@ kubectl delete svc <name>
 
 **关联文档**:
 - [../04-networking/04-ingress-basics.md](../../ingress/培训/lecturer/01-ingress-basics.md) — Ingress 基础
-- [../../故障诊断/topic-skills/05-service-connectivity.md](../../../../wiki/19-故障诊断/08-技能体系/05-service-connectivity.md) — Service 连通性 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/05-service-connectivity.md](../../../../skills/09-技能体系/05-service-connectivity.md) — Service 连通性 [[SKILL|Skill]]
 - [../../网络/](../../网络/) — Kubernetes 网络文档
 
 ## 相关概念
 
-- [[wiki/17-系统基础/06-知识字典/networking/service.md|service]]
+- [[wiki/21-知识字典/networking/service.md|service]]
 - 网络模型
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 

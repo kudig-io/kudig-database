@@ -288,18 +288,18 @@ iperf3 -c <server-ip> -t 30 -P 4
 | HTTPS 握手后卡死 | MTU 不匹配导致大包丢包 | `kubectl exec <pod> -- ping -M do -s 1472 <target>` | 修正 Pod/隧道/物理网卡 MTU |
 | Service Mesh 服务间调用失败 | Sidecar 注入失败 / DestinationRule 配置错误 | `kubectl get pods -n <ns>`; `istioctl analyze` | 重新注入 Sidecar；修正 DestinationRule |
 
-排查网络故障时，建议遵循先控制面后数据面、先节点后 Pod、先同节点后跨节点的分层思路。对于复杂场景，可结合 [[wiki/19-故障诊断/06-FTA故障树/fta-index.md|故障树]] 进行结构化分析。在排查过程中应做好抓包和日志留存，便于事后复盘。
+排查网络故障时，建议遵循先控制面后数据面、先节点后 Pod、先同节点后跨节点的分层思路。对于复杂场景，可结合 [[wiki/17-故障诊断/06-FTA故障树/fta-index.md|故障树]] 进行结构化分析。在排查过程中应做好抓包和日志留存，便于事后复盘。
 
 ## 5. 与其他域的协作边界
 
 | 本域职责 | 协作域 | 边界说明 |
 |---|---|---|
-| CNI / Service / Ingress 高可用架构 | [[wiki/01-集群基础/02-设计原则/02-production-architecture-design-principles.md|集群基础]] | 本域提供网络组件 HA 要求，集群域负责控制面、节点与升级基线 |
-| NetworkPolicy / mTLS / 证书生命周期 | [[wiki/08-安全/02-网络安全/01-network-security-policies.md|安全]] | 本域实施 L3/L4 网络隔离，安全域负责零信任架构、密钥与合规审计 |
-| 网络指标、流量拓扑、告警 | [[wiki/09-可观测性/02-指标/13-prometheus-enterprise-guide.md|可观测性]] | 本域定义网络黄金信号，可观测域负责采集、存储与可视化 |
-| 网络 SLO/SLI、容灾演练 | [[wiki/12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|可靠性]] | 本域提供网络组件 RTO/RPO 要求，可靠性域负责整体灾备设计 |
-| 网络故障树与现场诊断 | [[wiki/19-故障诊断/06-FTA故障树/fta-index.md|故障诊断]] | 本域提供网络专业知识，排障域负责结构化诊断流程 |
-| 值班、变更、事件响应 | [[wiki/13-生产运维/03-事件响应/04-on-call-playbook.md|生产运维]] | 本域提供网络专项 runbook，生产运维域负责值班体系与变更管理 |
+| CNI / Service / Ingress 高可用架构 | [[wiki/01-集群基础与系统/02-设计原则/02-production-architecture-design-principles.md|集群基础]] | 本域提供网络组件 HA 要求，集群域负责控制面、节点与升级基线 |
+| NetworkPolicy / mTLS / 证书生命周期 | [[wiki/07-安全/02-网络安全/01-network-security-policies.md|安全]] | 本域实施 L3/L4 网络隔离，安全域负责零信任架构、密钥与合规审计 |
+| 网络指标、流量拓扑、告警 | [[wiki/08-可观测性/02-指标/13-prometheus-enterprise-guide.md|可观测性]] | 本域定义网络黄金信号，可观测域负责采集、存储与可视化 |
+| 网络 SLO/SLI、容灾演练 | [[wiki/10-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|可靠性]] | 本域提供网络组件 RTO/RPO 要求，可靠性域负责整体灾备设计 |
+| 网络故障树与现场诊断 | [[wiki/17-故障诊断/06-FTA故障树/fta-index.md|故障诊断]] | 本域提供网络专业知识，排障域负责结构化诊断流程 |
+| 值班、变更、事件响应 | [[wiki/11-生产运维/03-事件响应/04-on-call-playbook.md|生产运维]] | 本域提供网络专项 runbook，生产运维域负责值班体系与变更管理 |
 
 明确协作边界可以避免上线前责任不清、运行期间互相推诿。网络域应主动输出网络组件的 SLO 要求、变更窗口建议和应急预案，而其他域则提供平台级支撑。跨域变更评审时，网络域代表应参与涉及 CNI、Ingress、证书和 DNS 的变更，确保网络层面的影响被充分评估。
 
@@ -326,13 +326,13 @@ iperf3 -c <server-ip> -t 30 -P 4
 - 网络灾难恢复 Runbook（待补充）
 
 ### 跨域参考
-- [[wiki/01-集群基础/02-设计原则/02-production-architecture-design-principles.md|集群生产架构设计原则]]
-- [[wiki/08-安全/02-网络安全/01-network-security-policies.md|网络安全策略]]
-- [[wiki/09-可观测性/02-指标/13-prometheus-enterprise-guide.md|Prometheus 企业级监控指南]]
-- [[wiki/12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 故障树]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 故障树]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/ingress-fta.md|Ingress 故障树]]
+- [[wiki/01-集群基础与系统/02-设计原则/02-production-architecture-design-principles.md|集群生产架构设计原则]]
+- [[wiki/07-安全/02-网络安全/01-network-security-policies.md|网络安全策略]]
+- [[wiki/08-可观测性/02-指标/13-prometheus-enterprise-guide.md|Prometheus 企业级监控指南]]
+- [[wiki/10-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md|Velero 备份恢复指南]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/networkpolicy-fta.md|NetworkPolicy 故障树]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 故障树]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/ingress-fta.md|Ingress 故障树]]
 
 ## 7. 快速检查脚本
 

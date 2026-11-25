@@ -52,7 +52,7 @@ title: Day 21: K8S 组件运维
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] control plane components运维
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] control plane components运维
   - [[coredns|CoreDNS]] troubleshooting DNS resolution
   - kube-proxy iptables IPVS mode
   - CNI Terway Flannel network troubleshooting
@@ -595,9 +595,9 @@ API Server 暴露了 Prometheus 指标（`:443/metrics`），关键指标包括 
 
 ## 延伸阅读
 
-- [K8s 架构与组件深入](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
-- [etcd 深入分析](../../../../../../wiki/01-集群基础/03-控制平面/11-etcd-deep-dive.md)
-- [API Server 深入分析](../../../../../../wiki/01-集群基础/03-控制平面/12-apiserver-deep-dive.md)
+- [K8s 架构与组件深入](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
+- [etcd 深入分析](../../../../../../wiki/01-集群基础与系统/03-控制平面/11-etcd-deep-dive.md)
+- [API Server 深入分析](../../../../../../wiki/01-集群基础与系统/03-控制平面/12-apiserver-deep-dive.md)
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/210-ack-cluster-management.md)
 - [组件故障排查总览](../../故障诊断/01-troubleshooting-overview.md)
 - [CoreDNS 排障指南](../../故障诊断/11-coredns-troubleshooting.md)

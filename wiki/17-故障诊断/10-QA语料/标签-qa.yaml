@@ -1,0 +1,519 @@
+domain: 标签
+total_questions: 110
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 containerd 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/containerd.md 的「核心定义」章节。
+  source: wiki/24-标签/01-核心平台/containerd.md
+  section: 核心定义
+- type: concept
+  question: 在 containerd 中, 容器运行时 (Container Runtime) 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/containerd.md 的「容器运行时 (Container Runtime)」章节。
+  source: wiki/24-标签/01-核心平台/containerd.md
+  section: 容器运行时 (Container Runtime)
+- type: concept
+  question: 在 containerd 中, containerd / CRI-O 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/containerd.md 的「containerd / CRI-O」章节。
+  source: wiki/24-标签/01-核心平台/containerd.md
+  section: containerd / CRI-O
+- type: operation
+  question: '如何执行与 containerd 相关的操作: crictl ps?'
+  answer: 参见 wiki/24-标签/01-核心平台/containerd.md 中的操作步骤。
+  source: wiki/24-标签/01-核心平台/containerd.md
+  command: crictl ps
+- type: troubleshooting
+  question: 如何排查 containerd 相关的故障?
+  answer: 参见 wiki/24-标签/01-核心平台/containerd.md 的故障排查章节。
+  source: wiki/24-标签/01-核心平台/containerd.md
+- type: comparison
+  question: containerd 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/01-核心平台/containerd.md 中的对比分析。
+  source: wiki/24-标签/01-核心平台/containerd.md
+- type: concept
+  question: 在 k8s 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/k8s.md 的「核心定义」章节。
+  source: wiki/24-标签/01-核心平台/k8s.md
+  section: 核心定义
+- type: concept
+  question: 在 k8s 中, 架构全景 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/k8s.md 的「架构全景」章节。
+  source: wiki/24-标签/01-核心平台/k8s.md
+  section: 架构全景
+- type: operation
+  question: '如何执行与 k8s 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 wiki/24-标签/01-核心平台/k8s.md 中的操作步骤。
+  source: wiki/24-标签/01-核心平台/k8s.md
+  command: kubectl get nodes -o wide
+- type: troubleshooting
+  question: 如何排查 k8s 相关的故障?
+  answer: 参见 wiki/24-标签/01-核心平台/k8s.md 的故障排查章节。
+  source: wiki/24-标签/01-核心平台/k8s.md
+- type: concept
+  question: 在 operator 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/operator.md 的「核心定义」章节。
+  source: wiki/24-标签/01-核心平台/operator.md
+  section: 核心定义
+- type: concept
+  question: 在 operator 中, Operator 清单模式 (Operator Manifest Patterns) 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/operator.md 的「Operator 清单模式 (Operator Manifest Patterns)」章节。
+  source: wiki/24-标签/01-核心平台/operator.md
+  section: Operator 清单模式 (Operator Manifest Patterns)
+- type: concept
+  question: 在 operator 中, 扩展机制 (Extension Mechanisms) 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/operator.md 的「扩展机制 (Extension Mechanisms)」章节。
+  source: wiki/24-标签/01-核心平台/operator.md
+  section: 扩展机制 (Extension Mechanisms)
+- type: concept
+  question: 在 operator 中, 概念 (Concepts) 是什么?
+  answer: 参见 wiki/24-标签/01-核心平台/operator.md 的「概念 (Concepts)」章节。
+  source: wiki/24-标签/01-核心平台/operator.md
+  section: 概念 (Concepts)
+- type: troubleshooting
+  question: 如何排查 operator 相关的故障?
+  answer: 参见 wiki/24-标签/01-核心平台/operator.md 的故障排查章节。
+  source: wiki/24-标签/01-核心平台/operator.md
+- type: comparison
+  question: operator 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/01-核心平台/operator.md 中的对比分析。
+  source: wiki/24-标签/01-核心平台/operator.md
+- type: concept
+  question: 在 networking 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/02-网络与存储/networking.md 的「核心定义」章节。
+  source: wiki/24-标签/02-网络与存储/networking.md
+  section: 核心定义
+- type: concept
+  question: 在 networking 中, 生产实践要点 是什么?
+  answer: 参见 wiki/24-标签/02-网络与存储/networking.md 的「生产实践要点」章节。
+  source: wiki/24-标签/02-网络与存储/networking.md
+  section: 生产实践要点
+- type: troubleshooting
+  question: 如何排查 networking 相关的故障?
+  answer: 参见 wiki/24-标签/02-网络与存储/networking.md 的故障排查章节。
+  source: wiki/24-标签/02-网络与存储/networking.md
+- type: comparison
+  question: networking 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/02-网络与存储/networking.md 中的对比分析。
+  source: wiki/24-标签/02-网络与存储/networking.md
+- type: concept
+  question: 在 storage 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/02-网络与存储/storage.md 的「核心定义」章节。
+  source: wiki/24-标签/02-网络与存储/storage.md
+  section: 核心定义
+- type: concept
+  question: 在 storage 中, 生产实践要点 是什么?
+  answer: 参见 wiki/24-标签/02-网络与存储/storage.md 的「生产实践要点」章节。
+  source: wiki/24-标签/02-网络与存储/storage.md
+  section: 生产实践要点
+- type: troubleshooting
+  question: 如何排查 storage 相关的故障?
+  answer: 参见 wiki/24-标签/02-网络与存储/storage.md 的故障排查章节。
+  source: wiki/24-标签/02-网络与存储/storage.md
+- type: comparison
+  question: storage 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/02-网络与存储/storage.md 中的对比分析。
+  source: wiki/24-标签/02-网络与存储/storage.md
+- type: concept
+  question: 在 security 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/03-安全与合规/security.md 的「核心定义」章节。
+  source: wiki/24-标签/03-安全与合规/security.md
+  section: 核心定义
+- type: concept
+  question: 在 security 中, 生产实践要点 是什么?
+  answer: 参见 wiki/24-标签/03-安全与合规/security.md 的「生产实践要点」章节。
+  source: wiki/24-标签/03-安全与合规/security.md
+  section: 生产实践要点
+- type: troubleshooting
+  question: 如何排查 security 相关的故障?
+  answer: 参见 wiki/24-标签/03-安全与合规/security.md 的故障排查章节。
+  source: wiki/24-标签/03-安全与合规/security.md
+- type: concept
+  question: 在 observability 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/04-可观测性/observability.md 的「核心定义」章节。
+  source: wiki/24-标签/04-可观测性/observability.md
+  section: 核心定义
+- type: concept
+  question: 在 observability 中, 生产实践要点 是什么?
+  answer: 参见 wiki/24-标签/04-可观测性/observability.md 的「生产实践要点」章节。
+  source: wiki/24-标签/04-可观测性/observability.md
+  section: 生产实践要点
+- type: troubleshooting
+  question: 如何排查 observability 相关的故障?
+  answer: 参见 wiki/24-标签/04-可观测性/observability.md 的故障排查章节。
+  source: wiki/24-标签/04-可观测性/observability.md
+- type: comparison
+  question: observability 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/04-可观测性/observability.md 中的对比分析。
+  source: wiki/24-标签/04-可观测性/observability.md
+- type: concept
+  question: 在 troubleshooting 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/04-可观测性/troubleshooting.md 的「核心定义」章节。
+  source: wiki/24-标签/04-可观测性/troubleshooting.md
+  section: 核心定义
+- type: concept
+  question: 在 troubleshooting 中, 诊断流程框架 是什么?
+  answer: 参见 wiki/24-标签/04-可观测性/troubleshooting.md 的「诊断流程框架」章节。
+  source: wiki/24-标签/04-可观测性/troubleshooting.md
+  section: 诊断流程框架
+- type: operation
+  question: '如何执行与 troubleshooting 相关的操作: kubectl get nodes -o wide?'
+  answer: 参见 wiki/24-标签/04-可观测性/troubleshooting.md 中的操作步骤。
+  source: wiki/24-标签/04-可观测性/troubleshooting.md
+  command: kubectl get nodes -o wide
+- type: troubleshooting
+  question: 如何排查 troubleshooting 相关的故障?
+  answer: 参见 wiki/24-标签/04-可观测性/troubleshooting.md 的故障排查章节。
+  source: wiki/24-标签/04-可观测性/troubleshooting.md
+- type: comparison
+  question: troubleshooting 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/04-可观测性/troubleshooting.md 中的对比分析。
+  source: wiki/24-标签/04-可观测性/troubleshooting.md
+- type: concept
+  question: 在 gitops 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/gitops.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/gitops.md
+  section: 核心定义
+- type: concept
+  question: 在 gitops 中, GitOps 平台 (GitOps Platforms) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/gitops.md 的「GitOps 平台 (GitOps Platforms)」章节。
+  source: wiki/24-标签/05-交付与运维/gitops.md
+  section: GitOps 平台 (GitOps Platforms)
+- type: concept
+  question: 在 gitops 中, 清单模式 (Manifest Patterns) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/gitops.md 的「清单模式 (Manifest Patterns)」章节。
+  source: wiki/24-标签/05-交付与运维/gitops.md
+  section: 清单模式 (Manifest Patterns)
+- type: troubleshooting
+  question: 如何排查 gitops 相关的故障?
+  answer: 参见 wiki/24-标签/05-交付与运维/gitops.md 的故障排查章节。
+  source: wiki/24-标签/05-交付与运维/gitops.md
+- type: comparison
+  question: gitops 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/05-交付与运维/gitops.md 中的对比分析。
+  source: wiki/24-标签/05-交付与运维/gitops.md
+- type: concept
+  question: 在 helm 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/helm.md
+  section: 核心定义
+- type: concept
+  question: 在 helm 中, Helm 清单模式 (Helm Manifest Patterns) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 的「Helm 清单模式 (Helm Manifest Patterns)」章节。
+  source: wiki/24-标签/05-交付与运维/helm.md
+  section: Helm 清单模式 (Helm Manifest Patterns)
+- type: concept
+  question: 在 helm 中, 扩展机制 (Extension Mechanisms) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 的「扩展机制 (Extension Mechanisms)」章节。
+  source: wiki/24-标签/05-交付与运维/helm.md
+  section: 扩展机制 (Extension Mechanisms)
+- type: concept
+  question: 在 helm 中, GitOps 与 Helm (GitOps & Helm) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 的「GitOps 与 Helm (GitOps & Helm)」章节。
+  source: wiki/24-标签/05-交付与运维/helm.md
+  section: GitOps 与 Helm (GitOps & Helm)
+- type: operation
+  question: '如何执行与 helm 相关的操作: helm search repo <keyword>?'
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 中的操作步骤。
+  source: wiki/24-标签/05-交付与运维/helm.md
+  command: helm search repo <keyword>
+- type: troubleshooting
+  question: 如何排查 helm 相关的故障?
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 的故障排查章节。
+  source: wiki/24-标签/05-交付与运维/helm.md
+- type: comparison
+  question: helm 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/05-交付与运维/helm.md 中的对比分析。
+  source: wiki/24-标签/05-交付与运维/helm.md
+- type: concept
+  question: 在 multi-cluster 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/multi-cluster.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/multi-cluster.md
+  section: 核心定义
+- type: concept
+  question: 在 multi-cluster 中, 概念 (Concepts) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/multi-cluster.md 的「概念 (Concepts)」章节。
+  source: wiki/24-标签/05-交付与运维/multi-cluster.md
+  section: 概念 (Concepts)
+- type: concept
+  question: 在 multi-cluster 中, 生产运维 (Production Operations) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/multi-cluster.md 的「生产运维 (Production Operations)」章节。
+  source: wiki/24-标签/05-交付与运维/multi-cluster.md
+  section: 生产运维 (Production Operations)
+- type: concept
+  question: 在 multi-cluster 中, GitOps 多集群 (GitOps Multi-Cluster) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/multi-cluster.md 的「GitOps 多集群 (GitOps Multi-Cluster)」章节。
+  source: wiki/24-标签/05-交付与运维/multi-cluster.md
+  section: GitOps 多集群 (GitOps Multi-Cluster)
+- type: troubleshooting
+  question: 如何排查 multi-cluster 相关的故障?
+  answer: 参见 wiki/24-标签/05-交付与运维/multi-cluster.md 的故障排查章节。
+  source: wiki/24-标签/05-交付与运维/multi-cluster.md
+- type: comparison
+  question: multi-cluster 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/05-交付与运维/multi-cluster.md 中的对比分析。
+  source: wiki/24-标签/05-交付与运维/multi-cluster.md
+- type: concept
+  question: 在 platform-engineering 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/platform-engineering.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/platform-engineering.md
+  section: 核心定义
+- type: concept
+  question: 在 platform-engineering 中, 平台构建 (Platform Building) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/platform-engineering.md 的「平台构建 (Platform Building)」章节。
+  source: wiki/24-标签/05-交付与运维/platform-engineering.md
+  section: 平台构建 (Platform Building)
+- type: concept
+  question: 在 platform-engineering 中, 运维管理 (Operations) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/platform-engineering.md 的「运维管理 (Operations)」章节。
+  source: wiki/24-标签/05-交付与运维/platform-engineering.md
+  section: 运维管理 (Operations)
+- type: troubleshooting
+  question: 如何排查 platform-engineering 相关的故障?
+  answer: 参见 wiki/24-标签/05-交付与运维/platform-engineering.md 的故障排查章节。
+  source: wiki/24-标签/05-交付与运维/platform-engineering.md
+- type: concept
+  question: 在 production 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/production.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/production.md
+  section: 核心定义
+- type: concept
+  question: 在 production 中, 生产运维核心 (Production Ops Core) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/production.md 的「生产运维核心 (Production Ops Core)」章节。
+  source: wiki/24-标签/05-交付与运维/production.md
+  section: 生产运维核心 (Production Ops Core)
+- type: concept
+  question: 在 production 中, 成本治理 (Cost Governance) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/production.md 的「成本治理 (Cost Governance)」章节。
+  source: wiki/24-标签/05-交付与运维/production.md
+  section: 成本治理 (Cost Governance)
+- type: troubleshooting
+  question: 如何排查 production 相关的故障?
+  answer: 参见 wiki/24-标签/05-交付与运维/production.md 的故障排查章节。
+  source: wiki/24-标签/05-交付与运维/production.md
+- type: concept
+  question: 在 reliability 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/reliability.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/reliability.md
+  section: 核心定义
+- type: concept
+  question: 在 reliability 中, SRE 实践 (SRE Practices) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/reliability.md 的「SRE 实践 (SRE Practices)」章节。
+  source: wiki/24-标签/05-交付与运维/reliability.md
+  section: SRE 实践 (SRE Practices)
+- type: concept
+  question: 在 reliability 中, 混沌工程 (Chaos Engineering) 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/reliability.md 的「混沌工程 (Chaos Engineering)」章节。
+  source: wiki/24-标签/05-交付与运维/reliability.md
+  section: 混沌工程 (Chaos Engineering)
+- type: concept
+  question: 在 sre 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/sre.md 的「核心定义」章节。
+  source: wiki/24-标签/05-交付与运维/sre.md
+  section: 核心定义
+- type: concept
+  question: 在 sre 中, SLO/SLI/错误预算 是什么?
+  answer: 参见 wiki/24-标签/05-交付与运维/sre.md 的「SLO/SLI/错误预算」章节。
+  source: wiki/24-标签/05-交付与运维/sre.md
+  section: SLO/SLI/错误预算
+- type: troubleshooting
+  question: 如何排查 sre 相关的故障?
+  answer: 参见 wiki/24-标签/05-交付与运维/sre.md 的故障排查章节。
+  source: wiki/24-标签/05-交付与运维/sre.md
+- type: comparison
+  question: sre 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/05-交付与运维/sre.md 中的对比分析。
+  source: wiki/24-标签/05-交付与运维/sre.md
+- type: concept
+  question: 在 ai-ml-infra 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/ai-ml-infra.md 的「核心定义」章节。
+  source: wiki/24-标签/06-AI与专项/ai-ml-infra.md
+  section: 核心定义
+- type: concept
+  question: 在 ai-ml-infra 中, AI 基础设施 (AI Infrastructure) 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/ai-ml-infra.md 的「AI 基础设施 (AI Infrastructure)」章节。
+  source: wiki/24-标签/06-AI与专项/ai-ml-infra.md
+  section: AI 基础设施 (AI Infrastructure)
+- type: concept
+  question: 在 ai-ml-infra 中, LLM 推理与服务 (LLM Inference & Serving) 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/ai-ml-infra.md 的「LLM 推理与服务 (LLM Inference & Serving)」章节。
+  source: wiki/24-标签/06-AI与专项/ai-ml-infra.md
+  section: LLM 推理与服务 (LLM Inference & Serving)
+- type: concept
+  question: 在 ai-ml-infra 中, AI Agent 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/ai-ml-infra.md 的「AI Agent」章节。
+  source: wiki/24-标签/06-AI与专项/ai-ml-infra.md
+  section: AI Agent
+- type: troubleshooting
+  question: 如何排查 ai-ml-infra 相关的故障?
+  answer: 参见 wiki/24-标签/06-AI与专项/ai-ml-infra.md 的故障排查章节。
+  source: wiki/24-标签/06-AI与专项/ai-ml-infra.md
+- type: comparison
+  question: ai-ml-infra 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/06-AI与专项/ai-ml-infra.md 中的对比分析。
+  source: wiki/24-标签/06-AI与专项/ai-ml-infra.md
+- type: concept
+  question: 在 gpu 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/gpu.md 的「核心定义」章节。
+  source: wiki/24-标签/06-AI与专项/gpu.md
+  section: 核心定义
+- type: concept
+  question: 在 gpu 中, AI 基础设施 (AI Infrastructure) 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/gpu.md 的「AI 基础设施 (AI Infrastructure)」章节。
+  source: wiki/24-标签/06-AI与专项/gpu.md
+  section: AI 基础设施 (AI Infrastructure)
+- type: concept
+  question: 在 gpu 中, LLM 推理 (LLM Inference/Serving) 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/gpu.md 的「LLM 推理 (LLM Inference/Serving)」章节。
+  source: wiki/24-标签/06-AI与专项/gpu.md
+  section: LLM 推理 (LLM Inference/Serving)
+- type: concept
+  question: 在 gpu 中, AI Agent 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/gpu.md 的「AI Agent」章节。
+  source: wiki/24-标签/06-AI与专项/gpu.md
+  section: AI Agent
+- type: troubleshooting
+  question: 如何排查 gpu 相关的故障?
+  answer: 参见 wiki/24-标签/06-AI与专项/gpu.md 的故障排查章节。
+  source: wiki/24-标签/06-AI与专项/gpu.md
+- type: concept
+  question: 在 research 中, 标签定义 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/research.md 的「标签定义」章节。
+  source: wiki/24-标签/06-AI与专项/research.md
+  section: 标签定义
+- type: concept
+  question: 在 research 中, Pages 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/research.md 的「Pages」章节。
+  source: wiki/24-标签/06-AI与专项/research.md
+  section: Pages
+- type: concept
+  question: 在 research 中, 研究标签使用指南 是什么?
+  answer: 参见 wiki/24-标签/06-AI与专项/research.md 的「研究标签使用指南」章节。
+  source: wiki/24-标签/06-AI与专项/research.md
+  section: 研究标签使用指南
+- type: comparison
+  question: research 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/06-AI与专项/research.md 中的对比分析。
+  source: wiki/24-标签/06-AI与专项/research.md
+- type: concept
+  question: 在 best-practices 中, 核心定义 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/best-practices.md 的「核心定义」章节。
+  source: wiki/24-标签/07-参考与最佳实践/best-practices.md
+  section: 核心定义
+- type: concept
+  question: 在 best-practices 中, 技能库最佳实践 (Skills Best Practices) 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/best-practices.md 的「技能库最佳实践 (Skills Best Practices)」章节。
+  source: wiki/24-标签/07-参考与最佳实践/best-practices.md
+  section: 技能库最佳实践 (Skills Best Practices)
+- type: concept
+  question: 在 best-practices 中, 部署 (Deployment) 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/best-practices.md 的「部署 (Deployment)」章节。
+  source: wiki/24-标签/07-参考与最佳实践/best-practices.md
+  section: 部署 (Deployment)
+- type: troubleshooting
+  question: 如何排查 best-practices 相关的故障?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/best-practices.md 的故障排查章节。
+  source: wiki/24-标签/07-参考与最佳实践/best-practices.md
+- type: concept
+  question: 在 deep-dive 中, 标签定义 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/deep-dive.md 的「标签定义」章节。
+  source: wiki/24-标签/07-参考与最佳实践/deep-dive.md
+  section: 标签定义
+- type: concept
+  question: 在 deep-dive 中, Pages 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/deep-dive.md 的「Pages」章节。
+  source: wiki/24-标签/07-参考与最佳实践/deep-dive.md
+  section: Pages
+- type: concept
+  question: 在 deep-dive 中, 深度解析标签指南 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/deep-dive.md 的「深度解析标签指南」章节。
+  source: wiki/24-标签/07-参考与最佳实践/deep-dive.md
+  section: 深度解析标签指南
+- type: troubleshooting
+  question: 如何排查 deep-dive 相关的故障?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/deep-dive.md 的故障排查章节。
+  source: wiki/24-标签/07-参考与最佳实践/deep-dive.md
+- type: comparison
+  question: deep-dive 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/deep-dive.md 中的对比分析。
+  source: wiki/24-标签/07-参考与最佳实践/deep-dive.md
+- type: concept
+  question: 在 papers 中, 标签定义 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/papers.md 的「标签定义」章节。
+  source: wiki/24-标签/07-参考与最佳实践/papers.md
+  section: 标签定义
+- type: concept
+  question: 在 papers 中, Pages 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/papers.md 的「Pages」章节。
+  source: wiki/24-标签/07-参考与最佳实践/papers.md
+  section: Pages
+- type: concept
+  question: 在 papers 中, 标签使用指南 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/papers.md 的「标签使用指南」章节。
+  source: wiki/24-标签/07-参考与最佳实践/papers.md
+  section: 标签使用指南
+- type: comparison
+  question: papers 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/papers.md 中的对比分析。
+  source: wiki/24-标签/07-参考与最佳实践/papers.md
+- type: concept
+  question: 在 reference 中, 标签定义 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/reference.md 的「标签定义」章节。
+  source: wiki/24-标签/07-参考与最佳实践/reference.md
+  section: 标签定义
+- type: concept
+  question: 在 reference 中, Pages 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/reference.md 的「Pages」章节。
+  source: wiki/24-标签/07-参考与最佳实践/reference.md
+  section: Pages
+- type: concept
+  question: 在 reference 中, Related Tags 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/reference.md 的「Related Tags」章节。
+  source: wiki/24-标签/07-参考与最佳实践/reference.md
+  section: Related Tags
+- type: troubleshooting
+  question: 如何排查 reference 相关的故障?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/reference.md 的故障排查章节。
+  source: wiki/24-标签/07-参考与最佳实践/reference.md
+- type: comparison
+  question: reference 中有哪些技术对比?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/reference.md 中的对比分析。
+  source: wiki/24-标签/07-参考与最佳实践/reference.md
+- type: concept
+  question: 在 visibility-public 中, 标签定义 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/visibility-public.md 的「标签定义」章节。
+  source: wiki/24-标签/07-参考与最佳实践/visibility-public.md
+  section: 标签定义
+- type: concept
+  question: 在 visibility-public 中, Pages 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/visibility-public.md 的「Pages」章节。
+  source: wiki/24-标签/07-参考与最佳实践/visibility-public.md
+  section: Pages
+- type: concept
+  question: 在 visibility-public 中, 公开可见性标签指南 是什么?
+  answer: 参见 wiki/24-标签/07-参考与最佳实践/visibility-public.md 的「公开可见性标签指南」章节。
+  source: wiki/24-标签/07-参考与最佳实践/visibility-public.md
+  section: 公开可见性标签指南
+- type: concept
+  question: 在 Tags 中, 原有标签 (Original Tags) 是什么?
+  answer: 参见 wiki/24-标签/index.md 的「原有标签 (Original Tags)」章节。
+  source: wiki/24-标签/index.md
+  section: 原有标签 (Original Tags)
+- type: concept
+  question: 在 Tags 中, 核心领域标签 (Domain Tags) 是什么?
+  answer: 参见 wiki/24-标签/index.md 的「核心领域标签 (Domain Tags)」章节。
+  source: wiki/24-标签/index.md
+  section: 核心领域标签 (Domain Tags)
+- type: concept
+  question: 在 Tags 中, 工程实践标签 (Engineering Practice Tags) 是什么?
+  answer: 参见 wiki/24-标签/index.md 的「工程实践标签 (Engineering Practice Tags)」章节。
+  source: wiki/24-标签/index.md
+  section: 工程实践标签 (Engineering Practice Tags)
+- type: concept
+  question: 在 Tags 中, 方法论与运营标签 (Methodology & Operations Tags) 是什么?
+  answer: 参见 wiki/24-标签/index.md 的「方法论与运营标签 (Methodology & Operations Tags)」章节。
+  source: wiki/24-标签/index.md
+  section: 方法论与运营标签 (Methodology & Operations Tags)
+- type: troubleshooting
+  question: 如何排查 Tags 相关的故障?
+  answer: 参见 wiki/24-标签/index.md 的故障排查章节。
+  source: wiki/24-标签/index.md

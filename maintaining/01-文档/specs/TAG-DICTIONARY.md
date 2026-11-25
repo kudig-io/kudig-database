@@ -265,8 +265,8 @@ tags: [k8s, etcd, control-plane, best-practice, production]
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[wiki/23-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
 - [[maintaining/01-文档/specs/SYNONYM-DICTIONARY.md|KUDIG 同义词与别名词典]]
 - [[maintaining/01-文档/specs/FRONTMATTER-SPEC.md|KUDIG Frontmatter 规范]]
 

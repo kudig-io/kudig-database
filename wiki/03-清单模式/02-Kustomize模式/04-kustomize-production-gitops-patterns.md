@@ -377,4 +377,4 @@ kubectl kustomize overlays/production | kubeval --strict
 
 - [[wiki/03-清单模式/02-Kustomize模式/index.md|Kustomize 模式]]
 - [[wiki/03-清单模式/02-Kustomize模式/01-kustomize-base-overlay-structure.md|Base/Overlay 结构]]
-- [[wiki/11-发布变更/01-GitOps/index.md|GitOps]]
+- [[wiki/09-发布变更/01-GitOps/index.md|GitOps]]

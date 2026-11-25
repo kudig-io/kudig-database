@@ -162,7 +162,7 @@ OAM 规范仓库停在 v0.3.x 线，上游 `oam-kubernetes-runtime` 已归档；
 - **差异化策略（override）**：对指定集群覆盖组件参数（如 prod 副本数不同）；
 - **健康与垃圾回收**：应用删除时按 `garbage-collect` policy 决定子集群资源是否级联清理。
 
-参考 [[wiki/10-平台工程/02-运维/10-multi-cluster-management.md|多集群管理]] 了解集群生命周期管理本身的更多方案。
+参考 [[wiki/12-平台工程/02-运维/10-multi-cluster-management.md|多集群管理]] 了解集群生命周期管理本身的更多方案。
 
 ---
 
@@ -360,13 +360,13 @@ vela cluster list   # 🟢
    - Git 仓库只存 `Application` CR；Argo CD/Flux 把它同步进控制集群；
    - KubeVela controller 负责渲染 + Workflow + 多集群分发；
    - 审批环节交给 `suspend`，GitOps 的"回滚=git revert"与 Workflow 状态需在 runbook 中对齐。
-   - 参考 [[wiki/11-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]] 与 [[wiki/11-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md|Flux GitOps 持续交付]]。
+   - 参考 [[wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md|Argo CD 企业级 GitOps]] 与 [[wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md|Flux GitOps 持续交付]]。
 
 2. **纯 KubeVela 模式**
    - CI 推镜像 → `vela live diff` 卡点 → `vela` CLI/VelaUX 触发；
    - 适合无 GitOps 基础设施、但需要应用抽象与多集群的团队。
 
-注意：不要让 Argo CD 直接管理 KubeVela 渲染出来的子资源（Deployment/Ingress），只管 Application 本身，否则会出现双控制器争抢。渐进发布若需金丝雀，可叠加 [[wiki/11-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]] 或 KubeVela 的 gateway/canary 相关 addon。
+注意：不要让 Argo CD 直接管理 KubeVela 渲染出来的子资源（Deployment/Ingress），只管 Application 本身，否则会出现双控制器争抢。渐进发布若需金丝雀，可叠加 [[wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md|Argo Rollouts 渐进式交付]] 或 KubeVela 的 gateway/canary 相关 addon。
 
 ---
 
@@ -487,4 +487,4 @@ kubectl -n vela-system exec deploy/kubevela-vela-core \
 - OAM 规范仓库：https://github.com/oam-dev/spec（v0.3.x，演进已停滞）
 - CUE 语言：https://cuelang.org/
 - VelaUX / Addon 仓库：https://github.com/kubevela/catalog
-- 本库相关：[[wiki/11-发布变更/01-GitOps/19-helm-production-guide.md|Helm 生产实践]]、[[wiki/11-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md|Argo CD/Flux 最佳实践]]、[[wiki/10-平台工程/02-运维/10-multi-cluster-management.md|多集群管理]]、[[wiki/22-概念/09-平台与发布/01-cluster-api-deep-dive.md|Cluster API 深度解析]]
+- 本库相关：[[wiki/09-发布变更/01-GitOps/19-helm-production-guide.md|Helm 生产实践]]、[[wiki/09-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md|Argo CD/Flux 最佳实践]]、[[wiki/12-平台工程/02-运维/10-multi-cluster-management.md|多集群管理]]、[[wiki/20-概念/09-平台与发布/01-cluster-api-deep-dive.md|Cluster API 深度解析]]

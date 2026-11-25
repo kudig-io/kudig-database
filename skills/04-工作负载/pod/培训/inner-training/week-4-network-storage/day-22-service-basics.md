@@ -49,7 +49,7 @@ title: Day 22: Service 基础
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - "[[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] Service类型"
+  - "[[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] Service类型"
   - "ClusterIP NodePort LoadBalancer"
   - "Service Endpoints"
   - "kube-proxy配置"

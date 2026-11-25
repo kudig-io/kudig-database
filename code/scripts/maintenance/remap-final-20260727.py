@@ -3,8 +3,8 @@
 """P0-1 最终收尾：多义/无匹配 wikilink 显式重映射（2026-07-27）
 
 处理 remap-title-links 无法自动解决的两类目标：
-1. 多义标题（多文件同标题）→ 人工选定规范目标（优先 wiki/20-最佳实践/01-best-practices
-   规范层与 wiki/22-概念/23-实体 提炼层）
+1. 多义标题（多文件同标题）→ 人工选定规范目标（优先 wiki/18-最佳实践/01-best-practices
+   规范层与 wiki/20-概念/23-实体 提炼层）
 2. 无标题匹配（旧目录链接、异名标题）→ 人工核对现存等价页
 
 所有映射目标在应用前校验存在性，缺失则告警且跳过。
@@ -25,43 +25,43 @@ WIKI = re.compile(r'\[\[([^\[\]]+?)\]\]')
 # 断链目标 -> 现存文件相对路径（无扩展名）
 REMAP = {
     # --- 多义标题：选定规范目标 ---
-    'Kubernetes 存储配置最佳实践': 'wiki/20-最佳实践/01-best-practices/infrastructure/storage',
-    'Kubernetes 灾难恢复最佳实践': 'wiki/20-最佳实践/01-best-practices/operations/disaster-recovery',
-    'Kubernetes 部署策略最佳实践': 'wiki/20-最佳实践/01-best-practices/operations/deployment',
-    'Kubernetes 通用最佳实践参考': 'wiki/20-最佳实践/01-best-practices/common-best-practices',
-    'Kubernetes 集群配置最佳实践': 'wiki/20-最佳实践/01-best-practices/infrastructure/kubernetes-cluster',
-    'Kubernetes 网络配置最佳实践': 'wiki/20-最佳实践/01-best-practices/infrastructure/networking',
-    'Kubernetes 日志管理最佳实践': 'wiki/20-最佳实践/01-best-practices/observability/logging',
-    'AI Agent 工程专题': 'wiki/15-AI基础设施/02-AI-Agents/README',
-    'Pod CrashLoopBackOff & OOMKilled 诊断与修复': 'wiki/19-故障诊断/08-技能体系/02-pod-crashloop-oomkilled',
-    'Container Runtime': 'wiki/22-概念/15-运行时与系统/container-runtime',
-    'HashiCorp Vault': 'wiki/23-实体/06-安全/vault',
-    'PDB 异常故障树分析': 'wiki/19-故障诊断/06-FTA故障树/list/pdb-fta',
-    'API Server 异常故障树分析': 'wiki/19-故障诊断/06-FTA故障树/list/apiserver-fta',
-    'Pod Lifecycle': 'wiki/22-概念/02-工作负载/pod-lifecycle',
+    'Kubernetes 存储配置最佳实践': 'wiki/18-最佳实践/01-best-practices/infrastructure/storage',
+    'Kubernetes 灾难恢复最佳实践': 'wiki/18-最佳实践/01-best-practices/operations/disaster-recovery',
+    'Kubernetes 部署策略最佳实践': 'wiki/18-最佳实践/01-best-practices/operations/deployment',
+    'Kubernetes 通用最佳实践参考': 'wiki/18-最佳实践/01-best-practices/common-best-practices',
+    'Kubernetes 集群配置最佳实践': 'wiki/18-最佳实践/01-best-practices/infrastructure/kubernetes-cluster',
+    'Kubernetes 网络配置最佳实践': 'wiki/18-最佳实践/01-best-practices/infrastructure/networking',
+    'Kubernetes 日志管理最佳实践': 'wiki/18-最佳实践/01-best-practices/observability/logging',
+    'AI Agent 工程专题': 'wiki/14-AI基础设施/02-AI-Agents/README',
+    'Pod CrashLoopBackOff & OOMKilled 诊断与修复': 'skills/09-技能体系/02-pod-crashloop-oomkilled',
+    'Container Runtime': 'wiki/20-概念/15-运行时与系统/container-runtime',
+    'HashiCorp Vault': 'wiki/22-实体/06-安全/vault',
+    'PDB 异常故障树分析': 'wiki/17-故障诊断/06-FTA故障树/list/pdb-fta',
+    'API Server 异常故障树分析': 'wiki/17-故障诊断/06-FTA故障树/list/apiserver-fta',
+    'Pod Lifecycle': 'wiki/20-概念/02-工作负载/pod-lifecycle',
     # --- 无标题匹配：人工核对等价页 ---
-    'Docker & Containerd 速查卡': 'wiki/17-系统基础/05-速查卡/docker',
-    '网络诊断速查卡': 'wiki/17-系统基础/05-速查卡/networking',
-    'KUDIG 故障排查 Prompt 模板': 'wiki/23-实体/15-参考与索引/kudig-prompts-catalog',
+    'Docker & Containerd 速查卡': 'wiki/01-集群基础与系统/12-速查卡/docker',
+    '网络诊断速查卡': 'wiki/01-集群基础与系统/12-速查卡/networking',
+    'KUDIG 故障排查 Prompt 模板': 'wiki/22-实体/15-参考与索引/kudig-prompts-catalog',
     'KUDIG Database — Global MOC': 'README',
     'KUDIG Database': 'README',
-    'urunc (Unikernel Container Runtime)': 'wiki/23-实体/03-运行时/urunc',
-    'KAITO (Kubernetes AI Toolchain Operator)': 'wiki/23-实体/11-AI与边缘/kaito',
-    'Secrets Management': 'wiki/08-安全/07-零信任架构/02-secrets-management-deep-dive',
+    'urunc (Unikernel Container Runtime)': 'wiki/22-实体/03-运行时/urunc',
+    'KAITO (Kubernetes AI Toolchain Operator)': 'wiki/22-实体/11-AI与边缘/kaito',
+    'Secrets Management': 'wiki/07-安全/07-零信任架构/02-secrets-management-deep-dive',
     'Manage Persistent Storage': 'skills/06-存储/csi-storage/manage-persistent-storage',
-    'wiki/15-AI基础设施/03-inference-serving/': 'wiki/15-AI基础设施/01-基础设施/17-llm-inference-serving',
-    'wiki/15-AI基础设施/02-gpu-scheduling/': 'wiki/15-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving',
-    'wiki/09-可观测性/03-tracing/': 'wiki/09-可观测性/04-链路追踪/index',
-    'wiki/22-概念/internal-developer-platform': 'wiki/22-概念/09-平台与发布/platform-engineering-idp',
-    'wiki/22-概念/error-budget': 'wiki/22-概念/08-可靠性与运维/slo-error-budget-framework',
-    'wiki/22-概念/incident-management': 'wiki/22-概念/08-可靠性与运维/incident-management-patterns',
-    'wiki/22-概念/troubleshooting-methodology': 'wiki/19-故障诊断/00-总览/03-systematic-troubleshooting-methodology',
-    'wiki/22-概念/root-cause-analysis': 'wiki/23-实体/15-参考与索引/fta-febm-methodology',
-    'wiki/19-故障诊断/07-FEBM方法论/02-evidence-collection-guide': 'wiki/19-故障诊断/07-FEBM方法论/02-febm-technical-implementation',
-    'wiki/19-故障诊断/07-FEBM方法论/03-hypothesis-verification': 'wiki/19-故障诊断/07-FEBM方法论/01-febm-theory-foundations',
-    'wiki/19-故障诊断/01-核心排障/01-pod-lifecycle-troubleshooting': 'wiki/19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting',
-    'wiki/19-故障诊断/01-核心排障/02-scheduling-resource-troubleshooting': 'wiki/19-故障诊断/01-核心排障/05-pod-pending-diagnosis',
-    'wiki/19-故障诊断/01-核心排障/05-control-plane-troubleshooting': 'wiki/19-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting',
+    'wiki/14-AI基础设施/03-inference-serving/': 'wiki/14-AI基础设施/01-基础设施/17-llm-inference-serving',
+    'wiki/14-AI基础设施/02-gpu-scheduling/': 'wiki/14-AI基础设施/05-K8s-AI基础设施/02-gpu-cluster-scheduling-inference-serving',
+    'wiki/08-可观测性/03-tracing/': 'wiki/08-可观测性/04-链路追踪/index',
+    'wiki/20-概念/internal-developer-platform': 'wiki/20-概念/09-平台与发布/platform-engineering-idp',
+    'wiki/20-概念/error-budget': 'wiki/20-概念/08-可靠性与运维/slo-error-budget-framework',
+    'wiki/20-概念/incident-management': 'wiki/20-概念/08-可靠性与运维/incident-management-patterns',
+    'wiki/20-概念/troubleshooting-methodology': 'wiki/17-故障诊断/00-总览/03-systematic-troubleshooting-methodology',
+    'wiki/20-概念/root-cause-analysis': 'wiki/22-实体/15-参考与索引/fta-febm-methodology',
+    'wiki/17-故障诊断/07-FEBM方法论/02-evidence-collection-guide': 'wiki/17-故障诊断/07-FEBM方法论/02-febm-technical-implementation',
+    'wiki/17-故障诊断/07-FEBM方法论/03-hypothesis-verification': 'wiki/17-故障诊断/07-FEBM方法论/01-febm-theory-foundations',
+    'wiki/17-故障诊断/01-核心排障/01-pod-lifecycle-troubleshooting': 'wiki/17-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting',
+    'wiki/17-故障诊断/01-核心排障/02-scheduling-resource-troubleshooting': 'wiki/17-故障诊断/01-核心排障/05-pod-pending-diagnosis',
+    'wiki/17-故障诊断/01-核心排障/05-control-plane-troubleshooting': 'wiki/17-故障诊断/01-核心排障/01-control-plane-apiserver-troubleshooting',
 }
 
 

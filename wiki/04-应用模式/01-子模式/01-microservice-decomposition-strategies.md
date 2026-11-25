@@ -462,7 +462,7 @@ message OrderCreatedEvent {
 
 - [[wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns|Event Sourcing 与 CQRS]]
 - [[wiki/04-应用模式/01-子模式/03-saga-distributed-transaction|Saga 分布式事务]]
-- [[wiki/10-平台工程/04-开发体验/01-inner-source-contribution-model|内部开源贡献模型]]
+- [[wiki/12-平台工程/04-开发体验/01-inner-source-contribution-model|内部开源贡献模型]]
 
 ## See Also
 

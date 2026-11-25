@@ -32,4 +32,4 @@ prerequisites:
 - prometheus-basics
 ---
 
-> **内容已并入主场**：[[wiki/17-系统基础/06-知识字典/security/pod-security-admission.md|Pod 安全准入]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/21-知识字典/security/pod-security-admission.md|Pod 安全准入]]（本页为重排去重桩，正文见主场）

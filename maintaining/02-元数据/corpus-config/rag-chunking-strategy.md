@@ -147,7 +147,7 @@ embeddings = OpenAIEmbeddings(model='text-embedding-3-large')
 vectorstore = Chroma.from_documents(chunks, embeddings)
 
 # 4. 检索
-results = vectorstore.similarity_search('[[wiki/22-概念/02-工作负载/pod-lifecycle.md|pod]] CrashLoopBackOff 怎么排查', k=5)
+results = vectorstore.similarity_search('[[wiki/20-概念/02-工作负载/pod-lifecycle.md|pod]] CrashLoopBackOff 怎么排查', k=5)
 ```
 
 

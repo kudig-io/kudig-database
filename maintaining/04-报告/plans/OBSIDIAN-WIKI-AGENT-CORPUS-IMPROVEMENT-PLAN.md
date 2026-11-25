@@ -469,7 +469,7 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 ## Obsidian 相关文档
 
 - _reports/CONTENT-DEEP-EVALUATION-2026-05-19.md
-- [[wiki/21-生态参考/03-领域索引/README.md|项目报告 (Reports)]]
+- [[wiki/19-生态参考/03-领域索引/README.md|项目报告 (Reports)]]
 - _reports/CONTENT-DEEP-EVALUATION-PROGRESS-2026-05-19.md
 - _reports/CONTENT-GAP-ANALYSIS.md
 - _reports/DEEP-RESEARCH-ASSESSMENT.md
@@ -491,6 +491,6 @@ cross_refs: [{ type: "domain", path: "...", label: "..." }]
 
 - [[README|README]]
 - [[MOC|MOC]]
-- [[wiki/17-系统基础/05-速查卡/k8s.md|k8s]]
+- [[wiki/01-集群基础与系统/12-速查卡/k8s.md|k8s]]
 
 <!-- risk-assessed -->

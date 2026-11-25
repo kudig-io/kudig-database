@@ -42,7 +42,7 @@ title: Day 20: Pod 容器组进阶
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod scheduling affinity anti-affinity
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod scheduling affinity anti-affinity
   - Pod liveness readiness startup probes
   - Pod resources requests limits
   - Kubernetes nodeSelector nodeAffinity

@@ -335,7 +335,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 ---
 
-> **Q13–Q20：集群组成组件专项**（2026-10-16 追加）。底料取自知识库 `wiki/01-集群基础/03-控制平面/` 深挖笔记（scheduler 20 / KCM 13 / kubelet 15 / kube-proxy 16 / runtime 21 / PKI 38 / HA 03）。Q1–Q12 已打透 etcd 与 apiserver，这批补齐剩余核心组件。
+> **Q13–Q20：集群组成组件专项**（2026-10-16 追加）。底料取自知识库 `wiki/01-集群基础与系统/03-控制平面/` 深挖笔记（scheduler 20 / KCM 13 / kubelet 15 / kube-proxy 16 / runtime 21 / PKI 38 / HA 03）。Q1–Q12 已打透 etcd 与 apiserver，这批补齐剩余核心组件。
 > 同主题白话讲解版（先看它建立理解，再回来背这边的「30 秒答」）：`maintaining/04-报告/k8s-集群核心组件-快问快答-白话版.md`。
 
 ## Q13. 讲讲 Pod 从提交到落节点的完整调度过程（控制面/scheduler）
@@ -539,7 +539,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - `kubectl -n kube-system logs ds/terway-eniip -c terway --tail=100 | grep -i "alloc\|eni"`
 - `terway-cli show [--detail | --eni | --pod ns/name]`；泄漏 IP 手动 `terway-cli release --ip <ip>`
 - CRD 侧：`kubectl get podeni -A` 看 Pod↔ENI 绑定
-- KB 案例：`wiki/13-生产运维/05-工单案例/ticket-case-001-terway-eni-exhaustion`
+- KB 案例：`wiki/11-生产运维/05-工单案例/ticket-case-001-terway-eni-exhaustion`
 
 **红线**｜❌ IP 不够就重启 Terway DaemonSet——治标，弹缩风暴时反而制造抖动；❌ 不看 vSwitch 余量直接升配节点——烧钱且可能没解决根因；❌ 答不出 terway-cli 这个工具名。
 
@@ -1653,7 +1653,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ 只看 bytes 不看 inodes（爆得最早的反而不在监控里）；❌ Released PV 没告警——那是删除链路断掉的信号（Q80）；❌ 云盘按"本地盘无限速"的假设做容量规划。
 
-**下一问**｜本专题（PV/PVC 基础 Q48–Q57 + 进阶 Q79–Q86）已收束成 KB 深挖笔记 `wiki/22-概念/04-存储/03-pv-pvc-lifecycle-deep-dive.md`——下一专题：HPA/VPA（Q47 的另一半钩子）。
+**下一问**｜本专题（PV/PVC 基础 Q48–Q57 + 进阶 Q79–Q86）已收束成 KB 深挖笔记 `wiki/20-概念/04-存储/03-pv-pvc-lifecycle-deep-dive.md`——下一专题：HPA/VPA（Q47 的另一半钩子）。
 
 
 ## Q87. "外部 controller 用 patch 更新 Service，会冲掉别的 controller 加的 finalizer"——这话对吗？（API 机制/finalizer·并发写）
@@ -1672,13 +1672,13 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ 说"默认 strategic patch 会覆盖别人的 finalizer"——并集语义只加不删；❌ 说"patch 天然安全可以随便写 finalizers 字段"——`--type=merge` 携带旧列表同样整体替换；❌ 对共享对象做无 RV 整体 PUT；❌ 不确认外部资源清理就手工摘 finalizer；❌ controller 用 SSA 认领 `metadata.finalizers`。
 
-**下一问**｜对象删除时，ownerReference 级联（GC）和 finalizer 谁先动？有没有两者都管不到的删除死角？（→ 呼应 [[wiki/22-概念/01-核心架构/02-garbage-collection-owner-reference.md|GC 级联删除]]）
+**下一问**｜对象删除时，ownerReference 级联（GC）和 finalizer 谁先动？有没有两者都管不到的删除死角？（→ 呼应 [[wiki/20-概念/01-核心架构/02-garbage-collection-owner-reference.md|GC 级联删除]]）
 
 ---
 
 ---
 
-> **Q88–Q93：集群组件·扩展与治理层专项**（2026-10-20 追加）。Q13–Q20 覆盖核心组件本身，这批补齐围绕 apiserver 的扩展与治理层：请求链路总纲 / CRD vs 聚合 apiserver / 准入 webhook / CCM / 指标链路 / TLS Bootstrap。底料与展开版（含全景串联图）：`wiki/01-集群基础/03-控制平面/42-cluster-extension-and-governance-deep-dive.md`。与 Q87（finalizer 并发写）互补：那卡讲单点 API 机制，这批讲整条治理链。
+> **Q88–Q93：集群组件·扩展与治理层专项**（2026-10-20 追加）。Q13–Q20 覆盖核心组件本身，这批补齐围绕 apiserver 的扩展与治理层：请求链路总纲 / CRD vs 聚合 apiserver / 准入 webhook / CCM / 指标链路 / TLS Bootstrap。底料与展开版（含全景串联图）：`wiki/01-集群基础与系统/03-控制平面/42-cluster-extension-and-governance-deep-dive.md`。与 Q87（finalizer 并发写）互补：那卡讲单点 API 机制，这批讲整条治理链。
 
 ## Q88. 一个写请求进 apiserver，要过几道门？（控制面/链路总纲）
 
@@ -1790,7 +1790,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 ---
 
-> **Q94–Q103：HPA/VPA 弹性伸缩专项**（2026-10-20 追加）。Q68–Q87 已被并行会话占用（专有云节点池 / SOFA CCM / Calico / OOM 系列 / ACK One OCM / 存储 CSI·快照·finalizer / 控制面链路·API 扩展·TLS Bootstrap 系列），本批从 Q94 续编。Q47 已打透 CFS 限流、Q41 已背 CA/Karpenter，本批补齐副本层与规格层弹性。深度版（四层金字塔/决策树/共存机理图）：`wiki/22-概念/07-调度与资源/hpa-vpa-autoscaling-deep-dive.md`。
+> **Q94–Q103：HPA/VPA 弹性伸缩专项**（2026-10-20 追加）。Q68–Q87 已被并行会话占用（专有云节点池 / SOFA CCM / Calico / OOM 系列 / ACK One OCM / 存储 CSI·快照·finalizer / 控制面链路·API 扩展·TLS Bootstrap 系列），本批从 Q94 续编。Q47 已打透 CFS 限流、Q41 已背 CA/Karpenter，本批补齐副本层与规格层弹性。深度版（四层金字塔/决策树/共存机理图）：`wiki/20-概念/07-调度与资源/hpa-vpa-autoscaling-deep-dive.md`。
 
 ## Q94. HPA 的扩缩公式？Utilization 的分母是谁？（弹性/HPA）
 
@@ -1949,7 +1949,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **一句话**｜**HPA 管"几个"、VPA 管"多大"、CA/Karpenter 管"多少台"、KEDA/Knative 管"要不要（0 还是 1）"**——被问"你们怎么做弹性"，先分层再谈参数。
 
-**30 秒答**｜自下而上：**副本层** HPA/KEDA（Q94–Q98）；**规格层** VPA（Q99–Q101）；**节点层** CA 改节点组 vs Karpenter JIT 直接 bind（Q41），触发信号是 HPA 扩容后的 Pending——两层在"Pending"上咬合；**请求驱动层** Knative/KPA（Q102 一句带过）。联动链背一遍：流量涨 → HPA 扩副本 → 节点不够 Pod Pending → CA/Karpenter 补节点 → Pod 落地。选型判断线：无状态可水平扩 → HPA 主力；单实例大应用 → VPA 精调（Off 起步）；事件驱动/缩零 → KEDA；**副本数总在 min/max 边缘 → 回头调 HPA 目标或做 VPA rightsizing，别硬堆 maxReplicas**。配套深度笔记：`wiki/22-概念/07-调度与资源/hpa-vpa-autoscaling-deep-dive.md`（金字塔图 + 决策树 + 共存机理）。
+**30 秒答**｜自下而上：**副本层** HPA/KEDA（Q94–Q98）；**规格层** VPA（Q99–Q101）；**节点层** CA 改节点组 vs Karpenter JIT 直接 bind（Q41），触发信号是 HPA 扩容后的 Pending——两层在"Pending"上咬合；**请求驱动层** Knative/KPA（Q102 一句带过）。联动链背一遍：流量涨 → HPA 扩副本 → 节点不够 Pod Pending → CA/Karpenter 补节点 → Pod 落地。选型判断线：无状态可水平扩 → HPA 主力；单实例大应用 → VPA 精调（Off 起步）；事件驱动/缩零 → KEDA；**副本数总在 min/max 边缘 → 回头调 HPA 目标或做 VPA rightsizing，别硬堆 maxReplicas**。配套深度笔记：`wiki/20-概念/07-调度与资源/hpa-vpa-autoscaling-deep-dive.md`（金字塔图 + 决策树 + 共存机理）。
 
 **弹药**
 - 联动故障面：HPA 扩容打爆镜像仓库（Q7 尾钩）；VPA 调大 requests 间接触发 CA 扩节点（成本联动，Q101）
@@ -1958,7 +1958,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ 只会答"我们有 HPA"——四个动词（几个/多大/多少台/要不要）一个都说不全；❌ 弹性只谈扩不谈缩（缩容策略才是生产事故高发段）；❌ 分不清"HPA 扩容失败"（指标/参数层）和"节点不够"（Pending → CA 层）。
 
-**下一专题**｜渐进式交付（Argo Rollouts/Flagger 金丝雀分析——Q65 埋的钩子；底料在 `wiki/11-发布变更/03-Progressive-Delivery/`）。
+**下一专题**｜渐进式交付（Argo Rollouts/Flagger 金丝雀分析——Q65 埋的钩子；底料在 `wiki/09-发布变更/03-Progressive-Delivery/`）。
 
 ---
 
@@ -1976,7 +1976,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - state 裁剪：精简字段不给整份 YAML、永远附最近变更、Secret/Token/证书绝不进 state
 - 成本算式：$0.042/M × 1.5K token ≈ $0.000063/次 ≈ ¥0.00044，×1 万次 ≈ ¥4.4/天；flash 级 LLM 钱同量级——差别在延迟、校准概率、输出可靠、多问隔离
 - 与 LLM function calling 方向相反：LLM 生成 JSON 让你调函数，Jev 本身就是函数（state+questions 进、类型化判断出）
-- 深度文档：wiki/15-AI基础设施/02-AI-Agents/53-jev-judgment-model-system-one-k8s-ops（API 契约/挂法时序图/六模板/三路线成本/决策树）
+- 深度文档：wiki/14-AI基础设施/02-AI-Agents/53-jev-judgment-model-system-one-k8s-ops（API 契约/挂法时序图/六模板/三路线成本/决策树）
 
 **红线**｜❌ 把判断模型当小号聊天模型让它解释根因/生成修复 YAML——输出里根本没有文本位；❌ 说 Jev 可以私有化部署或拿集群数据微调——官方明确不做，所有账户共享权重；❌ 阈值或副作用放在模型/prompt 里——必须在代码里；❌ 直接信 confidence 0.9 不做校准验证——"校准"是训练目标不是保证；❌ 集群原始 Secret/日志不脱敏发外部 API；❌ 高错误成本且无兜底流程的动作（删 ns、drain 生产节点、改 etcd）交给概率接口自动执行；❌ 把官方"快 193 倍省 444 倍"当承诺——理想条件数字且定价无公开页。
 
@@ -1995,11 +1995,11 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - 接手新客户 30/60/90：30 天摸底不表态 → 60 天建机制赢一场小胜 → 90 天出年度服务规划对齐高层
 - QBR 三段式：回顾（数据）→对齐（下季度重点）→升级（高层现场拍板）；会前逐一对齐，QBR 上不允许出现 surprise
 - 续约提前 6 个月布局：技术信任是续约的必要条件不是充分条件
-- 技术侧对照：故障处理的技术动作见 Q74–Q77 OOM 工单复盘（五步刀法是技术侧范例）；KB 深挖 `wiki/13-生产运维/09-TAM服务方法论/01-tam-banking-large-project-methodology.md`
+- 技术侧对照：故障处理的技术动作见 Q74–Q77 OOM 工单复盘（五步刀法是技术侧范例）；KB 深挖 `wiki/11-生产运维/09-TAM服务方法论/01-tam-banking-large-project-methodology.md`
 
 **红线**｜❌ 故障时消失或先隐瞒再"确认一下"（No Surprise 是铁律，一次清零）；❌ 会上随口"没问题"、纪要不写分歧只写共识；❌ "顺手帮忙"不登记，滚成免费劳动力还价值不可见；❌ 只懂技术不懂监管与客户 KPI，永远进不了决策桌；❌ 为成单/续约越合规红线；❌ 只做传声筒（只转发不复核）或只做保姆（事事下场），前者丢信任后者丢杠杆。
 
-**下一问**｜重大故障的黄金 24 小时，TAM 在战时指挥部里具体做什么、不做什么？（→ 呼应 [[wiki/13-生产运维/03-事件响应/02-war-room-coordination-procedures.md|War-Room 协同]]；技术侧呼应 Q76）
+**下一问**｜重大故障的黄金 24 小时，TAM 在战时指挥部里具体做什么、不做什么？（→ 呼应 [[wiki/11-生产运维/03-事件响应/02-war-room-coordination-procedures.md|War-Room 协同]]；技术侧呼应 Q76）
 
 ---
 
@@ -2014,7 +2014,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - 建完立刻做的基线：RBAC + RRSA、节点池拆分（系统/业务/GPU）与标签 taint、基线加固扫描、SLS 告警、备份中心开启、ENI/ECS 配额复核
 - 网段一次给足：VPC /16 级别、Pod vSwitch 按终态规模倒推、Service CIDR 留 /20 以上
 - 专有版 vs 托管版一句话：Master 谁养——养 etcd 的活归谁
-- KB 深挖：`wiki/18-云厂商/01-阿里云/公有云-ACK/08-ack-cluster-lifecycle-create-upgrade.md`（不可改清单 / 七阶段 / precheck 表 / 排障表）
+- KB 深挖：`wiki/16-云厂商/01-阿里云/公有云-ACK/08-ack-cluster-lifecycle-create-upgrade.md`（不可改清单 / 七阶段 / precheck 表 / 排障表）
 
 **红线**｜❌ "以后再把 Flannel 换成 Terway / 改 Service 网段"——都改不了，只能迁集群；❌ 网段不做终态规划，Pod IP 用光才想起扩（只能加 vSwitch，VPC 网段不能改）；❌ 只会点控制台，说不出授权角色、节点注册链路这些背后动作；❌ 新建还选专有版（除非客户合规硬要求）。
 
@@ -2056,7 +2056,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ `drain --force --grace-period=0` 一把梭——绕过 PDB 与优雅终止（Q34），有状态服务直接数据不一致；❌ 看到 Pending 就删 Pod——没容量删了还是 Pending，先扩容；❌ 控制面升级失败幻想"回退旧版本"——单向门；❌ 不暂停任务就排障——一边排一边继续滚，雪球越滚越大。
 
-**下一问**｜收口对比：节点池滚动升级 vs Deployment 滚动更新——三点像（分批 / 排水即优雅终止 / 可暂停），一点本质不同（不可回滚）；深挖见 KB 笔记 `wiki/18-云厂商/01-阿里云/公有云-ACK/08-ack-cluster-lifecycle-create-upgrade.md` §6。
+**下一问**｜收口对比：节点池滚动升级 vs Deployment 滚动更新——三点像（分批 / 排水即优雅终止 / 可暂停），一点本质不同（不可回滚）；深挖见 KB 笔记 `wiki/16-云厂商/01-阿里云/公有云-ACK/08-ack-cluster-lifecycle-create-upgrade.md` §6。
 
 ---
 
@@ -2071,7 +2071,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - 第四块拼图是 **N/S**：多集群 Ingress / Gateway API 多集群网关按权重把入口流量分到不同集群，三模式都不管这段
 - Karmada 官方口径是"多集群调度与编排控制面"，服务网格要靠伴生组件；OCM 的 Placement 只选集群不切副本（呼应 Q78）——两者都证明"调度 ≠ 通信、纳管 ≠ 调度"
 - 决策树三句：只要统一治理与配置下发 → Hub-Spoke；要按策略分布副本、多地容灾 → Federation；微服务要跨集群互调、统一身份 → Mesh；全要 → 叠加
-- KB 深挖：`wiki/22-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive.md`；三模式架构图见 `wiki/27-资产/architecture-diagrams/architecture-multi-cluster.md`
+- KB 深挖：`wiki/20-概念/01-核心架构/05-multi-cluster-architecture-patterns-deep-dive.md`；三模式架构图见 `wiki/25-资产/architecture-diagrams/architecture-multi-cluster.md`
 
 **红线**｜❌ 把 Karmada / KubeFed 说成能让 Pod 跨集群通信；❌ 把 ArgoCD ApplicationSet 多集群部署说成联邦调度（它是模板展开，没有副本切分与故障迁移）；❌ 把三模式当互斥选项二选一；❌ 说 KubeFed 还是主流（v2 社区已归档，Karmada 已 CNCF Graduated）。
 
@@ -2170,7 +2170,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ 把"Karmada 做了故障迁移"等同"业务已恢复"（流量没切就是空转）；❌ 不谈数据层就承诺多活 RPO=0；❌ 异地机房当同城双活用（延迟决定复制模式）；❌ 演练过一次就当容灾达标。
 
-**下一问**｜多集群 GitOps 怎么防漂移？ArgoCD ApplicationSet 多集群生成器与 Hub 单点怎么解？（→ 底料 `wiki/11-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md`，呼应 Q110 的 Hub 对账风险）
+**下一问**｜多集群 GitOps 怎么防漂移？ArgoCD ApplicationSet 多集群生成器与 Hub 单点怎么解？（→ 底料 `wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md`，呼应 Q110 的 Hub 对账风险）
 
 ---
 
@@ -2184,7 +2184,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - 根因机关：cloud-node-lifecycle"云 API 查不到实例 → 删 Node"是正当逻辑，叠加第二个 CCM 时它就是误删机关——原则：**查不到 ≠ 不存在，只有持有该节点云身份的一方才有删除判定权**
 - `spec.loadBalancerClass`（KEP-1959，1.24 GA）是官方给"多 LB 实现共存"的分域开关：设了 class 的 Service 云厂商 service 控制器直接忽略；MetalLB 与云 CCM 共存走的就是它
 - ACK 存量所有权样板：复用已有 SLB 走 `service.beta.kubernetes.io/alibaba-cloud-loadbalancer-id`，默认不覆盖已有监听（force-override-listeners 默认 false）
-- 深挖笔记：[[wiki/01-集群基础/03-控制平面/43-dual-cloud-controller-coexistence-deep-dive.md|双 CCM 分域共治深度剖析]]；架构分工见 Q72
+- 深挖笔记：[[wiki/01-集群基础与系统/03-控制平面/43-dual-cloud-controller-coexistence-deep-dive.md|双 CCM 分域共治深度剖析]]；架构分工见 Q72
 
 **红线**｜❌ 看到后端抖就重启 CCM——抢写不解决，重启后照旧；❌ 拿删 finalizer 当常规解卡手段（Q87 的并集语义坑）；❌ 给存量 Service 现场改 loadBalancerClass——字段不可变，只能重建滚动切。
 
@@ -2196,7 +2196,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **一句话**｜quorum=⌊N/2⌋+1 的法定多数派，威力来自**交集定理**——任意两个多数派必有公共节点，所以一个 term 只能有一个 Leader、已提交数据不会丢；2f+1 容忍 f，4 节点 quorum=3 只容忍 1，和 3 节点一样还多一台复制开销。
 
-**30 秒答**｜先定义后数学：写要落到多数派才 commit、选主要拿多数派选票；因任意两个多数派集合必相交，可推出 ①选举安全性（一个 term 至多一个 Leader）②Leader 完备性（新 Leader 必含全部已提交条目）——这就是"CP、失 quorum 拒写"的数学根基。容错表：3 容 1、5 容 2、7 容 3。判断线：**日常 3 节点够；要"一台维护+一台故障"并行才上 5**（代价：每次写等 3 台落盘、peer 流量涨）；偶数无容错增益还易选举平票。拓扑判断线：**etcd 单 Region 跨 AZ 展开**（3→1-1-1，5→2-2-1），跨 Region RTT 30–100ms 会打爆默认心跳（100ms）/选举超时（1000ms），先调拓扑再调参（election ≥10× heartbeat）。加分细节：etcd 3.5 起 `--pre-vote` 默认开（分区节点回来先预选确认能拿多数派才 bump term，不凭高 term 顶掉健康 Leader）；Learner 不计票、不计入 quorum；`etcdctl move-leader` 计划内转移。深度笔记：`wiki/22-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md` §1。
+**30 秒答**｜先定义后数学：写要落到多数派才 commit、选主要拿多数派选票；因任意两个多数派集合必相交，可推出 ①选举安全性（一个 term 至多一个 Leader）②Leader 完备性（新 Leader 必含全部已提交条目）——这就是"CP、失 quorum 拒写"的数学根基。容错表：3 容 1、5 容 2、7 容 3。判断线：**日常 3 节点够；要"一台维护+一台故障"并行才上 5**（代价：每次写等 3 台落盘、peer 流量涨）；偶数无容错增益还易选举平票。拓扑判断线：**etcd 单 Region 跨 AZ 展开**（3→1-1-1，5→2-2-1），跨 Region RTT 30–100ms 会打爆默认心跳（100ms）/选举超时（1000ms），先调拓扑再调参（election ≥10× heartbeat）。加分细节：etcd 3.5 起 `--pre-vote` 默认开（分区节点回来先预选确认能拿多数派才 bump term，不凭高 term 顶掉健康 Leader）；Learner 不计票、不计入 quorum；`etcdctl move-leader` 计划内转移。深度笔记：`wiki/20-概念/01-核心架构/etcd-quorum-lease-restore-deep-dive.md` §1。
 
 **弹药**
 - 追问"脑裂怎么办"：少数派分区选不出 Leader、无法 commit，恢复后按更高 term 收敛日志——Raft 的脑裂防护不是额外机制，就是交集定理本身
@@ -2372,7 +2372,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 - audit 定界：`jq -r 'select(.stage=="ResponseComplete") | [((.stageTimestamp|fromdateiso8601)-(.requestReceivedTimestamp|fromdateiso8601))*1000|floor, .verb, .user.username, .userAgent] | @tsv' audit.log | sort -rn | head`
 - pprof：`kubectl get --raw '/debug/pprof/profile?seconds=30'`（加固集群常关 `--profiling`）
 - webhook 缩拦截面：objectSelector/namespaceSelector + `timeoutSeconds` 调 1–2s；webhook 别拦自己所在 ns（自锁死循环）
-- 定界决策树与指标对照表：[[wiki/22-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|apiserver 延迟定界深挖]]
+- 定界决策树与指标对照表：[[wiki/20-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|apiserver 延迟定界深挖]]
 
 **红线**｜❌ 不拆 verb 看总 P99 就下结论；❌ webhook failurePolicy=Fail 又不给短超时——webhook 一抖全集群写瘫；❌ 拿 kubectl 耗时当 apiserver 延迟（里面含客户端 TLS/LB/网络）。
 
@@ -2389,7 +2389,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 **弹药**
 - 指标四件套：`apiserver_flowcontrol_rejected_requests_total` / `request_wait_duration_seconds` / `current_inqueue_requests` / `dispatched_requests_total`
 - LIST 座位折算：宽度估算器按预估返回对象数占座——大 LIST 天然多吃座位，所以最容易触发 429（呼应 Q11 大 LIST 定位）
-- 深挖：[[wiki/01-集群基础/03-控制平面/18-api-priority-fairness.md|APF 机制详解]] 与 [[wiki/22-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|延迟定界深挖]] 3.2 节
+- 深挖：[[wiki/01-集群基础与系统/03-控制平面/18-api-priority-fairness.md|APF 机制详解]] 与 [[wiki/20-概念/01-核心架构/05-apiserver-latency-triage-deep-dive.md|延迟定界深挖]] 3.2 节
 
 **红线**｜❌ 关 APF 退回 max-inflight（丢公平性，kubelet 会被 CI 挤死）；❌ 把所有人都塞进 exempt（不排队等于无限流）；❌ 429 就扩 apiserver 副本——座位随副本翻倍但 etcd 不翻，只是把打爆点往后挪。
 
@@ -2406,7 +2406,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 **弹药**
 - 纳管型 vs 高网型：纳管型是利旧客户已有 IB/RoCE 网络+传统存储，「选节点+配镜像」圈定裸机，可挂 iSCSI/NFS 三方存储；高网型是原生 RDMA + CPFS/APFS，按规格发放
 - 与「ACK One 注册集群」的红线区别：前者纳管的是裸金属算力进新建 ACK，后者纳管的是存量 K8s 集群进舰队（Q78）
-- 机制层深挖：[[wiki/18-云厂商/01-阿里云/专有云-ACK/010-bmcp-managed-ack-deep-dive.md|BMCP 纳管机制深挖]] §2 三层控制台职责矩阵
+- 机制层深挖：[[wiki/16-云厂商/01-阿里云/专有云-ACK/010-bmcp-managed-ack-deep-dive.md|BMCP 纳管机制深挖]] §2 三层控制台职责矩阵
 
 **红线**｜❌ 把「ACK 纳管 BMCP」与「ACK One 纳管外部集群」混为一谈；❌ 实例没在 BMS 注册就反复刷新创建页（根因在上一层控制台）；❌ 授权完不点刷新按钮直接重试。
 
@@ -2490,8 +2490,8 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **弹药**
 - K8s 侧分岔：节点 NotReady/Pod 调度失败是 K8s 面问题，不是 BMCP 纳管问题——别在 BMCP 控制台修 kubelet（分工边界表见 010 §11.3）
-- 硬件级异常（掉卡/NVLink）接 BMC/IPMI SEL 日志 + [[wiki/17-系统基础/02-硬件/10-hardware-troubleshooting-methodology.md|硬件排障方法论]]
-- 与双 CCM 的关系：SOFA 侧「BMCP 节点接入器」即纳管链路的 K8s 侧映像（[[wiki/01-集群基础/03-控制平面/43-dual-cloud-controller-coexistence-deep-dive.md|双 CCM 分域共治]]）
+- 硬件级异常（掉卡/NVLink）接 BMC/IPMI SEL 日志 + [[wiki/01-集群基础与系统/10-硬件/10-hardware-troubleshooting-methodology.md|硬件排障方法论]]
+- 与双 CCM 的关系：SOFA 侧「BMCP 节点接入器」即纳管链路的 K8s 侧映像（[[wiki/01-集群基础与系统/03-控制平面/43-dual-cloud-controller-coexistence-deep-dive.md|双 CCM 分域共治]]）
 
 **红线**｜❌ 日志转存调长指望补历史数据——机制上不补，事后才改等于没有；❌ 截屏控制台当故障证据——聚合日志产出的证据才被平台支持；❌ K8s 面故障混进 BMCP 排查通道浪费时间。
 
@@ -2542,7 +2542,7 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 **弹药**
 - 面试答法：「平台内建优先，跨云才选开源栈」一句话给判断线，再展开隔离档位差异
 - DRA 方向感：K8s 原生 DRA 最终会收编自定义资源语义，但专有云版本锁（1.30/1.32）决定 DRA 在该场景短期内不是选项
-- GPU 虚拟化三路线（用户态/内核/硬件）与卡型矩阵是 KGPU 的前置：[[wiki/15-AI基础设施/05-K8s-AI基础设施/01-gpu-operator-sharing-patterns.md|GPU Operator 与共享模式]]、010 §7.1/§7.3
+- GPU 虚拟化三路线（用户态/内核/硬件）与卡型矩阵是 KGPU 的前置：[[wiki/14-AI基础设施/05-K8s-AI基础设施/01-gpu-operator-sharing-patterns.md|GPU Operator 与共享模式]]、010 §7.1/§7.3
 
 **红线**｜❌ 在 BMCP 集群里叠装 HAMi 与 KGPU 抢同一批卡——两套 device plugin 管理域冲突；❌ 说「KGPU 就是 HAMI 的阿里版」——出身/隔离实现/前提链都不同，是同类不是同源；❌ 拿 time-slicing 的「无算力隔离」贬 KGPU/HAMi——各家档位不同，按 shareModel/HAMi 策略逐一对。
 
@@ -2580,4 +2580,4 @@ etcd 慢 = 写慢 + LIST 慢 + watch 事件晚发 = 全集群控制器一起慢�
 
 **红线**｜❌ 拿 kubectl describe pod 排 NCCL 超时——那是 RDMA 面的事；❌「清理环境」顺手删 EVPC——RDMA 面的删除会波及训练数据面；❌ 给纳管型集群配 EVPC 参数——它不在支持范围。
 
-**下一专题**｜BMCP 批次收口（Q128–Q138）。钩子：GPU 事件监控报「驱动掉卡」之后，节点侧的标准接手动作——BMC/IPMI SEL 日志采集 → [[wiki/17-系统基础/02-硬件/10-hardware-troubleshooting-methodology.md|硬件排障方法论]] → 掉卡 FTA（19-故障诊断）尚未建树，可作为下一批沉淀底料。
+**下一专题**｜BMCP 批次收口（Q128–Q138）。钩子：GPU 事件监控报「驱动掉卡」之后，节点侧的标准接手动作——BMC/IPMI SEL 日志采集 → [[wiki/01-集群基础与系统/10-硬件/10-hardware-troubleshooting-methodology.md|硬件排障方法论]] → 掉卡 FTA（19-故障诊断）尚未建树，可作为下一批沉淀底料。

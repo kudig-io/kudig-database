@@ -373,5 +373,5 @@ jobs:
 - [[wiki/03-清单模式/index.md|清单模式]]
 - [[wiki/03-清单模式/03-Helm值模式/index.md|Helm 值模式]]
 - [[wiki/03-清单模式/02-Kustomize模式/index.md|Kustomize 模式]]
-- [[wiki/11-发布变更/01-GitOps/index.md|GitOps]]
+- [[wiki/09-发布变更/01-GitOps/index.md|GitOps]]
 - [[wiki/03-清单模式/09-平台模式/index.md|平台模式]]

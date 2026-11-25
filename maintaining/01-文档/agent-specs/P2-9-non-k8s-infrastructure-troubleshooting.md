@@ -38,7 +38,7 @@ prerequisites:
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] 基础设施的问题排查
+> **用途**: DNS (CoreDNS之外)、Load Balancer、VPN/隧道等非 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] 基础设施的问题排查
 > **关联**: domain-14-linux, 网络
 
 ---

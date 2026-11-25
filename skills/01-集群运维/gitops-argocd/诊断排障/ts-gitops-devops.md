@@ -281,7 +281,7 @@ kubectl get pods -n kube-system | grep csi
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/23-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
+- [[wiki/22-实体/08-交付与制品/argocd.md|argocd]] — ArgoCD
 
 
 <!-- risk-assessed -->

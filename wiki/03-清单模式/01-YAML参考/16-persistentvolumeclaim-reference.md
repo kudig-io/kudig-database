@@ -1884,9 +1884,9 @@ groups:
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/storage-index.md|Storage 存储知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

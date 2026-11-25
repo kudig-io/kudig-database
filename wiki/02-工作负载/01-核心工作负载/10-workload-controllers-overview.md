@@ -79,7 +79,7 @@ related_docs:
 
 # 35 - 工作负载控制器详解 (Workload Controllers)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Workloads](https://kubernetes.io/docs/concepts/workloads/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] Workloads](https://kubernetes.io/docs/concepts/workloads/)
 
 <!-- chunk: 控制器核心特征矩阵 (Controller Matrix) -->
 ## 控制器核心特征矩阵 (Controller Matrix)
@@ -349,9 +349,9 @@ spec:
 - 调度器配置与优化
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[wiki/17-系统基础/05-速查卡/k8s.md|速查卡: k8s]]
+- [[wiki/01-集群基础与系统/12-速查卡/k8s.md|速查卡: k8s]]
 
-- [[wiki/10-平台工程/06-代码分析/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
+- [[wiki/12-平台工程/06-代码分析/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
 ## See Also
 
 - 08-multi-cloud-workload-strategy
@@ -361,6 +361,6 @@ spec:
 
 ```
 
-- [[wiki/10-平台工程/06-代码分析/kubernetes-core/03-kube-controller-manager-deep-dive.md|KCM 源码深度剖析（Deployment/RS/StatefulSet 调谐链行号级实现）]]
+- [[wiki/12-平台工程/06-代码分析/kubernetes-core/03-kube-controller-manager-deep-dive.md|KCM 源码深度剖析（Deployment/RS/StatefulSet 调谐链行号级实现）]]
 
 <!-- risk-assessed -->

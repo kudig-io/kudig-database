@@ -11,12 +11,12 @@ created: '2026-05-23'
 updated: '2026-05-23'
 last_updated: 2026-07
 relationships:
-- target: '[[wiki/23-实体/08-交付与制品/helm.md]]'
+- target: '[[wiki/22-实体/08-交付与制品/helm.md]]'
   type: uses
-- target: '[[wiki/23-实体/07-可观测性/prometheus.md]]'
+- target: '[[wiki/22-实体/07-可观测性/prometheus.md]]'
   type: uses
-- target: '[[wiki/23-实体/08-交付与制品/argocd.md]]'
+- target: '[[wiki/22-实体/08-交付与制品/argocd.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/22-概念/11-交叉分析/apiserver-×-Pod诊断.md|apiserver × Pod诊断]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/20-概念/11-交叉分析/apiserver-×-Pod诊断.md|apiserver × Pod诊断]]（本页为重排去重桩，正文见主场）

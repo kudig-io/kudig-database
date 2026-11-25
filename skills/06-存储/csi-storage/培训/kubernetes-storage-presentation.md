@@ -1022,7 +1022,7 @@ Kubernetes 存储
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
 
 ```
 

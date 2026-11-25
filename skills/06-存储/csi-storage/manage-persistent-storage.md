@@ -382,7 +382,7 @@ kubectl exec <pod> -- touch <mount-path>/test && kubectl exec <pod> -- rm <mount
 - [[skills/06-存储/csi-storage/csi-fta.md|CSI 存储异常诊断]] — 同域技能（CSI 层面故障）
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]] — 方法论基础
 - [[skills/02-控制面/etcd/backup-restore-etcd.md|etcd 备份恢复]] — 数据保护
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]] — 知识索引
-- [[wiki/21-生态参考/03-领域索引/storage-index.md|Storage 存储知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/storage-index.md|Storage 存储知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

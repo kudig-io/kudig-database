@@ -49,4 +49,4 @@ cross_refs:
   label: 监控最佳实践
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/01-best-practices/common-best-practices.md|Kubernetes 通用最佳实践参考 (best-practices)]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/01-best-practices/common-best-practices.md|Kubernetes 通用最佳实践参考 (best-practices)]]（本页为重排去重桩，正文见主场）

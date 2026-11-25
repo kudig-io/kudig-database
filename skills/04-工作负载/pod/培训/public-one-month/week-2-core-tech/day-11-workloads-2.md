@@ -49,7 +49,7 @@ prerequisites:
 ---
 id: LEARN-ONE-MONTH-W2-DAY11
 title: Day 11 - 工作负载 - Pod 生命周期 + 资源管理 + HPA
-topic: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
+topic: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [pod, lifecycle, probe, resources, qos, hpa, vpa, autoscaling, hands-on, week-2]
 last_updated: 2026-05-18

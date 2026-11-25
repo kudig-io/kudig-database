@@ -110,7 +110,7 @@ updated: 2026-05-21T16:30:00Z
 | CONTRIBUTING.md | 306 | `[[fta-template]]` | 指向 `[[code/31-脚本/templates/fta-template.md|fta template]]` |
 | MOC.md | 40 | `[[平台工程/代码分析/MOC` | 修复嵌套 wikilink 语法 |
 | AGENTS.md | 40,102,125 | `wikilinks` 等 | 这些是说明性文本，可转为代码格式 |
-| 平台工程/topic-code-analysis/README.md | 15-19 | `[[wiki/23-实体/15-参考与索引/k8s-cluster-cert.md|k8s cluster cert]]` 等 5 个 | 应指向 references/ 下的分组页面 |
+| 平台工程/topic-code-analysis/README.md | 15-19 | `[[wiki/22-实体/15-参考与索引/k8s-cluster-cert.md|k8s cluster cert]]` 等 5 个 | 应指向 references/ 下的分组页面 |
 | 多个 README.md | 多处 | `[[code/31-脚本/templates/cheat-sheet-template.md|cheat sheet template]]` | 应指向 `[[code/31-脚本/templates/cheat-sheet-template.md|cheat sheet template]]` |
 | _reports/OBSIDIAN-WIKI-AGENT... | 125,130,132,425 | 中文链接/相对路径 | 这些是分析报告，应转为纯文本 |
 
@@ -172,11 +172,11 @@ updated: 2026-05-21T16:30:00Z
 
 | 概念对 | 共现页面数 | 建议 |
 |---|---|---|
-| [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] × [[wiki/23-实体/15-参考与索引/fta-febm-methodology.md|fta febm methodology]] | 3,190 | 已有相关 synthesis 覆盖 |
-| [[wiki/23-实体/15-参考与索引/fta-febm-methodology.md|fta febm methodology]] × [[prometheus]] | 3,000 | 建议创建 synthesis |
-| [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] × [[prometheus]] | 2,986 | 已有相关 synthesis 覆盖 |
-| [[pod-lifecycle]] × [[wiki/23-实体/15-参考与索引/fta-febm-methodology.md|fta febm methodology]] | 2,972 | 建议创建 synthesis |
-| [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] × [[pod-lifecycle]] | 2,914 | 已有相关 synthesis 覆盖 |
+| [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] × [[wiki/22-实体/15-参考与索引/fta-febm-methodology.md|fta febm methodology]] | 3,190 | 已有相关 synthesis 覆盖 |
+| [[wiki/22-实体/15-参考与索引/fta-febm-methodology.md|fta febm methodology]] × [[prometheus]] | 3,000 | 建议创建 synthesis |
+| [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] × [[prometheus]] | 2,986 | 已有相关 synthesis 覆盖 |
+| [[pod-lifecycle]] × [[wiki/22-实体/15-参考与索引/fta-febm-methodology.md|fta febm methodology]] | 2,972 | 建议创建 synthesis |
+| [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] × [[pod-lifecycle]] | 2,914 | 已有相关 synthesis 覆盖 |
 
 ---
 
@@ -206,11 +206,11 @@ updated: 2026-05-21T16:30:00Z
 
 ### 修复 4：MOC.md 嵌套 wikilink（1 个）
 
-`平台工程/[[wiki/10-平台工程/06-代码分析/MOC.md|MOC]]` → `[[wiki/10-平台工程/06-代码分析/MOC.md|MOC]]`
+`平台工程/[[wiki/12-平台工程/06-代码分析/MOC.md|MOC]]` → `[[wiki/12-平台工程/06-代码分析/MOC.md|MOC]]`
 
 ### 修复 5：平台工程/topic-code-analysis/README.md 分组链接（5 个）
 
-将目录名 wikilink（如 `[[wiki/23-实体/15-参考与索引/k8s-cluster-cert.md|k8s cluster cert]]`）转为纯文本
+将目录名 wikilink（如 `[[wiki/22-实体/15-参考与索引/k8s-cluster-cert.md|k8s cluster cert]]`）转为纯文本
 
 ### 修复 6：转义 wikilink（48 个）
 

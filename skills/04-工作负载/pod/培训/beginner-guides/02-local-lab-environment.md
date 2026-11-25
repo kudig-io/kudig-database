@@ -390,7 +390,7 @@ minikube addons list
 
 ## 方案 C：k3d（轻量之选）
 
-k3d 在 Docker 里跑 [[wiki/23-实体/09-编排调度/k3s.md|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
+k3d 在 Docker 里跑 [[wiki/22-实体/09-编排调度/k3s.md|k3s]]](https://k3s.io/)（Rancher 出品的轻量 K8s 发行版），资源占用极低。
 
 ### 安装 k3d
 

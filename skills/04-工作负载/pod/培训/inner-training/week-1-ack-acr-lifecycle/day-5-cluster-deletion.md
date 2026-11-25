@@ -48,7 +48,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster deletion resource cleanup
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster removal retain resources
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] cluster removal retain resources
   - SLB ENI security group cleanup
   - aliyun cs DELETE cluster API
   - Cluster deletion failure troubleshooting
@@ -505,8 +505,8 @@ Day 6 将学习集群升级策略，掌握版本升级的操作步骤和风险�
 ## 延伸阅读
 
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
-- [K8s 架构总览](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
-- [集群生命周期管理](../../../../../../wiki/10-平台工程/02-运维/02-cluster-lifecycle-management.md)
+- [K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [集群生命周期管理](../../../../../../wiki/12-平台工程/02-运维/02-cluster-lifecycle-management.md)
 
 
 <!-- risk-assessed -->

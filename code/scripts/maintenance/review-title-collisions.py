@@ -49,21 +49,21 @@ LAYERS = [
 # terway 三向专项：05/01 系列 ↔ 05/06 系列 ↔ 23/04 系列（按主题人工配对）
 TERWAY_TOPICS = [
     ("产品概览", "wiki/05-网络/01-K8s网络核心/42-terway-product-overview.md",
-     "wiki/05-网络/06-Terway/01-product.md", "wiki/23-实体/04-网络/03-terway-product-overview.md"),
+     "wiki/05-网络/06-Terway/01-product.md", "wiki/22-实体/04-网络/03-terway-product-overview.md"),
     ("架构深潜", "wiki/05-网络/01-K8s网络核心/43-terway-architecture-deep-dive.md",
-     "wiki/05-网络/06-Terway/02-architecture.md", "wiki/23-实体/04-网络/04-terway-architecture-deep-dive.md"),
+     "wiki/05-网络/06-Terway/02-architecture.md", "wiki/22-实体/04-网络/04-terway-architecture-deep-dive.md"),
     ("使用指南", "wiki/05-网络/01-K8s网络核心/44-terway-usage-guide.md",
-     "wiki/05-网络/06-Terway/03-usage.md", "wiki/23-实体/04-网络/05-terway-usage-guide.md"),
+     "wiki/05-网络/06-Terway/03-usage.md", "wiki/22-实体/04-网络/05-terway-usage-guide.md"),
     ("CRD 操作", "wiki/05-网络/01-K8s网络核心/45-terway-crd-operations.md",
-     "wiki/05-网络/06-Terway/03b-crd-operations.md", "wiki/23-实体/04-网络/06-terway-crd-operations.md"),
+     "wiki/05-网络/06-Terway/03b-crd-operations.md", "wiki/22-实体/04-网络/06-terway-crd-operations.md"),
     ("运维手册", "wiki/05-网络/01-K8s网络核心/46-terway-operations-manual.md",
-     "wiki/05-网络/06-Terway/04-operations.md", "wiki/23-实体/04-网络/07-terway-operations-manual.md"),
+     "wiki/05-网络/06-Terway/04-operations.md", "wiki/22-实体/04-网络/07-terway-operations-manual.md"),
     ("测试验证", "wiki/05-网络/01-K8s网络核心/47-terway-testing-validation.md",
-     "wiki/05-网络/06-Terway/05-testing.md", "wiki/23-实体/04-网络/08-terway-testing-validation.md"),
+     "wiki/05-网络/06-Terway/05-testing.md", "wiki/22-实体/04-网络/08-terway-testing-validation.md"),
     ("性能调优", "wiki/05-网络/01-K8s网络核心/48-terway-performance-tuning.md",
-     "wiki/05-网络/06-Terway/06-performance.md", "wiki/23-实体/04-网络/09-terway-performance-tuning.md"),
+     "wiki/05-网络/06-Terway/06-performance.md", "wiki/22-实体/04-网络/09-terway-performance-tuning.md"),
     ("故障排查", "wiki/05-网络/01-K8s网络核心/49-terway-troubleshooting-fta.md",
-     "wiki/05-网络/06-Terway/07-troubleshooting-fta.md", "wiki/23-实体/04-网络/10-terway-troubleshooting-fta.md"),
+     "wiki/05-网络/06-Terway/07-troubleshooting-fta.md", "wiki/22-实体/04-网络/10-terway-troubleshooting-fta.md"),
 ]
 
 STRUCTURAL_NAMES = {"readme.md", "index.md", "moc.md", "summary.md"}

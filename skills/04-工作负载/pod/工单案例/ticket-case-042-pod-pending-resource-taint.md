@@ -21,10 +21,10 @@ affected_cluster: ack-zyy-prod-04
 affected_namespace: data-proc
 ticket_type: 调度失败
 skill_ref:
-- '[[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|Pod 异常故障树分析]]'
-- '[[wiki/10-平台工程/03-治理/01-capacity-planning-resource-assessment.md|容量规划与资源评估]]'
+- '[[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|Pod 异常故障树分析]]'
+- '[[wiki/12-平台工程/03-治理/01-capacity-planning-resource-assessment.md|容量规划与资源评估]]'
 fta_ref:
-- '[[wiki/19-故障诊断/06-FTA故障树/list/scheduler-fta.md|FTA: Scheduler
+- '[[wiki/17-故障诊断/06-FTA故障树/list/scheduler-fta.md|FTA: Scheduler
   异常]]'
 last_updated: 2026-06-26 15:45:00+08:00
 duplicate_of: INC-2026-ACK-047
@@ -53,12 +53,12 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-017-pod-pending-resource-exhaustion.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md|Pod Pending：资源不足与 Taint 不匹配]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md|Pod Pending：资源不足与 Taint 不匹配]]（本页为重排去重桩，正文见主场）

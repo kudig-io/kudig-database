@@ -124,10 +124,10 @@ VPA 和 HPA 同时配置到同一 Deployment 会导致扩缩容行为异常。�
 
 ## 相关资源
 
-- [[wiki/22-概念/k8s-production-best-practices.md|[[wiki/22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
-- [[wiki/22-概念/autoscaling-strategies.md|[[wiki/22-概念/07-调度与资源/autoscaling-strategies|Autoscaling Strategies]]]]
-- [[wiki/22-概念/resource-management.md|[[wiki/22-概念/07-调度与资源/resource-management|Resource Management]]]]
-- [[skills/04-工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|[[wiki/20-最佳实践/01-best-practices/operations/deployment|Kubernetes 部署策略最佳实践]]]]
+- [[wiki/20-概念/k8s-production-best-practices.md|[[wiki/20-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
+- [[wiki/20-概念/autoscaling-strategies.md|[[wiki/20-概念/07-调度与资源/autoscaling-strategies|Autoscaling Strategies]]]]
+- [[wiki/20-概念/resource-management.md|[[wiki/20-概念/07-调度与资源/resource-management|Resource Management]]]]
+- [[skills/04-工作负载/deployment/最佳实践/k8s-deployment-strategies-guide.md|[[wiki/18-最佳实践/01-best-practices/operations/deployment|Kubernetes 部署策略最佳实践]]]]
 
 ## 生产案例
 
@@ -174,9 +174,9 @@ VPA 和 HPA 同时配置到同一 Deployment 会导致扩缩容行为异常。�
 
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/07-调度与资源/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[wiki/22-概念/07-调度与资源/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
+- [[wiki/20-概念/07-调度与资源/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/07-调度与资源/autoscaling-strategies.md|autoscaling-strategies]] — Autoscaling Strategies
 
 
 <!-- risk-assessed -->

@@ -51,4 +51,4 @@ cross_refs:
   label: Pod安全最佳实践
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/08-security/network-security.md|Kubernetes 网络安全最佳实践 [security]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/08-security/network-security.md|Kubernetes 网络安全最佳实践 [security]]]（本页为重排去重桩，正文见主场）

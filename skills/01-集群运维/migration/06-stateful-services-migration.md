@@ -43,4 +43,4 @@ prerequisites:
 - mysql-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/07-迁移方案/06-stateful-services-migration.md|06 - 有状态服务迁移 [migration]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md|06 - 有状态服务迁移 [migration]]]（本页为重排去重桩，正文见主场）

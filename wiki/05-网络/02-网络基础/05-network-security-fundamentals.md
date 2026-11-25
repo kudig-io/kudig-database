@@ -731,7 +731,7 @@ echo "安全合规检查完成，报告已生成: $REPORT_FILE"
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
 
 ```
 

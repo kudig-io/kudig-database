@@ -43,7 +43,7 @@ EXCLUDE_DIRS = {
     ".codebuddy", ".comate", ".mimocode", ".qoder", ".understand-anything",
     ".wiki-meta", ".zread", ".impeccable", ".mimosa", ".video_agent",
     "_archives", "_staging", "assets", "web",
-    "03-发布", "02-元数据", "04-报告", "31-归档", "GTM",
+    "03-发布", "02-元数据", "04-报告", "31-归档", "99-归档", "GTM",
 }
 
 # 发布说明标题 → 组件实体页文件名别名（源自 wave3）

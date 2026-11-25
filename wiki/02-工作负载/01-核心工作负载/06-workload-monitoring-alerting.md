@@ -593,7 +593,7 @@ labels:
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/observability-index.md|Observability 可观测性知识图谱索引]]
 
 
 <!-- risk-assessed -->

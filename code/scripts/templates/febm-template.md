@@ -20,7 +20,7 @@ created: '2026-07-01'
 > **文档类型**: FEBM 取证分析
 > **适用版本**: Kubernetes v1.28 - v1.32
 > **最后更新**: {{日期}}
-> **关联主文档**: [FEBM 方法论深度剖析](../../../wiki/19-故障诊断/07-FEBM方法论/febm-methodology-deep-dive.md)
+> **关联主文档**: [FEBM 方法论深度剖析](../../../wiki/17-故障诊断/07-FEBM方法论/febm-methodology-deep-dive.md)
 
 ---
 
@@ -446,7 +446,7 @@ FEBM-OODA 循环:
 |:---|:---|:---|
 | FTA 故障树 | [../故障诊断/FTA故障树/list/{{component}}-fta.md](../故障诊断/FTA故障树/list/{{component}}-fta.md) | {{说明}} |
 | Skill 技能 | [../故障诊断/topic-skills/{{NN}}-{{scenario}}.md](../故障诊断/技能体系/{{NN}}-{{scenario}}.md) | {{说明}} |
-| 速查卡 | [../系统基础/topic-cheat-sheet/k8s.md](../../../wiki/17-系统基础/05-速查卡/k8s.md) | {{说明}} |
+| 速查卡 | [../系统基础/topic-cheat-sheet/k8s.md](../../../wiki/01-集群基础与系统/12-速查卡/k8s.md) | {{说明}} |
 | 深度学习 | [../domain-{{N}}-{{name}}/{{doc}}.md](../domain-{{N}}-{{name}}/{{doc}}.md) | {{说明}} |
 
 ---
@@ -460,6 +460,6 @@ FEBM-OODA 循环:
 
 ---
 
-> **导航**: [<< FEBM 方法论深度剖析](../../../wiki/19-故障诊断/07-FEBM方法论/febm-methodology-deep-dive.md) | [返回主索引](../故障诊断/[[wiki/06-存储/README.md|README]].md)
+> **导航**: [<< FEBM 方法论深度剖析](../../../wiki/17-故障诊断/07-FEBM方法论/febm-methodology-deep-dive.md) | [返回主索引](../故障诊断/[[wiki/06-存储与数据/README.md|README]].md)
 
 <!-- risk-assessed -->

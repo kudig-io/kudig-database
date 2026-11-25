@@ -51,7 +51,7 @@ prerequisites:
 ---
 id: LEARN-ONE-MONTH-W2-DAY9
 title: Day 9 - 控制平面 - Scheduler + Controller Manager
-topic: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
+topic: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [scheduler, controller-manager, affinity, taint, toleration, nodeelector, hands-on, week-2]
 last_updated: 2026-05-18

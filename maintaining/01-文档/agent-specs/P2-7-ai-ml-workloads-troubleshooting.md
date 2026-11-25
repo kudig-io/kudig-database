@@ -48,7 +48,7 @@ prerequisites:
 
 > **版本**: v1.0
 > **创建日期**: 2026-05-18
-> **用途**: AI/ML 工作负载在 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 上的问题排查指南
+> **用途**: AI/ML 工作负载在 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 上的问题排查指南
 > **覆盖**: 分布式训练 (MPI/NCCL)、模型服务 (KServe/Triton)、数据处理 (Spark/Flink)
 
 ---
@@ -347,6 +347,6 @@ kubectl logs -f <inference-pod> -c kserve-container | grep -i "model loaded|erro
 **关联文档**:
 - [AI基础设施/](../AI基础设施/) — AI 基础设施完整文档
 - [](../../../wiki/19-故障诊断) — K8s 通用问题排查
-- [08-技能体系/](../../../wiki/19-故障诊断/08-技能体系) — 通用运维 Skill
+- [08-技能体系/](../../../wiki/17-故障诊断/08-技能体系) — 通用运维 Skill
 
 <!-- risk-assessed -->

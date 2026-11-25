@@ -549,14 +549,14 @@ Service 通过 Label Selector 匹配 Pod 的 labels。匹配到的 Pod IP 和端
 
 ## 延伸阅读
 
-- [集群配置参数](../../../../../../wiki/01-集群基础/06-升级路径/01-cluster-configuration-parameters.md)
-- [API 版本与特性](../../../../../../wiki/01-集群基础/04-API版本/01-api-versions-features.md)
+- [集群配置参数](../../../../../../wiki/01-集群基础与系统/06-升级路径/01-cluster-configuration-parameters.md)
+- [API 版本与特性](../../../../../../wiki/01-集群基础与系统/04-API版本/01-api-versions-features.md)
 - [Deployment 生产模式](../../../../../../wiki/02-工作负载/01-核心工作负载/02-deployment-production-patterns.md)
-- [K8s 速查手册](../../../../../../wiki/17-系统基础/05-速查卡/k8s.md)
+- [K8s 速查手册](../../../../../../wiki/01-集群基础与系统/12-速查卡/k8s.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

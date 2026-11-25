@@ -182,16 +182,16 @@ kubectl uncordon <node-name>
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
-- [[wiki/22-概念/07-调度与资源/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[wiki/20-概念/07-调度与资源/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
 - [[skills/04-工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]]
-- [[wiki/23-实体/02-K8s核心组件/container-runtime.md|Container Runtime]]
-- [[wiki/22-概念/07-调度与资源/resource-management.md|Resource Management]]
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]]
+- [[wiki/22-实体/02-K8s核心组件/container-runtime.md|Container Runtime]]
+- [[wiki/20-概念/07-调度与资源/resource-management.md|Resource Management]]
 - [[skills/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[wiki/22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[wiki/20-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
 - [[skills/03-节点/node-fta.md|Node 异常故障树分析]] — Cross-reference
 

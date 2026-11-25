@@ -436,7 +436,7 @@ kubectl describe resourcequota -n <namespace>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../../../04-工作负载/pod/培训/lecturer/04-common-problems.md) — 常见问题
-- [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../../../wiki/19-故障诊断/08-技能体系/10-rbac-quota-failure.md) — RBAC/配额问题
+- [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../../../skills/09-技能体系/10-rbac-quota-failure.md) — RBAC/配额问题
 - [](../../../../wiki/19-故障诊断) — 故障排查文档
 
 ## Related
@@ -444,7 +444,7 @@ kubectl describe resourcequota -n <namespace>
 - [[skills/04-工作负载/pod/培训/learn-root.md|learn-root]] — [[kubernetes|Kubernetes]]es 培训：Root|Kubernetes 培训：Root]]
 - cronjob.md|learn-11-job-cronjob]] — 第九课：Job 和 CronJob - 任务调度
 - [[skills/04-工作负载/hpa-vpa/培训/learn-09-hpa-basics.md|learn-09-hpa-basics]] — 第九课：HPA - 自动伸缩
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
 
 

@@ -21,8 +21,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent.parent.parent
 HTML_PATH = ROOT / "code" / "GTM" / "index.html"
 
-DISTILLED_DIRS = ["wiki/22-概念", "wiki/23-实体", "wiki/24-综合", "skills"]
-DIAG_DIR = "wiki/19-故障诊断"
+DISTILLED_DIRS = ["wiki/20-概念", "wiki/22-实体", "wiki/23-综合与研究", "wiki/21-知识字典", "skills"]
+DIAG_DIR = "wiki/17-故障诊断"
 
 
 def count_md(directory: Path) -> int:

@@ -94,7 +94,7 @@ prerequisites:
 - **命令**:
   ```bash
   # 查看当前容器日志（如果容器正在运行）
-  kubectl logs <pod> -n <namespace> -c <[[wiki/23-实体/03-运行时/docker.md|container]]>
+  kubectl logs <pod> -n <namespace> -c <[[wiki/22-实体/03-运行时/docker.md|container]]>
   
   # 查看上一次崩溃的容器日志（CrashLoop 场景必用）
   kubectl logs <pod> -n <namespace> -c <container> --previous

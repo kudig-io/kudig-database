@@ -260,7 +260,7 @@ spec:
                 - key: app
                   operator: In
                   values: [web-app]
-              topologyKey: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/hostname
+              topologyKey: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/hostname
       containers:
       - name: web
         image: registry.cn-hangzhou.aliyuncs.com/acs-sample/nginx:1.24

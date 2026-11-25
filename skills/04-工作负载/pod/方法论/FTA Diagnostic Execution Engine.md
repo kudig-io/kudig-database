@@ -198,8 +198,8 @@ execution_config:
 - [[skills/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]]
 - [[skills/04-工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes FTA Top Events Index.md|Kubernetes FTA Top Events Index]]
-- [[wiki/22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
-- [[wiki/19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[wiki/20-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[wiki/17-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
 
 - [[README]]
 - [[nginx-ingress-fta]]

@@ -52,12 +52,12 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-012-pod-pending-resource-exhaustion.md|Pod 长期 Pending：节点 CPU/内存资源不足]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-012-pod-pending-resource-exhaustion.md|Pod 长期 Pending：节点 CPU/内存资源不足]]（本页为重排去重桩，正文见主场）

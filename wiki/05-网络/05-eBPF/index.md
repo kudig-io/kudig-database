@@ -45,4 +45,4 @@ last_updated: '2026-07-21'
 
 - [[wiki/05-网络/02-网络基础/index.md|网络基础]]
 - [[wiki/05-网络/03-服务网格/index.md|Service Mesh]]
-- [[wiki/09-可观测性/07-工具/index.md|可观测性工具]]
+- [[wiki/08-可观测性/07-工具/index.md|可观测性工具]]

@@ -732,12 +732,12 @@ amtool silence expire <silence-id>
 - [LogQL 查询语言参考](https://grafana.com/docs/loki/latest/query/)
 - [Alertmanager 配置文档](https://prometheus.io/docs/alerting/latest/configuration/)
 - [Kubernetes 日志架构](https://kubernetes.io/docs/concepts/cluster-administration/logging/)
-- [文件: `../../可观测性/03-logging-architecture.md`](../../../../../../wiki/09-可观测性/03-日志/03-logging-architecture.md)
-- [文件: `../../可观测性/04-distributed-tracing.md`](../../../../../../wiki/09-可观测性/04-链路追踪/05-distributed-tracing.md)
+- [文件: `../../可观测性/03-logging-architecture.md`](../../../../../../wiki/08-可观测性/03-日志/03-logging-architecture.md)
+- [文件: `../../可观测性/04-distributed-tracing.md`](../../../../../../wiki/08-可观测性/04-链路追踪/05-distributed-tracing.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

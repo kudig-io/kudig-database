@@ -499,15 +499,15 @@ kubectl get secret my-app-db-conn -n team-backend
 2. **Composition 面向平台**：Composition 包含所有基础设施最佳实践（加密、多 AZ、安全组）
 3. **多 Composition 策略**：同一 XRD 可以有多个 Composition（AWS/GCP/Azure），通过 label 选择
 4. **连接信息安全**：连接凭证通过 K8s Secret 传递，启用 encryption at rest
-5. **与 [[wiki/10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]] 配合**：了解更完整的平台设计
+5. **与 [[wiki/12-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]] 配合**：了解更完整的平台设计
 6. **与 [[wiki/03-清单模式/09-平台模式/02-cue-language-configuration|CUE]] 结合**：使用 CUE 验证 XRD schema
-7. **参考 [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]] 了解全局**
+7. **参考 [[wiki/12-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]] 了解全局**
 
 ## Related
 
-- [[wiki/10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
+- [[wiki/12-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
 - [[wiki/03-清单模式/09-平台模式/02-cue-language-configuration|CUE 语言配置]]
 - [[wiki/03-清单模式/09-平台模式/03-jsonnet-tanka-patterns|Jsonnet/Tanka 模式]]
-- [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
-- [[wiki/24-综合/02-交付与GitOps/crossplane-iac|Crossplane IaC 综合]]
-- [[wiki/10-平台工程/01-构建/06-kratix-platform-as-code|Kratix 平台即代码]]
+- [[wiki/12-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
+- [[wiki/23-综合与研究/02-交付与GitOps/crossplane-iac|Crossplane IaC 综合]]
+- [[wiki/12-平台工程/01-构建/06-kratix-platform-as-code|Kratix 平台即代码]]

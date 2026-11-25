@@ -442,6 +442,6 @@ kubectl exec -n kube-system <terway-pod> -- terway-cli check      # 健康检查
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
 - [[skills/05-网络/cni/flannel-fta.md|Flannel 网络异常诊断]] — 同域技能
 - [[skills/03-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

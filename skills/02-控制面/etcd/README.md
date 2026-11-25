@@ -157,8 +157,8 @@ kubectl get --raw /healthz?verbose | grep -v ok
 - [[skills/02-控制面/apiserver/apiserver-fta.md|API Server 故障树]] — 同域关联
 - [[skills/02-控制面/scheduler/scheduler-fta.md|Scheduler 故障树]] — 同域关联
 - [[skills/03-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]] — 跨域关联
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
-- [[wiki/21-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 知识图谱索引]] — 知识索引
 
 ## Related
 
@@ -166,7 +166,7 @@ kubectl get --raw /healthz?verbose | grep -v ok
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

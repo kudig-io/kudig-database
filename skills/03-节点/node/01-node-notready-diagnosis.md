@@ -508,7 +508,7 @@ kubectl get node <node-name> -o jsonpath='{.status.declaredFeatures}' | jq .
 
 ## 10. 阿里云/专有云特有场景
 
-> 来源：`wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §2
+> 来源：`skills/09-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §2
 
 | 场景 | 症状 | 根因 | 排查要点 |
 |------|------|------|----------|
@@ -522,7 +522,7 @@ kubectl get node <node-name> -o jsonpath='{.status.declaredFeatures}' | jq .
 
 ## 11. 边界条件与禁忌操作
 
-> 来源：`wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §3/§5
+> 来源：`skills/09-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md` §3/§5
 
 ### 11.1 边界条件
 
@@ -584,5 +584,5 @@ time() - kube_node_status_condition{condition="Ready"} > 40
 - [[skills/03-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
 - [[skills/03-节点/node/reference/node-version-differences.md|版本差异对比]]
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/node-fta.md|Node 故障树分析]]
-- [[wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Node NotReady 深度解析（原始文件）]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/node-fta.md|Node 故障树分析]]
+- [[skills/09-技能体系/skill-set/k8s-node-notready/SKILL-DEEP-DIVE.md|Node NotReady 深度解析（原始文件）]]

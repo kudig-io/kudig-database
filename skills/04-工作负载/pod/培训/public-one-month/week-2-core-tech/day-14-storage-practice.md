@@ -50,7 +50,7 @@ prerequisites:
 ---
 id: LEARN-ONE-MONTH-W2-DAY14
 title: Day 14 - 存储体系 + 综合实践
-topic: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
+topic: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [pv, pvc, storageclass, dynamic-provisioning, statefulset, csi, hands-on, week-2]
 last_updated: 2026-05-18

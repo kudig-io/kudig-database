@@ -5,7 +5,7 @@
 “网络/存储”这类枚举误伤），映射根段与二级段。
 
 作用范围：
-- wiki/19-故障诊断/10-QA语料/*.yaml   （source / answer 中的路径）
+- wiki/17-故障诊断/10-QA语料/*.yaml   （source / answer 中的路径）
 - maintaining/35-元数据/corpus-config/ 下的 *.json / *.yaml
 
 用法: python3 code/31-脚本/maintenance/rewrite-prefix-corpus-20260723.py [--dry-run]
@@ -48,7 +48,7 @@ def map_old_path(p):
 def main():
     dry = "--dry-run" in sys.argv
     targets = sorted(
-        glob.glob(os.path.join(ROOT, "wiki/19-故障诊断/10-QA语料/*.yaml"))
+        glob.glob(os.path.join(ROOT, "wiki/17-故障诊断/10-QA语料/*.yaml"))
         + glob.glob(os.path.join(ROOT, "maintaining/35-元数据/corpus-config/**/*.json"), recursive=True)
         + glob.glob(os.path.join(ROOT, "maintaining/35-元数据/corpus-config/**/*.yaml"), recursive=True)
     )

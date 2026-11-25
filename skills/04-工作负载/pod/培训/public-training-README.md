@@ -192,8 +192,8 @@ Week 4: 网络与存储 (进阶)
 | Day 23 | [[ingress\|Ingress]] 实操 | [day-23-ingress/01-ingress-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/ingress/%E5%9F%B9%E8%AE%AD/day-23-ingress/01-ingress-hands-on.md) |
 | Day 24 | Terway 网络实操 | [day-24-terway/01-terway-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/cni/%E5%9F%B9%E8%AE%AD/day-24-terway/01-terway-hands-on.md) |
 | Day 25 | Flannel 网络实操 | [day-25-flannel/01-flannel-hands-on.md](../../../05-%E7%BD%91%E7%BB%9C/cni/%E5%9F%B9%E8%AE%AD/day-25-flannel/01-flannel-hands-on.md) |
-| Day 26 | 存储卷创建与删除实操 | [day-26-pvc-create/01-pvc-create-hands-on.md](../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/day-26-pvc-create/01-pvc-create-hands-on.md) |
-| Day 27 | 存储卷挂载实操 | [day-27-pvc-mount/01-pvc-mount-hands-on.md](../../../06-%E5%AD%98%E5%82%A8/csi-storage/%E5%9F%B9%E8%AE%AD/day-27-pvc-mount/01-pvc-mount-hands-on.md) |
+| Day 26 | 存储卷创建与删除实操 | [day-26-pvc-create/01-pvc-create-hands-on.md](../../../../wiki/06-存储与数据/csi-storage/培训/day-26-pvc-create/01-pvc-create-hands-on.md) |
+| Day 27 | 存储卷挂载实操 | [day-27-pvc-mount/01-pvc-mount-hands-on.md](../../../../wiki/06-存储与数据/csi-storage/培训/day-27-pvc-mount/01-pvc-mount-hands-on.md) |
 | Day 28 | 综合复习与实践 | [day-28-comprehensive-review/01-comprehensive-review.md](day-28-comprehensive-review/01-comprehensive-review.md) |
 
 **本周产出**: 能够配置 Service/Ingress、排查网络问题、管理存储卷
@@ -258,7 +258,7 @@ Week 4: 网络与存储 (进阶)
 | oncall 速查卡 | `P1-5-oncall-quick-reference-card.md` | 值班快速参考 |
 | kubectl 场景速查卡 | `系统基础/topic-cheat-sheet/kubectl-scene-cheatsheet.md` | 命令场景对照 |
 | 新人上手路径 | `生产运维/topic-learn/quick-start/` | 快速入门指南 |
-| 考核评估体系 | `wiki/19-故障诊断/08-技能体系/assessment/` | 技能评估工具 |
+| 考核评估体系 | `skills/09-技能体系/assessment/` | 技能评估工具 |
 | K8s 术语表 | `系统基础/topic-dictionary/k8s-glossary.md` | 术语查询 |
 | 故障排查手册 | `故障诊断/` | 故障排查参考 |
 | 内部培训教案 | `生产运维/topic-learn/inner-training/` | 详细教案 (阿里云版本) |
@@ -319,25 +319,25 @@ related:
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/20-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[wiki/23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[wiki/22-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 <!-- risk-assessed -->

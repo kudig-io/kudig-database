@@ -45,4 +45,4 @@ prerequisites:
 - mysql-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/06-部署方案/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One) [deployment]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/06-部署方案/02-single-node-deployment.md|02 - 单节点部署 (Single Node All-in-One) [deployment]]]（本页为重排去重桩，正文见主场）

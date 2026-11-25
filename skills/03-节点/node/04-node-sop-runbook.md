@@ -288,7 +288,7 @@ groups:
 
 ## 6. 验证确认协议
 
-> 以下内容整合自 `wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md`
+> 以下内容整合自 `skills/09-技能体系/skill-set/k8s-node-notready/reference/remediation-playbook.md`
 
 ### 6.1 即时验证（修复后 1-2 分钟内）
 
@@ -691,4 +691,4 @@ spec:
 - [[skills/03-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
 - [[skills/03-节点/node/reference/node-version-differences.md|版本差异对比]]
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[wiki/19-故障诊断/01-核心排障/06-node-notready-diagnosis.md|Node NotReady 深度诊断（原始文件）]]
+- [[wiki/17-故障诊断/01-核心排障/06-node-notready-diagnosis.md|Node NotReady 深度诊断（原始文件）]]

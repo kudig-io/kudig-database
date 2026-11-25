@@ -88,9 +88,9 @@ prerequisites:
 
 判断口诀：需要**答案** → 请求驱动；需要**历史可回放**（重算、补数、审计）→ 消息流；只需要**告知事实**且下游可能越来越多 → 事件驱动。
 
-事件驱动与消息流并非互斥：Knative Eventing 的 Kafka 实现底层就用 Kafka 做 Channel/Broker 存储；反过来，一个事件也可能被物化进流（事件 → 落数仓）。相关模式参考 [[wiki/21-生态参考/02-论文/14-kubernetes-event-driven-architecture-asynchronous-processing.md|事件驱动架构]] 与 [[wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md|Event Sourcing/CQRS]]。
+事件驱动与消息流并非互斥：Knative Eventing 的 Kafka 实现底层就用 Kafka 做 Channel/Broker 存储；反过来，一个事件也可能被物化进流（事件 → 落数仓）。相关模式参考 [[wiki/19-生态参考/02-论文/14-kubernetes-event-driven-architecture-asynchronous-processing.md|事件驱动架构]] 与 [[wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md|Event Sourcing/CQRS]]。
 
-直接用 Kafka + 自建消费者也能实现事件驱动，但 K8s 原生事件层补上三块拼图：**Sink 解耦**（目的地是 `ksvc`/Service/Broker 等 K8s 资源引用，服务重建不用改订阅关系）、**弹性消费**（Knative Service 自动缩容到零，无事件零成本）、**声明式路由**（Broker/Trigger 是 CRD，可 GitOps 管理）。相关模式参考 [[wiki/21-生态参考/02-论文/14-kubernetes-event-driven-architecture-asynchronous-processing.md|事件驱动架构]] 与 [[wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md|Event Sourcing/CQRS]]。
+直接用 Kafka + 自建消费者也能实现事件驱动，但 K8s 原生事件层补上三块拼图：**Sink 解耦**（目的地是 `ksvc`/Service/Broker 等 K8s 资源引用，服务重建不用改订阅关系）、**弹性消费**（Knative Service 自动缩容到零，无事件零成本）、**声明式路由**（Broker/Trigger 是 CRD，可 GitOps 管理）。相关模式参考 [[wiki/19-生态参考/02-论文/14-kubernetes-event-driven-architecture-asynchronous-processing.md|事件驱动架构]] 与 [[wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md|Event Sourcing/CQRS]]。
 
 ---
 
@@ -150,7 +150,7 @@ event.SetType("com.example.order.created")
 event.SetData(cloudevents.ApplicationJSON, map[string]float64{"amount": 199.0}) // client.Send(ctx, event)
 ```
 
-事件载荷的 schema 治理可配合 [[wiki/07-数据库中间件/06-数据流/05-schema-registry-patterns.md|Schema Registry 模式]]。
+事件载荷的 schema 治理可配合 [[wiki/06-存储与数据/14-数据流/05-schema-registry-patterns.md|Schema Registry 模式]]。
 
 ---
 
@@ -210,7 +210,7 @@ KPA vs HPA：
 | 缩容到零 | ✅ 原生（Activator 兜底） | ❌（scale-to-zero 长期停留在 alpha；常态最小副本 ≥1） |
 | 冷启动 | 有（毫秒~秒级，取决于镜像与队列） | 不适用（不停机） |
 | 流量灰度 | Route 原生支持 | 无 |
-| 外部系统驱动 | — | 常配合 [[wiki/10-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md|KEDA 事件驱动伸缩]] 缩放到零 |
+| 外部系统驱动 | — | 常配合 [[wiki/12-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md|KEDA 事件驱动伸缩]] 缩放到零 |
 
 ---
 
@@ -453,7 +453,7 @@ kubectl logs -n knative-eventing deploy/mt-broker-ingress --tail=100
 
 ### 6.1 与 Kafka/Pulsar 事件流的边界：什么时候不用 Knative
 
-**直接用消息队列 + 自建路由更合适**：需要回放/重算（按 offset 重置位点补数）；需要严格顺序 + 高吞吐流计算（Flink/Spark 消费 Kafka，见 [[wiki/07-数据库中间件/06-数据流/02-stream-processing-overview.md|流处理技术概述]]）；需要消费组语义（各消费者独立进度、暂停/恢复）；事件本身就是数据管道（CDC → 数仓，走 Kafka Connect/Flink CDC）。
+**直接用消息队列 + 自建路由更合适**：需要回放/重算（按 offset 重置位点补数）；需要严格顺序 + 高吞吐流计算（Flink/Spark 消费 Kafka，见 [[wiki/06-存储与数据/14-数据流/02-stream-processing-overview.md|流处理技术概述]]）；需要消费组语义（各消费者独立进度、暂停/恢复）；事件本身就是数据管道（CDC → 数仓，走 Kafka Connect/Flink CDC）。
 
 **Knative Eventing 更合适**：事件扇出到多个轻量、偶发的反应式消费者（通知/审计/webhook/AI 触发器）；消费者希望 Serverless 化（无事件零成本）；路由规则需要声明式管理（按 type/source 过滤，GitOps 友好）；已有 K8s、想最小化新增基础设施。
 
@@ -547,4 +547,4 @@ kubectl -n knative-eventing exec deploy/eventing-controller -- \
 - CloudEvents 规范 v1.0.2：https://github.com/cloudevents/spec（ce@v1.0.2）
 - CloudEvents SDK：https://cloudevents.io/docs/sdks/
 - eventing-kafka-broker：https://github.com/knative-extensions/eventing-kafka-broker
-- 本库相关：[[wiki/10-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md|KEDA 事件驱动伸缩]]、[[wiki/07-数据库中间件/06-数据流/02-stream-processing-overview.md|流处理技术概述]]、[[wiki/07-数据库中间件/06-数据流/05-schema-registry-patterns.md|Schema Registry 模式]]、[[wiki/21-生态参考/02-论文/14-kubernetes-event-driven-architecture-asynchronous-processing.md|事件驱动架构]]
+- 本库相关：[[wiki/12-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md|KEDA 事件驱动伸缩]]、[[wiki/06-存储与数据/14-数据流/02-stream-processing-overview.md|流处理技术概述]]、[[wiki/06-存储与数据/14-数据流/05-schema-registry-patterns.md|Schema Registry 模式]]、[[wiki/19-生态参考/02-论文/14-kubernetes-event-driven-architecture-asynchronous-processing.md|事件驱动架构]]

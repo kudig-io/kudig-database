@@ -54,7 +54,7 @@ prerequisites:
 | RC-011 | CNI 插件异常 | 中 | 重启 CNI Pod(手动) | MEDIUM |
 | RC-012 | 节点被手动 cordon | 低 | REM-001 uncordon | LOW |
 
-> 完整根因详情见 [reference/root-cause-catalog.md](../../../../wiki/19-故障诊断/08-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md)
+> 完整根因详情见 [reference/root-cause-catalog.md](../../../../skills/09-技能体系/skill-set/k8s-node-notready/reference/root-cause-catalog.md)
 > 完整修复步骤见 [reference/remediation-playbook.md](./reference/remediation-playbook.md)
 
 ## 相关链接
@@ -106,7 +106,7 @@ prerequisites:
 ## Related
 
 - observability.md|ts-monitoring-observability]] — 监控可观测性排查
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
@@ -116,4 +116,4 @@ prerequisites:
 - SKILL
 
 <!-- risk-assessed -->
-- [[wiki/22-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]
+- [[wiki/20-概念/12-研究/ai-agent-MOC|02-ai-agents MOC]]

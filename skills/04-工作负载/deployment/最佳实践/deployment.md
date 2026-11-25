@@ -1,7 +1,7 @@
 ---
 title: Deployment
-description: '- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
-summary: '- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+description: '- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+summary: '- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
 category: entities
 tags:
 - k8s
@@ -32,4 +32,4 @@ prerequisites:
 - prometheus-basics
 ---
 
-> **内容已并入主场**：[[wiki/23-实体/02-K8s核心组件/deployment.md|Deployment]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/22-实体/02-K8s核心组件/deployment.md|Deployment]]（本页为重排去重桩，正文见主场）

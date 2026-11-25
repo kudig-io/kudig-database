@@ -403,7 +403,7 @@ kubectl delete ingress my-ingress
 
 **关联文档**:
 - [../05-configuration/05-configmap-secret.md](../../../04-工作负载/pod/培训/lecturer/03-configmap-secret.md) — 配置管理
-- [../../故障诊断/topic-skills/13-ingress-gateway-failure.md](../../../../wiki/19-故障诊断/08-技能体系/14-ingress-gateway-failure.md) — Ingress 问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/13-ingress-gateway-failure.md](../../../../skills/09-技能体系/14-ingress-gateway-failure.md) — Ingress 问题 [[SKILL|Skill]]
 - [../../网络/](../../网络/) — Kubernetes 网络文档
 
 ## Related
@@ -414,13 +414,13 @@ kubectl delete ingress my-ingress
 
 - [[skills/04-工作负载/pod/培训/learn-public-training.md|learn-public-training]]
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/monitoring-fta.md|monitoring-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/monitoring-fta.md|monitoring-fta]]
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/crd-operator-fta.md|crd-operator-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/crd-operator-fta.md|crd-operator-fta]]
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/vpa-fta.md|vpa-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/vpa-fta.md|vpa-fta]]
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/hpa-fta.md|hpa-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/hpa-fta.md|hpa-fta]]
 
 - [[skills/04-工作负载/pod/培训/learn-01-what-is-kubernetes.md|learn-01-what-is-kubernetes]]
 
@@ -428,11 +428,11 @@ kubectl delete ingress my-ingress
 
 - [[skills/04-工作负载/daemonset/培训/learn-13-daemonset-basics.md|learn-13-daemonset-basics]]
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/ingress-fta.md|ingress-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/ingress-fta.md|ingress-fta]]
 
 - README.md|learn-README]]
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/service-mesh-istio-fta.md|service-mesh-istio-fta]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/service-mesh-istio-fta.md|service-mesh-istio-fta]]
 
 - [[openkruise-fta]]
 

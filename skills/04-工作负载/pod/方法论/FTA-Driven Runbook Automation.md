@@ -189,7 +189,7 @@ FTA 故障树
 ## Related
 
 - [[higress-fta]] — Higress 网关异常故障树分析
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[deployment]] — Deployment
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
@@ -197,8 +197,8 @@ FTA 故障树
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 - [[skills/04-工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|Kubernetes Diagnostic Skills Overview]]
-- [[wiki/19-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
-- [[wiki/22-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]]
+- [[wiki/17-故障诊断/01-核心排障/Production Troubleshooting Playbook.md|Production Troubleshooting Playbook]]
+- [[wiki/20-概念/08-可靠性与运维/Structural-Troubleshooting-Framework.md|Structural Troubleshooting Framework]]
 
 
 <!-- risk-assessed -->

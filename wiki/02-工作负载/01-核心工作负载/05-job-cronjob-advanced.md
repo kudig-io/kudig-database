@@ -75,7 +75,7 @@ cross_refs:
 
 # 05 - Job 与 [[cronjob|CronJob]] 高级用法 (Job & CronJob Advanced Usage)
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] [[jobs|Jobs]]](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-02 | **参考**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|Kubernetes]] [[jobs|Jobs]]](https://kubernetes.io/docs/concepts/workloads/controllers/job/)
 
 <!-- chunk: Job 类型详解与使用场景 -->
 ## Job 类型详解与使用场景

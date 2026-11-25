@@ -376,9 +376,9 @@ ConfigMap/Secret 问题
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[skills/04-工作负载/deployment/deployment-fta.md|Deployment 异常故障树分析]] — Cross-reference

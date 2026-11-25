@@ -97,9 +97,9 @@ PVC 删除后 PV 被删除会导致数据丢失。生产环境应使用 Retain �
 
 ## 相关资源
 
-- [[wiki/22-概念/k8s-production-best-practices.md|[[wiki/22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
-- [[wiki/22-概念/storage-model.md|Persistent [[wiki/20-最佳实践/01-best-practices/infrastructure/storage|Storage]]stent Storage Model (PV/PVC/StorageClass)|Storage Model]]]]
-- [[wiki/22-概念/04-存储/block-file-object-storage.md|Block vs File vs Object Storage]]
+- [[wiki/20-概念/k8s-production-best-practices.md|[[wiki/20-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
+- [[wiki/20-概念/storage-model.md|Persistent [[wiki/18-最佳实践/03-infrastructure/storage|Storage]]stent Storage Model (PV/PVC/StorageClass)|Storage Model]]]]
+- [[wiki/20-概念/04-存储/block-file-object-storage.md|Block vs File vs Object Storage]]
 - [[skills/06-存储/csi-storage/manage-persistent-storage.md|[[skills/06-存储/csi-storage/manage-persistent-storage|Manage Persistent Storage]]]]
 
 ## 生产案例
@@ -145,9 +145,9 @@ PVC 删除后 PV 被删除会导致数据丢失。生产环境应使用 Retain �
 ## Related
 
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/04-存储/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[wiki/22-概念/04-存储/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
+- [[wiki/20-概念/04-存储/storage-model.md|storage-model]] — Persistent Storage Model (PV/PVC/StorageClass)
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/04-存储/block-file-object-storage.md|block-file-object-storage]] — Block, File, and Object Storage
 - [[skills/06-存储/csi-storage/manage-persistent-storage.md|manage-persistent-storage]] — Manage Persistent Storage
 
 

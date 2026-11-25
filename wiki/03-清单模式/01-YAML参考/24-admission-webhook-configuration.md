@@ -2662,14 +2662,14 @@ Admission Webhook 是 Kubernetes 准入控制的强大扩展机制:
 - 25-validatingadmissionpolicy
 - 26-priorityclass-runtimeclass
 
-- [[wiki/10-平台工程/06-代码分析/node-create/10-kubelet-config.md|10-kubelet-config]]
-- [[wiki/10-平台工程/06-代码分析/cluster-create/04-kubeconfig.md|04-kubeconfig]]
-- [[wiki/10-平台工程/06-代码分析/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
-- [[wiki/10-平台工程/06-代码分析/cluster-cert/13-cert-config.md|13-cert-config]]
+- [[wiki/12-平台工程/06-代码分析/node-create/10-kubelet-config.md|10-kubelet-config]]
+- [[wiki/12-平台工程/06-代码分析/cluster-create/04-kubeconfig.md|04-kubeconfig]]
+- [[wiki/12-平台工程/06-代码分析/cluster-create/24-what-kubeadm-does-not-install.md|24-what-kubeadm-does-not-install]]
+- [[wiki/12-平台工程/06-代码分析/cluster-cert/13-cert-config.md|13-cert-config]]
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]
 
 
 <!-- risk-assessed -->

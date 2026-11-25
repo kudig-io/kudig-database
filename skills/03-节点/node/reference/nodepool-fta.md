@@ -55,7 +55,7 @@ severity: high
 # NodePool 异常故障树分析
 
 > **FTA ID**: FTA-NODEPOOL-001
-> **来源**: `wiki/19-故障诊断/06-FTA故障树/list/nodepool-fta.md`
+> **来源**: `wiki/17-故障诊断/06-FTA故障树/list/nodepool-fta.md`
 
 ## 适用范围与说明
 
@@ -275,5 +275,5 @@ groups:
 - [[skills/03-节点/node/README.md|Node 异常诊断技能集]]
 - [[skills/03-节点/node/01-node-notready-diagnosis.md|Node NotReady 诊断]]
 - [[skills/03-节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/nodepool-fta.md|NodePool FTA 原始文件]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/nodepool-fta.md|NodePool FTA 原始文件]]
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]

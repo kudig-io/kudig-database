@@ -71,7 +71,7 @@ cross_refs:
 
 # 76 - CNI插件深度对比
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/cluster-administration/networking](https://kubernetes.io/docs/concepts/cluster-administration/networking/)
 
 <!-- chunk: CNI插件功能对比 -->
 ## CNI插件功能对比
@@ -342,8 +342,8 @@ iptables -t filter -L -n -v
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/network-index.md|Network 网络知识图谱索引]]
 
 ```
 

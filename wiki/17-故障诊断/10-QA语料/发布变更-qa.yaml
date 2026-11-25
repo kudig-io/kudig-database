@@ -1,0 +1,1560 @@
+domain: 发布变更
+total_questions: 320
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 Release Engineering Strategy — Versioning, Branching, and Delivery Pipeline Design 中, 发布工程全景 是什么?
+  answer: 参见 wiki/09-发布变更/00-总览/01-release-engineering-strategy.md 的「发布工程全景」章节。
+  source: wiki/09-发布变更/00-总览/01-release-engineering-strategy.md
+  section: 发布工程全景
+- type: concept
+  question: 在 Release Engineering Strategy — Versioning, Branching, and Delivery Pipeline Design 中, 版本策略 是什么?
+  answer: 参见 wiki/09-发布变更/00-总览/01-release-engineering-strategy.md 的「版本策略」章节。
+  source: wiki/09-发布变更/00-总览/01-release-engineering-strategy.md
+  section: 版本策略
+- type: concept
+  question: 在 Release Engineering Strategy — Versioning, Branching, and Delivery Pipeline Design 中, 分支策略 是什么?
+  answer: 参见 wiki/09-发布变更/00-总览/01-release-engineering-strategy.md 的「分支策略」章节。
+  source: wiki/09-发布变更/00-总览/01-release-engineering-strategy.md
+  section: 分支策略
+- type: operation
+  question: '如何执行与 Release Engineering Strategy — Versioning, Branching, and Delivery Pipeline Design 相关的操作: GIT_SHA=$(git
+    rev-parse --short HEAD)?'
+  answer: 参见 wiki/09-发布变更/00-总览/01-release-engineering-strategy.md 中的操作步骤。
+  source: wiki/09-发布变更/00-总览/01-release-engineering-strategy.md
+  command: GIT_SHA=$(git rev-parse --short HEAD)
+- type: comparison
+  question: Release Engineering Strategy — Versioning, Branching, and Delivery Pipeline Design 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/00-总览/01-release-engineering-strategy.md 中的对比分析。
+  source: wiki/09-发布变更/00-总览/01-release-engineering-strategy.md
+- type: concept
+  question: 在 发布与变更管理 生产就绪运维指南 中, 生产环境检查清单 是什么?
+  answer: 参见 wiki/09-发布变更/00-总览/02-production-readiness-operations-guide.md 的「生产环境检查清单」章节。
+  source: wiki/09-发布变更/00-总览/02-production-readiness-operations-guide.md
+  section: 生产环境检查清单
+- type: concept
+  question: 在 发布与变更管理 生产就绪运维指南 中, 关键风险与缓解措施 是什么?
+  answer: 参见 wiki/09-发布变更/00-总览/02-production-readiness-operations-guide.md 的「关键风险与缓解措施」章节。
+  source: wiki/09-发布变更/00-总览/02-production-readiness-operations-guide.md
+  section: 关键风险与缓解措施
+- type: concept
+  question: 在 00-总览 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/00-总览/index.md 的「文档」章节。
+  source: wiki/09-发布变更/00-总览/index.md
+  section: 文档
+- type: concept
+  question: 在 Argo CD企业级GitOps实践指南 中, 1 核心概念与原理 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md 的「1 核心概念与原理」章节。
+  source: wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md
+  section: 1 核心概念与原理
+- type: concept
+  question: 在 Argo CD企业级GitOps实践指南 中, 2 GitOps工作流程详解 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md 的「2 GitOps工作流程详解」章节。
+  source: wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md
+  section: 2 GitOps工作流程详解
+- type: concept
+  question: 在 Argo CD企业级GitOps实践指南 中, 3 Argo CD 内部组件交互 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md 的「3 Argo CD 内部组件交互」章节。
+  source: wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md
+  section: 3 Argo CD 内部组件交互
+- type: concept
+  question: 在 Argo CD企业级GitOps实践指南 中, 1 Argo CD Helm部署配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md 的「1 Argo CD Helm部署配置」章节。
+  source: wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md
+  section: 1 Argo CD Helm部署配置
+- type: concept
+  question: 在 Argo CD企业级GitOps实践指南 中, 2 外部Redis高可用部署 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md 的「2 外部Redis高可用部署」章节。
+  source: wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md
+  section: 2 外部Redis高可用部署
+- type: comparison
+  question: Argo CD企业级GitOps实践指南 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/01-argo-cd-enterprise-gitops.md
+- type: concept
+  question: 在 GitOps at Scale — ArgoCD & Flux Production Patterns 中, GitOps 核心原则 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/02-gitops-argocd-flux-production.md 的「GitOps 核心原则」章节。
+  source: wiki/09-发布变更/01-GitOps/02-gitops-argocd-flux-production.md
+  section: GitOps 核心原则
+- type: concept
+  question: 在 GitOps at Scale — ArgoCD & Flux Production Patterns 中, ArgoCD 企业部署 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/02-gitops-argocd-flux-production.md 的「ArgoCD 企业部署」章节。
+  source: wiki/09-发布变更/01-GitOps/02-gitops-argocd-flux-production.md
+  section: ArgoCD 企业部署
+- type: operation
+  question: '如何执行与 GitOps at Scale — ArgoCD & Flux Production Patterns 相关的操作: helm repo add argo https://argoproj.github.io/argo-helm?'
+  answer: 参见 wiki/09-发布变更/01-GitOps/02-gitops-argocd-flux-production.md 中的操作步骤。
+  source: wiki/09-发布变更/01-GitOps/02-gitops-argocd-flux-production.md
+  command: helm repo add argo https://argoproj.github.io/argo-helm
+- type: concept
+  question: 在 Jenkins企业级CI/CD流水线深度实践 中, 1 核心组件架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md 的「1 核心组件架构」章节。
+  source: wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md
+  section: 1 核心组件架构
+- type: concept
+  question: 在 Jenkins企业级CI/CD流水线深度实践 中, 2 高可用架构设计 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md 的「2 高可用架构设计」章节。
+  source: wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md
+  section: 2 高可用架构设计
+- type: concept
+  question: 在 Jenkins企业级CI/CD流水线深度实践 中, 3 Kubernetes Agent 调度模型 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md 的「3 Kubernetes Agent 调度模型」章节。
+  source: wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md
+  section: 3 Kubernetes Agent 调度模型
+- type: concept
+  question: 在 Jenkins企业级CI/CD流水线深度实践 中, 1 Kubernetes 部署配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md 的「1 Kubernetes 部署配置」章节。
+  source: wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md
+  section: 1 Kubernetes 部署配置
+- type: concept
+  question: 在 Jenkins企业级CI/CD流水线深度实践 中, 2 Configuration as Code (JCasC) 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md 的「2 Configuration as Code (JCasC)」章节。
+  source: wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md
+  section: 2 Configuration as Code (JCasC)
+- type: comparison
+  question: Jenkins企业级CI/CD流水线深度实践 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/03-jenkins-enterprise-cicd.md
+- type: concept
+  question: 在 GitLab CI/CD 企业级流水线自动化平台 中, 1 GitLab 企业级架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md 的「1 GitLab 企业级架构」章节。
+  source: wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md
+  section: 1 GitLab 企业级架构
+- type: concept
+  question: 在 GitLab CI/CD 企业级流水线自动化平台 中, 2 Runner 架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md 的「2 Runner 架构」章节。
+  source: wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md
+  section: 2 Runner 架构
+- type: concept
+  question: 在 GitLab CI/CD 企业级流水线自动化平台 中, 3 Kubernetes 部署 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md 的「3 Kubernetes 部署」章节。
+  source: wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md
+  section: 3 Kubernetes 部署
+- type: concept
+  question: 在 GitLab CI/CD 企业级流水线自动化平台 中, 1 Runner 配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md 的「1 Runner 配置」章节。
+  source: wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md
+  section: 1 Runner 配置
+- type: concept
+  question: 在 GitLab CI/CD 企业级流水线自动化平台 中, 2 企业级 CI/CD 流水线 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md 的「2 企业级 CI/CD 流水线」章节。
+  source: wiki/09-发布变更/01-GitOps/04-gitlab-enterprise-cicd.md
+  section: 2 企业级 CI/CD 流水线
+- type: concept
+  question: 在 GitHub Actions Enterprise CI/CD Platform 深度实践 中, 1 核心组件架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md 的「1 核心组件架构」章节。
+  source: wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md
+  section: 1 核心组件架构
+- type: concept
+  question: 在 GitHub Actions Enterprise CI/CD Platform 深度实践 中, 2 企业 Runner 架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md 的「2 企业 Runner 架构」章节。
+  source: wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md
+  section: 2 企业 Runner 架构
+- type: concept
+  question: 在 GitHub Actions Enterprise CI/CD Platform 深度实践 中, 3 自托管 Runner Kubernetes 部署 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md 的「3 自托管 Runner Kubernetes 部署」章节。
+  source: wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md
+  section: 3 自托管 Runner Kubernetes 部署
+- type: concept
+  question: 在 GitHub Actions Enterprise CI/CD Platform 深度实践 中, 1 企业级 CI/CD 工作流 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md 的「1 企业级 CI/CD 工作流」章节。
+  source: wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md
+  section: 1 企业级 CI/CD 工作流
+- type: concept
+  question: 在 GitHub Actions Enterprise CI/CD Platform 深度实践 中, 2 可复用工作流 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md 的「2 可复用工作流」章节。
+  source: wiki/09-发布变更/01-GitOps/05-github-actions-enterprise.md
+  section: 2 可复用工作流
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 深度实践 中, 1 Tekton 组件全景图 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md 的「1 Tekton 组件全景图」章节。
+  source: wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md
+  section: 1 Tekton 组件全景图
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 深度实践 中, 2 核心概念详解 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md 的「2 核心概念详解」章节。
+  source: wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md
+  section: 2 核心概念详解
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 深度实践 中, 1 生产级安装 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md 的「1 生产级安装」章节。
+  source: wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md
+  section: 1 生产级安装
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 深度实践 中, 2 生产级默认配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md 的「2 生产级默认配置」章节。
+  source: wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md
+  section: 2 生产级默认配置
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 深度实践 中, 3 Pipeline 详解 (DAG 编排) 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md 的「3 Pipeline 详解 (DAG 编排)」章节。
+  source: wiki/09-发布变更/01-GitOps/06-tekton-cloud-native-cicd.md
+  section: 3 Pipeline 详解 (DAG 编排)
+- type: concept
+  question: 在 Flux v2 GitOps 持续交付深度实践 中, 1 Flux 多集群架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 的「1 Flux 多集群架构」章节。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+  section: 1 Flux 多集群架构
+- type: concept
+  question: 在 Flux v2 GitOps 持续交付深度实践 中, 2 GitOps Toolkit 组件交互 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 的「2 GitOps Toolkit 组件交互」章节。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+  section: 2 GitOps Toolkit 组件交互
+- type: concept
+  question: 在 Flux v2 GitOps 持续交付深度实践 中, 1 Bootstrap 与目录结构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 的「1 Bootstrap 与目录结构」章节。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+  section: 1 Bootstrap 与目录结构
+- type: concept
+  question: 在 Flux v2 GitOps 持续交付深度实践 中, 2 Kustomization 高级配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 的「2 Kustomization 高级配置」章节。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+  section: 2 Kustomization 高级配置
+- type: concept
+  question: 在 Flux v2 GitOps 持续交付深度实践 中, 3 HelmRelease 高级配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 的「3 HelmRelease 高级配置」章节。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+  section: 3 HelmRelease 高级配置
+- type: operation
+  question: '如何执行与 Flux v2 GitOps 持续交付深度实践 相关的操作: curl -s https://fluxcd.io/install.sh | sudo bash?'
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 中的操作步骤。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+  command: curl -s https://fluxcd.io/install.sh | sudo bash
+- type: troubleshooting
+  question: 如何排查 Flux v2 GitOps 持续交付深度实践 相关的故障?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 的故障排查章节。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+- type: comparison
+  question: Flux v2 GitOps 持续交付深度实践 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/07-flux-gitops-continuous-delivery.md
+- type: concept
+  question: 在 GitOps 安全与合规深度实践 中, 1 SLSA 安全等级详解 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md 的「1 SLSA 安全等级详解」章节。
+  source: wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md
+  section: 1 SLSA 安全等级详解
+- type: concept
+  question: 在 GitOps 安全与合规深度实践 中, 2 SLSA Level 要求对比 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md 的「2 SLSA Level 要求对比」章节。
+  source: wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md
+  section: 2 SLSA Level 要求对比
+- type: concept
+  question: 在 GitOps 安全与合规深度实践 中, 1 供应链安全架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md 的「1 供应链安全架构」章节。
+  source: wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md
+  section: 1 供应链安全架构
+- type: concept
+  question: 在 GitOps 安全与合规深度实践 中, 1 Cosign 密钥管理 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md 的「1 Cosign 密钥管理」章节。
+  source: wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md
+  section: 1 Cosign 密钥管理
+- type: concept
+  question: 在 GitOps 安全与合规深度实践 中, 2 Cosign 签名完整流程 YAML 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md 的「2 Cosign 签名完整流程 YAML」章节。
+  source: wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md
+  section: 2 Cosign 签名完整流程 YAML
+- type: comparison
+  question: GitOps 安全与合规深度实践 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/08-gitops-security-compliance.md
+- type: concept
+  question: 在 CI/CD 流水线模式与渐进式交付深度实践 中, 1 分支策略对比 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md 的「1 分支策略对比」章节。
+  source: wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md
+  section: 1 分支策略对比
+- type: concept
+  question: 在 CI/CD 流水线模式与渐进式交付深度实践 中, 2 渐进式交付架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md 的「2 渐进式交付架构」章节。
+  source: wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md
+  section: 2 渐进式交付架构
+- type: concept
+  question: 在 CI/CD 流水线模式与渐进式交付深度实践 中, 3 分支策略对比表 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md 的「3 分支策略对比表」章节。
+  source: wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md
+  section: 3 分支策略对比表
+- type: concept
+  question: 在 CI/CD 流水线模式与渐进式交付深度实践 中, 1 Trunk-Based + Argo CD 模式 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md 的「1 Trunk-Based + Argo CD 模式」章节。
+  source: wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md
+  section: 1 Trunk-Based + Argo CD 模式
+- type: concept
+  question: 在 CI/CD 流水线模式与渐进式交付深度实践 中, 2 Argo Rollouts 金丝雀发布 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md 的「2 Argo Rollouts 金丝雀发布」章节。
+  source: wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md
+  section: 2 Argo Rollouts 金丝雀发布
+- type: comparison
+  question: CI/CD 流水线模式与渐进式交付深度实践 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/09-cicd-pipeline-patterns.md
+- type: concept
+  question: 在 Kubernetes 多集群 Fleet GitOps 运维指南 中, 适用场景与范围 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md 的「适用场景与范围」章节。
+  source: wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md
+  section: 适用场景与范围
+- type: comparison
+  question: Kubernetes 多集群 Fleet GitOps 运维指南 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/10-fleet-gitops-operations-guide.md
+- type: concept
+  question: 在 Argo Rollouts 渐进式交付 中, 架构概述 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md 的「架构概述」章节。
+  source: wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md
+  section: 架构概述
+- type: concept
+  question: 在 Argo Rollouts 渐进式交付 中, Canary 策略 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md 的「Canary 策略」章节。
+  source: wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md
+  section: Canary 策略
+- type: comparison
+  question: Argo Rollouts 渐进式交付 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/11-argo-rollouts-progressive-delivery.md
+- type: concept
+  question: 在 10-GitOps流水线实践 中, 核心组件架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md 的「核心组件架构」章节。
+  source: wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md
+  section: 核心组件架构
+- type: concept
+  question: 在 10-GitOps流水线实践 中, ArgoCD部署配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md 的「ArgoCD部署配置」章节。
+  source: wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md
+  section: ArgoCD部署配置
+- type: concept
+  question: 在 10-GitOps流水线实践 中, 应用仓库结构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md 的「应用仓库结构」章节。
+  source: wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md
+  section: 应用仓库结构
+- type: concept
+  question: 在 10-GitOps流水线实践 中, 蓝绿部署配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md 的「蓝绿部署配置」章节。
+  source: wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md
+  section: 蓝绿部署配置
+- type: concept
+  question: 在 10-GitOps流水线实践 中, ArgoCD蓝绿部署 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md 的「ArgoCD蓝绿部署」章节。
+  source: wiki/09-发布变更/01-GitOps/12-gitops-pipeline-practices.md
+  section: ArgoCD蓝绿部署
+- type: concept
+  question: 在 Flagger 自动化 Canary 发布 中, 架构概述 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/13-flagger-automated-canary.md 的「架构概述」章节。
+  source: wiki/09-发布变更/01-GitOps/13-flagger-automated-canary.md
+  section: 架构概述
+- type: concept
+  question: 在 Flagger 自动化 Canary 发布 中, 安装配置 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/13-flagger-automated-canary.md 的「安装配置」章节。
+  source: wiki/09-发布变更/01-GitOps/13-flagger-automated-canary.md
+  section: 安装配置
+- type: comparison
+  question: Flagger 自动化 Canary 发布 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/13-flagger-automated-canary.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/13-flagger-automated-canary.md
+- type: concept
+  question: 在 Helm 生产模式 中, 概述 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/15-helm-production-patterns.md 的「概述」章节。
+  source: wiki/09-发布变更/01-GitOps/15-helm-production-patterns.md
+  section: 概述
+- type: concept
+  question: 在 Helm 生产模式 中, 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/15-helm-production-patterns.md 的「核心概念」章节。
+  source: wiki/09-发布变更/01-GitOps/15-helm-production-patterns.md
+  section: 核心概念
+- type: comparison
+  question: Helm 生产模式 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/15-helm-production-patterns.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/15-helm-production-patterns.md
+- type: concept
+  question: 在 GitOps 2025 最佳实践：Argo CD ApplicationSet、Flux 2.x 与渐进式交付 中, Argo CD 2.12 ApplicationSet 高级模式 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md 的「Argo CD 2.12 ApplicationSet 高级模式」章节。
+  source: wiki/09-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md
+  section: Argo CD 2.12 ApplicationSet 高级模式
+- type: best_practice
+  question: 关于 GitOps 2025 最佳实践：Argo CD ApplicationSet、Flux 2.x 与渐进式交付, 有什么最佳实践?
+  answer: Argo CD ApplicationSet、Flux 2.x 与渐进式交付
+  source: wiki/09-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md
+- type: comparison
+  question: GitOps 2025 最佳实践：Argo CD ApplicationSet、Flux 2.x 与渐进式交付 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/16-gitops-2025-argocd-flux-best-practices.md
+- type: concept
+  question: 在 Argo CD 企业级 GitOps 实践指南 中, 1 组件架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md 的「1 组件架构」章节。
+  source: wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md
+  section: 1 组件架构
+- type: concept
+  question: 在 Argo CD 企业级 GitOps 实践指南 中, 2 单实例架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md 的「2 单实例架构」章节。
+  source: wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md
+  section: 2 单实例架构
+- type: concept
+  question: 在 Argo CD 企业级 GitOps 实践指南 中, 3 高可用架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md 的「3 高可用架构」章节。
+  source: wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md
+  section: 3 高可用架构
+- type: concept
+  question: 在 Argo CD 企业级 GitOps 实践指南 中, 1 生产级 Values 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md 的「1 生产级 Values」章节。
+  source: wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md
+  section: 1 生产级 Values
+- type: concept
+  question: 在 Argo CD 企业级 GitOps 实践指南 中, 2 部署命令 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md 的「2 部署命令」章节。
+  source: wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md
+  section: 2 部署命令
+- type: concept
+  question: 在 Flux GitOps 实践指南 中, 1 Flux 核心组件 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 的「1 Flux 核心组件」章节。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+  section: 1 Flux 核心组件
+- type: concept
+  question: 在 Flux GitOps 实践指南 中, 2 组件职责 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 的「2 组件职责」章节。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+  section: 2 组件职责
+- type: concept
+  question: 在 Flux GitOps 实践指南 中, 1 CLI 安装与初始化 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 的「1 CLI 安装与初始化」章节。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+  section: 1 CLI 安装与初始化
+- type: concept
+  question: 在 Flux GitOps 实践指南 中, 2 目录结构约定 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 的「2 目录结构约定」章节。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+  section: 2 目录结构约定
+- type: concept
+  question: 在 Flux GitOps 实践指南 中, 1 GitRepository 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 的「1 GitRepository」章节。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+  section: 1 GitRepository
+- type: operation
+  question: '如何执行与 Flux GitOps 实践指南 相关的操作: curl -s https://fluxcd.io/install.sh | sudo bash?'
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 中的操作步骤。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+  command: curl -s https://fluxcd.io/install.sh | sudo bash
+- type: comparison
+  question: Flux GitOps 实践指南 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md
+- type: concept
+  question: 在 Helm 生产实践指南（阿里云专有云版） 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/19-helm-production-guide.md 的「目录」章节。
+  source: wiki/09-发布变更/01-GitOps/19-helm-production-guide.md
+  section: 目录
+- type: concept
+  question: 在 Helm 生产实践指南（阿里云专有云版） 中, Chart 开发规范 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/19-helm-production-guide.md 的「Chart 开发规范」章节。
+  source: wiki/09-发布变更/01-GitOps/19-helm-production-guide.md
+  section: Chart 开发规范
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 实践指南 中, 1 Tekton 组件架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md 的「1 Tekton 组件架构」章节。
+  source: wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md
+  section: 1 Tekton 组件架构
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 实践指南 中, 2 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md 的「2 核心概念」章节。
+  source: wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md
+  section: 2 核心概念
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 实践指南 中, 1 安装部署 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md 的「1 安装部署」章节。
+  source: wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md
+  section: 1 安装部署
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 实践指南 中, 2 Task 定义 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md 的「2 Task 定义」章节。
+  source: wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md
+  section: 2 Task 定义
+- type: concept
+  question: 在 Tekton 云原生 CI/CD 实践指南 中, 3 Pipeline 定义 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md 的「3 Pipeline 定义」章节。
+  source: wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md
+  section: 3 Pipeline 定义
+- type: comparison
+  question: Tekton 云原生 CI/CD 实践指南 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md
+- type: concept
+  question: 在 Tekton Java CI/CD 流水线实践指南 中, 1 Java CI/CD 流水线架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md 的「1 Java CI/CD 流水线架构」章节。
+  source: wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md
+  section: 1 Java CI/CD 流水线架构
+- type: concept
+  question: 在 Tekton Java CI/CD 流水线实践指南 中, 2 Workspace 与缓存架构 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md 的「2 Workspace 与缓存架构」章节。
+  source: wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md
+  section: 2 Workspace 与缓存架构
+- type: concept
+  question: 在 Tekton Java CI/CD 流水线实践指南 中, 1 Maven Task 定义 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md 的「1 Maven Task 定义」章节。
+  source: wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md
+  section: 1 Maven Task 定义
+- type: concept
+  question: 在 Tekton Java CI/CD 流水线实践指南 中, 2 Jib Maven Task (无 Dockerfile 镜像构建) 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md 的「2 Jib Maven Task (无 Dockerfile 镜像构建)」章节。
+  source: wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md
+  section: 2 Jib Maven Task (无 Dockerfile 镜像构建)
+- type: concept
+  question: 在 Tekton Java CI/CD 流水线实践指南 中, 3 Buildpacks Task 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md 的「3 Buildpacks Task」章节。
+  source: wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md
+  section: 3 Buildpacks Task
+- type: comparison
+  question: Tekton Java CI/CD 流水线实践指南 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md 中的对比分析。
+  source: wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md
+- type: concept
+  question: 在 Gitops 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/01-GitOps/index.md 的「文档」章节。
+  source: wiki/09-发布变更/01-GitOps/index.md
+  section: 文档
+- type: concept
+  question: 在 Terraform企业级基础设施即代码实践 中, 1 核心组件架构 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md 的「1 核心组件架构」章节。
+  source: wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md
+  section: 1 核心组件架构
+- type: concept
+  question: 在 Terraform企业级基础设施即代码实践 中, 2 工作流程详解 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md 的「2 工作流程详解」章节。
+  source: wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md
+  section: 2 工作流程详解
+- type: concept
+  question: 在 Terraform企业级基础设施即代码实践 中, 1 标准化目录结构 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md 的「1 标准化目录结构」章节。
+  source: wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md
+  section: 1 标准化目录结构
+- type: concept
+  question: 在 Terraform企业级基础设施即代码实践 中, 2 后端配置管理 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md 的「2 后端配置管理」章节。
+  source: wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md
+  section: 2 后端配置管理
+- type: concept
+  question: 在 Terraform企业级基础设施即代码实践 中, 1 网络基础设施模块 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md 的「1 网络基础设施模块」章节。
+  source: wiki/09-发布变更/02-IaC/01-terraform-enterprise-iac.md
+  section: 1 网络基础设施模块
+- type: concept
+  question: 在 Ansible企业级自动化运维深度实践 中, 1 Core Component Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md 的「1 Core Component Architecture」章节。
+  source: wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md
+  section: 1 Core Component Architecture
+- type: concept
+  question: 在 Ansible企业级自动化运维深度实践 中, 2 Execution Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md 的「2 Execution Architecture」章节。
+  source: wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md
+  section: 2 Execution Architecture
+- type: concept
+  question: 在 Ansible企业级自动化运维深度实践 中, 1 Ansible Tower/AWX Setup 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md 的「1 Ansible Tower/AWX Setup」章节。
+  source: wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md
+  section: 1 Ansible Tower/AWX Setup
+- type: concept
+  question: 在 Ansible企业级自动化运维深度实践 中, 2 Dynamic Inventory Configuration 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md 的「2 Dynamic Inventory Configuration」章节。
+  source: wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md
+  section: 2 Dynamic Inventory Configuration
+- type: concept
+  question: 在 Ansible企业级自动化运维深度实践 中, 1 Standard Playbook Structure 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md 的「1 Standard Playbook Structure」章节。
+  source: wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md
+  section: 1 Standard Playbook Structure
+- type: troubleshooting
+  question: 如何排查 Ansible企业级自动化运维深度实践 相关的故障?
+  answer: 参见 wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md 的故障排查章节。
+  source: wiki/09-发布变更/02-IaC/02-ansible-enterprise-automation.md
+- type: concept
+  question: 在 Pulumi Enterprise Infrastructure as Code Platform 中, 企业级架构 (Enterprise Architecture) 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 的「企业级架构 (Enterprise Architecture)」章节。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  section: 企业级架构 (Enterprise Architecture)
+- type: concept
+  question: 在 Pulumi Enterprise Infrastructure as Code Platform 中, 多云架构 (Multi-cloud Architecture) 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 的「多云架构 (Multi-cloud Architecture)」章节。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  section: 多云架构 (Multi-cloud Architecture)
+- type: concept
+  question: 在 Pulumi Enterprise Infrastructure as Code Platform 中, Python 基础设施定义 (Python Infrastructure Definition) 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 的「Python 基础设施定义 (Python Infrastructure Definition)」章节。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  section: Python 基础设施定义 (Python Infrastructure Definition)
+- type: concept
+  question: 在 Pulumi Enterprise Infrastructure as Code Platform 中, 多环境配置 (Multi-environment Configuration) 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 的「多环境配置 (Multi-environment Configuration)」章节。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  section: 多环境配置 (Multi-environment Configuration)
+- type: concept
+  question: 在 Pulumi Enterprise Infrastructure as Code Platform 中, 项目结构 (Project Structure) 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 的「项目结构 (Project Structure)」章节。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  section: 项目结构 (Project Structure)
+- type: operation
+  question: '如何执行与 Pulumi Enterprise Infrastructure as Code Platform 相关的操作: pulumi login s3://my-pulumi-state-bucket?'
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 中的操作步骤。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  command: pulumi login s3://my-pulumi-state-bucket
+- type: operation
+  question: '如何执行与 Pulumi Enterprise Infrastructure as Code Platform 相关的操作: pulumi preview --diff?'
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 中的操作步骤。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+  command: pulumi preview --diff
+- type: troubleshooting
+  question: 如何排查 Pulumi Enterprise Infrastructure as Code Platform 相关的故障?
+  answer: 参见 wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md 的故障排查章节。
+  source: wiki/09-发布变更/02-IaC/03-pulumi-enterprise-iac.md
+- type: concept
+  question: 在 Azure Resource Manager (ARM) Enterprise 深度实践 中, 1 Core Component Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md 的「1 Core Component Architecture」章节。
+  source: wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md
+  section: 1 Core Component Architecture
+- type: concept
+  question: 在 Azure Resource Manager (ARM) Enterprise 深度实践 中, 2 Enterprise Management Group Hierarchy 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md 的「2 Enterprise Management Group Hierarchy」章节。
+  source: wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md
+  section: 2 Enterprise Management Group Hierarchy
+- type: concept
+  question: 在 Azure Resource Manager (ARM) Enterprise 深度实践 中, 1 Enterprise Template Structure 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md 的「1 Enterprise Template Structure」章节。
+  source: wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md
+  section: 1 Enterprise Template Structure
+- type: concept
+  question: 在 Azure Resource Manager (ARM) Enterprise 深度实践 中, 2 Linked Template Implementation 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md 的「2 Linked Template Implementation」章节。
+  source: wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md
+  section: 2 Linked Template Implementation
+- type: concept
+  question: 在 Azure Resource Manager (ARM) Enterprise 深度实践 中, 1 Custom Policy Definitions 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md 的「1 Custom Policy Definitions」章节。
+  source: wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md
+  section: 1 Custom Policy Definitions
+- type: troubleshooting
+  question: 如何排查 Azure Resource Manager (ARM) Enterprise 深度实践 相关的故障?
+  answer: 参见 wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md 的故障排查章节。
+  source: wiki/09-发布变更/02-IaC/04-azure-resource-manager-enterprise.md
+- type: concept
+  question: 在 Crossplane Enterprise Infrastructure Orchestration 深度实践 中, 1 Core Component Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md 的「1 Core Component Architecture」章节。
+  source: wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md
+  section: 1 Core Component Architecture
+- type: concept
+  question: 在 Crossplane Enterprise Infrastructure Orchestration 深度实践 中, 2 Enterprise Deployment Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md 的「2 Enterprise Deployment Architecture」章节。
+  source: wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md
+  section: 2 Enterprise Deployment Architecture
+- type: concept
+  question: 在 Crossplane Enterprise Infrastructure Orchestration 深度实践 中, 1 Provider Configuration 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md 的「1 Provider Configuration」章节。
+  source: wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md
+  section: 1 Provider Configuration
+- type: concept
+  question: 在 Crossplane Enterprise Infrastructure Orchestration 深度实践 中, 2 Multi-Provider Composition 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md 的「2 Multi-Provider Composition」章节。
+  source: wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md
+  section: 2 Multi-Provider Composition
+- type: concept
+  question: 在 Crossplane Enterprise Infrastructure Orchestration 深度实践 中, 1 Argo CD Integration 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md 的「1 Argo CD Integration」章节。
+  source: wiki/09-发布变更/02-IaC/05-crossplane-enterprise-orchestration.md
+  section: 1 Argo CD Integration
+- type: concept
+  question: 在 11-基础设施即代码 中, 模块化架构设计 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md 的「模块化架构设计」章节。
+  source: wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md
+  section: 模块化架构设计
+- type: concept
+  question: 在 11-基础设施即代码 中, 核心模块结构 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md 的「核心模块结构」章节。
+  source: wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md
+  section: 核心模块结构
+- type: concept
+  question: 在 11-基础设施即代码 中, Kubernetes集群模块 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md 的「Kubernetes集群模块」章节。
+  source: wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md
+  section: Kubernetes集群模块
+- type: concept
+  question: 在 11-基础设施即代码 中, 环境分离管理 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md 的「环境分离管理」章节。
+  source: wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md
+  section: 环境分离管理
+- type: concept
+  question: 在 11-基础设施即代码 中, 多环境配置 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md 的「多环境配置」章节。
+  source: wiki/09-发布变更/02-IaC/06-infrastructure-as-code.md
+  section: 多环境配置
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md 的「目录」章节。
+  source: wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md
+  section: 目录
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md 的「核心概念」章节。
+  source: wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md
+  section: 核心概念
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, 安装部署 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md 的「安装部署」章节。
+  source: wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md
+  section: 安装部署
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, Provider 配置 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md 的「Provider 配置」章节。
+  source: wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md
+  section: Provider 配置
+- type: concept
+  question: 在 Crossplane 平台工程实践指南 中, Composition 构建平台 API 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md 的「Composition 构建平台 API」章节。
+  source: wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md
+  section: Composition 构建平台 API
+- type: comparison
+  question: Crossplane 平台工程实践指南 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md 中的对比分析。
+  source: wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md
+- type: concept
+  question: 在 Iac 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/02-IaC/index.md 的「文档」章节。
+  source: wiki/09-发布变更/02-IaC/index.md
+  section: 文档
+- type: concept
+  question: 在 Argo Rollouts Deep Dive 中, 架构与核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/01-argo-rollouts-deep-dive.md 的「架构与核心概念」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/01-argo-rollouts-deep-dive.md
+  section: 架构与核心概念
+- type: concept
+  question: 在 Argo Rollouts Deep Dive 中, 金丝雀策略深度配置 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/01-argo-rollouts-deep-dive.md 的「金丝雀策略深度配置」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/01-argo-rollouts-deep-dive.md
+  section: 金丝雀策略深度配置
+- type: concept
+  question: 在 Canary Analysis Patterns 中, 金丝雀分析核心原理 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md 的「金丝雀分析核心原理」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md
+  section: 金丝雀分析核心原理
+- type: concept
+  question: 在 Canary Analysis Patterns 中, 指标设计模式 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md 的「指标设计模式」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md
+  section: 指标设计模式
+- type: comparison
+  question: Canary Analysis Patterns 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md 中的对比分析。
+  source: wiki/09-发布变更/03-Progressive-Delivery/02-canary-analysis-patterns.md
+- type: concept
+  question: 在 Flagger Progressive Delivery and Automated Canary Releases 中, Flagger vs Argo Rollouts 对比 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md 的「Flagger vs Argo Rollouts 对比」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md
+  section: Flagger vs Argo Rollouts 对比
+- type: concept
+  question: 在 Flagger Progressive Delivery and Automated Canary Releases 中, Flagger 安装 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md 的「Flagger 安装」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md
+  section: Flagger 安装
+- type: concept
+  question: 在 Flagger Progressive Delivery and Automated Canary Releases 中, 金丝雀发布（Canary） 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md 的「金丝雀发布（Canary）」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md
+  section: 金丝雀发布（Canary）
+- type: operation
+  question: '如何执行与 Flagger Progressive Delivery and Automated Canary Releases 相关的操作: helm repo add flagger https://flagger.app?'
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md 中的操作步骤。
+  source: wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md
+  command: helm repo add flagger https://flagger.app
+- type: comparison
+  question: Flagger Progressive Delivery and Automated Canary Releases 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md 中的对比分析。
+  source: wiki/09-发布变更/03-Progressive-Delivery/03-flagger-progressive-delivery.md
+- type: concept
+  question: 在 Flagger + KEDA 渐进式交付与 Dagger.io 便携 CI/CD 中, Flagger 1.38+ 与 KEDA 联合使用 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/04-flagger-keda-dagger-2025.md 的「Flagger 1.38+ 与 KEDA 联合使用」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/04-flagger-keda-dagger-2025.md
+  section: Flagger 1.38+ 与 KEDA 联合使用
+- type: operation
+  question: '如何执行与 Flagger + KEDA 渐进式交付与 Dagger.io 便携 CI/CD 相关的操作: helm repo add flagger https://flagger.app?'
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/04-flagger-keda-dagger-2025.md 中的操作步骤。
+  source: wiki/09-发布变更/03-Progressive-Delivery/04-flagger-keda-dagger-2025.md
+  command: helm repo add flagger https://flagger.app
+- type: concept
+  question: 在 Progressive Delivery 中, 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/index.md 的「核心概念」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/index.md
+  section: 核心概念
+- type: concept
+  question: 在 Progressive Delivery 中, 文件索引 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/index.md 的「文件索引」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/index.md
+  section: 文件索引
+- type: concept
+  question: 在 Progressive Delivery 中, 工具对比 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/index.md 的「工具对比」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/index.md
+  section: 工具对比
+- type: concept
+  question: 在 Progressive Delivery 中, Related 是什么?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/index.md 的「Related」章节。
+  source: wiki/09-发布变更/03-Progressive-Delivery/index.md
+  section: Related
+- type: comparison
+  question: Progressive Delivery 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/03-Progressive-Delivery/index.md 中的对比分析。
+  source: wiki/09-发布变更/03-Progressive-Delivery/index.md
+- type: concept
+  question: 在 变更窗口与审批流程 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md 的「目录」章节。
+  source: wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md
+  section: 目录
+- type: concept
+  question: 在 变更窗口与审批流程 中, 变更管理原则 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md 的「变更管理原则」章节。
+  source: wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md
+  section: 变更管理原则
+- type: concept
+  question: 在 变更窗口与审批流程 中, 变更分级 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md 的「变更分级」章节。
+  source: wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md
+  section: 变更分级
+- type: operation
+  question: '如何执行与 变更窗口与审批流程 相关的操作: kubectl annotate rfc upgrade-ingress-controller \?'
+  answer: 参见 wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md 中的操作步骤。
+  source: wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md
+  command: kubectl annotate rfc upgrade-ingress-controller \
+- type: operation
+  question: '如何执行与 变更窗口与审批流程 相关的操作: aliyun oos StartExecution \?'
+  answer: 参见 wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md 中的操作步骤。
+  source: wiki/09-发布变更/04-变更管理/01-change-window-and-approval.md
+  command: aliyun oos StartExecution \
+- type: concept
+  question: 在 金丝雀发布策略与回滚 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/02-canary-release-strategy.md 的「目录」章节。
+  source: wiki/09-发布变更/04-变更管理/02-canary-release-strategy.md
+  section: 目录
+- type: concept
+  question: 在 金丝雀发布策略与回滚 中, 金丝雀发布概述 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/02-canary-release-strategy.md 的「金丝雀发布概述」章节。
+  source: wiki/09-发布变更/04-变更管理/02-canary-release-strategy.md
+  section: 金丝雀发布概述
+- type: concept
+  question: 在 金丝雀发布策略与回滚 中, Argo Rollouts 金丝雀 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/02-canary-release-strategy.md 的「Argo Rollouts 金丝雀」章节。
+  source: wiki/09-发布变更/04-变更管理/02-canary-release-strategy.md
+  section: Argo Rollouts 金丝雀
+- type: concept
+  question: 在 变更回滚操作手册 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/03-change-rollback-playbook.md 的「目录」章节。
+  source: wiki/09-发布变更/04-变更管理/03-change-rollback-playbook.md
+  section: 目录
+- type: concept
+  question: 在 变更回滚操作手册 中, 回滚原则 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/03-change-rollback-playbook.md 的「回滚原则」章节。
+  source: wiki/09-发布变更/04-变更管理/03-change-rollback-playbook.md
+  section: 回滚原则
+- type: concept
+  question: 在 变更回滚操作手册 中, Deployment 回滚 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/03-change-rollback-playbook.md 的「Deployment 回滚」章节。
+  source: wiki/09-发布变更/04-变更管理/03-change-rollback-playbook.md
+  section: Deployment 回滚
+- type: concept
+  question: 在 CI/CD 中的 Secret 轮转 中, Secret 管理挑战 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/04-secret-rotation-cicd.md 的「Secret 管理挑战」章节。
+  source: wiki/09-发布变更/04-变更管理/04-secret-rotation-cicd.md
+  section: Secret 管理挑战
+- type: concept
+  question: 在 CI/CD 中的 Secret 轮转 中, External Secrets Operator (ESO) 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/04-secret-rotation-cicd.md 的「External Secrets Operator (ESO)」章节。
+  source: wiki/09-发布变更/04-变更管理/04-secret-rotation-cicd.md
+  section: External Secrets Operator (ESO)
+- type: comparison
+  question: CI/CD 中的 Secret 轮转 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/04-变更管理/04-secret-rotation-cicd.md 中的对比分析。
+  source: wiki/09-发布变更/04-变更管理/04-secret-rotation-cicd.md
+- type: concept
+  question: 在 Feature Flag 与渐进式暴露 中, 概述 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md 的「概述」章节。
+  source: wiki/09-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md
+  section: 概述
+- type: concept
+  question: 在 Feature Flag 与渐进式暴露 中, 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md 的「核心概念」章节。
+  source: wiki/09-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md
+  section: 核心概念
+- type: comparison
+  question: Feature Flag 与渐进式暴露 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md 中的对比分析。
+  source: wiki/09-发布变更/04-变更管理/05-feature-flags-progressive-exposure.md
+- type: concept
+  question: 在 数据库迁移发布策略 中, 概述 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy.md 的「概述」章节。
+  source: wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy.md
+  section: 概述
+- type: concept
+  question: 在 数据库迁移发布策略 中, 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy.md 的「核心概念」章节。
+  source: wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy.md
+  section: 核心概念
+- type: comparison
+  question: 数据库迁移发布策略 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy.md 中的对比分析。
+  source: wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy.md
+- type: concept
+  question: 在 回滚自动化模式 中, 概述 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/07-rollback-automation-patterns.md 的「概述」章节。
+  source: wiki/09-发布变更/04-变更管理/07-rollback-automation-patterns.md
+  section: 概述
+- type: concept
+  question: 在 回滚自动化模式 中, 核心概念 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/07-rollback-automation-patterns.md 的「核心概念」章节。
+  source: wiki/09-发布变更/04-变更管理/07-rollback-automation-patterns.md
+  section: 核心概念
+- type: concept
+  question: 在 22-变更管理流程 中, RFC流程设计 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/08-change-management-process.md 的「RFC流程设计」章节。
+  source: wiki/09-发布变更/04-变更管理/08-change-management-process.md
+  section: RFC流程设计
+- type: concept
+  question: 在 22-变更管理流程 中, 变更请求模板 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/08-change-management-process.md 的「变更请求模板」章节。
+  source: wiki/09-发布变更/04-变更管理/08-change-management-process.md
+  section: 变更请求模板
+- type: concept
+  question: 在 22-变更管理流程 中, RFC审批工作流 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/08-change-management-process.md 的「RFC审批工作流」章节。
+  source: wiki/09-发布变更/04-变更管理/08-change-management-process.md
+  section: RFC审批工作流
+- type: concept
+  question: 在 22-变更管理流程 中, 渐进式部署配置 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/08-change-management-process.md 的「渐进式部署配置」章节。
+  source: wiki/09-发布变更/04-变更管理/08-change-management-process.md
+  section: 渐进式部署配置
+- type: concept
+  question: 在 22-变更管理流程 中, Argo Rollouts配置 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/08-change-management-process.md 的「Argo Rollouts配置」章节。
+  source: wiki/09-发布变更/04-变更管理/08-change-management-process.md
+  section: Argo Rollouts配置
+- type: comparison
+  question: 22-变更管理流程 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/04-变更管理/08-change-management-process.md 中的对比分析。
+  source: wiki/09-发布变更/04-变更管理/08-change-management-process.md
+- type: concept
+  question: 在 Change Management 中, 变更风险分级 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/index.md 的「变更风险分级」章节。
+  source: wiki/09-发布变更/04-变更管理/index.md
+  section: 变更风险分级
+- type: concept
+  question: 在 Change Management 中, 文档索引 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/index.md 的「文档索引」章节。
+  source: wiki/09-发布变更/04-变更管理/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Change Management 中, 变更管理检查清单 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/index.md 的「变更管理检查清单」章节。
+  source: wiki/09-发布变更/04-变更管理/index.md
+  section: 变更管理检查清单
+- type: concept
+  question: 在 Change Management 中, Related 是什么?
+  answer: 参见 wiki/09-发布变更/04-变更管理/index.md 的「Related」章节。
+  source: wiki/09-发布变更/04-变更管理/index.md
+  section: Related
+- type: comparison
+  question: Change Management 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/04-变更管理/index.md 中的对比分析。
+  source: wiki/09-发布变更/04-变更管理/index.md
+- type: concept
+  question: 在 Selenium 企业级自动化测试平台 中, 企业级测试架构 (Enterprise Testing Architecture) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md 的「企业级测试架构 (Enterprise Testing Architecture)」章节。
+  source: wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md
+  section: 企业级测试架构 (Enterprise Testing Architecture)
+- type: concept
+  question: 在 Selenium 企业级自动化测试平台 中, 测试架构图 (Testing Architecture Diagram) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md 的「测试架构图 (Testing Architecture Diagram)」章节。
+  source: wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md
+  section: 测试架构图 (Testing Architecture Diagram)
+- type: concept
+  question: 在 Selenium 企业级自动化测试平台 中, 测试项目结构 (Test Project Structure) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md 的「测试项目结构 (Test Project Structure)」章节。
+  source: wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md
+  section: 测试项目结构 (Test Project Structure)
+- type: concept
+  question: 在 Selenium 企业级自动化测试平台 中, WebDriver工厂配置 (WebDriver Factory Configuration) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md 的「WebDriver工厂配置 (WebDriver Factory Configuration)」章节。
+  source: wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md
+  section: WebDriver工厂配置 (WebDriver Factory Configuration)
+- type: concept
+  question: 在 Selenium 企业级自动化测试平台 中, Page Object Model实现 (Page Object Model Implementation) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md 的「Page Object Model实现 (Page Object Model Implementation)」章节。
+  source: wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md
+  section: Page Object Model实现 (Page Object Model Implementation)
+- type: troubleshooting
+  question: 如何排查 Selenium 企业级自动化测试平台 相关的故障?
+  answer: 参见 wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md 的故障排查章节。
+  source: wiki/09-发布变更/05-测试质量/01-selenium-enterprise-automation.md
+- type: concept
+  question: 在 JUnit 5 企业级单元测试框架深度实践 中, JUnit 5 架构组件 (JUnit 5 Architecture Components) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 的「JUnit 5 架构组件 (JUnit 5 Architecture Components)」章节。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+  section: JUnit 5 架构组件 (JUnit 5 Architecture Components)
+- type: concept
+  question: 在 JUnit 5 企业级单元测试框架深度实践 中, JUnit 5 架构图 (JUnit 5 Architecture Diagram) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 的「JUnit 5 架构图 (JUnit 5 Architecture Diagram)」章节。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+  section: JUnit 5 架构图 (JUnit 5 Architecture Diagram)
+- type: concept
+  question: 在 JUnit 5 企业级单元测试框架深度实践 中, Maven项目配置 (Maven Project Configuration) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 的「Maven项目配置 (Maven Project Configuration)」章节。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+  section: Maven项目配置 (Maven Project Configuration)
+- type: concept
+  question: 在 JUnit 5 企业级单元测试框架深度实践 中, Gradle项目配置 (Gradle Project Configuration) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 的「Gradle项目配置 (Gradle Project Configuration)」章节。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+  section: Gradle项目配置 (Gradle Project Configuration)
+- type: concept
+  question: 在 JUnit 5 企业级单元测试框架深度实践 中, 参数化测试 (Parameterized Tests) 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 的「参数化测试 (Parameterized Tests)」章节。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+  section: 参数化测试 (Parameterized Tests)
+- type: operation
+  question: '如何执行与 JUnit 5 企业级单元测试框架深度实践 相关的操作: diagnose_test_execution() {?'
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 中的操作步骤。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+  command: diagnose_test_execution() {
+- type: troubleshooting
+  question: 如何排查 JUnit 5 企业级单元测试框架深度实践 相关的故障?
+  answer: 参见 wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md 的故障排查章节。
+  source: wiki/09-发布变更/05-测试质量/02-junit5-enterprise-testing.md
+- type: concept
+  question: 在 企业级AI测试与质量保障深度实践 中, 摘要 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/03-ai-testing-quality-assurance.md 的「摘要」章节。
+  source: wiki/09-发布变更/05-测试质量/03-ai-testing-quality-assurance.md
+  section: 摘要
+- type: concept
+  question: 在 企业级AI测试与质量保障深度实践 中, AI系统测试架构 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/03-ai-testing-quality-assurance.md 的「AI系统测试架构」章节。
+  source: wiki/09-发布变更/05-测试质量/03-ai-testing-quality-assurance.md
+  section: AI系统测试架构
+- type: concept
+  question: 在 企业级AI测试与质量保障深度实践 中, Obsidian 相关文档 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/03-ai-testing-quality-assurance.md 的「Obsidian 相关文档」章节。
+  source: wiki/09-发布变更/05-测试质量/03-ai-testing-quality-assurance.md
+  section: Obsidian 相关文档
+- type: concept
+  question: 在 Cypress Enterprise Automation Testing 深度实践 中, 1 Core Component Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md 的「1 Core Component Architecture」章节。
+  source: wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md
+  section: 1 Core Component Architecture
+- type: concept
+  question: 在 Cypress Enterprise Automation Testing 深度实践 中, 2 Enterprise Test Suite Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md 的「2 Enterprise Test Suite Architecture」章节。
+  source: wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md
+  section: 2 Enterprise Test Suite Architecture
+- type: concept
+  question: 在 Cypress Enterprise Automation Testing 深度实践 中, 1 Page Object Model Implementation 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md 的「1 Page Object Model Implementation」章节。
+  source: wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md
+  section: 1 Page Object Model Implementation
+- type: concept
+  question: 在 Cypress Enterprise Automation Testing 深度实践 中, 2 Custom Commands and Utilities 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md 的「2 Custom Commands and Utilities」章节。
+  source: wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md
+  section: 2 Custom Commands and Utilities
+- type: concept
+  question: 在 Cypress Enterprise Automation Testing 深度实践 中, 1 Dynamic Test Data Generation 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md 的「1 Dynamic Test Data Generation」章节。
+  source: wiki/09-发布变更/05-测试质量/04-cypress-enterprise-automation.md
+  section: 1 Dynamic Test Data Generation
+- type: concept
+  question: 在 Playwright Enterprise Automation Testing 深度实践 中, 1 Core Component Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md 的「1 Core Component Architecture」章节。
+  source: wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md
+  section: 1 Core Component Architecture
+- type: concept
+  question: 在 Playwright Enterprise Automation Testing 深度实践 中, 2 Enterprise Test Suite Architecture 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md 的「2 Enterprise Test Suite Architecture」章节。
+  source: wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md
+  section: 2 Enterprise Test Suite Architecture
+- type: concept
+  question: 在 Playwright Enterprise Automation Testing 深度实践 中, 1 Page Object Model Implementation 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md 的「1 Page Object Model Implementation」章节。
+  source: wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md
+  section: 1 Page Object Model Implementation
+- type: concept
+  question: 在 Playwright Enterprise Automation Testing 深度实践 中, 2 Fixture-Based Test Structure 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md 的「2 Fixture-Based Test Structure」章节。
+  source: wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md
+  section: 2 Fixture-Based Test Structure
+- type: concept
+  question: 在 Playwright Enterprise Automation Testing 深度实践 中, 3 Custom Test Utilities 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md 的「3 Custom Test Utilities」章节。
+  source: wiki/09-发布变更/05-测试质量/05-playwright-enterprise-automation.md
+  section: 3 Custom Test Utilities
+- type: concept
+  question: 在 Kubernetes Testing Strategy & Quality Gates 中, 测试金字塔（云原生版） 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/06-testing-strategy-quality-gates.md 的「测试金字塔（云原生版）」章节。
+  source: wiki/09-发布变更/05-测试质量/06-testing-strategy-quality-gates.md
+  section: 测试金字塔（云原生版）
+- type: concept
+  question: 在 Kubernetes Testing Strategy & Quality Gates 中, 各层测试实践 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/06-testing-strategy-quality-gates.md 的「各层测试实践」章节。
+  source: wiki/09-发布变更/05-测试质量/06-testing-strategy-quality-gates.md
+  section: 各层测试实践
+- type: comparison
+  question: Kubernetes Testing Strategy & Quality Gates 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/05-测试质量/06-testing-strategy-quality-gates.md 中的对比分析。
+  source: wiki/09-发布变更/05-测试质量/06-testing-strategy-quality-gates.md
+- type: concept
+  question: 在 Testing Quality 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/05-测试质量/index.md 的「文档」章节。
+  source: wiki/09-发布变更/05-测试质量/index.md
+  section: 文档
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 [best-practices] 中, 硬件要求 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md 的「硬件要求」章节。
+  source: wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md
+  section: 硬件要求
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 [best-practices] 中, Docker Desktop 安装与配置 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md 的「Docker Desktop 安装与配置」章节。
+  source: wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md
+  section: Docker Desktop 安装与配置
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 [best-practices] 中, 验证 Docker 可用 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md 的「验证 Docker 可用」章节。
+  source: wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md
+  section: 验证 Docker 可用
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 [best-practices] 中, 安装 kubectl 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md 的「安装 kubectl」章节。
+  source: wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md
+  section: 安装 kubectl
+- type: concept
+  question: 在 01 - 本机单机 Demo 部署 [best-practices] 中, A1. 安装 kind 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md 的「A1. 安装 kind」章节。
+  source: wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md
+  section: A1. 安装 kind
+- type: comparison
+  question: 01 - 本机单机 Demo 部署 [best-practices] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md 中的对比分析。
+  source: wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) [deployment] 中, 操作系统支持 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 的「操作系统支持」章节。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  section: 操作系统支持
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) [deployment] 中, 硬件要求 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 的「硬件要求」章节。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  section: 硬件要求
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) [deployment] 中, 设置主机名 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 的「设置主机名」章节。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  section: 设置主机名
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) [deployment] 中, 关闭 Swap 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 的「关闭 Swap」章节。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  section: 关闭 Swap
+- type: concept
+  question: 在 02 - 单节点部署 (Single Node All-in-One) [deployment] 中, 关闭防火墙 (开发/测试环境) 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 的「关闭防火墙 (开发/测试环境)」章节。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  section: 关闭防火墙 (开发/测试环境)
+- type: operation
+  question: '如何执行与 02 - 单节点部署 (Single Node All-in-One) [deployment] 相关的操作: sudo hostnamectl set-hostname k8s-single-node?'
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 中的操作步骤。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  command: sudo hostnamectl set-hostname k8s-single-node
+- type: operation
+  question: '如何执行与 02 - 单节点部署 (Single Node All-in-One) [deployment] 相关的操作: sudo swapoff -a?'
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 中的操作步骤。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+  command: sudo swapoff -a
+- type: comparison
+  question: 02 - 单节点部署 (Single Node All-in-One) [deployment] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/06-部署方案/02-single-node-deployment.md 中的对比分析。
+  source: wiki/09-发布变更/06-部署方案/02-single-node-deployment.md
+- type: concept
+  question: 在 03 - 研发环境部署 (Development Environment Deployment) [deployment] 中, 研发环境体系 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md 的「研发环境体系」章节。
+  source: wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md
+  section: 研发环境体系
+- type: concept
+  question: 在 03 - 研发环境部署 (Development Environment Deployment) [deployment] 中, 节点规划 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md 的「节点规划」章节。
+  source: wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md
+  section: 节点规划
+- type: concept
+  question: 在 03 - 研发环境部署 (Development Environment Deployment) [deployment] 中, 网络规划 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md 的「网络规划」章节。
+  source: wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md
+  section: 网络规划
+- type: concept
+  question: '在 03 - 研发环境部署 (Development Environment Deployment) [deployment] 中, 1 所有节点: 系统准备 是什么?'
+  answer: '参见 wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md 的「1 所有节点: 系统准备」章节。'
+  source: wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md
+  section: '1 所有节点: 系统准备'
+- type: concept
+  question: '在 03 - 研发环境部署 (Development Environment Deployment) [deployment] 中, 2 Master 节点: 初始化控制平面 是什么?'
+  answer: '参见 wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md 的「2 Master 节点: 初始化控制平面」章节。'
+  source: wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md
+  section: '2 Master 节点: 初始化控制平面'
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) [deployment] 中, 1 企业级分层架构 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md 的「1 企业级分层架构」章节。
+  source: wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md
+  section: 1 企业级分层架构
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) [deployment] 中, 2 生产环境规模分级 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md 的「2 生产环境规模分级」章节。
+  source: wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md
+  section: 2 生产环境规模分级
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) [deployment] 中, 3 节点规划示例 (小型生产集群) 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md 的「3 节点规划示例 (小型生产集群)」章节。
+  source: wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md
+  section: 3 节点规划示例 (小型生产集群)
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) [deployment] 中, 4 部署前检查清单 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md 的「4 部署前检查清单」章节。
+  source: wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md
+  section: 4 部署前检查清单
+- type: concept
+  question: 在 04 - 生产环境部署 (Production Environment Deployment) [deployment] 中, 1 在所有 Master 节点安装 HAProxy + Keepalived 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md 的「1 在所有 Master 节点安装 HAProxy + Keepalived」章节。
+  source: wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md
+  section: 1 在所有 Master 节点安装 HAProxy + Keepalived
+- type: operation
+  question: '如何执行与 04 - 生产环境部署 (Production Environment Deployment) [deployment] 相关的操作: sudo apt-get install -y haproxy keepalived?'
+  answer: 参见 wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md 中的操作步骤。
+  source: wiki/09-发布变更/06-部署方案/04-production-environment-deployment.md
+  command: sudo apt-get install -y haproxy keepalived
+- type: concept
+  question: 在 Multi-Environment Deployment Strategy — Dev to Production Pipeline 中, 环境拓扑 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md 的「环境拓扑」章节。
+  source: wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md
+  section: 环境拓扑
+- type: concept
+  question: 在 Multi-Environment Deployment Strategy — Dev to Production Pipeline 中, 环境配置矩阵 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md 的「环境配置矩阵」章节。
+  source: wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md
+  section: 环境配置矩阵
+- type: concept
+  question: 在 Multi-Environment Deployment Strategy — Dev to Production Pipeline 中, GitOps 多环境编排 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md 的「GitOps 多环境编排」章节。
+  source: wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md
+  section: GitOps 多环境编排
+- type: operation
+  question: '如何执行与 Multi-Environment Deployment Strategy — Dev to Production Pipeline 相关的操作: argocd app sync order-service-staging?'
+  answer: 参见 wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md 中的操作步骤。
+  source: wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md
+  command: argocd app sync order-service-staging
+- type: comparison
+  question: Multi-Environment Deployment Strategy — Dev to Production Pipeline 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md 中的对比分析。
+  source: wiki/09-发布变更/06-部署方案/05-multi-environment-deployment-strategy.md
+- type: concept
+  question: 在 Topic Deployment 中, 概览 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/index.md 的「概览」章节。
+  source: wiki/09-发布变更/06-部署方案/index.md
+  section: 概览
+- type: concept
+  question: 在 Topic Deployment 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/06-部署方案/index.md 的「文档」章节。
+  source: wiki/09-发布变更/06-部署方案/index.md
+  section: 文档
+- type: concept
+  question: 在 01 - 迁移评估与规划 [migration] 中, 1 自动化采集脚本 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md 的「1 自动化采集脚本」章节。
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+  section: 1 自动化采集脚本
+- type: concept
+  question: 在 01 - 迁移评估与规划 [migration] 中, 2 关键信息汇总表 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md 的「2 关键信息汇总表」章节。
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+  section: 2 关键信息汇总表
+- type: concept
+  question: 在 01 - 迁移评估与规划 [migration] 中, 1 API 版本兼容性检查 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md 的「1 API 版本兼容性检查」章节。
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+  section: 1 API 版本兼容性检查
+- type: concept
+  question: 在 01 - 迁移评估与规划 [migration] 中, 2 兼容性对照矩阵 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md 的「2 兼容性对照矩阵」章节。
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+  section: 2 兼容性对照矩阵
+- type: concept
+  question: 在 01 - 迁移评估与规划 [migration] 中, 3 镜像仓库兼容性 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md 的「3 镜像仓库兼容性」章节。
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+  section: 3 镜像仓库兼容性
+- type: best_practice
+  question: 关于 01 - 迁移评估与规划 [migration], 有什么最佳实践?
+  answer: '- 迁移期间源集群不缩容，保留完整回滚能力'
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+- type: comparison
+  question: 01 - 迁移评估与规划 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 [migration] 中, 1 ACK 版本对比 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 的「1 ACK 版本对比」章节。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  section: 1 ACK 版本对比
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 [migration] 中, 2 决策建议 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 的「2 决策建议」章节。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  section: 2 决策建议
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 [migration] 中, 1 网络架构设计 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 的「1 网络架构设计」章节。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  section: 1 网络架构设计
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 [migration] 中, 2 CIDR 规划规则 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 的「2 CIDR 规划规则」章节。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  section: 2 CIDR 规划规则
+- type: concept
+  question: 在 02 - ACK 目标集群设计与搭建 [migration] 中, 3 与自建集群网络互通 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 的「3 与自建集群网络互通」章节。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  section: 3 与自建集群网络互通
+- type: operation
+  question: '如何执行与 02 - ACK 目标集群设计与搭建 [migration] 相关的操作: aliyun cbn CreateCen --Name "migration-cen"?'
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 中的操作步骤。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  command: aliyun cbn CreateCen --Name "migration-cen"
+- type: operation
+  question: '如何执行与 02 - ACK 目标集群设计与搭建 [migration] 相关的操作: aliyun vpc CreateVpc \?'
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 中的操作步骤。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+  command: aliyun vpc CreateVpc \
+- type: comparison
+  question: 02 - ACK 目标集群设计与搭建 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/02-ack-target-cluster-design.md
+- type: concept
+  question: 在 03 - 应用工作负载迁移 [migration] 中, 1 同步策略 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md 的「1 同步策略」章节。
+  source: wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md
+  section: 1 同步策略
+- type: concept
+  question: 在 03 - 应用工作负载迁移 [migration] 中, 2 使用 skopeo 批量同步 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md 的「2 使用 skopeo 批量同步」章节。
+  source: wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md
+  section: 2 使用 skopeo 批量同步
+- type: concept
+  question: 在 03 - 应用工作负载迁移 [migration] 中, 3 ACK 配置 ImagePullSecret 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md 的「3 ACK 配置 ImagePullSecret」章节。
+  source: wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md
+  section: 3 ACK 配置 ImagePullSecret
+- type: concept
+  question: 在 03 - 应用工作负载迁移 [migration] 中, 1 导出资源 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md 的「1 导出资源」章节。
+  source: wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md
+  section: 1 导出资源
+- type: concept
+  question: 在 03 - 应用工作负载迁移 [migration] 中, 2 YAML 清洗脚本 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md 的「2 YAML 清洗脚本」章节。
+  source: wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md
+  section: 2 YAML 清洗脚本
+- type: comparison
+  question: 03 - 应用工作负载迁移 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/03-application-workload-migration.md
+- type: concept
+  question: 在 04 - 存储与数据迁移 [migration] 中, 1 存储方案映射 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md 的「1 存储方案映射」章节。
+  source: wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md
+  section: 1 存储方案映射
+- type: concept
+  question: 在 04 - 存储与数据迁移 [migration] 中, 2 存储容量规划 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md 的「2 存储容量规划」章节。
+  source: wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md
+  section: 2 存储容量规划
+- type: concept
+  question: 在 04 - 存储与数据迁移 [migration] 中, 1 预置 StorageClass 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md 的「1 预置 StorageClass」章节。
+  source: wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md
+  section: 1 预置 StorageClass
+- type: concept
+  question: 在 04 - 存储与数据迁移 [migration] 中, 2 创建 NAS StorageClass 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md 的「2 创建 NAS StorageClass」章节。
+  source: wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md
+  section: 2 创建 NAS StorageClass
+- type: concept
+  question: 在 04 - 存储与数据迁移 [migration] 中, 1 StorageClass 映射 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md 的「1 StorageClass 映射」章节。
+  source: wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md
+  section: 1 StorageClass 映射
+- type: comparison
+  question: 04 - 存储与数据迁移 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/04-storage-data-migration.md
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 [migration] 中, 1 CNI 对比 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md 的「1 CNI 对比」章节。
+  source: wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md
+  section: 1 CNI 对比
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 [migration] 中, 2 迁移注意事项 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md 的「2 迁移注意事项」章节。
+  source: wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md
+  section: 2 迁移注意事项
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 [migration] 中, 1 负载均衡方案对比 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md 的「1 负载均衡方案对比」章节。
+  source: wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md
+  section: 1 负载均衡方案对比
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 [migration] 中, 2 SLB/NLB/ALB 选型 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md 的「2 SLB/NLB/ALB 选型」章节。
+  source: wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md
+  section: 2 SLB/NLB/ALB 选型
+- type: concept
+  question: 在 05 - 网络迁移与流量切换 [migration] 中, 3 Service 迁移示例 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md 的「3 Service 迁移示例」章节。
+  source: wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md
+  section: 3 Service 迁移示例
+- type: comparison
+  question: 05 - 网络迁移与流量切换 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md
+- type: concept
+  question: 在 06 - 有状态服务迁移 [migration] 中, 1 策略选择 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md 的「1 策略选择」章节。
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+  section: 1 策略选择
+- type: concept
+  question: 在 06 - 有状态服务迁移 [migration] 中, 2 决策矩阵 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md 的「2 决策矩阵」章节。
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+  section: 2 决策矩阵
+- type: concept
+  question: '在 06 - 有状态服务迁移 [migration] 中, 1 方案 A: 迁移到阿里云 RDS（推荐） 是什么?'
+  answer: '参见 wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md 的「1 方案 A: 迁移到阿里云 RDS（推荐）」章节。'
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+  section: '1 方案 A: 迁移到阿里云 RDS（推荐）'
+- type: concept
+  question: '在 06 - 有状态服务迁移 [migration] 中, 2 方案 B: 迁移到 ACK StatefulSet 是什么?'
+  answer: '参见 wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md 的「2 方案 B: 迁移到 ACK StatefulSet」章节。'
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+  section: '2 方案 B: 迁移到 ACK StatefulSet'
+- type: concept
+  question: '在 06 - 有状态服务迁移 [migration] 中, 1 方案 A: 迁移到阿里云 Redis 是什么?'
+  answer: '参见 wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md 的「1 方案 A: 迁移到阿里云 Redis」章节。'
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+  section: '1 方案 A: 迁移到阿里云 Redis'
+- type: best_practice
+  question: 关于 06 - 有状态服务迁移 [migration], 有什么最佳实践?
+  answer: '# 1. 迁移后短期缓存命中率会降低（冷启动）'
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+- type: comparison
+  question: 06 - 有状态服务迁移 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/06-stateful-services-migration.md
+- type: concept
+  question: 在 07 - 可观测性与安全迁移 [migration] 中, 1 方案选择 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md 的「1 方案选择」章节。
+  source: wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md
+  section: 1 方案选择
+- type: concept
+  question: 在 07 - 可观测性与安全迁移 [migration] 中, 2 自建 Prometheus 部署 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md 的「2 自建 Prometheus 部署」章节。
+  source: wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md
+  section: 2 自建 Prometheus 部署
+- type: concept
+  question: 在 07 - 可观测性与安全迁移 [migration] 中, 3 自定义指标抓取配置迁移 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md 的「3 自定义指标抓取配置迁移」章节。
+  source: wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md
+  section: 3 自定义指标抓取配置迁移
+- type: concept
+  question: 在 07 - 可观测性与安全迁移 [migration] 中, 4 PrometheusRule 迁移 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md 的「4 PrometheusRule 迁移」章节。
+  source: wiki/09-发布变更/07-迁移方案/07-observability-security-migration.md
+  section: 4 PrometheusRule 迁移
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 [migration] 中, 1 自动化验证脚本 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md 的「1 自动化验证脚本」章节。
+  source: wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md
+  section: 1 自动化验证脚本
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 [migration] 中, 2 业务接口验证 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md 的「2 业务接口验证」章节。
+  source: wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md
+  section: 2 业务接口验证
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 [migration] 中, 1 压测对比 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md 的「1 压测对比」章节。
+  source: wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md
+  section: 1 压测对比
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 [migration] 中, 2 资源水位对比 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md 的「2 资源水位对比」章节。
+  source: wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md
+  section: 2 资源水位对比
+- type: concept
+  question: 在 08 - 验收、切换与旧集群退役 [migration] 中, 1 切换前检查 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md 的「1 切换前检查」章节。
+  source: wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md
+  section: 1 切换前检查
+- type: comparison
+  question: 08 - 验收、切换与旧集群退役 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/08-validation-cutover-decommission.md
+- type: concept
+  question: 在 09 - 迁移工具链参考 [migration] 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md 的「目录」章节。
+  source: wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md
+  section: 目录
+- type: concept
+  question: 在 09 - 迁移工具链参考 [migration] 中, 工具总览 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md 的「工具总览」章节。
+  source: wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md
+  section: 工具总览
+- type: concept
+  question: 在 09 - 迁移工具链参考 [migration] 中, Velero 完整指南 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md 的「Velero 完整指南」章节。
+  source: wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md
+  section: Velero 完整指南
+- type: comparison
+  question: 09 - 迁移工具链参考 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/09-migration-toolchain.md
+- type: concept
+  question: 在 10 - 生产迁移实战案例 [migration] 中, 目录 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/10-real-world-case-study.md 的「目录」章节。
+  source: wiki/09-发布变更/07-迁移方案/10-real-world-case-study.md
+  section: 目录
+- type: concept
+  question: 在 10 - 生产迁移实战案例 [migration] 中, 案例背景 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/10-real-world-case-study.md 的「案例背景」章节。
+  source: wiki/09-发布变更/07-迁移方案/10-real-world-case-study.md
+  section: 案例背景
+- type: comparison
+  question: 10 - 生产迁移实战案例 [migration] 中有哪些技术对比?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/10-real-world-case-study.md 中的对比分析。
+  source: wiki/09-发布变更/07-迁移方案/10-real-world-case-study.md
+- type: concept
+  question: 在 Topic Migration 中, 概览 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/index.md 的「概览」章节。
+  source: wiki/09-发布变更/07-迁移方案/index.md
+  section: 概览
+- type: concept
+  question: 在 Topic Migration 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/07-迁移方案/index.md 的「文档」章节。
+  source: wiki/09-发布变更/07-迁移方案/index.md
+  section: 文档
+- type: concept
+  question: 在 Domain 08 Release Change Management 中, 概览 是什么?
+  answer: 参见 wiki/09-发布变更/index.md 的「概览」章节。
+  source: wiki/09-发布变更/index.md
+  section: 概览
+- type: concept
+  question: 在 Domain 08 Release Change Management 中, 子目录 是什么?
+  answer: 参见 wiki/09-发布变更/index.md 的「子目录」章节。
+  source: wiki/09-发布变更/index.md
+  section: 子目录
+- type: concept
+  question: 在 Domain 08 Release Change Management 中, 文档 是什么?
+  answer: 参见 wiki/09-发布变更/index.md 的「文档」章节。
+  source: wiki/09-发布变更/index.md
+  section: 文档

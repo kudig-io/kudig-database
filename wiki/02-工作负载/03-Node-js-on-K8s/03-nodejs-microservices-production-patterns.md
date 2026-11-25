@@ -362,4 +362,4 @@ args:
 
 - [[wiki/02-工作负载/03-Node-js-on-K8s/index.md|Node.js on K8s]]
 - [[wiki/02-工作负载/03-Node-js-on-K8s/02-nodejs-observability-performance.md|Node.js 可观测性]]
-- [[wiki/09-可观测性/04-链路追踪/index.md|分布式追踪]]
+- [[wiki/08-可观测性/04-链路追踪/index.md|分布式追踪]]

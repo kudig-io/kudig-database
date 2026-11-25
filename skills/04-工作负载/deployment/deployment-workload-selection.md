@@ -199,16 +199,16 @@ spec:
 - [[skills/04-工作负载/deployment/deployment-rolling-update.md|[[skills/04-工作负载/deployment/deployment-rolling-update|Deployment 滚动更新策略]]]]
 - [[skills/04-工作负载/deployment/deployment-canary-and-bluegreen.md|[[skills/04-工作负载/deployment/deployment-canary-and-bluegreen|金丝雀与蓝绿发布]]]]
 - [[deployment|Deployment]]
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|StatefulSet]]
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|StatefulSet]]
 
 ## Related
 
 - [[fluentd]] — Fluentd
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
-- [[wiki/10-平台工程/06-代码分析/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
+- [[wiki/12-平台工程/06-代码分析/deployment-create/10-workload-comparison.md|Deployment vs StatefulSet vs DaemonSet 选型指南]]
 
 <!-- risk-assessed -->

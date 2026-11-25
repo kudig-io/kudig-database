@@ -96,7 +96,7 @@ Pod = 借了储物柜的读者
 • 管理员分配一个合适的储物柜给读者
 • 读者可以自由使用，但数据会一直保存在柜子里
 
-【[[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] 类比】
+【[[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] 类比】
 
 PV = 持久化卷，集群级别的存储资源
 PVC = 持久化卷声明，命名空间级别的请求
@@ -380,7 +380,7 @@ kubectl delete pvc <pvc-name>
 
 **关联文档**:
 - [../08-scaling/08-hpa-basics.md](../../../../04-工作负载/hpa-vpa/培训/lecturer/01-hpa-basics.md) — HPA 自动伸缩
-- [../../故障诊断/topic-skills/06-pvc-storage-failure.md](../../../../../wiki/19-故障诊断/08-技能体系/08-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/06-pvc-storage-failure.md](../../../../../skills/09-技能体系/08-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
 - [../../存储/](../../存储/) — K8s 存储文档
 
 

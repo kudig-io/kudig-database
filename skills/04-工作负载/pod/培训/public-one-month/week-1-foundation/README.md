@@ -126,7 +126,7 @@ related:
 | NET | 网络栈 | 独立的 IP、端口、路由表 | Pod 网络（CNI） |
 | IPC | 进程间通信 | 信号量、消息队列隔离 | Pod 内容器通信 |
 | MNT | 文件系统挂载 | 独立的文件系统视图 | Volume 挂载 |
-| UTS | 主机名和域名 | 容器有自己的 hostname | [[wiki/17-系统基础/06-知识字典/workloads/pod-hostname.md|Pod hostname]] |
+| UTS | 主机名和域名 | 容器有自己的 hostname | [[wiki/21-知识字典/workloads/pod-hostname.md|Pod hostname]] |
 | USER | 用户和组 ID | 容器内 root ≠ 宿主机 root | securityContext |
 | CGROUP | cgroup 根目录 | cgroup 视图隔离 | 容器内不可见宿主 cgroup |
 
@@ -338,38 +338,38 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 
 ## 延伸阅读
 
-- [Docker 架构总览](../../../../../../wiki/14-容器运行时/01-Docker/01-docker-architecture-overview.md)
-- [Docker 容器生命周期](../../../../../../wiki/14-容器运行时/01-Docker/03-docker-container-lifecycle.md)
-- [Docker 网络深入](../../../../../../wiki/14-容器运行时/01-Docker/04-docker-networking-deep-dive.md)
-- [Linux 系统架构](../../../../../../wiki/17-系统基础/01-Linux/01-linux-system-architecture.md)
-- [Linux 进程管理](../../../../../../wiki/17-系统基础/01-Linux/03-linux-process-management.md)
-- [Linux 网络配置](../../../../../../wiki/17-系统基础/01-Linux/05-linux-networking-configuration.md)
-- [K8s 架构总览](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件深入](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../wiki/01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
+- [Docker 架构总览](../../../../../../wiki/13-容器运行时/01-Docker/01-docker-architecture-overview.md)
+- [Docker 容器生命周期](../../../../../../wiki/13-容器运行时/01-Docker/03-docker-container-lifecycle.md)
+- [Docker 网络深入](../../../../../../wiki/13-容器运行时/01-Docker/04-docker-networking-deep-dive.md)
+- [Linux 系统架构](../../../../../../wiki/01-集群基础与系统/09-Linux/01-linux-system-architecture.md)
+- [Linux 进程管理](../../../../../../wiki/01-集群基础与系统/09-Linux/03-linux-process-management.md)
+- [Linux 网络配置](../../../../../../wiki/01-集群基础与系统/09-Linux/05-linux-networking-configuration.md)
+- [K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [K8s 核心组件深入](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../../../../../wiki/01-集群基础与系统/05-kubectl/02-kubectl-commands-reference.md)
 
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/20-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[wiki/23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[wiki/22-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 
 ```
 
@@ -378,8 +378,8 @@ kind 使用 Docker 容器模拟节点，启动快、支持多节点、适合 CI/
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

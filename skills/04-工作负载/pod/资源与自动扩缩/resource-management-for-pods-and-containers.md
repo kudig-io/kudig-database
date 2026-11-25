@@ -48,7 +48,7 @@ prerequisites:
 
 ## 概述
 
-在 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 中，你可以为 Pod 中的每个容器指定所需的资源量。最常见的资源类型是 CPU 和内存（RAM）。通过设置 `requests`（请求）和 `limits`（限制），调度器可以为 Pod 选择合适的节点，而 [[kubelet|kubelet]] 则确保运行中的容器不会超出设定的资源上限。
+在 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 中，你可以为 Pod 中的每个容器指定所需的资源量。最常见的资源类型是 CPU 和内存（RAM）。通过设置 `requests`（请求）和 `limits`（限制），调度器可以为 Pod 选择合适的节点，而 [[kubelet|kubelet]] 则确保运行中的容器不会超出设定的资源上限。
 
 ## 核心概念/原理
 
@@ -283,9 +283,9 @@ kubectl patch pod <pod-name> --subresource resize --type merge \
 ```
 ## 交叉引用
 
-- [存活、就绪和启动探针](../../../../wiki/17-系统基础/06-知识字典/configuration/liveness-readiness-and-startup-probes.md) — 资源不足可导致探针超时和误判
-- [ConfigMaps](../../../../wiki/17-系统基础/06-知识字典/configuration/configmaps.md) — 应用配置中的线程池/连接池大小应与资源 limits 匹配
-- [Windows 节点资源管理](../../../../wiki/17-系统基础/06-知识字典/configuration/resource-management-for-windows-nodes.md) — Windows 节点上资源管理的特殊行为
+- [存活、就绪和启动探针](../../../../wiki/21-知识字典/configuration/liveness-readiness-and-startup-probes.md) — 资源不足可导致探针超时和误判
+- [ConfigMaps](../../../../wiki/21-知识字典/configuration/configmaps.md) — 应用配置中的线程池/连接池大小应与资源 limits 匹配
+- [Windows 节点资源管理](../../../../wiki/21-知识字典/configuration/resource-management-for-windows-nodes.md) — Windows 节点上资源管理的特殊行为
 
 ## 参考链接
 
@@ -293,9 +293,9 @@ kubectl patch pod <pod-name> --subresource resize --type merge \
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/configuration/configmap.md|配置映射]]
-- [[wiki/17-系统基础/06-知识字典/configuration/configmaps.md|ConfigMaps]]
-- [[wiki/17-系统基础/06-知识字典/configuration/env.md|环境变量配置]]
+- [[wiki/21-知识字典/configuration/configmap.md|配置映射]]
+- [[wiki/21-知识字典/configuration/configmaps.md|ConfigMaps]]
+- [[wiki/21-知识字典/configuration/env.md|环境变量配置]]
 
 
 <!-- risk-assessed -->

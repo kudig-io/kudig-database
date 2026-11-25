@@ -470,7 +470,7 @@ related_topics:
   - storage
   - security
 related:
-  - 生产运维/topic-learn/public-training/[[wiki/06-存储/README.md|README]].md
+  - 生产运维/topic-learn/public-training/[[wiki/06-存储与数据/README.md|README]].md
   - 故障诊断/00-troubleshooting-overview.md
 ---
 ```

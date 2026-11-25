@@ -36,15 +36,15 @@ jobs:
         run: |
           cd code/scripts/corpus-generator
           python3 generate.py --priority all \
-            --output wiki/19-故障诊断/10-QA语料/generated/
+            --output wiki/17-故障诊断/10-QA语料/generated/
 
       - name: Validate corpus coverage
         run: |
           cd code/scripts/corpus-generator
           python3 validators/coverage_checker.py \
-            --skills-dir wiki/19-故障诊断/08-技能体系 \
-            --fta-dir wiki/19-故障诊断/06-FTA故障树/list \
-            --corpus-dir wiki/19-故障诊断/10-QA语料/generated \
+            --skills-dir skills/09-技能体系 \
+            --fta-dir wiki/17-故障诊断/06-FTA故障树/list \
+            --corpus-dir wiki/17-故障诊断/10-QA语料/generated \
             --output corpus-coverage-report.json
 
       - name: Upload coverage report
@@ -87,7 +87,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "wiki/19-故障诊断/10-QA语料/generated" "maintaining/02-元数据/metrics" code/GTM/index.html
+          git add "wiki/17-故障诊断/10-QA语料/generated" "maintaining/02-元数据/metrics" code/GTM/index.html
           if git diff --cached --quiet; then
             echo "语料与指标均无变更，跳过提交"
           else

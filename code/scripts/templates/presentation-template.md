@@ -8,7 +8,7 @@ tier: supporting
 created: '2026-07-01'
 ---
 
-# [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)
+# [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] [组件/技术名称] 全栈进阶培训 (从入门到专家)
 
 > **适用版本**: Kubernetes v1.28 - v1.32 | **文档类型**: 全栈技术实战指南  
 > **目标受众**: 初级运维/开发、资深 SRE、架构师  

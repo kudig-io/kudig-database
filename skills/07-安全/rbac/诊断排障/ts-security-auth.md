@@ -247,7 +247,7 @@ Pod 安全问题
 ## Related
 
 - [[skills/01-集群运维/cluster-upgrade/reference/skill-reference-version-matrix.md|skill-reference-version-matrix]] — Version Matrix
-- [[wiki/23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[wiki/22-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
 - [[cert-manager]] — cert-manager
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

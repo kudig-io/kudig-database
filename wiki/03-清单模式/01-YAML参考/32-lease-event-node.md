@@ -1364,8 +1364,8 @@ kubectl get pod my-pod -o yaml | kubectl apply --dry-run=server -f -
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/node-index.md|Node 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/node-index.md|Node 知识图谱索引]]
 
 ```
 

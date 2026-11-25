@@ -16,4 +16,4 @@ last_updated: 2026-07
 status: reviewed
 ---
 
-> **内容已并入主场**：[[wiki/22-概念/07-调度与资源/pod-overhead.md|Pod Overhead]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/20-概念/07-调度与资源/pod-overhead.md|Pod Overhead]]（本页为重排去重桩，正文见主场）

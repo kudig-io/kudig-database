@@ -49,7 +49,7 @@ title: Day 16: Node 节点进阶
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] node labels management
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] node labels management
   - Node taint toleration mechanism
   - Node maintenance cordon drain uncordon
   - Kubernetes node scheduling constraints
@@ -634,7 +634,7 @@ data:
 - [节点管理文档](https://kubernetes.io/docs/concepts/architecture/nodes/)
 - [Taint 和 Toleration](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/)
 - [节点维护](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/)
-- [文件: `../../../故障诊断/09-node-comprehensive-troubleshooting.md`](../../../../../../wiki/19-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md)
+- [文件: `../../../故障诊断/09-node-comprehensive-troubleshooting.md`](../../../../../../wiki/17-故障诊断/02-资源排障/01-node-comprehensive-troubleshooting.md)
 - [文件: `../../../工作负载/02-deployment-production-patterns.md`](../../../../../../wiki/02-工作负载/01-核心工作负载/02-deployment-production-patterns.md)
 
 ---

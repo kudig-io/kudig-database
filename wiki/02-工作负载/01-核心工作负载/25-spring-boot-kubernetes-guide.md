@@ -972,9 +972,9 @@ spec:
 <!-- chunk: 🔗 相关文档 -->
 ## 🔗 相关文档
 
-- [Java 容器化最佳实践](../../14-%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6/01-Docker/12-java-containerization-guide.md) — Dockerfile 与镜像优化
+- [Java 容器化最佳实践](../../13-容器运行时/01-Docker/12-java-containerization-guide.md) — Dockerfile 与镜像优化
 - [JVM GC 容器调优](../../19-故障诊断/05-JVM调优/03-jvm-gc-container-tuning-guide.md) — GC 算法选择
-- [Java 可观测性](../../wiki/09-可观测性/01-总览/14-java-observability-kubernetes-guide.md) — Micrometer + OTel
+- [Java 可观测性](../../wiki/08-可观测性/01-总览/14-java-observability-kubernetes-guide.md) — Micrometer + OTel
 - [Java 安全加固](../../08-安全/06-合规审计/14-java-security-kubernetes-guide.md) — 安全最佳实践
 - [Spring Cloud K8s 集成](../../05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide.md) — 服务网格
 - [GraalVM Native Image](../../16-专项技术/03-扩展机制/18-graalvm-native-image-guide.md) — 原生编译

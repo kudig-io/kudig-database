@@ -270,4 +270,4 @@ spec:
 - [[maintaining/01-文档/learning-paths/index.md|学习路径]]
 - [[maintaining/01-文档/learning-paths/kubernetes-sre-engineer-learning-path.md|SRE 学习路径]]
 - [[skills/index.md|技能体系]]
-- [[wiki/22-概念/index.md|核心概念]]
+- [[wiki/20-概念/index.md|核心概念]]

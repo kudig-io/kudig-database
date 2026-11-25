@@ -144,7 +144,7 @@ prerequisites:
 - [[skills/03-节点/node/诊断排障/troubleshoot-node-issues.md|troubleshoot-node-issues]] — [[skills/03-节点/node/诊断排障/troubleshoot-node-issues.md|Troubleshoot Node Issues]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]]] — FTA Diagnostic Execution Engine
 - [[skills/04-工作负载/job-cronjob/skill-23-job-cronjob-failure.md|skill-23-job-cronjob-failure]] — Job/CronJob 故障诊断与修复 / Job & CronJob Failure Diagnosis & Remediation Remediation
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 

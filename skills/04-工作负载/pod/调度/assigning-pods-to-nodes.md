@@ -56,7 +56,7 @@ Kubernetes 提供了以下几种节点选择机制：
    - **Node affinity（节点亲和性）**：基于节点标签约束 Pod 可以调度到哪些节点，功能类似 `nodeSelector` 但更灵活，支持软规则（preferred）。
    - **Inter-pod affinity/anti-affinity（Pod 间亲和性/反亲和性）**：基于其他 Pod 的标签来约束 Pod 的放置，支持将相关 Pod 放置在同一个拓扑域或分散放置。
 3. **nodeName**：更直接的节点选择方式，如果 `nodeName` 字段不为空，调度器会忽略该 Pod，直接由指定节点上的 [[kubelet|kubelet]] 尝试放置。这种方式会绕过调度器。
-4. **[[wiki/17-系统基础/06-知识字典/scheduling/pod-topology-spread-constraints.md|Pod topology spread constraints]]（Pod 拓扑分布约束）**：控制 Pod 在集群中的分布方式，如跨区域、跨节点等。
+4. **[[wiki/21-知识字典/scheduling/pod-topology-spread-constraints.md|Pod topology spread constraints]]（Pod 拓扑分布约束）**：控制 Pod 在集群中的分布方式，如跨区域、跨节点等。
 
 ## 关键机制或特性
 
@@ -261,10 +261,10 @@ kubectl run test --image=nginx --dry-run=server -o yaml --overrides='{"spec":{"n
 ```
 ## 交叉引用
 
-- [污点与容忍度](../../../../wiki/17-系统基础/06-知识字典/scheduling/taints-and-tolerations.md) — 节点排斥机制，与亲和性互补
+- [污点与容忍度](../../../../wiki/21-知识字典/scheduling/taints-and-tolerations.md) — 节点排斥机制，与亲和性互补
 - [Pod 拓扑分布约束](pod-topology-spread-constraints.md) — 更精细的跨拓扑域分布控制
-- [Kubernetes 调度器](../../../../wiki/17-系统基础/06-知识字典/scheduling/kubernetes-scheduler.md) — 过滤和评分阶段如何处理亲和性
-- [Karpenter 自动扩缩容](../../../../wiki/17-系统基础/06-知识字典/scheduling/karpenter-autoscaling.md) — Karpenter 如何感知 nodeSelector / affinity
+- [Kubernetes 调度器](../../../../wiki/21-知识字典/scheduling/kubernetes-scheduler.md) — 过滤和评分阶段如何处理亲和性
+- [Karpenter 自动扩缩容](../../../../wiki/21-知识字典/scheduling/karpenter-autoscaling.md) — Karpenter 如何感知 nodeSelector / affinity
 
 ## 参考链接
 
@@ -272,7 +272,7 @@ kubectl run test --image=nginx --dry-run=server -o yaml --overrides='{"spec":{"n
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

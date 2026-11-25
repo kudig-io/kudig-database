@@ -76,7 +76,7 @@ related_domains:
   - 安全
 related_topics:
   - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-15-security-1
-  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[wiki/10-平台工程/06-代码分析/cluster-create/16-security.md|16-security]]-2
+  - 生产运维/topic-learn/public-training/one-month/week-3-operations/day-[[wiki/12-平台工程/06-代码分析/cluster-create/16-security.md|16-security]]-2
   - 生产运维/topic-learn/public-training/one-month/week-4-enterprise/day-25-production-best-practices
 ---
 
@@ -413,12 +413,12 @@ Kyverno 使用 Admission Webhook 机制，每个 API 请求都会经过策略验
 
 ## 延伸阅读
 
-- [Kyverno 企业策略管理](../../../../../../wiki/08-安全/04-策略治理/01-kyverno-enterprise-policy-management.md)
-- [Vault 企业 Secret 管理](../../../../../../wiki/08-安全/01-身份与访问/05-vault-enterprise-secrets-management.md)
-- [零信任安全架构](../../../../../../wiki/08-安全/02-网络安全/02-zero-trust-security-architecture.md)
-- [认证授权系统](../../../../../../wiki/08-安全/01-身份与访问/01-authentication-authorization-system.md)
-- [Pod 安全标准](../../../../../../wiki/08-安全/04-策略治理/03-pod-security-standards.md)
-- [Secret 管理工具](../../../../../../wiki/08-安全/01-身份与访问/07-secret-management-tools.md)
+- [Kyverno 企业策略管理](../../../../../../wiki/07-安全/04-策略治理/01-kyverno-enterprise-policy-management.md)
+- [Vault 企业 Secret 管理](../../../../../../wiki/07-安全/01-身份与访问/05-vault-enterprise-secrets-management.md)
+- [零信任安全架构](../../../../../../wiki/07-安全/02-网络安全/02-zero-trust-security-architecture.md)
+- [认证授权系统](../../../../../../wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md)
+- [Pod 安全标准](../../../../../../wiki/07-安全/04-策略治理/03-pod-security-standards.md)
+- [Secret 管理工具](../../../../../../wiki/07-安全/01-身份与访问/07-secret-management-tools.md)
 
 
 <!-- risk-assessed -->

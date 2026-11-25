@@ -34,4 +34,4 @@ prerequisites:
 - gpu-ml-basics
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/07-scenarios/app-deployment.md|场景: 应用部署]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/07-scenarios/app-deployment.md|场景: 应用部署]]（本页为重排去重桩，正文见主场）

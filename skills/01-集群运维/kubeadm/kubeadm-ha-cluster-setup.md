@@ -60,7 +60,7 @@ prerequisites:
 ## Stacked etcd 架构
 
 ```
-负载均衡器 (HAProxy/[[wiki/23-实体/04-网络/kube-vip.md|kube-vip]]/云厂商 CLB)
+负载均衡器 (HAProxy/[[wiki/22-实体/04-网络/kube-vip.md|kube-vip]]/云厂商 CLB)
 control-plane-endpoint:6443
        │              │              │
   ┌────▼────┐   ┌────▼────┐   ┌────▼────┐
@@ -165,10 +165,10 @@ kubectl describe lease kube-scheduler -n kube-system
 ## 相关技能
 
 - [[skills/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[skills/01-集群运维/kubeadm/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]]]
-- [[wiki/22-概念/08-可靠性与运维/high-availability-patterns.md|高可用模式]]
+- [[wiki/20-概念/08-可靠性与运维/high-availability-patterns.md|高可用模式]]
 - [[skills/01-集群运维/kubeadm/kubeadm-cluster-deletion.md|[[skills/01-集群运维/kubeadm/kubeadm-cluster-deletion|kubeadm 集群删除操作]]]]
 - [[etcd|etcd]]
-- [[wiki/23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
+- [[wiki/22-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
 
 ## 生产案例
 
@@ -214,7 +214,7 @@ kubectl describe lease kube-scheduler -n kube-system
 ## Related
 
 - [[skills/01-集群运维/cluster-upgrade/最佳实践/k8s-cluster-configuration-guide.md|k8s-cluster-configuration-guide]] — Kubernetes 集群配置最佳实践
-- [[wiki/23-实体/02-K8s核心组件/kube-scheduler.md|kube-scheduler]] — kube-scheduler
+- [[wiki/22-实体/02-K8s核心组件/kube-scheduler.md|kube-scheduler]] — kube-scheduler
 - [[kube-vip]] — kube-vip
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

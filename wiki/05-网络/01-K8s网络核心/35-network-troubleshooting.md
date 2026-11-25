@@ -485,9 +485,9 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 - Flannel WireGuard 加密后端配置
 - Flannel IPv6 Dual Stack 支持
 - Flannel Windows 节点支持
-- [[wiki/19-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/apiserver-fta.md|API Server 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/backup-restore-fta.md|备份/恢复异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/calico-fta.md|calico FTA 树：Calico CNI 故障诊断]]
 
 ## See Also
 
@@ -498,7 +498,7 @@ kubectl exec -it netshoot -- ab -n 1000 -c 100 http://<service>/
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

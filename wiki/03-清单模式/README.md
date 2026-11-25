@@ -1,7 +1,7 @@
 ---
-title: Manifests & Patterns
-description: 清单模式知识域 — YAML 参考、Kustomize/Helm/Operator 高级模式、GitOps/安全/AI/弹性/平台清单模式
-summary: 清单模式知识域入口，涵盖 YAML 资源规范、Kustomize 覆盖策略、Helm Chart 工程化、Operator 开发模式、GitOps 声明式清单、安全与弹性模式
+title: 清单模式 Manifests & Patterns
+description: 03-清单模式 — YAML 参考、Kustomize 模式与 Helm 值模式。
+summary: YAML 参考、Kustomize 模式与 Helm 值模式。
 
 category: domain
 tags:
@@ -14,7 +14,7 @@ tags:
 - patterns
 tier: core
 created: '2026-05-23'
-last_updated: '2026-07-21'
+last_updated: '2026-11-25'
 difficulty: intermediate
 audience:
 - 所有工程师
@@ -23,52 +23,46 @@ estimated_read_time: 5min
 ---
 # 清单模式 Manifests & Patterns
 
-> YAML 参考、Kustomize 模式、Helm 值模式、Operator 模式与领域专用清单模式集。
+> YAML 参考、Kustomize 模式与 Helm 值模式。
 
 ## 二级子目录
 
-| 子目录 | 内容 | 核心话题 |
-|--------|------|----------|
-| [[wiki/03-清单模式/README.md\|YAML参考/]] | 资源规范 | Pod/Deployment/Service YAML 字段详解 |
-| [[wiki/03-清单模式/README.md\|Kustomize模式/]] | Kustomize | Base/Overlay、patchesStrategicMerge、Generator |
-| [[wiki/03-清单模式/README.md\|Helm值模式/]] | Helm | Chart 结构、values 覆盖、模板函数、依赖管理 |
-| [[wiki/03-清单模式/README.md\|Operator模式/]] | Operator | CRD 设计、Reconcile 循环、Kubebuilder/Operator SDK |
-| [[wiki/03-清单模式/README.md\|04-gitops-patterns/]] | GitOps 清单 | ArgoCD Application、Sync Policy、App-of-Apps |
-| [[wiki/03-清单模式/README.md\|05-security-patterns/]] | 安全清单 | NetworkPolicy、PodSecurity、RBAC 模板 |
-| [[wiki/03-清单模式/README.md\|06-ai-ml-patterns/]] | AI/ML 清单 | GPU 调度、训练 Job、推理服务模板 |
-| [[wiki/03-清单模式/README.md\|07-resilience-patterns/]] | 弹性清单 | PDB、HPA/VPA、拓扑分布、优先级 |
-| [[wiki/03-清单模式/README.md\|08-platform-patterns/]] | 平台清单 | Namespace 治理、ResourceQuota、LimitRange |
+- [[03-清单模式/00-总览/README|00-总览]]
+- [[03-清单模式/01-YAML参考/README|01-YAML参考]]
+- [[03-清单模式/02-Kustomize模式/README|02-Kustomize模式]]
+- [[03-清单模式/03-Helm值模式/README|03-Helm值模式]]
+- [[03-清单模式/04-Operator模式/README|04-Operator模式]]
+- [[03-清单模式/05-GitOps模式/README|05-GitOps模式]]
+- [[03-清单模式/06-安全模式/README|06-安全模式]]
+- [[03-清单模式/07-AI-ML模式/README|07-AI-ML模式]]
+- [[03-清单模式/08-韧性模式/README|08-韧性模式]]
+- [[03-清单模式/09-平台模式/README|09-平台模式]]
 
 ## 跨域导航
 
-- [[wiki/15-AI基础设施/README.md|AI基础设施]]
-- [[wiki/16-专项技术/README.md|专项技术]]
-- [[wiki/18-云厂商/README.md|云厂商]]
-- [[wiki/11-发布变更/README.md|发布变更]]
-- [[wiki/09-可观测性/README.md|可观测性]]
-- [[wiki/12-可靠性/README.md|可靠性]]
-- [[wiki/06-存储/README.md|存储]]
-- [[wiki/08-安全/README.md|安全]]
-- [[wiki/14-容器运行时/README.md|容器运行时]]
-- [[wiki/02-工作负载/README.md|工作负载]]
-- [[wiki/10-平台工程/README.md|平台工程]]
-- [[wiki/04-应用模式/README.md|应用模式]]
-- [[wiki/19-故障诊断/README.md|故障诊断]]
-- [[wiki/07-数据库中间件/README.md|数据库中间件]]
-- [[wiki/13-生产运维/README.md|生产运维]]
-- [[wiki/21-生态参考/README.md|生态参考]]
-- [[wiki/17-系统基础/README.md|系统基础]]
-- [[wiki/05-网络/README.md|网络]]
-- [[wiki/01-集群基础/README.md|集群基础]]
-
-## Related
-
-- [[wiki/02-工作负载/04-多语言运行时/02-python-on-kubernetes-production|Python 应用 Kubernetes 生产实践]]
-- [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
-- [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
-- [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
-- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[01-集群基础与系统/README|01-集群基础与系统]]
+- [[02-工作负载/README|02-工作负载]]
+- [[04-应用模式/README|04-应用模式]]
+- [[05-网络/README|05-网络]]
+- [[06-存储与数据/README|06-存储与数据]]
+- [[07-安全/README|07-安全]]
+- [[08-可观测性/README|08-可观测性]]
+- [[09-发布变更/README|09-发布变更]]
+- [[10-可靠性/README|10-可靠性]]
+- [[11-生产运维/README|11-生产运维]]
+- [[12-平台工程/README|12-平台工程]]
+- [[13-容器运行时/README|13-容器运行时]]
+- [[14-AI基础设施/README|14-AI基础设施]]
+- [[15-专项技术/README|15-专项技术]]
+- [[16-云厂商/README|16-云厂商]]
+- [[17-故障诊断/README|17-故障诊断]]
+- [[18-最佳实践/README|18-最佳实践]]
+- [[19-生态参考/README|19-生态参考]]
+- [[20-概念/README|20-概念]]
+- [[21-知识字典/README|21-知识字典]]
+- [[22-实体/README|22-实体]]
+- [[23-综合与研究/README|23-综合与研究]]
+- [[24-标签/README|24-标签]]
+- [[25-资产/README|25-资产]]
+- [[26-源码分析/README|26-源码分析]]
+- [[32-故障案例库/README|32-故障案例库]]

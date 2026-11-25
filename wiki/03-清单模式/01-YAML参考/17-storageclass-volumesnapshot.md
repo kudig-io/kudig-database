@@ -1514,16 +1514,16 @@ groups:
 - 18-csi-driver-resources
 - 19-serviceaccount-token
 
-- [[wiki/10-平台工程/06-代码分析/node-create/14-storage-node.md|14-storage-node]]
-- [[wiki/10-平台工程/06-代码分析/cluster-create/22-storage-volumes.md|22-storage-volumes]]
+- [[wiki/12-平台工程/06-代码分析/node-create/14-storage-node.md|14-storage-node]]
+- [[wiki/12-平台工程/06-代码分析/cluster-create/22-storage-volumes.md|22-storage-volumes]]
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/storage-index.md|Storage 存储知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 备份与灾备知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/storage-index.md|Storage 存储知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/csi-index.md|CSI (Container Storage Interface) 知识图谱索引]]
 
 
 <!-- risk-assessed -->

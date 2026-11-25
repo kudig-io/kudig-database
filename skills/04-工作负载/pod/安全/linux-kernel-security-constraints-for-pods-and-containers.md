@@ -31,4 +31,4 @@ prerequisites:
 - cloud-provider-basics
 ---
 
-> **内容已并入主场**：[[wiki/17-系统基础/06-知识字典/security/linux-kernel-security-constraints-for-pods-and-containers.md|针对 Pod 和容器的 Linux 内核安全约束]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/21-知识字典/security/linux-kernel-security-constraints-for-pods-and-containers.md|针对 Pod 和容器的 Linux 内核安全约束]]（本页为重排去重桩，正文见主场）

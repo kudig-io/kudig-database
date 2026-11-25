@@ -71,5 +71,5 @@ status: reviewed
 
 ## Related
 
-- [[wiki/26-标签/07-参考与最佳实践/visibility-public|visibility-public Hub]] — tag hub
+- [[wiki/24-标签/07-参考与最佳实践/visibility-public|visibility-public Hub]] — tag hub
 - [[maintaining/02-元数据/index.md|元数据目录索引]] — 完整索引

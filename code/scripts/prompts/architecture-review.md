@@ -35,7 +35,7 @@ prerequisites:
 
 # KUDIG 架构咨询 Prompt 模板
 
-> 用途: Agent 回答 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 架构、设计决策、技术选型问题
+> 用途: Agent 回答 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 架构、设计决策、技术选型问题
 
 ## Prompt
 

@@ -1,7 +1,7 @@
 ---
 title: Pod Lifecycle (concepts)
-description: '- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
-summary: '- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+description: '- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
+summary: '- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合'
 category: concepts
 tags:
 - k8s
@@ -55,7 +55,7 @@ prerequisites:
 
 Each Pod has four condition types that describe its internal state:
 - **PodScheduled**: Pod assigned to a node
-- **Initialized**: All [[wiki/17-系统基础/06-知识字典/workloads/init-containers.md|init containers]] completed
+- **Initialized**: All [[wiki/21-知识字典/workloads/init-containers.md|init containers]] completed
 - **ContainersReady**: All containers passed readiness
 - **Ready**: Pod can accept traffic (subset of ContainersReady + network ready)
 
@@ -63,7 +63,7 @@ Each Pod has four condition types that describe its internal state:
 
 1. **Init Containers** run sequentially (each must succeed before next starts)
 2. **Main Containers** start in parallel after all init containers complete
-3. **[[wiki/17-系统基础/06-知识字典/workloads/sidecar-containers.md|Sidecar Containers]]** (v1.28+) can run alongside init containers in parallel
+3. **[[wiki/21-知识字典/workloads/sidecar-containers.md|Sidecar Containers]]** (v1.28+) can run alongside init containers in parallel
 
 ## Health Probes
 
@@ -89,36 +89,36 @@ Each probe can use HTTP GET, TCP Socket, or Exec commands.
 - [Pod Lifecycle]()
 
 ## Related
-- [[wiki/22-概念/11-交叉分析/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
-- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
-- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]] — 综合
+- [[wiki/20-概念/11-交叉分析/Operator 模式 × Pod 生命周期.md|Operator 模式 × Pod 生命周期]] — 综合
+- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × Secret 管理.md|Pod 生命周期 × Secret 管理]] — 综合
+- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]] — 综合
 
 - [[skills/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — Troubleshoot Pod Issues
-- [[wiki/22-概念/08-可靠性与运维/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
-- [[wiki/22-概念/08-可靠性与运维/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
+- [[wiki/20-概念/08-可靠性与运维/node-lifecycle-management.md|node-lifecycle-management]] — 节点生命周期管理
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/20-概念/08-可靠性与运维/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
-- [[wiki/17-系统基础/06-知识字典/workloads/deployment.md|Deployment]]
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|StatefulSet]]
-- [[wiki/22-概念/08-可靠性与运维/high-availability-patterns.md|High Availability Patterns]]
+- [[wiki/21-知识字典/workloads/deployment.md|Deployment]]
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|StatefulSet]]
+- [[wiki/20-概念/08-可靠性与运维/high-availability-patterns.md|High Availability Patterns]]
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]]
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]]
 
 - Pod 生命周期事件表
 - Wiki 全量知识库摘要 — 2026-05-21 — Cross-reference
 - Wiki Lint Report — 2026-05-21 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-architecture-domain-guide.md|Kubernetes Architecture Domain Guide]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
-- [[wiki/22-概念/07-调度与资源/scheduling-algorithm.md|Scheduling Algorithm]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-workloads-domain-guide.md|Kubernetes Workloads Domain Guide]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/workloads-terms.md|K8s 工作负载术语参考]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-architecture-domain-guide.md|Kubernetes Architecture Domain Guide]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[wiki/20-概念/07-调度与资源/scheduling-algorithm.md|Scheduling Algorithm]] — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-inner-training.md|Kubernetes 培训：Inner Training]] — Cross-reference
 - [[skills/03-节点/node/运维操作/kubelet-eviction-mechanism.md|kubelet 资源驱逐机制]] — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-public-training.md|Kubernetes 培训：Public Training]] — Cross-reference
-- [[wiki/23-实体/07-可观测性/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
-- [[wiki/23-实体/02-K8s核心组件/container-runtime.md|Container Runtime]] — Cross-reference
-- [[wiki/23-实体/09-编排调度/clusterpedia.md|Clusterpedia]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/22-实体/07-可观测性/inspektor-gadget.md|Inspektor Gadget]] — Cross-reference
+- [[wiki/22-实体/02-K8s核心组件/container-runtime.md|Container Runtime]] — Cross-reference
+- [[wiki/22-实体/09-编排调度/clusterpedia.md|Clusterpedia]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

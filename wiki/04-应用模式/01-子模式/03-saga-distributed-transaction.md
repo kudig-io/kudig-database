@@ -199,7 +199,7 @@ var OrderSagaSteps = []SagaStep{
 }
 ```
 
-## 4. [[wiki/15-AI基础设施/03-Agent运行时/08-durable-agent-execution-temporal.md|Temporal]] 工作流引擎集成
+## 4. [[wiki/14-AI基础设施/03-Agent运行时/08-durable-agent-execution-temporal.md|Temporal]] 工作流引擎集成
 
 ### 4.1 Temporal 架构
 

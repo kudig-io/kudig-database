@@ -3,28 +3,33 @@ name: Quality Gate
 on:
   pull_request:
     paths:
-      - 'wiki/01-集群基础/**'
+      - 'wiki/01-集群基础与系统/**'
       - 'wiki/02-工作负载/**'
-      - 'wiki/05-网络/**'
-      - 'wiki/06-存储/**'
-      - 'wiki/08-安全/**'
-      - 'wiki/09-可观测性/**'
-      - 'wiki/10-平台工程/**'
-      - 'wiki/11-发布变更/**'
-      - 'wiki/12-可靠性/**'
-      - 'wiki/19-故障诊断/**'
-      - 'wiki/13-生产运维/**'
-      - 'wiki/18-云厂商/**'
-      - 'wiki/14-容器运行时/**'
-      - 'wiki/15-AI基础设施/**'
-      - 'wiki/16-专项技术/**'
-      - 'wiki/07-数据库中间件/**'
-      - 'wiki/17-系统基础/**'
       - 'wiki/03-清单模式/**'
-      - 'wiki/21-生态参考/**'
       - 'wiki/04-应用模式/**'
-      - 'wiki/22-概念/**'
-      - 'wiki/23-实体/**'
+      - 'wiki/05-网络/**'
+      - 'wiki/06-存储与数据/**'
+      - 'wiki/07-安全/**'
+      - 'wiki/08-可观测性/**'
+      - 'wiki/09-发布变更/**'
+      - 'wiki/10-可靠性/**'
+      - 'wiki/11-生产运维/**'
+      - 'wiki/12-平台工程/**'
+      - 'wiki/13-容器运行时/**'
+      - 'wiki/14-AI基础设施/**'
+      - 'wiki/15-专项技术/**'
+      - 'wiki/16-云厂商/**'
+      - 'wiki/17-故障诊断/**'
+      - 'wiki/18-最佳实践/**'
+      - 'wiki/19-生态参考/**'
+      - 'wiki/20-概念/**'
+      - 'wiki/21-知识字典/**'
+      - 'wiki/22-实体/**'
+      - 'wiki/23-综合与研究/**'
+      - 'wiki/24-标签/**'
+      - 'wiki/25-资产/**'
+      - 'wiki/26-源码分析/**'
+      - 'wiki/32-故障案例库/**'
       - 'skills/**'
       - 'maintaining/01-文档/**'
       - 'maintaining/02-元数据/**'
@@ -110,8 +115,8 @@ jobs:
           import sys, pathlib, yaml
           ROOT = pathlib.Path('.')
           EXCL = {'node_modules','.venv','.git','__pycache__','03-发布','31-归档','04-报告','02-元数据','27-资产'}
-          CONTENT = {'wiki/22-概念', 'wiki/23-实体', 'skills', 'wiki/24-综合', 'maintaining/01-文档', 'wiki/20-最佳实践', 'wiki/25-研究'}
-          DOMAINS = {'wiki/01-集群基础','wiki/02-工作负载','wiki/05-网络','wiki/06-存储','wiki/08-安全','wiki/09-可观测性','wiki/10-平台工程','wiki/11-发布变更','wiki/12-可靠性','wiki/19-故障诊断','wiki/13-生产运维','wiki/18-云厂商','wiki/14-容器运行时','wiki/15-AI基础设施','wiki/16-专项技术','wiki/07-数据库中间件','wiki/17-系统基础','wiki/03-清单模式','wiki/21-生态参考','wiki/04-应用模式'}
+          CONTENT = {'wiki/20-概念', 'wiki/22-实体', 'skills', 'wiki/23-综合与研究', 'maintaining/01-文档', 'wiki/18-最佳实践', 'wiki/25-研究'}
+          DOMAINS = {'wiki/01-集群基础与系统','wiki/02-工作负载','wiki/05-网络','wiki/06-存储与数据','wiki/07-安全','wiki/08-可观测性','wiki/12-平台工程','wiki/09-发布变更','wiki/10-可靠性','wiki/17-故障诊断','wiki/11-生产运维','wiki/16-云厂商','wiki/13-容器运行时','wiki/14-AI基础设施','wiki/15-专项技术','wiki/21-知识字典','wiki/03-清单模式','wiki/19-生态参考','wiki/04-应用模式'}
           def in_roots(p, roots):
               s = p.as_posix()
               return any(s.startswith(r + '/') for r in roots)
@@ -169,8 +174,8 @@ jobs:
           ROOT = pathlib.Path('.')
           EXCL = {'node_modules','.venv','.git','__pycache__','03-发布'}
           SCAN_EXCL = EXCL | {'31-归档','04-报告','02-元数据','27-资产','scripts'}
-          CONTENT = {'wiki/22-概念', 'wiki/23-实体', 'skills', 'wiki/24-综合', 'maintaining/01-文档', 'wiki/20-最佳实践', 'wiki/25-研究', 'wiki/26-标签'}
-          DOMAINS = {'wiki/01-集群基础','wiki/02-工作负载','wiki/05-网络','wiki/06-存储','wiki/08-安全','wiki/09-可观测性','wiki/10-平台工程','wiki/11-发布变更','wiki/12-可靠性','wiki/19-故障诊断','wiki/13-生产运维','wiki/18-云厂商','wiki/14-容器运行时','wiki/15-AI基础设施','wiki/16-专项技术','wiki/07-数据库中间件','wiki/17-系统基础','wiki/03-清单模式','wiki/21-生态参考','wiki/04-应用模式'}
+          CONTENT = {'wiki/20-概念', 'wiki/22-实体', 'skills', 'wiki/23-综合与研究', 'maintaining/01-文档', 'wiki/18-最佳实践', 'wiki/25-研究', 'wiki/24-标签'}
+          DOMAINS = {'wiki/01-集群基础与系统','wiki/02-工作负载','wiki/05-网络','wiki/06-存储与数据','wiki/07-安全','wiki/08-可观测性','wiki/12-平台工程','wiki/09-发布变更','wiki/10-可靠性','wiki/17-故障诊断','wiki/11-生产运维','wiki/16-云厂商','wiki/13-容器运行时','wiki/14-AI基础设施','wiki/15-专项技术','wiki/21-知识字典','wiki/03-清单模式','wiki/19-生态参考','wiki/04-应用模式'}
           def in_roots(p, roots):
               s = p.as_posix()
               return any(s.startswith(r + '/') for r in roots)
@@ -231,8 +236,8 @@ jobs:
           import pathlib, sys
           ROOT = pathlib.Path('.')
           EXCL = {'node_modules','.venv','.git','__pycache__','03-发布','31-归档','04-报告','02-元数据','27-资产','scripts'}
-          CONTENT = {'wiki/22-概念', 'wiki/23-实体', 'skills', 'wiki/24-综合', 'maintaining/01-文档', 'wiki/20-最佳实践', 'wiki/25-研究'}
-          DOMAINS = {'wiki/01-集群基础','wiki/02-工作负载','wiki/05-网络','wiki/06-存储','wiki/08-安全','wiki/09-可观测性','wiki/10-平台工程','wiki/11-发布变更','wiki/12-可靠性','wiki/19-故障诊断','wiki/13-生产运维','wiki/18-云厂商','wiki/14-容器运行时','wiki/15-AI基础设施','wiki/16-专项技术','wiki/07-数据库中间件','wiki/17-系统基础','wiki/03-清单模式','wiki/21-生态参考','wiki/04-应用模式'}
+          CONTENT = {'wiki/20-概念', 'wiki/22-实体', 'skills', 'wiki/23-综合与研究', 'maintaining/01-文档', 'wiki/18-最佳实践', 'wiki/25-研究'}
+          DOMAINS = {'wiki/01-集群基础与系统','wiki/02-工作负载','wiki/05-网络','wiki/06-存储与数据','wiki/07-安全','wiki/08-可观测性','wiki/12-平台工程','wiki/09-发布变更','wiki/10-可靠性','wiki/17-故障诊断','wiki/11-生产运维','wiki/16-云厂商','wiki/13-容器运行时','wiki/14-AI基础设施','wiki/15-专项技术','wiki/21-知识字典','wiki/03-清单模式','wiki/19-生态参考','wiki/04-应用模式'}
           def in_roots(p, roots):
               s = p.as_posix()
               return any(s.startswith(r + '/') for r in roots)
@@ -241,10 +246,10 @@ jobs:
           # 已知历史问题文件（2026-08-13 登记 N7，待专项修复后移出；硬失败仅拦截新增异常）
           KNOWN = {
               'wiki/05-网络/05-eBPF/10-ebpf-security-applications.md',
-              'wiki/17-系统基础/06-知识字典/operations/failure-patterns-analysis.md',
-              'wiki/17-系统基础/06-知识字典/operations/incident-management-runbooks.md',
-              'wiki/17-系统基础/06-知识字典/operations/performance-tuning-expert.md',
-              'wiki/21-生态参考/02-论文/24-kubernetes-policy-as-code-governance-automation.md',
+              'wiki/21-知识字典/operations/failure-patterns-analysis.md',
+              'wiki/21-知识字典/operations/incident-management-runbooks.md',
+              'wiki/21-知识字典/operations/performance-tuning-expert.md',
+              'wiki/19-生态参考/02-论文/24-kubernetes-policy-as-code-governance-automation.md',
               'skills/04-工作负载/pod/培训/learn-inner-training.md',
               'skills/04-工作负载/pod/培训/learn-public-training.md',
               'skills/04-工作负载/pod/培训/public-one-month/week-4-enterprise/day-25-production-best-practices.md',

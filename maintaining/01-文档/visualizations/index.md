@@ -67,10 +67,10 @@ SVG 动画展示 Write/Read/Ask/Iterate 循环学习法。
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/k8s-glossary-index.md|K8s 术语表索引]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/KUDIG Templates and Agent Prompts.md|KUDIG Templates and Agent Prompts]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-glossary-index.md|K8s 术语表索引]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/KUDIG Templates and Agent Prompts.md|KUDIG Templates and Agent Prompts]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[skills/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 
 

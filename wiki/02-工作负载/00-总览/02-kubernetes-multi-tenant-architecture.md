@@ -1072,9 +1072,9 @@ echo "=== 检查完成 ==="
 <!-- chunk: Obsidian 相关文档 -->## Obsidian 相关文档
 
 - 生产运维 MOC
-- [[wiki/13-生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
+- [[wiki/11-生产运维/README.md|Domain 11: 生产环境运维最佳实践 (Production Operations Best Practices)]]
 - Domain-18 生产运维 — 开源项目索引
-- [[wiki/01-集群基础/02-设计原则/02-production-architecture-design-principles.md|01-生产架构设计原则]]
+- [[wiki/01-集群基础与系统/02-设计原则/02-production-architecture-design-principles.md|01-生产架构设计原则]]
 - 02-多云混合部署策略
 - 03-边缘计算生产部署
 - 04-企业级监控体系
@@ -1172,15 +1172,15 @@ echo "=== 检查完成 ==="
 - 56-smart-elderly-care
 - 44-martech-adtech
 - 95-industrial-metaverse
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/openkruise-index.md|OpenKruise 全局索引]]
 
 ## See Also
 
 - 99-keda-event-driven-autoscaling-guide
 - 99-kubernetes-deployment-patterns-architecture
-- [[wiki/01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
-- [[wiki/01-集群基础/02-设计原则/02-production-architecture-design-principles.md|01-production-architecture-design-principles]]
+- [[wiki/01-集群基础与系统/00-总览/02-kubernetes-production-architecture-blueprint.md|99-kubernetes-production-architecture-blueprint]]
+- [[wiki/01-集群基础与系统/02-设计原则/02-production-architecture-design-principles.md|01-production-architecture-design-principles]]
 
 
 <!-- risk-assessed -->

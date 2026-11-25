@@ -42,4 +42,4 @@ prerequisites:
 - tls-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换 [migration]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/07-迁移方案/05-network-migration-traffic-cutover.md|05 - 网络迁移与流量切换 [migration]]]（本页为重排去重桩，正文见主场）

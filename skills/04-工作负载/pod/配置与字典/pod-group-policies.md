@@ -42,15 +42,15 @@ prerequisites:
 # Pod Group Policies
 
 ## 概述
-Pod Group Policies 是 [[wiki/17-系统基础/06-知识字典/workloads/workload-api.md|Workload API]] 的组成部分（Alpha，v1.35 默认禁用）。Workload 中定义的每个 Pod 组都必须声明一个调度策略，该策略决定调度器如何处理该组 Pod 的集合。
+Pod Group Policies 是 [[wiki/21-知识字典/workloads/workload-api.md|Workload API]] 的组成部分（Alpha，v1.35 默认禁用）。Workload 中定义的每个 Pod 组都必须声明一个调度策略，该策略决定调度器如何处理该组 Pod 的集合。
 
 ## 核心概念/原理
 目前 API 支持两种策略类型，每个组必须且只能指定一种：
 1. **basic（基本策略）**
-   - 调度器将组内所有 Pod 视为独立实体，按标准 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 行为逐个调度。
+   - 调度器将组内所有 Pod 视为独立实体，按标准 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 行为逐个调度。
    - 主要用于组织 Pod 以提升可观测性和管理性，适用于不需要同时启动的组，或为未来引入非“全有或全无”约束做准备。
 2. **gang（集体调度策略）**
-   - 强制“全有或全无”调度（[[wiki/17-系统基础/06-知识字典/scheduling/gang-scheduling.md|gang scheduling]]）。
+   - 强制“全有或全无”调度（[[wiki/21-知识字典/scheduling/gang-scheduling.md|gang scheduling]]）。
    - 适用于紧耦合工作负载，部分启动会导致死锁或资源浪费的场景（如分布式训练、批处理作业）。
    - 需要指定 `minCount` 参数：只有当至少有 `minCount` 个 Pod 能够同时调度时，该组才会被允许绑定到节点。
 
@@ -196,8 +196,8 @@ kubectl get events -n <ns> --field-selector reason=GangScheduling
 ## 交叉引用
 
 - [Workload API](workload-api.md) — 完整 Workload 资源定义
-- [Workload Reference](../../../../wiki/17-系统基础/06-知识字典/workloads/workload-reference.md) — Pod 端引用 Workload 的方式
-- [Jobs](../../../../wiki/17-系统基础/06-知识字典/workloads/jobs.md) — 批处理场景下的 gang 调度应用
+- [Workload Reference](../../../../wiki/21-知识字典/workloads/workload-reference.md) — Pod 端引用 Workload 的方式
+- [Jobs](../../../../wiki/21-知识字典/workloads/jobs.md) — 批处理场景下的 gang 调度应用
 - [调度与驱逐](../scheduling/) — 调度器核心行为
 
 ## 参考链接
@@ -205,9 +205,9 @@ kubectl get events -n <ns> --field-selector reason=GangScheduling
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[wiki/17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[wiki/17-系统基础/06-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[wiki/21-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[wiki/21-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[wiki/21-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

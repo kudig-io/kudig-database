@@ -43,7 +43,7 @@ prerequisites:
 # Pod Quality of [[service|Service]] Classes
 
 ## 概述
-[[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
+[[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 根据 Pod 内容器的资源请求（requests）和限制（limits）为每个 Pod 分配一个服务质量（QoS）等级。该等级用于在节点资源不足时决定驱逐优先级。
 
 ## 核心概念/原理
 可能的 QoS 等级有三种，按驱逐优先级从高到低排列：
@@ -221,7 +221,7 @@ kubectl describe node <node-name> | grep -A 5 "eviction"
 ## 交叉引用
 
 - [Pod 生命周期](../%E6%A6%82%E5%BF%B5%E5%8E%9F%E7%90%86/pod-lifecycle.md)
-- [OOM 内存诊断](../../../../wiki/19-故障诊断/01-核心排障/07-oom-memory-diagnosis.md)
+- [OOM 内存诊断](../../../../wiki/17-故障诊断/01-核心排障/07-oom-memory-diagnosis.md)
 - [高级 Pod 配置](../%E9%85%8D%E7%BD%AE%E4%B8%8E%E5%AD%97%E5%85%B8/advanced-pod-configuration.md)
 - [工作负载监控与告警](../../../../wiki/02-工作负载/01-核心工作负载/06-workload-monitoring-alerting.md)
 - [VPA 垂直自动扩缩](vertical-pod-autoscaling.md)
@@ -231,9 +231,9 @@ kubectl describe node <node-name> | grep -A 5 "eviction"
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
-- [[wiki/17-系统基础/06-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
-- [[wiki/17-系统基础/06-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
+- [[wiki/21-知识字典/workloads/advanced-pod-configuration.md|Advanced Pod Configuration]]
+- [[wiki/21-知识字典/workloads/automatic-cleanup-for-finished-jobs.md|Automatic Cleanup for Finished Jobs]]
+- [[wiki/21-知识字典/workloads/autoscaling-workloads.md|Autoscaling Workloads]]
 
 
 <!-- risk-assessed -->

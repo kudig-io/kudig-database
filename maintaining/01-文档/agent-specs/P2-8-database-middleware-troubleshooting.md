@@ -100,7 +100,7 @@ mysql -e "SHOW ENGINE INNODB STATUS\G"
 # → 长事务需尽早提交
 ```
 
-### 1.4 MySQL Operator 问题 ([[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]])
+### 1.4 MySQL Operator 问题 ([[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]])
 
 | 症状 | 诊断命令 | 根因 | 修复 |
 |------|---------|------|------|
@@ -429,6 +429,6 @@ psql -h 127.0.0.1 -p 5432 -U pgbouncer -c "SHOW POOLS"
 **关联文档**:
 - [数据库中间件/](../数据库中间件/) — 数据库中间件完整文档
 - [](../../../wiki/19-故障诊断) — K8s 通用问题排查
-- [08-技能体系/](../../../wiki/19-故障诊断/08-技能体系) — 通用运维 Skill
+- [08-技能体系/](../../../wiki/17-故障诊断/08-技能体系) — 通用运维 Skill
 
 <!-- risk-assessed -->

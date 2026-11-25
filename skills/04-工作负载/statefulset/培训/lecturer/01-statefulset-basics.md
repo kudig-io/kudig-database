@@ -1,7 +1,7 @@
 ---
 title: 第14课：StatefulSet - 有状态应用管理 [10-advanced-workloads]
 description: '# 第14课：StatefulSet - 有状态应用管理'
-summary: '你需要在 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] 上部署 MySQL 数据库集群：'
+summary: '你需要在 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] 上部署 MySQL 数据库集群：'
 category: k8s-lecturer
 tags:
 - k8s
@@ -99,7 +99,7 @@ Deployment 管理的是无状态应用：
 ```
 【场景】
 
-你需要在 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] 上部署 MySQL 数据库集群：
+你需要在 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] 上部署 MySQL 数据库集群：
 • 1 个主库（写）
 • 2 个从库（读）
 

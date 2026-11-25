@@ -136,10 +136,10 @@ Use tools like `rbac-lookup` or `kubectl-view-allocations` to audit RBAC at scal
 - [[maintaining/03-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|release-notes-security]] — 发布说明索引 — 安全
 - [[skills/07-安全/pod-security/最佳实践/k8s-pod-security-guide.md|k8s-pod-security-guide]] — Kubernetes Pod 安全最佳实践
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
-- [[wiki/22-概念/05-安全/multi-tenancy-isolation.md|multi-tenancy-isolation]] — Multi-Tenancy Isolation
-- [[wiki/22-概念/05-安全/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
-- [[wiki/22-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
-- [[wiki/22-概念/05-安全/multi-tenancy-isolation.md|Multi-Tenancy Isolation]]
+- [[wiki/20-概念/05-安全/multi-tenancy-isolation.md|multi-tenancy-isolation]] — Multi-Tenancy Isolation
+- [[wiki/20-概念/05-安全/security-defense-depth.md|security-defense-depth]] — Defense-in-Depth Security
+- [[wiki/20-概念/05-安全/security-defense-depth.md|Defense-in-Depth Security]]
+- [[wiki/20-概念/05-安全/multi-tenancy-isolation.md|Multi-Tenancy Isolation]]
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 
 

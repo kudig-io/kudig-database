@@ -16,4 +16,4 @@ last_updated: 2026-05-21
 status: deprecated
 ---
 
-> **内容已并入主场**：[[wiki/22-概念/05-安全/pod-security-policy.md|PodSecurityPolicy]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/20-概念/05-安全/pod-security-policy.md|PodSecurityPolicy]]（本页为重排去重桩，正文见主场）

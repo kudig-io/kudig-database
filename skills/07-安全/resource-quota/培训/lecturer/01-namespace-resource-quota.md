@@ -65,7 +65,7 @@ prerequisites:
 • 测试团队使用集群
 • 生产环境使用集群
 
-但你只有一个 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|k8s]] 集群！
+但你只有一个 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|k8s]] 集群！
 
 问题：如何让不同团队互不干扰？
 
@@ -437,7 +437,7 @@ kubectl describe resourcequota -n <namespace>
 
 **关联文档**:
 - [../09-troubleshooting/09-common-problems.md](../../../../04-工作负载/pod/培训/lecturer/04-common-problems.md) — 常见问题
-- [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../../../../wiki/19-故障诊断/08-技能体系/10-rbac-quota-failure.md) — RBAC/配额问题
+- [../../故障诊断/topic-skills/09-rbac-quota-failure.md](../../../../../skills/09-技能体系/10-rbac-quota-failure.md) — RBAC/配额问题
 - [](../../../../../wiki/19-故障诊断) — 故障排查文档
 
 <!-- risk-assessed -->

@@ -666,8 +666,8 @@ kubectl get pod <name> -o jsonpath='{.status.qosClass}'
 ## 延伸阅读
 
 - [资源管理](../../../../../../wiki/02-工作负载/01-核心工作负载/23-resource-management.md)
-- [配额排障](../../../../../../wiki/19-故障诊断/02-资源排障/16-quota-limitrange-troubleshooting.md)
-- [K8s Resource Quota 文档](https://[[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
+- [配额排障](../../../../../../wiki/17-故障诊断/02-资源排障/16-quota-limitrange-troubleshooting.md)
+- [K8s Resource Quota 文档](https://[[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]].io/docs/concepts/policy/resource-quotas/)
 - [K8s Limit Range 文档](https://kubernetes.io/docs/concepts/policy/limit-range/)
 
 

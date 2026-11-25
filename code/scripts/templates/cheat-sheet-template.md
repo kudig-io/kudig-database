@@ -236,8 +236,8 @@ fi
 
 - [官方文档]({{URL}})
 - [深度文档](../domain-{{N}}-{{name}}/{{doc}}.md)
-- [FTA 故障树](../../wiki/19-故障诊断/06-FTA故障树/list/{{component}}-fta.md)  # H3: 旧路径 ../故障诊断/FTA故障树/ 修复
-- [相关 Skill](../../wiki/19-故障诊断/08-技能体系/{{NN}}-{{scenario}}.md)  # H3: 旧路径 ../故障诊断/技能体系/ 修复
+- [FTA 故障树](../../wiki/17-故障诊断/06-FTA故障树/list/{{component}}-fta.md)  # H3: 旧路径 ../故障诊断/FTA故障树/ 修复
+- [相关 Skill](../../skills/09-技能体系/{{NN}}-{{scenario}}.md)  # H3: 旧路径 ../故障诊断/技能体系/ 修复
 
 ---
 

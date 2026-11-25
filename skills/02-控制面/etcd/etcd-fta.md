@@ -419,6 +419,6 @@ kubectl get pods -n kube-system -l component=etcd -o jsonpath='{.items[0].spec.c
 - [[skills/02-控制面/etcd/backup-restore-etcd.md|etcd 备份恢复]] — 同域技能
 - [[skills/02-控制面/etcd/backup-restore-fta.md|备份恢复故障树]] — 同域技能
 - [[skills/02-控制面/apiserver/apiserver-fta.md|API Server 故障树]] — 跨域关联
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

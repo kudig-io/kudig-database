@@ -77,7 +77,7 @@ subjects:
 
 ```yaml
 rules:
-  - apiGroups: [""]           # "" = core API group ([[wiki/22-概念/02-工作负载/pod-lifecycle.md|pod]]/Service/ConfigMap)
+  - apiGroups: [""]           # "" = core API group ([[wiki/20-概念/02-工作负载/pod-lifecycle.md|pod]]/Service/ConfigMap)
     resources: ["pods", "services"]
     verbs: ["get", "list"]
   - apiGroups: ["apps"]

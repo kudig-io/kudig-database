@@ -171,7 +171,7 @@ UTILIZATION: CPU P50=32%, P95=58%. GPU P50=15%, P95=40%. Storage 空闲率 45%.
 
 ## 参考文档
 
-- [[wiki/22-概念/bp-cost-optimization|成本优化最佳实践]] — FinOps 规范
+- [[wiki/20-概念/bp-cost-optimization|成本优化最佳实践]] — FinOps 规范
 - [[code/scripts/prompts/capacity-review|容量规划审查]] — 右 Sizing 详细分析
 - [[code/scripts/automation/resource-cleanup|资源清理脚本]] — 闲置资源清理
 

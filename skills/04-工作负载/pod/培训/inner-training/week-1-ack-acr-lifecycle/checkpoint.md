@@ -701,13 +701,13 @@ kubectl get nodes
 ## 延伸阅读
 
 - [ACK 服务总览](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
-- [K8s 架构总览](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
-- [K8s 版本升级策略](../../../../../../wiki/01-集群基础/06-升级路径/02-upgrade-paths-strategy.md)
-- [集群生命周期管理](../../../../../../wiki/10-平台工程/02-运维/02-cluster-lifecycle-management.md)
+- [K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [K8s 版本升级策略](../../../../../../wiki/01-集群基础与系统/06-升级路径/02-upgrade-paths-strategy.md)
+- [集群生命周期管理](../../../../../../wiki/12-平台工程/02-运维/02-cluster-lifecycle-management.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

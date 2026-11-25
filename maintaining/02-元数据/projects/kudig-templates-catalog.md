@@ -94,7 +94,7 @@ Skill 文档是最核心的运维操作模板，包含 12 个标准章节：
 
 ## 相关文档
 
-- [[wiki/23-实体/15-参考与索引/KUDIG Templates and Agent Prompts.md|原版模板集合]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Templates and Agent Prompts.md|原版模板集合]]
 - [[kudig-prompts-catalog|AI Prompt 模板]]
 - [[skills/04-工作负载/pod/方法论/Kubernetes Diagnostic Skills Overview.md|诊断技能总览]]
 
@@ -105,7 +105,7 @@ Skill 文档是最核心的运维操作模板，包含 12 个标准章节：
 - [[README]] — FTA 故障树清单索引
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/23-实体/15-参考与索引/kudig-documentation-specs.md|KUDIG 文档规范体系：标签字典、Frontmatter、场景分类、同义词典]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/kudig-documentation-specs.md|KUDIG 文档规范体系：标签字典、Frontmatter、场景分类、同义词典]] — Cross-reference
 
 
 <!-- risk-assessed -->

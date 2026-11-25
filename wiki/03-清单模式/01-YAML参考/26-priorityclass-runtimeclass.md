@@ -1220,7 +1220,7 @@ kubectl get resourceclaim --all-namespaces -o json | \
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/scheduler-index.md|Scheduler 调度与弹性伸缩知识图谱索引]]
 
 
 <!-- risk-assessed -->

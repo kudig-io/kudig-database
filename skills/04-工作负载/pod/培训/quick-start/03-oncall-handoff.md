@@ -43,7 +43,7 @@ prerequisites:
 
 # Day 3: 值班交接 SOP
 
-> **适用对象**: oncall 值班工程师 | **版本**: [[wiki/23-实体/kubernetes.md|[[wiki/17-系统基础/05-速查卡/k8s|k8s]]]] 1.28-1.33
+> **适用对象**: oncall 值班工程师 | **版本**: [[wiki/22-实体/kubernetes.md|[[wiki/01-集群基础与系统/12-速查卡/k8s|k8s]]]] 1.28-1.33
 
 ---
 

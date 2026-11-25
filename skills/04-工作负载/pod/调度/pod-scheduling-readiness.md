@@ -163,10 +163,10 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 ```
 ## 交叉引用
 
-- [Kubernetes 调度器](../../../../wiki/17-系统基础/06-知识字典/scheduling/kubernetes-scheduler.md) — 调度器如何处理 gated Pod
-- [[wiki/17-系统基础/06-知识字典/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
+- [Kubernetes 调度器](../../../../wiki/21-知识字典/scheduling/kubernetes-scheduler.md) — 调度器如何处理 gated Pod
+- [[wiki/21-知识字典/scheduling/gang-scheduling.md|Gang Scheduling]]](./gang-scheduling.md) — 结合 scheduling gate 实现组调度前置检查
 - [动态资源分配](./dynamic-resource-allocation.md) — DRA ResourceClaim 就绪后移除 gate
-- Karpenter 自动扩缩容](../../../../17-%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/06-%E7%9F%A5%E8%AF%86%E5%AD%97%E5%85%B8/scheduling/karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
+- Karpenter 自动扩缩容](../../../../wiki/21-知识字典/scheduling/karpenter-autoscaling.md) — 避免 gated Pod 触发不必要的扩容
 
 ## 参考链接
 
@@ -174,9 +174,9 @@ curl -sk https://localhost:10259/metrics | grep 'scheduler_pending_pods.*gated'
 
 ## Related
 
-- [[wiki/17-系统基础/06-知识字典/scheduling/affinity.md|亲和性]]
-- [[wiki/17-系统基础/06-知识字典/scheduling/anti-affinity.md|反亲和性]]
-- [[wiki/17-系统基础/06-知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
+- [[wiki/21-知识字典/scheduling/affinity.md|亲和性]]
+- [[wiki/21-知识字典/scheduling/anti-affinity.md|反亲和性]]
+- [[wiki/21-知识字典/scheduling/api-initiated-eviction.md|API-initiated Eviction]]
 
 
 <!-- risk-assessed -->

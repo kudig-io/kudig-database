@@ -493,7 +493,7 @@ APF 问题
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]] — kube-apiserver
+- [[wiki/22-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]] — kube-apiserver
 - [[etcd]] — etcd
 - [[cert-manager]] — cert-manager
 - [[prometheus]] — Prometheus

@@ -276,7 +276,7 @@ PDB 问题
 - [[helm-fta]] — Helm 发布异常故障树分析
 - [[skills/04-工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
 - [[skills/04-工作负载/pod/reference/ts-command-output.md|ts-command-output]] — 命令输出根因解析
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 
 
 <!-- risk-assessed -->

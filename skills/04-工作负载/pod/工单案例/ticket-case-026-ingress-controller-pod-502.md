@@ -54,14 +54,14 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
-- target: '[[wiki/22-概念/03-网络/ingress.md]]'
+- target: '[[wiki/20-概念/03-网络/ingress.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-026-ingress-controller-pod-502.md|Ingress 控制器 Pod 异常导致 404/502]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-026-ingress-controller-pod-502.md|Ingress 控制器 Pod 异常导致 404/502]]（本页为重排去重桩，正文见主场）

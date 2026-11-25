@@ -47,7 +47,7 @@ title: Day 11: 风险点识别与防范
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - ACK [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] security risk assessment checklist
+  - ACK [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] security risk assessment checklist
   - Pod Securityod Security Standards]] PSS configuration
   - Kubernetes security baseline hardening
   - [[networkpolicy|NetworkPolicy]] zero trust security
@@ -641,10 +641,10 @@ Day 12 将学习集群审计日志的配置与分析方法。
 
 ## 延伸阅读
 
-- [Pod 安全标准](../../../../../../wiki/08-安全/04-策略治理/03-pod-security-standards.md)
-- [Secret 管理工具](../../../../../../wiki/08-安全/01-身份与访问/07-secret-management-tools.md)
-- [RBAC 矩阵配置](../../../../../../wiki/08-安全/01-身份与访问/06-rbac-matrix-configuration.md)
-- [认证授权系统](../../../../../../wiki/08-安全/01-身份与访问/01-authentication-authorization-system.md)
+- [Pod 安全标准](../../../../../../wiki/07-安全/04-策略治理/03-pod-security-standards.md)
+- [Secret 管理工具](../../../../../../wiki/07-安全/01-身份与访问/07-secret-management-tools.md)
+- [RBAC 矩阵配置](../../../../../../wiki/07-安全/01-身份与访问/06-rbac-matrix-configuration.md)
+- [认证授权系统](../../../../../../wiki/07-安全/01-身份与访问/01-authentication-authorization-system.md)
 - [NetworkPolicy 实践](../../domain-6-networking/12-network-policy-practice.md)
 
 ```

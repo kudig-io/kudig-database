@@ -404,7 +404,7 @@ kubectl delete ingress my-ingress
 
 **关联文档**:
 - [../05-configuration/05-configmap-secret.md](../../../../04-工作负载/pod/培训/lecturer/03-configmap-secret.md) — 配置管理
-- [../../故障诊断/topic-skills/13-ingress-gateway-failure.md](../../../../../wiki/19-故障诊断/08-技能体系/14-ingress-gateway-failure.md) — Ingress 问题 [[SKILL|Skill]]
-- [../../网络/](../../网络/) — [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 网络文档
+- [../../故障诊断/topic-skills/13-ingress-gateway-failure.md](../../../../../skills/09-技能体系/14-ingress-gateway-failure.md) — Ingress 问题 [[SKILL|Skill]]
+- [../../网络/](../../网络/) — [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 网络文档
 
 <!-- risk-assessed -->

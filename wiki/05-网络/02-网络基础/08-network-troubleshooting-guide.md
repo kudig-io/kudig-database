@@ -432,4 +432,4 @@ kubectl exec <pod> -c istio-proxy -- curl -s localhost:15000/certs
 
 - [[wiki/05-网络/02-网络基础/index.md|网络基础]]
 - [[wiki/05-网络/05-eBPF/index.md|eBPF 网络]]
-- [[wiki/19-故障诊断/index.md|故障诊断]]
+- [[wiki/17-故障诊断/index.md|故障诊断]]

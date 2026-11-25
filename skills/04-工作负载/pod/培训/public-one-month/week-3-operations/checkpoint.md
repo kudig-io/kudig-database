@@ -758,7 +758,7 @@ kubectl run test-privileged --image=nginx --restart=Never --overrides='{"spec":{
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

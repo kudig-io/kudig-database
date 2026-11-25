@@ -39,7 +39,7 @@ estimated_read_time: 5min
 
 ### 推荐起步
 - 生产运维/topic-learn/: 1 个月学习计划（系统化路径）
-- 系统基础/topic-cheat-sheet/k8s.md: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 速查卡
+- 系统基础/topic-cheat-sheet/k8s.md: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] 速查卡
 - 发布变更/topic-deployment/01: 本地 Demo 部署
 - 容器运行时/01: Docker 架构概述
 - 系统基础/09: Linux 运维基础

@@ -196,7 +196,7 @@ flowchart TD
 - [[skills/04-工作负载/pod/方法论/FTA-Driven Runbook Automation.md|FTA-Driven Runbook Automation]] — FTA-Driven Runbook Automation
 - [[cluster-upgrade-fta]] — 集群升级异常故障树分析
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/job-cronjob-fta.md|Job/CronJob 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/job-cronjob-fta.md|Job/CronJob 异常故障树分析]]
 - [[skills/04-工作负载/pod/方法论/skill-README.md|topic-skills — 工单智能体 Kubernetes 诊断 Skill 库]] — Cross-reference
 
 

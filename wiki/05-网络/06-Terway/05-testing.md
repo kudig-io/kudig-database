@@ -1248,12 +1248,12 @@ chmod +x terway-e2e-test.sh
 | 文档 | 说明 |
 |:---|:---|
 | [生产运维/topic-learn/inner-training/week-4-network-storage/day-24-terway-cni.md](../../../skills/04-工作负载/pod/培训/inner-training/week-4-network-storage/day-24-terway-cni.md) | Terway CNI 入门学习任务 |
-| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/FTA故障树/list/terway-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) | Terway 异常 FTA 故障树 |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../17-故障诊断/04-高级排障/structural-03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/FTA故障树/list/terway-fta.md](../../17-故障诊断/06-FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

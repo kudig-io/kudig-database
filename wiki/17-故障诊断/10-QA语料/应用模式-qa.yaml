@@ -1,0 +1,2710 @@
+domain: 应用模式
+total_questions: 550
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 Microservices Architecture Patterns on Kubernetes — Production Design Guide 中, 微服务拆分策略 是什么?
+  answer: 参见 wiki/04-应用模式/00-总览/01-microservices-architecture-patterns-production.md 的「微服务拆分策略」章节。
+  source: wiki/04-应用模式/00-总览/01-microservices-architecture-patterns-production.md
+  section: 微服务拆分策略
+- type: concept
+  question: 在 Microservices Architecture Patterns on Kubernetes — Production Design Guide 中, 通信模式 是什么?
+  answer: 参见 wiki/04-应用模式/00-总览/01-microservices-architecture-patterns-production.md 的「通信模式」章节。
+  source: wiki/04-应用模式/00-总览/01-microservices-architecture-patterns-production.md
+  section: 通信模式
+- type: concept
+  question: 在 应用架构模式 生产就绪运维指南 中, 生产环境检查清单 是什么?
+  answer: 参见 wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md 的「生产环境检查清单」章节。
+  source: wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md
+  section: 生产环境检查清单
+- type: concept
+  question: 在 应用架构模式 生产就绪运维指南 中, 关键风险与缓解措施 是什么?
+  answer: 参见 wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md 的「关键风险与缓解措施」章节。
+  source: wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md
+  section: 关键风险与缓解措施
+- type: comparison
+  question: 应用架构模式 生产就绪运维指南 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md 中的对比分析。
+  source: wiki/04-应用模式/00-总览/02-production-readiness-operations-guide.md
+- type: concept
+  question: 在 00-总览 中, 文档 是什么?
+  answer: 参见 wiki/04-应用模式/00-总览/index.md 的「文档」章节。
+  source: wiki/04-应用模式/00-总览/index.md
+  section: 文档
+- type: concept
+  question: 在 微服务拆分策略 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/01-microservice-decomposition-strategies.md 的「概述」章节。
+  source: wiki/04-应用模式/01-子模式/01-microservice-decomposition-strategies.md
+  section: 概述
+- type: concept
+  question: 在 微服务拆分策略 中, DDD 领域驱动设计边界划分 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/01-microservice-decomposition-strategies.md 的「DDD 领域驱动设计边界划分」章节。
+  source: wiki/04-应用模式/01-子模式/01-microservice-decomposition-strategies.md
+  section: DDD 领域驱动设计边界划分
+- type: comparison
+  question: 微服务拆分策略 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/01-子模式/01-microservice-decomposition-strategies.md 中的对比分析。
+  source: wiki/04-应用模式/01-子模式/01-microservice-decomposition-strategies.md
+- type: concept
+  question: 在 Event Sourcing 与 CQRS 模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md
+  section: 概述
+- type: concept
+  question: 在 Event Sourcing 与 CQRS 模式 中, 核心概念 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md 的「核心概念」章节。
+  source: wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md
+  section: 核心概念
+- type: concept
+  question: 在 Event Sourcing 与 CQRS 模式 中, 事件存储选型 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md 的「事件存储选型」章节。
+  source: wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md
+  section: 事件存储选型
+- type: comparison
+  question: Event Sourcing 与 CQRS 模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/01-子模式/02-event-sourcing-cqrs-patterns.md
+- type: concept
+  question: 在 Saga 分布式事务 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/03-saga-distributed-transaction.md 的「概述」章节。
+  source: wiki/04-应用模式/01-子模式/03-saga-distributed-transaction.md
+  section: 概述
+- type: concept
+  question: 在 Saga 分布式事务 中, Saga 两种实现模式 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/03-saga-distributed-transaction.md 的「Saga 两种实现模式」章节。
+  source: wiki/04-应用模式/01-子模式/03-saga-distributed-transaction.md
+  section: Saga 两种实现模式
+- type: comparison
+  question: Saga 分布式事务 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/01-子模式/03-saga-distributed-transaction.md 中的对比分析。
+  source: wiki/04-应用模式/01-子模式/03-saga-distributed-transaction.md
+- type: concept
+  question: 在 Sidecar 与 Ambassador 容器设计模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md
+  section: 概述
+- type: concept
+  question: 在 Sidecar 与 Ambassador 容器设计模式 中, 模式分类 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md 的「模式分类」章节。
+  source: wiki/04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md
+  section: 模式分类
+- type: concept
+  question: 在 Sidecar 与 Ambassador 容器设计模式 中, Sidecar 模式 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md 的「Sidecar 模式」章节。
+  source: wiki/04-应用模式/01-子模式/04-sidecar-ambassador-patterns.md
+  section: Sidecar 模式
+- type: concept
+  question: 在 弹性与混沌模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md
+  section: 概述
+- type: concept
+  question: 在 弹性与混沌模式 中, 弹性模式全景 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md 的「弹性模式全景」章节。
+  source: wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md
+  section: 弹性模式全景
+- type: concept
+  question: 在 弹性与混沌模式 中, 熔断模式 (Circuit Breaker) 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md 的「熔断模式 (Circuit Breaker)」章节。
+  source: wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md
+  section: 熔断模式 (Circuit Breaker)
+- type: comparison
+  question: 弹性与混沌模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/01-子模式/05-chaos-resilience-patterns.md
+- type: concept
+  question: 在 KubeVela 与 OAM 应用交付模型 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md 的「目录」章节。
+  source: wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md
+  section: 目录
+- type: concept
+  question: 在 KubeVela 与 OAM 应用交付模型 中, 概述与核心概念 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md 的「概述与核心概念」章节。
+  source: wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md
+  section: 概述与核心概念
+- type: operation
+  question: '如何执行与 KubeVela 与 OAM 应用交付模型 相关的操作: helm repo add kubevela https://charts.kubevela.net/core?'
+  answer: 参见 wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md 中的操作步骤。
+  source: wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md
+  command: helm repo add kubevela https://charts.kubevela.net/core
+- type: operation
+  question: '如何执行与 KubeVela 与 OAM 应用交付模型 相关的操作: vela component list      # webservice/worker/task/helm/...?'
+  answer: 参见 wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md 中的操作步骤。
+  source: wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md
+  command: 'vela component list      # webservice/worker/task/helm/...'
+- type: comparison
+  question: KubeVela 与 OAM 应用交付模型 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md 中的对比分析。
+  source: wiki/04-应用模式/01-子模式/06-kubevela-oam-application-delivery.md
+- type: concept
+  question: 在 事件驱动架构 on Kubernetes：Knative Eventing 深度实践 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md 的「目录」章节。
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+  section: 目录
+- type: concept
+  question: 在 事件驱动架构 on Kubernetes：Knative Eventing 深度实践 中, 概述与核心概念：三种交互模式辨析 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md 的「概述与核心概念：三种交互模式辨析」章节。
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+  section: 概述与核心概念：三种交互模式辨析
+- type: concept
+  question: 在 事件驱动架构 on Kubernetes：Knative Eventing 深度实践 中, CloudEvents 规范 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md 的「CloudEvents 规范」章节。
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+  section: CloudEvents 规范
+- type: operation
+  question: '如何执行与 事件驱动架构 on Kubernetes：Knative Eventing 深度实践 相关的操作: kubectl apply -f https://github.com/knative/eventing/release?'
+  answer: 参见 wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md 中的操作步骤。
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+  command: kubectl apply -f https://github.com/knative/eventing/releases/download/knative-v1.23.1/eventing-crds
+- type: operation
+  question: '如何执行与 事件驱动架构 on Kubernetes：Knative Eventing 深度实践 相关的操作: kn service create audit-processor --image registry.example.c?'
+  answer: 参见 wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md 中的操作步骤。
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+  command: kn service create audit-processor --image registry.example.com/ecom/audit-processor:v1.2.0 -n eventi
+- type: best_practice
+  question: 关于 事件驱动架构 on Kubernetes：Knative Eventing 深度实践, 有什么最佳实践?
+  answer: '**非关键、可丢的通知类事件**用 IMC 即可；**业务主干事件（订单、支付）一律 Kafka Broker**，并显式配置 `delivery` 与 DLQ。'
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+- type: comparison
+  question: 事件驱动架构 on Kubernetes：Knative Eventing 深度实践 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md 中的对比分析。
+  source: wiki/04-应用模式/01-子模式/07-event-driven-knative-eventing.md
+- type: concept
+  question: 在 Application Sub-Patterns 中, 模式分类 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/index.md 的「模式分类」章节。
+  source: wiki/04-应用模式/01-子模式/index.md
+  section: 模式分类
+- type: concept
+  question: 在 Application Sub-Patterns 中, 文档索引 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/index.md 的「文档索引」章节。
+  source: wiki/04-应用模式/01-子模式/index.md
+  section: 文档索引
+- type: concept
+  question: 在 Application Sub-Patterns 中, Related 是什么?
+  answer: 参见 wiki/04-应用模式/01-子模式/index.md 的「Related」章节。
+  source: wiki/04-应用模式/01-子模式/index.md
+  section: Related
+- type: concept
+  question: 在 电商系统 Kubernetes 生产架构设计 (应用模式) 中, 领域驱动设计 (DDD) 映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md 的「领域驱动设计 (DDD) 映射」章节。
+  source: wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md
+  section: 领域驱动设计 (DDD) 映射
+- type: concept
+  question: 在 电商系统 Kubernetes 生产架构设计 (应用模式) 中, Gateway 生产配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md 的「Gateway 生产配置」章节。
+  source: wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md
+  section: Gateway 生产配置
+- type: concept
+  question: 在 电商系统 Kubernetes 生产架构设计 (应用模式) 中, 下单链路时序 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md 的「下单链路时序」章节。
+  source: wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md
+  section: 下单链路时序
+- type: concept
+  question: 在 电商系统 Kubernetes 生产架构设计 (应用模式) 中, 订单服务 K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md 的「订单服务 K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md
+  section: 订单服务 K8s 部署
+- type: concept
+  question: 在 电商系统 Kubernetes 生产架构设计 (应用模式) 中, Elasticsearch K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md 的「Elasticsearch K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/01-ecommerce-architecture.md
+  section: Elasticsearch K8s 部署
+- type: concept
+  question: 在 小程序平台 Kubernetes 生产架构设计 中, 双线程模型通信 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md 的「双线程模型通信」章节。
+  source: wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md
+  section: 双线程模型通信
+- type: concept
+  question: 在 小程序平台 Kubernetes 生产架构设计 中, 小程序发布状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md 的「小程序发布状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md
+  section: 小程序发布状态机
+- type: concept
+  question: 在 小程序平台 Kubernetes 生产架构设计 中, K8s 构建流水线 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md 的「K8s 构建流水线」章节。
+  source: wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md
+  section: K8s 构建流水线
+- type: concept
+  question: 在 小程序平台 Kubernetes 生产架构设计 中, 小程序沙箱隔离 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md 的「小程序沙箱隔离」章节。
+  source: wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md
+  section: 小程序沙箱隔离
+- type: concept
+  question: 在 小程序平台 Kubernetes 生产架构设计 中, Knative 云函数配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md 的「Knative 云函数配置」章节。
+  source: wiki/04-应用模式/02-行业架构/02-mini-program-architecture.md
+  section: Knative 云函数配置
+- type: concept
+  question: 在 内容管理系统 (CMS) Kubernetes 生产架构设计 中, Headless CMS 数据流 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/03-cms-architecture.md 的「Headless CMS 数据流」章节。
+  source: wiki/04-应用模式/02-行业架构/03-cms-architecture.md
+  section: Headless CMS 数据流
+- type: concept
+  question: 在 内容管理系统 (CMS) Kubernetes 生产架构设计 中, 协同编辑 OT 算法 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/03-cms-architecture.md 的「协同编辑 OT 算法」章节。
+  source: wiki/04-应用模式/02-行业架构/03-cms-architecture.md
+  section: 协同编辑 OT 算法
+- type: concept
+  question: 在 内容管理系统 (CMS) Kubernetes 生产架构设计 中, Next.js SSG/ISR K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/03-cms-architecture.md 的「Next.js SSG/ISR K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/03-cms-architecture.md
+  section: Next.js SSG/ISR K8s 部署
+- type: concept
+  question: 在 内容管理系统 (CMS) Kubernetes 生产架构设计 中, 多语言内容模型 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/03-cms-architecture.md 的「多语言内容模型」章节。
+  source: wiki/04-应用模式/02-行业架构/03-cms-architecture.md
+  section: 多语言内容模型
+- type: concept
+  question: 在 内容管理系统 (CMS) Kubernetes 生产架构设计 中, K8s CronJob 定时发布 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/03-cms-architecture.md 的「K8s CronJob 定时发布」章节。
+  source: wiki/04-应用模式/02-行业架构/03-cms-architecture.md
+  section: K8s CronJob 定时发布
+- type: concept
+  question: 在 实时通信 (IM / RTC) Kubernetes 生产架构设计 中, 消息收发流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md 的「消息收发流程」章节。
+  source: wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md
+  section: 消息收发流程
+- type: concept
+  question: 在 实时通信 (IM / RTC) Kubernetes 生产架构设计 中, 消息存储模型 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md 的「消息存储模型」章节。
+  source: wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md
+  section: 消息存储模型
+- type: concept
+  question: 在 实时通信 (IM / RTC) Kubernetes 生产架构设计 中, 消息队列 K8s 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md 的「消息队列 K8s 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md
+  section: 消息队列 K8s 配置
+- type: concept
+  question: 在 实时通信 (IM / RTC) Kubernetes 生产架构设计 中, WebRTC 信令流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md 的「WebRTC 信令流程」章节。
+  source: wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md
+  section: WebRTC 信令流程
+- type: concept
+  question: 在 实时通信 (IM / RTC) Kubernetes 生产架构设计 中, Media Server K8s 部署 (基于 Mediasoup / Janus) 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md 的「Media Server K8s 部署 (基于 Mediasoup / Janus)」章节。
+  source: wiki/04-应用模式/02-行业架构/04-im-rtc-architecture.md
+  section: Media Server K8s 部署 (基于 Mediasoup / Janus)
+- type: concept
+  question: 在 在线教育平台 Kubernetes 生产架构设计 (应用模式) 中, 直播课堂时序 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/05-online-education-architecture.md 的「直播课堂时序」章节。
+  source: wiki/04-应用模式/02-行业架构/05-online-education-architecture.md
+  section: 直播课堂时序
+- type: concept
+  question: 在 在线教育平台 Kubernetes 生产架构设计 (应用模式) 中, 视频加密 K8s 流水线 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/05-online-education-architecture.md 的「视频加密 K8s 流水线」章节。
+  source: wiki/04-应用模式/02-行业架构/05-online-education-architecture.md
+  section: 视频加密 K8s 流水线
+- type: concept
+  question: 在 在线教育平台 Kubernetes 生产架构设计 (应用模式) 中, 防作弊检测状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/05-online-education-architecture.md 的「防作弊检测状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/05-online-education-architecture.md
+  section: 防作弊检测状态机
+- type: concept
+  question: 在 在线教育平台 Kubernetes 生产架构设计 (应用模式) 中, See Also 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/05-online-education-architecture.md 的「See Also」章节。
+  source: wiki/04-应用模式/02-行业架构/05-online-education-architecture.md
+  section: See Also
+- type: concept
+  question: 在 金融科技 (FinTech) Kubernetes 生产架构设计 中, 支付链路时序 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/06-fintech-architecture.md 的「支付链路时序」章节。
+  source: wiki/04-应用模式/02-行业架构/06-fintech-architecture.md
+  section: 支付链路时序
+- type: concept
+  question: 在 金融科技 (FinTech) Kubernetes 生产架构设计 中, 支付状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/06-fintech-architecture.md 的「支付状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/06-fintech-architecture.md
+  section: 支付状态机
+- type: concept
+  question: 在 金融科技 (FinTech) Kubernetes 生产架构设计 中, 复式记账示例 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/06-fintech-architecture.md 的「复式记账示例」章节。
+  source: wiki/04-应用模式/02-行业架构/06-fintech-architecture.md
+  section: 复式记账示例
+- type: concept
+  question: 在 金融科技 (FinTech) Kubernetes 生产架构设计 中, 实时风控流水线 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/06-fintech-architecture.md 的「实时风控流水线」章节。
+  source: wiki/04-应用模式/02-行业架构/06-fintech-architecture.md
+  section: 实时风控流水线
+- type: concept
+  question: 在 金融科技 (FinTech) Kubernetes 生产架构设计 中, Vault 集成配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/06-fintech-architecture.md 的「Vault 集成配置」章节。
+  source: wiki/04-应用模式/02-行业架构/06-fintech-architecture.md
+  section: Vault 集成配置
+- type: concept
+  question: 在 物联网 (IoT) 平台 Kubernetes 生产架构设计 中, 设备认证流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md 的「设备认证流程」章节。
+  source: wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md
+  section: 设备认证流程
+- type: concept
+  question: 在 物联网 (IoT) 平台 Kubernetes 生产架构设计 中, EMQX MQTT Broker K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md 的「EMQX MQTT Broker K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md
+  section: EMQX MQTT Broker K8s 部署
+- type: concept
+  question: 在 物联网 (IoT) 平台 Kubernetes 生产架构设计 中, KubeEdge 边缘节点部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md 的「KubeEdge 边缘节点部署」章节。
+  source: wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md
+  section: KubeEdge 边缘节点部署
+- type: concept
+  question: 在 物联网 (IoT) 平台 Kubernetes 生产架构设计 中, 时序数据库 TDengine 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md 的「时序数据库 TDengine 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md
+  section: 时序数据库 TDengine 部署
+- type: concept
+  question: 在 物联网 (IoT) 平台 Kubernetes 生产架构设计 中, See Also 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md 的「See Also」章节。
+  source: wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md
+  section: See Also
+- type: comparison
+  question: 物联网 (IoT) 平台 Kubernetes 生产架构设计 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/07-iot-platform-architecture.md
+- type: concept
+  question: 在 AI/ML 推理服务 Kubernetes 生产架构设计 (应用模式) 中, KServe 模型服务配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md 的「KServe 模型服务配置」章节。
+  source: wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md
+  section: KServe 模型服务配置
+- type: concept
+  question: 在 AI/ML 推理服务 Kubernetes 生产架构设计 (应用模式) 中, DRA GPU 资源分配 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md 的「DRA GPU 资源分配」章节。
+  source: wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md
+  section: DRA GPU 资源分配
+- type: concept
+  question: 在 AI/ML 推理服务 Kubernetes 生产架构设计 (应用模式) 中, vLLM 推理服务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md 的「vLLM 推理服务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md
+  section: vLLM 推理服务架构
+- type: concept
+  question: 在 AI/ML 推理服务 Kubernetes 生产架构设计 (应用模式) 中, vLLM K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md 的「vLLM K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md
+  section: vLLM K8s 部署
+- type: concept
+  question: 在 AI/ML 推理服务 Kubernetes 生产架构设计 (应用模式) 中, GPU 节点池与自动扩缩容 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md 的「GPU 节点池与自动扩缩容」章节。
+  source: wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md
+  section: GPU 节点池与自动扩缩容
+- type: comparison
+  question: AI/ML 推理服务 Kubernetes 生产架构设计 (应用模式) 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/08-ai-ml-inference-architecture.md
+- type: concept
+  question: 在 游戏后端 Kubernetes 生产架构设计 (应用模式) 中, 匹配算法流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md 的「匹配算法流程」章节。
+  source: wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md
+  section: 匹配算法流程
+- type: concept
+  question: 在 游戏后端 Kubernetes 生产架构设计 (应用模式) 中, 游戏服务器 K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md 的「游戏服务器 K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md
+  section: 游戏服务器 K8s 部署
+- type: concept
+  question: 在 游戏后端 Kubernetes 生产架构设计 (应用模式) 中, 同步方案选型 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md 的「同步方案选型」章节。
+  source: wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md
+  section: 同步方案选型
+- type: concept
+  question: 在 游戏后端 Kubernetes 生产架构设计 (应用模式) 中, 游戏区服架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md 的「游戏区服架构」章节。
+  source: wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md
+  section: 游戏区服架构
+- type: concept
+  question: 在 游戏后端 Kubernetes 生产架构设计 (应用模式) 中, 游戏服 K8s 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md 的「游戏服 K8s 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md
+  section: 游戏服 K8s 配置
+- type: comparison
+  question: 游戏后端 Kubernetes 生产架构设计 (应用模式) 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/09-gaming-backend-architecture.md
+- type: concept
+  question: 在 社交媒体平台 Kubernetes 生产架构设计 中, Feed 流推拉模型 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/10-social-media-architecture.md 的「Feed 流推拉模型」章节。
+  source: wiki/04-应用模式/02-行业架构/10-social-media-architecture.md
+  section: Feed 流推拉模型
+- type: concept
+  question: 在 社交媒体平台 Kubernetes 生产架构设计 中, Feed 流写入流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/10-social-media-architecture.md 的「Feed 流写入流程」章节。
+  source: wiki/04-应用模式/02-行业架构/10-social-media-architecture.md
+  section: Feed 流写入流程
+- type: concept
+  question: 在 社交媒体平台 Kubernetes 生产架构设计 中, Feed 服务 K8s 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/10-social-media-architecture.md 的「Feed 服务 K8s 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/10-social-media-architecture.md
+  section: Feed 服务 K8s 配置
+- type: concept
+  question: 在 社交媒体平台 Kubernetes 生产架构设计 中, 社交媒体 Namespace 组织 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/10-social-media-architecture.md 的「社交媒体 Namespace 组织」章节。
+  source: wiki/04-应用模式/02-行业架构/10-social-media-architecture.md
+  section: 社交媒体 Namespace 组织
+- type: concept
+  question: 在 社交媒体平台 Kubernetes 生产架构设计 中, 内容审核 Worker 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/10-social-media-architecture.md 的「内容审核 Worker 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/10-social-media-architecture.md
+  section: 内容审核 Worker 部署
+- type: concept
+  question: 在 智慧零售与新零售 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 智慧零售与新零售 Kubernetes 生产架构设计 中, 单元化订单服务 ACK 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md 的「单元化订单服务 ACK 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md
+  section: 单元化订单服务 ACK 部署
+- type: concept
+  question: 在 智慧零售与新零售 Kubernetes 生产架构设计 中, ACK@Edge 门店网关部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md 的「ACK@Edge 门店网关部署」章节。
+  source: wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md
+  section: ACK@Edge 门店网关部署
+- type: concept
+  question: 在 智慧零售与新零售 Kubernetes 生产架构设计 中, 多 AZ 高可用架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md 的「多 AZ 高可用架构」章节。
+  source: wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md
+  section: 多 AZ 高可用架构
+- type: concept
+  question: 在 智慧零售与新零售 Kubernetes 生产架构设计 中, ACK 集群节点池配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md 的「ACK 集群节点池配置」章节。
+  source: wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md
+  section: ACK 集群节点池配置
+- type: comparison
+  question: 智慧零售与新零售 Kubernetes 生产架构设计 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/11-smart-retail-architecture.md
+- type: concept
+  question: 在 智慧物流与供应链 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 智慧物流与供应链 Kubernetes 生产架构设计 中, 履约状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md 的「履约状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md
+  section: 履约状态机
+- type: concept
+  question: 在 智慧物流与供应链 Kubernetes 生产架构设计 中, 智能仓库 K8s 边缘部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md 的「智能仓库 K8s 边缘部署」章节。
+  source: wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md
+  section: 智能仓库 K8s 边缘部署
+- type: concept
+  question: 在 智慧物流与供应链 Kubernetes 生产架构设计 中, 物流平台 ACK 多集群架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md 的「物流平台 ACK 多集群架构」章节。
+  source: wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md
+  section: 物流平台 ACK 多集群架构
+- type: concept
+  question: 在 智慧物流与供应链 Kubernetes 生产架构设计 中, 物流轨迹数据 Lindorm 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md 的「物流轨迹数据 Lindorm 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/12-smart-logistics-architecture.md
+  section: 物流轨迹数据 Lindorm 配置
+- type: concept
+  question: 在 数字政务 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 数字政务 Kubernetes 生产架构设计 中, 等保合规 K8s 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md 的「等保合规 K8s 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md
+  section: 等保合规 K8s 配置
+- type: concept
+  question: 在 数字政务 Kubernetes 生产架构设计 中, 政务云 ACK 专有版架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md 的「政务云 ACK 专有版架构」章节。
+  source: wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md
+  section: 政务云 ACK 专有版架构
+- type: concept
+  question: 在 数字政务 Kubernetes 生产架构设计 中, See Also 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md 的「See Also」章节。
+  source: wiki/04-应用模式/02-行业架构/13-digital-government-architecture.md
+  section: See Also
+- type: concept
+  question: 在 智慧医疗 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 智慧医疗 Kubernetes 生产架构设计 中, PACS 影像存储 K8s 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md 的「PACS 影像存储 K8s 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md
+  section: PACS 影像存储 K8s 配置
+- type: concept
+  question: 在 智慧医疗 Kubernetes 生产架构设计 中, 医疗等保三级部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md 的「医疗等保三级部署」章节。
+  source: wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md
+  section: 医疗等保三级部署
+- type: concept
+  question: 在 智慧医疗 Kubernetes 生产架构设计 中, 阿里云服务 → 多云映射表 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md 的「阿里云服务 → 多云映射表」章节。
+  source: wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md
+  section: 阿里云服务 → 多云映射表
+- type: concept
+  question: 在 智慧医疗 Kubernetes 生产架构设计 中, 多云部署注意事项 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md 的「多云部署注意事项」章节。
+  source: wiki/04-应用模式/02-行业架构/14-smart-healthcare-architecture.md
+  section: 多云部署注意事项
+- type: concept
+  question: 在 能源电力 Kubernetes 生产架构设计 (应用模式) 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md
+  section: 1 行业背景
+- type: concept
+  question: 在 能源电力 Kubernetes 生产架构设计 (应用模式) 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 能源电力 Kubernetes 生产架构设计 (应用模式) 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md
+  section: 3 市场格局
+- type: concept
+  question: 在 能源电力 Kubernetes 生产架构设计 (应用模式) 中, 1 智能电网调度 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md 的「1 智能电网调度」章节。
+  source: wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md
+  section: 1 智能电网调度
+- type: concept
+  question: 在 能源电力 Kubernetes 生产架构设计 (应用模式) 中, 2 新能源发电监控 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md 的「2 新能源发电监控」章节。
+  source: wiki/04-应用模式/02-行业架构/15-energy-power-architecture.md
+  section: 2 新能源发电监控
+- type: concept
+  question: 在 音视频与短视频平台 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/16-video-shortform-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/16-video-shortform-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 音视频与短视频平台 Kubernetes 生产架构设计 中, 视频处理 K8s Pipeline 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/16-video-shortform-architecture.md 的「视频处理 K8s Pipeline」章节。
+  source: wiki/04-应用模式/02-行业架构/16-video-shortform-architecture.md
+  section: 视频处理 K8s Pipeline
+- type: concept
+  question: 在 音视频与短视频平台 Kubernetes 生产架构设计 中, See Also 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/16-video-shortform-architecture.md 的「See Also」章节。
+  source: wiki/04-应用模式/02-行业架构/16-video-shortform-architecture.md
+  section: See Also
+- type: concept
+  question: 在 SaaS 多租户平台 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 SaaS 多租户平台 Kubernetes 生产架构设计 中, 隔离模型选型矩阵 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md 的「隔离模型选型矩阵」章节。
+  source: wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md
+  section: 隔离模型选型矩阵
+- type: concept
+  question: 在 SaaS 多租户平台 Kubernetes 生产架构设计 中, ShardingSphere 多租户配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md 的「ShardingSphere 多租户配置」章节。
+  source: wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md
+  section: ShardingSphere 多租户配置
+- type: concept
+  question: 在 SaaS 多租户平台 Kubernetes 生产架构设计 中, SaaS 平台 vCluster 隔离架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md 的「SaaS 平台 vCluster 隔离架构」章节。
+  source: wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md
+  section: SaaS 平台 vCluster 隔离架构
+- type: concept
+  question: 在 SaaS 多租户平台 Kubernetes 生产架构设计 中, vCluster 大客户隔离配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md 的「vCluster 大客户隔离配置」章节。
+  source: wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md
+  section: vCluster 大客户隔离配置
+- type: comparison
+  question: SaaS 多租户平台 Kubernetes 生产架构设计 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/17-saas-multitenant-architecture.md
+- type: concept
+  question: 在 数据中台 Kubernetes 生产架构设计 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md
+  section: 1 行业背景
+- type: concept
+  question: 在 数据中台 Kubernetes 生产架构设计 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 数据中台 Kubernetes 生产架构设计 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md
+  section: 3 市场格局
+- type: concept
+  question: 在 数据中台 Kubernetes 生产架构设计 中, 1 数据采集与接入 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md 的「1 数据采集与接入」章节。
+  source: wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md
+  section: 1 数据采集与接入
+- type: concept
+  question: 在 数据中台 Kubernetes 生产架构设计 中, 2 数据存储与计算 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md 的「2 数据存储与计算」章节。
+  source: wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md
+  section: 2 数据存储与计算
+- type: comparison
+  question: 数据中台 Kubernetes 生产架构设计 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/18-data-midplatform-architecture.md
+- type: concept
+  question: 在 云原生 DevOps 平台 Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 云原生 DevOps 平台 Kubernetes 生产架构设计 中, Argo CD Application 配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md 的「Argo CD Application 配置」章节。
+  source: wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md
+  section: Argo CD Application 配置
+- type: concept
+  question: 在 云原生 DevOps 平台 Kubernetes 生产架构设计 中, 多集群 GitOps 管理 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md 的「多集群 GitOps 管理」章节。
+  source: wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md
+  section: 多集群 GitOps 管理
+- type: concept
+  question: 在 云原生 DevOps 平台 Kubernetes 生产架构设计 中, 阿里云服务 → 多云映射表 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md 的「阿里云服务 → 多云映射表」章节。
+  source: wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md
+  section: 阿里云服务 → 多云映射表
+- type: concept
+  question: 在 云原生 DevOps 平台 Kubernetes 生产架构设计 中, 多云部署注意事项 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md 的「多云部署注意事项」章节。
+  source: wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md
+  section: 多云部署注意事项
+- type: comparison
+  question: 云原生 DevOps 平台 Kubernetes 生产架构设计 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/19-cloudnative-devops-architecture.md
+- type: concept
+  question: 在 微服务治理与 Service Mesh Kubernetes 生产架构设计 中, 阿里云产品映射 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md 的「阿里云产品映射」章节。
+  source: wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md
+  section: 阿里云产品映射
+- type: concept
+  question: 在 微服务治理与 Service Mesh Kubernetes 生产架构设计 中, Sidecar vs Ambient vs eBPF 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md 的「Sidecar vs Ambient vs eBPF」章节。
+  source: wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md
+  section: Sidecar vs Ambient vs eBPF
+- type: concept
+  question: 在 微服务治理与 Service Mesh Kubernetes 生产架构设计 中, ASM 流量管理配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md 的「ASM 流量管理配置」章节。
+  source: wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md
+  section: ASM 流量管理配置
+- type: concept
+  question: 在 微服务治理与 Service Mesh Kubernetes 生产架构设计 中, Sentinel 规则配置 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md 的「Sentinel 规则配置」章节。
+  source: wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md
+  section: Sentinel 规则配置
+- type: concept
+  question: 在 微服务治理与 Service Mesh Kubernetes 生产架构设计 中, Nacos K8s 部署 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md 的「Nacos K8s 部署」章节。
+  source: wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md
+  section: Nacos K8s 部署
+- type: comparison
+  question: 微服务治理与 Service Mesh Kubernetes 生产架构设计 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/20-microservice-governance-architecture.md
+- type: concept
+  question: 在 跨境电商架构设计 — 阿里云视角 中, 1 业务特点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md 的「1 业务特点」章节。
+  source: wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md
+  section: 1 业务特点
+- type: concept
+  question: 在 跨境电商架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md
+  section: 2 核心场景
+- type: concept
+  question: 在 跨境电商架构设计 — 阿里云视角 中, 1 整体业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md 的「1 整体业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md
+  section: 1 整体业务架构
+- type: concept
+  question: 在 跨境电商架构设计 — 阿里云视角 中, 2 跨境支付时序 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md 的「2 跨境支付时序」章节。
+  source: wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md
+  section: 2 跨境支付时序
+- type: concept
+  question: 在 跨境电商架构设计 — 阿里云视角 中, 3 海关三单对碰状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md 的「3 海关三单对碰状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/21-cross-border-ecommerce.md
+  section: 3 海关三单对碰状态机
+- type: concept
+  question: 在 新能源车联网架构设计 — 阿里云视角 中, 1 业务特点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md 的「1 业务特点」章节。
+  source: wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md
+  section: 1 业务特点
+- type: concept
+  question: 在 新能源车联网架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md
+  section: 2 核心场景
+- type: concept
+  question: 在 新能源车联网架构设计 — 阿里云视角 中, 1 车路云一体化架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md 的「1 车路云一体化架构」章节。
+  source: wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md
+  section: 1 车路云一体化架构
+- type: concept
+  question: 在 新能源车联网架构设计 — 阿里云视角 中, 2 OTA 升级状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md 的「2 OTA 升级状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md
+  section: 2 OTA 升级状态机
+- type: concept
+  question: 在 新能源车联网架构设计 — 阿里云视角 中, 3 V2X 车路协同时序 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md 的「3 V2X 车路协同时序」章节。
+  source: wiki/04-应用模式/02-行业架构/22-nev-connected-vehicle.md
+  section: 3 V2X 车路协同时序
+- type: concept
+  question: 在 信创替代架构设计 — 阿里云视角 中, 1 信创产业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md 的「1 信创产业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md
+  section: 1 信创产业背景
+- type: concept
+  question: 在 信创替代架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md
+  section: 2 核心场景
+- type: concept
+  question: 在 信创替代架构设计 — 阿里云视角 中, 1 信创云整体架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md 的「1 信创云整体架构」章节。
+  source: wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md
+  section: 1 信创云整体架构
+- type: concept
+  question: 在 信创替代架构设计 — 阿里云视角 中, 2 金融核心系统去 IOE 迁移流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md 的「2 金融核心系统去 IOE 迁移流程」章节。
+  source: wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md
+  section: 2 金融核心系统去 IOE 迁移流程
+- type: concept
+  question: 在 信创替代架构设计 — 阿里云视角 中, 3 信创应用部署状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md 的「3 信创应用部署状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md
+  section: 3 信创应用部署状态机
+- type: comparison
+  question: 信创替代架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/23-xinchuang-it-innovation.md
+- type: concept
+  question: 在 保险科技架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/24-insurtech.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/24-insurtech.md
+  section: 目录
+- type: concept
+  question: 在 保险科技架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/24-insurtech.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/24-insurtech.md
+  section: 行业背景
+- type: concept
+  question: 在 保险科技架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/24-insurtech.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/24-insurtech.md
+  section: 业务架构
+- type: concept
+  question: 在 证券量化交易架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/25-quantitative-trading.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/25-quantitative-trading.md
+  section: 1 行业背景
+- type: concept
+  question: 在 证券量化交易架构设计 — 阿里云视角 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/25-quantitative-trading.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/25-quantitative-trading.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 证券量化交易架构设计 — 阿里云视角 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/25-quantitative-trading.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/25-quantitative-trading.md
+  section: 3 市场格局
+- type: concept
+  question: 在 证券量化交易架构设计 — 阿里云视角 中, 1 行情接收与处理 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/25-quantitative-trading.md 的「1 行情接收与处理」章节。
+  source: wiki/04-应用模式/02-行业架构/25-quantitative-trading.md
+  section: 1 行情接收与处理
+- type: concept
+  question: 在 证券量化交易架构设计 — 阿里云视角 中, 2 策略执行 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/25-quantitative-trading.md 的「2 策略执行」章节。
+  source: wiki/04-应用模式/02-行业架构/25-quantitative-trading.md
+  section: 2 策略执行
+- type: concept
+  question: 在 航空出行架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/26-aviation-travel.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/26-aviation-travel.md
+  section: 目录
+- type: concept
+  question: 在 航空出行架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/26-aviation-travel.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/26-aviation-travel.md
+  section: 行业背景
+- type: concept
+  question: 在 航空出行架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/26-aviation-travel.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/26-aviation-travel.md
+  section: 业务架构
+- type: concept
+  question: 在 酒店旅游架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/27-hospitality-tourism.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/27-hospitality-tourism.md
+  section: 目录
+- type: concept
+  question: 在 酒店旅游架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/27-hospitality-tourism.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/27-hospitality-tourism.md
+  section: 行业背景
+- type: concept
+  question: 在 酒店旅游架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/27-hospitality-tourism.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/27-hospitality-tourism.md
+  section: 业务架构
+- type: concept
+  question: 在 房地产科技架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/28-proptech.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/28-proptech.md
+  section: 目录
+- type: concept
+  question: 在 房地产科技架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/28-proptech.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/28-proptech.md
+  section: 行业背景
+- type: concept
+  question: 在 房地产科技架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/28-proptech.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/28-proptech.md
+  section: 业务架构
+- type: concept
+  question: 在 农业物联网架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/29-agritech-iot.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/29-agritech-iot.md
+  section: 目录
+- type: concept
+  question: 在 农业物联网架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/29-agritech-iot.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/29-agritech-iot.md
+  section: 行业背景
+- type: concept
+  question: 在 农业物联网架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/29-agritech-iot.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/29-agritech-iot.md
+  section: 业务架构
+- type: concept
+  question: 在 人力资源 SaaS 架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/30-hrtech-saas.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/30-hrtech-saas.md
+  section: 目录
+- type: concept
+  question: 在 人力资源 SaaS 架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/30-hrtech-saas.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/30-hrtech-saas.md
+  section: 行业背景
+- type: concept
+  question: 在 人力资源 SaaS 架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/30-hrtech-saas.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/30-hrtech-saas.md
+  section: 业务架构
+- type: concept
+  question: 在 即时零售架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/31-instant-retail.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/31-instant-retail.md
+  section: 目录
+- type: concept
+  question: 在 即时零售架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/31-instant-retail.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/31-instant-retail.md
+  section: 行业背景
+- type: concept
+  question: 在 即时零售架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/31-instant-retail.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/31-instant-retail.md
+  section: 业务架构
+- type: concept
+  question: 在 智慧餐饮架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/32-smart-restaurant.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/32-smart-restaurant.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 智慧餐饮架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/32-smart-restaurant.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/32-smart-restaurant.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 智慧餐饮架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/32-smart-restaurant.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/32-smart-restaurant.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 智慧餐饮架构设计 — 阿里云视角 中, 1 扫码点餐与自助收银 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/32-smart-restaurant.md 的「1 扫码点餐与自助收银」章节。
+  source: wiki/04-应用模式/02-行业架构/32-smart-restaurant.md
+  section: 1 扫码点餐与自助收银
+- type: concept
+  question: 在 智慧餐饮架构设计 — 阿里云视角 中, 2 后厨 KDS 智能排单 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/32-smart-restaurant.md 的「2 后厨 KDS 智能排单」章节。
+  source: wiki/04-应用模式/02-行业架构/32-smart-restaurant.md
+  section: 2 后厨 KDS 智能排单
+- type: concept
+  question: 在 跨境电商海外仓架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 跨境电商海外仓架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 跨境电商海外仓架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 跨境电商海外仓架构设计 — 阿里云视角 中, 1 智能入库管理 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md 的「1 智能入库管理」章节。
+  source: wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md
+  section: 1 智能入库管理
+- type: concept
+  question: 在 跨境电商海外仓架构设计 — 阿里云视角 中, 2 精准库存管理 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md 的「2 精准库存管理」章节。
+  source: wiki/04-应用模式/02-行业架构/33-crossborder-warehouse.md
+  section: 2 精准库存管理
+- type: concept
+  question: 在 体育科技架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/34-sportstech.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/34-sportstech.md
+  section: 目录
+- type: concept
+  question: 在 体育科技架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/34-sportstech.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/34-sportstech.md
+  section: 行业背景
+- type: concept
+  question: 在 体育科技架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/34-sportstech.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/34-sportstech.md
+  section: 业务架构
+- type: concept
+  question: 在 元宇宙数字孪生架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/35-metaverse-digital-twin.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/35-metaverse-digital-twin.md
+  section: 目录
+- type: concept
+  question: 在 元宇宙数字孪生架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/35-metaverse-digital-twin.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/35-metaverse-digital-twin.md
+  section: 行业背景
+- type: concept
+  question: 在 元宇宙数字孪生架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/35-metaverse-digital-twin.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/35-metaverse-digital-twin.md
+  section: 业务架构
+- type: concept
+  question: 在 碳资产管理与 ESG 架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/36-carbon-esg-management.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/36-carbon-esg-management.md
+  section: 目录
+- type: concept
+  question: 在 碳资产管理与 ESG 架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/36-carbon-esg-management.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/36-carbon-esg-management.md
+  section: 行业背景
+- type: concept
+  question: 在 碳资产管理与 ESG 架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/36-carbon-esg-management.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/36-carbon-esg-management.md
+  section: 业务架构
+- type: concept
+  question: 在 宠物经济架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/37-pet-economy.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/37-pet-economy.md
+  section: 目录
+- type: concept
+  question: 在 宠物经济架构设计 — 阿里云视角 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/37-pet-economy.md 的「概述」章节。
+  source: wiki/04-应用模式/02-行业架构/37-pet-economy.md
+  section: 概述
+- type: concept
+  question: 在 宠物经济架构设计 — 阿里云视角 中, 设计原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/37-pet-economy.md 的「设计原则」章节。
+  source: wiki/04-应用模式/02-行业架构/37-pet-economy.md
+  section: 设计原则
+- type: concept
+  question: 在 供应链金融架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 供应链金融架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 供应链金融架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 供应链金融架构设计 — 阿里云视角 中, 1 应收账款保理融资 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md 的「1 应收账款保理融资」章节。
+  source: wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md
+  section: 1 应收账款保理融资
+- type: concept
+  question: 在 供应链金融架构设计 — 阿里云视角 中, 2 电子债权凭证拆分流转 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md 的「2 电子债权凭证拆分流转」章节。
+  source: wiki/04-应用模式/02-行业架构/38-supply-chain-finance.md
+  section: 2 电子债权凭证拆分流转
+- type: concept
+  question: 在 智慧园区架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/39-smart-campus.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/39-smart-campus.md
+  section: 目录
+- type: concept
+  question: 在 智慧园区架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/39-smart-campus.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/39-smart-campus.md
+  section: 行业背景
+- type: concept
+  question: 在 智慧园区架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/39-smart-campus.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/39-smart-campus.md
+  section: 业务架构
+- type: concept
+  question: 在 云游戏架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/40-cloud-gaming.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/40-cloud-gaming.md
+  section: 1 行业背景
+- type: concept
+  question: 在 云游戏架构设计 — 阿里云视角 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/40-cloud-gaming.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/40-cloud-gaming.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 云游戏架构设计 — 阿里云视角 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/40-cloud-gaming.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/40-cloud-gaming.md
+  section: 3 市场格局
+- type: concept
+  question: 在 云游戏架构设计 — 阿里云视角 中, 1 游戏串流 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/40-cloud-gaming.md 的「1 游戏串流」章节。
+  source: wiki/04-应用模式/02-行业架构/40-cloud-gaming.md
+  section: 1 游戏串流
+- type: concept
+  question: 在 云游戏架构设计 — 阿里云视角 中, 2 游戏商店与分发 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/40-cloud-gaming.md 的「2 游戏商店与分发」章节。
+  source: wiki/04-应用模式/02-行业架构/40-cloud-gaming.md
+  section: 2 游戏商店与分发
+- type: comparison
+  question: 云游戏架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/40-cloud-gaming.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/40-cloud-gaming.md
+- type: concept
+  question: 在 美妆电商架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/41-beauty-ecommerce.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/41-beauty-ecommerce.md
+  section: 目录
+- type: concept
+  question: 在 美妆电商架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/41-beauty-ecommerce.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/41-beauty-ecommerce.md
+  section: 行业背景
+- type: concept
+  question: 在 美妆电商架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/41-beauty-ecommerce.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/41-beauty-ecommerce.md
+  section: 业务架构
+- type: concept
+  question: 在 二手交易与循环经济架构设计 — 阿里云视角 中, 1 行业背景与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/42-secondhand-circular.md 的「1 行业背景与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/42-secondhand-circular.md
+  section: 1 行业背景与趋势
+- type: concept
+  question: 在 二手交易与循环经济架构设计 — 阿里云视角 中, 2 核心挑战与架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/42-secondhand-circular.md 的「2 核心挑战与架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/42-secondhand-circular.md
+  section: 2 核心挑战与架构影响
+- type: concept
+  question: 在 二手交易与循环经济架构设计 — 阿里云视角 中, 3 市场规模与用户画像 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/42-secondhand-circular.md 的「3 市场规模与用户画像」章节。
+  source: wiki/04-应用模式/02-行业架构/42-secondhand-circular.md
+  section: 3 市场规模与用户画像
+- type: concept
+  question: 在 二手交易与循环经济架构设计 — 阿里云视角 中, 1 核心业务场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/42-secondhand-circular.md 的「1 核心业务场景」章节。
+  source: wiki/04-应用模式/02-行业架构/42-secondhand-circular.md
+  section: 1 核心业务场景
+- type: concept
+  question: 在 二手交易与循环经济架构设计 — 阿里云视角 中, 2 交易状态机 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/42-secondhand-circular.md 的「2 交易状态机」章节。
+  source: wiki/04-应用模式/02-行业架构/42-secondhand-circular.md
+  section: 2 交易状态机
+- type: concept
+  question: 在 企业即时通讯架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/43-enterprise-im.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/43-enterprise-im.md
+  section: 目录
+- type: concept
+  question: 在 企业即时通讯架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/43-enterprise-im.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/43-enterprise-im.md
+  section: 行业背景
+- type: concept
+  question: 在 企业即时通讯架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/43-enterprise-im.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/43-enterprise-im.md
+  section: 业务架构
+- type: concept
+  question: 在 数字营销与广告科技架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/44-martech-adtech.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/44-martech-adtech.md
+  section: 目录
+- type: concept
+  question: 在 数字营销与广告科技架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/44-martech-adtech.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/44-martech-adtech.md
+  section: 行业背景
+- type: concept
+  question: 在 数字营销与广告科技架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/44-martech-adtech.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/44-martech-adtech.md
+  section: 业务架构
+- type: concept
+  question: 在 智慧港口与航运架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/45-smart-port-shipping.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/45-smart-port-shipping.md
+  section: 目录
+- type: concept
+  question: 在 智慧港口与航运架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/45-smart-port-shipping.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/45-smart-port-shipping.md
+  section: 行业背景
+- type: concept
+  question: 在 智慧港口与航运架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/45-smart-port-shipping.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/45-smart-port-shipping.md
+  section: 业务架构
+- type: concept
+  question: 在 卫星互联网架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/46-satellite-internet.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/46-satellite-internet.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 卫星互联网架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/46-satellite-internet.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/46-satellite-internet.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 卫星互联网架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/46-satellite-internet.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/46-satellite-internet.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 卫星互联网架构设计 — 阿里云视角 中, 1 宽带接入服务 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/46-satellite-internet.md 的「1 宽带接入服务」章节。
+  source: wiki/04-应用模式/02-行业架构/46-satellite-internet.md
+  section: 1 宽带接入服务
+- type: concept
+  question: 在 卫星互联网架构设计 — 阿里云视角 中, 2 全球物联网数据采集 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/46-satellite-internet.md 的「2 全球物联网数据采集」章节。
+  source: wiki/04-应用模式/02-行业架构/46-satellite-internet.md
+  section: 2 全球物联网数据采集
+- type: concept
+  question: 在 智慧矿山架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/47-smart-mining.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/47-smart-mining.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 智慧矿山架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/47-smart-mining.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/47-smart-mining.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 智慧矿山架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/47-smart-mining.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/47-smart-mining.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 智慧矿山架构设计 — 阿里云视角 中, 1 露天矿无人驾驶运输 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/47-smart-mining.md 的「1 露天矿无人驾驶运输」章节。
+  source: wiki/04-应用模式/02-行业架构/47-smart-mining.md
+  section: 1 露天矿无人驾驶运输
+- type: concept
+  question: 在 智慧矿山架构设计 — 阿里云视角 中, 2 智能综采工作面 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/47-smart-mining.md 的「2 智能综采工作面」章节。
+  source: wiki/04-应用模式/02-行业架构/47-smart-mining.md
+  section: 2 智能综采工作面
+- type: concept
+  question: 在 职业教育培训架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/48-vocational-edtech.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/48-vocational-edtech.md
+  section: 目录
+- type: concept
+  question: 在 职业教育培训架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/48-vocational-edtech.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/48-vocational-edtech.md
+  section: 行业背景
+- type: concept
+  question: 在 职业教育培训架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/48-vocational-edtech.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/48-vocational-edtech.md
+  section: 业务架构
+- type: concept
+  question: 在 直播电商架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/49-livestream-ecommerce.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/49-livestream-ecommerce.md
+  section: 目录
+- type: concept
+  question: 在 直播电商架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/49-livestream-ecommerce.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/49-livestream-ecommerce.md
+  section: 行业背景
+- type: concept
+  question: 在 直播电商架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/49-livestream-ecommerce.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/49-livestream-ecommerce.md
+  section: 业务架构
+- type: concept
+  question: 在 无人零售与智能货柜架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/50-unmanned-retail.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/50-unmanned-retail.md
+  section: 目录
+- type: concept
+  question: 在 无人零售与智能货柜架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/50-unmanned-retail.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/50-unmanned-retail.md
+  section: 行业背景
+- type: concept
+  question: 在 无人零售与智能货柜架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/50-unmanned-retail.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/50-unmanned-retail.md
+  section: 业务架构
+- type: concept
+  question: 在 智能制造 MES 架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/51-smart-manufacturing-mes.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/51-smart-manufacturing-mes.md
+  section: 目录
+- type: concept
+  question: 在 智能制造 MES 架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/51-smart-manufacturing-mes.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/51-smart-manufacturing-mes.md
+  section: 行业背景
+- type: concept
+  question: 在 智能制造 MES 架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/51-smart-manufacturing-mes.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/51-smart-manufacturing-mes.md
+  section: 业务架构
+- type: concept
+  question: 在 智慧水务架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/52-smart-water.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/52-smart-water.md
+  section: 目录
+- type: concept
+  question: 在 智慧水务架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/52-smart-water.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/52-smart-water.md
+  section: 行业背景
+- type: concept
+  question: 在 智慧水务架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/52-smart-water.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/52-smart-water.md
+  section: 业务架构
+- type: concept
+  question: 在 新零售 DTC 架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 新零售 DTC 架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 新零售 DTC 架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 新零售 DTC 架构设计 — 阿里云视角 中, 1 品牌独立站商城 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md 的「1 品牌独立站商城」章节。
+  source: wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md
+  section: 1 品牌独立站商城
+- type: concept
+  question: 在 新零售 DTC 架构设计 — 阿里云视角 中, 2 私域 CDP 客户数据平台 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md 的「2 私域 CDP 客户数据平台」章节。
+  source: wiki/04-应用模式/02-行业架构/53-new-retail-dtc.md
+  section: 2 私域 CDP 客户数据平台
+- type: concept
+  question: 在 社交游戏与元宇宙社交架构设计 — 阿里云视角 中, 1 行业背景与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md 的「1 行业背景与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md
+  section: 1 行业背景与趋势
+- type: concept
+  question: 在 社交游戏与元宇宙社交架构设计 — 阿里云视角 中, 2 核心挑战与架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md 的「2 核心挑战与架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md
+  section: 2 核心挑战与架构影响
+- type: concept
+  question: 在 社交游戏与元宇宙社交架构设计 — 阿里云视角 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md
+  section: 3 市场格局
+- type: concept
+  question: 在 社交游戏与元宇宙社交架构设计 — 阿里云视角 中, 1 核心业务场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md 的「1 核心业务场景」章节。
+  source: wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md
+  section: 1 核心业务场景
+- type: concept
+  question: 在 社交游戏与元宇宙社交架构设计 — 阿里云视角 中, 2 虚拟空间进入流程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md 的「2 虚拟空间进入流程」章节。
+  source: wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md
+  section: 2 虚拟空间进入流程
+- type: comparison
+  question: 社交游戏与元宇宙社交架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/54-social-gaming-metaverse.md
+- type: concept
+  question: 在 跨境电商独立站架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/55-crossborder-dtc.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/55-crossborder-dtc.md
+  section: 目录
+- type: concept
+  question: 在 跨境电商独立站架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/55-crossborder-dtc.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/55-crossborder-dtc.md
+  section: 行业背景
+- type: concept
+  question: 在 跨境电商独立站架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/55-crossborder-dtc.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/55-crossborder-dtc.md
+  section: 业务架构
+- type: concept
+  question: 在 智慧养老架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 智慧养老架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 智慧养老架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 智慧养老架构设计 — 阿里云视角 中, 1 居家安全监测 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md 的「1 居家安全监测」章节。
+  source: wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md
+  section: 1 居家安全监测
+- type: concept
+  question: 在 智慧养老架构设计 — 阿里云视角 中, 2 慢性病健康管理 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md 的「2 慢性病健康管理」章节。
+  source: wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md
+  section: 2 慢性病健康管理
+- type: comparison
+  question: 智慧养老架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/56-smart-elderly-care.md
+- type: concept
+  question: 在 数字疗法与互联网医疗架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 数字疗法与互联网医疗架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 数字疗法与互联网医疗架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 数字疗法与互联网医疗架构设计 — 阿里云视角 中, 1 认知行为治疗（CBT） 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md 的「1 认知行为治疗（CBT）」章节。
+  source: wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md
+  section: 1 认知行为治疗（CBT）
+- type: concept
+  question: 在 数字疗法与互联网医疗架构设计 — 阿里云视角 中, 2 慢性病数字管理 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md 的「2 慢性病数字管理」章节。
+  source: wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md
+  section: 2 慢性病数字管理
+- type: comparison
+  question: 数字疗法与互联网医疗架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/57-digital-therapeutics.md
+- type: concept
+  question: 在 Web3 GameFi 架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/58-web3-gamefi.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/58-web3-gamefi.md
+  section: 目录
+- type: concept
+  question: 在 Web3 GameFi 架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/58-web3-gamefi.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/58-web3-gamefi.md
+  section: 行业背景
+- type: concept
+  question: 在 Web3 GameFi 架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/58-web3-gamefi.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/58-web3-gamefi.md
+  section: 业务架构
+- type: concept
+  question: 在 工业互联网平台架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/59-industrial-internet-platform.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/59-industrial-internet-platform.md
+  section: 目录
+- type: concept
+  question: 在 工业互联网平台架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/59-industrial-internet-platform.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/59-industrial-internet-platform.md
+  section: 行业背景
+- type: concept
+  question: 在 工业互联网平台架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/59-industrial-internet-platform.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/59-industrial-internet-platform.md
+  section: 业务架构
+- type: concept
+  question: 在 车路协同自动驾驶架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/60-v2x-autonomous-driving.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/60-v2x-autonomous-driving.md
+  section: 目录
+- type: concept
+  question: 在 车路协同自动驾驶架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/60-v2x-autonomous-driving.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/60-v2x-autonomous-driving.md
+  section: 行业背景
+- type: concept
+  question: 在 车路协同自动驾驶架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/60-v2x-autonomous-driving.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/60-v2x-autonomous-driving.md
+  section: 业务架构
+- type: concept
+  question: 在 智慧电网架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/61-smart-grid.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/61-smart-grid.md
+  section: 1 行业背景
+- type: concept
+  question: 在 智慧电网架构设计 — 阿里云视角 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/61-smart-grid.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/61-smart-grid.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 智慧电网架构设计 — 阿里云视角 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/61-smart-grid.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/61-smart-grid.md
+  section: 3 市场格局
+- type: concept
+  question: 在 智慧电网架构设计 — 阿里云视角 中, 1 新能源功率预测 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/61-smart-grid.md 的「1 新能源功率预测」章节。
+  source: wiki/04-应用模式/02-行业架构/61-smart-grid.md
+  section: 1 新能源功率预测
+- type: concept
+  question: 在 智慧电网架构设计 — 阿里云视角 中, 2 虚拟电厂（VPP） 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/61-smart-grid.md 的「2 虚拟电厂（VPP）」章节。
+  source: wiki/04-应用模式/02-行业架构/61-smart-grid.md
+  section: 2 虚拟电厂（VPP）
+- type: concept
+  question: 在 分布式能源架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/62-distributed-energy.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/62-distributed-energy.md
+  section: 1 行业背景
+- type: concept
+  question: 在 分布式能源架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/62-distributed-energy.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/62-distributed-energy.md
+  section: 2 核心场景
+- type: concept
+  question: 在 分布式能源架构设计 — 阿里云视角 中, 1 云边协同原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/62-distributed-energy.md 的「1 云边协同原则」章节。
+  source: wiki/04-应用模式/02-行业架构/62-distributed-energy.md
+  section: 1 云边协同原则
+- type: concept
+  question: 在 分布式能源架构设计 — 阿里云视角 中, 2 安全可靠原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/62-distributed-energy.md 的「2 安全可靠原则」章节。
+  source: wiki/04-应用模式/02-行业架构/62-distributed-energy.md
+  section: 2 安全可靠原则
+- type: concept
+  question: 在 分布式能源架构设计 — 阿里云视角 中, 3 数据驱动原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/62-distributed-energy.md 的「3 数据驱动原则」章节。
+  source: wiki/04-应用模式/02-行业架构/62-distributed-energy.md
+  section: 3 数据驱动原则
+- type: concept
+  question: 在 工业视觉检测架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/63-industrial-visual-inspection.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/63-industrial-visual-inspection.md
+  section: 目录
+- type: concept
+  question: 在 工业视觉检测架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/63-industrial-visual-inspection.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/63-industrial-visual-inspection.md
+  section: 行业背景
+- type: concept
+  question: 在 工业视觉检测架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/63-industrial-visual-inspection.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/63-industrial-visual-inspection.md
+  section: 业务架构
+- type: concept
+  question: 在 AI 制药架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/64-ai-drug-discovery.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/64-ai-drug-discovery.md
+  section: 目录
+- type: concept
+  question: 在 AI 制药架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/64-ai-drug-discovery.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/64-ai-drug-discovery.md
+  section: 行业背景
+- type: concept
+  question: 在 AI 制药架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/64-ai-drug-discovery.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/64-ai-drug-discovery.md
+  section: 业务架构
+- type: concept
+  question: 在 自动驾驶仿真架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 自动驾驶仿真架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 自动驾驶仿真架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 自动驾驶仿真架构设计 — 阿里云视角 中, 1 参数化场景生成 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md 的「1 参数化场景生成」章节。
+  source: wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md
+  section: 1 参数化场景生成
+- type: concept
+  question: 在 自动驾驶仿真架构设计 — 阿里云视角 中, 2 物理级传感器仿真 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md 的「2 物理级传感器仿真」章节。
+  source: wiki/04-应用模式/02-行业架构/65-autonomous-driving-sim.md
+  section: 2 物理级传感器仿真
+- type: concept
+  question: 在 太空互联网架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/66-space-internet.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/66-space-internet.md
+  section: 1 行业背景
+- type: concept
+  question: 在 太空互联网架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/66-space-internet.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/66-space-internet.md
+  section: 2 核心场景
+- type: concept
+  question: 在 太空互联网架构设计 — 阿里云视角 中, 1 天地一体化原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/66-space-internet.md 的「1 天地一体化原则」章节。
+  source: wiki/04-应用模式/02-行业架构/66-space-internet.md
+  section: 1 天地一体化原则
+- type: concept
+  question: 在 太空互联网架构设计 — 阿里云视角 中, 2 高可用弹性原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/66-space-internet.md 的「2 高可用弹性原则」章节。
+  source: wiki/04-应用模式/02-行业架构/66-space-internet.md
+  section: 2 高可用弹性原则
+- type: concept
+  question: 在 太空互联网架构设计 — 阿里云视角 中, 3 数据驱动原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/66-space-internet.md 的「3 数据驱动原则」章节。
+  source: wiki/04-应用模式/02-行业架构/66-space-internet.md
+  section: 3 数据驱动原则
+- type: concept
+  question: 在 脑机接口架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md
+  section: 1 行业背景
+- type: concept
+  question: 在 脑机接口架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md
+  section: 2 核心场景
+- type: concept
+  question: 在 脑机接口架构设计 — 阿里云视角 中, 1 实时优先原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md 的「1 实时优先原则」章节。
+  source: wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md
+  section: 1 实时优先原则
+- type: concept
+  question: 在 脑机接口架构设计 — 阿里云视角 中, 2 隐私保护原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md 的「2 隐私保护原则」章节。
+  source: wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md
+  section: 2 隐私保护原则
+- type: concept
+  question: 在 脑机接口架构设计 — 阿里云视角 中, 3 个性化适配原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md 的「3 个性化适配原则」章节。
+  source: wiki/04-应用模式/02-行业架构/67-brain-computer-interface.md
+  section: 3 个性化适配原则
+- type: concept
+  question: 在 量子计算云平台架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md
+  section: 1 行业背景
+- type: concept
+  question: 在 量子计算云平台架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md
+  section: 2 核心场景
+- type: concept
+  question: 在 量子计算云平台架构设计 — 阿里云视角 中, 1 混合优先原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md 的「1 混合优先原则」章节。
+  source: wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md
+  section: 1 混合优先原则
+- type: concept
+  question: 在 量子计算云平台架构设计 — 阿里云视角 中, 2 公平调度原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md 的「2 公平调度原则」章节。
+  source: wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md
+  section: 2 公平调度原则
+- type: concept
+  question: 在 量子计算云平台架构设计 — 阿里云视角 中, 3 用户隔离原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md 的「3 用户隔离原则」章节。
+  source: wiki/04-应用模式/02-行业架构/68-quantum-computing-cloud.md
+  section: 3 用户隔离原则
+- type: concept
+  question: 在 6G 核心网架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/69-6g-core-network.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/69-6g-core-network.md
+  section: 1 行业背景
+- type: concept
+  question: 在 6G 核心网架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/69-6g-core-network.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/69-6g-core-network.md
+  section: 2 核心场景
+- type: concept
+  question: 在 6G 核心网架构设计 — 阿里云视角 中, 1 多面融合原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/69-6g-core-network.md 的「1 多面融合原则」章节。
+  source: wiki/04-应用模式/02-行业架构/69-6g-core-network.md
+  section: 1 多面融合原则
+- type: concept
+  question: 在 6G 核心网架构设计 — 阿里云视角 中, 2 分布式自治原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/69-6g-core-network.md 的「2 分布式自治原则」章节。
+  source: wiki/04-应用模式/02-行业架构/69-6g-core-network.md
+  section: 2 分布式自治原则
+- type: concept
+  question: 在 6G 核心网架构设计 — 阿里云视角 中, 3 AI 内生原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/69-6g-core-network.md 的「3 AI 内生原则」章节。
+  source: wiki/04-应用模式/02-行业架构/69-6g-core-network.md
+  section: 3 AI 内生原则
+- type: concept
+  question: 在 数字人民币架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/70-ecny-cbdc.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/70-ecny-cbdc.md
+  section: 目录
+- type: concept
+  question: 在 数字人民币架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/70-ecny-cbdc.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/70-ecny-cbdc.md
+  section: 行业背景
+- type: concept
+  question: 在 数字人民币架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/70-ecny-cbdc.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/70-ecny-cbdc.md
+  section: 业务架构
+- type: concept
+  question: 在 智慧税务架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/71-smart-tax.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/71-smart-tax.md
+  section: 目录
+- type: concept
+  question: 在 智慧税务架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/71-smart-tax.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/71-smart-tax.md
+  section: 行业背景
+- type: concept
+  question: 在 智慧税务架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/71-smart-tax.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/71-smart-tax.md
+  section: 业务架构
+- type: concept
+  question: 在 数字孪生城市架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/72-digital-twin-city.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/72-digital-twin-city.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 数字孪生城市架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/72-digital-twin-city.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/72-digital-twin-city.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 数字孪生城市架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/72-digital-twin-city.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/72-digital-twin-city.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 数字孪生城市架构设计 — 阿里云视角 中, 1 城市信息模型 CIM 平台 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/72-digital-twin-city.md 的「1 城市信息模型 CIM 平台」章节。
+  source: wiki/04-应用模式/02-行业架构/72-digital-twin-city.md
+  section: 1 城市信息模型 CIM 平台
+- type: concept
+  question: 在 数字孪生城市架构设计 — 阿里云视角 中, 2 城市规划仿真验证 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/72-digital-twin-city.md 的「2 城市规划仿真验证」章节。
+  source: wiki/04-应用模式/02-行业架构/72-digital-twin-city.md
+  section: 2 城市规划仿真验证
+- type: comparison
+  question: 数字孪生城市架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/72-digital-twin-city.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/72-digital-twin-city.md
+- type: concept
+  question: 在 智慧消防架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/73-smart-firefighting.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/73-smart-firefighting.md
+  section: 目录
+- type: concept
+  question: 在 智慧消防架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/73-smart-firefighting.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/73-smart-firefighting.md
+  section: 行业背景
+- type: concept
+  question: 在 智慧消防架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/73-smart-firefighting.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/73-smart-firefighting.md
+  section: 业务架构
+- type: concept
+  question: 在 沉浸式 XR 架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/74-immersive-xr.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/74-immersive-xr.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 沉浸式 XR 架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/74-immersive-xr.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/74-immersive-xr.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 沉浸式 XR 架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/74-immersive-xr.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/74-immersive-xr.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 沉浸式 XR 架构设计 — 阿里云视角 中, 1 VR 沉浸娱乐 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/74-immersive-xr.md 的「1 VR 沉浸娱乐」章节。
+  source: wiki/04-应用模式/02-行业架构/74-immersive-xr.md
+  section: 1 VR 沉浸娱乐
+- type: concept
+  question: 在 沉浸式 XR 架构设计 — 阿里云视角 中, 2 AR 工业辅助 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/74-immersive-xr.md 的「2 AR 工业辅助」章节。
+  source: wiki/04-应用模式/02-行业架构/74-immersive-xr.md
+  section: 2 AR 工业辅助
+- type: concept
+  question: 在 情感计算 AI 架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/75-affective-computing.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/75-affective-computing.md
+  section: 1 行业背景
+- type: concept
+  question: 在 情感计算 AI 架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/75-affective-computing.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/75-affective-computing.md
+  section: 2 核心场景
+- type: concept
+  question: 在 情感计算 AI 架构设计 — 阿里云视角 中, 1 多模态协同原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/75-affective-computing.md 的「1 多模态协同原则」章节。
+  source: wiki/04-应用模式/02-行业架构/75-affective-computing.md
+  section: 1 多模态协同原则
+- type: concept
+  question: 在 情感计算 AI 架构设计 — 阿里云视角 中, 2 隐私保护原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/75-affective-computing.md 的「2 隐私保护原则」章节。
+  source: wiki/04-应用模式/02-行业架构/75-affective-computing.md
+  section: 2 隐私保护原则
+- type: concept
+  question: 在 情感计算 AI 架构设计 — 阿里云视角 中, 3 实时性原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/75-affective-computing.md 的「3 实时性原则」章节。
+  source: wiki/04-应用模式/02-行业架构/75-affective-computing.md
+  section: 3 实时性原则
+- type: concept
+  question: 在 合成生物学架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/76-synthetic-biology.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/76-synthetic-biology.md
+  section: 1 行业背景
+- type: concept
+  question: 在 合成生物学架构设计 — 阿里云视角 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/76-synthetic-biology.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/76-synthetic-biology.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 合成生物学架构设计 — 阿里云视角 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/76-synthetic-biology.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/76-synthetic-biology.md
+  section: 3 市场格局
+- type: concept
+  question: 在 合成生物学架构设计 — 阿里云视角 中, 1 基因设计 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/76-synthetic-biology.md 的「1 基因设计」章节。
+  source: wiki/04-应用模式/02-行业架构/76-synthetic-biology.md
+  section: 1 基因设计
+- type: concept
+  question: 在 合成生物学架构设计 — 阿里云视角 中, 2 蛋白质工程 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/76-synthetic-biology.md 的「2 蛋白质工程」章节。
+  source: wiki/04-应用模式/02-行业架构/76-synthetic-biology.md
+  section: 2 蛋白质工程
+- type: comparison
+  question: 合成生物学架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/76-synthetic-biology.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/76-synthetic-biology.md
+- type: concept
+  question: 在 可控核聚变监控架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md
+  section: 1 行业背景
+- type: concept
+  question: 在 可控核聚变监控架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md
+  section: 2 核心场景
+- type: concept
+  question: 在 可控核聚变监控架构设计 — 阿里云视角 中, 1 实时性优先原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md 的「1 实时性优先原则」章节。
+  source: wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md
+  section: 1 实时性优先原则
+- type: concept
+  question: 在 可控核聚变监控架构设计 — 阿里云视角 中, 2 安全联锁独立原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md 的「2 安全联锁独立原则」章节。
+  source: wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md
+  section: 2 安全联锁独立原则
+- type: concept
+  question: 在 可控核聚变监控架构设计 — 阿里云视角 中, 3 数据完整性原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md 的「3 数据完整性原则」章节。
+  source: wiki/04-应用模式/02-行业架构/77-fusion-energy-monitoring.md
+  section: 3 数据完整性原则
+- type: concept
+  question: 在 深海探测架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md
+  section: 1 行业背景
+- type: concept
+  question: 在 深海探测架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md
+  section: 2 核心场景
+- type: concept
+  question: 在 深海探测架构设计 — 阿里云视角 中, 1 延迟容忍原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md 的「1 延迟容忍原则」章节。
+  source: wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md
+  section: 1 延迟容忍原则
+- type: concept
+  question: 在 深海探测架构设计 — 阿里云视角 中, 2 自主容错原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md 的「2 自主容错原则」章节。
+  source: wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md
+  section: 2 自主容错原则
+- type: concept
+  question: 在 深海探测架构设计 — 阿里云视角 中, 3 边缘优先原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md 的「3 边缘优先原则」章节。
+  source: wiki/04-应用模式/02-行业架构/78-deep-sea-exploration.md
+  section: 3 边缘优先原则
+- type: concept
+  question: 在 极地科考架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/79-polar-research.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/79-polar-research.md
+  section: 1 行业背景
+- type: concept
+  question: 在 极地科考架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/79-polar-research.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/79-polar-research.md
+  section: 2 核心场景
+- type: concept
+  question: 在 极地科考架构设计 — 阿里云视角 中, 1 极致可靠原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/79-polar-research.md 的「1 极致可靠原则」章节。
+  source: wiki/04-应用模式/02-行业架构/79-polar-research.md
+  section: 1 极致可靠原则
+- type: concept
+  question: 在 极地科考架构设计 — 阿里云视角 中, 2 极低带宽适应原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/79-polar-research.md 的「2 极低带宽适应原则」章节。
+  source: wiki/04-应用模式/02-行业架构/79-polar-research.md
+  section: 2 极低带宽适应原则
+- type: concept
+  question: 在 极地科考架构设计 — 阿里云视角 中, 3 能源优化原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/79-polar-research.md 的「3 能源优化原则」章节。
+  source: wiki/04-应用模式/02-行业架构/79-polar-research.md
+  section: 3 能源优化原则
+- type: concept
+  question: 在 时间敏感网络 TSN 架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/80-tsn-network.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/80-tsn-network.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 时间敏感网络 TSN 架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/80-tsn-network.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/80-tsn-network.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 时间敏感网络 TSN 架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/80-tsn-network.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/80-tsn-network.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 时间敏感网络 TSN 架构设计 — 阿里云视角 中, 1 工业运动控制 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/80-tsn-network.md 的「1 工业运动控制」章节。
+  source: wiki/04-应用模式/02-行业架构/80-tsn-network.md
+  section: 1 工业运动控制
+- type: concept
+  question: 在 时间敏感网络 TSN 架构设计 — 阿里云视角 中, 2 车载以太网 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/80-tsn-network.md 的「2 车载以太网」章节。
+  source: wiki/04-应用模式/02-行业架构/80-tsn-network.md
+  section: 2 车载以太网
+- type: concept
+  question: 在 智慧海关架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/81-smart-customs.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/81-smart-customs.md
+  section: 目录
+- type: concept
+  question: 在 智慧海关架构设计 — 阿里云视角 中, 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/81-smart-customs.md 的「行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/81-smart-customs.md
+  section: 行业背景
+- type: concept
+  question: 在 智慧海关架构设计 — 阿里云视角 中, 业务架构 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/81-smart-customs.md 的「业务架构」章节。
+  source: wiki/04-应用模式/02-行业架构/81-smart-customs.md
+  section: 业务架构
+- type: concept
+  question: 在 司法科技架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/82-legaltech.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/82-legaltech.md
+  section: 目录
+- type: concept
+  question: 在 司法科技架构设计 — 阿里云视角 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/82-legaltech.md 的「概述」章节。
+  source: wiki/04-应用模式/02-行业架构/82-legaltech.md
+  section: 概述
+- type: concept
+  question: 在 司法科技架构设计 — 阿里云视角 中, 设计原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/82-legaltech.md 的「设计原则」章节。
+  source: wiki/04-应用模式/02-行业架构/82-legaltech.md
+  section: 设计原则
+- type: concept
+  question: 在 文化数字化架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/83-cultural-digitization.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/83-cultural-digitization.md
+  section: 目录
+- type: concept
+  question: 在 文化数字化架构设计 — 阿里云视角 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/83-cultural-digitization.md 的「概述」章节。
+  source: wiki/04-应用模式/02-行业架构/83-cultural-digitization.md
+  section: 概述
+- type: concept
+  question: 在 文化数字化架构设计 — 阿里云视角 中, 设计原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/83-cultural-digitization.md 的「设计原则」章节。
+  source: wiki/04-应用模式/02-行业架构/83-cultural-digitization.md
+  section: 设计原则
+- type: concept
+  question: 在 国家公园架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/84-national-park.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/84-national-park.md
+  section: 目录
+- type: concept
+  question: 在 国家公园架构设计 — 阿里云视角 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/84-national-park.md 的「概述」章节。
+  source: wiki/04-应用模式/02-行业架构/84-national-park.md
+  section: 概述
+- type: concept
+  question: 在 国家公园架构设计 — 阿里云视角 中, 设计原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/84-national-park.md 的「设计原则」章节。
+  source: wiki/04-应用模式/02-行业架构/84-national-park.md
+  section: 设计原则
+- type: concept
+  question: 在 氢能源架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md
+  section: 1 行业背景
+- type: concept
+  question: 在 氢能源架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md
+  section: 2 核心场景
+- type: concept
+  question: 在 氢能源架构设计 — 阿里云视角 中, 1 安全第一原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md 的「1 安全第一原则」章节。
+  source: wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md
+  section: 1 安全第一原则
+- type: concept
+  question: 在 氢能源架构设计 — 阿里云视角 中, 2 云边协同原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md 的「2 云边协同原则」章节。
+  source: wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md
+  section: 2 云边协同原则
+- type: concept
+  question: 在 氢能源架构设计 — 阿里云视角 中, 3 数据驱动原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md 的「3 数据驱动原则」章节。
+  source: wiki/04-应用模式/02-行业架构/85-hydrogen-energy.md
+  section: 3 数据驱动原则
+- type: concept
+  question: 在 固态电池架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/86-solid-state-battery.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/86-solid-state-battery.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 固态电池架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/86-solid-state-battery.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/86-solid-state-battery.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 固态电池架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/86-solid-state-battery.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/86-solid-state-battery.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 固态电池架构设计 — 阿里云视角 中, 1 材料设计与筛选 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/86-solid-state-battery.md 的「1 材料设计与筛选」章节。
+  source: wiki/04-应用模式/02-行业架构/86-solid-state-battery.md
+  section: 1 材料设计与筛选
+- type: concept
+  question: 在 固态电池架构设计 — 阿里云视角 中, 2 分子模拟与界面分析 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/86-solid-state-battery.md 的「2 分子模拟与界面分析」章节。
+  source: wiki/04-应用模式/02-行业架构/86-solid-state-battery.md
+  section: 2 分子模拟与界面分析
+- type: concept
+  question: 在 柔性制造架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md
+  section: 1 行业背景
+- type: concept
+  question: 在 柔性制造架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md
+  section: 2 核心场景
+- type: concept
+  question: 在 柔性制造架构设计 — 阿里云视角 中, 1 订单驱动原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md 的「1 订单驱动原则」章节。
+  source: wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md
+  section: 1 订单驱动原则
+- type: concept
+  question: 在 柔性制造架构设计 — 阿里云视角 中, 2 模块化原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md 的「2 模块化原则」章节。
+  source: wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md
+  section: 2 模块化原则
+- type: concept
+  question: 在 柔性制造架构设计 — 阿里云视角 中, 3 数据贯穿原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md 的「3 数据贯穿原则」章节。
+  source: wiki/04-应用模式/02-行业架构/87-flexible-manufacturing.md
+  section: 3 数据贯穿原则
+- type: concept
+  question: 在 纳米材料架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/88-nanomaterials.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/88-nanomaterials.md
+  section: 1 行业背景
+- type: concept
+  question: 在 纳米材料架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/88-nanomaterials.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/88-nanomaterials.md
+  section: 2 核心场景
+- type: concept
+  question: 在 纳米材料架构设计 — 阿里云视角 中, 1 计算-数据-AI 闭环原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/88-nanomaterials.md 的「1 计算-数据-AI 闭环原则」章节。
+  source: wiki/04-应用模式/02-行业架构/88-nanomaterials.md
+  section: 1 计算-数据-AI 闭环原则
+- type: concept
+  question: 在 纳米材料架构设计 — 阿里云视角 中, 2 多尺度协同原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/88-nanomaterials.md 的「2 多尺度协同原则」章节。
+  source: wiki/04-应用模式/02-行业架构/88-nanomaterials.md
+  section: 2 多尺度协同原则
+- type: concept
+  question: 在 纳米材料架构设计 — 阿里云视角 中, 3 高通量自动化原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/88-nanomaterials.md 的「3 高通量自动化原则」章节。
+  source: wiki/04-应用模式/02-行业架构/88-nanomaterials.md
+  section: 3 高通量自动化原则
+- type: comparison
+  question: 纳米材料架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/88-nanomaterials.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/88-nanomaterials.md
+- type: concept
+  question: 在 基因编辑 CRISPR 架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md
+  section: 1 行业背景
+- type: concept
+  question: 在 基因编辑 CRISPR 架构设计 — 阿里云视角 中, 2 行业挑战 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md 的「2 行业挑战」章节。
+  source: wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md
+  section: 2 行业挑战
+- type: concept
+  question: 在 基因编辑 CRISPR 架构设计 — 阿里云视角 中, 3 市场格局 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md 的「3 市场格局」章节。
+  source: wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md
+  section: 3 市场格局
+- type: concept
+  question: 在 基因编辑 CRISPR 架构设计 — 阿里云视角 中, 1 gRNA 设计与筛选 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md 的「1 gRNA 设计与筛选」章节。
+  source: wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md
+  section: 1 gRNA 设计与筛选
+- type: concept
+  question: 在 基因编辑 CRISPR 架构设计 — 阿里云视角 中, 2 脱靶分析 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md 的「2 脱靶分析」章节。
+  source: wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md
+  section: 2 脱靶分析
+- type: comparison
+  question: 基因编辑 CRISPR 架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/89-crispr-gene-editing.md
+- type: concept
+  question: 在 类脑计算架构设计 — 阿里云视角 中, 1 行业背景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md 的「1 行业背景」章节。
+  source: wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md
+  section: 1 行业背景
+- type: concept
+  question: 在 类脑计算架构设计 — 阿里云视角 中, 2 核心场景 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md 的「2 核心场景」章节。
+  source: wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md
+  section: 2 核心场景
+- type: concept
+  question: 在 类脑计算架构设计 — 阿里云视角 中, 1 软硬件协同原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md 的「1 软硬件协同原则」章节。
+  source: wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md
+  section: 1 软硬件协同原则
+- type: concept
+  question: 在 类脑计算架构设计 — 阿里云视角 中, 2 训练-部署闭环原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md 的「2 训练-部署闭环原则」章节。
+  source: wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md
+  section: 2 训练-部署闭环原则
+- type: concept
+  question: 在 类脑计算架构设计 — 阿里云视角 中, 3 事件驱动原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md 的「3 事件驱动原则」章节。
+  source: wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md
+  section: 3 事件驱动原则
+- type: comparison
+  question: 类脑计算架构设计 — 阿里云视角 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md 中的对比分析。
+  source: wiki/04-应用模式/02-行业架构/90-neuromorphic-computing.md
+- type: concept
+  question: 在 低空经济（eVTOL/UAM）架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 低空经济（eVTOL/UAM）架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 低空经济（eVTOL/UAM）架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 低空经济（eVTOL/UAM）架构设计 — 阿里云视角 中, 1 城市空中交通 eVTOL 通勤 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md 的「1 城市空中交通 eVTOL 通勤」章节。
+  source: wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md
+  section: 1 城市空中交通 eVTOL 通勤
+- type: concept
+  question: 在 低空经济（eVTOL/UAM）架构设计 — 阿里云视角 中, 2 无人机末端配送 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md 的「2 无人机末端配送」章节。
+  source: wiki/04-应用模式/02-行业架构/91-urban-air-mobility.md
+  section: 2 无人机末端配送
+- type: concept
+  question: 在 智慧体育场馆架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 智慧体育场馆架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 智慧体育场馆架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 智慧体育场馆架构设计 — 阿里云视角 中, 1 智能票务与无感入场 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md 的「1 智能票务与无感入场」章节。
+  source: wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md
+  section: 1 智能票务与无感入场
+- type: concept
+  question: 在 智慧体育场馆架构设计 — 阿里云视角 中, 2 多机位 VR 赛事直播 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md 的「2 多机位 VR 赛事直播」章节。
+  source: wiki/04-应用模式/02-行业架构/92-smart-sports-venue.md
+  section: 2 多机位 VR 赛事直播
+- type: concept
+  question: 在 数字孪生工厂架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 数字孪生工厂架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 数字孪生工厂架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 数字孪生工厂架构设计 — 阿里云视角 中, 1 工厂三维可视化 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md 的「1 工厂三维可视化」章节。
+  source: wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md
+  section: 1 工厂三维可视化
+- type: concept
+  question: 在 数字孪生工厂架构设计 — 阿里云视角 中, 2 PLC 虚拟调试 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md 的「2 PLC 虚拟调试」章节。
+  source: wiki/04-应用模式/02-行业架构/93-digital-twin-factory.md
+  section: 2 PLC 虚拟调试
+- type: concept
+  question: 在 智慧监狱架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/94-smart-prison.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/94-smart-prison.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 智慧监狱架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/94-smart-prison.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/94-smart-prison.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 智慧监狱架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/94-smart-prison.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/94-smart-prison.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 智慧监狱架构设计 — 阿里云视角 中, 1 智能视频监控与行为分析 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/94-smart-prison.md 的「1 智能视频监控与行为分析」章节。
+  source: wiki/04-应用模式/02-行业架构/94-smart-prison.md
+  section: 1 智能视频监控与行为分析
+- type: concept
+  question: 在 智慧监狱架构设计 — 阿里云视角 中, 2 人员精确定位与轨迹追踪 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/94-smart-prison.md 的「2 人员精确定位与轨迹追踪」章节。
+  source: wiki/04-应用模式/02-行业架构/94-smart-prison.md
+  section: 2 人员精确定位与轨迹追踪
+- type: concept
+  question: 在 工业元宇宙架构设计 — 阿里云视角 中, 1 市场规模与趋势 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md 的「1 市场规模与趋势」章节。
+  source: wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md
+  section: 1 市场规模与趋势
+- type: concept
+  question: 在 工业元宇宙架构设计 — 阿里云视角 中, 2 行业痛点 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md 的「2 行业痛点」章节。
+  source: wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md
+  section: 2 行业痛点
+- type: concept
+  question: 在 工业元宇宙架构设计 — 阿里云视角 中, 3 数字化转型架构影响 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md 的「3 数字化转型架构影响」章节。
+  source: wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md
+  section: 3 数字化转型架构影响
+- type: concept
+  question: 在 工业元宇宙架构设计 — 阿里云视角 中, 1 多地 VR 协同设计评审 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md 的「1 多地 VR 协同设计评审」章节。
+  source: wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md
+  section: 1 多地 VR 协同设计评审
+- type: concept
+  question: 在 工业元宇宙架构设计 — 阿里云视角 中, 2 高危操作虚拟培训 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md 的「2 高危操作虚拟培训」章节。
+  source: wiki/04-应用模式/02-行业架构/95-industrial-metaverse.md
+  section: 2 高危操作虚拟培训
+- type: concept
+  question: 在 碳捕集利用与封存（CCUS）架构设计 — 阿里云视角 中, 目录 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/96-carbon-capture.md 的「目录」章节。
+  source: wiki/04-应用模式/02-行业架构/96-carbon-capture.md
+  section: 目录
+- type: concept
+  question: 在 碳捕集利用与封存（CCUS）架构设计 — 阿里云视角 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/96-carbon-capture.md 的「概述」章节。
+  source: wiki/04-应用模式/02-行业架构/96-carbon-capture.md
+  section: 概述
+- type: concept
+  question: 在 碳捕集利用与封存（CCUS）架构设计 — 阿里云视角 中, 设计原则 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/96-carbon-capture.md 的「设计原则」章节。
+  source: wiki/04-应用模式/02-行业架构/96-carbon-capture.md
+  section: 设计原则
+- type: concept
+  question: 在 Topic Application Architecture 中, 概览 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/index.md 的「概览」章节。
+  source: wiki/04-应用模式/02-行业架构/index.md
+  section: 概览
+- type: concept
+  question: 在 Topic Application Architecture 中, 文档 是什么?
+  answer: 参见 wiki/04-应用模式/02-行业架构/index.md 的「文档」章节。
+  source: wiki/04-应用模式/02-行业架构/index.md
+  section: 文档
+- type: concept
+  question: 在 AI 推理应用模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md
+  section: 概述
+- type: concept
+  question: 在 AI 推理应用模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 AI 推理应用模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md
+  section: 架构设计
+- type: comparison
+  question: AI 推理应用模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/ai-inference-app-patterns.md
+- type: concept
+  question: 在 API 设计与版本管理模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md
+  section: 概述
+- type: concept
+  question: 在 API 设计与版本管理模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 API 设计与版本管理模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md
+  section: 架构设计
+- type: comparison
+  question: API 设计与版本管理模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/api-design-versioning-patterns.md
+- type: concept
+  question: 在 应用可观测性模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-observability-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/app-observability-patterns.md
+  section: 概述
+- type: concept
+  question: 在 应用可观测性模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-observability-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/app-observability-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 应用可观测性模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-observability-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/app-observability-patterns.md
+  section: 架构设计
+- type: comparison
+  question: 应用可观测性模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-observability-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/app-observability-patterns.md
+- type: concept
+  question: 在 应用弹性与熔断模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md
+  section: 概述
+- type: concept
+  question: 在 应用弹性与熔断模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 应用弹性与熔断模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md
+  section: 架构设计
+- type: comparison
+  question: 应用弹性与熔断模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/app-resilience-circuit-breaker.md
+- type: concept
+  question: 在 应用排障 Runbook 中, CrashLoopBackOff 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-runbooks.md 的「CrashLoopBackOff」章节。
+  source: wiki/04-应用模式/03-生产模式/application-runbooks.md
+  section: CrashLoopBackOff
+- type: concept
+  question: 在 应用排障 Runbook 中, OOMKilled 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-runbooks.md 的「OOMKilled」章节。
+  source: wiki/04-应用模式/03-生产模式/application-runbooks.md
+  section: OOMKilled
+- type: operation
+  question: '如何执行与 应用排障 Runbook 相关的操作: kubectl logs <pod> --previous --tail=50?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-runbooks.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/application-runbooks.md
+  command: kubectl logs <pod> --previous --tail=50
+- type: operation
+  question: '如何执行与 应用排障 Runbook 相关的操作: kubectl describe pod <pod> | grep -A3 "Last State"?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-runbooks.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/application-runbooks.md
+  command: kubectl describe pod <pod> | grep -A3 "Last State"
+- type: operation
+  question: '如何执行与 应用排障 Runbook 相关的操作: kubectl describe pod <pod> | grep -A10 "Events:"?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-runbooks.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/application-runbooks.md
+  command: kubectl describe pod <pod> | grep -A10 "Events:"
+- type: comparison
+  question: 应用排障 Runbook 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-runbooks.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/application-runbooks.md
+- type: concept
+  question: 在 应用安全加固生产模式 中, Pod Security Standards (PSS/PSA) 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-security-hardening.md 的「Pod Security Standards (PSS/PSA)」章节。
+  source: wiki/04-应用模式/03-生产模式/application-security-hardening.md
+  section: Pod Security Standards (PSS/PSA)
+- type: concept
+  question: 在 应用安全加固生产模式 中, SecurityContext 生产基线 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-security-hardening.md 的「SecurityContext 生产基线」章节。
+  source: wiki/04-应用模式/03-生产模式/application-security-hardening.md
+  section: SecurityContext 生产基线
+- type: comparison
+  question: 应用安全加固生产模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/application-security-hardening.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/application-security-hardening.md
+- type: concept
+  question: 在 批处理与定时任务模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/batch-cron-job-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/batch-cron-job-patterns.md
+  section: 概述
+- type: concept
+  question: 在 批处理与定时任务模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/batch-cron-job-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/batch-cron-job-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 批处理与定时任务模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/batch-cron-job-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/batch-cron-job-patterns.md
+  section: 架构设计
+- type: concept
+  question: 在 配置管理与 Feature Flag 模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/config-management-feature-flags.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/config-management-feature-flags.md
+  section: 概述
+- type: concept
+  question: 在 配置管理与 Feature Flag 模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/config-management-feature-flags.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/config-management-feature-flags.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 配置管理与 Feature Flag 模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/config-management-feature-flags.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/config-management-feature-flags.md
+  section: 架构设计
+- type: comparison
+  question: 配置管理与 Feature Flag 模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/config-management-feature-flags.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/config-management-feature-flags.md
+- type: concept
+  question: 在 成本优化与 FinOps 生产模式 中, 成本优化四杠杆 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/cost-optimization-finops.md 的「成本优化四杠杆」章节。
+  source: wiki/04-应用模式/03-生产模式/cost-optimization-finops.md
+  section: 成本优化四杠杆
+- type: concept
+  question: 在 成本优化与 FinOps 生产模式 中, Right-sizing 实战 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/cost-optimization-finops.md 的「Right-sizing 实战」章节。
+  source: wiki/04-应用模式/03-生产模式/cost-optimization-finops.md
+  section: Right-sizing 实战
+- type: operation
+  question: '如何执行与 成本优化与 FinOps 生产模式 相关的操作: kubectl top pods -A --sort-by=memory | head -30?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/cost-optimization-finops.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/cost-optimization-finops.md
+  command: kubectl top pods -A --sort-by=memory | head -30
+- type: concept
+  question: 在 零停机数据库迁移模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md
+  section: 概述
+- type: concept
+  question: 在 零停机数据库迁移模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 零停机数据库迁移模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md
+  section: 架构设计
+- type: comparison
+  question: 零停机数据库迁移模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/database-migration-zero-downtime.md
+- type: concept
+  question: 在 GPU 工作负载调度模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md
+  section: 概述
+- type: concept
+  question: 在 GPU 工作负载调度模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 GPU 工作负载调度模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md
+  section: 架构设计
+- type: comparison
+  question: GPU 工作负载调度模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/gpu-workload-scheduling-patterns.md
+- type: concept
+  question: 在 topic-production-patterns 索引 中, 与其他目录的关系 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/index.md 的「与其他目录的关系」章节。
+  source: wiki/04-应用模式/03-生产模式/index.md
+  section: 与其他目录的关系
+- type: comparison
+  question: topic-production-patterns 索引 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/index.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/index.md
+- type: concept
+  question: 在 多集群应用分发模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md
+  section: 概述
+- type: concept
+  question: 在 多集群应用分发模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 多集群应用分发模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md
+  section: 架构设计
+- type: comparison
+  question: 多集群应用分发模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-app-distribution.md
+- type: concept
+  question: 在 多集群与灾备生产模式 中, 拓扑选型 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md 的「拓扑选型」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md
+  section: 拓扑选型
+- type: concept
+  question: 在 多集群与灾备生产模式 中, Active-Active 架构 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md 的「Active-Active 架构」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md
+  section: Active-Active 架构
+- type: operation
+  question: '如何执行与 多集群与灾备生产模式 相关的操作: for i in 1 2 3; do?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md
+  command: for i in 1 2 3; do
+- type: operation
+  question: '如何执行与 多集群与灾备生产模式 相关的操作: velero schedule create daily-backup \?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/multi-cluster-dr-patterns.md
+  command: velero schedule create daily-backup \
+- type: concept
+  question: 在 多租户应用隔离模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md
+  section: 概述
+- type: concept
+  question: 在 多租户应用隔离模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 多租户应用隔离模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md
+  section: 架构设计
+- type: comparison
+  question: 多租户应用隔离模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/multi-tenant-app-isolation.md
+- type: concept
+  question: 在 Pod 可用性与生命周期生产模式 中, 生产探针设计矩阵 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md 的「生产探针设计矩阵」章节。
+  source: wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md
+  section: 生产探针设计矩阵
+- type: concept
+  question: 在 Pod 可用性与生命周期生产模式 中, PodDisruptionBudget (PDB) 生产实践 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md 的「PodDisruptionBudget (PDB) 生产实践」章节。
+  source: wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md
+  section: PodDisruptionBudget (PDB) 生产实践
+- type: operation
+  question: '如何执行与 Pod 可用性与生命周期生产模式 相关的操作: kubectl get pdb -A -o wide?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md
+  command: kubectl get pdb -A -o wide
+- type: comparison
+  question: Pod 可用性与生命周期生产模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md
+- type: concept
+  question: 在 渐进式交付生产模式 中, 策略对比 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md 的「策略对比」章节。
+  source: wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md
+  section: 策略对比
+- type: concept
+  question: 在 渐进式交付生产模式 中, Canary 金丝雀（Argo Rollouts） 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md 的「Canary 金丝雀（Argo Rollouts）」章节。
+  source: wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md
+  section: Canary 金丝雀（Argo Rollouts）
+- type: operation
+  question: '如何执行与 渐进式交付生产模式 相关的操作: kubectl argo rollouts undo rollout/api-server?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md
+  command: kubectl argo rollouts undo rollout/api-server
+- type: comparison
+  question: 渐进式交付生产模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/progressive-delivery-patterns.md
+- type: concept
+  question: 在 发布变更管理模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/release-change-management-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/release-change-management-patterns.md
+  section: 概述
+- type: concept
+  question: 在 发布变更管理模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/release-change-management-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/release-change-management-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 发布变更管理模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/release-change-management-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/release-change-management-patterns.md
+  section: 架构设计
+- type: concept
+  question: 在 资源 QoS 与 Right-sizing 生产模式 中, QoS 等级机制 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md 的「QoS 等级机制」章节。
+  source: wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md
+  section: QoS 等级机制
+- type: concept
+  question: 在 资源 QoS 与 Right-sizing 生产模式 中, 生产配置原则 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md 的「生产配置原则」章节。
+  source: wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md
+  section: 生产配置原则
+- type: operation
+  question: '如何执行与 资源 QoS 与 Right-sizing 生产模式 相关的操作: kubectl describe vpa api-vpa -n production | grep -A10 Recom?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md
+  command: kubectl describe vpa api-vpa -n production | grep -A10 Recommendation
+- type: comparison
+  question: 资源 QoS 与 Right-sizing 生产模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/resource-qos-rightsizing.md
+- type: concept
+  question: 在 调度与拓扑分布生产模式 中, 拓扑分布约束 (topologySpreadConstraints) 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md 的「拓扑分布约束 (topologySpreadConstraints)」章节。
+  source: wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md
+  section: 拓扑分布约束 (topologySpreadConstraints)
+- type: concept
+  question: 在 调度与拓扑分布生产模式 中, 亲和性与反亲和性 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md 的「亲和性与反亲和性」章节。
+  source: wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md
+  section: 亲和性与反亲和性
+- type: best_practice
+  question: 关于 调度与拓扑分布生产模式, 有什么最佳实践?
+  answer: AZ 级 `DoNotSchedule` + 节点级 `ScheduleAnyway` 组合，保证跨 AZ 强制分布但节点级尽力而为。
+  source: wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md
+- type: comparison
+  question: 调度与拓扑分布生产模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/scheduling-topology-patterns.md
+- type: concept
+  question: 在 Serverless 与事件驱动模式 中, 概述 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md 的「概述」章节。
+  source: wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md
+  section: 概述
+- type: concept
+  question: 在 Serverless 与事件驱动模式 中, 模式定义与适用场景 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md 的「模式定义与适用场景」章节。
+  source: wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md
+  section: 模式定义与适用场景
+- type: concept
+  question: 在 Serverless 与事件驱动模式 中, 架构设计 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md 的「架构设计」章节。
+  source: wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md
+  section: 架构设计
+- type: comparison
+  question: Serverless 与事件驱动模式 中有哪些技术对比?
+  answer: 参见 wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md 中的对比分析。
+  source: wiki/04-应用模式/03-生产模式/serverless-event-driven-patterns.md
+- type: concept
+  question: 在 Stateful 应用生产模式 中, StatefulSet 生产拓扑 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/stateful-app-patterns.md 的「StatefulSet 生产拓扑」章节。
+  source: wiki/04-应用模式/03-生产模式/stateful-app-patterns.md
+  section: StatefulSet 生产拓扑
+- type: concept
+  question: 在 Stateful 应用生产模式 中, PVC 备份与恢复 是什么?
+  answer: 参见 wiki/04-应用模式/03-生产模式/stateful-app-patterns.md 的「PVC 备份与恢复」章节。
+  source: wiki/04-应用模式/03-生产模式/stateful-app-patterns.md
+  section: PVC 备份与恢复
+- type: operation
+  question: '如何执行与 Stateful 应用生产模式 相关的操作: kubectl get volumesnapshot db-snap-20260702 -o jsonpath=''{.s?'
+  answer: 参见 wiki/04-应用模式/03-生产模式/stateful-app-patterns.md 中的操作步骤。
+  source: wiki/04-应用模式/03-生产模式/stateful-app-patterns.md
+  command: kubectl get volumesnapshot db-snap-20260702 -o jsonpath='{.status.readyToUse}'
+- type: concept
+  question: 在 Domain 20 Application Patterns 中, 概览 是什么?
+  answer: 参见 wiki/04-应用模式/index.md 的「概览」章节。
+  source: wiki/04-应用模式/index.md
+  section: 概览
+- type: concept
+  question: 在 Domain 20 Application Patterns 中, 子目录 是什么?
+  answer: 参见 wiki/04-应用模式/index.md 的「子目录」章节。
+  source: wiki/04-应用模式/index.md
+  section: 子目录
+- type: concept
+  question: 在 Domain 20 Application Patterns 中, 文档 是什么?
+  answer: 参见 wiki/04-应用模式/index.md 的「文档」章节。
+  source: wiki/04-应用模式/index.md
+  section: 文档

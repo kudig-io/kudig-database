@@ -355,7 +355,7 @@ pie title 底事件频率分布
 | 深度排查 | [../domain-{{N}}-{{name}}/{{doc}}.md](../domain-{{N}}-{{name}}/{{doc}}.md) | 完整故障排查指南 |
 | Skill | [../故障诊断/topic-skills/{{NN}}-{{scenario}}.md](../故障诊断/技能体系/{{NN}}-{{scenario}}.md) | 自动化修复技能 |
 | FEBM | [../故障诊断/FEBM方法论/{{NN}}-{{scenario}}.md](../故障诊断/FEBM方法论/{{NN}}-{{scenario}}.md) | 取证分析方法 |
-| 速查卡 | [../系统基础/topic-cheat-sheet/k8s.md](../../../wiki/17-系统基础/05-速查卡/k8s.md) | 命令速查 |
+| 速查卡 | [../系统基础/topic-cheat-sheet/k8s.md](../../../wiki/01-集群基础与系统/12-速查卡/k8s.md) | 命令速查 |
 | 学习计划 | [../生产运维/topic-learn/{{path}}/README.md](../生产运维/topic-learn/{{path}}/README.md) | 相关学习路径 |
 
 ---
@@ -369,7 +369,7 @@ pie title 底事件频率分布
 
 ---
 
-> **关联文档**: [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../../../wiki/19-故障诊断/06-FTA故障树/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
+> **关联文档**: [故障诊断/FTA故障树/fta-methodology-and-agentic-practices.md](../../../wiki/17-故障诊断/06-FTA故障树/fta-methodology-and-agentic-practices.md)（FTA 方法论与 AI Agent 智能运维实践）
 
 ## Related
 

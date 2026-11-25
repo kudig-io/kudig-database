@@ -56,7 +56,7 @@ intent_queries:
   - ACR console image management
   - ACK console kubectl command mapping
   - ACK cluster console operations guide
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] console operations tutorial
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] console operations tutorial
 trigger_keywords:
   - console
   - 控制台
@@ -550,8 +550,8 @@ Day 4 将学习 K8S 集群创建的完整流程，包括参数配置、网络规
 ## 延伸阅读
 
 - [ACK 实操指南](../../云厂商/04-alicloud-ack/service-ack-practical-guide.md)
-- [K8s 核心组件](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../wiki/01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
+- [K8s 核心组件](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../../../../../wiki/01-集群基础与系统/05-kubectl/02-kubectl-commands-reference.md)
 
 
 <!-- risk-assessed -->

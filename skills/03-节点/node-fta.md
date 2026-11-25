@@ -134,8 +134,8 @@ base_confidence: 0.7
 
 - [[kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/node-index.md|Node 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/node-index.md|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -48,7 +48,7 @@ last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
   - ACK multi-nodepool architecture design
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] node maintenance drain uncordon
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] node maintenance drain uncordon
   - Pod scheduling affinity anti-affinity
   - Kubernetes health probes configuration
   - Cluster autoscaler scaling policy
@@ -666,7 +666,7 @@ aliyun cs DELETE /clusters/<cluster_id>/nodepools/<spot-pool-id>
 - [ACK 节点池管理](../../云厂商/04-alicloud-ack/230-ack-node-pool.md)
 - [Pod 调度策略](../../domain-09-workload/05-pod-scheduling-strategies.md)
 - [HPA/VPA 自动伸缩](../../../../../../wiki/02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling.md)
-- [节点 NotReady 诊断](../../../../../../wiki/19-故障诊断/01-核心排障/06-node-notready-diagnosis.md)
+- [节点 NotReady 诊断](../../../../../../wiki/17-故障诊断/01-核心排障/06-node-notready-diagnosis.md)
 
 ```
 

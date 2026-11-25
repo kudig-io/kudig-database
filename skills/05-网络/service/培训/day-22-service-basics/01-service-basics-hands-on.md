@@ -317,7 +317,7 @@ kind: Ingress
 metadata:
   name: web-ingress
   annotations:
-    nginx.ingress.[[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/rewrite-target: /
+    nginx.ingress.[[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:

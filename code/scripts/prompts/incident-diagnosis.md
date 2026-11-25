@@ -140,7 +140,7 @@ SYMPTOMS:
    - [ ] L1: kubectl get pod -o yaml (Pod YAML 含 OOM 状态) — 立即
    - [ ] L5: kubectl events -n prod --for pod/payment-service-* — 1h 内
 
-5. 升级建议: 建议通知 DBA 团队排查连接池; 参考 Runbook: [[wiki/19-故障诊断/08-技能体系/skill-08-oom-troubleshooting]]
+5. 升级建议: 建议通知 DBA 团队排查连接池; 参考 Runbook: [[skills/09-技能体系/skill-08-oom-troubleshooting]]
 ```
 
 ## 使用说明
@@ -153,8 +153,8 @@ SYMPTOMS:
 
 ## 参考文档
 
-- [[wiki/19-故障诊断/06-FTA故障树/MOC|FTA 故障树索引]] — 根因映射参考
-- [[wiki/19-故障诊断/07-FEBM方法论/MOC|FEBM 证据收集方法论]] — 证据分级标准
+- [[wiki/17-故障诊断/06-FTA故障树/MOC|FTA 故障树索引]] — 根因映射参考
+- [[wiki/17-故障诊断/07-FEBM方法论/MOC|FEBM 证据收集方法论]] — 证据分级标准
 - [[code/scripts/templates/runbook-template|Runbook 模板]] — 配套 Runbook 编写
 
 <!-- risk-assessed -->

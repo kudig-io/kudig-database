@@ -90,7 +90,7 @@ estimated_read_time: 15min
 
 | 组件 | 覆盖范围 |
 |:---|:---|
-| [存储/csi-storage/](wiki/06-存储/csi-storage) | CSI/PV/PVC/挂载/后端/持久存储管理/存储最佳实践 |
+| [存储/csi-storage/](wiki/06-存储与数据/csi-storage) | CSI/PV/PVC/挂载/后端/持久存储管理/存储最佳实践 |
 
 ### 5. 安全 `安全/`
 
@@ -179,11 +179,11 @@ kubectl get endpoints <svc> -n <ns>
 
 ## 相关链接
 
-- [[wiki/19-故障诊断/README.md|Domain-12 故障排查]]
-- [[wiki/19-故障诊断/06-FTA故障树/README.md|topic-fta: 故障树分析方法论]]
-- [[wiki/19-故障诊断/07-FEBM方法论/README.md|topic-febm: FEBM 循证方法论]]
-- [[wiki/13-生产运维/README.md|Domain 11: 生产环境运维最佳实践]]
-- [[wiki/15-AI基础设施/README.md|AI Agent 工程专题]]
+- [[wiki/17-故障诊断/README.md|Domain-12 故障排查]]
+- [[wiki/17-故障诊断/06-FTA故障树/README.md|topic-fta: 故障树分析方法论]]
+- [[wiki/17-故障诊断/07-FEBM方法论/README.md|topic-febm: FEBM 循证方法论]]
+- [[wiki/11-生产运维/README.md|Domain 11: 生产环境运维最佳实践]]
+- [[wiki/14-AI基础设施/README.md|AI Agent 工程专题]]
 
 <!-- risk-assessed -->
 
@@ -193,8 +193,8 @@ kubectl get endpoints <svc> -n <ns>
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine|FTA Diagnostic Execution Engine]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

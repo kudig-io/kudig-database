@@ -24,7 +24,7 @@ ticket_type: 调度故障
 skill_ref:
 - '[[wiki/02-工作负载/01-核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]'
 - '[[wiki/02-工作负载/01-核心工作负载/23-resource-management.md|资源管理]]'
-- '[[wiki/19-故障诊断/08-技能体系/skill-set/k8s-deployment-rollout/SKILL.md|Deployment
+- '[[skills/09-技能体系/skill-set/k8s-deployment-rollout/SKILL.md|Deployment
   滚动发布诊断 Skill]]'
 fta_ref:
 - 'FTA: Pod Pending 排障'
@@ -52,12 +52,12 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-047-pod-pending-resource-taint-affinity.md|Pod 持续 Pending：资源不足、Taint 不匹配与亲和性冲突]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-047-pod-pending-resource-taint-affinity.md|Pod 持续 Pending：资源不足、Taint 不匹配与亲和性冲突]]（本页为重排去重桩，正文见主场）

@@ -66,7 +66,7 @@ This generates:
 
 ### Step 3: Implement Reconciliation
 
-The Reconcile() function follows the [[wiki/22-概念/controller-pattern.md|[[wiki/22-概念/01-核心架构/controller-pattern|Controller Pattern]]]]:
+The Reconcile() function follows the [[wiki/20-概念/controller-pattern.md|[[wiki/20-概念/01-核心架构/controller-pattern|Controller Pattern]]]]:
 
 1. Fetch the CR instance
 2. Determine desired state from spec
@@ -94,7 +94,7 @@ if !deletionTimestamp.IsZero() {
 
 Use `envtest` (provided by controller-runtime) for integration testing:
 - Spins up a real API Server and etcd
-- Tests reconciler against real [[wiki/17-系统基础/06-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]]
+- Tests reconciler against real [[wiki/21-知识字典/fundamentals/the-kubernetes-api.md|Kubernetes API]]
 - Fast, no full cluster needed
 
 ### Step 6: Package and Deploy
@@ -161,15 +161,15 @@ Build container image, generate RBAC manifests from kubebuilder markers, and dep
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
+- [[wiki/22-实体/02-K8s核心组件/crd-custom-resources.md|crd-custom-resources]] — CRD (Custom Resource Definition)
 - [[helm]] — Helm
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/01-核心架构/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
+- [[wiki/20-概念/01-核心架构/controller-pattern.md|controller-pattern]] — Controller Pattern (Reconciliation Loop)
 - [[operator-pattern|Operator Pattern]]
-- [[wiki/22-概念/01-核心架构/controller-pattern.md|Controller Pattern]]
-- [[wiki/23-实体/02-K8s核心组件/crd-custom-resources.md|CRD Custom Resources]]
-- [[wiki/23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
+- [[wiki/20-概念/01-核心架构/controller-pattern.md|Controller Pattern]]
+- [[wiki/22-实体/02-K8s核心组件/crd-custom-resources.md|CRD Custom Resources]]
+- [[wiki/22-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
 
 
 <!-- risk-assessed -->

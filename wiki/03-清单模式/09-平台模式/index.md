@@ -76,17 +76,17 @@ authors:
 
 ## 相关主题
 
-- [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
-- [[wiki/10-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
-- [[wiki/10-平台工程/01-构建/08-golden-paths-design|Golden Path 设计]]
-- [[wiki/24-综合/02-交付与GitOps/helm-gitops|Helm GitOps]]
-- [[wiki/24-综合/02-交付与GitOps/argocd-gitops|ArgoCD GitOps]]
-- [[wiki/24-综合/02-交付与GitOps/crossplane-iac|Crossplane IaC]]
+- [[wiki/12-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
+- [[wiki/12-平台工程/01-构建/07-crossplane-platform-composition|Crossplane 平台组合]]
+- [[wiki/12-平台工程/01-构建/08-golden-paths-design|Golden Path 设计]]
+- [[wiki/23-综合与研究/02-交付与GitOps/helm-gitops|Helm GitOps]]
+- [[wiki/23-综合与研究/02-交付与GitOps/argocd-gitops|ArgoCD GitOps]]
+- [[wiki/23-综合与研究/02-交付与GitOps/crossplane-iac|Crossplane IaC]]
 
 ## Related
 
 - [[wiki/03-清单模式/09-平台模式/01-crossplane-compositions-patterns|Crossplane 组合模式]]
 - [[wiki/03-清单模式/09-平台模式/02-cue-language-configuration|CUE 语言配置]]
 - [[wiki/03-清单模式/09-平台模式/03-jsonnet-tanka-patterns|Jsonnet/Tanka 模式]]
-- [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
-- [[wiki/24-综合/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]
+- [[wiki/12-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
+- [[wiki/23-综合与研究/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]

@@ -1,0 +1,1621 @@
+domain: 综合与研究
+total_questions: 334
+generated_at: '2026-11-25'
+qa_pairs:
+- type: concept
+  question: 在 综合总览 中, 子域导航 是什么?
+  answer: 参见 wiki/23-综合与研究/00-总览/index.md 的「子域导航」章节。
+  source: wiki/23-综合与研究/00-总览/index.md
+  section: 子域导航
+- type: concept
+  question: 在 综合总览 中, 写作规范 是什么?
+  answer: 参见 wiki/23-综合与研究/00-总览/index.md 的「写作规范」章节。
+  source: wiki/23-综合与研究/00-总览/index.md
+  section: 写作规范
+- type: concept
+  question: 在 综合总览 中, 使用指引 是什么?
+  answer: 参见 wiki/23-综合与研究/00-总览/index.md 的「使用指引」章节。
+  source: wiki/23-综合与研究/00-总览/index.md
+  section: 使用指引
+- type: concept
+  question: 在 AI 工作负载 × 成本优化 × FinOps 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ai-workload-cost-optimization-finops.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ai-workload-cost-optimization-finops.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 AI 工作负载 × 成本优化 × FinOps 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ai-workload-cost-optimization-finops.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ai-workload-cost-optimization-finops.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: AI 工作负载 × 成本优化 × FinOps 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ai-workload-cost-optimization-finops.md 中的对比分析。
+  source: wiki/23-综合与研究/01-AI与机器学习/ai-workload-cost-optimization-finops.md
+- type: concept
+  question: 在 Feature Store × RAG × ML 平台 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/feature-store-rag-ml-platform.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/feature-store-rag-ml-platform.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Feature Store × RAG × ML 平台 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/feature-store-rag-ml-platform.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/feature-store-rag-ml-platform.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: Feature Store × RAG × ML 平台 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/feature-store-rag-ml-platform.md 中的对比分析。
+  source: wiki/23-综合与研究/01-AI与机器学习/feature-store-rag-ml-platform.md
+- type: concept
+  question: 在 GPU Operator × Device Plugin × CDI 生态交叉 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md
+  section: The Connection
+- type: concept
+  question: 在 GPU Operator × Device Plugin × CDI 生态交叉 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 GPU Operator × Device Plugin × CDI 生态交叉 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 GPU Operator × Device Plugin × CDI 生态交叉 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 GPU Operator × Device Plugin × CDI 生态交叉 中, Practical Patterns 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md 的「Practical Patterns」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-operator-device-plugin-ecosystem.md
+  section: Practical Patterns
+- type: concept
+  question: 在 GPU Scheduling × Cost Optimization 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md
+  section: The Connection
+- type: concept
+  question: 在 GPU Scheduling × Cost Optimization 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 GPU Scheduling × Cost Optimization 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 GPU Scheduling × Cost Optimization 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 GPU Scheduling × Cost Optimization 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/gpu-scheduling-cost.md
+  section: Open Questions
+- type: concept
+  question: 在 01-AI与机器学习 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/index.md
+  section: 文档
+- type: concept
+  question: 在 可观测性 × AI/LLM 监控 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/observability-ai-llm-monitoring.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/observability-ai-llm-monitoring.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 可观测性 × AI/LLM 监控 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/observability-ai-llm-monitoring.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/observability-ai-llm-monitoring.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 可观测性 × AI/LLM 监控 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/observability-ai-llm-monitoring.md 中的对比分析。
+  source: wiki/23-综合与研究/01-AI与机器学习/observability-ai-llm-monitoring.md
+- type: concept
+  question: 在 存储 × AI 工作负载 × 数据管线 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/storage-ai-workload-data-pipeline.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/storage-ai-workload-data-pipeline.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 存储 × AI 工作负载 × 数据管线 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/storage-ai-workload-data-pipeline.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/storage-ai-workload-data-pipeline.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 存储 × AI 工作负载 × 数据管线 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/storage-ai-workload-data-pipeline.md 中的对比分析。
+  source: wiki/23-综合与研究/01-AI与机器学习/storage-ai-workload-data-pipeline.md
+- type: concept
+  question: 在 工单智能体 × RAG 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md
+  section: The Connection
+- type: concept
+  question: 在 工单智能体 × RAG 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 工单智能体 × RAG 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 工单智能体 × RAG 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 工单智能体 × RAG 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md
+  section: Open Questions
+- type: comparison
+  question: 工单智能体 × RAG 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md 中的对比分析。
+  source: wiki/23-综合与研究/01-AI与机器学习/ticket-agent-rag.md
+- type: concept
+  question: 在 训练 × 推理 × 数据生命周期全链路交叉 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md
+  section: The Connection
+- type: concept
+  question: 在 训练 × 推理 × 数据生命周期全链路交叉 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 训练 × 推理 × 数据生命周期全链路交叉 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 训练 × 推理 × 数据生命周期全链路交叉 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 训练 × 推理 × 数据生命周期全链路交叉 中, Practical Patterns 是什么?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md 的「Practical Patterns」章节。
+  source: wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md
+  section: Practical Patterns
+- type: comparison
+  question: 训练 × 推理 × 数据生命周期全链路交叉 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md 中的对比分析。
+  source: wiki/23-综合与研究/01-AI与机器学习/training-inference-data-lifecycle.md
+- type: concept
+  question: 在 Argo Rollouts × 渐进式交付 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argo-rollouts-progressive-delivery.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argo-rollouts-progressive-delivery.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Argo Rollouts × 渐进式交付 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argo-rollouts-progressive-delivery.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argo-rollouts-progressive-delivery.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: Argo Rollouts × 渐进式交付 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argo-rollouts-progressive-delivery.md 中的对比分析。
+  source: wiki/23-综合与研究/02-交付与GitOps/argo-rollouts-progressive-delivery.md
+- type: concept
+  question: 在 ArgoCD × GitOps 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md
+  section: The Connection
+- type: concept
+  question: 在 ArgoCD × GitOps 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 ArgoCD × GitOps 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 ArgoCD × GitOps 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 ArgoCD × GitOps 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md
+  section: Open Questions
+- type: comparison
+  question: ArgoCD × GitOps 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md 中的对比分析。
+  source: wiki/23-综合与研究/02-交付与GitOps/argocd-gitops.md
+- type: concept
+  question: 在 Crossplane × Infrastructure as Code 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md
+  section: The Connection
+- type: concept
+  question: 在 Crossplane × Infrastructure as Code 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Crossplane × Infrastructure as Code 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Crossplane × Infrastructure as Code 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Crossplane × Infrastructure as Code 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md
+  section: Open Questions
+- type: comparison
+  question: Crossplane × Infrastructure as Code 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md 中的对比分析。
+  source: wiki/23-综合与研究/02-交付与GitOps/crossplane-iac.md
+- type: concept
+  question: 在 Helm × GitOps 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md
+  section: The Connection
+- type: concept
+  question: 在 Helm × GitOps 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Helm × GitOps 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Helm × GitOps 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Helm × GitOps 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/helm-gitops.md
+  section: Open Questions
+- type: concept
+  question: 在 02-交付与GitOps 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/index.md
+  section: 文档
+- type: concept
+  question: 在 多集群 × GitOps × 联邦 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/multi-cluster-gitops-federation.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/multi-cluster-gitops-federation.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 多集群 × GitOps × 联邦 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/multi-cluster-gitops-federation.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/02-交付与GitOps/multi-cluster-gitops-federation.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 多集群 × GitOps × 联邦 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/02-交付与GitOps/multi-cluster-gitops-federation.md 中的对比分析。
+  source: wiki/23-综合与研究/02-交付与GitOps/multi-cluster-gitops-federation.md
+- type: concept
+  question: 在 Cilium × Service Mesh 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md
+  section: The Connection
+- type: concept
+  question: 在 Cilium × Service Mesh 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Cilium × Service Mesh 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Cilium × Service Mesh 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Cilium × Service Mesh 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md
+  section: Open Questions
+- type: comparison
+  question: Cilium × Service Mesh 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md 中的对比分析。
+  source: wiki/23-综合与研究/03-网络与服务网格/cilium-service-mesh.md
+- type: concept
+  question: 在 03-网络与服务网格 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes × Service 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md
+  section: The Connection
+- type: concept
+  question: 在 Kubernetes × Service 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Kubernetes × Service 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Kubernetes × Service 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Kubernetes × Service 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md
+  section: Open Questions
+- type: comparison
+  question: Kubernetes × Service 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md 中的对比分析。
+  source: wiki/23-综合与研究/03-网络与服务网格/kubernetes-service.md
+- type: concept
+  question: 在 NetworkPolicy × Service Mesh 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md
+  section: The Connection
+- type: concept
+  question: 在 NetworkPolicy × Service Mesh 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 NetworkPolicy × Service Mesh 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 NetworkPolicy × Service Mesh 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 NetworkPolicy × Service Mesh 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md
+  section: Open Questions
+- type: comparison
+  question: NetworkPolicy × Service Mesh 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md 中的对比分析。
+  source: wiki/23-综合与研究/03-网络与服务网格/networkpolicy-service-mesh.md
+- type: concept
+  question: 在 Service × Ingress 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-ingress.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-ingress.md
+  section: The Connection
+- type: concept
+  question: 在 Service × Ingress 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-ingress.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-ingress.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Service × Ingress 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-ingress.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-ingress.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Service × Ingress 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-ingress.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-ingress.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Service × Ingress 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-ingress.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-ingress.md
+  section: Open Questions
+- type: concept
+  question: 在 Service Mesh × mTLS × Zero Trust 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-mesh-mtls-zero-trust.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-mesh-mtls-zero-trust.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Service Mesh × mTLS × Zero Trust 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/service-mesh-mtls-zero-trust.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/service-mesh-mtls-zero-trust.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: concept
+  question: 在 Zero Trust × NetworkPolicy × 微分段 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/zero-trust-networkpolicy-segmentation.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/zero-trust-networkpolicy-segmentation.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Zero Trust × NetworkPolicy × 微分段 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/03-网络与服务网格/zero-trust-networkpolicy-segmentation.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/03-网络与服务网格/zero-trust-networkpolicy-segmentation.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: concept
+  question: 在 cert-manager × TLS 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md
+  section: The Connection
+- type: concept
+  question: 在 cert-manager × TLS 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 cert-manager × TLS 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 cert-manager × TLS 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 cert-manager × TLS 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/04-安全与合规/cert-manager-tls.md
+  section: Open Questions
+- type: concept
+  question: 在 合规 × K8s × SOC2/HIPAA/PCI 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/compliance-k8s-soc2-hipaa.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/compliance-k8s-soc2-hipaa.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 合规 × K8s × SOC2/HIPAA/PCI 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/compliance-k8s-soc2-hipaa.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/compliance-k8s-soc2-hipaa.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 合规 × K8s × SOC2/HIPAA/PCI 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/compliance-k8s-soc2-hipaa.md 中的对比分析。
+  source: wiki/23-综合与研究/04-安全与合规/compliance-k8s-soc2-hipaa.md
+- type: concept
+  question: 在 容器镜像仓库 × 镜像扫描 × 准入控制 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-registry-image-scanning.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-registry-image-scanning.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 容器镜像仓库 × 镜像扫描 × 准入控制 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-registry-image-scanning.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-registry-image-scanning.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 容器镜像仓库 × 镜像扫描 × 准入控制 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-registry-image-scanning.md 中的对比分析。
+  source: wiki/23-综合与研究/04-安全与合规/container-registry-image-scanning.md
+- type: concept
+  question: 在 容器运行时 × 镜像安全 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md
+  section: The Connection
+- type: concept
+  question: 在 容器运行时 × 镜像安全 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 容器运行时 × 镜像安全 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 容器运行时 × 镜像安全 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 容器运行时 × 镜像安全 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md
+  section: Open Questions
+- type: comparison
+  question: 容器运行时 × 镜像安全 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md 中的对比分析。
+  source: wiki/23-综合与研究/04-安全与合规/container-runtime-image-security.md
+- type: concept
+  question: 在 04-安全与合规 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/04-安全与合规/index.md
+  section: 文档
+- type: concept
+  question: 在 OPA/Gatekeeper × Kyverno × Policy-as-Code 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/opa-kyverno-policy-as-code.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/opa-kyverno-policy-as-code.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 OPA/Gatekeeper × Kyverno × Policy-as-Code 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/opa-kyverno-policy-as-code.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/opa-kyverno-policy-as-code.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: OPA/Gatekeeper × Kyverno × Policy-as-Code 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/opa-kyverno-policy-as-code.md 中的对比分析。
+  source: wiki/23-综合与研究/04-安全与合规/opa-kyverno-policy-as-code.md
+- type: concept
+  question: 在 RBAC × Multi-tenancy 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md
+  section: The Connection
+- type: concept
+  question: 在 RBAC × Multi-tenancy 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 RBAC × Multi-tenancy 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 RBAC × Multi-tenancy 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 RBAC × Multi-tenancy 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/04-安全与合规/rbac-multitenancy.md
+  section: Open Questions
+- type: concept
+  question: 在 Sigstore/Cosign × 软件供应链安全 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/sigstore-cosign-supply-chain.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/sigstore-cosign-supply-chain.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Sigstore/Cosign × 软件供应链安全 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/sigstore-cosign-supply-chain.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/04-安全与合规/sigstore-cosign-supply-chain.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: Sigstore/Cosign × 软件供应链安全 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/04-安全与合规/sigstore-cosign-supply-chain.md 中的对比分析。
+  source: wiki/23-综合与研究/04-安全与合规/sigstore-cosign-supply-chain.md
+- type: concept
+  question: 在 eBPF × Observability 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/ebpf-observability.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/05-可观测性/ebpf-observability.md
+  section: The Connection
+- type: concept
+  question: 在 eBPF × Observability 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/ebpf-observability.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/05-可观测性/ebpf-observability.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 eBPF × Observability 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/ebpf-observability.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/05-可观测性/ebpf-observability.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 eBPF × Observability 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/ebpf-observability.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/05-可观测性/ebpf-observability.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 eBPF × Observability 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/ebpf-observability.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/05-可观测性/ebpf-observability.md
+  section: Open Questions
+- type: concept
+  question: 在 05-可观测性 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/05-可观测性/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes × Prometheus 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md
+  section: The Connection
+- type: concept
+  question: 在 Kubernetes × Prometheus 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Kubernetes × Prometheus 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Kubernetes × Prometheus 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Kubernetes × Prometheus 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md
+  section: Open Questions
+- type: troubleshooting
+  question: 如何排查 Kubernetes × Prometheus 相关的故障?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md 的故障排查章节。
+  source: wiki/23-综合与研究/05-可观测性/kubernetes-prometheus.md
+- type: concept
+  question: 在 OpenTelemetry × Prometheus 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md
+  section: The Connection
+- type: concept
+  question: 在 OpenTelemetry × Prometheus 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 OpenTelemetry × Prometheus 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 OpenTelemetry × Prometheus 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 OpenTelemetry × Prometheus 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md
+  section: Open Questions
+- type: comparison
+  question: OpenTelemetry × Prometheus 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md 中的对比分析。
+  source: wiki/23-综合与研究/05-可观测性/opentelemetry-prometheus.md
+- type: concept
+  question: 在 SLO × 可观测性 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/slo-observability.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/05-可观测性/slo-observability.md
+  section: The Connection
+- type: concept
+  question: 在 SLO × 可观测性 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/slo-observability.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/05-可观测性/slo-observability.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 SLO × 可观测性 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/slo-observability.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/05-可观测性/slo-observability.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 SLO × 可观测性 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/slo-observability.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/05-可观测性/slo-observability.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 SLO × 可观测性 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/slo-observability.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/05-可观测性/slo-observability.md
+  section: Open Questions
+- type: comparison
+  question: SLO × 可观测性 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/05-可观测性/slo-observability.md 中的对比分析。
+  source: wiki/23-综合与研究/05-可观测性/slo-observability.md
+- type: concept
+  question: 在 Autoscaling × Cost Optimization 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md
+  section: The Connection
+- type: concept
+  question: 在 Autoscaling × Cost Optimization 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Autoscaling × Cost Optimization 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Autoscaling × Cost Optimization 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Autoscaling × Cost Optimization 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md
+  section: Open Questions
+- type: comparison
+  question: Autoscaling × Cost Optimization 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md 中的对比分析。
+  source: wiki/23-综合与研究/06-可靠性与成本/autoscaling-cost-optimization.md
+- type: concept
+  question: 在 备份 × 多云 × 灾难恢复策略 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/backup-multicloud-dr-strategy.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/backup-multicloud-dr-strategy.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 备份 × 多云 × 灾难恢复策略 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/backup-multicloud-dr-strategy.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/backup-multicloud-dr-strategy.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 备份 × 多云 × 灾难恢复策略 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/backup-multicloud-dr-strategy.md 中的对比分析。
+  source: wiki/23-综合与研究/06-可靠性与成本/backup-multicloud-dr-strategy.md
+- type: concept
+  question: 在 混沌工程 × SRE × 弹性 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/chaos-engineering-sre-resilience.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/chaos-engineering-sre-resilience.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 混沌工程 × SRE × 弹性 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/chaos-engineering-sre-resilience.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/chaos-engineering-sre-resilience.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: 混沌工程 × SRE × 弹性 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/chaos-engineering-sre-resilience.md 中的对比分析。
+  source: wiki/23-综合与研究/06-可靠性与成本/chaos-engineering-sre-resilience.md
+- type: concept
+  question: 在 06-可靠性与成本 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/index.md
+  section: 文档
+- type: concept
+  question: 在 KEDA × HPA 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md
+  section: The Connection
+- type: concept
+  question: 在 KEDA × HPA 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 KEDA × HPA 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 KEDA × HPA 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 KEDA × HPA 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/keda-hpa.md
+  section: Open Questions
+- type: concept
+  question: 在 多租户 × 资源隔离 × 治理交叉 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md
+  section: The Connection
+- type: concept
+  question: 在 多租户 × 资源隔离 × 治理交叉 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 多租户 × 资源隔离 × 治理交叉 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 多租户 × 资源隔离 × 治理交叉 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 多租户 × 资源隔离 × 治理交叉 中, Practical Patterns 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md 的「Practical Patterns」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/multitenancy-resource-isolation-governance.md
+  section: Practical Patterns
+- type: concept
+  question: 在 Velero × Disaster Recovery 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md
+  section: The Connection
+- type: concept
+  question: 在 Velero × Disaster Recovery 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Velero × Disaster Recovery 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Velero × Disaster Recovery 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Velero × Disaster Recovery 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md
+  section: Open Questions
+- type: comparison
+  question: Velero × Disaster Recovery 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md 中的对比分析。
+  source: wiki/23-综合与研究/06-可靠性与成本/velero-disaster-recovery.md
+- type: concept
+  question: 在 07-平台与数据 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/07-平台与数据/index.md
+  section: 文档
+- type: concept
+  question: 在 Kafka × 数据库 × CDC × 流处理 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kafka-database-cdc-streaming.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kafka-database-cdc-streaming.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Kafka × 数据库 × CDC × 流处理 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kafka-database-cdc-streaming.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kafka-database-cdc-streaming.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: concept
+  question: 在 Kubernetes × etcd 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+  section: The Connection
+- type: concept
+  question: 在 Kubernetes × etcd 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Kubernetes × etcd 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Kubernetes × etcd 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Kubernetes × etcd 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+  section: Open Questions
+- type: troubleshooting
+  question: 如何排查 Kubernetes × etcd 相关的故障?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 的故障排查章节。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+- type: comparison
+  question: Kubernetes × etcd 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md 中的对比分析。
+  source: wiki/23-综合与研究/07-平台与数据/kubernetes-etcd.md
+- type: concept
+  question: 在 Linux 内核 × 容器性能 中, The Connection（为什么这两个领域交叉） 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/linux-kernel-container-performance.md 的「The Connection（为什么这两个领域交叉）」章节。
+  source: wiki/23-综合与研究/07-平台与数据/linux-kernel-container-performance.md
+  section: The Connection（为什么这两个领域交叉）
+- type: concept
+  question: 在 Linux 内核 × 容器性能 中, Where They Co-occur（生产中的交叉场景） 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/linux-kernel-container-performance.md 的「Where They Co-occur（生产中的交叉场景）」章节。
+  source: wiki/23-综合与研究/07-平台与数据/linux-kernel-container-performance.md
+  section: Where They Co-occur（生产中的交叉场景）
+- type: comparison
+  question: Linux 内核 × 容器性能 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/linux-kernel-container-performance.md 中的对比分析。
+  source: wiki/23-综合与研究/07-平台与数据/linux-kernel-container-performance.md
+- type: concept
+  question: 在 Platform Engineering × Developer Experience 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md
+  section: The Connection
+- type: concept
+  question: 在 Platform Engineering × Developer Experience 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 Platform Engineering × Developer Experience 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 Platform Engineering × Developer Experience 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 Platform Engineering × Developer Experience 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md
+  section: Open Questions
+- type: comparison
+  question: Platform Engineering × Developer Experience 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md 中的对比分析。
+  source: wiki/23-综合与研究/07-平台与数据/platform-engineering-devex.md
+- type: concept
+  question: 在 StatefulSet × 云原生存储 中, The Connection 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md 的「The Connection」章节。
+  source: wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md
+  section: The Connection
+- type: concept
+  question: 在 StatefulSet × 云原生存储 中, Where They Co-occur 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md 的「Where They Co-occur」章节。
+  source: wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md
+  section: Where They Co-occur
+- type: concept
+  question: 在 StatefulSet × 云原生存储 中, Cross-cutting Insight 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md 的「Cross-cutting Insight」章节。
+  source: wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md
+  section: Cross-cutting Insight
+- type: concept
+  question: 在 StatefulSet × 云原生存储 中, Tensions and Trade-offs 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md 的「Tensions and Trade-offs」章节。
+  source: wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md
+  section: Tensions and Trade-offs
+- type: concept
+  question: 在 StatefulSet × 云原生存储 中, Open Questions 是什么?
+  answer: 参见 wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md 的「Open Questions」章节。
+  source: wiki/23-综合与研究/07-平台与数据/statefulset-cloud-native-storage.md
+  section: Open Questions
+- type: concept
+  question: 在 综合目录索引 中, 控制平面与核心架构 是什么?
+  answer: 参见 wiki/23-综合与研究/index.md 的「控制平面与核心架构」章节。
+  source: wiki/23-综合与研究/index.md
+  section: 控制平面与核心架构
+- type: concept
+  question: 在 综合目录索引 中, 可观测性与监控 是什么?
+  answer: 参见 wiki/23-综合与研究/index.md 的「可观测性与监控」章节。
+  source: wiki/23-综合与研究/index.md
+  section: 可观测性与监控
+- type: concept
+  question: 在 综合目录索引 中, 网络与安全 是什么?
+  answer: 参见 wiki/23-综合与研究/index.md 的「网络与安全」章节。
+  source: wiki/23-综合与研究/index.md
+  section: 网络与安全
+- type: concept
+  question: 在 综合目录索引 中, 发布与平台工程 是什么?
+  answer: 参见 wiki/23-综合与研究/index.md 的「发布与平台工程」章节。
+  source: wiki/23-综合与研究/index.md
+  section: 发布与平台工程
+- type: concept
+  question: 在 综合目录索引 中, 弹性伸缩与成本 是什么?
+  answer: 参见 wiki/23-综合与研究/index.md 的「弹性伸缩与成本」章节。
+  source: wiki/23-综合与研究/index.md
+  section: 弹性伸缩与成本
+- type: concept
+  question: 在 提炼笔记 中, 文件分布 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md 的「文件分布」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md
+  section: 文件分布
+- type: concept
+  question: 在 提炼笔记 中, 板块一：K8s 网络模型三原则（来源：00-总览/01、01-K8s网络核心/00、03） 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md 的「板块一：K8s 网络模型三原则（来源：00-总览/01、01-K8s网络核心/00、03）」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md
+  section: 板块一：K8s 网络模型三原则（来源：00-总览/01、01-K8s网络核心/00、03）
+- type: concept
+  question: 在 提炼笔记 中, 板块二：CNI 插件选型（来源：01-K8s网络核心/04、03） 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md 的「板块二：CNI 插件选型（来源：01-K8s网络核心/04、03）」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md
+  section: 板块二：CNI 插件选型（来源：01-K8s网络核心/04、03）
+- type: concept
+  question: 在 提炼笔记 中, 板块三：Service、DNS 与 kube-proxy（来源：00-总览/01） 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md 的「板块三：Service、DNS 与 kube-proxy（来源：00-总览/01）」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md
+  section: 板块三：Service、DNS 与 kube-proxy（来源：00-总览/01）
+- type: concept
+  question: 在 提炼笔记 中, 板块四：东西向与南北向——服务网格 vs API 网关（来源：03-服务网格/07、04-API网关/01、02） 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md 的「板块四：东西向与南北向——服务网格 vs API 网关（来源：03-服务网格/07、04-API网关/01、02）」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md
+  section: 板块四：东西向与南北向——服务网格 vs API 网关（来源：03-服务网格/07、04-API网关/01、02）
+- type: comparison
+  question: 提炼笔记 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md 中的对比分析。
+  source: wiki/23-综合与研究/消化/05-网络-播客/提炼笔记.md
+- type: concept
+  question: 在 播客稿 中, 开场 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/播客稿.md 的「开场」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/播客稿.md
+  section: 开场
+- type: concept
+  question: 在 播客稿 中, 板块一：K8s 网络模型的三条铁律 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/播客稿.md 的「板块一：K8s 网络模型的三条铁律」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/播客稿.md
+  section: 板块一：K8s 网络模型的三条铁律
+- type: concept
+  question: 在 播客稿 中, 板块二：CNI 选型与 Terway 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/播客稿.md 的「板块二：CNI 选型与 Terway」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/播客稿.md
+  section: 板块二：CNI 选型与 Terway
+- type: concept
+  question: 在 播客稿 中, 板块三：Service 与 DNS 的性能拐点 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/播客稿.md 的「板块三：Service 与 DNS 的性能拐点」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/播客稿.md
+  section: 板块三：Service 与 DNS 的性能拐点
+- type: concept
+  question: 在 播客稿 中, 板块四：服务网格与 API 网关 是什么?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/播客稿.md 的「板块四：服务网格与 API 网关」章节。
+  source: wiki/23-综合与研究/消化/05-网络-播客/播客稿.md
+  section: 板块四：服务网格与 API 网关
+- type: comparison
+  question: 播客稿 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/消化/05-网络-播客/播客稿.md 中的对比分析。
+  source: wiki/23-综合与研究/消化/05-网络-播客/播客稿.md
+- type: concept
+  question: 在 研究总览 中, 子域导航 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/00-总览/index.md 的「子域导航」章节。
+  source: wiki/23-综合与研究/研究/00-总览/index.md
+  section: 子域导航
+- type: concept
+  question: 在 研究总览 中, 使用指引 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/00-总览/index.md 的「使用指引」章节。
+  source: wiki/23-综合与研究/研究/00-总览/index.md
+  section: 使用指引
+- type: comparison
+  question: 研究总览 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/00-总览/index.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/00-总览/index.md
+- type: concept
+  question: 在 AI Agent 基础设施 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-agent-infrastructure.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-agent-infrastructure.md
+  section: 研究背景
+- type: concept
+  question: 在 AI Agent 基础设施 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-agent-infrastructure.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-agent-infrastructure.md
+  section: 核心问题
+- type: concept
+  question: 在 AI Agent 基础设施 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-agent-infrastructure.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-agent-infrastructure.md
+  section: 调研发现
+- type: concept
+  question: 在 AI 推理服务最佳实践研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md
+  section: 研究背景
+- type: concept
+  question: 在 AI 推理服务最佳实践研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md
+  section: 核心问题
+- type: concept
+  question: 在 AI 推理服务最佳实践研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 AI 推理服务最佳实践研究 相关的操作: python -m vllm.entrypoints.openai.api_server \?'
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md
+  command: python -m vllm.entrypoints.openai.api_server \
+- type: comparison
+  question: AI 推理服务最佳实践研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/ai-inference-serving-best-practices.md
+- type: concept
+  question: 在 边缘计算与 K8s 轻量化运行时研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md
+  section: 研究背景
+- type: concept
+  question: 在 边缘计算与 K8s 轻量化运行时研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md
+  section: 核心问题
+- type: concept
+  question: 在 边缘计算与 K8s 轻量化运行时研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md
+  section: 调研发现
+- type: comparison
+  question: 边缘计算与 K8s 轻量化运行时研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/edge-computing-k8s.md
+- type: concept
+  question: 在 GPU 共享调度在 Kubernetes 中的生产实践 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md
+  section: 研究背景
+- type: concept
+  question: 在 GPU 共享调度在 Kubernetes 中的生产实践 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md
+  section: 核心问题
+- type: concept
+  question: 在 GPU 共享调度在 Kubernetes 中的生产实践 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md
+  section: 调研发现
+- type: comparison
+  question: GPU 共享调度在 Kubernetes 中的生产实践 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/gpu-sharing-scheduling.md
+- type: concept
+  question: 在 01-AI与边缘 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/index.md
+  section: 文档
+- type: concept
+  question: 在 WebAssembly 云原生应用 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md
+  section: 研究背景
+- type: concept
+  question: 在 WebAssembly 云原生应用 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md
+  section: 核心问题
+- type: concept
+  question: 在 WebAssembly 云原生应用 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md
+  section: 调研发现
+- type: comparison
+  question: WebAssembly 云原生应用 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/01-AI与边缘/wasm-cloud-native.md
+- type: concept
+  question: 在 eBPF 在 Kubernetes 网络中的革命性应用 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md
+  section: 研究背景
+- type: concept
+  question: 在 eBPF 在 Kubernetes 网络中的革命性应用 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md
+  section: 核心问题
+- type: concept
+  question: 在 eBPF 在 Kubernetes 网络中的革命性应用 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 eBPF 在 Kubernetes 网络中的革命性应用 相关的操作: hubble observe --namespace production --follow?'
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md
+  command: hubble observe --namespace production --follow
+- type: comparison
+  question: eBPF 在 Kubernetes 网络中的革命性应用 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution.md
+- type: concept
+  question: 在 eBPF 可观测性深度应用研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md
+  section: 研究背景
+- type: concept
+  question: 在 eBPF 可观测性深度应用研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md
+  section: 核心问题
+- type: concept
+  question: 在 eBPF 可观测性深度应用研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 eBPF 可观测性深度应用研究 相关的操作: hubble observe --follow                     # 全集群实时流量?'
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/02-网络与安全/ebpf-observability.md
+  command: 'hubble observe --follow                     # 全集群实时流量'
+- type: concept
+  question: 在 Gateway API vs Ingress：下一代 Kubernetes 网络入口 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md
+  section: 研究背景
+- type: concept
+  question: 在 Gateway API vs Ingress：下一代 Kubernetes 网络入口 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md
+  section: 核心问题
+- type: concept
+  question: 在 Gateway API vs Ingress：下一代 Kubernetes 网络入口 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 Gateway API vs Ingress：下一代 Kubernetes 网络入口 相关的操作: kubectl krew install ingress2gateway?'
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md
+  command: kubectl krew install ingress2gateway
+- type: comparison
+  question: Gateway API vs Ingress：下一代 Kubernetes 网络入口 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/02-网络与安全/gateway-api-vs-ingress.md
+- type: concept
+  question: 在 02-网络与安全 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/index.md
+  section: 文档
+- type: concept
+  question: 在 K8s 安全策略自动化研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 安全策略自动化研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 安全策略自动化研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md
+  section: 调研发现
+- type: comparison
+  question: K8s 安全策略自动化研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/02-网络与安全/policy-as-code-security.md
+- type: concept
+  question: 在 Service Mesh 演进与选型 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md
+  section: 研究背景
+- type: concept
+  question: 在 Service Mesh 演进与选型 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md
+  section: 核心问题
+- type: concept
+  question: 在 Service Mesh 演进与选型 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md
+  section: 调研发现
+- type: comparison
+  question: Service Mesh 演进与选型 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/02-网络与安全/service-mesh-evolution.md
+- type: concept
+  question: 在 K8s 供应链安全深度研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 供应链安全深度研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 供应链安全深度研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 K8s 供应链安全深度研究 相关的操作: cosign sign --yes \?'
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/02-网络与安全/supply-chain-security.md
+  command: cosign sign --yes \
+- type: concept
+  question: 在 K8s 零信任安全架构研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 零信任安全架构研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 零信任安全架构研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md
+  section: 调研发现
+- type: comparison
+  question: K8s 零信任安全架构研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/02-网络与安全/zero-trust-k8s-security.md
+- type: concept
+  question: 在 GitOps 多集群部署模式研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md
+  section: 研究背景
+- type: concept
+  question: 在 GitOps 多集群部署模式研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md
+  section: 核心问题
+- type: concept
+  question: 在 GitOps 多集群部署模式研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md
+  section: 调研发现
+- type: comparison
+  question: GitOps 多集群部署模式研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/03-平台与交付/gitops-multi-cluster.md
+- type: concept
+  question: 在 03-平台与交付 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/index.md
+  section: 文档
+- type: concept
+  question: 在 多集群 Kubernetes 管理技术选型研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md
+  section: 研究背景
+- type: concept
+  question: 在 多集群 Kubernetes 管理技术选型研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md
+  section: 核心问题
+- type: concept
+  question: 在 多集群 Kubernetes 管理技术选型研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md
+  section: 调研发现
+- type: comparison
+  question: 多集群 Kubernetes 管理技术选型研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/03-平台与交付/multi-cluster-management.md
+- type: concept
+  question: 在 K8s Operator 开发模式与最佳实践研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s Operator 开发模式与最佳实践研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s Operator 开发模式与最佳实践研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md
+  section: 调研发现
+- type: comparison
+  question: K8s Operator 开发模式与最佳实践研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/03-平台与交付/operator-development-patterns.md
+- type: concept
+  question: 在 K8s 平台工程与 IDP 构建研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 平台工程与 IDP 构建研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 平台工程与 IDP 构建研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md
+  section: 调研发现
+- type: comparison
+  question: K8s 平台工程与 IDP 构建研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/03-平台与交付/platform-engineering-idp.md
+- type: concept
+  question: 在 渐进式交付模式 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md
+  section: 研究背景
+- type: concept
+  question: 在 渐进式交付模式 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md
+  section: 核心问题
+- type: concept
+  question: 在 渐进式交付模式 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md
+  section: 调研发现
+- type: comparison
+  question: 渐进式交付模式 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/03-平台与交付/progressive-delivery-patterns.md
+- type: concept
+  question: 在 K8s 混沌工程落地实践研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 混沌工程落地实践研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 混沌工程落地实践研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md
+  section: 调研发现
+- type: comparison
+  question: K8s 混沌工程落地实践研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/chaos-engineering-practice.md
+- type: concept
+  question: 在 K8s 灾难恢复与业务连续性研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 灾难恢复与业务连续性研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 灾难恢复与业务连续性研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 K8s 灾难恢复与业务连续性研究 相关的操作: ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%?'
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md
+  command: ETCDCTL_API=3 etcdctl snapshot save /backup/etcd-$(date +%Y%m%d-%H%M%S).db \
+- type: comparison
+  question: K8s 灾难恢复与业务连续性研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/disaster-recovery-bcp.md
+- type: concept
+  question: 在 绿色计算与可持续性 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/greenops-sustainability.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/greenops-sustainability.md
+  section: 研究背景
+- type: concept
+  question: 在 绿色计算与可持续性 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/greenops-sustainability.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/greenops-sustainability.md
+  section: 核心问题
+- type: concept
+  question: 在 绿色计算与可持续性 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/greenops-sustainability.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/greenops-sustainability.md
+  section: 调研发现
+- type: concept
+  question: 在 04-可靠性与运维 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/index.md
+  section: 文档
+- type: concept
+  question: 在 Kubernetes 自动伸缩策略 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md
+  section: 研究背景
+- type: concept
+  question: 在 Kubernetes 自动伸缩策略 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md
+  section: 核心问题
+- type: concept
+  question: 在 Kubernetes 自动伸缩策略 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md
+  section: 调研发现
+- type: comparison
+  question: Kubernetes 自动伸缩策略 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-autoscaling-strategies.md
+- type: concept
+  question: 在 FinOps 在 Kubernetes 中的落地实践研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md
+  section: 研究背景
+- type: concept
+  question: 在 FinOps 在 Kubernetes 中的落地实践研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md
+  section: 核心问题
+- type: concept
+  question: 在 FinOps 在 Kubernetes 中的落地实践研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md
+  section: 调研发现
+- type: comparison
+  question: FinOps 在 Kubernetes 中的落地实践研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-finops-practice.md
+- type: concept
+  question: 在 Kubernetes v1.37 新功能快问快答 中, 快答：这个新版本有哪些新功能？ 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-quick-qa.md 的「快答：这个新版本有哪些新功能？」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-quick-qa.md
+  section: 快答：这个新版本有哪些新功能？
+- type: concept
+  question: 在 Kubernetes v1.37 发布专题研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md
+  section: 研究背景
+- type: concept
+  question: 在 Kubernetes v1.37 发布专题研究 中, Stable 毕业（16 项） 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md 的「Stable 毕业（16 项）」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md
+  section: Stable 毕业（16 项）
+- type: concept
+  question: 在 Kubernetes v1.37 发布专题研究 中, Beta 毕业重点（23 项选摘） 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md 的「Beta 毕业重点（23 项选摘）」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md
+  section: Beta 毕业重点（23 项选摘）
+- type: operation
+  question: '如何执行与 Kubernetes v1.37 发布专题研究 相关的操作: kubectl -n kube-system get configmap kube-proxy -o jsonpath=?'
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/kubernetes-v1.37-release-research.md
+  command: kubectl -n kube-system get configmap kube-proxy -o jsonpath='{.data.config\.conf}' | grep 'mode:'
+- type: concept
+  question: 在 K8s 多租户架构与隔离研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 多租户架构与隔离研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 多租户架构与隔离研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md
+  section: 调研发现
+- type: comparison
+  question: K8s 多租户架构与隔离研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/multi-tenancy-isolation.md
+- type: concept
+  question: 在 K8s 可观测性体系演进研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 可观测性体系演进研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 可观测性体系演进研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md
+  section: 调研发现
+- type: comparison
+  question: K8s 可观测性体系演进研究 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/04-可靠性与运维/observability-evolution.md
+- type: concept
+  question: 在 05-存储 中, 文档 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/05-存储/index.md 的「文档」章节。
+  source: wiki/23-综合与研究/研究/05-存储/index.md
+  section: 文档
+- type: concept
+  question: 在 K8s 存储性能调优研究 中, 研究背景 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md 的「研究背景」章节。
+  source: wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md
+  section: 研究背景
+- type: concept
+  question: 在 K8s 存储性能调优研究 中, 核心问题 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md 的「核心问题」章节。
+  source: wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md
+  section: 核心问题
+- type: concept
+  question: 在 K8s 存储性能调优研究 中, 调研发现 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md 的「调研发现」章节。
+  source: wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md
+  section: 调研发现
+- type: operation
+  question: '如何执行与 K8s 存储性能调优研究 相关的操作: kubectl exec -it <pod> -- iostat -xz 1?'
+  answer: 参见 wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md 中的操作步骤。
+  source: wiki/23-综合与研究/研究/05-存储/storage-performance-tuning.md
+  command: kubectl exec -it <pod> -- iostat -xz 1
+- type: concept
+  question: 在 Research 中, 概览 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/index.md 的「概览」章节。
+  source: wiki/23-综合与研究/研究/index.md
+  section: 概览
+- type: concept
+  question: 在 Research 中, 网络与数据平面 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/index.md 的「网络与数据平面」章节。
+  source: wiki/23-综合与研究/研究/index.md
+  section: 网络与数据平面
+- type: concept
+  question: 在 Research 中, AI 基础设施 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/index.md 的「AI 基础设施」章节。
+  source: wiki/23-综合与研究/研究/index.md
+  section: AI 基础设施
+- type: concept
+  question: 在 Research 中, 安全与合规 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/index.md 的「安全与合规」章节。
+  source: wiki/23-综合与研究/研究/index.md
+  section: 安全与合规
+- type: concept
+  question: 在 Research 中, 可靠性与混沌 是什么?
+  answer: 参见 wiki/23-综合与研究/研究/index.md 的「可靠性与混沌」章节。
+  source: wiki/23-综合与研究/研究/index.md
+  section: 可靠性与混沌
+- type: comparison
+  question: Research 中有哪些技术对比?
+  answer: 参见 wiki/23-综合与研究/研究/index.md 中的对比分析。
+  source: wiki/23-综合与研究/研究/index.md

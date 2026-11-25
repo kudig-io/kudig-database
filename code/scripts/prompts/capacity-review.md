@@ -134,8 +134,8 @@ WORKLOAD: ml-training/training-job CPU Req: 8, Usage P95: 1.2, Mem Req: 32Gi, Us
 
 ## 参考文档
 
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management|GPU 调度与管理]] — GPU 资源规划
-- [[wiki/22-概念/bp-resource-management|资源管理最佳实践]] — Request/Limit 配置规范
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management|GPU 调度与管理]] — GPU 资源规划
+- [[wiki/20-概念/bp-resource-management|资源管理最佳实践]] — Request/Limit 配置规范
 - [[code/scripts/automation/k8s-health-check|集群健康检查脚本]] — 数据采集
 
 <!-- risk-assessed -->

@@ -48,7 +48,7 @@ prerequisites:
 
 # kudig-database
 
-**The open-source [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] knowledge base built for AI agents.**
+**The open-source [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] knowledge base built for AI agents.**
 **为 AI 智能体打造的开源 Kubernetes 生产运维知识库。**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)

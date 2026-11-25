@@ -224,7 +224,7 @@ prerequisites:
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|networkpolicy]] — NetworkPolicy
 - [[cilium]] — Cilium
 - [[cni]] — CNI (Container Network Interface)
 - [[prometheus]] — Prometheus

@@ -46,4 +46,4 @@ prerequisites:
 - logging-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/07-迁移方案/01-migration-assessment-planning.md|01 - 迁移评估与规划 [migration]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/07-迁移方案/01-migration-assessment-planning.md|01 - 迁移评估与规划 [migration]]]（本页为重排去重桩，正文见主场）

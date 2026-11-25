@@ -1578,7 +1578,7 @@ IPAM（host-local）单次 ADD 在 **1-5ms**（本地磁盘读写）。如果用
 - [[wiki/05-网络/01-K8s网络核心/04-cni-plugins-comparison.md|CNI 插件对比]] — Calico / Cilium / Flannel / Weave 架构与特性对比。
 - [[wiki/05-网络/01-K8s网络核心/02-network-architecture-overview.md|K8s 网络架构总览]] — Kubernetes 网络模型整体视角。
 - [[wiki/05-网络/02-网络基础/07-cni-plugin-comparison-selection.md|CNI 插件选型]] — 不同场景下选哪个 CNI 的决策矩阵。
-- [[wiki/14-容器运行时/03-containerd-CRI-O/11-cri-interface-internals.md|CRI 接口内部]] — kubelet 如何通过 CRI 调用容器运行时，进而触发 CNI。
+- [[wiki/13-容器运行时/03-containerd-CRI-O/11-cri-interface-internals.md|CRI 接口内部]] — kubelet 如何通过 CRI 调用容器运行时，进而触发 CNI。
 
 ### 外部参考
 

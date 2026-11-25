@@ -484,7 +484,7 @@ kubectl get sc -o wide
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]] — 执行引擎
 - [[skills/06-存储/csi-storage/manage-persistent-storage.md|PV/PVC 存储管理]] — 同域技能
 - [[skills/03-节点/node/02-node-resource-pressure.md|节点资源压力诊断]] — 跨域关联
-- [[wiki/21-生态参考/03-领域索引/csi-index.md|CSI 知识图谱索引]] — 知识索引
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/csi-index.md|CSI 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

@@ -117,10 +117,10 @@ CoreDNS 配置不当会导致 Service 发现失败。应检查 CoreDNS Pod 状�
 
 ## 相关资源
 
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[wiki/22-概念/03-网络/service-networking.md|Service Networking]]
-- [[wiki/23-实体/02-K8s核心组件/cni-plugins.md|CNI Plugins]]
-- [[wiki/23-实体/02-K8s核心组件/networkpolicy.md|NetworkPolicy]]
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[wiki/20-概念/03-网络/service-networking.md|Service Networking]]
+- [[wiki/22-实体/02-K8s核心组件/cni-plugins.md|CNI Plugins]]
+- [[wiki/22-实体/02-K8s核心组件/networkpolicy.md|NetworkPolicy]]
 - [[skills/05-网络/networkpolicy/最佳实践/k8s-network-security-guide.md|Kubernetes 网络安全最佳实践]]
 
 ## 生产案例
@@ -168,8 +168,8 @@ CoreDNS 配置不当会导致 Service 发现失败。应检查 CoreDNS Pod 状�
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[wiki/22-概念/03-网络/service-networking.md|service-networking]] — Service Networking
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/03-网络/service-networking.md|service-networking]] — Service Networking
 
 
 <!-- risk-assessed -->

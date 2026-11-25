@@ -595,4 +595,4 @@ echo "=== 验证完成 ==="
 - [[wiki/02-工作负载/01-核心工作负载/01-workload-overview-architecture.md|工作负载架构总览]]
 - [[wiki/02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling.md|HPA/VPA 自动伸缩]]
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production.md|Go on K8s]]
-- [[wiki/26-标签/05-交付与运维/production|production 标签枢纽]]
+- [[wiki/24-标签/05-交付与运维/production|production 标签枢纽]]

@@ -51,7 +51,7 @@ prerequisites:
 ---
 id: LEARN-ONE-MONTH-W2-DAY8
 title: Day 8 - 控制平面 - etcd + API Server
-topic: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
+topic: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]]
 type: hands-on-guide
 tags: [etcd, apiserver, control-plane, raft, authentication, authorization, admission, hands-on, week-2]
 last_updated: 2026-05-18
@@ -548,9 +548,9 @@ kubectl exec -n kube-system $ETCD_POD -- \
 - [etcd 官方文档](https://etcd.io/docs/)
 - [Raft 论文](https://raft.github.io/raft.pdf)
 - [Kubernetes API Server 文档](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/)
-- [文件: `../../集群基础/11-etcd-deep-dive.md`](../../../../../../wiki/01-集群基础/03-控制平面/11-etcd-deep-dive.md)
-- [文件: `../../集群基础/12-apiserver-deep-dive.md`](../../../../../../wiki/01-集群基础/03-控制平面/12-apiserver-deep-dive.md)
-- [文件: `../../集群基础/07-distributed-consensus-etcd.md`](../../../../../../wiki/01-集群基础/02-设计原则/08-distributed-consensus-etcd.md)
+- [文件: `../../集群基础/11-etcd-deep-dive.md`](../../../../../../wiki/01-集群基础与系统/03-控制平面/11-etcd-deep-dive.md)
+- [文件: `../../集群基础/12-apiserver-deep-dive.md`](../../../../../../wiki/01-集群基础与系统/03-控制平面/12-apiserver-deep-dive.md)
+- [文件: `../../集群基础/07-distributed-consensus-etcd.md`](../../../../../../wiki/01-集群基础与系统/02-设计原则/08-distributed-consensus-etcd.md)
 
 ---
 

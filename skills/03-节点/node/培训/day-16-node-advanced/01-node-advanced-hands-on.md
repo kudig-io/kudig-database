@@ -49,7 +49,7 @@ title: Day 16: Node 节点进阶实操
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 节点池扩缩容
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 节点池扩缩容
   - Cluster Autoscaler 配置
   - Pod 亲和性反亲和性
   - 拓扑分布约束

@@ -20,7 +20,7 @@ created: '2026-07-01'
 > **模板版本**: 2.0
 > **最后更新**: 2026-05
 > **文档类型**: 知识域深度文档
-> **适用版本**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]] v1.28 - v1.32
+> **适用版本**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]] v1.28 - v1.32
 
 ---
 
@@ -116,8 +116,8 @@ related_docs:
   │ (集群基础)│               │ (平台工程)│
   └──────────┘               └──────────┘
 
-交叉引用: [架构基础](../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md) |
-         [设计原理](../../../wiki/01-集群基础/02-设计原则/01-design-principles-foundations.md)
+交叉引用: [架构基础](../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md) |
+         [设计原理](../../../wiki/01-集群基础与系统/02-设计原则/01-design-principles-foundations.md)
 ```
 
 ---

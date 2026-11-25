@@ -36,14 +36,14 @@ dedup = _load("apply_identical_dedup", "apply-identical-dedup.py")
 review = _load("review_title_collisions", "review-title-collisions.py")
 
 QA_DIR = ROOT / "wiki" / "19-故障诊断" / "10-QA语料"
-QA_CORPUS_PREFIX = "wiki/19-故障诊断/10-QA语料/"
+QA_CORPUS_PREFIX = "wiki/17-故障诊断/10-QA语料/"
 
 
 def batch_of(paths: list[str]) -> str:
     """与评审单分批一致。"""
     if any(p.startswith("skills/") for p in paths) and any(p.startswith("wiki/") for p in paths):
         return "B1"
-    if any("/01-best-practices/" in p or p.startswith("wiki/20-最佳实践/") for p in paths):
+    if any("/01-best-practices/" in p or p.startswith("wiki/18-最佳实践/") for p in paths):
         return "B24"
     if any("工单案例" in p for p in paths):
         return "B3a"

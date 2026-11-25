@@ -173,14 +173,14 @@ prerequisites:
 | Pod CrashLoop | [Q&A](../oncall-qa/oncall-quick-qa.md#q2-pod-一直-crashloopbackoff-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#2-pod-处于-crashloopbackoff) | [01-pod-crash-loop](../故障诊断/技能体系/01-pod-crash-loop.md) |
 | Pod Evicted | [Q&A](../oncall-qa/oncall-quick-qa.md#q4-pod-evicted-怎么办) | - | - |
 | ImagePullBackOff | [Q&A](../oncall-qa/oncall-quick-qa.md#q3-pod-imagepullbackoff-怎么办) | - | [03-imagepull-failure](../故障诊断/技能体系/03-imagepull-failure.md) |
-| Service 无法访问 | [Q&A](../oncall-qa/oncall-quick-qa.md#q5-service-无法访问怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#3-service-无法访问) | [05-service-connectivity](../../../../../wiki/19-故障诊断/08-技能体系/05-service-connectivity.md) |
+| Service 无法访问 | [Q&A](../oncall-qa/oncall-quick-qa.md#q5-service-无法访问怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#3-service-无法访问) | [05-service-connectivity](../../../../../skills/09-技能体系/05-service-connectivity.md) |
 | DNS 解析失败 | [Q&A](../oncall-qa/oncall-quick-qa.md#q6-dns-解析失败怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#4-dns-解析失败) | [04-dns-failure](../故障诊断/技能体系/04-dns-failure.md) |
-| Ingress 404 | [Q&A](../oncall-qa/oncall-quick-qa.md#q7-ingress-返回-404-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#9-ingress-404) | [13-ingress-gateway-failure](../../../../../wiki/19-故障诊断/08-技能体系/14-ingress-gateway-failure.md) |
+| Ingress 404 | [Q&A](../oncall-qa/oncall-quick-qa.md#q7-ingress-返回-404-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#9-ingress-404) | [13-ingress-gateway-failure](../../../../../skills/09-技能体系/14-ingress-gateway-failure.md) |
 | 节点 NotReady | [Q&A](../oncall-qa/oncall-quick-qa.md#q13-节点-notready-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#5-节点-notready) | [故障诊断](../../../../03-%E8%8A%82%E7%82%B9/node/01-node-notready-diagnosis.md) |
 | HPA 不工作 | [Q&A](../oncall-qa/oncall-quick-qa.md#q11-hpa-不工作怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#6-hpa-不触发扩容) | [07-hpa-scaling-failure](../故障诊断/技能体系/07-hpa-scaling-failure.md) |
-| PVC Pending | [Q&A](../oncall-qa/oncall-quick-qa.md#q15-pvc-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#7-pvc-pending) | [06-pvc-storage-failure](../../../../../wiki/19-故障诊断/08-技能体系/08-pvc-storage-failure.md) |
-| RBAC Forbidden | [Q&A](../oncall-qa/oncall-quick-qa.md#q17-rbac-forbidden-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#10-rbac-forbidden) | [09-rbac-quota-failure](../../../../../wiki/19-故障诊断/08-技能体系/10-rbac-quota-failure.md) |
-| 滚动更新卡住 | [Q&A](../oncall-qa/oncall-quick-qa.md#q19-deployment-滚动更新卡住怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#8-deployment-滚动更新卡住) | [08-deployment-rollout-failure](../../../../../wiki/19-故障诊断/08-技能体系/09-deployment-rollout-failure.md) |
+| PVC Pending | [Q&A](../oncall-qa/oncall-quick-qa.md#q15-pvc-pending-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#7-pvc-pending) | [06-pvc-storage-failure](../../../../../skills/09-技能体系/08-pvc-storage-failure.md) |
+| RBAC Forbidden | [Q&A](../oncall-qa/oncall-quick-qa.md#q17-rbac-forbidden-怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#10-rbac-forbidden) | [09-rbac-quota-failure](../../../../../skills/09-技能体系/10-rbac-quota-failure.md) |
+| 滚动更新卡住 | [Q&A](../oncall-qa/oncall-quick-qa.md#q19-deployment-滚动更新卡住怎么办) | [决策树](../12-decision-tree/decision-tree-mermaid.md#8-deployment-滚动更新卡住) | [08-deployment-rollout-failure](../../../../../skills/09-技能体系/09-deployment-rollout-failure.md) |
 | DaemonSet 问题 | [Q&A](../../../daemonset/%E5%9F%B9%E8%AE%AD/lecturer/10-daemonset-basics.md#6-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../故障诊断/技能体系/17-daemonset-pdb-failure.md) |
 | StatefulSet 问题 | [Q&A](../../../statefulset/%E5%9F%B9%E8%AE%AD/lecturer/11-statefulset-basics.md#7-数字人-qa-场景) | - | [17-daemonset-pdb-failure](../故障诊断/技能体系/17-daemonset-pdb-failure.md) |
 | 调度/亲和性问题 | [Q&A](../../../../02-%E6%8E%A7%E5%88%B6%E9%9D%A2/scheduler/%E5%9F%B9%E8%AE%AD/lecturer/12-scheduling-basics.md#7-数字人-qa-场景) | - | [16-scheduling-pdb-failure](../故障诊断/技能体系/16-scheduling-pdb-failure.md) |
@@ -447,7 +447,7 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ---
 
 **关联文档**:
-- [08-技能体系/](../../../../../wiki/19-故障诊断/08-技能体系) — 18 个 GA Skill（深度技术细节）
+- [08-技能体系/](../../../../../wiki/17-故障诊断/08-技能体系) — 18 个 GA Skill（深度技术细节）
 - [P0-1: 工单分类体系](../../../../../maintaining/01-文档/agent-specs/P0-1-ticket-classification-intent-recognition.md) — 工单路由引擎
 - [P0-3: 会话上下文管理](../../../../../maintaining/01-文档/agent-specs/P0-3-session-context-management.md) — 多轮对话管理
 - [](../../../../../wiki/19-故障诊断) — 故障排查文档
@@ -455,25 +455,25 @@ kubectl delete pod <pod-name> -n <namespace> --grace-period=0 --force
 ## Related
 
 - Domain-34: CNCF Landscape 开源项目 — Cross-reference
-- [[wiki/21-生态参考/98-merged-indexes/index.md|[[wiki/23-实体/15-参考与索引/release-notes-networking|发布说明索引 — 网络]]]] — Cross-reference
+- [[wiki/19-生态参考/98-merged-indexes/index.md|[[wiki/22-实体/15-参考与索引/release-notes-networking|发布说明索引 — 网络]]]] — Cross-reference
 - 网络 MOC — Cross-reference
 - Topic 应用层架构设计最佳实践 — Cross-reference
 - topic-application-architecture MOC — Cross-reference
-- [[wiki/22-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
+- [[wiki/20-概念/10-最佳实践/bp-common-best-practices.md|Kubernetes 通用最佳实践参考]] — Cross-reference
 - [[maintaining/02-元数据/metadata/KUDIG Knowledge Base Architecture.md|KUDIG Knowledge Base Architecture]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
 - [[skills/04-工作负载/pod/培训/learn-decision-tree-mermaid.md|故障排查决策树 - Mermaid 可视化版]] — Cross-reference
 - [[skills/04-工作负载/daemonset/skill-22-daemonset-failure.md|DaemonSet 故障诊断与修复 / DaemonSet Failure Diagnosis & Remediation]] — Cross-reference
-- [[wiki/10-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
+- [[wiki/12-平台工程/02-运维/04-monitoring-alerting-system.md|监控告警体系]] — Cross-reference
 - Domain 30: 企业级灾备与业务连续性 (Enterprise Disaster Recovery & Business Continuity) — Cross-reference
-- [[wiki/23-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
+- [[wiki/22-实体/15-参考与索引/ecosystem-changelog.md|生态组件变更日志索引]] — Cross-reference
+- [[wiki/19-生态参考/03-领域索引/cluster-index.md|Cluster 集群知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pvc-index.md|PVC 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/nginx-ingress-index.md|nginx-ingress-controller 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/higress-index.md|Higress 知识图谱索引]]
 
 
 ## 参见

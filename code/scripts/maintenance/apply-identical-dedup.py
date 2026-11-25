@@ -45,8 +45,8 @@ def load_groups() -> dict:
 
 
 REFINED_PREFIXES = (
-    "wiki/22-概念/", "wiki/23-实体/", "wiki/24-综合/", "wiki/25-研究/",
-    "wiki/26-标签/", "wiki/17-系统基础/06-知识字典/",
+    "wiki/20-概念/", "wiki/22-实体/", "wiki/23-综合与研究/", "wiki/23-综合与研究/研究/",
+    "wiki/24-标签/", "wiki/21-知识字典/",
 )
 
 
@@ -57,8 +57,8 @@ def pick_canonical(paths: list[str]) -> tuple[str, str]:
 
     if wiki:
         ordered = (
-            ("R-11", lambda p: p.startswith("wiki/11-发布变更/")),
-            ("R-20", lambda p: p.startswith("wiki/20-最佳实践/") and "/01-best-practices/" not in p),
+            ("R-11", lambda p: p.startswith("wiki/09-发布变更/")),
+            ("R-20", lambda p: p.startswith("wiki/18-最佳实践/") and "/01-best-practices/" not in p),
             ("R-CHEAT", lambda p: "/05-速查卡/" not in p),
             ("R-MAIN", lambda p: not p.startswith(REFINED_PREFIXES)),
             ("R-FUNC", lambda p: "/functions-" not in p),

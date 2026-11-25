@@ -771,8 +771,8 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 | [网络/37-terway-resources-crud-operations.md](../01-K8s网络核心/39-terway-resources-crud-operations.md) | Terway 实例 CRUD 操作、CRD 资源管理 |
 | [网络/38-terway-gc-mechanism.md](../01-K8s网络核心/40-terway-gc-mechanism.md) | Terway GC 垃圾回收机制 |
 | [网络/34-network-performance-tuning.md](../01-K8s网络核心/36-network-performance-tuning.md) | 网络性能调优通用指南 |
-| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/04-%E9%AB%98%E7%BA%A7%E6%8E%92%E9%9A%9C/structural-03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
-| [故障诊断/FTA故障树/list/terway-fta.md](../../19-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD/06-FTA%E6%95%85%E9%9A%9C%E6%A0%91/list/terway-fta.md) | Terway 异常 FTA 故障树 |
+| [故障诊断/高级排障/structural-03-networking/07-terway-troubleshooting.md](../../17-故障诊断/04-高级排障/structural-03-networking/07-terway-troubleshooting.md) | Terway 结构化故障排查 |
+| [故障诊断/FTA故障树/list/terway-fta.md](../../17-故障诊断/06-FTA故障树/list/terway-fta.md) | Terway 异常 FTA 故障树 |
 | [生产运维/topic-presentations/kubernetes-terway-presentation.md](../生产运维/topic-presentations/kubernetes-terway-presentation.md) | Terway 全栈进阶培训 |
 
 ---
@@ -781,7 +781,7 @@ nstat -az | grep -E "TcpRetransSegs|TcpOutRsts"
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
 
 ```
 

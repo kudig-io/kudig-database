@@ -156,7 +156,7 @@ related_topics:
    - 重点: etcd 备份、Velero
 
 3. **监控 Playbooks**
-   - 文件: `../../[[wiki/09-可观测性/05-告警/07-monitoring-playbooks.md|21-monitoring-playbooks]].md`
+   - 文件: `../../[[wiki/08-可观测性/05-告警/07-monitoring-playbooks.md|21-monitoring-playbooks]].md`
    - 重点: 监控配置模板
 
 ---
@@ -564,9 +564,9 @@ Week 4 将学习网络与存储，包括 Service/Ingress 配置、Terway/Flannel
 
 ## 延伸阅读
 
-- [集群生命周期管理](../../../../../../wiki/10-平台工程/02-运维/02-cluster-lifecycle-management.md)
-- [备份恢复策略](../../../../../../wiki/10-平台工程/02-运维/09-backup-recovery-strategy.md)
-- [监控 Playbooks](../../../../../../wiki/09-可观测性/05-告警/07-monitoring-playbooks.md)
+- [集群生命周期管理](../../../../../../wiki/12-平台工程/02-运维/02-cluster-lifecycle-management.md)
+- [备份恢复策略](../../../../../../wiki/12-平台工程/02-运维/09-backup-recovery-strategy.md)
+- [监控 Playbooks](../../../../../../wiki/08-可观测性/05-告警/07-monitoring-playbooks.md)
 - [Pod 综合排障](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
 
 ```

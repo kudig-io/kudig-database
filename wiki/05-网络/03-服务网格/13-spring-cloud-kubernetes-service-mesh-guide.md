@@ -839,7 +839,7 @@ management:
 
 - [Spring Boot on K8s](../../02-工作负载/01-核心工作负载/25-spring-boot-kubernetes-guide.md)
 - [Istio 服务网格指南](11-istio-service-mesh-guide.md)
-- [Java 可观测性](../../wiki/09-可观测性/01-总览/14-java-observability-kubernetes-guide.md)
+- [Java 可观测性](../../wiki/08-可观测性/01-总览/14-java-observability-kubernetes-guide.md)
 - [Java 安全加固](../../08-安全/06-合规审计/14-java-security-kubernetes-guide.md)
 
 ---
@@ -1212,7 +1212,7 @@ spec:
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/service-mesh-index.md|Service Mesh 服务网格知识图谱索引]]
 
 
 <!-- risk-assessed -->

@@ -220,13 +220,13 @@ def main():
     parser.add_argument('--output', type=str, required=True,
                         help='输出目录')
     parser.add_argument('--skills-dir', type=str,
-                        default='wiki/19-故障诊断/08-技能体系',
+                        default='wiki/17-故障诊断/08-技能体系',
                         help='Skills 目录')
     parser.add_argument('--fta-dir', type=str,
-                        default='wiki/19-故障诊断/06-FTA故障树/list',
+                        default='wiki/17-故障诊断/06-FTA故障树/list',
                         help='FTA 目录')
     parser.add_argument('--seed-dir', type=str,
-                        default='wiki/19-故障诊断/10-QA语料/seed',
+                        default='wiki/17-故障诊断/10-QA语料/seed',
                         help='手工种子目录')
     parser.add_argument('--config', type=str, default=None,
                         help='配置文件路径')

@@ -273,7 +273,7 @@ kubectl get pods -n <namespace>
 【排查步骤】
 
 第一步：测试 DNS
-kubectl run -it --rm dnsutils --image=tutum/dnsutils -- nslookup [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].default
+kubectl run -it --rm dnsutils --image=tutum/dnsutils -- nslookup [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].default
 
 如果这个失败，说明集群 DNS 有问题。
 
@@ -541,7 +541,7 @@ kubectl top pods -n <namespace>
 
 **关联文档**:
 - [](../../../../../wiki/19-故障诊断) — 故障排查文档
-- [08-技能体系/](../../../../../wiki/19-故障诊断/08-技能体系) — 18 个 GA Skill
+- [08-技能体系/](../../../../../wiki/17-故障诊断/08-技能体系) — 18 个 GA Skill
 - [../01-introduction/01-what-is-kubernetes.md](02-what-is-kubernetes.md) — K8s 概念入门
 
 

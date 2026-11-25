@@ -386,7 +386,7 @@ ETCDCTL_API=3 etcdctl snapshot status <backup-file> --write-out=table
 - [[skills/02-控制面/etcd/etcd-fta.md|etcd 异常诊断]] — 同域技能
 - [[skills/02-控制面/etcd/backup-restore-fta.md|备份恢复故障树]] — 同域技能
 - [[skills/06-存储/csi-storage/manage-persistent-storage.md|PV/PVC 存储管理]] — 跨域关联
-- [[wiki/21-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
-- [[wiki/21-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/etcd-index.md|etcd 知识图谱索引]] — 知识索引
+- [[wiki/19-生态参考/03-领域索引/backup-dr-index.md|Backup & DR 知识图谱索引]] — 知识索引
 
 <!-- risk-assessed -->

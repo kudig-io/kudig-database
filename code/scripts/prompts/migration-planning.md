@@ -186,8 +186,8 @@ CONSTRAINTS: zero downtime, 数据量 5TB, 团队 3 人
 
 ## 参考文档
 
-- [[wiki/10-平台工程/02-运维/cluster-migration-guide|集群迁移指南]] — 迁移最佳实践
-- [[wiki/22-概念/bp-disaster-recovery|灾备最佳实践]] — 迁移期间的灾备策略
-- [[wiki/19-故障诊断/06-FTA故障树/cluster-migration-fta|迁移故障树]] — 常见迁移问题
+- [[wiki/12-平台工程/02-运维/cluster-migration-guide|集群迁移指南]] — 迁移最佳实践
+- [[wiki/20-概念/bp-disaster-recovery|灾备最佳实践]] — 迁移期间的灾备策略
+- [[wiki/17-故障诊断/06-FTA故障树/cluster-migration-fta|迁移故障树]] — 常见迁移问题
 
 <!-- risk-assessed -->

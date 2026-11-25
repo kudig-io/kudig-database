@@ -50,7 +50,7 @@ last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
   - ACK cluster upgrade strategy in-place replacement
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] version upgrade path compatibility
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] version upgrade path compatibility
   - kubent API deprecation check upgrade
   - Cluster upgrade verification rollback
   - ACK managed cluster upgrade process
@@ -521,8 +521,8 @@ Day 7 将学习集群证书管理，理解证书类型、过期处理和轮换�
 
 ## 延伸阅读
 
-- [K8s 版本升级策略](../../../../../../wiki/01-集群基础/06-升级路径/02-upgrade-paths-strategy.md)
-- [升级与迁移策略](../../../../../../wiki/01-集群基础/06-升级路径/03-upgrade-migration-strategy.md)
+- [K8s 版本升级策略](../../../../../../wiki/01-集群基础与系统/06-升级路径/02-upgrade-paths-strategy.md)
+- [升级与迁移策略](../../../../../../wiki/01-集群基础与系统/06-升级路径/03-upgrade-migration-strategy.md)
 - [ACK 集群管理](../../云厂商/04-alicloud-ack/alicloud-ack-overview.md)
 
 

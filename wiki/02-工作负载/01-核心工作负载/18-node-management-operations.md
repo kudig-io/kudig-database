@@ -541,7 +541,7 @@ echo "=== 加固完成 ==="
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/node-index.md|Node 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/node-index.md|Node 知识图谱索引]]
 
 
 <!-- risk-assessed -->

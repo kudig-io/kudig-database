@@ -48,7 +48,7 @@ title: Day 25: 生产运维最佳实践
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 变更管理
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 变更管理
   - 生产事故响应流程
   - 容量规划预测
   - SRE 最佳实践
@@ -574,10 +574,10 @@ spec:
 - [Google SRE Book](https://sre.google/sre-book/table-of-contents/)
 - [ITIL 变更管理](https://www.axelos.com/best-practice-solutions/itil)
 - [PagerDuty 事故响应指南](https://response.pagerduty.com/)
-- [文件: `../../生产运维/01-production-architecture-design-principles.md`](../../../../../../wiki/01-集群基础/02-设计原则/02-production-architecture-design-principles.md)
-- [文件: `../../生产运维/22-change-management-process.md`](../../../../../../wiki/11-发布变更/04-变更管理/08-change-management-process.md)
-- [文件: `../../生产运维/23-incident-response-handling.md`](../../../../../../wiki/13-生产运维/03-事件响应/10-incident-response-handling.md)
-- [文件: `../../生产运维/24-capacity-planning-forecasting.md`](../../../../../../wiki/12-可靠性/03-容量规划/06-capacity-planning-forecasting.md)
+- [文件: `../../生产运维/01-production-architecture-design-principles.md`](../../../../../../wiki/01-集群基础与系统/02-设计原则/02-production-architecture-design-principles.md)
+- [文件: `../../生产运维/22-change-management-process.md`](../../../../../../wiki/09-发布变更/04-变更管理/08-change-management-process.md)
+- [文件: `../../生产运维/23-incident-response-handling.md`](../../../../../../wiki/11-生产运维/03-事件响应/10-incident-response-handling.md)
+- [文件: `../../生产运维/24-capacity-planning-forecasting.md`](../../../../../../wiki/10-可靠性/03-容量规划/06-capacity-planning-forecasting.md)
 
 ```
 

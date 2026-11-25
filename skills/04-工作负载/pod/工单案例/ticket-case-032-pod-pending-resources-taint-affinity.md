@@ -28,8 +28,8 @@ skill_ref:
   配置]]'
 - '[[wiki/02-工作负载/01-核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]'
 fta_ref:
-- '[[wiki/19-故障诊断/06-FTA故障树/list/scheduler-fta.md|FTA: 调度失败]]'
-- '[[wiki/19-故障诊断/06-FTA故障树/list/pod-fta.md|FTA: Pod 异常]]'
+- '[[wiki/17-故障诊断/06-FTA故障树/list/scheduler-fta.md|FTA: 调度失败]]'
+- '[[wiki/17-故障诊断/06-FTA故障树/list/pod-fta.md|FTA: Pod 异常]]'
 last_updated: 2026-06-26 16:30:00+08:00
 duplicate_of: INC-2026-ACK-047
 status: duplicate
@@ -61,12 +61,12 @@ authors:
 - name: KUDIG Team
   role: contributor
 relationships:
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-040-node-diskpressure-eviction.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-042-pod-pending-resource-taint.md]]'
   type: related_to
-- target: '[[wiki/13-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
+- target: '[[wiki/11-生产运维/05-工单案例/ticket-case-041-ingress-controller-502.md]]'
   type: related_to
 ---
 
-> **内容已并入主场**：[[wiki/13-生产运维/05-工单案例/ticket-case-032-pod-pending-resources-taint-affinity.md|Pod Pending：资源请求过大 + 节点 taint/反亲和性冲突]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/11-生产运维/05-工单案例/ticket-case-032-pod-pending-resources-taint-affinity.md|Pod Pending：资源请求过大 + 节点 taint/反亲和性冲突]]（本页为重排去重桩，正文见主场）

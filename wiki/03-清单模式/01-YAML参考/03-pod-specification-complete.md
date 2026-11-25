@@ -3149,7 +3149,7 @@ Pod 是 Kubernetes 中最核心的资源对象,理解其完整规格对于构建
 
 - [[reference|#reference Hub]] — tag hub
 
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 ```
 

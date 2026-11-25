@@ -372,7 +372,7 @@ kubectl get node <node-name> -o jsonpath='{.status}' | jq '.conditions[] | selec
 
 ## 9. 驱逐配置深度治理
 
-> 来源：`wiki/19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §3
+> 来源：`wiki/17-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §3
 
 ### 9.1 驱逐策略完整配置
 
@@ -446,7 +446,7 @@ containerLogMaxFiles: 5
 
 ## 10. 节点健康自愈与自动化预防
 
-> 来源：`wiki/19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §4
+> 来源：`wiki/17-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md` §4
 
 ### 10.1 Node Problem Detector (NPD) + Draino
 
@@ -483,5 +483,5 @@ containerLogMaxFiles: 5
 - [[skills/03-节点/node/04-node-sop-runbook.md|Node SOP 与 Runbook]]
 - [[skills/03-节点/node/05-gpu-device-plugin-troubleshooting.md|GPU 与设备插件故障排查]]
 - [[skills/03-节点/node/reference/node-version-differences.md|版本差异对比]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/node-fta.md|Node 故障树分析]]
-- [[wiki/19-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南（原始文件）]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/node-fta.md|Node 故障树分析]]
+- [[wiki/17-故障诊断/04-高级排障/structural-02-node-components/01-kubelet-troubleshooting.md|kubelet 故障排查指南（原始文件）]]

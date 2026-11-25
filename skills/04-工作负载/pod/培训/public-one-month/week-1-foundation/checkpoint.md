@@ -87,7 +87,7 @@ related_topics:
   - kubernetes
   - troubleshooting
 related:
-  - 生产运维/topic-learn/public-training/one-month/[[wiki/06-存储/README.md|README]].md
+  - 生产运维/topic-learn/public-training/one-month/[[wiki/06-存储与数据/README.md|README]].md
   - 生产运维/topic-learn/public-training/one-month/week-1-foundation/day-1-docker-basics.md
 ---
 ```
@@ -948,14 +948,14 @@ kubectl label namespace frontend name=frontend
 ## 延伸阅读
 
 - [Docker 基础概念](../../容器运行时/01-docker-fundamentals-concepts.md)
-- [K8s 架构总览](../../../../../../wiki/01-集群基础/01-架构总览/01-kubernetes-architecture-overview.md)
-- [K8s 核心组件](../../../../../../wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md)
-- [kubectl 命令参考](../../../../../../wiki/01-集群基础/05-kubectl/02-kubectl-commands-reference.md)
+- [K8s 架构总览](../../../../../../wiki/01-集群基础与系统/01-架构总览/01-kubernetes-architecture-overview.md)
+- [K8s 核心组件](../../../../../../wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md)
+- [kubectl 命令参考](../../../../../../wiki/01-集群基础与系统/05-kubectl/02-kubectl-commands-reference.md)
 - [Pod 排障指南](../../../诊断排障/02-pod-comprehensive-troubleshooting.md)
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 ```
 

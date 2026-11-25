@@ -122,7 +122,7 @@ mindmap
 
 **为什么夹 RS**：直接让 Deployment 管 Pod，回滚就没有"旧版本"实体可用。每次模板变更 Deployment 创建一个新 RS（以 pod-template-hash 区分），旧 RS 缩到 0 但保留——`rollout undo` 只是把旧 RS 的副本数加回来。
 
-深挖：[[wiki/22-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]]
+深挖：[[wiki/20-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]]
 
 ### 2. 扩缩容发生在哪一层？改 Deployment 的 replicas 和改 RS 的 replicas 有什么区别？
 
@@ -153,7 +153,7 @@ loop:
 
 **经典追问**：`replicas=4, maxSurge=25%, maxUnavailable=25%` → surge=1（4×0.25 向上取整），unavailable=1（向下取整）→ 滚动期间最多 5 个 Pod、可用至少 3 个。**两个参数为 0 的组合非法**（既不超发也不可少，永远无法推进）。
 
-深挖：[[wiki/22-概念/02-工作负载/deployments.md|Deployment 概念详解]]
+深挖：[[wiki/20-概念/02-工作负载/deployments.md|Deployment 概念详解]]
 
 ### 4. 回滚的机制是什么？revisionHistoryLimit 管什么？回滚会创建新版本吗？
 
@@ -238,7 +238,7 @@ sequenceDiagram
 | env / envFrom | 永不更新（环境变量只在容器启动时注入） | 改了配置"不生效"，重启才好 |
 | volume 挂载 | kubelet 周期同步文件（秒到分钟级） | 文件变了但应用不重读——应用要支持热加载或 SIGHUP |
 
-**生产正解**：配置变更走"改名（带版本后缀）+ 模板引用变更"触发真滚动，或显式 `rollout restart`（第 14 题）。深挖：[[wiki/22-概念/14-案例研究/2026-05-15-configmap-no-rolling-update.md|案例：ConfigMap 不触发滚动更新]]
+**生产正解**：配置变更走"改名（带版本后缀）+ 模板引用变更"触发真滚动，或显式 `rollout restart`（第 14 题）。深挖：[[wiki/20-概念/14-案例研究/2026-05-15-configmap-no-rolling-update.md|案例：ConfigMap 不触发滚动更新]]
 
 ### 10. Deployment 的 selector 为什么不可变？改了会怎样？
 
@@ -361,7 +361,7 @@ kubectl rollout restart deployment/app      # 全量滚动重启（改注解实�
 
 **协同链路**：`kubectl drain node` → 每个 Pod 走 Eviction API → 评估 PDB（`minAvailable`/`maxUnavailable`）→ 允许则按优雅终止流程走（第 8 题），不允许则该 Pod 驱逐失败、drain 卡住重试。**处置顺序**：① 确认 PDB 数值与副本数自洽（`minAvailable: 100%` + 单副本 = 永远不可驱逐的经典死锁）；② 临时调整 PDB 或接受 `--disable-eviction`/`--force`（明确知道后果才用）；③ Deployment 场景下 PDB 通常与 `maxUnavailable` 对齐。
 
-深挖：[[wiki/01-集群基础/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|节点维护 cordon/drain]]
+深挖：[[wiki/01-集群基础与系统/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|节点维护 cordon/drain]]
 
 ### 20. 控制器怎么判断"模板变了"？pod-template-hash 在哪一环起作用？
 
@@ -451,9 +451,9 @@ kubectl rollout restart deployment/app      # 全量滚动重启（改注解实�
 - [[wiki/02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling.md|HPA/VPA 自动扩缩]]
 - [[wiki/02-工作负载/01-核心工作负载/23-resource-management.md|资源管理]]
 - [[wiki/02-工作负载/01-核心工作负载/03-statefulset-advanced-operations.md|StatefulSet 高级运维]]
-- [[wiki/22-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]]
-- [[wiki/22-概念/02-工作负载/deployments.md|Deployment 概念详解]]
-- [[wiki/22-概念/02-工作负载/pod-lifecycle.md|Pod 生命周期]]
-- [[wiki/22-概念/14-案例研究/2026-05-15-configmap-no-rolling-update.md|案例：ConfigMap 不触发滚动更新]]
-- [[wiki/01-集群基础/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|节点维护 cordon/drain]]
-- [[wiki/01-集群基础/01-架构总览/05-pod-creation-end-to-end-flow.md|Pod 创建全流程]]
+- [[wiki/20-概念/02-工作负载/deployment-controller-architecture.md|Deployment 控制器架构]]
+- [[wiki/20-概念/02-工作负载/deployments.md|Deployment 概念详解]]
+- [[wiki/20-概念/02-工作负载/pod-lifecycle.md|Pod 生命周期]]
+- [[wiki/20-概念/14-案例研究/2026-05-15-configmap-no-rolling-update.md|案例：ConfigMap 不触发滚动更新]]
+- [[wiki/01-集群基础与系统/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|节点维护 cordon/drain]]
+- [[wiki/01-集群基础与系统/01-架构总览/05-pod-creation-end-to-end-flow.md|Pod 创建全流程]]

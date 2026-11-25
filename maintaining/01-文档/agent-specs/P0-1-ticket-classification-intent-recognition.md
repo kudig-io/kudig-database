@@ -386,7 +386,7 @@ prerequisites:
 **关联文档**:
 - [P0-2: 多技能协同协议设计](P0-2-multi-skill-coordination-protocol.md)
 - [P0-3: 会话上下文管理机制](P0-3-session-context-management.md)
-- [故障诊断/[[wiki/06-存储/README.md|README]].md](../故障诊断/topic-skills/README.md)
-- [06-FTA故障树/list/](../../../wiki/19-故障诊断/06-FTA故障树/list) — FTA 问题树参考
+- [故障诊断/[[wiki/06-存储与数据/README.md|README]].md](../故障诊断/topic-skills/README.md)
+- [06-FTA故障树/list/](../../../wiki/17-故障诊断/06-FTA故障树/list) — FTA 问题树参考
 
 <!-- risk-assessed -->

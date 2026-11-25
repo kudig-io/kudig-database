@@ -52,7 +52,7 @@ title: Day 26: FTA/FEBM 专题深化
 last_updated: 2026-05-18
 difficulty: advanced
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 故障树分析进阶
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 故障树分析进阶
   - FEBM 取证循证方法深化
   - AI Agent 运维模式
   - K8s 问题全景树
@@ -571,10 +571,10 @@ spec:
 
 ## 延伸阅读
 
-- [文件: `../../故障诊断/FTA故障树/23-fta-production-quick-start.md`](../../../../../../wiki/19-故障诊断/06-FTA故障树/23-fta-production-quick-start.md)
-- [文件: `../../故障诊断/FTA故障树/kubernetes-fta-full-analysis.md`](../../../../../../wiki/19-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis.md)
-- [文件: `../../故障诊断/FEBM方法论/08-febm-production-quick-start.md`](../../../../../../wiki/19-故障诊断/07-FEBM方法论/08-febm-production-quick-start.md)
-- [文件: `../../故障诊断/FTA故障树/10-agent-orchestration-patterns.md`](../../../../../../wiki/19-故障诊断/06-FTA故障树/10-agent-orchestration-patterns.md)
+- [文件: `../../故障诊断/FTA故障树/23-fta-production-quick-start.md`](../../../../../../wiki/17-故障诊断/06-FTA故障树/23-fta-production-quick-start.md)
+- [文件: `../../故障诊断/FTA故障树/kubernetes-fta-full-analysis.md`](../../../../../../wiki/17-故障诊断/06-FTA故障树/kubernetes-fta-full-analysis.md)
+- [文件: `../../故障诊断/FEBM方法论/08-febm-production-quick-start.md`](../../../../../../wiki/17-故障诊断/07-FEBM方法论/08-febm-production-quick-start.md)
+- [文件: `../../故障诊断/FTA故障树/10-agent-orchestration-patterns.md`](../../../../../../wiki/17-故障诊断/06-FTA故障树/10-agent-orchestration-patterns.md)
 - [NASA FTA Handbook](https://ntrs.nasa.gov/citations/20020003100)
 - [Google SRE Book - Understanding Outages](https://sre.google/sre-book/understanding-outages/)
 

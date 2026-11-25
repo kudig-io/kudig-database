@@ -45,7 +45,7 @@ python3 scripts/video-content-generator.py --type skill --list
 python3 scripts/video-content-generator.py --type fta --list
 
 # 生成视频脚本
-python3 scripts/video-content-generator.py --type skill --topic [[wiki/22-概念/02-工作负载/pod-lifecycle.md|pod]]-crashloop -o video-scripts/pod-crashloop.md
+python3 scripts/video-content-generator.py --type skill --topic [[wiki/20-概念/02-工作负载/pod-lifecycle.md|pod]]-crashloop -o video-scripts/pod-crashloop.md
 python3 scripts/video-content-generator.py --type fta --topic pod-fta -o video-scripts/pod-fta.md
 
 # ===== 生成视频 =====

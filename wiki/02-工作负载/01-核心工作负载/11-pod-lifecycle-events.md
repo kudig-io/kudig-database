@@ -81,7 +81,7 @@ related_docs:
 
 # 37 - Pod生命周期事件表
 
-> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
+> **适用版本**: v1.25 - v1.32 | **最后更新**: 2026-01 | **参考**: [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].io/docs/concepts/workloads/pods/pod-lifecycle](https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/)
 
 <!-- chunk: Pod阶段(Phase) -->
 ## Pod阶段(Phase)
@@ -813,14 +813,14 @@ echo "=== 验证完成 ==="
 ## Related
 
 - [[deployment]]
-- [[wiki/22-概念/11-交叉分析/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
+- [[wiki/20-概念/11-交叉分析/Pod 生命周期 × 存储模型.md|Pod 生命周期 × 存储模型]]
 
 - 工作负载控制器详解
 - HPA/VPA 自动扩缩容
 - 相关知识域: 集群基础
 - 相关知识域: 可观测性
-- [[wiki/17-系统基础/05-速查卡/k8s.md|速查卡: k8s]]
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/01-集群基础与系统/12-速查卡/k8s.md|速查卡: k8s]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 ## See Also
 

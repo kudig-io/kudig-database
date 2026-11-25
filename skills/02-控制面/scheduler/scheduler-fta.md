@@ -201,7 +201,7 @@ flowchart TD
 - [[apiserver-fta]] — API Server 异常故障树分析
 
 - [[nginx-ingress-fta]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/scheduler-fta.md|Scheduler 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/scheduler-fta.md|Scheduler 异常故障树分析]]
 - [[skills/04-工作负载/pod/培训/测验/assessment-k8s-fundamentals-quiz-answers.md|K8S Fundamentals Quiz Answers]] — Cross-reference
 
 

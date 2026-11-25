@@ -455,14 +455,14 @@ cue trace ./teams/team-backend/      # 追踪约束来源
 5. **安全内建**：Schema 中强制 `runAsNonRoot: true`、`readOnlyRootFilesystem: true`
 6. **与 [[wiki/03-清单模式/09-平台模式/01-crossplane-compositions-patterns|Crossplane]] 配合**：CUE 验证 XRD Claim 配置
 7. **与 [[wiki/03-清单模式/09-平台模式/03-jsonnet-tanka-patterns|Jsonnet/Tanka]] 对比**：根据团队技能选择
-8. **参考 [[wiki/10-平台工程/01-构建/08-golden-paths-design|Golden Path 设计]] 了解平台配置策略**
+8. **参考 [[wiki/12-平台工程/01-构建/08-golden-paths-design|Golden Path 设计]] 了解平台配置策略**
 
 ## Related
 
 - [[wiki/03-清单模式/09-平台模式/01-crossplane-compositions-patterns|Crossplane 组合模式]]
 - [[wiki/03-清单模式/09-平台模式/03-jsonnet-tanka-patterns|Jsonnet/Tanka 模式]]
-- [[wiki/10-平台工程/01-构建/08-golden-paths-design|Golden Path 设计]]
-- [[wiki/10-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
-- [[wiki/24-综合/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]
+- [[wiki/12-平台工程/01-构建/08-golden-paths-design|Golden Path 设计]]
+- [[wiki/12-平台工程/01-构建/01-platform-engineering-overview|平台工程概述]]
+- [[wiki/23-综合与研究/02-交付与GitOps/helm-gitops|Helm GitOps 综合]]
 - [[wiki/03-清单模式/09-平台模式/index|平台模式索引]]
-- [[wiki/14-容器运行时/03-containerd-CRI-O/18-ebpf-runtime-security-falco-tetragon|eBPF 运行时安全：Falco/Tetragon/Tracee 部署与威胁检测]]
+- [[wiki/13-容器运行时/03-containerd-CRI-O/18-ebpf-runtime-security-falco-tetragon|eBPF 运行时安全：Falco/Tetragon/Tracee 部署与威胁检测]]

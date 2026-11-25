@@ -166,51 +166,51 @@ flowchart TD
 - [[flux]] — Flux
 - [[helm]] — Helm
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/helm-fta.md|Helm 发布异常故障树分析]]
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-4.0.md|RELEASE-NOTES-4.0]]
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/helm-fta.md|Helm 发布异常故障树分析]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-4.0.md|RELEASE-NOTES-4.0]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.18.md|RELEASE-NOTES-3.18]]
 - RELEASE-NOTES-2.16
 - RELEASE-NOTES-2.12
 - RELEASE-NOTES-2.13
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-4.1.md|RELEASE-NOTES-4.1]]
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-4.1.md|RELEASE-NOTES-4.1]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.19.md|RELEASE-NOTES-3.19]]
 - RELEASE-NOTES-2.17
 - RELEASE-NOTES-2.4
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.12.md|RELEASE-NOTES-3.12]]
 - RELEASE-NOTES-3.5
 - RELEASE-NOTES-2.0
 - RELEASE-NOTES-3.1
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.16.md|RELEASE-NOTES-3.16]]
 - RELEASE-NOTES-2.1
 - RELEASE-NOTES-3.0
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.17.md|RELEASE-NOTES-3.17]]
 - RELEASE-NOTES-2.5
 - RELEASE-NOTES-1.2
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.13.md|RELEASE-NOTES-3.13]]
 - RELEASE-NOTES-3.4
 - RELEASE-NOTES-2.2
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.14.md|RELEASE-NOTES-3.14]]
 - RELEASE-NOTES-3.3
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.20.md|RELEASE-NOTES-3.20]]
 - RELEASE-NOTES-2.6
 - RELEASE-NOTES-3.7
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.10.md|RELEASE-NOTES-3.10]]
 - RELEASE-NOTES-2.7
 - RELEASE-NOTES-3.6
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.11.md|RELEASE-NOTES-3.11]]
 - RELEASE-NOTES-2.3
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.15.md|RELEASE-NOTES-3.15]]
 - RELEASE-NOTES-3.2
 - RELEASE-NOTES-2.8
 - RELEASE-NOTES-2.10
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.9.md|RELEASE-NOTES-3.9]]
 - RELEASE-NOTES-2.14
 - RELEASE-NOTES-2.15
 - RELEASE-NOTES-2.9
 - RELEASE-NOTES-2.11
-- [[wiki/31-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
+- [[wiki/99-归档/release-notes/cli-tools/helm/RELEASE-NOTES-3.8.md|RELEASE-NOTES-3.8]]
 - [[skills/04-工作负载/pod/reference/ts-command-output.md|命令输出根因解析]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/helm-index.md|Helm 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/helm-index.md|Helm 全局索引]]
 
 
 <!-- risk-assessed -->

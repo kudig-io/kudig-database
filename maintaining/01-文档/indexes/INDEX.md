@@ -186,67 +186,67 @@ prerequisites:
 **各 Domain 项目索引**: 全部 40 个 Domain 已新增 `00-open-source-projects-index.md`，覆盖项目清单、版本信息、兼容矩阵与选型指南。
 
 **深度项目指南 (26 篇)**:
-- [Prometheus 企业监控部署指南](../../wiki/09-可观测性/02-指标/13-prometheus-enterprise-guide.md)
-- [分布式追踪实践指南 (Jaeger/Tempo/OpenTelemetry)](../../wiki/09-可观测性/04-链路追踪/08-distributed-tracing-guide.md)
-- [KEDA 事件驱动自动缩放指南](../../../wiki/10-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md)
-- [Argo CD GitOps 实践指南](../../../wiki/11-发布变更/01-GitOps/17-argo-cd-gitops-guide.md)
-- [Flux GitOps 实践指南](../../../wiki/11-发布变更/01-GitOps/18-flux-gitops-guide.md)
-- [Tekton CI/CD 实践指南](../../../wiki/11-发布变更/01-GitOps/20-tekton-cicd-guide.md)
+- [Prometheus 企业监控部署指南](../../wiki/08-可观测性/02-指标/13-prometheus-enterprise-guide.md)
+- [分布式追踪实践指南 (Jaeger/Tempo/OpenTelemetry)](../../wiki/08-可观测性/04-链路追踪/08-distributed-tracing-guide.md)
+- [KEDA 事件驱动自动缩放指南](../../../wiki/12-平台工程/02-运维/18-keda-event-driven-autoscaling-guide.md)
+- [Argo CD GitOps 实践指南](../../../wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md)
+- [Flux GitOps 实践指南](../../../wiki/09-发布变更/01-GitOps/18-flux-gitops-guide.md)
+- [Tekton CI/CD 实践指南](../../../wiki/09-发布变更/01-GitOps/20-tekton-cicd-guide.md)
 - [Istio 服务网格入门指南](../../../wiki/05-网络/03-服务网格/11-istio-service-mesh-guide.md)
 - [Linkerd 轻量级服务网格指南](../../../wiki/05-网络/03-服务网格/12-linkerd-service-mesh-guide.md)
-- [Harbor 企业镜像仓库指南](../../../wiki/14-容器运行时/02-镜像管理/08-harbor-enterprise-guide.md)
-- [Falco 运行时安全监控指南](../../../wiki/08-安全/03-运行时安全/08-falco-runtime-security-guide.md)
-- [Kyverno K8s 原生策略管理指南](../../../wiki/08-安全/04-策略治理/08-kyverno-policy-guide.md)
-- [OPA Gatekeeper 策略即代码指南](../../../wiki/08-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md)
-- [Vault K8s 密钥管理指南](../../../wiki/08-安全/01-身份与访问/10-vault-k8s-secrets-guide.md)
-- [cert-manager TLS 证书管理指南](../../../wiki/08-安全/06-合规审计/13-cert-manager-tls-guide.md)
-- [SLSA 供应链安全实践指南](../../../wiki/08-安全/05-供应链/16-slsa-supply-chain-security-guide.md)
-- [Crossplane 平台工程实践指南](../../../wiki/11-发布变更/02-IaC/07-crossplane-platform-guide.md)
+- [Harbor 企业镜像仓库指南](../../../wiki/13-容器运行时/02-镜像管理/08-harbor-enterprise-guide.md)
+- [Falco 运行时安全监控指南](../../../wiki/07-安全/03-运行时安全/08-falco-runtime-security-guide.md)
+- [Kyverno K8s 原生策略管理指南](../../../wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md)
+- [OPA Gatekeeper 策略即代码指南](../../../wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md)
+- [Vault K8s 密钥管理指南](../../../wiki/07-安全/01-身份与访问/10-vault-k8s-secrets-guide.md)
+- [cert-manager TLS 证书管理指南](../../../wiki/07-安全/06-合规审计/13-cert-manager-tls-guide.md)
+- [SLSA 供应链安全实践指南](../../../wiki/07-安全/05-供应链/16-slsa-supply-chain-security-guide.md)
+- [Crossplane 平台工程实践指南](../../../wiki/09-发布变更/02-IaC/07-crossplane-platform-guide.md)
 - [Cilium eBPF 网络与安全指南](../../../wiki/05-网络/02-网络基础/09-cilium-ebpf-network-guide.md)
 - [Envoy Gateway API Gateway 指南](../../../wiki/05-网络/04-API网关/15-envoy-gateway-enterprise-guide.md)
-- [Kubeflow AI 平台部署指南](../../../wiki/15-AI基础设施/01-基础设施/39-kubeflow-ai-platform-guide.md)
-- [Backstage 内部开发者平台 (IDP) 构建指南](../../../wiki/10-平台工程/01-构建/15-backstage-idp-guide.md)
-- [Serverless / FaaS 实践指南 (Knative/OpenFunction)](../../../wiki/16-专项技术/03-扩展机制/20-serverless-faas-guide.md)
-- [Kubernetes v1.29-v1.33 版本特性深度指南](../../../wiki/01-集群基础/01-架构总览/20-kubernetes-v1.29-v1.33-features-guide.md)
-- [Kubernetes 核心组件 v1.29-v1.33 新特性速查](../../../wiki/01-集群基础/01-架构总览/16-kubernetes-core-components-v1.29-v1.33-update.md)
-- [Kubernetes v1.33 升级实操指南](../../../wiki/01-集群基础/06-升级路径/04-kubernetes-v1.33-upgrade-guide.md)
-- [Kubectl v1.29-v1.33 新命令与用法速查](../../../wiki/01-集群基础/05-kubectl/04-kubectl-v1.29-v1.33-new-commands-guide.md)
-- [Kubernetes v1.33 生产环境最佳实践](../../../wiki/01-集群基础/01-架构总览/24-kubernetes-v1.33-production-best-practices.md)
-- [Kubernetes 版本生命周期与支持策略](../../../wiki/01-集群基础/04-API版本/04-kubernetes-version-lifecycle-support-policy.md)
-- [Kubernetes v1.33 生态系统兼容性矩阵](../../../wiki/01-集群基础/01-架构总览/22-kubernetes-v1.33-ecosystem-compatibility-matrix.md)
-- [Kubernetes v1.33 一页纸速查卡](../../../wiki/01-集群基础/01-架构总览/25-kubernetes-v1.33-quick-reference-card.md)
-- [Kubernetes v1.33 弃用功能与迁移指南](../../../wiki/01-集群基础/01-架构总览/21-kubernetes-v1.33-deprecation-migration-guide.md)
-- [Kubernetes v1.25-v1.33 特性对比总表](../../../wiki/01-集群基础/01-架构总览/18-kubernetes-v1.25-v1.33-feature-comparison-table.md)
-- [Kubernetes v1.29-v1.33 完整 Feature Gate 参考手册](../../../wiki/01-集群基础/01-架构总览/19-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md)
-- [Kubernetes v1.33 实战案例集 (14个案例)](../../../wiki/01-集群基础/01-架构总览/23-kubernetes-v1.33-practical-cookbook.md)
-- [Kubernetes v1.29-v1.33 核心特性架构图集](../../../wiki/01-集群基础/01-架构总览/17-kubernetes-core-features-mermaid-diagrams.md)
-- [Kubernetes 生产环境完整架构蓝图](../../../wiki/01-集群基础/00-总览/02-kubernetes-production-architecture-blueprint.md)
+- [Kubeflow AI 平台部署指南](../../../wiki/14-AI基础设施/01-基础设施/39-kubeflow-ai-platform-guide.md)
+- [Backstage 内部开发者平台 (IDP) 构建指南](../../../wiki/12-平台工程/01-构建/15-backstage-idp-guide.md)
+- [Serverless / FaaS 实践指南 (Knative/OpenFunction)](../../../wiki/15-专项技术/03-扩展机制/20-serverless-faas-guide.md)
+- [Kubernetes v1.29-v1.33 版本特性深度指南](../../../wiki/01-集群基础与系统/01-架构总览/20-kubernetes-v1.29-v1.33-features-guide.md)
+- [Kubernetes 核心组件 v1.29-v1.33 新特性速查](../../../wiki/01-集群基础与系统/01-架构总览/16-kubernetes-core-components-v1.29-v1.33-update.md)
+- [Kubernetes v1.33 升级实操指南](../../../wiki/01-集群基础与系统/06-升级路径/04-kubernetes-v1.33-upgrade-guide.md)
+- [Kubectl v1.29-v1.33 新命令与用法速查](../../../wiki/01-集群基础与系统/05-kubectl/04-kubectl-v1.29-v1.33-new-commands-guide.md)
+- [Kubernetes v1.33 生产环境最佳实践](../../../wiki/01-集群基础与系统/01-架构总览/24-kubernetes-v1.33-production-best-practices.md)
+- [Kubernetes 版本生命周期与支持策略](../../../wiki/01-集群基础与系统/04-API版本/04-kubernetes-version-lifecycle-support-policy.md)
+- [Kubernetes v1.33 生态系统兼容性矩阵](../../../wiki/01-集群基础与系统/01-架构总览/22-kubernetes-v1.33-ecosystem-compatibility-matrix.md)
+- [Kubernetes v1.33 一页纸速查卡](../../../wiki/01-集群基础与系统/01-架构总览/25-kubernetes-v1.33-quick-reference-card.md)
+- [Kubernetes v1.33 弃用功能与迁移指南](../../../wiki/01-集群基础与系统/01-架构总览/21-kubernetes-v1.33-deprecation-migration-guide.md)
+- [Kubernetes v1.25-v1.33 特性对比总表](../../../wiki/01-集群基础与系统/01-架构总览/18-kubernetes-v1.25-v1.33-feature-comparison-table.md)
+- [Kubernetes v1.29-v1.33 完整 Feature Gate 参考手册](../../../wiki/01-集群基础与系统/01-架构总览/19-kubernetes-v1.29-v1.33-complete-feature-gates-reference.md)
+- [Kubernetes v1.33 实战案例集 (14个案例)](../../../wiki/01-集群基础与系统/01-架构总览/23-kubernetes-v1.33-practical-cookbook.md)
+- [Kubernetes v1.29-v1.33 核心特性架构图集](../../../wiki/01-集群基础与系统/01-架构总览/17-kubernetes-core-features-mermaid-diagrams.md)
+- [Kubernetes 生产环境完整架构蓝图](../../../wiki/01-集群基础与系统/00-总览/02-kubernetes-production-architecture-blueprint.md)
 - [Kubernetes 部署模式架构详解](../../../wiki/02-工作负载/00-总览/01-kubernetes-deployment-patterns-architecture.md)
 - [Kubernetes 多租户与资源隔离架构](../../../wiki/02-工作负载/00-总览/02-kubernetes-multi-tenant-architecture.md)
-- [Kubernetes v1.29-v1.33 设计原理演进与影响分析](../../../wiki/01-集群基础/02-设计原则/23-kubernetes-v1.33-design-principles-evolution.md)
+- [Kubernetes v1.29-v1.33 设计原理演进与影响分析](../../../wiki/01-集群基础与系统/02-设计原则/23-kubernetes-v1.33-design-principles-evolution.md)
 - [Kubernetes v1.29-v1.33 工作负载管理新特性指南](../../../wiki/02-工作负载/01-核心工作负载/24-kubernetes-v1.33-workloads-guide.md)
-- [Kubernetes v1.29-v1.33 可观测性新特性指南](../../wiki/09-可观测性/01-总览/15-kubernetes-v1.33-observability-guide.md)
-- [Kubernetes v1.29-v1.33 平台运维新特性指南](../../../wiki/10-平台工程/02-运维/19-kubernetes-v1.33-platform-ops-guide.md)
-- [CloudNativePG 企业级 PostgreSQL 指南](../../../wiki/07-数据库中间件/01-数据库/19-cloudnativepg-enterprise-guide.md)
-- [Velero 备份恢复指南](../../../wiki/12-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md)
-- [FinOps 成本优化指南 (Kubecost/OpenCost/Infracost)](../../../wiki/13-生产运维/01-成本治理/07-finops-cost-optimization-guide.md)
-- [Karpenter 节点自动扩展指南](../../../wiki/10-平台工程/02-运维/17-karpenter-node-autoscaling-guide.md)
-- [WebAssembly 云原生实践指南 (WasmEdge/Spin)](../../../wiki/16-专项技术/02-WebAssembly/12-wasmedge-cloud-native-guide.md)
-- [K8s 开发者工具链指南 (k9s/Headlamp/stern)](../../../wiki/16-专项技术/01-边缘计算/15-kubernetes-developer-toolchain-guide.md)
+- [Kubernetes v1.29-v1.33 可观测性新特性指南](../../wiki/08-可观测性/01-总览/15-kubernetes-v1.33-observability-guide.md)
+- [Kubernetes v1.29-v1.33 平台运维新特性指南](../../../wiki/12-平台工程/02-运维/19-kubernetes-v1.33-platform-ops-guide.md)
+- [CloudNativePG 企业级 PostgreSQL 指南](../../../wiki/06-存储与数据/09-数据库/19-cloudnativepg-enterprise-guide.md)
+- [Velero 备份恢复指南](../../../wiki/10-可靠性/02-灾难恢复/26-velero-backup-recovery-guide.md)
+- [FinOps 成本优化指南 (Kubecost/OpenCost/Infracost)](../../../wiki/11-生产运维/01-成本治理/07-finops-cost-optimization-guide.md)
+- [Karpenter 节点自动扩展指南](../../../wiki/12-平台工程/02-运维/17-karpenter-node-autoscaling-guide.md)
+- [WebAssembly 云原生实践指南 (WasmEdge/Spin)](../../../wiki/15-专项技术/02-WebAssembly/12-wasmedge-cloud-native-guide.md)
+- [K8s 开发者工具链指南 (k9s/Headlamp/stern)](../../../wiki/15-专项技术/01-边缘计算/15-kubernetes-developer-toolchain-guide.md)
 
 **Java/Spring 技术栈深度指南 (2026-04-30 新增, 12 篇)**:
 - [Java on Kubernetes 综合实践指南 (统一入口)](../../../wiki/02-工作负载/02-Java-on-K8s/README.md) — 一站式 Java + K8s 知识导航
-- [Java 容器化最佳实践 (Dockerfile/Jib/Buildpacks/分层JAR)](../../../wiki/14-容器运行时/01-Docker/12-java-containerization-guide.md)
-- [GraalVM Native Image 云原生实践指南](../../../wiki/16-专项技术/03-扩展机制/18-graalvm-native-image-guide.md)
+- [Java 容器化最佳实践 (Dockerfile/Jib/Buildpacks/分层JAR)](../../../wiki/13-容器运行时/01-Docker/12-java-containerization-guide.md)
+- [GraalVM Native Image 云原生实践指南](../../../wiki/15-专项技术/03-扩展机制/18-graalvm-native-image-guide.md)
 - [Spring Boot on Kubernetes 生产实践指南](../../../wiki/02-工作负载/01-核心工作负载/25-spring-boot-kubernetes-guide.md)
 - [Spring Cloud Kubernetes 与服务网格集成指南](../../../wiki/05-网络/03-服务网格/13-spring-cloud-kubernetes-service-mesh-guide.md)
-- [JVM GC 容器调优深度指南 (G1/ZGC/Shenandoah)](../../../wiki/19-故障诊断/05-JVM调优/03-jvm-gc-container-tuning-guide.md)
-- [Java 应用安全加固指南](../../../wiki/08-安全/06-合规审计/14-java-security-kubernetes-guide.md)
-- [Tekton Java CI/CD 流水线实践指南](../../../wiki/11-发布变更/01-GitOps/21-tekton-java-cicd-guide.md)
-- [Java 应用可观测性整合指南 (Micrometer+OTel+Prometheus)](../../wiki/09-可观测性/01-总览/14-java-observability-kubernetes-guide.md)
-- [Java K8s Client 与 Operator SDK 开发指南](../../../wiki/10-平台工程/01-构建/16-java-k8s-client-operator-guide.md)
-- [Java 性能调优与资源 Sizing 指南](../../../wiki/19-故障诊断/05-JVM调优/02-java-performance-resource-sizing-guide.md)
-- [Quarkus/Micronaut 云原生 Java 框架实践指南](../../../wiki/16-专项技术/03-扩展机制/19-quarkus-micronaut-cloud-native-java-guide.md)
+- [JVM GC 容器调优深度指南 (G1/ZGC/Shenandoah)](../../../wiki/17-故障诊断/05-JVM调优/03-jvm-gc-container-tuning-guide.md)
+- [Java 应用安全加固指南](../../../wiki/07-安全/06-合规审计/14-java-security-kubernetes-guide.md)
+- [Tekton Java CI/CD 流水线实践指南](../../../wiki/09-发布变更/01-GitOps/21-tekton-java-cicd-guide.md)
+- [Java 应用可观测性整合指南 (Micrometer+OTel+Prometheus)](../../wiki/08-可观测性/01-总览/14-java-observability-kubernetes-guide.md)
+- [Java K8s Client 与 Operator SDK 开发指南](../../../wiki/12-平台工程/01-构建/16-java-k8s-client-operator-guide.md)
+- [Java 性能调优与资源 Sizing 指南](../../../wiki/17-故障诊断/05-JVM调优/02-java-performance-resource-sizing-guide.md)
+- [Quarkus/Micronaut 云原生 Java 框架实践指南](../../../wiki/15-专项技术/03-扩展机制/19-quarkus-micronaut-cloud-native-java-guide.md)
 
 **快速选型**: [OPEN-SOURCE-SELECTION-GUIDE.md](../ecosystem/OPEN-SOURCE-SELECTION-GUIDE.md) — 按场景/角色的 30 秒快速选型索引。
 
@@ -338,11 +338,11 @@ FTA 问题树、FEBM 取证、Skills 技能库等独创方法论。
 
 | 专题 | 文档数 | 说明 |
 |:---|:---:|:---|
-| [FTA 问题树分析](../../../wiki/19-故障诊断/06-FTA故障树) | 29+36 | 方法论 23 篇 + 36 个组件问题树 |
-| [FEBM 取证循证](../../../wiki/19-故障诊断/07-FEBM方法论) | 9 | 从证据到结论的归纳式方法论 |
-| [Skills 运维技能库](../../../wiki/19-故障诊断/08-技能体系) | 18 | 生产级诊断-修复闭环 |
-| [结构化问题排查](../../../wiki/19-故障诊断/04-高级排障) | 49 | 12 个分类 × 结构化流程 + 配置优先方法论 |
-| [配置优先排查方法论](../../../wiki/19-故障诊断/04-高级排障/structural-00-configuration-first-methodology.md) | 1 | 疑难问题系统性排查：先配置后链路，CoreDNS 完整示例 |
+| [FTA 问题树分析](../../../wiki/17-故障诊断/06-FTA故障树) | 29+36 | 方法论 23 篇 + 36 个组件问题树 |
+| [FEBM 取证循证](../../../wiki/17-故障诊断/07-FEBM方法论) | 9 | 从证据到结论的归纳式方法论 |
+| [Skills 运维技能库](../../../wiki/17-故障诊断/08-技能体系) | 18 | 生产级诊断-修复闭环 |
+| [结构化问题排查](../../../wiki/17-故障诊断/04-高级排障) | 49 | 12 个分类 × 结构化流程 + 配置优先方法论 |
+| [配置优先排查方法论](../../../wiki/17-故障诊断/04-高级排障/structural-00-configuration-first-methodology.md) | 1 | 疑难问题系统性排查：先配置后链路，CoreDNS 完整示例 |
 | [运维词典](./系统基础/知识字典/) | 200+ | 13 个分类的运维知识条目 |
 
 ---
@@ -387,28 +387,28 @@ AI Agent、AI Coding 工具相关知识体系。
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/k8s-glossary-index.md|K8s 术语表索引]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/KUDIG Templates and Agent Prompts.md|KUDIG Templates and Agent Prompts]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-glossary-index.md|K8s 术语表索引]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/KUDIG Templates and Agent Prompts.md|KUDIG Templates and Agent Prompts]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]] — Cross-reference
 - [[skills/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 
 - [[wiki/02-工作负载/04-多语言运行时/05-multicluster-workload-distribution|多集群工作负载分发]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
 - [[wiki/05-网络/01-K8s网络核心/53-network-self-healing-automation|网络自愈自动化]]
-- [[wiki/11-发布变更/04-变更管理/06-database-migration-release-strategy|数据库迁移发布策略]]
-- [[wiki/12-可靠性/06-SRE实践/12-multi-active-architecture|多活架构设计]]
-- [[wiki/14-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]
-- [[wiki/18-云厂商/01-阿里云/公有云-ACK/002-ack-ecs-compute|ACK 关联产品 - ECS 计算资源]]
-- [[wiki/18-云厂商/01-阿里云/公有云-ACK/006-ack-ros-iac|ACK 关联产品 - ROS 资源编排 (IaC)]]
-- [[wiki/18-云厂商/01-阿里云/公有云-ACK/005-ack-ram-authorization|ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)]]
-- [[wiki/23-实体/13-云厂商与发行版/008-apsara-stack-sls-logging|专有云 (Apsara Stack) - SLS 日志服务]]
-- [[wiki/23-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]
-- [[wiki/23-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]
-- [[wiki/23-实体/15-参考与索引/k8s-design-principles-deep-dive|设计原理：声明式 API、控制器模式与 etcd 共识]]
-- [[wiki/23-实体/15-参考与索引/release-notes-kubernetes|发布说明索引 — Kubernetes]]
-- [[wiki/23-实体/15-参考与索引/release-notes-security|发布说明索引 — 安全]]
-- [[wiki/25-研究/02-网络与安全/ebpf-networking-revolution|eBPF 在 Kubernetes 网络中的革命性应用]]
+- [[wiki/09-发布变更/04-变更管理/06-database-migration-release-strategy|数据库迁移发布策略]]
+- [[wiki/10-可靠性/06-SRE实践/12-multi-active-architecture|多活架构设计]]
+- [[wiki/13-容器运行时/03-containerd-CRI-O/16-wasm-runtime-integration|WASM 运行时集成：WasmEdge/Spin/wasmtime 与 containerd]]
+- [[wiki/16-云厂商/01-阿里云/公有云-ACK/002-ack-ecs-compute|ACK 关联产品 - ECS 计算资源]]
+- [[wiki/16-云厂商/01-阿里云/公有云-ACK/006-ack-ros-iac|ACK 关联产品 - ROS 资源编排 (IaC)]]
+- [[wiki/16-云厂商/01-阿里云/公有云-ACK/005-ack-ram-authorization|ACK 关联产品 - RAM 权限与授权 (RAM & RRSA)]]
+- [[wiki/16-云厂商/10-云厂商与发行版/008-apsara-stack-sls-logging|专有云 (Apsara Stack) - SLS 日志服务]]
+- [[wiki/22-实体/15-参考与索引/release-notes-storage|发布说明索引 — 存储]]
+- [[wiki/22-实体/15-参考与索引/release-notes-observability|发布说明索引 — 可观测性]]
+- [[wiki/22-实体/15-参考与索引/k8s-design-principles-deep-dive|设计原理：声明式 API、控制器模式与 etcd 共识]]
+- [[wiki/22-实体/15-参考与索引/release-notes-kubernetes|发布说明索引 — Kubernetes]]
+- [[wiki/22-实体/15-参考与索引/release-notes-security|发布说明索引 — 安全]]
+- [[wiki/23-综合与研究/研究/02-网络与安全/ebpf-networking-revolution|eBPF 在 Kubernetes 网络中的革命性应用]]
 - [[skills/07-安全/rbac/audit-rbac-configurations|Audit RBAC Configurations]]
 
 ## Assessments

@@ -372,4 +372,4 @@ spec:
 - [[wiki/04-应用模式/index.md|应用模式]]
 - [[maintaining/03-发布/package/2026-07-02_18-29/corpus/supporting/skills/training-lecturer/11-workloads/index|微服务]]
 - [[wiki/05-网络/03-服务网格/index.md|服务网格]]
-- [[wiki/07-数据库中间件/03-消息队列/index.md|消息队列]]
+- [[wiki/06-存储与数据/11-消息队列/index.md|消息队列]]

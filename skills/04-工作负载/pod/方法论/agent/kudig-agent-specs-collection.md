@@ -198,7 +198,7 @@ prerequisites:
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/k8s-knowledge-map.md|k8s-knowledge-map]] — Kubernetes Knowledge Map
+- [[wiki/22-实体/15-参考与索引/k8s-knowledge-map.md|k8s-knowledge-map]] — Kubernetes Knowledge Map
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 - [[cilium]] — Cilium
 - [[submariner]] — Submariner

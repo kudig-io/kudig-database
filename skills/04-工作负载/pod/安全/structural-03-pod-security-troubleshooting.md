@@ -795,23 +795,23 @@ capsh --decode=<hex>
 ```
 ### 相关文档
 
-- [Pod 故障排查](../[[wiki/19-故障诊断/04-高级排障/structural-05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
-- [RBAC 故障排查](../../../../wiki/19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md)
-- [Webhook/准入控制故障排查](../[[wiki/19-故障诊断/04-高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
+- [Pod 故障排查](../[[wiki/17-故障诊断/04-高级排障/structural-05-workloads/01-pod-troubleshooting.md|01-pod-troubleshooting]].md)
+- [RBAC 故障排查](../../../../wiki/17-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md)
+- [Webhook/准入控制故障排查](../[[wiki/17-故障诊断/04-高级排障/structural-01-control-plane/05-webhook-admission-troubleshooting.md|05-webhook-admission-troubleshooting]].md)
 
 ## Related
 
 - 08-docker-troubleshooting-guide
 - 16-troubleshooting-guide
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
-- [[wiki/21-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/security-index.md|Security 安全知识图谱索引]]
 
 ## See Also
 
-- [[wiki/19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
-- [[wiki/19-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
-- [[wiki/19-故障诊断/04-高级排障/structural-06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
-- [[wiki/19-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-06-security-auth/02-certificate-troubleshooting.md|02-certificate-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-06-security-auth/04-audit-logging-troubleshooting.md|04-audit-logging-troubleshooting]]
+- [[wiki/17-故障诊断/04-高级排障/structural-06-security-auth/01-rbac-troubleshooting.md|01-rbac-troubleshooting]]
 
 ```
 

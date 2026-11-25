@@ -80,9 +80,9 @@ authors:
 
 ## 跨域关联
 
-- 镜像安全：[[wiki/08-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]
-- Pod 安全加固：[[wiki/08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
-- 可观测性：[[wiki/09-可观测性/README|可观测性]]
+- 镜像安全：[[wiki/07-安全/05-供应链/12-image-security-scanning.md|镜像安全扫描]]
+- Pod 安全加固：[[wiki/07-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]]
+- 可观测性：[[wiki/08-可观测性/README|可观测性]]
 - Java 运行时：[[wiki/02-工作负载/02-Java-on-K8s/01-spring-boot-kubernetes-production.md|Spring Boot on Kubernetes 生产实践指南]]
 
 ## Related

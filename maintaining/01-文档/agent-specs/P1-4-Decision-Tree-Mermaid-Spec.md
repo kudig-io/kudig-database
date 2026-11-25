@@ -348,7 +348,7 @@ flowchart TD
     IE2 --> IE2_B["iptables/ipvs 规则错误"]
     IE2 --> IE2_C["网络命名空间问题"]
     
-    DS3["📋 执行: kubectl exec ${POD} -- nslookup [[wiki/23-实体/02-K8s核心组件/kubernetes.md|kubernetes]].default<br/>测试集群 DNS 解析"]
+    DS3["📋 执行: kubectl exec ${POD} -- nslookup [[wiki/22-实体/02-K8s核心组件/kubernetes.md|kubernetes]].default<br/>测试集群 DNS 解析"]
     IE2 --> DS3
     
     DS4["📋 执行: kubectl exec ${POD} -- ping ${TARGET_POD_IP}<br/>测试 Pod 间直接通信"]

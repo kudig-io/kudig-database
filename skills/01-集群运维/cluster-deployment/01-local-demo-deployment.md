@@ -40,4 +40,4 @@ prerequisites:
 - etcd-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/06-部署方案/01-local-demo-deployment.md|01 - 本机单机 Demo 部署 [best-practices]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/06-部署方案/01-local-demo-deployment.md|01 - 本机单机 Demo 部署 [best-practices]]]（本页为重排去重桩，正文见主场）

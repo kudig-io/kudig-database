@@ -446,7 +446,7 @@ kubectl delete svc <name>
 
 **关联文档**:
 - [../04-networking/04-ingress-basics.md](../../ingress/培训/lecturer/01-ingress-basics.md) — Ingress 基础
-- [../../故障诊断/topic-skills/05-service-connectivity.md](../../../../wiki/19-故障诊断/08-技能体系/05-service-connectivity.md) — Service 连通性 Skill
+- [../../故障诊断/topic-skills/05-service-connectivity.md](../../../../skills/09-技能体系/05-service-connectivity.md) — Service 连通性 Skill
 - [../../网络/](../../网络/) — Kubernetes 网络文档
 
 ## See Also

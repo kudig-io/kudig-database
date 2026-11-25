@@ -77,7 +77,7 @@ prerequisites:
 
 1. **环境准备**：配置内核参数（`net.bridge.bridge-nf-call-*`、`net.ipv4.ip_forward`），禁用 swap
 2. **安装容器运行时**：containerd 1.6+，启用 SystemdCgroup
-3. **安装 [[wiki/23-实体/02-K8s核心组件/kubernetes.md|Kubernetes 组件]]**：[[kubelet|kubelet]]、kubeadm、kubectl
+3. **安装 [[wiki/22-实体/02-K8s核心组件/kubernetes.md|Kubernetes 组件]]**：[[kubelet|kubelet]]、kubeadm、kubectl
 4. **初始化控制平面**：使用 kubeadm-config.yaml 初始化，配置 controlPlaneEndpoint
 5. **安装网络插件**：Calico/Cilium，确保 Pod CIDR 与集群配置一致 ^[inferred]
 6. **加入工作节点**：使用 kubeadm join 命令
@@ -105,8 +105,8 @@ prerequisites:
 
 ## 相关资源
 
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
-- [[wiki/23-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[wiki/22-实体/02-K8s核心组件/kube-apiserver.md|kube-apiserver]]
 - [[etcd|etcd]]
 - [[skills/05-网络/cni/最佳实践/k8s-network-configuration-guide.md|Kubernetes 网络配置最佳实践]]
 
@@ -152,11 +152,11 @@ prerequisites:
 
 ## Related
 
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[containerd]] — containerd
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
 
 
 <!-- risk-assessed -->

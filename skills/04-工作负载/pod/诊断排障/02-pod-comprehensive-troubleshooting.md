@@ -68,4 +68,4 @@ cross_refs:
   label: '故障树: pod'
 ---
 
-> **内容已并入主场**：[[wiki/19-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/17-故障诊断/01-核心排障/08-pod-comprehensive-troubleshooting.md|Pod 全面故障排查]]（本页为重排去重桩，正文见主场）

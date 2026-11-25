@@ -2,7 +2,7 @@
 """
 KUDIG-DATABASE 运维场景工单剧本生成器
 
-将 20 个运维场景生成为「工单剧本」(Playbook)，输出到 wiki/13-生产运维/08-运维场景剧本/。
+将 20 个运维场景生成为「工单剧本」(Playbook)，输出到 wiki/11-生产运维/08-运维场景剧本/。
 
 每个剧本包含: 触发条件 / 前置检查 / 快速决策树(mermaid) / 工作流分支 /
 完工验证清单 / 常见陷阱 / 升级路径 / 资源编排(doc/fta/skill/case 关联)。
@@ -25,9 +25,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 OUT_DIR = BASE_DIR / "wiki" / "13-生产运维" / "08-运维场景剧本"
 
-FTA_DIR = "wiki/19-故障诊断/06-FTA故障树/list"
-SKILL_DIR = "wiki/19-故障诊断/08-技能体系"
-CASE_DIR = "wiki/13-生产运维/05-工单案例"
+FTA_DIR = "wiki/17-故障诊断/06-FTA故障树/list"
+SKILL_DIR = "wiki/17-故障诊断/08-技能体系"
+CASE_DIR = "wiki/11-生产运维/05-工单案例"
 
 TODAY = date.today().isoformat()
 YEAR_MONTH = TODAY[:7]
@@ -160,7 +160,7 @@ SCENARIOS = [
     "确认网络方案：CNI 选型与云厂商 VPC 路由模型（Terway/Calico/Cilium）",
     "确认容量基线：节点规格、可用区分布、控制面副本数（≥3）",
     ("确认周边依赖就绪：镜像仓库、DNS、存储后端、监控接入点",
-     "doc:wiki/18-云厂商/README.md|云厂商集成要点"),
+     "doc:wiki/16-云厂商/README.md|云厂商集成要点"),
 ],
 "branches": [
     {"cond": "云托管", "name": "路径 A · 云托管（ACK/EKS 等）",
@@ -181,7 +181,7 @@ SCENARIOS = [
     {"cond": "纳入舰队", "name": "路径 C · 纳入既有多集群舰队",
      "steps": [
          ("明确纳管平面（注册中心/下发面），统一凭证与审计入口",
-          "doc:wiki/13-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册"),
+          "doc:wiki/11-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册"),
          "打通网络边界：VPN/专线/东西向网关，验证跨集群 Service 可达性",
      ]},
 ],
@@ -204,8 +204,8 @@ SCENARIOS = [
     ("涉及云厂商配额/底层限制", "提云厂商工单并附 FTA 定位证据链"),
 ],
 "resources_docs": [
-    "doc:wiki/01-集群基础/README.md|集群基础",
-    "doc:wiki/13-生产运维/00-总览/01-production-readiness-operations-guide.md|生产就绪运营指南",
+    "doc:wiki/01-集群基础与系统/README.md|集群基础",
+    "doc:wiki/11-生产运维/00-总览/01-production-readiness-operations-guide.md|生产就绪运营指南",
 ],
 "resources_ftas": ["apiserver-fta.md", "etcd-fta.md", "node-fta.md"],
 "resources_skills": ["12-control-plane-failure.md", "06-certificate-expiry.md"],
@@ -314,26 +314,26 @@ SCENARIOS = [
 "pre_checks": [
     "确认真伪与持续性：排除误报，等待至少一个完整指标周期",
     ("按升级矩阵完成初步定级（P0~P3）",
-     "doc:wiki/13-生产运维/03-事件响应/01-escalation-matrix-severity-levels.md|事件升级矩阵"),
+     "doc:wiki/11-生产运维/03-事件响应/01-escalation-matrix-severity-levels.md|事件升级矩阵"),
     "影响半径速记：节点数 / 工作负载 / 用户面 SLO 影响",
     "近 1 小时变更清单：发布、配置、扩缩容、证书、内核操作",
-    ("P0 即刻拉起 War Room", "doc:wiki/13-生产运维/03-事件响应/02-war-room-coordination-procedures.md|War Room 协调规程"),
+    ("P0 即刻拉起 War Room", "doc:wiki/11-生产运维/03-事件响应/02-war-room-coordination-procedures.md|War Room 协调规程"),
 ],
 "branches": [
     {"cond": "现象广泛或来源不明", "name": "阶段 1-2 · 信息收集与定级（≤5 分钟）",
      "steps": [
          "kubectl get events --sort-by=.lastTimestamp 抓 Warning 波形",
          "kubectl top nodes / top pods --all-namespaces 找资源热点",
-         ("将异常时间线与近期变更记录对齐", "doc:wiki/11-发布变更/04-变更管理/index.md|变更管理索引"),
+         ("将异常时间线与近期变更记录对齐", "doc:wiki/09-发布变更/04-变更管理/index.md|变更管理索引"),
          ("向干系人发出首份通报（模板化表达）",
-          "doc:wiki/13-生产运维/03-事件响应/03-communication-templates-stakeholder.md|干系人沟通模板"),
+          "doc:wiki/11-生产运维/03-事件响应/03-communication-templates-stakeholder.md|干系人沟通模板"),
      ]},
     {"cond": "影响持续扩大", "name": "阶段 3 · 快速止血（先恢复后定位）",
      "steps": [
          "决策优先级：切流降级 > 回滚最近变更 > 隔离故障单元 > 受控重启",
          "止血动作必须先截图留证再执行，防止现场销毁",
          ("操作前对照变更冻结窗口约束",
-          "doc:wiki/13-生产运维/07-运维手册/07-change-freeze-policy.md|变更冻结策略"),
+          "doc:wiki/11-生产运维/07-运维手册/07-change-freeze-policy.md|变更冻结策略"),
      ]},
     {"cond": "节点侧异常", "name": "分流 A · 节点",
      "steps": [
@@ -367,7 +367,7 @@ SCENARIOS = [
     "受影响业务接口成功率/延迟达标，无衍生告警",
     "止血手段副作用已评估（临时资源的回收计划明确）",
     ("48h 内产出复盘 RCA，结论回写知识库与 FTA",
-     "doc:wiki/13-生产运维/03-事件响应/index.md|事件响应手册集"),
+     "doc:wiki/11-生产运维/03-事件响应/index.md|事件响应手册集"),
 ],
 "pitfalls": [
     "没有留证就重启组件——根因永久丢失，只能靠猜",
@@ -380,10 +380,10 @@ SCENARIOS = [
     ("疑似云产品侧故障", "提云厂商工单并同步初步证据包"),
 ],
 "resources_docs": [
-    "doc:wiki/19-故障诊断/README.md|故障诊断域",
-    "doc:wiki/13-生产运维/03-事件响应/04-on-call-playbook.md|On-Call 手册",
-    "doc:wiki/13-生产运维/07-运维手册/09-observability-operations.md|可观测性运营",
-    "doc:wiki/13-生产运维/05-工单案例/ticket-routing-rules.md|工单路由规则",
+    "doc:wiki/17-故障诊断/README.md|故障诊断域",
+    "doc:wiki/11-生产运维/03-事件响应/04-on-call-playbook.md|On-Call 手册",
+    "doc:wiki/11-生产运维/07-运维手册/09-observability-operations.md|可观测性运营",
+    "doc:wiki/11-生产运维/05-工单案例/ticket-routing-rules.md|工单路由规则",
 ],
 "resources_ftas": ["pod-fta.md", "node-fta.md", "etcd-fta.md", "dns-fta.md", "csi-fta.md"],
 "resources_skills": ["01-node-notready.md", "03-pod-pending.md", "04-dns-resolution-failure.md",
@@ -452,8 +452,8 @@ SCENARIOS = [
 ],
 "escalation": [("调优涉及内核参数或发行版配置", "交由系统组评审窗口统一执行")],
 "resources_docs": [
-    "doc:wiki/13-生产运维/07-运维手册/09-observability-operations.md|可观测性运营",
-    "doc:wiki/17-系统基础/README.md|系统基础(Linux)",
+    "doc:wiki/11-生产运维/07-运维手册/09-observability-operations.md|可观测性运营",
+    "doc:wiki/01-集群基础与系统/README.md|系统基础(Linux)",
 ],
 "resources_ftas": ["hpa-fta.md", "vpa-fta.md", "node-fta.md"],
 "resources_skills": ["18-performance-bottleneck.md", "13-autoscaling-failure.md", "20-node-resource-pressure.md"],
@@ -521,9 +521,9 @@ SCENARIOS = [
 ],
 "escalation": [("涉及生产关键链路的强策略", "变更委员会评审并设一周观察期")],
 "resources_docs": [
-    "doc:wiki/08-安全/README.md|安全域",
-    "doc:wiki/13-生产运维/02-集群治理/04-rbac-governance-model.md|RBAC 治理模型",
-    "doc:wiki/13-生产运维/02-集群治理/03-admission-policy-governance.md|准入策略治理",
+    "doc:wiki/07-安全/README.md|安全域",
+    "doc:wiki/11-生产运维/02-集群治理/04-rbac-governance-model.md|RBAC 治理模型",
+    "doc:wiki/11-生产运维/02-集群治理/03-admission-policy-governance.md|准入策略治理",
 ],
 "resources_ftas": ["rbac-fta.md", "networkpolicy-fta.md", "certificate-fta.md"],
 "resources_skills": ["10-rbac-quota-failure.md", "22-networkpolicy-connectivity.md", "26-namespace-quota-limitrange.md"],
@@ -550,7 +550,7 @@ SCENARIOS = [
 "pre_checks": [
     "盘点监控对象：绘制 infra→middleware→app→biz 四级资源层级图",
     ("对齐既有可观测运营基线（采集/存储/查询三层健康度）",
-     "doc:wiki/13-生产运维/07-运维手册/09-observability-operations.md|可观测性运营手册"),
+     "doc:wiki/11-生产运维/07-运维手册/09-observability-operations.md|可观测性运营手册"),
     "评估告警消费能力：值班者每小时可处理条数上限",
 ],
 "branches": [
@@ -585,8 +585,8 @@ SCENARIOS = [
 ],
 "escalation": [("监控平台自身故障期间", "启用降级采集通道并将人工巡检频次翻倍")],
 "resources_docs": [
-    "doc:wiki/09-可观测性/README.md|可观测性域",
-    "doc:wiki/13-生产运维/07-运维手册/06-sla-slo-definition-templates.md|SLA/SLO 模板",
+    "doc:wiki/08-可观测性/README.md|可观测性域",
+    "doc:wiki/11-生产运维/07-运维手册/06-sla-slo-definition-templates.md|SLA/SLO 模板",
 ],
 "resources_ftas": ["monitoring-fta.md"],
 "resources_skills": ["16-monitoring-alerting-failure.md", "17-logging-pipeline-failure.md"],
@@ -613,7 +613,7 @@ SCENARIOS = [
 "pre_checks": [
     "备份对象四象限清单：etcd 快照、资源清单(GitOps 库)、PV 数据、证书私钥",
     "RPO/RTO 目标书面化并与业务方签字确认",
-    ("恢复环境与介质可达性预检", "doc:wiki/12-可靠性/02-灾难恢复/index.md|灾备恢复专题"),
+    ("恢复环境与介质可达性预检", "doc:wiki/10-可靠性/02-灾难恢复/index.md|灾备恢复专题"),
 ],
 "branches": [
     {"cond": "控制面受损", "name": "A · etcd 快照与恢复",
@@ -629,7 +629,7 @@ SCENARIOS = [
     {"cond": "区域性故障", "name": "C · 容灾切换",
      "steps": [
          ("按多集群手册执行 DNS/GSLB 切换",
-          "doc:wiki/13-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册"),
+          "doc:wiki/11-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册"),
          "切回正向演练同样计入达标项",
      ]},
 ],
@@ -645,8 +645,8 @@ SCENARIOS = [
 ],
 "escalation": [("恢复演练失败或 RTO 超标", "列入 P1 风险跟踪并暂停相关升级计划")],
 "resources_docs": [
-    "doc:wiki/12-可靠性/README.md|可靠性域",
-    "doc:wiki/12-可靠性/02-灾难恢复/index.md|灾难恢复专题",
+    "doc:wiki/10-可靠性/README.md|可靠性域",
+    "doc:wiki/10-可靠性/02-灾难恢复/index.md|灾难恢复专题",
 ],
 "resources_ftas": ["backup-restore-fta.md", "etcd-fta.md", "csi-fta.md"],
 "resources_skills": ["12-control-plane-failure.md", "08-pvc-storage-failure.md"],
@@ -707,8 +707,8 @@ SCENARIOS = [
 ],
 "escalation": [("任一批次升级后数据面受损", "立即中止批次队列并回滚，转 SC-03 总纲处理")],
 "resources_docs": [
-    "doc:wiki/11-发布变更/04-变更管理/index.md|变更管理",
-    "doc:wiki/01-集群基础/README.md|集群基础",
+    "doc:wiki/09-发布变更/04-变更管理/index.md|变更管理",
+    "doc:wiki/01-集群基础与系统/README.md|集群基础",
 ],
 "resources_ftas": ["cluster-upgrade-fta.md", "kubeadm-fta.md", "certificate-fta.md"],
 "resources_skills": ["27-cluster-upgrade-migration.md", "06-certificate-expiry.md"],
@@ -737,9 +737,9 @@ SCENARIOS = [
 ],
 "pre_checks": [
     ("复核昨夜值班交接事项，确认无遗留 P2 以上未闭环项",
-     "doc:wiki/13-生产运维/03-事件响应/04-on-call-playbook.md|On-Call 手册"),
+     "doc:wiki/11-生产运维/03-事件响应/04-on-call-playbook.md|On-Call 手册"),
     ("浏览今日变更计划，标记高风险时段避开深度清理动作",
-     "doc:wiki/13-生产运维/07-运维手册/02-change-management-guide.md|变更管理指南"),
+     "doc:wiki/11-生产运维/07-运维手册/02-change-management-guide.md|变更管理指南"),
     "打开当月巡检记录表准备趋势对照",
 ],
 "branches": [
@@ -748,7 +748,7 @@ SCENARIOS = [
          "nodes 全 Ready；NotReady/SchedulingDisabled 异常节点即时取证建单",
          "kube-system 与自研平台命名空间全部 Running 且无 CrashLoop",
          ("Warning events 近 12h 波形环比抬升即深挖",
-          "doc:wiki/19-故障诊断/README.md|故障诊断域入口"),
+          "doc:wiki/17-故障诊断/README.md|故障诊断域入口"),
      ]},
     {"cond": "每日必检", "name": "板块 ② 容量与配额面（约 5 分钟）",
      "steps": [
@@ -790,7 +790,7 @@ SCENARIOS = [
           "case:ticket-case-035-node-diskpressure-eviction.md|磁盘压力驱逐"),
          "孤儿 ConfigMap/PVC 审计并列回收白名单（双人复核）",
          ("巡检摘要按话术模板同步相关方",
-          "doc:wiki/13-生产运维/06-回复话术/README.md|回复话术库"),
+          "doc:wiki/11-生产运维/06-回复话术/README.md|回复话术库"),
      ]},
 ],
 "validation": [
@@ -808,9 +808,9 @@ SCENARIOS = [
     ("连续两天同类黄灯", "立项专项分析并纳入周会汇报"),
 ],
 "resources_docs": [
-    "doc:wiki/13-生产运维/07-运维手册/01-production-sre-daily-ops.md|生产 SRE 日常运维手册",
-    "doc:wiki/13-生产运维/07-运维手册/10-node-and-runtime-ops.md|节点与运行时运营",
-    "doc:wiki/13-生产运维/05-工单案例/ticket-routing-rules.md|工单路由规则",
+    "doc:wiki/11-生产运维/07-运维手册/01-production-sre-daily-ops.md|生产 SRE 日常运维手册",
+    "doc:wiki/11-生产运维/07-运维手册/10-node-and-runtime-ops.md|节点与运行时运营",
+    "doc:wiki/11-生产运维/05-工单案例/ticket-routing-rules.md|工单路由规则",
 ],
 "resources_ftas": ["node-fta.md", "monitoring-fta.md"],
 "resources_skills": ["03-pod-pending.md", "04-dns-resolution-failure.md", "06-certificate-expiry.md"],
@@ -837,7 +837,7 @@ SCENARIOS = [
 ],
 "pre_checks": [
     "驱动/CUDA/容器运行时版本矩阵一致性确认",
-    ("梳理调度器与配额策略现状", "doc:wiki/15-AI基础设施/README.md|AI 基础设施域"),
+    ("梳理调度器与配额策略现状", "doc:wiki/14-AI基础设施/README.md|AI 基础设施域"),
 ],
 "branches": [
     {"cond": "GPU 供给", "name": "A · GPU 分配链路",
@@ -868,8 +868,8 @@ SCENARIOS = [
 ],
 "escalation": [("硬件级 XID 错误频发", "通知供应商换卡并把节点划入隔离池")],
 "resources_docs": [
-    "doc:wiki/15-AI基础设施/README.md|AI 基础设施域",
-    "doc:wiki/16-专项技术/README.md|专项技术",
+    "doc:wiki/14-AI基础设施/README.md|AI 基础设施域",
+    "doc:wiki/15-专项技术/README.md|专项技术",
 ],
 "resources_ftas": ["gpu-fta.md", "crd-operator-fta.md"],
 "resources_skills": ["03-pod-pending.md", "13-autoscaling-failure.md", "18-performance-bottleneck.md"],
@@ -1004,7 +1004,7 @@ SCENARIOS = [
 ],
 "escalation": [("多租户同时挂载失败的底座故障", "广播暂停对应 StorageClass 新供给并升级")],
 "resources_docs": [
-    "doc:wiki/06-存储/README.md|存储域",
+    "doc:wiki/06-存储与数据/README.md|存储域",
 ],
 "resources_ftas": ["csi-fta.md", "statefulset-fta.md"],
 "resources_skills": ["08-pvc-storage-failure.md", "23-statefulset-failure.md"],
@@ -1030,7 +1030,7 @@ SCENARIOS = [
 ],
 "pre_checks": [
     ("按分级标准完成事件定性（SEV-S/P1/P2）",
-     "doc:wiki/13-生产运维/03-事件响应/01-escalation-matrix-severity-levels.md|事件分级标准"),
+     "doc:wiki/11-生产运维/03-事件响应/01-escalation-matrix-severity-levels.md|事件分级标准"),
     "开启专用安保频道（脱离日常 on-call 群）",
     "记录初始时间戳 T0，法务/合规全程跟随",
 ],
@@ -1045,18 +1045,18 @@ SCENARIOS = [
      "steps": [
          "容器文件系统/内存快照上传证物桶（chain of custody 登记）",
          ("导出 apiserver audit log 固定时间窗",
-          "doc:wiki/13-生产运维/03-事件响应/08-supply-chain-incident-response.md|供应链事件响应"),
+          "doc:wiki/11-生产运维/03-事件响应/08-supply-chain-incident-response.md|供应链事件响应"),
      ]},
     {"cond": "清除阶段", "name": "C · 清除与重建",
      "steps": [
          "受感染节点与镜像一律重建不复用",
          ("容器运行时逃逸路径复核",
-          "doc:wiki/13-生产运维/03-事件响应/07-container-runtime-threat-response.md|运行时威胁响应"),
+          "doc:wiki/11-生产运维/03-事件响应/07-container-runtime-threat-response.md|运行时威胁响应"),
      ]},
     {"cond": "对外沟通", "name": "D · 溯源与通报",
      "steps": [
          ("统一发言人使用既定话术对外通报",
-          "doc:wiki/13-生产运维/03-事件响应/03-communication-templates-stakeholder.md|干系人沟通模板"),
+          "doc:wiki/11-生产运维/03-事件响应/03-communication-templates-stakeholder.md|干系人沟通模板"),
          "IOC 回填威胁情报库并反向全网扫描存量",
      ]},
 ],
@@ -1072,8 +1072,8 @@ SCENARIOS = [
 ],
 "escalation": [("确认数据外泄或勒索加密", "立即上升公司安全委员会并启动公关预案")],
 "resources_docs": [
-    "doc:wiki/08-安全/README.md|安全域",
-    "doc:wiki/13-生产运维/03-事件响应/index.md|事件响应手册集",
+    "doc:wiki/07-安全/README.md|安全域",
+    "doc:wiki/11-生产运维/03-事件响应/index.md|事件响应手册集",
 ],
 "resources_ftas": ["webhook-admission-fta.md", "psp-scc-fta.md"],
 "resources_skills": ["19-security-incident-response.md", "15-configmap-secret-failure.md"],
@@ -1100,7 +1100,7 @@ SCENARIOS = [
 "pre_checks": [
     ("读取 SC-09 巡检沉淀的三个月水位趋势", "scenario:daily-ops.md|SC-09 日常巡检"),
     ("request 失真体检：real/request 比 <0.6 的右调清单",
-     "doc:wiki/13-生产运维/01-成本治理/02-idle-resource-right-sizing.md|闲置资源右调"),
+     "doc:wiki/11-生产运维/01-成本治理/02-idle-resource-right-sizing.md|闲置资源右调"),
     "列出隐性天花板：IP 池/端口/安全组限额（别只算 CPU 内存）",
 ],
 "branches": [
@@ -1121,7 +1121,7 @@ SCENARIOS = [
      "steps": [
          "影子流量全链路压测至目标峰值 ×1.3",
          ("容量基线纳入生产就绪度评审附件",
-          "doc:wiki/13-生产运维/07-运维手册/03-capacity-planning-readiness.md|容量规划就绪指南"),
+          "doc:wiki/11-生产运维/07-运维手册/03-capacity-planning-readiness.md|容量规划就绪指南"),
      ]},
 ],
 "validation": [
@@ -1136,8 +1136,8 @@ SCENARIOS = [
 ],
 "escalation": [("两周内无法满足确定性业务缺口", "上报架构委员会进入机型采购/混合云流程")],
 "resources_docs": [
-    "doc:wiki/13-生产运维/07-运维手册/03-capacity-planning-readiness.md|容量规划就绪指南",
-    "doc:wiki/13-生产运维/01-成本治理/01-cost-allocation-chargeback.md|成本分摊",
+    "doc:wiki/11-生产运维/07-运维手册/03-capacity-planning-readiness.md|容量规划就绪指南",
+    "doc:wiki/11-生产运维/01-成本治理/01-cost-allocation-chargeback.md|成本分摊",
 ],
 "resources_ftas": ["cluster-autoscaler-fta.md", "hpa-fta.md"],
 "resources_skills": ["13-autoscaling-failure.md", "26-namespace-quota-limitrange.md"],
@@ -1171,7 +1171,7 @@ SCENARIOS = [
      "steps": [
          ("Progressing 卡死三分叉：webhook 不可达/hook 失败/history 上限",
           "fta:gitops-argocd-fta.md",
-          "doc:wiki/11-发布变更/README.md|发布变更域"),
+          "doc:wiki/09-发布变更/README.md|发布变更域"),
      ]},
     {"cond": "配置漂移", "name": "B · Drift 治理",
      "steps": [
@@ -1196,8 +1196,8 @@ SCENARIOS = [
 ],
 "escalation": [("GitOps 系统自身不可用", "启用只读逃生账号 + 事故特批写入流程")],
 "resources_docs": [
-    "doc:wiki/11-发布变更/README.md|发布变更域",
-    "doc:wiki/10-平台工程/README.md|平台工程域",
+    "doc:wiki/09-发布变更/README.md|发布变更域",
+    "doc:wiki/12-平台工程/README.md|平台工程域",
 ],
 "resources_ftas": ["gitops-argocd-fta.md"],
 "resources_skills": ["09-deployment-rollout-failure.md", "28-helm-chart-failure.md"],
@@ -1280,7 +1280,7 @@ SCENARIOS = [
 ],
 "pre_checks": [
     ("舰队清单与健康画像仪表先行",
-     "doc:wiki/13-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册"),
+     "doc:wiki/11-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册"),
     "身份联邦（OIDC/token 链）与网络边界（专线/peering）确认",
 ],
 "branches": [
@@ -1313,7 +1313,7 @@ SCENARIOS = [
 ],
 "escalation": [("舰队级控制面瘫痪", "启用应急预案二把手 + 云厂商 TAM 绿色通道")],
 "resources_docs": [
-    "doc:wiki/13-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册",
+    "doc:wiki/11-生产运维/07-运维手册/05-multi-cluster-operations.md|多集群运维手册",
 ],
 "resources_ftas": ["cloud-provider-fta.md", "cluster-autoscaler-fta.md"],
 "resources_skills": ["26-namespace-quota-limitrange.md"],
@@ -1339,7 +1339,7 @@ SCENARIOS = [
 ],
 "pre_checks": [
     "云边隧道模式确认（WebSocket tunnel / mTLS 元数据通道）",
-    ("参考专项技术域的边缘实践沉淀", "doc:wiki/16-专项技术/README.md|专项技术域"),
+    ("参考专项技术域的边缘实践沉淀", "doc:wiki/15-专项技术/README.md|专项技术域"),
     "边缘硬件档案：架构(ARM/x86)、内存上限、磁盘寿命",
 ],
 "branches": [
@@ -1371,8 +1371,8 @@ SCENARIOS = [
 ],
 "escalation": [("站点硬件级更换", "启动现场物流 SOP 并提供远程装配支援")],
 "resources_docs": [
-    "doc:wiki/16-专项技术/README.md|专项技术域",
-    "doc:wiki/14-容器运行时/README.md|容器运行时域",
+    "doc:wiki/15-专项技术/README.md|专项技术域",
+    "doc:wiki/13-容器运行时/README.md|容器运行时域",
 ],
 "resources_ftas": ["kubelet-fta.md", "cloud-provider-fta.md"],
 "resources_skills": ["01-node-notready.md", "20-node-resource-pressure.md"],
@@ -1398,7 +1398,7 @@ SCENARIOS = [
 ],
 "pre_checks": [
     ("可见性先行：分摊标签覆盖率检查（无标签不入账）",
-     "doc:wiki/13-生产运维/01-成本治理/01-cost-allocation-chargeback.md|成本分摊与退款"),
+     "doc:wiki/11-生产运维/01-成本治理/01-cost-allocation-chargeback.md|成本分摊与退款"),
     "业务容忍度访谈：可抢占/可定时缩容的白名单",
     ("水位基线承接自 SC-14 容量规划", "scenario:capacity-planning.md|SC-14 容量规划"),
 ],
@@ -1407,22 +1407,22 @@ SCENARIOS = [
      "steps": [
          "基于 VPA recommend 曲线加权生成建议并灰度验证",
          ("闲置额度回收进公共池",
-          "doc:wiki/13-生产运维/01-成本治理/02-idle-resource-right-sizing.md|闲置资源右调"),
+          "doc:wiki/11-生产运维/01-成本治理/02-idle-resource-right-sizing.md|闲置资源右调"),
      ]},
     {"cond": "计费结构", "name": "B · Spot/RI/弹性组合拳",
      "steps": [
          ("中断友好型负载迁 Spot 池 + 驱逐兜底方案",
-          "doc:wiki/13-生产运维/01-成本治理/03-spot-instance-strategy.md|Spot 策略",
+          "doc:wiki/11-生产运维/01-成本治理/03-spot-instance-strategy.md|Spot 策略",
           "fta:cluster-autoscaler-fta.md"),
          ("稳态负载 RI/包年包月配比测算",
-          "doc:wiki/13-生产运维/01-成本治理/05-kubernetes-cost-governance.md|K8s 成本治理"),
+          "doc:wiki/11-生产运维/01-成本治理/05-kubernetes-cost-governance.md|K8s 成本治理"),
      ]},
     {"cond": "长期运营", "name": "C · FinOps 平台化",
      "steps": [
          ("Kubecost/OpenCost 落地与预算告警接线",
-          "doc:wiki/13-生产运维/01-成本治理/04-kubecost-finops-automation.md|Kubecost 自动化"),
+          "doc:wiki/11-生产运维/01-成本治理/04-kubecost-finops-automation.md|Kubecost 自动化"),
          ("面向管理层的账单叙事固定节奏",
-          "doc:wiki/13-生产运维/01-成本治理/06-finops-cost-governance-runbook.md|FinOps 运营 Runbook"),
+          "doc:wiki/11-生产运维/01-成本治理/06-finops-cost-governance-runbook.md|FinOps 运营 Runbook"),
      ]},
 ],
 "validation": [
@@ -1437,7 +1437,7 @@ SCENARIOS = [
 ],
 "escalation": [("预估月节省空间 >30%", "成立专项小组并制定季度 OKR")],
 "resources_docs": [
-    "doc:wiki/13-生产运维/01-成本治理/07-finops-cost-optimization-guide.md|FinOps 优化指南",
+    "doc:wiki/11-生产运维/01-成本治理/07-finops-cost-optimization-guide.md|FinOps 优化指南",
 ],
 "resources_ftas": ["cluster-autoscaler-fta.md"],
 "resources_skills": ["13-autoscaling-failure.md", "18-performance-bottleneck.md"],
@@ -1462,7 +1462,7 @@ SCENARIOS = [
     "监管漏洞通报限期整改",
 ],
 "pre_checks": [
-    ("框架映射表：条款 ↔ CIS ↔ 内部控制项编号", "doc:wiki/08-安全/README.md|安全域导航"),
+    ("框架映射表：条款 ↔ CIS ↔ 内部控制项编号", "doc:wiki/07-安全/README.md|安全域导航"),
     "证据三库齐备：配置基线库 / 审计日志库 / 流程制度库",
     ("与 SC-05 加固基线联合排期", "scenario:security-hardening.md|SC-05 安全加固"),
 ],
@@ -1470,13 +1470,13 @@ SCENARIOS = [
     {"cond": "迎检冲刺", "name": "A · 差距评估与整改",
      "steps": [
          ("机器扫描 + 人工走查双轨取证",
-          "doc:wiki/13-生产运维/02-集群治理/05-cluster-governance-lifecycle-compliance.md|集群治理生命周期合规"),
+          "doc:wiki/11-生产运维/02-集群治理/05-cluster-governance-lifecycle-compliance.md|集群治理生命周期合规"),
          "整改台账（责任人/期限/复测方式）每周更新",
      ]},
     {"cond": "常态治理", "name": "B · 策略即代码",
      "steps": [
          ("OPA/Kyverno 规则与条款编号双向注释挂钩",
-          "doc:wiki/13-生产运维/02-集群治理/03-admission-policy-governance.md|准入策略治理"),
+          "doc:wiki/11-生产运维/02-集群治理/03-admission-policy-governance.md|准入策略治理"),
          ("audit log 保留期与防篡改(WORM)存储",
           "skill:15-configmap-secret-failure.md"),
      ]},
@@ -1498,8 +1498,8 @@ SCENARIOS = [
 ],
 "escalation": [("高危项 7 日无法整改", "报请风控委员会备案过渡补偿措施")],
 "resources_docs": [
-    "doc:wiki/08-安全/README.md|安全域",
-    "doc:wiki/13-生产运维/02-集群治理/index.md|集群治理索引",
+    "doc:wiki/07-安全/README.md|安全域",
+    "doc:wiki/11-生产运维/02-集群治理/index.md|集群治理索引",
 ],
 "resources_ftas": ["webhook-admission-fta.md", "rbac-fta.md"],
 "resources_skills": ["19-security-incident-response.md", "10-rbac-quota-failure.md"],
@@ -1687,7 +1687,7 @@ def render_index(all_missing: list) -> str:
         add("| ID | 剧本 | 一句话说明 |")
         add("|---|---|---|")
         for s in ss:
-            rel = f"wiki/13-生产运维/08-运维场景剧本/{s['name']}"
+            rel = f"wiki/11-生产运维/08-运维场景剧本/{s['name']}"
             add(f"| {s['id']} | [[{rel}|{s['title']}]] | {s['description']} |")
         add("")
     add("## 场景间关系速览")

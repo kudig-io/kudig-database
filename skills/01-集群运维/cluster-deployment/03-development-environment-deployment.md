@@ -51,4 +51,4 @@ prerequisites:
 - logging-basics
 ---
 
-> **内容已并入主场**：[[wiki/11-发布变更/06-部署方案/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment) [deployment]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/09-发布变更/06-部署方案/03-development-environment-deployment.md|03 - 研发环境部署 (Development Environment Deployment) [deployment]]]（本页为重排去重桩，正文见主场）

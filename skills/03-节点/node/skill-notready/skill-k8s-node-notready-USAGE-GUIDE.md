@@ -126,8 +126,8 @@ kubectl get pods -o wide --field-selector spec.nodeName=<node>
 
 - [[skills/07-安全/rbac/诊断排障/ts-security-auth.md|ts-security-auth]] — 安全认证故障排查
 - [[skills/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|troubleshoot-pod-issues]] — [[skills/04-工作负载/pod/诊断排障/troubleshoot-pod-issues.md|Troubleshoot Pod Issues]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/node-fta.md|node-fta]] — node-fta
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/17-故障诊断/06-FTA故障树/list/node-fta.md|node-fta]] — node-fta
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
 
 

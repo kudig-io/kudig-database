@@ -34,4 +34,4 @@ prerequisites:
 - gpu-ml-basics
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/07-scenarios/network-diagnosis.md|场景: 网络诊断]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/07-scenarios/network-diagnosis.md|场景: 网络诊断]]（本页为重排去重桩，正文见主场）

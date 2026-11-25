@@ -130,13 +130,13 @@ Pod 定义、生命周期、架构关系及与其他组件的交叉主题。
 
 | 文件 | 说明 |
 |------|------|
-| [概念原理/pods.md](../../../wiki/22-概念/02-工作负载/pods.md) | Pod 上游概念文档 |
+| [概念原理/pods.md](../../../wiki/20-概念/02-工作负载/pods.md) | Pod 上游概念文档 |
 | [概念原理/pod-lifecycle.md](概念原理/pod-lifecycle.md) | Pod 生命周期（上游） |
 | [概念原理/architecture-pod-lifecycle.md](概念原理/architecture-pod-lifecycle.md) | 架构视角的生命周期 |
 | [概念原理/containerd-pod-lifecycle.md](概念原理/containerd-pod-lifecycle.md) | containerd 视角的生命周期 |
 | [概念原理/pod-availability-lifecycle.md](../../../wiki/04-应用模式/03-生产模式/pod-availability-lifecycle.md) | 可用性与生命周期 |
-| [概念原理/pod-affinity.md](../../../wiki/22-概念/07-调度与资源/pod-affinity.md) | Pod 亲和性概念 |
-| [概念原理/pod-overhead.md](../../../wiki/22-概念/07-调度与资源/pod-overhead.md) | Pod 开销概念 |
+| [概念原理/pod-affinity.md](../../../wiki/20-概念/07-调度与资源/pod-affinity.md) | Pod 亲和性概念 |
+| [概念原理/pod-overhead.md](../../../wiki/20-概念/07-调度与资源/pod-overhead.md) | Pod 开销概念 |
 | [概念原理/apiserver-×-Pod诊断.md](概念原理/apiserver-×-Pod诊断.md) | API Server × Pod 诊断 |
 | [概念原理/etcd-×-Pod诊断.md](概念原理/etcd-×-Pod诊断.md) | etcd × Pod 诊断 |
 | [概念原理/Operator模式×Pod生命周期.md](概念原理/Operator模式×Pod生命周期.md) | Operator × 生命周期 |
@@ -180,12 +180,12 @@ Pod 安全标准（PSS）、安全准入（PSA）、安全策略（PSP）、内�
 | 文件 | 说明 |
 |------|------|
 | [安全/01-pod-security-standards-reference.md](../../../wiki/03-清单模式/06-安全模式/01-pod-security-standards-reference.md) | PSS 标准参考 |
-| [安全/06-pod-security-standards.md](../../../wiki/08-安全/04-策略治理/03-pod-security-standards.md) | PSS 标准 |
-| [安全/02-pod-security-admission-deep-dive.md](../../../wiki/08-安全/01-身份与访问/02-pod-security-admission-deep-dive.md) | PSA 准入深入 |
+| [安全/06-pod-security-standards.md](../../../wiki/07-安全/04-策略治理/03-pod-security-standards.md) | PSS 标准 |
+| [安全/02-pod-security-admission-deep-dive.md](../../../wiki/07-安全/01-身份与访问/02-pod-security-admission-deep-dive.md) | PSA 准入深入 |
 | [安全/15-pod-security-standards-migration.md](安全/04-pod-security-standards-migration.md) | PSP→PSA 迁移 |
 | [安全/k8s-pod-security-guide.md](安全/k8s-pod-security-guide.md) | Pod 安全指南 |
 | [安全/best-practices-pod-security.md](安全/best-practices-pod-security.md)、[安全/security-pod-security.md](安全/security-pod-security.md) | 安全最佳实践（两来源） |
-| [安全/linux-kernel-security-constraints-for-pods-and-containers.md](../../../wiki/17-系统基础/06-知识字典/security/linux-kernel-security-constraints-for-pods-and-containers.md) | 内核安全约束 |
+| [安全/linux-kernel-security-constraints-for-pods-and-containers.md](../../../wiki/21-知识字典/security/linux-kernel-security-constraints-for-pods-and-containers.md) | 内核安全约束 |
 | [安全/structural-03-pod-security-troubleshooting.md](安全/structural-03-pod-security-troubleshooting.md) | 安全排障 |
 | [安全/概念-pod-security-policy.md](安全/概念-pod-security-policy.md)、[安全/字典-pod-security-*.md](安全) | PSP/PSA/PSS 字典条目 |
 
@@ -225,7 +225,7 @@ Pod 安全标准（PSS）、安全准入（PSA）、安全策略（PSP）、内�
 
 | 文件 | 说明 |
 |------|------|
-| [生态索引/pod-index.md](../../../wiki/21-生态参考/03-领域索引/pod-index.md) | Pod 知识图谱领域索引 |
+| [生态索引/pod-index.md](../../../wiki/19-生态参考/03-领域索引/pod-index.md) | Pod 知识图谱领域索引 |
 
 ### 📦 上游源码文档 · [上游源码/](上游源码)
 
@@ -308,8 +308,8 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA 诊断执行引擎]]
 - [[skills/04-工作负载/pod/诊断排障/ts-workloads.md|工作负载故障排查]]
-- [[wiki/19-故障诊断/README.md|Domain-12 故障排查]]
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/17-故障诊断/README.md|Domain-12 故障排查]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 ## Related
 
@@ -319,7 +319,7 @@ kubectl get pod <pod-name> -n <namespace> -o jsonpath='{.status.containerStatuse
 - [[wiki/02-工作负载/04-多语言运行时/01-go-on-kubernetes-production|Go 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/03-rust-on-kubernetes-production|Rust 应用 Kubernetes 生产实践]]
 - [[wiki/02-工作负载/04-多语言运行时/04-gpu-workload-management|GPU 工作负载管理]]
-- [[wiki/09-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
-- [[wiki/12-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
-- [[wiki/19-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
-- [[wiki/26-标签/06-AI与专项/research|research]]
+- [[wiki/08-可观测性/00-总览/13-ebpf-observability-deep-dive|eBPF 可观测性深度实践]]
+- [[wiki/10-可靠性/06-SRE实践/13-ai-workload-reliability|AI 工作负载可靠性]]
+- [[wiki/17-故障诊断/04-高级排障/structural-README|Kubernetes 结构化故障排查知识库 [故障诊断]]]
+- [[wiki/24-标签/06-AI与专项/research|research]]

@@ -30,9 +30,9 @@ Common examples include:
 - Configuring **different Pod Environment Variables and Arguments** for dev, test, canary, production
 
 {% panel style="info", title="Reference" %}
-- [images](../../../../../../wiki/17-系统基础/06-知识字典/tooling/kustomize.md#images)
-- [configMapGenerator](../../../../../../wiki/17-系统基础/06-知识字典/tooling/kustomize.md#configmapgenerator)
-- [secretGenerator](../../../../../../wiki/17-系统基础/06-知识字典/tooling/kustomize.md#secretgenerator)
+- [images](../../../../../../wiki/21-知识字典/tooling/kustomize.md#images)
+- [configMapGenerator](../../../../../../wiki/21-知识字典/tooling/kustomize.md#configmapgenerator)
+- [secretGenerator](../../../../../../wiki/21-知识字典/tooling/kustomize.md#secretgenerator)
 {% endpanel %}
 
 ## Customizing Images

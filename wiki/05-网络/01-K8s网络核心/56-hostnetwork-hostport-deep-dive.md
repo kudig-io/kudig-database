@@ -60,7 +60,7 @@ Kubernetes 的默认网络模型建立在「每个 Pod 拥有独立网络命名�
 
 两者都绕过了「Pod 通过 CNI 注册到 Pod 网络」这条主线，因此会带来一系列非直觉的副作用：kube-proxy 不再为这些 Pod 处理 Service 的 ClusterIP 路由、NetworkPolicy 对 hostNetwork Pod 完全失效、DNS 解析行为发生改变、调度器需要额外检查端口唯一性。这些副作用是本篇的核心议题——理解它们的机制，是安全使用这两条通道的前提。
 
-> 本文聚焦 `hostNetwork`/`hostPort` 本身的机制与权衡。Service 的整体模型见 [[wiki/05-网络/01-K8s网络核心/07-service-concepts-types.md|Service 概念与类型]]，DNS 细节见 [[wiki/05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现 CoreDNS]]，DaemonSet 作为最常见载体的实践见 [[wiki/22-概念/02-工作负载/daemonset.md|DaemonSet]]。
+> 本文聚焦 `hostNetwork`/`hostPort` 本身的机制与权衡。Service 的整体模型见 [[wiki/05-网络/01-K8s网络核心/07-service-concepts-types.md|Service 概念与类型]]，DNS 细节见 [[wiki/05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现 CoreDNS]]，DaemonSet 作为最常见载体的实践见 [[wiki/20-概念/02-工作负载/daemonset.md|DaemonSet]]。
 
 ---
 
@@ -327,7 +327,7 @@ spec:
             drop: [ALL]
 ```
 
-要点：`hostNetwork: true` 与 `dnsPolicy: ClusterFirstWithHostNet` 必须同时出现；端口 9100 由 DaemonSet 保证唯一；securityContext 收紧权限以对冲 hostNetwork 带来的隔离损失。DaemonSet 的更多实践见 [[wiki/22-概念/02-工作负载/daemonset.md|DaemonSet]]。
+要点：`hostNetwork: true` 与 `dnsPolicy: ClusterFirstWithHostNet` 必须同时出现；端口 9100 由 DaemonSet 保证唯一；securityContext 收紧权限以对冲 hostNetwork 带来的隔离损失。DaemonSet 的更多实践见 [[wiki/20-概念/02-工作负载/daemonset.md|DaemonSet]]。
 
 ---
 
@@ -535,7 +535,7 @@ spec:
 - 用 OPA Gatekeeper / Kyverno 写策略，要求 `hostNetwork: true` 必须同时声明 `dnsPolicy: ClusterFirstWithHostNet` 且 `securityContext.capabilities.drop` 含 `ALL`。
 - 把 hostNetwork Pod 限制在专用命名空间（如 `kube-system`、`monitoring`），用 RBAC 阻止业务团队在应用命名空间使用。
 
-网络安全策略的更广议题见 [[wiki/08-安全/02-网络安全/01-network-security-policies.md|网络安全策略]]。
+网络安全策略的更广议题见 [[wiki/07-安全/02-网络安全/01-network-security-policies.md|网络安全策略]]。
 
 ### 5. 红线
 
@@ -746,7 +746,7 @@ hostNetwork/hostPort 异常
 - [[wiki/05-网络/01-K8s网络核心/07-service-concepts-types.md|Service 概念与类型]] — Service 的 ClusterIP/NodePort/LoadBalancer 模型，hostNetwork 与之的交互细节
 - [[wiki/05-网络/01-K8s网络核心/12-dns-service-discovery-coredns.md|DNS 服务发现 CoreDNS]] — CoreDNS 工作机制，理解 dnsPolicy 各取值背后的解析路径
 - [[wiki/05-网络/01-K8s网络核心/52-dns-advanced-external-integration.md|DNS 高级与外部集成]] — NDots、autopath、NodeLocal DNSCache，hostNetwork Pod 同样适用
-- [[wiki/22-概念/02-工作负载/daemonset.md|DaemonSet]] — hostNetwork 最常见的载体，DaemonSet + hostNetwork 的部署模式
-- [[wiki/08-安全/02-网络安全/01-network-security-policies.md|网络安全策略]] — NetworkPolicy 的能力边界，为何对 hostNetwork Pod 失效
+- [[wiki/20-概念/02-工作负载/daemonset.md|DaemonSet]] — hostNetwork 最常见的载体，DaemonSet + hostNetwork 的部署模式
+- [[wiki/07-安全/02-网络安全/01-network-security-policies.md|网络安全策略]] — NetworkPolicy 的能力边界，为何对 hostNetwork Pod 失效
 
 <!-- risk-assessed -->

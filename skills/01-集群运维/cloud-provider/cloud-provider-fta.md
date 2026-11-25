@@ -185,7 +185,7 @@ flowchart TD
 ## 相关链接
 
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
+- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/17-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 
 ## Related
 
@@ -195,10 +195,10 @@ flowchart TD
 - [[service-fta]] — Service 异常故障树分析
 - [[resource-quota-fta]] — ResourceQuota 异常故障树分析
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/cloud-provider-fta.md|云平台集成异常故障树分析]]
 - [[skills/04-工作负载/pod/方法论/Symptom Vector Matching Engine.md|Symptom Vector Matching Engine]] — Cross-reference
 - [[skills/04-工作负载/pod/方法论/skills-run-README.md|Skills Demo — 本地运行工单诊断技能]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/terway-index.md|Terway 知识图谱索引]]
 
 
 <!-- risk-assessed -->

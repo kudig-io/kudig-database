@@ -298,7 +298,7 @@ kubectl get pods -n kube-system | grep -E "cloud-contro
 ## Related
 
 - [[skills/01-集群运维/cluster-upgrade/诊断排障/ts-cluster-operations.md|ts-cluster-operations]] — 集群运维故障排查
-- [[wiki/23-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
+- [[wiki/22-实体/02-K8s核心组件/kubelet.md|kubelet]] — kubelet
 - [[etcd]] — etcd
 - [[prometheus]] — Prometheus
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

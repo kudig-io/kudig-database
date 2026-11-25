@@ -224,7 +224,7 @@ prerequisites:
 ## Related
 
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
 - [[coredns]] — CoreDNS
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

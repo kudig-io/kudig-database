@@ -214,7 +214,7 @@ ip link delete flannel.1 2>/dev/null || true
 - [[skills/01-集群运维/kubeadm/kubeadm-cluster-lifecycle.md|[[skills/01-集群运维/kubeadm/kubeadm-cluster-lifecycle|kubeadm 集群创建生命周期]]]]
 - [[skills/03-节点/node/运维操作/node-drain-and-maintenance.md|[[skills/03-节点/node/运维操作/node-drain-and-maintenance|节点驱逐与维护]]]]
 - [[skills/02-控制面/etcd/backup-restore-etcd.md|备份和恢复 etcd]]
-- [[wiki/22-概念/kubernetes-pki-certificate-system.md|[[wiki/22-概念/05-安全/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]]]
+- [[wiki/20-概念/kubernetes-pki-certificate-system.md|[[wiki/20-概念/05-安全/kubernetes-pki-certificate-system|Kubernetes PKI 证书体系]]]]
 - [[etcd|etcd]]
 
 ## Related
@@ -223,8 +223,8 @@ ip link delete flannel.1 2>/dev/null || true
 - [[cni]] — CNI (Container Network Interface)
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/05-安全/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
+- [[wiki/20-概念/05-安全/kubernetes-pki-certificate-system.md|kubernetes-pki-certificate-system]] — Kubernetes PKI 证书体系
 
-- [[wiki/10-平台工程/06-代码分析/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
+- [[wiki/12-平台工程/06-代码分析/cluster-delete/README.md|Cluster Delete — Kubernetes 集群删除源码分析]]
 
 <!-- risk-assessed -->

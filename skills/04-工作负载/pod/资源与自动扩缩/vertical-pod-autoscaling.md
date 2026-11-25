@@ -250,9 +250,9 @@ kubectl get pods -n kube-system -l 'app in (vpa-recommender,vpa-updater,vpa-admi
 ```
 ## 交叉引用
 
-- [HPA 水平自动扩缩](../../../../wiki/17-系统基础/06-知识字典/workloads/horizontal-pod-autoscaling.md)
-- [自动扩缩容概览](../../../../wiki/17-系统基础/06-知识字典/workloads/autoscaling-workloads.md)
-- [VPA 故障树分析 (FTA)](../../../../wiki/19-故障诊断/06-FTA故障树/list/vpa-fta.md)
+- [HPA 水平自动扩缩](../../../../wiki/21-知识字典/workloads/horizontal-pod-autoscaling.md)
+- [自动扩缩容概览](../../../../wiki/21-知识字典/workloads/autoscaling-workloads.md)
+- [VPA 故障树分析 (FTA)](../../../../wiki/17-故障诊断/06-FTA故障树/list/vpa-fta.md)
 - [Pod QoS 等级](pod-quality-of-service-classes.md)
 - [工作负载监控与告警](../../../../wiki/02-工作负载/01-核心工作负载/06-workload-monitoring-alerting.md)
 
@@ -261,7 +261,7 @@ kubectl get pods -n kube-system -l 'app in (vpa-recommender,vpa-updater,vpa-admi
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
+- [[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]
 
 
 <!-- risk-assessed -->

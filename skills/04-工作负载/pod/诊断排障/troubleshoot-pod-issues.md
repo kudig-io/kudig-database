@@ -144,13 +144,13 @@ For Java applications in containers:
 - [[skills/08-可观测性/monitoring/monitor-kubernetes-metrics.md|monitor-kubernetes-metrics]] — [[skills/08-可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/07-调度与资源/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
+- [[wiki/20-概念/07-调度与资源/resource-management.md|resource-management]] — Resource Management (Requests, Limits, QoS)
 - [[skills/04-工作负载/pod/方法论/skill-reference-diagnostic-workflow.md|skill-reference-diagnostic-workflow]] — Diagnostic Workflow
 - [[pod-lifecycle|Pod Lifecycle]]
-- [[wiki/22-概念/07-调度与资源/resource-management.md|Resource Management]]
+- [[wiki/20-概念/07-调度与资源/resource-management.md|Resource Management]]
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|Configure Health Probes]]
 - [[skills/08-可观测性/monitoring/monitor-kubernetes-metrics.md|Monitor Kubernetes Metrics]]
-- [[wiki/22-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
+- [[wiki/20-概念/08-可靠性与运维/Symptom-SOP-RootCause-Mapping.md|Symptom-SOP-RootCause Mapping]]
 - [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|FTA Diagnostic Execution Engine]]
 
 

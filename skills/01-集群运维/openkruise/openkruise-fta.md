@@ -121,7 +121,7 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 ## 相关链接
 
 - [[skills/04-工作负载/pod/方法论/FTA Methodology and Core Principles.md|FTA 方法论]]
-- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/19-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
+- [[skills/04-工作负载/pod/方法论/FTA Diagnostic Execution Engine.md|[[wiki/17-故障诊断/06-FTA故障树/fta-execution-engine|FTA 诊断执行引擎]]]]
 
 ## Related
 
@@ -132,9 +132,9 @@ kubectl annotate pod <pod> -n <namespace> kruise.io/inplace-update-enabled="true
 - [[openkruise]] — OpenKruise
 
 - [[nginx-ingress-fta]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/openkruise-fta.md|OpenKruise 工作负载异常故障树分析]]
 - [[skills/05-网络/ingress/培训/learn-05-ingress-basics.md|第五课：Ingress - 外部 HTTP/HTTPS 访问]] — Cross-reference
-- [[wiki/21-生态参考/03-领域索引/openkruise-index.md|OpenKruise 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/openkruise-index.md|OpenKruise 全局索引]]
 
 
 <!-- risk-assessed -->

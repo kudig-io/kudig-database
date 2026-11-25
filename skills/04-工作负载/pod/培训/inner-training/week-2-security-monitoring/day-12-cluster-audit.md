@@ -89,7 +89,7 @@ tags: [week-2, day-12, audit, security, logging, k8s, k8s-1.28-1.33]
 
 ## 概述
 
-[[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 审计（Audit）是集群安全体系中的重要组成部分，它记录了集群中发生的所有 API 操作，包括谁在什么时候对什么资源执行了什么操作。审计日志是安全合规、问题追溯和操作审计的基础，在安全事件响应中发挥着关键作用。
+[[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 审计（Audit）是集群安全体系中的重要组成部分，它记录了集群中发生的所有 API 操作，包括谁在什么时候对什么资源执行了什么操作。审计日志是安全合规、问题追溯和操作审计的基础，在安全事件响应中发挥着关键作用。
 
 在 ACK（阿里云容器服务）环境中，审计日志默认集成到阿里云 SLS（日志服务），提供了强大的查询和分析能力。本课程将深入讲解 K8S 审计日志的工作机制、ACK 与 SLS 的集成配置、审计日志的查询分析方法，以及审计告警规则的配置。
 
@@ -471,8 +471,8 @@ rules:
 - [Kubernetes 审计官方文档](https://kubernetes.io/docs/tasks/debug/debug-cluster/audit/)
 - [阿里云 SLS 文档](https://help.aliyun.com/product/28958.html)
 - [ACK 审计日志文档](https://help.aliyun.com/document_detail/155212.html)
-- [文件: `../../../可观测性/01-observability-architecture-overview.md`](../../../../../../wiki/09-可观测性/01-总览/01-observability-architecture-overview.md)
-- [文件: `../../../可观测性/03-logging-architecture.md`](../../../../../../wiki/09-可观测性/03-日志/03-logging-architecture.md)
+- [文件: `../../../可观测性/01-observability-architecture-overview.md`](../../../../../../wiki/08-可观测性/01-总览/01-observability-architecture-overview.md)
+- [文件: `../../../可观测性/03-logging-architecture.md`](../../../../../../wiki/08-可观测性/03-日志/03-logging-architecture.md)
 
 ---
 

@@ -92,7 +92,7 @@ related:
 
 ## 概述
 
-Docker 是学习 [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 的第一块基石。Kubernetes 的核心功能就是编排和管理容器，而 Docker 是目前最流行的容器运行时之一（准确地说，K8s 1.24+ 使用 [[containerd|containerd]] 作为运行时，但 Docker 的概念和操作仍然是理解容器技术的基础）。
+Docker 是学习 [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] 的第一块基石。Kubernetes 的核心功能就是编排和管理容器，而 Docker 是目前最流行的容器运行时之一（准确地说，K8s 1.24+ 使用 [[containerd|containerd]] 作为运行时，但 Docker 的概念和操作仍然是理解容器技术的基础）。
 
 今天的学习目标不是成为 Docker 专家，而是理解容器技术的本质、掌握 Docker 的核心操作，并建立"容器与 K8s 的关系"的认知框架。后续学习中遇到容器相关的问题时，你能够快速定位和解决。
 
@@ -398,12 +398,12 @@ containerd 是从 Docker 中拆分出来的容器运行时组件。Docker 的架
 
 ## 延伸阅读
 
-- [Docker 架构总览](../../../../../../wiki/14-容器运行时/01-Docker/01-docker-architecture-overview.md)
-- [Docker 容器生命周期](../../../../../../wiki/14-容器运行时/01-Docker/03-docker-container-lifecycle.md)
+- [Docker 架构总览](../../../../../../wiki/13-容器运行时/01-Docker/01-docker-architecture-overview.md)
+- [Docker 容器生命周期](../../../../../../wiki/13-容器运行时/01-Docker/03-docker-container-lifecycle.md)
 - [Docker 镜像构建优化](../../容器运行时/02-docker-image-build-optimization.md)
-- [Docker 网络深入](../../../../../../wiki/14-容器运行时/01-Docker/04-docker-networking-deep-dive.md)
-- [Docker 安全最佳实践](../../../../../../wiki/14-容器运行时/01-Docker/07-docker-security-best-practices.md)
-- [Docker 命令参考](../../../../../../wiki/14-容器运行时/01-Docker/13-docker-commands-reference.md)
+- [Docker 网络深入](../../../../../../wiki/13-容器运行时/01-Docker/04-docker-networking-deep-dive.md)
+- [Docker 安全最佳实践](../../../../../../wiki/13-容器运行时/01-Docker/07-docker-security-best-practices.md)
+- [Docker 命令参考](../../../../../../wiki/13-容器运行时/01-Docker/13-docker-commands-reference.md)
 
 ```
 

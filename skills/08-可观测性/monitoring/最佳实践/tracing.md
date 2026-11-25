@@ -51,4 +51,4 @@ cross_refs:
   label: 日志管理最佳实践
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/05-observability/tracing.md|Kubernetes 分布式追踪最佳实践 [observability]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/05-observability/tracing.md|Kubernetes 分布式追踪最佳实践 [observability]]]（本页为重排去重桩，正文见主场）

@@ -59,4 +59,4 @@ cross_refs:
   label: 集群配置最佳实践
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/03-infrastructure/networking.md|Kubernetes 网络配置最佳实践 [infrastructure]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/03-infrastructure/networking.md|Kubernetes 网络配置最佳实践 [infrastructure]]]（本页为重排去重桩，正文见主场）

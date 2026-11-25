@@ -339,4 +339,4 @@ ENTRYPOINT ["/manager"]
 
 - [[wiki/03-清单模式/index.md|清单模式总索引]]
 - [[wiki/03-清单模式/02-Kustomize模式/index.md|Kustomize 模式]]
-- [[wiki/10-平台工程/index.md|平台工程]]
+- [[wiki/12-平台工程/index.md|平台工程]]

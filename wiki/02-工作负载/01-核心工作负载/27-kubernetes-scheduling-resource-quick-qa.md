@@ -165,7 +165,7 @@ Capacity        64Gi                          # 节点物理总量
 
 **为什么关心**：① 不做预留时，系统进程与 Pod 争内存，节点紧张时 sshd 都可能被 OOM——生产节点必须配预留；② `kubectl describe node` 的 Allocated resources 就是 Σrequests 视角的占用，与真实用量（kubectl top）是两个维度（第 20 题）。
 
-深挖：[[wiki/01-集群基础/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]]
+深挖：[[wiki/01-集群基础与系统/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]]
 
 ### 6. 什么是超卖（overcommit）？为什么 CPU 可以大胆超卖、内存要小心？
 
@@ -262,7 +262,7 @@ kubectl describe pod → Events: FailedScheduling
 
 **触发条件**：memory.available、nodefs/imagefs available、pid.available 等；软阈值配 `eviction-soft-grace-period` + `eviction-max-pod-grace-period`。**驱逐排序**：先看资源是否超 requests（超得越多越先）、再比 PriorityClass、最后 QoS（BestEffort 先走）。**与第 4 题的分工**：Pod 超自身 limit → cgroup OOM；节点资源枯竭 → kubelet 驱逐（优雅）→ 兜不住才内核 OOM（粗暴）。
 
-深挖：[[wiki/01-集群基础/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]]
+深挖：[[wiki/01-集群基础与系统/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]]
 
 ### 14. CPU limit 配小了为什么会有延迟毛刺？CFS 节流的原理是什么？
 
@@ -406,7 +406,7 @@ flowchart LR
 - [[wiki/02-工作负载/01-核心工作负载/21-hpa-vpa-autoscaling.md|HPA/VPA 自动扩缩]]
 - [[wiki/02-工作负载/01-核心工作负载/22-cluster-capacity-planning.md|集群容量规划]]
 - [[wiki/02-工作负载/01-核心工作负载/07-workload-troubleshooting-handbook.md|工作负载排障手册]]
-- [[wiki/01-集群基础/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]]
-- [[wiki/01-集群基础/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|节点维护 cordon/drain]]
+- [[wiki/01-集群基础与系统/03-控制平面/37-kubelet-eviction-thresholds.md|kubelet 驱逐阈值]]
+- [[wiki/01-集群基础与系统/03-控制平面/40-node-maintenance-cordon-drain-shutdown.md|节点维护 cordon/drain]]
 - [[wiki/02-工作负载/01-核心工作负载/26-kubernetes-deployment-quick-qa.md|K8s Deployment 快问快答]]
 - [[wiki/02-工作负载/01-核心工作负载/11-pod-lifecycle-events.md|Pod 生命周期事件]]

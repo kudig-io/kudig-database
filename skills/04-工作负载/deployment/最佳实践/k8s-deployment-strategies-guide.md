@@ -115,10 +115,10 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 
 ## 相关资源
 
-- [[wiki/22-概念/k8s-production-best-practices.md|[[wiki/22-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
+- [[wiki/20-概念/k8s-production-best-practices.md|[[wiki/20-概念/10-最佳实践/k8s-production-best-practices|Kubernetes 生产环境最佳实践]]]]
 - [[deployment|Deployment]]
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|[[skills/04-工作负载/pod/运维操作/configure-health-probes|Configure Health Probes]]]]
-- [[wiki/22-概念/gitops-principles.md|[[wiki/17-系统基础/05-速查卡/gitops|GitOps]]ps Principles and Practice|GitOps Principles]]]]
+- [[wiki/20-概念/gitops-principles.md|[[wiki/01-集群基础与系统/12-速查卡/gitops|GitOps]]ps Principles and Practice|GitOps Principles]]]]
 
 ## 生产案例
 
@@ -166,9 +166,9 @@ maxSurge 和 maxUnavailable 配置不当会导致部署时资源不足，Pod 无
 - [[skills/04-工作负载/pod/运维操作/configure-health-probes.md|configure-health-probes]] — Configure Health Probes
 - [[deployment]] — Deployment
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
 
-- [[wiki/10-平台工程/06-代码分析/deployment-create/09-canary-bluegreen.md|Deployment 金丝雀与蓝绿发布模式]]
+- [[wiki/12-平台工程/06-代码分析/deployment-create/09-canary-bluegreen.md|Deployment 金丝雀与蓝绿发布模式]]
 ```
 
 <!-- risk-assessed -->

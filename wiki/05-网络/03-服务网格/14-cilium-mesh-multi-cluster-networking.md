@@ -318,7 +318,7 @@ kubectl --context cluster1 -n kube-system exec ds/cilium -c cilium-agent -- cili
 
 ### 4.2 与 Karmada/OCM 的边界
 
-[[wiki/23-实体/09-编排调度/karmada.md|Karmada]] 与 OCM（Open Cluster Management）是**管理面**：多集群调度（副本按集群分发）、策略下发、应用生命周期。它们**不提供任何数据面连通能力**——Karmada 把 Deployment 摊到 N 个集群后，服务之间怎么互相访问，Karmada 完全不管。清晰的分层结论：**应用分发/调度层**（Karmada、OCM、Argo CD ApplicationSet）回答"在哪跑"；**网络连通/策略层**（Cilium ClusterMesh、Submariner）回答"怎么通、谁许谁"；**L7 治理层**（Istio ambient、Linkerd）回答"怎么路由、怎么观测"。
+[[wiki/22-实体/09-编排调度/karmada.md|Karmada]] 与 OCM（Open Cluster Management）是**管理面**：多集群调度（副本按集群分发）、策略下发、应用生命周期。它们**不提供任何数据面连通能力**——Karmada 把 Deployment 摊到 N 个集群后，服务之间怎么互相访问，Karmada 完全不管。清晰的分层结论：**应用分发/调度层**（Karmada、OCM、Argo CD ApplicationSet）回答"在哪跑"；**网络连通/策略层**（Cilium ClusterMesh、Submariner）回答"怎么通、谁许谁"；**L7 治理层**（Istio ambient、Linkerd）回答"怎么路由、怎么观测"。
 
 典型生产栈即三层叠加：Karmada 负责把 `web` 按集群权重调度，ClusterMesh 保证任一集群的 `api` 都能调到全网 `web` 后端，Istio 负责金丝雀与 mTLS。
 
@@ -489,7 +489,7 @@ hubble --context cluster2 observe --from-cluster cluster1 --verdict DROPPED -f
 - Cilium 官方博客 — Multi-Cluster Networking Deep Dive：<https://cilium.io/blog/>
 - Istio 多集群部署模型（primary-remote / multi-primary）：<https://istio.io/latest/docs/ops/deployment/deployment-models/>
 - Karmada 官方文档：<https://karmada.io/docs/>
-- 相关内部文档：[[wiki/05-网络/02-网络基础/09-cilium-ebpf-network-guide.md|Cilium eBPF 网络与安全实践指南]]、[[wiki/05-网络/02-网络基础/07-cni-plugin-comparison-selection.md|CNI 插件对比选型]]、[[wiki/05-网络/02-网络基础/06-sdn-network-virtualization.md|SDN 网络虚拟化]]、[[wiki/23-实体/04-网络/cilium.md|Cilium]]、[[wiki/23-实体/07-可观测性/prometheus.md|Prometheus]]
+- 相关内部文档：[[wiki/05-网络/02-网络基础/09-cilium-ebpf-network-guide.md|Cilium eBPF 网络与安全实践指南]]、[[wiki/05-网络/02-网络基础/07-cni-plugin-comparison-selection.md|CNI 插件对比选型]]、[[wiki/05-网络/02-网络基础/06-sdn-network-virtualization.md|SDN 网络虚拟化]]、[[wiki/22-实体/04-网络/cilium.md|Cilium]]、[[wiki/22-实体/07-可观测性/prometheus.md|Prometheus]]
 
 ---
 

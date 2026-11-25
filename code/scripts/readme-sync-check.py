@@ -20,7 +20,7 @@ BUCKETS = ('wiki', 'skills', 'code', 'maintaining')
 # 顶层目录豁免：不要求出现在根 README 目录图中（当前无被忽略的 NN- 目录）
 TREE_EXEMPT = set()
 # 冻结目录：只增不改，不参与域 README 校验
-FROZEN = {'03-发布', '04-报告', '31-归档'}
+FROZEN = {'03-发布', '04-报告', '31-归档', '99-归档'}
 WIKI = re.compile(r'\[\[([^\[\]]+?)\]\]')
 
 

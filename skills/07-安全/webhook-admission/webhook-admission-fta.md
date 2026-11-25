@@ -221,7 +221,7 @@ flowchart TD
 - [[helm]] — Helm
 - [[coredns]] — CoreDNS
 
-- [[wiki/19-故障诊断/06-FTA故障树/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/webhook-admission-fta.md|Admission Webhook 异常 FTA 树]]
 - [[skills/04-工作负载/pod/方法论/agent/Agent Orchestration Patterns.md|Agent Orchestration Patterns for FTA]] — Cross-reference
 
 

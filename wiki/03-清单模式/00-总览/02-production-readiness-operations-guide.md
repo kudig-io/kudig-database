@@ -177,7 +177,7 @@ authors:
   ```bash
   kubectl label ns <namespace> pod-security.kubernetes.io/enforce=restricted
   ```
-- 参考 [[wiki/08-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]] 配置基线策略，并在 CI 中集成策略校验。
+- 参考 [[wiki/07-安全/04-策略治理/03-pod-security-standards.md|Pod Security Standards]] 配置基线策略，并在 CI 中集成策略校验。
 
 ### 2.4 证书与镜像签名缺失
 
@@ -398,13 +398,13 @@ kubectl get crd -o json | jq '.items[].spec.versions[].name'
 
 ### 相关域资料
 
-- [[wiki/11-发布变更/01-GitOps/17-argo-cd-gitops-guide.md|ArgoCD GitOps 指南]]
-- [[wiki/11-发布变更/01-GitOps/19-helm-production-guide.md|Helm 生产化指南]]
-- [[wiki/08-安全/04-策略治理/08-kyverno-policy-guide.md|Kyverno 策略指南]]
-- [[wiki/08-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md|OPA Gatekeeper 策略指南]]
-- [[wiki/09-可观测性/02-指标/05-monitoring-metrics-prometheus.md|Prometheus 监控指标实践]]
-- [[wiki/12-可靠性/06-SRE实践/04-slo-sli-guide.md|SLO/SLI 指南]]
-- [[wiki/13-生产运维/07-运维手册/01-production-sre-daily-ops.md|SRE 日常运维手册]]
+- [[wiki/09-发布变更/01-GitOps/17-argo-cd-gitops-guide.md|ArgoCD GitOps 指南]]
+- [[wiki/09-发布变更/01-GitOps/19-helm-production-guide.md|Helm 生产化指南]]
+- [[wiki/07-安全/04-策略治理/08-kyverno-policy-guide.md|Kyverno 策略指南]]
+- [[wiki/07-安全/04-策略治理/09-opa-gatekeeper-policy-guide.md|OPA Gatekeeper 策略指南]]
+- [[wiki/08-可观测性/02-指标/05-monitoring-metrics-prometheus.md|Prometheus 监控指标实践]]
+- [[wiki/10-可靠性/06-SRE实践/04-slo-sli-guide.md|SLO/SLI 指南]]
+- [[wiki/11-生产运维/07-运维手册/01-production-sre-daily-ops.md|SRE 日常运维手册]]
 - [[wiki/02-工作负载/01-核心工作负载/12-advanced-pod-patterns.md|高级 Pod 模式]]
 
 ---

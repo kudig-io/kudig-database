@@ -104,31 +104,31 @@ topic-scenarios 专题
 
 ## Related
 
-- [[wiki/17-系统基础/05-速查卡/k8s.md|k8s]]
+- [[wiki/01-集群基础与系统/12-速查卡/k8s.md|k8s]]
 - backup-restore
 - cost-optimization
 - network-diagnosis
 - Wiki Lint Report — 2026-05-21 — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
-- [[wiki/23-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-storage.md|发布说明索引 — 存储]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-observability.md|发布说明索引 — 可观测性]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-networking.md|发布说明索引 — 网络]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-kubernetes.md|发布说明索引 — Kubernetes]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-security.md|发布说明索引 — 安全]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-knowledge-map.md|Kubernetes Knowledge Map]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-cicd-gitops.md|发布说明索引 — CI/CD 与 GitOps]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-cli-tools.md|发布说明索引 — CLI 工具]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/release-notes-core-deps.md|发布说明索引 — 核心依赖]] — Cross-reference
+- [[wiki/22-实体/15-参考与索引/k8s-difficulty-index.md|Kubernetes Difficulty Index]] — Cross-reference
 - 网络 MOC — Cross-reference
 - [[wiki/05-网络/01-K8s网络核心/03-cni-architecture-fundamentals.md|CNI 架构与核心原理]] — Cross-reference
-- [[wiki/09-可观测性/01-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
-- [[wiki/15-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
+- [[wiki/08-可观测性/01-总览/01-observability-architecture-overview.md|Kubernetes 可观测性架构体系]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/03-gpu-scheduling-management.md|GPU 调度与管理]] — Cross-reference
+- [[wiki/14-AI基础设施/01-基础设施/05-distributed-training-frameworks.md|分布式训练框架]] — Cross-reference
 - 发布变更 MOC — Cross-reference
-- [[wiki/01-集群基础/05-kubectl/02-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
-- [[wiki/01-集群基础/01-架构总览/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
-- [[wiki/06-存储/01-K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
-- [[wiki/06-存储/01-K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
+- [[wiki/01-集群基础与系统/05-kubectl/02-kubectl-commands-reference.md|kubectl 命令完整参考]] — Cross-reference
+- [[wiki/01-集群基础与系统/01-架构总览/02-core-components-deep-dive.md|Kubernetes 核心组件深度剖析]] — Cross-reference
+- [[wiki/06-存储与数据/01-K8s存储/02-pv-architecture-fundamentals.md|PV/PVC 核心概念与企业级实践]] — Cross-reference
+- [[wiki/06-存储与数据/01-K8s存储/01-storage-architecture-overview.md|存储架构概览与核心组件]] — Cross-reference
 
 
 <!-- risk-assessed -->

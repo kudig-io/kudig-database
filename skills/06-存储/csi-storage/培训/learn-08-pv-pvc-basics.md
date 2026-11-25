@@ -376,17 +376,17 @@ kubectl delete pvc <pvc-name>
 
 **关联文档**:
 - [../08-scaling/08-hpa-basics.md](../../../04-工作负载/hpa-vpa/培训/lecturer/01-hpa-basics.md) — HPA 自动伸缩
-- [../../故障诊断/topic-skills/06-pvc-storage-failure.md](../../../../wiki/19-故障诊断/08-技能体系/08-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
+- [../../故障诊断/topic-skills/06-pvc-storage-failure.md](../../../../skills/09-技能体系/08-pvc-storage-failure.md) — 存储问题 [[SKILL|Skill]]
 - [../../存储/](../../存储/) — K8s 存储文档
 
 ## 相关概念
 
 - 持久化存储
-- [[wiki/17-系统基础/06-知识字典/storage/storage-classes.md|storage-classes]]
+- [[wiki/21-知识字典/storage/storage-classes.md|storage-classes]]
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/fundamentals-terms.md|fundamentals-terms]] — K8s 基础概念术语参考
+- [[wiki/22-实体/15-参考与索引/fundamentals-terms.md|fundamentals-terms]] — K8s 基础概念术语参考
 - [[skills/04-工作负载/pod/培训/learn-analogy-dictionary.md|learn-analogy-dictionary]] — K8S 概念类比词典
 - [[skills/03-节点/node/skill-notready/skill-k8s-node-notready-SKILL.md|skill-k8s-node-notready-SKILL]] — Skill
 

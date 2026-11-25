@@ -227,9 +227,9 @@ aliases:
 
 ## Related
 
-- [[wiki/23-实体/15-参考与索引/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
-- [[wiki/23-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
-- [[wiki/23-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Tag Dictionary.md|KUDIG Tag Dictionary]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Frontmatter Spec.md|KUDIG Frontmatter Spec]]
+- [[wiki/22-实体/15-参考与索引/KUDIG Scenario Taxonomy.md|KUDIG Scenario Taxonomy]]
 - [[maintaining/01-文档/specs/TAG-DICTIONARY.md|KUDIG 全局标签字典]]
 
 

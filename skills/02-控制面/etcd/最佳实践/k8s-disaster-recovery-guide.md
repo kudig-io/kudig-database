@@ -48,9 +48,9 @@ prerequisites:
 
 五层架构 ^[inferred]：
 
-- **生产环境**：Kubernetes 集群 + [[wiki/17-系统基础/06-知识字典/storage/persistent-volumes.md|Persistent Volumes]]es（卷）|Volumes]] + etcd
+- **生产环境**：Kubernetes 集群 + [[wiki/21-知识字典/storage/persistent-volumes.md|Persistent Volumes]]es（卷）|Volumes]] + etcd
 - **备份层**：Velero 备份工具 + 定时备份任务
-- **存储层**：S3/OSS 对象存储 + [[wiki/17-系统基础/06-知识字典/storage/volume-snapshots.md|Volume Snapshots]] + etcd 备份
+- **存储层**：S3/OSS 对象存储 + [[wiki/21-知识字典/storage/volume-snapshots.md|Volume Snapshots]] + etcd 备份
 - **恢复层**：Velero Restore 任务 + 集群恢复 + 数据恢复
 - **灾备环境**：灾备集群 + 灾备数据
 
@@ -117,9 +117,9 @@ etcd 是集群状态的核心，必须单独备份。可使用 `etcdctl snapshot
 
 ## 相关资源
 
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|Kubernetes 生产环境最佳实践]]
 - [[skills/02-控制面/etcd/backup-restore-etcd.md|Backup and Restore etcd]]
-- [[wiki/22-概念/08-可靠性与运维/high-availability-patterns.md|High Availability Patterns]]
+- [[wiki/20-概念/08-可靠性与运维/high-availability-patterns.md|High Availability Patterns]]
 
 ## 生产案例
 
@@ -166,8 +166,8 @@ etcd 是集群状态的核心，必须单独备份。可使用 `etcdctl snapshot
 
 - [[etcd]] — etcd
 - [[kubernetes]] — Kubernetes (CNCF Graduated)
-- [[wiki/22-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
-- [[wiki/22-概念/08-可靠性与运维/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
+- [[wiki/20-概念/10-最佳实践/k8s-production-best-practices.md|k8s-production-best-practices]] — Kubernetes 生产环境最佳实践
+- [[wiki/20-概念/08-可靠性与运维/high-availability-patterns.md|high-availability-patterns]] — High Availability Patterns
 - [[skills/02-控制面/etcd/backup-restore-etcd.md|backup-restore-etcd]] — Backup and Restore etcd
 
 

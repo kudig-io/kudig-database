@@ -575,7 +575,7 @@ kubectl delete daemonset <name> -n <namespace>
 ## Related
 
 - [[docker]] — Docker
-- [[wiki/23-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
+- [[wiki/22-实体/02-K8s核心组件/statefulset.md|statefulset]] — StatefulSet
 - [[deployment]] — Deployment
 - [[cni]] — CNI (Container Network Interface)
 - [[kubernetes]] — Kubernetes (CNCF Graduated)

@@ -52,7 +52,7 @@ title: Day 16: 安全体系 - Pod 安全 + 密钥管理
 last_updated: 2026-05-18
 difficulty: intermediate
 intent_queries:
-  - [[wiki/23-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
+  - [[wiki/22-实体/kubernetes.md|[[kubernetes|kubernetes]]]] Pod Securityod Security Standards]]
   - K8s Secret 管理最佳实践
   - [[kyverno|Kyverno]] 策略引擎
   - Pod 安全上下文配置
@@ -701,9 +701,9 @@ resources:
 - [Pod Security Standards 官方文档](https://kubernetes.io/docs/concepts/security/pod-security-standards/)
 - [Kyverno 官方文档](https://kyverno.io/docs/)
 - [Secret 最佳实践](https://kubernetes.io/docs/concepts/configuration/secret/#good-practices)
-- [文件: `../../安全/06-pod-security-standards.md`](../../../../../../wiki/08-安全/04-策略治理/03-pod-security-standards.md)
-- [文件: `../../安全/11-secret-management-tools.md`](../../../../../../wiki/08-安全/01-身份与访问/07-secret-management-tools.md)
-- [文件: `../../安全/14-policy-engines-opa-kyverno.md`](../../../../../../wiki/08-安全/04-策略治理/05-policy-engines-opa-kyverno.md)
+- [文件: `../../安全/06-pod-security-standards.md`](../../../../../../wiki/07-安全/04-策略治理/03-pod-security-standards.md)
+- [文件: `../../安全/11-secret-management-tools.md`](../../../../../../wiki/07-安全/01-身份与访问/07-secret-management-tools.md)
+- [文件: `../../安全/14-policy-engines-opa-kyverno.md`](../../../../../../wiki/07-安全/04-策略治理/05-policy-engines-opa-kyverno.md)
 
 ```
 

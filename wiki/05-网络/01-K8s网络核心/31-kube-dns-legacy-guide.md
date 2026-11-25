@@ -227,7 +227,7 @@ kubectl logs -n kube-system -l k8s-app=kube-dns -c coredns
 - [[wiki/05-网络/01-K8s网络核心/14-coredns-architecture-principles.md|CoreDNS 架构原理]]
 - [[wiki/05-网络/01-K8s网络核心/15-coredns-configuration-corefile.md|CoreDNS Corefile 配置]]
 - [[wiki/05-网络/01-K8s网络核心/29-coredns-troubleshooting-optimization.md|CoreDNS 故障排查与优化]]
-- [[wiki/19-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 异常故障树分析]]
+- [[wiki/17-故障诊断/06-FTA故障树/list/dns-fta.md|DNS 异常故障树分析]]
 
 
 <!-- risk-assessed -->

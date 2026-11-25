@@ -81,7 +81,7 @@ related_domains:
   - 故障诊断
 related_topics:
   - 生产运维/topic-learn/quick-start
-  - 生产运维/topic-learn/public-training/[[wiki/06-存储/README.md|README]]
+  - 生产运维/topic-learn/public-training/[[wiki/06-存储与数据/README.md|README]]
 id: PUBLIC-TRAINING-BOOT-001
 topic: training
 type: landing-page
@@ -368,7 +368,7 @@ GitOps          ❌ 手动 kubectl apply    ✅ ArgoCD 全自动部署
 
 ## Related
 
-- [[wiki/21-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
+- [[wiki/19-生态参考/03-领域索引/gitops-cicd-index.md|GitOps / CI-CD 全局索引]]
 
 
 <!-- risk-assessed -->

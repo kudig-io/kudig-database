@@ -199,8 +199,8 @@ kubectl get events -n [NAMESPACE] --field-selector reason=OOMKilling
 
 ### 8. 参考资料
 
-- [[wiki/19-故障诊断/08-技能体系/MOC|操作技能索引]] — 相关技能卡片
-- [[wiki/19-故障诊断/06-FTA故障树/MOC|FTA 故障树]] — 根因分析参考
+- [[skills/09-技能体系/MOC|操作技能索引]] — 相关技能卡片
+- [[wiki/17-故障诊断/06-FTA故障树/MOC|FTA 故障树]] — 根因分析参考
 - [相关监控 Dashboard 链接]
 - [相关架构设计文档]
 

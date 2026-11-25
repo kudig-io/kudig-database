@@ -66,4 +66,4 @@ agent_execution_mode: L2-semi-auto
 fta_path: TE-1 -> IE-1.1/IE-1.2
 ---
 
-> **内容已并入主场**：[[wiki/19-故障诊断/04-高级排障/01-node-component-troubleshooting.md|节点组件故障排查]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/17-故障诊断/04-高级排障/01-node-component-troubleshooting.md|节点组件故障排查]]（本页为重排去重桩，正文见主场）

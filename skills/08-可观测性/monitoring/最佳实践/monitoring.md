@@ -48,4 +48,4 @@ cross_refs:
   label: 企业监控知识域
 ---
 
-> **内容已并入主场**：[[wiki/20-最佳实践/05-observability/monitoring.md|Kubernetes 监控最佳实践 [observability]]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/18-最佳实践/05-observability/monitoring.md|Kubernetes 监控最佳实践 [observability]]]（本页为重排去重桩，正文见主场）

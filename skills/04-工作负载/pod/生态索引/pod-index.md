@@ -36,4 +36,4 @@ prerequisites:
 - gpu-scheduling-basics
 ---
 
-> **内容已并入主场**：[[wiki/21-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]（本页为重排去重桩，正文见主场）
+> **内容已并入主场**：[[wiki/19-生态参考/03-领域索引/pod-index.md|Pod 知识图谱索引]]（本页为重排去重桩，正文见主场）
