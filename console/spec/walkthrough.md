@@ -23,7 +23,7 @@ audience:
 
 ## 0. 样本页
 
-`wiki/07-数据库中间件/01-数据库/17-mysql-kubernetes-production-guide.md`
+`wiki/06-存储与数据/09-数据库/17-mysql-kubernetes-production-guide.md`
 
 | 属性 | 值 |
 |---|---|
@@ -75,7 +75,7 @@ MySQL on Kubernetes 生产指南              7/7 层 · 正文 261 行 · 表 2
 > ```bash
 > python3 - <<'EOF'
 > import re, pathlib
-> raw = pathlib.Path('wiki/07-数据库中间件/01-数据库/17-mysql-kubernetes-production-guide.md').read_text()
+> raw = pathlib.Path('wiki/06-存储与数据/09-数据库/17-mysql-kubernetes-production-guide.md').read_text()
 > body = raw.split('---', 2)[2]
 > for i, line in enumerate(body.split('\n'), 1):
 >     if re.match(r'^##\s+\S', line): print(i, line.strip())

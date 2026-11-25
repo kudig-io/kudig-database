@@ -50,9 +50,9 @@ triples.json   {page, entity, dimension, anchor, evidence}
 {
   "schema": "kudig-console/3",
   "pages": [{
-    "id": "wiki/07-数据库中间件/01-数据库/17-mysql-kubernetes-production-guide",
+    "id": "wiki/06-存储与数据/09-数据库/17-mysql-kubernetes-production-guide",
     "t": "MySQL on Kubernetes 生产指南",
-    "p": "wiki", "d": "wiki/07-数据库中间件", "dn": "07 数据库中间件",
+    "p": "wiki", "d": "wiki/06-存储与数据", "dn": "06 存储与数据",
     "layers": "1111111",        // L0..L6 落锁位串
     "tier": "core", "cat": "database-middleware", "diff": "advanced",
     "date": "2026-07", "n": 402, "sec": 8,
@@ -86,7 +86,7 @@ triples.json   {page, entity, dimension, anchor, evidence}
   "schema": "kudig-console-blocks/1",
   "generatedFrom": {"indexSha": "c2df8d7b…", "builder": "console-corpus/3"},
   "pages": {
-    "wiki/07-数据库中间件/01-数据库/17-mysql-kubernetes-production-guide": {
+    "wiki/06-存储与数据/09-数据库/17-mysql-kubernetes-production-guide": {
       "lineCount": 402,
       "shape": "ops-heavy",
       "sections": [

@@ -51,9 +51,13 @@ vocab = json.loads(pathlib.Path('console/spec/dimensions.json').read_text())
 dims = json.loads(pathlib.Path('console/data/graph/blocks.json').read_text())
 known = {d['id'] for d in vocab['dimensions']}
 pages = list(dims['pages'].values())
-# The baseline in labels.md §4 is measured on 07-数据库中间件 (60 non-index pages), not the whole
-# library — the share of pages mentioning "备份" differs by an order of magnitude between domains.
-scope = [p for k, p in dims['pages'].items() if k.startswith('wiki/07-数据库中间件') and p['shape'] != 'index-like']
+# The baseline in labels.md §4 is measured on the DB-middleware family (now under
+# 06-存储与数据/08~16 after the P2 renumber), not the whole library — the share of pages
+# mentioning "备份" differs by an order of magnitude between domains.
+DB_FAMILY = tuple('wiki/06-存储与数据/' + s for s in (
+    '08-数据库中间件总览', '09-数据库', '10-缓存', '11-消息队列',
+    '12-时序数据库', '13-Operator管理', '14-数据流', '15-搜索引擎', '16-新型数据库'))
+scope = [p for k, p in dims['pages'].items() if k.startswith(DB_FAMILY) and p['shape'] != 'index-like']
 # 1) precision + recall of the 07-domain baseline (labels.md §4)
 BASE = {'d-monitor': 0.63, 'd-backup': 0.45, 'd-ha': 0.32}
 viol = []
@@ -64,7 +68,7 @@ bad_share = [v for v in viol if abs(v[1] - v[2]) > 0.15]  # tolerance: ±15 poin
 # 2) unknown dimension ids must never appear
 all_ids = sorted({x['id'] for p in pages for x in p['dims']})
 unknown = [i for i in all_ids if i not in known]
-print(f'vocab shares on 07 domain ({len(scope)} pages) (got, want):', viol)
+print(f'vocab shares on DB-middleware family ({len(scope)} pages) (got, want):', viol)
 print('unknown dimension ids in blocks.json:', unknown or 'none')
 if bad_share or unknown:
     print('VOCAB REGRESSION')
