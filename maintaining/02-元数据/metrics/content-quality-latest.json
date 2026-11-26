@@ -1,13 +1,13 @@
 {
-  "date": "2026-11-25",
-  "pages_scanned": 4539,
-  "orphans": 1622,
-  "orphan_rate": 0.3573,
-  "avg_inbound": 7.68,
+  "date": "2026-11-26",
+  "pages_scanned": 6015,
+  "orphans": 3080,
+  "orphan_rate": 0.5121,
+  "avg_inbound": 7.2,
   "broken_wikilinks": 0,
   "verified_upon": {
-    "checked": 916,
-    "missing": 915,
-    "coverage": 0.0011
+    "checked": 619,
+    "missing": 619,
+    "coverage": 0.0
   }
 }
